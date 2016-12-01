@@ -17,10 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QPixmap pix("/usr/inc/logo.jpg");
-//    QPixmap pix1("C:/Users/aashmele/untitled2/logo.jpg");
-//    ui->label->setPixmap(pix1);
-
-
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
 
@@ -30,7 +26,33 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(1000);
     timer2->start(25);
 
-    QVector<double> x(size(),y(size();
+    int n = 50; // number of points in graph
+    double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
+    double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
+    double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
+    double yOffset = (rand()/(double)RAND_MAX - 0.5)*5;
+    double r1 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
+    QVector<double> x(n), y(n);
+    for (int i=0; i<n; i++)
+    {
+      x[i] = (i/(double)n-0.5)*10.0*xScale + xOffset;
+      y[i] = (qSin(x[i]*r1*5)*qSin(qCos(x[i]*r2)*r4*3)+r3*qCos(qSin(x[i])*r4*2))*yScale + yOffset;
+    }
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setName(QString("New graph %1").arg(ui->customPlot->graphCount()-1));
+    ui->customPlot->graph()->setData(x, y);
+    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
+    if (rand()%100 > 50)
+      ui->customPlot->graph()->setScatterStyle(QCPScatterStyle((QCPScatterStyle::ScatterShape)(rand()%14+1)));
+    QPen graphPen;
+    graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
+    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->replot();
 
 
 }
@@ -55,6 +77,10 @@ void MainWindow::on_dial_sliderMoved(int position)
     p.end();
     ui->label->setPixmap(rotate);
     a++;*/
+
+
+//ui->pushButton_2->setText("4");
+//ui->label_2->setText("4");
 
 
 }
@@ -95,6 +121,13 @@ void MainWindow::updatepicture()
     ui->label->setPixmap(rotate);
     a++;
 
+
+
+
+
+
+
+
 }
 
 
@@ -119,21 +152,39 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    // generate some data:
-    QVector<double> x(101), y(101); // initialize with entries 0..100
-    for (int i=0; i<101; ++i)
+
+
+    ui->customPlot->clearGraphs();
+
+    int n = 50; // number of points in graph
+    double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
+    double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
+    double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
+    double yOffset = (rand()/(double)RAND_MAX - 0.5)*5;
+    double r1 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
+    double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
+    QVector<double> x(n), y(n);
+    for (int i=0; i<n; i++)
     {
-      x[i] = i/50.0 - 1; // x goes from -1 to 1
-      y[i] = x[i]*x[i]; // let's plot a quadratic function
+      x[i] = (i/(double)n-0.5)*10.0*xScale + xOffset;
+      y[i] = (qSin(x[i]*r1*5)*qSin(qCos(x[i]*r2)*r4*3)+r3*qCos(qSin(x[i])*r4*2))*yScale + yOffset;
     }
-    // create graph and assign data to it:
-    /*ui->customPlot->addGraph();
-    customPlot->graph(0)->setData(x, y);
-    // give the axes some labels:
-    customPlot->xAxis->setLabel("x");
-    customPlot->yAxis->setLabel("y");
-    // set axes ranges, so we see all data:
-    customPlot->xAxis->setRange(-1, 1);
-    customPlot->yAxis->setRange(0, 1);
-    customPlot->replot();*/
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setName(QString("New graph %1").arg(ui->customPlot->graphCount()-1));
+    ui->customPlot->graph()->setData(x, y);
+    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
+    if (rand()%100 > 50)
+      ui->customPlot->graph()->setScatterStyle(QCPScatterStyle((QCPScatterStyle::ScatterShape)(rand()%14+1)));
+    QPen graphPen;
+    graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
+    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->replot();
+}
+
+void MainWindow::on_pushButton_2_pressed()
+{
 }

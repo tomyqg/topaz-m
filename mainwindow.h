@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
-#include "C:/Users/aashmele/untitled2/qcustomplot.h"
 
 
 namespace Ui {
@@ -33,6 +32,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_2_pressed();
 
 private:
     Ui::MainWindow *ui;
