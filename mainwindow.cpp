@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -7,10 +8,12 @@
 #include <QPen>
 #include <QVector>
 #include <QtMath>
-
+#include <QFile>
+#include <QDataStream>
 
 int a=0;
 int b=0;
+
 
 QVector<double> xx1;
 QVector<double> yy1;
@@ -32,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
 
     timer->start(1000);
-    timer2->start(20);
+    timer2->start(40);
     timer3->start(100);
 
     int n = 50; // number of points in graph
@@ -103,7 +106,7 @@ void MainWindow::updatepicture()
 {
     //QPixmap ship("C:/Users/aashmele/untitled2/logo.jpg");
 
-    QPixmap ship("/usr/inc/logo.jpg");
+ /*   QPixmap ship("/usr/inc/logo.jpg");
     QPixmap rotate(ship.size()) ;
     QPainter p(&rotate);
     p.setRenderHint(QPainter::Antialiasing);
@@ -116,7 +119,7 @@ void MainWindow::updatepicture()
     p.end();
     ui->label->setPixmap(rotate);
     a++;
-
+*/
 }
 
 void MainWindow::updategraph()
@@ -232,4 +235,30 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_2_pressed()
 {
+}
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+
+//    QFile file("C:/Work/value.txt");
+
+     //QFile file("/sys/class/gpio/gpio66/value");
+/*
+    QFile file("/usr/value.txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+
+    if (ui->checkBox->checkState())
+    {
+        out << "1";
+        qDebug() << "one";
+
+    }
+    else
+    {
+        out << "0";
+        qDebug() << "zero";
+        //qDebug() << ui->checkBox->checkState();
+    }
+    file.close();*/
 }
