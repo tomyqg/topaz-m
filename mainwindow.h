@@ -27,7 +27,7 @@ private slots:
 
     void updateCaption();
     void updatepicture();
-
+    void updategraph();
 
     void on_pushButton_clicked();
 

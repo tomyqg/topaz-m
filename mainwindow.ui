@@ -131,9 +131,9 @@ color: rgb(0, 0, 0);</string>
    <widget class="QCustomPlot" name="customPlot" native="true">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>690</x>
       <y>40</y>
-      <width>361</width>
+      <width>571</width>
       <height>261</height>
      </rect>
     </property>
