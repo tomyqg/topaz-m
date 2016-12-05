@@ -116,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
 
     timer->start(888);
-    timer2->start(555);
+    timer2->start(101);
     timer3->start(99);
 
     ui->customPlot->xAxis->setRange(-8, 200);
@@ -410,8 +410,8 @@ void MainWindow::on_pushButton_2_clicked()
 {
 
     ui->customPlot->clearGraphs();
-    int high=0;
-    int low=0;
+    int high=-1;
+    int low=1;
 
 
     for (int i=0; i<b; i++)
