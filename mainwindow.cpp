@@ -19,6 +19,24 @@ int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color5rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color6rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color7rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color8rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color9rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color10rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+
+int color11rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color12rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color13rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color14rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color15rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color16rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color17rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color18rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color19rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color20rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+
+//y1 offset
 
 QVector<double> xx1;
 QVector<double> yy1;
@@ -34,7 +52,7 @@ QVector<double> yy4;
 
 QVector<double> xx5;
 QVector<double> yy5;
-/*
+
 QVector<double> xx6;
 QVector<double> yy6;
 
@@ -49,7 +67,38 @@ QVector<double> yy9;
 
 QVector<double> xx10;
 QVector<double> yy10;
-*/
+
+QVector<double> xx11;
+QVector<double> yy11;
+
+QVector<double> xx12;
+QVector<double> yy12;
+
+QVector<double> xx13;
+QVector<double> yy13;
+
+QVector<double> xx14;
+QVector<double> yy14;
+
+QVector<double> xx15;
+QVector<double> yy15;
+
+QVector<double> xx16;
+QVector<double> yy16;
+
+QVector<double> xx17;
+QVector<double> yy17;
+
+QVector<double> xx18;
+QVector<double> yy18;
+
+QVector<double> xx19;
+QVector<double> yy19;
+
+QVector<double> xx20;
+QVector<double> yy20;
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -66,47 +115,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer3 = new QTimer(this);
     connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
 
-    timer->start(1000);
-    timer2->start(500);
-    timer3->start(100);
+    timer->start(888);
+    timer2->start(555);
+    timer3->start(99);
 
     ui->customPlot->xAxis->setRange(-8, 200);
     ui->customPlot->yAxis->setRange(-5, 100);
-
-/*
-    int n = 50; // number of points in graph
-    double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
-    double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
-    double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
-    double yOffset = (rand()/(double)RAND_MAX - 0.5)*5;
-    double r1 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
-    QVector<double> x(n), y(n);
-    for (int i=0; i<n; i++)
-    {
-        x[i] = (i/(double)n-0.5)*10.0*xScale + xOffset;
-        y[i] = (qSin(x[i]*r1*5)*qSin(qCos(x[i]*r2)*r4*3)+r3*qCos(qSin(x[i])*r4*2))*yScale + yOffset;
-    }
-
-    ui->customPlot->xAxis->setRange(-8, 200);
-    ui->customPlot->yAxis->setRange(-5, 100);
-
-    ui->customPlot->addGraph();
-    ui->customPlot->graph()->setName(QString("New graph %1").arg(ui->customPlot->graphCount()-1));
-    ui->customPlot->graph()->setData(x, y);
-    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
-    if (rand()%100 > 50)
-        ui->customPlot->graph()->setScatterStyle(QCPScatterStyle((QCPScatterStyle::ScatterShape)(rand()%14+1)));
-    QPen graphPen;
-    graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
-    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
-    ui->customPlot->graph()->setPen(graphPen);
-    ui->customPlot->replot();
-
-    ui->customPlot->addGraph(); // blue line
-    ui->customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));*/
 }
 
 MainWindow::~MainWindow()
@@ -140,98 +154,180 @@ void MainWindow::updateCaption()
 
 void MainWindow::updatepicture()
 {
-    //QPixmap ship("C:/Users/aashmele/untitled2/logo.jpg");
-/*
-    QPixmap ship("/usr/inc/logo.jpg");
-    QPixmap rotate(ship.size()) ;
-    QPainter p(&rotate);
-    p.setRenderHint(QPainter::Antialiasing);
-    p.setRenderHint(QPainter::SmoothPixmapTransform);
-    p.setRenderHint(QPainter::HighQualityAntialiasing);
-    p.translate(rotate.size().width()/2, rotate.size().height()/2);
-    p.rotate(a+(ui->dial->value()-45)*2);
-    p.translate(-rotate.size().width()/2, -rotate.size().height()/2);
-    p.drawPixmap(0,0,ship);
-    p.end();
-    ui->label->setPixmap(rotate);
-    a++;*/
+
     QPen graphPen;
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
-//    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx1, yy1);
 
 
     graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
-//    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
     ui->customPlot->graph()->setPen(graphPen);
 
 
     ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx2, yy2);
     graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
-//    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
     ui->customPlot->graph()->setPen(graphPen);
 
 
 
     ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx3, yy3);
     graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
-//    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
     ui->customPlot->graph()->setPen(graphPen);
 
-
-
     ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx4, yy4);
     graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
-//    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
     ui->customPlot->graph()->setPen(graphPen);
-
-
 
     ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx5, yy5);
     graphPen.setColor(QColor(color5rgb[0],color5rgb[1],color5rgb[2]));
-//    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
     ui->customPlot->graph()->setPen(graphPen);
 
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx6, yy6);
+    graphPen.setColor(QColor(color6rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
 
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx7, yy7);
+    graphPen.setColor(QColor(color7rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
 
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx8, yy8);
+    graphPen.setColor(QColor(color8rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx9, yy9);
+    graphPen.setColor(QColor(color9rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx10, yy10);
+    graphPen.setColor(QColor(color10rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx11, yy11);
+    graphPen.setColor(QColor(color11rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx12, yy12);
+    graphPen.setColor(QColor(color12rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx13, yy13);
+    graphPen.setColor(QColor(color13rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx14, yy14);
+    graphPen.setColor(QColor(color14rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx15, yy15);
+    graphPen.setColor(QColor(color15rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx16, yy16);
+    graphPen.setColor(QColor(color16rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx17, yy17);
+    graphPen.setColor(QColor(color17rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx18, yy18);
+    graphPen.setColor(QColor(color18rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx19, yy19);
+    graphPen.setColor(QColor(color19rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(xx20, yy20);
+    graphPen.setColor(QColor(color20rgb[0],color5rgb[1],color5rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->replot();
 }
 
 void MainWindow::updategraph()
 {
-    int high=5;
-    int low=1;
+    int high=1;
+    int low=-1;
 
     xx1.append(b);
+    xx2.append(b);
+    xx3.append(b);
+    xx4.append(b);
+    xx5.append(b);
+    xx6.append(b);
+    xx7.append(b);
+    xx8.append(b);
+    xx9.append(b);
+    xx10.append(b);
+
+    xx11.append(b);
+    xx12.append(b);
+    xx13.append(b);
+    xx14.append(b);
+    xx15.append(b);
+    xx16.append(b);
+    xx17.append(b);
+    xx18.append(b);
+    xx19.append(b);
+
+    xx20.append(b);
+
+
+
+
     yy1.append(ui->dial_2->value()+qrand() % ((high + 1) - low) + low + 0);
 
+    yy2.append(ui->dial_3->value()+qrand() % ((high + 1) - low) + low + 5);
 
-    xx2.append(b);
-    yy2.append(ui->dial_3->value()+qrand() % ((high + 1) - low) + low + 10);
+    yy3.append(ui->dial_4->value()+qrand() % ((high + 1) - low) + low + 10);
 
-    xx3.append(b);
-    yy3.append(ui->dial_4->value()+qrand() % ((high + 1) - low) + low + 15);
+    yy4.append(ui->dial_5->value()+qrand() % ((high + 1) - low) + low + 15);
 
-    xx4.append(b);
-    yy4.append(ui->dial_5->value()+qrand() % ((high + 1) - low) + low + 20);
+    yy5.append(ui->dial_6->value()+qrand() % ((high + 1) - low) + low + 20);
 
-    xx5.append(b);
-    yy5.append(ui->dial_6->value()+qrand() % ((high + 1) - low) + low + 25);
+    yy6.append(ui->dial_7->value()+qrand() % ((high + 1) - low) + low + 25);
 
-//    xx6.append(b);
-//    yy6.append(ui->dial_4->value()+qrand() % ((high + 1) - low) + low + 30);
+    yy7.append(ui->dial_8->value()+qrand() % ((high + 1) - low) + low + 30);
 
+    yy8.append(ui->dial_9->value()+qrand() % ((high + 1) - low) + low + 35);
+
+    yy9.append(ui->dial_10->value()+qrand() % ((high + 1) - low) + low + 40);
+
+    yy10.append(ui->dial_11->value()+qrand() % ((high + 1) - low) + low + 45);
+
+    yy11.append(ui->dial_12->value()+qrand() % ((high + 1) - low) + low + 50);
+
+    yy12.append(ui->dial_13->value()+qrand() % ((high + 1) - low) + low + 55);
+    yy13.append(ui->dial_14->value()+qrand() % ((high + 1) - low) + low + 60);
+    yy14.append(ui->dial_15->value()+qrand() % ((high + 1) - low) + low + 65);
+    yy15.append(ui->dial_16->value()+qrand() % ((high + 1) - low) + low + 70);
+    yy16.append(ui->dial_17->value()+qrand() % ((high + 1) - low) + low + 75);
+    yy17.append(ui->dial_18->value()+qrand() % ((high + 1) - low) + low + 80);
+    yy18.append(ui->dial_19->value()+qrand() % ((high + 1) - low) + low + 85);
+    yy19.append(ui->dial_20->value()+qrand() % ((high + 1) - low) + low + 90);
+    yy20.append(ui->dial_21->value()+qrand() % ((high + 1) - low) + low + 95);
 
 
     ///////////////
@@ -241,17 +337,77 @@ void MainWindow::updategraph()
     {
         b=0;
         xx1.clear();
-        yy1.clear();
         xx2.clear();
-        yy2.clear();
         xx3.clear();
-        yy3.clear();
         xx4.clear();
-        yy4.clear();
         xx5.clear();
+        xx6.clear();
+        xx7.clear();
+        xx8.clear();
+        xx9.clear();
+        xx10.clear();
+
+        xx11.clear();
+        xx12.clear();
+        xx13.clear();
+        xx14.clear();
+        xx15.clear();
+        xx16.clear();
+        xx17.clear();
+        xx18.clear();
+        xx19.clear();
+
+        xx20.clear();
+
+        yy1.clear();
+        yy2.clear();
+        yy3.clear();
+        yy4.clear();
         yy5.clear();
 
+        yy6.clear();
+        yy7.clear();
+        yy8.clear();
+        yy9.clear();
+        yy10.clear();
+
+        yy11.clear();
+        yy12.clear();
+        yy13.clear();
+        yy14.clear();
+        yy15.clear();
+        yy16.clear();
+        yy17.clear();
+        yy18.clear();
+        yy19.clear();
+        yy20.clear();
+
         ui->customPlot->clearGraphs();
+    }
+
+    for (int i=0; i<b; i++)
+    {
+        yy1[i] += 1-1;
+        yy2[i] += 1-1;
+        yy3[i] += 1-1;
+        yy4[i] += 1-1;
+        yy5[i] += 1-1;
+        yy6[i] += 1-1;
+        yy7[i] += 1-1;
+        yy8[i] += 1-1;
+        yy9[i] += 1-1;
+        yy10[i] += 1-1;
+
+        yy11[i] += 1-1;
+        yy12[i] += 1-1;
+        yy13[i] += 1-1;
+        yy14[i] += 1-1;
+        yy15[i] += 1-1;
+        yy16[i] += 1-1;
+        yy17[i] += 1-1;
+        yy18[i] += 1-1;
+        yy19[i] += 1-1;
+        yy20[i] += 1-1;
     }
 }
 
@@ -277,66 +433,34 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
 
-
     ui->customPlot->clearGraphs();
+    int high=0;
+    int low=0;
 
-    int n = 50; // number of points in graph
-    double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
-    double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
-    double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
-    double yOffset = (rand()/(double)RAND_MAX - 0.5)*5;
-    double r1 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
-    double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
-    QVector<double> x(n), y(n);
-    for (int i=0; i<n; i++)
+
+    for (int i=0; i<b; i++)
     {
-        x[i] = (i/(double)n-0.5)*10.0*xScale + xOffset;
-        y[i] = (qSin(x[i]*r1*5)*qSin(qCos(x[i]*r2)*r4*3)+r3*qCos(qSin(x[i])*r4*2))*yScale + yOffset;
-    }
+        yy1[i] += qrand() % ((high + 1) - low) + low + 0+sin(i/5)*20;
+        yy2[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy3[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy4[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy5[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy6[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy7[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy8[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy9[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy10[i] += qrand() % ((high + 1) - low) + low + 0;
 
-    ui->customPlot->addGraph();
-    ui->customPlot->graph()->setName(QString("New graph %1").arg(ui->customPlot->graphCount()-1));
-    ui->customPlot->graph()->setData(x, y);
-    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
-    if (rand()%100 > 50)
-        ui->customPlot->graph()->setScatterStyle(QCPScatterStyle((QCPScatterStyle::ScatterShape)(rand()%14+1)));
-    QPen graphPen;
-    graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
-    graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
-    ui->customPlot->graph()->setPen(graphPen);
-    ui->customPlot->replot();
-
-
-
-
-    ///////////////
-    QVector<double> x1(200), y1(200);
-    QVector<double> x2(201), y2(201);
-    //int tre=a%100;
-
-    for (int i=0; i<201; i++)
-    {
-        x2[i] = i ; // x goes from -1 to 1
-        y2[i] = x2[i]/2; // let's plot a quadratic function
-    }
-
-    ui->customPlot->addGraph();
-    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
-    //    ui->customPlot->graph()->setData({10,20,22,25,27,28,29,30,31,90}, {50,15,30,20,10,90,80,70,60,50});
-    //    ui->customPlot->graph()->setData({10,20,30,40,50,60,70,80,90,100},y1);// {50,15,30,20,10,90,80,70,60,50});
-    ui->customPlot->graph()->setData(x2, y2);
-    //ui->customPlot->graph()->addData(1,10);
-
-    ui->customPlot->replot();
-    ///////////////
-    b++;
-    if(b==200)
-    {
-        b=0;
-        ui->customPlot->clearGraphs();
-
+        yy11[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy12[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy13[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy14[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy15[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy16[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy17[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy18[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy19[i] += qrand() % ((high + 1) - low) + low + 0;
+        yy20[i] += qrand() % ((high + 1) - low) + low + 0;
     }
 }
 
