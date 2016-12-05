@@ -157,6 +157,8 @@ void MainWindow::updatepicture()
 
     QPen graphPen;
 
+    ui->customPlot->clearGraphs();
+
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
@@ -382,32 +384,6 @@ void MainWindow::updategraph()
         yy19.clear();
         yy20.clear();
 
-        ui->customPlot->clearGraphs();
-    }
-
-    for (int i=0; i<b; i++)
-    {
-        yy1[i] += 1-1;
-        yy2[i] += 1-1;
-        yy3[i] += 1-1;
-        yy4[i] += 1-1;
-        yy5[i] += 1-1;
-        yy6[i] += 1-1;
-        yy7[i] += 1-1;
-        yy8[i] += 1-1;
-        yy9[i] += 1-1;
-        yy10[i] += 1-1;
-
-        yy11[i] += 1-1;
-        yy12[i] += 1-1;
-        yy13[i] += 1-1;
-        yy14[i] += 1-1;
-        yy15[i] += 1-1;
-        yy16[i] += 1-1;
-        yy17[i] += 1-1;
-        yy18[i] += 1-1;
-        yy19[i] += 1-1;
-        yy20[i] += 1-1;
     }
 }
 
@@ -440,7 +416,7 @@ void MainWindow::on_pushButton_2_clicked()
 
     for (int i=0; i<b; i++)
     {
-        yy1[i] += qrand() % ((high + 1) - low) + low + 0+sin(i/5)*20;
+        yy1[i] += qrand() % ((high + 1) - low) + low + 0;
         yy2[i] += qrand() % ((high + 1) - low) + low + 0;
         yy3[i] += qrand() % ((high + 1) - low) + low + 0;
         yy4[i] += qrand() % ((high + 1) - low) + low + 0;
@@ -496,3 +472,4 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     }
     file.close();
 }
+
