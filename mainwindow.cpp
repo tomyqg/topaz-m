@@ -10,6 +10,7 @@
 #include <QtMath>
 #include <QFile>
 #include <QDataStream>
+#include <QtMath>
 
 int a=0;
 int b=0;
@@ -18,6 +19,33 @@ int b=0;
 QVector<double> xx1;
 QVector<double> yy1;
 
+QVector<double> xx2;
+QVector<double> yy2;
+
+QVector<double> xx3;
+QVector<double> yy3;
+/*
+QVector<double> xx4;
+QVector<double> yy4;
+
+QVector<double> xx5;
+QVector<double> yy5;
+
+QVector<double> xx6;
+QVector<double> yy6;
+
+QVector<double> xx7;
+QVector<double> yy7;
+
+QVector<double> xx8;
+QVector<double> yy8;
+
+QVector<double> xx9;
+QVector<double> yy9;
+
+QVector<double> xx10;
+QVector<double> yy10;
+*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -105,8 +133,8 @@ void MainWindow::updateCaption()
 void MainWindow::updatepicture()
 {
     //QPixmap ship("C:/Users/aashmele/untitled2/logo.jpg");
-
- /*   QPixmap ship("/usr/inc/logo.jpg");
+/*
+    QPixmap ship("/usr/inc/logo.jpg");
     QPixmap rotate(ship.size()) ;
     QPainter p(&rotate);
     p.setRenderHint(QPainter::Antialiasing);
@@ -118,20 +146,41 @@ void MainWindow::updatepicture()
     p.drawPixmap(0,0,ship);
     p.end();
     ui->label->setPixmap(rotate);
-    a++;
-*/
+    a++;*/
 }
 
 void MainWindow::updategraph()
 {
+    int high=5;
+    int low=1;
 
     xx1.append(b);
-    yy1.append(ui->dial_2->value());
+    yy1.append(ui->dial_2->value()+qrand() % ((high + 1) - low) + low + 0);
 
+
+    xx2.append(b);
+    yy2.append(ui->dial_2->value()+qrand() % ((high + 1) - low) + low + 10);
+
+    xx3.append(b);
+    yy3.append(ui->dial_2->value()+qrand() % ((high + 1) - low) + low + 20);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
     ui->customPlot->graph()->setData(xx1, yy1);
+    ui->customPlot->replot();
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
+    ui->customPlot->graph()->setData(xx2, yy2);
+    ui->customPlot->replot();
+
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(1));
+    ui->customPlot->graph()->setData(xx3, yy3);
+    ui->customPlot->replot();
+
+
 
     ui->customPlot->replot();
     ///////////////
@@ -239,26 +288,29 @@ void MainWindow::on_pushButton_2_pressed()
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
 {
+    QFile filedir("/sys/class/gpio/gpio69/direction");
 
-//    QFile file("C:/Work/value.txt");
+    filedir.open(QIODevice::WriteOnly);
+    QTextStream outdir(&filedir);
 
-     //QFile file("/sys/class/gpio/gpio66/value");
-/*
-    QFile file("/usr/value.txt");
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    outdir << "out";
+    filedir.close();
+
+    QFile file("/sys/class/gpio/gpio69/value");
+
+    file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
 
     if (ui->checkBox->checkState())
     {
         out << "1";
-        qDebug() << "one";
-
     }
+
     else
     {
         out << "0";
-        qDebug() << "zero";
+
         //qDebug() << ui->checkBox->checkState();
     }
-    file.close();*/
+    file.close();
 }
