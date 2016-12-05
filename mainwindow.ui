@@ -132,9 +132,9 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>40</y>
-      <width>571</width>
-      <height>261</height>
+      <y>50</y>
+      <width>531</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -147,10 +147,10 @@ color: rgb(0, 0, 0);</string>
    <widget class="QDial" name="dial_2">
     <property name="geometry">
      <rect>
-      <x>870</x>
+      <x>690</x>
       <y>300</y>
-      <width>221</width>
-      <height>181</height>
+      <width>70</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
@@ -165,6 +165,136 @@ color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string>светодиод</string>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_3">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_4">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_5">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_6">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_7">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_8">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>300</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_9">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_10">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_11">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_12">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_13">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_14">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial_15">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>380</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
     </property>
    </widget>
   </widget>
