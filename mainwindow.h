@@ -37,6 +37,10 @@ private slots:
 
     void on_checkBox_stateChanged(int arg1);
 
+    void on_textEdit_textChanged();
+
+    double returnmathresult();
+
 private:
     Ui::MainWindow *ui;
 

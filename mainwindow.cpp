@@ -11,6 +11,17 @@
 #include <QFile>
 #include <QDataStream>
 #include <QtMath>
+#include <QtScript/QScriptEngine>
+
+#include "math.h"
+#include <QtScript/QScriptEngine>
+#include <QPainterPath>
+#include <QPainter>
+#include <QDateTime>
+#include <QFile>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QtWidgets>
 
 int a=0;
 int b=0;
@@ -116,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
 
     timer->start(888);
-    timer2->start(101);
+    timer2->start(201);
     timer3->start(99);
 
     ui->customPlot->xAxis->setRange(-8, 200);
@@ -156,7 +167,7 @@ void MainWindow::updatepicture()
 {
 
     QPen graphPen;
-
+    graphPen.setWidthF(1);
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
@@ -270,7 +281,9 @@ void MainWindow::updatepicture()
 
 void MainWindow::updategraph()
 {
-    int high=1;
+
+
+    int high=2;
     int low=-1;
 
     xx1.append(b);
@@ -385,20 +398,39 @@ void MainWindow::updategraph()
         yy20.clear();
 
     }
+
+    QString inn = ui->textEdit->toPlainText();
+
+    QScriptEngine myEngine;
+
+    QString vaal = QString::number(ui->dial_2->value());
+//    QString nonrepl = ui->textEdit->toPlainText();
+//    QString replaced = nonrepl.replace(QString("x"), "2");
+//    ui->textEdit->setText(replaced);
+
+    QString replaced=inn;
+
+    replaced.replace(QString("sin"), QString("Math.sin"));
+
+    replaced.replace(QString("cos"), QString("Math.cos"));
+
+    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
+
+    replaced.replace(QString("pow"), QString("Math.pow"));
+
+    replaced.replace(QString("x"), QString(vaal));
+
+
+    double Result = myEngine.evaluate(replaced).toNumber();
+
+
+    ui->label_4->setText(QString::number(Result));
+
+
 }
 
 void MainWindow::paintEvent(QPaintEvent *e)
-{/*
-    QPainter painter(this);
-
-    QPen pen1(Qt::black);
-    pen1.setWidth(6);
-
-painter.rotate(-45);
-    QRect rec(20,60,20,60);
-    painter.setPen(pen1);
-    painter.drawRect(rec);*/
-
+{
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -408,11 +440,9 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-
     ui->customPlot->clearGraphs();
-    int high=-1;
-    int low=1;
-
+    int high=2;
+    int low=-2;
 
     for (int i=0; i<b; i++)
     {
@@ -473,3 +503,60 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     file.close();
 }
 
+
+double MainWindow::returnmathresult()
+{
+    QString inn = ui->textEdit->toPlainText();
+
+    QScriptEngine myEngine;
+
+    QString vaal = QString::number(ui->dial_2->value());
+
+    QString replaced=inn;
+
+    replaced.replace(QString("sin"), QString("Math.sin"));
+
+    replaced.replace(QString("cos"), QString("Math.cos"));
+
+    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
+
+    replaced.replace(QString("pow"), QString("Math.pow"));
+
+    replaced.replace(QString("x"), QString(vaal));
+
+
+    double Result = myEngine.evaluate(replaced).toNumber();
+
+
+    ui->label_4->setText(QString::number(Result));
+    return Result;
+
+}
+
+void MainWindow::on_textEdit_textChanged()
+{
+    QString inn = ui->textEdit->toPlainText();
+
+    QScriptEngine myEngine;
+
+    QString vaal = QString::number(ui->dial_2->value());
+
+    QString replaced=inn;
+
+    replaced.replace(QString("sin"), QString("Math.sin"));
+
+    replaced.replace(QString("cos"), QString("Math.cos"));
+
+    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
+
+    replaced.replace(QString("pow"), QString("Math.pow"));
+
+    replaced.replace(QString("x"), QString(vaal));
+
+
+    double Result = myEngine.evaluate(replaced).toNumber();
+
+
+    ui->label_4->setText(QString::number(Result));
+
+}

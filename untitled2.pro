@@ -4,9 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui script
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-
+CONFIG += c++11
 TARGET = untitled2
 
 TEMPLATE = app
