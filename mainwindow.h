@@ -39,7 +39,11 @@ private slots:
 
     void on_textEdit_textChanged();
 
-    double returnmathresult();
+    double returnmathresult(double dval);
+
+    void on_horizontalSlider_actionTriggered(int action);
+
+    void on_dial_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

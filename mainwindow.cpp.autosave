@@ -142,7 +142,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_dial_sliderMoved(int position)
 {
     ui->lcdNumber->display(ui->dial->value());
-
 }
 
 void MainWindow::on_lcdNumber_overflow()
