@@ -190,8 +190,8 @@ void MainWindow::updateCaption()
                 QByteArray data = serial.readAll();
 
                 foreach (char tch, data) {
-                //ug()<<QString::number((quint8)tch, 10)<< QString::number((quint8)tch, 2);
-                ui->label_7->setText(ui->label_7->text()+QString::number((quint8)tch, 10));
+                    //ug()<<QString::number((quint8)tch, 10)<< QString::number((quint8)tch, 2);
+                    ui->label_7->setText(ui->label_7->text()+QString::number((quint8)tch, 10));
                 }
 
                 dieTime= QTime::currentTime().addSecs(2);
@@ -546,20 +546,6 @@ void MainWindow::updategraph()
         yy19.clear();
         yy20.clear();
     }
-    ui->label_4->setText(QString::number(returnmathresult(argument)));
-}
-
-void MainWindow::paintEvent(QPaintEvent *e)
-{
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    QApplication::exit();
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
     ui->label_7->clear();
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
@@ -581,28 +567,99 @@ void MainWindow::on_pushButton_2_clicked()
 
             serial.write("321");
 
-//            serial.putChar('7');
+            //            serial.putChar('7');
 
-            QTime dieTime= QTime::currentTime().addSecs(2);
+            QTime dieTime= QTime::currentTime().addSecs(0.5);
             while (QTime::currentTime() < dieTime)
                 QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
-            QByteArray data = serial.readAll();
 
-            QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(data);
+            if (serial.bytesAvailable()>=0)
+            {   QByteArray data = serial.readAll();
+
+                QString DataAsString = (QString(data.toHex()));
 
 
-            dieTime= QTime::currentTime().addSecs(2);
-            while (QTime::currentTime() < dieTime)
-                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+                dieTime= QTime::currentTime().addSecs(2);
+                while (QTime::currentTime() < dieTime)
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
-            //ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
+                //ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
 
-            ui->label_4->setText(DataAsString);
+                ui->label_4->setText(QString::number(serial.bytesAvailable()));
+
+                dieTime= QTime::currentTime().addSecs(0.5);
+                while (QTime::currentTime() < dieTime)
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
 
             serial.close();
         }
         // Example use QSerialPort
+    }
+}
+
+void MainWindow::paintEvent(QPaintEvent *e)
+{
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QApplication::exit();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    while(1)
+    {
+        ui->label_7->clear();
+
+        foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+
+            // Example use QSerialPort
+            QSerialPort serial;
+            serial.setPort(info);
+
+            if (serial.open(QIODevice::ReadWrite))
+            {
+                serial.setBaudRate(QSerialPort::Baud9600);
+                serial.setDataBits(QSerialPort::Data8);
+                serial.setParity(QSerialPort::NoParity);
+                serial.setStopBits(QSerialPort::OneStop);
+                serial.setFlowControl(QSerialPort::NoFlowControl);
+
+                // ui->label_7->setText(ui->label_7->text()+" " + portname);
+                ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
+
+                serial.write("321");
+
+                //            serial.putChar('7');
+
+                QTime dieTime= QTime::currentTime().addSecs(0.2);
+                while (QTime::currentTime() < dieTime)
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+                QByteArray data = serial.readAll();
+
+                QString DataAsString = (QString(data.toHex()));
+
+
+                dieTime= QTime::currentTime().addSecs(2);
+                while (QTime::currentTime() < dieTime)
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+                //ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
+
+                ui->label_4->setText(QString::number(serial.bytesAvailable()));
+
+                dieTime= QTime::currentTime().addSecs(0.2);
+                while (QTime::currentTime() < dieTime)
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+                serial.close();
+            }
+            // Example use QSerialPort
+        }
     }
 }
 
@@ -662,7 +719,7 @@ double MainWindow::returnmathresult(double dval)
 
     double Result = myEngine.evaluate(replaced).toNumber();
 
-    ui->label_4->setText(QString::number(Result));
+    // ui->label_4->setText(QString::number(Result));
     return Result;
     //    return 2;
 }
@@ -691,7 +748,7 @@ void MainWindow::on_textEdit_textChanged()
     double Result = myEngine.evaluate(replaced).toNumber();
 
 
-    ui->label_4->setText(QString::number(Result));
+    //ui->label_4->setText(QString::number(Result));
 
 }
 
