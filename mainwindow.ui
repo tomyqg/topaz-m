@@ -451,6 +451,32 @@ p, li { white-space: pre-wrap; }
      <string>20</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>590</y>
+      <width>211</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start blinking</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>690</y>
+      <width>831</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

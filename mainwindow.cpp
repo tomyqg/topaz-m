@@ -12,7 +12,7 @@
 #include <QDataStream>
 #include <QtMath>
 #include <QtScript/QScriptEngine>
-
+#include <QtSerialPort/QtSerialPort>
 #include "math.h"
 #include <QtScript/QScriptEngine>
 #include <QPainterPath>
@@ -22,6 +22,9 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QtWidgets>
+#include <QThread>
+#include <QMutex>
+
 
 int a=0;
 int b=0;
@@ -142,7 +145,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_dial_sliderMoved(int position)
 {
     ui->lcdNumber->display(ui->dial->value());
-
 }
 
 void MainWindow::on_lcdNumber_overflow()
@@ -165,6 +167,94 @@ void MainWindow::updateCaption()
 
 void MainWindow::updatepicture()
 {
+/*
+    int portcount = QSerialPortInfo::availablePorts().count();
+    ui->label_7->setText(QString::number(portcount));
+*/
+
+    QByteArray arr;
+
+    arr="Bro";
+
+  /*  foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+
+        // Example use QSerialPort
+        QSerialPort serial;
+        serial.setPort(info);
+        QString portname = "/dev/"+info.portName();
+        serial.setPortName(portname);
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+
+        serial.close();
+
+        serial.setPortName(portname);
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+
+        if (serial.open(QSerialPort::ReadWrite))
+        {
+
+            serial.setPortName(portname);
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+
+            ui->label_7->setText(ui->label_7->text()+" " + portname);
+            ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
+            serial.write(arr);
+            serial.write(arr);
+            serial.close();
+        }
+
+        // Example use QSerialPort
+       QSerialPort serial2;
+        serial2.setPort(info);
+        portname = info.portName();
+
+
+
+        serial2.setPortName(portname);
+        serial2.setBaudRate(QSerialPort::Baud9600);
+        serial2.setDataBits(QSerialPort::Data8);
+        serial2.setParity(QSerialPort::NoParity);
+        serial2.setStopBits(QSerialPort::OneStop);
+        serial2.setFlowControl(QSerialPort::NoFlowControl);
+        serial2.close();
+
+        serial2.setPortName(portname);
+        serial2.setBaudRate(QSerialPort::Baud9600);
+        serial2.setDataBits(QSerialPort::Data8);
+        serial2.setParity(QSerialPort::NoParity);
+        serial2.setStopBits(QSerialPort::OneStop);
+        serial2.setFlowControl(QSerialPort::NoFlowControl);
+
+        if (serial2.open(QIODevice::ReadWrite))
+        {
+            serial2.setPortName(portname);
+
+            serial2.setBaudRate(QSerialPort::Baud9600);
+            serial2.setDataBits(QSerialPort::Data8);
+            serial2.setParity(QSerialPort::NoParity);
+            serial2.setStopBits(QSerialPort::OneStop);
+            serial2.setFlowControl(QSerialPort::NoFlowControl);
+
+          //  ui->label_7->setText(ui->label_7->text()+" 2 " + portname);
+            serial2.write(arr);
+            serial2.write(arr);
+            serial2.close();
+        }
+}*/
 
     QPen graphPen;
     graphPen.setWidthF(1);
@@ -176,7 +266,6 @@ void MainWindow::updatepicture()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
 
-
     graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
@@ -185,8 +274,6 @@ void MainWindow::updatepicture()
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
         ui->customPlot->graph()->setPen(graphPen);
     }
-
-
 
     if(countgraph>=3){ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx3, yy3);
@@ -368,38 +455,6 @@ void MainWindow::updategraph()
     if(countgraph>=19) yy19.append(returnmathresult(argument)*1+90);
     if(countgraph>=20) yy20.append(returnmathresult(argument)*1+95);
 
-
-    /* yy2.append(ui->dial_3->value()+qrand() % ((high + 1) - low) + low + 5);
-
-    yy3.append(ui->dial_4->value()+qrand() % ((high + 1) - low) + low + 10);
-
-    yy4.append(ui->dial_5->value()+qrand() % ((high + 1) - low) + low + 15);
-
-    yy5.append(ui->dial_6->value()+qrand() % ((high + 1) - low) + low + 20);
-
-    yy6.append(ui->dial_7->value()+qrand() % ((high + 1) - low) + low + 25);
-
-    yy7.append(ui->dial_8->value()+qrand() % ((high + 1) - low) + low + 30);
-
-    yy8.append(ui->dial_9->value()+qrand() % ((high + 1) - low) + low + 35);
-
-    yy9.append(ui->dial_10->value()+qrand() % ((high + 1) - low) + low + 40);
-
-    yy10.append(ui->dial_11->value()+qrand() % ((high + 1) - low) + low + 45);
-
-    yy11.append(ui->dial_12->value()+qrand() % ((high + 1) - low) + low + 50);
-
-    yy12.append(ui->dial_13->value()+qrand() % ((high + 1) - low) + low + 55);
-    yy13.append(ui->dial_14->value()+qrand() % ((high + 1) - low) + low + 60);
-    yy14.append(ui->dial_15->value()+qrand() % ((high + 1) - low) + low + 65);
-    yy15.append(ui->dial_16->value()+qrand() % ((high + 1) - low) + low + 70);
-    yy16.append(ui->dial_17->value()+qrand() % ((high + 1) - low) + low + 75);
-    yy17.append(ui->dial_18->value()+qrand() % ((high + 1) - low) + low + 80);
-    yy18.append(ui->dial_19->value()+qrand() % ((high + 1) - low) + low + 85);
-    yy19.append(ui->dial_20->value()+qrand() % ((high + 1) - low) + low + 90);
-    yy20.append(ui->dial_21->value()+qrand() % ((high + 1) - low) + low + 95);
-
-*/
     ///////////////
     b++;
 
@@ -466,34 +521,92 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ui->customPlot->clearGraphs();
-    int high=2;
-    int low=-2;
+    QString currentRequest = "request";
+    QSerialPort serialq;
+    serialq.close();
+    serialq.setPortName("COM8");
+    serialq.open(QIODevice::ReadWrite);
+    QByteArray requestData = currentRequest.toLocal8Bit();
+    serialq.write(requestData);
 
-    for (int i=0; i<b; i++)
-    {
-        yy1[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy2[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy3[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy4[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy5[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy6[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy7[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy8[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy9[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy10[i] += qrand() % ((high + 1) - low) + low + 0;
 
-        yy11[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy12[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy13[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy14[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy15[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy16[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy17[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy18[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy19[i] += qrand() % ((high + 1) - low) + low + 0;
-        yy20[i] += qrand() % ((high + 1) - low) + low + 0;
-    }
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+
+          // Example use QSerialPort
+          QSerialPort serial;
+          serial.setPort(info);
+          QString portname = "/dev/"+info.portName();
+          serial.setPortName(portname);
+          serial.setBaudRate(QSerialPort::Baud9600);
+          serial.setDataBits(QSerialPort::Data8);
+          serial.setParity(QSerialPort::NoParity);
+          serial.setStopBits(QSerialPort::OneStop);
+          serial.setFlowControl(QSerialPort::NoFlowControl);
+
+
+          serial.close();
+
+          serial.setPortName(portname);
+          serial.setBaudRate(QSerialPort::Baud9600);
+          serial.setDataBits(QSerialPort::Data8);
+          serial.setParity(QSerialPort::NoParity);
+          serial.setStopBits(QSerialPort::OneStop);
+          serial.setFlowControl(QSerialPort::NoFlowControl);
+
+
+          if (serial.open(QSerialPort::ReadWrite))
+          {
+
+              serial.setPortName(portname);
+              serial.setBaudRate(QSerialPort::Baud9600);
+              serial.setDataBits(QSerialPort::Data8);
+              serial.setParity(QSerialPort::NoParity);
+              serial.setStopBits(QSerialPort::OneStop);
+              serial.setFlowControl(QSerialPort::NoFlowControl);
+
+              ui->label_7->setText(ui->label_7->text()+" " + portname);
+              ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
+              serial.write("array");
+              serial.close();
+          }
+
+          // Example use QSerialPort
+         QSerialPort serial2;
+          serial2.setPort(info);
+          portname = info.portName();
+
+
+
+          serial2.setPortName(portname);
+          serial2.setBaudRate(QSerialPort::Baud9600);
+          serial2.setDataBits(QSerialPort::Data8);
+          serial2.setParity(QSerialPort::NoParity);
+          serial2.setStopBits(QSerialPort::OneStop);
+          serial2.setFlowControl(QSerialPort::NoFlowControl);
+          serial2.close();
+
+          serial2.setPortName(portname);
+          serial2.setBaudRate(QSerialPort::Baud9600);
+          serial2.setDataBits(QSerialPort::Data8);
+          serial2.setParity(QSerialPort::NoParity);
+          serial2.setStopBits(QSerialPort::OneStop);
+          serial2.setFlowControl(QSerialPort::NoFlowControl);
+
+          if (serial2.open(QIODevice::ReadWrite))
+          {
+              serial2.setPortName(portname);
+
+              serial2.setBaudRate(QSerialPort::Baud9600);
+              serial2.setDataBits(QSerialPort::Data8);
+              serial2.setParity(QSerialPort::NoParity);
+              serial2.setStopBits(QSerialPort::OneStop);
+              serial2.setFlowControl(QSerialPort::NoFlowControl);
+
+            //  ui->label_7->setText(ui->label_7->text()+" 2 " + portname);
+              serial2.write("arr");
+              serial2.close();
+          }
+  }
 }
 
 void MainWindow::on_pushButton_2_pressed()
@@ -554,7 +667,7 @@ double MainWindow::returnmathresult(double dval)
 
     ui->label_4->setText(QString::number(Result));
     return Result;
-//    return 2;
+    //    return 2;
 }
 
 void MainWindow::on_textEdit_textChanged()
@@ -594,4 +707,10 @@ void MainWindow::on_horizontalSlider_actionTriggered(int action)
 void MainWindow::on_dial_valueChanged(int value)
 {
 
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QProcess process;
+    process.startDetached("python /usr/pythscr.py");
 }

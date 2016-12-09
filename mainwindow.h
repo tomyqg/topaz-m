@@ -45,8 +45,15 @@ private slots:
 
     void on_dial_valueChanged(int value);
 
+    void on_pushButton_3_clicked();
+
+signals:
+
+    void error(const QString &s);
+
 private:
     Ui::MainWindow *ui;
+    QMutex mutex;
 
 protected:
     void paintEvent(QPaintEvent *e);

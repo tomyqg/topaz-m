@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT += core gui script
+QT += serialport
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 TARGET = untitled2
@@ -19,4 +21,7 @@ HEADERS  += mainwindow.h \
          ../../qcustomplot.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    uartpyyy.py
 
