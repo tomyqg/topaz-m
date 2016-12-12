@@ -161,139 +161,15 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
-
-
-
-    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-
-        // Example use QSerialPort
-        QSerialPort serial;
-        serial.setPort(info);
-
-        if (serial.open(QIODevice::ReadWrite))
-        {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-
-
-            QByteArray readbuf = serial.readAll();
-            QTime dieTime= QTime::currentTime().addSecs(0.2);
-            while (QTime::currentTime() < dieTime)
-                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-
-            if (readbuf.size()!=0)
-            {
-
-                QByteArray data = serial.readAll();
-
-                foreach (char tch, data) {
-                    //ug()<<QString::number((quint8)tch, 10)<< QString::number((quint8)tch, 2);
-                    ui->label_7->setText(ui->label_7->text()+QString::number((quint8)tch, 10));
-                }
-
-                dieTime= QTime::currentTime().addSecs(2);
-                while (QTime::currentTime() < dieTime)
-                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-            }
-            serial.close();
-        }
-    }
 }
 
 
 void MainWindow::updatepicture()
 {
-    /*
-    int portcount = QSerialPortInfo::availablePorts().count();
-    ui->label_7->setText(QString::number(portcount));
-*/
 
     QByteArray arr;
 
     arr="Bro";
-
-    /*  foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-
-        // Example use QSerialPort
-        QSerialPort serial;
-        serial.setPort(info);
-        QString portname = "/dev/"+info.portName();
-        serial.setPortName(portname);
-        serial.setBaudRate(QSerialPort::Baud9600);
-        serial.setDataBits(QSerialPort::Data8);
-        serial.setParity(QSerialPort::NoParity);
-        serial.setStopBits(QSerialPort::OneStop);
-        serial.setFlowControl(QSerialPort::NoFlowControl);
-
-
-        serial.close();
-
-        serial.setPortName(portname);
-        serial.setBaudRate(QSerialPort::Baud9600);
-        serial.setDataBits(QSerialPort::Data8);
-        serial.setParity(QSerialPort::NoParity);
-        serial.setStopBits(QSerialPort::OneStop);
-        serial.setFlowControl(QSerialPort::NoFlowControl);
-
-
-        if (serial.open(QSerialPort::ReadWrite))
-        {
-
-            serial.setPortName(portname);
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-
-            ui->label_7->setText(ui->label_7->text()+" " + portname);
-            ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
-            serial.write(arr);
-            serial.write(arr);
-            serial.close();
-        }
-
-        // Example use QSerialPort
-       QSerialPort serial2;
-        serial2.setPort(info);
-        portname = info.portName();
-
-
-
-        serial2.setPortName(portname);
-        serial2.setBaudRate(QSerialPort::Baud9600);
-        serial2.setDataBits(QSerialPort::Data8);
-        serial2.setParity(QSerialPort::NoParity);
-        serial2.setStopBits(QSerialPort::OneStop);
-        serial2.setFlowControl(QSerialPort::NoFlowControl);
-        serial2.close();
-
-        serial2.setPortName(portname);
-        serial2.setBaudRate(QSerialPort::Baud9600);
-        serial2.setDataBits(QSerialPort::Data8);
-        serial2.setParity(QSerialPort::NoParity);
-        serial2.setStopBits(QSerialPort::OneStop);
-        serial2.setFlowControl(QSerialPort::NoFlowControl);
-
-        if (serial2.open(QIODevice::ReadWrite))
-        {
-            serial2.setPortName(portname);
-
-            serial2.setBaudRate(QSerialPort::Baud9600);
-            serial2.setDataBits(QSerialPort::Data8);
-            serial2.setParity(QSerialPort::NoParity);
-            serial2.setStopBits(QSerialPort::OneStop);
-            serial2.setFlowControl(QSerialPort::NoFlowControl);
-
-          //  ui->label_7->setText(ui->label_7->text()+" 2 " + portname);
-            serial2.write(arr);
-            serial2.write(arr);
-            serial2.close();
-        }
-}*/
 
     QPen graphPen;
     graphPen.setWidthF(1);
@@ -479,15 +355,6 @@ void MainWindow::updategraph()
             // ui->label_7->setText(ui->label_7->text()+" " + portname);
             ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
 
-            /*serial.write("321");
-
-            //            serial.putChar('7');
-
-            QTime dieTime= QTime::currentTime().addSecs(0.5);
-            while (QTime::currentTime() < dieTime)
-                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-*/
-
             if (serial.bytesAvailable()>=0)
             {   QByteArray data = serial.readAll();
 
@@ -516,7 +383,7 @@ void MainWindow::updategraph()
 
                 ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
 
-                dieTime= QTime::currentTime().addSecs(0.05);
+                dieTime= QTime::currentTime().addSecs(0.1);
                 while (QTime::currentTime() < dieTime)
                     QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
             }
