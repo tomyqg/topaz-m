@@ -586,7 +586,9 @@ void MainWindow::updategraph()
 
                 //ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
 
-                ui->label_4->setText(QString::number(serial.bytesAvailable()));
+                QString inputstr = QTextCodec::codecForMib(106)->toUnicode(serial.readAll());
+
+                ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
 
                 dieTime= QTime::currentTime().addSecs(0.5);
                 while (QTime::currentTime() < dieTime)
@@ -647,9 +649,9 @@ void MainWindow::on_pushButton_2_clicked()
                 while (QTime::currentTime() < dieTime)
                     QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
-                //ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
+                ui->label_7->setText(ui->label_7->text()+" " + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
 
-                ui->label_4->setText(QString::number(serial.bytesAvailable()));
+                ui->label_4->setText(QString::number(serial.bytesAvailable()) + QTextCodec::codecForMib(1015)->toUnicode(serial.readAll()));
 
                 dieTime= QTime::currentTime().addSecs(0.5);
                 while (QTime::currentTime() < dieTime)
