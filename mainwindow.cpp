@@ -129,9 +129,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer3 = new QTimer(this);
     connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
 
+
+    QTimer *timer4 = new QTimer(this);
+    connect(timer4, SIGNAL(timeout()), this, SLOT(updatevalue()));
+
     timer->start(888);
     timer2->start(500);
     timer3->start(101);
+    timer4->start(301);
 
     ui->customPlot->xAxis->setRange(-8, 200);
     ui->customPlot->yAxis->setRange(-5, 100);
@@ -301,6 +306,53 @@ void MainWindow::updatepicture()
     }
     ui->customPlot->replot();
 }
+void MainWindow::updatevalue()
+{
+
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+
+        // Example use QSerialPort
+        QSerialPort serial;
+        serial.setPort(info);
+
+        if (serial.open(QIODevice::ReadWrite))
+        {
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+
+            // ui->label_7->setText(ui->label_7->text()+" " + portname);
+            ui->label_7->setText(" " + serial.portName());
+
+
+            {
+
+                QByteArray requestData;// = serial.readAll();
+                while (serial.waitForReadyRead(200))
+                    requestData += serial.readAll();
+
+                QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+
+                if (inputstr!="")
+                {
+                    double value1 = inputstr.toDouble();
+                    if (value1<=100)
+                        if (value1>0)
+                        {ui->dial->setValue(value1);
+                            ui->lcdNumber->display(value1);
+                        }
+
+                }
+
+                ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr+ ui->label_4->text());
+            }
+
+            serial.close();
+        }
+    }
+}
 
 void MainWindow::updategraph()
 {
@@ -336,51 +388,6 @@ void MainWindow::updategraph()
 
     double argument = ui->dial->value();
 
-
-
-    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-
-        // Example use QSerialPort
-        QSerialPort serial;
-        serial.setPort(info);
-
-        if (serial.open(QIODevice::ReadWrite))
-        {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-
-            // ui->label_7->setText(ui->label_7->text()+" " + portname);
-            ui->label_7->setText(ui->label_7->text()+" " + serial.portName());
-
-
-            {
-
-                QByteArray requestData;// = serial.readAll();
-                while (serial.waitForReadyRead(200))
-                    requestData += serial.readAll();
-
-                QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-
-                if (inputstr!="")
-                {
-                    double value1 = inputstr.toDouble();
-                    if (value1<=100)
-                        if (value1>0)
-                        {ui->dial->setValue(value1);
-                            ui->lcdNumber->display(value1);
-                        }
-
-                }
-
-                ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr+ ui->label_4->text());
-            }
-
-            serial.close();
-        }
-    }
 
 
     yy1.append(returnmathresult(argument)*1);
