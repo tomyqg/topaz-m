@@ -319,40 +319,6 @@ void MainWindow::updatevalue()
 
         char buf[1];
 
-/*
-            QByteArray requestData;// = serial.readAll();
-            while (serial.waitForReadyRead(50))
-            {}
-                //   requestData += serial.readAll();
-            {
-
-
-                QByteArray requestData = serial.readAll();
-
-                static_cast<quint8>(requestData[0]);
-
-
-
-                   serial.getChar(buf);
-                serial.readLine(buf,1);
-
-                ui->label_4->setText("char 321: ");*/
-                /*
-                QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                if (inputstr!="")
-                {
-                    double value1 = inputstr.toDouble();
-                    if (value1<=100)
-                        if (value1>0)
-                        {ui->dial->setValue(value1);
-                            ui->lcdNumber->display(value1);
-                        }
-                    ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
-                    inputstr="";
-                }
-            }*/
-
-
         ui->label_7->setText(" " + serial.portName());
 
         {
@@ -360,15 +326,18 @@ void MainWindow::updatevalue()
             while (serial.waitForReadyRead(50))
                 requestData += serial.readAll();
             QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+
+            ui->label_4->setText(ui->label_4->text() + ":" + inputstr);
+
             if (inputstr!="")
             {
                 double value1 = inputstr.toDouble();
-                if (value1<=100)
+                if (value1<=1000)
                     if (value1>0)
                     {ui->dial->setValue(value1);
                         ui->lcdNumber->display(value1);
                     }
-                ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
+                //ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
                 inputstr="";
             }
         }
@@ -517,6 +486,8 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_2_pressed()
 {
     ui->customPlot->clearGraphs();
+
+    ui->label_4->setText("");
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
