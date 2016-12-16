@@ -25,7 +25,7 @@
 #include <QThread>
 #include <QMutex>
 
-
+// sin(x)+cos(x)+sqrt(x)+sin(sqrt(x/2))
 int a=0;
 int b=0;
 int color1rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
@@ -136,7 +136,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(888);
     timer2->start(102);
     timer3->start(101);
-    timer4->start(301);
+    timer4->start(57);
 
     ui->customPlot->xAxis->setRange(-8, 200);
     ui->customPlot->yAxis->setRange(-5, 100);
@@ -173,8 +173,6 @@ void MainWindow::updatepicture()
 {
 
     QByteArray arr;
-
-    arr="Bro";
 
     QPen graphPen;
     graphPen.setWidthF(1);
@@ -313,11 +311,47 @@ void MainWindow::updatevalue()
 
     if (serial.open(QIODevice::ReadWrite))
     {
-        serial.setBaudRate(QSerialPort::Baud2400);
+        serial.setBaudRate(QSerialPort::Baud9600);
         serial.setDataBits(QSerialPort::Data8);
         serial.setParity(QSerialPort::NoParity);
         serial.setStopBits(QSerialPort::OneStop);
         serial.setFlowControl(QSerialPort::NoFlowControl);
+
+        char buf[1];
+
+/*
+            QByteArray requestData;// = serial.readAll();
+            while (serial.waitForReadyRead(50))
+            {}
+                //   requestData += serial.readAll();
+            {
+
+
+                QByteArray requestData = serial.readAll();
+
+                static_cast<quint8>(requestData[0]);
+
+
+
+                   serial.getChar(buf);
+                serial.readLine(buf,1);
+
+                ui->label_4->setText("char 321: ");*/
+                /*
+                QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                if (inputstr!="")
+                {
+                    double value1 = inputstr.toDouble();
+                    if (value1<=100)
+                        if (value1>0)
+                        {ui->dial->setValue(value1);
+                            ui->lcdNumber->display(value1);
+                        }
+                    ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
+                    inputstr="";
+                }
+            }*/
+
 
         ui->label_7->setText(" " + serial.portName());
 
@@ -325,9 +359,7 @@ void MainWindow::updatevalue()
             QByteArray requestData;// = serial.readAll();
             while (serial.waitForReadyRead(50))
                 requestData += serial.readAll();
-
             QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-
             if (inputstr!="")
             {
                 double value1 = inputstr.toDouble();
@@ -339,7 +371,6 @@ void MainWindow::updatevalue()
                 ui->label_4->setText("size " + QString::number(serial.bytesAvailable()) + ",msg:" + inputstr);
                 inputstr="";
             }
-
         }
         serial.close();
     }
@@ -485,6 +516,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_2_pressed()
 {
+    ui->customPlot->clearGraphs();
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
@@ -502,7 +534,7 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
 
-    if (ui->checkBox->checkState())
+    if (1)
     {
         out << "1";
     }
@@ -549,7 +581,7 @@ void MainWindow::on_textEdit_textChanged()
 
     QScriptEngine myEngine;
 
-    QString vaal = QString::number(ui->dial_2->value());
+    QString vaal = QString::number(ui->dial->value());
 
     QString replaced=inn;
 
@@ -563,18 +595,12 @@ void MainWindow::on_textEdit_textChanged()
 
     replaced.replace(QString("x"), QString(vaal));
 
-
     double Result = myEngine.evaluate(replaced).toNumber();
-
-
-    //ui->label_4->setText(QString::number(Result));
-
 }
 
 void MainWindow::on_horizontalSlider_actionTriggered(int action)
 {
     ui->label_6->setText(QString::number(ui->horizontalSlider->value()));
-
 }
 
 void MainWindow::on_dial_valueChanged(int value)

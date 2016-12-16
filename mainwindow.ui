@@ -118,14 +118,14 @@ color: rgb(0, 0, 0);</string>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>570</y>
+      <x>980</x>
+      <y>620</y>
       <width>281</width>
       <height>91</height>
      </rect>
     </property>
     <property name="text">
-     <string>ПОСТРОИТЬ произвольный ГРАФИК</string>
+     <string>Очистить график</string>
     </property>
    </widget>
    <widget class="QCustomPlot" name="customPlot" native="true">
@@ -134,7 +134,7 @@ color: rgb(0, 0, 0);</string>
       <x>540</x>
       <y>50</y>
       <width>721</width>
-      <height>251</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -142,219 +142,6 @@ color: rgb(0, 0, 0);</string>
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_2">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>301</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>светодиод</string>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_3">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_4">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_5">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_6">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_7">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_8">
-    <property name="geometry">
-     <rect>
-      <x>960</x>
-      <y>299</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_9">
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>299</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_10">
-    <property name="geometry">
-     <rect>
-      <x>1120</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_11">
-    <property name="geometry">
-     <rect>
-      <x>1200</x>
-      <y>300</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_12">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>381</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_13">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_14">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_15">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_16">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_17">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_18">
-    <property name="geometry">
-     <rect>
-      <x>960</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_19">
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_20">
-    <property name="geometry">
-     <rect>
-      <x>1120</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDial" name="dial_21">
-    <property name="geometry">
-     <rect>
-      <x>1200</x>
-      <y>380</y>
-      <width>98</width>
-      <height>98</height>
-     </rect>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit">
@@ -371,7 +158,7 @@ color: rgb(0, 0, 0);</string>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;sin(x)+cos(x)+&lt;span style=&quot; font-size:8pt; color:#008000;&quot;&gt;sqrt(x)+sin(sqrt(x/2))&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#008000;&quot;&gt;x&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
