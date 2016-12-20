@@ -10,6 +10,16 @@ namespace Ui {
 class MainWindow;
 }
 
+class NewThreadClass:public QObject
+{
+   Q_OBJECT
+
+public slots:
+   void updatethread();
+
+signals:
+};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
