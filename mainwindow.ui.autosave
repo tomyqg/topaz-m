@@ -241,8 +241,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLCDNumber" name="lcdNumber_2">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>580</y>
+      <x>1000</x>
+      <y>590</y>
       <width>141</width>
       <height>51</height>
      </rect>
@@ -251,7 +251,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>1030</x>
+      <x>980</x>
       <y>500</y>
       <width>191</width>
       <height>31</height>
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>1030</x>
+      <x>1000</x>
       <y>540</y>
       <width>191</width>
       <height>31</height>

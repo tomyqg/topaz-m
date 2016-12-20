@@ -22,6 +22,5 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-DISTFILES += \
-    uartpyyy.py
+DISTFILES +=
 

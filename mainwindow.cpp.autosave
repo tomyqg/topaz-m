@@ -320,7 +320,6 @@ void MainWindow::updatevalue()
         char buf[1];
 
         ui->label_7->setText(" " + serial.portName());
-
         {
             QByteArray requestData;// = serial.readAll();
             while (serial.waitForReadyRead(50))
