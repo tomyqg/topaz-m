@@ -119,6 +119,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+    setWindowFlags(Qt::CustomizeWindowHint);
+
+
+    setWindowTitle(tr("ANGSTREM"));
+
     QPixmap pix("/usr/inc/logo.jpg");
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
@@ -166,6 +172,7 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
+
 }
 
 
@@ -320,7 +327,6 @@ void MainWindow::updatevalue()
         char buf[1];
 
         ui->label_7->setText(" " + serial.portName());
-
         {
             QByteArray requestData;// = serial.readAll();
             while (serial.waitForReadyRead(50))
