@@ -30,6 +30,8 @@
 
 //y1 offset
 
+ QString inputstr = "";
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -69,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // a new thread that reads serial input
 
-    QThread *thread= new QThread;
+    QThread *thread= new QThread();
     NewThreadClass *my = new NewThreadClass();
 
     my->moveToThread(thread);
@@ -111,6 +113,9 @@ void MainWindow::updateCaption()
 
 void MainWindow::updatevalue()
 {
+
+    ui->label_7->setText(inputstr);
+
    /* QSerialPort serial;
     serial.setPortName("/dev/ttyS1"); //usart1
 
@@ -275,47 +280,58 @@ void MainWindow::on_pushButton_3_clicked()
 
 void NewThreadClass::updatethread()
 {
-    QSerialPort serial;
-    serial.setPortName("/dev/ttyS1"); //usart1
 
-    if (serial.open(QIODevice::ReadWrite))
+    while (1)
     {
-        serial.setBaudRate(QSerialPort::Baud9600);
-        serial.setDataBits(QSerialPort::Data8);
-        serial.setParity(QSerialPort::NoParity);
-        serial.setStopBits(QSerialPort::OneStop);
-        serial.setFlowControl(QSerialPort::NoFlowControl);
+        inputstr = "aaa";
+        Sleep(1000);
+        inputstr = "bbb";
+        Sleep(1000);
+        inputstr = "ccc";
+        Sleep(1000);
+        inputstr = "ddd";
+        Sleep(1000);
 
-        char buf[1];
+}
+//    QSerialPort serial;
+//    serial.setPortName("/dev/ttyS1"); //usart1
 
+//    if (serial.open(QIODevice::ReadWrite))
+//    {
+//        serial.setBaudRate(QSerialPort::Baud9600);
+//        serial.setDataBits(QSerialPort::Data8);
+//        serial.setParity(QSerialPort::NoParity);
+//        serial.setStopBits(QSerialPort::OneStop);
+//        serial.setFlowControl(QSerialPort::NoFlowControl);
 
-        {
-            QByteArray requestData;// = serial.readAll();
-            while (serial.waitForReadyRead(50))
-                requestData += serial.readAll();
-            QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+//        char buf[1];
 
-            if (inputstr!="")
-            {
+//        {
+//            QByteArray requestData;// = serial.readAll();
+//            while (serial.waitForReadyRead(50))
+//                requestData += serial.readAll();
+//            QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
 
-                QString valuestring = inputstr.left(3);
-                QString letterstring = inputstr.right(1);
-                double value1 = valuestring.toDouble();
-                if (value1<=1000)
-                    if (value1>0)
-                    {
-                        if (letterstring=="a")
-                        {
-                          /*  ui->dial->setValue(value1);
-                            ui->lcdNumber->display(value1);*/}
-                        if (letterstring=="b")
-                        {}
-                            //ui->lcdNumber_2->display(value1);
-                    }
-//                ui->label_4->setText("msg>" + valuestring+"<" + letterstring);
-                inputstr="";
-            }
-        }
-        serial.close();
-    }
+//            if (inputstr!="")
+//            {
+
+//                QString valuestring = inputstr.left(3);
+//                QString letterstring = inputstr.right(1);
+//                double value1 = valuestring.toDouble();
+//                if (value1<=1000)
+//                    if (value1>0)
+//                    {
+//                        if (letterstring=="a")
+//                        {
+//                          /*  ui->dial->setValue(value1);
+//                            ui->lcdNumber->display(value1);*/}
+//                        if (letterstring=="b")
+//                        {}
+//                            //ui->lcdNumber_2->display(value1);
+//                    }
+//                inputstr="";
+//            }
+//        }
+//        serial.close();
+//    }
 }

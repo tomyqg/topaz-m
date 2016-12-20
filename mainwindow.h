@@ -14,10 +14,9 @@ class NewThreadClass:public QObject
 {
    Q_OBJECT
 
-public slots:
+private slots:
    void updatethread();
 
-signals:
 };
 
 class MainWindow : public QMainWindow
