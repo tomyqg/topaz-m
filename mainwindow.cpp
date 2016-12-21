@@ -293,9 +293,9 @@ void NewThreadClass::updatethread()
                             while (serial.waitForReadyRead(10))
                                 requestData = serial.readAll();
                             inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                            serial.write("c");
-                            while (serial.waitForBytesWritten(20))
-                                ;
+//                            serial.write("c");
+//                            while (serial.waitForBytesWritten(10))
+//                                ;
 
 
 
@@ -307,7 +307,7 @@ void NewThreadClass::updatethread()
                         }
                     }
 
-                    while (serial.waitForReadyRead(200))
+                    while (serial.waitForReadyRead(10))
                         requestData = serial.readAll();
                 }
                 //inputstr =(QString::number(serial.bytesAvailable()));
