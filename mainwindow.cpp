@@ -103,19 +103,19 @@ void MainWindow::updatevalue()
     ui->label_7->setText(inputstr);
     if (inputstr!="")
     {
-        QString valuestring = inputstr.left(3);
-        QString letterstring = inputstr.right(1);
+        QString message =inputstr.left(4);
+        QString valuestring = message.left(3);
+        QString letterstring = message.right(1);
         double value1 = valuestring.toDouble();
         if (value1<=1000)
             if (value1>0)
             {
                 if (letterstring=="a")
                 {
-                    /*  ui->dial->setValue(value1);
-                    ui->lcdNumber->display(value1);*/}
+                    ui->dial->setValue(value1);
+                    ui->lcdNumber->display(value1);}
                 if (letterstring=="b")
-                {}
-                //ui->lcdNumber_2->display(value1);
+                    ui->lcdNumber_2->display(value1);
             }
 
 
@@ -289,21 +289,13 @@ void NewThreadClass::updatethread()
                         while (1)
                         {
 
-
                             while (serial.waitForReadyRead(10))
                                 requestData = serial.readAll();
                             inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-//                            serial.write("c");
-//                            while (serial.waitForBytesWritten(10))
-//                                ;
+                            serial.write("c");
+                            while (serial.waitForBytesWritten(20))
+                                ;
 
-
-
-                            //                    inputstr =(QString::number(serial.bytesAvailable()));
-
-                            //                    serial.write("c");
-                            //                    while (serial.waitForBytesWritten(500))
-                            //                        ;
                         }
                     }
 
