@@ -365,3 +365,5 @@ void MainWindow::updatepicture()
     }
     ui->customPlot->replot();
 }
+
+

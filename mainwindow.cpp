@@ -30,7 +30,7 @@
 
 //y1 offset
 
- QString inputstr = "";
+QString inputstr = "";
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -66,8 +66,8 @@ MainWindow::MainWindow(QWidget *parent) :
     timer3->start(101);
     timer4->start(30);
 
-    ui->customPlot->xAxis->setRange(-8, 200);
-    ui->customPlot->yAxis->setRange(-5, 100);
+    ui->customPlot->xAxis->setRange(-8, 150);
+    ui->customPlot->yAxis->setRange(-5, 110);
 
     // a new thread that reads serial input
 
@@ -79,7 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
 
     thread->start();
-
 }
 
 MainWindow::~MainWindow()
@@ -113,10 +112,34 @@ void MainWindow::updateCaption()
 
 void MainWindow::updatevalue()
 {
+    if (inputstr!="")
+    {
 
-    ui->label_7->setText(inputstr);
+        QString valuestring = inputstr.left(3);
+        QString letterstring = inputstr.right(1);
+        double value1 = valuestring.toDouble();
+        if (value1<=1000)
+            if (value1>0)
+            {
+                if (letterstring=="a")
+                {
+                    /*  ui->dial->setValue(value1);
+                    ui->lcdNumber->display(value1);*/}
+                if (letterstring=="b")
+                {}
+                //ui->lcdNumber_2->display(value1);
+            }
 
-   /* QSerialPort serial;
+
+        ui->label_7->setText(inputstr);
+
+        //inputstr="";
+
+    }
+
+
+
+    /* QSerialPort serial;
     serial.setPortName("/dev/ttyS1"); //usart1
 
     if (serial.open(QIODevice::ReadWrite))
@@ -126,8 +149,6 @@ void MainWindow::updatevalue()
         serial.setParity(QSerialPort::NoParity);
         serial.setStopBits(QSerialPort::OneStop);
         serial.setFlowControl(QSerialPort::NoFlowControl);
-
-        char buf[1];
 
         ui->label_7->setText(" " + serial.portName());
         {
@@ -159,7 +180,6 @@ void MainWindow::updatevalue()
         serial.close();
     }*/
 }
-
 
 
 void MainWindow::paintEvent(QPaintEvent *e)
@@ -281,57 +301,92 @@ void MainWindow::on_pushButton_3_clicked()
 void NewThreadClass::updatethread()
 {
 
-    while (1)
+    while (0)
     {
         inputstr = "aaa";
-        Sleep(1000);
+
+        QTime dieTime= QTime::currentTime().addSecs(1);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+        //        Sleep(1000);
         inputstr = "bbb";
-        Sleep(1000);
+
+
+        dieTime= QTime::currentTime().addSecs(1);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+        //        Sleep(1000);
         inputstr = "ccc";
-        Sleep(1000);
+
+        dieTime= QTime::currentTime().addSecs(1);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+        //        Sleep(1000);
         inputstr = "ddd";
-        Sleep(1000);
 
+        dieTime= QTime::currentTime().addSecs(1);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+
+    while (1)
+    {
+        QSerialPort serial;
+
+        serial.setPortName("/dev/ttyS1"); //usart1
+
+        if (serial.open(QIODevice::ReadWrite))
+        {
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+            //inputstr = serial.portName();
+
+            {
+                QByteArray requestData;// = serial.readAll();
+                while (serial.waitForReadyRead(50))
+                    requestData += serial.readAll();
+                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                if(serial.bytesAvailable()>0)
+                    inputstr="ololo";
+            }
+            serial.close();
+        }
+    }
+
+    while (0)
+    {
+        QSerialPort serial;
+        serial.setPortName("/dev/ttyS1"); //usart1
+
+        if (serial.open(QIODevice::ReadWrite))
+        {
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+
+            {
+                QByteArray requestData;// = serial.readAll();
+                while (serial.waitForReadyRead(200))
+                    requestData += serial.readAll();
+                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+            }
+            serial.close();
+        }
+    }
 }
-//    QSerialPort serial;
-//    serial.setPortName("/dev/ttyS1"); //usart1
 
-//    if (serial.open(QIODevice::ReadWrite))
-//    {
-//        serial.setBaudRate(QSerialPort::Baud9600);
-//        serial.setDataBits(QSerialPort::Data8);
-//        serial.setParity(QSerialPort::NoParity);
-//        serial.setStopBits(QSerialPort::OneStop);
-//        serial.setFlowControl(QSerialPort::NoFlowControl);
 
-//        char buf[1];
-
-//        {
-//            QByteArray requestData;// = serial.readAll();
-//            while (serial.waitForReadyRead(50))
-//                requestData += serial.readAll();
-//            QString inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-
-//            if (inputstr!="")
-//            {
-
-//                QString valuestring = inputstr.left(3);
-//                QString letterstring = inputstr.right(1);
-//                double value1 = valuestring.toDouble();
-//                if (value1<=1000)
-//                    if (value1>0)
-//                    {
-//                        if (letterstring=="a")
-//                        {
-//                          /*  ui->dial->setValue(value1);
-//                            ui->lcdNumber->display(value1);*/}
-//                        if (letterstring=="b")
-//                        {}
-//                            //ui->lcdNumber_2->display(value1);
-//                    }
-//                inputstr="";
-//            }
-//        }
-//        serial.close();
-//    }
+void MainWindow::delay(int n)
+{
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }

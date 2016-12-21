@@ -56,6 +56,7 @@ private slots:
     void on_dial_valueChanged(int value);
 
     void on_pushButton_3_clicked();
+    void delay(int n);
 
 signals:
 
