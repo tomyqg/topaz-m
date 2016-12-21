@@ -242,46 +242,75 @@ void NewThreadClass::updatethread()
 {
     QByteArray requestData;
 
-    QSerialPort serial;
-    QTime dieTime;
-    serial.setPortName("/dev/ttyS1"); //usart1
 
+    QTime dieTime;
+    int i=0;
     while (1)
     {
 
-        if (serial.open(QIODevice::ReadWrite))
+        //        foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
 
+            // Example use QSerialPort
+            QSerialPort serial;
+            //            serial.setPort(info);
+            serial.setPortName("/dev/ttyS1"); //usart1
+            i++;
+            if (serial.open(QIODevice::ReadWrite))
             {
-                //                QByteArray requestData;// = serial.readAll();
-                //                while (serial.waitForReadyRead(200))
-                //                    requestData += serial.readAll();
-                //                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                //                if(serial.bytesAvailable()>0)
-                //                    ;
-                //                inputstr="ololo";
 
-                //                while (serial.waitForReadyRead(200))
-                //                    requestData = serial.readAll();
+                //inputstr =(inputstr  + serial.portName());
+                serial.setBaudRate(QSerialPort::Baud9600);
+                serial.setDataBits(QSerialPort::Data8);
+                serial.setParity(QSerialPort::NoParity);
+                serial.setStopBits(QSerialPort::OneStop);
+                serial.setFlowControl(QSerialPort::NoFlowControl);
+
+                {
+
+                    serial.write("a");
+                    while (serial.waitForBytesWritten(500))
+                        ;
+
+                    serial.write("b");
+                    while (serial.waitForBytesWritten(500))
+                        ;
+
+                    QByteArray requestData;// = serial.readAll();
+                    while (serial.waitForReadyRead(500))
+                        requestData += serial.readAll();
+                    inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                    if(serial.bytesAvailable()>0)
+                        ;
+
+                  //  inputstr="ololo";
+if ((serial.bytesAvailable())>0)
+{
+    while (1)
+    {
+                    inputstr =(QString::number(serial.bytesAvailable()));
+
+                    serial.write("c");
+                    while (serial.waitForBytesWritten(500))
+                        ;
+    }
+}
+
+                    while (serial.waitForReadyRead(200))
+                        requestData = serial.readAll();
+                }
+                //inputstr =(QString::number(serial.bytesAvailable()));
+                serial.close();
             }
-            //inputstr =(QString::number(serial.bytesAvailable()));
-            serial.close();
+
+            //   inputstr =("321");
+
+            if (i==5)
+            {
+                i=0;
+                inputstr="";
+            }
         }
-
-        inputstr =("321");
-
-        dieTime= QTime::currentTime().addSecs(2);
-        while (QTime::currentTime() < dieTime)
-            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-
-        inputstr =("999");
-
-        //inputstr="ololo";
     }
 }
 
