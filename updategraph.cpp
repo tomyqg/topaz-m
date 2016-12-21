@@ -178,8 +178,17 @@ void MainWindow::updategraph()
     ///////////////
     b++;
 
-    if (b==200)
+    if (b>=300)
     {
+        ui->customPlot->xAxis->setRange(b-300, b+300);
+}
+
+    if (b==1200)
+    {
+        ui->customPlot->xAxis->setRange(0, 600);
+
+
+
         b=0;
         xx1.clear();
         xx2.clear();
