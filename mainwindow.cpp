@@ -277,24 +277,35 @@ void NewThreadClass::updatethread()
                         ;
 
                     QByteArray requestData;// = serial.readAll();
-                    while (serial.waitForReadyRead(500))
+                    while (serial.waitForReadyRead(10))
                         requestData += serial.readAll();
                     inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
                     if(serial.bytesAvailable()>0)
                         ;
 
-                  //  inputstr="ololo";
-if ((serial.bytesAvailable())>0)
-{
-    while (1)
-    {
-                    inputstr =(QString::number(serial.bytesAvailable()));
+                    //  inputstr="ololo";
+                    if ((serial.bytesAvailable())>0)
+                    {
+                        while (1)
+                        {
 
-                    serial.write("c");
-                    while (serial.waitForBytesWritten(500))
-                        ;
-    }
-}
+
+                            while (serial.waitForReadyRead(10))
+                                requestData = serial.readAll();
+                            inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                            serial.write("c");
+                            while (serial.waitForBytesWritten(20))
+                                ;
+
+
+
+                            //                    inputstr =(QString::number(serial.bytesAvailable()));
+
+                            //                    serial.write("c");
+                            //                    while (serial.waitForBytesWritten(500))
+                            //                        ;
+                        }
+                    }
 
                     while (serial.waitForReadyRead(200))
                         requestData = serial.readAll();
