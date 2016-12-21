@@ -349,38 +349,18 @@ void NewThreadClass::updatethread()
 
             {
                 QByteArray requestData;// = serial.readAll();
-                while (serial.waitForReadyRead(50))
+                while (serial.waitForReadyRead(200))
                     requestData += serial.readAll();
                 inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
                 if(serial.bytesAvailable()>0)
                     inputstr="ololo";
             }
+
+            inputstr =(QString::number(serial.bytesAvailable()));
             serial.close();
         }
     }
 
-    while (0)
-    {
-        QSerialPort serial;
-        serial.setPortName("/dev/ttyS1"); //usart1
-
-        if (serial.open(QIODevice::ReadWrite))
-        {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-
-            {
-                QByteArray requestData;// = serial.readAll();
-                while (serial.waitForReadyRead(200))
-                    requestData += serial.readAll();
-                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-            }
-            serial.close();
-        }
-    }
 }
 
 
