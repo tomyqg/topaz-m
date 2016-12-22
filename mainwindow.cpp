@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     my->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
-
+    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mousePress()));
     thread->start();
 }
 
@@ -99,12 +99,11 @@ void MainWindow::updateCaption()
 }
 
 void MainWindow::updatevalue()
-{//
+{
     if (inputstr!="")
     {
-
         //inputstr=inputstr.right(4);
-        ui->label_7->setText(inputstr);
+        //ui->label_7->setText(inputstr);
 
         QString message =inputstr.left(4);
         QString valuestring = message.left(3);
@@ -121,12 +120,6 @@ void MainWindow::updatevalue()
 
                     ui->lcdNumber_2->display(value1);
             }
-
-
-        //        ui->label_7->setText(inputstr);
-
-        //inputstr="";
-
     }
 }
 
@@ -318,4 +311,11 @@ void MainWindow::delay(int n)
     QTime dieTime= QTime::currentTime().addSecs(1);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+void MainWindow::on_horizontalSlider_2_valueChanged(int value)
+{
+    int nu = ui->horizontalSlider_2->value();
+    ui->label_2->setText("Интервал " + QString::number(nu) +  " мсек");
+    timer3->setInterval(nu);
 }

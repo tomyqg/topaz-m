@@ -28,7 +28,7 @@
 
 int a=0;
 int b=0;
-int color1rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color1rgb[]={153, 0, 153}; //фиолетовый темный
 int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
@@ -115,9 +115,6 @@ void MainWindow::updategraph()
 {
     int countgraph = ui->horizontalSlider->value();
 
-    int high=2;
-    int low=-1;
-
     xx1.append(b);
     if(countgraph>=2) xx2.append(b);
     if(countgraph>=3) xx3.append(b);
@@ -143,6 +140,7 @@ void MainWindow::updategraph()
     double argument = ui->dial->value();
 
     yy1.append(returnmathresult(argument)*1);
+
     if(countgraph>=2)
         yy2.append(returnmathresult(argument)*1+5);
     if(countgraph>=3)
@@ -178,16 +176,14 @@ void MainWindow::updategraph()
     ///////////////
     b++;
 
-    if (b>=300)
+    if (b>=300&&b<900)
     {
-        ui->customPlot->xAxis->setRange(b-300, b+300);
+    //    ui->customPlot->xAxis->setRange(b-300, b+300);
 }
 
     if (b==1200)
     {
-        ui->customPlot->xAxis->setRange(0, 600);
-
-
+      //  ui->customPlot->xAxis->setRange(0, 600);
 
         b=0;
         xx1.clear();
@@ -210,7 +206,6 @@ void MainWindow::updategraph()
         xx17.clear();
         xx18.clear();
         xx19.clear();
-
         xx20.clear();
 
         yy1.clear();
@@ -245,7 +240,8 @@ void MainWindow::updatepicture()
     QByteArray arr;
 
     QPen graphPen;
-    graphPen.setWidthF(1);
+    //graphPen.setWidthF(2);
+    //graphPen.setWidth(2);
     ui->customPlot->clearGraphs();
 
     int countgraph = ui->horizontalSlider->value();
@@ -375,4 +371,20 @@ void MainWindow::updatepicture()
     ui->customPlot->replot();
 }
 
+void MainWindow::mousePress()
+{
+  // if an axis is selected, only allow the direction of that axis to be dragged
+  // if no axis is selected, both directions may be dragged
+ui->label_7->setText("Presed");
+//ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
 
+ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
+ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
+
+//  if (ui->customPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
+//    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
+//  else if (ui->customPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
+//    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
+//  else
+//    ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
+}
