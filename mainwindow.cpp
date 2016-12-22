@@ -99,9 +99,7 @@ void MainWindow::updateCaption()
 }
 
 void MainWindow::updatevalue()
-{
-
-
+{//
     if (inputstr!="")
     {
 
