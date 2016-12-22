@@ -100,9 +100,14 @@ void MainWindow::updateCaption()
 
 void MainWindow::updatevalue()
 {
-    ui->label_7->setText(inputstr);
+
+
     if (inputstr!="")
     {
+
+        //inputstr=inputstr.right(4);
+        ui->label_7->setText(inputstr);
+
         QString message =inputstr.left(4);
         QString valuestring = message.left(3);
         QString letterstring = message.right(1);
@@ -115,6 +120,7 @@ void MainWindow::updatevalue()
                     ui->dial->setValue(value1);
                     ui->lcdNumber->display(value1);}
                 if (letterstring=="b")
+
                     ui->lcdNumber_2->display(value1);
             }
 
@@ -247,8 +253,6 @@ void NewThreadClass::updatethread()
     int i=0;
     while (1)
     {
-
-        //        foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         {
 
             // Example use QSerialPort
@@ -259,7 +263,6 @@ void NewThreadClass::updatethread()
             if (serial.open(QIODevice::ReadWrite))
             {
 
-                //inputstr =(inputstr  + serial.portName());
                 serial.setBaudRate(QSerialPort::Baud9600);
                 serial.setDataBits(QSerialPort::Data8);
                 serial.setParity(QSerialPort::NoParity);
@@ -267,7 +270,6 @@ void NewThreadClass::updatethread()
                 serial.setFlowControl(QSerialPort::NoFlowControl);
 
                 {
-
                     serial.write("a");
                     while (serial.waitForBytesWritten(500))
                         ;
@@ -278,7 +280,7 @@ void NewThreadClass::updatethread()
 
                     QByteArray requestData;// = serial.readAll();
                     while (serial.waitForReadyRead(10))
-                        requestData += serial.readAll();
+                        requestData = serial.readAll();
                     inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
                     if(serial.bytesAvailable()>0)
                         ;
@@ -288,14 +290,12 @@ void NewThreadClass::updatethread()
                     {
                         while (1)
                         {
-
                             while (serial.waitForReadyRead(10))
                                 requestData = serial.readAll();
                             inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
                             serial.write("c");
                             while (serial.waitForBytesWritten(20))
                                 ;
-
                         }
                     }
 
@@ -305,8 +305,6 @@ void NewThreadClass::updatethread()
                 //inputstr =(QString::number(serial.bytesAvailable()));
                 serial.close();
             }
-
-            //   inputstr =("321");
 
             if (i==5)
             {
