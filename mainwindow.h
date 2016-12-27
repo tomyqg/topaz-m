@@ -16,7 +16,6 @@ class NewThreadClass:public QObject
 
 private slots:
    void updatethread();
-
 };
 
 class MainWindow : public QMainWindow
@@ -37,21 +36,16 @@ private slots:
     void updategraph();
     void updatevalue();
     void mousePress();
-
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_2_pressed();
     void on_checkBox_stateChanged(int arg1);
     void on_textEdit_textChanged();
     double returnmathresult(double dval);
-
     void on_horizontalSlider_actionTriggered(int action);
-
     void on_dial_valueChanged(int value);
-
     void on_pushButton_3_clicked();
     void delay(int n);
-
     void on_horizontalSlider_2_valueChanged(int value);
 
 signals:
@@ -60,6 +54,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+    QTimer *tmr;
     QMutex mutex;
 
 protected:

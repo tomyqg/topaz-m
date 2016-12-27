@@ -2,7 +2,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -178,12 +177,12 @@ void MainWindow::updategraph()
 
     if (b>=300&&b<900)
     {
-    //    ui->customPlot->xAxis->setRange(b-300, b+300);
+        ui->customPlot->xAxis->setRange(b-300, b+300);
 }
 
     if (b==1200)
     {
-      //  ui->customPlot->xAxis->setRange(0, 600);
+        ui->customPlot->xAxis->setRange(0, 600);
 
         b=0;
         xx1.clear();
@@ -231,7 +230,7 @@ void MainWindow::updategraph()
         yy19.clear();
         yy20.clear();
     }
-    ui->label_7->clear();
+
 }
 
 void MainWindow::updatepicture()
@@ -375,7 +374,7 @@ void MainWindow::mousePress()
 {
   // if an axis is selected, only allow the direction of that axis to be dragged
   // if no axis is selected, both directions may be dragged
-ui->label_7->setText("Presed");
+
 //ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
 
 ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());

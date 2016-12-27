@@ -1,5 +1,7 @@
 #include "mainwindow.h"
+#include "options.h"
 #include "ui_mainwindow.h"
+#include "dialog.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -46,17 +48,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer2 = new QTimer(this);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
 
-    QTimer *timer3 = new QTimer(this);
-    connect(timer3, SIGNAL(timeout()), this, SLOT(updategraph()));
+    tmr = new QTimer();
+    tmr->setInterval(1000);
+    connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
+    connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
+    tmr->start(100);
 
-
-    QTimer *timer4 = new QTimer(this);
-    connect(timer4, SIGNAL(timeout()), this, SLOT(updatevalue()));
 
     timer->start(888);
     timer2->start(201);
-    timer3->start(101);
-    timer4->start(50);
 
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-5, 110);
@@ -135,6 +135,9 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    Options options;
+    options.setModal(true);
+    options.exec();
 
 }
 
@@ -317,5 +320,7 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     int nu = ui->horizontalSlider_2->value();
     ui->label_2->setText("Интервал " + QString::number(nu) +  " мсек");
-    timer3->setInterval(nu);
+    //timer3->setInterval(nu);
+    tmr->setInterval(nu);
+
 }

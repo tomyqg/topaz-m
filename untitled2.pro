@@ -16,13 +16,19 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
          ../../qcustomplot.cpp \
-    updategraph.cpp
+    updategraph.cpp \
+    dialog.cpp \
+    options.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
-    updategraph.h
+    updategraph.h \
+    dialog.h \
+    options.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialog.ui \
+    options.ui
 
 DISTFILES +=
 
