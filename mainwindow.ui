@@ -53,7 +53,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>500</y>
+      <y>450</y>
       <width>261</width>
       <height>91</height>
      </rect>
@@ -105,13 +105,13 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>710</y>
+      <y>700</y>
       <width>211</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>EXIT</string>
+     <string>Отключить питание</string>
     </property>
    </widget>
    <widget class="QCustomPlot" name="customPlot" native="true">
@@ -325,13 +325,79 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>640</y>
+      <y>570</y>
       <width>211</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Настройки</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_13">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>630</y>
+      <width>191</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Отключен</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ток</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Напряжение</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Резистивный термодатчик</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Термоэлемент</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Счетчик импульсов</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>700</y>
+      <width>231</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>630</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Закрыть программу</string>
     </property>
    </widget>
   </widget>

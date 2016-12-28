@@ -85,7 +85,6 @@ void MainWindow::on_dial_sliderMoved(int position)
 
 void MainWindow::on_lcdNumber_overflow()
 {
-
 }
 
 void MainWindow::on_dial_actionTriggered(int action)
@@ -130,6 +129,10 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 void MainWindow::on_pushButton_clicked()
 {
+    QProcess process;
+
+    process.startDetached("sudo poweroff");
+
     QApplication::exit();
 }
 
@@ -138,7 +141,6 @@ void MainWindow::on_pushButton_2_clicked()
     Options options;
     options.setModal(true);
     options.exec();
-
 }
 
 void MainWindow::on_pushButton_2_pressed()
@@ -171,6 +173,7 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     {
         out << "0";
     }
+
     file.close();
 }
 
@@ -234,8 +237,10 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    QProcess process;
-    process.startDetached("python /usr/pythscr.py"); // start script
+//    QProcess process;
+//    process.startDetached("python /usr/pythscr.py"); // start script
+
+    QApplication::exit();
 }
 
 void NewThreadClass::updatethread()
@@ -320,7 +325,18 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     int nu = ui->horizontalSlider_2->value();
     ui->label_2->setText("Интервал " + QString::number(nu) +  " мсек");
-    //timer3->setInterval(nu);
     tmr->setInterval(nu);
+}
 
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+    if(event->buttons() == Qt::RightButton)
+        ui->label_7->setText("Only right button");
+    if(event->buttons() == Qt::LeftButton)
+        ui->label_7->setText("Only left button");
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+    ui->label_7->setText("button Released");
 }

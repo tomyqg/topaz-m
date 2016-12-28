@@ -59,6 +59,10 @@ private:
 
 protected:
     void paintEvent(QPaintEvent *e);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
+
+
 };
 
 #endif // MAINWINDOW_H
