@@ -553,6 +553,9 @@
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="cursor">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
        <item>
         <property name="text">
          <string>Отключен</string>

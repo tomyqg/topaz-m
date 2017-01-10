@@ -26,7 +26,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void focusChanged(QWidget* old, QWidget* now);
+    void textupdate();
+
 private slots:
+
 
     void on_dial_sliderMoved(int position);
     void on_lcdNumber_overflow();
@@ -48,6 +53,8 @@ private slots:
     void delay(int n);
     void on_horizontalSlider_2_valueChanged(int value);
 
+    void on_comboBox_13_currentTextChanged(const QString &arg1);
+
 signals:
 
     void error(const QString &s);
@@ -60,7 +67,10 @@ private:
 protected:
     void paintEvent(QPaintEvent *e);
     void mousePressEvent(QMouseEvent* event);
+    void touchReleaseEvent(QTouchEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+
+    //bool MainWindow::eventFilter(QObject *object, QEvent *event);
 
 
 };

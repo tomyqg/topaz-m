@@ -12,11 +12,8 @@
 #include <QtMath>
 #include <QFile>
 #include <QDataStream>
-#include <QtMath>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
-#include "math.h"
-#include <QtScript/QScriptEngine>
 #include <QPainterPath>
 #include <QPainter>
 #include <QDateTime>
@@ -25,7 +22,11 @@
 #include <QMessageBox>
 #include <QtWidgets>
 #include <QThread>
-#include <QMutex>
+#include <QtTest/QTestEvent>
+#include <QtTest/QTestEventList>
+#include <QtTest/QTest>
+#include <QPoint>
+#include <QEvent>
 
 QString inputstr = "";
 
@@ -52,8 +53,9 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr->setInterval(1000);
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    tmr->start(100);
+    //connect(this, SIGNAL(QApplication::focusChanged(QWidget*,QWidget*)), this, SLOT(textupdate()));
 
+    tmr->start(100);
 
     timer->start(888);
     timer2->start(201);
@@ -71,7 +73,35 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
     connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mousePress()));
     thread->start();
+//    //qApp->installEventFilter(this);
+//    ui->comboBox_13->installEventFilter(this);
 }
+
+//bool MainWindow::eventFilter(QObject *object, QEvent *event)
+//{
+//////     switch( event->type() )
+//////     {
+////////               case QEvent::MousePressEvent:
+////////               case QEvent::MouseReleaseEvent:
+////////               case QEvent::
+//////               case QEvent::TouchBegin:
+//////               case QEvent::TouchCancel:
+//////               case QEvent::TouchEnd:
+////////                        qDebug() << int(event->type()) << watched;
+
+//////              break;
+//////     }
+
+//////     //return BaseClass::eventFilter(watched,event);
+//////     return true;
+
+////     if (object == ui->comboBox_13)
+////     {
+////         qWarning(object->objectName().toLatin1().data());
+////     }
+
+//     return true;
+//}
 
 MainWindow::~MainWindow()
 {
@@ -97,13 +127,22 @@ void MainWindow::updateCaption()
     ui->textEdit_2->setText(local.toString());
 }
 
+void MainWindow::textupdate()
+{
+
+QWidget * fw = qApp->focusWidget();
+//QWidget * fw = QApplication::focusWidget();
+
+ui->textEdit_3->setText(fw->objectName());
+
+}
+
+
 void MainWindow::updatevalue()
 {
+
     if (inputstr!="")
     {
-        //inputstr=inputstr.right(4);
-        //ui->label_7->setText(inputstr);
-
         QString message =inputstr.left(4);
         QString valuestring = message.left(3);
         QString letterstring = message.right(1);
@@ -232,84 +271,58 @@ void MainWindow::on_horizontalSlider_actionTriggered(int action)
 
 void MainWindow::on_dial_valueChanged(int value)
 {
-
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-//    QProcess process;
-//    process.startDetached("python /usr/pythscr.py"); // start script
-
     QApplication::exit();
 }
 
 void NewThreadClass::updatethread()
 {
-    QByteArray requestData;
-
-
-    QTime dieTime;
-    int i=0;
     while (1)
     {
+        QSerialPort serial;
+        serial.setPortName("/dev/ttyS1"); //usart1
+        if (serial.open(QIODevice::ReadWrite))
         {
-
-            // Example use QSerialPort
-            QSerialPort serial;
-            //            serial.setPort(info);
-            serial.setPortName("/dev/ttyS1"); //usart1
-            i++;
-            if (serial.open(QIODevice::ReadWrite))
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
             {
+                serial.write("a");
+                while (serial.waitForBytesWritten(500))
+                    ;
 
-                serial.setBaudRate(QSerialPort::Baud9600);
-                serial.setDataBits(QSerialPort::Data8);
-                serial.setParity(QSerialPort::NoParity);
-                serial.setStopBits(QSerialPort::OneStop);
-                serial.setFlowControl(QSerialPort::NoFlowControl);
+                serial.write("b");
+                while (serial.waitForBytesWritten(500))
+                    ;
 
+                QByteArray requestData;// = serial.readAll();
+                while (serial.waitForReadyRead(10))
+                    requestData = serial.readAll();
+                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                if(serial.bytesAvailable()>0)
+                    ;
+
+                if ((serial.bytesAvailable())>0)
                 {
-                    serial.write("a");
-                    while (serial.waitForBytesWritten(500))
-                        ;
-
-                    serial.write("b");
-                    while (serial.waitForBytesWritten(500))
-                        ;
-
-                    QByteArray requestData;// = serial.readAll();
-                    while (serial.waitForReadyRead(10))
-                        requestData = serial.readAll();
-                    inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                    if(serial.bytesAvailable()>0)
-                        ;
-
-                    //  inputstr="ololo";
-                    if ((serial.bytesAvailable())>0)
+                    while (1)
                     {
-                        while (1)
-                        {
-                            while (serial.waitForReadyRead(10))
-                                requestData = serial.readAll();
-                            inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                            serial.write("c");
-                            while (serial.waitForBytesWritten(20))
-                                ;
-                        }
+                        while (serial.waitForReadyRead(10))
+                            requestData = serial.readAll();
+                        inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+                        serial.write("c");
+                        while (serial.waitForBytesWritten(20))
+                            ;
                     }
-
-                    while (serial.waitForReadyRead(10))
-                        requestData = serial.readAll();
                 }
-                //inputstr =(QString::number(serial.bytesAvailable()));
-                serial.close();
+                while (serial.waitForReadyRead(10))
+                    requestData = serial.readAll();
             }
-
-            if (i==5)
-            {
-                i=0;
-                inputstr="";
-            }
+            serial.close();
         }
     }
 }
@@ -334,9 +347,31 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
         ui->label_7->setText("Only right button");
     if(event->buttons() == Qt::LeftButton)
         ui->label_7->setText("Only left button");
+    QMouseEvent *mEvnRelease = new QMouseEvent(QEvent::MouseButtonRelease, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QCoreApplication::sendEvent(QWidget::focusWidget(),mEvnRelease);
+}
+
+void MainWindow::touchReleaseEvent(QTouchEvent *event)
+{
+
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent* event)
 {
     ui->label_7->setText("button Released");
+}
+
+void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
+{
+    QMouseEvent *mEvnRelease = new QMouseEvent(QEvent::MouseButtonRelease, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QCoreApplication::sendEvent(QWidget::focusWidget(),mEvnRelease);
+    ui->label_7->setText("index changed");
+}
+
+
+void MainWindow::focusChanged(QWidget* old, QWidget* now)
+{
+    ui->textEdit_3->setText("b");
+//    qWarning(now->objectName().toLatin1().data());
+
 }
