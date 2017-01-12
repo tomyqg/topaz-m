@@ -27,7 +27,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void focusChanged(QWidget* old, QWidget* now);
+    void focusChanged(QWidget* , QWidget* );
     void textupdate();
 
 private slots:
@@ -55,6 +55,12 @@ private slots:
 
     void on_comboBox_13_currentTextChanged(const QString &arg1);
 
+    void on_comboBox_13_currentIndexChanged(int index);
+
+    void on_comboBox_13_activated(const QString &arg1);
+
+    void on_comboBox_13_currentIndexChanged(const QString &arg1);
+
 signals:
 
     void error(const QString &s);
@@ -70,7 +76,8 @@ protected:
     void touchReleaseEvent(QTouchEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-    //bool MainWindow::eventFilter(QObject *object, QEvent *event);
+protected:
+     bool eventFilter(QObject *obj, QEvent *event);
 
 
 };

@@ -27,6 +27,9 @@
 #include <QtTest/QTest>
 #include <QPoint>
 #include <QEvent>
+#include <QMouseEvent>
+
+#include <QFocusEvent>
 
 QString inputstr = "";
 
@@ -38,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setWindowFlags(Qt::CustomizeWindowHint);
 
-    setWindowTitle(tr("ANGSTREM"));
+    setWindowTitle(tr("VISION"));
 
     QPixmap pix("/usr/inc/logo.jpg");
     ui->label->setPixmap(pix);
@@ -53,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr->setInterval(1000);
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    //connect(this, SIGNAL(QApplication::focusChanged(QWidget*,QWidget*)), this, SLOT(textupdate()));
 
     tmr->start(100);
 
@@ -66,42 +68,22 @@ MainWindow::MainWindow(QWidget *parent) :
     // a new thread that reads serial input
 
     QThread *thread= new QThread();
+
     NewThreadClass *my = new NewThreadClass();
+
+
 
     my->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
-    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mousePress()));
+
+    //connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mousePress()));
+
     thread->start();
-//    //qApp->installEventFilter(this);
-//    ui->comboBox_13->installEventFilter(this);
+
+    ui->comboBox_13->installEventFilter( this );
 }
 
-//bool MainWindow::eventFilter(QObject *object, QEvent *event)
-//{
-//////     switch( event->type() )
-//////     {
-////////               case QEvent::MousePressEvent:
-////////               case QEvent::MouseReleaseEvent:
-////////               case QEvent::
-//////               case QEvent::TouchBegin:
-//////               case QEvent::TouchCancel:
-//////               case QEvent::TouchEnd:
-////////                        qDebug() << int(event->type()) << watched;
-
-//////              break;
-//////     }
-
-//////     //return BaseClass::eventFilter(watched,event);
-//////     return true;
-
-////     if (object == ui->comboBox_13)
-////     {
-////         qWarning(object->objectName().toLatin1().data());
-////     }
-
-//     return true;
-//}
 
 MainWindow::~MainWindow()
 {
@@ -125,22 +107,24 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
+
+    //    QMouseEvent mouseEvent(QEvent::MouseButtonRelease,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
+    //    QCoreApplication::sendEvent(ui->pushButton_2, &mouseEvent);
+    //    QCoreApplication::sendEvent(ui->dial, &mouseEvent);
+    //    QCoreApplication::sendEvent(ui->comboBox_13, &mouseEvent);
 }
 
 void MainWindow::textupdate()
 {
-
-QWidget * fw = qApp->focusWidget();
-//QWidget * fw = QApplication::focusWidget();
-
-ui->textEdit_3->setText(fw->objectName());
-
+    QWidget * fw = qApp->focusWidget();
+    QObject * ob = qApp->focusObject();
+    ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " + ob->objectName());
+    QMouseEvent mouseEvent(QEvent::MouseButtonRelease,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
+    QCoreApplication::sendEvent(ob,&mouseEvent);
 }
-
 
 void MainWindow::updatevalue()
 {
-
     if (inputstr!="")
     {
         QString message =inputstr.left(4);
@@ -353,7 +337,6 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
 
 void MainWindow::touchReleaseEvent(QTouchEvent *event)
 {
-
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent* event)
@@ -368,10 +351,38 @@ void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
     ui->label_7->setText("index changed");
 }
 
-
-void MainWindow::focusChanged(QWidget* old, QWidget* now)
+void MainWindow::focusChanged(QWidget* , QWidget* )
 {
     ui->textEdit_3->setText("b");
-//    qWarning(now->objectName().toLatin1().data());
+}
 
+void MainWindow::on_comboBox_13_currentIndexChanged(int index)
+{
+}
+
+void MainWindow::on_comboBox_13_activated(const QString &arg1)
+{
+}
+
+void MainWindow::on_comboBox_13_currentIndexChanged(const QString &arg1)
+{
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    switch( event->type() ){
+    case QEvent::MouseButtonDblClick:
+        qDebug() << "Mouse Button Double Clicked";
+        break;
+    case QEvent::MouseButtonPress:
+        qDebug() << "Mouse Button Pressed";
+        break;
+    case QEvent::MouseButtonRelease:
+        qDebug() << "Mouse Button Released";
+        break;
+    default:
+        break;
+    }
+    // pass the event on to the parent class
+    return QMainWindow::eventFilter(obj, event);
 }

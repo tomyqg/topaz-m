@@ -38,6 +38,9 @@
       <height>131</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
    </widget>
    <widget class="QLCDNumber" name="lcdNumber">
     <property name="geometry">
@@ -47,6 +50,9 @@
       <width>251</width>
       <height>91</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_2">
@@ -62,6 +68,9 @@
      <font>
       <pointsize>20</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -80,6 +89,9 @@ p, li { white-space: pre-wrap; }
       <height>121</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(0, 0, 0);</string>
@@ -92,6 +104,9 @@ color: rgb(0, 0, 0);</string>
        <width>241</width>
        <height>161</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
      </property>
      <property name="text">
       <string/>
@@ -109,6 +124,9 @@ color: rgb(0, 0, 0);</string>
       <width>211</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>Отключить питание</string>
@@ -129,15 +147,21 @@ color: rgb(0, 0, 0);</string>
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
    </widget>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>550</y>
+      <y>530</y>
       <width>451</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -156,6 +180,9 @@ p, li { white-space: pre-wrap; }
       <height>16</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="text">
      <string>Математический канал</string>
     </property>
@@ -164,10 +191,13 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>600</y>
-      <width>451</width>
+      <y>570</y>
+      <width>81</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>TextLabel</string>
@@ -177,10 +207,13 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>670</y>
+      <y>620</y>
       <width>451</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="minimum">
      <number>1</number>
@@ -202,10 +235,13 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>650</y>
+      <y>600</y>
       <width>111</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>количество графиков</string>
@@ -215,10 +251,13 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>650</y>
+      <y>630</y>
       <width>111</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>20</string>
@@ -232,6 +271,9 @@ p, li { white-space: pre-wrap; }
       <width>141</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
@@ -247,6 +289,9 @@ p, li { white-space: pre-wrap; }
      <font>
       <pointsize>24</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>Количество</string>
@@ -266,6 +311,9 @@ p, li { white-space: pre-wrap; }
       <pointsize>24</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="text">
      <string>нажатий</string>
     </property>
@@ -279,6 +327,9 @@ p, li { white-space: pre-wrap; }
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="text">
      <string>Нормированное значение</string>
     </property>
@@ -291,6 +342,9 @@ p, li { white-space: pre-wrap; }
       <width>271</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="minimum">
      <number>50</number>
@@ -317,6 +371,9 @@ p, li { white-space: pre-wrap; }
       <height>16</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="text">
      <string>Интервал: </string>
     </property>
@@ -330,18 +387,78 @@ p, li { white-space: pre-wrap; }
       <height>41</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="text">
      <string>Настройки</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>640</y>
+      <width>231</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>630</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="text">
+     <string>Закрыть программу</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>660</y>
+      <width>451</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox_13">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>630</y>
-      <width>191</width>
+      <x>650</x>
+      <y>590</y>
+      <width>111</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::NoInsert</enum>
+    </property>
+    <property name="frame">
+     <bool>true</bool>
     </property>
     <item>
      <property name="text">
@@ -373,42 +490,6 @@ p, li { white-space: pre-wrap; }
       <string>Счетчик импульсов</string>
      </property>
     </item>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>700</y>
-      <width>231</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>630</y>
-      <width>211</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Закрыть программу</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>690</y>
-      <width>221</width>
-      <height>41</height>
-     </rect>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

@@ -6,6 +6,7 @@
 
 QT += core gui script
 QT += serialport
+QT += testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
