@@ -27,3 +27,14 @@ void Options::on_pushButton_2_clicked()
 {
     this->close();
 }
+
+
+void Options::checkboxchange(QString newstring)
+{
+    ui->lineEdit_5->setText(newstring);
+}
+
+void Options::on_radioButton_2_clicked()
+{
+    checkboxchange("В");
+}

@@ -178,7 +178,7 @@ void MainWindow::updategraph()
     if (b>=300&&b<900)
     {
         ui->customPlot->xAxis->setRange(b-300, b+300);
-}
+    }
 
     if (b==1200)
     {
@@ -372,18 +372,7 @@ void MainWindow::updatepicture()
 
 void MainWindow::mousePress()
 {
-  // if an axis is selected, only allow the direction of that axis to be dragged
-  // if no axis is selected, both directions may be dragged
 
-//ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
-
-ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
-ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
-
-//  if (ui->customPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
-//    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
-//  else if (ui->customPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
-//    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
-//  else
-//    ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal|Qt::Vertical);
+    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
+    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
 }

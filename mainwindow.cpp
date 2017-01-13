@@ -77,15 +77,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
 
-    //connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mousePress()));
-
     thread->start();
 
     ui->comboBox_13->installEventFilter( this );
 
     ui->dial->installEventFilter( this );
 
-    //    qApp->installEventFilter( this );
+    ui->pushButton_2->installEventFilter( this );
+
 }
 
 
@@ -111,6 +110,9 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
+    focusNextChild();
+//    QMouseEvent mouseEvent(QEvent::TouchEnd,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
+//    QCoreApplication::sendEvent(ui->pushButton_2,&mouseEvent);
 }
 
 void MainWindow::textupdate()
@@ -119,7 +121,8 @@ void MainWindow::textupdate()
     QObject * ob = qApp->focusObject();
     ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " + ob->objectName());
     QMouseEvent mouseEvent(QEvent::MouseButtonRelease,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
-    QCoreApplication::sendEvent(ob,&mouseEvent);
+    QCoreApplication::sendEvent(ui->pushButton_2,&mouseEvent);
+    //    QCoreApplication::postEvent(ui->textEdit_3,&mouseEvent);
 }
 
 void MainWindow::updatevalue()
@@ -143,7 +146,6 @@ void MainWindow::updatevalue()
             }
     }
 }
-
 
 void MainWindow::paintEvent(QPaintEvent *e)
 {
@@ -341,6 +343,9 @@ void MainWindow::touchReleaseEvent(QTouchEvent *event)
 void MainWindow::mouseReleaseEvent(QMouseEvent* event)
 {
     ui->label_7->setText("button Released");
+//    this->focusNextChild();
+//    QCursor::setPos(200,200);
+
 }
 
 void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
@@ -376,7 +381,8 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         break;
     case QEvent::MouseButtonPress:
         //        qDebug() << "Mouse Button Pressed";
-        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"Mouse Button Pressed");
+        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"Mouse Button Pressed aaaaa");
+        focusNextChild();
         break;
     case QEvent::MouseButtonRelease:
         //        qDebug() << "Mouse Button Released";

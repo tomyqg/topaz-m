@@ -20,14 +20,16 @@ SOURCES += main.cpp\
     updategraph.cpp \
     dialog.cpp \
     options.cpp \
-    digitalinputs.cpp
+    digitalinputs.cpp \
+    options_setting_class.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
     updategraph.h \
     dialog.h \
     options.h \
-    digitalinputs.h
+    digitalinputs.h \
+    options_setting_class.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
