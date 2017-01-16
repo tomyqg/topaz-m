@@ -27,8 +27,10 @@ public:
     ~MainWindow();
 
 public slots:
+
     void focusChanged(QWidget* , QWidget* );
     void textupdate();
+    void WritetoFile();
 
 private slots:
 

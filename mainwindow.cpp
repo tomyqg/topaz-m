@@ -68,8 +68,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     NewThreadClass *my = new NewThreadClass();
 
-
-
     my->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
@@ -81,7 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->dial->installEventFilter( this );
 
     ui->pushButton_2->installEventFilter( this );
-
 }
 
 
@@ -107,9 +104,7 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
-    focusNextChild();
-//    QMouseEvent mouseEvent(QEvent::TouchEnd,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
-//    QCoreApplication::sendEvent(ui->pushButton_2,&mouseEvent);
+//    focusNextChild();
 }
 
 void MainWindow::textupdate()
@@ -411,4 +406,37 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     }
     // pass the event on to the parent class
     return QMainWindow::eventFilter(obj, event);
+}
+
+
+void MainWindow::WritetoFile()
+{
+
+    QFile filedir("/sys/class/gpio/gpio69/direction");
+
+    filedir.open(QIODevice::WriteOnly);
+    QTextStream outdir(&filedir);
+
+    outdir << "out";
+    filedir.close();
+
+    QFile file("/sys/class/gpio/gpio69/value");
+
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+
+    if (1)
+    {
+        out << "1";
+    }
+
+    else
+    {
+        out << "0";
+    }
+
+    file.close();
+
+    ui->pushButton_2->setText("настрйки сохранены");
+
 }
