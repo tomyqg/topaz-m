@@ -13,8 +13,9 @@ void Options::savesettings()
 
 void Options::WriteOptionsToFile()
 {
-    QJsonArray settings;
     QJsonObject channel1;
+    QJsonObject channels;
+    QJsonArray settings;
 
     channel1["Type"] = GetSignalType();
     channel1["Units"] = GetSignalUnits();
@@ -25,12 +26,12 @@ void Options::WriteOptionsToFile()
 
     settings.append(channel1);
 
-//    channel1["settings"] = settings;
-//    channel1["settings2"] = settings;
+    channels["channel1"] = settings;
+    channels["channel2"] = settings;
 
-    QString setstr = QJsonDocument(channel1).toJson(QJsonDocument::Compact);
+    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
 
-    qDebug() << QJsonDocument(channel1).toJson(QJsonDocument::Compact);
+    qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
 
     //    QFile file("/sys/class/gpio/gpio69/value");
     QFile file("C:/Work/options.txt");
