@@ -33,6 +33,7 @@ private slots:
     void savesettings();
 
     int GetSignalType();
+    QString GetSignalUnits();
 
 private:
 

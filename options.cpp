@@ -50,7 +50,7 @@ Options::~Options()
 void Options::on_pushButton_clicked()
 {
     WriteOptionsToFile();
-    savesettings();
+//    savesettings();
     this->close();
 }
 
@@ -84,5 +84,9 @@ int Options::GetSignalType()
             return 4;
     if ( ui->radioButton_5->isChecked() )
             return 5;
+}
 
+QString Options::GetSignalUnits()
+{
+            return "Signal units";
 }
