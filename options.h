@@ -19,11 +19,15 @@ private slots:
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void checkboxchange(QString newstring);
 
     void on_radioButton_2_clicked();
+    void on_radioButton_3_clicked();
+
+    void checkboxchange(QString newstring);
+    void savesettings();
 
 private:
+
     Ui::Options *ui;
 };
 

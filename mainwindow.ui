@@ -452,6 +452,9 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox_13">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>650</x>

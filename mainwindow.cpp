@@ -38,11 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     setWindowFlags(Qt::CustomizeWindowHint);
-
     setWindowTitle(tr("VISION"));
-
     QPixmap pix("/usr/inc/logo.jpg");
     ui->label->setPixmap(pix);
 
