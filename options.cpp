@@ -29,7 +29,6 @@
 #include <QPoint>
 #include <QEvent>
 #include <QMouseEvent>
-
 #include <QFocusEvent>
 
 Options::Options(QWidget *parent) :
@@ -39,7 +38,7 @@ Options::Options(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
-    connect(ui->radioButton, SIGNAL(pressed()), this, SLOT(checkboxchange()) );
+    connect(ui->UnChan1RadButOtkl, SIGNAL(pressed()), this, SLOT(checkboxchange()) );
 }
 
 Options::~Options()
@@ -50,7 +49,7 @@ Options::~Options()
 void Options::on_pushButton_clicked()
 {
     WriteOptionsToFile();
-//    savesettings();
+    //    savesettings();
     this->close();
 }
 
@@ -71,22 +70,34 @@ void Options::on_radioButton_2_clicked()
 void Options::on_radioButton_3_clicked()
 {
 }
+
 int Options::GetSignalType()
 {
-    if ( ui->radioButton->isChecked() )
-            return 1;
+    if ( ui->UnChan1RadButOtkl->isChecked() )
+        return 1;
+    if ( ui->UnChan1RadButTok->isChecked() )
+        return 2;
+    if ( ui->UnChan1RadButNapryagenie->isChecked() )
+        return 3;
+    if ( ui->UnChan1RadButResistor->isChecked() )
+        return 4;
+    if ( ui->UnChan1RadButTPara->isChecked() )
+        return 5;
+    if ( ui->UnChan1RadButTPara->isChecked() )
+        return 6;
 
-    if ( ui->radioButton_2->isChecked() )
-            return 2;
-    if ( ui->radioButton_3->isChecked() )
-            return 3;
-    if ( ui->radioButton_4->isChecked() )
-            return 4;
-    if ( ui->radioButton_5->isChecked() )
-            return 5;
+    return 0;
 }
 
 QString Options::GetSignalUnits()
 {
-            return "Signal units";
+    return "Signal units";
 }
+
+
+int Channel1OptionClass::GetSignalType1()
+{
+return 2;
+}
+
+

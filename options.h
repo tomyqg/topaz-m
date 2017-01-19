@@ -7,6 +7,7 @@
 
 namespace Ui {
 class Options;
+class Channel1OptionClass;
 }
 
 class Options : public QDialog
@@ -24,20 +25,41 @@ public slots:
 private slots:
 
     void on_pushButton_clicked();
+
     void on_pushButton_2_clicked();
 
     void on_radioButton_2_clicked();
+
     void on_radioButton_3_clicked();
 
     void checkboxchange();
+
     void savesettings();
 
     int GetSignalType();
+
     QString GetSignalUnits();
+
+
+private:
+
+    Ui::Options *ui;
+
+};
+
+class Channel1OptionClass: public QObject
+{
+    Q_OBJECT
+
+private slots:
+
+    int GetSignalType1();
 
 private:
 
     Ui::Options *ui;
 };
+
+
 
 #endif // OPTIONS_H
