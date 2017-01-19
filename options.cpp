@@ -4,6 +4,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "channel1.h"
+
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -95,9 +97,5 @@ QString Options::GetSignalUnits()
 }
 
 
-int Channel1OptionClass::GetSignalType1()
-{
-return 2;
-}
 
 

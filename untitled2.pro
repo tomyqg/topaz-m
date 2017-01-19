@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     dialog.cpp \
     options.cpp \
     digitalinputs.cpp \
-    options_setting_class.cpp
+    options_setting_class.cpp \
+    channel1.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     dialog.h \
     options.h \
     digitalinputs.h \
-    options_setting_class.h
+    options_setting_class.h \
+    channel1.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \

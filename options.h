@@ -47,18 +47,7 @@ private:
 
 };
 
-class Channel1OptionClass: public QObject
-{
-    Q_OBJECT
 
-private slots:
-
-    int GetSignalType1();
-
-private:
-
-    Ui::Options *ui;
-};
 
 
 
