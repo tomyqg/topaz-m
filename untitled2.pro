@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     updategraph.cpp \
     dialog.cpp \
     options.cpp \
-    digitalinputs.cpp \
     channel1.cpp
 
 HEADERS  += mainwindow.h \
@@ -28,13 +27,11 @@ HEADERS  += mainwindow.h \
     updategraph.h \
     dialog.h \
     options.h \
-    digitalinputs.h \
     channel1.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
-    options.ui \
-    digitalinputs.ui
+    options.ui
 
 DISTFILES +=
 

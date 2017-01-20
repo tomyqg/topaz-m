@@ -20,7 +20,6 @@ int Channel1Options::Ret()
 
 
 void Channel1Options::setprop()
-
 {
 
     Channel1Options::count222 = 10;
@@ -70,12 +69,10 @@ int Channel1Options::GetSignalType()
     return Channel1Options::signaltype;
 }
 
-
 void Channel1Options::SetSignalType(int newsignaltype)
 {
     Channel1Options::signaltype = newsignaltype;
 }
-
 
 void Channel1Options::SetUnitsName(QString newunitname)
 {

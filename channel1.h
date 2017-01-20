@@ -2,9 +2,9 @@
 #define CHANNEL1_H
 
 #include <QObject>
-#include <options.h>
+//#include <options.h>
 #include <QDialog>
-#include <mainwindow.h>
+//#include <mainwindow.h>
 
 
 
@@ -54,6 +54,8 @@ private:
     static int highermeasurelimit;
     static int measureperiodsecond;
     static QString unitsname;
+
+
 
 };
 

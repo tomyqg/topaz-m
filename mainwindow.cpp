@@ -32,8 +32,6 @@
 #include <QFocusEvent>
 
 
-#include "channel1.h"
-#include "channel1.cpp"
 
 QString inputstr = "";
 
@@ -252,27 +250,27 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    Channel1Options a;
+//    Channel1Options a;
 
-    Channel1Options b;
+//    Channel1Options b;
 
-//    int adasd = a.Ret();
-//    qDebug() << adasd;
-//    adasd = b.Ret();
-//    qDebug() << adasd;
+////    int adasd = a.Ret();
+////    qDebug() << adasd;
+////    adasd = b.Ret();
+////    qDebug() << adasd;
 
-//    b.setprop();
+////    b.setprop();
 
-//    adasd = a.Ret();
-//    qDebug() << adasd;
-//    adasd = b.Ret();
-//    qDebug() << adasd;
+////    adasd = a.Ret();
+////    qDebug() << adasd;
+////    adasd = b.Ret();
+////    qDebug() << adasd;
 
-    qDebug() << a.GetUnitsName();
+//    qDebug() << a.GetUnitsName();
 
-    a.SetUnitsName("ohhh yeeees");
+//    a.SetUnitsName("ohhh yeeees");
 
-    qDebug() << b.GetUnitsName();
+//    qDebug() << b.GetUnitsName();
 
     QApplication::exit();
 

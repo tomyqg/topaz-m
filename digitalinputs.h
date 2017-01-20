@@ -1,4 +1,4 @@
-#ifndef DIGITALINPUTS_H
+ifndef DIGITALINPUTS_H
 #define DIGITALINPUTS_H
 
 #include <QDialog>
