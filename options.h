@@ -7,7 +7,8 @@
 
 namespace Ui {
 class Options;
-class Channel1OptionClass;
+class Newclass;
+
 }
 
 class Options : public QDialog
@@ -48,6 +49,13 @@ private:
 };
 
 
+class Newclass : Options
+{
+public:
+    Newclass();
+    void changesome();
+
+};
 
 
 

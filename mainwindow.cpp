@@ -31,6 +31,12 @@
 
 #include <QFocusEvent>
 
+#include "testclass.h"
+#include "testclass.cpp"
+
+#include "channel1.h"
+#include "channel1.cpp"
+
 QString inputstr = "";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -73,11 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
 
     thread->start();
-
     ui->comboBox_13->installEventFilter( this );
-
     ui->dial->installEventFilter( this );
-
     ui->pushButton_2->installEventFilter( this );
 }
 
@@ -104,7 +107,6 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
-//    focusNextChild();
 }
 
 void MainWindow::textupdate()
@@ -252,7 +254,39 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    //    testclass a;
+    //    a.setprop1();
+    //    Channel1Options a;
+    //    a.setprop();
+    //    Channel1Options b;
+    //    b.setprop2();
+    //
+    //    Channel1Options a;
+    //    a.GetSignalType1();
+    //    qDebug() << a.st1;
+
+
+    Channel1Options a;
+
+    Channel1Options b;
+
+    //    a.setprop();
+
+    int adasd = a.Ret();
+    qDebug() << adasd;
+    adasd = b.Ret();
+    qDebug() << adasd;
+
+    b.setprop();
+
+    adasd = a.Ret();
+    qDebug() << adasd;
+    adasd = b.Ret();
+    qDebug() << adasd;
+
+
     QApplication::exit();
+
 }
 
 void NewThreadClass::updatethread()
@@ -277,7 +311,7 @@ void NewThreadClass::updatethread()
                 while (serial.waitForBytesWritten(500))
                     ;
 
-                QByteArray requestData;// = serial.readAll();
+                QByteArray requestData;
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
                 inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
@@ -335,9 +369,8 @@ void MainWindow::touchReleaseEvent(QTouchEvent *event)
 void MainWindow::mouseReleaseEvent(QMouseEvent* event)
 {
     ui->label_7->setText("button Released");
-//    this->focusNextChild();
-//    QCursor::setPos(200,200);
-
+    //    this->focusNextChild();
+    //    QCursor::setPos(200,200);
 }
 
 void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
