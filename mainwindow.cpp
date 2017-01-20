@@ -31,8 +31,6 @@
 
 #include <QFocusEvent>
 
-#include "testclass.h"
-#include "testclass.cpp"
 
 #include "channel1.h"
 #include "channel1.cpp"
@@ -254,38 +252,30 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    //    testclass a;
-    //    a.setprop1();
-    //    Channel1Options a;
-    //    a.setprop();
-    //    Channel1Options b;
-    //    b.setprop2();
-    //
-    //    Channel1Options a;
-    //    a.GetSignalType1();
-    //    qDebug() << a.st1;
-
-
     Channel1Options a;
 
     Channel1Options b;
 
-    //    a.setprop();
+//    int adasd = a.Ret();
+//    qDebug() << adasd;
+//    adasd = b.Ret();
+//    qDebug() << adasd;
 
-    int adasd = a.Ret();
-    qDebug() << adasd;
-    adasd = b.Ret();
-    qDebug() << adasd;
+//    b.setprop();
 
-    b.setprop();
+//    adasd = a.Ret();
+//    qDebug() << adasd;
+//    adasd = b.Ret();
+//    qDebug() << adasd;
 
-    adasd = a.Ret();
-    qDebug() << adasd;
-    adasd = b.Ret();
-    qDebug() << adasd;
+    qDebug() << a.GetUnitsName();
 
+    a.SetUnitsName("ohhh yeeees");
+
+    qDebug() << b.GetUnitsName();
 
     QApplication::exit();
+
 
 }
 

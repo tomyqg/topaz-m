@@ -4,8 +4,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "testclass.h"
-
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
