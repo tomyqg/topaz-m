@@ -32,7 +32,6 @@
 #include <QFocusEvent>
 
 
-
 QString inputstr = "";
 
 MainWindow::MainWindow(QWidget *parent) :

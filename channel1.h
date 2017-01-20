@@ -34,6 +34,8 @@ public:
     void SetUnitsName(QString newunit);
     int Ret();
 
+    int thetemp  = 5  ;
+
 public:
 
     void setprop();
@@ -54,9 +56,6 @@ private:
     static int highermeasurelimit;
     static int measureperiodsecond;
     static QString unitsname;
-
-
-
 };
 
 #endif // CHANNEL1_H

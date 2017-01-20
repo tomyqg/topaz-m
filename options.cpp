@@ -32,8 +32,7 @@
 #include <QFocusEvent>
 
 #include "channel1.h"
-#include "channel1.cpp"
-
+//#include "channel1.cpp"
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -102,10 +101,11 @@ QString Options::GetSignalUnits()
 void Options::savesettings()
 {
 //    QMessageBox::information(this,"info","Options are saved");
+    Channel1Options a;
 
-//    Channel1Options a;
+    qDebug() <<  a.thetemp;
 
-//    qDebug() << a.GetSignalType();
+    qDebug() << a.GetHigherLimit();
 }
 
 void Options::WriteOptionsToFile()
