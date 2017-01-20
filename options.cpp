@@ -102,10 +102,13 @@ void Options::savesettings()
 {
 //    QMessageBox::information(this,"info","Options are saved");
     Channel1Options a;
+    Channel1Options b;
 
-    qDebug() <<  a.thetemp;
+    a.SetUnitsName(ui->lineEdit_5->text());
 
-    qDebug() << a.GetHigherLimit();
+
+    qDebug() << a.GetUnitsName();
+
 }
 
 void Options::WriteOptionsToFile()

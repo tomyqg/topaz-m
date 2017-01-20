@@ -31,6 +31,7 @@
 
 #include <QFocusEvent>
 
+#include <channel1.h>
 
 QString inputstr = "";
 
@@ -102,6 +103,11 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
+
+
+    Channel1Options eeeeee;
+
+   qDebug() << eeeeee.GetUnitsName();
 }
 
 void MainWindow::textupdate()
