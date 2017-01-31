@@ -32,7 +32,6 @@
 #include <QFocusEvent>
 
 #include "channel1.h"
-//#include "channel1.cpp"
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -41,7 +40,17 @@ Options::Options(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
-    connect(ui->UnChan1RadButOtkl, SIGNAL(pressed()), this, SLOT(checkboxchange()) );
+    connect(ui->ButonOtklChannel_1, SIGNAL(pressed()), this, SLOT(checkboxchange()) );
+
+    // параметры для каждого канала
+
+//    ChannelOptions options1;
+//    ChannelOptions options2;
+//    QList<ChannelOptions> ChannelOptionsList;
+//    ChannelOptions tempoptions1;
+//    tempoptions1.SetUnitsName("Ampers321");
+//    ChannelOptionsList.append(tempoptions1);
+//    qDebug() << ChannelOptionsList[0].GetUnitsName();
 }
 
 Options::~Options()
@@ -76,6 +85,7 @@ void Options::on_radioButton_3_clicked()
 
 int Options::GetSignalType()
 {
+    /*
     if ( ui->UnChan1RadButOtkl->isChecked() )
         return 1;
     if ( ui->UnChan1RadButTok->isChecked() )
@@ -87,7 +97,7 @@ int Options::GetSignalType()
     if ( ui->UnChan1RadButTPara->isChecked() )
         return 5;
     if ( ui->UnChan1RadButTPara->isChecked() )
-        return 6;
+        return 6;*/
     
     return 0;
 }
@@ -100,17 +110,7 @@ QString Options::GetSignalUnits()
 
 void Options::savesettings()
 {
-    //    QMessageBox::information(this,"info","Options are saved");
-    Channel1Options a;
-    Channel2Options b;
 
-
-    a.SetUnitsName(ui->Chanel1_Units->text());
-    b.SetUnitsName(ui->Chanel2_Units->text());
-    
-    
-    qDebug() << a.GetUnitsName();
-    qDebug() << b.GetUnitsName();
 }
 
 void Options::WriteOptionsToFile()
@@ -145,14 +145,24 @@ void Options::WriteOptionsToFile()
     file.close();
 }
 
-void Newclass::changesome()
+
+
+void Options::on_NPI_BOX_3_valueChanged(int arg1)
 {
-    
+    options1.SetUnitsName("1111");
+    options2.SetUnitsName("222");
+    options3.SetUnitsName("333");
 }
 
-Newclass::Newclass()
-
+void Options::on_NPI_BOX_4_valueChanged(int arg1)
 {
-    
-    
+
+    qDebug() << options1.GetUnitsName();
+    qDebug() << options2.GetUnitsName();
+    qDebug() << options3.GetUnitsName();
+
+
+    options1.SetUnitsName("444");
+    options2.SetUnitsName("555");
+    options3.SetUnitsName("666");
 }

@@ -155,6 +155,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+
     Options options;
     options.setModal(true);
     options.exec();

@@ -98,7 +98,7 @@
           <number>5</number>
          </property>
          <item>
-          <widget class="QRadioButton" name="UnChan1RadButOtkl">
+          <widget class="QRadioButton" name="ButonOtklChannel_1">
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -131,7 +131,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="UnChan1RadButNapryagenie">
+          <widget class="QRadioButton" name="ButtonNapryagenie">
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -316,7 +316,7 @@
             <number>0</number>
            </property>
            <property name="singleStep">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="value">
             <number>1</number>
@@ -1024,7 +1024,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NP_Box_5">
+          <widget class="QSpinBox" name="NP_Box_channel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1526,198 +1526,13 @@
     <string>Выйти без сохранения</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="VPI_BOX_2">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>510</y>
-     <width>61</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>550</y>
-     <width>161</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Событие при превышении</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_10">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>590</y>
-     <width>161</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Событие при уменьшении</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>630</y>
-     <width>171</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Значение выше уставки</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_5">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>550</y>
-     <width>171</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <item>
-    <property name="text">
-     <string>Реле 1 замыкание</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Реле 1 размыкание</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>510</y>
-     <width>131</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Уставка 1, значение</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_9">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>590</y>
-     <width>171</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="currentIndex">
-    <number>1</number>
-   </property>
-   <item>
-    <property name="text">
-     <string>Реле 1 замыкание</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Реле 1 размыкание</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="label_12">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>670</y>
-     <width>181</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Сообщение при уменьшении</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>670</y>
-     <width>171</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Значение ниже уставки</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_11">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>630</y>
-     <width>181</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Сообщение при превышении</string>
-   </property>
-  </widget>
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>tabWidget_2</tabstop>
-  <tabstop>UnChan1RadButOtkl</tabstop>
+  <tabstop>ButonOtklChannel_1</tabstop>
   <tabstop>UnChan1RadButTok</tabstop>
-  <tabstop>UnChan1RadButNapryagenie</tabstop>
+  <tabstop>ButtonNapryagenie</tabstop>
   <tabstop>UnChan1RadButResistor</tabstop>
   <tabstop>comboBox_13</tabstop>
   <tabstop>comboBox_14</tabstop>
@@ -1726,11 +1541,6 @@
   <tabstop>radioButton_8</tabstop>
   <tabstop>radioButton_10</tabstop>
   <tabstop>radioButton_7</tabstop>
-  <tabstop>VPI_BOX_2</tabstop>
-  <tabstop>comboBox_5</tabstop>
-  <tabstop>comboBox_9</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_3</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>pushButton_2</tabstop>
   <tabstop>comboBox_11</tabstop>

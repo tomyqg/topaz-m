@@ -4,7 +4,7 @@
 #include <QObject>
 
 
-class Channel1Options
+class ChannelOptions
 {
 public:
     static int count222;
@@ -21,8 +21,6 @@ public:
     int GetHigherLimit();
     int GetLowerMeasureLimit();
     int GetHigherMeasureLimit();
-    int Ret();
-    int thetemp  = 5;
 
     void SetSignalType(int newsignaltype);
     void SetLowerLimit(int newsignaltype);
@@ -35,24 +33,27 @@ public:
 
 private:
 
-    static int signaltype;
-    static int lowerlimit;
-    static int higherlimit;
-    static int lowermeasurelimit;
-    static int highermeasurelimit;
-    static int measureperiodsecond;
-    static QString unitsname;
+    int signaltype;
+    int lowerlimit;
+    int higherlimit;
+    int lowermeasurelimit;
+    int highermeasurelimit;
+    int measureperiodsecond;
+    QString unitsname;
 
-protected:
-
-    void Protecfun();
-
+//    static int signaltype;
+//    static int lowerlimit;
+//    static int higherlimit;
+//    static int lowermeasurelimit;
+//    static int highermeasurelimit;
+//    static int measureperiodsecond;
+//    static QString unitsname;
 };
 
-class Channel2Options : public Channel1Options
+class Channel2Options : public ChannelOptions
 {
 
-    // приватные переменные настроек канала 1
+//  переменные настроек канала 2
 
 private:
 
@@ -63,6 +64,7 @@ private:
     static int highermeasurelimit;
     static int measureperiodsecond;
     static QString unitsname;
+
 };
 
 #endif // CHANNEL1_H

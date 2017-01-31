@@ -5,15 +5,23 @@
 
 #include <mainwindow.h>
 
+#include <channel1.h>
+
+
+
+
 namespace Ui {
 class Options;
-class Newclass;
 
 }
 
 class Options : public QDialog
 {
     Q_OBJECT
+
+    ChannelOptions options1;
+    ChannelOptions options2;
+    ChannelOptions options3;
 
 public:
     explicit Options(QWidget *parent = 0);
@@ -42,21 +50,18 @@ private slots:
     QString GetSignalUnits();
 
 
+
+    void on_NPI_BOX_3_valueChanged(int arg1);
+
+    void on_NPI_BOX_4_valueChanged(int arg1);
+
 private:
 
     Ui::Options *ui;
 
-};
 
-
-class Newclass : Options
-{
-public:
-    Newclass();
-    void changesome();
 
 };
-
 
 
 #endif // OPTIONS_H

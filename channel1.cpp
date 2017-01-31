@@ -1,66 +1,55 @@
 #include "channel1.h"
 #include "QDebug"
 
-QString Channel1Options::unitsname = "options1 name";
-int Channel1Options::count222 = 7;
-int Channel1Options::higherlimit = 20;
-int Channel1Options::lowerlimit= 4;
-int Channel1Options::highermeasurelimit = 100;
-int Channel1Options::lowermeasurelimit= 0;
-int Channel1Options::signaltype= 0;
+//QString ChannelOptions::unitsname = "options1 name";
+int ChannelOptions::count222 = 7;
+//int ChannelOptions::higherlimit = 20;
+//int ChannelOptions::lowerlimit= 4;
+//int ChannelOptions::highermeasurelimit = 100;
+//int ChannelOptions::lowermeasurelimit= 0;
+//int ChannelOptions::signaltype= 0;
 
-int Channel1Options::GetSignalType1()
+int ChannelOptions::GetSignalType1()
 {
     return 1;
 }
 
-int Channel1Options::Ret()
+int ChannelOptions::GetHigherLimit()
 {
-    return Channel1Options::count222;
+    return ChannelOptions::higherlimit;
 }
 
-QString Channel1Options::GetUnitsName()
+int ChannelOptions::GetHigherMeasureLimit()
 {
-    return Channel1Options::unitsname;
+    return ChannelOptions::highermeasurelimit;
 }
 
-int Channel1Options::GetHigherLimit()
+int ChannelOptions::GetLowerLimit()
 {
-    return Channel1Options::higherlimit;
+    return ChannelOptions::lowerlimit;
 }
 
-int Channel1Options::GetHigherMeasureLimit()
+int ChannelOptions::GetLowerMeasureLimit()
 {
-    return Channel1Options::highermeasurelimit;
+    return ChannelOptions::lowermeasurelimit;
 }
 
-int Channel1Options::GetLowerLimit()
+int ChannelOptions::GetSignalType()
 {
-    return Channel1Options::lowerlimit;
+    return ChannelOptions::signaltype;
 }
 
-int Channel1Options::GetLowerMeasureLimit()
+void ChannelOptions::SetSignalType(int newsignaltype)
 {
-    return Channel1Options::lowermeasurelimit;
+    ChannelOptions::signaltype = newsignaltype;
 }
 
-int Channel1Options::GetSignalType()
-{
-    return Channel1Options::signaltype;
-}
-
-void Channel1Options::SetSignalType(int newsignaltype)
-{
-    Channel1Options::signaltype = newsignaltype;
-}
-
-void Channel1Options::SetUnitsName(QString newunitname)
+void ChannelOptions::SetUnitsName(QString newunitname)
 {
     unitsname = newunitname;
-//    qDebug() << "SetUnitsName";
 }
 
-void Channel1Options::Protecfun()
+QString ChannelOptions::GetUnitsName()
 {
-    qDebug() << "Protected funct";
+    return ChannelOptions::unitsname;
 }
