@@ -1,4 +1,5 @@
 #include "channel1.h"
+#include "QDebug"
 
 QString Channel1Options::unitsname = "options1 name";
 int Channel1Options::count222 = 7;
@@ -17,27 +18,6 @@ int Channel1Options::Ret()
 {
     return Channel1Options::count222;
 }
-
-
-void Channel1Options::setprop()
-{
-
-    Channel1Options::count222 = 10;
-
-    //    count = 2 ;
-    //    qDebug() << this->type1;
-    //    type1 = 1;
-    //    qDebug() << this->type1;
-}
-
-void Channel1Options::setprop2()
-
-{
-    //    qDebug() << this->type1;
-    //    type1 = 2;
-    //    qDebug() << this->type1;
-}
-
 
 QString Channel1Options::GetUnitsName()
 {
@@ -76,5 +56,11 @@ void Channel1Options::SetSignalType(int newsignaltype)
 
 void Channel1Options::SetUnitsName(QString newunitname)
 {
-    Channel1Options::unitsname = newunitname;
+    unitsname = newunitname;
+//    qDebug() << "SetUnitsName";
+}
+
+void Channel1Options::Protecfun()
+{
+    qDebug() << "Protected funct";
 }

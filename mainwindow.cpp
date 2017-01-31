@@ -103,11 +103,9 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->textEdit_2->setText(local.toString());
-
-
-    Channel1Options eeeeee;
-
-   qDebug() << eeeeee.GetUnitsName();
+//    Channel1Options eeeeee;
+//    eeeeee.SetUnitsName("loh");
+//   qDebug() << eeeeee.GetUnitsName();
 }
 
 void MainWindow::textupdate()

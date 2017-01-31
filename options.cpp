@@ -63,7 +63,7 @@ void Options::on_pushButton_2_clicked()
 
 void Options::checkboxchange()
 {
-    ui->lineEdit_5->setText("newstring");
+    ui->Chanel1_Units->setText("newstring");
 }
 
 void Options::on_radioButton_2_clicked()
@@ -88,7 +88,7 @@ int Options::GetSignalType()
         return 5;
     if ( ui->UnChan1RadButTPara->isChecked() )
         return 6;
-
+    
     return 0;
 }
 
@@ -100,15 +100,17 @@ QString Options::GetSignalUnits()
 
 void Options::savesettings()
 {
-//    QMessageBox::information(this,"info","Options are saved");
+    //    QMessageBox::information(this,"info","Options are saved");
     Channel1Options a;
-    Channel1Options b;
-
-    a.SetUnitsName(ui->lineEdit_5->text());
+    Channel2Options b;
 
 
+    a.SetUnitsName(ui->Chanel1_Units->text());
+    b.SetUnitsName(ui->Chanel2_Units->text());
+    
+    
     qDebug() << a.GetUnitsName();
-
+    qDebug() << b.GetUnitsName();
 }
 
 void Options::WriteOptionsToFile()
@@ -116,25 +118,25 @@ void Options::WriteOptionsToFile()
     QJsonObject channel1;
     QJsonObject channels;
     QJsonArray settings;
-
+    
     //Channel1Options a;
-
+    
     channel1["Type"] = GetSignalType();
     channel1["Units"] = GetSignalUnits();
     channel1["HigherLimit"] = 100;
     channel1["LowerLimit"] = 0;
     channel1["HigherMeasLimit"] = 20;
     channel1["LowerMeasLimit"] = 4;
-
+    
     settings.append(channel1);
-
+    
     channels["channel1"] = settings;
     channels["channel2"] = settings;
-
+    
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
-
+    
     qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
-
+    
     //    QFile file("/sys/class/gpio/gpio69/value");
     QFile file("C:/Work/options.txt");
     file.open(QIODevice::WriteOnly);
@@ -145,12 +147,12 @@ void Options::WriteOptionsToFile()
 
 void Newclass::changesome()
 {
-
+    
 }
 
 Newclass::Newclass()
 
 {
-
-
+    
+    
 }

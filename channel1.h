@@ -2,10 +2,6 @@
 #define CHANNEL1_H
 
 #include <QObject>
-//#include <options.h>
-#include <QDialog>
-//#include <mainwindow.h>
-
 
 
 class Channel1Options
@@ -15,8 +11,9 @@ public:
 
 public :  int count;
 
-
 public:
+
+    QString GetUnitsName();
 
     int GetSignalType1();
     int GetSignalType();
@@ -24,7 +21,8 @@ public:
     int GetHigherLimit();
     int GetLowerMeasureLimit();
     int GetHigherMeasureLimit();
-    QString GetUnitsName();
+    int Ret();
+    int thetemp  = 5;
 
     void SetSignalType(int newsignaltype);
     void SetLowerLimit(int newsignaltype);
@@ -32,20 +30,29 @@ public:
     void SetLowerMeasureLimit(int newlowermeaslimit);
     void SetHigherMeasureLimit(int newhighermeaslimit);
     void SetUnitsName(QString newunit);
-    int Ret();
 
-    int thetemp  = 5  ;
-
-public:
-
-    void setprop();
-    void setprop2();
+    // приватные переменные настроек канала 1
 
 private:
 
-    int type1=949;
+    static int signaltype;
+    static int lowerlimit;
+    static int higherlimit;
+    static int lowermeasurelimit;
+    static int highermeasurelimit;
+    static int measureperiodsecond;
+    static QString unitsname;
 
-    // переменные настроек прибора
+protected:
+
+    void Protecfun();
+
+};
+
+class Channel2Options : public Channel1Options
+{
+
+    // приватные переменные настроек канала 1
 
 private:
 

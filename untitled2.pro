@@ -27,6 +27,7 @@ HEADERS  += mainwindow.h \
     updategraph.h \
     dialog.h \
     options.h \
+    channel1.h\
     channel1.h
 
 FORMS    += mainwindow.ui \
