@@ -1,9 +1,3 @@
-#include "options.h"
-#include "ui_options.h"
-
-//#include "mainwindow.h"
-//#include "ui_mainwindow.h"
-
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -31,6 +25,8 @@
 #include <QMouseEvent>
 #include <QFocusEvent>
 
+#include "options.h"
+#include "ui_options.h"
 #include "channel1.h"
 
 Options::Options(QWidget *parent) :
@@ -40,17 +36,7 @@ Options::Options(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
-    connect(ui->ButonOtklChannel_1, SIGNAL(pressed()), this, SLOT(checkboxchange()) );
-
-    // параметры для каждого канала
-
-//    ChannelOptions options1;
-//    ChannelOptions options2;
-//    QList<ChannelOptions> ChannelOptionsList;
-//    ChannelOptions tempoptions1;
-//    tempoptions1.SetUnitsName("Ampers321");
-//    ChannelOptionsList.append(tempoptions1);
-//    qDebug() << ChannelOptionsList[0].GetUnitsName();
+    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(checkboxchange()) );
 }
 
 Options::~Options()
@@ -72,7 +58,16 @@ void Options::on_pushButton_2_clicked()
 
 void Options::checkboxchange()
 {
-    ui->Chanel1_Units->setText("newstring");
+    if (ui->ButonOtklChannel_1->isChecked())
+        qDebug() << "ButonOtklChannel_1";
+
+    if (ui->ButonNapryagenieChannel_1->isChecked())
+        qDebug() << "ButonNapryagenieChannel_1";
+
+    if (ui->ButonTokChannel_1->isChecked())
+        qDebug() << "ButonTokChannel_1";
+
+
 }
 
 void Options::on_radioButton_2_clicked()
@@ -110,25 +105,22 @@ QString Options::GetSignalUnits()
 
 void Options::savesettings()
 {
-
 }
 
 void Options::WriteOptionsToFile()
 {
-    QJsonObject channel1;
+    QJsonObject channel;
     QJsonObject channels;
     QJsonArray settings;
     
-    //Channel1Options a;
+    channel["Type"] = GetSignalType();
+    channel["Units"] = GetSignalUnits();
+    channel["HigherLimit"] = 100;
+    channel["LowerLimit"] = 0;
+    channel["HigherMeasLimit"] = 20;
+    channel["LowerMeasLimit"] = 4;
     
-    channel1["Type"] = GetSignalType();
-    channel1["Units"] = GetSignalUnits();
-    channel1["HigherLimit"] = 100;
-    channel1["LowerLimit"] = 0;
-    channel1["HigherMeasLimit"] = 20;
-    channel1["LowerMeasLimit"] = 4;
-    
-    settings.append(channel1);
+    settings.append(channel);
     
     channels["channel1"] = settings;
     channels["channel2"] = settings;
@@ -137,7 +129,7 @@ void Options::WriteOptionsToFile()
     
     qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-    //    QFile file("/sys/class/gpio/gpio69/value");
+    //    QFile file("/usr/options.txt");
     QFile file("C:/Work/options.txt");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
@@ -145,24 +137,26 @@ void Options::WriteOptionsToFile()
     file.close();
 }
 
-
-
-void Options::on_NPI_BOX_3_valueChanged(int arg1)
+void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)
 {
     options1.SetUnitsName("1111");
     options2.SetUnitsName("222");
     options3.SetUnitsName("333");
 }
 
-void Options::on_NPI_BOX_4_valueChanged(int arg1)
+void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
 {
-
     qDebug() << options1.GetUnitsName();
     qDebug() << options2.GetUnitsName();
     qDebug() << options3.GetUnitsName();
 
-
     options1.SetUnitsName("444");
     options2.SetUnitsName("555");
     options3.SetUnitsName("666");
+}
+
+void Options::on_UnitsChannel_1_editingFinished()
+{
+    options1.SetUnitsName(ui->UnitsChannel_1->text());
+    qDebug() << options1.GetUnitsName();
 }

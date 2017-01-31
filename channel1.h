@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-
 class ChannelOptions
 {
 public:
@@ -29,7 +28,7 @@ public:
     void SetHigherMeasureLimit(int newhighermeaslimit);
     void SetUnitsName(QString newunit);
 
-    // приватные переменные настроек канала 1
+    // приватные переменные настроек канала
 
 private:
 
@@ -40,30 +39,6 @@ private:
     int highermeasurelimit;
     int measureperiodsecond;
     QString unitsname;
-
-//    static int signaltype;
-//    static int lowerlimit;
-//    static int higherlimit;
-//    static int lowermeasurelimit;
-//    static int highermeasurelimit;
-//    static int measureperiodsecond;
-//    static QString unitsname;
-};
-
-class Channel2Options : public ChannelOptions
-{
-
-//  переменные настроек канала 2
-
-private:
-
-    static int signaltype;
-    static int lowerlimit;
-    static int higherlimit;
-    static int lowermeasurelimit;
-    static int highermeasurelimit;
-    static int measureperiodsecond;
-    static QString unitsname;
 
 };
 

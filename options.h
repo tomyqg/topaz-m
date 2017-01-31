@@ -7,9 +7,6 @@
 
 #include <channel1.h>
 
-
-
-
 namespace Ui {
 class Options;
 
@@ -22,6 +19,8 @@ class Options : public QDialog
     ChannelOptions options1;
     ChannelOptions options2;
     ChannelOptions options3;
+
+    ChannelOptions options16;
 
 public:
     explicit Options(QWidget *parent = 0);
@@ -49,18 +48,15 @@ private slots:
 
     QString GetSignalUnits();
 
+    void on_VerhnPredIzmerChannel_1_valueChanged(int arg1);
 
+    void on_PeriodIzmerChannel_1_valueChanged(int arg1);
 
-    void on_NPI_BOX_3_valueChanged(int arg1);
-
-    void on_NPI_BOX_4_valueChanged(int arg1);
+    void on_UnitsChannel_1_editingFinished();
 
 private:
 
     Ui::Options *ui;
-
-
-
 };
 
 

@@ -1,13 +1,7 @@
 #include "channel1.h"
 #include "QDebug"
 
-//QString ChannelOptions::unitsname = "options1 name";
 int ChannelOptions::count222 = 7;
-//int ChannelOptions::higherlimit = 20;
-//int ChannelOptions::lowerlimit= 4;
-//int ChannelOptions::highermeasurelimit = 100;
-//int ChannelOptions::lowermeasurelimit= 0;
-//int ChannelOptions::signaltype= 0;
 
 int ChannelOptions::GetSignalType1()
 {
