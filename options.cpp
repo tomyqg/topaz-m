@@ -49,8 +49,8 @@ Options::~Options()
 
 void Options::on_pushButton_clicked()
 {
-    WriteOptionsToFile();
     savesettings();
+    WriteOptionsToFile();
     this->close();
 }
 
@@ -67,45 +67,43 @@ void Options::Channel1TypeChange()
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
+    
     if (ui->ButonTokChannel_1->isChecked())
     {
         options1.SetSignalType(2);
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
+    
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
         options1.SetSignalType(3);
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
+    
     if (ui->ButonResistorChannel_1->isChecked())
     {
         options1.SetSignalType(4);
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
+    
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
-
+        
         options1.SetSignalType(5);
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
+    
     if (ui->ButonImpulseChannel_1->isChecked())
     {
         options1.SetSignalType(6);
         qDebug() << "options1";
         qDebug() << options1.GetSignalType();
     }
-
-//    options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
-//    options1.SetLowerLimit(ui->NignPredelChannel_1->value());
+    
 }
 
 void Options::Channel2TypeChange()
@@ -116,35 +114,35 @@ void Options::Channel2TypeChange()
         qDebug() << "options2";
         qDebug() << options2.GetSignalType();
     }
-
+    
     if (ui->ButonTokChannel_2->isChecked())
     {
         options2.SetSignalType(2);
         qDebug() << "options2";
         qDebug() << options2.GetSignalType();
     }
-
+    
     if (ui->ButonNapryagenieChannel_2->isChecked())
     {
         options2.SetSignalType(3);
         qDebug() << "options2";
         qDebug() << options2.GetSignalType();
     }
-
+    
     if (ui->ButonResistorChannel_2->isChecked())
     {
         options2.SetSignalType(4);
         qDebug() << "options2";
         qDebug() << options2.GetSignalType();
     }
-
+    
     if (ui->ButonTermoparaChannel_2->isChecked())
     {
         options2.SetSignalType(5);
         qDebug() << "options2";
         qDebug() << options2.GetSignalType();
     }
-
+    
     if (ui->ButonImpulseChannel_2->isChecked())
     {
         options2.SetSignalType(6);
@@ -155,12 +153,12 @@ void Options::Channel2TypeChange()
 
 void Options::Channel3TypeChange()
 {
-
+    
 }
 
 void Options::Channel4TypeChange()
 {
-
+    
 }
 
 void Options::on_radioButton_2_clicked()
@@ -180,6 +178,19 @@ QString Options::GetSignalUnits()
 
 void Options::savesettings()
 {
+    Channel1TypeChange();
+    options1.SetUnitsName(ui->UnitsChannel_1->text());
+    options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
+    options1.SetLowerLimit(ui->NignPredelChannel_1->value());
+    options1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
+    options1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
+
+    Channel2TypeChange();
+    options2.SetUnitsName(ui->UnitsChannel_2->text());
+    options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
+    options2.SetLowerLimit(ui->NignPredelChannel_2->value());
+    options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
+    options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
 }
 
 void Options::WriteOptionsToFile()
@@ -197,7 +208,7 @@ void Options::WriteOptionsToFile()
     channel1["LowerLimit"] = options1.GetLowerLimit();
     channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
     channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
-
+    
     settings.append(channel1);
     
     channel2["Type"] = options2.GetSignalType();
@@ -206,11 +217,11 @@ void Options::WriteOptionsToFile()
     channel2["LowerLimit"] = options2.GetLowerLimit();
     channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
     channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
-
+    
     settings.append(channel2);
-
+    
     channels["channel1"] = settings;
-
+    
     channels["channel2"] = settings;
     
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
@@ -218,7 +229,7 @@ void Options::WriteOptionsToFile()
     qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
     //    QFile file("/usr/options.txt");
-
+    
     QFile file("C:/Work/options.txt");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
@@ -238,7 +249,7 @@ void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
     qDebug() << options1.GetUnitsName();
     qDebug() << options2.GetUnitsName();
     qDebug() << options3.GetUnitsName();
-
+    
     options1.SetUnitsName("444");
     options2.SetUnitsName("555");
     options3.SetUnitsName("666");

@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "dialog.h"
 
+
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -254,31 +255,7 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-//    Channel1Options a;
-
-//    Channel1Options b;
-
-////    int adasd = a.Ret();
-////    qDebug() << adasd;
-////    adasd = b.Ret();
-////    qDebug() << adasd;
-
-////    b.setprop();
-
-////    adasd = a.Ret();
-////    qDebug() << adasd;
-////    adasd = b.Ret();
-////    qDebug() << adasd;
-
-//    qDebug() << a.GetUnitsName();
-
-//    a.SetUnitsName("ohhh yeeees");
-
-//    qDebug() << b.GetUnitsName();
-
     QApplication::exit();
-
-
 }
 
 void NewThreadClass::updatethread()

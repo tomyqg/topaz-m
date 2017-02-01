@@ -40,3 +40,23 @@ QString ChannelOptions::GetUnitsName()
 {
     return this->unitsname;
 }
+
+void ChannelOptions::SetHigherLimit(int newlimit)
+{
+    this->higherlimit=newlimit;
+}
+
+void ChannelOptions::SetLowerLimit(int newlimit)
+{
+    this->lowerlimit=newlimit;
+}
+
+void ChannelOptions::SetHigherMeasureLimit(int newlimit)
+{
+    this->highermeasurelimit=newlimit;
+}
+
+void ChannelOptions::SetLowerMeasureLimit(int newlimit)
+{
+    this->lowermeasurelimit=newlimit;
+}

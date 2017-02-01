@@ -6,8 +6,6 @@
 class ChannelOptions
 {
 
-public :  int count;
-
 public:
 
     QString GetUnitsName();
@@ -36,7 +34,6 @@ private:
     int highermeasurelimit;
     int measureperiodsecond;
     QString unitsname;
-
 };
 
 #endif // CHANNEL1_H
