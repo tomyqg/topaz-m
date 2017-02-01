@@ -40,11 +40,16 @@ private slots:
 
     void on_radioButton_3_clicked();
 
-    void checkboxchange();
+    void Channel1TypeChange();
+
+    void Channel2TypeChange();
+
+    void Channel3TypeChange();
+
+    void Channel4TypeChange();
 
     void savesettings();
 
-    int GetSignalType();
 
     QString GetSignalUnits();
 

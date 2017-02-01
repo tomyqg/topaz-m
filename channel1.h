@@ -5,8 +5,6 @@
 
 class ChannelOptions
 {
-public:
-    static int count222;
 
 public :  int count;
 
@@ -14,7 +12,6 @@ public:
 
     QString GetUnitsName();
 
-    int GetSignalType1();
     int GetSignalType();
     int GetLowerLimit();
     int GetHigherLimit();

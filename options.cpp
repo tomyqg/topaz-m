@@ -36,7 +36,10 @@ Options::Options(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
-    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(checkboxchange()) );
+    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(Channel1TypeChange()) );
+    connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
+    connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
+    connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 }
 
 Options::~Options()
@@ -56,17 +59,107 @@ void Options::on_pushButton_2_clicked()
     this->close();
 }
 
-void Options::checkboxchange()
+void Options::Channel1TypeChange()
 {
     if (ui->ButonOtklChannel_1->isChecked())
-        qDebug() << "ButonOtklChannel_1";
-
-    if (ui->ButonNapryagenieChannel_1->isChecked())
-        qDebug() << "ButonNapryagenieChannel_1";
+    {
+        options1.SetSignalType(1);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
 
     if (ui->ButonTokChannel_1->isChecked())
-        qDebug() << "ButonTokChannel_1";
+    {
+        options1.SetSignalType(2);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
 
+    if (ui->ButonNapryagenieChannel_1->isChecked())
+    {
+        options1.SetSignalType(3);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
+
+    if (ui->ButonResistorChannel_1->isChecked())
+    {
+        options1.SetSignalType(4);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
+
+    if (ui->ButonTermoparaChannel_1->isChecked())
+    {
+
+        options1.SetSignalType(5);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
+
+    if (ui->ButonImpulseChannel_1->isChecked())
+    {
+        options1.SetSignalType(6);
+        qDebug() << "options1";
+        qDebug() << options1.GetSignalType();
+    }
+
+//    options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
+//    options1.SetLowerLimit(ui->NignPredelChannel_1->value());
+}
+
+void Options::Channel2TypeChange()
+{
+    if (ui->ButonOtklChannel_2->isChecked())
+    {
+        options2.SetSignalType(1);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+
+    if (ui->ButonTokChannel_2->isChecked())
+    {
+        options2.SetSignalType(2);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+
+    if (ui->ButonNapryagenieChannel_2->isChecked())
+    {
+        options2.SetSignalType(3);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+
+    if (ui->ButonResistorChannel_2->isChecked())
+    {
+        options2.SetSignalType(4);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+
+    if (ui->ButonTermoparaChannel_2->isChecked())
+    {
+        options2.SetSignalType(5);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+
+    if (ui->ButonImpulseChannel_2->isChecked())
+    {
+        options2.SetSignalType(6);
+        qDebug() << "options2";
+        qDebug() << options2.GetSignalType();
+    }
+}
+
+void Options::Channel3TypeChange()
+{
+
+}
+
+void Options::Channel4TypeChange()
+{
 
 }
 
@@ -78,24 +171,6 @@ void Options::on_radioButton_3_clicked()
 {
 }
 
-int Options::GetSignalType()
-{
-    /*
-    if ( ui->UnChan1RadButOtkl->isChecked() )
-        return 1;
-    if ( ui->UnChan1RadButTok->isChecked() )
-        return 2;
-    if ( ui->UnChan1RadButNapryagenie->isChecked() )
-        return 3;
-    if ( ui->UnChan1RadButResistor->isChecked() )
-        return 4;
-    if ( ui->UnChan1RadButTPara->isChecked() )
-        return 5;
-    if ( ui->UnChan1RadButTPara->isChecked() )
-        return 6;*/
-    
-    return 0;
-}
 
 QString Options::GetSignalUnits()
 {
@@ -109,20 +184,33 @@ void Options::savesettings()
 
 void Options::WriteOptionsToFile()
 {
-    QJsonObject channel;
+    QJsonObject channel1;
+    QJsonObject channel2;
+    QJsonObject channel3;
+    QJsonObject channel4;
     QJsonObject channels;
     QJsonArray settings;
     
-    channel["Type"] = GetSignalType();
-    channel["Units"] = GetSignalUnits();
-    channel["HigherLimit"] = 100;
-    channel["LowerLimit"] = 0;
-    channel["HigherMeasLimit"] = 20;
-    channel["LowerMeasLimit"] = 4;
+    channel1["Type"] = options1.GetSignalType();
+    channel1["Units"] = options1.GetUnitsName();
+    channel1["HigherLimit"] = options1.GetHigherLimit();
+    channel1["LowerLimit"] = options1.GetLowerLimit();
+    channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
+    channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
+
+    settings.append(channel1);
     
-    settings.append(channel);
-    
+    channel2["Type"] = options2.GetSignalType();
+    channel2["Units"] = options2.GetUnitsName();
+    channel2["HigherLimit"] = options2.GetHigherLimit();
+    channel2["LowerLimit"] = options2.GetLowerLimit();
+    channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
+    channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
+
+    settings.append(channel2);
+
     channels["channel1"] = settings;
+
     channels["channel2"] = settings;
     
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
@@ -130,6 +218,7 @@ void Options::WriteOptionsToFile()
     qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
     //    QFile file("/usr/options.txt");
+
     QFile file("C:/Work/options.txt");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
