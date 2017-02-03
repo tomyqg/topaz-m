@@ -33,6 +33,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     dialog.ui \
     options.ui
-
+target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos/clocks
+INSTALLS    += target
 DISTFILES +=
 

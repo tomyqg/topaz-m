@@ -64,12 +64,27 @@ void Options::Channel1TypeChange()
     if (ui->ButonOtklChannel_1->isChecked())
     {
         options1.SetSignalType(1);
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+        ui->UnitsChannel_1->setText("None");
+        ui->UnitsChannel_1->setEnabled(false);
+        ui->VerhnPredelChannel_1->setEnabled(false);
+        ui->NignPredelChannel_1->setEnabled(false);
+        ui->NignPredIzmerChannel_1->setEnabled(false);
+        ui->VerhnPredIzmerChannel_1->setEnabled(false);
+        ui->PeriodIzmerChannel_1->setEnabled(false);
+    }
+    else
+    {
+        ui->UnitsChannel_1->setEnabled(true);
+        ui->VerhnPredelChannel_1->setEnabled(true);
+        ui->NignPredelChannel_1->setEnabled(true);
+        ui->NignPredIzmerChannel_1->setEnabled(true);
+        ui->VerhnPredIzmerChannel_1->setEnabled(true);
+        ui->PeriodIzmerChannel_1->setEnabled(true);
     }
     
     if (ui->ButonTokChannel_1->isChecked())
     {
+        ui->UnitsChannel_1->setText("мА");
         options1.SetSignalType(2);
         //qDebug() << "options1";
         //qDebug() << options1.GetSignalType();
@@ -78,6 +93,7 @@ void Options::Channel1TypeChange()
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
         options1.SetSignalType(3);
+        ui->UnitsChannel_1->setText("В");
         //qDebug() << "options1";
         //qDebug() << options1.GetSignalType();
     }
@@ -85,14 +101,15 @@ void Options::Channel1TypeChange()
     if (ui->ButonResistorChannel_1->isChecked())
     {
         options1.SetSignalType(4);
+        ui->UnitsChannel_1->setText("Ом");
         //qDebug() << "options1";
         //qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
-        
         options1.SetSignalType(5);
+        ui->UnitsChannel_1->setText("мВ");
         //qDebug() << "options1";
         //qDebug() << options1.GetSignalType();
     }
@@ -100,6 +117,7 @@ void Options::Channel1TypeChange()
     if (ui->ButonImpulseChannel_1->isChecked())
     {
         options1.SetSignalType(6);
+        ui->UnitsChannel_1->setText("1");
         //qDebug() << "options1";
         //qDebug() << options1.GetSignalType();
     }
@@ -257,7 +275,7 @@ void Options::WriteOptionsToFile()
     
     channel1["Type"] = options1.GetSignalType();
     channel1["Units"] = options1.GetUnitsName();
-    channel1["HigherLimit"] = (ui->VerhnPredelChannel_1->value());
+    channel1["HigherLimit"] = options1.GetHigherLimit();
     channel1["LowerLimit"] = options1.GetLowerLimit();
     channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
     channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
@@ -272,12 +290,13 @@ void Options::WriteOptionsToFile()
     channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
     
 
-    channel2["Type"] = "Type";
-    channel2["Units"] = "Volts";
-    channel2["HigherLimit"] = 140;
-    channel2["LowerLimit"] = 40;
-    channel2["HigherMeasLimit"] = 20;
-    channel2["LowerMeasLimit"] = 4;
+    channel2["Type"] = options2.GetSignalType();
+    channel2["Units"] = options2.GetUnitsName();
+    channel2["HigherLimit"] = options2.GetHigherLimit();
+    channel2["LowerLimit"] = options2.GetLowerLimit();
+    channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
+    channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
+
 
     settings.append(channel2);
     
@@ -290,9 +309,8 @@ void Options::WriteOptionsToFile()
     
     //qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-    QFile file("/usr/options.txt");
-    //QFile file("C:/Work/options.txt");
-
+//    QFile file("/usr/options.txt");
+    QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
     QTextStream out(&file);
     out << setstr;
