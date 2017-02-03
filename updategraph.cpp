@@ -372,7 +372,6 @@ void MainWindow::updatepicture()
 
 void MainWindow::mousePress()
 {
-
     ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
     ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
 }
