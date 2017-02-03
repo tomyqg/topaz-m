@@ -3,7 +3,6 @@
 #include "ui_mainwindow.h"
 #include "dialog.h"
 
-
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>

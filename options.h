@@ -19,8 +19,7 @@ class Options : public QDialog
     ChannelOptions options1;
     ChannelOptions options2;
     ChannelOptions options3;
-
-    ChannelOptions options16;
+    ChannelOptions options4;
 
 public:
     explicit Options(QWidget *parent = 0);
@@ -48,8 +47,7 @@ private slots:
 
     void Channel4TypeChange();
 
-    void savesettings();
-
+    void applynewsettings();
 
     QString GetSignalUnits();
 
@@ -63,6 +61,5 @@ private:
 
     Ui::Options *ui;
 };
-
 
 #endif // OPTIONS_H
