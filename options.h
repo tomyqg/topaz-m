@@ -49,6 +49,10 @@ private slots:
 
     void applynewsettings();
 
+    void applysettingstoUI();
+
+    void readoptionsfromfile();
+
     QString GetSignalUnits();
 
     void on_VerhnPredIzmerChannel_1_valueChanged(int arg1);

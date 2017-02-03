@@ -78,6 +78,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_13->installEventFilter( this );
     ui->dial->installEventFilter( this );
     ui->pushButton_2->installEventFilter( this );
+
+
+
+
+
 }
 
 
