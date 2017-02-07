@@ -12,10 +12,10 @@ class MainWindow;
 
 class NewThreadClass:public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 
 private slots:
-   void updatethread();
+    void updatethread();
 };
 
 class MainWindow : public QMainWindow
@@ -26,11 +26,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    static QString starttime;
+    static QString endtime;
+
 public slots:
 
     void focusChanged(QWidget* , QWidget* );
     void textupdate();
     void WritetoFile();
+    void WriteArchiveToFile();
 
 private slots:
 
@@ -41,6 +45,9 @@ private slots:
     void updatepicture();
     void updategraph();
     void updatevalue();
+
+
+
     void mousePress();
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
@@ -62,6 +69,10 @@ private slots:
 
     void on_comboBox_13_currentIndexChanged(const QString &arg1);
 
+    void on_pushButton_4_clicked();
+
+    void on_horizontalSlider_2_actionTriggered(int action);
+
 signals:
 
     void error(const QString &s);
@@ -78,8 +89,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event);
 
 protected:
-     bool eventFilter(QObject *obj, QEvent *event);
-
+    bool eventFilter(QObject *obj, QEvent *event);
 
 };
 

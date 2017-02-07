@@ -151,7 +151,6 @@ void Options::Channel2TypeChange()
         ui->VerhnPredIzmerChannel_2->setEnabled(true);
         ui->PeriodIzmerChannel_2->setEnabled(true);
     }
-
     
     if (ui->ButonTokChannel_2->isChecked())
     {
@@ -281,9 +280,9 @@ void Options::applynewsettings()
 }
 void Options::readoptionsfromfile()
 {
-    //    QFile infile("/usr/options.txt");
+        QFile infile("/usr/options.txt");
 
-    QFile infile("C:/Work/options.txt");
+//    QFile infile("C:/Work/options.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -294,7 +293,7 @@ void Options::readoptionsfromfile()
 
     QJsonObject json = doc.object();
 
-    qDebug()<<json ;
+   //qDebug()<<json ;
 
     QJsonArray array = json["channels"].toArray();
 
@@ -314,9 +313,9 @@ void Options::readoptionsfromfile()
     options1.SetSignalType(ch1.value("Type").toInt());
     options1.SetUnitsName(ch1.value("Units").toString());
 
-    qDebug()<<ch1;
+   //qDebug()<<ch1;
 
-    qDebug()<<ch1.value("Type").toInt();
+   //qDebug()<<ch1.value("Type").toInt();
 
     infile.close();
 }
@@ -381,6 +380,8 @@ void Options::applysettingstoUI()
 
 }
 
+
+
 void Options::WriteOptionsToFile()
 {
     QJsonObject channel1;
@@ -415,8 +416,8 @@ void Options::WriteOptionsToFile()
     
     //qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-    //    QFile file("/usr/options.txt");
-    QFile file("C:/Work/options.txt");
+        QFile file("/usr/options.txt");
+//    QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
@@ -447,4 +448,10 @@ void Options::on_UnitsChannel_1_editingFinished()
 {
     options1.SetUnitsName(ui->UnitsChannel_1->text());
     //qDebug() << options1.GetUnitsName();
+}
+
+void Options::on_pushButton_3_clicked()
+{
+        QProcess process1;
+        process1.startDetached("xinput_calibrator"); // max perfomance on
 }

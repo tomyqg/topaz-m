@@ -61,6 +61,8 @@ private slots:
 
     void on_UnitsChannel_1_editingFinished();
 
+    void on_pushButton_3_clicked();
+
 private:
 
     Ui::Options *ui;
