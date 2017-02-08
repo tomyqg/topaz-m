@@ -45,52 +45,37 @@ private slots:
     void updatepicture();
     void updategraph();
     void updatevalue();
-
-
-
     void mousePress();
+    void delay(int n);
+    double returnmathresult(double dval);
+
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_2_pressed();
     void on_checkBox_stateChanged(int arg1);
     void on_textEdit_textChanged();
-    double returnmathresult(double dval);
     void on_horizontalSlider_actionTriggered(int action);
     void on_dial_valueChanged(int value);
     void on_pushButton_3_clicked();
-    void delay(int n);
     void on_horizontalSlider_2_valueChanged(int value);
-
     void on_comboBox_13_currentTextChanged(const QString &arg1);
-
     void on_comboBox_13_currentIndexChanged(int index);
-
     void on_comboBox_13_activated(const QString &arg1);
-
     void on_comboBox_13_currentIndexChanged(const QString &arg1);
-
     void on_pushButton_4_clicked();
-
     void on_horizontalSlider_2_actionTriggered(int action);
 
 signals:
-
     void error(const QString &s);
 
 private:
+
     Ui::MainWindow *ui;
     QTimer *tmr;
     QMutex mutex;
 
 protected:
     void paintEvent(QPaintEvent *e);
-    void mousePressEvent(QMouseEvent* event);
-    void touchReleaseEvent(QTouchEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-
-protected:
-    bool eventFilter(QObject *obj, QEvent *event);
-
 };
 
 #endif // MAINWINDOW_H

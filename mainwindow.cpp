@@ -27,7 +27,6 @@
 
 QString inputstr = "";
 
-
 QDateTime start(QDateTime::currentDateTime());
 
 QString MainWindow::starttime = start.toString();
@@ -54,28 +53,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
 
     tmr = new QTimer();
-    tmr->setInterval(1000);
-
+    tmr->setInterval(500);
 
     QTimer *closetimer = new QTimer(this);
 
-
-
 //    closetimer->setInterval(1000*120);
-
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
     connect(timer, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+//    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
 
-
-    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
-
-    tmr->start(100);
-
-    timer->start(888);
+    tmr->start(500);
+    timer->start(1111);
     timer2->start(201);
-    closetimer->start(1000*300);
+//    closetimer->start(1000*150);
 
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-5, 110);
@@ -97,8 +89,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 800MHz"); // max freq on
-    //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
-    //    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3389 3958 252 616"); // вручную ввели координаты тача
+        process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+
+
+        process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     //    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //        process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //            process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -128,7 +122,10 @@ void MainWindow::on_dial_actionTriggered(int action)
 void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->textEdit_2->setText(local.toString());
+
+
+//    const sformat="m:d:yyyy";
+    ui->textEdit_2->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     //    Channel1Options eeeeee;
     //    eeeeee.SetUnitsName("loh");
     //   qDebug() << eeeeee.GetUnitsName();
@@ -256,7 +253,7 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    WriteArchiveToFile();
+//    WriteArchiveToFile();
     QApplication::exit();
 }
 
@@ -320,28 +317,7 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     int nu = ui->horizontalSlider_2->value();
     ui->label_2->setText("Интервал " + QString::number(nu) +  " мсек");
-    tmr->setInterval(nu);
-}
-
-void MainWindow::mousePressEvent(QMouseEvent* event)
-{
-    //    if(event->buttons() == Qt::RightButton)
-    //        ui->label_7->setText("Only right button");
-    //    if(event->buttons() == Qt::LeftButton)
-    //        ui->label_7->setText("Only left button");
-    //    QMouseEvent *mEvnRelease = new QMouseEvent(QEvent::MouseButtonRelease, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-    //    QCoreApplication::sendEvent(QWidget::focusWidget(),mEvnRelease);
-}
-
-void MainWindow::touchReleaseEvent(QTouchEvent *event)
-{
-}
-
-void MainWindow::mouseReleaseEvent(QMouseEvent* event)
-{
-    //    ui->label_7->setText("button Released");
-    //    this->focusNextChild();
-    //    QCursor::setPos(200,200);
+    tmr->setInterval(500);
 }
 
 void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
@@ -366,52 +342,6 @@ void MainWindow::on_comboBox_13_activated(const QString &arg1)
 
 void MainWindow::on_comboBox_13_currentIndexChanged(const QString &arg1)
 {
-}
-
-bool MainWindow::eventFilter(QObject *obj, QEvent *event)
-{
-    //    switch( event->type() ){
-    //    case QEvent::MouseButtonDblClick:
-    //        //        qDebug() << "Mouse Button Double Clicked";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " + "Mouse Double Clicked");
-    //        break;
-    //    case QEvent::MouseButtonPress:
-    //        //        qDebug() << "Mouse Button Pressed";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"Mouse Button Pressed aaaaa");
-    //        focusNextChild();
-    //        break;
-    //    case QEvent::MouseButtonRelease:
-    //        //        qDebug() << "Mouse Button Released";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"Mouse Button Released");
-    //        break;
-
-    //    case QEvent::TouchBegin:
-    //        //        qDebug() << "TouchBegin";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"TouchBegin");
-    //        break;
-
-    //    case QEvent::TouchEnd:
-    //        //        qDebug() << "TouchEnd";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"TouchEnd");
-    //        break;
-
-    //    case QEvent::TouchCancel:
-    //        //        qDebug() << "TouchCancel";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"TouchCancel");
-    //        break;
-
-    //    case QEvent::TouchUpdate:
-    //        //qDebug() << "TouchUpdate";
-    //        ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " +"TouchUpdate");
-    //        break;
-
-    //    default:
-    //        break;
-    //    }
-    //    // pass the event on to the parent class
-    //    return QMainWindow::eventFilter(obj, event);
-
-    return 0;
 }
 
 void MainWindow::WritetoFile()
@@ -455,5 +385,4 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
 {
-
 }

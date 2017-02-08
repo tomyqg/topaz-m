@@ -28,6 +28,7 @@ public:
 public slots:
 
     void WriteOptionsToFile();
+    void WriteSystemOptionsToFile();
 
 private slots:
 

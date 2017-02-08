@@ -182,10 +182,10 @@ void MainWindow::updategraph()
     
     if (b==1200)
     {
-        ui->customPlot->xAxis->setRange(0, 600);
+        /* ui->customPlot->xAxis->setRange(0, 600);
         
         b=0;
-        xx1.clear();
+       xx1.clear();
         xx2.clear();
         xx3.clear();
         xx4.clear();
@@ -226,7 +226,7 @@ void MainWindow::updategraph()
         yy17.clear();
         yy18.clear();
         yy19.clear();
-        yy20.clear();
+        yy20.clear();*/
     }
 }
 

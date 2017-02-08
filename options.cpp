@@ -41,10 +41,11 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
-
     readoptionsfromfile();
     applysettingstoUI();
 
+    ui->timeEdit->setDateTime(QDateTime::currentDateTime());
+    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 }
 
 Options::~Options()
@@ -54,8 +55,10 @@ Options::~Options()
 
 void Options::on_pushButton_clicked()
 {
+
     applynewsettings();
-    WriteOptionsToFile();
+    WriteSystemOptionsToFile();
+//    WriteOptionsToFile();
     this->close();
 }
 
@@ -108,8 +111,7 @@ void Options::Channel1TypeChange()
     {
         options1.SetSignalType(4);
         ui->UnitsChannel_1->setText("Om");
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
@@ -264,25 +266,44 @@ QString Options::GetSignalUnits()
 
 void Options::applynewsettings()
 {
-//    Channel1TypeChange();
+    //    Channel1TypeChange();
     options1.SetUnitsName(ui->UnitsChannel_1->text());
     options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
     options1.SetLowerLimit(ui->NignPredelChannel_1->value());
     options1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
     options1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
 
-//    Channel2TypeChange();
+    //    Channel2TypeChange();
     options2.SetUnitsName(ui->UnitsChannel_2->text());
     options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
     options2.SetLowerLimit(ui->NignPredelChannel_2->value());
     options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
     options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
+
+    // apply new time
+
+    QProcess process;
+
+    QDateTime newuidate = ui->dateEdit->dateTime();
+    QTime newuitime = ui->timeEdit->time();
+//    qDebug()<<local ;
+
+
+    QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
+    QString newtime = newuitime.toString();
+
+    process.startDetached("sudo date --set " + newdate);
+    process.startDetached("sudo date --set " + newtime); // max freq on
+
+//    qDebug()<<newtime ;
+//    qDebug()<<newdate ;
+
 }
 void Options::readoptionsfromfile()
 {
-        QFile infile("/usr/options.txt");
+    QFile infile("/usr/options.txt");
 
-//    QFile infile("C:/Work/options.txt");
+    //    QFile infile("C:/Work/options.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -293,7 +314,7 @@ void Options::readoptionsfromfile()
 
     QJsonObject json = doc.object();
 
-   //qDebug()<<json ;
+    //qDebug()<<json ;
 
     QJsonArray array = json["channels"].toArray();
 
@@ -313,12 +334,14 @@ void Options::readoptionsfromfile()
     options1.SetSignalType(ch1.value("Type").toInt());
     options1.SetUnitsName(ch1.value("Units").toString());
 
-   //qDebug()<<ch1;
+    //qDebug()<<ch1;
 
-   //qDebug()<<ch1.value("Type").toInt();
+    //qDebug()<<ch1.value("Type").toInt();
 
     infile.close();
 }
+
+
 void Options::applysettingstoUI()
 {
 
@@ -377,10 +400,32 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_1->setValue(options1.GetLowerLimit());
     ui->VerhnPredIzmerChannel_1->setValue(options1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options1.GetLowerMeasureLimit());
-
 }
 
+void Options::WriteSystemOptionsToFile()
+{
+//    QJsonObject systemoptions;
 
+//    QDateTime local(QDateTime::currentDateTime());
+
+//    systemoptions["Time"] = local.time().toString();
+//    systemoptions["Date"] = local.date().toString();
+
+//    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+
+//    qDebug() << setstr;
+
+//    QFile file("C:/Work/systemoptions.txt");
+
+//    file.open(QIODevice::ReadWrite);
+
+//    file.resize(0); // clear file
+
+//    QTextStream out(&file);
+//    out << setstr;
+//    file.close();
+
+}
 
 void Options::WriteOptionsToFile()
 {
@@ -416,8 +461,8 @@ void Options::WriteOptionsToFile()
     
     //qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-        QFile file("/usr/options.txt");
-//    QFile file("C:/Work/options.txt");
+    QFile file("/usr/options.txt");
+    //    QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
@@ -452,6 +497,6 @@ void Options::on_UnitsChannel_1_editingFinished()
 
 void Options::on_pushButton_3_clicked()
 {
-        QProcess process1;
-        process1.startDetached("xinput_calibrator"); // max perfomance on
+    QProcess process1;
+    process1.startDetached("xinput_calibrator"); // max perfomance on
 }
