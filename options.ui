@@ -69,7 +69,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab_13">
       <attribute name="title">
@@ -232,10 +232,10 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>130</x>
           <y>20</y>
           <width>111</width>
-          <height>411</height>
+          <height>371</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -849,7 +849,7 @@
           <x>130</x>
           <y>20</y>
           <width>111</width>
-          <height>381</height>
+          <height>371</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1445,7 +1445,7 @@
           <x>130</x>
           <y>20</y>
           <width>111</width>
-          <height>381</height>
+          <height>371</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -2041,7 +2041,7 @@
           <x>130</x>
           <y>20</y>
           <width>111</width>
-          <height>409</height>
+          <height>371</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_11">

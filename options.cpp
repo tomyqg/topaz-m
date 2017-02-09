@@ -69,7 +69,6 @@ Options::~Options()
 
 void Options::on_pushButton_clicked()
 {
-
     applynewsettings();
     WriteSystemOptionsToFile();
     WriteOptionsToFile();
@@ -361,7 +360,9 @@ void Options::customizeUI()
 
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
 
-    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 50px;}""QSpinBox::up-button { width: 50px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
+//    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
+
+    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 60px}");//height: 20px;
 
     QString commonstylesheet( ui->NignPredelChannel_1->styleSheet());
     ui->VerhnPredelChannel_1->setStyleSheet(commonstylesheet);
@@ -592,9 +593,6 @@ bool Options::eventFilter(QObject *object, QEvent *event)
         kb.close();
 
         ui->ButonImpulseChannel_1->setFocus();
-        ui->
-
-//        object->
 
         return true;
     }
