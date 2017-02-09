@@ -19,6 +19,12 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void textinput();
+
+    void on_pushButton_13_clicked();
+
+public slots:
+    QString getcustomstring();
 
 private:
     Ui::keyboard *ui;

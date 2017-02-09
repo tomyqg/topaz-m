@@ -1,7 +1,7 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
-#include "ui_mainwindow.h"
 #include "dialog.h"
 
 #include <QPixmap>
@@ -63,6 +63,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
     connect(timer, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+
+
+
+
     //    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
 
     tmr->start(500);
@@ -97,6 +101,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //            process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
     //        process.startDetached("xinput set-prop 7 \"Device Accel Velocity Scaling\" 2"); // вручную ввели координаты тача
     //        process.startDetached("xinput list-props 7"); // вручную ввели координаты тача
+
+
+//    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
+
+//    // apply style to all widgets
+//    for (int i = 0; i < spinList.count(); ++i) {
+//        QLabel *sb = spinList.at(i);
+//        sb->setText("alloha");
+//    }
 }
 
 
@@ -387,13 +400,13 @@ void MainWindow::on_customPlot_destroyed()
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    QList<QLabel*> spinList = QObject::findChildren<QLabel*> (  );
+//    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
 
-    // apply style to all widgets
-    for (int i = 0; i < spinList.count(); ++i) {
-        QLabel *sb = spinList.at(i);
-        sb->setText("alloha");
-    }
+//    // apply style to all widgets
+//    for (int i = 0; i < spinList.count(); ++i) {
+//        QLabel *sb = spinList.at(i);
+//        sb->setText("alloha");
+//    }
 
     keyboard kb;
     kb.setModal(true);

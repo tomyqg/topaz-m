@@ -28,6 +28,7 @@
 #include "options.h"
 #include "ui_options.h"
 #include "channel1.h"
+#include "keyboard.h"
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -41,6 +42,9 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
+
+//    this->installEventFilter(this);
+
     readoptionsfromfile();
     applysettingstoUI();
     customizeUI();
@@ -49,7 +53,13 @@ Options::Options(QWidget *parent) :
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 
 
+    QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> (  );
 
+    for (int i = 0; i < spinList.count(); ++i) {
+        QSpinBox *sb = spinList.at(i);
+        sb->installEventFilter(this);
+
+    }
 }
 
 Options::~Options()
@@ -99,16 +109,16 @@ void Options::Channel1TypeChange()
     {
         ui->UnitsChannel_1->setText("mA");
         options1.SetSignalType(2);
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+        ////qDebug() << "options1";
+        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
         options1.SetSignalType(3);
         ui->UnitsChannel_1->setText("V");
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+        ////qDebug() << "options1";
+        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonResistorChannel_1->isChecked())
@@ -122,16 +132,16 @@ void Options::Channel1TypeChange()
     {
         options1.SetSignalType(5);
         ui->UnitsChannel_1->setText("mV");
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+        ////qDebug() << "options1";
+        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonImpulseChannel_1->isChecked())
     {
         options1.SetSignalType(6);
         ui->UnitsChannel_1->setText("1");
-        //qDebug() << "options1";
-        //qDebug() << options1.GetSignalType();
+        ////qDebug() << "options1";
+        ////qDebug() << options1.GetSignalType();
     }
 }
 
@@ -290,7 +300,7 @@ void Options::applynewsettings()
 
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
-    //    qDebug()<<local ;
+    //    //qDebug()<<local ;
 
 
     QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
@@ -299,8 +309,8 @@ void Options::applynewsettings()
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
 
-    //    qDebug()<<newtime ;
-    //    qDebug()<<newdate ;
+    //    //qDebug()<<newtime ;
+    //    //qDebug()<<newdate ;
 
 }
 void Options::readoptionsfromfile()
@@ -318,7 +328,7 @@ void Options::readoptionsfromfile()
 
     QJsonObject json = doc.object();
 
-    //qDebug()<<json ;
+    ////qDebug()<<json ;
 
     QJsonArray array = json["channels"].toArray();
 
@@ -338,9 +348,9 @@ void Options::readoptionsfromfile()
     options1.SetSignalType(ch1.value("Type").toInt());
     options1.SetUnitsName(ch1.value("Units").toString());
 
-    //qDebug()<<ch1;
+    ////qDebug()<<ch1;
 
-    //qDebug()<<ch1.value("Type").toInt();
+    ////qDebug()<<ch1.value("Type").toInt();
 
     infile.close();
 }
@@ -372,7 +382,7 @@ void Options::customizeUI()
     for (int i = 0; i < dspinList.count(); ++i) {
         QDoubleSpinBox *dsb = dspinList.at(i);
         dsb->setStyleSheet(commonstylesheet);
-        qDebug() << dsb;
+        //qDebug() << dsb;
     }
 
     {
@@ -468,7 +478,7 @@ void Options::WriteSystemOptionsToFile()
 
     //    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
 
-    //    qDebug() << setstr;
+    //    //qDebug() << setstr;
 
     //    QFile file("C:/Work/systemoptions.txt");
 
@@ -514,7 +524,7 @@ void Options::WriteOptionsToFile()
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-    //qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
+    ////qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
     QFile file("/usr/options.txt");
     //    QFile file("C:/Work/options.txt");
@@ -535,9 +545,9 @@ void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)
 
 void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
 {
-    //qDebug() << options1.GetUnitsName();
-    //qDebug() << options2.GetUnitsName();
-    //qDebug() << options3.GetUnitsName();
+    ////qDebug() << options1.GetUnitsName();
+    ////qDebug() << options2.GetUnitsName();
+    ////qDebug() << options3.GetUnitsName();
     
     options1.SetUnitsName("444");
     options2.SetUnitsName("555");
@@ -547,11 +557,49 @@ void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
 void Options::on_UnitsChannel_1_editingFinished()
 {
     options1.SetUnitsName(ui->UnitsChannel_1->text());
-    //qDebug() << options1.GetUnitsName();
+    ////qDebug() << options1.GetUnitsName();
 }
 
 void Options::on_pushButton_3_clicked()
 {
+    //    ui->timeEdit->
     QProcess process1;
     process1.startDetached("xinput_calibrator"); // max perfomance on
+}
+
+void Options::on_NignPredelChannel_2_valueChanged(int arg1)
+{
+
+//    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
+}
+
+
+bool Options::eventFilter(QObject *object, QEvent *event)
+{
+    if(event->type() == event->FocusIn) // && object == ui->NignPredelChannel_1
+    {
+        //do something
+//        //qDebug() << object;
+
+        keyboard kb;
+        kb.setModal(true);
+        kb.exec();
+
+        object->setProperty("value",kb.getcustomstring());
+
+        event->accept();
+
+        kb.close();
+
+        ui->ButonImpulseChannel_1->setFocus();
+        ui->
+
+//        object->
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

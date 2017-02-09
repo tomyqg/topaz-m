@@ -405,8 +405,6 @@ void MainWindow::WriteArchiveToFile()
     archivechannel1["values"] = valuesarray;
     archivechannel1["channelname"] = "channel_1";
 
-
-
     archivechannel2["arraysize"] = valuesarray.size();
     archivechannel2["values"] = valuesarray;
     archivechannel2["channelname"] = "channel_2";
