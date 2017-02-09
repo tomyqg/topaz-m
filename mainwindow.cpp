@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "options.h"
+#include "keyboard.h"
 #include "ui_mainwindow.h"
 #include "dialog.h"
 
@@ -382,4 +383,19 @@ void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
 void MainWindow::on_customPlot_destroyed()
 {
 
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QList<QLabel*> spinList = QObject::findChildren<QLabel*> (  );
+
+    // apply style to all widgets
+    for (int i = 0; i < spinList.count(); ++i) {
+        QLabel *sb = spinList.at(i);
+        sb->setText("alloha");
+    }
+
+    keyboard kb;
+    kb.setModal(true);
+    kb.exec();
 }

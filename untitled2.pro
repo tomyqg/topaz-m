@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     updategraph.cpp \
     dialog.cpp \
     options.cpp \
-    channel1.cpp
+    channel1.cpp \
+    keyboard.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -28,11 +29,13 @@ HEADERS  += mainwindow.h \
     dialog.h \
     options.h \
     channel1.h\
-    channel1.h
+    channel1.h \
+    keyboard.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
-    options.ui
+    options.ui \
+    keyboard.ui
 target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
 INSTALLS    += target
 DISTFILES +=

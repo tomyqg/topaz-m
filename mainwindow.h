@@ -67,6 +67,8 @@ private slots:
 
     void on_customPlot_destroyed();
 
+    void on_pushButton_5_clicked();
+
 signals:
     void error(const QString &s);
 

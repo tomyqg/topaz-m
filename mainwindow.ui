@@ -96,7 +96,6 @@
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
     </property>
-    <zorder>time_label</zorder>
    </widget>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
@@ -441,9 +440,9 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>270</x>
       <y>510</y>
-      <width>461</width>
+      <width>241</width>
       <height>51</height>
      </rect>
     </property>
@@ -470,6 +469,22 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>241</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>клаиватура</string>
     </property>
    </widget>
   </widget>
