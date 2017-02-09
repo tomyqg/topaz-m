@@ -351,19 +351,29 @@ void Options::customizeUI()
 
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
 
-    ui->NignPredelChannel_1->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_1->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_2->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_2->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_3->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_3->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_4->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
-    ui->NignPredelChannel_4->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 50px;}""QSpinBox::up-button { width: 50px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
 
-//    QStyle style1 (ui->NignPredelChannel_1->style());
-//    ui->VerhnPredelChannel_1->setStyle(style1);
-    QPalette myPalette( ui->NignPredelChannel_1->palette());
-    ui->VerhnPredelChannel_1->setPalette(myPalette);
+    QString commonstylesheet( ui->NignPredelChannel_1->styleSheet());
+    ui->VerhnPredelChannel_1->setStyleSheet(commonstylesheet);
+
+    // find qspin widgetss to apply new settings
+    QList<QSpinBox*> spinList = QObject::findChildren<QSpinBox*> (  );
+
+    // apply style to all widgets
+    for (int i = 0; i < spinList.count(); ++i) {
+        QSpinBox *sb = spinList.at(i);
+        sb->setStyleSheet(commonstylesheet);
+    }
+
+
+    QList<QDoubleSpinBox*> dspinList = QObject::findChildren<QDoubleSpinBox*> (  );
+
+    // apply style to all widgets
+    for (int i = 0; i < dspinList.count(); ++i) {
+        QDoubleSpinBox *dsb = dspinList.at(i);
+        dsb->setStyleSheet(commonstylesheet);
+        qDebug() << dsb;
+    }
 
     {
         //this is a template
@@ -372,15 +382,15 @@ void Options::customizeUI()
                                "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
                                "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
                                "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::up-button { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-                               "QSpinBox::up-button:hover { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+                               "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+                               "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
 
                                "QSpinBox::down-arrow { border-left: 17px solid none;"
                                "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
                                "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
                                "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::down-button { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-                               "QSpinBox::down-button:hover { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+                               "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+                               "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
             );*/
     }
 
