@@ -22,7 +22,6 @@
 #include <QtWidgets>
 #include <QThread>
 #include <QPoint>
-
 #include <channel1.h>
 
 QString inputstr = "";
@@ -32,7 +31,6 @@ QDateTime start(QDateTime::currentDateTime());
 QString MainWindow::starttime = start.toString();
 
 QString MainWindow::endtime = "";
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -45,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QProcess process1;
     QPixmap pix("/usr/inc/logo.jpg");
     ui->label->setPixmap(pix);
+    ui->customPlot->xAxis->setRange(-8, 600);
+    ui->customPlot->yAxis->setRange(-5, 110);
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
@@ -57,20 +57,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QTimer *closetimer = new QTimer(this);
 
-//    closetimer->setInterval(1000*120);
+    //    closetimer->setInterval(1000*120);
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
     connect(timer, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
-//    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
+    //    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
 
     tmr->start(500);
     timer->start(1111);
     timer2->start(201);
-//    closetimer->start(1000*150);
+    //    closetimer->start(1000*150);
 
-    ui->customPlot->xAxis->setRange(-8, 600);
-    ui->customPlot->yAxis->setRange(-5, 110);
 
     // a new thread that reads serial input
 
@@ -88,11 +86,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //    ui->pushButton_2->installEventFilter( this );
 
     QProcess process;
-    process.startDetached("sudo cpufreq-set -f 800MHz"); // max freq on
-        process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
 
 
-        process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
+    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     //    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //        process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //            process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -122,13 +120,7 @@ void MainWindow::on_dial_actionTriggered(int action)
 void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
-
-
-//    const sformat="m:d:yyyy";
-    ui->textEdit_2->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
-    //    Channel1Options eeeeee;
-    //    eeeeee.SetUnitsName("loh");
-    //   qDebug() << eeeeee.GetUnitsName();
+    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
 }
 
 void MainWindow::textupdate()
@@ -253,7 +245,7 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-//    WriteArchiveToFile();
+    //    WriteArchiveToFile();
     QApplication::exit();
 }
 
@@ -385,4 +377,9 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
 {
+}
+
+void MainWindow::on_customPlot_destroyed()
+{
+
 }

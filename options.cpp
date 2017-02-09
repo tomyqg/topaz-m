@@ -43,9 +43,13 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
     readoptionsfromfile();
     applysettingstoUI();
+    customizeUI();
 
     ui->timeEdit->setDateTime(QDateTime::currentDateTime());
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
+
+
+
 }
 
 Options::~Options()
@@ -58,7 +62,7 @@ void Options::on_pushButton_clicked()
 
     applynewsettings();
     WriteSystemOptionsToFile();
-//    WriteOptionsToFile();
+    WriteOptionsToFile();
     this->close();
 }
 
@@ -286,7 +290,7 @@ void Options::applynewsettings()
 
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
-//    qDebug()<<local ;
+    //    qDebug()<<local ;
 
 
     QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
@@ -295,8 +299,8 @@ void Options::applynewsettings()
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
 
-//    qDebug()<<newtime ;
-//    qDebug()<<newdate ;
+    //    qDebug()<<newtime ;
+    //    qDebug()<<newdate ;
 
 }
 void Options::readoptionsfromfile()
@@ -340,7 +344,47 @@ void Options::readoptionsfromfile()
 
     infile.close();
 }
+void Options::customizeUI()
+{
 
+    //set tab height
+
+    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
+
+    ui->NignPredelChannel_1->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_1->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_2->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_2->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_3->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_3->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_4->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+    ui->NignPredelChannel_4->setStyleSheet("QSpinBox::down-button { width: 40px;}""QSpinBox::up-button { width: 40px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; }");//height: 20px;
+
+//    QStyle style1 (ui->NignPredelChannel_1->style());
+//    ui->VerhnPredelChannel_1->setStyle(style1);
+    QPalette myPalette( ui->NignPredelChannel_1->palette());
+    ui->VerhnPredelChannel_1->setPalette(myPalette);
+
+    {
+        //this is a template
+        /*("QSpinBox { border: 2px solid red; border-radius: 5px; background-color: yellow; }"
+                               "QSpinBox::up-arrow { border-left: 17px solid none;"
+                               "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+                               "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
+                               "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+                               "QSpinBox::up-button { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+                               "QSpinBox::up-button:hover { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+
+                               "QSpinBox::down-arrow { border-left: 17px solid none;"
+                               "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+                               "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
+                               "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+                               "QSpinBox::down-button { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+                               "QSpinBox::down-button:hover { width: 40px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+            );*/
+    }
+
+}
 
 void Options::applysettingstoUI()
 {
@@ -400,30 +444,31 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_1->setValue(options1.GetLowerLimit());
     ui->VerhnPredIzmerChannel_1->setValue(options1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options1.GetLowerMeasureLimit());
+
 }
 
 void Options::WriteSystemOptionsToFile()
 {
-//    QJsonObject systemoptions;
+    //    QJsonObject systemoptions;
 
-//    QDateTime local(QDateTime::currentDateTime());
+    //    QDateTime local(QDateTime::currentDateTime());
 
-//    systemoptions["Time"] = local.time().toString();
-//    systemoptions["Date"] = local.date().toString();
+    //    systemoptions["Time"] = local.time().toString();
+    //    systemoptions["Date"] = local.date().toString();
 
-//    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+    //    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
 
-//    qDebug() << setstr;
+    //    qDebug() << setstr;
 
-//    QFile file("C:/Work/systemoptions.txt");
+    //    QFile file("C:/Work/systemoptions.txt");
 
-//    file.open(QIODevice::ReadWrite);
+    //    file.open(QIODevice::ReadWrite);
 
-//    file.resize(0); // clear file
+    //    file.resize(0); // clear file
 
-//    QTextStream out(&file);
-//    out << setstr;
-//    file.close();
+    //    QTextStream out(&file);
+    //    out << setstr;
+    //    file.close();
 
 }
 

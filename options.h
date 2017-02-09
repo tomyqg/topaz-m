@@ -52,6 +52,8 @@ private slots:
 
     void applysettingstoUI();
 
+    void customizeUI();
+
     void readoptionsfromfile();
 
     QString GetSignalUnits();

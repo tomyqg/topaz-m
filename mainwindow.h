@@ -65,6 +65,8 @@ private slots:
     void on_pushButton_4_clicked();
     void on_horizontalSlider_2_actionTriggered(int action);
 
+    void on_customPlot_destroyed();
+
 signals:
     void error(const QString &s);
 

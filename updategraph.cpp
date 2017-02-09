@@ -109,7 +109,6 @@ QVector<double> yy19;
 QVector<double> xx20;
 QVector<double> yy20;
 
-
 void MainWindow::updategraph()
 {
     int countgraph = ui->horizontalSlider->value();

@@ -41,9 +41,12 @@
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
-   <widget class="QWidget" name="tab_5">
+   <property name="elideMode">
+    <enum>Qt::ElideLeft</enum>
+   </property>
+   <widget class="QWidget" name="universal_tab">
     <attribute name="title">
      <string>Универсальные входы</string>
     </attribute>
@@ -66,7 +69,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_13">
       <attribute name="title">
@@ -229,10 +232,10 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>130</x>
+          <x>140</x>
           <y>20</y>
           <width>111</width>
-          <height>381</height>
+          <height>411</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -662,7 +665,22 @@
          </property>
         </item>
        </widget>
+       <zorder>VPI_BOX_6</zorder>
+       <zorder>label_33</zorder>
+       <zorder>lineEdit_8</zorder>
+       <zorder>comboBox_10</zorder>
+       <zorder>label_34</zorder>
+       <zorder>lineEdit_9</zorder>
+       <zorder>label_35</zorder>
+       <zorder>label_36</zorder>
+       <zorder>label_37</zorder>
+       <zorder>comboBox_6</zorder>
+       <zorder>layoutWidget</zorder>
       </widget>
+      <zorder>groupBox</zorder>
+      <zorder>groupBox_3</zorder>
+      <zorder>groupBox_4</zorder>
+      <zorder>layoutWidget</zorder>
      </widget>
      <widget class="QWidget" name="tab_7">
       <attribute name="title">
@@ -2020,7 +2038,7 @@
           <x>130</x>
           <y>20</y>
           <width>111</width>
-          <height>381</height>
+          <height>409</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -2471,7 +2489,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_9">
       <attribute name="title">
@@ -2479,7 +2497,7 @@
       </attribute>
       <widget class="QComboBox" name="comboBox_11">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="geometry">
         <rect>
@@ -2569,7 +2587,7 @@
       </attribute>
       <widget class="QComboBox" name="comboBox_13">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="geometry">
         <rect>
@@ -2612,7 +2630,7 @@
       </widget>
       <widget class="QComboBox" name="comboBox_14">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="geometry">
         <rect>
@@ -2645,6 +2663,11 @@
       </attribute>
      </widget>
     </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Выходы</string>
+    </attribute>
    </widget>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -2766,9 +2789,9 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_2">
+   <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Выходы</string>
+     <string>Режим отображения</string>
     </attribute>
    </widget>
   </widget>
@@ -2817,9 +2840,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
