@@ -64,16 +64,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
     connect(timer, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
 
-
-
-
     //    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
 
     tmr->start(500);
     timer->start(1111);
     timer2->start(201);
     //    closetimer->start(1000*150);
-
 
     // a new thread that reads serial input
 
@@ -91,8 +87,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //    ui->pushButton_2->installEventFilter( this );
 
     QProcess process;
-    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
+//    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    process.startDetached("sudo cpufreq-set --governor powersave"); // max perfomance on
 
 
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача

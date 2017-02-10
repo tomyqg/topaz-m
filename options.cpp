@@ -60,6 +60,14 @@ Options::Options(QWidget *parent) :
         sb->installEventFilter(this);
 
     }
+
+    QList<QLineEdit*> lineeditList = Options::findChildren<QLineEdit*> (  );
+
+    for (int i = 0; i < lineeditList.count(); ++i) {
+        QLineEdit *le = lineeditList.at(i);
+        le->installEventFilter(this);
+
+    }
 }
 
 Options::~Options()
@@ -587,21 +595,21 @@ bool Options::eventFilter(QObject *object, QEvent *event)
         kb.exec();
 
         object->setProperty("value",kb.getcustomstring());
+        object->setProperty("text",kb.getcustomstring());
         kb.close();
         ui->pushButton->setFocus();
         kb.close();
         event->accept();
         kb.close();
         ui->pushButton->setFocus();
-
-                kb.close();
-
+event->accept();
+        kb.close();
+event->accept();
         ui->pushButton->setFocus();
+        event->accept();
 
-        return true;
+//        return true;
     }
-    else
-    {
-        return false;
-    }
+
+    return QObject::eventFilter(object, event);
 }
