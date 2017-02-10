@@ -38,12 +38,11 @@ Options::Options(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
+
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(Channel1TypeChange()) );
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
-
-    //    this->installEventFilter(this);
 
     readoptionsfromfile();
     applysettingstoUI();
@@ -58,7 +57,6 @@ Options::Options(QWidget *parent) :
     for (int i = 0; i < spinList.count(); ++i) {
         QSpinBox *sb = spinList.at(i);
         sb->installEventFilter(this);
-
     }
 
     QList<QLineEdit*> lineeditList = Options::findChildren<QLineEdit*> (  );

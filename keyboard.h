@@ -23,8 +23,11 @@ private slots:
 
     void on_pushButton_13_clicked();
 
+    void on_pushButton_27_clicked();
+
 public slots:
     QString getcustomstring();
+    bool eventFilter(QObject *object, QEvent *event);
 
 private:
     Ui::keyboard *ui;

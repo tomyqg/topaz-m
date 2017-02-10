@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //    ui->pushButton_2->installEventFilter( this );
 
     QProcess process;
-    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set -f 3MHz"); // max freq on
 //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
     process.startDetached("sudo cpufreq-set --governor powersave"); // max perfomance on
 
@@ -258,55 +258,6 @@ void MainWindow::on_pushButton_3_clicked()
 {
     //    WriteArchiveToFile();
     QApplication::exit();
-}
-
-void NewThreadClass::updatethread()
-{
-    while (1)
-    {
-        QSerialPort serial;
-        serial.setPortName("/dev/ttyS1"); //usart1
-        if (serial.open(QIODevice::ReadWrite))
-        {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
-            {
-                serial.write("a");
-                while (serial.waitForBytesWritten(500))
-                    ;
-
-                serial.write("b");
-                while (serial.waitForBytesWritten(500))
-                    ;
-
-                QByteArray requestData;
-                while (serial.waitForReadyRead(10))
-                    requestData = serial.readAll();
-                inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                if(serial.bytesAvailable()>0)
-                    ;
-
-                if ((serial.bytesAvailable())>0)
-                {
-                    while (1)
-                    {
-                        while (serial.waitForReadyRead(10))
-                            requestData = serial.readAll();
-                        inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                        serial.write("c");
-                        while (serial.waitForBytesWritten(20))
-                            ;
-                    }
-                }
-                while (serial.waitForReadyRead(10))
-                    requestData = serial.readAll();
-            }
-            serial.close();
-        }
-    }
 }
 
 void MainWindow::delay(int n)

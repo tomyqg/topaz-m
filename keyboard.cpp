@@ -12,8 +12,11 @@ keyboard::keyboard(QWidget *parent) :
     ui(new Ui::keyboard)
 {
     ui->setupUi(this);
-
     connect(ui->buttonGroup, SIGNAL(buttonPressed(int)), this, SLOT(textinput()) );
+
+    ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
+
+    ui->textEdit->installEventFilter(this);
 }
 
 keyboard::~keyboard()
@@ -73,4 +76,11 @@ void keyboard::textinput()
 void keyboard::on_pushButton_13_clicked()
 {
     this->close();
+}
+
+void keyboard::on_pushButton_27_clicked()
+{
+    QString textwas = ui->textEdit->toPlainText();
+    QString textnew = textwas.remove(textwas.length()-1,1);
+    ui->textEdit->setText(textnew);
 }

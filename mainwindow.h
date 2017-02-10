@@ -15,7 +15,7 @@ class NewThreadClass:public QObject
     Q_OBJECT
 
 private slots:
-    void updatethread();
+    void readuart();
 };
 
 class MainWindow : public QMainWindow

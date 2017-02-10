@@ -1,13 +1,8 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
-#include <QPainter>
 #include <QFile>
-#include <QDataStream>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
-#include <QPainterPath>
-#include <QPainter>
+
 #include <QDateTime>
 #include <QFile>
 #include <QCloseEvent>
@@ -20,20 +15,25 @@
 #include "channel1.h"
 #include "keyboard.h"
 
-
 bool Options::eventFilter(QObject *object, QEvent *event)
 {
     if(event->type() == event->MouseButtonRelease) // && object == ui->NignPredelChannel_1
     {
-
         keyboard kb;
         kb.setModal(true);
         kb.exec();
+
         object->setProperty("value", kb.getcustomstring() );
         object->setProperty("text",kb.getcustomstring() );
 
-        qDebug() << object;
-        qDebug() << object->objectName();
+//        qDebug() << object;
+//        qDebug() << object->objectName();
+
+
+//        if  (object==QWidget::)
+        {
+
+        }
 
         kb.close();
         ui->pushButton->setFocus();
@@ -48,6 +48,17 @@ bool Options::eventFilter(QObject *object, QEvent *event)
         event->accept();
         //        return true;
     }
+    return QObject::eventFilter(object, event);
+}
 
+bool keyboard::eventFilter(QObject *object, QEvent *event)
+{
+
+    QKeyEvent* key = static_cast<QKeyEvent*>(event); // what key pressed
+
+    if  (key->key()==Qt::Key_Enter) // if key == enter, then close
+    {
+        this->close();
+    }
     return QObject::eventFilter(object, event);
 }
