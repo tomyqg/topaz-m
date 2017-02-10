@@ -43,7 +43,7 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
-//    this->installEventFilter(this);
+    //    this->installEventFilter(this);
 
     readoptionsfromfile();
     applysettingstoUI();
@@ -360,7 +360,7 @@ void Options::customizeUI()
 
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
 
-//    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
+    //    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
 
     ui->NignPredelChannel_1->setStyleSheet( "QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 60px}");//height: 20px;
 
@@ -571,7 +571,7 @@ void Options::on_pushButton_3_clicked()
 void Options::on_NignPredelChannel_2_valueChanged(int arg1)
 {
 
-//    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
+    //    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
 }
 
 
@@ -580,19 +580,23 @@ bool Options::eventFilter(QObject *object, QEvent *event)
     if(event->type() == event->FocusIn) // && object == ui->NignPredelChannel_1
     {
         //do something
-//        //qDebug() << object;
+        //        //qDebug() << object;
 
         keyboard kb;
         kb.setModal(true);
         kb.exec();
 
         object->setProperty("value",kb.getcustomstring());
-
-        event->accept();
-
         kb.close();
+        ui->pushButton->setFocus();
+        kb.close();
+        event->accept();
+        kb.close();
+        ui->pushButton->setFocus();
 
-        ui->ButonImpulseChannel_1->setFocus();
+                kb.close();
+
+        ui->pushButton->setFocus();
 
         return true;
     }
