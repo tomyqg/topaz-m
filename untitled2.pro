@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     dialog.cpp \
     options.cpp \
     channel1.cpp \
-    keyboard.cpp
+    keyboard.cpp \
+    eventfilter.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \

@@ -66,7 +66,6 @@ Options::Options(QWidget *parent) :
     for (int i = 0; i < lineeditList.count(); ++i) {
         QLineEdit *le = lineeditList.at(i);
         le->installEventFilter(this);
-
     }
 }
 
@@ -580,36 +579,4 @@ void Options::on_NignPredelChannel_2_valueChanged(int arg1)
 {
 
     //    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
-}
-
-
-bool Options::eventFilter(QObject *object, QEvent *event)
-{
-    if(event->type() == event->FocusIn) // && object == ui->NignPredelChannel_1
-    {
-        //do something
-        //        //qDebug() << object;
-
-        keyboard kb;
-        kb.setModal(true);
-        kb.exec();
-
-        object->setProperty("value",kb.getcustomstring());
-        object->setProperty("text",kb.getcustomstring());
-        kb.close();
-        ui->pushButton->setFocus();
-        kb.close();
-        event->accept();
-        kb.close();
-        ui->pushButton->setFocus();
-event->accept();
-        kb.close();
-event->accept();
-        ui->pushButton->setFocus();
-        event->accept();
-
-//        return true;
-    }
-
-    return QObject::eventFilter(object, event);
 }
