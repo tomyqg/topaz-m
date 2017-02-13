@@ -19,10 +19,6 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->installEventFilter(this);
 }
 
-
-
-
-
 keyboard::~keyboard()
 {
     delete ui;
@@ -30,12 +26,7 @@ keyboard::~keyboard()
 
 void keyboard::on_buttonBox_accepted()
 {
-
-
-
 //    qDebug() << "acc";
-
-
     //    QTextEdit *textBox = MainWindow->findChild<QTextEdit *>("textBox");
 
     //    QList<QLabel*> spinList = keyboard::findChildren<QLabel*> (  );

@@ -440,10 +440,10 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>510</y>
-      <width>241</width>
-      <height>51</height>
+      <x>10</x>
+      <y>410</y>
+      <width>481</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="text">

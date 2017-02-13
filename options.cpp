@@ -201,10 +201,34 @@ void Options::Channel2TypeChange()
         options2.SetSignalType(6);
         ui->UnitsChannel_2->setText("1");
     }
+
+    //    qDebug() << options2.GetSignalType();
 }
 
 void Options::Channel3TypeChange()
 {
+
+    if (ui->ButonOtklChannel_3->isChecked())
+    {
+        options2.SetSignalType(1);
+        ui->UnitsChannel_3->setText("None");
+        ui->UnitsChannel_3->setEnabled(false);
+        ui->VerhnPredelChannel_3->setEnabled(false);
+        ui->NignPredelChannel_3->setEnabled(false);
+        ui->NignPredIzmerChannel_3->setEnabled(false);
+        ui->VerhnPredIzmerChannel_3->setEnabled(false);
+        ui->PeriodIzmerChannel_3->setEnabled(false);
+    }
+    else
+    {
+        ui->UnitsChannel_3->setEnabled(true);
+        ui->VerhnPredelChannel_3->setEnabled(true);
+        ui->NignPredelChannel_3->setEnabled(true);
+        ui->NignPredIzmerChannel_3->setEnabled(true);
+        ui->VerhnPredIzmerChannel_3->setEnabled(true);
+        ui->PeriodIzmerChannel_3->setEnabled(true);
+    }
+
     if (ui->ButonOtklChannel_3->isChecked())
     {
         options3.SetSignalType(1);
@@ -238,6 +262,28 @@ void Options::Channel3TypeChange()
 
 void Options::Channel4TypeChange()
 {
+
+    if (ui->ButonOtklChannel_4->isChecked())
+    {
+        options2.SetSignalType(1);
+        ui->UnitsChannel_4->setText("None");
+        ui->UnitsChannel_4->setEnabled(false);
+        ui->VerhnPredelChannel_4->setEnabled(false);
+        ui->NignPredelChannel_4->setEnabled(false);
+        ui->NignPredIzmerChannel_4->setEnabled(false);
+        ui->VerhnPredIzmerChannel_4->setEnabled(false);
+        ui->PeriodIzmerChannel_4->setEnabled(false);
+    }
+    else
+    {
+        ui->UnitsChannel_4->setEnabled(true);
+        ui->VerhnPredelChannel_4->setEnabled(true);
+        ui->NignPredelChannel_4->setEnabled(true);
+        ui->NignPredIzmerChannel_4->setEnabled(true);
+        ui->VerhnPredIzmerChannel_4->setEnabled(true);
+        ui->PeriodIzmerChannel_4->setEnabled(true);
+    }
+
     if (ui->ButonOtklChannel_4->isChecked())
     {
         options4.SetSignalType(1);
@@ -284,44 +330,48 @@ QString Options::GetSignalUnits()
 
 void Options::applynewsettings()
 {
-    //    Channel1TypeChange();
     options1.SetUnitsName(ui->UnitsChannel_1->text());
     options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
     options1.SetLowerLimit(ui->NignPredelChannel_1->value());
     options1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
     options1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
 
-    //    Channel2TypeChange();
     options2.SetUnitsName(ui->UnitsChannel_2->text());
     options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
     options2.SetLowerLimit(ui->NignPredelChannel_2->value());
     options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
     options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
 
+    options3.SetUnitsName(ui->UnitsChannel_3->text());
+    options3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
+    options3.SetLowerLimit(ui->NignPredelChannel_3->value());
+    options3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
+    options3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
+
+    options4.SetUnitsName(ui->UnitsChannel_4->text());
+    options4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
+    options4.SetLowerLimit(ui->NignPredelChannel_4->value());
+    options4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
+    options4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
+
     // apply new time
 
     QProcess process;
-
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
-    //    //qDebug()<<local ;
-
 
     QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
     QString newtime = newuitime.toString();
 
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
-
-    //    //qDebug()<<newtime ;
-    //    //qDebug()<<newdate ;
-
 }
+
 void Options::readoptionsfromfile()
 {
-    QFile infile("/usr/options.txt");
+        QFile infile("/usr/options.txt");
 
-    //    QFile infile("C:/Work/options.txt");
+//    QFile infile("C:/Work/options.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -332,15 +382,12 @@ void Options::readoptionsfromfile()
 
     QJsonObject json = doc.object();
 
-    ////qDebug()<<json ;
-
     QJsonArray array = json["channels"].toArray();
 
     /*
     for (int x = 0; x < 2; ++x) {
 
         ch  = array.at(x).toObject();
-
     }*/
 
     QJsonObject ch1 = array.at(0).toObject();
@@ -352,15 +399,43 @@ void Options::readoptionsfromfile()
     options1.SetSignalType(ch1.value("Type").toInt());
     options1.SetUnitsName(ch1.value("Units").toString());
 
-    ////qDebug()<<ch1;
+    QJsonObject ch2 = array.at(1).toObject();
 
-    ////qDebug()<<ch1.value("Type").toInt();
+    options2.SetHigherLimit(ch2.value("HigherLimit").toInt());
+    options2.SetLowerLimit(ch2.value("LowerLimit").toInt());
+    options2.SetHigherMeasureLimit(ch2.value("HigherMeasLimit").toInt());
+    options2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toInt());
+    options2.SetSignalType(ch2.value("Type").toInt());
+    options2.SetUnitsName(ch2.value("Units").toString());
+
+    QJsonObject ch3 = array.at(2).toObject();
+
+    options3.SetHigherLimit(ch3.value("HigherLimit").toInt());
+    options3.SetLowerLimit(ch3.value("LowerLimit").toInt());
+    options3.SetHigherMeasureLimit(ch3.value("HigherMeasLimit").toInt());
+    options3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toInt());
+    options3.SetSignalType(ch3.value("Type").toInt());
+    options3.SetUnitsName(ch3.value("Units").toString());
+
+    QJsonObject ch4 = array.at(3).toObject();
+
+    options4.SetHigherLimit(ch4.value("HigherLimit").toInt());
+    options4.SetLowerLimit(ch4.value("LowerLimit").toInt());
+    options4.SetHigherMeasureLimit(ch4.value("HigherMeasLimit").toInt());
+    options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toInt());
+    options4.SetSignalType(ch4.value("Type").toInt());
+    options4.SetUnitsName(ch4.value("Units").toString());
+
+    //    qDebug() << json;
+    //    qDebug() << ch1;
+    //    qDebug() << ch2;
+    //    qDebug() << ch3;
+    //    qDebug() << ch4;
 
     infile.close();
 }
 void Options::customizeUI()
 {
-
     //set tab height
 
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
@@ -416,53 +491,212 @@ void Options::applysettingstoUI()
 {
 
     int sigtype = options1.GetSignalType();
-
-    if (sigtype == 1)
+    int sigtype2 = options2.GetSignalType();
+    int sigtype3 = options3.GetSignalType();
+    int sigtype4 = options4.GetSignalType();
+    // channel 1
     {
-        ui->ButonOtklChannel_1->setChecked(true);
+        if (sigtype == 1)
+        {
+            ui->ButonOtklChannel_1->setChecked(true);
 
-        ui->UnitsChannel_1->setText("None");
-        ui->UnitsChannel_1->setEnabled(false);
-        ui->VerhnPredelChannel_1->setEnabled(false);
-        ui->NignPredelChannel_1->setEnabled(false);
-        ui->NignPredIzmerChannel_1->setEnabled(false);
-        ui->VerhnPredIzmerChannel_1->setEnabled(false);
-        ui->PeriodIzmerChannel_1->setEnabled(false);
+            ui->UnitsChannel_1->setText("None");
+            ui->UnitsChannel_1->setEnabled(false);
+            ui->VerhnPredelChannel_1->setEnabled(false);
+            ui->NignPredelChannel_1->setEnabled(false);
+            ui->NignPredIzmerChannel_1->setEnabled(false);
+            ui->VerhnPredIzmerChannel_1->setEnabled(false);
+            ui->PeriodIzmerChannel_1->setEnabled(false);
+        }
+        else
+        {
+            ui->UnitsChannel_1->setEnabled(true);
+            ui->VerhnPredelChannel_1->setEnabled(true);
+            ui->NignPredelChannel_1->setEnabled(true);
+            ui->NignPredIzmerChannel_1->setEnabled(true);
+            ui->VerhnPredIzmerChannel_1->setEnabled(true);
+            ui->PeriodIzmerChannel_1->setEnabled(true);
+        }
+
+        if (sigtype == 2)
+        {
+            ui->ButonTokChannel_1->setChecked(true);
+        }
+
+        if (sigtype == 3)
+        {
+            ui->ButonNapryagenieChannel_1->setChecked(true);
+        }
+
+        if (sigtype == 4)
+        {
+            ui->ButonResistorChannel_1->setChecked(true);
+        }
+
+        if (sigtype == 5)
+        {
+            ui->ButonTermoparaChannel_1->setChecked(true);
+        }
+
+
+        if (sigtype == 6)
+        {
+            ui->ButonImpulseChannel_1->setChecked(true);
+        }
     }
-    else
+
+    // channel 2
     {
-        ui->UnitsChannel_1->setEnabled(true);
-        ui->VerhnPredelChannel_1->setEnabled(true);
-        ui->NignPredelChannel_1->setEnabled(true);
-        ui->NignPredIzmerChannel_1->setEnabled(true);
-        ui->VerhnPredIzmerChannel_1->setEnabled(true);
-        ui->PeriodIzmerChannel_1->setEnabled(true);
+        if (sigtype2 == 1)
+        {
+            ui->ButonOtklChannel_2->setChecked(true);
+
+            ui->UnitsChannel_2->setText("None");
+            ui->UnitsChannel_2->setEnabled(false);
+            ui->VerhnPredelChannel_2->setEnabled(false);
+            ui->NignPredelChannel_2->setEnabled(false);
+            ui->NignPredIzmerChannel_2->setEnabled(false);
+            ui->VerhnPredIzmerChannel_2->setEnabled(false);
+            ui->PeriodIzmerChannel_2->setEnabled(false);
+        }
+        else
+        {
+            ui->UnitsChannel_2->setEnabled(true);
+            ui->VerhnPredelChannel_2->setEnabled(true);
+            ui->NignPredelChannel_2->setEnabled(true);
+            ui->NignPredIzmerChannel_2->setEnabled(true);
+            ui->VerhnPredIzmerChannel_2->setEnabled(true);
+            ui->PeriodIzmerChannel_2->setEnabled(true);
+        }
+
+        if (sigtype2 == 2)
+        {
+            ui->ButonTokChannel_2->setChecked(true);
+        }
+
+        if (sigtype2 == 3)
+        {
+            ui->ButonNapryagenieChannel_2->setChecked(true);
+        }
+
+        if (sigtype2 == 4)
+        {
+            ui->ButonResistorChannel_2->setChecked(true);
+        }
+
+        if (sigtype2 == 5)
+        {
+            ui->ButonTermoparaChannel_2->setChecked(true);
+        }
+
+
+        if (sigtype2 == 6)
+        {
+            ui->ButonImpulseChannel_2->setChecked(true);
+        }
     }
 
-    if (sigtype == 2)
+
+    // channel 3
     {
-        ui->ButonTokChannel_1->setChecked(true);
+        if (sigtype3 == 1)
+        {
+            ui->ButonOtklChannel_3->setChecked(true);
+
+            ui->UnitsChannel_3->setText("None");
+            ui->UnitsChannel_3->setEnabled(false);
+            ui->VerhnPredelChannel_3->setEnabled(false);
+            ui->NignPredelChannel_3->setEnabled(false);
+            ui->NignPredIzmerChannel_3->setEnabled(false);
+            ui->VerhnPredIzmerChannel_3->setEnabled(false);
+            ui->PeriodIzmerChannel_3->setEnabled(false);
+        }
+        else
+        {
+            ui->UnitsChannel_3->setEnabled(true);
+            ui->VerhnPredelChannel_3->setEnabled(true);
+            ui->NignPredelChannel_3->setEnabled(true);
+            ui->NignPredIzmerChannel_3->setEnabled(true);
+            ui->VerhnPredIzmerChannel_3->setEnabled(true);
+            ui->PeriodIzmerChannel_3->setEnabled(true);
+        }
+
+        if (sigtype3 == 2)
+        {
+            ui->ButonTokChannel_3->setChecked(true);
+        }
+
+        if (sigtype3 == 3)
+        {
+            ui->ButonNapryagenieChannel_3->setChecked(true);
+        }
+
+        if (sigtype3 == 4)
+        {
+            ui->ButonResistorChannel_3->setChecked(true);
+        }
+
+        if (sigtype3 == 5)
+        {
+            ui->ButonTermoparaChannel_3->setChecked(true);
+        }
+
+
+        if (sigtype3 == 6)
+        {
+            ui->ButonImpulseChannel_3->setChecked(true);
+        }
     }
 
-    if (sigtype == 3)
+    // channel 4
     {
-        ui->ButonNapryagenieChannel_1->setChecked(true);
-    }
+        if (sigtype4 == 1)
+        {
+            ui->ButonOtklChannel_4->setChecked(true);
 
-    if (sigtype == 4)
-    {
-        ui->ButonResistorChannel_1->setChecked(true);
-    }
+            ui->UnitsChannel_4->setText("None");
+            ui->UnitsChannel_4->setEnabled(false);
+            ui->VerhnPredelChannel_4->setEnabled(false);
+            ui->NignPredelChannel_4->setEnabled(false);
+            ui->NignPredIzmerChannel_4->setEnabled(false);
+            ui->VerhnPredIzmerChannel_4->setEnabled(false);
+            ui->PeriodIzmerChannel_4->setEnabled(false);
+        }
+        else
+        {
+            ui->UnitsChannel_4->setEnabled(true);
+            ui->VerhnPredelChannel_4->setEnabled(true);
+            ui->NignPredelChannel_4->setEnabled(true);
+            ui->NignPredIzmerChannel_4->setEnabled(true);
+            ui->VerhnPredIzmerChannel_4->setEnabled(true);
+            ui->PeriodIzmerChannel_4->setEnabled(true);
+        }
 
-    if (sigtype == 5)
-    {
-        ui->ButonTermoparaChannel_1->setChecked(true);
-    }
+        if (sigtype4 == 2)
+        {
+            ui->ButonTokChannel_4->setChecked(true);
+        }
+
+        if (sigtype4 == 3)
+        {
+            ui->ButonNapryagenieChannel_4->setChecked(true);
+        }
+
+        if (sigtype4 == 4)
+        {
+            ui->ButonResistorChannel_4->setChecked(true);
+        }
+
+        if (sigtype4 == 5)
+        {
+            ui->ButonTermoparaChannel_4->setChecked(true);
+        }
 
 
-    if (sigtype == 6)
-    {
-        ui->ButonImpulseChannel_1->setChecked(true);
+        if (sigtype4 == 6)
+        {
+            ui->ButonImpulseChannel_4->setChecked(true);
+        }
     }
 
     ui->UnitsChannel_1->setText(options1.GetUnitsName());
@@ -470,6 +704,26 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_1->setValue(options1.GetLowerLimit());
     ui->VerhnPredIzmerChannel_1->setValue(options1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options1.GetLowerMeasureLimit());
+
+
+    ui->UnitsChannel_2->setText(options2.GetUnitsName());
+    ui->VerhnPredelChannel_2->setValue(options2.GetHigherLimit());
+    ui->NignPredelChannel_2->setValue(options2.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_2->setValue(options2.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_2->setValue(options2.GetLowerMeasureLimit());
+
+
+    ui->UnitsChannel_3->setText(options3.GetUnitsName());
+    ui->VerhnPredelChannel_3->setValue(options3.GetHigherLimit());
+    ui->NignPredelChannel_3->setValue(options3.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_3->setValue(options3.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_3->setValue(options3.GetLowerMeasureLimit());
+
+    ui->UnitsChannel_4->setText(options4.GetUnitsName());
+    ui->VerhnPredelChannel_4->setValue(options4.GetHigherLimit());
+    ui->NignPredelChannel_4->setValue(options4.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_4->setValue(options4.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
 
 }
 
@@ -522,18 +776,37 @@ void Options::WriteOptionsToFile()
     channel2["LowerLimit"] = options2.GetLowerLimit();
     channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
     channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
-    
+
     settings.append(channel2);
+
+    channel3["Type"] = options3.GetSignalType();
+    channel3["Units"] = options3.GetUnitsName();
+    channel3["HigherLimit"] = options3.GetHigherLimit();
+    channel3["LowerLimit"] = options3.GetLowerLimit();
+    channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
+    channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
+
+    settings.append(channel3);
+
+    channel4["Type"] = options4.GetSignalType();
+    channel4["Units"] = options4.GetUnitsName();
+    channel4["HigherLimit"] = options4.GetHigherLimit();
+    channel4["LowerLimit"] = options4.GetLowerLimit();
+    channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
+    channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
+
+    settings.append(channel4);
     
-    channels["count"] = 2;
+    channels["count"] = 4;
     channels["channels"] = settings;
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
     
-    ////qDebug() << QJsonDocument(channels).toJson(QJsonDocument::Compact);
-    
-    QFile file("/usr/options.txt");
-    //    QFile file("C:/Work/options.txt");
+    //    qDebug() << channel4;
+
+
+        QFile file("/usr/options.txt");
+//    QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
@@ -544,20 +817,10 @@ void Options::WriteOptionsToFile()
 
 void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)
 {
-    options1.SetUnitsName("1111");
-    options2.SetUnitsName("222");
-    options3.SetUnitsName("333");
 }
 
 void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
 {
-    ////qDebug() << options1.GetUnitsName();
-    ////qDebug() << options2.GetUnitsName();
-    ////qDebug() << options3.GetUnitsName();
-    
-    options1.SetUnitsName("444");
-    options2.SetUnitsName("555");
-    options3.SetUnitsName("666");
 }
 
 void Options::on_UnitsChannel_1_editingFinished()
@@ -581,6 +844,6 @@ void Options::on_NignPredelChannel_2_valueChanged(int arg1)
 
 void Options::on_tabWidget_2_tabBarClicked(int index)
 {
-//    QWidget *newTab = new QWidget(ui->tabWidget_2);
-//    ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
+    //    QWidget *newTab = new QWidget(ui->tabWidget_2);
+    //    ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
 }

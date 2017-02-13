@@ -17,43 +17,21 @@
 
 bool Options::eventFilter(QObject *object, QEvent *event)
 {
-    if(event->type() == event->MouseButtonRelease) // && object == ui->NignPredelChannel_1
+    if(event->type() == event->MouseButtonRelease)
     {
         keyboard kb;
         kb.setModal(true);
         kb.exec();
-
         object->setProperty("value", kb.getcustomstring() );
         object->setProperty("text",kb.getcustomstring() );
-
-//        qDebug() << object;
-//        qDebug() << object->objectName();
-
-
-//        if  (object==QWidget::)
-        {
-
-        }
-
-        kb.close();
         ui->pushButton->setFocus();
         kb.close();
-        event->accept();
-        kb.close();
-        ui->pushButton->setFocus();
-        event->accept();
-        kb.close();
-        event->accept();
-        ui->pushButton->setFocus();
-        event->accept();
-        //        return true;
     }
     return QObject::eventFilter(object, event);
 }
 
 bool keyboard::eventFilter(QObject *object, QEvent *event)
 {
-
     QKeyEvent* key = static_cast<QKeyEvent*>(event); // what key pressed
 
     if  (key->key()==Qt::Key_Enter) // if key == enter, then close

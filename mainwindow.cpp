@@ -87,28 +87,23 @@ MainWindow::MainWindow(QWidget *parent) :
     //    ui->pushButton_2->installEventFilter( this );
 
     QProcess process;
-    process.startDetached("sudo cpufreq-set -f 3MHz"); // max freq on
-//    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
-    process.startDetached("sudo cpufreq-set --governor powersave"); // max perfomance on
+    //    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
+    //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
 
-
+    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-    //    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
-    //        process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
-    //            process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
-    //        process.startDetached("xinput set-prop 7 \"Device Accel Velocity Scaling\" 2"); // вручную ввели координаты тача
-    //        process.startDetached("xinput list-props 7"); // вручную ввели координаты тача
 
-
-//    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
-
-//    // apply style to all widgets
-//    for (int i = 0; i < spinList.count(); ++i) {
-//        QLabel *sb = spinList.at(i);
-//        sb->setText("alloha");
-//    }
+    //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
+    //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
+    //process.startDetached("xinput list-props 7"); // вручную ввели координаты тача
+    //QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
+    //apply style to all widgets
+    //for (int i = 0; i < spinList.count(); ++i) {
+    //QLabel *sb = spinList.at(i);
+    //sb->setText("alloha");
+    //}
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -132,6 +127,8 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
+    QProcess process;
+    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 }
 
 void MainWindow::textupdate()
@@ -331,12 +328,11 @@ void MainWindow::WritetoFile()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    QProcess process1;
+    //    QProcess process1;
+    //        process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
+    //        process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
+    //        process1.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3389 3958 252 616"); // вручную ввели координаты тача
     //    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
-    //    process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
-    //    process1.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3389 3958 252 616"); // вручную ввели координаты тача
-
-    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
 }
 
 void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
@@ -345,22 +341,18 @@ void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
 
 void MainWindow::on_customPlot_destroyed()
 {
-
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-//    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
-
-//    // apply style to all widgets
-//    for (int i = 0; i < spinList.count(); ++i) {
-//        QLabel *sb = spinList.at(i);
-//        sb->setText("alloha");
-//    }
+    //    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
+    //    // apply style to all widgets
+    //    for (int i = 0; i < spinList.count(); ++i) {
+    //        QLabel *sb = spinList.at(i);
+    //        sb->setText("alloha");
+    //    }
 
     keyboard kb;
-
-
     kb.setModal(true);
     kb.exec();
 }
