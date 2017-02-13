@@ -578,3 +578,9 @@ void Options::on_NignPredelChannel_2_valueChanged(int arg1)
 
     //    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
 }
+
+void Options::on_tabWidget_2_tabBarClicked(int index)
+{
+//    QWidget *newTab = new QWidget(ui->tabWidget_2);
+//    ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
+}

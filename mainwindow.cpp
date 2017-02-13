@@ -260,6 +260,8 @@ void MainWindow::on_pushButton_3_clicked()
     QApplication::exit();
 }
 
+
+
 void MainWindow::delay(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(1);
@@ -357,6 +359,8 @@ void MainWindow::on_pushButton_5_clicked()
 //    }
 
     keyboard kb;
+
+
     kb.setModal(true);
     kb.exec();
 }

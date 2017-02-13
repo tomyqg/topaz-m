@@ -19,6 +19,10 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->installEventFilter(this);
 }
 
+
+
+
+
 keyboard::~keyboard()
 {
     delete ui;

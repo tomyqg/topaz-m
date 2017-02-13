@@ -69,6 +69,8 @@ private slots:
 
     void on_NignPredelChannel_2_valueChanged(int arg1);
 
+    void on_tabWidget_2_tabBarClicked(int index);
+
 private:
 
     Ui::Options *ui;

@@ -15,7 +15,11 @@ class keyboard : public QDialog
 
 public:
     explicit keyboard(QWidget *parent = 0);
+
     ~keyboard();
+
+
+    bool onlydigits;
 
 private slots:
     void on_buttonBox_accepted();
