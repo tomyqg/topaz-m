@@ -41,6 +41,7 @@ void NewThreadClass::readuart()
             serial.setStopBits(QSerialPort::OneStop);
             serial.setFlowControl(QSerialPort::NoFlowControl);
             {
+                // start stuff
                 serial.write("a");
                 while (serial.waitForBytesWritten(500))
                     ;
@@ -48,13 +49,12 @@ void NewThreadClass::readuart()
                 serial.write("b");
                 while (serial.waitForBytesWritten(500))
                     ;
+                // end stuff
 
                 QByteArray requestData;
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
                 inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                if(serial.bytesAvailable()>0)
-                    ;
 
                 if ((serial.bytesAvailable())>0)
                 {

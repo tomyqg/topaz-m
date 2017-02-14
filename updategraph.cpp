@@ -428,8 +428,6 @@ void MainWindow::WriteArchiveToFile()
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
 
-    //qDebug() << setstr;
-
     QFile file("C:/Work/archive.txt");
 
     file.open(QIODevice::ReadWrite);
@@ -437,8 +435,6 @@ void MainWindow::WriteArchiveToFile()
     file.resize(0); // clear file
 
     QTextStream out(&file);
-
-    //    ui->textEdit_3->setText(setstr);
 
     out << setstr;
 

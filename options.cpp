@@ -39,7 +39,7 @@ Options::Options(QWidget *parent) :
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
 
-    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(Channel1TypeChange()) );
+    connect(ui->buttonGroup,   SIGNAL(buttonClicked(int)), this, SLOT(Channel1TypeChange()) );
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
@@ -833,7 +833,16 @@ void Options::on_pushButton_3_clicked()
 {
     //    ui->timeEdit->
     QProcess process1;
-    process1.startDetached("xinput_calibrator"); // max perfomance on
+    process1.start("xinput_calibrator"); // max perfomance on
+
+
+
+    process1.waitForFinished();
+
+    QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
+
+    ui->textEdit->setText( "and the output is " + output);
+
 }
 
 void Options::on_NignPredelChannel_2_valueChanged(int arg1)

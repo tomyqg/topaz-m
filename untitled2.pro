@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     channel1.cpp \
     keyboard.cpp \
     eventfilter.cpp \
-    uartdriver.cpp
+    uartdriver.cpp \
+    writearchive.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \

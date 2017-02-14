@@ -69,8 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr->start(500);
     timer->start(1111);
     timer2->start(201);
-    //    closetimer->start(1000*150);
 
+    //    closetimer->start(1000*150);
     // a new thread that reads serial input
 
     QThread *thread= new QThread();
@@ -82,17 +82,20 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
 
     thread->start();
-    //    ui->comboBox_13->installEventFilter( this );
-    //    ui->dial->installEventFilter( this );
-    //    ui->pushButton_2->installEventFilter( this );
 
     QProcess process;
+
     //    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
-
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
+
+//    process.waitForFinished();
+
+    QString zzz = QTextCodec::codecForMib(106)->toUnicode(process.readAll());
+
+    ui->textEdit_3->setText( "and the output is " + zzz);
 
     //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -295,35 +298,6 @@ void MainWindow::on_comboBox_13_activated(const QString &arg1)
 
 void MainWindow::on_comboBox_13_currentIndexChanged(const QString &arg1)
 {
-}
-
-void MainWindow::WritetoFile()
-{
-    QFile filedir("/sys/class/gpio/gpio69/direction");
-
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-
-    outdir << "out";
-    filedir.close();
-
-    QFile file("/sys/class/gpio/gpio69/value");
-
-    file.open(QIODevice::WriteOnly);
-    QTextStream out(&file);
-
-    if (1)
-    {
-        out << "1";
-    }
-
-    else
-    {
-        out << "0";
-    }
-
-    file.close();
-    ui->pushButton_2->setText("настрйки сохранены");
 }
 
 void MainWindow::on_pushButton_4_clicked()
