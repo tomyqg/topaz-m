@@ -52,3 +52,26 @@ void MainWindow::WritetoFile()
     file.close();
     ui->pushButton_2->setText("настрйки сохранены");
 }
+
+void Options::WriteSystemOptionsToFile()
+{
+    QJsonObject systemoptions;
+
+    QDateTime local(QDateTime::currentDateTime());
+
+    systemoptions["Time"] = local.time().toString();
+    systemoptions["Date"] = local.date().toString();
+    systemoptions["Calibration"] = Options::calibrationprm;
+
+    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+
+    QFile file("/usr/systemoptions.txt");
+
+    file.open(QIODevice::ReadWrite);
+
+    file.resize(0); // clear file
+
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+}

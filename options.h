@@ -25,6 +25,8 @@ public:
     explicit Options(QWidget *parent = 0);
     ~Options();
 
+    static QString calibrationprm;
+
 public slots:
 
     void WriteOptionsToFile();
@@ -56,6 +58,8 @@ private slots:
     void customizeUI();
 
     void readoptionsfromfile();
+
+        void readsystemoptionsfromfile();
 
     QString GetSignalUnits();
 

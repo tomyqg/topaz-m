@@ -30,11 +30,12 @@
 #include "channel1.h"
 #include "keyboard.h"
 
+QString Options::calibrationprm = "3383 3962 234 599";
+
 Options::Options(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Options)
 {
-
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
@@ -43,14 +44,13 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
-
+    readsystemoptionsfromfile();
     readoptionsfromfile();
     applysettingstoUI();
     customizeUI();
 
     ui->timeEdit->setDateTime(QDateTime::currentDateTime());
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
-
 
     QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> (  );
 
@@ -367,73 +367,6 @@ void Options::applynewsettings()
     process.startDetached("sudo date --set " + newtime); // max freq on
 }
 
-void Options::readoptionsfromfile()
-{
-        QFile infile("/usr/options.txt");
-
-//    QFile infile("C:/Work/options.txt");
-
-    infile.open(QIODevice::ReadOnly);
-
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-
-    QJsonObject json = doc.object();
-
-    QJsonArray array = json["channels"].toArray();
-
-    /*
-    for (int x = 0; x < 2; ++x) {
-
-        ch  = array.at(x).toObject();
-    }*/
-
-    QJsonObject ch1 = array.at(0).toObject();
-
-    options1.SetHigherLimit(ch1.value("HigherLimit").toInt());
-    options1.SetLowerLimit(ch1.value("LowerLimit").toInt());
-    options1.SetHigherMeasureLimit(ch1.value("HigherMeasLimit").toInt());
-    options1.SetLowerMeasureLimit(ch1.value("LowerMeasLimit").toInt());
-    options1.SetSignalType(ch1.value("Type").toInt());
-    options1.SetUnitsName(ch1.value("Units").toString());
-
-    QJsonObject ch2 = array.at(1).toObject();
-
-    options2.SetHigherLimit(ch2.value("HigherLimit").toInt());
-    options2.SetLowerLimit(ch2.value("LowerLimit").toInt());
-    options2.SetHigherMeasureLimit(ch2.value("HigherMeasLimit").toInt());
-    options2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toInt());
-    options2.SetSignalType(ch2.value("Type").toInt());
-    options2.SetUnitsName(ch2.value("Units").toString());
-
-    QJsonObject ch3 = array.at(2).toObject();
-
-    options3.SetHigherLimit(ch3.value("HigherLimit").toInt());
-    options3.SetLowerLimit(ch3.value("LowerLimit").toInt());
-    options3.SetHigherMeasureLimit(ch3.value("HigherMeasLimit").toInt());
-    options3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toInt());
-    options3.SetSignalType(ch3.value("Type").toInt());
-    options3.SetUnitsName(ch3.value("Units").toString());
-
-    QJsonObject ch4 = array.at(3).toObject();
-
-    options4.SetHigherLimit(ch4.value("HigherLimit").toInt());
-    options4.SetLowerLimit(ch4.value("LowerLimit").toInt());
-    options4.SetHigherMeasureLimit(ch4.value("HigherMeasLimit").toInt());
-    options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toInt());
-    options4.SetSignalType(ch4.value("Type").toInt());
-    options4.SetUnitsName(ch4.value("Units").toString());
-
-    //    qDebug() << json;
-    //    qDebug() << ch1;
-    //    qDebug() << ch2;
-    //    qDebug() << ch3;
-    //    qDebug() << ch4;
-
-    infile.close();
-}
 void Options::customizeUI()
 {
     //set tab height
@@ -724,32 +657,6 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_4->setValue(options4.GetLowerLimit());
     ui->VerhnPredIzmerChannel_4->setValue(options4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
-
-}
-
-void Options::WriteSystemOptionsToFile()
-{
-    //    QJsonObject systemoptions;
-
-    //    QDateTime local(QDateTime::currentDateTime());
-
-    //    systemoptions["Time"] = local.time().toString();
-    //    systemoptions["Date"] = local.date().toString();
-
-    //    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-
-    //    //qDebug() << setstr;
-
-    //    QFile file("C:/Work/systemoptions.txt");
-
-    //    file.open(QIODevice::ReadWrite);
-
-    //    file.resize(0); // clear file
-
-    //    QTextStream out(&file);
-    //    out << setstr;
-    //    file.close();
-
 }
 
 void Options::WriteOptionsToFile()
@@ -805,8 +712,8 @@ void Options::WriteOptionsToFile()
     //    qDebug() << channel4;
 
 
-        QFile file("/usr/options.txt");
-//    QFile file("C:/Work/options.txt");
+    QFile file("/usr/options.txt");
+    //    QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
@@ -831,11 +738,22 @@ void Options::on_UnitsChannel_1_editingFinished()
 
 void Options::on_pushButton_3_clicked()
 {
+
+
     //    ui->timeEdit->
     QProcess process1;
     process1.start("xinput_calibrator"); // max perfomance on
 
+    QString stringtofind = "Option	\"Calibration\"";
+    QString stringtofind2 = "Option	\"SwapAxes\"";
 
+//    QString theouttemp = "Calibrating EVDEV driver for \"HID 1aad:0001\" id=7 current calibration values (from XInput): min_x=3383, max_x=3962 and min_y=234, max_y=599 Doing dynamic recalibration: Setting calibration data: 3388, 3964, 242, 599 --> Making the calibration permanent <--          copy the snippet below into '/etc/X11/xorg.conf.d/99-calibration.conf' (/usr/share/X11/xorg.conf.d/ in some distro's)
+//            Section \"InputClass\"
+//            Identifier	\"calibration\"
+//            MatchProduct	\"HID 1aad:0001\"
+//            Option	\"Calibration\"	\"3388 3964 242 599\"
+//            Option	\"SwapAxes\"	\"0\"
+//            EndSection";
 
     process1.waitForFinished();
 
@@ -843,11 +761,27 @@ void Options::on_pushButton_3_clicked()
 
     ui->textEdit->setText( "and the output is " + output);
 
+    if (output.indexOf(stringtofind)>=0)
+    {
+//        ui->textEdit->setText(Options::calibrationprm);
+
+        QString a = Options::calibrationprm;
+
+        QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
+
+        pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
+        pice = pice.simplified();
+        pice = pice.remove(0, stringtofind.length() );
+        Options::calibrationprm = pice;
+
+        a = a + "->" + Options::calibrationprm ;
+
+        ui->textEdit->setText(a);
+    }
 }
 
 void Options::on_NignPredelChannel_2_valueChanged(int arg1)
 {
-
     //    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
 }
 

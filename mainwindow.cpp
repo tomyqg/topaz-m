@@ -131,7 +131,7 @@ void MainWindow::updateCaption()
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     QProcess process;
-    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
+    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // вручную ввели координаты тача
 }
 
 void MainWindow::textupdate()
