@@ -1,32 +1,32 @@
 #include "channel1.h"
 #include "QDebug"
 
-int ChannelOptions::GetHigherLimit()
+double ChannelOptions::GetHigherLimit()
 {
     return this->higherlimit;
 }
 
-int ChannelOptions::GetHigherMeasureLimit()
+double ChannelOptions::GetHigherMeasureLimit()
 {
     return this->highermeasurelimit;
 }
 
-int ChannelOptions::GetLowerLimit()
+double ChannelOptions::GetLowerLimit()
 {
     return this->lowerlimit;
 }
 
-int ChannelOptions::GetLowerMeasureLimit()
+double ChannelOptions::GetLowerMeasureLimit()
 {
     return this->lowermeasurelimit;
 }
 
-int ChannelOptions::GetSignalType()
+double ChannelOptions::GetSignalType()
 {
     return this->signaltype;
 }
 
-void ChannelOptions::SetSignalType(int newsignaltype)
+void ChannelOptions::SetSignalType(double newsignaltype)
 {
     this->signaltype = newsignaltype;
 }
@@ -41,22 +41,22 @@ QString ChannelOptions::GetUnitsName()
     return this->unitsname;
 }
 
-void ChannelOptions::SetHigherLimit(int newlimit)
+void ChannelOptions::SetHigherLimit(double newlimit)
 {
     this->higherlimit=newlimit;
 }
 
-void ChannelOptions::SetLowerLimit(int newlimit)
+void ChannelOptions::SetLowerLimit(double newlimit)
 {
     this->lowerlimit=newlimit;
 }
 
-void ChannelOptions::SetHigherMeasureLimit(int newlimit)
+void ChannelOptions::SetHigherMeasureLimit(double newlimit)
 {
     this->highermeasurelimit=newlimit;
 }
 
-void ChannelOptions::SetLowerMeasureLimit(int newlimit)
+void ChannelOptions::SetLowerMeasureLimit(double newlimit)
 {
     this->lowermeasurelimit=newlimit;
 }

@@ -41,7 +41,7 @@
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -259,7 +259,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredelChannel_1">
+          <widget class="QDoubleSpinBox" name="NignPredelChannel_1">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -275,78 +275,120 @@
            <property name="inputMethodHints">
             <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="VerhnPredelChannel_1">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
+           <property name="accelerated">
+            <bool>true</bool>
            </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="NignPredIzmerChannel_1">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="VerhnPredIzmerChannel_1">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="PeriodIzmerChannel_1">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="minimum">
-            <number>0</number>
+           <property name="decimals">
+            <number>2</number>
            </property>
            <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>2</number>
+           </property>
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>2</number>
+           </property>
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>2</number>
+           </property>
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="accelerated">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
             <number>1</number>
            </property>
+           <property name="minimum">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
            <property name="value">
-            <number>1</number>
+            <double>1.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -858,7 +900,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredelChannel_2">
+          <widget class="QDoubleSpinBox" name="NignPredelChannel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -874,7 +916,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredelChannel_2">
+          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -890,7 +932,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredIzmerChannel_2">
+          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -906,7 +948,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredIzmerChannel_2">
+          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -922,7 +964,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="PeriodIzmerChannel_2">
+          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_2">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -934,15 +976,18 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
             </font>
+           </property>
+           <property name="decimals">
+            <number>1</number>
            </property>
            <property name="minimum">
-            <number>0</number>
+            <double>0.100000000000000</double>
            </property>
            <property name="singleStep">
-            <number>1</number>
+            <double>0.100000000000000</double>
            </property>
            <property name="value">
-            <number>1</number>
+            <double>1.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -1454,7 +1499,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredelChannel_3">
+          <widget class="QDoubleSpinBox" name="NignPredelChannel_3">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1470,7 +1515,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredelChannel_3">
+          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_3">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1486,7 +1531,26 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredIzmerChannel_3">
+          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_3">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhFormattedNumbersOnly</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_3">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1502,7 +1566,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredIzmerChannel_3">
+          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_3">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1515,30 +1579,17 @@
              <pointsize>12</pointsize>
             </font>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="PeriodIzmerChannel_3">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-            </font>
+           <property name="decimals">
+            <number>1</number>
            </property>
            <property name="minimum">
-            <number>0</number>
+            <double>0.100000000000000</double>
            </property>
            <property name="singleStep">
-            <number>1</number>
+            <double>0.100000000000000</double>
            </property>
            <property name="value">
-            <number>1</number>
+            <double>1.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -2050,7 +2101,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredelChannel_4">
+          <widget class="QDoubleSpinBox" name="NignPredelChannel_4">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -2066,7 +2117,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredelChannel_4">
+          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_4">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -2082,7 +2133,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="NignPredIzmerChannel_4">
+          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_4">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -2098,7 +2149,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="VerhnPredIzmerChannel_4">
+          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_4">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -2114,7 +2165,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="PeriodIzmerChannel_4">
+          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_4">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -2126,15 +2177,15 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
             </font>
+           </property>
+           <property name="decimals">
+            <number>1</number>
            </property>
            <property name="minimum">
-            <number>0</number>
+            <double>0.100000000000000</double>
            </property>
            <property name="singleStep">
-            <number>1</number>
-           </property>
-           <property name="value">
-            <number>1</number>
+            <double>0.100000000000000</double>
            </property>
           </widget>
          </item>
@@ -2773,6 +2824,9 @@
        <day>31</day>
       </date>
      </property>
+     <property name="displayFormat">
+      <string>dd.MM.yy</string>
+     </property>
      <property name="date">
       <date>
        <year>2017</year>
@@ -2796,6 +2850,130 @@
     <attribute name="title">
      <string>Режим отображения</string>
     </attribute>
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>20</y>
+       <width>231</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Тип канала 1</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_11">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>219</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QRadioButton" name="ButonOtklChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Тренд                 </string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="ButonTokChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Барграф</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="ButonNapryagenieChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Напряжение                     </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="ButonResistorChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Резистивный датчик       </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="ButonTermoparaChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Термопара                           </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="ButonImpulseChannel_5">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Счетчик Импульсов           </string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton">

@@ -10,29 +10,29 @@ public:
 
     QString GetUnitsName();
 
-    int GetSignalType();
-    int GetLowerLimit();
-    int GetHigherLimit();
-    int GetLowerMeasureLimit();
-    int GetHigherMeasureLimit();
+    double GetSignalType();
+    double GetLowerLimit();
+    double GetHigherLimit();
+    double GetLowerMeasureLimit();
+    double GetHigherMeasureLimit();
 
-    void SetSignalType(int newsignaltype);
-    void SetLowerLimit(int newsignaltype);
-    void SetHigherLimit(int newhigherlimit);
-    void SetLowerMeasureLimit(int newlowermeaslimit);
-    void SetHigherMeasureLimit(int newhighermeaslimit);
+    void SetSignalType(double newsignaltype);
+    void SetLowerLimit(double newsignaltype);
+    void SetHigherLimit(double newhigherlimit);
+    void SetLowerMeasureLimit(double newlowermeaslimit);
+    void SetHigherMeasureLimit(double newhighermeaslimit);
     void SetUnitsName(QString newunit);
 
     // приватные переменные настроек канала
 
 private:
 
-    int signaltype;
-    int lowerlimit;
-    int higherlimit;
-    int lowermeasurelimit;
-    int highermeasurelimit;
-    int measureperiodsecond;
+    double signaltype;
+    double lowerlimit;
+    double higherlimit;
+    double lowermeasurelimit;
+    double highermeasurelimit;
+    double measureperiodsecond;
     QString unitsname;
 };
 

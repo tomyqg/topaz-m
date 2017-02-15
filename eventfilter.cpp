@@ -19,6 +19,8 @@ bool Options::eventFilter(QObject *object, QEvent *event)
 {
     if(event->type() == event->MouseButtonRelease)
     {
+        Options::olderprop = object->property("text").toString();
+//        qDebug() << Options::olderprop ;
         keyboard kb;
         kb.setModal(true);
         kb.exec();
@@ -33,10 +35,14 @@ bool Options::eventFilter(QObject *object, QEvent *event)
 bool keyboard::eventFilter(QObject *object, QEvent *event)
 {
     QKeyEvent* key = static_cast<QKeyEvent*>(event); // what key pressed
-
     if  (key->key()==Qt::Key_Enter) // if key == enter, then close
     {
         this->close();
     }
     return QObject::eventFilter(object, event);
+}
+
+void keyboard::setolderproperty(QString str)
+{
+    this->olderproperty = str;
 }

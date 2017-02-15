@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(1111);
     timer2->start(201);
 
-    //    closetimer->start(1000*150);
+    // closetimer->start(1000*150);
     // a new thread that reads serial input
 
     QThread *thread= new QThread();
@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     my->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), my, SLOT(updatethread()));
+    connect(thread, SIGNAL(started()), my, SLOT(readuart()));
 
     thread->start();
 
@@ -95,7 +95,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QString zzz = QTextCodec::codecForMib(106)->toUnicode(process.readAll());
 
-    ui->textEdit_3->setText( "and the output is " + zzz);
+//    ui->textEdit_3->setText( "and the output is " + zzz);
 
     //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -285,7 +285,7 @@ void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
 
 void MainWindow::focusChanged(QWidget* , QWidget* )
 {
-    ui->textEdit_3->setText("b");
+//    ui->textEdit_3->setText("b");
 }
 
 void MainWindow::on_comboBox_13_currentIndexChanged(int index)

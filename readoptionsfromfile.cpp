@@ -45,15 +45,19 @@ void Options::readsystemoptionsfromfile()
 
     Options::calibrationprm = json["Calibration"].toString();
 
+    QProcess process;
+
+    process.startDetached("sudo date --set " + json["Date"].toString());
+    process.startDetached("sudo date --set " + json["Time"].toString()); // max freq on
+
     infile.close();
 }
-
 
 void Options::readoptionsfromfile()
 {
     QFile infile("/usr/options.txt");
 
-    //    QFile infile("C:/Work/options.txt");
+//        QFile infile("C:/Work/options.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -74,38 +78,38 @@ void Options::readoptionsfromfile()
 
     QJsonObject ch1 = array.at(0).toObject();
 
-    options1.SetHigherLimit(ch1.value("HigherLimit").toInt());
-    options1.SetLowerLimit(ch1.value("LowerLimit").toInt());
-    options1.SetHigherMeasureLimit(ch1.value("HigherMeasLimit").toInt());
-    options1.SetLowerMeasureLimit(ch1.value("LowerMeasLimit").toInt());
-    options1.SetSignalType(ch1.value("Type").toInt());
+    options1.SetHigherLimit(ch1.value("HigherLimit").toDouble());
+    options1.SetLowerLimit(ch1.value("LowerLimit").toDouble());
+    options1.SetHigherMeasureLimit(ch1.value("HigherMeasLimit").toDouble());
+    options1.SetLowerMeasureLimit(ch1.value("LowerMeasLimit").toDouble());
+    options1.SetSignalType(ch1.value("Type").toDouble());
     options1.SetUnitsName(ch1.value("Units").toString());
 
     QJsonObject ch2 = array.at(1).toObject();
 
-    options2.SetHigherLimit(ch2.value("HigherLimit").toInt());
-    options2.SetLowerLimit(ch2.value("LowerLimit").toInt());
-    options2.SetHigherMeasureLimit(ch2.value("HigherMeasLimit").toInt());
-    options2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toInt());
-    options2.SetSignalType(ch2.value("Type").toInt());
+    options2.SetHigherLimit(ch2.value("HigherLimit").toDouble());
+    options2.SetLowerLimit(ch2.value("LowerLimit").toDouble());
+    options2.SetHigherMeasureLimit(ch2.value("HigherMeasLimit").toDouble());
+    options2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toDouble());
+    options2.SetSignalType(ch2.value("Type").toDouble());
     options2.SetUnitsName(ch2.value("Units").toString());
 
     QJsonObject ch3 = array.at(2).toObject();
 
-    options3.SetHigherLimit(ch3.value("HigherLimit").toInt());
-    options3.SetLowerLimit(ch3.value("LowerLimit").toInt());
-    options3.SetHigherMeasureLimit(ch3.value("HigherMeasLimit").toInt());
-    options3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toInt());
-    options3.SetSignalType(ch3.value("Type").toInt());
+    options3.SetHigherLimit(ch3.value("HigherLimit").toDouble());
+    options3.SetLowerLimit(ch3.value("LowerLimit").toDouble());
+    options3.SetHigherMeasureLimit(ch3.value("HigherMeasLimit").toDouble());
+    options3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toDouble());
+    options3.SetSignalType(ch3.value("Type").toDouble());
     options3.SetUnitsName(ch3.value("Units").toString());
 
     QJsonObject ch4 = array.at(3).toObject();
 
-    options4.SetHigherLimit(ch4.value("HigherLimit").toInt());
-    options4.SetLowerLimit(ch4.value("LowerLimit").toInt());
-    options4.SetHigherMeasureLimit(ch4.value("HigherMeasLimit").toInt());
-    options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toInt());
-    options4.SetSignalType(ch4.value("Type").toInt());
+    options4.SetHigherLimit(ch4.value("HigherLimit").toDouble());
+    options4.SetLowerLimit(ch4.value("LowerLimit").toDouble());
+    options4.SetHigherMeasureLimit(ch4.value("HigherMeasLimit").toDouble());
+    options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toDouble());
+    options4.SetSignalType(ch4.value("Type").toDouble());
     options4.SetUnitsName(ch4.value("Units").toString());
 
     //    qDebug() << json;

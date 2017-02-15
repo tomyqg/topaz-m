@@ -31,6 +31,7 @@
 #include "keyboard.h"
 
 QString Options::calibrationprm = "3383 3962 234 599";
+QString Options::olderprop = "";
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -44,8 +45,9 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_2, SIGNAL(buttonClicked(int)), this, SLOT(Channel2TypeChange()) );
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
-    readsystemoptionsfromfile();
+
     readoptionsfromfile();
+    readsystemoptionsfromfile();
     applysettingstoUI();
     customizeUI();
 
@@ -375,7 +377,7 @@ void Options::customizeUI()
 
     //    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
 
-    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 60px}");//height: 20px;
+    ui->NignPredelChannel_1->setStyleSheet( "QDoubleSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 40px}""QSpinBox::down-button { width: 40px; height: 20px}""QDoubleSpinBox::down-button { width: 40px;height: 20px}" "QSpinBox::up-button { width: 40px; height: 20px}""QDoubleSpinBox::up-button { width: 40px;height: 20px}");//height: 20px;
 
     QString commonstylesheet( ui->NignPredelChannel_1->styleSheet());
     ui->VerhnPredelChannel_1->setStyleSheet(commonstylesheet);
@@ -388,7 +390,6 @@ void Options::customizeUI()
         QSpinBox *sb = spinList.at(i);
         sb->setStyleSheet(commonstylesheet);
     }
-
 
     QList<QDoubleSpinBox*> dspinList = QObject::findChildren<QDoubleSpinBox*> (  );
 
@@ -659,69 +660,6 @@ void Options::applysettingstoUI()
     ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
 }
 
-void Options::WriteOptionsToFile()
-{
-    QJsonObject channel1;
-    QJsonObject channel2;
-    QJsonObject channel3;
-    QJsonObject channel4;
-    QJsonObject channels;
-    QJsonArray settings;
-    
-    channel1["Type"] = options1.GetSignalType();
-    channel1["Units"] = options1.GetUnitsName();
-    channel1["HigherLimit"] = options1.GetHigherLimit();
-    channel1["LowerLimit"] = options1.GetLowerLimit();
-    channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
-    channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
-    
-    settings.append(channel1);
-    
-    channel2["Type"] = options2.GetSignalType();
-    channel2["Units"] = options2.GetUnitsName();
-    channel2["HigherLimit"] = options2.GetHigherLimit();
-    channel2["LowerLimit"] = options2.GetLowerLimit();
-    channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
-    channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
-
-    settings.append(channel2);
-
-    channel3["Type"] = options3.GetSignalType();
-    channel3["Units"] = options3.GetUnitsName();
-    channel3["HigherLimit"] = options3.GetHigherLimit();
-    channel3["LowerLimit"] = options3.GetLowerLimit();
-    channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
-    channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
-
-    settings.append(channel3);
-
-    channel4["Type"] = options4.GetSignalType();
-    channel4["Units"] = options4.GetUnitsName();
-    channel4["HigherLimit"] = options4.GetHigherLimit();
-    channel4["LowerLimit"] = options4.GetLowerLimit();
-    channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
-    channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
-
-    settings.append(channel4);
-    
-    channels["count"] = 4;
-    channels["channels"] = settings;
-
-    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
-    
-    //    qDebug() << channel4;
-
-
-    QFile file("/usr/options.txt");
-    //    QFile file("C:/Work/options.txt");
-    file.open(QIODevice::ReadWrite);
-
-    file.resize(0); // clear file
-    QTextStream out(&file);
-    out << setstr;
-    file.close();
-}
-
 void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)
 {
 }
@@ -738,8 +676,6 @@ void Options::on_UnitsChannel_1_editingFinished()
 
 void Options::on_pushButton_3_clicked()
 {
-
-
     //    ui->timeEdit->
     QProcess process1;
     process1.start("xinput_calibrator"); // max perfomance on
@@ -759,24 +695,20 @@ void Options::on_pushButton_3_clicked()
 
     QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
 
-    ui->textEdit->setText( "and the output is " + output);
+//    ui->textEdit->setText( "and the output is " + output);
 
     if (output.indexOf(stringtofind)>=0)
     {
 //        ui->textEdit->setText(Options::calibrationprm);
-
-        QString a = Options::calibrationprm;
-
+//        QString a = Options::calibrationprm;
         QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
 
         pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
         pice = pice.simplified();
         pice = pice.remove(0, stringtofind.length() );
-        Options::calibrationprm = pice;
-
-        a = a + "->" + Options::calibrationprm ;
-
-        ui->textEdit->setText(a);
+        Options::calibrationprm = pice.remove('\"');
+//        a = a + "->" + Options::calibrationprm ;
+//        ui->textEdit->setText(a);
     }
 }
 

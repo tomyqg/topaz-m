@@ -232,36 +232,10 @@
     <string notr="true">buttonGroup</string>
    </attribute>
   </widget>
-  <widget class="QPushButton" name="pushButton_10">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>240</y>
-     <width>50</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>,</string>
-   </property>
-   <attribute name="buttonGroup">
-    <string notr="true">buttonGroup</string>
-   </attribute>
-  </widget>
   <widget class="QPushButton" name="pushButton_11">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>160</x>
      <y>240</y>
      <width>50</width>
      <height>50</height>
@@ -1805,6 +1779,68 @@
    </property>
    <property name="text">
     <string>⇪</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_42">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>300</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>:</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_43">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>240</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>.</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_44">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>240</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>The Long Space Button</string>
    </property>
   </widget>
  </widget>

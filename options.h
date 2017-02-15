@@ -26,6 +26,7 @@ public:
     ~Options();
 
     static QString calibrationprm;
+    static QString olderprop;
 
 public slots:
 

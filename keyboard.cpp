@@ -4,6 +4,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "options.h"
+
 #include <QtCore>
 #include <QtWidgets>
 
@@ -14,9 +16,12 @@ keyboard::keyboard(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->buttonGroup, SIGNAL(buttonPressed(int)), this, SLOT(textinput()) );
 
+    ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
-
     ui->textEdit->installEventFilter(this);
+
+//    qDebug() << Options::olderprop;
+
 }
 
 keyboard::~keyboard()
@@ -77,5 +82,12 @@ void keyboard::on_pushButton_27_clicked()
 {
     QString textwas = ui->textEdit->toPlainText();
     QString textnew = textwas.remove(textwas.length()-1,1);
+    ui->textEdit->setText(textnew);
+}
+
+void keyboard::on_pushButton_44_clicked()
+{
+    QString textwas = ui->textEdit->toPlainText();
+    QString textnew = textwas.append(' ');
     ui->textEdit->setText(textnew);
 }

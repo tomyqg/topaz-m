@@ -19,6 +19,8 @@ public:
     ~keyboard();
 
 
+    QString olderproperty;
+
     bool onlydigits;
 
 private slots:
@@ -29,8 +31,11 @@ private slots:
 
     void on_pushButton_27_clicked();
 
+    void on_pushButton_44_clicked();
+
 public slots:
     QString getcustomstring();
+    void setolderproperty(QString str);
     bool eventFilter(QObject *object, QEvent *event);
 
 private:

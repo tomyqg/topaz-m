@@ -75,3 +75,64 @@ void Options::WriteSystemOptionsToFile()
     out << setstr;
     file.close();
 }
+
+
+
+void Options::WriteOptionsToFile()
+{
+    QJsonObject channel1;
+    QJsonObject channel2;
+    QJsonObject channel3;
+    QJsonObject channel4;
+    QJsonObject channels;
+    QJsonArray settings;
+
+    channel1["Type"] = options1.GetSignalType();
+    channel1["Units"] = options1.GetUnitsName();
+    channel1["HigherLimit"] = options1.GetHigherLimit();
+    channel1["LowerLimit"] = options1.GetLowerLimit();
+    channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
+    channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
+
+    settings.append(channel1);
+
+    channel2["Type"] = options2.GetSignalType();
+    channel2["Units"] = options2.GetUnitsName();
+    channel2["HigherLimit"] = options2.GetHigherLimit();
+    channel2["LowerLimit"] = options2.GetLowerLimit();
+    channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
+    channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
+
+    settings.append(channel2);
+
+    channel3["Type"] = options3.GetSignalType();
+    channel3["Units"] = options3.GetUnitsName();
+    channel3["HigherLimit"] = options3.GetHigherLimit();
+    channel3["LowerLimit"] = options3.GetLowerLimit();
+    channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
+    channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
+
+    settings.append(channel3);
+
+    channel4["Type"] = options4.GetSignalType();
+    channel4["Units"] = options4.GetUnitsName();
+    channel4["HigherLimit"] = options4.GetHigherLimit();
+    channel4["LowerLimit"] = options4.GetLowerLimit();
+    channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
+    channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
+
+    settings.append(channel4);
+
+    channels["count"] = 4;
+    channels["channels"] = settings;
+
+    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
+    QFile file("/usr/options.txt");
+//        QFile file("C:/Work/options.txt");
+    file.open(QIODevice::ReadWrite);
+
+    file.resize(0); // clear file
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+}
