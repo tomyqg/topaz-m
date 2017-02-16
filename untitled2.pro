@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     eventfilter.cpp \
     uartdriver.cpp \
     writeoptionstofile.cpp \
-    readoptionsfromfile.cpp
+    readoptionsfromfile.cpp \
+    messages.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -34,12 +35,14 @@ HEADERS  += mainwindow.h \
     options.h \
     channel1.h\
     channel1.h \
-    keyboard.h
+    keyboard.h \
+    messages.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
     options.ui \
-    keyboard.ui
+    keyboard.ui \
+    messages.ui
 target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
 #target.path  = /usr
 INSTALLS    += target

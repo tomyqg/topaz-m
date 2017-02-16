@@ -19,9 +19,6 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
     ui->textEdit->installEventFilter(this);
-
-//    qDebug() << Options::olderprop;
-
 }
 
 keyboard::~keyboard()
@@ -62,15 +59,6 @@ void keyboard::textinput()
 
     ui->textEdit->setText(textnew);
 
-
-
-    //    qDebug() << button->text();
-
-    //    if( strcmp( widget->metaObject()->className(), "QPushButton") == 0 ) {
-    //        qDebug() << "this comes from a QPushButton, let me print the text on the button";
-    //        QPushButton *button = static_cast<QPushButton*>(widget);
-    //        qDebug() << button->text();
-    //    }
 }
 
 void keyboard::on_pushButton_13_clicked()

@@ -69,6 +69,10 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_radioButton_clicked();
+
+    void on_radioButton_2_clicked();
+
 signals:
     void error(const QString &s);
 
@@ -81,5 +85,8 @@ private:
 protected:
     void paintEvent(QPaintEvent *e);
 };
+
+
+
 
 #endif // MAINWINDOW_H

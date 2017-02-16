@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "options.h"
+#include "messages.h"
 #include "keyboard.h"
 #include "dialog.h"
 
@@ -91,11 +92,11 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 
-//    process.waitForFinished();
+    //    process.waitForFinished();
 
     QString zzz = QTextCodec::codecForMib(106)->toUnicode(process.readAll());
 
-//    ui->textEdit_3->setText( "and the output is " + zzz);
+    //    ui->textEdit_3->setText( "and the output is " + zzz);
 
     //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -285,7 +286,7 @@ void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
 
 void MainWindow::focusChanged(QWidget* , QWidget* )
 {
-//    ui->textEdit_3->setText("b");
+    //    ui->textEdit_3->setText("b");
 }
 
 void MainWindow::on_comboBox_13_currentIndexChanged(int index)
@@ -302,11 +303,10 @@ void MainWindow::on_comboBox_13_currentIndexChanged(const QString &arg1)
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    //    QProcess process1;
-    //        process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
-    //        process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
-    //        process1.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3389 3958 252 616"); // вручную ввели координаты тача
-    //    process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
+    Messages messages;
+    //    messages.setM
+    messages.setModal(true);
+    messages.exec();
 }
 
 void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
@@ -329,4 +329,20 @@ void MainWindow::on_pushButton_5_clicked()
     keyboard kb;
     kb.setModal(true);
     kb.exec();
+}
+
+void MainWindow::on_radioButton_clicked()
+{
+    QProcess process;
+    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    QProcess process;
+    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+
 }
