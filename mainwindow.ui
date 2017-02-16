@@ -133,27 +133,11 @@ p, li { white-space: pre-wrap; }
      <string>Математический канал</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>560</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="horizontalSlider">
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>610</y>
+      <y>570</y>
       <width>451</width>
       <height>22</height>
      </rect>
@@ -181,7 +165,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>590</y>
+      <y>630</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -190,14 +174,14 @@ p, li { white-space: pre-wrap; }
      <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
-     <string>количество графиков</string>
+     <string>число графиков</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>620</y>
+      <y>630</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -303,22 +287,6 @@ p, li { white-space: pre-wrap; }
      <string>Настройки</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>630</y>
-      <width>231</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
@@ -334,61 +302,6 @@ p, li { white-space: pre-wrap; }
     <property name="text">
      <string>Закрыть программу</string>
     </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox_13">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>510</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="insertPolicy">
-     <enum>QComboBox::NoInsert</enum>
-    </property>
-    <property name="frame">
-     <bool>true</bool>
-    </property>
-    <item>
-     <property name="text">
-      <string>Отключен</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ток</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Напряжение</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Резистивный термодатчик</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Термоэлемент</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Счетчик импульсов</string>
-     </property>
-    </item>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -470,6 +383,9 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>энергосбережение</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

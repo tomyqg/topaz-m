@@ -91,12 +91,13 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-
     //    process.waitForFinished();
 
     QString zzz = QTextCodec::codecForMib(106)->toUnicode(process.readAll());
 
-    //    ui->textEdit_3->setText( "and the output is " + zzz);
+    ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
+
+    //ui->textEdit_3->setText( "and the output is " + zzz);
 
     //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
     //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
@@ -187,7 +188,6 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_2_pressed()
 {
     ui->customPlot->clearGraphs();
-    ui->label_4->setText("");
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
