@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "options.h"
+#include "messages.h"
 #include "keyboard.h"
 #include "dialog.h"
 #include <QPixmap>
@@ -128,11 +129,85 @@ void Options::WriteOptionsToFile()
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
     QFile file("/usr/options.txt");
-//        QFile file("C:/Work/options.txt");
+    //        QFile file("C:/Work/options.txt");
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
     QTextStream out(&file);
     out << setstr;
     file.close();
+}
+
+
+void MessageWrite::LogMessageWrite(QString nm)
+{
+    QJsonObject themessage;
+    QJsonObject archive;
+
+    //    for(int y=0; y<12; y++)
+    //    {
+    //        archivechannel1["Date"] = y*2.12;
+    //        archivechannel1["Message"] = nm;
+
+    //        valuesarray.append(archivechannel1);
+    //        messagequeue.append(archivechannel2);
+    //    }
+    //    int a;
+
+    QDateTime local (QDateTime::currentDateTime());
+    themessage["Time"] = local.time().toString();
+    themessage["Date"] = local.date().toString("dd/MM/yy");
+    themessage["Message"] = nm;
+
+    for(int y=0; y<100; y++)
+    {
+        themessage["Time"] = local.time().toString();
+        themessage["Date"] = local.date().toString("dd/MM/yy");
+        themessage["Message"] = nm;
+        messagesqueue.append(themessage);
+    }
+
+    messagesqueue.append(themessage);
+
+
+
+    Options opt;
+    double maxmes  = opt.getmaxmessageslimit();
+
+
+    while (messagesqueue.count()>maxmes)
+    {
+        messagesqueue.removeFirst();
+    }
+
+    archive["messagesqueue"] = messagesqueue;
+    archive["totalmsg"] = messagesqueue.count();
+
+    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
+
+    //    QFile file("C:/Work/Log.txt");
+    QFile file("/usr/Log.txt");
+
+    file.open(QIODevice::ReadWrite);
+
+    file.resize(0); // clear file
+
+    QTextStream out(&file);
+
+    out << setstr;
+
+    file.close();
+}
+
+void MessageWrite::LogClear()
+{
+
+    QFile file("/usr/Log.txt");
+
+    file.open(QIODevice::ReadWrite);
+
+    file.resize(0); // clear file
+
+    file.close();
+
 }

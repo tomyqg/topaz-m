@@ -24,9 +24,9 @@ SOURCES += main.cpp\
     keyboard.cpp \
     eventfilter.cpp \
     uartdriver.cpp \
-    writeoptionstofile.cpp \
     readoptionsfromfile.cpp \
-    messages.cpp
+    messages.cpp \
+    writetofile.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \

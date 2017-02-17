@@ -28,6 +28,8 @@
 #include "messages.h"
 #include "ui_messages.h"
 
+QJsonArray MessageWrite::messagesqueue;
+
 Messages::Messages(QDialog *parent) :
     QDialog(parent),
     ui(new Ui::Messages)
@@ -35,19 +37,18 @@ Messages::Messages(QDialog *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("MESSAGES"));
-
-    QString s = "What are little boys made of, made of?What are little boysmade of?";
-    for (int var = 0; var < 12; ++var) {
-        ui->listWidget->addItem(s);
+    MessageWrite mr ("Messages open");
+    QJsonArray messagesarray = mr.LogMessageRead();
+    for (int var = 0; var < messagesarray.count() ; ++var) {
+        QJsonObject mes = messagesarray.at(var).toObject();
+        ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("Date").toString() +" "+  mes.value("Time").toString()+" "+ mes.value("Message").toString());
     }
     ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
-
-    MessageWrite mr;
-
 }
 
 Messages::~Messages()
 {
+    MessageWrite mr ("Messages close");
     delete ui;
 }
 
@@ -58,15 +59,11 @@ void Messages::on_pushButton_clicked()
 
 MessageWrite::MessageWrite()
 {
-//    qDebug() << "none string";
+    LogMessageWrite("message");
 }
 
 MessageWrite::MessageWrite( QString nm)
 {
-//    qDebug() << nm;
+    LogMessageRead();
+    LogMessageWrite(nm);
 }
-
-void MessageWrite::WriteMessage(QString nm)
-{}
-
-

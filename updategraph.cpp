@@ -373,6 +373,7 @@ void MainWindow::mousePress()
 
 
 
+
 void MainWindow::WriteArchiveToFile()
 {
 
@@ -424,11 +425,12 @@ void MainWindow::WriteArchiveToFile()
 
     archive["archives"] = archives;
     archive["StartTime"] = MainWindow::starttime;
-    archive["EndTime"] = end.toString();
+    archive["EndTime"] = end.toString("dd/MM/yy");
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
 
-    QFile file("C:/Work/archive.txt");
+//    QFile file("C:/Work/");
+    QFile file("/usr/archive.txt");
 
     file.open(QIODevice::ReadWrite);
 

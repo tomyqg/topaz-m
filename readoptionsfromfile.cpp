@@ -23,6 +23,7 @@
 #include <QThread>
 #include <QPoint>
 #include <channel1.h>
+#include <messages.h>
 
 
 
@@ -111,12 +112,24 @@ void Options::readoptionsfromfile()
     options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toDouble());
     options4.SetSignalType(ch4.value("Type").toDouble());
     options4.SetUnitsName(ch4.value("Units").toString());
-
     //    qDebug() << json;
-    //    qDebug() << ch1;
-    //    qDebug() << ch2;
-    //    qDebug() << ch3;
-    //    qDebug() << ch4;
-
     infile.close();
 }
+
+QJsonArray MessageWrite::LogMessageRead()
+{
+//    QFile file("C:/Work/Log.txt");
+    QFile file("/usr/Log.txt");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString sss = in.readLine();
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QJsonObject json = doc.object();
+    QJsonArray array = json["messagesqueue"].toArray();
+    MessageWrite::messagesqueue = array;
+    file.close();
+//    qDebug() << MessageWrite::messagesqueue;
+    return MessageWrite::messagesqueue;
+}
+
+

@@ -29,9 +29,12 @@
 #include "ui_options.h"
 #include "channel1.h"
 #include "keyboard.h"
+#include "messages.h"
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
+
+double Options::maxmessageslimit=1000;
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -356,6 +359,8 @@ void Options::applynewsettings()
     options4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
     options4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
 
+    setmaxmessageslimit(ui->spinBox->value());
+
     // apply new time
 
     QProcess process;
@@ -378,6 +383,10 @@ void Options::customizeUI()
     //    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
 
     ui->NignPredelChannel_1->setStyleSheet( "QDoubleSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 40px}""QSpinBox::down-button { width: 40px; height: 20px}""QDoubleSpinBox::down-button { width: 40px;height: 20px}" "QSpinBox::up-button { width: 40px; height: 20px}""QDoubleSpinBox::up-button { width: 40px;height: 20px}");//height: 20px;
+
+    //    ui->pushButton_2->setIcon(QIcon("/usr/EXT.jpg"));
+    //    ui->pushButton_2->setIconSize(QSize(211,45));
+
 
     QString commonstylesheet( ui->NignPredelChannel_1->styleSheet());
     ui->VerhnPredelChannel_1->setStyleSheet(commonstylesheet);
@@ -683,32 +692,32 @@ void Options::on_pushButton_3_clicked()
     QString stringtofind = "Option	\"Calibration\"";
     QString stringtofind2 = "Option	\"SwapAxes\"";
 
-//    QString theouttemp = "Calibrating EVDEV driver for \"HID 1aad:0001\" id=7 current calibration values (from XInput): min_x=3383, max_x=3962 and min_y=234, max_y=599 Doing dynamic recalibration: Setting calibration data: 3388, 3964, 242, 599 --> Making the calibration permanent <--          copy the snippet below into '/etc/X11/xorg.conf.d/99-calibration.conf' (/usr/share/X11/xorg.conf.d/ in some distro's)
-//            Section \"InputClass\"
-//            Identifier	\"calibration\"
-//            MatchProduct	\"HID 1aad:0001\"
-//            Option	\"Calibration\"	\"3388 3964 242 599\"
-//            Option	\"SwapAxes\"	\"0\"
-//            EndSection";
+    //    QString theouttemp = "Calibrating EVDEV driver for \"HID 1aad:0001\" id=7 current calibration values (from XInput): min_x=3383, max_x=3962 and min_y=234, max_y=599 Doing dynamic recalibration: Setting calibration data: 3388, 3964, 242, 599 --> Making the calibration permanent <--          copy the snippet below into '/etc/X11/xorg.conf.d/99-calibration.conf' (/usr/share/X11/xorg.conf.d/ in some distro's)
+    //            Section \"InputClass\"
+    //            Identifier	\"calibration\"
+    //            MatchProduct	\"HID 1aad:0001\"
+    //            Option	\"Calibration\"	\"3388 3964 242 599\"
+    //            Option	\"SwapAxes\"	\"0\"
+    //            EndSection";
 
     process1.waitForFinished();
 
     QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
 
-//    ui->textEdit->setText( "and the output is " + output);
+    //    ui->textEdit->setText( "and the output is " + output);
 
     if (output.indexOf(stringtofind)>=0)
     {
-//        ui->textEdit->setText(Options::calibrationprm);
-//        QString a = Options::calibrationprm;
+        //        ui->textEdit->setText(Options::calibrationprm);
+        //        QString a = Options::calibrationprm;
         QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
 
         pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
         pice = pice.simplified();
         pice = pice.remove(0, stringtofind.length() );
         Options::calibrationprm = pice.remove('\"');
-//        a = a + "->" + Options::calibrationprm ;
-//        ui->textEdit->setText(a);
+        //        a = a + "->" + Options::calibrationprm ;
+        //        ui->textEdit->setText(a);
     }
 }
 
@@ -722,3 +731,20 @@ void Options::on_tabWidget_2_tabBarClicked(int index)
     //    QWidget *newTab = new QWidget(ui->tabWidget_2);
     //    ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
 }
+
+void Options::on_pushButton_4_clicked()
+{
+    MessageWrite ms;
+    ms.LogClear();
+}
+
+double Options::getmaxmessageslimit()
+{
+    return maxmessageslimit;
+}
+
+void Options::setmaxmessageslimit(double n)
+{
+    maxmessageslimit = n;
+}
+

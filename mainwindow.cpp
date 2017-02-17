@@ -30,7 +30,7 @@ QString inputstr = "";
 
 QDateTime start(QDateTime::currentDateTime());
 
-QString MainWindow::starttime = start.toString();
+QString MainWindow::starttime = start.toString("dd/MM/yy");
 
 QString MainWindow::endtime = "";
 
@@ -54,6 +54,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer2 = new QTimer(this);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
 
+    QTimer *timetouch = new QTimer(this);
+    connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
+
     tmr = new QTimer();
     tmr->setInterval(500);
 
@@ -63,13 +66,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    connect(timer, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+    connect(timetouch, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
 
     //    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
 
     tmr->start(500);
     timer->start(1111);
     timer2->start(201);
+
+    timetouch->start(5000);
 
     // closetimer->start(1000*150);
     // a new thread that reads serial input
@@ -85,33 +90,17 @@ MainWindow::MainWindow(QWidget *parent) :
     thread->start();
 
     QProcess process;
-
-    //    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-    //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-    //    process.waitForFinished();
-
-    QString zzz = QTextCodec::codecForMib(106)->toUnicode(process.readAll());
-
     ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
 
-    //ui->textEdit_3->setText( "and the output is " + zzz);
-
-    //process1.startDetached("xinput_calibrator"); // запускает калибратор дисплея
-    //process1.startDetached("sudo xinput_calibrator --list"); // вывели список таач-скринов
-    //process.startDetached("xinput list-props 7"); // вручную ввели координаты тача
-    //QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
-    //apply style to all widgets
-    //for (int i = 0; i < spinList.count(); ++i) {
-    //QLabel *sb = spinList.at(i);
-    //sb->setText("alloha");
-    //}
+    MessageWrite mr ("Programm Started");
 }
 
 MainWindow::~MainWindow()
 {
+    MessageWrite mr ("Programm Closed");
     delete ui;
 }
 
@@ -132,17 +121,12 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
-    QProcess process;
-    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // вручную ввели координаты тача
 }
 
-void MainWindow::textupdate()
+void MainWindow::touchupdate()
 {
-    //    QWidget * fw = qApp->focusWidget();
-    //    QObject * ob = qApp->focusObject();
-    //    ui->textEdit_3->setText(ui->textEdit_3->toPlainText() + " | " + ob->objectName());
-    //    QMouseEvent mouseEvent(QEvent::MouseButtonRelease,QCursor::pos(),Qt::LeftButton,Qt::LeftButton,Qt::NoModifier);
-    //    QCoreApplication::sendEvent(ui->pushButton_2,&mouseEvent);
+    QProcess process;
+    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
 }
 
 void MainWindow::updatevalue()

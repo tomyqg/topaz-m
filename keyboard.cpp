@@ -3,7 +3,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "messages.h"
 #include "options.h"
 
 #include <QtCore>
@@ -19,46 +19,32 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
     ui->textEdit->installEventFilter(this);
+
+    MessageWrite mr ("Keyboard Open");
 }
 
 keyboard::~keyboard()
 {
+    MessageWrite mr ("Keyboard Close");
     delete ui;
 }
 
 void keyboard::on_buttonBox_accepted()
 {
-//    qDebug() << "acc";
-    //    QTextEdit *textBox = MainWindow->findChild<QTextEdit *>("textBox");
-
-    //    QList<QLabel*> spinList = keyboard::findChildren<QLabel*> (  );
-
-    //    // apply style to all widgets
-    //    for (int i = 0; i < spinList.count(); ++i) {
-    //        QLabel *sb = spinList.at(i);
-    //        sb->setText("alloha");
-    //    }
 }
 
 QString keyboard::getcustomstring()
 {
     return ui->textEdit->toPlainText();
-//     ui->textEdit->toPlainText();
 }
 
 void keyboard::textinput()
 {
-
     QWidget *widget = QApplication::focusWidget();
-
     QString textwas = ui->textEdit->toPlainText();
-
     QPushButton *button = static_cast<QPushButton*>(widget);
-
     QString textnew = textwas  + button->text();
-
     ui->textEdit->setText(textnew);
-
 }
 
 void keyboard::on_pushButton_13_clicked()

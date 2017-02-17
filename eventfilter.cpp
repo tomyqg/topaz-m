@@ -17,6 +17,7 @@
 
 bool Options::eventFilter(QObject *object, QEvent *event)
 {
+//    if(event->type() == event->MouseButtonDblClick)
     if(event->type() == event->MouseButtonRelease)
     {
         Options::olderprop = object->property("text").toString();

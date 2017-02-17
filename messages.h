@@ -26,11 +26,15 @@ class MessageWrite
 {
 public:
 
-//    QString GetUnitsName();
-//    double GetSignalType();
-    void WriteMessage(QString nm);
+    QJsonArray LogMessageRead();
+    void LogMessageWrite(QString nm);
     explicit  MessageWrite();
     explicit MessageWrite(QString nm);
+
+    static QJsonArray messagesqueue;
+    static QString strstr;
+
+    void LogClear();
 
 private:
 

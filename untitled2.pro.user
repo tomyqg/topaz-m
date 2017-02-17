@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-02-16T15:57:09. -->
+<!-- Written by QtCreator 4.1.0, 2017-02-17T11:25:58. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -320,9 +320,9 @@
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
-       <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
        <value type="QString">/usr/untitled2</value>
        <value type="QString">/usr</value>
+       <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -331,10 +331,10 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-02-16T15:55:38</value>
-       <value type="QDateTime">2017-02-14T13:29:49</value>
+       <value type="QDateTime">2017-02-17T11:23:10</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
        <value type="QDateTime">2017-02-13T15:40:39</value>
+       <value type="QDateTime">2017-02-14T13:29:49</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>

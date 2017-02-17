@@ -32,7 +32,7 @@ public:
 public slots:
 
     void focusChanged(QWidget* , QWidget* );
-    void textupdate();
+    void touchupdate();
     void WritetoFile();
     void WriteArchiveToFile();
 

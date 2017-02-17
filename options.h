@@ -27,6 +27,8 @@ public:
 
     static QString calibrationprm;
     static QString olderprop;
+    void setmaxmessageslimit(double n);
+    double getmaxmessageslimit();
 
 public slots:
 
@@ -60,7 +62,7 @@ private slots:
 
     void readoptionsfromfile();
 
-        void readsystemoptionsfromfile();
+    void readsystemoptionsfromfile();
 
     QString GetSignalUnits();
 
@@ -76,7 +78,12 @@ private slots:
 
     void on_tabWidget_2_tabBarClicked(int index);
 
+    void on_pushButton_4_clicked();
+
 private:
+
+    static double maxmessageslimit;
+
 
     Ui::Options *ui;
 };
