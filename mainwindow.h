@@ -10,14 +10,6 @@ namespace Ui {
 class MainWindow;
 }
 
-class NewThreadClass:public QObject
-{
-    Q_OBJECT
-
-private slots:
-    void readuart();
-};
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -80,6 +72,10 @@ private:
 
     Ui::MainWindow *ui;
     QTimer *tmr;
+    QTimer *channeltimer1;
+    QTimer *channeltimer2;
+    QTimer *channeltimer3;
+    QTimer *channeltimer4;
     QMutex mutex;
 
 protected:

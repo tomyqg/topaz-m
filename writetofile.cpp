@@ -25,6 +25,19 @@
 #include <QPoint>
 #include <channel1.h>
 
+
+extern QVector<double> xx1;
+extern QVector<double> yy1;
+
+extern QVector<double> xx2;
+extern QVector<double> yy2;
+
+extern QVector<double> xx3;
+extern QVector<double> yy3;
+
+extern QVector<double> xx4;
+extern QVector<double> yy4;
+
 void MainWindow::WritetoFile()
 {
     QFile filedir("/sys/class/gpio/gpio69/direction");
@@ -77,8 +90,6 @@ void Options::WriteSystemOptionsToFile()
     file.close();
 }
 
-
-
 void Options::WriteOptionsToFile()
 {
     QJsonObject channel1;
@@ -130,10 +141,9 @@ void Options::WriteOptionsToFile()
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
     QFile file("/usr/options.txt");
     //        QFile file("C:/Work/options.txt");
-    file.open(QIODevice::ReadWrite);
-
-    file.resize(0); // clear file
     QTextStream out(&file);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
     out << setstr;
     file.close();
 }
@@ -144,21 +154,11 @@ void MessageWrite::LogMessageWrite(QString nm)
     QJsonObject themessage;
     QJsonObject archive;
 
-    //    for(int y=0; y<12; y++)
-    //    {
-    //        archivechannel1["Date"] = y*2.12;
-    //        archivechannel1["Message"] = nm;
-
-    //        valuesarray.append(archivechannel1);
-    //        messagequeue.append(archivechannel2);
-    //    }
-    //    int a;
-
     QDateTime local (QDateTime::currentDateTime());
     themessage["Time"] = local.time().toString();
     themessage["Date"] = local.date().toString("dd/MM/yy");
     themessage["Message"] = nm;
-
+    /*
     for(int y=0; y<100; y++)
     {
         themessage["Time"] = local.time().toString();
@@ -166,16 +166,13 @@ void MessageWrite::LogMessageWrite(QString nm)
         themessage["Message"] = nm;
         messagesqueue.append(themessage);
     }
-
+*/
     messagesqueue.append(themessage);
-
-
 
     Options opt;
     double maxmes  = opt.getmaxmessageslimit();
 
-
-    while (messagesqueue.count()>maxmes)
+    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
     {
         messagesqueue.removeFirst();
     }
@@ -201,13 +198,76 @@ void MessageWrite::LogMessageWrite(QString nm)
 
 void MessageWrite::LogClear()
 {
-
     QFile file("/usr/Log.txt");
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    file.close();
+}
+
+void MainWindow::WriteArchiveToFile()
+{
+
+    QJsonObject archivechannel1;
+    QJsonObject archivechannel2;
+    QJsonObject archivechannel3;
+    QJsonObject archivechannel4;
+
+    QJsonObject archive;
+
+    QJsonArray archives;
+
+    QJsonArray array;
+
+    QJsonArray valuesarray;
+
+    for(int y=0; y<yy1.size(); y++)
+    {
+        //qDebug()<< yy1.at(y);
+        valuesarray.append(yy1.at(y)*0.11);
+    }
+
+    //    qDebug()<< settings;
+
+    int a;
+    QDateTime end(QDateTime::currentDateTime());
+
+    archivechannel1["arraysize"] = valuesarray.size();
+    archivechannel1["values"] = valuesarray;
+    archivechannel1["channelname"] = "channel_1";
+
+    archivechannel2["arraysize"] = valuesarray.size();
+    archivechannel2["values"] = valuesarray;
+    archivechannel2["channelname"] = "channel_2";
+
+    archivechannel3["arraysize"] = valuesarray.size();
+    archivechannel3["values"] = valuesarray;
+    archivechannel3["channelname"] = "channel_3";
+
+    archivechannel4["arraysize"] = valuesarray.size();
+    archivechannel4["values"] = valuesarray;
+    archivechannel4["channelname"] = "channel_4";
+
+    archives.append(archivechannel1);
+    archives.append(archivechannel2);
+    archives.append(archivechannel3);
+    archives.append(archivechannel4);
+
+    archive["archives"] = archives;
+    archive["StartTime"] = MainWindow::starttime;
+    archive["EndTime"] = end.toString("dd/MM/yy");
+
+    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
+
+    //    QFile file("C:/Work/");
+    QFile file("/usr/archive.txt");
 
     file.open(QIODevice::ReadWrite);
 
     file.resize(0); // clear file
 
-    file.close();
+    QTextStream out(&file);
 
+    out << setstr;
+
+    file.close();
 }

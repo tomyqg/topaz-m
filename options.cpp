@@ -54,8 +54,8 @@ Options::Options(QWidget *parent) :
     applysettingstoUI();
     customizeUI();
 
-    ui->timeEdit->setDateTime(QDateTime::currentDateTime());
-    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
+//    ui->timeEdit->setDateTime(QDateTime::currentDateTime());
+//    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 
     QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> (  );
 

@@ -64,6 +64,16 @@
     <string>закрыть</string>
    </property>
   </widget>
+  <widget class="QDial" name="dial">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>590</y>
+     <width>161</width>
+     <height>151</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -41,7 +41,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>5</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -3309,6 +3309,9 @@
       </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_6">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -3319,6 +3322,9 @@
       </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_7">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -3329,6 +3335,9 @@
       </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_8">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -3339,6 +3348,9 @@
       </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_9">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -3416,6 +3428,9 @@
        </item>
        <item>
         <widget class="QLabel" name="label_5">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -3430,6 +3445,9 @@
        </item>
        <item>
         <widget class="QLabel" name="label_6">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -3444,6 +3462,9 @@
        </item>
        <item>
         <widget class="QLabel" name="label_7">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -3458,6 +3479,9 @@
        </item>
        <item>
         <widget class="QLabel" name="label_9">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -3520,8 +3544,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
  </buttongroups>

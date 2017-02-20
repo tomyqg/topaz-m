@@ -24,10 +24,13 @@
 #include <QThread>
 #include <QPoint>
 #include <channel1.h>
+#include <uartdriver.h>
 
 extern QString inputstr ;
 
-void NewThreadClass::readuart()
+double UartDriver::channelinputbuffer[] = {};
+
+void UartDriver::readuart()
 {
     while (1)
     {
@@ -74,4 +77,9 @@ void NewThreadClass::readuart()
             serial.close();
         }
     }
+}
+
+double UartDriver::readchannelvalue(int channelnumber)
+{
+    return channelinputbuffer[channelnumber];
 }

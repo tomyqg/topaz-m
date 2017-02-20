@@ -15,12 +15,14 @@ public:
     double GetHigherLimit();
     double GetLowerMeasureLimit();
     double GetHigherMeasureLimit();
+    double GetMeasurePeriod();
 
     void SetSignalType(double newsignaltype);
     void SetLowerLimit(double newsignaltype);
     void SetHigherLimit(double newhigherlimit);
     void SetLowerMeasureLimit(double newlowermeaslimit);
     void SetHigherMeasureLimit(double newhighermeaslimit);
+    void SetMeasurePeriod(double newmeasperiod);
     void SetUnitsName(QString newunit);
 
     // приватные переменные настроек канала
@@ -32,7 +34,7 @@ private:
     double higherlimit;
     double lowermeasurelimit;
     double highermeasurelimit;
-    double measureperiodsecond;
+    double measureperiod;
     QString unitsname;
 };
 

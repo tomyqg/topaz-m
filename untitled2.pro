@@ -36,7 +36,8 @@ HEADERS  += mainwindow.h \
     channel1.h\
     channel1.h \
     keyboard.h \
-    messages.h
+    messages.h \
+    uartdriver.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \

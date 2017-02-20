@@ -21,6 +21,11 @@ double ChannelOptions::GetLowerMeasureLimit()
     return this->lowermeasurelimit;
 }
 
+double ChannelOptions::GetMeasurePeriod()
+{
+    return this->measureperiod;
+}
+
 double ChannelOptions::GetSignalType()
 {
     return this->signaltype;
@@ -35,6 +40,13 @@ void ChannelOptions::SetUnitsName(QString unitsname)
 {
     this->unitsname = unitsname;
 }
+
+void ChannelOptions::SetMeasurePeriod(double np)
+{
+    this->measureperiod = np;
+}
+
+
 
 QString ChannelOptions::GetUnitsName()
 {

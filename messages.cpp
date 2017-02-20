@@ -44,6 +44,7 @@ Messages::Messages(QDialog *parent) :
         ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("Date").toString() +" "+  mes.value("Time").toString()+" "+ mes.value("Message").toString());
     }
     ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
+    ui->listWidget->scrollToBottom();
 }
 
 Messages::~Messages()
@@ -66,4 +67,9 @@ MessageWrite::MessageWrite( QString nm)
 {
     LogMessageRead();
     LogMessageWrite(nm);
+}
+
+void Messages::on_dial_valueChanged(int value)
+{
+    ui->listWidget->setCurrentRow(ui->listWidget->count()/100*ui->dial->value());
 }

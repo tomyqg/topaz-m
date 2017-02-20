@@ -26,6 +26,8 @@
 #include <QPoint>
 #include <channel1.h>
 
+#include <uartdriver.h>
+
 QString inputstr = "";
 
 QDateTime start(QDateTime::currentDateTime());
@@ -60,9 +62,19 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr = new QTimer();
     tmr->setInterval(500);
 
-    QTimer *closetimer = new QTimer(this);
+    channeltimer1 = new QTimer();
+    channeltimer1->setInterval(100);
 
-    //    closetimer->setInterval(1000*120);
+    channeltimer2 = new QTimer();
+    channeltimer2->setInterval(300);
+
+    channeltimer3 = new QTimer();
+    channeltimer3->setInterval(2000);
+
+    channeltimer4 = new QTimer();
+    channeltimer4->setInterval(5000);
+
+    QTimer *closetimer = new QTimer(this);
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
@@ -81,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QThread *thread= new QThread();
 
-    NewThreadClass *my = new NewThreadClass();
+    UartDriver *my = new UartDriver();
 
     my->moveToThread(thread);
 
@@ -145,8 +157,9 @@ void MainWindow::updatevalue()
                     ui->dial->setValue(value1);
                     ui->lcdNumber->display(value1);}
                 if (letterstring=="b")
-
-                    ui->lcdNumber_2->display(value1);
+                {
+                    //ui->lcdNumber_2->display(value1);
+                }
             }
     }
 }
@@ -263,14 +276,10 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 
 void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
 {
-    //    QMouseEvent *mEvnRelease = new QMouseEvent(QEvent::MouseButtonRelease, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-    //    QCoreApplication::sendEvent(QWidget::focusWidget(),mEvnRelease);
-    //    ui->label_7->setText("index changed");
 }
 
 void MainWindow::focusChanged(QWidget* , QWidget* )
 {
-    //    ui->textEdit_3->setText("b");
 }
 
 void MainWindow::on_comboBox_13_currentIndexChanged(int index)

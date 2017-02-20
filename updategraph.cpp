@@ -31,7 +31,8 @@ int color1rgb[]={153, 0, 153}; //фиолетовый темный
 int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-int color5rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+
+/*int color5rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color6rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color7rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color8rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
@@ -48,6 +49,7 @@ int color17rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color18rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color19rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color20rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+*/
 
 QVector<double> xx1;
 QVector<double> yy1;
@@ -60,7 +62,7 @@ QVector<double> yy3;
 
 QVector<double> xx4;
 QVector<double> yy4;
-
+/*
 QVector<double> xx5;
 QVector<double> yy5;
 
@@ -108,16 +110,17 @@ QVector<double> yy19;
 
 QVector<double> xx20;
 QVector<double> yy20;
-
+*/
 void MainWindow::updategraph()
 {
     int countgraph = ui->horizontalSlider->value();
     
     xx1.append(b);
-    if(countgraph>=2) xx2.append(b);
-    if(countgraph>=3) xx3.append(b);
-    if(countgraph>=4) xx4.append(b);
-    if(countgraph>=5) xx5.append(b);
+    xx2.append(b);
+    xx3.append(b);
+    xx4.append(b);
+
+    /*   if(countgraph>=5) xx5.append(b);
     if(countgraph>=6) xx6.append(b);
     if(countgraph>=7) xx7.append(b);
     if(countgraph>=8) xx8.append(b);
@@ -134,18 +137,21 @@ void MainWindow::updategraph()
     if(countgraph>=18) xx18.append(b);
     if(countgraph>=19) xx19.append(b);
     if(countgraph>=20) xx20.append(b);
-    
+   */
+
     double argument = ui->dial->value();
     
     yy1.append(returnmathresult(argument)*1);
+    yy2.append(returnmathresult(argument)*1+5);
+    yy3.append(returnmathresult(argument)*1+10);
+    yy4.append(returnmathresult(argument)*1+15);
+
+
     
-    if(countgraph>=2)
-        yy2.append(returnmathresult(argument)*1+5);
-    if(countgraph>=3)
-        yy3.append(returnmathresult(argument)*1+10);
-    if(countgraph>=4)
-        yy4.append(returnmathresult(argument)*1+15);
-    if(countgraph>=5)
+    //if(countgraph>=2)
+    //if(countgraph>=3)
+    //if(countgraph>=4)
+    /* if(countgraph>=5)
         yy5.append(returnmathresult(argument)*1+20);
     if(countgraph>=6)
         yy6.append(returnmathresult(argument)*1+25);
@@ -161,7 +167,7 @@ void MainWindow::updategraph()
         yy11.append(returnmathresult(argument)*1+50);
     if(countgraph>=12)
         yy12.append(returnmathresult(argument)*1+55);
-    
+
     if(countgraph>=13) yy13.append(returnmathresult(argument)*1+60);
     if(countgraph>=14) yy14.append(returnmathresult(argument)*1+65);
     if(countgraph>=15) yy15.append(returnmathresult(argument)*1+70);
@@ -170,7 +176,7 @@ void MainWindow::updategraph()
     if(countgraph>=18) yy18.append(returnmathresult(argument)*1+85);
     if(countgraph>=19) yy19.append(returnmathresult(argument)*1+90);
     if(countgraph>=20) yy20.append(returnmathresult(argument)*1+95);
-    
+    */
     ///////////////
     b++;
     
@@ -181,14 +187,14 @@ void MainWindow::updategraph()
     
     if (b==1200)
     {
-         ui->customPlot->xAxis->setRange(0, 600);
+        ui->customPlot->xAxis->setRange(0, 600);
         
         b=0;
         xx1.clear();
         xx2.clear();
         xx3.clear();
         xx4.clear();
-        xx5.clear();
+        /* xx5.clear();
         xx6.clear();
         xx7.clear();
         xx8.clear();
@@ -205,12 +211,12 @@ void MainWindow::updategraph()
         xx18.clear();
         xx19.clear();
         xx20.clear();
-        
+        */
         yy1.clear();
         yy2.clear();
         yy3.clear();
         yy4.clear();
-        yy5.clear();
+        /*  yy5.clear();
         yy6.clear();
         yy7.clear();
         yy8.clear();
@@ -225,7 +231,7 @@ void MainWindow::updategraph()
         yy17.clear();
         yy18.clear();
         yy19.clear();
-        yy20.clear();
+        yy20.clear();*/
     }
 }
 
@@ -243,27 +249,32 @@ void MainWindow::updatepicture()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
-    
+    graphPen.setWidth(2);
     graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
     
-    if(countgraph>=2){ui->customPlot->graph()->setData(xx2, yy2);
+    if(countgraph>=2)
+    {ui->customPlot->graph()->setData(xx2, yy2);
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
+        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
     
     if(countgraph>=3){ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx3, yy3);
         graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
+        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);}
     
     if(countgraph>=4){ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx4, yy4);
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
+        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
-    
+    /*
     if(countgraph>=5){ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx5, yy5);
         graphPen.setColor(QColor(color5rgb[0],color5rgb[1],color5rgb[2]));
@@ -297,7 +308,7 @@ void MainWindow::updatepicture()
         ui->customPlot->graph()->setData(xx9, yy9);
         graphPen.setColor(QColor(color9rgb[0],color5rgb[1],color5rgb[2]));
         ui->customPlot->graph()->setPen(graphPen);}
-    
+
     if(countgraph>=10){   ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx10, yy10);
         graphPen.setColor(QColor(color10rgb[0],color5rgb[1],color5rgb[2]));
@@ -361,84 +372,15 @@ void MainWindow::updatepicture()
         ui->customPlot->graph()->setData(xx20, yy20);
         graphPen.setColor(QColor(color20rgb[0],color5rgb[1],color5rgb[2]));
         ui->customPlot->graph()->setPen(graphPen);
-    }
+    }*/
+
     ui->customPlot->replot();
 }
 
 void MainWindow::mousePress()
 {
-    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
-    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
+    //    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->xAxis->orientation());
+    //    ui->customPlot->axisRect()->setRangeDrag(ui->customPlot->yAxis->orientation());
 }
 
 
-
-
-void MainWindow::WriteArchiveToFile()
-{
-
-    QJsonObject archivechannel1;
-    QJsonObject archivechannel2;
-    QJsonObject archivechannel3;
-    QJsonObject archivechannel4;
-
-
-    QJsonObject archive;
-
-    QJsonArray archives;
-
-    QJsonArray array;
-
-    QJsonArray valuesarray;
-
-    for(int y=0; y<yy1.size(); y++)
-    {
-        //qDebug()<< yy1.at(y);
-        valuesarray.append(yy1.at(y)*0.11);
-    }
-
-    //    qDebug()<< settings;
-
-    int a;
-    QDateTime end(QDateTime::currentDateTime());
-
-    archivechannel1["arraysize"] = valuesarray.size();
-    archivechannel1["values"] = valuesarray;
-    archivechannel1["channelname"] = "channel_1";
-
-    archivechannel2["arraysize"] = valuesarray.size();
-    archivechannel2["values"] = valuesarray;
-    archivechannel2["channelname"] = "channel_2";
-
-    archivechannel3["arraysize"] = valuesarray.size();
-    archivechannel3["values"] = valuesarray;
-    archivechannel3["channelname"] = "channel_3";
-
-    archivechannel4["arraysize"] = valuesarray.size();
-    archivechannel4["values"] = valuesarray;
-    archivechannel4["channelname"] = "channel_4";
-
-    archives.append(archivechannel1);
-    archives.append(archivechannel2);
-    archives.append(archivechannel3);
-    archives.append(archivechannel4);
-
-    archive["archives"] = archives;
-    archive["StartTime"] = MainWindow::starttime;
-    archive["EndTime"] = end.toString("dd/MM/yy");
-
-    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-
-//    QFile file("C:/Work/");
-    QFile file("/usr/archive.txt");
-
-    file.open(QIODevice::ReadWrite);
-
-    file.resize(0); // clear file
-
-    QTextStream out(&file);
-
-    out << setstr;
-
-    file.close();
-}
