@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "options.h"
+#include "ui_options.h"
+#include "options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "dialog.h"
@@ -39,6 +41,8 @@ extern QVector<double> yy3;
 extern QVector<double> xx4;
 extern QVector<double> yy4;
 
+extern QString pathtofile ;
+
 void MainWindow::WritetoFile()
 {
     QFile filedir("/sys/class/gpio/gpio69/direction");
@@ -74,13 +78,17 @@ void Options::WriteSystemOptionsToFile()
 
     QDateTime local(QDateTime::currentDateTime());
 
-    systemoptions["Time"] = local.time().toString();
-    systemoptions["Date"] = local.date().toString();
+//    systemoptions["Time"] = local.time().toString();
+//    systemoptions["Date"] = local.date().toString();
+
+    systemoptions["Time"] = ui->timeEdit->time().toString();
+    systemoptions["Date"] = ui->dateEdit->date().toString();
+
     systemoptions["Calibration"] = Options::calibrationprm;
 
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
 
-    QFile file("/usr/systemoptions.txt");
+    QFile file(pathtofile + "systemoptions.txt");
 
     file.open(QIODevice::ReadWrite);
 
@@ -144,8 +152,7 @@ void Options::WriteOptionsToFile()
     channels["channels"] = settings;
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
-    QFile file("/usr/options.txt");
-    //        QFile file("C:/Work/options.txt");
+    QFile file(pathtofile + "options.txt");
     QTextStream out(&file);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
@@ -163,15 +170,7 @@ void MessageWrite::LogMessageWrite(QString nm)
     themessage["Time"] = local.time().toString();
     themessage["Date"] = local.date().toString("dd/MM/yy");
     themessage["Message"] = nm;
-    /*
-    for(int y=0; y<100; y++)
-    {
-        themessage["Time"] = local.time().toString();
-        themessage["Date"] = local.date().toString("dd/MM/yy");
-        themessage["Message"] = nm;
-        messagesqueue.append(themessage);
-    }
-*/
+
     messagesqueue.append(themessage);
 
     Options opt;
@@ -187,8 +186,7 @@ void MessageWrite::LogMessageWrite(QString nm)
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
 
-    //    QFile file("C:/Work/Log.txt");
-    QFile file("/usr/Log.txt");
+    QFile file(pathtofile + "Log.txt");
 
     file.open(QIODevice::ReadWrite);
 
@@ -203,7 +201,7 @@ void MessageWrite::LogMessageWrite(QString nm)
 
 void MessageWrite::LogClear()
 {
-    QFile file("/usr/Log.txt");
+    QFile file(pathtofile + "Log.txt");
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     file.close();
@@ -263,8 +261,7 @@ void MainWindow::WriteArchiveToFile()
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
 
-    //    QFile file("C:/Work/");
-    QFile file("/usr/archive.txt");
+    QFile file(pathtofile + "archive.txt");
 
     file.open(QIODevice::ReadWrite);
 

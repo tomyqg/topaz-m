@@ -116,40 +116,44 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::WriteNewDataChannel1()
 {
     UartDriver UD;
-
     ChannelOptions ch;
-
     ch.readoptionsfromfile(1);
-
     UD.writechannelvalue(0,ui->dial->value() + 10);
-
     int period = ch.GetMeasurePeriod()*1000;
-
-
     channeltimer1->setInterval(period);
-    ui->textEdit->setText( QString::number(period) );
-//    qDebug() << "WriteNewDataChannel1";
+
+//    ui->textEdit->setText( QString::number(period) );
+//    qDebug() << ch.GetMeasurePeriod();
 }
 
 void MainWindow::WriteNewDataChannel2()
 {
     UartDriver UD;
+    ChannelOptions ch;
+    ch.readoptionsfromfile(2);
     UD.writechannelvalue(1,ui->dial->value() + 20 );
-//    qDebug() << "WriteNewDataChannel2";
+    int period = ch.GetMeasurePeriod()*1000;
+    channeltimer2->setInterval(period);
 }
 
 void MainWindow::WriteNewDataChannel3()
 {
     UartDriver UD;
+    ChannelOptions ch;
+    ch.readoptionsfromfile(3);
     UD.writechannelvalue(2,ui->dial->value() + 30 );
-//    qDebug() << "WriteNewDataChannel3";
+    int period = ch.GetMeasurePeriod()*1000;
+    channeltimer3->setInterval(period);
 }
 
 void MainWindow::WriteNewDataChannel4()
 {
     UartDriver UD;
+    ChannelOptions ch;
+    ch.readoptionsfromfile(4);
     UD.writechannelvalue(3,ui->dial->value() + 40 );
-//    qDebug() << "WriteNewDataChannel4";
+    int period = ch.GetMeasurePeriod()*1000;
+    channeltimer4->setInterval(period);
 }
 
 MainWindow::~MainWindow()

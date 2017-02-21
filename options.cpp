@@ -50,7 +50,7 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
     readoptionsfromfile();
-    readsystemoptionsfromfile();
+//    readsystemoptionsfromfile();
     applysettingstoUI();
     customizeUI();
 
@@ -364,17 +364,6 @@ void Options::applynewsettings()
     options4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
 
     setmaxmessageslimit(ui->spinBox->value());
-
-    // apply new time
-    QProcess process;
-    QDateTime newuidate = ui->dateEdit->dateTime();
-    QTime newuitime = ui->timeEdit->time();
-
-    QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
-    QString newtime = newuitime.toString();
-
-    process.startDetached("sudo date --set " + newdate);
-    process.startDetached("sudo date --set " + newtime); // max freq on
 }
 
 void Options::customizeUI()
@@ -753,3 +742,17 @@ void Options::setmaxmessageslimit(double n)
     maxmessageslimit = n;
 }
 
+
+void Options::on_pushButton_5_clicked()
+{
+    // apply new time
+    QProcess process;
+    QDateTime newuidate = ui->dateEdit->dateTime();
+    QTime newuitime = ui->timeEdit->time();
+
+    QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
+    QString newtime = newuitime.toString();
+
+    process.startDetached("sudo date --set " + newdate);
+    process.startDetached("sudo date --set " + newtime); // max freq on
+}

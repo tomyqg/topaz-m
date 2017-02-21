@@ -26,15 +26,13 @@
 #include <messages.h>
 
 
-//QString pathtofile = "/usr/";
-QString pathtofile = "C:/Work/";
+QString pathtofile = "/usr/";
+//QString pathtofile = "C:/Work/";
 
 
 void Options::readsystemoptionsfromfile()
 {
-    QFile infile("/usr/systemoptions.txt");
-
-    //    QFile infile("C:/Work/options.txt");
+    QFile infile(pathtofile + "systemoptions.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -45,23 +43,14 @@ void Options::readsystemoptionsfromfile()
 
     QJsonObject json = doc.object();
 
-    //QJsonArray array = json["channels"].toArray();
-
     Options::calibrationprm = json["Calibration"].toString();
-
-    QProcess process;
-
-    process.startDetached("sudo date --set " + json["Date"].toString());
-    process.startDetached("sudo date --set " + json["Time"].toString()); // max freq on
 
     infile.close();
 }
 
 void Options::readoptionsfromfile()
 {
-    QFile infile("/usr/options.txt");
-
-//        QFile infile("C:/Work/options.txt");
+    QFile infile(pathtofile + "options.txt");
 
     infile.open(QIODevice::ReadOnly);
 
@@ -125,8 +114,7 @@ void Options::readoptionsfromfile()
 
 QJsonArray MessageWrite::LogMessageRead()
 {
-//    QFile file("C:/Work/Log.txt");
-    QFile file("/usr/Log.txt");
+    QFile file(pathtofile + "Log.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream in(&file);
     QString sss = in.readLine();
@@ -139,40 +127,21 @@ QJsonArray MessageWrite::LogMessageRead()
     return MessageWrite::messagesqueue;
 }
 
-
 void ChannelOptions::readoptionsfromfile(int channel)
 {
-
-    QFile infile("/usr/options.txt");
-
-//        QFile infile("C:/Work/options.txt");
-
+    QFile infile(pathtofile + "options.txt");
     infile.open(QIODevice::ReadOnly);
-
     QTextStream in(&infile);
-    QString sss = in.readLine();
-
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-
+    QString sss = in.readLine();    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
-
     QJsonArray array = json["channels"].toArray();
-
-    /*
-    for (int x = 0; x < 2; ++x) {
-
-        ch  = array.at(x).toObject();
-    }*/
-
     QJsonObject ch = array.at(channel-1).toObject();
-
     this->SetHigherLimit(ch.value("HigherLimit").toDouble());
     this->SetLowerLimit(ch.value("LowerLimit").toDouble());
     this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
     this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
     this->SetSignalType(ch.value("Type").toDouble());
     this->SetUnitsName(ch.value("Units").toString());
-    this->SetMeasurePeriod(ch.value("Period").toInt());
-
+    this->SetMeasurePeriod(ch.value("Period").toDouble());
     infile.close();
 }
