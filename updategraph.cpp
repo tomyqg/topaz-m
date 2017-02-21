@@ -112,10 +112,7 @@ QVector<double> yy20;
 */
 void MainWindow::updategraph()
 {
-    int countgraph = ui->horizontalSlider->value();
-    
-
-    UartDriver UD;
+        UartDriver UD;
 
     xx1.append(b);
     //    xx2.append(b);
@@ -262,8 +259,8 @@ void MainWindow::updatepicture()
 
     ui->customPlot->clearGraphs();
     
-    int countgraph = ui->horizontalSlider->value();
-    
+//    int countgraph = ui->horizontalSlider->value();
+
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
@@ -273,20 +270,22 @@ void MainWindow::updatepicture()
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
     
-    if(countgraph>=2)
+//    if(countgraph>=2)
     {ui->customPlot->graph()->setData(xx1, yy2);
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
     
-    if(countgraph>=3){ui->customPlot->addGraph();
+//    if(countgraph>=3)
+    {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy3);
         graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);}
     
-    if(countgraph>=4){ui->customPlot->addGraph();
+//    if(countgraph>=4)
+    {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy4);
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
         graphPen.setWidth(2);

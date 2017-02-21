@@ -231,7 +231,6 @@ void MainWindow::WriteArchiveToFile()
 
     //    qDebug()<< settings;
 
-    int a;
     QDateTime end(QDateTime::currentDateTime());
 
     archivechannel1["arraysize"] = valuesarray.size();

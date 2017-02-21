@@ -32,7 +32,7 @@
    <widget class="QDial" name="dial">
     <property name="geometry">
      <rect>
-      <x>990</x>
+      <x>1180</x>
       <y>630</y>
       <width>71</width>
       <height>81</height>
@@ -45,7 +45,7 @@
    <widget class="QLCDNumber" name="lcdNumber">
     <property name="geometry">
      <rect>
-      <x>1000</x>
+      <x>1190</x>
       <y>700</y>
       <width>41</width>
       <height>41</height>
@@ -100,10 +100,10 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>520</y>
-      <width>451</width>
-      <height>41</height>
+      <x>1060</x>
+      <y>510</y>
+      <width>191</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="focusPolicy">
@@ -115,126 +115,6 @@
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#008000;&quot;&gt;x&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>500</y>
-      <width>191</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>Математический канал</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="horizontalSlider">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>570</y>
-      <width>451</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>20</number>
-    </property>
-    <property name="pageStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>5</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>630</y>
-      <width>111</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>число графиков</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>630</y>
-      <width>111</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>20</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="horizontalSlider_2">
-    <property name="geometry">
-     <rect>
-      <x>1000</x>
-      <y>610</y>
-      <width>271</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="minimum">
-     <number>50</number>
-    </property>
-    <property name="maximum">
-     <number>2000</number>
-    </property>
-    <property name="singleStep">
-     <number>100</number>
-    </property>
-    <property name="pageStep">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>1080</x>
-      <y>580</y>
-      <width>251</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>Интервал: </string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -272,10 +152,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>560</y>
-      <width>241</width>
-      <height>131</height>
+      <x>790</x>
+      <y>520</y>
+      <width>231</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="focusPolicy">
@@ -328,8 +208,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QRadioButton" name="radioButton">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>570</y>
+      <x>960</x>
+      <y>680</y>
       <width>151</width>
       <height>19</height>
      </rect>
@@ -341,8 +221,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QRadioButton" name="radioButton_2">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>600</y>
+      <x>960</x>
+      <y>710</y>
       <width>151</width>
       <height>19</height>
      </rect>

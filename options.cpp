@@ -70,6 +70,8 @@ Options::Options(QWidget *parent) :
         QLineEdit *le = lineeditList.at(i);
         le->installEventFilter(this);
     }
+
+    ui->textEdit->setReadOnly(1);
 }
 
 Options::~Options()
@@ -318,14 +320,6 @@ void Options::Channel4TypeChange()
     {
         options4.SetSignalType(6);
     }
-}
-
-void Options::on_radioButton_2_clicked()
-{
-}
-
-void Options::on_radioButton_3_clicked()
-{
 }
 
 QString Options::GetSignalUnits()
@@ -663,14 +657,6 @@ void Options::applysettingstoUI()
     ui->PeriodIzmerChannel_4->setValue(options4.GetMeasurePeriod());
 }
 
-void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)
-{
-}
-
-void Options::on_PeriodIzmerChannel_1_valueChanged(int arg1)
-{
-}
-
 void Options::on_UnitsChannel_1_editingFinished()
 {
     options1.SetUnitsName(ui->UnitsChannel_1->text());
@@ -713,11 +699,6 @@ void Options::on_pushButton_3_clicked()
         //        a = a + "->" + Options::calibrationprm ;
         //        ui->textEdit->setText(a);
     }
-}
-
-void Options::on_NignPredelChannel_2_valueChanged(int arg1)
-{
-    //    ui->NignPredelChannel_2->setValue(kb.getcustomstring().toDouble());
 }
 
 void Options::on_tabWidget_2_tabBarClicked(int index)

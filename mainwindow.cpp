@@ -108,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-    ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
+    //ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
 
     MessageWrite mr ("Programm Started");
 }
@@ -232,7 +232,7 @@ void MainWindow::on_pushButton_2_pressed()
 {
     ui->customPlot->clearGraphs();
 }
-
+/*
 void MainWindow::on_checkBox_stateChanged(int arg1)
 {
     QFile filedir("/sys/class/gpio/gpio69/direction");
@@ -259,7 +259,7 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 
     file.close();
 }
-
+*/
 double MainWindow::returnmathresult(double dval)
 {
     QString inn = ui->textEdit->toPlainText();
@@ -289,11 +289,6 @@ void MainWindow::on_textEdit_textChanged()
     double Result = myEngine.evaluate(replaced).toNumber();
 }
 
-void MainWindow::on_horizontalSlider_actionTriggered(int action)
-{
-    ui->label_6->setText(QString::number(ui->horizontalSlider->value()));
-}
-
 void MainWindow::on_dial_valueChanged(int value)
 {
 }
@@ -313,32 +308,10 @@ void MainWindow::delay(int n)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
-void MainWindow::on_horizontalSlider_2_valueChanged(int value)
-{
-    int nu = ui->horizontalSlider_2->value();
-    ui->label_2->setText("Интервал " + QString::number(nu) +  " мсек");
-    tmr->setInterval(500);
-}
-
-void MainWindow::on_comboBox_13_currentTextChanged(const QString &arg1)
-{
-}
-
 void MainWindow::focusChanged(QWidget* , QWidget* )
 {
 }
 
-void MainWindow::on_comboBox_13_currentIndexChanged(int index)
-{
-}
-
-void MainWindow::on_comboBox_13_activated(const QString &arg1)
-{
-}
-
-void MainWindow::on_comboBox_13_currentIndexChanged(const QString &arg1)
-{
-}
 
 void MainWindow::on_pushButton_4_clicked()
 {
@@ -348,27 +321,11 @@ void MainWindow::on_pushButton_4_clicked()
     messages.exec();
 }
 
-void MainWindow::on_horizontalSlider_2_actionTriggered(int action)
-{
-}
 
 void MainWindow::on_customPlot_destroyed()
 {
 }
 
-void MainWindow::on_pushButton_5_clicked()
-{
-    //    QList<QLabel*> spinList = MainWindow::findChildren<QLabel*> (  );
-    //    // apply style to all widgets
-    //    for (int i = 0; i < spinList.count(); ++i) {
-    //        QLabel *sb = spinList.at(i);
-    //        sb->setText("alloha");
-    //    }
-
-    keyboard kb;
-    kb.setModal(true);
-    kb.exec();
-}
 
 void MainWindow::on_radioButton_clicked()
 {
@@ -385,3 +342,4 @@ void MainWindow::on_radioButton_2_clicked()
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 
 }
+

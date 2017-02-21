@@ -23,13 +23,10 @@ public:
     bool onlydigits;
 
 private slots:
-    void on_buttonBox_accepted();
+//    void on_buttonBox_accepted();
     void textinput();
-
     void on_pushButton_13_clicked();
-
     void on_pushButton_27_clicked();
-
     void on_pushButton_44_clicked();
 
 public slots:

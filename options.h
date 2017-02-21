@@ -42,10 +42,6 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    void on_radioButton_2_clicked();
-
-    void on_radioButton_3_clicked();
-
     void Channel1TypeChange();
 
     void Channel2TypeChange();
@@ -66,15 +62,9 @@ private slots:
 
     QString GetSignalUnits();
 
-    void on_VerhnPredIzmerChannel_1_valueChanged(int arg1);
-
-    void on_PeriodIzmerChannel_1_valueChanged(int arg1);
-
     void on_UnitsChannel_1_editingFinished();
 
     void on_pushButton_3_clicked();
-
-    void on_NignPredelChannel_2_valueChanged(int arg1);
 
     void on_tabWidget_2_tabBarClicked(int index);
 
