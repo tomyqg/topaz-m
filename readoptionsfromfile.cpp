@@ -26,6 +26,9 @@
 #include <messages.h>
 
 
+//QString pathtofile = "/usr/";
+QString pathtofile = "C:/Work/";
+
 
 void Options::readsystemoptionsfromfile()
 {
@@ -85,6 +88,7 @@ void Options::readoptionsfromfile()
     options1.SetLowerMeasureLimit(ch1.value("LowerMeasLimit").toDouble());
     options1.SetSignalType(ch1.value("Type").toDouble());
     options1.SetUnitsName(ch1.value("Units").toString());
+    options1.SetMeasurePeriod(ch1.value("Period").toDouble());
 
     QJsonObject ch2 = array.at(1).toObject();
 
@@ -94,6 +98,7 @@ void Options::readoptionsfromfile()
     options2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toDouble());
     options2.SetSignalType(ch2.value("Type").toDouble());
     options2.SetUnitsName(ch2.value("Units").toString());
+    options2.SetMeasurePeriod(ch2.value("Period").toDouble());
 
     QJsonObject ch3 = array.at(2).toObject();
 
@@ -103,6 +108,7 @@ void Options::readoptionsfromfile()
     options3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toDouble());
     options3.SetSignalType(ch3.value("Type").toDouble());
     options3.SetUnitsName(ch3.value("Units").toString());
+    options3.SetMeasurePeriod(ch3.value("Period").toDouble());
 
     QJsonObject ch4 = array.at(3).toObject();
 
@@ -112,7 +118,8 @@ void Options::readoptionsfromfile()
     options4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toDouble());
     options4.SetSignalType(ch4.value("Type").toDouble());
     options4.SetUnitsName(ch4.value("Units").toString());
-    //    qDebug() << json;
+    options4.SetMeasurePeriod(ch4.value("Period").toDouble());
+
     infile.close();
 }
 
@@ -133,3 +140,39 @@ QJsonArray MessageWrite::LogMessageRead()
 }
 
 
+void ChannelOptions::readoptionsfromfile(int channel)
+{
+
+    QFile infile("/usr/options.txt");
+
+//        QFile infile("C:/Work/options.txt");
+
+    infile.open(QIODevice::ReadOnly);
+
+    QTextStream in(&infile);
+    QString sss = in.readLine();
+
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+
+    QJsonObject json = doc.object();
+
+    QJsonArray array = json["channels"].toArray();
+
+    /*
+    for (int x = 0; x < 2; ++x) {
+
+        ch  = array.at(x).toObject();
+    }*/
+
+    QJsonObject ch = array.at(channel-1).toObject();
+
+    this->SetHigherLimit(ch.value("HigherLimit").toDouble());
+    this->SetLowerLimit(ch.value("LowerLimit").toDouble());
+    this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
+    this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
+    this->SetSignalType(ch.value("Type").toDouble());
+    this->SetUnitsName(ch.value("Units").toString());
+    this->SetMeasurePeriod(ch.value("Period").toInt());
+
+    infile.close();
+}

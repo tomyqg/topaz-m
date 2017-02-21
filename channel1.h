@@ -25,6 +25,8 @@ public:
     void SetMeasurePeriod(double newmeasperiod);
     void SetUnitsName(QString newunit);
 
+    void readoptionsfromfile(int channel);
+
     // приватные переменные настроек канала
 
 private:

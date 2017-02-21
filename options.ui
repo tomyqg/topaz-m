@@ -41,7 +41,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -198,6 +198,9 @@
          </item>
          <item>
           <widget class="QRadioButton" name="ButonImpulseChannel_1">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -1083,6 +1086,9 @@
          </item>
          <item>
           <widget class="QRadioButton" name="ButonImpulseChannel_2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -1682,6 +1688,9 @@
          </item>
          <item>
           <widget class="QRadioButton" name="ButonImpulseChannel_3">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -2284,6 +2293,9 @@
          </item>
          <item>
           <widget class="QRadioButton" name="ButonImpulseChannel_4">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="font">
             <font>
              <family>Times New Roman</family>
@@ -3544,9 +3556,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

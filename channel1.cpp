@@ -1,5 +1,9 @@
 #include "channel1.h"
 #include "QDebug"
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 double ChannelOptions::GetHigherLimit()
 {
@@ -24,6 +28,7 @@ double ChannelOptions::GetLowerMeasureLimit()
 double ChannelOptions::GetMeasurePeriod()
 {
     return this->measureperiod;
+//    return 27;
 }
 
 double ChannelOptions::GetSignalType()
@@ -45,8 +50,6 @@ void ChannelOptions::SetMeasurePeriod(double np)
 {
     this->measureperiod = np;
 }
-
-
 
 QString ChannelOptions::GetUnitsName()
 {
@@ -72,3 +75,5 @@ void ChannelOptions::SetLowerMeasureLimit(double newlimit)
 {
     this->lowermeasurelimit=newlimit;
 }
+
+

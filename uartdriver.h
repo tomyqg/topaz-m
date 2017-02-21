@@ -14,10 +14,15 @@ private slots:
 
 public slots:
     double readchannelvalue(int channel);
+    void writechannelvalue(int channel, double value);
+    void just();
 
 private:
     static double channelinputbuffer[4];
 
+public:
+//    explicit  UartDriver();
 };
 
 #endif // UARTDRIVER_H
+

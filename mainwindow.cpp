@@ -62,42 +62,45 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr = new QTimer();
     tmr->setInterval(500);
 
-    channeltimer1 = new QTimer();
-    channeltimer1->setInterval(100);
 
-    channeltimer2 = new QTimer();
-    channeltimer2->setInterval(300);
-
-    channeltimer3 = new QTimer();
-    channeltimer3->setInterval(2000);
-
-    channeltimer4 = new QTimer();
-    channeltimer4->setInterval(5000);
 
     QTimer *closetimer = new QTimer(this);
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    connect(timetouch, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
 
-    //    connect(closetimer, SIGNAL(timeout()), this, SLOT(on_pushButton_3_clicked()));
-
-    tmr->start(500);
+    tmr->start(100);
     timer->start(1111);
     timer2->start(201);
-
     timetouch->start(5000);
 
-    // closetimer->start(1000*150);
-    // a new thread that reads serial input
-
     QThread *thread= new QThread();
-
     UartDriver *my = new UartDriver();
+    UartDriver *UD = new UartDriver();
 
     my->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), my, SLOT(readuart()));
+
+    channeltimer1 = new QTimer();
+    channeltimer1->setInterval(100);
+    channeltimer2 = new QTimer();
+    channeltimer2->setInterval(300);
+    channeltimer3 = new QTimer();
+    channeltimer3->setInterval(2000);
+    channeltimer4 = new QTimer();
+    channeltimer4->setInterval(5000);
+
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel1()) );
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel2()) );
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel3()) );
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel4()) );
+
+
+    channeltimer1->start(100);
+    channeltimer2->start(500);
+    channeltimer3->start(2000);
+    channeltimer4->start(5000);
 
     thread->start();
 
@@ -108,6 +111,45 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
 
     MessageWrite mr ("Programm Started");
+}
+
+void MainWindow::WriteNewDataChannel1()
+{
+    UartDriver UD;
+
+    ChannelOptions ch;
+
+    ch.readoptionsfromfile(1);
+
+    UD.writechannelvalue(0,ui->dial->value() + 10);
+
+    int period = ch.GetMeasurePeriod()*1000;
+
+
+    channeltimer1->setInterval(period);
+    ui->textEdit->setText( QString::number(period) );
+//    qDebug() << "WriteNewDataChannel1";
+}
+
+void MainWindow::WriteNewDataChannel2()
+{
+    UartDriver UD;
+    UD.writechannelvalue(1,ui->dial->value() + 20 );
+//    qDebug() << "WriteNewDataChannel2";
+}
+
+void MainWindow::WriteNewDataChannel3()
+{
+    UartDriver UD;
+    UD.writechannelvalue(2,ui->dial->value() + 30 );
+//    qDebug() << "WriteNewDataChannel3";
+}
+
+void MainWindow::WriteNewDataChannel4()
+{
+    UartDriver UD;
+    UD.writechannelvalue(3,ui->dial->value() + 40 );
+//    qDebug() << "WriteNewDataChannel4";
 }
 
 MainWindow::~MainWindow()

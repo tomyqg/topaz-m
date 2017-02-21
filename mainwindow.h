@@ -21,12 +21,22 @@ public:
     static QString starttime;
     static QString endtime;
 
+    QTimer *channeltimer1 ;
+    QTimer *channeltimer2;
+    QTimer *channeltimer3;
+    QTimer *channeltimer4;
+
 public slots:
 
     void focusChanged(QWidget* , QWidget* );
     void touchupdate();
     void WritetoFile();
     void WriteArchiveToFile();
+
+    void WriteNewDataChannel1();
+    void WriteNewDataChannel2();
+    void WriteNewDataChannel3();
+    void WriteNewDataChannel4();
 
 private slots:
 
@@ -56,13 +66,9 @@ private slots:
     void on_comboBox_13_currentIndexChanged(const QString &arg1);
     void on_pushButton_4_clicked();
     void on_horizontalSlider_2_actionTriggered(int action);
-
     void on_customPlot_destroyed();
-
     void on_pushButton_5_clicked();
-
     void on_radioButton_clicked();
-
     void on_radioButton_2_clicked();
 
 signals:
@@ -72,17 +78,9 @@ private:
 
     Ui::MainWindow *ui;
     QTimer *tmr;
-    QTimer *channeltimer1;
-    QTimer *channeltimer2;
-    QTimer *channeltimer3;
-    QTimer *channeltimer4;
-    QMutex mutex;
 
 protected:
     void paintEvent(QPaintEvent *e);
 };
-
-
-
 
 #endif // MAINWINDOW_H

@@ -340,29 +340,32 @@ void Options::applynewsettings()
     options1.SetLowerLimit(ui->NignPredelChannel_1->value());
     options1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
     options1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
+    options1.SetMeasurePeriod(ui->PeriodIzmerChannel_1->value());
 
     options2.SetUnitsName(ui->UnitsChannel_2->text());
     options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
     options2.SetLowerLimit(ui->NignPredelChannel_2->value());
     options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
     options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
+    options2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
 
     options3.SetUnitsName(ui->UnitsChannel_3->text());
     options3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
     options3.SetLowerLimit(ui->NignPredelChannel_3->value());
     options3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
     options3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
+    options3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
 
     options4.SetUnitsName(ui->UnitsChannel_4->text());
     options4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
     options4.SetLowerLimit(ui->NignPredelChannel_4->value());
     options4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
     options4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
+    options4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
 
     setmaxmessageslimit(ui->spinBox->value());
 
     // apply new time
-
     QProcess process;
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
@@ -386,7 +389,6 @@ void Options::customizeUI()
 
     //    ui->pushButton_2->setIcon(QIcon("/usr/EXT.jpg"));
     //    ui->pushButton_2->setIconSize(QSize(211,45));
-
 
     QString commonstylesheet( ui->NignPredelChannel_1->styleSheet());
     ui->VerhnPredelChannel_1->setStyleSheet(commonstylesheet);
@@ -635,7 +637,6 @@ void Options::applysettingstoUI()
             ui->ButonTermoparaChannel_4->setChecked(true);
         }
 
-
         if (sigtype4 == 6)
         {
             ui->ButonImpulseChannel_4->setChecked(true);
@@ -647,6 +648,7 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_1->setValue(options1.GetLowerLimit());
     ui->VerhnPredIzmerChannel_1->setValue(options1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options1.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_1->setValue(options1.GetMeasurePeriod());
 
 
     ui->UnitsChannel_2->setText(options2.GetUnitsName());
@@ -654,6 +656,7 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_2->setValue(options2.GetLowerLimit());
     ui->VerhnPredIzmerChannel_2->setValue(options2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options2.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_2->setValue(options2.GetMeasurePeriod());
 
 
     ui->UnitsChannel_3->setText(options3.GetUnitsName());
@@ -661,12 +664,14 @@ void Options::applysettingstoUI()
     ui->NignPredelChannel_3->setValue(options3.GetLowerLimit());
     ui->VerhnPredIzmerChannel_3->setValue(options3.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_3->setValue(options3.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_3->setValue(options3.GetMeasurePeriod());
 
     ui->UnitsChannel_4->setText(options4.GetUnitsName());
     ui->VerhnPredelChannel_4->setValue(options4.GetHigherLimit());
     ui->NignPredelChannel_4->setValue(options4.GetLowerLimit());
     ui->VerhnPredIzmerChannel_4->setValue(options4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_4->setValue(options4.GetMeasurePeriod());
 }
 
 void Options::on_VerhnPredIzmerChannel_1_valueChanged(int arg1)

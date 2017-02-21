@@ -28,7 +28,7 @@
 
 extern QString inputstr ;
 
-double UartDriver::channelinputbuffer[] = {};
+double UartDriver::channelinputbuffer[] = {27.22,33.87,57.89,81.11};
 
 void UartDriver::readuart()
 {
@@ -79,7 +79,23 @@ void UartDriver::readuart()
     }
 }
 
+void UartDriver::writechannelvalue(int channel, double value)
+{
+    this->channelinputbuffer[channel] = value;
+//    qDebug() << "writechannelvalue";
+}
+
+void UartDriver::just()
+{
+    qDebug() << "just";
+}
+
+
 double UartDriver::readchannelvalue(int channelnumber)
 {
     return channelinputbuffer[channelnumber];
+}
+
+void UartDriver()
+{
 }

@@ -26,6 +26,7 @@
 #include <channel1.h>
 
 
+
 extern QVector<double> xx1;
 extern QVector<double> yy1;
 
@@ -105,6 +106,7 @@ void Options::WriteOptionsToFile()
     channel1["LowerLimit"] = options1.GetLowerLimit();
     channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
     channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
+    channel1["Period"] = options1.GetMeasurePeriod();
 
     settings.append(channel1);
 
@@ -114,6 +116,7 @@ void Options::WriteOptionsToFile()
     channel2["LowerLimit"] = options2.GetLowerLimit();
     channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
     channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
+    channel2["Period"] = options2.GetMeasurePeriod();
 
     settings.append(channel2);
 
@@ -123,6 +126,7 @@ void Options::WriteOptionsToFile()
     channel3["LowerLimit"] = options3.GetLowerLimit();
     channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
     channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
+    channel3["Period"] = options3.GetMeasurePeriod();
 
     settings.append(channel3);
 
@@ -132,6 +136,7 @@ void Options::WriteOptionsToFile()
     channel4["LowerLimit"] = options4.GetLowerLimit();
     channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
     channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
+    channel4["Period"] = options4.GetMeasurePeriod();
 
     settings.append(channel4);
 

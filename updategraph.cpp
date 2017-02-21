@@ -1,5 +1,6 @@
 #include "updategraph.h"
 #include "mainwindow.h"
+#include "uartdriver.h"
 #include "ui_mainwindow.h"
 
 #include <QPixmap>
@@ -54,14 +55,12 @@ int color20rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 QVector<double> xx1;
 QVector<double> yy1;
 
-QVector<double> xx2;
 QVector<double> yy2;
 
-QVector<double> xx3;
 QVector<double> yy3;
 
-QVector<double> xx4;
 QVector<double> yy4;
+
 /*
 QVector<double> xx5;
 QVector<double> yy5;
@@ -115,10 +114,13 @@ void MainWindow::updategraph()
 {
     int countgraph = ui->horizontalSlider->value();
     
+
+    UartDriver UD;
+
     xx1.append(b);
-    xx2.append(b);
-    xx3.append(b);
-    xx4.append(b);
+    //    xx2.append(b);
+    //    xx3.append(b);
+    //    xx4.append(b);
 
     /*   if(countgraph>=5) xx5.append(b);
     if(countgraph>=6) xx6.append(b);
@@ -140,12 +142,17 @@ void MainWindow::updategraph()
    */
 
     double argument = ui->dial->value();
-    
-    yy1.append(returnmathresult(argument)*1);
-    yy2.append(returnmathresult(argument)*1+5);
-    yy3.append(returnmathresult(argument)*1+10);
-    yy4.append(returnmathresult(argument)*1+15);
+    //    UD.writechannelvalue(1,argument);
 
+    yy1.append(UD.readchannelvalue(0));
+    yy2.append(UD.readchannelvalue(1));
+    yy3.append(UD.readchannelvalue(2));
+    yy4.append(UD.readchannelvalue(3));
+    
+    //    yy1.append(returnmathresult(argument)*1);
+    //    yy2.append(returnmathresult(argument)*1+5);
+    //    yy3.append(returnmathresult(argument)*1+10);
+    //    yy4.append(returnmathresult(argument)*1+15);
 
     
     //if(countgraph>=2)
@@ -179,7 +186,18 @@ void MainWindow::updategraph()
     */
     ///////////////
     b++;
-    
+
+    /*
+    if (b>100)
+    {
+        yy1.removeFirst();
+        yy2.removeFirst();
+        yy3.removeFirst();
+        yy4.removeFirst();
+
+        xx1.removeFirst();
+    }*/
+
     if (b>=300&&b<900)
     {
         ui->customPlot->xAxis->setRange(b-300, b+300);
@@ -191,9 +209,9 @@ void MainWindow::updategraph()
         
         b=0;
         xx1.clear();
-        xx2.clear();
-        xx3.clear();
-        xx4.clear();
+        //        xx2.clear();
+        //        xx3.clear();
+        //        xx4.clear();
         /* xx5.clear();
         xx6.clear();
         xx7.clear();
@@ -256,24 +274,25 @@ void MainWindow::updatepicture()
     ui->customPlot->addGraph();
     
     if(countgraph>=2)
-    {ui->customPlot->graph()->setData(xx2, yy2);
+    {ui->customPlot->graph()->setData(xx1, yy2);
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
     
     if(countgraph>=3){ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(xx3, yy3);
+        ui->customPlot->graph()->setData(xx1, yy3);
         graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);}
     
     if(countgraph>=4){ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(xx4, yy4);
+        ui->customPlot->graph()->setData(xx1, yy4);
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
+
     /*
     if(countgraph>=5){ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx5, yy5);
