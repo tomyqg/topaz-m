@@ -28,7 +28,6 @@ double ChannelOptions::GetLowerMeasureLimit()
 double ChannelOptions::GetMeasurePeriod()
 {
     return this->measureperiod;
-//    return 27;
 }
 
 double ChannelOptions::GetSignalType()
@@ -76,4 +75,62 @@ void ChannelOptions::SetLowerMeasureLimit(double newlimit)
     this->lowermeasurelimit=newlimit;
 }
 
+QString ChannelOptions::GetState1HighMessage()
+{
+    return this->state1highmessage;
+}
 
+QString ChannelOptions::GetState1LowMessage()
+{
+    return this->state1lowmessage;
+}
+
+QString ChannelOptions::GetState2HighMessage()
+{
+    return this->state2highmessage;
+}
+
+QString ChannelOptions::GetState2LowMessage()
+{
+    return this->state2lowmessage;
+}
+
+void ChannelOptions::SetState1HighMessage(QString newmessage)
+{
+    this->state1highmessage = newmessage;
+}
+
+void ChannelOptions::SetState1LowMessage(QString newmessage)
+{
+    this->state1lowmessage = newmessage;
+}
+
+void ChannelOptions::SetState2HighMessage(QString newmessage)
+{
+    this->state2highmessage = newmessage;
+}
+
+void ChannelOptions::SetState2LowMessage(QString newmessage)
+{
+    this->state2lowmessage = newmessage;
+}
+
+void ChannelOptions::SetState1Value(double value)
+{
+    this->state1value = value;
+}
+
+void ChannelOptions::SetState2Value(double value)
+{
+    this->state2value = value;
+}
+
+double ChannelOptions::GetState1Value()
+{
+    return this->state1value;
+}
+
+double ChannelOptions::GetState2Value()
+{
+    return this->state2value;
+}

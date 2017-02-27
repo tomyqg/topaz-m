@@ -106,6 +106,12 @@ void Options::WriteOptionsToFile()
     channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
     channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
     channel1["Period"] = options1.GetMeasurePeriod();
+    channel1["State1HighMessage"] = options1.GetState1HighMessage();
+    channel1["State1LowMessage"] = options1.GetState1LowMessage();
+    channel1["State2HighMessage"] = options1.GetState2HighMessage();
+    channel1["State2LowMessage"] = options1.GetState2LowMessage();
+    channel1["State1Value"] = options1.GetState1Value();
+    channel1["State2Value"] = options1.GetState2Value();
 
     settings.append(channel1);
 

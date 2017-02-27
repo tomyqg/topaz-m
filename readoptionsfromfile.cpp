@@ -79,6 +79,14 @@ void Options::readoptionsfromfile()
     options1.SetUnitsName(ch1.value("Units").toString());
     options1.SetMeasurePeriod(ch1.value("Period").toDouble());
 
+    options1.SetState1HighMessage(ch1.value("State1HighMessage").toString());
+    options1.SetState1LowMessage(ch1.value("State1LowMessage").toString());
+    options1.SetState2HighMessage(ch1.value("State2HighMessage").toString());
+    options1.SetState2LowMessage(ch1.value("State2LowMessage").toString());
+    options1.SetState1Value(ch1.value("State1Value").toDouble());
+    options1.SetState2Value(ch1.value("State2Value").toDouble());
+
+
     QJsonObject ch2 = array.at(1).toObject();
 
     options2.SetHigherLimit(ch2.value("HigherLimit").toDouble());

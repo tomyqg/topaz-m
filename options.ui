@@ -508,7 +508,7 @@
        <property name="title">
         <string>Уставка 1 Канала 1</string>
        </property>
-       <widget class="QDoubleSpinBox" name="Chan1State1">
+       <widget class="QDoubleSpinBox" name="State1ValueChannel_1">
         <property name="geometry">
          <rect>
           <x>240</x>
@@ -565,7 +565,7 @@
          <string>Сообщение при превышении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_9">
+       <widget class="QLineEdit" name="State1HighMessageChannel_1">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -675,7 +675,7 @@
          </property>
         </item>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_14">
+       <widget class="QLineEdit" name="State1LowMessageChannel_1">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -743,7 +743,7 @@
        <property name="title">
         <string>Уставка 2 Канала 1</string>
        </property>
-       <widget class="QDoubleSpinBox" name="Chan1State2">
+       <widget class="QDoubleSpinBox" name="State2ValueChannel_1">
         <property name="geometry">
          <rect>
           <x>240</x>
@@ -800,7 +800,7 @@
          <string>Сообщение при превышении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_18">
+       <widget class="QLineEdit" name="State2HighMessageChannel_1">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -907,7 +907,7 @@
          </property>
         </item>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_19">
+       <widget class="QLineEdit" name="State2LowMessageChannel_1">
         <property name="geometry">
          <rect>
           <x>0</x>
