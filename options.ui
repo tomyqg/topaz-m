@@ -41,7 +41,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -743,7 +743,7 @@
        <property name="title">
         <string>Уставка 2 Канала 1</string>
        </property>
-       <widget class="QDoubleSpinBox" name="VPI_BOX_11">
+       <widget class="QDoubleSpinBox" name="Chan1State2">
         <property name="geometry">
          <rect>
           <x>240</x>
@@ -3418,6 +3418,12 @@ p, li { white-space: pre-wrap; }
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_7">
       <property name="enabled">
@@ -3430,6 +3436,12 @@ p, li { white-space: pre-wrap; }
         <width>191</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
       </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_8">
@@ -3444,6 +3456,12 @@ p, li { white-space: pre-wrap; }
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QTextEdit" name="textEdit_9">
       <property name="enabled">
@@ -3457,6 +3475,12 @@ p, li { white-space: pre-wrap; }
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -3467,11 +3491,17 @@ p, li { white-space: pre-wrap; }
         <height>311</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+       </font>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_14">
        <item>
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3486,6 +3516,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_2">
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3500,6 +3531,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3514,6 +3546,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_4">
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3531,6 +3564,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3548,6 +3582,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3565,6 +3600,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3582,6 +3618,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="font">
           <font>
+           <family>Times New Roman</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3603,6 +3640,12 @@ p, li { white-space: pre-wrap; }
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>x</string>
       </property>
@@ -3615,6 +3658,12 @@ p, li { white-space: pre-wrap; }
         <width>191</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>x</string>
@@ -3629,6 +3678,12 @@ p, li { white-space: pre-wrap; }
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>x</string>
       </property>
@@ -3641,6 +3696,12 @@ p, li { white-space: pre-wrap; }
         <width>191</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>x</string>
@@ -3694,9 +3755,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

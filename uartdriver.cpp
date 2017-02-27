@@ -87,7 +87,7 @@ void UartDriver::writechannelvalue(int channel, double value)
 
 void UartDriver::just()
 {
-    qDebug() << "just";
+//    qDebug() << "just";
 }
 
 

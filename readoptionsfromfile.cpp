@@ -25,10 +25,8 @@
 #include <channel1.h>
 #include <messages.h>
 
-
-QString pathtofile = "/usr/";
-//QString pathtofile = "C:/Work/";
-
+//QString pathtofile = "/usr/";
+QString pathtofile = "C:/Work/";
 
 void Options::readsystemoptionsfromfile()
 {
@@ -37,6 +35,7 @@ void Options::readsystemoptionsfromfile()
     infile.open(QIODevice::ReadOnly);
 
     QTextStream in(&infile);
+
     QString sss = in.readLine();
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
@@ -55,6 +54,7 @@ void Options::readoptionsfromfile()
     infile.open(QIODevice::ReadOnly);
 
     QTextStream in(&infile);
+
     QString sss = in.readLine();
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());

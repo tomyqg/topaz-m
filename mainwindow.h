@@ -18,8 +18,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    static QString starttime;
+    static QString startdate;
     static QString endtime;
+    static QString starttime;
 
     QTimer *channeltimer1 ;
     QTimer *channeltimer2;
@@ -30,7 +31,7 @@ public slots:
 
     void focusChanged(QWidget* , QWidget* );
     void touchupdate();
-    void WritetoFile();
+    void WriteGpio();
     void WriteArchiveToFile();
 
     void WriteNewDataChannel1();

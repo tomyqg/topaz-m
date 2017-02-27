@@ -32,7 +32,8 @@ QString inputstr = "";
 
 QDateTime start(QDateTime::currentDateTime());
 
-QString MainWindow::starttime = start.toString("dd/MM/yy");
+QString MainWindow::startdate = start.toString("dd/MM/yy");
+QString MainWindow::starttime = start.toString("hh:mm:ss");
 
 QString MainWindow::endtime = "";
 
@@ -62,7 +63,11 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr = new QTimer();
     tmr->setInterval(500);
 
+    QTimer *tmrarchive = new QTimer(this);
+    tmrarchive->setInterval(5000);
 
+    connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+    tmrarchive->start(5000);
 
     QTimer *closetimer = new QTimer(this);
 
@@ -96,11 +101,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel3()) );
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel4()) );
 
-
     channeltimer1->start(100);
-    channeltimer2->start(500);
-    channeltimer3->start(2000);
-    channeltimer4->start(5000);
+    channeltimer2->start(100);
+    channeltimer3->start(100);
+    channeltimer4->start(100);
 
     thread->start();
 
@@ -122,8 +126,6 @@ void MainWindow::WriteNewDataChannel1()
     int period = ch.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
 
-//    ui->textEdit->setText( QString::number(period) );
-//    qDebug() << ch.GetMeasurePeriod();
 }
 
 void MainWindow::WriteNewDataChannel2()
@@ -295,7 +297,6 @@ void MainWindow::on_dial_valueChanged(int value)
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    //    WriteArchiveToFile();
     QApplication::exit();
 }
 
@@ -312,27 +313,22 @@ void MainWindow::focusChanged(QWidget* , QWidget* )
 {
 }
 
-
 void MainWindow::on_pushButton_4_clicked()
 {
     Messages messages;
-    //    messages.setM
     messages.setModal(true);
     messages.exec();
 }
 
-
 void MainWindow::on_customPlot_destroyed()
 {
 }
-
 
 void MainWindow::on_radioButton_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
-
 }
 
 void MainWindow::on_radioButton_2_clicked()
@@ -340,6 +336,5 @@ void MainWindow::on_radioButton_2_clicked()
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
-
 }
 
