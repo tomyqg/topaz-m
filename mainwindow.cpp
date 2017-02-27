@@ -96,10 +96,10 @@ MainWindow::MainWindow(QWidget *parent) :
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel1()) );
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel2()) );
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel3()) );
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(WriteNewDataChannel4()) );
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()) );
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()) );
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()) );
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()) );
 
     channeltimer1->start(100);
     channeltimer2->start(100);
@@ -112,49 +112,62 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-    //ui->horizontalSlider->setStyleSheet("QSlider::handle:horizontal {background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);border: 1px solid #5c5c5c;width: 18px;margin: -2px 0; border-radius: 3px;}""QSlider::groove:vertical {background: red;position: absolute; left: 4px; right: 4px;}");
 
     MessageWrite mr ("Programm Started");
+
+    qDebug() << "readoptionsfromfile" ;
+
+    ch1.readoptionsfromfile(1);
+    ch2.readoptionsfromfile(2);
+    ch3.readoptionsfromfile(3);
+    ch4.readoptionsfromfile(4);
 }
 
-void MainWindow::WriteNewDataChannel1()
+void MainWindow::UpdateDataChannel1()
 {
+    double currentdata = ui->dial->value() + 5;
     UartDriver UD;
-    ChannelOptions ch;
-    ch.readoptionsfromfile(1);
-    UD.writechannelvalue(0,ui->dial->value() + 10);
-    int period = ch.GetMeasurePeriod()*1000;
+    UD.writechannelvalue(0,currentdata);
+    if (currentdata>=ch1.GetState1Value())
+    {
+        ui->listWidget->addItem("channel 1 up");
+//        ui->textEdit_2->setText(QString::number(currentdata) + ":" +  QString::number(ch1.GetState1Value())  ); // +QString::number(ch.GetState1Value)
+        ui->textEdit_2->setText(ch1.GetState1HighMessage()); // +QString::number(ch.GetState1Value)
+    }
+    else
+    {
+        ui->listWidget->clear();
+        ui->textEdit_2->clear();
+    }
+
+    int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-
 }
 
-void MainWindow::WriteNewDataChannel2()
+void MainWindow::UpdateDataChannel2()
 {
     UartDriver UD;
-    ChannelOptions ch;
-    ch.readoptionsfromfile(2);
+    ch2.readoptionsfromfile(2);
     UD.writechannelvalue(1,ui->dial->value() + 20 );
-    int period = ch.GetMeasurePeriod()*1000;
+    int period = ch2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
 }
 
-void MainWindow::WriteNewDataChannel3()
+void MainWindow::UpdateDataChannel3()
 {
     UartDriver UD;
-    ChannelOptions ch;
-    ch.readoptionsfromfile(3);
+    ch3.readoptionsfromfile(3);
     UD.writechannelvalue(2,ui->dial->value() + 30 );
-    int period = ch.GetMeasurePeriod()*1000;
+    int period = ch3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
 
-void MainWindow::WriteNewDataChannel4()
+void MainWindow::UpdateDataChannel4()
 {
     UartDriver UD;
-    ChannelOptions ch;
-    ch.readoptionsfromfile(4);
+    ch4.readoptionsfromfile(4);
     UD.writechannelvalue(3,ui->dial->value() + 40 );
-    int period = ch.GetMeasurePeriod()*1000;
+    int period = ch4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
 
@@ -228,6 +241,13 @@ void MainWindow::on_pushButton_2_clicked()
     Options options;
     options.setModal(true);
     options.exec();
+
+    ch1.readoptionsfromfile(1);
+    ch2.readoptionsfromfile(2);
+    ch3.readoptionsfromfile(3);
+    ch4.readoptionsfromfile(4);
+
+    qDebug() << "readoptionsfromfile" ;
 }
 
 void MainWindow::on_pushButton_2_pressed()

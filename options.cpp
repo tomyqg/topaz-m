@@ -530,7 +530,6 @@ void Options::applysettingstoUI()
         }
     }
 
-
     // channel 3
     {
         if (sigtype3 == 1)
@@ -574,7 +573,6 @@ void Options::applysettingstoUI()
         {
             ui->ButonTermoparaChannel_3->setChecked(true);
         }
-
 
         if (sigtype3 == 6)
         {
@@ -651,7 +649,6 @@ void Options::applysettingstoUI()
     ui->VerhnPredIzmerChannel_2->setValue(options2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options2.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_2->setValue(options2.GetMeasurePeriod());
-
 
     ui->UnitsChannel_3->setText(options3.GetUnitsName());
     ui->VerhnPredelChannel_3->setValue(options3.GetHigherLimit());

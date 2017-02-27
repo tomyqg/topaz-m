@@ -140,10 +140,12 @@ void ChannelOptions::readoptionsfromfile(int channel)
     QFile infile(pathtofile + "options.txt");
     infile.open(QIODevice::ReadOnly);
     QTextStream in(&infile);
-    QString sss = in.readLine();    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QString sss = in.readLine();
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
     QJsonArray array = json["channels"].toArray();
     QJsonObject ch = array.at(channel-1).toObject();
+
     this->SetHigherLimit(ch.value("HigherLimit").toDouble());
     this->SetLowerLimit(ch.value("LowerLimit").toDouble());
     this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
@@ -151,5 +153,12 @@ void ChannelOptions::readoptionsfromfile(int channel)
     this->SetSignalType(ch.value("Type").toDouble());
     this->SetUnitsName(ch.value("Units").toString());
     this->SetMeasurePeriod(ch.value("Period").toDouble());
+    this->SetState1HighMessage(ch.value("State1HighMessage").toString());
+    this->SetState1LowMessage(ch.value("State1LowMessage").toString());
+    this->SetState2HighMessage(ch.value("State2HighMessage").toString());
+    this->SetState2LowMessage(ch.value("State2LowMessage").toString());
+    this->SetState1Value(ch.value("State1Value").toDouble());
+    this->SetState2Value(ch.value("State2Value").toDouble());
+
     infile.close();
 }

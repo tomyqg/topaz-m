@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
-
+#include <channel1.h>
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +27,12 @@ public:
     QTimer *channeltimer3;
     QTimer *channeltimer4;
 
+//    UartDriver UD;
+    ChannelOptions ch1;
+    ChannelOptions ch2;
+    ChannelOptions ch3;
+    ChannelOptions ch4;
+
 public slots:
 
     void focusChanged(QWidget* , QWidget* );
@@ -34,10 +40,10 @@ public slots:
     void WriteGpio();
     void WriteArchiveToFile();
 
-    void WriteNewDataChannel1();
-    void WriteNewDataChannel2();
-    void WriteNewDataChannel3();
-    void WriteNewDataChannel4();
+    void UpdateDataChannel1();
+    void UpdateDataChannel2();
+    void UpdateDataChannel3();
+    void UpdateDataChannel4();
 
 private slots:
 
