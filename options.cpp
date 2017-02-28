@@ -341,6 +341,7 @@ void Options::applynewsettings()
     options1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
     options1.SetState1Value(ui->State1ValueChannel_1->value());
     options1.SetState2Value(ui->State2ValueChannel_1->value());
+    options1.SetChannelName(ui->Name_Channel_1->text());
 
     options2.SetUnitsName(ui->UnitsChannel_2->text());
     options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
@@ -642,6 +643,8 @@ void Options::applysettingstoUI()
     ui->State1LowMessageChannel_1->setText(options1.GetState1LowMessage());
     ui->State2HighMessageChannel_1->setText(options1.GetState2HighMessage());
     ui->State2LowMessageChannel_1->setText(options1.GetState2LowMessage());
+    ui->Name_Channel_1->setText(options1.GetChannelName());
+//    ui->Name_Channel_1->setText("options1.GetChannelName()");
 
     ui->UnitsChannel_2->setText(options2.GetUnitsName());
     ui->VerhnPredelChannel_2->setValue(options2.GetHigherLimit());

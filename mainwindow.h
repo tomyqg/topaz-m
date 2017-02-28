@@ -54,7 +54,6 @@ private slots:
     void updatepicture();
     void updategraph();
     void updatevalue();
-    void mousePress();
     void delay(int n);
     double returnmathresult(double dval);
 

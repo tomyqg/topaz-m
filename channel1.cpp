@@ -95,6 +95,16 @@ QString ChannelOptions::GetState2LowMessage()
     return this->state2lowmessage;
 }
 
+QString ChannelOptions::GetChannelName()
+{
+    return this->channelname;
+}
+
+void ChannelOptions::SetChannelName(QString newname)
+{
+    this->channelname = newname;
+}
+
 void ChannelOptions::SetState1HighMessage(QString newmessage)
 {
     this->state1highmessage = newmessage;
@@ -133,4 +143,32 @@ double ChannelOptions::GetState1Value()
 double ChannelOptions::GetState2Value()
 {
     return this->state2value;
+}
+
+bool ChannelOptions::IsHighState1Setted()
+{
+    return this->HighState1Setted;
+}
+
+bool ChannelOptions::IsLowState1Setted()
+{
+    return this->LowState1Setted;
+}
+
+bool ChannelOptions::IsHighState2Setted()
+{
+    return this->HighState2Setted;
+}
+
+bool ChannelOptions::IsLowState2Setted()
+{
+    return this->LowState2Setted;
+}
+
+ChannelOptions::ChannelOptions()
+{
+    this->HighState1Setted = false;
+    this->LowState1Setted= false;
+    this->HighState2Setted= false;
+    this->LowState2Setted= false;
 }

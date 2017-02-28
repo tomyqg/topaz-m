@@ -115,60 +115,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MessageWrite mr ("Programm Started");
 
-    qDebug() << "readoptionsfromfile" ;
+//    qDebug() << "readoptionsfromfile" ;
 
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-}
 
-void MainWindow::UpdateDataChannel1()
-{
-    double currentdata = ui->dial->value() + 5;
-    UartDriver UD;
-    UD.writechannelvalue(0,currentdata);
-    if (currentdata>=ch1.GetState1Value())
-    {
-        ui->listWidget->addItem("channel 1 up");
-//        ui->textEdit_2->setText(QString::number(currentdata) + ":" +  QString::number(ch1.GetState1Value())  ); // +QString::number(ch.GetState1Value)
-        ui->textEdit_2->setText(ch1.GetState1HighMessage()); // +QString::number(ch.GetState1Value)
-    }
-    else
-    {
-        ui->listWidget->clear();
-        ui->textEdit_2->clear();
-    }
 
-    int period = ch1.GetMeasurePeriod()*1000;
-    channeltimer1->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel2()
-{
-    UartDriver UD;
-    ch2.readoptionsfromfile(2);
-    UD.writechannelvalue(1,ui->dial->value() + 20 );
-    int period = ch2.GetMeasurePeriod()*1000;
-    channeltimer2->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel3()
-{
-    UartDriver UD;
-    ch3.readoptionsfromfile(3);
-    UD.writechannelvalue(2,ui->dial->value() + 30 );
-    int period = ch3.GetMeasurePeriod()*1000;
-    channeltimer3->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel4()
-{
-    UartDriver UD;
-    ch4.readoptionsfromfile(4);
-    UD.writechannelvalue(3,ui->dial->value() + 40 );
-    int period = ch4.GetMeasurePeriod()*1000;
-    channeltimer4->setInterval(period);
 }
 
 MainWindow::~MainWindow()
@@ -241,13 +195,13 @@ void MainWindow::on_pushButton_2_clicked()
     Options options;
     options.setModal(true);
     options.exec();
-
+    //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
 
-    qDebug() << "readoptionsfromfile" ;
+//    qDebug() << "readoptionsfromfile" ;
 }
 
 void MainWindow::on_pushButton_2_pressed()
@@ -357,4 +311,3 @@ void MainWindow::on_radioButton_2_clicked()
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
-

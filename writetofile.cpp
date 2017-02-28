@@ -100,6 +100,7 @@ void Options::WriteOptionsToFile()
     QJsonArray settings;
 
     channel1["Type"] = options1.GetSignalType();
+    channel1["Name"] = options1.GetChannelName();
     channel1["Units"] = options1.GetUnitsName();
     channel1["HigherLimit"] = options1.GetHigherLimit();
     channel1["LowerLimit"] = options1.GetLowerLimit();
@@ -112,6 +113,7 @@ void Options::WriteOptionsToFile()
     channel1["State2LowMessage"] = options1.GetState2LowMessage();
     channel1["State1Value"] = options1.GetState1Value();
     channel1["State2Value"] = options1.GetState2Value();
+
 
     settings.append(channel1);
 

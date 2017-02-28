@@ -81,7 +81,7 @@
          <x>0</x>
          <y>10</y>
          <width>220</width>
-         <height>430</height>
+         <height>231</height>
         </rect>
        </property>
        <property name="title">
@@ -956,6 +956,51 @@
           <string>Реле 2.2 размыкание</string>
          </property>
         </item>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_20">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>250</y>
+         <width>221</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Имя канала</string>
+       </property>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>221</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_59">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Имя канала</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Name_Channel_1">
+           <property name="text">
+            <string>Channel 1</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>
@@ -3310,7 +3355,7 @@ p, li { white-space: pre-wrap; }
        <x>40</x>
        <y>20</y>
        <width>231</width>
-       <height>221</height>
+       <height>121</height>
       </rect>
      </property>
      <property name="title">
