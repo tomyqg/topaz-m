@@ -136,7 +136,7 @@ void MainWindow::UpdateDataChannel1()
         ui->listWidget->addItem(ch1.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch1.HighState1Setted = true;
-        MessageWrite mr (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
+         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
     }
 
     if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
@@ -145,7 +145,7 @@ void MainWindow::UpdateDataChannel1()
         ui->listWidget->addItem(ch1.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch1.HighState1Setted = false;
-        MessageWrite mr (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
+         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
     }
 
     int period = ch1.GetMeasurePeriod()*1000;
@@ -169,7 +169,7 @@ void MainWindow::UpdateDataChannel2()
         ui->listWidget->addItem(ch2.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch2.HighState1Setted = true;
-        MessageWrite mr (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
+         mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
     }
 
     if ((currentdata<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
@@ -178,7 +178,7 @@ void MainWindow::UpdateDataChannel2()
         ui->listWidget->addItem(ch2.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch2.HighState1Setted = false;
-        MessageWrite mr (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
+         mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
     }
 
     int period = ch2.GetMeasurePeriod()*1000;

@@ -30,6 +30,7 @@ public:
 
     QJsonArray LogMessageRead();
     void LogMessageWrite(QString nm);
+    void WriteAllLogToFile();
     explicit  MessageWrite();
     explicit MessageWrite(QString nm);
 

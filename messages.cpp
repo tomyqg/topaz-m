@@ -60,6 +60,7 @@ void Messages::on_pushButton_clicked()
 
 MessageWrite::MessageWrite()
 {
+    LogMessageRead();
     LogMessageWrite("message");
 }
 

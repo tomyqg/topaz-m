@@ -180,6 +180,10 @@ void Options::WriteOptionsToFile()
     file.close();
 }
 
+void MessageWrite::WriteAllLogToFile()
+{
+
+}
 
 void MessageWrite::LogMessageWrite(QString nm)
 {

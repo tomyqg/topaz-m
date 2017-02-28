@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <channel1.h>
+#include "messages.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,8 @@ public:
     ChannelOptions ch2;
     ChannelOptions ch3;
     ChannelOptions ch4;
+
+    MessageWrite mr;
 
 public slots:
 
