@@ -153,10 +153,34 @@ void MainWindow::UpdateDataChannel1()
 }
 
 void MainWindow::UpdateDataChannel2()
-{
+{/*
     UartDriver UD;
     ch2.readoptionsfromfile(2);
     UD.writechannelvalue(1,ui->dial->value() + 20 );
+    int period = ch2.GetMeasurePeriod()*1000;
+    channeltimer2->setInterval(period);*/
+
+    double currentdata = ui->dial->value() + 20;
+    UartDriver UD;
+    UD.writechannelvalue(1,currentdata);
+    if ((currentdata>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
+    {
+        ch2.LowState1Setted = false;
+        ui->listWidget->addItem(ch2.GetState1HighMessage());
+        ui->listWidget->scrollToBottom();
+        ch2.HighState1Setted = true;
+        MessageWrite mr (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
+    }
+
+    if ((currentdata<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
+    {
+        ch2.LowState1Setted = true;
+        ui->listWidget->addItem(ch2.GetState1LowMessage());
+        ui->listWidget->scrollToBottom();
+        ch2.HighState1Setted = false;
+        MessageWrite mr (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
+    }
+
     int period = ch2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
 }

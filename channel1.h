@@ -50,12 +50,10 @@ public:
 
     void readoptionsfromfile(int channel);
 
-
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;
     bool LowState2Setted ;
-
 
     // приватные переменные настроек канала
 
@@ -77,5 +75,4 @@ private:
     QString state2lowmessage;
     QString channelname;
 };
-
 #endif // CHANNEL1_H

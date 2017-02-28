@@ -74,6 +74,13 @@ void Options::readoptionsfromfile()
     options2.SetSignalType(ch2.value("Type").toDouble());
     options2.SetUnitsName(ch2.value("Units").toString());
     options2.SetMeasurePeriod(ch2.value("Period").toDouble());
+    options2.SetState1HighMessage(ch2.value("State1HighMessage").toString());
+    options2.SetState1LowMessage(ch2.value("State1LowMessage").toString());
+    options2.SetState2HighMessage(ch2.value("State2HighMessage").toString());
+    options2.SetState2LowMessage(ch2.value("State2LowMessage").toString());
+    options2.SetState1Value(ch2.value("State1Value").toDouble());
+    options2.SetState2Value(ch2.value("State2Value").toDouble());
+    options2.SetChannelName(ch2.value("Name").toString());
 
     QJsonObject ch3 = array.at(2).toObject();
     options3.SetHigherLimit(ch3.value("HigherLimit").toDouble());
@@ -83,6 +90,13 @@ void Options::readoptionsfromfile()
     options3.SetSignalType(ch3.value("Type").toDouble());
     options3.SetUnitsName(ch3.value("Units").toString());
     options3.SetMeasurePeriod(ch3.value("Period").toDouble());
+    options3.SetState1HighMessage(ch3.value("State1HighMessage").toString());
+    options3.SetState1LowMessage(ch3.value("State1LowMessage").toString());
+    options3.SetState2HighMessage(ch3.value("State2HighMessage").toString());
+    options3.SetState2LowMessage(ch3.value("State2LowMessage").toString());
+    options3.SetState1Value(ch3.value("State1Value").toDouble());
+    options3.SetState2Value(ch3.value("State2Value").toDouble());
+    options3.SetChannelName(ch3.value("Name").toString());
 
     QJsonObject ch4 = array.at(3).toObject();
     options4.SetHigherLimit(ch4.value("HigherLimit").toDouble());
@@ -92,6 +106,13 @@ void Options::readoptionsfromfile()
     options4.SetSignalType(ch4.value("Type").toDouble());
     options4.SetUnitsName(ch4.value("Units").toString());
     options4.SetMeasurePeriod(ch4.value("Period").toDouble());
+    options4.SetState1HighMessage(ch4.value("State1HighMessage").toString());
+    options4.SetState1LowMessage(ch4.value("State1LowMessage").toString());
+    options4.SetState2HighMessage(ch4.value("State2HighMessage").toString());
+    options4.SetState2LowMessage(ch4.value("State2LowMessage").toString());
+    options4.SetState1Value(ch4.value("State1Value").toDouble());
+    options4.SetState2Value(ch4.value("State2Value").toDouble());
+    options4.SetChannelName(ch4.value("Name").toString());
     infile.close();
 }
 

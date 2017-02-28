@@ -349,6 +349,13 @@ void Options::applynewsettings()
     options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
     options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
     options2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
+    options2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
+    options2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
+    options2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
+    options2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
+    options2.SetState1Value(ui->State1ValueChannel_2->value());
+    options2.SetState2Value(ui->State2ValueChannel_2->value());
+    options2.SetChannelName(ui->Name_Channel_2->text());
 
     options3.SetUnitsName(ui->UnitsChannel_3->text());
     options3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
@@ -356,6 +363,13 @@ void Options::applynewsettings()
     options3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
     options3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
     options3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
+    options3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
+    options3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
+    options3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
+    options3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
+    options3.SetState1Value(ui->State1ValueChannel_3->value());
+    options3.SetState2Value(ui->State2ValueChannel_3->value());
+    options3.SetChannelName(ui->Name_Channel_3->text());
 
     options4.SetUnitsName(ui->UnitsChannel_4->text());
     options4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
@@ -363,6 +377,13 @@ void Options::applynewsettings()
     options4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
     options4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
     options4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
+    options4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
+    options4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
+    options4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
+    options4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
+    options4.SetState1Value(ui->State1ValueChannel_4->value());
+    options4.SetState2Value(ui->State2ValueChannel_4->value());
+    options4.SetChannelName(ui->Name_Channel_4->text());
 
     setmaxmessageslimit(ui->spinBox->value());
 }
@@ -644,7 +665,6 @@ void Options::applysettingstoUI()
     ui->State2HighMessageChannel_1->setText(options1.GetState2HighMessage());
     ui->State2LowMessageChannel_1->setText(options1.GetState2LowMessage());
     ui->Name_Channel_1->setText(options1.GetChannelName());
-//    ui->Name_Channel_1->setText("options1.GetChannelName()");
 
     ui->UnitsChannel_2->setText(options2.GetUnitsName());
     ui->VerhnPredelChannel_2->setValue(options2.GetHigherLimit());
@@ -652,6 +672,13 @@ void Options::applysettingstoUI()
     ui->VerhnPredIzmerChannel_2->setValue(options2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options2.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_2->setValue(options2.GetMeasurePeriod());
+    ui->State1ValueChannel_2->setValue(options2.GetState1Value());
+    ui->State2ValueChannel_2->setValue(options2.GetState2Value());
+    ui->State1HighMessageChannel_2->setText(options2.GetState1HighMessage());
+    ui->State1LowMessageChannel_2->setText(options2.GetState1LowMessage());
+    ui->State2HighMessageChannel_2->setText(options2.GetState2HighMessage());
+    ui->State2LowMessageChannel_2->setText(options2.GetState2LowMessage());
+    ui->Name_Channel_2->setText(options2.GetChannelName());
 
     ui->UnitsChannel_3->setText(options3.GetUnitsName());
     ui->VerhnPredelChannel_3->setValue(options3.GetHigherLimit());
@@ -659,6 +686,13 @@ void Options::applysettingstoUI()
     ui->VerhnPredIzmerChannel_3->setValue(options3.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_3->setValue(options3.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_3->setValue(options3.GetMeasurePeriod());
+    ui->State1ValueChannel_3->setValue(options3.GetState1Value());
+    ui->State2ValueChannel_3->setValue(options3.GetState2Value());
+    ui->State1HighMessageChannel_3->setText(options3.GetState1HighMessage());
+    ui->State1LowMessageChannel_3->setText(options3.GetState1LowMessage());
+    ui->State2HighMessageChannel_3->setText(options3.GetState2HighMessage());
+    ui->State2LowMessageChannel_3->setText(options3.GetState2LowMessage());
+    ui->Name_Channel_3->setText(options3.GetChannelName());
 
     ui->UnitsChannel_4->setText(options4.GetUnitsName());
     ui->VerhnPredelChannel_4->setValue(options4.GetHigherLimit());
@@ -666,6 +700,13 @@ void Options::applysettingstoUI()
     ui->VerhnPredIzmerChannel_4->setValue(options4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_4->setValue(options4.GetMeasurePeriod());
+    ui->State1ValueChannel_4->setValue(options4.GetState1Value());
+    ui->State2ValueChannel_4->setValue(options4.GetState2Value());
+    ui->State1HighMessageChannel_4->setText(options4.GetState1HighMessage());
+    ui->State1LowMessageChannel_4->setText(options4.GetState1LowMessage());
+    ui->State2HighMessageChannel_4->setText(options4.GetState2HighMessage());
+    ui->State2LowMessageChannel_4->setText(options4.GetState2LowMessage());
+    ui->Name_Channel_4->setText(options4.GetChannelName());
 }
 
 void Options::on_UnitsChannel_1_editingFinished()

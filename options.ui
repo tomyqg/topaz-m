@@ -56,7 +56,7 @@
        <x>0</x>
        <y>10</y>
        <width>1280</width>
-       <height>641</height>
+       <height>621</height>
       </rect>
      </property>
      <property name="cursor">
@@ -84,6 +84,12 @@
          <height>231</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Тип канала 1</string>
        </property>
@@ -91,10 +97,15 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>10</y>
+          <y>30</y>
           <width>219</width>
           <height>201</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <property name="spacing">
@@ -229,6 +240,12 @@
          <height>430</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -243,6 +260,11 @@
           <width>111</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
@@ -409,6 +431,11 @@
           <height>371</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QLabel" name="label_18">
@@ -502,7 +529,8 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="title">
@@ -641,7 +669,7 @@
          <string>Сообщение при уменьшении</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_6">
+       <widget class="QComboBox" name="State1_actionHigh_Channel_1">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -694,7 +722,7 @@
          <string>Значение ниже  уставки 1</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_10">
+       <widget class="QComboBox" name="State1_actionLow_Channel_1">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -737,7 +765,8 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="title">
@@ -876,7 +905,7 @@
          <string>Сообщение при уменьшении</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_19">
+       <widget class="QComboBox" name="State2_actionHigh_Channel_1">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -926,7 +955,7 @@
          <string>Значение ниже  уставки 2</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_20">
+       <widget class="QComboBox" name="State2_actionLow_Channel_1">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -962,15 +991,21 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>250</y>
+         <y>260</y>
          <width>221</width>
          <height>121</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Имя канала</string>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -978,6 +1013,11 @@
           <width>221</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -995,8 +1035,14 @@
          </item>
          <item>
           <widget class="QLineEdit" name="Name_Channel_1">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
-            <string>Channel 1</string>
+            <string>Kanal 1</string>
            </property>
           </widget>
          </item>
@@ -1017,6 +1063,12 @@
          <height>430</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Тип канала 2</string>
        </property>
@@ -1024,10 +1076,15 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>10</y>
-          <width>219</width>
+          <y>30</y>
+          <width>211</width>
           <height>201</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="spacing">
@@ -1152,6 +1209,68 @@
          </item>
         </layout>
        </widget>
+       <widget class="QGroupBox" name="groupBox_21">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>250</y>
+          <width>221</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>Имя канала</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_12">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>211</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+          </font>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_60">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Имя канала</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="Name_Channel_2">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kanal 2</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
       <widget class="QGroupBox" name="groupBox_5">
        <property name="geometry">
@@ -1161,6 +1280,12 @@
          <width>250</width>
          <height>430</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
        </property>
        <property name="title">
         <string>Параметры Канала 2</string>
@@ -1173,6 +1298,11 @@
           <width>111</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
@@ -1293,9 +1423,14 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>131</width>
+          <width>140</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
@@ -1379,143 +1514,331 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="groupBox_6">
+      <widget class="QGroupBox" name="groupBox_24">
        <property name="geometry">
         <rect>
          <x>490</x>
-         <y>10</y>
-         <width>600</width>
-         <height>430</height>
+         <y>260</y>
+         <width>450</width>
+         <height>241</height>
         </rect>
        </property>
-       <property name="title">
-        <string>Уставки Канала 2</string>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
        </property>
-       <widget class="QDoubleSpinBox" name="VPI_BOX_7">
+       <property name="title">
+        <string>Уставка 2 Канала 2</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State2ValueChannel_2">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>30</y>
-          <width>61</width>
-          <height>22</height>
+          <width>100</width>
+          <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="value">
+         <double>40.000000000000000</double>
+        </property>
        </widget>
-       <widget class="QLabel" name="label_38">
+       <widget class="QLabel" name="label_69">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>110</y>
-          <width>161</width>
+          <y>100</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Событие при уменьшении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_10">
+       <widget class="QLabel" name="label_70">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>210</y>
-          <width>251</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Значение</string>
-        </property>
-        <property name="maxLength">
-         <number>8</number>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_12">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>110</y>
-          <width>171</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>Реле 1 замыкание</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Реле 1 размыкание</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QLabel" name="label_39">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>150</y>
-          <width>181</width>
+          <y>130</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Сообщение при превышении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_11">
+       <widget class="QLineEdit" name="State2HighMessageChannel_2">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>170</y>
-          <width>251</width>
+          <y>160</y>
+          <width>230</width>
           <height>20</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>Значение выше уставки</string>
+         <string>Значение выше уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_71">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_72">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Уставка 2, значение</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_73">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionHigh_Channel_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>70</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State2LowMessageChannel_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionLow_Channel_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>10</y>
+         <width>450</width>
+         <height>241</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Уставка 1 Канала 2</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State1ValueChannel_2">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>30</y>
+          <width>100</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="value">
+         <double>80.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_38">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_39">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="State1HighMessageChannel_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение выше уставки 1</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_40">
@@ -1523,14 +1846,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>161</width>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1541,15 +1864,15 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>30</y>
-          <width>131</width>
+          <y>40</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1561,46 +1884,101 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>181</width>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Сообщение при уменьшении</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_7">
+       <widget class="QComboBox" name="State1_actionHigh_Channel_2">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>70</y>
-          <width>171</width>
+          <width>180</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(30, 45, 255);</string>
         </property>
         <item>
          <property name="text">
-          <string>Реле 1 замыкание</string>
+          <string>Реле 1.1 замыкание</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Реле 1 размыкание</string>
+          <string>Реле 1.1 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State1LowMessageChannel_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 1</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State1_actionLow_Channel_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 размыкание</string>
          </property>
         </item>
        </widget>
@@ -1619,6 +1997,12 @@
          <height>430</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>Тип канала 3</string>
        </property>
@@ -1626,10 +2010,15 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>10</y>
+          <y>30</y>
           <width>219</width>
           <height>201</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <italic>false</italic>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <property name="spacing">
@@ -1642,6 +2031,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1663,6 +2053,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1684,6 +2075,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1702,6 +2094,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1720,6 +2113,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1741,6 +2135,7 @@
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
+             <italic>false</italic>
              <bold>true</bold>
             </font>
            </property>
@@ -1754,6 +2149,70 @@
          </item>
         </layout>
        </widget>
+       <widget class="QGroupBox" name="groupBox_22">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>250</y>
+          <width>221</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+         </font>
+        </property>
+        <property name="title">
+         <string>Имя канала</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_13">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>221</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <italic>false</italic>
+          </font>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_61">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>10</pointsize>
+              <italic>false</italic>
+             </font>
+            </property>
+            <property name="text">
+             <string>Имя канала</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="Name_Channel_3">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <italic>false</italic>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kanal 3</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
       <widget class="QGroupBox" name="groupBox_8">
        <property name="geometry">
@@ -1763,6 +2222,12 @@
          <width>250</width>
          <height>430</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
        </property>
        <property name="title">
         <string>Параметры Канала 3</string>
@@ -1898,7 +2363,7 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>131</width>
+          <width>146</width>
           <height>371</height>
          </rect>
         </property>
@@ -1984,143 +2449,331 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="groupBox_9">
+      <widget class="QGroupBox" name="groupBox_25">
        <property name="geometry">
         <rect>
          <x>490</x>
-         <y>10</y>
-         <width>600</width>
-         <height>430</height>
+         <y>260</y>
+         <width>450</width>
+         <height>241</height>
         </rect>
        </property>
-       <property name="title">
-        <string>Уставки Канала 3</string>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
        </property>
-       <widget class="QDoubleSpinBox" name="VPI_BOX_8">
+       <property name="title">
+        <string>Уставка 2 Канала 3</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State2ValueChannel_3">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>30</y>
-          <width>61</width>
-          <height>22</height>
+          <width>100</width>
+          <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="value">
+         <double>40.000000000000000</double>
+        </property>
        </widget>
-       <widget class="QLabel" name="label_43">
+       <widget class="QLabel" name="label_74">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>110</y>
-          <width>161</width>
+          <y>100</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Событие при уменьшении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_12">
+       <widget class="QLabel" name="label_75">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>210</y>
-          <width>251</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Значение</string>
-        </property>
-        <property name="maxLength">
-         <number>8</number>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_15">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>110</y>
-          <width>171</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>Реле 1 замыкание</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Реле 1 размыкание</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QLabel" name="label_44">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>150</y>
-          <width>181</width>
+          <y>130</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Сообщение при превышении</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_13">
+       <widget class="QLineEdit" name="State2HighMessageChannel_3">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>170</y>
-          <width>251</width>
+          <y>160</y>
+          <width>230</width>
           <height>20</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>Значение выше уставки</string>
+         <string>Значение выше уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_76">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_77">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Уставка 2, значение</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_78">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionHigh_Channel_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>70</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State2LowMessageChannel_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionLow_Channel_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_9">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>10</y>
+         <width>450</width>
+         <height>241</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Уставка 1 Канала 3</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State1ValueChannel_3">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>30</y>
+          <width>100</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="value">
+         <double>80.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="State1HighMessageChannel_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение выше уставки 1</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_45">
@@ -2128,14 +2781,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>161</width>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -2146,15 +2799,15 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>30</y>
-          <width>131</width>
+          <y>40</y>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -2166,46 +2819,101 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>181</width>
+          <width>230</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
          <string>Сообщение при уменьшении</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_8">
+       <widget class="QComboBox" name="State1_actionHigh_Channel_3">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>70</y>
-          <width>171</width>
+          <width>180</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(30, 45, 255);</string>
         </property>
         <item>
          <property name="text">
-          <string>Реле 1 замыкание</string>
+          <string>Реле 1.1 замыкание</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Реле 1 размыкание</string>
+          <string>Реле 1.1 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State1LowMessageChannel_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 1</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State1_actionLow_Channel_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 размыкание</string>
          </property>
         </item>
        </widget>
@@ -2224,6 +2932,14 @@
          <height>430</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="title">
         <string>Тип канала 4</string>
        </property>
@@ -2231,10 +2947,17 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>10</y>
+          <y>30</y>
           <width>219</width>
           <height>201</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_10">
          <property name="spacing">
@@ -2345,8 +3068,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2359,6 +3082,76 @@
          </item>
         </layout>
        </widget>
+       <widget class="QGroupBox" name="groupBox_23">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>250</y>
+          <width>221</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="title">
+         <string>Имя канала</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget_14">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>221</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_62">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Имя канала</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="Name_Channel_4">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>12</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Kanal 4</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
       <widget class="QGroupBox" name="groupBox_11">
        <property name="geometry">
@@ -2368,6 +3161,14 @@
          <width>250</width>
          <height>430</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
        </property>
        <property name="title">
         <string>Параметры Канала 4</string>
@@ -2380,6 +3181,13 @@
           <width>111</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_11">
          <item>
@@ -2394,6 +3202,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2413,6 +3223,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </widget>
@@ -2429,6 +3241,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </widget>
@@ -2445,6 +3259,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </widget>
@@ -2461,6 +3277,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </widget>
@@ -2477,6 +3295,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="decimals">
@@ -2497,9 +3317,16 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>131</width>
+          <width>146</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_12">
          <item>
@@ -2508,6 +3335,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2521,6 +3350,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2534,6 +3365,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2547,6 +3380,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2560,6 +3395,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2573,6 +3410,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -2583,184 +3422,509 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="groupBox_12">
+      <widget class="QGroupBox" name="groupBox_26">
        <property name="geometry">
         <rect>
          <x>490</x>
-         <y>10</y>
-         <width>600</width>
-         <height>430</height>
+         <y>260</y>
+         <width>450</width>
+         <height>241</height>
         </rect>
        </property>
-       <property name="title">
-        <string>Уставки Канала 4</string>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
        </property>
-       <widget class="QDoubleSpinBox" name="VPI_BOX_9">
+       <property name="title">
+        <string>Уставка 2 Канала 4</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State2ValueChannel_4">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>30</y>
-          <width>109</width>
+          <width>100</width>
           <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
         </property>
+        <property name="value">
+         <double>40.000000000000000</double>
+        </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_16">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>180</y>
-          <width>171</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>Реле 4.2 замыкание</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Реле 4.2 размыкание</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QComboBox" name="comboBox_9">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>120</y>
-          <width>171</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <item>
-         <property name="text">
-          <string>Реле 4.1 замыкание</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Реле 4.1 размыкание</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QLabel" name="label_79">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>30</y>
-          <width>166</width>
-          <height>361</height>
+          <y>100</y>
+          <width>230</width>
+          <height>16</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_15">
-         <item>
-          <widget class="QLabel" name="label_57">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Уставка 1, значение</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_56">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Событие при превышении</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_54">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Событие при уменьшении</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_55">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Сообщение при превышении</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_15">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Значение выше уставки</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_58">
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Сообщение при уменьшении</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_80">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="State2HighMessageChannel_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение выше уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_81">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_82">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Уставка 2, значение</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_83">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionHigh_Channel_4">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>70</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State2LowMessageChannel_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 2</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State2_actionLow_Channel_4">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 2.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 2.2 размыкание</string>
+         </property>
+        </item>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_12">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>10</y>
+         <width>450</width>
+         <height>241</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="title">
+        <string>Уставка 1 Канала 4</string>
+       </property>
+       <widget class="QDoubleSpinBox" name="State1ValueChannel_4">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>30</y>
+          <width>100</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="value">
+         <double>80.000000000000000</double>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_54">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_55">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="State1HighMessageChannel_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение выше уставки 1</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_56">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Событие при превышении</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_57">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Уставка 1, значение</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_58">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>230</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сообщение при уменьшении</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State1_actionHigh_Channel_4">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>70</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(30, 45, 255);</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 размыкание</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="State1LowMessageChannel_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>230</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Значение ниже  уставки 1</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="State1_actionLow_Channel_4">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>180</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 замыкание</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Реле 1.1 размыкание</string>
+         </property>
+        </item>
        </widget>
       </widget>
      </widget>

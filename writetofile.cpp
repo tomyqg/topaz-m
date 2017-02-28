@@ -118,32 +118,53 @@ void Options::WriteOptionsToFile()
     settings.append(channel1);
 
     channel2["Type"] = options2.GetSignalType();
+    channel2["Name"] = options2.GetChannelName();
     channel2["Units"] = options2.GetUnitsName();
     channel2["HigherLimit"] = options2.GetHigherLimit();
     channel2["LowerLimit"] = options2.GetLowerLimit();
     channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
     channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
     channel2["Period"] = options2.GetMeasurePeriod();
+    channel2["State1HighMessage"] = options2.GetState1HighMessage();
+    channel2["State1LowMessage"] = options2.GetState1LowMessage();
+    channel2["State2HighMessage"] = options2.GetState2HighMessage();
+    channel2["State2LowMessage"] = options2.GetState2LowMessage();
+    channel2["State1Value"] = options2.GetState1Value();
+    channel2["State2Value"] = options2.GetState2Value();
 
     settings.append(channel2);
 
     channel3["Type"] = options3.GetSignalType();
+    channel3["Name"] = options3.GetChannelName();
     channel3["Units"] = options3.GetUnitsName();
     channel3["HigherLimit"] = options3.GetHigherLimit();
     channel3["LowerLimit"] = options3.GetLowerLimit();
     channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
     channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
     channel3["Period"] = options3.GetMeasurePeriod();
+    channel3["State1HighMessage"] = options3.GetState1HighMessage();
+    channel3["State1LowMessage"] = options3.GetState1LowMessage();
+    channel3["State2HighMessage"] = options3.GetState2HighMessage();
+    channel3["State2LowMessage"] = options3.GetState2LowMessage();
+    channel3["State1Value"] = options3.GetState1Value();
+    channel3["State2Value"] = options3.GetState2Value();
 
     settings.append(channel3);
 
     channel4["Type"] = options4.GetSignalType();
+    channel4["Name"] = options4.GetChannelName();
     channel4["Units"] = options4.GetUnitsName();
     channel4["HigherLimit"] = options4.GetHigherLimit();
     channel4["LowerLimit"] = options4.GetLowerLimit();
     channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
     channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
     channel4["Period"] = options4.GetMeasurePeriod();
+    channel4["State1HighMessage"] = options4.GetState1HighMessage();
+    channel4["State1LowMessage"] = options4.GetState1LowMessage();
+    channel4["State2HighMessage"] = options4.GetState2HighMessage();
+    channel4["State2LowMessage"] = options4.GetState2LowMessage();
+    channel4["State1Value"] = options4.GetState1Value();
+    channel4["State2Value"] = options4.GetState2Value();
 
     settings.append(channel4);
 
