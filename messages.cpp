@@ -34,11 +34,14 @@ Messages::Messages(QDialog *parent) :
     QDialog(parent),
     ui(new Ui::Messages)
 {
+
+//    MessageWrite mr;
+//    mr.WriteAllLogToFile();
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("MESSAGES"));
-    MessageWrite mr ("Messages open");
-    QJsonArray messagesarray = mr.LogMessageRead();
+    MessageWrite mr2 ("Messages open");
+    QJsonArray messagesarray = mr2.LogMessageRead();
     for (int var = 0; var < messagesarray.count() ; ++var) {
         QJsonObject mes = messagesarray.at(var).toObject();
         ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("Date").toString() +" "+  mes.value("Time").toString()+" "+ mes.value("Message").toString());

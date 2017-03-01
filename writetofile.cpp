@@ -181,21 +181,7 @@ void Options::WriteOptionsToFile()
 }
 
 void MessageWrite::WriteAllLogToFile()
-{
-
-}
-
-void MessageWrite::LogMessageWrite(QString nm)
-{
-    QJsonObject themessage;
-    QJsonObject archive;
-
-    QDateTime local (QDateTime::currentDateTime());
-    themessage["Time"] = local.time().toString();
-    themessage["Date"] = local.date().toString("dd/MM/yy");
-    themessage["Message"] = nm;
-
-    messagesqueue.append(themessage);
+{    QJsonObject archive;
 
     Options opt;
     double maxmes  = opt.getmaxmessageslimit();
@@ -221,6 +207,18 @@ void MessageWrite::LogMessageWrite(QString nm)
     out << setstr;
 
     file.close();
+}
+
+void MessageWrite::LogMessageWrite(QString nm)
+{
+    QJsonObject themessage;
+
+
+    QDateTime local (QDateTime::currentDateTime());
+    themessage["Time"] = local.time().toString();
+    themessage["Date"] = local.date().toString("dd/MM/yy");
+    themessage["Message"] = nm;
+    messagesqueue.append(themessage);
 }
 
 void MessageWrite::LogClear()

@@ -115,19 +115,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MessageWrite mr ("Programm Started");
 
-//    qDebug() << "readoptionsfromfile" ;
-
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-
-
 }
 
 MainWindow::~MainWindow()
 {
-    MessageWrite mr ("Programm Closed");
+    MessageWrite mr1 ("Programm Closed");
+    mr1.WriteAllLogToFile();
     delete ui;
 }
 
@@ -200,8 +197,7 @@ void MainWindow::on_pushButton_2_clicked()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-
-//    qDebug() << "readoptionsfromfile" ;
+    //    qDebug() << "readoptionsfromfile" ;
 }
 
 void MainWindow::on_pushButton_2_pressed()
@@ -274,8 +270,6 @@ void MainWindow::on_pushButton_3_clicked()
     QApplication::exit();
 }
 
-
-
 void MainWindow::delay(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(1);
@@ -289,6 +283,7 @@ void MainWindow::focusChanged(QWidget* , QWidget* )
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    mr.WriteAllLogToFile();
     Messages messages;
     messages.setModal(true);
     messages.exec();

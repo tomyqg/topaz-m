@@ -1077,7 +1077,7 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>211</width>
+          <width>219</width>
           <height>201</height>
          </rect>
         </property>
@@ -4964,9 +4964,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

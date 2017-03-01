@@ -3,25 +3,12 @@
 #include "options.h"
 #include "keyboard.h"
 #include "dialog.h"
-#include <QPixmap>
 #include <QTimer>
 #include <QTime>
-#include <QPainter>
-#include <QPen>
-#include <QVector>
-#include <QtMath>
 #include <QFile>
-#include <QDataStream>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
-#include <QPainterPath>
-#include <QPainter>
 #include <QDateTime>
 #include <QCloseEvent>
 #include <QMessageBox>
-#include <QtWidgets>
-#include <QThread>
-#include <QPoint>
 #include <channel1.h>
 #include <messages.h>
 
@@ -127,7 +114,7 @@ QJsonArray MessageWrite::LogMessageRead()
     QJsonArray array = json["messagesqueue"].toArray();
     MessageWrite::messagesqueue = array;
     file.close();
-//    qDebug() << MessageWrite::messagesqueue;
+    //    qDebug() << MessageWrite::messagesqueue;
     return MessageWrite::messagesqueue;
 }
 
