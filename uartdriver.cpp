@@ -81,7 +81,7 @@ void UartDriver::readuart()
 
 void UartDriver::writechannelvalue(int channel, double value)
 {
-    this->channelinputbuffer[channel] = value;
+    this->channelinputbuffer[channel-1] = value;
 //    qDebug() << "writechannelvalue";
 }
 

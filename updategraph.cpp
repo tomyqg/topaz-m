@@ -127,9 +127,9 @@ void MainWindow::updatepicture()
 
 void MainWindow::UpdateDataChannel1()
 {
-    double currentdata = ui->dial->value() + 5;
+    double currentdata = ui->dial->value() + 10;
     UartDriver UD;
-    UD.writechannelvalue(0,currentdata);
+    UD.writechannelvalue(1,currentdata);
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
         ch1.LowState1Setted = false;
@@ -153,16 +153,10 @@ void MainWindow::UpdateDataChannel1()
 }
 
 void MainWindow::UpdateDataChannel2()
-{/*
-    UartDriver UD;
-    ch2.readoptionsfromfile(2);
-    UD.writechannelvalue(1,ui->dial->value() + 20 );
-    int period = ch2.GetMeasurePeriod()*1000;
-    channeltimer2->setInterval(period);*/
-
+{
     double currentdata = ui->dial->value() + 20;
     UartDriver UD;
-    UD.writechannelvalue(1,currentdata);
+    UD.writechannelvalue(2,currentdata);
     if ((currentdata>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {
         ch2.LowState1Setted = false;
@@ -187,18 +181,54 @@ void MainWindow::UpdateDataChannel2()
 
 void MainWindow::UpdateDataChannel3()
 {
+    double currentdata = ui->dial->value() + 30;
     UartDriver UD;
-    ch3.readoptionsfromfile(3);
-    UD.writechannelvalue(2,ui->dial->value() + 30 );
+    UD.writechannelvalue(3,currentdata);
+    if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
+    {
+        ch3.LowState1Setted = false;
+        ui->listWidget->addItem(ch3.GetState1HighMessage());
+        ui->listWidget->scrollToBottom();
+        ch3.HighState1Setted = true;
+         mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
+    }
+
+    if ((currentdata<ch3.GetState1Value() ) && ( ch3.LowState1Setted == false ))
+    {
+        ch3.LowState1Setted = true;
+        ui->listWidget->addItem(ch3.GetState1LowMessage());
+        ui->listWidget->scrollToBottom();
+        ch3.HighState1Setted = false;
+         mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
+    }
+
     int period = ch3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel4()
 {
+    double currentdata = ui->dial->value() + 40;
     UartDriver UD;
-    ch4.readoptionsfromfile(4);
-    UD.writechannelvalue(3,ui->dial->value() + 40 );
+    UD.writechannelvalue(4,currentdata);
+    if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
+    {
+        ch4.LowState1Setted = false;
+        ui->listWidget->addItem(ch4.GetState1HighMessage());
+        ui->listWidget->scrollToBottom();
+        ch4.HighState1Setted = true;
+         mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
+    }
+
+    if ((currentdata<ch4.GetState1Value() ) && ( ch4.LowState1Setted == false ))
+    {
+        ch4.LowState1Setted = true;
+        ui->listWidget->addItem(ch4.GetState1LowMessage());
+        ui->listWidget->scrollToBottom();
+        ch4.HighState1Setted = false;
+         mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
+    }
+
     int period = ch4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
