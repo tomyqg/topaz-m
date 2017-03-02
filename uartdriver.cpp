@@ -35,7 +35,7 @@ void UartDriver::readuart()
 
     while (1)
     {
-//        writechannelvalue(1,46);
+        //        writechannelvalue(1,46);
         QSerialPort serial;
         serial.setPortName("/dev/ttyS1"); //usart1
         if (serial.open(QIODevice::ReadWrite))
@@ -98,6 +98,43 @@ double UartDriver::readchannelvalue(int channelnumber)
     return channelinputbuffer[channelnumber-1];
 }
 
-void UartDriver()
+QByteArray ReadAllUartByteData()
 {
+    QSerialPort serial;
+    QByteArray bytedata;
+    //    serial.setPortName("/dev/ttyS1"); //usart1
+    serial.setPortName("/dev/ttyS1"); //usart1
+    if (serial.open(QIODevice::ReadWrite))
+    {
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+        while (serial.waitForReadyRead(10))
+            bytedata.append( serial.readAll() );
+    }
+
+    return bytedata;
+
 }
+
+
+QString UartDriver::readalluartports()
+{
+
+    QString a;
+
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+
+        {    // Example use QSerialPort
+            QSerialPort serial;
+            serial.setPort(info);
+            a.append(info.portName());
+        }
+    }
+
+    return a;
+}
+

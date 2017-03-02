@@ -145,6 +145,9 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
+    UartDriver ud;
+    ui->listWidget->addItem(ud.readalluartports());
+    ui->listWidget->scrollToBottom();
 }
 
 void MainWindow::touchupdate()

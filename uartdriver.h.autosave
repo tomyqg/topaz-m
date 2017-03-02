@@ -17,7 +17,7 @@ public slots:
     void writechannelvalue(int channel, double value);
     void just();
     QString readalluartports();
-    QByteArray ReadAllByteData();
+    QByteArray ReadAllUartByteData();
 
 private:
     static double channelinputbuffer[4];
