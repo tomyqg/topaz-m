@@ -32,12 +32,15 @@ double UartDriver::channelinputbuffer[] = {27.22,33.87,57.89,81.11};
 
 void UartDriver::readuart()
 {
+
     while (1)
     {
+//        writechannelvalue(1,46);
         QSerialPort serial;
         serial.setPortName("/dev/ttyS1"); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
+
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
@@ -82,18 +85,17 @@ void UartDriver::readuart()
 void UartDriver::writechannelvalue(int channel, double value)
 {
     this->channelinputbuffer[channel-1] = value;
-//    qDebug() << "writechannelvalue";
+    //    qDebug() << "writechannelvalue";
 }
 
 void UartDriver::just()
 {
-//    qDebug() << "just";
+    //    qDebug() << "just";
 }
-
 
 double UartDriver::readchannelvalue(int channelnumber)
 {
-    return channelinputbuffer[channelnumber];
+    return channelinputbuffer[channelnumber-1];
 }
 
 void UartDriver()

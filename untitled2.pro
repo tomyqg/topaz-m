@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     uartdriver.cpp \
     readoptionsfromfile.cpp \
     messages.cpp \
-    writetofile.cpp
+    writetofile.cpp \
+    metrologicalcalc.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     channel1.h \
     keyboard.h \
     messages.h \
-    uartdriver.h
+    uartdriver.h \
+    metrologicalcalc.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \

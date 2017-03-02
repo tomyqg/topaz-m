@@ -3,20 +3,17 @@
 #include "uartdriver.h"
 #include "ui_mainwindow.h"
 #include "messages.h"
+#include "metrologicalcalc.h"
 
 
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
 #include <QPainter>
-#include <QPen>
-#include <QVector>
 #include <QtMath>
 #include <QFile>
 #include <QDataStream>
 #include <QtMath>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
 #include <QtScript/QScriptEngine>
 #include <QPainterPath>
 #include <QPainter>
@@ -24,9 +21,7 @@
 #include <QFile>
 #include <QCloseEvent>
 #include <QMessageBox>
-#include <QtWidgets>
-#include <QThread>
-#include <QMutex>
+
 
 int a=0;
 int b=0;
@@ -50,10 +45,10 @@ void MainWindow::updategraph()
 
     double argument = ui->dial->value();
 
-    yy1.append(UD.readchannelvalue(0));
-    yy2.append(UD.readchannelvalue(1));
-    yy3.append(UD.readchannelvalue(2));
-    yy4.append(UD.readchannelvalue(3));
+    yy1.append(UD.readchannelvalue(1));
+    yy2.append(UD.readchannelvalue(2));
+    yy3.append(UD.readchannelvalue(3));
+    yy4.append(UD.readchannelvalue(4));
 
     b++;
 
@@ -127,9 +122,13 @@ void MainWindow::updatepicture()
 
 void MainWindow::UpdateDataChannel1()
 {
-    double currentdata = ui->dial->value() + 10;
+    double fakedata = ui->dial->value() + 10;
     UartDriver UD;
-    UD.writechannelvalue(1,currentdata);
+
+    UD.writechannelvalue(1,fakedata);
+
+    double currentdata = UD.readchannelvalue(1);
+
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
         ch1.LowState1Setted = false;
@@ -154,10 +153,20 @@ void MainWindow::UpdateDataChannel1()
 
 void MainWindow::UpdateDataChannel2()
 {
-    double currentdata = ui->dial->value() + 20;
     UartDriver UD;
-    UD.writechannelvalue(2,currentdata);
-    if ((currentdata>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
+    MetrologicalCalc me;
+
+    double fakedata = me.CurrentToPressure( (ui->dial->value()/5) ,0,ui->dial->maximum()/5,0,75);
+
+//    me.CurrentToPressure()
+
+    UD.writechannelvalue(2,fakedata);
+
+    double pressure = UD.readchannelvalue(2);
+
+//        double pressure = me.CurrentToPressure(UD.readchannelvalue(2),4,20,0,100);
+
+    if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {
         ch2.LowState1Setted = false;
         ui->listWidget->addItem(ch2.GetState1HighMessage());
@@ -166,7 +175,7 @@ void MainWindow::UpdateDataChannel2()
          mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
     }
 
-    if ((currentdata<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
+    if ((pressure<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
     {
         ch2.LowState1Setted = true;
         ui->listWidget->addItem(ch2.GetState1LowMessage());
@@ -181,9 +190,14 @@ void MainWindow::UpdateDataChannel2()
 
 void MainWindow::UpdateDataChannel3()
 {
-    double currentdata = ui->dial->value() + 30;
+    double fakedata = ui->dial->value() + 30;
+
     UartDriver UD;
-    UD.writechannelvalue(3,currentdata);
+
+    UD.writechannelvalue(3,fakedata);
+
+    double currentdata = UD.readchannelvalue(3);
+
     if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
     {
         ch3.LowState1Setted = false;
@@ -208,9 +222,14 @@ void MainWindow::UpdateDataChannel3()
 
 void MainWindow::UpdateDataChannel4()
 {
-    double currentdata = ui->dial->value() + 40;
+    double fakedata = ui->dial->value() + 40;
+
     UartDriver UD;
-    UD.writechannelvalue(4,currentdata);
+
+    UD.writechannelvalue(4,fakedata);
+
+    double currentdata = UD.readchannelvalue(4);
+
     if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
     {
         ch4.LowState1Setted = false;

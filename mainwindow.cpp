@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *closetimer = new QTimer(this);
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
-    connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
+    //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
 
     tmr->start(100);
     timer->start(1111);
@@ -81,7 +81,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QThread *thread= new QThread();
     UartDriver *my = new UartDriver();
-    UartDriver *UD = new UartDriver();
 
     my->moveToThread(thread);
 
@@ -113,7 +112,8 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 
-    MessageWrite mr ("Programm Started");
+    MessageWrite mr ;
+    mr.LogMessageWrite("Programm Started");
 
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
