@@ -17,13 +17,14 @@ public slots:
     void writechannelvalue(int channel, double value);
     void just();
     QString readalluartports();
-    QByteArray ReadAllByteData();
 
 private:
     static double channelinputbuffer[4];
+    QByteArray ReadAllUartByteData();
+    QString ReadAllUartStringData();
 
 public:
-//    explicit  UartDriver();
+    //    explicit  UartDriver();
 };
 
 #endif // UARTDRIVER_H
