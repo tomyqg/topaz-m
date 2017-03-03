@@ -13,6 +13,7 @@ private slots:
 
 public slots:
     double readchannelvalue(int channel);
+    float readchannel1value(int channel);
     void writechannelvalue(int channel, double value);
     void readuart();
     void just();
@@ -24,6 +25,7 @@ public slots:
 
 private:
     static double channelinputbuffer[4];
+    static double channeltempbuffer[4];
 
 public:
     //    explicit  UartDriver();

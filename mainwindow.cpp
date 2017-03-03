@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     my->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), my, SLOT(readuart()));
+//    connect(thread, SIGNAL(started()), my, SLOT(readuart()));
 
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);

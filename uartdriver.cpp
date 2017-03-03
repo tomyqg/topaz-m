@@ -29,18 +29,11 @@
 extern QString inputstr ;
 
 double UartDriver::channelinputbuffer[] = {27.22,33.87,57.89,81.11};
+double UartDriver::channeltempbuffer[] = {27.22,33.87,57.89,81.11};
 
 void UartDriver::readuart()
 {
     char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
-    QString ba2 = "01030000000AC5CD";
-
-    double a = 0x413FD9AB;
-
-    QString floatstr = "413FD9AB";
-
-
-    // 000086-Tx:01 04 00 00 00 0A 70 0D
 
     QByteArray requestData;
     // 01 03 00 00 00 0A C5 CD
@@ -86,10 +79,10 @@ void UartDriver::readuart()
                 QByteArray arr3;
                 arr3.resize(4);
 
-//                arr3[0] = 0x41;
-//                arr3[1] = 0x3f;
-//                arr3[2] = 0xd9;
-//                arr3[3] = 0xab;
+                //                arr3[0] = 0x41;
+                //                arr3[1] = 0x3f;
+                //                arr3[2] = 0xd9;
+                //                arr3[3] = 0xab;
 
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
@@ -101,13 +94,15 @@ void UartDriver::readuart()
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
 
-                 qDebug() << val1; // val = 0
+                qDebug() << val1; // val = 0
 
-//                 channelinputbuffer[0] = val1;
 
-                 writechannelvalue(1,val1);
+                //                channeltempbuffer[0]  = val1;
+                //channelinputbuffer[0] = val1;
 
-                //                qDebug() << floatstr.toFloat();
+                //writechannelvalue(1,val1);
+
+                //qDebug() << floatstr.toFloat();
             }
         }
     }
@@ -115,6 +110,7 @@ void UartDriver::readuart()
 
 void UartDriver::writechannelvalue(int channel, double value)
 {
+
     this->channelinputbuffer[channel-1] = value;
     //    qDebug() << "writechannelvalue";
 }
@@ -126,9 +122,89 @@ void UartDriver::just()
 
 double UartDriver::readchannelvalue(int channelnumber)
 {
-
-
     return channelinputbuffer[channelnumber-1];
+}
+
+
+
+float UartDriver::readchannel1value(int channelnumber)
+{
+
+    float val1;
+
+    char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
+    QByteArray requestData;
+    QByteArray ba(arr, 8);
+
+    //    while (1)
+    {
+        QSerialPort serial;
+        serial.setPortName("COM3"); //usart1
+        if (serial.open(QIODevice::ReadWrite))
+        {
+            qDebug() << serial.portName() + " Opened";
+
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+
+
+            //qDebug() << "serial.bytesAvailable: " ;
+            //qDebug() << serial.bytesAvailable();
+
+            //            while (1)
+            {
+                serial.write(ba);
+                while (serial.waitForBytesWritten(10))
+                    ;
+                //serial.write(QByteArray::fromHex("01030000000AC5CD"));
+                //while (serial.waitForBytesWritten(20))
+                //  ;
+
+                Sleep(50);
+                while (serial.waitForReadyRead(10))
+                    requestData = serial.readAll();
+
+                qDebug() << "recieve: " + requestData;
+
+                char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
+                QByteArray tb(arr2, 4);
+
+
+                QByteArray arr3;
+                arr3.resize(4);
+
+                //                arr3[0] = 0x41;
+                //                arr3[1] = 0x3f;
+                //                arr3[2] = 0xd9;
+                //                arr3[3] = 0xab;
+
+                arr3[0] = requestData.at(5);
+                arr3[1] = requestData.at(6);
+                arr3[2] = requestData.at(3);
+                arr3[3] = requestData.at(4);
+
+
+                QDataStream stream(arr3);
+                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+                stream >> val1;
+
+                                qDebug() << val1; // val = 0
+
+
+                //                channeltempbuffer[0]  = val1;
+                //channelinputbuffer[0] = val1;
+
+                //writechannelvalue(1,val1);
+
+                //qDebug() << floatstr.toFloat();
+            }
+        }
+    }
+
+    return val1;
 }
 
 QByteArray UartDriver::ReadAllUartByteData()
@@ -198,11 +274,7 @@ QString UartDriver::readalluartports()
 
 void UartDriver::writedata()
 {
-    //01 03 00 00 00 0A C5 CD
-
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
-
-    // 01 03 00 00 00 0A C5 CD
 
     QByteArray ba(arr, 8);
 

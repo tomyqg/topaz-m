@@ -127,7 +127,8 @@ void MainWindow::UpdateDataChannel1()
 
 //    UD.writechannelvalue(1,fakedata);
 
-    double currentdata = UD.readchannelvalue(1);
+    double currentdata = UD.readchannel1value(1);
+    UD.writechannelvalue(1,currentdata);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
