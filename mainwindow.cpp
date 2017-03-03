@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap pix("/usr/inc/logo.jpg");
     ui->label->setPixmap(pix);
     ui->customPlot->xAxis->setRange(-8, 600);
-    ui->customPlot->yAxis->setRange(-5, 110);
+    ui->customPlot->yAxis->setRange(-200, 200);
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));

@@ -73,7 +73,7 @@ void UartDriver::readuart()
                 //while (serial.waitForBytesWritten(20))
                 //  ;
 
-                Sleep(1000);
+                Sleep(50);
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
 
@@ -82,24 +82,30 @@ void UartDriver::readuart()
                 char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
                 QByteArray tb(arr2, 4);
 
-                float number =  *(reinterpret_cast<const float*>(tb.constData()));
-
-                qDebug() << number;
 
                 QByteArray arr3;
                 arr3.resize(4);
-                arr3[0] = 0x41;
-                arr3[1] = 0xf8;
-                arr3[2] = 0xf6;
-                arr3[3] = 0x00;
+
+//                arr3[0] = 0x41;
+//                arr3[1] = 0x3f;
+//                arr3[2] = 0xd9;
+//                arr3[3] = 0xab;
+
+                arr3[0] = requestData.at(5);
+                arr3[1] = requestData.at(6);
+                arr3[2] = requestData.at(3);
+                arr3[3] = requestData.at(4);
 
                 float val1;
                 QDataStream stream(arr3);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
-                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
 
                  qDebug() << val1; // val = 0
+
+//                 channelinputbuffer[0] = val1;
+
+                 writechannelvalue(1,val1);
 
                 //                qDebug() << floatstr.toFloat();
             }
@@ -120,6 +126,8 @@ void UartDriver::just()
 
 double UartDriver::readchannelvalue(int channelnumber)
 {
+
+
     return channelinputbuffer[channelnumber-1];
 }
 

@@ -122,10 +122,10 @@ void MainWindow::updatepicture()
 
 void MainWindow::UpdateDataChannel1()
 {
-    double fakedata = ui->dial->value() + 10;
+//    double fakedata = ui->dial->value() + 10;
     UartDriver UD;
 
-    UD.writechannelvalue(1,fakedata);
+//    UD.writechannelvalue(1,fakedata);
 
     double currentdata = UD.readchannelvalue(1);
 
