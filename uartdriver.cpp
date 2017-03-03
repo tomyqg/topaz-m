@@ -32,8 +32,15 @@ double UartDriver::channelinputbuffer[] = {27.22,33.87,57.89,81.11};
 
 void UartDriver::readuart()
 {
-    char arr[9] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD, '\n'};
+    char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
     QString ba2 = "01030000000AC5CD";
+
+    double a = 0x413FD9AB;
+
+    QString floatstr = "413FD9AB";
+
+
+    // 000086-Tx:01 04 00 00 00 0A 70 0D
 
     QByteArray requestData;
     // 01 03 00 00 00 0A C5 CD
@@ -62,17 +69,40 @@ void UartDriver::readuart()
                 serial.write(ba);
                 while (serial.waitForBytesWritten(10))
                     ;
-//                serial.write(QByteArray::fromHex("01030000000AC5CD"));
-//                while (serial.waitForBytesWritten(20))
-//                    ;
+                //serial.write(QByteArray::fromHex("01030000000AC5CD"));
+                //while (serial.waitForBytesWritten(20))
+                //  ;
 
-                Sleep(100);
+                Sleep(1000);
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
 
                 qDebug() << "recieve: " + requestData;
-            }
 
+                char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
+                QByteArray tb(arr2, 4);
+
+                float number =  *(reinterpret_cast<const float*>(tb.constData()));
+
+                qDebug() << number;
+
+                QByteArray arr3;
+                arr3.resize(4);
+                arr3[0] = 0x41;
+                arr3[1] = 0xf8;
+                arr3[2] = 0xf6;
+                arr3[3] = 0x00;
+
+                float val1;
+                QDataStream stream(arr3);
+                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+                stream >> val1;
+                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+
+                 qDebug() << val1; // val = 0
+
+                //                qDebug() << floatstr.toFloat();
+            }
         }
     }
 }
