@@ -32,14 +32,19 @@ double UartDriver::channelinputbuffer[] = {27.22,33.87,57.89,81.11};
 
 void UartDriver::readuart()
 {
+    char arr[9] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD, '\n'};
+    QString ba2 = "01030000000AC5CD";
+
+    // 01 03 00 00 00 0A C5 CD
+    QByteArray ba(arr, 8);
 
     while (1)
     {
-        //        writechannelvalue(1,46);
         QSerialPort serial;
-        serial.setPortName("/dev/ttyS1"); //usart1
+        serial.setPortName("COM5"); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
+            qDebug() << serial.portName() + " Opened";
 
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
@@ -48,30 +53,51 @@ void UartDriver::readuart()
             serial.setFlowControl(QSerialPort::NoFlowControl);
             {
                 // start stuff
-                serial.write("a");
-                while (serial.waitForBytesWritten(500))
-                    ;
+                //                serial.write(ba);
 
-                serial.write("b");
-                while (serial.waitForBytesWritten(500))
+                serial.write(QByteArray::fromHex("01030000000AC5CD"));
+                while (serial.waitForBytesWritten(20))
                     ;
+                Sleep(100);
+                while (serial.waitForReadyRead(10))
+                    ;
+                Sleep(100);
                 // end stuff
 
                 QByteArray requestData;
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
+
                 inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
+
+                qDebug() << serial.portName() + " Opened";
+                qDebug() << "serial.bytesAvailable: " ;
+                qDebug() << serial.bytesAvailable();
+
+                //                qDebug() << "serial.readBufferSize(): " ;
+                //                qDebug() << serial.readBufferSize();
 
                 if ((serial.bytesAvailable())>0)
                 {
+
+//                    qDebug() << "serial.bytesAvailable: " ;
+//                    qDebug() << serial.bytesAvailable();
+
                     while (1)
                     {
-                        while (serial.waitForReadyRead(10))
-                            requestData = serial.readAll();
                         inputstr = QTextCodec::codecForMib(106)->toUnicode(requestData);
-                        serial.write("c");
+                        serial.write(ba);
                         while (serial.waitForBytesWritten(20))
                             ;
+
+                        Sleep(500);
+                        while (serial.waitForReadyRead(10))
+                            requestData = serial.readAll();
+//                        serial.write(QByteArray::fromHex("01030000000AC5CD"));
+//                        while (serial.waitForBytesWritten(20))
+//                            ;
+
+                        qDebug() << "requestData: " + requestData;
                     }
                 }
                 while (serial.waitForReadyRead(10))
@@ -103,9 +129,14 @@ QByteArray UartDriver::ReadAllUartByteData()
     QSerialPort serial;
     QByteArray bytedata;
     //    serial.setPortName("/dev/ttyS1"); //usart1
-    serial.setPortName("/dev/ttyS1"); //usart1
+    serial.setPortName("COM3"); //usart1
     if (serial.open(QIODevice::ReadWrite))
     {
+
+        //        serial.waitForReadyRead(10);
+
+        qDebug() << serial.bytesAvailable();
+
         serial.setBaudRate(QSerialPort::Baud9600);
         serial.setDataBits(QSerialPort::Data8);
         serial.setParity(QSerialPort::NoParity);
@@ -124,7 +155,7 @@ QString UartDriver::ReadAllUartStringData()
     QSerialPort serial;
     QByteArray bytedata;
     //    serial.setPortName("/dev/ttyS1"); //usart1
-    serial.setPortName("/dev/ttyS1"); //usart1
+    serial.setPortName("COM1"); //usart1
     if (serial.open(QIODevice::ReadWrite))
     {
         serial.setBaudRate(QSerialPort::Baud9600);
@@ -156,4 +187,46 @@ QString UartDriver::readalluartports()
     }
 
     return a;
+}
+
+void UartDriver::writedata()
+{
+    //01 03 00 00 00 0A C5 CD
+
+    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
+
+    // 01 03 00 00 00 0A C5 CD
+
+    QByteArray ba(arr, 8);
+
+    QByteArray bytedata;
+
+    QSerialPort serial;
+
+    //    serial.setPortName("/dev/ttyS1"); //usart1
+    serial.setPortName("COM3"); //usart1
+    if (serial.open(QIODevice::ReadWrite))
+    {
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::SoftwareControl);
+
+        //        serial.write("1");
+        serial.write(ba);
+
+        while (serial.waitForBytesWritten(100))
+            ;
+        Sleep(100);
+
+        qDebug() << "bytesAvailable" + serial.bytesAvailable();
+
+        while (serial.waitForReadyRead(100))
+            bytedata.append( serial.readAll() );
+
+        qDebug() << "bytesAvailable" + serial.bytesAvailable();
+    }
+    QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
+    serial.close();
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-01T16:41:22. -->
+<!-- Written by QtCreator 4.1.0, 2017-03-03T08:20:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -307,10 +307,10 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.7.2</value>
@@ -319,10 +319,10 @@
        <value type="QString">192.168.7.2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
+       <value type="QString">/usr/untitled2</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
        <value type="QString">/usr</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
-       <value type="QString">/usr/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -331,10 +331,10 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-02-27T15:00:40</value>
-       <value type="QDateTime">2017-02-13T15:40:39</value>
-       <value type="QDateTime">2017-03-01T14:42:00</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
+       <value type="QDateTime">2017-03-01T14:42:00</value>
+       <value type="QDateTime">2017-02-13T15:40:39</value>
+       <value type="QDateTime">2017-02-27T15:00:40</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>

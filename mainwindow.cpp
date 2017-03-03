@@ -146,8 +146,13 @@ void MainWindow::updateCaption()
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     UartDriver ud;
-    ui->listWidget->addItem(ud.readalluartports());
-    ui->listWidget->scrollToBottom();
+    //    ui->listWidget->addItem(ud.readalluartports());
+//    ud.readuart();
+    //    ud.writedata();
+
+    //    ui->listWidget->addItem(ud.ReadAllUartStringData());
+    //    ui->textEdit->setText("ud.ReadAllUartStringData()");
+    //    ui->listWidget->scrollToBottom();
 }
 
 void MainWindow::touchupdate()

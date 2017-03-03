@@ -10,18 +10,20 @@ class UartDriver:public QObject
     Q_OBJECT
 
 private slots:
-    void readuart();
 
 public slots:
     double readchannelvalue(int channel);
     void writechannelvalue(int channel, double value);
+    void readuart();
     void just();
+
+    void writedata();
     QString readalluartports();
+    QString ReadAllUartStringData();
+    QByteArray ReadAllUartByteData();
 
 private:
     static double channelinputbuffer[4];
-    QByteArray ReadAllUartByteData();
-    QString ReadAllUartStringData();
 
 public:
     //    explicit  UartDriver();
