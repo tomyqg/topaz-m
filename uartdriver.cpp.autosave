@@ -62,9 +62,9 @@ void UartDriver::readuart()
                 serial.write(ba);
                 while (serial.waitForBytesWritten(10))
                     ;
-//                serial.write(QByteArray::fromHex("01030000000AC5CD"));
-//                while (serial.waitForBytesWritten(20))
-//                    ;
+//serial.write(QByteArray::fromHex("01030000000AC5CD"));
+//while (serial.waitForBytesWritten(20))
+//  ;
 
                 Sleep(100);
                 while (serial.waitForReadyRead(10))
