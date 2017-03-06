@@ -22,14 +22,12 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 
-
 int a=0;
 int b=0;
 int color1rgb[]={153, 0, 153}; //фиолетовый темный
 int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-
 
 QVector<double> xx1;
 QVector<double> yy1;

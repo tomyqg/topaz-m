@@ -25,6 +25,7 @@ public slots:
 
 private:
     static double channeltempbuffer[4];
+    void delay(int n);
 
 public:
     static double channelinputbuffer[4];
