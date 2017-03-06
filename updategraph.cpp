@@ -45,10 +45,10 @@ void MainWindow::updategraph()
 
     double argument = ui->dial->value();
 
-    yy1.append(UD.readchannelvalue(1));
-    yy2.append(UD.readchannelvalue(2));
-    yy3.append(UD.readchannelvalue(3));
-    yy4.append(UD.readchannelvalue(4));
+    yy1.append(UD.channelinputbuffer[0]);
+    yy2.append(UD.channelinputbuffer[1]);
+    yy3.append(UD.channelinputbuffer[2]);
+    yy4.append(UD.channelinputbuffer[3]);
 
     b++;
 
@@ -122,12 +122,8 @@ void MainWindow::updatepicture()
 
 void MainWindow::UpdateDataChannel1()
 {
-//    double fakedata = ui->dial->value() + 10;
     UartDriver UD;
-
-//    UD.writechannelvalue(1,fakedata);
-
-    double currentdata = UD.readchannel1value(1);
+    double currentdata = UD.readchannelvalue(1);
     UD.writechannelvalue(1,currentdata);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
@@ -155,17 +151,9 @@ void MainWindow::UpdateDataChannel1()
 void MainWindow::UpdateDataChannel2()
 {
     UartDriver UD;
-    MetrologicalCalc me;
+    double pressure = UD.readchannelvalue(1) + 20;
+    UD.writechannelvalue(2,pressure);
 
-    double fakedata = me.CurrentToPressure( (ui->dial->value()/5) ,0,ui->dial->maximum()/5,0,75);
-
-//    me.CurrentToPressure()
-
-    UD.writechannelvalue(2,fakedata);
-
-    double pressure = UD.readchannelvalue(2);
-
-//        double pressure = me.CurrentToPressure(UD.readchannelvalue(2),4,20,0,100);
 
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {
@@ -197,7 +185,7 @@ void MainWindow::UpdateDataChannel3()
 
     UD.writechannelvalue(3,fakedata);
 
-    double currentdata = UD.readchannelvalue(3);
+    double currentdata = fakedata;
 
     if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
     {
@@ -229,7 +217,7 @@ void MainWindow::UpdateDataChannel4()
 
     UD.writechannelvalue(4,fakedata);
 
-    double currentdata = UD.readchannelvalue(4);
+    double currentdata = fakedata;
 
     if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
     {

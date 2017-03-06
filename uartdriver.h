@@ -24,10 +24,10 @@ public slots:
     QByteArray ReadAllUartByteData();
 
 private:
-    static double channelinputbuffer[4];
     static double channeltempbuffer[4];
 
 public:
+    static double channelinputbuffer[4];
     //    explicit  UartDriver();
 };
 
