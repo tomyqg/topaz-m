@@ -113,7 +113,7 @@ void UartDriver::writechannelvalue(int channel, double value)
 
 void UartDriver::just()
 {
-//qDebug() << "just";
+    //qDebug() << "just";
 }
 
 double UartDriver::readchannelvalue(int channelnumber)
@@ -123,20 +123,17 @@ double UartDriver::readchannelvalue(int channelnumber)
     char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
     QByteArray requestData;
     QByteArray ba(arr, 8);
+    QProcess process;
 
     {
         QSerialPort serial;
-        QProcess process;
 
-        process.startDetached("config-pin P9.24 uart");
-        process.startDetached("config-pin P9.26 uart");
-        process.startDetached("config-pin P8.7 gpio_pu");
+
 
         serial.setPortName(comportname); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
             //qDebug() << serial.portName() + " Opened";
-
 
             process.startDetached("config-pin -a P8.07 hi");
 
@@ -145,7 +142,7 @@ double UartDriver::readchannelvalue(int channelnumber)
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
             serial.setFlowControl(QSerialPort::HardwareControl);
-/*
+            /*
             serial.setRequestToSend(0);
             serial.setDataTerminalReady(0);
 

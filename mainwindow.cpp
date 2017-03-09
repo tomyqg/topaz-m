@@ -112,6 +112,12 @@ MainWindow::MainWindow(QWidget *parent) :
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 
+//    QProcess process;
+
+    process.startDetached("config-pin P9.24 uart");
+    process.startDetached("config-pin P9.26 uart");
+    process.startDetached("config-pin P8.7 gpio_pd");
+
     MessageWrite mr ;
     mr.LogMessageWrite("Programm Started");
 
