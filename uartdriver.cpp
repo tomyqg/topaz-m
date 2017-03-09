@@ -27,6 +27,8 @@
 #include <uartdriver.h>
 
 #define comportname "/dev/ttyS1"
+//#define comportname "/dev/ttyO0"
+
 #define uartsleep delay(50);
 
 //#define comportname "COM3"
@@ -60,8 +62,14 @@ void UartDriver::readuart()
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
+            serial.setFlowControl(QSerialPort::HardwareControl);
 
+            serial.setRequestToSend(true);
+
+            while (1)
+            {
+
+            }
 
             ////qDebug() << "serial.bytesAvailable: " ;
             ////qDebug() << serial.bytesAvailable();
@@ -132,22 +140,89 @@ double UartDriver::readchannelvalue(int channelnumber)
     //    while (1)
     {
         QSerialPort serial;
+        QProcess process;
+
+        process.startDetached("config-pin P9.24 uart");
+        process.startDetached("config-pin P9.26 uart");
+        process.startDetached("config-pin P8.7 gpio_pu");
+
         serial.setPortName(comportname); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
             //qDebug() << serial.portName() + " Opened";
+
+
+            process.startDetached("config-pin -a P8.07 hi");
+//            process.startDetached("config-pin -a P8.07 lo");
+
+            //config-pin P8.7 gpio_pd
 
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
             serial.setFlowControl(QSerialPort::NoFlowControl);
+/*
+            serial.setRequestToSend(0);
+            serial.setDataTerminalReady(0);
 
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+            delay(500);
+            serial.setRequestToSend(1);
+            serial.setDataTerminalReady(1);
+
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+            delay(500);
+
+            serial.setFlowControl(QSerialPort::HardwareControl);
+
+
+            serial.setRequestToSend(0);
+            serial.setDataTerminalReady(0);
+
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+            delay(500);
+            serial.setRequestToSend(1);
+            serial.setDataTerminalReady(1);
+
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+            delay(500);
+
+            serial.setFlowControl(QSerialPort::NoFlowControl);
+
+            serial.setRequestToSend(0);
+            serial.setDataTerminalReady(0);
+
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+            delay(500);
+            serial.setRequestToSend(1);
+            serial.setDataTerminalReady(1);
+
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
+
+
+            delay(500);*/
 
             ////qDebug() << "serial.bytesAvailable: " ;
             ////qDebug() << serial.bytesAvailable();
-
-            //            while (1)
+            //while (1)
             {
                 serial.write(ba);
                 while (serial.waitForBytesWritten(10))
@@ -155,7 +230,7 @@ double UartDriver::readchannelvalue(int channelnumber)
                 //serial.write(QByteArray::fromHex("01030000000AC5CD"));
                 //while (serial.waitForBytesWritten(20))
                 //  ;
-
+                process.startDetached("config-pin -a P8.07 lo");
                 uartsleep;
 
                 while (serial.waitForReadyRead(10))
@@ -170,10 +245,10 @@ double UartDriver::readchannelvalue(int channelnumber)
                 QByteArray arr3;
                 arr3.resize(4);
 
-                //                arr3[0] = 0x41;
-                //                arr3[1] = 0x3f;
-                //                arr3[2] = 0xd9;
-                //                arr3[3] = 0xab;
+                //arr3[0] = 0x41;
+                //arr3[1] = 0x3f;
+                //arr3[2] = 0xd9;
+                //arr3[3] = 0xab;
 
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
@@ -224,8 +299,14 @@ float UartDriver::readchannel1value(int channelnumber)
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
+            serial.setFlowControl(QSerialPort::HardwareControl);
 
+            serial.setRequestToSend(true);
+
+            while (1)
+            {
+
+            }
 
             ////qDebug() << "serial.bytesAvailable: " ;
             ////qDebug() << serial.bytesAvailable();

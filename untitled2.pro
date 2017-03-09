@@ -46,8 +46,8 @@ FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
     messages.ui
-target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
-#target.path  = /usr
+#target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
+target.path  = /usr
 INSTALLS    += target
 DISTFILES +=
 
