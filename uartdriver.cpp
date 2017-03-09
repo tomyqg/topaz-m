@@ -69,17 +69,11 @@ void UartDriver::readuart()
 
             }
 
-            ////qDebug() << "serial.bytesAvailable: " ;
-            ////qDebug() << serial.bytesAvailable();
-
             while (1)
             {
                 serial.write(ba);
                 while (serial.waitForBytesWritten(10))
                     ;
-                //serial.write(QByteArray::fromHex("01030000000AC5CD")
-                //while (serial.waitForBytesWritten(20))
-                //  ;
 
                 uartsleep;
 
@@ -94,11 +88,6 @@ void UartDriver::readuart()
 
                 QByteArray arr3;
                 arr3.resize(4);
-
-                //                arr3[0] = 0x41;
-                //                arr3[1] = 0x3f;
-                //                arr3[2] = 0xd9;
-                //                arr3[3] = 0xab;
 
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
@@ -124,7 +113,7 @@ void UartDriver::writechannelvalue(int channel, double value)
 
 void UartDriver::just()
 {
-    //    //qDebug() << "just";
+//qDebug() << "just";
 }
 
 double UartDriver::readchannelvalue(int channelnumber)
@@ -135,7 +124,6 @@ double UartDriver::readchannelvalue(int channelnumber)
     QByteArray requestData;
     QByteArray ba(arr, 8);
 
-    //    while (1)
     {
         QSerialPort serial;
         QProcess process;
@@ -151,9 +139,6 @@ double UartDriver::readchannelvalue(int channelnumber)
 
 
             process.startDetached("config-pin -a P8.07 hi");
-//            process.startDetached("config-pin -a P8.07 lo");
-
-            //config-pin P8.7 gpio_pd
 
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
@@ -218,8 +203,8 @@ double UartDriver::readchannelvalue(int channelnumber)
 
             delay(500);*/
 
-            ////qDebug() << "serial.bytesAvailable: " ;
-            ////qDebug() << serial.bytesAvailable();
+            //qDebug() << serial.bytesAvailable();
+
             //while (1)
             {
                 serial.write(ba);
@@ -243,16 +228,10 @@ double UartDriver::readchannelvalue(int channelnumber)
                 QByteArray arr3;
                 arr3.resize(4);
 
-                //arr3[0] = 0x41;
-                //arr3[1] = 0x3f;
-                //arr3[2] = 0xd9;
-                //arr3[3] = 0xab;
-
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
                 arr3[2] = requestData.at(3);
                 arr3[3] = requestData.at(4);
-
 
                 QDataStream stream(arr3);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
@@ -262,7 +241,6 @@ double UartDriver::readchannelvalue(int channelnumber)
             }
         }
     }
-
     return val1;
 }
 
@@ -295,11 +273,7 @@ float UartDriver::readchannel1value(int channelnumber)
 
             while (1)
             {
-
             }
-
-            ////qDebug() << "serial.bytesAvailable: " ;
-            ////qDebug() << serial.bytesAvailable();
 
             //            while (1)
             {
@@ -323,11 +297,6 @@ float UartDriver::readchannel1value(int channelnumber)
                 QByteArray arr3;
                 arr3.resize(4);
 
-                //                arr3[0] = 0x41;
-                //                arr3[1] = 0x3f;
-                //                arr3[2] = 0xd9;
-                //                arr3[3] = 0xab;
-
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
                 arr3[2] = requestData.at(3);
@@ -337,16 +306,6 @@ float UartDriver::readchannel1value(int channelnumber)
                 QDataStream stream(arr3);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
-
-                //qDebug() << val1; // val = 0
-
-
-                //                channeltempbuffer[0]  = val1;
-                //channelinputbuffer[0] = val1;
-
-                //writechannelvalue(1,val1);
-
-                ////qDebug() << floatstr.toFloat();
             }
         }
     }
@@ -383,7 +342,7 @@ QString UartDriver::ReadAllUartStringData()
 {
     QSerialPort serial;
     QByteArray bytedata;
-    //    serial.setPortName("/dev/ttyS1"); //usart1
+
     serial.setPortName(comportname); //usart1
     if (serial.open(QIODevice::ReadWrite))
     {
@@ -408,7 +367,7 @@ QString UartDriver::readalluartports()
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
 
-        {    // Example use QSerialPort
+        {
             QSerialPort serial;
             serial.setPort(info);
             a.append(info.portName());
@@ -428,7 +387,6 @@ void UartDriver::writedata()
 
     QSerialPort serial;
 
-    //    serial.setPortName("/dev/ttyS1"); //usart1
     serial.setPortName(comportname); //usart1
     if (serial.open(QIODevice::ReadWrite))
     {
@@ -438,14 +396,11 @@ void UartDriver::writedata()
         serial.setStopBits(QSerialPort::OneStop);
         serial.setFlowControl(QSerialPort::SoftwareControl);
 
-        //        serial.write("1");
         serial.write(ba);
 
         while (serial.waitForBytesWritten(100))
             ;
         uartsleep;
-
-        //qDebug() << "bytesAvailable" + serial.bytesAvailable();
 
         while (serial.waitForReadyRead(100))
             bytedata.append( serial.readAll() );
