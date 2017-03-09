@@ -789,5 +789,3 @@ void Options::on_pushButton_5_clicked()
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
 }
-
-

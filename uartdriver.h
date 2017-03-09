@@ -12,6 +12,7 @@ class UartDriver:public QObject
 private slots:
 
 public slots:
+    void SetRTS(bool newstate);
     double readchannelvalue(int channel);
     float readchannel1value(int channel);
     void writechannelvalue(int channel, double value);

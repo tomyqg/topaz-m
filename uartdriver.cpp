@@ -145,8 +145,10 @@ double UartDriver::readchannelvalue(int channelnumber)
             while (1)
             {
 
+                SetRTS(1);delay(50);
+                SetRTS(0);delay(10);
 
-                QFile file("/sys/class/gpio/gpio66/value");
+                /*QFile file("/sys/class/gpio/gpio66/value");
                 QTextStream out(&file);
                 file.open(QIODevice::WriteOnly);
 
@@ -158,7 +160,7 @@ double UartDriver::readchannelvalue(int channelnumber)
 
                 out << "0";
                 file.close();
-                delay(5);
+                delay(5);*/
             }
 
             process.startDetached("config-pin -a P8.07 hi");
@@ -428,4 +430,24 @@ void UartDriver::delay(int n)
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
         ;//        QCoreApplication::processEvents(QEventLoop::AllEvents,1);
+}
+
+void UartDriver::SetRTS(bool newstate)
+{
+
+    QFile filedir("/sys/class/gpio/gpio66/direction");
+
+    filedir.open(QIODevice::WriteOnly);
+    QTextStream outdir(&filedir);
+
+    outdir << "out";
+    filedir.close();
+
+
+    QFile file("/sys/class/gpio/gpio66/value");
+    QTextStream out(&file);
+    file.open(QIODevice::WriteOnly);
+
+    out << newstate;
+    file.close();
 }
