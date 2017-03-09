@@ -27,8 +27,6 @@
 #include <uartdriver.h>
 
 #define comportname "/dev/ttyS1"
-//#define comportname "/dev/ttyO0"
-
 #define uartsleep delay(50);
 
 //#define comportname "COM3"
@@ -260,15 +258,7 @@ double UartDriver::readchannelvalue(int channelnumber)
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
 
-                //qDebug() << val1; // val = 0
-
-
-                //                channeltempbuffer[0]  = val1;
-                //channelinputbuffer[0] = val1;
-
-                //writechannelvalue(1,val1);
-
-                ////qDebug() << floatstr.toFloat();
+                process.startDetached("config-pin -a P8.07 hi");
             }
         }
     }

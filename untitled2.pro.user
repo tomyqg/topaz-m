@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-07T15:26:20. -->
+<!-- Written by QtCreator 4.1.0, 2017-03-09T10:23:38. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">0</value>
+  <value type="int">1</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -319,8 +319,8 @@
        <value type="QString">192.168.7.2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
-       <value type="QString">/usr/untitled2</value>
        <value type="QString">/usr</value>
+       <value type="QString">/usr/untitled2</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
       </valuelist>
@@ -331,8 +331,8 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
+       <value type="QDateTime">2017-03-09T10:16:43</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
-       <value type="QDateTime">2017-02-13T15:40:39</value>
        <value type="QDateTime">2017-03-07T13:10:24</value>
        <value type="QDateTime">2017-02-27T15:00:40</value>
       </valuelist>
