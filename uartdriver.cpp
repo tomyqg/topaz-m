@@ -144,7 +144,7 @@ double UartDriver::readchannelvalue(int channelnumber)
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::NoFlowControl);
+            serial.setFlowControl(QSerialPort::HardwareControl);
 /*
             serial.setRequestToSend(0);
             serial.setDataTerminalReady(0);
@@ -271,18 +271,11 @@ float UartDriver::readchannel1value(int channelnumber)
 
             serial.setRequestToSend(true);
 
-            while (1)
-            {
-            }
-
             //            while (1)
             {
                 serial.write(ba);
                 while (serial.waitForBytesWritten(10))
                     ;
-                //serial.write(QByteArray::fromHex("01030000000AC5CD"));
-                //while (serial.waitForBytesWritten(20))
-                //  ;
 
                 uartsleep;
                 while (serial.waitForReadyRead(10))
@@ -293,7 +286,6 @@ float UartDriver::readchannel1value(int channelnumber)
                 char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
                 QByteArray tb(arr2, 4);
 
-
                 QByteArray arr3;
                 arr3.resize(4);
 
@@ -302,14 +294,12 @@ float UartDriver::readchannel1value(int channelnumber)
                 arr3[2] = requestData.at(3);
                 arr3[3] = requestData.at(4);
 
-
                 QDataStream stream(arr3);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
             }
         }
     }
-
     return val1;
 }
 
@@ -321,10 +311,8 @@ QByteArray UartDriver::ReadAllUartByteData()
     if (serial.open(QIODevice::ReadWrite))
     {
 
-        //        serial.waitForReadyRead(10);
-
+        //serial.waitForReadyRead(10);
         //qDebug() << serial.bytesAvailable();
-
         serial.setBaudRate(QSerialPort::Baud9600);
         serial.setDataBits(QSerialPort::Data8);
         serial.setParity(QSerialPort::NoParity);
