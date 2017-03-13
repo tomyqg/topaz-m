@@ -32,6 +32,20 @@ private:
 public:
     static double channelinputbuffer[4];
     //    explicit  UartDriver();
+
+
+};
+
+
+class ModBus:UartDriver
+{
+    Q_OBJECT
+
+public:
+    enum DeviceAdress {
+        MainDevice = 0x01
+    };
+
 };
 
 #endif // UARTDRIVER_H

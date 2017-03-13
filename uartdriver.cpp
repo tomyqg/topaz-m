@@ -369,16 +369,11 @@ int UartDriver::GetXOR(QByteArray bytearray)
 {
     unsigned int a = 0;
 
-    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5};
-    QByteArray ba(arr, 7);
-
-    foreach (unsigned char val, ba)
+    foreach (unsigned char val, bytearray)
     {
         a = a^val;
-        qDebug() << val;
     }
-    qDebug() << a;
-    qDebug() << ba;
+    //    qDebug() << a;
     return a;
 }
 QByteArray UartDriver::ModBusMakeRequest(char deviceaddress,char functcode, char startaddress, char registercountforread)
@@ -386,6 +381,7 @@ QByteArray UartDriver::ModBusMakeRequest(char deviceaddress,char functcode, char
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
 
     QByteArray ba(arr, 8);
+    QByteArray tmp(arr, 7);
     QByteArray bytedata;
     QSerialPort serial;
     QByteArray requestdata;
@@ -397,14 +393,12 @@ QByteArray UartDriver::ModBusMakeRequest(char deviceaddress,char functcode, char
 
     int crc;
     crc = GetXOR(requestdata);
+
     requestdata.append(crc);
-//    qDebug() << requestdata;
-
-
-
-
+    qDebug() << requestdata;
 
     serial.setPortName(comportname); //usart1
+
     if (serial.open(QIODevice::ReadWrite))
     {
         serial.setBaudRate(QSerialPort::Baud9600);
@@ -421,11 +415,10 @@ QByteArray UartDriver::ModBusMakeRequest(char deviceaddress,char functcode, char
 
         while (serial.waitForReadyRead(100))
             bytedata.append( serial.readAll() );
-
         //qDebug() << "bytesAvailable" + serial.bytesAvailable();
     }
+
     QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
     serial.close();
-
     return 0;
 }

@@ -125,7 +125,7 @@ void MainWindow::UpdateDataChannel1()
     UD.writechannelvalue(1,currentdata);
 
     // {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5
-    UD.ModBusMakeRequest(0x01,0x03,0x0A,0x0A);
+    UD.ModBusMakeRequest(ModBus::MainDevice,0x03,0x0A,0xC5);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
@@ -142,7 +142,7 @@ void MainWindow::UpdateDataChannel1()
         ui->listWidget->addItem(ch1.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch1.HighState1Setted = false;
-         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
+        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
     }
 
     int period = ch1.GetMeasurePeriod()*1000;
