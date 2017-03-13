@@ -123,148 +123,61 @@ double UartDriver::readchannelvalue(int channelnumber)
     char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
     QByteArray requestData;
     QByteArray ba(arr, 8);
-    QProcess process;
 
     {
         QSerialPort serial;
 
-
-
         serial.setPortName(comportname); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
-            //qDebug() << serial.portName() + " Opened";
-
-            QFile filedir("/sys/class/gpio/gpio66/direction");
-
-            filedir.open(QIODevice::WriteOnly);
-            QTextStream outdir(&filedir);
-
-            outdir << "out";
-            filedir.close();
-            while (1)
+            while (0)
             {
-
                 SetRTS(1);delay(50);
                 SetRTS(0);delay(10);
-
-                /*QFile file("/sys/class/gpio/gpio66/value");
-                QTextStream out(&file);
-                file.open(QIODevice::WriteOnly);
-
-                out << "1";
-                file.close();
-
-                delay(5);
-                file.open(QIODevice::WriteOnly);
-
-                out << "0";
-                file.close();
-                delay(5);*/
             }
-
-            process.startDetached("config-pin -a P8.07 hi");
-            delay(500);
-
+            //            delay(500);
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
             serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::HardwareControl);
-            /*
-            serial.setRequestToSend(0);
-            serial.setDataTerminalReady(0);
-
-            serial.write(ba);
-            while (serial.waitForBytesWritten(10))
-                ;
-
-            delay(500);
-            serial.setRequestToSend(1);
-            serial.setDataTerminalReady(1);
-
-            serial.write(ba);
-            while (serial.waitForBytesWritten(10))
-                ;
-
-            delay(500);
-
-            serial.setFlowControl(QSerialPort::HardwareControl);
-
-
-            serial.setRequestToSend(0);
-            serial.setDataTerminalReady(0);
-
-            serial.write(ba);
-            while (serial.waitForBytesWritten(10))
-                ;
-
-            delay(500);
-            serial.setRequestToSend(1);
-            serial.setDataTerminalReady(1);
-
-            serial.write(ba);
-            while (serial.waitForBytesWritten(10))
-                ;
-
-            delay(500);
-
             serial.setFlowControl(QSerialPort::NoFlowControl);
 
-            serial.setRequestToSend(0);
-            serial.setDataTerminalReady(0);
-
+            SetRTS(1);
+            delay(10);
+            //uartsleep;
             serial.write(ba);
             while (serial.waitForBytesWritten(10))
                 ;
 
-            delay(500);
-            serial.setRequestToSend(1);
-            serial.setDataTerminalReady(1);
+            //while (serial.waitForBytesWritten(20))
+            //  ;
+//            delay(10);
+            SetRTS(0);
+            uartsleep;
 
-            serial.write(ba);
-            while (serial.waitForBytesWritten(10))
-                ;
+            while (serial.waitForReadyRead(10))
+                requestData = serial.readAll();
 
+            //qDebug() << "recieve: " + requestData;
 
-            delay(500);*/
-
-            //qDebug() << serial.bytesAvailable();
-
-            //while (1)
-            {
-                serial.write(ba);
-                while (serial.waitForBytesWritten(10))
-                    ;
-                //serial.write(QByteArray::fromHex("01030000000AC5CD"));
-                //while (serial.waitForBytesWritten(20))
-                //  ;
-                process.startDetached("config-pin -a P8.07 lo");
-                uartsleep;
-
-                while (serial.waitForReadyRead(10))
-                    requestData = serial.readAll();
-
-                //qDebug() << "recieve: " + requestData;
-
-                char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
-                QByteArray tb(arr2, 4);
+            char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
+            QByteArray tb(arr2, 4);
 
 
-                QByteArray arr3;
-                arr3.resize(4);
+            QByteArray arr3;
+            arr3.resize(4);
 
-                arr3[0] = requestData.at(5);
-                arr3[1] = requestData.at(6);
-                arr3[2] = requestData.at(3);
-                arr3[3] = requestData.at(4);
+            arr3[0] = requestData.at(5);
+            arr3[1] = requestData.at(6);
+            arr3[2] = requestData.at(3);
+            arr3[3] = requestData.at(4);
 
-                QDataStream stream(arr3);
-                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
-                stream >> val1;
+            QDataStream stream(arr3);
+            stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+            stream >> val1;
 
-                //                process.startDetached("config-pin -a P8.07 hi");
-            }
+            //                process.startDetached("config-pin -a P8.07 hi");
+
         }
     }
     return val1;
