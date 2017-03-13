@@ -117,7 +117,6 @@ void MainWindow::updatepicture()
     ui->customPlot->replot();
 }
 
-
 void MainWindow::UpdateDataChannel1()
 {
     UartDriver UD;
@@ -125,7 +124,9 @@ void MainWindow::UpdateDataChannel1()
     UD.writechannelvalue(1,currentdata);
 
     // {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5
-    UD.ModBusMakeRequest(ModBus::MainDevice,0x03,0x0A,0xC5);
+
+    ModBus MB;
+    MB.ModBusMakeRequest(ModBus::MainDevice,ModBus::AB1Adress,ModBus::FunctionOne,0xC5);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
@@ -133,7 +134,7 @@ void MainWindow::UpdateDataChannel1()
         ui->listWidget->addItem(ch1.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch1.HighState1Setted = true;
-         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
+        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
     }
 
     if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
@@ -155,14 +156,13 @@ void MainWindow::UpdateDataChannel2()
     double pressure = UD.readchannelvalue(1) + 20;
     UD.writechannelvalue(2,pressure);
 
-
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {
         ch2.LowState1Setted = false;
         ui->listWidget->addItem(ch2.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch2.HighState1Setted = true;
-         mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
+        mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
     }
 
     if ((pressure<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
@@ -171,7 +171,7 @@ void MainWindow::UpdateDataChannel2()
         ui->listWidget->addItem(ch2.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch2.HighState1Setted = false;
-         mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
+        mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
     }
 
     int period = ch2.GetMeasurePeriod()*1000;
@@ -194,7 +194,7 @@ void MainWindow::UpdateDataChannel3()
         ui->listWidget->addItem(ch3.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch3.HighState1Setted = true;
-         mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
+        mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
     }
 
     if ((currentdata<ch3.GetState1Value() ) && ( ch3.LowState1Setted == false ))
@@ -203,7 +203,7 @@ void MainWindow::UpdateDataChannel3()
         ui->listWidget->addItem(ch3.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch3.HighState1Setted = false;
-         mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
+        mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
     }
 
     int period = ch3.GetMeasurePeriod()*1000;
@@ -226,7 +226,7 @@ void MainWindow::UpdateDataChannel4()
         ui->listWidget->addItem(ch4.GetState1HighMessage());
         ui->listWidget->scrollToBottom();
         ch4.HighState1Setted = true;
-         mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
+        mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
     }
 
     if ((currentdata<ch4.GetState1Value() ) && ( ch4.LowState1Setted == false ))
@@ -235,7 +235,7 @@ void MainWindow::UpdateDataChannel4()
         ui->listWidget->addItem(ch4.GetState1LowMessage());
         ui->listWidget->scrollToBottom();
         ch4.HighState1Setted = false;
-         mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
+        mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
     }
 
     int period = ch4.GetMeasurePeriod()*1000;

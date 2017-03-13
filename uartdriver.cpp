@@ -26,11 +26,11 @@
 #include <channel1.h>
 #include <uartdriver.h>
 
-#define comportname "/dev/ttyS1"
-#define uartsleep delay(50);
+//#define comportname "/dev/ttyS1"
+//#define uartsleep delay(50);
 
-//#define comportname "COM3"
-//#define uartsleep Sleep(50);
+#define comportname "COM3"
+#define uartsleep Sleep(50);
 
 //serial.setPortName("/dev/ttyS1"); //usart1
 //serial.setPortName("COM3"); //usart1
@@ -109,11 +109,6 @@ void UartDriver::writechannelvalue(int channel, double value)
 {
 
     this->channelinputbuffer[channel-1] = value;
-}
-
-void UartDriver::just()
-{
-    //qDebug() << "just";
 }
 
 double UartDriver::readchannelvalue(int channelnumber)
@@ -309,9 +304,7 @@ void UartDriver::writedata()
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
 
     QByteArray ba(arr, 8);
-
     QByteArray bytedata;
-
     QSerialPort serial;
 
     serial.setPortName(comportname); //usart1
@@ -331,8 +324,6 @@ void UartDriver::writedata()
 
         while (serial.waitForReadyRead(100))
             bytedata.append( serial.readAll() );
-
-        //qDebug() << "bytesAvailable" + serial.bytesAvailable();
     }
     QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
     serial.close();
@@ -347,7 +338,6 @@ void UartDriver::delay(int n)
 
 void UartDriver::SetRTS(bool newstate)
 {
-
     QFile filedir("/sys/class/gpio/gpio66/direction");
 
     filedir.open(QIODevice::WriteOnly);
@@ -355,7 +345,6 @@ void UartDriver::SetRTS(bool newstate)
 
     outdir << "out";
     filedir.close();
-
 
     QFile file("/sys/class/gpio/gpio66/value");
     QTextStream out(&file);
@@ -376,7 +365,7 @@ int UartDriver::GetXOR(QByteArray bytearray)
     //    qDebug() << a;
     return a;
 }
-QByteArray UartDriver::ModBusMakeRequest(char deviceaddress,char functcode, char startaddress, char registercountforread)
+QByteArray ModBus::ModBusMakeRequest(char deviceaddress,char functcode, char startaddress, char registercountforread)
 {
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
 
