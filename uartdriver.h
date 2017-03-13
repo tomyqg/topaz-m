@@ -18,7 +18,7 @@ public slots:
     void writechannelvalue(int channel, double value);
     void readuart();
     void just();
-
+    QByteArray ModBusMakeRequest(int deviceaddress,int functcode, int startaddress, int registercountforread);
     void writedata();
     QString readalluartports();
     QString ReadAllUartStringData();
@@ -27,6 +27,7 @@ public slots:
 private:
     static double channeltempbuffer[4];
     void delay(int n);
+    int GetXOR(QByteArray bytearray);
 
 public:
     static double channelinputbuffer[4];

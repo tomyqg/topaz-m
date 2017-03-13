@@ -151,7 +151,7 @@ double UartDriver::readchannelvalue(int channelnumber)
 
             //while (serial.waitForBytesWritten(20))
             //  ;
-//            delay(10);
+            //            delay(10);
             SetRTS(0);
             uartsleep;
 
@@ -363,4 +363,56 @@ void UartDriver::SetRTS(bool newstate)
 
     out << newstate;
     file.close();
+}
+
+int UartDriver::GetXOR(QByteArray bytearray)
+{
+    return 0x76;
+}
+QByteArray UartDriver::ModBusMakeRequest(int deviceaddress,int functcode, int startaddress, int registercountforread)
+{
+    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
+
+    QByteArray ba(arr, 8);
+    QByteArray bytedata;
+    QSerialPort serial;
+    QByteArray requestdata;
+
+    requestdata.append(deviceaddress);
+    requestdata.append(functcode);
+    requestdata.append(startaddress);
+    requestdata.append(registercountforread);
+
+    int crc;
+
+    crc = GetXOR(requestdata);
+
+    requestdata.append(crc);
+
+    qDebug() << requestdata;
+
+    serial.setPortName(comportname); //usart1
+    if (serial.open(QIODevice::ReadWrite))
+    {
+        serial.setBaudRate(QSerialPort::Baud9600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::SoftwareControl);
+
+        serial.write(ba);
+
+        while (serial.waitForBytesWritten(100))
+            ;
+        uartsleep;
+
+        while (serial.waitForReadyRead(100))
+            bytedata.append( serial.readAll() );
+
+        //qDebug() << "bytesAvailable" + serial.bytesAvailable();
+    }
+    QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
+    serial.close();
+
+    return 0;
 }
