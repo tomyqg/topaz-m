@@ -124,8 +124,8 @@ void MainWindow::UpdateDataChannel1()
     double currentdata = UD.readchannelvalue(1);
     UD.writechannelvalue(1,currentdata);
 
-
-    UD.ModBusMakeRequest(0x05,0x0C,0x3D,0x2D);
+    // {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5
+    UD.ModBusMakeRequest(0x01,0x03,0x0A,0x0A);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {

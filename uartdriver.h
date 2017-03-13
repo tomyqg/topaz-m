@@ -12,17 +12,17 @@ class UartDriver:public QObject
 private slots:
 
 public slots:
-    void SetRTS(bool newstate);
-    double readchannelvalue(int channel);
     float readchannel1value(int channel);
-    void writechannelvalue(int channel, double value);
-    void readuart();
+    double readchannelvalue(int channel);
     void just();
-    QByteArray ModBusMakeRequest(int deviceaddress,int functcode, int startaddress, int registercountforread);
+    void readuart();
+    void SetRTS(bool newstate);
+    void writechannelvalue(int channel, double value);
     void writedata();
     QString readalluartports();
     QString ReadAllUartStringData();
     QByteArray ReadAllUartByteData();
+    QByteArray ModBusMakeRequest(char deviceaddress,char functcode, char startaddress, char registercountforread);
 
 private:
     static double channeltempbuffer[4];
