@@ -21,11 +21,11 @@ public slots:
 
 private:
     static double channeltempbuffer[4];
-    void SetRTS(bool newstate);
 
 protected:
     void delay(int n);
     int  GetXOR(QByteArray bytearray);
+    void SetRTS(bool newstate);
 
 public:
     static double channelinputbuffer[4];
@@ -37,6 +37,8 @@ class ModBus:UartDriver
 
 public slots:
     double ReadTemperature(char channel);
+    double ReadVoltage(char channel);
+
 
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
@@ -58,19 +60,29 @@ public:
     Q_ENUM(DeviceAdress)
 
     enum RegisterAdress {
-        TemperetureAdress   = 0x01,
-        VoltageAdress       = 0x02,
-        CurrentAdress       = 0x04,
-        ResistanceAdress    = 0x08,
-        FrequencyAdress     = 0x10
+        TemperetureAdressHi   = 0x01,
+        VoltageAdressHi       = 0x02,
+        CurrentAdressHi       = 0x04,
+        ResistanceAdressHi    = 0x08,
+        FrequencyAdressHi     = 0x10,
+        TemperetureAdressLo   = 0x00,
+        VoltageAdressLo       = 0x00,
+        CurrentAdressLo       = 0x00,
+        ResistanceAdressLo    = 0x00,
+        FrequencyAdressLo     = 0x00
     };
 
     enum RegisterCount{
-        TemperetureRegCount = 0x01,
-        VoltageRegCount = 0x01,
-        CurrentRegCount = 0x01,
-        ResistanceRegCount = 0x01,
-        FrequencyRegCount = 0x01
+        TemperetureRegCountHi = 0x01,
+        VoltageRegCountHi = 0x01,
+        CurrentRegCountHi = 0x01,
+        ResistanceRegCountHi = 0x01,
+        FrequencyRegCountHi = 0x01,
+        TemperetureRegCountLo = 0x00,
+        VoltageRegCountLo = 0x00,
+        CurrentRegCountLo = 0x00,
+        ResistanceRegCountLo = 0x00,
+        FrequencyRegCountLo = 0x00
     };
 
     Q_ENUM(RegisterAdress)

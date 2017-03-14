@@ -78,16 +78,13 @@ void UartDriver::readuart()
 
                 while (serial.waitForReadyRead(10))
                     requestData = serial.readAll();
-
                 //qDebug() << "recieve: " + requestData;
-
                 char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
                 QByteArray tb(arr2, 4);
 
 
                 QByteArray arr3;
                 arr3.resize(4);
-
                 arr3[0] = requestData.at(5);
                 arr3[1] = requestData.at(6);
                 arr3[2] = requestData.at(3);
@@ -97,7 +94,6 @@ void UartDriver::readuart()
                 QDataStream stream(arr3);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
                 stream >> val1;
-
                 //qDebug() << val1; // val = 0
             }
         }
@@ -106,7 +102,6 @@ void UartDriver::readuart()
 
 void UartDriver::writechannelvalue(int channel, double value)
 {
-
     this->channelinputbuffer[channel-1] = value;
 }
 
@@ -124,12 +119,7 @@ double UartDriver::readchannelvalue(int channelnumber)
         serial.setPortName(comportname); //usart1
         if (serial.open(QIODevice::ReadWrite))
         {
-            while (0)
-            {
-                SetRTS(1);delay(50);
-                SetRTS(0);delay(10);
-            }
-            //            delay(500);
+
             serial.setBaudRate(QSerialPort::Baud9600);
             serial.setDataBits(QSerialPort::Data8);
             serial.setParity(QSerialPort::NoParity);
@@ -143,19 +133,11 @@ double UartDriver::readchannelvalue(int channelnumber)
             while (serial.waitForBytesWritten(10))
                 ;
 
-            //while (serial.waitForBytesWritten(20))
-            //  ;
-            //            delay(10);
             SetRTS(0);
             uartsleep;
 
             while (serial.waitForReadyRead(10))
                 requestData = serial.readAll();
-
-            //qDebug() << "recieve: " + requestData;
-
-            char arr2[4] = {0x41, 0x3F, 0xD9, 0xAB};
-            QByteArray tb(arr2, 4);
 
 
             QByteArray arr3;
@@ -169,15 +151,10 @@ double UartDriver::readchannelvalue(int channelnumber)
             QDataStream stream(arr3);
             stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
             stream >> val1;
-
-            //                process.startDetached("config-pin -a P8.07 hi");
-
         }
     }
     return val1;
 }
-
-
 
 float UartDriver::readchannel1value(int channelnumber)
 {
@@ -361,7 +338,6 @@ int UartDriver::GetXOR(QByteArray bytearray)
     {
         a = a^val;
     }
-    //    qDebug() << a;
     return a;
 }
 
@@ -372,13 +348,9 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
                                      char QuantityofInputRegHi,
                                      char QuantityofInputRegLo)
 {
-    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
-
-    QByteArray ba(arr, 8);
-    QByteArray bytedata;
-    QSerialPort serial;
     QByteArray requestdata;
     int crc;
+    float val1;
 
     requestdata.append(DeviceAdress);
     requestdata.append(Function);
@@ -389,51 +361,92 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
     crc = GetXOR(requestdata);
     requestdata.append(crc);
 
+    char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
+    QByteArray requestData;
+    QByteArray ba(arr, 8);
 
-//    qDebug() << requestdata;
-
-    serial.setPortName(comportname); //usart1
-
-    if (serial.open(QIODevice::ReadWrite))
     {
-        serial.setBaudRate(QSerialPort::Baud9600);
-        serial.setDataBits(QSerialPort::Data8);
-        serial.setParity(QSerialPort::NoParity);
-        serial.setStopBits(QSerialPort::OneStop);
-        serial.setFlowControl(QSerialPort::SoftwareControl);
-//        serial.write(requestdata);
+        QSerialPort serial;
+        serial.setPortName(comportname); //usart1
+        if (serial.open(QIODevice::ReadWrite))
+        {
+            serial.setBaudRate(QSerialPort::Baud9600);
+            serial.setDataBits(QSerialPort::Data8);
+            serial.setParity(QSerialPort::NoParity);
+            serial.setStopBits(QSerialPort::OneStop);
+            serial.setFlowControl(QSerialPort::NoFlowControl);
 
-        serial.write(ba);
+            SetRTS(1);
+            delay(10);
+            //uartsleep;
+            serial.write(ba);
+            while (serial.waitForBytesWritten(10))
+                ;
 
-        while (serial.waitForBytesWritten(10))
-            ;
-        uartsleep;
+            SetRTS(0);
+            uartsleep;
 
-        while (serial.waitForReadyRead(10))
-            bytedata.append( serial.readAll() );
-        //qDebug() << "bytesAvailable" + serial.bytesAvailable();
-        serial.close();
+            while (serial.waitForReadyRead(10))
+                requestData = serial.readAll();
+
+            QByteArray arr3;
+            arr3.resize(4);
+
+            arr3[0] = requestData.at(5);
+            arr3[1] = requestData.at(6);
+            arr3[2] = requestData.at(3);
+            arr3[3] = requestData.at(4);
+
+            QDataStream stream(arr3);
+            stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+            stream >> val1;
+        }
     }
-    return bytedata;
+    return requestData;
 }
 
 double ModBus::ReadTemperature(char channel)
 {
     QByteArray arr;
     QByteArray RequestRespose;
-    RequestRespose = ModBusMakeRequest(channel,ModBus::ReadHoldingRegisters,0x00,ModBus::TemperetureAdress,0x00,ModBus::TemperetureRegCount);
-
+    float val;
+    RequestRespose = ModBusMakeRequest(channel,
+                                       ModBus::ReadHoldingRegisters,
+                                       ModBus::TemperetureAdressHi,
+                                       ModBus::TemperetureAdressLo,
+                                       ModBus::TemperetureRegCountHi,
+                                       ModBus::TemperetureRegCountLo);
     arr.resize(4);
-
     arr[0] = RequestRespose.at(5);
     arr[1] = RequestRespose.at(6);
     arr[2] = RequestRespose.at(3);
     arr[3] = RequestRespose.at(4);
-
-    float val;
+    //convert hex to double
     QDataStream stream(arr);
     stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
     stream >> val;
+    return val;
+}
 
+double ModBus::ReadVoltage(char channel)
+{
+    QByteArray arr;
+    QByteArray RequestRespose;
+    float val;
+    RequestRespose = ModBusMakeRequest(channel,
+                                       ModBus::ReadHoldingRegisters,
+                                       ModBus::VoltageAdressHi,
+                                       ModBus::VoltageAdressLo,
+                                       ModBus::VoltageRegCountHi,
+                                       ModBus::VoltageRegCountLo);
+    arr.resize(4);
+    arr[0] = RequestRespose.at(5);
+    arr[1] = RequestRespose.at(6);
+    arr[2] = RequestRespose.at(3);
+    arr[3] = RequestRespose.at(4);
+    //convert hex to double
+    QDataStream stream(arr);
+    stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+    stream >> val;
     return val;
 }

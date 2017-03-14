@@ -121,15 +121,10 @@ void MainWindow::UpdateDataChannel1()
 {
     UartDriver UD;
     ModBus modbus;
-    double currentdata = modbus.ReadTemperature(1);
+    double currentdata ;
+//    currentdata = UD.readchannelvalue(1);
+    currentdata = modbus.ReadVoltage(1);
     UD.writechannelvalue(1,currentdata);
-
-    // {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5
-
-
-
-
-    //MB.ModBusMakeRequest(ModBus::UniversalChannel1, ModBus::ReadDiscreteInputs,ModBus::Fone,0xC5);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
