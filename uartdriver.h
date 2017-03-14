@@ -36,38 +36,63 @@ class ModBus:UartDriver
     Q_OBJECT
 
 public slots:
-    QByteArray ModBusMakeRequest(char deviceadress,char functcode, char startaddress, char registercountforread);
+    double ReadTemperature(char channel);
+
+    QByteArray ModBusMakeRequest(
+            char DeviceAdress,
+            char Function,
+            char StartingAddressHi,
+            char StartingAddressLo,
+            char QuantityofInputRegHi,
+            char QuantityofInputRegLo
+            );
 
 public:
+
     enum DeviceAdress {
-        MainDevice = 0x01
+        UniversalChannel1 = 0x01,
+        UniversalChannel2 = 0x02,
+        UniversalChannel3 = 0x04,
+        UniversalChannel4 = 0x08
     };
     Q_ENUM(DeviceAdress)
 
-    enum StartAdress {
-        ZeroAdress = 0x00,
-        AB1Adress = 0x03
+    enum RegisterAdress {
+        TemperetureAdress   = 0x01,
+        VoltageAdress       = 0x02,
+        CurrentAdress       = 0x04,
+        ResistanceAdress    = 0x08,
+        FrequencyAdress     = 0x10
     };
-    Q_ENUM(StartAdress)
+
+    enum RegisterCount{
+        TemperetureRegCount = 0x01,
+        VoltageRegCount = 0x01,
+        CurrentRegCount = 0x01,
+        ResistanceRegCount = 0x01,
+        FrequencyRegCount = 0x01
+    };
+
+    Q_ENUM(RegisterAdress)
 
     enum Function {
-       /* FunctionOne = 0x0A,
-        FunctionTwo = 0x03*/
-        ReadCoilsState = 0x01,
+        ReadCoils = 0x01,
         ReadDiscreteInputs = 0x02,
-        ReadHoldingfRegisters = 0x03,
+        ReadHoldingRegisters = 0x03,
         ReadInputRegisters = 0x04,
-        SetCoilsState = 0x05,
-        StatusDeviceRequest = 0x07,
+        WriteSingleCoil = 0x05,
+        WriteSingleRegister = 0x06,
+        ReadExceptionStatus = 0x07,
         DiagnosticRequest = 0x08,
-        ReadStatusAndEventsCount = 0x0B,
-        ReadEventsJournal = 0x0C
+        GetCommEventCounter = 0x0B,
+        GetCommEventLog = 0x0C,
+        WriteMultipleRegisters = 0x10
     };
     Q_ENUM(Function)
 
     enum ByteQueues {
-        one = 0x02,
-        two = 0x03
+        Fone = 0x02,
+        Ftwo = 0x03
     };
     Q_ENUM(ByteQueues)
 };

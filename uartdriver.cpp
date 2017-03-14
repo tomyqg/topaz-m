@@ -26,11 +26,11 @@
 #include <channel1.h>
 #include <uartdriver.h>
 
-//#define comportname "/dev/ttyS1"
-//#define uartsleep delay(50);
+#define comportname "/dev/ttyS1"
+#define uartsleep delay(50);
 
-#define comportname "COM3"
-#define uartsleep Sleep(50);
+//#define comportname "COM3"
+//#define uartsleep Sleep(50);
 
 //serial.setPortName("/dev/ttyS1"); //usart1
 //serial.setPortName("COM3"); //usart1
@@ -45,7 +45,6 @@ void UartDriver::readuart()
     char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
 
     QByteArray requestData;
-    // 01 03 00 00 00 0A C5 CD
     QByteArray ba(arr, 8);
 
     while (1)
@@ -365,26 +364,33 @@ int UartDriver::GetXOR(QByteArray bytearray)
     //    qDebug() << a;
     return a;
 }
-QByteArray ModBus::ModBusMakeRequest(char deviceaddress,char functcode, char startaddress, char registercountforread)
+
+QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
+                                     char Function,
+                                     char StartingAddressHi,
+                                     char StartingAddressLo,
+                                     char QuantityofInputRegHi,
+                                     char QuantityofInputRegLo)
 {
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
 
     QByteArray ba(arr, 8);
-    QByteArray tmp(arr, 7);
     QByteArray bytedata;
     QSerialPort serial;
     QByteArray requestdata;
-
-    requestdata.append(deviceaddress);
-    requestdata.append(functcode);
-    requestdata.append(startaddress);
-    requestdata.append(registercountforread);
-
     int crc;
-    crc = GetXOR(requestdata);
 
+    requestdata.append(DeviceAdress);
+    requestdata.append(Function);
+    requestdata.append(StartingAddressHi);
+    requestdata.append(StartingAddressLo);
+    requestdata.append(QuantityofInputRegHi);
+    requestdata.append(QuantityofInputRegLo);
+    crc = GetXOR(requestdata);
     requestdata.append(crc);
-    qDebug() << requestdata;
+
+
+//    qDebug() << requestdata;
 
     serial.setPortName(comportname); //usart1
 
@@ -395,19 +401,39 @@ QByteArray ModBus::ModBusMakeRequest(char deviceaddress,char functcode, char sta
         serial.setParity(QSerialPort::NoParity);
         serial.setStopBits(QSerialPort::OneStop);
         serial.setFlowControl(QSerialPort::SoftwareControl);
+//        serial.write(requestdata);
 
         serial.write(ba);
 
-        while (serial.waitForBytesWritten(100))
+        while (serial.waitForBytesWritten(10))
             ;
         uartsleep;
 
-        while (serial.waitForReadyRead(100))
+        while (serial.waitForReadyRead(10))
             bytedata.append( serial.readAll() );
         //qDebug() << "bytesAvailable" + serial.bytesAvailable();
+        serial.close();
     }
+    return bytedata;
+}
 
-    QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
-    serial.close();
-    return 0;
+double ModBus::ReadTemperature(char channel)
+{
+    QByteArray arr;
+    QByteArray RequestRespose;
+    RequestRespose = ModBusMakeRequest(channel,ModBus::ReadHoldingRegisters,0x00,ModBus::TemperetureAdress,0x00,ModBus::TemperetureRegCount);
+
+    arr.resize(4);
+
+    arr[0] = RequestRespose.at(5);
+    arr[1] = RequestRespose.at(6);
+    arr[2] = RequestRespose.at(3);
+    arr[3] = RequestRespose.at(4);
+
+    float val;
+    QDataStream stream(arr);
+    stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+    stream >> val;
+
+    return val;
 }
