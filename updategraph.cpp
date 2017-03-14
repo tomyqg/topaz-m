@@ -54,11 +54,11 @@ void MainWindow::updategraph()
     {
         ui->customPlot->xAxis->setRange(b-300, b+300);
     }
-    
+
     if (b==1200)
     {
         ui->customPlot->xAxis->setRange(0, 600);
-        
+
         b=0;
         xx1.clear();
         yy1.clear();
@@ -70,9 +70,9 @@ void MainWindow::updategraph()
 
 void MainWindow::updatepicture()
 {
-    
+
     QByteArray arr;
-    
+
     QPen graphPen;
 
     ui->customPlot->clearGraphs();
@@ -85,19 +85,19 @@ void MainWindow::updatepicture()
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
-    
+
     {ui->customPlot->graph()->setData(xx1, yy2);
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
-    
+
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy3);
         graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
         graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);}
-    
+
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy4);
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
@@ -120,13 +120,16 @@ void MainWindow::updatepicture()
 void MainWindow::UpdateDataChannel1()
 {
     UartDriver UD;
-    double currentdata = UD.readchannelvalue(1);
+    ModBus modbus;
+    double currentdata = modbus.ReadTemperature(1);
     UD.writechannelvalue(1,currentdata);
 
     // {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5
 
-    ModBus MB;
-    MB.ModBusMakeRequest(ModBus::MainDevice,ModBus::AB1Adress,ModBus::FunctionOne,0xC5);
+
+
+
+    //MB.ModBusMakeRequest(ModBus::UniversalChannel1, ModBus::ReadDiscreteInputs,ModBus::Fone,0xC5);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
