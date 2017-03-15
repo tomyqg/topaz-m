@@ -214,9 +214,6 @@ QByteArray UartDriver::ReadAllUartByteData()
     serial.setPortName(comportname); //usart1
     if (serial.open(QIODevice::ReadWrite))
     {
-
-        //serial.waitForReadyRead(10);
-        //qDebug() << serial.bytesAvailable();
         serial.setBaudRate(QSerialPort::Baud9600);
         serial.setDataBits(QSerialPort::Data8);
         serial.setParity(QSerialPort::NoParity);
@@ -257,14 +254,12 @@ QString UartDriver::readalluartports()
     QString a;
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
-
         {
             QSerialPort serial;
             serial.setPort(info);
             a.append(info.portName());
         }
     }
-
     return a;
 }
 
