@@ -5,7 +5,6 @@
 #include "messages.h"
 #include "metrologicalcalc.h"
 
-
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
@@ -38,16 +37,13 @@ QVector<double> yy4;
 void MainWindow::updategraph()
 {
     UartDriver UD;
-
     xx1.append(b);
-
     double argument = ui->dial->value();
 
     yy1.append(UD.channelinputbuffer[0]);
     yy2.append(UD.channelinputbuffer[1]);
     yy3.append(UD.channelinputbuffer[2]);
     yy4.append(UD.channelinputbuffer[3]);
-
     b++;
 
     if (b>=300&&b<900)
@@ -57,9 +53,8 @@ void MainWindow::updategraph()
 
     if (b==1200)
     {
-        ui->customPlot->xAxis->setRange(0, 600);
-
         b=0;
+        ui->customPlot->xAxis->setRange(0, 600);
         xx1.clear();
         yy1.clear();
         yy2.clear();
@@ -70,11 +65,8 @@ void MainWindow::updategraph()
 
 void MainWindow::updatepicture()
 {
-
     QByteArray arr;
-
     QPen graphPen;
-
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
@@ -106,14 +98,11 @@ void MainWindow::updatepicture()
     }
 
     ui->customPlot->xAxis->setAutoTickStep(false);
-    //    qDebug() << ui->customPlot->xAxis->tickStep();
-    //    ui->customPlot->xAxis->set
     ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 
     ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");// dd.MM.yyyy
-    //    ui->customPlot->rescaleAxes(); // если мы хотим всегда график растянутый на всю длину и высоту
     ui->customPlot->replot();
 }
 
@@ -122,7 +111,6 @@ void MainWindow::UpdateDataChannel1()
     UartDriver UD;
     ModBus modbus;
     double currentdata ;
-//    currentdata = UD.readchannelvalue(1);
     currentdata = modbus.ReadVoltage(1);
     UD.writechannelvalue(1,currentdata);
 
@@ -211,11 +199,8 @@ void MainWindow::UpdateDataChannel3()
 void MainWindow::UpdateDataChannel4()
 {
     double fakedata = ui->dial->value() + 40;
-
     UartDriver UD;
-
     UD.writechannelvalue(4,fakedata);
-
     double currentdata = fakedata;
 
     if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))

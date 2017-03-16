@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-14T16:29:23. -->
+<!-- Written by QtCreator 4.1.0, 2017-03-15T16:29:25. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">0</value>
+  <value type="int">1</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -308,8 +308,8 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
@@ -332,8 +332,8 @@
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
        <value type="QDateTime">2017-03-14T15:37:52</value>
-       <value type="QDateTime">2017-03-14T11:21:35</value>
        <value type="QDateTime">2017-02-27T15:00:40</value>
+       <value type="QDateTime">2017-03-14T11:21:35</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>

@@ -10,7 +10,6 @@ class UartDriver:public QObject
     Q_OBJECT
 
 public slots:
-    float readchannel1value(int channel);
     double readchannelvalue(int channel);
     void readuart();
     void writechannelvalue(int channel, double value);
@@ -38,8 +37,6 @@ class ModBus:UartDriver
 public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
-
-
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
             char Function,
