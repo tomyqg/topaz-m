@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
+#include <QPixmap>
 
 #define BeagleBone
 
