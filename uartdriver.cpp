@@ -9,7 +9,6 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
-#include <QPixmap>
 
 #define BeagleBone
 
@@ -27,8 +26,8 @@ QString pathtofile = "C:/Work/";
 
 extern QString inputstr;
 
-double UartDriver::channelinputbuffer[4];// = {27.22,33.87,57.89,81.11};
-double UartDriver::channeltempbuffer[4];// = {27.22,33.87,57.89,81.11};
+double UartDriver::channelinputbuffer[4];
+double UartDriver::channeltempbuffer[4];
 
 void UartDriver::readuart()
 {
@@ -84,7 +83,7 @@ void UartDriver::writechannelvalue(int channel, double value)
 double UartDriver::readchannelvalue(int channelnumber)
 {
     float val1;
-    char arr[9] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D, '\n'};
+    char arr[8] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D};
     QByteArray requestData;
     QByteArray ba(arr, 8);
     {
@@ -187,8 +186,8 @@ void UartDriver::writedata()
     char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xCD};
 
     QByteArray ba(arr, 8);
-    QByteArray bytedata;
     QSerialPort serial;
+    QByteArray bytedata;
 
     serial.setPortName(comportname); //usart1
     if (serial.open(QIODevice::ReadWrite))
@@ -214,7 +213,7 @@ void UartDriver::delay(int n)
 {
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
-        ;//        QCoreApplication::processEvents(QEventLoop::AllEvents,1);
+        ;
 }
 
 void UartDriver::SetRTS(bool newstate)
@@ -252,6 +251,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
                                      char QuantityofInputRegLo)
 {
     QByteArray requestdata;
+    QByteArray requestData;
     int crc;
     float val1;
 
@@ -265,9 +265,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
     requestdata.append(crc);
 
     char arr[8] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D};
-    QByteArray requestData;
     QByteArray trimmeddata;
-    QByteArray ba(arr, 8);
 
     QSerialPort serial;
     serial.setPortName(comportname); //usart1
@@ -283,6 +281,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         SetRTS(1);
         delay(10);
         //uartsleep;
+        QByteArray ba(arr, 8);
         serial.write(ba);
         while (serial.waitForBytesWritten(10))
             ;
@@ -315,14 +314,14 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         //qDebug() << inputcrc;
 
         if (inputcrc == inputcrcall)
-            //qDebug() << "crc VALID";
+           ; //qDebug() << "crc VALID";
 
-            arr3[0] = requestData.at(5);
+        arr3[0] = requestData.at(5);
         arr3[1] = requestData.at(6);
         arr3[2] = requestData.at(3);
         arr3[3] = requestData.at(4);
-
         QDataStream stream(arr3);
+
         stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
         stream >> val1;
     }

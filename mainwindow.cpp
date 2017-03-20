@@ -151,7 +151,7 @@ void MainWindow::updateCaption()
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     mathresolver mr;
-    ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(x+x+x+cos(x*0))",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
+    ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
     //ui->listWidget->addItem(ud.readalluartports());
     //ud.readuart();
     //ud.writedata();
