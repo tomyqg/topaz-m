@@ -4,6 +4,9 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "dialog.h"
+#include "mathresolver.h"
+#include "channel1.h"
+#include "uartdriver.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -24,9 +27,7 @@
 #include <QtWidgets>
 #include <QThread>
 #include <QPoint>
-#include <channel1.h>
 
-#include <uartdriver.h>
 
 QString inputstr = "";
 
@@ -46,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle(tr("VISION"));
 
     QProcess process1;
-    QPixmap pix("/usr/inc/logo.jpg");
+    QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-200, 200);
@@ -96,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     channeltimer4->setInterval(5000);
 
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()) );
-//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()) );
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()) );
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()) );
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()) );
 
@@ -108,12 +109,10 @@ MainWindow::MainWindow(QWidget *parent) :
     thread->start();
 
     QProcess process;
-    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+
+    process.startDetached("sudo cpufreq-set -f 600MHz"); // max freq on
+    //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
-
-//    QProcess process;
-
     process.startDetached("config-pin P9.24 uart");
     process.startDetached("config-pin P9.26 uart");
     process.startDetached("config-pin P8.7 gpio_pd");
@@ -151,14 +150,14 @@ void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
-    UartDriver ud;
-    //    ui->listWidget->addItem(ud.readalluartports());
-//    ud.readuart();
-    //    ud.writedata();
-
-    //    ui->listWidget->addItem(ud.ReadAllUartStringData());
-    //    ui->textEdit->setText("ud.ReadAllUartStringData()");
-    //    ui->listWidget->scrollToBottom();
+    mathresolver mr;
+    ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(x+x+x+cos(x*0))",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
+    //ui->listWidget->addItem(ud.readalluartports());
+    //ud.readuart();
+    //ud.writedata();
+    //ui->listWidget->addItem(ud.ReadAllUartStringData());
+    //ui->textEdit->setText("ud.ReadAllUartStringData()");
+    //ui->listWidget->scrollToBottom();
 }
 
 void MainWindow::touchupdate()
@@ -211,7 +210,7 @@ void MainWindow::on_pushButton_2_clicked()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-    //    qDebug() << "readoptionsfromfile" ;
+    //qDebug() << "readoptionsfromfile" ;
 }
 
 void MainWindow::on_pushButton_2_pressed()
@@ -247,7 +246,7 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 }
 */
 double MainWindow::returnmathresult(double dval)
-{
+{/*
     QString inn = ui->textEdit->toPlainText();
     QScriptEngine myEngine;
     QString vaal = QString::number(dval);
@@ -258,12 +257,13 @@ double MainWindow::returnmathresult(double dval)
     replaced.replace(QString("pow"), QString("Math.pow"));
     replaced.replace(QString("x"), QString(vaal));
     double Result = myEngine.evaluate(replaced).toNumber();
-    return Result;
+    */
+    return 1;
 }
 
 void MainWindow::on_textEdit_textChanged()
 {
-    QString inn = ui->textEdit->toPlainText();
+    /*QString inn = ui->textEdit->toPlainText();
     QScriptEngine myEngine;
     QString vaal = QString::number(ui->dial->value());
     QString replaced=inn;
@@ -272,7 +272,7 @@ void MainWindow::on_textEdit_textChanged()
     replaced.replace(QString("sqrt"), QString("Math.sqrt"));
     replaced.replace(QString("pow"), QString("Math.pow"));
     replaced.replace(QString("x"), QString(vaal));
-    double Result = myEngine.evaluate(replaced).toNumber();
+    double Result = myEngine.evaluate(replaced).toNumber();*/
 }
 
 void MainWindow::on_dial_valueChanged(int value)
@@ -291,9 +291,6 @@ void MainWindow::delay(int n)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
-void MainWindow::focusChanged(QWidget* , QWidget* )
-{
-}
 
 void MainWindow::on_pushButton_4_clicked()
 {
@@ -311,12 +308,12 @@ void MainWindow::on_radioButton_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+//    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
 }
 
 void MainWindow::on_radioButton_2_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+//    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }

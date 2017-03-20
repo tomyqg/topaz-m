@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     readoptionsfromfile.cpp \
     messages.cpp \
     writetofile.cpp \
-    metrologicalcalc.cpp
+    metrologicalcalc.cpp \
+    mathresolver.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     keyboard.h \
     messages.h \
     uartdriver.h \
-    metrologicalcalc.h
+    metrologicalcalc.h \
+    mathresolver.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \

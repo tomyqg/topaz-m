@@ -1,13 +1,9 @@
-#include <QPixmap>
 #include <QTimer>
 #include <QTime>
 #include <QFile>
-
 #include <QDateTime>
 #include <QFile>
 #include <QCloseEvent>
-#include <QMessageBox>
-#include <QtWidgets>
 #include <QEvent>
 
 #include "options.h"

@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>1180</x>
-      <y>630</y>
+      <y>620</y>
       <width>71</width>
       <height>81</height>
      </rect>
@@ -45,9 +45,9 @@
    <widget class="QLCDNumber" name="lcdNumber">
     <property name="geometry">
      <rect>
-      <x>1190</x>
+      <x>1180</x>
       <y>700</y>
-      <width>41</width>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
@@ -123,26 +123,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>510</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#008000;&quot;&gt;x&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
@@ -178,9 +158,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>520</y>
-      <width>231</width>
+      <x>700</x>
+      <y>570</y>
+      <width>241</width>
       <height>111</height>
      </rect>
     </property>
@@ -235,7 +215,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>680</y>
+      <y>580</y>
       <width>151</width>
       <height>19</height>
      </rect>
@@ -248,7 +228,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>710</y>
+      <y>610</y>
       <width>151</width>
       <height>19</height>
      </rect>
@@ -264,9 +244,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>520</y>
-      <width>321</width>
-      <height>111</height>
+      <y>590</y>
+      <width>180</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -290,10 +270,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEdit_2">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>530</y>
-      <width>271</width>
-      <height>70</height>
+      <x>260</x>
+      <y>590</y>
+      <width>180</width>
+      <height>71</height>
      </rect>
     </property>
    </widget>

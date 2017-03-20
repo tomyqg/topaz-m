@@ -2,30 +2,18 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "ui_options.h"
-#include "options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "dialog.h"
-#include <QPixmap>
+#include "channel1.h"
+
 #include <QTimer>
+#include <QDateTime>
 #include <QTime>
-#include <QPainter>
-#include <QPen>
 #include <QVector>
-#include <QtMath>
 #include <QFile>
 #include <QDataStream>
 #include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
-#include <QPainterPath>
-#include <QPainter>
-#include <QDateTime>
-#include <QCloseEvent>
-#include <QMessageBox>
-#include <QtWidgets>
-#include <QThread>
-#include <QPoint>
-#include <channel1.h>
 
 extern QVector<double> xx1;
 extern QVector<double> yy1;
@@ -35,9 +23,9 @@ extern QVector<double> yy4;
 
 extern QString pathtofile ;
 
-void MainWindow::WriteGpio()
+void MainWindow::WriteGpio(int num, bool val)
 {
-    QFile filedir("/sys/class/gpio/gpio69/direction");
+    QFile filedir("/sys/class/gpio/gpio" + QString::number(num) + "/direction");
 
     filedir.open(QIODevice::WriteOnly);
     QTextStream outdir(&filedir);
@@ -50,15 +38,7 @@ void MainWindow::WriteGpio()
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
 
-    if (1)
-    {
-        out << "1";
-    }
-
-    else
-    {
-        out << "0";
-    }
+    out << val;
 
     file.close();
 }
@@ -181,8 +161,8 @@ void Options::WriteOptionsToFile()
 }
 
 void MessageWrite::WriteAllLogToFile()
-{    QJsonObject archive;
-
+{
+    QJsonObject archive;
     Options opt;
     double maxmes  = opt.getmaxmessageslimit();
 
@@ -190,30 +170,20 @@ void MessageWrite::WriteAllLogToFile()
     {
         messagesqueue.removeFirst();
     }
-
     archive["messagesqueue"] = messagesqueue;
     archive["totalmsg"] = messagesqueue.count();
-
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-
     QFile file(pathtofile + "Log.txt");
-
     file.open(QIODevice::ReadWrite);
-
     file.resize(0); // clear file
-
     QTextStream out(&file);
-
     out << setstr;
-
     file.close();
 }
 
 void MessageWrite::LogMessageWrite(QString nm)
 {
     QJsonObject themessage;
-
-
     QDateTime local (QDateTime::currentDateTime());
     themessage["Time"] = local.time().toString();
     themessage["Date"] = local.date().toString("dd/MM/yy");
@@ -244,7 +214,6 @@ void MainWindow::WriteArchiveToFile()
 
     for(int y=0; y<yy1.size(); y++)
         valuesarray1.append(yy1.at(y)*1.11);
-
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
@@ -290,6 +259,5 @@ void MainWindow::WriteArchiveToFile()
     QTextStream out(&file);
     out << setstr;
     file.close();
-
 //    qDebug() << "writearchive";
 }

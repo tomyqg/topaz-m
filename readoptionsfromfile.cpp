@@ -12,8 +12,7 @@
 #include <channel1.h>
 #include <messages.h>
 
-//QString pathtofile = "/usr/";
-QString pathtofile = "C:/Work/";
+extern QString pathtofile;
 
 void Options::readsystemoptionsfromfile()
 {

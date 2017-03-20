@@ -38,9 +38,8 @@ public:
 
 public slots:
 
-    void focusChanged(QWidget* , QWidget* );
     void touchupdate();
-    void WriteGpio();
+    void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
 
     void UpdateDataChannel1();
@@ -75,7 +74,6 @@ signals:
     void error(const QString &s);
 
 private:
-
     Ui::MainWindow *ui;
     QTimer *tmr;
 

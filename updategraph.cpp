@@ -4,22 +4,14 @@
 #include "ui_mainwindow.h"
 #include "messages.h"
 #include "metrologicalcalc.h"
+#include "mathresolver.h"
 
-#include <QPixmap>
 #include <QTimer>
 #include <QTime>
-#include <QPainter>
-#include <QtMath>
-#include <QFile>
-#include <QDataStream>
-#include <QtMath>
-#include <QtScript/QScriptEngine>
-#include <QPainterPath>
-#include <QPainter>
 #include <QDateTime>
+#include <QtMath>
+#include <QDataStream>
 #include <QFile>
-#include <QCloseEvent>
-#include <QMessageBox>
 
 int a=0;
 int b=0;
@@ -138,8 +130,21 @@ void MainWindow::UpdateDataChannel1()
 
 void MainWindow::UpdateDataChannel2()
 {
+  /*  UartDriver UD;
+    double fakedata = ui->dial->value() + 20;
+    UD.writechannelvalue(2,fakedata);
+    double pressure = fakedata;
+*/
+
     UartDriver UD;
-    double pressure = UD.readchannelvalue(1) + 20;
+    ModBus modbus;
+    mathresolver mathres;
+
+    double currentdata ;
+    double pressure ;
+    currentdata = modbus.ReadTemperature(1);
+
+    pressure = mathres.Solve("x/2", currentdata);
     UD.writechannelvalue(2,pressure);
 
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
@@ -167,11 +172,8 @@ void MainWindow::UpdateDataChannel2()
 void MainWindow::UpdateDataChannel3()
 {
     double fakedata = ui->dial->value() + 30;
-
     UartDriver UD;
-
     UD.writechannelvalue(3,fakedata);
-
     double currentdata = fakedata;
 
     if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))

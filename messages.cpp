@@ -1,29 +1,10 @@
-#include <QPixmap>
 #include <QTimer>
 #include <QTime>
-#include <QPainter>
-#include <QPen>
 #include <QVector>
-#include <QtMath>
 #include <QFile>
-#include <QDataStream>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
-#include <QPainterPath>
-#include <QPainter>
-#include <QDateTime>
-#include <QFile>
-#include <QCloseEvent>
 #include <QMessageBox>
 #include <QtWidgets>
-#include <QThread>
-#include <QtTest/QTestEvent>
-#include <QtTest/QTestEventList>
-#include <QtTest/QTest>
-#include <QPoint>
-#include <QEvent>
-#include <QMouseEvent>
-#include <QFocusEvent>
+
 
 #include "messages.h"
 #include "ui_messages.h"
@@ -34,9 +15,6 @@ Messages::Messages(QDialog *parent) :
     QDialog(parent),
     ui(new Ui::Messages)
 {
-
-//    MessageWrite mr;
-//    mr.WriteAllLogToFile();
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("MESSAGES"));

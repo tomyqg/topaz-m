@@ -37,6 +37,8 @@ class ModBus:UartDriver
 public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
+
+private:
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
             char Function,
@@ -47,7 +49,6 @@ public slots:
             );
 
 public:
-
     enum DeviceAdress {
         UniversalChannel1 = 0x01,
         UniversalChannel2 = 0x02,
@@ -62,12 +63,13 @@ public:
         CurrentAdressHi       = 0x04,
         ResistanceAdressHi    = 0x08,
         FrequencyAdressHi     = 0x10,
-        TemperetureAdressLo   = 0x00,
+        TemperetureAdressLo   = 0x00, // возможно, не нужно
         VoltageAdressLo       = 0x00,
         CurrentAdressLo       = 0x00,
         ResistanceAdressLo    = 0x00,
         FrequencyAdressLo     = 0x00
     };
+    Q_ENUM(RegisterAdress)
 
     enum RegisterCount{
         TemperetureRegCountHi = 0x01,
@@ -81,8 +83,7 @@ public:
         ResistanceRegCountLo = 0x00,
         FrequencyRegCountLo = 0x00
     };
-
-    Q_ENUM(RegisterAdress)
+    Q_ENUM(RegisterCount)
 
     enum Function {
         ReadCoils = 0x01,
@@ -99,11 +100,10 @@ public:
     };
     Q_ENUM(Function)
 
-    enum ByteQueues {
-        Fone = 0x02,
-        Ftwo = 0x03
+    enum OutputValue {
+
     };
-    Q_ENUM(ByteQueues)
+    Q_ENUM(OutputValue)
 };
 
 #endif // UARTDRIVER_H
