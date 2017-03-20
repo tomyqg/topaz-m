@@ -57,7 +57,6 @@ private slots:
     void updategraph();
     void updatevalue();
     void delay(int n);
-    double returnmathresult(double dval);
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
@@ -66,7 +65,6 @@ private slots:
     void on_dial_valueChanged(int value);
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
-    void on_customPlot_destroyed();
     void on_radioButton_clicked();
     void on_radioButton_2_clicked();
 

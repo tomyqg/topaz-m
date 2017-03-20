@@ -7,14 +7,6 @@
 #include "dialog.h"
 #include "channel1.h"
 
-#include <QTimer>
-#include <QDateTime>
-#include <QTime>
-#include <QVector>
-#include <QFile>
-#include <QDataStream>
-#include <QtScript/QScriptEngine>
-
 extern QVector<double> xx1;
 extern QVector<double> yy1;
 extern QVector<double> yy2;

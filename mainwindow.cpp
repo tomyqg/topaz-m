@@ -11,10 +11,8 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QTime>
-#include <QPainter>
 #include <QPen>
 #include <QVector>
-#include <QtMath>
 #include <QFile>
 #include <QDataStream>
 #include <QtScript/QScriptEngine>
@@ -28,14 +26,10 @@
 #include <QThread>
 #include <QPoint>
 
-
 QString inputstr = "";
-
 QDateTime start(QDateTime::currentDateTime());
-
 QString MainWindow::startdate = start.toString("dd/MM/yy");
 QString MainWindow::starttime = start.toString("hh:mm:ss");
-
 QString MainWindow::endtime = "";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -85,8 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     my->moveToThread(thread);
 
-//    connect(thread, SIGNAL(started()), my, SLOT(readuart()));
-
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);
     channeltimer2 = new QTimer();
@@ -96,10 +88,10 @@ MainWindow::MainWindow(QWidget *parent) :
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()) );
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()) );
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()) );
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()) );
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
 
     channeltimer1->start(100);
     channeltimer2->start(100);
@@ -110,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QProcess process;
 
-    process.startDetached("sudo cpufreq-set -f 600MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set -f 100MHz"); // max freq on
     //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     process.startDetached("config-pin P9.24 uart");
@@ -151,7 +143,10 @@ void MainWindow::updateCaption()
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     mathresolver mr;
-    ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
+    ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(abs(x)) / sqrt(abs(x-5))", 9) ) ); //"sin(2) + cos(2)"+ cos(2)
+
+    //ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
+    // pressure = mathres.Solve("sqrt(abs(x)) + sqrt(abs(x-5))", 9);
     //ui->listWidget->addItem(ud.readalluartports());
     //ud.readuart();
     //ud.writedata();
@@ -217,62 +212,9 @@ void MainWindow::on_pushButton_2_pressed()
 {
     ui->customPlot->clearGraphs();
 }
-/*
-void MainWindow::on_checkBox_stateChanged(int arg1)
-{
-    QFile filedir("/sys/class/gpio/gpio69/direction");
-
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-
-    outdir << "out";
-    filedir.close();
-
-    QFile file("/sys/class/gpio/gpio69/value");
-    file.open(QIODevice::WriteOnly);
-    QTextStream out(&file);
-
-    if (1)
-    {
-        out << "1";
-    }
-
-    else
-    {
-        out << "0";
-    }
-
-    file.close();
-}
-*/
-double MainWindow::returnmathresult(double dval)
-{/*
-    QString inn = ui->textEdit->toPlainText();
-    QScriptEngine myEngine;
-    QString vaal = QString::number(dval);
-    QString replaced=inn;
-    replaced.replace(QString("sin"), QString("Math.sin"));
-    replaced.replace(QString("cos"), QString("Math.cos"));
-    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
-    replaced.replace(QString("pow"), QString("Math.pow"));
-    replaced.replace(QString("x"), QString(vaal));
-    double Result = myEngine.evaluate(replaced).toNumber();
-    */
-    return 1;
-}
 
 void MainWindow::on_textEdit_textChanged()
 {
-    /*QString inn = ui->textEdit->toPlainText();
-    QScriptEngine myEngine;
-    QString vaal = QString::number(ui->dial->value());
-    QString replaced=inn;
-    replaced.replace(QString("sin"), QString("Math.sin"));
-    replaced.replace(QString("cos"), QString("Math.cos"));
-    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
-    replaced.replace(QString("pow"), QString("Math.pow"));
-    replaced.replace(QString("x"), QString(vaal));
-    double Result = myEngine.evaluate(replaced).toNumber();*/
 }
 
 void MainWindow::on_dial_valueChanged(int value)
@@ -298,10 +240,6 @@ void MainWindow::on_pushButton_4_clicked()
     Messages messages;
     messages.setModal(true);
     messages.exec();
-}
-
-void MainWindow::on_customPlot_destroyed()
-{
 }
 
 void MainWindow::on_radioButton_clicked()

@@ -6,15 +6,7 @@
 #include "metrologicalcalc.h"
 #include "mathresolver.h"
 
-#include <QTimer>
-#include <QTime>
-#include <QDateTime>
-#include <QtMath>
-#include <QDataStream>
-#include <QFile>
-
-int a=0;
-int b=0;
+int a=0;int b=0;
 int color1rgb[]={153, 0, 153}; //фиолетовый темный
 int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
@@ -130,12 +122,6 @@ void MainWindow::UpdateDataChannel1()
 
 void MainWindow::UpdateDataChannel2()
 {
-  /*  UartDriver UD;
-    double fakedata = ui->dial->value() + 20;
-    UD.writechannelvalue(2,fakedata);
-    double pressure = fakedata;
-*/
-
     UartDriver UD;
     ModBus modbus;
     mathresolver mathres;
@@ -144,6 +130,7 @@ void MainWindow::UpdateDataChannel2()
     double pressure ;
     currentdata = modbus.ReadTemperature(1);
     pressure = mathres.Solve("sqrt(abs(x))", currentdata);
+//    pressure = mathres.Solve("sqrt(abs(x))+3.33");
     UD.writechannelvalue(2,pressure);
 
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))

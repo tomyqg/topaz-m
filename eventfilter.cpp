@@ -1,11 +1,3 @@
-#include <QTimer>
-#include <QTime>
-#include <QFile>
-#include <QDateTime>
-#include <QFile>
-#include <QCloseEvent>
-#include <QEvent>
-
 #include "options.h"
 #include "ui_options.h"
 #include "channel1.h"

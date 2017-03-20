@@ -1,10 +1,8 @@
 #include "mathresolver.h"
 #include <QtMath>
-#include <QtScript/QScriptEngine>
 
 mathresolver::mathresolver()
 {
-//    float a = Solve("sin(2)",1);
 }
 
 double mathresolver::Solve(QString eqstring, double x)
@@ -32,6 +30,8 @@ double mathresolver::Solve(QString eqstring)
     replaced.replace(QString("abs"), QString("Math.abs"));
     double Result = myEngine.evaluate(replaced).toNumber();
     return Result;*/
-    mathresolver m;
-    return m.Solve(eqstring,0);
+
+    QString replaced=eqstring;
+    replaced.replace(QString("x"), QString(""));
+    return Solve(replaced,0);
 }

@@ -1,9 +1,4 @@
 #include "channel1.h"
-#include "QDebug"
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
 
 double ChannelOptions::GetHigherLimit()
 {

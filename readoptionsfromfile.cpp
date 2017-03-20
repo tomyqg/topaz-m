@@ -3,14 +3,6 @@
 #include "options.h"
 #include "keyboard.h"
 #include "dialog.h"
-#include <QTimer>
-#include <QTime>
-#include <QFile>
-#include <QDateTime>
-#include <QCloseEvent>
-#include <QMessageBox>
-#include <channel1.h>
-#include <messages.h>
 
 extern QString pathtofile;
 
