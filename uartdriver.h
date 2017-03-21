@@ -100,21 +100,20 @@ public:
     };
     Q_ENUM(Function)
 
-    enum OutputValue {
-    };
-    Q_ENUM(OutputValue)
 
-    enum G00_Group{
-        DataChannel1Address = 0x00,
-        DataChannel2Address = 0x02,
-        DataChannel3Address = 0x04,
-        DataChannel4Address = 0x06,
-        DataChannel1Lenght = 2, //  (2 registers)
-        DataChannel2Lenght = 2,
-        DataChannel3Lenght = 2,
-        DataChannel41Lenght = 2
-    };
-    Q_ENUM(G00_Group)
+    /* Параметры устройства для группы G00 (выходные данные канала):
+     * Для модуля типа 4AI при доступе по команде 03 (0x03)
+     * Read Holding Registers и 04 (0x04) Read Input Registers
+     * (формат команд аналогичный).
+     * */
+
+
+
+
+    /* Доступ к параметрам данного раздела осуществляется
+     * с использованием команды 03 (0x03)
+     * Read Holding Registers
+     * */
 
     enum G01_Group{
         ProtocolVersionAddress  = 0,
@@ -165,9 +164,158 @@ public:
         UniqueIDLenght = 6,
         OnboardTempAddress  = 35,
         OnboardTempLenght = 2,
-
+        OnboardVoltageAddress  = 37,
+        OnboardVoltageLenght = 2,
+        AICountAddress  = 40,
+        AICountLenght = 1,
+        DICountAddress  = 41,
+        DICountLenght = 1,
     };
     Q_ENUM(G01_Group)
+
+    /* Параметры устройства для группы G02 (конфигурация канала):
+     * Абсолютные адреса параметров указаны для первого канала
+     * (0 в блоке «Номер канала», см. п. Адресация параметров).
+     * Адреса для остальных каналов модуля получаются по формуле Addr + 128*N,
+     * где N= номер канала модуля – 1. Например, адрес параметра Status для
+     * первого канал модуля равен 32771, для второго – 32899 (32771+128*1),
+     * для третьего – 33027 (32771+128*2)
+     * */
+
+    enum G02_Group{
+        DataMeasureGenerateAddress = 0,
+        DataMeasureGenerateLenght = 2,
+        DataFlagsAddress = 2,
+        DataFlagsLenght = 1,
+        StatusAddress = 3,
+        StatusLenght = 1,
+        ErrorAddress = 4,
+        ErrorLenght = 1,
+        QuantityAddress = 5,
+        QuantityLenght = 2,
+        UptimeAddress = 7,
+        UptimeLenght = 2,
+        DataRAWAddress = 9,
+        DataRAWLenght = 2,
+        DataFlagsRAWAddress = 11,
+        DataFlagsRAWLenght = 1,
+        SupportedSignalsAddress = 12,
+        SupportedSignalsLenght = 1,
+        SignalTypeAddress = 13,
+        SignalTypeLenght = 1,
+        FilterTypeAddress = 27,
+        FilterTypeLenght = 1,
+        FilterLenghtAddress = 28,
+        FilterLenghtLenght = 1,
+        TransferFunctionAddress = 29,
+        TransferFunctionLenght = 1,
+        TransferSignalLowLimitAddress = 31,
+        TransferSignalLowLimitLenght = 2,
+        TransferSignalHighLimitAddress = 33,
+        TransferSignalHighLimitLenght = 2,
+        TransferScaleLowLimitAddress = 35,
+        TransferScaleLowLimitLenght = 2,
+        TransferScaleHighLimitAddress = 37,
+        TransferScaleHighLimitLenght = 2,
+        BadGoodCommAddress = 39,
+        BadGoodCommLenght = 2,
+
+        UserCalibration1GainAddress = 42,
+        UserCalibration1GainLenght = 2,
+        UserCalibration1OffsetAddress = 44,
+        UserCalibration1OffsetLenght = 2,
+        UserCalibration1DateAddress = 46,
+        UserCalibration1DateLenght = 2,
+        UserCalibration2GainAddress = 48,
+        UserCalibration2GainLenght = 2,
+        UserCalibration2OffsetAddress = 50,
+        UserCalibration2OffsetLenght = 2,
+        UserCalibration2DateAddress = 52,
+        UserCalibration2DateLenght = 2,
+        UserCalibration3GainAddress = 54,
+        UserCalibration3GainLenght = 2,
+        UserCalibration3OffsetAddress = 56,
+        UserCalibration3OffsetLenght = 2,
+        UserCalibration3DateAddress = 58,
+        UserCalibration3DateLenght = 2,
+        UserCalibration4GainAddress = 60,
+        UserCalibration4GainLenght = 2,
+        UserCalibration4OffsetAddress = 62,
+        UserCalibration4OffsetLenght = 2,
+        UserCalibration4DateAddress = 64,
+        UserCalibration4DateLenght = 2,
+
+        FactoryCalibration1GainAddress = 66,
+        FactoryCalibration1GainLenght = 2,
+        FactoryCalibration1OffsetAddress = 68,
+        FactoryCalibration1OffsetLenght = 2,
+        FactoryCalibration1DateAddress = 70,
+        FactoryCalibration1DateLenght = 2,
+        FactoryCalibration2GainAddress = 72,
+        FactoryCalibration2GainLenght = 2,
+        FactoryCalibration2OffsetAddress = 74,
+        FactoryCalibration2OffsetLenght = 2,
+        FactoryCalibration2DateAddress = 76,
+        FactoryCalibration2DateLenght = 2,
+        FactoryCalibration3GainAddress = 78,
+        FactoryCalibration3GainLenght = 2,
+        FactoryCalibration3OffsetAddress = 80,
+        FactoryCalibration3OffsetLenght = 2,
+        FactoryCalibration3DateAddress = 82,
+        FactoryCalibration3DateLenght = 2,
+        FactoryCalibration4GainAddress = 84,
+        FactoryCalibration4GainLenght = 2,
+        FactoryCalibration4OffsetAddress = 86,
+        FactoryCalibration4OffsetLenght = 2,
+        FactoryCalibration4DateAddress = 88,
+        FactoryCalibration4DateLenght = 2,
+
+        MeasuredCJValueAddress = 90,
+        MeasuredCJValueLenght = 2,
+        ResultCJValueAddress = 92,
+        ResultCJValueLenght = 2,
+
+        AdditionalParameterAddress = 14,
+        AdditionalParameterLenght = 12,
+    };
+    Q_ENUM(G02_Group)
+
+    enum MeasureTypeVoltage{
+        Voltage1VoltNoBreakControl = 1,
+        Voltage1VoltWithBreakControl = 2,
+        Voltage100mVoltNoBreakControl = 3,
+        Voltage100mVoltWithBreakControl = 4,
+        Voltage5VoltNoBreakControl = 5,
+        Voltage5VoltWithBreakControl = 6,
+        Voltage10VoltNoBreakControl = 7,
+        Voltage10VoltWithBreakControl = 8
+    };
+    Q_ENUM(MeasureTypeVoltage)
+
+    enum MeasureTypeWireMode{
+        Wire3NoBreakControl = 3,
+        Wire3WithBreakControl = 4,
+        Wire4NoBreakControl = 5,
+        Wire4WithBreakControl = 6
+    };
+    Q_ENUM(MeasureTypeWireMode)
+
+    enum TermoCoupleType{
+        R = 1,  //(ТПП 13)
+        S = 2,  //(ТПП 10)
+        B = 3,  //(ТПР)
+        J = 4,  //(ТЖК )
+        T = 5,  //(ТМКн)
+        E = 6,  //(ТХКн)
+        K = 7,  //(ТХА)
+        N = 8,  //(ТНН)
+        A1 = 9, //(ТВР)
+        A2 = 10,//(ТВР)
+        A3 = 11,//(ТВР)
+        L = 12, //(ТХК)
+        M = 14  //(ТМК)
+    };
+    Q_ENUM(TermoCoupleType)
 };
 
 #endif // UARTDRIVER_H
