@@ -23,12 +23,8 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
     readoptionsfromfile();
-//    readsystemoptionsfromfile();
     applysettingstoUI();
     customizeUI();
-
-//    ui->timeEdit->setDateTime(QDateTime::currentDateTime());
-//    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 
     QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> (  );
 
@@ -93,39 +89,30 @@ void Options::Channel1TypeChange()
     {
         ui->UnitsChannel_1->setText("mA");
         options1.SetSignalType(2);
-        ////qDebug() << "options1";
-        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
         options1.SetSignalType(3);
         ui->UnitsChannel_1->setText("V");
-        ////qDebug() << "options1";
-        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonResistorChannel_1->isChecked())
     {
         options1.SetSignalType(4);
         ui->UnitsChannel_1->setText("Om");
-
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
         options1.SetSignalType(5);
         ui->UnitsChannel_1->setText("mV");
-        ////qDebug() << "options1";
-        ////qDebug() << options1.GetSignalType();
     }
     
     if (ui->ButonImpulseChannel_1->isChecked())
     {
         options1.SetSignalType(6);
         ui->UnitsChannel_1->setText("1");
-        ////qDebug() << "options1";
-        ////qDebug() << options1.GetSignalType();
     }
 }
 
@@ -181,13 +168,10 @@ void Options::Channel2TypeChange()
         options2.SetSignalType(6);
         ui->UnitsChannel_2->setText("1");
     }
-
-    //    qDebug() << options2.GetSignalType();
 }
 
 void Options::Channel3TypeChange()
 {
-
     if (ui->ButonOtklChannel_3->isChecked())
     {
         options2.SetSignalType(1);
@@ -518,7 +502,6 @@ void Options::applysettingstoUI()
             ui->ButonTermoparaChannel_2->setChecked(true);
         }
 
-
         if (sigtype2 == 6)
         {
             ui->ButonImpulseChannel_2->setChecked(true);
@@ -690,7 +673,6 @@ void Options::on_UnitsChannel_1_editingFinished()
 
 void Options::on_pushButton_3_clicked()
 {
-    //    ui->timeEdit->
     QProcess process1;
     process1.start("xinput_calibrator"); // max perfomance on
 
@@ -716,13 +698,10 @@ void Options::on_pushButton_3_clicked()
         //        ui->textEdit->setText(Options::calibrationprm);
         //        QString a = Options::calibrationprm;
         QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
-
         pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
         pice = pice.simplified();
         pice = pice.remove(0, stringtofind.length() );
         Options::calibrationprm = pice.remove('\"');
-        //        a = a + "->" + Options::calibrationprm ;
-        //        ui->textEdit->setText(a);
     }
 }
 
@@ -747,7 +726,6 @@ void Options::setmaxmessageslimit(double n)
 {
     maxmessageslimit = n;
 }
-
 
 void Options::on_pushButton_5_clicked()
 {

@@ -28,8 +28,8 @@ keyboard::~keyboard()
     MessageWrite mr ("Keyboard Close");
     delete ui;
 }
-/*
-void keyboard::on_buttonBox_accepted()
+
+/*void keyboard::on_buttonBox_accepted()
 {
 }*/
 

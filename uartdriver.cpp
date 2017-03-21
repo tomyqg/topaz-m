@@ -10,7 +10,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -325,7 +325,6 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
         stream >> val1;
     }
-
     return requestData;
 }
 

@@ -101,9 +101,73 @@ public:
     Q_ENUM(Function)
 
     enum OutputValue {
-
     };
     Q_ENUM(OutputValue)
+
+    enum G00_Group{
+        DataChannel1Address = 0x00,
+        DataChannel2Address = 0x02,
+        DataChannel3Address = 0x04,
+        DataChannel4Address = 0x06,
+        DataChannel1Lenght = 2, //  (2 registers)
+        DataChannel2Lenght = 2,
+        DataChannel3Lenght = 2,
+        DataChannel41Lenght = 2
+    };
+    Q_ENUM(G00_Group)
+
+    enum G01_Group{
+        ProtocolVersionAddress  = 0,
+        ProtocolVersionLenght = 1, // (1 register)
+        HardwareVersionAddress  = 1,
+        HardwareVersionLenght = 1,
+        SoftwareVersionAddress  = 2,
+        SoftwareVersionLenght = 1,
+        SoftwareRevisionAddress  = 3,
+        SoftwareRevisionLenght = 1,
+        DeviceTypeAddress  = 4,
+        DeviceTypeLenght = 1,
+        ModbusAddressAddress  = 5,
+        ModbusAddressLenght = 1,
+        ModbusbaudrateAddress  = 6,
+        ModbusbaudrateLenght = 1,
+        ModbusParityAddress  = 7,
+        ModbusParityLenght = 1,
+        ModbusStopbitAddress  = 8,
+        ModbusStopbitLenght = 1,
+        BraceControlAddress  = 10,
+        BraceControlLenght = 1,
+        SerialNumberAddress  = 11,
+        SerialNumberLenght = 2,
+        UptimeAddress  = 13,
+        UptimeLenght = 2,
+        DeviceStateAddress  = 15,
+        DeviceStateLenght = 1,
+        DipStateAddress  = 16,
+        DipStateLenght = 2,
+        AccessStateAddress  = 18,
+        AccessStateLenght = 1,
+        DataOrderAddress  = 19,
+        DataOrderLenght = 1,
+        ModbusCommCountAddress  = 20,
+        ModbusCommCountLenght = 1,
+        ModbusCommErrorAddress  = 21,
+        ModbusCommErrorLenght = 1,
+        StatusAddress  = 22,
+        StatusLenght = 1,
+        ErrorsAddress  = 23,
+        ErrorsLenght = 1,
+        FactoryDateAddress  = 24,
+        FactoryDateLenght = 2,
+        SoftwareCRC32Address  = 26,
+        SoftwareCRC32Lenght = 2,
+        UniqueIDAddress  = 28,
+        UniqueIDLenght = 6,
+        OnboardTempAddress  = 35,
+        OnboardTempLenght = 2,
+
+    };
+    Q_ENUM(G01_Group)
 };
 
 #endif // UARTDRIVER_H
