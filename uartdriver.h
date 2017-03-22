@@ -39,6 +39,7 @@ public slots:
     double ReadVoltage(char channel);
     quint16 crc16_modbus(const QByteArray &array);
 
+
 private:
     QByteArray ModBusMakeRequest(
             char DeviceAdress,

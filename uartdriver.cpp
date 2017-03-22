@@ -29,10 +29,8 @@ extern QString inputstr;
 double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 
-
 quint16 ModBus::crc16_modbus(const QByteArray &array)
 {
-
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
         0XC601, 0X06C0, 0X0780, 0XC741, 0X0500, 0XC5C1, 0XC481, 0X0440,
@@ -340,6 +338,51 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
 
         while (serial.waitForReadyRead(10))
             requestData = serial.readAll();
+
+        uartsleep;
+        QByteArray newqba = requestData;
+        newqba.remove(requestData.length()-1,1);
+        QByteArray inpcrc = requestData;
+        uartsleep;
+        //inpcrc = inpcrc.remove(0,inpcrc.length()-1);
+        //uint16_t inpcrcvalue = inpcrc.at(0);
+
+        uint16_t inpcrcvalue = inpcrc.at(inpcrc.length()-1);
+
+        ModBus modb;
+        uint16_t crc = modb.crc16_modbus(newqba);
+
+        uartsleep;
+        //qDebug() << "inp bytes are:";
+        //qDebug() << requestData;
+        //qDebug() << "withoutCRC bytearray";
+        //qDebug() << newqba;
+        //qDebug() << requestData.length();
+        //qDebug() << newqba.length();
+
+        if (inpcrcvalue == crc)
+            qDebug() << "CRC is GOOD";
+        else
+        {
+            qDebug() << "CRC is BAD";
+            qDebug() << "last byte (crc) is";
+            qDebug() << inpcrcvalue;
+            qDebug() << "CRC16 is:" ;
+            qDebug() << crc;
+            qDebug() << "inp bytes are:";
+            qDebug() << requestData;
+            qDebug() << "without CRC bytearray";
+            qDebug() << newqba;
+        }
+
+        /*
+        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+
+        char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xA3}; // 0xCD
+        QByteArray ba(arr, 8);
+
+        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+        */
 
         QByteArray arr3;
         arr3.resize(4);

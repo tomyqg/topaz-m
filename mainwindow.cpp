@@ -89,7 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
     channeltimer4->setInterval(5000);
 
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
 
@@ -144,17 +144,6 @@ void MainWindow::updateCaption()
     //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     mathresolver mr;
     ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(abs(x)) / sqrt(abs(x-5))", 9) ) ); //"sin(2) + cos(2)"+ cos(2)
-
-    ModBus modb;
-    //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
-
-    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5}; // 0xCD
-    QByteArray ba(arr, 7);
-
-    //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
-
-    qDebug() << "CRC16 is:" ;
-    qDebug() << modb.crc16_modbus(ba) ;
 
     //ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
     // pressure = mathres.Solve("sqrt(abs(x)) + sqrt(abs(x-5))", 9);
