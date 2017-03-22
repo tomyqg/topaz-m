@@ -129,7 +129,7 @@ void MainWindow::UpdateDataChannel2()
     double currentdata ;
     double pressure ;
     currentdata = modbus.ReadTemperature(1);
-    pressure = mathres.Solve("sqrt(abs(x))", currentdata);
+    pressure = mathres.Solve("sqrt(abs(x))+20", currentdata);
 //    pressure = mathres.Solve("sqrt(abs(x))+3.33");
     UD.writechannelvalue(2,pressure);
 

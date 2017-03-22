@@ -342,90 +342,22 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         uartsleep;
         QByteArray newqba = requestData;
         newqba.remove(requestData.length()-1,1);
-        QByteArray inpcrc = requestData;
-        QByteArray inpcrc2;
-        uartsleep;
-        inpcrc2 = requestData;
-        inpcrc2 = inpcrc2.remove(0,inpcrc2.length()-1);
-        //uint16_t inpcrcvalue = inpcrc.at(0);
 
-        uint16_t inpcrcvalue = (uint16_t)inpcrc2.at(0);
+        uint8_t inpcrc = (uint8_t)requestData.at(requestData.length()-1);
 
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(newqba);
 
-        uartsleep;
-        //qDebug() << "inp bytes are:";
-        //qDebug() << requestData;
-        //qDebug() << "withoutCRC bytearray";
-        //qDebug() << newqba;
-        //qDebug() << requestData.length();
-        //qDebug() << newqba.length();
-
-        if ((uint8_t)inpcrc2.at(0) == crc)
-        {  qDebug() << "CRC is GOOD";
+        if (inpcrc == crc) // compare CRCses
+        {
+            return requestData;
         }
         else
         {
-            qDebug() << "CRC is BAD";
-            qDebug() << "CRC16 is:" ;
-            qDebug() << crc;
-            qDebug() << "Last input";
-            qDebug() << (uint8_t)inpcrc2.at(0);
-            qDebug() << "Last input Hex";
-            qDebug() << inpcrc2;
-            qDebug() << "inp bytes are:";
-            qDebug() << requestData;
-            qDebug() << "without CRC bytearray";
-            qDebug() << newqba;
+            return 0;
         }
-
-//        qDebug() << "last byte (crc) is";
-//        qDebug() << inpcrcvalue;
-
-
-        /*        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
-
-        char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xA3}; // 0xCD
-        QByteArray ba(arr, 8);
-
-        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
-        */
-
-        QByteArray arr3;
-        arr3.resize(4);
-
-        //int inddd = requestData.at(requestData.length()-2);
-
-        trimmeddata = requestData;
-        trimmeddata.remove(requestData.length() - 2,2);
-        int inputcrc = GetXOR(trimmeddata);
-        int inputcrcall = GetXOR(requestData);
-        int crcfromMB = requestData.at(requestData.length() - 1);
-
-        uartsleep;
-        //qDebug() << requestData;
-        //qDebug() << requestData.length();
-        //qDebug() << requestData.at(5);
-
-        //qDebug() << trimmeddata;
-        //qDebug() << trimmeddata.length();
-        //qDebug() << inputcrcall;
-        //qDebug() << inputcrc;
-
-        if (inputcrc == inputcrcall)
-            ; //qDebug() << "crc VALID";
-
-        arr3[0] = requestData.at(5);
-        arr3[1] = requestData.at(6);
-        arr3[2] = requestData.at(3);
-        arr3[3] = requestData.at(4);
-        QDataStream stream(arr3);
-
-        stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
-        stream >> val1;
     }
-    return requestData;
+    return 0;
 }
 
 double ModBus::ReadTemperature(char channel)
