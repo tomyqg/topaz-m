@@ -343,11 +343,13 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         QByteArray newqba = requestData;
         newqba.remove(requestData.length()-1,1);
         QByteArray inpcrc = requestData;
+        QByteArray inpcrc2;
         uartsleep;
-        //inpcrc = inpcrc.remove(0,inpcrc.length()-1);
+        inpcrc2 = requestData;
+        inpcrc2 = inpcrc2.remove(0,inpcrc2.length()-1);
         //uint16_t inpcrcvalue = inpcrc.at(0);
 
-        uint16_t inpcrcvalue = inpcrc.at(inpcrc.length()-1);
+        uint16_t inpcrcvalue = (uint16_t)inpcrc2.at(0);
 
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(newqba);
@@ -360,23 +362,29 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         //qDebug() << requestData.length();
         //qDebug() << newqba.length();
 
-        if (inpcrcvalue == crc)
-            qDebug() << "CRC is GOOD";
+        if ((uint8_t)inpcrc2.at(0) == crc)
+        {  qDebug() << "CRC is GOOD";
+        }
         else
         {
             qDebug() << "CRC is BAD";
-            qDebug() << "last byte (crc) is";
-            qDebug() << inpcrcvalue;
             qDebug() << "CRC16 is:" ;
             qDebug() << crc;
+            qDebug() << "Last input";
+            qDebug() << (uint8_t)inpcrc2.at(0);
+            qDebug() << "Last input Hex";
+            qDebug() << inpcrc2;
             qDebug() << "inp bytes are:";
             qDebug() << requestData;
             qDebug() << "without CRC bytearray";
             qDebug() << newqba;
         }
 
-        /*
-        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+//        qDebug() << "last byte (crc) is";
+//        qDebug() << inpcrcvalue;
+
+
+        /*        //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
 
         char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5, 0xA3}; // 0xCD
         QByteArray ba(arr, 8);
