@@ -37,6 +37,7 @@ class ModBus:UartDriver
 public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
+    quint16 crc16_modbus(const QByteArray &array);
 
 private:
     QByteArray ModBusMakeRequest(

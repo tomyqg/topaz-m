@@ -141,12 +141,20 @@ void MainWindow::on_dial_actionTriggered(int action)
 void MainWindow::updateCaption()
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
+    //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
     mathresolver mr;
     ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(abs(x)) / sqrt(abs(x-5))", 9) ) ); //"sin(2) + cos(2)"+ cos(2)
 
     ModBus modb;
-    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+    //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+
+    char arr[8] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, 0xC5}; // 0xCD
+    QByteArray ba(arr, 7);
+
+    //    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+
+    qDebug() << "CRC16 is:" ;
+    qDebug() << modb.crc16_modbus(ba) ;
 
     //ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
     // pressure = mathres.Solve("sqrt(abs(x)) + sqrt(abs(x-5))", 9);
@@ -249,12 +257,12 @@ void MainWindow::on_radioButton_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-//    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
 }
 
 void MainWindow::on_radioButton_2_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
-//    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+    //    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
