@@ -107,14 +107,11 @@ public:
      * (формат команд аналогичный).
      * */
 
-
-
-
     /* Доступ к параметрам данного раздела осуществляется
      * с использованием команды 03 (0x03)
      * Read Holding Registers
      * */
-/*
+
     enum G01_Group{
         ProtocolVersionAddress  = 0,
         ProtocolVersionLenght = 1, // (1 register)
@@ -172,7 +169,7 @@ public:
         DICountLenght = 1,
     };
     Q_ENUM(G01_Group)
-*/
+
     /* Параметры устройства для группы G02 (конфигурация канала):
      * Абсолютные адреса параметров указаны для первого канала
      * (0 в блоке «Номер канала», см. п. Адресация параметров).
@@ -181,20 +178,20 @@ public:
      * первого канал модуля равен 32771, для второго – 32899 (32771+128*1),
      * для третьего – 33027 (32771+128*2)
      * */
-/*
+
     enum G02_Group{
         DataMeasureGenerateAddress = 0,
         DataMeasureGenerateLenght = 2,
         DataFlagsAddress = 2,
         DataFlagsLenght = 1,
-        StatusAddress = 3,
-        StatusLenght = 1,
+//        StatusAddress = 3,
+//        StatusLenght = 1,
         ErrorAddress = 4,
         ErrorLenght = 1,
         QuantityAddress = 5,
         QuantityLenght = 2,
-        UptimeAddress = 7,
-        UptimeLenght = 2,
+//        UptimeAddress = 7,
+//        UptimeLenght = 2,
         DataRAWAddress = 9,
         DataRAWLenght = 2,
         DataFlagsRAWAddress = 11,
@@ -315,7 +312,50 @@ public:
         L = 12, //(ТХК)
         M = 14  //(ТМК)
     };
-    Q_ENUM(TermoCoupleType)*/
+    Q_ENUM(TermoCoupleType)
+/*
+    enum TermoResistorType{
+        Pt1dot3910 = 1,
+        Pt1dot3850  = 2,
+        Cu1dot4280 = 3,
+        Cu1dot4260  = 4,
+        Ni1dot6170 = 5,
+        М53  = 6,
+        P46 = 7
+    };
+    Q_ENUM(TermoResistorType)
+
+    enum SignalTypeSelect{
+        MeasureOff = 0,
+        MeasureCurrent = 1,
+        MeasureVoltage = 2,
+        MeasureResistance = 3,
+        MeasureTC = 4,
+        MeasureTermoResistance = 5,
+        MeasureDiscrette = 6,
+        MeasureImpulseCount = 7,
+        MeasureImpulseFrequency = 8
+    };
+    Q_ENUM(SignalTypeSelect)
+
+    enum FilterTypeSelect{
+        FilterOff = 0,
+        FilterMediama = 1,
+        FilterAverage = 2
+
+    };
+    Q_ENUM(FilterTypeSelect)
+
+    enum TransmissionFunction{
+        LinearTransmission = 0,
+        QuadroTransmission = 1,
+        SQRTTransmission = 2
+    };
+    Q_ENUM(TransmissionFunction)
+
+    enum Errors{
+    };
+    Q_ENUM(Errors)*/
 };
 
 #endif // UARTDRIVER_H

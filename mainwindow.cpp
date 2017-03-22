@@ -145,6 +145,9 @@ void MainWindow::updateCaption()
     mathresolver mr;
     ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(abs(x)) / sqrt(abs(x-5))", 9) ) ); //"sin(2) + cos(2)"+ cos(2)
 
+    ModBus modb;
+    ui->textEdit_2->setText(QString::number(modb.UniversalChannel4));
+
     //ui->textEdit_2->setText(QString::number( mr.Solve("pow(x, 8)",2.5) ) ); //"sin(2) + cos(2)"+ cos(2)
     // pressure = mathres.Solve("sqrt(abs(x)) + sqrt(abs(x-5))", 9);
     //ui->listWidget->addItem(ud.readalluartports());
