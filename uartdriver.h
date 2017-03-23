@@ -49,6 +49,14 @@ private:
             char QuantityofInputRegHi,
             char QuantityofInputRegLo
             );
+public:
+    QByteArray ModBusMakeRequest2(
+                                        char DeviceAdress,
+                                        char Function,
+                                        uint16_t Address,
+                                        uint16_t Lenght
+                                        );
+
 
 public:
     enum DeviceAdress {

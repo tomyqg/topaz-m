@@ -133,6 +133,8 @@ void MainWindow::UpdateDataChannel2()
 //    pressure = mathres.Solve("sqrt(abs(x))+3.33");
     UD.writechannelvalue(2,pressure);
 
+    modbus.ModBusMakeRequest2(0x01,0x03, 0xabef,0xccae);
+
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {
         ch2.LowState1Setted = false;
