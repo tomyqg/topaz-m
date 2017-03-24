@@ -11,7 +11,6 @@ class UartDriver:public QObject
 
 public slots:
     double readchannelvalue(int channel);
-    void readuart();
     void writechannelvalue(int channel, double value);
     void writedata();
     QString readalluartports();
@@ -39,7 +38,6 @@ public slots:
     double ReadVoltage(char channel);
     quint16 crc16_modbus(const QByteArray &array);
 
-
 private:
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
@@ -51,12 +49,11 @@ private:
             );
 public:
     QByteArray ModBusMakeRequest2(
-                                        char DeviceAdress,
-                                        char Function,
-                                        uint16_t Address,
-                                        uint16_t Lenght
-                                        );
-
+            char DeviceAdress,
+            char Function,
+            uint16_t Address,
+            uint16_t Lenght
+            );
 
 public:
     enum DeviceAdress {
@@ -68,7 +65,7 @@ public:
     Q_ENUM(DeviceAdress)
 
     enum RegisterAdress {
-        TemperetureAdressHi   = 0x01,
+        TemperetureAdress   = 0x0000,
         VoltageAdressHi       = 0x02,
         CurrentAdressHi       = 0x04,
         ResistanceAdressHi    = 0x08,
@@ -82,7 +79,7 @@ public:
     Q_ENUM(RegisterAdress)
 
     enum RegisterCount{
-        TemperetureRegCountHi = 0x01,
+        TemperetureRegLenght = 0x000A,
         VoltageRegCountHi = 0x01,
         CurrentRegCountHi = 0x01,
         ResistanceRegCountHi = 0x01,
@@ -323,15 +320,15 @@ public:
         M = 14  //(ТМК)
     };
     Q_ENUM(TermoCoupleType)
-/*
+
     enum TermoResistorType{
         Pt1dot3910 = 1,
         Pt1dot3850  = 2,
         Cu1dot4280 = 3,
         Cu1dot4260  = 4,
         Ni1dot6170 = 5,
-        М53  = 6,
-        P46 = 7
+        m5m3m = 6,
+        PP46P = 7
     };
     Q_ENUM(TermoResistorType)
 
@@ -352,7 +349,6 @@ public:
         FilterOff = 0,
         FilterMediama = 1,
         FilterAverage = 2
-
     };
     Q_ENUM(FilterTypeSelect)
 
@@ -365,7 +361,7 @@ public:
 
     enum Errors{
     };
-    Q_ENUM(Errors)*/
+    Q_ENUM(Errors)
 };
 
 #endif // UARTDRIVER_H

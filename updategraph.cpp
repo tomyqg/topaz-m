@@ -97,7 +97,7 @@ void MainWindow::UpdateDataChannel1()
     double currentdata ;
     currentdata = modbus.ReadVoltage(1);
     UD.writechannelvalue(1,currentdata);
-    modbus.ModBusMakeRequest2(0x01,0x03, 0xcaef,0xccae);
+//    modbus.ModBusMakeRequest2(0x01,0x03, 0xcaef,0xccae);
 
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
@@ -130,11 +130,9 @@ void MainWindow::UpdateDataChannel2()
     double currentdata ;
     double pressure ;
     currentdata = modbus.ReadTemperature(1);
-    pressure = mathres.Solve("sqrt(abs(x))+20", currentdata);
-//    pressure = mathres.Solve("sqrt(abs(x))+3.33");
+    pressure = mathres.Solve("x/2", currentdata); //sqrt(abs(x))+20
     UD.writechannelvalue(2,pressure);
-
-
+//    pressure = mathres.Solve("sqrt(abs(x))+3.33");
 
     if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
     {

@@ -78,51 +78,6 @@ quint16 ModBus::crc16_modbus(const QByteArray &array)
     return wCRCWord;
 }
 
-void UartDriver::readuart()
-{
-    char arr[8] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D};
-    QByteArray requestData;
-    QByteArray ba(arr, 8);
-    QByteArray arr3;
-    float val1;
-    QDataStream stream(arr3);
-
-    while (1)
-    {
-        QSerialPort serial;
-        serial.setPortName(comportname); //usart1
-        if (serial.open(QIODevice::ReadWrite))
-        {
-            serial.setBaudRate(QSerialPort::Baud9600);
-            serial.setDataBits(QSerialPort::Data8);
-            serial.setParity(QSerialPort::NoParity);
-            serial.setStopBits(QSerialPort::OneStop);
-            serial.setFlowControl(QSerialPort::HardwareControl);
-            serial.setRequestToSend(true);
-
-            while (1)
-            {
-                serial.write(ba);
-                while (serial.waitForBytesWritten(10))
-                    ;
-
-                uartsleep;
-
-                while (serial.waitForReadyRead(10))
-                    requestData = serial.readAll();
-                arr3.resize(4);
-                arr3[0] = requestData.at(5);
-                arr3[1] = requestData.at(6);
-                arr3[2] = requestData.at(3);
-                arr3[3] = requestData.at(4);
-
-                stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
-                stream >> val1;
-            }
-        }
-    }
-}
-
 void UartDriver::writechannelvalue(int channel, double value)
 {
     this->channelinputbuffer[channel-1] = value;
@@ -362,12 +317,11 @@ double ModBus::ReadTemperature(char channel)
     QByteArray arr;
     QByteArray RequestRespose;
     float val;
-    RequestRespose = ModBusMakeRequest(channel,
-                                       ModBus::ReadHoldingRegisters,
-                                       ModBus::TemperetureAdressHi,
-                                       ModBus::TemperetureAdressLo,
-                                       ModBus::TemperetureRegCountHi,
-                                       ModBus::TemperetureRegCountLo);
+    RequestRespose = ModBusMakeRequest2(channel,
+                                       ModBus::ReadInputRegisters,
+                                       ModBus::TemperetureAdress,
+                                       ModBus::TemperetureRegLenght
+                                       );
     arr.resize(4);
     arr[0] = RequestRespose.at(5);
     arr[1] = RequestRespose.at(6);
@@ -404,7 +358,6 @@ double ModBus::ReadVoltage(char channel)
     return val;
 }
 
-
 QByteArray ModBus::ModBusMakeRequest2(
                                     char DeviceAdress,
                                     char Function,
@@ -419,6 +372,9 @@ QByteArray ModBus::ModBusMakeRequest2(
     char AddressLo;
     char LenghtHi;
     char LenghtLo;
+    char CRC16Hi;
+    char CRC16Lo;
+
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
@@ -431,7 +387,13 @@ QByteArray ModBus::ModBusMakeRequest2(
     requestdata.append(AddressLo);
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
-    requestdata.append(crc16_modbus(requestdata));
+
+    quint16 CRC16 = crc16_modbus(requestdata);
+    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    CRC16Lo = (int) (CRC16 & 0x00FF);
+
+    requestdata.append(CRC16Lo);
+    requestdata.append(CRC16Hi);
 
     QSerialPort serial;
     serial.setPortName(comportname); //usart1
@@ -449,6 +411,8 @@ QByteArray ModBus::ModBusMakeRequest2(
         serial.write(requestdata);
         while (serial.waitForBytesWritten(10))
             ;
+
+//        qDebug() << requestdata;
 
         SetRTS(0);
         uartsleep;

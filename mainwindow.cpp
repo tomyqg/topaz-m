@@ -88,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
