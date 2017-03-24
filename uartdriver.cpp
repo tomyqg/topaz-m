@@ -74,7 +74,7 @@ quint16 ModBus::crc16_modbus(const QByteArray &array)
         wCRCWord >>= 8;
         wCRCWord ^= wCRCTable[nTemp];
     }
-//    qDebug() << wCRCWord;
+    //    qDebug() << wCRCWord;
     return wCRCWord;
 }
 
@@ -318,10 +318,10 @@ double ModBus::ReadTemperature(char channel)
     QByteArray RequestRespose;
     float val;
     RequestRespose = ModBusMakeRequest2(channel,
-                                       ModBus::ReadInputRegisters,
-                                       ModBus::TemperetureAdress,
-                                       ModBus::TemperetureRegLenght
-                                       );
+                                        ModBus::ReadInputRegisters,
+                                        ModBus::TemperetureAdress,
+                                        ModBus::TemperetureRegLenght
+                                        );
     arr.resize(4);
     arr[0] = RequestRespose.at(5);
     arr[1] = RequestRespose.at(6);
@@ -359,11 +359,11 @@ double ModBus::ReadVoltage(char channel)
 }
 
 QByteArray ModBus::ModBusMakeRequest2(
-                                    char DeviceAdress,
-                                    char Function,
-                                    uint16_t Address,
-                                    uint16_t Lenght
-                                    )
+        char DeviceAdress,
+        char Function,
+        uint16_t Address,
+        uint16_t Lenght
+        )
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -374,7 +374,6 @@ QByteArray ModBus::ModBusMakeRequest2(
     char LenghtLo;
     char CRC16Hi;
     char CRC16Lo;
-
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
@@ -395,6 +394,33 @@ QByteArray ModBus::ModBusMakeRequest2(
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
 
+    InputDataByteArray  = UartWriteData(requestdata);
+
+    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
+    uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+    uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+    uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+
+    ModBus modb;
+    uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+
+    if (inpcrc == crc)
+    {
+        // qDebug() << "CRC GOOD";
+        return InputDataByteArray;
+    }
+    else
+    {
+        // qDebug() << "CRC BAD";
+        return 0;
+    }
+    return 0;
+}
+
+QByteArray UartDriver::UartWriteData(QByteArray data)
+{
+    QByteArray InputDataByteArray;
     QSerialPort serial;
     serial.setPortName(comportname); //usart1
 
@@ -408,12 +434,9 @@ QByteArray ModBus::ModBusMakeRequest2(
 
         SetRTS(1);
         uartsleep;
-        serial.write(requestdata);
+        serial.write(data);
         while (serial.waitForBytesWritten(10))
             ;
-
-//        qDebug() << requestdata;
-
         SetRTS(0);
         uartsleep;
 
@@ -421,30 +444,20 @@ QByteArray ModBus::ModBusMakeRequest2(
             InputDataByteArray = serial.readAll();
 
         uartsleep;
+
         QByteArray InputDataByteArrayNoCRC = InputDataByteArray;
-        InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-1,1);
-
-        QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
-        InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-
-        uint8_t inpcrc = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-
+        InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-2,2);
         uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-
-        uint16_t inpcrcnew = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-
+        uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRC);
-        uint16_t crcnew = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
 
-//        if (inpcrc == crc) // compare CRCses
-
-        if (inpcrcnew == crcnew)
+        if (inpcrc == crc)
         {
-            qDebug() << inpcrcnew;
-            qDebug() << crcnew;
+//qDebug() << inpcrcnew;
+//qDebug() << crcnew;
             return InputDataByteArray;
         }
         else

@@ -24,6 +24,9 @@ protected:
     void delay(int n);
     int  GetXOR(QByteArray bytearray);
     void SetRTS(bool newstate);
+    QByteArray UartWriteData(QByteArray data);
+
+
 
 public:
     static double channelinputbuffer[4];
