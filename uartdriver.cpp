@@ -20,7 +20,7 @@ QString pathtofile = "/usr/";
 
 #ifndef BeagleBone
 #define comportname "COM3"
-#define uartsleep Sleep(50);
+#define uartsleep Sleep(40);
 QString pathtofile = "C:/Work/";
 #endif
 
@@ -63,7 +63,7 @@ quint16 ModBus::crc16_modbus(const QByteArray &array)
         0X8801, 0X48C0, 0X4980, 0X8941, 0X4B00, 0X8BC1, 0X8A81, 0X4A40,
         0X4E00, 0X8EC1, 0X8F81, 0X4F40, 0X8D01, 0X4DC0, 0X4C80, 0X8C41,
         0X4400, 0X84C1, 0X8581, 0X4540, 0X8701, 0X47C0, 0X4680, 0X8641,
-        0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040 };
+        0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040};
 
     quint8 nTemp;
     quint16 wCRCWord = 0xFFFF;
@@ -74,7 +74,7 @@ quint16 ModBus::crc16_modbus(const QByteArray &array)
         wCRCWord >>= 8;
         wCRCWord ^= wCRCTable[nTemp];
     }
-    qDebug() << wCRCWord;
+//    qDebug() << wCRCWord;
     return wCRCWord;
 }
 
@@ -301,7 +301,6 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
     QByteArray requestdata;
     QByteArray requestData;
     int crc;
-    float val1;
 
     requestdata.append(DeviceAdress);
     requestdata.append(Function);
@@ -313,7 +312,6 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
     requestdata.append(crc);
 
     char arr[8] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D};
-    QByteArray trimmeddata;
 
     QSerialPort serial;
     serial.setPortName(comportname); //usart1
@@ -327,8 +325,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         serial.setFlowControl(QSerialPort::NoFlowControl);
 
         SetRTS(1);
-        delay(10);
-        //uartsleep;
+        uartsleep;
         QByteArray ba(arr, 8);
         serial.write(ba);
         while (serial.waitForBytesWritten(10))
@@ -345,7 +342,6 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
         newqba.remove(requestData.length()-1,1);
 
         uint8_t inpcrc = (uint8_t)requestData.at(requestData.length()-1);
-
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(newqba);
 
@@ -423,9 +419,6 @@ QByteArray ModBus::ModBusMakeRequest2(
     char AddressLo;
     char LenghtHi;
     char LenghtLo;
-    float value;
-
-    char arr[8] = {0x01, 0x04, 0x00, 0x00, 0x00, 0x0A, 0x70, 0x0D};
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
@@ -439,8 +432,6 @@ QByteArray ModBus::ModBusMakeRequest2(
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
     requestdata.append(crc16_modbus(requestdata));
-
-
 
     QSerialPort serial;
     serial.setPortName(comportname); //usart1
