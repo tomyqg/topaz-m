@@ -424,13 +424,27 @@ QByteArray ModBus::ModBusMakeRequest2(
         QByteArray InputDataByteArrayNoCRC = InputDataByteArray;
         InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-1,1);
 
+        QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+        InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
+
         uint8_t inpcrc = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+
+        uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+        uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+
+        uint16_t inpcrcnew = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+
 
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRC);
+        uint16_t crcnew = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
 
-        if (inpcrc == crc) // compare CRCses
+//        if (inpcrc == crc) // compare CRCses
+
+        if (inpcrcnew == crcnew)
         {
+            qDebug() << inpcrcnew;
+            qDebug() << crcnew;
             return InputDataByteArray;
         }
         else
