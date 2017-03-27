@@ -98,6 +98,8 @@ void MainWindow::UpdateDataChannel1()
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     UD.writechannelvalue(1,currentdata);
 
+//     qDebug() << QString::number(ModBus::UniqueIDAddress);
+
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
         ch1.LowState1Setted = false;
