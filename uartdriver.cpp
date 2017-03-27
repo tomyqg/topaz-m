@@ -529,8 +529,6 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         if (inpcrc == crc)
         {
-//qDebug() << inpcrcnew;
-//qDebug() << crcnew;
             return InputDataByteArray;
         }
         else
@@ -543,10 +541,14 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
 double ModBus::DataChannel1Read()
 {
-    return ModBusGetValue(ModBus::MainDeviceAddress,
+    return DataChannelRead(ModBus::UniversalChannel1);
+}
+
+double ModBus::DataChannelRead (char channel)
+{
+    return ModBusGetValue(channel,
                           ModBus::ReadInputRegisters,
                           ModBus::DataChannel1,
                           ModBus::DataChannelLenght
-                          //ModBus::TemperetureRegLenght
                           );
 }
