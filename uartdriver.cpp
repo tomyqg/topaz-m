@@ -358,6 +358,79 @@ double ModBus::ReadVoltage(char channel)
     return val;
 }
 
+
+float ModBus::ModBusGetValue(
+        char DeviceAdress,
+        char Function,
+        uint16_t Address,
+        uint16_t Lenght
+        )
+{
+    QByteArray requestdata;
+    QByteArray InputDataByteArray;
+
+    char AddressHi;
+    char AddressLo;
+    char LenghtHi;
+    char LenghtLo;
+    char CRC16Hi;
+    char CRC16Lo;
+
+    AddressHi = (int) ((Address & 0xFF00)>>8);
+    AddressLo = (int) (Address & 0x00FF);
+    LenghtHi = (int) ((Lenght & 0xFF00)>>8);
+    LenghtLo = (int) (Lenght & 0x00FF);
+
+    requestdata.append(DeviceAdress);
+    requestdata.append(Function);
+    requestdata.append(AddressHi);
+    requestdata.append(AddressLo);
+    requestdata.append(LenghtHi);
+    requestdata.append(LenghtLo);
+
+    quint16 CRC16 = crc16_modbus(requestdata);
+    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    CRC16Lo = (int) (CRC16 & 0x00FF);
+
+    requestdata.append(CRC16Lo);
+    requestdata.append(CRC16Hi);
+
+    InputDataByteArray  = UartWriteData(requestdata);
+
+    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
+    uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+    uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+    uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+
+    ModBus modb;
+    uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+
+    if (inpcrc == crc)
+    {
+        QByteArray arr;
+        QByteArray RequestRespose;
+        float val;
+
+        arr.resize(4);
+        arr[0] = InputDataByteArray.at(5);
+        arr[1] = InputDataByteArray.at(6);
+        arr[2] = InputDataByteArray.at(3);
+        arr[3] = InputDataByteArray.at(4);
+        //convert hex to double
+        QDataStream stream(arr);
+        stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+        stream >> val;
+        return val;
+    }
+    else
+    {
+        // qDebug() << "CRC BAD";
+        return 0;
+    }
+    return 0;
+}
+
 QByteArray ModBus::ModBusMakeRequest2(
         char DeviceAdress,
         char Function,
@@ -466,4 +539,14 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         }
     }
     return 0;
+}
+
+double ModBus::DataChannel1Read()
+{
+    return ModBusGetValue(ModBus::MainDeviceAddress,
+                          ModBus::ReadInputRegisters,
+                          ModBus::DataChannel1,
+                          ModBus::DataChannelLenght
+                          //ModBus::TemperetureRegLenght
+                          );
 }

@@ -94,8 +94,8 @@ void MainWindow::UpdateDataChannel1()
 {
     UartDriver UD;
     ModBus modbus;
-    double currentdata ;
-    currentdata = modbus.ReadVoltage(1);
+    double currentdata;
+    currentdata = modbus.DataChannel1Read();
     UD.writechannelvalue(1,currentdata);
 //    modbus.ModBusMakeRequest2(0x01,0x03, 0xcaef,0xccae);
 
@@ -129,8 +129,8 @@ void MainWindow::UpdateDataChannel2()
 
     double currentdata ;
     double pressure ;
-    currentdata = modbus.ReadTemperature(1);
-    pressure = mathres.Solve("x/2", currentdata); //sqrt(abs(x))+20
+    currentdata = modbus.DataChannel1Read();
+    pressure = mathres.Solve("x/2", currentdata);// + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
     UD.writechannelvalue(2,pressure);
 //    pressure = mathres.Solve("sqrt(abs(x))+3.33");
 

@@ -26,8 +26,6 @@ protected:
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
 
-
-
 public:
     static double channelinputbuffer[4];
 };
@@ -58,8 +56,20 @@ public:
             uint16_t Lenght
             );
 
+    float ModBus::ModBusGetValue(
+            char DeviceAdress,
+            char Function,
+            uint16_t Address,
+            uint16_t Lenght
+            );
+
+public:
+    double DataChannelRead (char channel);
+    double DataChannel1Read();
+
 public:
     enum DeviceAdress {
+        MainDeviceAddress = 0x01,
         UniversalChannel1 = 0x01,
         UniversalChannel2 = 0x02,
         UniversalChannel3 = 0x04,
@@ -116,6 +126,15 @@ public:
      * Read Holding Registers и 04 (0x04) Read Input Registers
      * (формат команд аналогичный).
      * */
+    enum G00_Group
+    {
+        DataChannel1 = 0,
+        DataChannel2 = 2,
+        DataChannel3 = 3,
+        DataChannel4 = 4,
+        DataChannelLenght = 2
+    };
+    Q_ENUM(G00_Group)
 
     /* Доступ к параметрам данного раздела осуществляется
      * с использованием команды 03 (0x03)
@@ -194,14 +213,14 @@ public:
         DataMeasureGenerateLenght = 2,
         DataFlagsAddress = 2,
         DataFlagsLenght = 1,
-//        StatusAddress = 3,
-//        StatusLenght = 1,
+        //        StatusAddress = 3,
+        //        StatusLenght = 1,
         ErrorAddress = 4,
         ErrorLenght = 1,
         QuantityAddress = 5,
         QuantityLenght = 2,
-//        UptimeAddress = 7,
-//        UptimeLenght = 2,
+        //        UptimeAddress = 7,
+        //        UptimeLenght = 2,
         DataRAWAddress = 9,
         DataRAWLenght = 2,
         DataFlagsRAWAddress = 11,
