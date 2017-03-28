@@ -10,9 +10,7 @@ class UartDriver:public QObject
     Q_OBJECT
 
 public slots:
-    double readchannelvalue(int channel);
     void writechannelvalue(int channel, double value);
-    void writedata();
     QString readalluartports();
     QString ReadAllUartStringData();
     QByteArray ReadAllUartByteData();
@@ -22,7 +20,6 @@ private:
 
 protected:
     void delay(int n);
-    int  GetXOR(QByteArray bytearray);
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
 

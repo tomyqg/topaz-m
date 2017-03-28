@@ -9,7 +9,6 @@ bool Options::eventFilter(QObject *object, QEvent *event)
     if(event->type() == event->MouseButtonRelease)
     {
         Options::olderprop = object->property("text").toString();
-//        qDebug() << Options::olderprop ;
         keyboard kb;
         kb.setModal(true);
         kb.exec();

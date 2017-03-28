@@ -21,9 +21,9 @@ QVector<double> yy4;
 void MainWindow::updategraph()
 {
     UartDriver UD;
-    xx1.append(b);
-    double argument = ui->dial->value();
 
+    double argument = ui->dial->value();
+    xx1.append(b);
     yy1.append(UD.channelinputbuffer[0]);
     yy2.append(UD.channelinputbuffer[1]);
     yy3.append(UD.channelinputbuffer[2]);
@@ -31,9 +31,7 @@ void MainWindow::updategraph()
     b++;
 
     if (b>=300&&b<900)
-    {
-        ui->customPlot->xAxis->setRange(b-300, b+300);
-    }
+    {ui->customPlot->xAxis->setRange(b-300, b+300);}
 
     if (b==1200)
     {
@@ -84,7 +82,6 @@ void MainWindow::updatepicture()
     ui->customPlot->xAxis->setAutoTickStep(false);
     ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-
     ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");// dd.MM.yyyy
     ui->customPlot->replot();
@@ -97,9 +94,7 @@ void MainWindow::UpdateDataChannel1()
     double currentdata;
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     UD.writechannelvalue(1,currentdata);
-
-//     qDebug() << QString::number(ModBus::UniqueIDAddress);
-
+    //qDebug() << QString::number(ModBus::UniqueIDAddress);
     if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
     {
         ch1.LowState1Setted = false;
