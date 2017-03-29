@@ -382,19 +382,19 @@ void Options::customizeUI()
     {
         //this is a template
         /*("QSpinBox { border: 2px solid red; border-radius: 5px; background-color: yellow; }"
-                               "QSpinBox::up-arrow { border-left: 17px solid none;"
-                               "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
-                               "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-                               "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+           "QSpinBox::up-arrow { border-left: 17px solid none;"
+           "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+           "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
+           "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+           "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+           "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
 
-                               "QSpinBox::down-arrow { border-left: 17px solid none;"
-                               "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
-                               "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-                               "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-                               "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+           "QSpinBox::down-arrow { border-left: 17px solid none;"
+           "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+           "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
+           "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+           "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+           "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
             );*/
     }
 
@@ -679,24 +679,14 @@ void Options::on_pushButton_3_clicked()
     QString stringtofind = "Option	\"Calibration\"";
     QString stringtofind2 = "Option	\"SwapAxes\"";
 
-    //    QString theouttemp = "Calibrating EVDEV driver for \"HID 1aad:0001\" id=7 current calibration values (from XInput): min_x=3383, max_x=3962 and min_y=234, max_y=599 Doing dynamic recalibration: Setting calibration data: 3388, 3964, 242, 599 --> Making the calibration permanent <--          copy the snippet below into '/etc/X11/xorg.conf.d/99-calibration.conf' (/usr/share/X11/xorg.conf.d/ in some distro's)
-    //            Section \"InputClass\"
-    //            Identifier	\"calibration\"
-    //            MatchProduct	\"HID 1aad:0001\"
-    //            Option	\"Calibration\"	\"3388 3964 242 599\"
-    //            Option	\"SwapAxes\"	\"0\"
-    //            EndSection";
-
     process1.waitForFinished();
 
     QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
 
-    //    ui->textEdit->setText( "and the output is " + output);
-
     if (output.indexOf(stringtofind)>=0)
     {
-        //        ui->textEdit->setText(Options::calibrationprm);
-        //        QString a = Options::calibrationprm;
+        //ui->textEdit->setText(Options::calibrationprm);
+        //QString a = Options::calibrationprm;
         QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
         pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
         pice = pice.simplified();
@@ -707,8 +697,10 @@ void Options::on_pushButton_3_clicked()
 
 void Options::on_tabWidget_2_tabBarClicked(int index)
 {
-    //    QWidget *newTab = new QWidget(ui->tabWidget_2);
-    //    ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
+        //QWidget *newTab = new QWidget(ui->tabWidget_2);
+        //ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
+    qDebug() << "Clicked";
+
 }
 
 void Options::on_pushButton_4_clicked()

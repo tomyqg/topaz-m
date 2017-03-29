@@ -95,6 +95,17 @@ QString ChannelOptions::GetChannelName()
     return this->channelname;
 }
 
+QString ChannelOptions::GetMathEquation()
+{
+    return this->mathequation;
+}
+
+
+void ChannelOptions::SetMathEquation(QString newmathstring)
+{
+    this->mathequation = newmathstring;
+}
+
 void ChannelOptions::SetChannelName(QString newname)
 {
     this->channelname = newname;

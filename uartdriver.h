@@ -25,6 +25,7 @@ protected:
 
 public:
     static double channelinputbuffer[4];
+    void SetRTSPinDirection();
 };
 
 class ModBus:UartDriver
@@ -37,14 +38,14 @@ public slots:
     quint16 crc16_modbus(const QByteArray &array);
 
 public:
-    QByteArray ModBusMakeRequest2(
+    QByteArray ModBusMakeRequest(
             char DeviceAdress,
             char Function,
             uint16_t Address,
             uint16_t Lenght
             );
 
-    QByteArray ModBusMakeRequest2(
+    QByteArray ModBusMakeRequest(
             char DeviceAdress,
             char Function,
             uint16_t Address,
@@ -52,7 +53,7 @@ public:
             uint16_t Lenght
             );
 
-    float ModBus::ModBusGetValue(
+    float ModBusGetValue(
             char DeviceAdress,
             char Function,
             uint16_t Address,
@@ -66,7 +67,6 @@ public:
 public:
 //    int G00Bias = 0;
     enum DeviceAdress {
-
 
         MainDeviceAddress = 0x01 ,
         UniversalChannel1 = 0x01 ,

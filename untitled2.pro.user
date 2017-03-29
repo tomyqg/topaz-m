@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-27T16:29:09. -->
+<!-- Written by QtCreator 4.1.0, 2017-03-29T09:00:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -309,8 +309,8 @@
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.7.2</value>
@@ -321,8 +321,8 @@
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
        <value type="QString">/usr</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
-       <value type="QString">/usr/untitled2</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
+       <value type="QString">/usr/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -331,10 +331,10 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-03-23T11:15:51</value>
+       <value type="QDateTime">2017-03-28T11:18:20</value>
        <value type="QDateTime">2017-03-09T11:21:34</value>
-       <value type="QDateTime">2017-02-13T15:33:46</value>
        <value type="QDateTime">2017-02-27T15:00:40</value>
+       <value type="QDateTime">2017-02-13T15:33:46</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>

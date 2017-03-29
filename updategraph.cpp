@@ -21,8 +21,6 @@ QVector<double> yy4;
 void MainWindow::updategraph()
 {
     UartDriver UD;
-
-    double argument = ui->dial->value();
     xx1.append(b);
     yy1.append(UD.channelinputbuffer[0]);
     yy2.append(UD.channelinputbuffer[1]);
@@ -123,8 +121,8 @@ void MainWindow::UpdateDataChannel2()
     ModBus modbus;
     mathresolver mathres;
 
-    double currentdata ;
-    double pressure ;
+    double currentdata;
+    double pressure;
     currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
     pressure = mathres.Solve("x/2", currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
     UD.writechannelvalue(2,pressure);
@@ -153,10 +151,18 @@ void MainWindow::UpdateDataChannel2()
 
 void MainWindow::UpdateDataChannel3()
 {
-    double fakedata = ui->dial->value() + 30;
     UartDriver UD;
-    UD.writechannelvalue(3,fakedata);
-    double currentdata = fakedata;
+    ModBus modbus;
+    mathresolver mathres;
+
+    double currentdata;
+    double pressure;
+    currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
+    currentdata = mathres.Solve("x/3", currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+
+    UD.writechannelvalue(3,currentdata);
+
+//    double currentdata = fakedata;
 
     if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
     {
@@ -182,10 +188,16 @@ void MainWindow::UpdateDataChannel3()
 
 void MainWindow::UpdateDataChannel4()
 {
-    double fakedata = ui->dial->value() + 40;
     UartDriver UD;
-    UD.writechannelvalue(4,fakedata);
-    double currentdata = fakedata;
+    ModBus modbus;
+    mathresolver mathres;
+
+    double currentdata;
+    double pressure;
+    currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
+    currentdata = mathres.Solve("x/6", currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+
+    UD.writechannelvalue(4,currentdata);
 
     if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
     {

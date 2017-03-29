@@ -5,7 +5,6 @@
 #include "dialog.h"
 #include "channel1.h"
 #include "uartdriver.h"
-
 #include <QFile>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
@@ -83,7 +82,6 @@ void UartDriver::writechannelvalue(int channel, double value)
     this->channelinputbuffer[channel-1] = value;
 }
 
-
 QByteArray UartDriver::ReadAllUartByteData()
 {
     QSerialPort serial;
@@ -120,7 +118,6 @@ QString UartDriver::ReadAllUartStringData()
         while (serial.waitForReadyRead(10))
             bytedata.append( serial.readAll() );
     }
-
     QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
     return DataAsString;
 }
@@ -148,13 +145,7 @@ void UartDriver::delay(int n)
 
 void UartDriver::SetRTS(bool newstate)
 {
-
 #ifdef BeagleBone
-    QFile filedir("/sys/class/gpio/gpio66/direction");
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-    outdir << "out";
-    filedir.close();
     QFile file("/sys/class/gpio/gpio66/value");
     QTextStream out(&file);
     file.open(QIODevice::WriteOnly);
@@ -163,13 +154,24 @@ void UartDriver::SetRTS(bool newstate)
 #endif
 }
 
+void  UartDriver::SetRTSPinDirection()
+{
+
+#ifdef BeagleBone
+    QFile filedir("/sys/class/gpio/gpio66/direction");
+    filedir.open(QIODevice::WriteOnly);
+    QTextStream outdir(&filedir);
+    outdir << "out";
+    filedir.close();
+#endif
+}
 
 double ModBus::ReadTemperature(char channel)
 {
     QByteArray arr;
     QByteArray RequestRespose;
     float val;
-    RequestRespose = ModBusMakeRequest2(channel,
+    RequestRespose = ModBusMakeRequest(channel,
                                         ModBus::ReadInputRegisters,
                                         ModBus::TemperetureAdress,
                                         ModBus::TemperetureRegLenght
@@ -233,7 +235,6 @@ float ModBus::ModBusGetValue(char DeviceAdress,
     if (inpcrc == crc)
     {
         QByteArray arr;
-        QByteArray RequestRespose;
         float val;
 
         arr.resize(4);
@@ -243,7 +244,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,
         arr[3] = InputDataByteArray.at(4);
         //convert hex to double
         QDataStream stream(arr);
-        stream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
         stream >> val;
         return val;
     }
@@ -255,12 +256,11 @@ float ModBus::ModBusGetValue(char DeviceAdress,
     return 0;
 }
 
-QByteArray ModBus::ModBusMakeRequest2(
-        char DeviceAdress,
-        char Function,
-        uint16_t Address,
-        uint16_t Lenght
-        )
+QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
+                                     char Function,
+                                     uint16_t Address,
+                                     uint16_t Lenght
+                                     )
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -298,27 +298,24 @@ QByteArray ModBus::ModBusMakeRequest2(
 
     if (inpcrc == crc)
     {
-        // qDebug() << "CRC GOOD";
-        return InputDataByteArray;
+        return InputDataByteArray;// qDebug() << "CRC GOOD";
     }
     else
     {
-        // qDebug() << "CRC BAD";
-        return 0;
+        return 0;// qDebug() << "CRC BAD";
     }
     return 0;
 }
 
-QByteArray ModBus::ModBusMakeRequest2(char DeviceAdress,
-                                      char Function,
-                                      uint16_t Address,
-                                      uint16_t AddressBias,
-                                      uint16_t Lenght
-                                      )
+QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
+                                     char Function,
+                                     uint16_t Address,
+                                     uint16_t AddressBias,
+                                     uint16_t Lenght
+                                     )
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
-
     char AddressHi,AddressLo,LenghtHi,LenghtLo,CRC16Hi,CRC16Lo;
 
     AddressHi = (int) (((Address + AddressBias) & 0xFF00)>>8);
@@ -390,7 +387,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-2,2);
         uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-        uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+        uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo);
 
         ModBus modb;
         uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRC);
