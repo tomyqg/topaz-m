@@ -740,3 +740,14 @@ void Options::on_pushButton_5_clicked()
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
 }
+
+void Options::on_horizontalScrollBar_sliderReleased()
+{
+    if (ui->horizontalScrollBar->value() == ui->horizontalScrollBar->maximum())
+    {
+        ui->math_text_ch_1->setEnabled(1);
+        ui->math_text_ch_2->setEnabled(1);
+        ui->math_text_ch_3->setEnabled(1);
+        ui->math_text_ch_4->setEnabled(1);
+    }
+}

@@ -45,7 +45,6 @@ void MainWindow::updategraph()
 
 void MainWindow::updatepicture()
 {
-    QByteArray arr;
     QPen graphPen;
     ui->customPlot->clearGraphs();
     
@@ -77,11 +76,11 @@ void MainWindow::updatepicture()
         ui->customPlot->graph()->setPen(graphPen);
     }
     
-    ui->customPlot->xAxis->setAutoTickStep(false);
-    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
-    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
-    ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");// dd.MM.yyyy
+//    ui->customPlot->xAxis->setAutoTickStep(false);
+//    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
+//    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+//    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
+//    ui->customPlot->xAxis->setDateTimeForma("hh:mm:ss");// dd.MM.yyyy
     ui->customPlot->replot();
 }
 

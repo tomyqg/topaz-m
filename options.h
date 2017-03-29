@@ -56,6 +56,8 @@ private slots:
 
     QString GetSignalUnits();
 
+    void on_horizontalScrollBar_sliderReleased();
+
 private:
 
     static double maxmessageslimit;

@@ -172,10 +172,10 @@ double ModBus::ReadTemperature(char channel)
     QByteArray RequestRespose;
     float val;
     RequestRespose = ModBusMakeRequest(channel,
-                                        ModBus::ReadInputRegisters,
-                                        ModBus::TemperetureAdress,
-                                        ModBus::TemperetureRegLenght
-                                        );
+                                       ModBus::ReadInputRegisters,
+                                       ModBus::TemperetureAdress,
+                                       ModBus::TemperetureRegLenght
+                                       );
     arr.resize(4);
     arr[0] = RequestRespose.at(5);
     arr[1] = RequestRespose.at(6);
@@ -190,7 +190,7 @@ double ModBus::ReadTemperature(char channel)
 
 double ModBus::ReadVoltage(char channel)
 {
-   return DataChannelRead(ModBus::UniversalChannel1);
+    return DataChannelRead(ModBus::UniversalChannel1);
 }
 
 float ModBus::ModBusGetValue(char DeviceAdress,

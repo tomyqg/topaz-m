@@ -5,8 +5,7 @@
 
 bool Options::eventFilter(QObject *object, QEvent *event)
 {
-//    if(event->type() == event->MouseButtonDblClick)
-    if(event->type() == event->MouseButtonRelease)
+    if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") )
     {
         Options::olderprop = object->property("text").toString();
         keyboard kb;
