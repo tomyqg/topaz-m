@@ -39,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
-
     Initialization();
 }
 
@@ -187,7 +186,6 @@ void MainWindow::Initialization()
     UD->SetRTSPinDirection();
 
     UD->moveToThread(thread);
-
 
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);

@@ -95,15 +95,14 @@ QString ChannelOptions::GetChannelName()
     return this->channelname;
 }
 
-QString ChannelOptions::GetMathEquation()
+QString ChannelOptions::GetMathString()
 {
-    return this->mathequation;
+    return this->mathequationstring;
 }
-
 
 void ChannelOptions::SetMathEquation(QString newmathstring)
 {
-    this->mathequation = newmathstring;
+    this->mathequationstring = newmathstring;
 }
 
 void ChannelOptions::SetChannelName(QString newname)
@@ -141,6 +140,11 @@ void ChannelOptions::SetState2Value(double value)
     this->state2value = value;
 }
 
+void ChannelOptions::SetMathematical(bool newstate)
+{
+    this->MathematicalState = newstate;
+}
+
 double ChannelOptions::GetState1Value()
 {
     return this->state1value;
@@ -169,6 +173,11 @@ bool ChannelOptions::IsHighState2Setted()
 bool ChannelOptions::IsLowState2Setted()
 {
     return this->LowState2Setted;
+}
+
+bool ChannelOptions::IsMathematical()
+{
+    return this->MathematicalState;
 }
 
 ChannelOptions::ChannelOptions()

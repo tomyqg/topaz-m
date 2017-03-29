@@ -39,43 +39,26 @@ public slots:
 private slots:
 
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
-
     void Channel1TypeChange();
-
     void Channel2TypeChange();
-
     void Channel3TypeChange();
-
     void Channel4TypeChange();
-
     void applynewsettings();
-
     void applysettingstoUI();
-
     void customizeUI();
-
     void readoptionsfromfile();
-
     void readsystemoptionsfromfile();
+    void on_UnitsChannel_1_editingFinished();
+    void on_pushButton_3_clicked();
+    void on_pushButton_4_clicked();
+    void on_pushButton_5_clicked();
 
     QString GetSignalUnits();
-
-    void on_UnitsChannel_1_editingFinished();
-
-    void on_pushButton_3_clicked();
-
-    void on_tabWidget_2_tabBarClicked(int index);
-
-    void on_pushButton_4_clicked();
-
-    void on_pushButton_5_clicked();
 
 private:
 
     static double maxmessageslimit;
-
 
     Ui::Options *ui;
 };

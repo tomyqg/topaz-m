@@ -26,7 +26,7 @@ public:
     QString GetState2HighMessage();
     QString GetState2LowMessage();
     QString GetChannelName();
-    QString GetMathEquation();
+    QString GetMathString();
 
     void readoptionsfromfile(int channel);
 
@@ -45,15 +45,19 @@ public:
     void SetState2HighMessage(QString newmessage);
     void SetState2LowMessage(QString newmessage);
     void SetMathEquation(QString newmathstring);
+    void SetMathematical(bool newstate);
 
     bool IsHighState1Setted();
     bool IsLowState1Setted();
     bool IsHighState2Setted();
     bool IsLowState2Setted();
+    bool IsMathematical();
+
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;
     bool LowState2Setted ;
+    bool MathematicalState;
 
     // приватные переменные настроек канала
 
@@ -74,6 +78,6 @@ private:
     QString state2highmessage;
     QString state2lowmessage;
     QString channelname;
-    QString mathequation;
+    QString mathequationstring;
 };
 #endif // CHANNEL1_H

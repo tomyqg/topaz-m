@@ -43,6 +43,8 @@ void Options::readoptionsfromfile()
     options1.SetState1Value(ch1.value("State1Value").toDouble());
     options1.SetState2Value(ch1.value("State2Value").toDouble());
     options1.SetChannelName(ch1.value("Name").toString());
+    options1.SetMathEquation(ch1.value("MathString").toString());
+    options1.SetMathematical(ch1.value("MathWork").toBool());
 
     QJsonObject ch2 = array.at(1).toObject();
     options2.SetHigherLimit(ch2.value("HigherLimit").toDouble());
@@ -59,6 +61,8 @@ void Options::readoptionsfromfile()
     options2.SetState1Value(ch2.value("State1Value").toDouble());
     options2.SetState2Value(ch2.value("State2Value").toDouble());
     options2.SetChannelName(ch2.value("Name").toString());
+    options2.SetMathEquation(ch2.value("MathString").toString());
+    options2.SetMathematical(ch2.value("MathWork").toBool());
 
     QJsonObject ch3 = array.at(2).toObject();
     options3.SetHigherLimit(ch3.value("HigherLimit").toDouble());
@@ -75,6 +79,8 @@ void Options::readoptionsfromfile()
     options3.SetState1Value(ch3.value("State1Value").toDouble());
     options3.SetState2Value(ch3.value("State2Value").toDouble());
     options3.SetChannelName(ch3.value("Name").toString());
+    options3.SetMathEquation(ch3.value("MathString").toString());
+    options3.SetMathematical(ch3.value("MathWork").toBool());
 
     QJsonObject ch4 = array.at(3).toObject();
     options4.SetHigherLimit(ch4.value("HigherLimit").toDouble());
@@ -91,6 +97,8 @@ void Options::readoptionsfromfile()
     options4.SetState1Value(ch4.value("State1Value").toDouble());
     options4.SetState2Value(ch4.value("State2Value").toDouble());
     options4.SetChannelName(ch4.value("Name").toString());
+    options4.SetMathEquation(ch4.value("MathString").toString());
+    options4.SetMathematical(ch4.value("MathWork").toBool());
     infile.close();
 }
 
@@ -134,6 +142,8 @@ void ChannelOptions::readoptionsfromfile(int channel)
     this->SetState1Value(ch.value("State1Value").toDouble());
     this->SetState2Value(ch.value("State2Value").toDouble());
     this->SetChannelName(ch.value("Name").toString());
+    this->SetMathematical(ch.value("MathWork").toBool());
+    this->SetMathEquation(ch.value("MathString").toString());
 
     infile.close();
 }

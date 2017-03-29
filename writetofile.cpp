@@ -7,56 +7,35 @@
 #include "dialog.h"
 #include "channel1.h"
 
-extern QVector<double> xx1;
-extern QVector<double> yy1;
-extern QVector<double> yy2;
-extern QVector<double> yy3;
-extern QVector<double> yy4;
+extern QVector<double> xx1,yy1,yy2,yy3,yy4;
 
 extern QString pathtofile ;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
     QFile filedir("/sys/class/gpio/gpio" + QString::number(num) + "/direction");
-
     filedir.open(QIODevice::WriteOnly);
     QTextStream outdir(&filedir);
-
     outdir << "out";
     filedir.close();
-
-    QFile file("/sys/class/gpio/gpio69/value");
-
+    QFile file("/sys/class/gpio/gpio" + QString::number(num) + "/value");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
-
     out << val;
-
     file.close();
 }
 
 void Options::WriteSystemOptionsToFile()
 {
     QJsonObject systemoptions;
-
     QDateTime local(QDateTime::currentDateTime());
-
-    //    systemoptions["Time"] = local.time().toString();
-    //    systemoptions["Date"] = local.date().toString();
-
     systemoptions["Time"] = ui->timeEdit->time().toString();
     systemoptions["Date"] = ui->dateEdit->date().toString();
-
     systemoptions["Calibration"] = Options::calibrationprm;
-
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-
     QFile file(pathtofile + "systemoptions.txt");
-
     file.open(QIODevice::ReadWrite);
-
     file.resize(0); // clear file
-
     QTextStream out(&file);
     out << setstr;
     file.close();
@@ -64,11 +43,7 @@ void Options::WriteSystemOptionsToFile()
 
 void Options::WriteOptionsToFile()
 {
-    QJsonObject channel1;
-    QJsonObject channel2;
-    QJsonObject channel3;
-    QJsonObject channel4;
-    QJsonObject channels;
+    QJsonObject channel1,channel2,channel3,channel4,channels;
     QJsonArray settings;
 
     channel1["Type"] = options1.GetSignalType();
@@ -85,7 +60,8 @@ void Options::WriteOptionsToFile()
     channel1["State2LowMessage"] = options1.GetState2LowMessage();
     channel1["State1Value"] = options1.GetState1Value();
     channel1["State2Value"] = options1.GetState2Value();
-
+    channel1["MathString"] = options1.GetMathString();
+    channel1["MathWork"] = options1.IsMathematical();
 
     settings.append(channel1);
 
@@ -103,6 +79,8 @@ void Options::WriteOptionsToFile()
     channel2["State2LowMessage"] = options2.GetState2LowMessage();
     channel2["State1Value"] = options2.GetState1Value();
     channel2["State2Value"] = options2.GetState2Value();
+    channel2["MathString"] = options2.GetMathString();
+    channel2["MathWork"] = options2.IsMathematical();
 
     settings.append(channel2);
 
@@ -120,6 +98,8 @@ void Options::WriteOptionsToFile()
     channel3["State2LowMessage"] = options3.GetState2LowMessage();
     channel3["State1Value"] = options3.GetState1Value();
     channel3["State2Value"] = options3.GetState2Value();
+    channel3["MathString"] = options3.GetMathString();
+    channel3["MathWork"] = options3.IsMathematical();
 
     settings.append(channel3);
 
@@ -137,6 +117,8 @@ void Options::WriteOptionsToFile()
     channel4["State2LowMessage"] = options4.GetState2LowMessage();
     channel4["State1Value"] = options4.GetState1Value();
     channel4["State2Value"] = options4.GetState2Value();
+    channel4["MathString"] = options4.GetMathString();
+    channel4["MathWork"] = options4.IsMathematical();
 
     settings.append(channel4);
 
@@ -251,5 +233,5 @@ void MainWindow::WriteArchiveToFile()
     QTextStream out(&file);
     out << setstr;
     file.close();
-//    qDebug() << "writearchive";
+    //    qDebug() << "writearchive";
 }

@@ -316,6 +316,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
+
     char AddressHi,AddressLo,LenghtHi,LenghtLo,CRC16Hi,CRC16Lo;
 
     AddressHi = (int) (((Address + AddressBias) & 0xFF00)>>8);

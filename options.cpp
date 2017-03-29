@@ -299,6 +299,8 @@ void Options::applynewsettings()
     options1.SetState1Value(ui->State1ValueChannel_1->value());
     options1.SetState2Value(ui->State2ValueChannel_1->value());
     options1.SetChannelName(ui->Name_Channel_1->text());
+    options1.SetMathEquation(ui->math_text_ch_1->text());
+    options1.SetMathematical(ui->checkBox->isChecked());
 
     options2.SetUnitsName(ui->UnitsChannel_2->text());
     options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
@@ -313,6 +315,8 @@ void Options::applynewsettings()
     options2.SetState1Value(ui->State1ValueChannel_2->value());
     options2.SetState2Value(ui->State2ValueChannel_2->value());
     options2.SetChannelName(ui->Name_Channel_2->text());
+    options2.SetMathEquation(ui->math_text_ch_2->text());
+    options2.SetMathematical(ui->checkBox_2->isChecked());
 
     options3.SetUnitsName(ui->UnitsChannel_3->text());
     options3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
@@ -327,6 +331,8 @@ void Options::applynewsettings()
     options3.SetState1Value(ui->State1ValueChannel_3->value());
     options3.SetState2Value(ui->State2ValueChannel_3->value());
     options3.SetChannelName(ui->Name_Channel_3->text());
+    options3.SetMathEquation(ui->math_text_ch_3->text());
+    options3.SetMathematical(ui->checkBox_3->isChecked());
 
     options4.SetUnitsName(ui->UnitsChannel_4->text());
     options4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
@@ -341,6 +347,8 @@ void Options::applynewsettings()
     options4.SetState1Value(ui->State1ValueChannel_4->value());
     options4.SetState2Value(ui->State2ValueChannel_4->value());
     options4.SetChannelName(ui->Name_Channel_4->text());
+    options4.SetMathEquation(ui->math_text_ch_4->text());
+    options4.SetMathematical(ui->checkBox_4->isChecked());
 
     setmaxmessageslimit(ui->spinBox->value());
 }
@@ -621,6 +629,8 @@ void Options::applysettingstoUI()
     ui->State2HighMessageChannel_1->setText(options1.GetState2HighMessage());
     ui->State2LowMessageChannel_1->setText(options1.GetState2LowMessage());
     ui->Name_Channel_1->setText(options1.GetChannelName());
+    ui->math_text_ch_1->setText(options1.GetMathString());
+    ui->checkBox->setChecked(options1.IsMathematical());
 
     ui->UnitsChannel_2->setText(options2.GetUnitsName());
     ui->VerhnPredelChannel_2->setValue(options2.GetHigherLimit());
@@ -635,6 +645,8 @@ void Options::applysettingstoUI()
     ui->State2HighMessageChannel_2->setText(options2.GetState2HighMessage());
     ui->State2LowMessageChannel_2->setText(options2.GetState2LowMessage());
     ui->Name_Channel_2->setText(options2.GetChannelName());
+    ui->math_text_ch_2->setText(options2.GetMathString());
+    ui->checkBox_2->setChecked(options2.IsMathematical());
 
     ui->UnitsChannel_3->setText(options3.GetUnitsName());
     ui->VerhnPredelChannel_3->setValue(options3.GetHigherLimit());
@@ -649,6 +661,8 @@ void Options::applysettingstoUI()
     ui->State2HighMessageChannel_3->setText(options3.GetState2HighMessage());
     ui->State2LowMessageChannel_3->setText(options3.GetState2LowMessage());
     ui->Name_Channel_3->setText(options3.GetChannelName());
+    ui->math_text_ch_3->setText(options3.GetMathString());
+    ui->checkBox_3->setChecked(options3.IsMathematical());
 
     ui->UnitsChannel_4->setText(options4.GetUnitsName());
     ui->VerhnPredelChannel_4->setValue(options4.GetHigherLimit());
@@ -663,6 +677,8 @@ void Options::applysettingstoUI()
     ui->State2HighMessageChannel_4->setText(options4.GetState2HighMessage());
     ui->State2LowMessageChannel_4->setText(options4.GetState2LowMessage());
     ui->Name_Channel_4->setText(options4.GetChannelName());
+    ui->math_text_ch_4->setText(options4.GetMathString());
+    ui->checkBox_4->setChecked(options4.IsMathematical());
 }
 
 void Options::on_UnitsChannel_1_editingFinished()
@@ -693,14 +709,6 @@ void Options::on_pushButton_3_clicked()
         pice = pice.remove(0, stringtofind.length() );
         Options::calibrationprm = pice.remove('\"');
     }
-}
-
-void Options::on_tabWidget_2_tabBarClicked(int index)
-{
-        //QWidget *newTab = new QWidget(ui->tabWidget_2);
-        //ui->tabWidget_2->addTab(newTab, tr("NewChannel"));
-    qDebug() << "Clicked";
-
 }
 
 void Options::on_pushButton_4_clicked()
