@@ -176,9 +176,9 @@ void MainWindow::Initialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
 
-    tmr->start(10);// этот таймер тоже отвечает за обновление графика
+    tmr->start(20);// этот таймер тоже отвечает за обновление графика
     timer->start(1111);
-    timer2->start(10); // этот таймер отвечает за обновление графика
+    timer2->start(20); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
     QThread *thread= new QThread();

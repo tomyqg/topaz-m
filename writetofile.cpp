@@ -187,14 +187,14 @@ void MainWindow::WriteArchiveToFile()
     QJsonArray valuesarray4;
 
     for(int y=0; y<yy1.size(); y++)
-        valuesarray1.append(yy1.at(y)*1.11);
+        valuesarray1.append(yy1.at(y));
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
     archivechannel1["name"] = "channel_1";
 
     for(int y=0; y<yy2.size(); y++)
-        valuesarray2.append(yy2.at(y)*1.22);
+        valuesarray2.append(yy2.at(y));
 
     archivechannel2["size"] = valuesarray2.size();
     archivechannel2["values"] = valuesarray2;
