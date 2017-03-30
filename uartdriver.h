@@ -31,7 +31,7 @@ public:
     void SetRTSPinDirection();
 };
 
-class ModBus:UartDriver
+class ModBus: public UartDriver
 {
     Q_OBJECT
 
@@ -39,7 +39,7 @@ public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
     quint16 crc16_modbus(const QByteArray &array);
-    void ModBus::ReadAllChannelsThread();
+    void ReadAllChannelsThread();
 
 public:
     QByteArray ModBusMakeRequest(

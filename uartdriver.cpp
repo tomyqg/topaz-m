@@ -436,6 +436,6 @@ void ModBus::ReadAllChannelsThread ()
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
             UD.writechannelvalue(1,currentdata);
-            Sleep(300);
+            Sleep(100);
     }
 }

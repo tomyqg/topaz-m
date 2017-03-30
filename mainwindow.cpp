@@ -183,9 +183,15 @@ void MainWindow::Initialization()
 
     QThread *thread= new QThread();
     UartDriver *UD = new UartDriver();
+    ModBus *MB = new ModBus();
+
     UD->SetRTSPinDirection();
 
-    UD->moveToThread(thread);
+//    UD->moveToThread(thread);
+
+    MB->moveToThread(thread);
+
+    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
 
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);
