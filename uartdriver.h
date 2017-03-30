@@ -25,6 +25,9 @@ protected:
 
 public:
     static double channelinputbuffer[4];
+
+    static bool needtoupdatechannel[4];
+
     void SetRTSPinDirection();
 };
 
@@ -36,6 +39,7 @@ public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
     quint16 crc16_modbus(const QByteArray &array);
+    void ModBus::ReadAllChannelsThread();
 
 public:
     QByteArray ModBusMakeRequest(

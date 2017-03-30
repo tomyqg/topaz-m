@@ -49,6 +49,8 @@ public slots:
     void UpdateDataChannel3();
     void UpdateDataChannel4();
 
+    void UpdateDataChannel111();
+
 private slots:
 
     void on_dial_sliderMoved(int position);

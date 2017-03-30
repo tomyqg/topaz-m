@@ -27,6 +27,7 @@ extern QString inputstr;
 
 double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
+bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
 quint16 ModBus::crc16_modbus(const QByteArray &array)
 {
@@ -415,4 +416,26 @@ double ModBus::DataChannelRead (char channel)
                           ModBus::DataChannel1,
                           ModBus::DataChannelLenght
                           );
+}
+
+void ModBus::ReadAllChannelsThread ()
+{
+
+    UartDriver UD;
+    ModBus modbus;
+//    mathresolver mathres;
+    double currentdata;
+
+    while (1)
+    {
+        //    UD.needtoupdatechannel[0] = 1;
+
+        currentdata = DataChannelRead(ModBus::UniversalChannel1);
+//        if (ch1.IsMathematical())
+            //    {
+            //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            //    }
+            UD.writechannelvalue(1,currentdata);
+            Sleep(300);
+    }
 }

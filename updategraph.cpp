@@ -93,6 +93,8 @@ void MainWindow::UpdateDataChannel1()
     mathresolver mathres;
     double currentdata;
 
+    UD.needtoupdatechannel[0] = 1;
+
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (ch1.IsMathematical())
     {
@@ -109,7 +111,7 @@ void MainWindow::UpdateDataChannel1()
         ch1.HighState1Setted = true;
         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
     }
-    
+
     if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
     {
         ch1.LowState1Setted = true;
@@ -118,7 +120,46 @@ void MainWindow::UpdateDataChannel1()
         ch1.HighState1Setted = false;
         mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
     }
-    
+
+    int period = ch1.GetMeasurePeriod()*1000;
+    channeltimer1->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel111()
+{
+    UartDriver UD;
+    ModBus modbus;
+    mathresolver mathres;
+    double currentdata;
+
+    UD.needtoupdatechannel[0] = 1;
+
+    currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
+    if (ch1.IsMathematical())
+    {
+        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+    }
+    UD.writechannelvalue(1,currentdata);
+
+    //qDebug() << QString::number(ModBus::UniqueIDAddress);
+    if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
+    {
+        ch1.LowState1Setted = false;
+        ui->listWidget->addItem(ch1.GetState1HighMessage());
+        ui->listWidget->scrollToBottom();
+        ch1.HighState1Setted = true;
+        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
+    }
+
+    if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
+    {
+        ch1.LowState1Setted = true;
+        ui->listWidget->addItem(ch1.GetState1LowMessage());
+        ui->listWidget->scrollToBottom();
+        ch1.HighState1Setted = false;
+        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
+    }
+
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
 }
