@@ -202,7 +202,10 @@ void MainWindow::Initialization()
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
 
-//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
 //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
 //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));

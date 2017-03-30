@@ -50,6 +50,9 @@ public slots:
     void UpdateDataChannel4();
 
     void UpdateDataChannel111();
+    void UpdateDataChannel222();
+    void UpdateDataChannel333();
+    void UpdateDataChannel444();
 
 private slots:
 

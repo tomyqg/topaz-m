@@ -127,41 +127,30 @@ void MainWindow::UpdateDataChannel1()
 
 void MainWindow::UpdateDataChannel111()
 {
-    UartDriver UD;
-    ModBus modbus;
-    mathresolver mathres;
-    double currentdata;
-
-    UD.needtoupdatechannel[0] = 1;
-
-    currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (ch1.IsMathematical())
-    {
-        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
-    }
-    UD.writechannelvalue(1,currentdata);
-
-    //qDebug() << QString::number(ModBus::UniqueIDAddress);
-    if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
-    {
-        ch1.LowState1Setted = false;
-        ui->listWidget->addItem(ch1.GetState1HighMessage());
-        ui->listWidget->scrollToBottom();
-        ch1.HighState1Setted = true;
-        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
-    }
-
-    if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
-    {
-        ch1.LowState1Setted = true;
-        ui->listWidget->addItem(ch1.GetState1LowMessage());
-        ui->listWidget->scrollToBottom();
-        ch1.HighState1Setted = false;
-        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
-    }
-
+    UartDriver::needtoupdatechannel[0] = 1;
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel222()
+{
+    UartDriver::needtoupdatechannel[1] = 1;
+    int period = ch2.GetMeasurePeriod()*1000;
+    channeltimer2->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel333()
+{
+    UartDriver::needtoupdatechannel[2] = 1;
+    int period = ch3.GetMeasurePeriod()*1000;
+    channeltimer3->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel444()
+{
+    UartDriver::needtoupdatechannel[3] = 1;
+    int period = ch4.GetMeasurePeriod()*1000;
+    channeltimer4->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel2()
