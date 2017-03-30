@@ -135,14 +135,14 @@ void MainWindow::on_radioButton_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-    //    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
 }
 
 void MainWindow::on_radioButton_2_clicked()
 {
     QProcess process;
     process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
-    //    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
 
 void MainWindow::Initialization()
@@ -176,9 +176,9 @@ void MainWindow::Initialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
 
-    tmr->start(100);
+    tmr->start(10);// этот таймер тоже отвечает за обновление графика
     timer->start(1111);
-    timer2->start(201);
+    timer2->start(10); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
     QThread *thread= new QThread();
@@ -210,7 +210,7 @@ void MainWindow::Initialization()
 
     QProcess process;
 
-    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
+    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     process.startDetached("config-pin P9.24 uart");

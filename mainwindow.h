@@ -19,6 +19,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QPen graphPen;
+
     static QString startdate;
     static QString endtime;
     static QString starttime;

@@ -9,7 +9,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-//#define BeagleBone
+#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -220,8 +220,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
-
-    InputDataByteArray  = UartWriteData(requestdata);
+    InputDataByteArray  = UartWriteData(requestdata); // make request and recieve response
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
@@ -250,7 +249,6 @@ float ModBus::ModBusGetValue(char DeviceAdress,
     }
     else
     {
-        // qDebug() << "CRC BAD";
         return 0;
     }
     return 0;

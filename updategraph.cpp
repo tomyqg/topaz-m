@@ -7,16 +7,16 @@
 #include "mathresolver.h"
 
 int a=0;int b=0;
-int color1rgb[]={153, 0, 153}; //фиолетовый темный
-int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color1rgb[]={219, 37, 37};
+int color2rgb[]={43, 37, 219};
+int color3rgb[]={37, 219, 49};
+int color4rgb[]={59, 30, 7};
 
-QVector<double> xx1;
-QVector<double> yy1;
-QVector<double> yy2;
-QVector<double> yy3;
-QVector<double> yy4;
+/*int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
+int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};*/
+
+QVector<double> xx1, yy1, yy2, yy3, yy4;
 
 void MainWindow::updategraph()
 {
@@ -29,7 +29,14 @@ void MainWindow::updategraph()
     b++;
     
     if (b>=300&&b<900)
-    {ui->customPlot->xAxis->setRange(b-300, b+300);}
+    {
+        ui->customPlot->xAxis->setRange(b-300, b+300);
+//        yy1.remove(0);
+//        yy2.remove(0);
+//        yy3.remove(0);
+//        yy4.remove(0);
+//        xx1.remove(0);
+    }
     
     if (b==1200)
     {
@@ -45,13 +52,11 @@ void MainWindow::updategraph()
 
 void MainWindow::updatepicture()
 {
-    QPen graphPen;
     ui->customPlot->clearGraphs();
-    
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
-    graphPen.setWidth(2);
+    graphPen.setWidth(4);
     graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
     
     ui->customPlot->graph()->setPen(graphPen);
@@ -59,28 +64,25 @@ void MainWindow::updatepicture()
     
     {ui->customPlot->graph()->setData(xx1, yy2);
         graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
-        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
     
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy3);
         graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
-        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);}
     
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(xx1, yy4);
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
-        graphPen.setWidth(2);
         ui->customPlot->graph()->setPen(graphPen);
     }
     
-//    ui->customPlot->xAxis->setAutoTickStep(false);
-//    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
-//    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-//    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
-//    ui->customPlot->xAxis->setDateTimeForma("hh:mm:ss");// dd.MM.yyyy
+    //    ui->customPlot->xAxis->setAutoTickStep(false);
+    //    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
+    //    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+    //    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
+    //    ui->customPlot->xAxis->setDateTimeForma("hh:mm:ss");// dd.MM.yyyy
     ui->customPlot->replot();
 }
 

@@ -749,5 +749,10 @@ void Options::on_horizontalScrollBar_sliderReleased()
         ui->math_text_ch_2->setEnabled(1);
         ui->math_text_ch_3->setEnabled(1);
         ui->math_text_ch_4->setEnabled(1);
+        ui->checkBox->setEnabled(1);
+        ui->checkBox_3->setEnabled(1);
+        ui->checkBox_4->setEnabled(1);
+        ui->checkBox_2->setEnabled(1);
     }
+    ui->horizontalScrollBar->setValue(0);
 }
