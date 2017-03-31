@@ -29,6 +29,7 @@ public:
     QTimer *channeltimer2;
     QTimer *channeltimer3;
     QTimer *channeltimer4;
+    QThread *thread;
 
 //    UartDriver UD;
     ChannelOptions ch1;

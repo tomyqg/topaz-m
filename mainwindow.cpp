@@ -181,7 +181,7 @@ void MainWindow::Initialization()
     timer2->start(20); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
-    QThread *thread= new QThread();
+    thread= new QThread();
     UartDriver *UD = new UartDriver();
     ModBus *MB = new ModBus();
 
@@ -216,7 +216,6 @@ void MainWindow::Initialization()
     channeltimer3->start(100);
     channeltimer4->start(100);
 
-    thread->start();
 
     QProcess process;
 
@@ -234,4 +233,5 @@ void MainWindow::Initialization()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
+    thread->start();
 }

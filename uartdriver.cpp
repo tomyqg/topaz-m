@@ -423,11 +423,11 @@ void ModBus::ReadAllChannelsThread ()
 
     UartDriver UD;
     ModBus modbus;
-    //    mathresolver mathres;
     double currentdata;
 
     while (1)
     {
+        uartsleep;
 
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
@@ -477,4 +477,6 @@ void ModBus::ReadAllChannelsThread ()
             //            Sleep(100);
         }
     }
+
+//    thread()->deleteLater();
 }

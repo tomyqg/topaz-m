@@ -127,6 +127,8 @@ void MainWindow::UpdateDataChannel1()
 
 void MainWindow::UpdateDataChannel111()
 {
+//    if (thread->)
+    thread->start();
     UartDriver::needtoupdatechannel[0] = 1;
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
@@ -134,6 +136,7 @@ void MainWindow::UpdateDataChannel111()
 
 void MainWindow::UpdateDataChannel222()
 {
+//    thread->start();
     UartDriver::needtoupdatechannel[1] = 1;
     int period = ch2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
@@ -141,6 +144,7 @@ void MainWindow::UpdateDataChannel222()
 
 void MainWindow::UpdateDataChannel333()
 {
+//    thread->start();
     UartDriver::needtoupdatechannel[2] = 1;
     int period = ch3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
@@ -148,6 +152,7 @@ void MainWindow::UpdateDataChannel333()
 
 void MainWindow::UpdateDataChannel444()
 {
+//    thread->start();
     UartDriver::needtoupdatechannel[3] = 1;
     int period = ch4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-30T10:49:53. -->
+<!-- Written by QtCreator 4.1.0, 2017-03-30T16:32:22. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -331,7 +331,7 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-03-30T10:41:54</value>
+       <value type="QDateTime">2017-03-30T16:17:53</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
        <value type="QDateTime">2017-03-09T11:21:34</value>
        <value type="QDateTime">2017-02-27T15:00:40</value>
