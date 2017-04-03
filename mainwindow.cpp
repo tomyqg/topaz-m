@@ -176,9 +176,9 @@ void MainWindow::Initialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
 
-    tmr->start(20);// этот таймер тоже отвечает за обновление графика
+    tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(20); // этот таймер отвечает за обновление графика
+    timer2->start(100); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
     thread= new QThread();
@@ -192,6 +192,7 @@ void MainWindow::Initialization()
     MB->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
+//    connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
 
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);
@@ -216,11 +217,10 @@ void MainWindow::Initialization()
     channeltimer3->start(100);
     channeltimer4->start(100);
 
-
     QProcess process;
 
-    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     process.startDetached("config-pin P9.24 uart");
     process.startDetached("config-pin P9.26 uart");
@@ -233,5 +233,5 @@ void MainWindow::Initialization()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-    thread->start();
+    thread->start(QThread::LowestPriority);
 }

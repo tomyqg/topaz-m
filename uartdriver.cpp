@@ -23,6 +23,14 @@ QString pathtofile = "/usr/";
 QString pathtofile = "C:/Work/";
 #endif
 
+#ifdef BeagleBone
+#define longsleep delay(1000);
+#endif
+
+#ifndef BeagleBone
+#define longsleep Sleep(1000);
+#endif
+
 extern QString inputstr;
 
 double UartDriver::channelinputbuffer[4];
@@ -157,7 +165,6 @@ void UartDriver::SetRTS(bool newstate)
 
 void  UartDriver::SetRTSPinDirection()
 {
-
 #ifdef BeagleBone
     QFile filedir("/sys/class/gpio/gpio66/direction");
     filedir.open(QIODevice::WriteOnly);
@@ -172,11 +179,7 @@ double ModBus::ReadTemperature(char channel)
     QByteArray arr;
     QByteArray RequestRespose;
     float val;
-    RequestRespose = ModBusMakeRequest(channel,
-                                       ModBus::ReadInputRegisters,
-                                       ModBus::TemperetureAdress,
-                                       ModBus::TemperetureRegLenght
-                                       );
+    RequestRespose = ModBusMakeRequest(channel,ModBus::ReadInputRegisters,ModBus::TemperetureAdress,ModBus::TemperetureRegLenght);
     arr.resize(4);
     arr[0] = RequestRespose.at(5);
     arr[1] = RequestRespose.at(6);
@@ -194,10 +197,7 @@ double ModBus::ReadVoltage(char channel)
     return DataChannelRead(ModBus::UniversalChannel1);
 }
 
-float ModBus::ModBusGetValue(char DeviceAdress,
-                             char Function,
-                             uint16_t Address,
-                             uint16_t Lenght)
+float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -225,12 +225,12 @@ float ModBus::ModBusGetValue(char DeviceAdress,
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+    quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
     ModBus modb;
-    uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -255,11 +255,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,
     return 0;
 }
 
-QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
-                                     char Function,
-                                     uint16_t Address,
-                                     uint16_t Lenght
-                                     )
+QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -288,12 +284,11 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+    quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
-    ModBus modb;
-    uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 crc = crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -306,12 +301,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
     return 0;
 }
 
-QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
-                                     char Function,
-                                     uint16_t Address,
-                                     uint16_t AddressBias,
-                                     uint16_t Lenght
-                                     )
+QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t AddressBias,uint16_t Lenght)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -339,12 +329,10 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-
-    ModBus modb;
-    uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
+    quint16  inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
+    quint16  crc = crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -411,11 +399,7 @@ double ModBus::DataChannel1Read()
 
 double ModBus::DataChannelRead (char channel)
 {
-    return ModBusGetValue(channel,
-                          ModBus::ReadInputRegisters,
-                          ModBus::DataChannel1,
-                          ModBus::DataChannelLenght
-                          );
+    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 void ModBus::ReadAllChannelsThread ()
@@ -425,58 +409,80 @@ void ModBus::ReadAllChannelsThread ()
     ModBus modbus;
     double currentdata;
 
+    while (0)
+    {
+        longsleep;
+//        qDebug() << "thread" ;
+    }
+
     while (1)
     {
-        uartsleep;
-
+//        uartsleep;
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            while (currentdata==0)
+                currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            UD.writechannelvalue(1,currentdata);
+
+            if (currentdata!=0)
+                UD.writechannelvalue(1,currentdata);
             //            Sleep(100);
         }
+
+        currentdata=0;
 
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            while (currentdata==0)
+                currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            UD.writechannelvalue(2,currentdata);
+            if (currentdata!=0)
+                UD.writechannelvalue(2,currentdata);
             //            Sleep(100);
         }
+
+        currentdata=0;
 
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            while (currentdata==0)
+                currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            UD.writechannelvalue(3,currentdata);
+            if (currentdata!=0)
+                UD.writechannelvalue(3,currentdata);
             //            Sleep(100);
         }
+
+        currentdata=0;
 
         if (UartDriver::needtoupdatechannel[3] == 1)
         {
             UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
+
+            while (currentdata==0)
+                currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            UD.writechannelvalue(4,currentdata);
+            if (currentdata!=0)
+                UD.writechannelvalue(4,currentdata);
             //            Sleep(100);
         }
-    }
 
-//    thread()->deleteLater();
+        currentdata=0;
+    }
+    thread()->deleteLater();
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-03-30T16:32:22. -->
+<!-- Written by QtCreator 4.1.0, 2017-04-03T08:31:36. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">0</value>
+  <value type="int">1</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -307,10 +307,10 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.7.2</value>
@@ -319,10 +319,10 @@
        <value type="QString">192.168.7.2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
-       <value type="QString">/usr</value>
+       <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
        <value type="QString">/usr/untitled2</value>
        <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
-       <value type="QString">C:/SysGCC/Beaglebone/arm-linux-gnueabihf/sysroot/usr/local/qt5/examples/quick/demos</value>
+       <value type="QString">/usr</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -331,10 +331,10 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-03-30T16:17:53</value>
+       <value type="QDateTime">2017-02-27T15:00:40</value>
        <value type="QDateTime">2017-02-13T15:33:46</value>
        <value type="QDateTime">2017-03-09T11:21:34</value>
-       <value type="QDateTime">2017-02-27T15:00:40</value>
+       <value type="QDateTime">2017-03-31T14:01:40</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -647,7 +647,7 @@
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">untitled2.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/aashmele/Downloads/QCustomPlot.tar/QCustomPlot/examples/build-untitled2-Desktop_Qt_5_7_0_MSVC2015_64bit-Release</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default"></value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
