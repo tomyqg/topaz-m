@@ -218,7 +218,7 @@ void MainWindow::Initialization()
     
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(300); // этот таймер отвечает за обновление графика
+    timer2->start(200); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
     
     thread= new QThread();
@@ -242,16 +242,15 @@ void MainWindow::Initialization()
     labelstimer->setInterval(6000);
     
     
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
-//    connect(labelstimer, SIGNAL(timeout()), this, SLOT(LabelsCorrect()));
+//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
+//    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
+//    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 
-    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
-    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
-    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
     
     channeltimer1->start(100);
     channeltimer2->start(100);
@@ -277,5 +276,5 @@ void MainWindow::Initialization()
     ch4.readoptionsfromfile(4);
     
     LabelsInit();
-    thread->start(QThread::LowestPriority);
+    //    thread->start(QThread::LowestPriority);
 }
