@@ -65,9 +65,7 @@ public slots:
 
 private slots:
 
-    void on_dial_sliderMoved(int position);
     void on_lcdNumber_overflow();
-    void on_dial_actionTriggered(int action);
     void updateCaption();
     void updatepicture();
     void updategraph();

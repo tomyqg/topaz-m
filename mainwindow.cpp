@@ -40,20 +40,11 @@ void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
-    //    Labels << fisttime.toString("hh:mm:ss");
-    int i = 0;
 
-    while(i<=5) {
-        Dates.append(QDateTime::currentDateTime());// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
-        Labels.append(fisttime.toString());
-        i++;
-    }
+    for (int var = 0; var <= 10; ++var) {
 
-    i = 6;
-    while(i<=10) {
-        Dates.append(fisttime.addSecs((i-5)*6));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
-        Labels.append(Dates.at(i).toString("hh:mm:ss") );
-        i++;
+        Dates.append(fisttime.addSecs((var-5)*6));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels.append(fisttime.addSecs((var-5)*6).toString("hh:mm:ss") );
     }
 }
 
@@ -62,7 +53,7 @@ void MainWindow::LabelsUpdate()
     int i = 0;
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
-
+    
     while(i<=10) {
         Dates[i] = Dates[i].addSecs(6);// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
@@ -77,16 +68,16 @@ void MainWindow::LabelsCorrect()
     qint16 timecorrectsec;
     fisttime = QDateTime::currentDateTime();
     timecorrectsec = Dates[5].msecsTo(fisttime);
-//    qDebug() << timecorrectsec;
+    //    qDebug() << timecorrectsec;
 
-    int i = 5;
+    int i = 0;
     while(i<=10)
     {
         Dates[i] = Dates[i].addMSecs(timecorrectsec );// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
         i++;
     }
-//    qDebug() << "Labels Correct";
+    //    qDebug() << "Labels Correct";
 }
 
 
@@ -107,16 +98,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_dial_sliderMoved(int position)
-{
-    ui->lcdNumber->display(ui->dial->value());
-}
-
 void MainWindow::on_lcdNumber_overflow()
-{
-}
-
-void MainWindow::on_dial_actionTriggered(int action)
 {
 }
 
@@ -210,39 +192,39 @@ void MainWindow::Initialization()
     ui->label->setPixmap(pix);
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-200, 200);
-
+    
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
-
+    
     QTimer *timer2 = new QTimer(this);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
-
+    
     QTimer *timetouch = new QTimer(this);
     connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
-
+    
     tmr = new QTimer();
     tmr->setInterval(500);
-
+    
     QTimer *tmrarchive = new QTimer(this);
     tmrarchive->setInterval(5000);
-
+    
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(5000);
-
+    
     QTimer *closetimer = new QTimer(this);
-
+    
     connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
     //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-
+    
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
     timer2->start(300); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
-
+    
     thread= new QThread();
     UartDriver *UD = new UartDriver();
     ModBus *MB = new ModBus();
-
+    
     UD->SetRTSPinDirection();
     //    UD->moveToThread(thread);
     MB->moveToThread(thread);
@@ -257,42 +239,43 @@ void MainWindow::Initialization()
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
     labelstimer = new QTimer();
-    labelstimer->setInterval(5*6000);
-
-
+    labelstimer->setInterval(6000);
+    
+    
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
-    //    connect(labelstimer, SIGNAL(timeout()), this, SLOT(LabelsUpdate()));
+//    connect(labelstimer, SIGNAL(timeout()), this, SLOT(LabelsCorrect()));
+
     //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
     //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
     //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
     //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
-
+    
     channeltimer1->start(100);
     channeltimer2->start(100);
     channeltimer3->start(100);
     channeltimer4->start(100);
-    labelstimer->start(5*6000);
-
+    labelstimer->start(6000);
+    
     QProcess process;
-
+    
     //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     process.startDetached("config-pin P9.24 uart");
     process.startDetached("config-pin P9.26 uart");
     process.startDetached("config-pin P8.7 gpio_pd");
-
+    
     MessageWrite mr ;
     mr.LogMessageWrite("Programm Started");
-
+    
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-
+    
     LabelsInit();
     thread->start(QThread::LowestPriority);
 }

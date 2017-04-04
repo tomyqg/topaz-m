@@ -31,43 +31,21 @@ void MainWindow::updategraph()
     //if (b>600)
     while (xx1.length()>300)
     {
-        xx1.remove(0);
-        yy1.remove(0);
-        yy2.remove(0);
-        yy3.remove(0);
-        yy4.remove(0);
+        xx1.remove(0);yy1.remove(0);yy2.remove(0);yy3.remove(0);yy4.remove(0);
     }
 
-//    if (b>=300) // &&b<900
+    //    if (b>=300) // &&b<900
     {
         ui->customPlot->xAxis->setRange(b-300, b+300);
 
         if (b%60==0)
         {
-            LabelsUpdate();
             LabelsCorrect();
-
-            qDebug() << xx1.length();
-            qDebug() << yy1.length();
-
-
+            //LabelsUpdate();
+            //qDebug() << xx1.length();
+            //qDebug() << yy1.length();
         }
     }
-
-
-
-    /*
-    if (b==1200)
-    {
-        b=0;
-        ui->customPlot->xAxis->setRange(0, 600);
-        xx1.clear();
-        yy1.clear();
-        yy2.clear();
-        yy3.clear();
-        yy4.clear();
-        LabelsInit();
-    }*/
 }
 
 void MainWindow::updatepicture()
