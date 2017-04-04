@@ -29,7 +29,7 @@ void MainWindow::updategraph()
     b++;
 
     //if (b>600)
-    while (xx1.length()>600)
+    while (xx1.length()>300)
     {
         xx1.remove(0);
         yy1.remove(0);
@@ -38,11 +38,25 @@ void MainWindow::updategraph()
         yy4.remove(0);
     }
 
-    if (b>=300&&b<900)
+//    if (b>=300) // &&b<900
     {
         ui->customPlot->xAxis->setRange(b-300, b+300);
+
+        if (b%60==0)
+        {
+            LabelsUpdate();
+            LabelsCorrect();
+
+            qDebug() << xx1.length();
+            qDebug() << yy1.length();
+
+
+        }
     }
-    
+
+
+
+    /*
     if (b==1200)
     {
         b=0;
@@ -52,7 +66,8 @@ void MainWindow::updategraph()
         yy2.clear();
         yy3.clear();
         yy4.clear();
-    }
+        LabelsInit();
+    }*/
 }
 
 void MainWindow::updatepicture()
@@ -82,59 +97,34 @@ void MainWindow::updatepicture()
         graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
         ui->customPlot->graph()->setPen(graphPen);
     }
-    
+
+    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
 
-//    ui->customPlot->xAxis->setTickLength(1,2); // 60 secs btw timestamp
+    //    ui->customPlot->xAxis->setAutoTickLabels(false);
+    //    ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-//    ui->customPlot->xAxis->setAutoTickStep(false);
-//    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-//    ui->customPlot->xAxis->setTickLabels(false);
-
-    QVector<double> Ticks;  // вектор с шагом в 30 градусов
-    int i = 0;
-    while(i<=360) {
-        Ticks << i;
-        i+=30;
-    }
-    ui->customPlot->xAxis->setAutoTicks(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickVector(Ticks);
-
-    QVector<QString> Labels;
-    Labels << "0" << QString::fromUtf8("π/6") << QString::fromUtf8("π/3")
-           << QString::fromUtf8("π/2") << QString::fromUtf8("2π/3")
-           << QString::fromUtf8("5π/6") << QString::fromUtf8("π")
-           << QString::fromUtf8("7π/6") << QString::fromUtf8("4π/3")
-           << QString::fromUtf8("3π/2") << QString::fromUtf8("5π/3")
-           << QString::fromUtf8("11π/6") << QString::fromUtf8("2π");
+    //    QVector<QString> Labels;
+    //    Labels << "0" << QString::fromUtf8("π/6") << QString::fromUtf8("π/3")
+    //           << QString::fromUtf8("π/2") << QString::fromUtf8("2π/3")
+    //           << QString::fromUtf8("5π/6") << QString::fromUtf8("π")
+    //           << QString::fromUtf8("7π/6") << QString::fromUtf8("4π/3")
+    //           << QString::fromUtf8("3π/2") << QString::fromUtf8("5π/3")
+    //           << QString::fromUtf8("11π/6") << QString::fromUtf8("2π");
 
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-    //    QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
-//    textTicker->addTick(10, "a bit\nlow");
-
-/*
-    QCPItemText *groupTracerText = new QCPItemText(ui->customPlot);
-    groupTracerText->position->setType(QCPItemPosition::ptAxisRectRatio);
-    groupTracerText->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    groupTracerText->position->setCoords(1.0, 0.20); // lower right corner of axis rect
-
-    groupTracerText->setText("Fixed positions in\nwave packet define\ngroup velocity vg");*/
-//    groupTracerText->setTextAlignment(Qt::AlignLeft);
-//    groupTracerText->setFont(QFont(font().family(), 9));
-//    groupTracerText->setPadding(QMargins(10,10,20,20));
-
-//    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-//    ui->customPlot->addItem(textLabel);
-//    textLabel->setText("Date Dummy");
-////    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
-////    textLabel->setPen(QPen(Qt::black)); // show black border around text
-////    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-////    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-//    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-//    textLabel->position->setCoords(100, 20); // place positi
-////    ui->customPlot->addItem(textLabel);
+    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    //    ui->customPlot->addItem(textLabel);
+    //    textLabel->setText("Date Dummy");
+    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
+    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
+    //    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    //    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    //    textLabel->position->setCoords(100, 20); // place positi
+    //    ui->customPlot->addItem(textLabel);
 
     //    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
     //    ui->customPlot->xAxis->setDateTimeForma("hh:mm:ss");// dd.MM.yyyy

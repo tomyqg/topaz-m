@@ -9,7 +9,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -19,7 +19,7 @@ QString pathtofile = "/usr/";
 
 #ifndef BeagleBone
 #define comportname "COM3"
-#define uartsleep Sleep(40);
+#define uartsleep Sleep(50);
 QString pathtofile = "C:/Work/";
 #endif
 
@@ -404,17 +404,8 @@ double ModBus::DataChannelRead (char channel)
 
 void ModBus::ReadAllChannelsThread ()
 {
-
     UartDriver UD;
-    ModBus modbus;
     double currentdata;
-
-    while (0)
-    {
-        longsleep;
-//        qDebug() << "thread" ;
-    }
-
     while (1)
     {
 //        uartsleep;

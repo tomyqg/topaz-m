@@ -32,6 +32,64 @@ QString MainWindow::startdate = start.toString("dd/MM/yy");
 QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
 
+QVector<QDateTime> MainWindow::Dates;
+
+//QVector<QString> MainWindow::Labels; // ОТМЕТКИ НА ВРЕМЕННОЙ ШКАЛЕ -ИХ МЫ ГЕНЕРИРУЕМ ПРИ ЗАПУСКЕ
+
+void MainWindow::LabelsInit()
+{
+    QDateTime fisttime;
+    fisttime = QDateTime::currentDateTime();
+    //    Labels << fisttime.toString("hh:mm:ss");
+    int i = 0;
+
+    while(i<=5) {
+        Dates.append(QDateTime::currentDateTime());// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels.append(fisttime.toString());
+        i++;
+    }
+
+    i = 6;
+    while(i<=10) {
+        Dates.append(fisttime.addSecs((i-5)*6));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels.append(Dates.at(i).toString("hh:mm:ss") );
+        i++;
+    }
+}
+
+void MainWindow::LabelsUpdate()
+{
+    int i = 0;
+    QDateTime fisttime;
+    fisttime = QDateTime::currentDateTime();
+
+    while(i<=10) {
+        Dates[i] = Dates[i].addSecs(6);// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
+        i++;
+    }
+}
+
+
+void MainWindow::LabelsCorrect()
+{
+    QDateTime fisttime;
+    qint16 timecorrectsec;
+    fisttime = QDateTime::currentDateTime();
+    timecorrectsec = Dates[5].msecsTo(fisttime);
+//    qDebug() << timecorrectsec;
+
+    int i = 5;
+    while(i<=10)
+    {
+        Dates[i] = Dates[i].addMSecs(timecorrectsec );// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
+        i++;
+    }
+//    qDebug() << "Labels Correct";
+}
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -178,7 +236,7 @@ void MainWindow::Initialization()
 
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(100); // этот таймер отвечает за обновление графика
+    timer2->start(300); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
     thread= new QThread();
@@ -186,14 +244,10 @@ void MainWindow::Initialization()
     ModBus *MB = new ModBus();
 
     UD->SetRTSPinDirection();
-
-//    UD->moveToThread(thread);
-
+    //    UD->moveToThread(thread);
     MB->moveToThread(thread);
-
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-//    connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
-
+    //    connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);
     channeltimer2 = new QTimer();
@@ -202,20 +256,25 @@ void MainWindow::Initialization()
     channeltimer3->setInterval(2000);
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
+    labelstimer = new QTimer();
+    labelstimer->setInterval(5*6000);
+
 
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
-//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
-//    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
-//    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+    //    connect(labelstimer, SIGNAL(timeout()), this, SLOT(LabelsUpdate()));
+    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
+    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
 
     channeltimer1->start(100);
     channeltimer2->start(100);
     channeltimer3->start(100);
     channeltimer4->start(100);
+    labelstimer->start(5*6000);
 
     QProcess process;
 
@@ -233,5 +292,7 @@ void MainWindow::Initialization()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
+
+    LabelsInit();
     thread->start(QThread::LowestPriority);
 }

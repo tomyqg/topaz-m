@@ -24,11 +24,15 @@ public:
     static QString startdate;
     static QString endtime;
     static QString starttime;
+    QVector<QString> Labels;
+    static QVector<QDateTime> Dates;
+
 
     QTimer *channeltimer1 ;
     QTimer *channeltimer2;
     QTimer *channeltimer3;
     QTimer *channeltimer4;
+    QTimer *labelstimer;
     QThread *thread;
 
 //    UartDriver UD;
@@ -42,6 +46,10 @@ public:
 public slots:
 
     void touchupdate();
+    void LabelsInit();
+    void LabelsUpdate();
+    void LabelsCorrect();
+
     void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
 
