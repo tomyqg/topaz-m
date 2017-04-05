@@ -70,6 +70,8 @@ private slots:
     void updateCaption();
     void updatepicture();
     void updatebargraf();
+    void updatetrends();
+    void updatetrendsngrafs();
     void updategraph();
     void delay(int n);
 

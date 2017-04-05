@@ -6,6 +6,7 @@
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
+int Options::DisplayParametr = Options::Trends;
 
 double Options::maxmessageslimit=1000;
 
@@ -415,6 +416,26 @@ void Options::applysettingstoUI()
     int sigtype2 = options2.GetSignalType();
     int sigtype3 = options3.GetSignalType();
     int sigtype4 = options4.GetSignalType();
+
+
+
+    if (Options::DisplayParametr == Options::Trends)
+    {
+        ui->SetTrendsBtn->setChecked(true);
+    }
+     if (Options::DisplayParametr == Options::Bars)
+    {
+        ui->SetBarsBtn->setChecked(true);
+    }
+     if (Options::DisplayParametr == Options::Polar)
+    {
+        ui->SetPolarBtn->setChecked(true);
+    }
+     if (Options::DisplayParametr == Options::TrendsBars)
+    {
+        ui->SetTrendsBarsBtn->setChecked(true);
+    }
+
     // channel 1
     {
         if (sigtype == 1)

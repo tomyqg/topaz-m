@@ -9,7 +9,6 @@
 
 namespace Ui {
 class Options;
-
 }
 
 class Options : public QDialog
@@ -27,6 +26,7 @@ public:
 
     static QString calibrationprm;
     static QString olderprop;
+    static int DisplayParametr;
     void setmaxmessageslimit(double n);
     double getmaxmessageslimit();
 
@@ -53,15 +53,19 @@ private slots:
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
-
+    void on_horizontalScrollBar_sliderReleased();
     QString GetSignalUnits();
 
-    void on_horizontalScrollBar_sliderReleased();
+public:
+    enum DisplayParametr {
+        Trends = 0x01 ,
+        Polar = 0x02 ,
+        Bars = 0x03 ,
+        TrendsBars = 0x04
+    };
 
 private:
-
     static double maxmessageslimit;
-
     Ui::Options *ui;
 };
 

@@ -15,6 +15,7 @@ void Options::readsystemoptionsfromfile()
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
     Options::calibrationprm = json["Calibration"].toString();
+    Options::DisplayParametr = json["Display"].toInt();
     infile.close();
 }
 
@@ -27,6 +28,7 @@ void Options::readoptionsfromfile()
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
     QJsonArray array = json["channels"].toArray();
+    infile.close();
 
     QJsonObject ch1 = array.at(0).toObject();
     options1.SetHigherLimit(ch1.value("HigherLimit").toDouble());
@@ -99,7 +101,6 @@ void Options::readoptionsfromfile()
     options4.SetChannelName(ch4.value("Name").toString());
     options4.SetMathEquation(ch4.value("MathString").toString());
     options4.SetMathematical(ch4.value("MathWork").toBool());
-    infile.close();
 }
 
 QJsonArray MessageWrite::LogMessageRead()

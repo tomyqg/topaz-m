@@ -31,6 +31,28 @@ void Options::WriteSystemOptionsToFile()
     QDateTime local(QDateTime::currentDateTime());
     systemoptions["Time"] = ui->timeEdit->time().toString();
     systemoptions["Date"] = ui->dateEdit->date().toString();
+
+    if (ui->SetTrendsBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::Trends;
+        Options::DisplayParametr = Options::Trends;
+    }
+    if (ui->SetPolarBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::Polar;
+        Options::DisplayParametr = Options::Polar;
+    }
+    if (ui->SetBarsBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::Bars;
+        Options::DisplayParametr = Options::Bars;
+    }
+    if (ui->SetTrendsBarsBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::TrendsBars;
+        Options::DisplayParametr = Options::TrendsBars;
+    }
+
     systemoptions["Calibration"] = Options::calibrationprm;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(pathtofile + "systemoptions.txt");

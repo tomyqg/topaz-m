@@ -4518,12 +4518,12 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>40</x>
        <y>20</y>
-       <width>231</width>
-       <height>121</height>
+       <width>221</width>
+       <height>161</height>
       </rect>
      </property>
      <property name="title">
-      <string>Тип канала 1</string>
+      <string>Режим Отображения</string>
      </property>
      <widget class="QWidget" name="layoutWidget_11">
       <property name="geometry">
@@ -4531,7 +4531,7 @@ p, li { white-space: pre-wrap; }
         <x>0</x>
         <y>10</y>
         <width>219</width>
-        <height>111</height>
+        <height>151</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -4539,7 +4539,7 @@ p, li { white-space: pre-wrap; }
         <number>5</number>
        </property>
        <item>
-        <widget class="QRadioButton" name="ButonOtklChannel_5">
+        <widget class="QRadioButton" name="SetTrendsBtn">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -4563,7 +4563,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonTokChannel_5">
+        <widget class="QRadioButton" name="SetBarsBtn">
          <property name="font">
           <font>
            <family>Times New Roman</family>
@@ -4581,7 +4581,22 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonNapryagenieChannel_5">
+        <widget class="QRadioButton" name="SetTrendsBarsBtn">
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Тренд + Барграф</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="SetPolarBtn">
          <property name="font">
           <font>
            <family>Times New Roman</family>
@@ -5119,9 +5134,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

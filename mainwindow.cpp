@@ -196,7 +196,7 @@ void MainWindow::Initialization()
     
     QTimer *timer2 = new QTimer(this);
 //    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
-    connect(timer2, SIGNAL(timeout()), this, SLOT(updatebargraf()));
+    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
     
     QTimer *timetouch = new QTimer(this);
     connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));

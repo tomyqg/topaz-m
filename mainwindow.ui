@@ -293,20 +293,6 @@ background-color: rgb(219, 37, 37);</string>
       <pixmap>logo.jpg</pixmap>
      </property>
     </widget>
-    <zorder>groupBox</zorder>
-    <zorder>groupBox_2</zorder>
-    <zorder>pushButton_7</zorder>
-    <zorder>pushButton_8</zorder>
-    <zorder>label_3</zorder>
-    <zorder>label_4</zorder>
-    <zorder>pushButton_6</zorder>
-    <zorder>pushButton_5</zorder>
-    <zorder>label_5</zorder>
-    <zorder>label_2</zorder>
-    <zorder>time_label</zorder>
-    <zorder>listWidget</zorder>
-    <zorder>textEdit_2</zorder>
-    <zorder>label</zorder>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
