@@ -61,7 +61,6 @@ void MainWindow::LabelsUpdate()
     }
 }
 
-
 void MainWindow::LabelsCorrect()
 {
     QDateTime fisttime;
@@ -79,7 +78,6 @@ void MainWindow::LabelsCorrect()
     }
     //    qDebug() << "Labels Correct";
 }
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -241,7 +239,6 @@ void MainWindow::Initialization()
     labelstimer = new QTimer();
     labelstimer->setInterval(6000);
     
-    
 //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
 //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
 //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
@@ -274,7 +271,7 @@ void MainWindow::Initialization()
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
     ch4.readoptionsfromfile(4);
-    
+
     LabelsInit();
     //    thread->start(QThread::LowestPriority);
 }

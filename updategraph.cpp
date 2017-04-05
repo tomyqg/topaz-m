@@ -54,7 +54,7 @@ void MainWindow::updatepicture()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(xx1, yy1);
-    graphPen.setWidth(4);
+    graphPen.setWidth(6);
     graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
     
     ui->customPlot->graph()->setPen(graphPen);
@@ -79,33 +79,19 @@ void MainWindow::updatepicture()
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
 
-    //    ui->customPlot->xAxis->setAutoTickLabels(false);
-    //    ui->customPlot->xAxis->setTickVectorLabels(Labels);
-
-    //    QVector<QString> Labels;
-    //    Labels << "0" << QString::fromUtf8("π/6") << QString::fromUtf8("π/3")
-    //           << QString::fromUtf8("π/2") << QString::fromUtf8("2π/3")
-    //           << QString::fromUtf8("5π/6") << QString::fromUtf8("π")
-    //           << QString::fromUtf8("7π/6") << QString::fromUtf8("4π/3")
-    //           << QString::fromUtf8("3π/2") << QString::fromUtf8("5π/3")
-    //           << QString::fromUtf8("11π/6") << QString::fromUtf8("2π");
-
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-    //    ui->customPlot->addItem(textLabel);
-    //    textLabel->setText("Date Dummy");
-    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
-    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
-    //    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-    //    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-    //    textLabel->position->setCoords(100, 20); // place positi
-    //    ui->customPlot->addItem(textLabel);
-
-    //    ui->customPlot->xAxis->setDateTimeSpec(Qt::OffsetFromUTC);
-    //    ui->customPlot->xAxis->setDateTimeForma("hh:mm:ss");// dd.MM.yyyy
+  /*  // add the text label at the top:
+    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    ui->customPlot->addItem(textLabel);
+    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+    textLabel->setText("Dummy label");
+    textLabel->setFont(QFont("Times New Roman", 16)); // make font a bit larger
+    textLabel->setPen(QPen(Qt::black)); // show black border around text
+*/
     ui->customPlot->replot();
 }
 
