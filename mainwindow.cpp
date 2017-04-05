@@ -195,7 +195,8 @@ void MainWindow::Initialization()
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
     
     QTimer *timer2 = new QTimer(this);
-    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+//    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+    connect(timer2, SIGNAL(timeout()), this, SLOT(updatebargraf()));
     
     QTimer *timetouch = new QTimer(this);
     connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
@@ -216,7 +217,7 @@ void MainWindow::Initialization()
     
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(200); // этот таймер отвечает за обновление графика
+    timer2->start(100); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
     
     thread= new QThread();

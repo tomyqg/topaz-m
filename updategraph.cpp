@@ -82,7 +82,101 @@ void MainWindow::updatepicture()
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-  /*  // add the text label at the top:
+    /*  // add the text label at the top:
+    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    ui->customPlot->addItem(textLabel);
+    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+    textLabel->setText("Dummy label");
+    textLabel->setFont(QFont("Times New Roman", 16)); // make font a bit larger
+    textLabel->setPen(QPen(Qt::black)); // show black border around text
+*/
+    ui->customPlot->replot();
+}
+
+void MainWindow::updatebargraf()
+{
+    QVector<double> x1,x2,x3,x4;
+    QVector<double> y1,y2,y3,y4;
+
+    x1.append(15);
+    x1.append(25);
+    x2.append(35);
+    x2.append(45);
+    x3.append(55);
+    x3.append(65);
+    x4.append(75);
+    x4.append(85);
+
+    y1.append(UartDriver::channelinputbuffer[0]);
+    y1.append(UartDriver::channelinputbuffer[0]);
+    y2.append(UartDriver::channelinputbuffer[1]);
+    y2.append(UartDriver::channelinputbuffer[1]);
+    y3.append(UartDriver::channelinputbuffer[2]);
+    y3.append(UartDriver::channelinputbuffer[2]);
+    y4.append(UartDriver::channelinputbuffer[3]);
+    y4.append(UartDriver::channelinputbuffer[3]);
+
+    ui->customPlot->clearGraphs();
+    ui->customPlot->xAxis->setRange(0, 100);
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setName("Bargraf");
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x1, y1);
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color1rgb[0],color1rgb[1],color1rgb[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x2, y2);
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color2rgb[0],color2rgb[1],color2rgb[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x3, y3);
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color3rgb[0],color3rgb[1],color3rgb[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x4, y4);
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color4rgb[0],color4rgb[1],color4rgb[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    //graphPen.setWidth(6);
+    /*   ui->customPlot->addGraph();
+
+    {ui->customPlot->graph()->setData(xx1, yy2);
+        graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
+        ui->customPlot->graph()->setPen(graphPen);
+    }
+
+    {ui->customPlot->addGraph();
+        ui->customPlot->graph()->setData(xx1, yy3);
+        graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
+        ui->customPlot->graph()->setPen(graphPen);}
+
+    {ui->customPlot->addGraph();
+        ui->customPlot->graph()->setData(xx1, yy4);
+        graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
+        ui->customPlot->graph()->setPen(graphPen);
+    }
+*/
+    LabelsBar.clear();
+
+    LabelsBar.append("0");LabelsBar.append("Channel 1");LabelsBar.append("Channel 2");LabelsBar.append("Channel 3");LabelsBar.append("Channel 4");
+
+    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
+    ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
+
+    ui->customPlot->xAxis->setAutoTickLabels(false);
+    ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
+
+    /*  // add the text label at the top:
     QCPItemText *textLabel = new QCPItemText(ui->customPlot);
     ui->customPlot->addItem(textLabel);
     textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);

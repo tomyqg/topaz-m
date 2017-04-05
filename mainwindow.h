@@ -25,6 +25,7 @@ public:
     static QString endtime;
     static QString starttime;
     QVector<QString> Labels;
+    QVector<QString> LabelsBar;
     static QVector<QDateTime> Dates;
 
 
@@ -68,6 +69,7 @@ private slots:
     void on_lcdNumber_overflow();
     void updateCaption();
     void updatepicture();
+    void updatebargraf();
     void updategraph();
     void delay(int n);
 
