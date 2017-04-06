@@ -66,6 +66,11 @@ public slots:
 
     bool eventFilter(QObject* watched, QEvent* event);
 
+
+private:
+    void PaintOnWidget();
+
+
 private slots:
 
     void on_lcdNumber_overflow();

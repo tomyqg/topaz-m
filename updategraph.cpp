@@ -58,11 +58,11 @@ void MainWindow::updatepicture()
 
     else if (Options::DisplayParametr == Options::Bars)
     {
-       updatebargraf();
+        updatebargraf();
     }
     else if (Options::DisplayParametr == Options::TrendsBars)
     {
-       updatetrendsngrafs();
+        updatetrendsngrafs();
     }
 }
 
@@ -445,4 +445,28 @@ void MainWindow::UpdateDataChannel4()
     
     int period = ch4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
+}
+
+void MainWindow::PaintOnWidget()
+{
+    QPainter painter;
+    painter.begin(ui->MessagesWidget);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
+    painter.drawEllipse(5, 5, 40, 40);
+    painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    painter.drawEllipse(5+45, 5, 40, 40);
+    painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    painter.drawEllipse(5+90, 5, 40, 40);
+
+    painter.setBrush(QBrush(Qt::cyan, Qt::Dense6Pattern));
+    painter.drawRect(2, 2, 1000,98 );
+
+    painter.setFont(QFont("Times New Roman", 8, QFont::Bold));
+
+    painter.drawText(135, 2, 50, 40, Qt::AlignHCenter | Qt::AlignVCenter,"The Text");
+
+    painter.end();
+
 }

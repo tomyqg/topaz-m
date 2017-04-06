@@ -203,7 +203,7 @@ void MainWindow::Initialization()
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
     
     QTimer *timer2 = new QTimer(this);
-//    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+    //    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
     
     QTimer *timetouch = new QTimer(this);
@@ -225,7 +225,7 @@ void MainWindow::Initialization()
     
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(100); // этот таймер отвечает за обновление графика
+    timer2->start(250); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
     
     thread= new QThread();
@@ -248,10 +248,10 @@ void MainWindow::Initialization()
     labelstimer = new QTimer();
     labelstimer->setInterval(6000);
     
-//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
-//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
-//    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
-//    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
+    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
+    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
+    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
@@ -289,16 +289,8 @@ void MainWindow::Initialization()
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
-
-        qDebug() << "yes";
-           QPainter painter;
-           painter.begin(ui->MessagesWidget);
-           painter.setRenderHint(QPainter::Antialiasing, true);
-           painter.setPen(QPen(Qt::black, 12, Qt::DashDotLine, Qt::RoundCap));
-           painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
-           painter.drawEllipse(50, 50, 100, 100);
-           painter.end();
-           return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
-       }
-       return false;
+        PaintOnWidget();
+        return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
+    }
+    return false;
 }

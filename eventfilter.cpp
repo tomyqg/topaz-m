@@ -1,4 +1,5 @@
 #include "options.h"
+#include "mainwindow.h"
 #include "ui_options.h"
 #include "channel1.h"
 #include "keyboard.h"
@@ -33,3 +34,5 @@ void keyboard::setolderproperty(QString str)
 {
     this->olderproperty = str;
 }
+
+
