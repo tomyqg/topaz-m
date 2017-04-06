@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
     Initialization();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -190,6 +192,10 @@ void MainWindow::Initialization()
     QProcess process1;
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
+
+
+    ui->MessagesWidget->installEventFilter(this);
+
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-200, 200);
     
@@ -277,4 +283,22 @@ void MainWindow::Initialization()
 
     LabelsInit();
     //    thread->start(QThread::LowestPriority);
+}
+
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
+
+        qDebug() << "yes";
+           QPainter painter;
+           painter.begin(ui->MessagesWidget);
+           painter.setRenderHint(QPainter::Antialiasing, true);
+           painter.setPen(QPen(Qt::black, 12, Qt::DashDotLine, Qt::RoundCap));
+           painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
+           painter.drawEllipse(50, 50, 100, 100);
+           painter.end();
+           return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
+       }
+       return false;
 }

@@ -293,6 +293,16 @@ background-color: rgb(219, 37, 37);</string>
       <pixmap>logo.jpg</pixmap>
      </property>
     </widget>
+    <widget class="QWidget" name="MessagesWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>530</y>
+       <width>1181</width>
+       <height>101</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">

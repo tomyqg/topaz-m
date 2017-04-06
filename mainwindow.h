@@ -64,6 +64,8 @@ public slots:
     void UpdateDataChannel333();
     void UpdateDataChannel444();
 
+    bool eventFilter(QObject* watched, QEvent* event);
+
 private slots:
 
     void on_lcdNumber_overflow();
