@@ -705,7 +705,6 @@ void Options::applysettingstoUI()
 void Options::on_UnitsChannel_1_editingFinished()
 {
     options1.SetUnitsName(ui->UnitsChannel_1->text());
-    ////qDebug() << options1.GetUnitsName();
 }
 
 void Options::on_pushButton_3_clicked()

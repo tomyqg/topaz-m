@@ -34,8 +34,6 @@ QString MainWindow::endtime = "";
 
 QVector<QDateTime> MainWindow::Dates;
 
-//QVector<QString> MainWindow::Labels; // ОТМЕТКИ НА ВРЕМЕННОЙ ШКАЛЕ -ИХ МЫ ГЕНЕРИРУЕМ ПРИ ЗАПУСКЕ
-
 void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
@@ -116,6 +114,10 @@ void MainWindow::touchupdate()
 
 void MainWindow::paintEvent(QPaintEvent *e)
 {
+    QPainter painter(this);
+    QRect rec(10,10,100,100);
+    QPen framepen(Qt::red);
+    painter.drawRect(rec);
 }
 
 void MainWindow::on_pushButton_clicked()

@@ -9,7 +9,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -408,7 +408,7 @@ void ModBus::ReadAllChannelsThread ()
     double currentdata;
     while (1)
     {
-//        uartsleep;
+        //        uartsleep;
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
