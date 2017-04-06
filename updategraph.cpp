@@ -13,6 +13,11 @@ int color2rgb[]={43, 37, 219};
 int color3rgb[]={37, 219, 49};
 int color4rgb[]={59, 30, 7};
 
+QColor Channel1Color = QColor(color1rgb[0],color1rgb[1],color1rgb[2]);
+QColor Channel2Color = QColor(color2rgb[0],color2rgb[1],color2rgb[2]);
+QColor Channel3Color = QColor(color3rgb[0],color3rgb[1],color3rgb[2]);
+QColor Channel4Color = QColor(color4rgb[0],color4rgb[1],color4rgb[2]);
+
 /*int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};*/
@@ -453,19 +458,34 @@ void MainWindow::PaintOnWidget()
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
-    painter.drawEllipse(5, 5, 40, 40);
-    painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-    painter.drawEllipse(5+45, 5, 40, 40);
-    painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-    painter.drawEllipse(5+90, 5, 40, 40);
+    painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
+    painter.drawRect(2, 2, 304, 98);
+    painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
+    painter.drawRect(2+304, 2, 304, 98);
+    painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
+    painter.drawRect(2+304*2, 2, 304, 98);
+    painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
+    painter.drawRect(304*3, 2, 302, 98);
 
-    painter.setBrush(QBrush(Qt::cyan, Qt::Dense6Pattern));
-    painter.drawRect(2, 2, 1000,98 );
+//    painter.setBrush(QBrush(Qt::cyan, Qt::Dense6Pattern));
+//    painter.drawRect(2, 2, 1000,98 );
 
-    painter.setFont(QFont("Times New Roman", 8, QFont::Bold));
+    painter.setFont(QFont("Times New Roman", 40, QFont::ExtraBold));
+    painter.drawText(2, 2, 304, 98,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
+    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
+    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
+    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
 
-    painter.drawText(135, 2, 50, 40, Qt::AlignHCenter | Qt::AlignVCenter,"The Text");
+    painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
+    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
+    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
+    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
+    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
+
+//    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 1");
+//    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 2");
+//    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 3");
+//    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 4");
 
     painter.end();
 

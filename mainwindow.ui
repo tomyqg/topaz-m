@@ -296,9 +296,9 @@ background-color: rgb(219, 37, 37);</string>
     <widget class="QWidget" name="MessagesWidget" native="true">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>530</y>
-       <width>1181</width>
+       <x>32</x>
+       <y>569</y>
+       <width>1218</width>
        <height>101</height>
       </rect>
      </property>
