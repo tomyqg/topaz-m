@@ -225,7 +225,7 @@ void MainWindow::Initialization()
     
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(250); // этот таймер отвечает за обновление графика
+    timer2->start(100); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
     
     thread= new QThread();

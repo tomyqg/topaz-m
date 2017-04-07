@@ -459,18 +459,15 @@ void MainWindow::PaintOnWidget()
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
-    painter.drawRect(2, 2, 304, 98);
+    painter.drawRect(4, 2, 304, 98);
     painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
     painter.drawRect(2+304, 2, 304, 98);
     painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
     painter.drawRect(2+304*2, 2, 304, 98);
     painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
-    painter.drawRect(304*3, 2, 302, 98);
+    painter.drawRect(2+304*3, 2, 302, 98);
 
-//    painter.setBrush(QBrush(Qt::cyan, Qt::Dense6Pattern));
-//    painter.drawRect(2, 2, 1000,98 );
-
-    painter.setFont(QFont("Times New Roman", 40, QFont::ExtraBold));
+    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
     painter.drawText(2, 2, 304, 98,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
     painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
     painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
@@ -482,11 +479,10 @@ void MainWindow::PaintOnWidget()
     painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
     painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
 
-//    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 1");
-//    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 2");
-//    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 3");
-//    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignTop,"Channel 4");
-
+    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetUnitsName());
+    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
+    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
+    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
     painter.end();
-
 }

@@ -28,7 +28,6 @@ public:
     QVector<QString> LabelsBar;
     static QVector<QDateTime> Dates;
 
-
     QTimer *channeltimer1 ;
     QTimer *channeltimer2;
     QTimer *channeltimer3;
@@ -66,10 +65,8 @@ public slots:
 
     bool eventFilter(QObject* watched, QEvent* event);
 
-
 private:
     void PaintOnWidget();
-
 
 private slots:
 
