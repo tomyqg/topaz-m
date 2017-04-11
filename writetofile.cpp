@@ -53,6 +53,30 @@ void Options::WriteSystemOptionsToFile()
         Options::DisplayParametr = Options::TrendsBars;
     }
 
+    if (ui->SetCyfraBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::Cyfra;
+        Options::DisplayParametr = Options::Cyfra;
+    }
+
+    if (ui->SetTrendsBarsCyfraBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::TrendsCyfraBars;
+        Options::DisplayParametr = Options::TrendsCyfraBars;
+    }
+
+    if (ui->SetTrendsCyfraBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::TrendsCyfra;
+        Options::DisplayParametr = Options::TrendsCyfra;
+    }
+
+    if (ui->SetBarsCyfraBtn->isChecked())
+    {
+        systemoptions["Display"] = Options::BarsCyfra;
+        Options::DisplayParametr = Options::BarsCyfra;
+    }
+
     systemoptions["Calibration"] = Options::calibrationprm;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(pathtofile + "systemoptions.txt");

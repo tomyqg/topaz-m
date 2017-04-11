@@ -67,6 +67,8 @@ public slots:
 
 private:
     void PaintOnWidget();
+    void PaintOnWidgetBottom();
+    void PaintOnWidgetAllScreen();
 
 private slots:
 

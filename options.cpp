@@ -436,6 +436,26 @@ void Options::applysettingstoUI()
         ui->SetTrendsBarsBtn->setChecked(true);
     }
 
+     if (Options::DisplayParametr == Options::Cyfra)
+    {
+        ui->SetCyfraBtn->setChecked(true);
+    }
+
+     if (Options::DisplayParametr == Options::TrendsCyfraBars)
+    {
+        ui->SetTrendsBarsCyfraBtn->setChecked(true);
+    }
+
+     if (Options::DisplayParametr == Options::TrendsCyfra)
+    {
+        ui->SetTrendsCyfraBtn->setChecked(true);
+    }
+
+     if (Options::DisplayParametr == Options::BarsCyfra)
+    {
+        ui->SetBarsCyfraBtn->setChecked(true);
+    }
+
     // channel 1
     {
         if (sigtype == 1)

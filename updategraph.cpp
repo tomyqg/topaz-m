@@ -56,18 +56,24 @@ void MainWindow::updategraph()
 
 void MainWindow::updatepicture()
 {
-    if (Options::DisplayParametr == Options::Trends)
+    switch( Options::DisplayParametr )
     {
-        updatetrends();
-    }
+    case Options::Trends:
+        updatetrends();break;
+    case Options::Bars :
+        updatebargraf();break;
+    case Options::BarsCyfra :
+        updatebargraf();break;
+    case Options::TrendsBars:
+        updatetrendsngrafs();break;
+    case Options::TrendsCyfraBars:
+        updatetrendsngrafs();break;
+    case Options::Polar:
+        break;
 
-    else if (Options::DisplayParametr == Options::Bars)
-    {
-        updatebargraf();
-    }
-    else if (Options::DisplayParametr == Options::TrendsBars)
-    {
-        updatetrendsngrafs();
+    default:
+        updatetrends();break;
+
     }
 }
 
@@ -156,10 +162,7 @@ void MainWindow::updatetrendsngrafs()
     graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
     ui->customPlot->graph()->setPen(graphPen);
 
-
     ui->customPlot->replot();
-
-
 }
 
 void MainWindow::updatetrends()
@@ -454,35 +457,97 @@ void MainWindow::UpdateDataChannel4()
 
 void MainWindow::PaintOnWidget()
 {
+    switch( Options::DisplayParametr )
+    {
+    case Options::Cyfra:
+        PaintOnWidgetAllScreen();break;
+    case Options::TrendsCyfra:
+        PaintOnWidgetBottom();break;
+    case Options::TrendsCyfraBars:
+        PaintOnWidgetBottom();break;
+    case Options::BarsCyfra:
+        PaintOnWidgetBottom();break;
+    default:
+        break;
+    }
+}
+
+void MainWindow::PaintOnWidgetBottom()
+{
+    int widgwidth  = ui->MessagesWidget->width();
+    int widgheight  = ui->MessagesWidget->height();
+
     QPainter painter;
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
-    painter.drawRect(4, 2, 304, 98);
+    painter.drawRect(2, 2+561, widgwidth*1/4, 96);
     painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
-    painter.drawRect(2+304, 2, 304, 98);
+    painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
     painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
-    painter.drawRect(2+304*2, 2, 304, 98);
+    painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
     painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
-    painter.drawRect(2+304*3, 2, 302, 98);
+    painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
 
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-    painter.drawText(2, 2, 304, 98,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
-    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
-    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
+    painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
+    painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
+    painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
+    painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
 
+//    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
-    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
-    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
-    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
-    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
+    painter.drawText(2, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
+    painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
+    painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
+    painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
 
     painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
-    painter.drawText(2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetUnitsName());
-    painter.drawText(2+304, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
-    painter.drawText(2+304*2, 2, 304, 98, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
-    painter.drawText(304*3, 2, 302, 98, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
+    painter.drawText(2, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetUnitsName());
+    painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
+    painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
+    painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
+    painter.end();
+}
+
+void MainWindow::PaintOnWidgetAllScreen()
+{
+    QPainter painter;
+
+    int widgwidth  = ui->MessagesWidget->width();
+    int widgheight  = ui->MessagesWidget->height();
+
+    painter.begin(ui->MessagesWidget);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setBrush(QBrush(Channel1Color, Qt::SolidPattern));
+    painter.drawRect(2, 2, widgwidth/2-2, widgheight/2-2);
+    painter.setBrush(QBrush(Channel2Color, Qt::SolidPattern));
+    painter.drawRect(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2);
+    painter.setBrush(QBrush(Channel3Color, Qt::SolidPattern));
+    painter.drawRect(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2);
+    painter.setBrush(QBrush(Channel4Color, Qt::SolidPattern));
+    painter.drawRect(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2);
+
+    painter.setPen(QPen(Qt::cyan, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
+    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
+    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
+    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
+    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
+
+    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
+    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
+    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
+    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
+
+    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetUnitsName());
+    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
+    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
+    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
     painter.end();
 }

@@ -61,7 +61,11 @@ public:
         Trends = 0x01 ,
         Polar = 0x02 ,
         Bars = 0x03 ,
-        TrendsBars = 0x04
+        TrendsBars = 0x04,
+        Cyfra = 0x05,
+        TrendsCyfra = 0x06,
+        BarsCyfra = 0x07,
+        TrendsCyfraBars = 0x08
     };
 
 private:
