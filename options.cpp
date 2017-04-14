@@ -280,11 +280,6 @@ void Options::Channel4TypeChange()
     }
 }
 
-QString Options::GetSignalUnits()
-{
-    return "Signal units";
-}
-
 void Options::applynewsettings()
 {
     options1.SetUnitsName(ui->UnitsChannel_1->text());

@@ -43,8 +43,10 @@ public:
 
     MessageWrite mr;
 
+
 public slots:
 
+    void updateText( const QString text );
     void touchupdate();
     void LabelsInit();
     void LabelsUpdate();

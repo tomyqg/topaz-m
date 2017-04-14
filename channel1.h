@@ -3,8 +3,10 @@
 
 #include <QObject>
 
-class ChannelOptions
+class ChannelOptions: public QObject
 {
+
+    Q_OBJECT
 
 public:
     explicit ChannelOptions();
@@ -79,5 +81,8 @@ private:
     QString state2lowmessage;
     QString channelname;
     QString mathequationstring;
+
+signals:
+    void updateUI(const QString text);
 };
 #endif // CHANNEL1_H

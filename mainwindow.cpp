@@ -285,6 +285,14 @@ void MainWindow::Initialization()
 
 
     Options::DisplayParametr = Options::Cyfra;
+
+
+    ChannelOptions * asddddd = new ChannelOptions;
+
+    connect( asddddd, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
+
+    asddddd->updateUI("NEW UI TEXT");
+
     //    thread->start(QThread::LowestPriority);
 }
 
@@ -296,4 +304,9 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
     }
     return false;
+}
+
+void  MainWindow::updateText( const QString text ) // const QString & newText
+{
+    ui->textEdit_2->setText( text );
 }
