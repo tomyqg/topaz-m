@@ -21,6 +21,8 @@ public:
 
     QPen graphPen;
 
+    QVector<QPoint> points;
+
     static QString startdate;
     static QString endtime;
     static QString starttime;

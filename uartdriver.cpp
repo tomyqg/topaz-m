@@ -14,6 +14,7 @@
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
 #define uartsleep delay(50);
+#define longsleep delay(1000);
 QString pathtofile = "/usr/";
 #endif
 
@@ -21,13 +22,6 @@ QString pathtofile = "/usr/";
 #define comportname "COM3"
 #define uartsleep Sleep(50);;//
 QString pathtofile = "C:/Work/";
-#endif
-
-#ifdef BeagleBone
-#define longsleep delay(1000);
-#endif
-
-#ifndef BeagleBone
 #define longsleep Sleep(1000);
 #endif
 

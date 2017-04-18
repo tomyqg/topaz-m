@@ -560,10 +560,20 @@ void MainWindow::PaintAngleLineDiagramm()
 
     painter.begin(ui->MessagesWidget);
     //    painter.setRenderHint(QPainter::Antialiasing, true);
-    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
-    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
-    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
-    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
+//    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
+//    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
+//    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
+//    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
+
+    int channel1value = xx1.last();
+    int channel2value = xx1.last();
+    int channel3value = xx1.last();
+    int channel4value = xx1.last();
+
+    int channel1length = UartDriver::channelinputbuffer[0]/200*180;
+    int channel2length = UartDriver::channelinputbuffer[1]/200*180;
+    int channel3length = UartDriver::channelinputbuffer[2]/200*180;
+    int channel4length = UartDriver::channelinputbuffer[3]/200*180;
 
     /* Create the line object: */
     QLineF Channel1Line;
@@ -571,7 +581,10 @@ void MainWindow::PaintAngleLineDiagramm()
     /* Set the origin: */
     Channel1Line.setP1(QPointF(widgheight/2-2, 200));
     Channel1Line.setAngle(channel1value);
-    Channel1Line.setLength(150);
+    Channel1Line.setLength(channel1length);
+
+    int x = Channel1Line.x2(); // мы берем координаты `1 точки
+    int y = Channel1Line.y2(); // мы берем координаты второй точки
 
     /* Create the line object: */
     QLineF Channel2Line;
@@ -579,7 +592,7 @@ void MainWindow::PaintAngleLineDiagramm()
     /* Set the origin: */
     Channel2Line.setP1(QPointF(widgheight-2, 200));
     Channel2Line.setAngle(channel2value);
-    Channel2Line.setLength(150);
+    Channel2Line.setLength(channel2length);
 
     /* Create the line object: */
     QLineF Channel3Line;
@@ -587,7 +600,7 @@ void MainWindow::PaintAngleLineDiagramm()
     /* Set the origin: */
     Channel3Line.setP1(QPointF(widgheight/2-2, 200 + widgheight/2-2));
     Channel3Line.setAngle(channel3value);
-    Channel3Line.setLength(150);
+    Channel3Line.setLength(channel3length);
 
     /* Create the line object: */
     QLineF Channel4Line;
@@ -595,13 +608,24 @@ void MainWindow::PaintAngleLineDiagramm()
     /* Set the origin: */
     Channel4Line.setP1(QPointF(widgheight-2, 200 + widgheight/2-2));
     Channel4Line.setAngle(channel4value);
-    Channel4Line.setLength(150);
+    Channel4Line.setLength(channel4length);
 
     //qDebug() << Channel1Line.y2(); // мы берем координаты второй точки
     painter.drawLine(Channel1Line);
     painter.drawLine(Channel2Line);
     painter.drawLine(Channel3Line);
     painter.drawLine(Channel4Line);
+
+    QPoint a;
+    a.setX(x);
+    a.setY(y);
+
+    points.append(a);
+
+    painter.drawPolyline(points);
+//    qDebug() << x;qDebug() << y;
+
+    qDebug() << points;
 
     painter.end();
 }
