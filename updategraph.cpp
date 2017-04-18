@@ -60,6 +60,8 @@ void MainWindow::updatepicture()
     {
     case Options::Trends:
         updatetrends();break;
+    case Options::TrendsCyfra:
+        updatetrends();break;
     case Options::Bars :
         updatebargraf();break;
     case Options::BarsCyfra :
@@ -68,11 +70,8 @@ void MainWindow::updatepicture()
         updatetrendsngrafs();break;
     case Options::TrendsCyfraBars:
         updatetrendsngrafs();break;
-        //    case Options::Polar:
-        //        updatetrends();break;
-
     default:
-        updatetrends();break;
+        justupdategraf();break;
     }
 }
 
@@ -211,6 +210,14 @@ textLabel->setPen(QPen(Qt::black)); // show black border around text*/
 
 }
 
+void MainWindow::justupdategraf()
+{
+ui->MessagesWidget->update();
+
+    //    ui->customPlot->clearGraphs();
+    //    ui->customPlot->replot();
+}
+
 void MainWindow::updatebargraf()
 {
     QVector<double> x1,x2,x3,x4;
@@ -283,6 +290,7 @@ void MainWindow::UpdateDataChannel1()
     ModBus modbus;
     mathresolver mathres;
     double currentdata;
+
     
     UD.needtoupdatechannel[0] = 1;
     
@@ -467,7 +475,7 @@ void MainWindow::PaintOnWidget()
     case Options::BarsCyfra:
         PaintOnWidgetBottom();break;
     case Options::Polar:
-        PaintAngleLineDiagramm();break;
+        PaintPolarDiagramm();break;
     default:
         break;
     }
@@ -553,62 +561,72 @@ void MainWindow::PaintOnWidgetAllScreen()
     painter.end();
 }
 
-void MainWindow::PaintAngleLineDiagramm()
+void MainWindow::PaintPolarDiagramm()
 {
     QPainter painter;
     int widgheight  = ui->MessagesWidget->height();
+    double maximumradius;
+
+    maximumradius = widgheight/4 - 10;
 
     painter.begin(ui->MessagesWidget);
     //    painter.setRenderHint(QPainter::Antialiasing, true);
-//    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
-//    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
-//    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
-//    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
+    //    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
+    //    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
+    //    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
+    //    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
 
     int channel1value = xx1.last();
     int channel2value = xx1.last();
     int channel3value = xx1.last();
     int channel4value = xx1.last();
 
-    int channel1length = UartDriver::channelinputbuffer[0]/200*180;
-    int channel2length = UartDriver::channelinputbuffer[1]/200*180;
-    int channel3length = UartDriver::channelinputbuffer[2]/200*180;
-    int channel4length = UartDriver::channelinputbuffer[3]/200*180;
+    int channel1length = UartDriver::channelinputbuffer[0]/200*maximumradius;
+    int channel2length = UartDriver::channelinputbuffer[1]/200*maximumradius;
+    int channel3length = UartDriver::channelinputbuffer[2]/200*maximumradius;
+    int channel4length = UartDriver::channelinputbuffer[3]/200*maximumradius;
 
     /* Create the line object: */
     QLineF Channel1Line;
     painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel1Line.setP1(QPointF(widgheight/2-2, 200));
+    Channel1Line.setP1(QPointF(widgheight/2-2, maximumradius + 10));
     Channel1Line.setAngle(channel1value);
     Channel1Line.setLength(channel1length);
 
-    int x = Channel1Line.x2(); // мы берем координаты `1 точки
-    int y = Channel1Line.y2(); // мы берем координаты второй точки
+    int x1 = Channel1Line.x2(); // мы берем координаты `1 точки
+    int y1 = Channel1Line.y2(); // мы берем координаты второй точки
 
     /* Create the line object: */
     QLineF Channel2Line;
     painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel2Line.setP1(QPointF(widgheight-2, 200));
+    Channel2Line.setP1(QPointF(widgheight-2, maximumradius + 10));
     Channel2Line.setAngle(channel2value);
     Channel2Line.setLength(channel2length);
+    int x2 = Channel2Line.x2(); // мы берем координаты `1 точки
+    int y2 = Channel2Line.y2(); // мы берем координаты второй точки
 
     /* Create the line object: */
     QLineF Channel3Line;
     painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel3Line.setP1(QPointF(widgheight/2-2, 200 + widgheight/2-2));
+    Channel3Line.setP1(QPointF(widgheight/2-2, widgheight - (maximumradius + 10)));
     Channel3Line.setAngle(channel3value);
     Channel3Line.setLength(channel3length);
+    int x3 = Channel3Line.x2(); // мы берем координаты `1 точки
+    int y3 = Channel3Line.y2(); // мы берем координаты второй точки
 
     /* Create the line object: */
     QLineF Channel4Line;
     painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel4Line.setP1(QPointF(widgheight-2, 200 + widgheight/2-2));
+    Channel4Line.setP1(QPointF(widgheight-2,  widgheight - (maximumradius + 10)) );
     Channel4Line.setAngle(channel4value);
     Channel4Line.setLength(channel4length);
+
+    int x4 = Channel4Line.x2(); // мы берем координаты `1 точки
+    int y4 = Channel4Line.y2(); // мы берем координаты второй точки
 
     //qDebug() << Channel1Line.y2(); // мы берем координаты второй точки
     painter.drawLine(Channel1Line);
@@ -616,16 +634,42 @@ void MainWindow::PaintAngleLineDiagramm()
     painter.drawLine(Channel3Line);
     painter.drawLine(Channel4Line);
 
-    QPoint a;
-    a.setX(x);
-    a.setY(y);
+    QPoint p1,p2,p3,p4;
+    p1.setX(x1);
+    p1.setY(y1);
 
-    points.append(a);
+    p2.setX(x2);
+    p2.setY(y2);
 
-    painter.drawPolyline(points);
-//    qDebug() << x;qDebug() << y;
+    p3.setX(x3);
+    p3.setY(y3);
 
-    qDebug() << points;
+    p4.setX(x4);
+    p4.setY(y4);
+
+    points1.append(p1);
+    points2.append(p2);
+    points3.append(p3);
+    points4.append(p4);
+
+    if (xx1.last()>=359)
+    {points1.removeFirst();
+        points2.removeFirst();
+        points3.removeFirst();
+        points4.removeFirst();
+    }
+
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.drawPolyline(points1);
+    painter.drawPolyline(points2);
+    painter.drawPolyline(points3);
+    painter.drawPolyline(points4);
+
+    painter.setRenderHint(QPainter::Antialiasing, false);
+    //    qDebug() << x;qDebug() << y;
+
+    //    qDebug() << points;
 
     painter.end();
 }

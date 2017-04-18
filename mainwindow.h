@@ -21,7 +21,10 @@ public:
 
     QPen graphPen;
 
-    QVector<QPoint> points;
+    QVector<QPoint> points1;
+    QVector<QPoint> points2;
+    QVector<QPoint> points3;
+    QVector<QPoint> points4;
 
     static QString startdate;
     static QString endtime;
@@ -73,7 +76,7 @@ private:
     void PaintOnWidget();
     void PaintOnWidgetBottom();
     void PaintOnWidgetAllScreen();
-    void PaintAngleLineDiagramm();
+    void PaintPolarDiagramm();
 
 private slots:
 
@@ -83,6 +86,7 @@ private slots:
     void updatebargraf();
     void updatetrends();
     void updatetrendsngrafs();
+    void justupdategraf();
     void updategraph();
     void delay(int n);
 

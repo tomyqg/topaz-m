@@ -9,20 +9,20 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-//#define BeagleBone
+#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
+QString pathtofile = "/usr/";
 #define uartsleep delay(50);
 #define longsleep delay(1000);
-QString pathtofile = "/usr/";
 #endif
 
 #ifndef BeagleBone
 #define comportname "COM3"
 #define uartsleep Sleep(50);;//
-QString pathtofile = "C:/Work/";
 #define longsleep Sleep(1000);
+QString pathtofile = "C:/Work/";
 #endif
 
 extern QString inputstr;
