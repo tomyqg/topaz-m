@@ -68,12 +68,11 @@ void MainWindow::updatepicture()
         updatetrendsngrafs();break;
     case Options::TrendsCyfraBars:
         updatetrendsngrafs();break;
-    case Options::Polar:
-        break;
+        //    case Options::Polar:
+        //        updatetrends();break;
 
     default:
         updatetrends();break;
-
     }
 }
 
@@ -467,6 +466,8 @@ void MainWindow::PaintOnWidget()
         PaintOnWidgetBottom();break;
     case Options::BarsCyfra:
         PaintOnWidgetBottom();break;
+    case Options::Polar:
+        PaintAngleLineDiagramm();break;
     default:
         break;
     }
@@ -496,7 +497,7 @@ void MainWindow::PaintOnWidgetBottom()
     painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
     painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
 
-//    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    //    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
     painter.drawText(2, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
     painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
@@ -549,5 +550,58 @@ void MainWindow::PaintOnWidgetAllScreen()
     painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
     painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
     painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
+    painter.end();
+}
+
+void MainWindow::PaintAngleLineDiagramm()
+{
+    QPainter painter;
+    int widgheight  = ui->MessagesWidget->height();
+
+    painter.begin(ui->MessagesWidget);
+    //    painter.setRenderHint(QPainter::Antialiasing, true);
+    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
+    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
+    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
+    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
+
+    /* Create the line object: */
+    QLineF Channel1Line;
+    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    /* Set the origin: */
+    Channel1Line.setP1(QPointF(widgheight/2-2, 200));
+    Channel1Line.setAngle(channel1value);
+    Channel1Line.setLength(150);
+
+    /* Create the line object: */
+    QLineF Channel2Line;
+    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    /* Set the origin: */
+    Channel2Line.setP1(QPointF(widgheight-2, 200));
+    Channel2Line.setAngle(channel2value);
+    Channel2Line.setLength(150);
+
+    /* Create the line object: */
+    QLineF Channel3Line;
+    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    /* Set the origin: */
+    Channel3Line.setP1(QPointF(widgheight/2-2, 200 + widgheight/2-2));
+    Channel3Line.setAngle(channel3value);
+    Channel3Line.setLength(150);
+
+    /* Create the line object: */
+    QLineF Channel4Line;
+    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    /* Set the origin: */
+    Channel4Line.setP1(QPointF(widgheight-2, 200 + widgheight/2-2));
+    Channel4Line.setAngle(channel4value);
+    Channel4Line.setLength(150);
+
+    //qDebug() << Channel1Line.y2(); // мы берем координаты второй точки
+    painter.drawLine(Channel1Line);
+    painter.drawLine(Channel2Line);
+    painter.drawLine(Channel3Line);
+    painter.drawLine(Channel4Line);
+
     painter.end();
 }

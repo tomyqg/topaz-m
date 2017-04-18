@@ -9,7 +9,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -19,7 +19,7 @@ QString pathtofile = "/usr/";
 
 #ifndef BeagleBone
 #define comportname "COM3"
-#define uartsleep ;//Sleep(50);
+#define uartsleep Sleep(50);;//
 QString pathtofile = "C:/Work/";
 #endif
 

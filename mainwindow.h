@@ -71,6 +71,7 @@ private:
     void PaintOnWidget();
     void PaintOnWidgetBottom();
     void PaintOnWidgetAllScreen();
+    void PaintAngleLineDiagramm();
 
 private slots:
 
