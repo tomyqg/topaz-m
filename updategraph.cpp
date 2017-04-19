@@ -24,7 +24,7 @@ int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};*/
 
 QVector<double> xx1, yy1, yy2, yy3, yy4;
 
-void MainWindow::updategraph()
+void MainWindow::AddValuesToBuffer()
 {
     UartDriver UD;
     xx1.append(b);
@@ -33,28 +33,9 @@ void MainWindow::updategraph()
     yy3.append(UD.channelinputbuffer[2]);
     yy4.append(UD.channelinputbuffer[3]);
     b++;
-
-    //if (b>600)
-    while (xx1.length()>300)
-    {
-        xx1.remove(0);yy1.remove(0);yy2.remove(0);yy3.remove(0);yy4.remove(0);
-    }
-
-    //    if (b>=300) // &&b<900
-    {
-        ui->customPlot->xAxis->setRange(b-300, b+300);
-
-        if (b%60==0)
-        {
-            LabelsCorrect();
-            //LabelsUpdate();
-            //qDebug() << xx1.length();
-            //qDebug() << yy1.length();
-        }
-    }
 }
 
-void MainWindow::updatepicture()
+void MainWindow::UpdateGraphics()
 {
     switch( Options::DisplayParametr )
     {
@@ -70,13 +51,27 @@ void MainWindow::updatepicture()
         updatetrendsngrafs();break;
     case Options::TrendsCyfraBars:
         updatetrendsngrafs();break;
-    default:
+    case Options::Polar:
         justupdategraf();break;
+    default:
+        break;
     }
 }
 
 void MainWindow::updatetrendsngrafs()
 {
+    while (xx1.length()>300)
+    {
+        xx1.remove(0);yy1.remove(0);yy2.remove(0);yy3.remove(0);yy4.remove(0);
+    }
+
+    ui->customPlot->xAxis->setRange(b-300, b+300);
+
+    if (b%60==0)
+    {
+        LabelsCorrect();
+    }
+
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
@@ -165,6 +160,19 @@ void MainWindow::updatetrendsngrafs()
 
 void MainWindow::updatetrends()
 {
+
+    while (xx1.length()>300)
+    {
+        xx1.remove(0);yy1.remove(0);yy2.remove(0);yy3.remove(0);yy4.remove(0);
+    }
+
+    ui->customPlot->xAxis->setRange(b-300, b+300);
+
+    if (b%60==0)
+    {
+        LabelsCorrect();
+    }
+
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
@@ -212,7 +220,8 @@ textLabel->setPen(QPen(Qt::black)); // show black border around text*/
 
 void MainWindow::justupdategraf()
 {
-ui->MessagesWidget->update();
+    ui->customPlot->clearGraphs();
+    ui->MessagesWidget->update();
 
     //    ui->customPlot->clearGraphs();
     //    ui->customPlot->replot();
@@ -295,31 +304,34 @@ void MainWindow::UpdateDataChannel1()
     UD.needtoupdatechannel[0] = 1;
     
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (ch1.IsMathematical())
+
+    if (currentdata!=0)
     {
-        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        if (ch1.IsMathematical())
+        {
+            currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        }
+        UD.writechannelvalue(1,currentdata);
+
+        if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
+        {
+            ch1.LowState1Setted = false;
+            ui->listWidget->addItem(ch1.GetState1HighMessage());
+            ui->listWidget->scrollToBottom();
+            ch1.HighState1Setted = true;
+            mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
+        }
+
+        if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
+        {
+            ch1.LowState1Setted = true;
+            ui->listWidget->addItem(ch1.GetState1LowMessage());
+            ui->listWidget->scrollToBottom();
+            ch1.HighState1Setted = false;
+            mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
+        }
+
     }
-    UD.writechannelvalue(1,currentdata);
-    
-    //qDebug() << QString::number(ModBus::UniqueIDAddress);
-    if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
-    {
-        ch1.LowState1Setted = false;
-        ui->listWidget->addItem(ch1.GetState1HighMessage());
-        ui->listWidget->scrollToBottom();
-        ch1.HighState1Setted = true;
-        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
-    }
-    
-    if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
-    {
-        ch1.LowState1Setted = true;
-        ui->listWidget->addItem(ch1.GetState1LowMessage());
-        ui->listWidget->scrollToBottom();
-        ch1.HighState1Setted = false;
-        mr.LogMessageWrite (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
-    }
-    
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
 }
@@ -361,33 +373,36 @@ void MainWindow::UpdateDataChannel2()
     double currentdata;
     double pressure;
     currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (ch2.IsMathematical())
+    if (currentdata!=0)
     {
-        currentdata = mathres.Solve(ch2.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        if (ch2.IsMathematical())
+        {
+            currentdata = mathres.Solve(ch2.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        }
+        pressure = currentdata;
+        UD.writechannelvalue(2,pressure);
+
+        if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
+        {
+            ch2.LowState1Setted = false;
+            ui->listWidget->addItem(ch2.GetState1HighMessage());
+            ui->listWidget->scrollToBottom();
+            ch2.HighState1Setted = true;
+            mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
+        }
+
+        if ((pressure<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
+        {
+            ch2.LowState1Setted = true;
+            ui->listWidget->addItem(ch2.GetState1LowMessage());
+            ui->listWidget->scrollToBottom();
+            ch2.HighState1Setted = false;
+            mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
+        }
     }
-    pressure = currentdata;
-    UD.writechannelvalue(2,pressure);
-    
-    if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
-    {
-        ch2.LowState1Setted = false;
-        ui->listWidget->addItem(ch2.GetState1HighMessage());
-        ui->listWidget->scrollToBottom();
-        ch2.HighState1Setted = true;
-        mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
-    }
-    
-    if ((pressure<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
-    {
-        ch2.LowState1Setted = true;
-        ui->listWidget->addItem(ch2.GetState1LowMessage());
-        ui->listWidget->scrollToBottom();
-        ch2.HighState1Setted = false;
-        mr.LogMessageWrite (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
-    }
-    
     int period = ch2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
+
 }
 
 void MainWindow::UpdateDataChannel3()
@@ -398,30 +413,32 @@ void MainWindow::UpdateDataChannel3()
     double currentdata;
     
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (ch3.IsMathematical())
+    if (currentdata!=0)
     {
-        currentdata = mathres.Solve(ch3.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        if (ch3.IsMathematical())
+        {
+            currentdata = mathres.Solve(ch3.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        }
+        UD.writechannelvalue(3,currentdata);
+
+        if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
+        {
+            ch3.LowState1Setted = false;
+            ui->listWidget->addItem(ch3.GetState1HighMessage());
+            ui->listWidget->scrollToBottom();
+            ch3.HighState1Setted = true;
+            mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
+        }
+
+        if ((currentdata<ch3.GetState1Value() ) && ( ch3.LowState1Setted == false ))
+        {
+            ch3.LowState1Setted = true;
+            ui->listWidget->addItem(ch3.GetState1LowMessage());
+            ui->listWidget->scrollToBottom();
+            ch3.HighState1Setted = false;
+            mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
+        }
     }
-    UD.writechannelvalue(3,currentdata);
-    
-    if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
-    {
-        ch3.LowState1Setted = false;
-        ui->listWidget->addItem(ch3.GetState1HighMessage());
-        ui->listWidget->scrollToBottom();
-        ch3.HighState1Setted = true;
-        mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
-    }
-    
-    if ((currentdata<ch3.GetState1Value() ) && ( ch3.LowState1Setted == false ))
-    {
-        ch3.LowState1Setted = true;
-        ui->listWidget->addItem(ch3.GetState1LowMessage());
-        ui->listWidget->scrollToBottom();
-        ch3.HighState1Setted = false;
-        mr.LogMessageWrite (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
-    }
-    
     int period = ch3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
@@ -434,30 +451,32 @@ void MainWindow::UpdateDataChannel4()
     double currentdata;
     
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (ch4.IsMathematical())
+    if (currentdata!=0)
     {
-        currentdata = mathres.Solve(ch4.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        if (ch4.IsMathematical())
+        {
+            currentdata = mathres.Solve(ch4.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+        }
+        UD.writechannelvalue(4,currentdata);
+
+        if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
+        {
+            ch4.LowState1Setted = false;
+            ui->listWidget->addItem(ch4.GetState1HighMessage());
+            ui->listWidget->scrollToBottom();
+            ch4.HighState1Setted = true;
+            mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
+        }
+
+        if ((currentdata<ch4.GetState1Value() ) && ( ch4.LowState1Setted == false ))
+        {
+            ch4.LowState1Setted = true;
+            ui->listWidget->addItem(ch4.GetState1LowMessage());
+            ui->listWidget->scrollToBottom();
+            ch4.HighState1Setted = false;
+            mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
+        }
     }
-    UD.writechannelvalue(4,currentdata);
-    
-    if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
-    {
-        ch4.LowState1Setted = false;
-        ui->listWidget->addItem(ch4.GetState1HighMessage());
-        ui->listWidget->scrollToBottom();
-        ch4.HighState1Setted = true;
-        mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
-    }
-    
-    if ((currentdata<ch4.GetState1Value() ) && ( ch4.LowState1Setted == false ))
-    {
-        ch4.LowState1Setted = true;
-        ui->listWidget->addItem(ch4.GetState1LowMessage());
-        ui->listWidget->scrollToBottom();
-        ch4.HighState1Setted = false;
-        mr.LogMessageWrite (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
-    }
-    
     int period = ch4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
@@ -467,13 +486,13 @@ void MainWindow::PaintOnWidget()
     switch( Options::DisplayParametr )
     {
     case Options::Cyfra:
-        PaintOnWidgetAllScreen();break;
+        PaintCyfrasFullScreen();break;
     case Options::TrendsCyfra:
-        PaintOnWidgetBottom();break;
+        PaintCyfrasBottom();break;
     case Options::TrendsCyfraBars:
-        PaintOnWidgetBottom();break;
+        PaintCyfrasBottom();break;
     case Options::BarsCyfra:
-        PaintOnWidgetBottom();break;
+        PaintCyfrasBottom();break;
     case Options::Polar:
         PaintPolarDiagramm();break;
     default:
@@ -481,12 +500,11 @@ void MainWindow::PaintOnWidget()
     }
 }
 
-void MainWindow::PaintOnWidgetBottom()
+void MainWindow::PaintCyfrasBottom()
 {
     int widgwidth  = ui->MessagesWidget->width();
     int widgheight  = ui->MessagesWidget->height();
 
-    QPainter painter;
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -520,7 +538,7 @@ void MainWindow::PaintOnWidgetBottom()
     painter.end();
 }
 
-void MainWindow::PaintOnWidgetAllScreen()
+void MainWindow::PaintCyfrasFullScreen()
 {
     QPainter painter;
 
@@ -629,6 +647,9 @@ void MainWindow::PaintPolarDiagramm()
     int y4 = Channel4Line.y2(); // мы берем координаты второй точки
 
     //qDebug() << Channel1Line.y2(); // мы берем координаты второй точки
+
+    painter.setPen(QPen(Qt::green,2,  Qt::DashLine)); //, Qt::DashDotLine, Qt::RoundCap));
+
     painter.drawLine(Channel1Line);
     painter.drawLine(Channel2Line);
     painter.drawLine(Channel3Line);
@@ -652,24 +673,31 @@ void MainWindow::PaintPolarDiagramm()
     points3.append(p3);
     points4.append(p4);
 
-    if (xx1.last()>=359)
-    {points1.removeFirst();
+    if (xx1.last()>=360)
+    {
+        points1.removeFirst();
         points2.removeFirst();
         points3.removeFirst();
         points4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+
+    //graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+    //painter.setPen(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+
+    painter.setPen(QPen(Channel1Color, 4));
     painter.drawPolyline(points1);
+    painter.setPen(QPen(Channel2Color, 4));
     painter.drawPolyline(points2);
+    painter.setPen(QPen(Channel3Color, 4));
     painter.drawPolyline(points3);
+    painter.setPen(QPen(Channel4Color, 4));
     painter.drawPolyline(points4);
-
     painter.setRenderHint(QPainter::Antialiasing, false);
-    //    qDebug() << x;qDebug() << y;
 
-    //    qDebug() << points;
+    //qDebug() << x;qDebug() << y;
+    //qDebug() << points;
 
     painter.end();
 }

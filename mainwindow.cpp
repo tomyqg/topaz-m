@@ -77,16 +77,12 @@ void MainWindow::LabelsCorrect()
     //    qDebug() << "Labels Correct";
 }
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),  ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
     Initialization();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -100,26 +96,16 @@ void MainWindow::on_lcdNumber_overflow()
 {
 }
 
-void MainWindow::updateCaption()
+void MainWindow::updateDateLabel()
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy "));
-    mathresolver mr;
-    //ui->textEdit_2->setText(QString::number( mr.Solve("sqrt(abs(x)) / sqrt(abs(x-5))", 9) ) ); //"sin(2) + cos(2)"+ cos(2)
+    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
 void MainWindow::touchupdate()
 {
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
-}
-
-void MainWindow::paintEvent(QPaintEvent *e)
-{
-    QPainter painter(this);
-    QRect rec(10,10,100,100);
-    QPen framepen(Qt::red);
-    painter.drawRect(rec);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -141,12 +127,6 @@ void MainWindow::on_pushButton_2_clicked()
     ch4.readoptionsfromfile(4);
     //qDebug() << "readoptionsfromfile" ;
 }
-
-void MainWindow::on_pushButton_2_pressed()
-{
-    ui->customPlot->clearGraphs();
-}
-
 
 void MainWindow::on_dial_valueChanged(int value)
 {
@@ -192,19 +172,16 @@ void MainWindow::Initialization()
     QProcess process1;
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
-
-
     ui->MessagesWidget->installEventFilter(this);
-
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-200, 200);
     
     QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
     
     QTimer *timer2 = new QTimer(this);
     //    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
-    connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+    connect(timer2, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
     
     QTimer *timetouch = new QTimer(this);
     connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
@@ -220,12 +197,12 @@ void MainWindow::Initialization()
     
     QTimer *closetimer = new QTimer(this);
     
-    connect(tmr, SIGNAL(timeout()), this, SLOT(updategraph()));
+    connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
     //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
     
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    timer2->start(50); // этот таймер отвечает за обновление графика
+    timer2->start(100); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
     
     thread= new QThread();
@@ -233,10 +210,10 @@ void MainWindow::Initialization()
     ModBus *MB = new ModBus();
     
     UD->SetRTSPinDirection();
-    //    UD->moveToThread(thread);
+    //UD->moveToThread(thread);
     MB->moveToThread(thread);
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-    //    connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
+    //connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
     channeltimer1 = new QTimer();
     channeltimer1->setInterval(100);
     channeltimer2 = new QTimer();
@@ -245,13 +222,13 @@ void MainWindow::Initialization()
     channeltimer3->setInterval(2000);
     channeltimer4 = new QTimer();
     channeltimer4->setInterval(5000);
-    labelstimer = new QTimer();
-    labelstimer->setInterval(6000);
+    archivetimer = new QTimer();
+    archivetimer->setInterval(6000);
     
-    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
-    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
-    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
-    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
+    //connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+    //connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
+    //connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
+    //connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
@@ -262,11 +239,9 @@ void MainWindow::Initialization()
     channeltimer2->start(100);
     channeltimer3->start(100);
     channeltimer4->start(100);
-    labelstimer->start(6000);
+    archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
     
     QProcess process;
-    
-    //process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
     process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
     process.startDetached("config-pin P9.24 uart");
@@ -275,7 +250,7 @@ void MainWindow::Initialization()
     
     MessageWrite mr ;
     mr.LogMessageWrite("Programm Started");
-    
+
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
     ch3.readoptionsfromfile(3);
@@ -283,19 +258,12 @@ void MainWindow::Initialization()
 
     LabelsInit();
 
-
     Options::DisplayParametr = Options::Polar;
 
-
     ChannelOptions * asddddd = new ChannelOptions;
-
     connect( asddddd, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
-
     asddddd->updateUI("NEW UI TEXT");
-
-    //    thread->start(QThread::LowestPriority);
 }
-
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
@@ -308,5 +276,5 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
 void  MainWindow::updateText( const QString text ) // const QString & newText
 {
-    ui->textEdit_2->setText( text );
+    ui->textEdit_2->setText(text);
 }

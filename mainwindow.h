@@ -19,27 +19,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QPen graphPen;
-
-    QVector<QPoint> points1;
-    QVector<QPoint> points2;
-    QVector<QPoint> points3;
-    QVector<QPoint> points4;
-
-    static QString startdate;
-    static QString endtime;
-    static QString starttime;
-    QVector<QString> Labels;
-    QVector<QString> LabelsBar;
-    static QVector<QDateTime> Dates;
-
-    QTimer *channeltimer1 ;
-    QTimer *channeltimer2;
-    QTimer *channeltimer3;
-    QTimer *channeltimer4;
-    QTimer *labelstimer;
-    QThread *thread;
-
 //    UartDriver UD;
     ChannelOptions ch1;
     ChannelOptions ch2;
@@ -48,7 +27,6 @@ public:
 
     MessageWrite mr;
 
-
 public slots:
 
     void updateText( const QString text );
@@ -56,7 +34,6 @@ public slots:
     void LabelsInit();
     void LabelsUpdate();
     void LabelsCorrect();
-
     void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
 
@@ -74,25 +51,24 @@ public slots:
 
 private:
     void PaintOnWidget();
-    void PaintOnWidgetBottom();
-    void PaintOnWidgetAllScreen();
+    void PaintCyfrasBottom();
+    void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
 
 private slots:
 
     void on_lcdNumber_overflow();
-    void updateCaption();
-    void updatepicture();
+    void updateDateLabel();
+    void UpdateGraphics();
     void updatebargraf();
     void updatetrends();
     void updatetrendsngrafs();
     void justupdategraf();
-    void updategraph();
+    void AddValuesToBuffer();
     void delay(int n);
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void on_pushButton_2_pressed();
     void on_dial_valueChanged(int value);
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
@@ -107,8 +83,31 @@ private:
     QTimer *tmr;
     void Initialization();
 
+    QPen graphPen;
+
+    QPainter painter;
+
+    QVector<QPoint> points1;
+    QVector<QPoint> points2;
+    QVector<QPoint> points3;
+    QVector<QPoint> points4;
+
+    static QString startdate;
+    static QString endtime;
+    static QString starttime;
+    static QVector<QDateTime> Dates;
+    QVector<QString> Labels;
+    QVector<QString> LabelsBar;
+
+    QTimer *channeltimer1 ;
+    QTimer *channeltimer2;
+    QTimer *channeltimer3;
+    QTimer *channeltimer4;
+    QTimer *archivetimer;
+    QThread *thread;
+
 protected:
-    void paintEvent(QPaintEvent *e);
+
 };
 
 #endif // MAINWINDOW_H

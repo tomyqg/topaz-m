@@ -9,7 +9,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -20,7 +20,7 @@ QString pathtofile = "/usr/";
 
 #ifndef BeagleBone
 #define comportname "COM3"
-#define uartsleep Sleep(50);;//
+#define uartsleep Sleep(50);
 #define longsleep Sleep(1000);
 QString pathtofile = "C:/Work/";
 #endif
@@ -458,13 +458,8 @@ void ModBus::ReadAllChannelsThread ()
 
             while (currentdata==0)
                 currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            //        if (ch1.IsMathematical())
-            //    {
-            //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
-            //    }
             if (currentdata!=0)
                 UD.writechannelvalue(4,currentdata);
-            //            Sleep(100);
         }
 
         currentdata=0;
