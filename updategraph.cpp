@@ -206,25 +206,22 @@ void MainWindow::updatetrends()
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
     /*  // add the text label at the top:
-QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-ui->customPlot->addItem(textLabel);
-textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-textLabel->setText("Dummy label");
-textLabel->setFont(QFont("Times New Roman", 16)); // make font a bit larger
-textLabel->setPen(QPen(Qt::black)); // show black border around text*/
+    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    ui->customPlot->addItem(textLabel);
+    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
+    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+    textLabel->setText("Dummy label");
+    textLabel->setFont(QFont("Times New Roman", 16)); // make font a bit larger
+    textLabel->setPen(QPen(Qt::black)); // show black border around text*/
     ui->customPlot->replot();
-
 }
 
 void MainWindow::justupdategraf()
 {
-    ui->customPlot->clearGraphs();
     ui->MessagesWidget->update();
-
-    //    ui->customPlot->clearGraphs();
-    //    ui->customPlot->replot();
+    ui->customPlot->clearGraphs();
+    ui->customPlot->replot();
 }
 
 void MainWindow::updatebargraf()
