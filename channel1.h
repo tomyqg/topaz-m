@@ -53,7 +53,7 @@ public:
     bool IsLowState1Setted();
     bool IsHighState2Setted();
     bool IsLowState2Setted();
-    bool IsMathematical();
+    bool IsChannelMathematical();
 
     bool HighState1Setted ;
     bool LowState1Setted ;

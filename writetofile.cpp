@@ -7,7 +7,7 @@
 #include "dialog.h"
 #include "channel1.h"
 
-extern QVector<double> xx1,yy1,yy2,yy3,yy4;
+extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 
 extern QString pathtofile ;
 
@@ -87,84 +87,84 @@ void Options::WriteSystemOptionsToFile()
     file.close();
 }
 
-void Options::WriteOptionsToFile()
+void Options::WriteAllChannelsOptionsToFile()
 {
     QJsonObject channel1,channel2,channel3,channel4,channels;
     QJsonArray settings;
 
-    channel1["Type"] = options1.GetSignalType();
-    channel1["Name"] = options1.GetChannelName();
-    channel1["Units"] = options1.GetUnitsName();
-    channel1["HigherLimit"] = options1.GetHigherLimit();
-    channel1["LowerLimit"] = options1.GetLowerLimit();
-    channel1["HigherMeasLimit"] = options1.GetHigherMeasureLimit();
-    channel1["LowerMeasLimit"] = options1.GetLowerMeasureLimit();
-    channel1["Period"] = options1.GetMeasurePeriod();
-    channel1["State1HighMessage"] = options1.GetState1HighMessage();
-    channel1["State1LowMessage"] = options1.GetState1LowMessage();
-    channel1["State2HighMessage"] = options1.GetState2HighMessage();
-    channel1["State2LowMessage"] = options1.GetState2LowMessage();
-    channel1["State1Value"] = options1.GetState1Value();
-    channel1["State2Value"] = options1.GetState2Value();
-    channel1["MathString"] = options1.GetMathString();
-    channel1["MathWork"] = options1.IsMathematical();
+    channel1["Type"] = options_channel1.GetSignalType();
+    channel1["Name"] = options_channel1.GetChannelName();
+    channel1["Units"] = options_channel1.GetUnitsName();
+    channel1["HigherLimit"] = options_channel1.GetHigherLimit();
+    channel1["LowerLimit"] = options_channel1.GetLowerLimit();
+    channel1["HigherMeasLimit"] = options_channel1.GetHigherMeasureLimit();
+    channel1["LowerMeasLimit"] = options_channel1.GetLowerMeasureLimit();
+    channel1["Period"] = options_channel1.GetMeasurePeriod();
+    channel1["State1HighMessage"] = options_channel1.GetState1HighMessage();
+    channel1["State1LowMessage"] = options_channel1.GetState1LowMessage();
+    channel1["State2HighMessage"] = options_channel1.GetState2HighMessage();
+    channel1["State2LowMessage"] = options_channel1.GetState2LowMessage();
+    channel1["State1Value"] = options_channel1.GetState1Value();
+    channel1["State2Value"] = options_channel1.GetState2Value();
+    channel1["MathString"] = options_channel1.GetMathString();
+    channel1["MathWork"] = options_channel1.IsChannelMathematical();
 
     settings.append(channel1);
 
-    channel2["Type"] = options2.GetSignalType();
-    channel2["Name"] = options2.GetChannelName();
-    channel2["Units"] = options2.GetUnitsName();
-    channel2["HigherLimit"] = options2.GetHigherLimit();
-    channel2["LowerLimit"] = options2.GetLowerLimit();
-    channel2["HigherMeasLimit"] = options2.GetHigherMeasureLimit();
-    channel2["LowerMeasLimit"] = options2.GetLowerMeasureLimit();
-    channel2["Period"] = options2.GetMeasurePeriod();
-    channel2["State1HighMessage"] = options2.GetState1HighMessage();
-    channel2["State1LowMessage"] = options2.GetState1LowMessage();
-    channel2["State2HighMessage"] = options2.GetState2HighMessage();
-    channel2["State2LowMessage"] = options2.GetState2LowMessage();
-    channel2["State1Value"] = options2.GetState1Value();
-    channel2["State2Value"] = options2.GetState2Value();
-    channel2["MathString"] = options2.GetMathString();
-    channel2["MathWork"] = options2.IsMathematical();
+    channel2["Type"] = options_channel2.GetSignalType();
+    channel2["Name"] = options_channel2.GetChannelName();
+    channel2["Units"] = options_channel2.GetUnitsName();
+    channel2["HigherLimit"] = options_channel2.GetHigherLimit();
+    channel2["LowerLimit"] = options_channel2.GetLowerLimit();
+    channel2["HigherMeasLimit"] = options_channel2.GetHigherMeasureLimit();
+    channel2["LowerMeasLimit"] = options_channel2.GetLowerMeasureLimit();
+    channel2["Period"] = options_channel2.GetMeasurePeriod();
+    channel2["State1HighMessage"] = options_channel2.GetState1HighMessage();
+    channel2["State1LowMessage"] = options_channel2.GetState1LowMessage();
+    channel2["State2HighMessage"] = options_channel2.GetState2HighMessage();
+    channel2["State2LowMessage"] = options_channel2.GetState2LowMessage();
+    channel2["State1Value"] = options_channel2.GetState1Value();
+    channel2["State2Value"] = options_channel2.GetState2Value();
+    channel2["MathString"] = options_channel2.GetMathString();
+    channel2["MathWork"] = options_channel2.IsChannelMathematical();
 
     settings.append(channel2);
 
-    channel3["Type"] = options3.GetSignalType();
-    channel3["Name"] = options3.GetChannelName();
-    channel3["Units"] = options3.GetUnitsName();
-    channel3["HigherLimit"] = options3.GetHigherLimit();
-    channel3["LowerLimit"] = options3.GetLowerLimit();
-    channel3["HigherMeasLimit"] = options3.GetHigherMeasureLimit();
-    channel3["LowerMeasLimit"] = options3.GetLowerMeasureLimit();
-    channel3["Period"] = options3.GetMeasurePeriod();
-    channel3["State1HighMessage"] = options3.GetState1HighMessage();
-    channel3["State1LowMessage"] = options3.GetState1LowMessage();
-    channel3["State2HighMessage"] = options3.GetState2HighMessage();
-    channel3["State2LowMessage"] = options3.GetState2LowMessage();
-    channel3["State1Value"] = options3.GetState1Value();
-    channel3["State2Value"] = options3.GetState2Value();
-    channel3["MathString"] = options3.GetMathString();
-    channel3["MathWork"] = options3.IsMathematical();
+    channel3["Type"] = options_channel3.GetSignalType();
+    channel3["Name"] = options_channel3.GetChannelName();
+    channel3["Units"] = options_channel3.GetUnitsName();
+    channel3["HigherLimit"] = options_channel3.GetHigherLimit();
+    channel3["LowerLimit"] = options_channel3.GetLowerLimit();
+    channel3["HigherMeasLimit"] = options_channel3.GetHigherMeasureLimit();
+    channel3["LowerMeasLimit"] = options_channel3.GetLowerMeasureLimit();
+    channel3["Period"] = options_channel3.GetMeasurePeriod();
+    channel3["State1HighMessage"] = options_channel3.GetState1HighMessage();
+    channel3["State1LowMessage"] = options_channel3.GetState1LowMessage();
+    channel3["State2HighMessage"] = options_channel3.GetState2HighMessage();
+    channel3["State2LowMessage"] = options_channel3.GetState2LowMessage();
+    channel3["State1Value"] = options_channel3.GetState1Value();
+    channel3["State2Value"] = options_channel3.GetState2Value();
+    channel3["MathString"] = options_channel3.GetMathString();
+    channel3["MathWork"] = options_channel3.IsChannelMathematical();
 
     settings.append(channel3);
 
-    channel4["Type"] = options4.GetSignalType();
-    channel4["Name"] = options4.GetChannelName();
-    channel4["Units"] = options4.GetUnitsName();
-    channel4["HigherLimit"] = options4.GetHigherLimit();
-    channel4["LowerLimit"] = options4.GetLowerLimit();
-    channel4["HigherMeasLimit"] = options4.GetHigherMeasureLimit();
-    channel4["LowerMeasLimit"] = options4.GetLowerMeasureLimit();
-    channel4["Period"] = options4.GetMeasurePeriod();
-    channel4["State1HighMessage"] = options4.GetState1HighMessage();
-    channel4["State1LowMessage"] = options4.GetState1LowMessage();
-    channel4["State2HighMessage"] = options4.GetState2HighMessage();
-    channel4["State2LowMessage"] = options4.GetState2LowMessage();
-    channel4["State1Value"] = options4.GetState1Value();
-    channel4["State2Value"] = options4.GetState2Value();
-    channel4["MathString"] = options4.GetMathString();
-    channel4["MathWork"] = options4.IsMathematical();
+    channel4["Type"] = options_channel4.GetSignalType();
+    channel4["Name"] = options_channel4.GetChannelName();
+    channel4["Units"] = options_channel4.GetUnitsName();
+    channel4["HigherLimit"] = options_channel4.GetHigherLimit();
+    channel4["LowerLimit"] = options_channel4.GetLowerLimit();
+    channel4["HigherMeasLimit"] = options_channel4.GetHigherMeasureLimit();
+    channel4["LowerMeasLimit"] = options_channel4.GetLowerMeasureLimit();
+    channel4["Period"] = options_channel4.GetMeasurePeriod();
+    channel4["State1HighMessage"] = options_channel4.GetState1HighMessage();
+    channel4["State1LowMessage"] = options_channel4.GetState1LowMessage();
+    channel4["State2HighMessage"] = options_channel4.GetState2HighMessage();
+    channel4["State2LowMessage"] = options_channel4.GetState2LowMessage();
+    channel4["State1Value"] = options_channel4.GetState1Value();
+    channel4["State2Value"] = options_channel4.GetState2Value();
+    channel4["MathString"] = options_channel4.GetMathString();
+    channel4["MathWork"] = options_channel4.IsChannelMathematical();
 
     settings.append(channel4);
 
@@ -201,7 +201,7 @@ void MessageWrite::WriteAllLogToFile()
     file.close();
 }
 
-void MessageWrite::LogMessageWrite(QString nm)
+void MessageWrite::LogAddMessage(QString nm)
 {
     QJsonObject themessage;
     QDateTime local (QDateTime::currentDateTime());
@@ -232,29 +232,29 @@ void MainWindow::WriteArchiveToFile()
     QJsonArray valuesarray3;
     QJsonArray valuesarray4;
 
-    for(int y=0; y<yy1.size(); y++)
-        valuesarray1.append(yy1.at(y));
+    for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
+        valuesarray1.append(Y_coordinates_Chanel_1.at(y));
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
     archivechannel1["name"] = "channel_1";
 
-    for(int y=0; y<yy2.size(); y++)
-        valuesarray2.append(yy2.at(y));
+    for(int y=0; y<Y_coordinates_Chanel_2.size(); y++)
+        valuesarray2.append(Y_coordinates_Chanel_2.at(y));
 
     archivechannel2["size"] = valuesarray2.size();
     archivechannel2["values"] = valuesarray2;
     archivechannel2["name"] = "channel_2";
 
-    for(int y=0; y<yy3.size(); y++)
-        valuesarray3.append(yy3.at(y)*1.33);
+    for(int y=0; y<Y_coordinates_Chanel_3.size(); y++)
+        valuesarray3.append(Y_coordinates_Chanel_3.at(y)*1.33);
 
     archivechannel3["size"] = valuesarray3.size();
     archivechannel3["values"] = valuesarray3;
     archivechannel3["name"] = "channel_3";
 
-    for(int y=0; y<yy4.size(); y++)
-        valuesarray1.append(yy4.at(y)*1.44);
+    for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
+        valuesarray1.append(Y_coordinates_Chanel_4.at(y)*1.44);
 
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;

@@ -60,10 +60,10 @@ private slots:
     void on_lcdNumber_overflow();
     void updateDateLabel();
     void UpdateGraphics();
-    void updatebargraf();
-    void updatetrends();
-    void updatetrendsngrafs();
-    void justupdategraf();
+    void GrafsUpdateBars();
+    void GrafsUpdateTrends();
+    void GrafsUpdateTrendsAndBars();
+    void GrafsUpdateNone();
     void AddValuesToBuffer();
     void delay(int n);
 
@@ -87,10 +87,10 @@ private:
 
     QPainter painter;
 
-    QVector<QPoint> points1;
-    QVector<QPoint> points2;
-    QVector<QPoint> points3;
-    QVector<QPoint> points4;
+    QVector<QPoint> PolarChartPointsChannel1;
+    QVector<QPoint> PolarChartPointsChannel2;
+    QVector<QPoint> PolarChartPointsChannel3;
+    QVector<QPoint> PolarChartPointsChannel4;
 
     static QString startdate;
     static QString endtime;

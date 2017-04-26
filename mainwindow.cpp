@@ -249,7 +249,7 @@ void MainWindow::Initialization()
     process.startDetached("config-pin P8.7 gpio_pd");
     
     MessageWrite mr ;
-    mr.LogMessageWrite("Programm Started");
+    mr.LogAddMessage("Programm Started");
 
     ch1.readoptionsfromfile(1);
     ch2.readoptionsfromfile(2);
@@ -258,7 +258,7 @@ void MainWindow::Initialization()
 
     LabelsInit();
 
-    Options::DisplayParametr = Options::Polar;
+    Options::DisplayParametr = Options::TrendsCyfraBars;
 
     ChannelOptions * asddddd = new ChannelOptions;
     connect( asddddd, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //

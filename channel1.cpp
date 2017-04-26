@@ -175,7 +175,7 @@ bool ChannelOptions::IsLowState2Setted()
     return this->LowState2Setted;
 }
 
-bool ChannelOptions::IsMathematical()
+bool ChannelOptions::IsChannelMathematical()
 {
     return this->MathematicalState;
 }

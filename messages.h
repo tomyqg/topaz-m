@@ -29,7 +29,7 @@ class MessageWrite
 public:
 
     QJsonArray LogMessageRead();
-    void LogMessageWrite(QString nm);
+    void LogAddMessage(QString nm);
     void WriteAllLogToFile();
     explicit  MessageWrite();
     explicit MessageWrite(QString nm);

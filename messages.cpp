@@ -42,13 +42,13 @@ void Messages::on_pushButton_clicked()
 MessageWrite::MessageWrite()
 {
     LogMessageRead();
-    LogMessageWrite("message");
+    LogAddMessage("message");
 }
 
 MessageWrite::MessageWrite( QString nm)
 {
     LogMessageRead();
-    LogMessageWrite(nm);
+    LogAddMessage(nm);
 }
 
 void Messages::on_dial_valueChanged(int value)

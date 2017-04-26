@@ -24,10 +24,10 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
     readoptionsfromfile();
-    applysettingstoUI();
-    customizeUI();
+    ApplyNewSettingstoOptionsUI();
+    CustomizeOptionsUI();
 
-    QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> (  );
+    QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> ();
 
     for (int i = 0; i < spinList.count(); ++i) {
         QSpinBox *sb = spinList.at(i);
@@ -51,9 +51,9 @@ Options::~Options()
 
 void Options::on_pushButton_clicked()
 {
-    applynewsettings();
+    ApplyNewSettingstoAllChannels();
     WriteSystemOptionsToFile();
-    WriteOptionsToFile();
+    WriteAllChannelsOptionsToFile();
     this->close();
 }
 
@@ -66,7 +66,7 @@ void Options::Channel1TypeChange()
 {
     if (ui->ButonOtklChannel_1->isChecked())
     {
-        options1.SetSignalType(1);
+        options_channel1.SetSignalType(1);
 
         ui->UnitsChannel_1->setText("None");
         ui->UnitsChannel_1->setEnabled(false);
@@ -89,30 +89,30 @@ void Options::Channel1TypeChange()
     if (ui->ButonTokChannel_1->isChecked())
     {
         ui->UnitsChannel_1->setText("mA");
-        options1.SetSignalType(2);
+        options_channel1.SetSignalType(2);
     }
     
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
-        options1.SetSignalType(3);
+        options_channel1.SetSignalType(3);
         ui->UnitsChannel_1->setText("V");
     }
     
     if (ui->ButonResistorChannel_1->isChecked())
     {
-        options1.SetSignalType(4);
+        options_channel1.SetSignalType(4);
         ui->UnitsChannel_1->setText("Om");
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
-        options1.SetSignalType(5);
+        options_channel1.SetSignalType(5);
         ui->UnitsChannel_1->setText("mV");
     }
     
     if (ui->ButonImpulseChannel_1->isChecked())
     {
-        options1.SetSignalType(6);
+        options_channel1.SetSignalType(6);
         ui->UnitsChannel_1->setText("1");
     }
 }
@@ -121,7 +121,7 @@ void Options::Channel2TypeChange()
 {
     if (ui->ButonOtklChannel_2->isChecked())
     {
-        options2.SetSignalType(1);
+        options_channel2.SetSignalType(1);
         ui->UnitsChannel_2->setText("None");
         ui->UnitsChannel_2->setEnabled(false);
         ui->VerhnPredelChannel_2->setEnabled(false);
@@ -142,31 +142,31 @@ void Options::Channel2TypeChange()
     
     if (ui->ButonTokChannel_2->isChecked())
     {
-        options2.SetSignalType(2);
+        options_channel2.SetSignalType(2);
         ui->UnitsChannel_2->setText("mA");
     }
     
     if (ui->ButonNapryagenieChannel_2->isChecked())
     {
-        options2.SetSignalType(3);
+        options_channel2.SetSignalType(3);
         ui->UnitsChannel_2->setText("V");
     }
     
     if (ui->ButonResistorChannel_2->isChecked())
     {
-        options2.SetSignalType(4);
+        options_channel2.SetSignalType(4);
         ui->UnitsChannel_2->setText("Om");
     }
     
     if (ui->ButonTermoparaChannel_2->isChecked())
     {
-        options2.SetSignalType(5);
+        options_channel2.SetSignalType(5);
         ui->UnitsChannel_2->setText("mV");
     }
     
     if (ui->ButonImpulseChannel_2->isChecked())
     {
-        options2.SetSignalType(6);
+        options_channel2.SetSignalType(6);
         ui->UnitsChannel_2->setText("1");
     }
 }
@@ -175,7 +175,7 @@ void Options::Channel3TypeChange()
 {
     if (ui->ButonOtklChannel_3->isChecked())
     {
-        options2.SetSignalType(1);
+        options_channel2.SetSignalType(1);
         ui->UnitsChannel_3->setText("None");
         ui->UnitsChannel_3->setEnabled(false);
         ui->VerhnPredelChannel_3->setEnabled(false);
@@ -196,41 +196,40 @@ void Options::Channel3TypeChange()
 
     if (ui->ButonOtklChannel_3->isChecked())
     {
-        options3.SetSignalType(1);
+        options_channel3.SetSignalType(1);
     }
 
     if (ui->ButonTokChannel_3->isChecked())
     {
-        options3.SetSignalType(2);
+        options_channel3.SetSignalType(2);
     }
 
     if (ui->ButonNapryagenieChannel_3->isChecked())
     {
-        options3.SetSignalType(3);
+        options_channel3.SetSignalType(3);
     }
 
     if (ui->ButonResistorChannel_3->isChecked())
     {
-        options3.SetSignalType(4);
+        options_channel3.SetSignalType(4);
     }
 
     if (ui->ButonTermoparaChannel_3->isChecked())
     {
-        options3.SetSignalType(5);
+        options_channel3.SetSignalType(5);
     }
 
     if (ui->ButonImpulseChannel_3->isChecked())
     {
-        options3.SetSignalType(6);
+        options_channel3.SetSignalType(6);
     }
 }
 
 void Options::Channel4TypeChange()
 {
-
     if (ui->ButonOtklChannel_4->isChecked())
     {
-        options2.SetSignalType(1);
+        options_channel2.SetSignalType(1);
         ui->UnitsChannel_4->setText("None");
         ui->UnitsChannel_4->setEnabled(false);
         ui->VerhnPredelChannel_4->setEnabled(false);
@@ -251,105 +250,105 @@ void Options::Channel4TypeChange()
 
     if (ui->ButonOtklChannel_4->isChecked())
     {
-        options4.SetSignalType(1);
+        options_channel4.SetSignalType(1);
     }
 
     if (ui->ButonTokChannel_4->isChecked())
     {
-        options4.SetSignalType(2);
+        options_channel4.SetSignalType(2);
     }
 
     if (ui->ButonNapryagenieChannel_4->isChecked())
     {
-        options4.SetSignalType(3);
+        options_channel4.SetSignalType(3);
     }
 
     if (ui->ButonResistorChannel_4->isChecked())
     {
-        options4.SetSignalType(4);
+        options_channel4.SetSignalType(4);
     }
 
     if (ui->ButonTermoparaChannel_4->isChecked())
     {
-        options4.SetSignalType(5);
+        options_channel4.SetSignalType(5);
     }
 
     if (ui->ButonImpulseChannel_4->isChecked())
     {
-        options4.SetSignalType(6);
+        options_channel4.SetSignalType(6);
     }
 }
 
-void Options::applynewsettings()
+void Options::ApplyNewSettingstoAllChannels()
 {
-    options1.SetUnitsName(ui->UnitsChannel_1->text());
-    options1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
-    options1.SetLowerLimit(ui->NignPredelChannel_1->value());
-    options1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
-    options1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
-    options1.SetMeasurePeriod(ui->PeriodIzmerChannel_1->value());
-    options1.SetState1HighMessage(ui->State1HighMessageChannel_1->text());
-    options1.SetState1LowMessage(ui->State1LowMessageChannel_1->text());
-    options1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
-    options1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
-    options1.SetState1Value(ui->State1ValueChannel_1->value());
-    options1.SetState2Value(ui->State2ValueChannel_1->value());
-    options1.SetChannelName(ui->Name_Channel_1->text());
-    options1.SetMathEquation(ui->math_text_ch_1->text());
-    options1.SetMathematical(ui->checkBox->isChecked());
+    options_channel1.SetUnitsName(ui->UnitsChannel_1->text());
+    options_channel1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
+    options_channel1.SetLowerLimit(ui->NignPredelChannel_1->value());
+    options_channel1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
+    options_channel1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
+    options_channel1.SetMeasurePeriod(ui->PeriodIzmerChannel_1->value());
+    options_channel1.SetState1HighMessage(ui->State1HighMessageChannel_1->text());
+    options_channel1.SetState1LowMessage(ui->State1LowMessageChannel_1->text());
+    options_channel1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
+    options_channel1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
+    options_channel1.SetState1Value(ui->State1ValueChannel_1->value());
+    options_channel1.SetState2Value(ui->State2ValueChannel_1->value());
+    options_channel1.SetChannelName(ui->Name_Channel_1->text());
+    options_channel1.SetMathEquation(ui->math_text_ch_1->text());
+    options_channel1.SetMathematical(ui->checkBox->isChecked());
 
-    options2.SetUnitsName(ui->UnitsChannel_2->text());
-    options2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
-    options2.SetLowerLimit(ui->NignPredelChannel_2->value());
-    options2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
-    options2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
-    options2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
-    options2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
-    options2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
-    options2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
-    options2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
-    options2.SetState1Value(ui->State1ValueChannel_2->value());
-    options2.SetState2Value(ui->State2ValueChannel_2->value());
-    options2.SetChannelName(ui->Name_Channel_2->text());
-    options2.SetMathEquation(ui->math_text_ch_2->text());
-    options2.SetMathematical(ui->checkBox_2->isChecked());
+    options_channel2.SetUnitsName(ui->UnitsChannel_2->text());
+    options_channel2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
+    options_channel2.SetLowerLimit(ui->NignPredelChannel_2->value());
+    options_channel2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
+    options_channel2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
+    options_channel2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
+    options_channel2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
+    options_channel2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
+    options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
+    options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
+    options_channel2.SetState1Value(ui->State1ValueChannel_2->value());
+    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
+    options_channel2.SetChannelName(ui->Name_Channel_2->text());
+    options_channel2.SetMathEquation(ui->math_text_ch_2->text());
+    options_channel2.SetMathematical(ui->checkBox_2->isChecked());
 
-    options3.SetUnitsName(ui->UnitsChannel_3->text());
-    options3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
-    options3.SetLowerLimit(ui->NignPredelChannel_3->value());
-    options3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
-    options3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
-    options3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
-    options3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
-    options3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
-    options3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
-    options3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
-    options3.SetState1Value(ui->State1ValueChannel_3->value());
-    options3.SetState2Value(ui->State2ValueChannel_3->value());
-    options3.SetChannelName(ui->Name_Channel_3->text());
-    options3.SetMathEquation(ui->math_text_ch_3->text());
-    options3.SetMathematical(ui->checkBox_3->isChecked());
+    options_channel3.SetUnitsName(ui->UnitsChannel_3->text());
+    options_channel3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
+    options_channel3.SetLowerLimit(ui->NignPredelChannel_3->value());
+    options_channel3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
+    options_channel3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
+    options_channel3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
+    options_channel3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
+    options_channel3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
+    options_channel3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
+    options_channel3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
+    options_channel3.SetState1Value(ui->State1ValueChannel_3->value());
+    options_channel3.SetState2Value(ui->State2ValueChannel_3->value());
+    options_channel3.SetChannelName(ui->Name_Channel_3->text());
+    options_channel3.SetMathEquation(ui->math_text_ch_3->text());
+    options_channel3.SetMathematical(ui->checkBox_3->isChecked());
 
-    options4.SetUnitsName(ui->UnitsChannel_4->text());
-    options4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
-    options4.SetLowerLimit(ui->NignPredelChannel_4->value());
-    options4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
-    options4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
-    options4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
-    options4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
-    options4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
-    options4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
-    options4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
-    options4.SetState1Value(ui->State1ValueChannel_4->value());
-    options4.SetState2Value(ui->State2ValueChannel_4->value());
-    options4.SetChannelName(ui->Name_Channel_4->text());
-    options4.SetMathEquation(ui->math_text_ch_4->text());
-    options4.SetMathematical(ui->checkBox_4->isChecked());
+    options_channel4.SetUnitsName(ui->UnitsChannel_4->text());
+    options_channel4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
+    options_channel4.SetLowerLimit(ui->NignPredelChannel_4->value());
+    options_channel4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
+    options_channel4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
+    options_channel4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
+    options_channel4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
+    options_channel4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
+    options_channel4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
+    options_channel4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
+    options_channel4.SetState1Value(ui->State1ValueChannel_4->value());
+    options_channel4.SetState2Value(ui->State2ValueChannel_4->value());
+    options_channel4.SetChannelName(ui->Name_Channel_4->text());
+    options_channel4.SetMathEquation(ui->math_text_ch_4->text());
+    options_channel4.SetMathematical(ui->checkBox_4->isChecked());
 
-    setmaxmessageslimit(ui->spinBox->value());
+    setlogmessageslimit(ui->spinBox->value());
 }
 
-void Options::customizeUI()
+void Options::CustomizeOptionsUI()
 {
     //set tab height
 
@@ -383,36 +382,30 @@ void Options::customizeUI()
         //qDebug() << dsb;
     }
 
-    {
         //this is a template
         /*("QSpinBox { border: 2px solid red; border-radius: 5px; background-color: yellow; }"
-           "QSpinBox::up-arrow { border-left: 17px solid none;"
-           "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-           "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
-           "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-           "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-           "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+        "QSpinBox::up-arrow { border-left: 17px solid none;"
+        "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+        "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
+        "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
+        "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+        "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
 
-           "QSpinBox::down-arrow { border-left: 17px solid none;"
-           "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-           "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
-           "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-           "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-           "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
-            );*/
-    }
-
+        "QSpinBox::down-arrow { border-left: 17px solid none;"
+        "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+        "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
+        "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
+        "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
+        "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
+        );*/
 }
 
-void Options::applysettingstoUI()
+void Options::ApplyNewSettingstoOptionsUI()
 {
-
-    int sigtype = options1.GetSignalType();
-    int sigtype2 = options2.GetSignalType();
-    int sigtype3 = options3.GetSignalType();
-    int sigtype4 = options4.GetSignalType();
-
-
+    int sigtype = options_channel1.GetSignalType();
+    int sigtype2 = options_channel2.GetSignalType();
+    int sigtype3 = options_channel3.GetSignalType();
+    int sigtype4 = options_channel4.GetSignalType();
 
     if (Options::DisplayParametr == Options::Trends)
     {
@@ -652,74 +645,74 @@ void Options::applysettingstoUI()
         }
     }
 
-    ui->UnitsChannel_1->setText(options1.GetUnitsName());
-    ui->VerhnPredelChannel_1->setValue(options1.GetHigherLimit());
-    ui->NignPredelChannel_1->setValue(options1.GetLowerLimit());
-    ui->VerhnPredIzmerChannel_1->setValue(options1.GetHigherMeasureLimit());
-    ui->NignPredIzmerChannel_1->setValue(options1.GetLowerMeasureLimit());
-    ui->PeriodIzmerChannel_1->setValue(options1.GetMeasurePeriod());
-    ui->State1ValueChannel_1->setValue(options1.GetState1Value());
-    ui->State2ValueChannel_1->setValue(options1.GetState2Value());
-    ui->State1HighMessageChannel_1->setText(options1.GetState1HighMessage());
-    ui->State1LowMessageChannel_1->setText(options1.GetState1LowMessage());
-    ui->State2HighMessageChannel_1->setText(options1.GetState2HighMessage());
-    ui->State2LowMessageChannel_1->setText(options1.GetState2LowMessage());
-    ui->Name_Channel_1->setText(options1.GetChannelName());
-    ui->math_text_ch_1->setText(options1.GetMathString());
-    ui->checkBox->setChecked(options1.IsMathematical());
+    ui->UnitsChannel_1->setText(options_channel1.GetUnitsName());
+    ui->VerhnPredelChannel_1->setValue(options_channel1.GetHigherLimit());
+    ui->NignPredelChannel_1->setValue(options_channel1.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_1->setValue(options_channel1.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_1->setValue(options_channel1.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_1->setValue(options_channel1.GetMeasurePeriod());
+    ui->State1ValueChannel_1->setValue(options_channel1.GetState1Value());
+    ui->State2ValueChannel_1->setValue(options_channel1.GetState2Value());
+    ui->State1HighMessageChannel_1->setText(options_channel1.GetState1HighMessage());
+    ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
+    ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
+    ui->State2LowMessageChannel_1->setText(options_channel1.GetState2LowMessage());
+    ui->Name_Channel_1->setText(options_channel1.GetChannelName());
+    ui->math_text_ch_1->setText(options_channel1.GetMathString());
+    ui->checkBox->setChecked(options_channel1.IsChannelMathematical());
 
-    ui->UnitsChannel_2->setText(options2.GetUnitsName());
-    ui->VerhnPredelChannel_2->setValue(options2.GetHigherLimit());
-    ui->NignPredelChannel_2->setValue(options2.GetLowerLimit());
-    ui->VerhnPredIzmerChannel_2->setValue(options2.GetHigherMeasureLimit());
-    ui->NignPredIzmerChannel_2->setValue(options2.GetLowerMeasureLimit());
-    ui->PeriodIzmerChannel_2->setValue(options2.GetMeasurePeriod());
-    ui->State1ValueChannel_2->setValue(options2.GetState1Value());
-    ui->State2ValueChannel_2->setValue(options2.GetState2Value());
-    ui->State1HighMessageChannel_2->setText(options2.GetState1HighMessage());
-    ui->State1LowMessageChannel_2->setText(options2.GetState1LowMessage());
-    ui->State2HighMessageChannel_2->setText(options2.GetState2HighMessage());
-    ui->State2LowMessageChannel_2->setText(options2.GetState2LowMessage());
-    ui->Name_Channel_2->setText(options2.GetChannelName());
-    ui->math_text_ch_2->setText(options2.GetMathString());
-    ui->checkBox_2->setChecked(options2.IsMathematical());
+    ui->UnitsChannel_2->setText(options_channel2.GetUnitsName());
+    ui->VerhnPredelChannel_2->setValue(options_channel2.GetHigherLimit());
+    ui->NignPredelChannel_2->setValue(options_channel2.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_2->setValue(options_channel2.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_2->setValue(options_channel2.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_2->setValue(options_channel2.GetMeasurePeriod());
+    ui->State1ValueChannel_2->setValue(options_channel2.GetState1Value());
+    ui->State2ValueChannel_2->setValue(options_channel2.GetState2Value());
+    ui->State1HighMessageChannel_2->setText(options_channel2.GetState1HighMessage());
+    ui->State1LowMessageChannel_2->setText(options_channel2.GetState1LowMessage());
+    ui->State2HighMessageChannel_2->setText(options_channel2.GetState2HighMessage());
+    ui->State2LowMessageChannel_2->setText(options_channel2.GetState2LowMessage());
+    ui->Name_Channel_2->setText(options_channel2.GetChannelName());
+    ui->math_text_ch_2->setText(options_channel2.GetMathString());
+    ui->checkBox_2->setChecked(options_channel2.IsChannelMathematical());
 
-    ui->UnitsChannel_3->setText(options3.GetUnitsName());
-    ui->VerhnPredelChannel_3->setValue(options3.GetHigherLimit());
-    ui->NignPredelChannel_3->setValue(options3.GetLowerLimit());
-    ui->VerhnPredIzmerChannel_3->setValue(options3.GetHigherMeasureLimit());
-    ui->NignPredIzmerChannel_3->setValue(options3.GetLowerMeasureLimit());
-    ui->PeriodIzmerChannel_3->setValue(options3.GetMeasurePeriod());
-    ui->State1ValueChannel_3->setValue(options3.GetState1Value());
-    ui->State2ValueChannel_3->setValue(options3.GetState2Value());
-    ui->State1HighMessageChannel_3->setText(options3.GetState1HighMessage());
-    ui->State1LowMessageChannel_3->setText(options3.GetState1LowMessage());
-    ui->State2HighMessageChannel_3->setText(options3.GetState2HighMessage());
-    ui->State2LowMessageChannel_3->setText(options3.GetState2LowMessage());
-    ui->Name_Channel_3->setText(options3.GetChannelName());
-    ui->math_text_ch_3->setText(options3.GetMathString());
-    ui->checkBox_3->setChecked(options3.IsMathematical());
+    ui->UnitsChannel_3->setText(options_channel3.GetUnitsName());
+    ui->VerhnPredelChannel_3->setValue(options_channel3.GetHigherLimit());
+    ui->NignPredelChannel_3->setValue(options_channel3.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_3->setValue(options_channel3.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_3->setValue(options_channel3.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_3->setValue(options_channel3.GetMeasurePeriod());
+    ui->State1ValueChannel_3->setValue(options_channel3.GetState1Value());
+    ui->State2ValueChannel_3->setValue(options_channel3.GetState2Value());
+    ui->State1HighMessageChannel_3->setText(options_channel3.GetState1HighMessage());
+    ui->State1LowMessageChannel_3->setText(options_channel3.GetState1LowMessage());
+    ui->State2HighMessageChannel_3->setText(options_channel3.GetState2HighMessage());
+    ui->State2LowMessageChannel_3->setText(options_channel3.GetState2LowMessage());
+    ui->Name_Channel_3->setText(options_channel3.GetChannelName());
+    ui->math_text_ch_3->setText(options_channel3.GetMathString());
+    ui->checkBox_3->setChecked(options_channel3.IsChannelMathematical());
 
-    ui->UnitsChannel_4->setText(options4.GetUnitsName());
-    ui->VerhnPredelChannel_4->setValue(options4.GetHigherLimit());
-    ui->NignPredelChannel_4->setValue(options4.GetLowerLimit());
-    ui->VerhnPredIzmerChannel_4->setValue(options4.GetHigherMeasureLimit());
-    ui->NignPredIzmerChannel_4->setValue(options4.GetLowerMeasureLimit());
-    ui->PeriodIzmerChannel_4->setValue(options4.GetMeasurePeriod());
-    ui->State1ValueChannel_4->setValue(options4.GetState1Value());
-    ui->State2ValueChannel_4->setValue(options4.GetState2Value());
-    ui->State1HighMessageChannel_4->setText(options4.GetState1HighMessage());
-    ui->State1LowMessageChannel_4->setText(options4.GetState1LowMessage());
-    ui->State2HighMessageChannel_4->setText(options4.GetState2HighMessage());
-    ui->State2LowMessageChannel_4->setText(options4.GetState2LowMessage());
-    ui->Name_Channel_4->setText(options4.GetChannelName());
-    ui->math_text_ch_4->setText(options4.GetMathString());
-    ui->checkBox_4->setChecked(options4.IsMathematical());
+    ui->UnitsChannel_4->setText(options_channel4.GetUnitsName());
+    ui->VerhnPredelChannel_4->setValue(options_channel4.GetHigherLimit());
+    ui->NignPredelChannel_4->setValue(options_channel4.GetLowerLimit());
+    ui->VerhnPredIzmerChannel_4->setValue(options_channel4.GetHigherMeasureLimit());
+    ui->NignPredIzmerChannel_4->setValue(options_channel4.GetLowerMeasureLimit());
+    ui->PeriodIzmerChannel_4->setValue(options_channel4.GetMeasurePeriod());
+    ui->State1ValueChannel_4->setValue(options_channel4.GetState1Value());
+    ui->State2ValueChannel_4->setValue(options_channel4.GetState2Value());
+    ui->State1HighMessageChannel_4->setText(options_channel4.GetState1HighMessage());
+    ui->State1LowMessageChannel_4->setText(options_channel4.GetState1LowMessage());
+    ui->State2HighMessageChannel_4->setText(options_channel4.GetState2HighMessage());
+    ui->State2LowMessageChannel_4->setText(options_channel4.GetState2LowMessage());
+    ui->Name_Channel_4->setText(options_channel4.GetChannelName());
+    ui->math_text_ch_4->setText(options_channel4.GetMathString());
+    ui->checkBox_4->setChecked(options_channel4.IsChannelMathematical());
 }
 
 void Options::on_UnitsChannel_1_editingFinished()
 {
-    options1.SetUnitsName(ui->UnitsChannel_1->text());
+    options_channel1.SetUnitsName(ui->UnitsChannel_1->text());
 }
 
 void Options::on_pushButton_3_clicked()
@@ -757,7 +750,7 @@ double Options::getmaxmessageslimit()
     return maxmessageslimit;
 }
 
-void Options::setmaxmessageslimit(double n)
+void Options::setlogmessageslimit(double n)
 {
     maxmessageslimit = n;
 }

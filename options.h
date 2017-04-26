@@ -15,10 +15,10 @@ class Options : public QDialog
 {
     Q_OBJECT
 
-    ChannelOptions options1;
-    ChannelOptions options2;
-    ChannelOptions options3;
-    ChannelOptions options4;
+    ChannelOptions options_channel1;
+    ChannelOptions options_channel2;
+    ChannelOptions options_channel3;
+    ChannelOptions options_channel4;
 
 public:
     explicit Options(QWidget *parent = 0);
@@ -27,12 +27,12 @@ public:
     static QString calibrationprm;
     static QString olderprop;
     static int DisplayParametr;
-    void setmaxmessageslimit(double n);
+    void setlogmessageslimit(double n);
     double getmaxmessageslimit();
 
 public slots:
 
-    void WriteOptionsToFile();
+    void WriteAllChannelsOptionsToFile();
     void WriteSystemOptionsToFile();
     bool eventFilter(QObject *object, QEvent *event);
 
@@ -44,9 +44,9 @@ private slots:
     void Channel2TypeChange();
     void Channel3TypeChange();
     void Channel4TypeChange();
-    void applynewsettings();
-    void applysettingstoUI();
-    void customizeUI();
+    void ApplyNewSettingstoAllChannels();
+    void ApplyNewSettingstoOptionsUI();
+    void CustomizeOptionsUI();
     void readoptionsfromfile();
     void readsystemoptionsfromfile();
     void on_UnitsChannel_1_editingFinished();
