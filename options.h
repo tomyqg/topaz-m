@@ -11,16 +11,6 @@ namespace Ui {
 class Options;
 }
 
-enum DisplayParametrEnum {
-    Trends = 0x01 ,
-    Polar = 0x02 ,
-    Bars = 0x03 ,
-    TrendsBars = 0x04,
-    Cyfra = 0x05,
-    TrendsCyfra = 0x06,
-    BarsCyfra = 0x07,
-    TrendsCyfraBars = 0x08
-};
 
 class Options : public QDialog
 {
@@ -40,8 +30,16 @@ public:
     static int DisplayParametr;
     void SetLogMessagesLimit(double n);
     double GetLogMessagesLimit();
-    DisplayParametrEnum SetDisplayParametr();
-
+    enum DisplayParametrEnum {
+        Trends = 0x01 ,
+        Polar = 0x02 ,
+        Bars = 0x03 ,
+        TrendsBars = 0x04,
+        Cyfra = 0x05,
+        TrendsCyfra = 0x06,
+        BarsCyfra = 0x07,
+        TrendsCyfraBars = 0x08
+    };
 private slots:
 
     void on_pushButton_clicked();
@@ -70,6 +68,9 @@ private:
     void ReadSystemOptionsFromFile();
     static double maxmessageslimit;
     Ui::Options *ui;
+
+
+
 };
 
 #endif // OPTIONS_H

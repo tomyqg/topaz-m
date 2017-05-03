@@ -37,22 +37,21 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
-    Options options;
-    switch( options.SetDisplayParametr() )
+    switch( Options::DisplayParametr )
     {
-    case DisplayParametrEnum::Trends:
+    case Options::Trends:
         GrafsUpdateTrends();break;
-    case DisplayParametrEnum::TrendsCyfra:
+    case Options::TrendsCyfra:
         GrafsUpdateTrends();break;
-    case DisplayParametrEnum::Bars :
+    case Options::Bars :
         GrafsUpdateBars();break;
-    case DisplayParametrEnum::BarsCyfra :
+    case Options::BarsCyfra :
         GrafsUpdateBars();break;
-    case DisplayParametrEnum::TrendsBars:
+    case Options::TrendsBars:
         GrafsUpdateTrendsAndBars();break;
-    case DisplayParametrEnum::TrendsCyfraBars:
+    case Options::TrendsCyfraBars:
         GrafsUpdateTrendsAndBars();break;
-    case DisplayParametrEnum::Polar:
+    case Options::Polar:
         GrafsUpdateNone();break;
     default:
         break;
@@ -68,7 +67,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->xAxis->setRange(b-300, b+300);
 
-    if (b%60==0)
+    if (b%60<=5)
     {
         LabelsCorrect();
     }
@@ -169,7 +168,7 @@ void MainWindow::GrafsUpdateTrends()
 
     ui->customPlot->xAxis->setRange(b-300, b+300);
 
-    if (b%60==0)
+    if (b%60<=5)
     {
         LabelsCorrect();
     }
@@ -296,16 +295,16 @@ void MainWindow::UpdateDataChannel1()
     ModBus modbus;
     mathresolver mathres;
     double currentdata;
-    
+
     UD.needtoupdatechannel[0] = 1;
-    
+
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
 
     if (currentdata!=0)
     {
         if (ch1.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(1,currentdata);
 
@@ -365,7 +364,7 @@ void MainWindow::UpdateDataChannel2()
     UartDriver UD;
     ModBus modbus;
     mathresolver mathres;
-    
+
     double currentdata;
     double pressure;
     currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
@@ -373,7 +372,7 @@ void MainWindow::UpdateDataChannel2()
     {
         if (ch2.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch2.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch2.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         pressure = currentdata;
         UD.writechannelvalue(2,pressure);
@@ -407,13 +406,13 @@ void MainWindow::UpdateDataChannel3()
     ModBus modbus;
     mathresolver mathres;
     double currentdata;
-    
+
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (currentdata!=0)
     {
         if (ch3.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch3.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch3.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(3,currentdata);
 
@@ -445,13 +444,13 @@ void MainWindow::UpdateDataChannel4()
     ModBus modbus;
     mathresolver mathres;
     double currentdata;
-    
+
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (currentdata!=0)
     {
         if (ch4.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch4.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch4.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(4,currentdata);
 
@@ -481,15 +480,15 @@ void MainWindow::PaintOnWidget()
 {
     switch( Options::DisplayParametr )
     {
-    case DisplayParametrEnum::Cyfra:
+    case Options::Cyfra:
         PaintCyfrasFullScreen();break;
-    case DisplayParametrEnum::TrendsCyfra:
+    case Options::TrendsCyfra:
         PaintCyfrasBottom();break;
-    case DisplayParametrEnum::TrendsCyfraBars:
+    case Options::TrendsCyfraBars:
         PaintCyfrasBottom();break;
-    case DisplayParametrEnum::BarsCyfra:
+    case Options::BarsCyfra:
         PaintCyfrasBottom();break;
-    case DisplayParametrEnum::Polar:
+    case Options::Polar:
         PaintPolarDiagramm();break;
     default:
         break;
@@ -673,11 +672,16 @@ void MainWindow::PaintPolarDiagramm()
     int a = X_Coordinates.last();
     if ( a%360 == 0)
     {
-        X_Coordinates.clear();
+//        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
         PolarChartPointsChannel4.clear();
+
+//        PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
+//        PolarChartPointsChannel2.removeFirst();
+//        PolarChartPointsChannel3.removeFirst();
+//        PolarChartPointsChannel4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);

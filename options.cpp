@@ -407,39 +407,39 @@ void Options::ApplyNewSettingstoOptionsUI()
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
 
-    if (Options::SetDisplayParametr() == DisplayParametrEnum::Trends)
+    if (Options::DisplayParametr == Trends)
     {
         ui->SetTrendsBtn->setChecked(true);
     }
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::Bars)
+if (Options::DisplayParametr == DisplayParametrEnum::Bars)
     {
         ui->SetBarsBtn->setChecked(true);
     }
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::Polar)
+if (Options::DisplayParametr ==DisplayParametrEnum::Polar)
     {
         ui->SetPolarBtn->setChecked(true);
     }
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsBars)
+if (Options::DisplayParametr == DisplayParametrEnum::TrendsBars)
     {
         ui->SetTrendsBarsBtn->setChecked(true);
     }
 
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::Cyfra)
+     if (Options::DisplayParametr == DisplayParametrEnum::Cyfra)
     {
         ui->SetCyfraBtn->setChecked(true);
     }
 
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsCyfraBars)
+     if (Options::DisplayParametr ==DisplayParametrEnum::TrendsCyfraBars)
     {
         ui->SetTrendsBarsCyfraBtn->setChecked(true);
     }
 
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsCyfra)
+     if (Options::DisplayParametr == DisplayParametrEnum::TrendsCyfra)
     {
         ui->SetTrendsCyfraBtn->setChecked(true);
     }
 
-     if (Options::SetDisplayParametr() == DisplayParametrEnum::BarsCyfra)
+     if (Options::DisplayParametr == DisplayParametrEnum::BarsCyfra)
     {
         ui->SetBarsCyfraBtn->setChecked(true);
     }
