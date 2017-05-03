@@ -30,6 +30,8 @@ public:
     static int DisplayParametr;
     void SetLogMessagesLimit(double n);
     double GetLogMessagesLimit();
+    QString GetCalibration() { return  calibrationprm;}
+
     enum DisplayParametrEnum {
         Trends = 0x01 ,
         Polar = 0x02 ,
@@ -40,6 +42,9 @@ public:
         BarsCyfra = 0x07,
         TrendsCyfraBars = 0x08
     };
+
+//    void SetDisplayParametr();
+
 private slots:
 
     void on_pushButton_clicked();
@@ -58,6 +63,12 @@ private slots:
 
 private:
 
+    QString GetNewDateString() {return ui->timeEdit->time().toString();}
+    QString GetNewTimeString() {return ui->timeEdit->time().toString();}
+    int GetCurrentDisplayParametr() { return DisplayParametr;}
+    void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
+    void UpdateCurrentDisplayParametr() ;
+
     void WriteAllChannelsOptionsToFile();
     bool eventFilter(QObject *object, QEvent *event);
     void WriteSystemOptionsToFile();
@@ -68,9 +79,6 @@ private:
     void ReadSystemOptionsFromFile();
     static double maxmessageslimit;
     Ui::Options *ui;
-
-
-
 };
 
 #endif // OPTIONS_H

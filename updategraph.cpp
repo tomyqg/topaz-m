@@ -672,16 +672,16 @@ void MainWindow::PaintPolarDiagramm()
     int a = X_Coordinates.last();
     if ( a%360 == 0)
     {
-//        X_Coordinates.clear();
+        //        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
         PolarChartPointsChannel4.clear();
 
-//        PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
-//        PolarChartPointsChannel2.removeFirst();
-//        PolarChartPointsChannel3.removeFirst();
-//        PolarChartPointsChannel4.removeFirst();
+        //        PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
+        //        PolarChartPointsChannel2.removeFirst();
+        //        PolarChartPointsChannel3.removeFirst();
+        //        PolarChartPointsChannel4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);

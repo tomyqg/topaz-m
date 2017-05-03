@@ -20,8 +20,6 @@ SOURCES += main.cpp\
          ../../qcustomplot.cpp \
     updategraph.cpp \
     dialog.cpp \
-    options.cpp \
-    channel1.cpp \
     keyboard.cpp \
     eventfilter.cpp \
     uartdriver.cpp \
@@ -29,7 +27,10 @@ SOURCES += main.cpp\
     messages.cpp \
     writetofile.cpp \
     metrologicalcalc.cpp \
-    mathresolver.cpp
+    mathresolver.cpp \
+    options_gui.cpp \
+    options_logic.cpp \
+    channel.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
