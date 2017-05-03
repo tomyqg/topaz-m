@@ -6,7 +6,7 @@
 
 extern QString pathtofile;
 
-void Options::readsystemoptionsfromfile()
+void Options::ReadSystemOptionsFromFile()
 {
     QFile infile(pathtofile + "systemoptions.txt");
     infile.open(QIODevice::ReadOnly);
@@ -19,7 +19,7 @@ void Options::readsystemoptionsfromfile()
     infile.close();
 }
 
-void Options::readoptionsfromfile()
+void Options::ReadChannelsOptionsFromFile()
 {
     QFile infile(pathtofile + "options.txt");
     infile.open(QIODevice::ReadOnly);
@@ -118,7 +118,7 @@ QJsonArray MessageWrite::LogMessageRead()
     return MessageWrite::messagesqueue;
 }
 
-void ChannelOptions::readoptionsfromfile(int channel)
+void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
 {
     QFile infile(pathtofile + "options.txt");
     infile.open(QIODevice::ReadOnly);

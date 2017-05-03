@@ -30,7 +30,7 @@ public:
     QString GetChannelName();
     QString GetMathString();
 
-    void readoptionsfromfile(int channel);
+    void ReadSingleChannelOptionFromFile(int channel);
 
     void SetChannelName(QString newname);
     void SetSignalType(double newsignaltype);

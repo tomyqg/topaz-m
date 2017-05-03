@@ -6,7 +6,7 @@
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
-int Options::DisplayParametr = Options::Trends;
+int Options::DisplayParametr = DisplayParametrEnum::Trends;
 
 double Options::maxmessageslimit=1000;
 
@@ -23,7 +23,7 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
-    readoptionsfromfile();
+    ReadChannelsOptionsFromFile();
     ApplyNewSettingstoOptionsUI();
     CustomizeOptionsUI();
 
@@ -345,7 +345,7 @@ void Options::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathEquation(ui->math_text_ch_4->text());
     options_channel4.SetMathematical(ui->checkBox_4->isChecked());
 
-    setlogmessageslimit(ui->spinBox->value());
+    SetLogMessagesLimit(ui->spinBox->value());
 }
 
 void Options::CustomizeOptionsUI()
@@ -407,39 +407,39 @@ void Options::ApplyNewSettingstoOptionsUI()
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
 
-    if (Options::DisplayParametr == Options::Trends)
+    if (Options::SetDisplayParametr() == DisplayParametrEnum::Trends)
     {
         ui->SetTrendsBtn->setChecked(true);
     }
-     if (Options::DisplayParametr == Options::Bars)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::Bars)
     {
         ui->SetBarsBtn->setChecked(true);
     }
-     if (Options::DisplayParametr == Options::Polar)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::Polar)
     {
         ui->SetPolarBtn->setChecked(true);
     }
-     if (Options::DisplayParametr == Options::TrendsBars)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsBars)
     {
         ui->SetTrendsBarsBtn->setChecked(true);
     }
 
-     if (Options::DisplayParametr == Options::Cyfra)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::Cyfra)
     {
         ui->SetCyfraBtn->setChecked(true);
     }
 
-     if (Options::DisplayParametr == Options::TrendsCyfraBars)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsCyfraBars)
     {
         ui->SetTrendsBarsCyfraBtn->setChecked(true);
     }
 
-     if (Options::DisplayParametr == Options::TrendsCyfra)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::TrendsCyfra)
     {
         ui->SetTrendsCyfraBtn->setChecked(true);
     }
 
-     if (Options::DisplayParametr == Options::BarsCyfra)
+     if (Options::SetDisplayParametr() == DisplayParametrEnum::BarsCyfra)
     {
         ui->SetBarsCyfraBtn->setChecked(true);
     }
@@ -745,12 +745,12 @@ void Options::on_pushButton_4_clicked()
     ms.LogClear();
 }
 
-double Options::getmaxmessageslimit()
+double Options::GetLogMessagesLimit()
 {
     return maxmessageslimit;
 }
 
-void Options::setlogmessageslimit(double n)
+void Options::SetLogMessagesLimit(double n)
 {
     maxmessageslimit = n;
 }

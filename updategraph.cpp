@@ -37,21 +37,22 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
-    switch( Options::DisplayParametr )
+    Options options;
+    switch( options.SetDisplayParametr() )
     {
-    case Options::Trends:
+    case DisplayParametrEnum::Trends:
         GrafsUpdateTrends();break;
-    case Options::TrendsCyfra:
+    case DisplayParametrEnum::TrendsCyfra:
         GrafsUpdateTrends();break;
-    case Options::Bars :
+    case DisplayParametrEnum::Bars :
         GrafsUpdateBars();break;
-    case Options::BarsCyfra :
+    case DisplayParametrEnum::BarsCyfra :
         GrafsUpdateBars();break;
-    case Options::TrendsBars:
+    case DisplayParametrEnum::TrendsBars:
         GrafsUpdateTrendsAndBars();break;
-    case Options::TrendsCyfraBars:
+    case DisplayParametrEnum::TrendsCyfraBars:
         GrafsUpdateTrendsAndBars();break;
-    case Options::Polar:
+    case DisplayParametrEnum::Polar:
         GrafsUpdateNone();break;
     default:
         break;
@@ -304,7 +305,7 @@ void MainWindow::UpdateDataChannel1()
     {
         if (ch1.IsChannelMathematical())
         {
-            currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(1,currentdata);
 
@@ -372,7 +373,7 @@ void MainWindow::UpdateDataChannel2()
     {
         if (ch2.IsChannelMathematical())
         {
-            currentdata = mathres.Solve(ch2.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch2.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         pressure = currentdata;
         UD.writechannelvalue(2,pressure);
@@ -412,7 +413,7 @@ void MainWindow::UpdateDataChannel3()
     {
         if (ch3.IsChannelMathematical())
         {
-            currentdata = mathres.Solve(ch3.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch3.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(3,currentdata);
 
@@ -450,7 +451,7 @@ void MainWindow::UpdateDataChannel4()
     {
         if (ch4.IsChannelMathematical())
         {
-            currentdata = mathres.Solve(ch4.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(ch4.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(4,currentdata);
 
@@ -480,15 +481,15 @@ void MainWindow::PaintOnWidget()
 {
     switch( Options::DisplayParametr )
     {
-    case Options::Cyfra:
+    case DisplayParametrEnum::Cyfra:
         PaintCyfrasFullScreen();break;
-    case Options::TrendsCyfra:
+    case DisplayParametrEnum::TrendsCyfra:
         PaintCyfrasBottom();break;
-    case Options::TrendsCyfraBars:
+    case DisplayParametrEnum::TrendsCyfraBars:
         PaintCyfrasBottom();break;
-    case Options::BarsCyfra:
+    case DisplayParametrEnum::BarsCyfra:
         PaintCyfrasBottom();break;
-    case Options::Polar:
+    case DisplayParametrEnum::Polar:
         PaintPolarDiagramm();break;
     default:
         break;
@@ -672,16 +673,11 @@ void MainWindow::PaintPolarDiagramm()
     int a = X_Coordinates.last();
     if ( a%360 == 0)
     {
-//        X_Coordinates.clear();
+        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
         PolarChartPointsChannel4.clear();
-
-//        PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
-//        PolarChartPointsChannel2.removeFirst();
-//        PolarChartPointsChannel3.removeFirst();
-//        PolarChartPointsChannel4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);

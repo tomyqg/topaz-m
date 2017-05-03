@@ -4,7 +4,7 @@ MetrologicalCalc::MetrologicalCalc()
 {
 }
 
-double MetrologicalCalc::CurrentToPressure(double current, double currentlow, double currenthigh, double pressurelow, double pressurehigh)
+double MetrologicalCalc::ConvertCurrentToPressure(double current, double currentlow, double currenthigh, double pressurelow, double pressurehigh)
 {
     return ( ( (current-currentlow)*(pressurehigh-pressurelow)/(currenthigh-currentlow) ) + pressurelow );
 }

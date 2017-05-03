@@ -32,7 +32,7 @@ void Options::WriteSystemOptionsToFile()
     systemoptions["Time"] = ui->timeEdit->time().toString();
     systemoptions["Date"] = ui->dateEdit->date().toString();
 
-    if (ui->SetTrendsBtn->isChecked())
+   /* if (ui->SetTrendsBtn->isChecked())
     {
         systemoptions["Display"] = Options::Trends;
         Options::DisplayParametr = Options::Trends;
@@ -75,7 +75,7 @@ void Options::WriteSystemOptionsToFile()
     {
         systemoptions["Display"] = Options::BarsCyfra;
         Options::DisplayParametr = Options::BarsCyfra;
-    }
+    }*/
 
     systemoptions["Calibration"] = Options::calibrationprm;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
@@ -184,7 +184,7 @@ void MessageWrite::WriteAllLogToFile()
 {
     QJsonObject archive;
     Options opt;
-    double maxmes  = opt.getmaxmessageslimit();
+    double maxmes  = opt.GetLogMessagesLimit();
 
     while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
     {
@@ -280,4 +280,60 @@ void MainWindow::WriteArchiveToFile()
     out << setstr;
     file.close();
     //    qDebug() << "writearchive";
+}
+
+DisplayParametrEnum Options::SetDisplayParametr()
+{
+
+    return DisplayParametrEnum::Trends;
+
+
+    if (ui->SetTrendsBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::Trends;
+    }
+    if (ui->SetPolarBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::Polar;
+    }
+    if (ui->SetBarsBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::Bars;
+    }
+    if (ui->SetTrendsBarsBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::TrendsBars;
+    }
+
+    if (ui->SetCyfraBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::Cyfra;
+    }
+
+    if (ui->SetTrendsBarsCyfraBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::TrendsCyfraBars;
+    }
+
+    if (ui->SetTrendsCyfraBtn->isChecked())
+    {
+
+        return DisplayParametrEnum::TrendsCyfra;
+    }
+
+    if (ui->SetBarsCyfraBtn->isChecked())
+    {
+
+//        Options::DisplayParametr = DisplayParametrEnum::BarsCyfra;
+        return DisplayParametrEnum::BarsCyfra;
+    }
+
+
+
 }

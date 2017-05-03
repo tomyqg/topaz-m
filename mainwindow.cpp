@@ -65,7 +65,6 @@ void MainWindow::LabelsCorrect()
     qint16 timecorrectsec;
     fisttime = QDateTime::currentDateTime();
     timecorrectsec = Dates[5].msecsTo(fisttime);
-    //    qDebug() << timecorrectsec;
 
     int i = 0;
     while(i<=10)
@@ -74,15 +73,14 @@ void MainWindow::LabelsCorrect()
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
         i++;
     }
-    //    qDebug() << "Labels Correct";
 }
 
-MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),  ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
-    Initialization();
+    MainWindowInitialization();
 }
 
 MainWindow::~MainWindow()
@@ -121,15 +119,10 @@ void MainWindow::on_pushButton_2_clicked()
     options.setModal(true);
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    ch1.readoptionsfromfile(1);
-    ch2.readoptionsfromfile(2);
-    ch3.readoptionsfromfile(3);
-    ch4.readoptionsfromfile(4);
-    //qDebug() << "readoptionsfromfile" ;
-}
-
-void MainWindow::on_dial_valueChanged(int value)
-{
+    ch1.ReadSingleChannelOptionFromFile(1);
+    ch2.ReadSingleChannelOptionFromFile(2);
+    ch3.ReadSingleChannelOptionFromFile(3);
+    ch4.ReadSingleChannelOptionFromFile(4);
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -137,7 +130,7 @@ void MainWindow::on_pushButton_3_clicked()
     QApplication::exit();
 }
 
-void MainWindow::delay(int n)
+void MainWindow::DelaySec(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(1);
     while (QTime::currentTime() < dieTime)
@@ -167,9 +160,8 @@ void MainWindow::on_radioButton_2_clicked()
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
 
-void MainWindow::Initialization()
+void MainWindow::MainWindowInitialization()
 {
-    QProcess process1;
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
     ui->MessagesWidget->installEventFilter(this);
@@ -194,12 +186,9 @@ void MainWindow::Initialization()
     
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(5000);
-    
-    QTimer *closetimer = new QTimer(this);
-    
+
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
-    //connect(tmr, SIGNAL(timeout()), this, SLOT(updatevalue()));
-    
+
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
     timer2->start(100); // этот таймер отвечает за обновление графика
@@ -251,18 +240,18 @@ void MainWindow::Initialization()
     MessageWrite mr ;
     mr.LogAddMessage("Programm Started");
 
-    ch1.readoptionsfromfile(1);
-    ch2.readoptionsfromfile(2);
-    ch3.readoptionsfromfile(3);
-    ch4.readoptionsfromfile(4);
+    ch1.ReadSingleChannelOptionFromFile(1);
+    ch2.ReadSingleChannelOptionFromFile(2);
+    ch3.ReadSingleChannelOptionFromFile(3);
+    ch4.ReadSingleChannelOptionFromFile(4);
 
     LabelsInit();
 
-    Options::DisplayParametr = Options::TrendsCyfraBars;
+//    Options::DisplayParametr = Options::Polar;
 
-    ChannelOptions * asddddd = new ChannelOptions;
-    connect( asddddd, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
-    asddddd->updateUI("NEW UI TEXT");
+    ChannelOptions * objectwithsignal = new ChannelOptions;
+    connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
+    objectwithsignal->updateUI("NEW UI TEXT");
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)

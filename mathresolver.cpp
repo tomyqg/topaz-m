@@ -5,7 +5,7 @@ mathresolver::mathresolver()
 {
 }
 
-double mathresolver::Solve(QString eqstring, double x)
+double mathresolver::SolveEquation(QString eqstring, double x)
 {
     QScriptEngine myEngine;
     QString replaced=eqstring;
@@ -19,7 +19,7 @@ double mathresolver::Solve(QString eqstring, double x)
     return Result;
 }
 
-double mathresolver::Solve(QString eqstring)
+double mathresolver::SolveEquation(QString eqstring)
 {
      /*QScriptEngine myEngine;
      * доступные функции:
@@ -35,5 +35,5 @@ double mathresolver::Solve(QString eqstring)
 
     QString replaced=eqstring;
     replaced.replace(QString("x"), QString(""));
-    return Solve(replaced,0);
+    return SolveEquation(replaced,0);
 }

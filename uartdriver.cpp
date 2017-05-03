@@ -14,7 +14,7 @@
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
 QString pathtofile = "/usr/";
-#define uartsleep delay(50);
+#define uartsleep DelayMsec(50);
 #define longsleep delay(1000);
 #endif
 
@@ -31,7 +31,7 @@ double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
-quint16 ModBus::crc16_modbus(const QByteArray &array)
+quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -85,7 +85,7 @@ void UartDriver::writechannelvalue(int channel, double value)
     this->channelinputbuffer[channel-1] = value;
 }
 
-QByteArray UartDriver::ReadAllUartByteData()
+QByteArray UartDriver::ReadAllUartDataByteFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -104,7 +104,7 @@ QByteArray UartDriver::ReadAllUartByteData()
     return bytedata;
 }
 
-QString UartDriver::ReadAllUartStringData()
+QString UartDriver::ReadAllUartDataStringFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -125,7 +125,7 @@ QString UartDriver::ReadAllUartStringData()
     return DataAsString;
 }
 
-QString UartDriver::readalluartports()
+QString UartDriver::ReadAllAvailableCOMs()
 {
     QString a;
 
@@ -139,7 +139,7 @@ QString UartDriver::readalluartports()
     return a;
 }
 
-void UartDriver::delay(int n)
+void UartDriver::DelayMsec(int n)
 {
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
@@ -209,7 +209,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-    quint16 CRC16 = crc16_modbus(requestdata);
+    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
 
@@ -224,7 +224,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
     ModBus modb;
-    quint16 crc = modb.crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -268,7 +268,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-    quint16 CRC16 = crc16_modbus(requestdata);
+    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
     requestdata.append(CRC16Hi);
@@ -282,7 +282,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
     quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
-    quint16 crc = crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 crc = Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -314,7 +314,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-    quint16 CRC16 = crc16_modbus(requestdata);
+    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
     requestdata.append(CRC16Hi);
@@ -326,7 +326,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
     quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
     quint16  inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-    quint16  crc = crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16  crc = Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -372,7 +372,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo);
 
         ModBus modb;
-        uint16_t crc = modb.crc16_modbus(InputDataByteArrayNoCRC);
+        uint16_t crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRC);
 
         if (inpcrc == crc)
         {

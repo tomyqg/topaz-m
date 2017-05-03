@@ -1,14 +1,13 @@
 #ifndef METROLOGICALCALC_H
 #define METROLOGICALCALC_H
 
+#include <QObject>
 
-class MetrologicalCalc
+class MetrologicalCalc :  public QObject
 {
 public:
     MetrologicalCalc();
-
-    double CurrentToPressure(double current, double currentlow,double currenthigh,double pressurelow,double pressurehigh);
-
+    double ConvertCurrentToPressure(double current, double currentlow,double currenthigh,double pressurelow,double pressurehigh);
 };
 
 #endif // METROLOGICALCALC_H

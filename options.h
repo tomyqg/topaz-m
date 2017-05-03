@@ -11,6 +11,17 @@ namespace Ui {
 class Options;
 }
 
+enum DisplayParametrEnum {
+    Trends = 0x01 ,
+    Polar = 0x02 ,
+    Bars = 0x03 ,
+    TrendsBars = 0x04,
+    Cyfra = 0x05,
+    TrendsCyfra = 0x06,
+    BarsCyfra = 0x07,
+    TrendsCyfraBars = 0x08
+};
+
 class Options : public QDialog
 {
     Q_OBJECT
@@ -27,47 +38,36 @@ public:
     static QString calibrationprm;
     static QString olderprop;
     static int DisplayParametr;
-    void setlogmessageslimit(double n);
-    double getmaxmessageslimit();
-
-public slots:
-
-    void WriteAllChannelsOptionsToFile();
-    void WriteSystemOptionsToFile();
-    bool eventFilter(QObject *object, QEvent *event);
+    void SetLogMessagesLimit(double n);
+    double GetLogMessagesLimit();
+    DisplayParametrEnum SetDisplayParametr();
 
 private slots:
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void Channel1TypeChange();
-    void Channel2TypeChange();
-    void Channel3TypeChange();
-    void Channel4TypeChange();
-    void ApplyNewSettingstoAllChannels();
-    void ApplyNewSettingstoOptionsUI();
-    void CustomizeOptionsUI();
-    void readoptionsfromfile();
-    void readsystemoptionsfromfile();
     void on_UnitsChannel_1_editingFinished();
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
     void on_horizontalScrollBar_sliderReleased();
 
-public:
-    enum DisplayParametr {
-        Trends = 0x01 ,
-        Polar = 0x02 ,
-        Bars = 0x03 ,
-        TrendsBars = 0x04,
-        Cyfra = 0x05,
-        TrendsCyfra = 0x06,
-        BarsCyfra = 0x07,
-        TrendsCyfraBars = 0x08
-    };
+
 
 private:
+
+    void WriteAllChannelsOptionsToFile();
+    bool eventFilter(QObject *object, QEvent *event);
+    void WriteSystemOptionsToFile();
+    void ApplyNewSettingstoAllChannels();
+    void ApplyNewSettingstoOptionsUI();
+    void CustomizeOptionsUI();
+    void ReadChannelsOptionsFromFile();
+    void ReadSystemOptionsFromFile();
+    void Channel1TypeChange();
+    void Channel2TypeChange();
+    void Channel3TypeChange();
+    void Channel4TypeChange();
     static double maxmessageslimit;
     Ui::Options *ui;
 };

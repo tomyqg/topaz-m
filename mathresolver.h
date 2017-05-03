@@ -10,8 +10,8 @@ class mathresolver
 {
 public:
     mathresolver();
-    double Solve(QString eqstring, double x);
-    double Solve(QString eqstring);
+    double SolveEquation(QString eqstring, double x);
+    double SolveEquation(QString eqstring);
 };
 
 #endif // MATHRESOLVER_H

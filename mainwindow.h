@@ -65,11 +65,10 @@ private slots:
     void GrafsUpdateTrendsAndBars();
     void GrafsUpdateNone();
     void AddValuesToBuffer();
-    void delay(int n);
+    void DelaySec(int n);
 
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void on_dial_valueChanged(int value);
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
     void on_radioButton_clicked();
@@ -81,7 +80,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     QTimer *tmr;
-    void Initialization();
+    void MainWindowInitialization();
 
     QPen graphPen;
 

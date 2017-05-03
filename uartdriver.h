@@ -11,15 +11,15 @@ class UartDriver:public QObject
 
 public slots:
     void writechannelvalue(int channel, double value);
-    QString readalluartports();
-    QString ReadAllUartStringData();
-    QByteArray ReadAllUartByteData();
+    QString ReadAllAvailableCOMs();
+    QString ReadAllUartDataStringFormat();
+    QByteArray ReadAllUartDataByteFormat();
 
 private:
     static double channeltempbuffer[4];
 
 protected:
-    void delay(int n);
+    void DelayMsec(int n);
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
 
@@ -38,7 +38,7 @@ class ModBus: public UartDriver
 public slots:
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
-    quint16 crc16_modbus(const QByteArray &array);
+    quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
 public:
