@@ -51,6 +51,10 @@ private slots:
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
     void on_horizontalScrollBar_sliderReleased();
+    void Channel1TypeChange();
+    void Channel2TypeChange();
+    void Channel3TypeChange();
+    void Channel4TypeChange();
 
 
 
@@ -64,10 +68,6 @@ private:
     void CustomizeOptionsUI();
     void ReadChannelsOptionsFromFile();
     void ReadSystemOptionsFromFile();
-    void Channel1TypeChange();
-    void Channel2TypeChange();
-    void Channel3TypeChange();
-    void Channel4TypeChange();
     static double maxmessageslimit;
     Ui::Options *ui;
 };
