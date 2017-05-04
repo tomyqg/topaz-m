@@ -16,7 +16,6 @@ TARGET = untitled2
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
          ../../qcustomplot.cpp \
     updategraph.cpp \
     dialog.cpp \
@@ -30,7 +29,9 @@ SOURCES += main.cpp\
     mathresolver.cpp \
     options_gui.cpp \
     options_logic.cpp \
-    channel.cpp
+    channel.cpp \
+    mainwindow_gui.cpp \
+    mainwindow_logic.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
@@ -51,7 +52,7 @@ FORMS    += mainwindow.ui \
     keyboard.ui \
     messages.ui
 #target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
-target.path  = /usr
+target.path  = /usr/test
 INSTALLS    += target
 DISTFILES +=
 

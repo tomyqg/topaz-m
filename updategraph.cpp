@@ -302,6 +302,7 @@ void MainWindow::UpdateDataChannel1()
 
     if (currentdata!=0)
     {
+        SetConnectFailure(false);
         if (ch1.IsChannelMathematical())
         {
             currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
@@ -326,6 +327,9 @@ void MainWindow::UpdateDataChannel1()
             mr.LogAddMessage (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
         }
 
+    }
+    else {
+        SetConnectFailure(true);
     }
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
@@ -531,6 +535,14 @@ void MainWindow::PaintCyfrasBottom()
     painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
     painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
     painter.end();
+
+    if (GetConnectFailure() == true)
+    {
+//        qDebug() << "Connection Fail";
+//        painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
+//        painter.drawRect(2+widgwidth*1/4, 2+561, 0, 96);
+//        painter.drawText(2+widgwidth*1/4, 2+561, 0, 96, Qt::AlignHCenter | Qt::AlignTop, "Connect Failure");
+    }
 }
 
 void MainWindow::PaintCyfrasFullScreen()

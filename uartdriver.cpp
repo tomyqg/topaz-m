@@ -13,7 +13,7 @@
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
-QString pathtofile = "/usr/";
+QString pathtofile = "/usr/test";
 #define uartsleep DelayMsec(50);
 #define longsleep delay(1000);
 #endif

@@ -59,12 +59,11 @@ private slots:
     void Channel3TypeChange();
     void Channel4TypeChange();
 
-
-
 private:
 
-    QString GetNewDateString() {return ui->timeEdit->time().toString();}
-    QString GetNewTimeString() {return ui->timeEdit->time().toString();}
+    QString GetNewDateString();
+    QString GetNewTimeString();
+
     int GetCurrentDisplayParametr() { return DisplayParametr;}
     void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
     void UpdateCurrentDisplayParametr() ;

@@ -429,3 +429,6 @@ void Options::UpdateCurrentDisplayParametr()
             SetCurrentDisplayParametr(Options::BarsCyfra);
         }
 }
+
+QString Options::GetNewDateString() {return ui->timeEdit->time().toString();}
+QString Options::GetNewTimeString() {return ui->timeEdit->time().toString();}

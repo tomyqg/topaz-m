@@ -31,7 +31,7 @@ public slots:
 
     void updateText( const QString text );
     void touchupdate();
-    void LabelsInit();
+    void InitLabels();
     void LabelsUpdate();
     void LabelsCorrect();
     void WriteGpio(int num, bool val);
@@ -50,10 +50,17 @@ public slots:
     bool eventFilter(QObject* watched, QEvent* event);
 
 private:
+
+    void InitPins();
+    void InitProcessor();
+    void InitTimers();
+    void InitTouchScreen();
     void PaintOnWidget();
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
+    bool GetConnectFailure(){return ConnectFailure;}
+    void SetConnectFailure(bool newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
 
 private slots:
 
@@ -104,6 +111,8 @@ private:
     QTimer *channeltimer4;
     QTimer *archivetimer;
     QThread *thread;
+
+    bool ConnectFailure;
 
 protected:
 
