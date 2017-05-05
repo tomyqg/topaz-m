@@ -33,7 +33,13 @@ public:
 
 class ModBus: public UartDriver
 {
+
+
     Q_OBJECT
+
+private:
+
+    static bool ConnectFailure;
 
 public slots:
     double ReadTemperature(char channel);
@@ -42,6 +48,10 @@ public slots:
     void ReadAllChannelsThread();
 
 public:
+
+    bool GetConnectFailure(){return ConnectFailure;}
+    void SetConnectFailure(bool newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
+
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
             char Function,

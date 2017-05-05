@@ -26,6 +26,73 @@
 #include <QThread>
 #include <QPoint>
 
+void MainWindow::MainWindowInitialization()
+{
+    QPixmap pix("/usr/logo.jpg");
+    ui->label->setPixmap(pix);
+    ui->MessagesWidget->installEventFilter(this);
+    ui->customPlot->xAxis->setRange(-8, 600);
+    ui->customPlot->yAxis->setRange(-200, 200);
+
+    MessageWrite mr ;
+    mr.LogAddMessage("Programm Started");
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
+
+    UpdateGraficsTimer = new QTimer(this);
+    //connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+    connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
+
+    QTimer *timetouch = new QTimer(this);
+    connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
+
+    tmr = new QTimer();
+    tmr->setInterval(500);
+
+    QTimer *tmrarchive = new QTimer(this);
+    tmrarchive->setInterval(5000);
+
+    connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+    tmrarchive->start(5000);
+
+    connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
+
+    tmr->start(100);// этот таймер тоже за обновление значений
+    timer->start(1111);
+    UpdateGraficsTimer->start(400); // этот таймер отвечает за обновление графика
+    timetouch->start(5000);
+
+
+    InitPins();
+    InitTouchScreen();
+    InitProcessor();
+    InitLabels();
+    InitTimers();
+
+    thread= new QThread();
+    ModBus *MB = new ModBus();
+    MB->moveToThread(thread);
+    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
+    //connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
+
+
+    ch1.ReadSingleChannelOptionFromFile(1);
+    ch2.ReadSingleChannelOptionFromFile(2);
+    ch3.ReadSingleChannelOptionFromFile(3);
+    ch4.ReadSingleChannelOptionFromFile(4);
+
+
+    Options::DisplayParametr = Options::TrendsCyfra;
+
+    InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
+
+    // connection for accessing to UI from another class
+    ChannelOptions * objectwithsignal = new ChannelOptions;
+    connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
+    objectwithsignal->updateUI("NEW UI TEXT");
+}
+
 void MainWindow::InitLabels()
 {
     QDateTime fisttime;

@@ -49,6 +49,7 @@ public slots:
 
     bool eventFilter(QObject* watched, QEvent* event);
 
+
 private:
 
     void InitPins();
@@ -59,8 +60,6 @@ private:
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
-    bool GetConnectFailure(){return ConnectFailure;}
-    void SetConnectFailure(bool newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
 
 private slots:
 
@@ -112,7 +111,9 @@ private:
     QTimer *archivetimer;
     QThread *thread;
 
-    bool ConnectFailure;
+    QTimer *UpdateGraficsTimer;
+
+
 
 protected:
 

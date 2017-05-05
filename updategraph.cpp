@@ -302,7 +302,7 @@ void MainWindow::UpdateDataChannel1()
 
     if (currentdata!=0)
     {
-        SetConnectFailure(false);
+
         if (ch1.IsChannelMathematical())
         {
             currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
@@ -329,7 +329,7 @@ void MainWindow::UpdateDataChannel1()
 
     }
     else {
-        SetConnectFailure(true);
+
     }
     int period = ch1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
@@ -504,6 +504,9 @@ void MainWindow::PaintCyfrasBottom()
     int widgwidth  = ui->MessagesWidget->width();
     int widgheight  = ui->MessagesWidget->height();
 
+    QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
+
+
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -516,11 +519,27 @@ void MainWindow::PaintCyfrasBottom()
     painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
     painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
 
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-    painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
-    painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
-    painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
+
+    ModBus mb;
+
+    if (mb.GetConnectFailure() == false)
+    {
+        painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+        Channel1ValueString = QString::number(UartDriver::channelinputbuffer[0]);
+        Channel2ValueString = QString::number(UartDriver::channelinputbuffer[1]);
+        Channel3ValueString = QString::number(UartDriver::channelinputbuffer[2]);
+        Channel4ValueString = QString::number(UartDriver::channelinputbuffer[3]);
+    }
+    else
+    {
+        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
+        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
+    }
+
+    painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
+    painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
+    painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
+    painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
     //    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
@@ -534,15 +553,8 @@ void MainWindow::PaintCyfrasBottom()
     painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
     painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
     painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
-    painter.end();
 
-    if (GetConnectFailure() == true)
-    {
-//        qDebug() << "Connection Fail";
-//        painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
-//        painter.drawRect(2+widgwidth*1/4, 2+561, 0, 96);
-//        painter.drawText(2+widgwidth*1/4, 2+561, 0, 96, Qt::AlignHCenter | Qt::AlignTop, "Connect Failure");
-    }
+    painter.end();
 }
 
 void MainWindow::PaintCyfrasFullScreen()
