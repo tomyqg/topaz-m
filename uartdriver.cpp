@@ -31,7 +31,7 @@ double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
-bool ModBus::ConnectFailure =false;
+uint ModBus::ConnectFailure =false;
 
 quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
@@ -228,15 +228,17 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     ModBus modb;
     quint16 crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
-
-    if (InputDataByteArray!=0)
-        SetConnectFailure(false);
+    if (InputDataByteArray.length()!=0)
+        SetConnectFailure(0);
     else
-        SetConnectFailure(true);
+    {
+        SetConnectFailure(1);
+        return 0;
+    }
 
     if (inpcrc == crc)
     {
-        SetConnectFailure(false);
+        SetConnectFailure(0);
         QByteArray arr;
         float val;
 
@@ -253,7 +255,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     }
     else
     {
-        SetConnectFailure(true);
+        SetConnectFailure(2);
         return 0;
     }
     return 0;

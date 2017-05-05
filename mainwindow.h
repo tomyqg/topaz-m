@@ -37,6 +37,8 @@ public slots:
     void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
 
+    void HalfSecondGone();
+
     void UpdateDataChannel1();
     void UpdateDataChannel2();
     void UpdateDataChannel3();
@@ -60,6 +62,8 @@ private:
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
+    char GetHalfSecFlag();
+    void InvertHalfSecFlag();
 
 private slots:
 
@@ -88,6 +92,8 @@ private:
     QTimer *tmr;
     void MainWindowInitialization();
 
+    char halfSecondflag;
+
     QPen graphPen;
 
     QPainter painter;
@@ -113,7 +119,7 @@ private:
 
     QTimer *UpdateGraficsTimer;
 
-
+    QTimer *halfSecondTimer;
 
 protected:
 

@@ -136,10 +136,9 @@ void MainWindow::InitProcessor()
 {
     // an object for make terminal requests
     QProcess process;
-
-    //    Use NOPASSWD line for all commands, I mean:
-    //    jenkins ALL=(ALL) NOPASSWD: ALL
-    //    Put the line after all other lines in the sudoers file.
+    //Use NOPASSWD line for all commands, I mean:
+    //jenkins ALL=(ALL) NOPASSWD: ALL
+    //Put the line after all other lines in the sudoers file.
 
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 1000MHz");
@@ -151,7 +150,8 @@ void MainWindow::InitTimers()
     channeltimer2 = new QTimer();
     channeltimer3 = new QTimer();
     channeltimer4 = new QTimer();
-    archivetimer = new QTimer();
+    archivetimer  = new QTimer();
+    halfSecondTimer  = new QTimer();
 
     //connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
     //connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
@@ -162,19 +162,20 @@ void MainWindow::InitTimers()
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+    connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
 
     channeltimer1->start(100);
     channeltimer2->start(100);
     channeltimer3->start(100);
     channeltimer4->start(100);
     archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
+    halfSecondTimer->start(500);
 }
 
 void MainWindow::InitTouchScreen()
 {
     // an object for make terminal requests
     QProcess process;
-
     // the initial touchscreen
     process.startDetached("sudo xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 }
@@ -206,4 +207,20 @@ void MainWindow::LabelsCorrect()
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
         i++;
     }
+}
+
+void MainWindow::HalfSecondGone()
+{
+InvertHalfSecFlag();
+}
+
+char MainWindow::GetHalfSecFlag()
+{
+    return halfSecondflag;
+}
+
+void MainWindow::InvertHalfSecFlag()
+{
+    halfSecondflag++;
+    halfSecondflag = halfSecondflag%2;
 }

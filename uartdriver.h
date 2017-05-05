@@ -33,13 +33,11 @@ public:
 
 class ModBus: public UartDriver
 {
-
-
     Q_OBJECT
 
 private:
 
-    static bool ConnectFailure;
+    static uint ConnectFailure;
 
 public slots:
     double ReadTemperature(char channel);
@@ -49,8 +47,8 @@ public slots:
 
 public:
 
-    bool GetConnectFailure(){return ConnectFailure;}
-    void SetConnectFailure(bool newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
+    uint GetConnectFailureStatus(){return ConnectFailure;}
+    void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
 
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
@@ -79,9 +77,15 @@ public:
     double DataChannel1Read();
 
 public:
-//    int G00Bias = 0;
-    enum DeviceAdress {
 
+    enum UartErrors {
+        NoResponse = 0x01 ,
+        CrcError = 0x02
+    };
+    Q_ENUM(UartErrors)
+
+
+    enum DeviceAdress {
         MainDeviceAddress = 0x01 ,
         UniversalChannel1 = 0x01 ,
         UniversalChannel2 = 0x02 ,
@@ -91,7 +95,7 @@ public:
     Q_ENUM(DeviceAdress)
 
     enum RegisterAdress {
-        TemperetureAdress   = 0x0000,
+        TemperetureAdress     = 0x0000,
         VoltageAdressHi       = 0x02,
         CurrentAdressHi       = 0x04,
         ResistanceAdressHi    = 0x08,

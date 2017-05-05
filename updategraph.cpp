@@ -506,34 +506,52 @@ void MainWindow::PaintCyfrasBottom()
 
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
-
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
-    painter.drawRect(2, 2+561, widgwidth*1/4, 96);
-    painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
-    painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
-    painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
-    painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
-    painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
-    painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
-
-
     ModBus mb;
 
-    if (mb.GetConnectFailure() == false)
+    if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
     {
-        painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-        Channel1ValueString = QString::number(UartDriver::channelinputbuffer[0]);
-        Channel2ValueString = QString::number(UartDriver::channelinputbuffer[1]);
-        Channel3ValueString = QString::number(UartDriver::channelinputbuffer[2]);
-        Channel4ValueString = QString::number(UartDriver::channelinputbuffer[3]);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
     }
     else
     {
+        painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
+        painter.drawRect(2, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
+        painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
+        painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
+        painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
+    }
+
+    if (mb.GetConnectFailureStatus() == 1)
+    {
         painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
         Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
+    }
+
+    else if (mb.GetConnectFailureStatus() == 2)
+    {
+        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
+        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "CRC Error";
+    }
+
+    else {
+        painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+        Channel1ValueString = QString::number(GetHalfSecFlag());
+        Channel2ValueString = QString::number(UartDriver::channelinputbuffer[1]);
+        Channel3ValueString = QString::number(UartDriver::channelinputbuffer[2]);
+        Channel4ValueString = QString::number(UartDriver::channelinputbuffer[3]);
     }
 
     painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
@@ -694,7 +712,7 @@ void MainWindow::PaintPolarDiagramm()
     PolarChartPointsChannel4.append(NewPolarPointChannel4);
 
     int a = X_Coordinates.last();
-    if ( a%360 == 0)
+    if ( a%360 >= 0)
     {
         //        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
@@ -702,10 +720,10 @@ void MainWindow::PaintPolarDiagramm()
         PolarChartPointsChannel3.clear();
         PolarChartPointsChannel4.clear();
 
-        //        PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
-        //        PolarChartPointsChannel2.removeFirst();
-        //        PolarChartPointsChannel3.removeFirst();
-        //        PolarChartPointsChannel4.removeFirst();
+        //PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
+        //PolarChartPointsChannel2.removeFirst();
+        //PolarChartPointsChannel3.removeFirst();
+        //PolarChartPointsChannel4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);
