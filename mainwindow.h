@@ -30,7 +30,7 @@ public:
 public slots:
 
     void updateText( const QString text );
-    void touchupdate();
+    void NewTouchscreenCalibration();
     void InitLabels();
     void LabelsUpdate();
     void LabelsCorrect();
@@ -55,19 +55,24 @@ public slots:
 private:
 
     void InitPins();
-    void InitProcessor();
+    void InitProcessorMaxFreq();
+    void InitProcessorMinFreq();
     void InitTimers();
     void InitTouchScreen();
     void PaintOnWidget();
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
+    void PaintUstavkiAlert();
     char GetHalfSecFlag();
     void InvertHalfSecFlag();
+    void OpenMessagesWindow();
+    void OpenOptionsWindow();
+    void PowerOff();
+    void CloseApplication();
 
 private slots:
 
-    void on_lcdNumber_overflow();
     void updateDateLabel();
     void UpdateGraphics();
     void GrafsUpdateBars();
@@ -109,6 +114,7 @@ private:
     static QVector<QDateTime> Dates;
     QVector<QString> Labels;
     QVector<QString> LabelsBar;
+
 
     QTimer *channeltimer1 ;
     QTimer *channeltimer2;

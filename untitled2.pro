@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     options_logic.cpp \
     channel.cpp \
     mainwindow_gui.cpp \
-    mainwindow_logic.cpp
+    mainwindow_logic.cpp \
+    painting.cpp
 
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \

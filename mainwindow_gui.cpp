@@ -37,8 +37,7 @@ QVector<QDateTime> MainWindow::Dates;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint);
-    setWindowTitle(tr("VISION"));
+
     MainWindowInitialization();
 }
 
@@ -49,17 +48,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_lcdNumber_overflow()
-{
-}
-
 void MainWindow::updateDateLabel()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 /*
     QProcess process;
-
 
 //    QProcess process1;
 //    process1.start("sudo su"); // root permission
@@ -79,67 +73,41 @@ UartDriver *UD = new UartDriver();
     UD->SetRTSPinDirection();*/
 }
 
-void MainWindow::touchupdate()
-{
-    QProcess process;
-    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
-}
 
 void MainWindow::on_pushButton_clicked()
 {
-    QProcess process;
-    process.startDetached("sudo poweroff");
-    QApplication::exit();
+    PowerOff();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    Options options;
-    options.setModal(true);
-    options.exec();
-    //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    ch1.ReadSingleChannelOptionFromFile(1);
-    ch2.ReadSingleChannelOptionFromFile(2);
-    ch3.ReadSingleChannelOptionFromFile(3);
-    ch4.ReadSingleChannelOptionFromFile(4);
+    OpenOptionsWindow();
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    QApplication::exit();
+    CloseApplication();
 }
-
-void MainWindow::DelaySec(int n)
-{
-    QTime dieTime= QTime::currentTime().addSecs(1);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}
-
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    mr.WriteAllLogToFile();
-    Messages messages;
-    messages.setModal(true);
-    messages.exec();
+    OpenMessagesWindow();
 }
 
 void MainWindow::on_radioButton_clicked()
 {
-    QProcess process;
-    process.startDetached("sudo cpufreq-set -f 1000MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor performance"); // max perfomance on
+    InitProcessorMaxFreq();
 }
 
 void MainWindow::on_radioButton_2_clicked()
 {
-    QProcess process;
-    process.startDetached("sudo cpufreq-set -f 300MHz"); // max freq on
-    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
+    InitProcessorMinFreq();
 }
 
-
+void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
+{
+    ui->textEdit_2->setText(text);
+}
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
@@ -148,9 +116,4 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
     }
     return false;
-}
-
-void  MainWindow::updateText( const QString text ) // const QString & newText
-{
-    ui->textEdit_2->setText(text);
 }

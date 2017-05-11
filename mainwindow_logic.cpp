@@ -28,6 +28,9 @@
 
 void MainWindow::MainWindowInitialization()
 {
+    setWindowFlags(Qt::CustomizeWindowHint);
+    setWindowTitle(tr("VISION"));
+
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
     ui->MessagesWidget->installEventFilter(this);
@@ -45,7 +48,7 @@ void MainWindow::MainWindowInitialization()
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
 
     QTimer *timetouch = new QTimer(this);
-    connect(timetouch, SIGNAL(timeout()), this, SLOT(touchupdate()));
+    connect(timetouch, SIGNAL(timeout()), this, SLOT(NewTouchscreenCalibration()));
 
     tmr = new QTimer();
     tmr->setInterval(500);
@@ -66,7 +69,7 @@ void MainWindow::MainWindowInitialization()
 
     InitPins();
     InitTouchScreen();
-    InitProcessor();
+    InitProcessorMaxFreq();
     InitLabels();
     InitTimers();
 
@@ -132,7 +135,45 @@ void MainWindow::InitPins()
     filedir.close();
 }
 
-void MainWindow::InitProcessor()
+void MainWindow::OpenMessagesWindow()
+{
+    mr.WriteAllLogToFile();
+    Messages messages;
+    messages.setModal(true);
+    messages.exec();
+}
+
+void MainWindow::DelaySec(int n)
+{
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+void MainWindow::OpenOptionsWindow()
+{
+    Options options;
+    options.setModal(true);
+    options.exec();
+    //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
+    ch1.ReadSingleChannelOptionFromFile(1);
+    ch2.ReadSingleChannelOptionFromFile(2);
+    ch3.ReadSingleChannelOptionFromFile(3);
+    ch4.ReadSingleChannelOptionFromFile(4);
+}
+void MainWindow::PowerOff()
+{
+    QProcess process;
+    process.startDetached("sudo poweroff");
+    QApplication::exit();
+}
+
+void MainWindow::CloseApplication()
+{
+    QApplication::exit();
+}
+
+void MainWindow::InitProcessorMaxFreq()
 {
     // an object for make terminal requests
     QProcess process;
@@ -142,6 +183,19 @@ void MainWindow::InitProcessor()
 
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 1000MHz");
+}
+
+void MainWindow::InitProcessorMinFreq()
+{
+    // an object for make terminal requests
+    QProcess process;
+    //Use NOPASSWD line for all commands, I mean:
+    //jenkins ALL=(ALL) NOPASSWD: ALL
+    //Put the line after all other lines in the sudoers file.
+
+    // the maximum processor speed
+    process.startDetached("sudo cpufreq-set -f 300MHz");
+    process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
 
 void MainWindow::InitTimers()
@@ -223,4 +277,11 @@ void MainWindow::InvertHalfSecFlag()
 {
     halfSecondflag++;
     halfSecondflag = halfSecondflag%2;
+}
+
+
+void MainWindow::NewTouchscreenCalibration()
+{
+    QProcess process;
+    process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
 }
