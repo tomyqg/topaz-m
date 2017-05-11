@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
-#include "dialog.h"
 #include "channel1.h"
 #include "uartdriver.h"
 #include <QFile>
@@ -13,7 +12,7 @@
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
-QString pathtofile = "/usr/test";
+QString pathtofile = "/usr/test/";
 #define uartsleep DelayMsec(50);
 #define longsleep delay(1000);
 #endif

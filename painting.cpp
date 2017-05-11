@@ -158,7 +158,7 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.end();
 }
 
-void MainWindow::PaintUstavkiAlert()
+void MainWindow::PaintStatesAndAlerts() // отрисовывает события на уставки
 {
     QPainter painter;
 
@@ -168,6 +168,21 @@ void MainWindow::PaintUstavkiAlert()
     int alertwindowwidth = widgwidth/2-2;
     int alertwindowheight = widgheight/2/4;
     int alerttextsize = widgwidth/2-2;
+
+    double channel1currentvalue = UartDriver::channelinputbuffer[0];
+    double channel2currentvalue = UartDriver::channelinputbuffer[1];
+    double channel3currentvalue = UartDriver::channelinputbuffer[2];
+    double channel4currentvalue = UartDriver::channelinputbuffer[3];
+
+    double channel1state1value = ch1.GetState1Value();
+    double channel2state1value = ch2.GetState1Value();
+    double channel3state1value = ch3.GetState1Value();
+    double channel4state1value = ch4.GetState1Value();
+
+    double channel1state2value = ch1.GetState2Value();
+    double channel2state2value = ch2.GetState2Value();
+    double channel3state2value = ch3.GetState2Value();
+    double channel4state2value = ch4.GetState2Value();
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -181,25 +196,35 @@ void MainWindow::PaintUstavkiAlert()
     painter.setBrush(QBrush(Channel4Color, Qt::SolidPattern));
     painter.drawRect(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2);
 
-    painter.setPen(QPen(Qt::cyan, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
-    painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
-    painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
-    painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
-
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
     painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
     painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
     painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
     painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
 
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-    painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetUnitsName());
-    painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetUnitsName());
-    painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetUnitsName());
-    painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetUnitsName());
+    painter.setFont(QFont("Times New Roman", 30, QFont::ExtraBold));
+
+    // увеличение уставки
+    if (channel1currentvalue>channel1state1value)
+        painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState1HighMessage());
+    if (channel2currentvalue>channel2state1value)
+        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState1HighMessage());
+    if (channel3currentvalue>channel3state1value)
+        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetState1HighMessage());
+    if (channel4currentvalue>channel4state1value)
+        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetState1HighMessage());
+
+    // уменьшение уставки
+    if (channel1currentvalue<channel1state2value)
+        painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState2LowMessage());
+    if (channel2currentvalue<channel2state2value)
+        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState2LowMessage());
+    if (channel3currentvalue<channel2state2value)
+        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetState2LowMessage());
+    if (channel4currentvalue<channel2state2value)
+        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetState2LowMessage());
+
     painter.end();
 }
 
@@ -336,13 +361,16 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
+    PaintStatesAndAlerts();
+
     switch( Options::DisplayParametr )
     {
     case Options::Cyfra:
         PaintCyfrasFullScreen();break;
     case Options::TrendsCyfra:
-        //PaintCyfrasBottom();break;
-        PaintUstavkiAlert();break;
+        PaintCyfrasBottom();break;
+    case Options::Trends:
+        PaintStatesAndAlerts();break;
     case Options::TrendsCyfraBars:
         PaintCyfrasBottom();break;
     case Options::BarsCyfra:

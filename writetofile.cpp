@@ -4,7 +4,6 @@
 #include "ui_options.h"
 #include "messages.h"
 #include "keyboard.h"
-#include "dialog.h"
 #include "channel1.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;

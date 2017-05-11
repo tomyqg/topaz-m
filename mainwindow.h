@@ -63,7 +63,7 @@ private:
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
-    void PaintUstavkiAlert();
+    void PaintStatesAlert();
     char GetHalfSecFlag();
     void InvertHalfSecFlag();
     void OpenMessagesWindow();

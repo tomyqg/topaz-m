@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
-#include "dialog.h"
 
 extern QString pathtofile;
 

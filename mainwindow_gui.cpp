@@ -3,7 +3,6 @@
 #include "options.h"
 #include "messages.h"
 #include "keyboard.h"
-#include "dialog.h"
 #include "mathresolver.h"
 #include "channel1.h"
 #include "uartdriver.h"

@@ -18,7 +18,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
          ../../qcustomplot.cpp \
     updategraph.cpp \
-    dialog.cpp \
     keyboard.cpp \
     eventfilter.cpp \
     uartdriver.cpp \
@@ -37,7 +36,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
          ../../qcustomplot.h \
     updategraph.h \
-    dialog.h \
     options.h \
     channel1.h\
     channel1.h \
@@ -48,7 +46,6 @@ HEADERS  += mainwindow.h \
     mathresolver.h
 
 FORMS    += mainwindow.ui \
-    dialog.ui \
     options.ui \
     keyboard.ui \
     messages.ui

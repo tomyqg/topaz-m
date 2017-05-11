@@ -3,7 +3,6 @@
 #include "options.h"
 #include "messages.h"
 #include "keyboard.h"
-#include "dialog.h"
 #include "mathresolver.h"
 #include "channel1.h"
 #include "uartdriver.h"
@@ -86,7 +85,7 @@ void MainWindow::MainWindowInitialization()
     ch4.ReadSingleChannelOptionFromFile(4);
 
 
-    Options::DisplayParametr = Options::TrendsCyfra;
+    Options::DisplayParametr = Options::Trends;
 
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
 
