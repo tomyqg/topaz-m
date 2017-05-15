@@ -87,24 +87,24 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(6);
-    graphPen.setColor(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]));
+    graphPen.setColor(GetChannel1Color());
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     {ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-        graphPen.setColor(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]));
+        graphPen.setColor(GetChannel2Color());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-        graphPen.setColor(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]));
+        graphPen.setColor(GetChannel3Color());
         ui->customPlot->graph()->setPen(graphPen);}
 
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-        graphPen.setColor(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]));
+        graphPen.setColor(GetChannel4Color());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
@@ -143,26 +143,26 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]));
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel1Color())); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2, y2);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]));
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel2Color())); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3, y3);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]));
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel3Color())); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4, y4);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]));
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel4Color())); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->replot();
@@ -288,7 +288,7 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setPen(graphPen);
 
     LabelsBar.clear();
-    LabelsBar.append("0");LabelsBar.append(ch1.GetChannelName());LabelsBar.append(ch2.GetChannelName());LabelsBar.append(ch3.GetChannelName());LabelsBar.append(ch4.GetChannelName());
+    LabelsBar.append("0");LabelsBar.append(channel1object.GetChannelName());LabelsBar.append(channel2object.GetChannelName());LabelsBar.append(channel3object.GetChannelName());LabelsBar.append(channel4object.GetChannelName());
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
@@ -313,63 +313,63 @@ void MainWindow::UpdateDataChannel1()
     if (currentdata!=0)
     {
 
-        if (ch1.IsChannelMathematical())
+        if (channel1object.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch1.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(channel1object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(1,currentdata);
 
-        if ((currentdata>=ch1.GetState1Value() ) && ( ch1.HighState1Setted == false ))
+        if ((currentdata>=channel1object.GetState1Value() ) && ( channel1object.HighState1Setted == false ))
         {
-            ch1.LowState1Setted = false;
-            ui->listWidget->addItem(ch1.GetState1HighMessage());
+            channel1object.LowState1Setted = false;
+            ui->listWidget->addItem(channel1object.GetState1HighMessage());
             ui->listWidget->scrollToBottom();
-            ch1.HighState1Setted = true;
-            mr.LogAddMessage (ch1.GetChannelName() + ":" + ch1.GetState1HighMessage());
+            channel1object.HighState1Setted = true;
+            mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1HighMessage());
         }
 
-        if ((currentdata<ch1.GetState1Value() ) && ( ch1.LowState1Setted == false ))
+        if ((currentdata<channel1object.GetState1Value() ) && ( channel1object.LowState1Setted == false ))
         {
-            ch1.LowState1Setted = true;
-            ui->listWidget->addItem(ch1.GetState1LowMessage());
+            channel1object.LowState1Setted = true;
+            ui->listWidget->addItem(channel1object.GetState1LowMessage());
             ui->listWidget->scrollToBottom();
-            ch1.HighState1Setted = false;
-            mr.LogAddMessage (ch1.GetChannelName() + ":" + ch1.GetState1LowMessage());
+            channel1object.HighState1Setted = false;
+            mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1LowMessage());
         }
 
     }
     else {
 
     }
-    int period = ch1.GetMeasurePeriod()*1000;
+    int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel111()
 {
     UartDriver::needtoupdatechannel[0] = 1;
-    int period = ch1.GetMeasurePeriod()*1000;
+    int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel222()
 {
     UartDriver::needtoupdatechannel[1] = 1;
-    int period = ch2.GetMeasurePeriod()*1000;
+    int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel333()
 {
     UartDriver::needtoupdatechannel[2] = 1;
-    int period = ch3.GetMeasurePeriod()*1000;
+    int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel444()
 {
     UartDriver::needtoupdatechannel[3] = 1;
-    int period = ch4.GetMeasurePeriod()*1000;
+    int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
 
@@ -384,32 +384,32 @@ void MainWindow::UpdateDataChannel2()
     currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (currentdata!=0)
     {
-        if (ch2.IsChannelMathematical())
+        if (channel2object.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch2.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(channel2object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         pressure = currentdata;
         UD.writechannelvalue(2,pressure);
 
-        if ((pressure>=ch2.GetState1Value() ) && ( ch2.HighState1Setted == false ))
+        if ((pressure>=channel2object.GetState1Value() ) && ( channel2object.HighState1Setted == false ))
         {
-            ch2.LowState1Setted = false;
-            ui->listWidget->addItem(ch2.GetState1HighMessage());
+            channel2object.LowState1Setted = false;
+            ui->listWidget->addItem(channel2object.GetState1HighMessage());
             ui->listWidget->scrollToBottom();
-            ch2.HighState1Setted = true;
-            mr.LogAddMessage (ch2.GetChannelName() + ":" + ch2.GetState1HighMessage());
+            channel2object.HighState1Setted = true;
+            mr.LogAddMessage (channel2object.GetChannelName() + ":" + channel2object.GetState1HighMessage());
         }
 
-        if ((pressure<ch2.GetState1Value() ) && ( ch2.LowState1Setted == false ))
+        if ((pressure<channel2object.GetState1Value() ) && ( channel2object.LowState1Setted == false ))
         {
-            ch2.LowState1Setted = true;
-            ui->listWidget->addItem(ch2.GetState1LowMessage());
+            channel2object.LowState1Setted = true;
+            ui->listWidget->addItem(channel2object.GetState1LowMessage());
             ui->listWidget->scrollToBottom();
-            ch2.HighState1Setted = false;
-            mr.LogAddMessage (ch2.GetChannelName() + ":" + ch2.GetState1LowMessage());
+            channel2object.HighState1Setted = false;
+            mr.LogAddMessage (channel2object.GetChannelName() + ":" + channel2object.GetState1LowMessage());
         }
     }
-    int period = ch2.GetMeasurePeriod()*1000;
+    int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
 
 }
@@ -424,31 +424,31 @@ void MainWindow::UpdateDataChannel3()
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (currentdata!=0)
     {
-        if (ch3.IsChannelMathematical())
+        if (channel3object.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch3.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(channel3object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(3,currentdata);
 
-        if ((currentdata>=ch3.GetState1Value() ) && ( ch3.HighState1Setted == false ))
+        if ((currentdata>=channel3object.GetState1Value() ) && ( channel3object.HighState1Setted == false ))
         {
-            ch3.LowState1Setted = false;
-            ui->listWidget->addItem(ch3.GetState1HighMessage());
+            channel3object.LowState1Setted = false;
+            ui->listWidget->addItem(channel3object.GetState1HighMessage());
             ui->listWidget->scrollToBottom();
-            ch3.HighState1Setted = true;
-            mr.LogAddMessage (ch3.GetChannelName() + ":" + ch3.GetState1HighMessage());
+            channel3object.HighState1Setted = true;
+            mr.LogAddMessage (channel3object.GetChannelName() + ":" + channel3object.GetState1HighMessage());
         }
 
-        if ((currentdata<ch3.GetState1Value() ) && ( ch3.LowState1Setted == false ))
+        if ((currentdata<channel3object.GetState1Value() ) && ( channel3object.LowState1Setted == false ))
         {
-            ch3.LowState1Setted = true;
-            ui->listWidget->addItem(ch3.GetState1LowMessage());
+            channel3object.LowState1Setted = true;
+            ui->listWidget->addItem(channel3object.GetState1LowMessage());
             ui->listWidget->scrollToBottom();
-            ch3.HighState1Setted = false;
-            mr.LogAddMessage (ch3.GetChannelName() + ":" + ch3.GetState1LowMessage());
+            channel3object.HighState1Setted = false;
+            mr.LogAddMessage (channel3object.GetChannelName() + ":" + channel3object.GetState1LowMessage());
         }
     }
-    int period = ch3.GetMeasurePeriod()*1000;
+    int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
 
@@ -462,31 +462,31 @@ void MainWindow::UpdateDataChannel4()
     currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
     if (currentdata!=0)
     {
-        if (ch4.IsChannelMathematical())
+        if (channel4object.IsChannelMathematical())
         {
-            currentdata = mathres.SolveEquation(ch4.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
+            currentdata = mathres.SolveEquation(channel4object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
         }
         UD.writechannelvalue(4,currentdata);
 
-        if ((currentdata>=ch4.GetState1Value() ) && ( ch4.HighState1Setted == false ))
+        if ((currentdata>=channel4object.GetState1Value() ) && ( channel4object.HighState1Setted == false ))
         {
-            ch4.LowState1Setted = false;
-            ui->listWidget->addItem(ch4.GetState1HighMessage());
+            channel4object.LowState1Setted = false;
+            ui->listWidget->addItem(channel4object.GetState1HighMessage());
             ui->listWidget->scrollToBottom();
-            ch4.HighState1Setted = true;
-            mr.LogAddMessage (ch4.GetChannelName() + ":" + ch4.GetState1HighMessage());
+            channel4object.HighState1Setted = true;
+            mr.LogAddMessage (channel4object.GetChannelName() + ":" + channel4object.GetState1HighMessage());
         }
 
-        if ((currentdata<ch4.GetState1Value() ) && ( ch4.LowState1Setted == false ))
+        if ((currentdata<channel4object.GetState1Value() ) && ( channel4object.LowState1Setted == false ))
         {
-            ch4.LowState1Setted = true;
-            ui->listWidget->addItem(ch4.GetState1LowMessage());
+            channel4object.LowState1Setted = true;
+            ui->listWidget->addItem(channel4object.GetState1LowMessage());
             ui->listWidget->scrollToBottom();
-            ch4.HighState1Setted = false;
-            mr.LogAddMessage (ch4.GetChannelName() + ":" + ch4.GetState1LowMessage());
+            channel4object.HighState1Setted = false;
+            mr.LogAddMessage (channel4object.GetChannelName() + ":" + channel4object.GetState1LowMessage());
         }
     }
-    int period = ch4.GetMeasurePeriod()*1000;
+    int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
 

@@ -41,7 +41,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>4</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -4561,7 +4561,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="text">
-          <string>Цифра</string>
+          <string>Тренд</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -4585,7 +4585,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="text">
-          <string>Тренд                 </string>
+          <string>Цифра           </string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -5221,9 +5221,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

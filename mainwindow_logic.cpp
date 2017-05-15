@@ -78,10 +78,10 @@ void MainWindow::MainWindowInitialization()
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
     //connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
 
-    ch1.ReadSingleChannelOptionFromFile(1);
-    ch2.ReadSingleChannelOptionFromFile(2);
-    ch3.ReadSingleChannelOptionFromFile(3);
-    ch4.ReadSingleChannelOptionFromFile(4);
+    channel1object.ReadSingleChannelOptionFromFile(1);
+    channel2object.ReadSingleChannelOptionFromFile(2);
+    channel3object.ReadSingleChannelOptionFromFile(3);
+    channel4object.ReadSingleChannelOptionFromFile(4);
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -154,10 +154,10 @@ void MainWindow::OpenOptionsWindow()
     options.setModal(true);
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    ch1.ReadSingleChannelOptionFromFile(1);
-    ch2.ReadSingleChannelOptionFromFile(2);
-    ch3.ReadSingleChannelOptionFromFile(3);
-    ch4.ReadSingleChannelOptionFromFile(4);
+    channel1object.ReadSingleChannelOptionFromFile(1);
+    channel2object.ReadSingleChannelOptionFromFile(2);
+    channel3object.ReadSingleChannelOptionFromFile(3);
+    channel4object.ReadSingleChannelOptionFromFile(4);
 }
 void MainWindow::PowerOff()
 {

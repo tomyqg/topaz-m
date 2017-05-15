@@ -20,10 +20,10 @@ public:
     ~MainWindow();
 
 //    UartDriver UD;
-    ChannelOptions ch1;
-    ChannelOptions ch2;
-    ChannelOptions ch3;
-    ChannelOptions ch4;
+    ChannelOptions channel1object;
+    ChannelOptions channel2object;
+    ChannelOptions channel3object;
+    ChannelOptions channel4object;
 
     MessageWrite mr;
 
