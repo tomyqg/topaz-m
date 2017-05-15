@@ -8,7 +8,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
@@ -150,7 +150,7 @@ void UartDriver::DelayMsec(int n)
 void UartDriver::SetRTS(bool newstate)
 {
 #ifdef BeagleBone
-    QFile file("/sys/class/gpio/gpio66/value");
+    QFile file(GetPathToRTSPinValue());
     QTextStream out(&file);
     file.open(QIODevice::WriteOnly);
     out << newstate;
@@ -161,7 +161,7 @@ void UartDriver::SetRTS(bool newstate)
 void  UartDriver::SetRTSPinDirection()
 {
 #ifdef BeagleBone
-    QFile filedir("/sys/class/gpio/gpio66/direction");
+    QFile filedir(GetPathToRTSPinDirection());
     filedir.open(QIODevice::WriteOnly);
     QTextStream outdir(&filedir);
     outdir << "out";

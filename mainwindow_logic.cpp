@@ -78,14 +78,13 @@ void MainWindow::MainWindowInitialization()
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
     //connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
 
-
     ch1.ReadSingleChannelOptionFromFile(1);
     ch2.ReadSingleChannelOptionFromFile(2);
     ch3.ReadSingleChannelOptionFromFile(3);
     ch4.ReadSingleChannelOptionFromFile(4);
 
-
-    Options::DisplayParametr = Options::Trends;
+    Options op;
+    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
 
@@ -284,3 +283,4 @@ void MainWindow::NewTouchscreenCalibration()
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
 }
+

@@ -15,6 +15,8 @@ void Options::ReadSystemOptionsFromFile()
     QJsonObject json = doc.object();
     Options::calibrationprm = json["Calibration"].toString();
     Options::DisplayParametr = json["Display"].toInt();
+
+//    qDebug() << Options::DisplayParametr  ;
     infile.close();
 }
 

@@ -27,27 +27,22 @@ void Options::ApplyNewSettingstoOptionsUI()
     {
         ui->SetTrendsBarsBtn->setChecked(true);
     }
-
     if (GetCurrentDisplayParametr() == Cyfra)
     {
         ui->SetCyfraBtn->setChecked(true);
     }
-
     if (GetCurrentDisplayParametr() == TrendsCyfraBars)
     {
         ui->SetTrendsBarsCyfraBtn->setChecked(true);
     }
-
     if (GetCurrentDisplayParametr() == TrendsCyfra)
     {
         ui->SetTrendsCyfraBtn->setChecked(true);
     }
-
     if (GetCurrentDisplayParametr() == BarsCyfra)
     {
         ui->SetBarsCyfraBtn->setChecked(true);
     }
-
     // channel 1
     {
         if (sigtype == 1)

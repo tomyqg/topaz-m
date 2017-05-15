@@ -30,8 +30,12 @@ QDateTime start(QDateTime::currentDateTime());
 QString MainWindow::startdate = start.toString("dd/MM/yy");
 QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
-
 QVector<QDateTime> MainWindow::Dates;
+
+extern QColor Channel1Color;
+extern QColor Channel2Color;
+extern QColor Channel3Color;
+extern QColor Channel4Color;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -45,6 +49,16 @@ MainWindow::~MainWindow()
     MessageWrite mr1 ("Programm Closed");
     mr1.WriteAllLogToFile();
     delete ui;
+}
+
+QColor MainWindow::GetChannel1Color()
+{
+    return Channel1Color;
+}
+
+void MainWindow::SetChannel1Color(int red, int green, int blue)
+{
+     Channel1Color = QColor(red,green,blue);
 }
 
 void MainWindow::updateDateLabel()

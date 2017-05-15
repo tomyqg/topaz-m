@@ -51,7 +51,6 @@ public slots:
 
     bool eventFilter(QObject* watched, QEvent* event);
 
-
 private:
 
     void InitPins();
@@ -63,13 +62,23 @@ private:
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
-    void PaintStatesAlert();
-    char GetHalfSecFlag();
+    void PaintStatesAndAlerts();
     void InvertHalfSecFlag();
     void OpenMessagesWindow();
     void OpenOptionsWindow();
     void PowerOff();
     void CloseApplication();
+    char GetHalfSecFlag();
+
+    QColor GetChannel1Color();
+    QColor GetChannel2Color();
+    QColor GetChannel3Color();
+    QColor GetChannel4Color();
+
+    void SetChannel1Color( int red, int green, int blue);
+    void SetChannel2Color( QColor  newcolor);
+    void SetChannel3Color( QColor  newcolor);
+    void SetChannel4Color( QColor  newcolor);
 
 private slots:
 
@@ -94,13 +103,10 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-    QTimer *tmr;
     void MainWindowInitialization();
 
     char halfSecondflag;
-
     QPen graphPen;
-
     QPainter painter;
 
     QVector<QPoint> PolarChartPointsChannel1;
@@ -115,17 +121,15 @@ private:
     QVector<QString> Labels;
     QVector<QString> LabelsBar;
 
-
     QTimer *channeltimer1 ;
     QTimer *channeltimer2;
     QTimer *channeltimer3;
     QTimer *channeltimer4;
     QTimer *archivetimer;
-    QThread *thread;
-
     QTimer *UpdateGraficsTimer;
-
     QTimer *halfSecondTimer;
+    QTimer *tmr;
+    QThread *thread;
 
 protected:
 

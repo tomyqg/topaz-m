@@ -6,7 +6,7 @@
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
-int Options::DisplayParametr = DisplayParametrEnum::Trends;
+int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
 
@@ -23,6 +23,7 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
+    ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
     ApplyNewSettingstoOptionsUI();
     CustomizeOptionsUI();

@@ -36,8 +36,6 @@ void MainWindow::PaintCyfrasBottom()
         painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
         painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
         painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
-
-
     }
     else
     {
@@ -95,7 +93,6 @@ void MainWindow::PaintCyfrasBottom()
     */
 
     //Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = QString::number(s);
-
     painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
     painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
     painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
@@ -167,7 +164,7 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
 
     int alertwindowwidth = widgwidth/2-2;
     int alertwindowheight = widgheight/2/4;
-    int alerttextsize = widgwidth/2-2;
+    int alerttextsize = 30;
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -203,11 +200,17 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
     painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
     painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
 
-    painter.setFont(QFont("Times New Roman", 30, QFont::ExtraBold));
+    painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
 
     // увеличение уставки
     if (channel1currentvalue>channel1state1value)
+    {
+        qDebug() << GetChannel1Color();
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState1HighMessage());
+        SetChannel1Color(20, 37, 37);
+    }
+
+
     if (channel2currentvalue>channel2state1value)
         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState1HighMessage());
     if (channel3currentvalue>channel3state1value)
@@ -220,11 +223,56 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState2LowMessage());
     if (channel2currentvalue<channel2state2value)
         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState2LowMessage());
-    if (channel3currentvalue<channel2state2value)
+    if (channel3currentvalue<channel3state2value)
         painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetState2LowMessage());
-    if (channel4currentvalue<channel2state2value)
+    if (channel4currentvalue<channel4state2value)
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetState2LowMessage());
 
+    if  (GetHalfSecFlag() == 1)
+    {
+        painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+        painter.setFont(QFont("Times New Roman", 70, QFont::ExtraBold));
+
+        // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
+        if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
+            painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignRight | Qt::AlignVCenter, "!");
+        if ((channel2currentvalue>channel2state1value) || (channel2currentvalue<channel2state2value))
+            painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignRight | Qt::AlignVCenter,"!");
+        if ((channel3currentvalue>channel3state1value) || (channel3currentvalue<channel3state2value))
+            painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignRight | Qt::AlignVCenter,"!");
+        if ((channel4currentvalue>channel4state1value) || (channel4currentvalue<channel4state2value))
+            painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignRight | Qt::AlignVCenter,"!");
+    }
+
+    ModBus mb;
+    // если связб плохая и прошло пол секунды то нужно мигнуть красным цветом
+    if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
+    {
+        QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
+
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
+        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+        painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
+
+        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
+        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
+        painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
+        painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
+        painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
+        painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
+
+        //    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+        painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
+        painter.drawText(2, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop, ch1.GetChannelName());
+        painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch2.GetChannelName());
+        painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch3.GetChannelName());
+        painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,ch4.GetChannelName());
+    }
     painter.end();
 }
 
@@ -233,17 +281,8 @@ void MainWindow::PaintPolarDiagramm()
     QPainter painter;
     int widgheight  = ui->MessagesWidget->height();
     double maximumradius;
-
     maximumradius = widgheight/4 - 10;
-
     painter.begin(ui->MessagesWidget);
-
-    //    painter.setRenderHint(QPainter::Antialiasing, true);
-    //    int channel1value = UartDriver::channelinputbuffer[0]/200*180;
-    //    int channel2value = UartDriver::channelinputbuffer[1]/200*180;
-    //    int channel3value = UartDriver::channelinputbuffer[2]/200*180;
-    //    int channel4value = UartDriver::channelinputbuffer[3]/200*180;
-
     int channel1value = X_Coordinates.last();
     int channel2value = X_Coordinates.last();
     int channel3value = X_Coordinates.last();
@@ -331,17 +370,9 @@ void MainWindow::PaintPolarDiagramm()
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
         PolarChartPointsChannel4.clear();
-
-        //PolarChartPointsChannel1.removeFirst(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
-        //PolarChartPointsChannel2.removeFirst();
-        //PolarChartPointsChannel3.removeFirst();
-        //PolarChartPointsChannel4.removeFirst();
     }
 
     painter.setRenderHint(QPainter::Antialiasing, true);
-
-    //graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
-    //painter.setPen(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
 
     painter.setPen(QPen(Channel1Color, 4));
     painter.drawPolyline(PolarChartPointsChannel1);
@@ -353,16 +384,12 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawPolyline(PolarChartPointsChannel4);
     painter.setRenderHint(QPainter::Antialiasing, false);
 
-    //qDebug() << x;qDebug() << y;
-    //qDebug() << points;
-
     painter.end();
 }
 
 void MainWindow::PaintOnWidget()
 {
     PaintStatesAndAlerts();
-
     switch( Options::DisplayParametr )
     {
     case Options::Cyfra:
@@ -370,7 +397,8 @@ void MainWindow::PaintOnWidget()
     case Options::TrendsCyfra:
         PaintCyfrasBottom();break;
     case Options::Trends:
-        PaintStatesAndAlerts();break;
+        //        PaintStatesAndAlerts();break;
+        PaintCyfrasFullScreen();break;
     case Options::TrendsCyfraBars:
         PaintCyfrasBottom();break;
     case Options::BarsCyfra:

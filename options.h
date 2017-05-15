@@ -32,6 +32,8 @@ public:
     double GetLogMessagesLimit();
     QString GetCalibration() { return  calibrationprm;}
 
+    void ReadSystemOptionsFromFile();
+
     enum DisplayParametrEnum {
         Trends = 0x01 ,
         Polar = 0x02 ,
@@ -75,7 +77,7 @@ private:
     void ApplyNewSettingstoOptionsUI();
     void CustomizeOptionsUI();
     void ReadChannelsOptionsFromFile();
-    void ReadSystemOptionsFromFile();
+
     static double maxmessageslimit;
     Ui::Options *ui;
 };

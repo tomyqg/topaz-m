@@ -18,6 +18,11 @@ public slots:
 private:
     static double channeltempbuffer[4];
 
+
+    QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
+    QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
+
+
 protected:
     void DelayMsec(int n);
     void SetRTS(bool newstate);
@@ -38,6 +43,7 @@ class ModBus: public UartDriver
 private:
 
     static uint ConnectFailure;
+
 
 public slots:
     double ReadTemperature(char channel);
