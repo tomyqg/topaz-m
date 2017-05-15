@@ -77,7 +77,7 @@
        <x>50</x>
        <y>0</y>
        <width>331</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
@@ -114,13 +114,18 @@
     <widget class="QWidget" name="MessagesWidget" native="true">
      <property name="geometry">
       <rect>
-       <x>32</x>
-       <y>10</y>
-       <width>1218</width>
+       <x>39</x>
+       <y>30</y>
+       <width>1211</width>
        <height>661</height>
       </rect>
      </property>
     </widget>
+    <zorder>time_label</zorder>
+    <zorder>label</zorder>
+    <zorder>MessagesWidget</zorder>
+    <zorder>frame</zorder>
+    <zorder>frame</zorder>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">

@@ -288,7 +288,7 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setPen(graphPen);
 
     LabelsBar.clear();
-    LabelsBar.append("0");LabelsBar.append("Channel 1");LabelsBar.append("Channel 2");LabelsBar.append("Channel 3");LabelsBar.append("Channel 4");
+    LabelsBar.append("0");LabelsBar.append(ch1.GetChannelName());LabelsBar.append(ch2.GetChannelName());LabelsBar.append(ch3.GetChannelName());LabelsBar.append(ch4.GetChannelName());
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
