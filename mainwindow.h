@@ -75,10 +75,10 @@ private:
     QColor GetChannel3Color();
     QColor GetChannel4Color();
 
-    void SetChannel1Color( int red, int green, int blue);
-    void SetChannel2Color( QColor  newcolor);
-    void SetChannel3Color( QColor  newcolor);
-    void SetChannel4Color( QColor  newcolor);
+    void SetChannel1Color( QColor newcolor);
+    void SetChannel2Color( QColor newcolor);
+    void SetChannel3Color( QColor newcolor);
+    void SetChannel4Color( QColor newcolor);
 
 private slots:
 

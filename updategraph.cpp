@@ -8,15 +8,25 @@
 #include "options.h"
 
 int a=0;int b=0;
-int color1rgb[]={219, 37, 37};
-int color2rgb[]={43, 37, 219};
-int color3rgb[]={37, 219, 49};
-int color4rgb[]={59, 30, 7};
 
-QColor Channel1Color = QColor(color1rgb[0],color1rgb[1],color1rgb[2]);
-QColor Channel2Color = QColor(color2rgb[0],color2rgb[1],color2rgb[2]);
-QColor Channel3Color = QColor(color3rgb[0],color3rgb[1],color3rgb[2]);
-QColor Channel4Color = QColor(color4rgb[0],color4rgb[1],color4rgb[2]);
+int color1rgbnormal[]={30, 44, 41 };  //20, 37, 37 // 219, 37, 37 red
+int color2rgbnormal[]={43, 37, 219};
+int color3rgbnormal[]={37, 219, 49};
+int color4rgbnormal[]={59, 30, 7};
+
+QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
+QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
+QColor Channel3Color = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
+QColor Channel4Color = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
+
+QColor Channel1ColorNormal = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
+QColor Channel2ColorNormal = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
+QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
+QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
+
+QColor ChannelColorHighState = QColor(200,30,30);
+
+QColor ChannelColorLowState = QColor(230,230,30);
 
 /*int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
 int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
@@ -77,24 +87,24 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(6);
-    graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+    graphPen.setColor(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]));
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     {ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-        graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
+        graphPen.setColor(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]));
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-        graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
+        graphPen.setColor(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]));
         ui->customPlot->graph()->setPen(graphPen);}
 
     {ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-        graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
+        graphPen.setColor(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]));
         ui->customPlot->graph()->setPen(graphPen);
     }
 
@@ -133,26 +143,26 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color1rgb[0],color1rgb[1],color1rgb[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color1rgb[0],color1rgb[1],color1rgb[2]));
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2, y2);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color2rgb[0],color2rgb[1],color2rgb[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color2rgb[0],color2rgb[1],color2rgb[2]));
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3, y3);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color3rgb[0],color3rgb[1],color3rgb[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color3rgb[0],color3rgb[1],color3rgb[2]));
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4, y4);
-    ui->customPlot->graph()->setBrush(QBrush(QColor(color4rgb[0],color4rgb[1],color4rgb[2]))); // first graph will be filled with translucent blue
-    graphPen.setColor(QColor(color4rgb[0],color4rgb[1],color4rgb[2]));
+    ui->customPlot->graph()->setBrush(QBrush(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]))); // first graph will be filled with translucent blue
+    graphPen.setColor(QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->replot();

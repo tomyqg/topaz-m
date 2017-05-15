@@ -11,6 +11,15 @@ extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
+
+extern QColor Channel1ColorNormal;
+extern QColor Channel2ColorNormal ;
+extern QColor Channel3ColorNormal;
+extern QColor Channel4ColorNormal ;
+
+extern QColor ChannelColorHighState;
+extern QColor ChannelColorLowState;
+
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
 void MainWindow::PaintCyfrasBottom()
@@ -202,31 +211,91 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
 
     painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
 
-    // увеличение уставки
+    // увеличение уставки Channel 1
     if (channel1currentvalue>channel1state1value)
     {
-        qDebug() << GetChannel1Color();
+        //        qDebug() << GetChannel1Color();
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState1HighMessage());
-        SetChannel1Color(20, 37, 37);
+        SetChannel1Color(ChannelColorHighState);
+    }
+    // уменьшение уставки  Channel 1
+    else if (channel1currentvalue<channel1state2value)
+    {
+
+        painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState2LowMessage());
+        SetChannel1Color(ChannelColorLowState);
+    }
+
+    else
+    {
+         painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        SetChannel1Color(Channel1ColorNormal);
+    }
+
+    // увеличение уставки Channel 2
+    if (channel2currentvalue>channel2state1value)
+    {
+        //        qDebug() << GetChannel2Color();
+        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch2.GetState1HighMessage());
+        SetChannel2Color(ChannelColorHighState);
+    }
+    // уменьшение уставки  Channel 2
+    else if (channel2currentvalue<channel2state2value)
+    {
+
+        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch2.GetState2LowMessage());
+        SetChannel2Color(ChannelColorLowState);
+    }
+
+    else
+    {
+         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        SetChannel2Color(Channel2ColorNormal);
+    }
+
+    // увеличение уставки Channel 3
+    if (channel3currentvalue>channel3state1value)
+    {
+        //        qDebug() << GetChannel3Color();
+        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch3.GetState1HighMessage());
+        SetChannel3Color(ChannelColorHighState);
+    }
+    // уменьшение уставки  Channel 3
+    else if (channel3currentvalue<channel3state2value)
+    {
+
+        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch3.GetState2LowMessage());
+        SetChannel3Color(ChannelColorLowState);
+    }
+
+    else
+    {
+         painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        SetChannel3Color(Channel3ColorNormal);
     }
 
 
-    if (channel2currentvalue>channel2state1value)
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState1HighMessage());
-    if (channel3currentvalue>channel3state1value)
-        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetState1HighMessage());
+    // увеличение уставки Channel 4
     if (channel4currentvalue>channel4state1value)
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetState1HighMessage());
+    {
+        //        qDebug() << GetChannel4Color();
+        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch4.GetState1HighMessage());
+        SetChannel4Color(ChannelColorHighState);
+    }
+    // уменьшение уставки  Channel 4
+    else if (channel4currentvalue<channel4state2value)
+    {
 
-    // уменьшение уставки
-    if (channel1currentvalue<channel1state2value)
-        painter.drawText(2, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch1.GetState2LowMessage());
-    if (channel2currentvalue<channel2state2value)
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch2.GetState2LowMessage());
-    if (channel3currentvalue<channel3state2value)
-        painter.drawText(2, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch3.GetState2LowMessage());
-    if (channel4currentvalue<channel4state2value)
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom,ch4.GetState2LowMessage());
+        painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, ch4.GetState2LowMessage());
+        SetChannel4Color(ChannelColorLowState);
+    }
+
+    else
+    {
+         painter.drawText(2+alertwindowwidth, 2+alertwindowheight-2, alertwindowwidth, alertwindowheight-2, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        SetChannel4Color(Channel4ColorNormal);
+    }
+
 
     if  (GetHalfSecFlag() == 1)
     {
