@@ -8,7 +8,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 
-//#define BeagleBone
+#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"

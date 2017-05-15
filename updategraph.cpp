@@ -9,10 +9,10 @@
 
 int a=0;int b=0;
 
-int color1rgbnormal[]={30, 44, 41 };  //20, 37, 37 // 219, 37, 37 red
-int color2rgbnormal[]={43, 37, 219};
-int color3rgbnormal[]={37, 219, 49};
-int color4rgbnormal[]={59, 30, 7};
+int color1rgbnormal[]={30, 120, 120 };  //dark cyan
+int color2rgbnormal[]={40, 40, 220};  // dark blue
+int color3rgbnormal[]={30, 100, 30};  // dark green
+int color4rgbnormal[]={150, 50, 170}; // dark phiolet
 
 QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
 QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
