@@ -33,6 +33,8 @@ void MainWindow::MainWindowInitialization()
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
     ui->MessagesWidget->installEventFilter(this);
+    ui->centralWidget->installEventFilter(this);
+
     ui->customPlot->xAxis->setRange(-8, 600);
     ui->customPlot->yAxis->setRange(-200, 200);
 

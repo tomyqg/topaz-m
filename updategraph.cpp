@@ -63,6 +63,8 @@ void MainWindow::UpdateGraphics()
         GrafsUpdateTrendsAndBars();break;
     case Options::Polar:
         GrafsUpdateNone();break;
+    case Options::Cyfra:
+        GrafsUpdateNone();break;
     default:
         break;
     }

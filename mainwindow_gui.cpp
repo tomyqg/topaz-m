@@ -57,12 +57,12 @@ QColor MainWindow::GetChannel1Color()
 
 void MainWindow::SetChannel1Color(QColor newcolor)
 {
-     Channel1Color = newcolor;
+    Channel1Color = newcolor;
 }
 
 void MainWindow::SetChannel2Color(QColor newcolor)
 {
-     Channel2Color = newcolor;
+    Channel2Color = newcolor;
 }
 
 QColor MainWindow::GetChannel2Color()
@@ -72,7 +72,7 @@ QColor MainWindow::GetChannel2Color()
 
 void MainWindow::SetChannel3Color(QColor newcolor)
 {
-     Channel3Color = newcolor;
+    Channel3Color = newcolor;
 }
 
 QColor MainWindow::GetChannel3Color()
@@ -82,7 +82,7 @@ QColor MainWindow::GetChannel3Color()
 
 void MainWindow::SetChannel4Color(QColor newcolor)
 {
-     Channel4Color = newcolor;
+    Channel4Color = newcolor;
 }
 
 QColor MainWindow::GetChannel4Color()
@@ -94,7 +94,7 @@ void MainWindow::updateDateLabel()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-/*
+    /*
     QProcess process;
 
 //    QProcess process1;
@@ -153,6 +153,11 @@ void  MainWindow::updateText( const QString text ) // этот слот обно
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
+
+    if (watched == ui->centralWidget && event->type() == QEvent::MouseButtonPress) {
+        ReactOnTouch();
+    }
+
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
         PaintOnWidget();
         return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.

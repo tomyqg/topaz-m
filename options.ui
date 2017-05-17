@@ -4545,7 +4545,7 @@ p, li { white-space: pre-wrap; }
         <number>5</number>
        </property>
        <item>
-        <widget class="QRadioButton" name="SetCyfraBtn">
+        <widget class="QRadioButton" name="SetTrendsBtn">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -4564,12 +4564,12 @@ p, li { white-space: pre-wrap; }
           <string>Тренд</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="SetTrendsBtn">
+        <widget class="QRadioButton" name="SetCyfraBtn">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -4585,10 +4585,10 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="text">
-          <string>Цифра           </string>
+          <string>Цифра</string>
          </property>
          <property name="checked">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -4645,7 +4645,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="text">
-          <string>Барграф + цифра</string>
+          <string>Барграф + Цифра</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -5221,9 +5221,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

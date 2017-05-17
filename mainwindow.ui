@@ -121,11 +121,6 @@
       </rect>
      </property>
     </widget>
-    <zorder>time_label</zorder>
-    <zorder>label</zorder>
-    <zorder>MessagesWidget</zorder>
-    <zorder>frame</zorder>
-    <zorder>frame</zorder>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">

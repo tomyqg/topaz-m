@@ -35,6 +35,7 @@ void MainWindow::PaintCyfrasBottom()
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+
     ModBus mb;
 
     // здесь мы рисуем прямоугольнички
@@ -52,13 +53,13 @@ void MainWindow::PaintCyfrasBottom()
     }
     else
     {
-        painter.setBrush(QBrush(Channel1Color, Qt::Dense4Pattern));
+        painter.setBrush(QBrush(GetChannel1Color(), Qt::Dense4Pattern));
         painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Channel2Color, Qt::Dense4Pattern));
+        painter.setBrush(QBrush(GetChannel2Color(), Qt::Dense4Pattern));
         painter.drawRect(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Channel3Color, Qt::Dense4Pattern));
+        painter.setBrush(QBrush(GetChannel3Color(), Qt::Dense4Pattern));
         painter.drawRect(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Channel4Color, Qt::Dense4Pattern));
+        painter.setBrush(QBrush(GetChannel4Color(), Qt::Dense4Pattern));
         painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
     }
 
@@ -145,8 +146,10 @@ void MainWindow::PaintCyfrasBottom()
 void MainWindow::PaintCyfrasFullScreen()
 {
     QPainter painter;
+    // задаётся параметры вручную
 
-    int borderwidth = 0 ;
+    // отступ  сверху и слева в пикселях
+    int borderwidth = 0150 ;
 
     //высчитываются
 
@@ -157,15 +160,15 @@ void MainWindow::PaintCyfrasFullScreen()
 
 
     painter.begin(ui->MessagesWidget);
-    painter.setRenderHint(QPainter::Antialiasing, true);
+//    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setBrush(QBrush(Channel1Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-    painter.setBrush(QBrush(Channel2Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-    painter.setBrush(QBrush(Channel3Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
-    painter.setBrush(QBrush(Channel4Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
 
     painter.setPen(QPen(Qt::cyan, 1)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -203,7 +206,7 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.end();
 }
 
-void MainWindow::PaintStatesAndAlerts() // отрисовывает события на уставки
+void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает события на уставки
 {
     QPainter painter;
 
@@ -237,13 +240,13 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setBrush(QBrush(Channel1Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(2, 2, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(Channel2Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
     painter.drawRect(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(Channel3Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
     painter.drawRect(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(Channel4Color, Qt::SolidPattern));
+    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
     painter.drawRect(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
 
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -264,11 +267,9 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
     // уменьшение уставки  Channel 1
     else if (channel1currentvalue<channel1state2value)
     {
-
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState2LowMessage());
         SetChannel1Color(ChannelColorLowState);
     }
-
     else
     {
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
@@ -321,7 +322,6 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
     // уменьшение уставки  Channel 4
     else if (channel4currentvalue<channel4state2value)
     {
-
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState2LowMessage());
         SetChannel4Color(ChannelColorLowState);
     }
@@ -497,23 +497,29 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
-    PaintStatesAndAlerts();
     switch( Options::DisplayParametr )
     {
     case Options::Cyfra:
-        PaintCyfrasFullScreen();break;
+        PaintStatesAndAlertsAtTop();PaintCyfrasFullScreen();break;
     case Options::TrendsCyfra:
-        PaintCyfrasBottom();break;
+        PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::Trends:
-        //        PaintStatesAndAlerts();break;
-        PaintCyfrasFullScreen();break;
+        PaintStatesAndAlertsAtTop();PaintStatesAndAlertsAtTop();break;
     case Options::TrendsCyfraBars:
-        PaintCyfrasBottom();break;
+        PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::BarsCyfra:
-        PaintCyfrasBottom();break;
+        PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::Polar:
-        PaintPolarDiagramm();break;
+        PaintStatesAndAlertsAtTop();PaintPolarDiagramm();break;
     default:
         break;
     }
+}
+
+void MainWindow::ReactOnTouch()
+{
+    QString x = QString::number(QCursor::pos().x());
+    QString y = QString::number(QCursor::pos().y());
+    SetChannel1Color(Qt::white);
+    channel1object.SetChannelName("x : " + x + "; Y : " + y);
 }

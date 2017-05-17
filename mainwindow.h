@@ -59,10 +59,11 @@ private:
     void InitTimers();
     void InitTouchScreen();
     void PaintOnWidget();
+    void ReactOnTouch();
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
-    void PaintStatesAndAlerts();
+    void PaintStatesAndAlertsAtTop();
     void InvertHalfSecFlag();
     void OpenMessagesWindow();
     void OpenOptionsWindow();
