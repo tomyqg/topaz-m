@@ -500,7 +500,7 @@ void MainWindow::PaintOnWidget()
     switch( Options::DisplayParametr )
     {
     case Options::Cyfra:
-        PaintStatesAndAlertsAtTop();PaintCyfrasFullScreen();break;
+        PaintCyfrasFullScreen();break;
     case Options::TrendsCyfra:
         PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::Trends:
@@ -525,8 +525,6 @@ void MainWindow::ReactOnTouch()
 
     int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
-    int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
-    int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
 
     int xpos = QCursor::pos().x();
     int ypos = QCursor::pos().y();
@@ -535,42 +533,47 @@ void MainWindow::ReactOnTouch()
     QString x = QString::number(xpos);
     QString y = QString::number(ypos);
 
+    SetChannel1Color(Channel1ColorNormal);
+    SetChannel2Color(Channel2ColorNormal);
+    SetChannel3Color(Channel3ColorNormal);
+    SetChannel4Color(Channel4ColorNormal);
+
+
     if (xpos< widgwidth/2)
         if (ypos< widgheight/2)
         {
             // левый верхний квадрат
 
-             channel1object.SetUnitsName("lev verhn");
+            SetChannel1Color(Qt::yellow);
+//             channel1object.SetUnitsName("lev verhn");
         }
 
 
     if (xpos > widgwidth/2)
         if (ypos< widgheight/2)
         {
+            SetChannel2Color(Qt::yellow);
             // прав верхний квадрат
 
-            channel1object.SetUnitsName("prav verhn");
+//            channel1object.SetUnitsName("prav verhn");
         }
 
     if (xpos< widgwidth/2)
         if (ypos > widgheight/2)
         {
+            SetChannel3Color(Qt::yellow);
             // левый ниж квадрат
-            channel1object.SetUnitsName("lev nizhn");
+//            channel1object.SetUnitsName("lev nizhn");
         }
 
 
     if (xpos > widgwidth/2)
         if (ypos > widgheight/2)
         {
+            SetChannel4Color(Qt::yellow);
             // прав нижний
-            channel1object.SetUnitsName("prav nizhn");
+//            channel1object.SetUnitsName("prav nizhn");
         }
 
-
-
-
-
-    SetChannel1Color(Qt::white);
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
 }
