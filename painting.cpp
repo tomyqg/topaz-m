@@ -149,7 +149,7 @@ void MainWindow::PaintCyfrasFullScreen()
     // задаётся параметры вручную
 
     // отступ  сверху и слева в пикселях
-    int borderwidth = 0150 ;
+    int borderwidth = 0 ;
 
     //высчитываются
 
@@ -518,8 +518,59 @@ void MainWindow::PaintOnWidget()
 
 void MainWindow::ReactOnTouch()
 {
-    QString x = QString::number(QCursor::pos().x());
-    QString y = QString::number(QCursor::pos().y());
+    // отступ  сверху и слева в пикселях
+    int borderwidth = 0 ;
+
+    //высчитываются
+
+    int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
+    int widgheight  = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
+    int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
+    int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
+
+    int xpos = QCursor::pos().x();
+    int ypos = QCursor::pos().y();
+
+
+    QString x = QString::number(xpos);
+    QString y = QString::number(ypos);
+
+    if (xpos< widgwidth/2)
+        if (ypos< widgheight/2)
+        {
+            // левый верхний квадрат
+
+             channel1object.SetUnitsName("lev verhn");
+        }
+
+
+    if (xpos > widgwidth/2)
+        if (ypos< widgheight/2)
+        {
+            // прав верхний квадрат
+
+            channel1object.SetUnitsName("prav verhn");
+        }
+
+    if (xpos< widgwidth/2)
+        if (ypos > widgheight/2)
+        {
+            // левый ниж квадрат
+            channel1object.SetUnitsName("lev nizhn");
+        }
+
+
+    if (xpos > widgwidth/2)
+        if (ypos > widgheight/2)
+        {
+            // прав нижний
+            channel1object.SetUnitsName("prav nizhn");
+        }
+
+
+
+
+
     SetChannel1Color(Qt::white);
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
 }

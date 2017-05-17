@@ -154,13 +154,14 @@ void  MainWindow::updateText( const QString text ) // этот слот обно
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
 
-    if (watched == ui->centralWidget && event->type() == QEvent::MouseButtonPress) {
-        ReactOnTouch();
-    }
 
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
         PaintOnWidget();
-        return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
+//        return true; // return true if you do not want to have the child widget paint on its own afterwards, otherwise, return false.
     }
-    return false;
+
+    if (watched == ui->centralWidget && event->type() == QEvent::MouseButtonPress) {
+        ReactOnTouch();
+    }
+    return true;
 }
