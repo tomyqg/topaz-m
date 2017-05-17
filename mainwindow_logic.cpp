@@ -214,6 +214,7 @@ void MainWindow::InitTimers()
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
 
     channeltimer1->start(100);

@@ -71,7 +71,14 @@ quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
     quint8 nTemp;
     quint16 wCRCWord = 0xFFFF;
 
-    for (int i=0; i < array.length();++i)
+    int arraylengt  = array.length();
+
+    if (arraylengt  == 0)
+    {
+        arraylengt   = 0;
+    }
+
+    for (int i=0; i < arraylengt ;++i)
     {
         nTemp = (quint8)array.at(i) ^ wCRCWord;
         wCRCWord >>= 8;
@@ -101,8 +108,9 @@ QByteArray UartDriver::ReadAllUartDataByteFormat()
 
         while (serial.waitForReadyRead(10))
         {
+            if (serial.size() < 9)
+                return 0;
             bytedata.append( serial.readAll() );
-
         }
     }
     return bytedata;
@@ -123,7 +131,11 @@ QString UartDriver::ReadAllUartDataStringFormat()
         serial.setFlowControl(QSerialPort::NoFlowControl);
 
         while (serial.waitForReadyRead(10))
+        {
+            if (serial.size() < 9)
+                return 0;
             bytedata.append( serial.readAll() );
+        }
     }
     QString DataAsString = QTextCodec::codecForMib(1015)->toUnicode(bytedata);
     return DataAsString;
@@ -213,38 +225,80 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
+
     quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
-    InputDataByteArray  = UartWriteData(requestdata); // make request and recieve response
+    InputDataByteArray  = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
-    ModBus modb;
-    quint16 crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+//    Q_ASSERT(2 < 3);
+//    return 7.7727;
+//    return 2.345;
+//    if (InputDataByteArray.size()==0)
+//    {
+//        return 2.345;
+//    }
 
-    if (InputDataByteArray.length()!=0)
-        SetConnectFailure(0);
-    else
+    int InputDataByteArraylenght = InputDataByteArray.length();
+
+
+    if (InputDataByteArraylenght < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
     {
         SetConnectFailure(1);
         return 0;
     }
+    else
+    {
+        SetConnectFailure(0);
+    }
 
-    if (inpcrc == crc)
+    quint8 inpcrchibyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 1);
+    quint8 inpcrclobyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 2);
+    quint16 inputcrc16summ = ((uint16_t) (inpcrchibyte<<8))|( (uint16_t) inpcrclobyte );
+
+    ModBus modb;
+    quint16 crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+
+    if (inputcrc16summ == crc)
     {
         SetConnectFailure(0);
         QByteArray arr;
         float val;
 
         arr.resize(4);
+
+        if (InputDataByteArray.size()<3)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<4)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<5)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<6)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<7)
+        {
+            return 0;
+        }
+
         arr[0] = InputDataByteArray.at(5);
         arr[1] = InputDataByteArray.at(6);
         arr[2] = InputDataByteArray.at(3);
@@ -377,11 +431,22 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         uartsleep;
 
         while (serial.waitForReadyRead(10))
+        {
             InputDataByteArray = serial.readAll();
+        }
+
+        if (InputDataByteArray.length() < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
+        {
+            int lengggh = InputDataByteArray.length() ;
+            lengggh  = lengggh ;
+            return 0;
+        }
 
         QByteArray InputDataByteArrayNoCRC = InputDataByteArray;
         InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-2,2);
-        uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
+
+
+        uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);// до этой строки вроде все нормально работает, ассерт не вылетает // ассерт вываливается на этой строке, сука
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
         uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo);
 
