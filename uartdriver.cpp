@@ -75,7 +75,7 @@ quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 
     if (arraylengt  == 0)
     {
-        arraylengt   = 0;
+        return 0; // если входящий байтмассив нулевой то сразу возвращаем и не считаем срс16
     }
 
     for (int i=0; i < arraylengt ;++i)
@@ -264,9 +264,9 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     quint16 inputcrc16summ = ((uint16_t) (inpcrchibyte<<8))|( (uint16_t) inpcrclobyte );
 
     ModBus modb;
-    quint16 crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
-    if (inputcrc16summ == crc)
+    if (inputcrc16summ == calculatedcrc16summ)
     {
         SetConnectFailure(0);
         QByteArray arr;
@@ -444,7 +444,6 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         QByteArray InputDataByteArrayNoCRC = InputDataByteArray;
         InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-2,2);
-
 
         uint8_t inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);// до этой строки вроде все нормально работает, ассерт не вылетает // ассерт вываливается на этой строке, сука
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);

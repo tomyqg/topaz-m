@@ -105,7 +105,7 @@ void MainWindow::PaintCyfrasBottom()
     }
     */
 
-        // выводим значения каналов большими цифрами
+    // выводим значения каналов большими цифрами
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
     painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
     painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
@@ -146,52 +146,59 @@ void MainWindow::PaintCyfrasFullScreen()
 {
     QPainter painter;
 
-    int widgwidth  = ui->MessagesWidget->width();
-    int widgheight  = ui->MessagesWidget->height();
+    int borderwidth = 0 ;
+
+    //высчитываются
+
+    int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
+    int widgheight  = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
+    int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
+    int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
+
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setBrush(QBrush(Channel1Color, Qt::SolidPattern));
-    painter.drawRect(2, 2, widgwidth/2-2, widgheight/2-2);
+    painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
     painter.setBrush(QBrush(Channel2Color, Qt::SolidPattern));
-    painter.drawRect(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2);
+    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight);
     painter.setBrush(QBrush(Channel3Color, Qt::SolidPattern));
-    painter.drawRect(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2);
+    painter.drawRect(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
     painter.setBrush(QBrush(Channel4Color, Qt::SolidPattern));
-    painter.drawRect(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2);
+    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
 
     painter.setPen(QPen(Qt::cyan, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
-    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
-    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
-    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
+    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[borderwidth]));
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
 
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
-    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
-    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
-    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
+    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-    painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
-    painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
-    painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
-    painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
+    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
 
     // подписываем букву m если канал математически обрабатывается
     painter.setPen(Qt::darkRed);
     painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
-        painter.drawText(2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignRight | Qt::AlignTop, "math ");
+        painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
     if (channel2object.IsChannelMathematical())
-        painter.drawText(2+widgwidth/2-2, 2, widgwidth/2-2, widgheight/2-2, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
     if (channel3object.IsChannelMathematical())
-        painter.drawText(2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
     if (channel4object.IsChannelMathematical())
-        painter.drawText(2+widgwidth/2-2, 2+widgheight/2-2, widgwidth/2-2, widgheight/2-2, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
 
     painter.end();
 }
@@ -200,8 +207,13 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
 {
     QPainter painter;
 
-    int widgwidth  = ui->MessagesWidget->width();
-    int widgheight  = ui->MessagesWidget->height();
+    int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
+    //высчитываются
+    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
+    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
+    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
+    int otstupsnizu = smallrectingleheight + 24;
+    int otstupsverhu = widgheight - otstupsnizu;
 
     int alertwindowwidth = widgwidth/2-2;
     int alertwindowheight = widgheight/2/4-2;
@@ -294,7 +306,6 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState2LowMessage());
         SetChannel3Color(ChannelColorLowState);
     }
-
     else
     {
         painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
@@ -314,7 +325,6 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState2LowMessage());
         SetChannel4Color(ChannelColorLowState);
     }
-
     else
     {
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
@@ -344,27 +354,29 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
         painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2, 2+561, widgwidth*1/4, 96);
+        painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
         painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96);
+        painter.drawRect(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight);
         painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96);
+        painter.drawRect(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
         painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+widgwidth*3/4, 2+561, widgwidth*1/4-4, 96);
+        painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
 
         painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
         Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
-        painter.drawText(2, 2+561, widgwidth*1/4, 96,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
-        painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
-        painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
-        painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
-        //    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+        // выводим значения каналов большими цифрами
+        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
+        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
+        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
+        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
+
+        // подписываем названия каналов
         painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
-        painter.drawText(2, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
-        painter.drawText(2+widgwidth*1/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
-        painter.drawText(2+widgwidth*2/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
-        painter.drawText(2+widgwidth*3/4, 2+561, widgwidth*1/4, 96, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
+        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
+        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
+        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
+        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
     }
     painter.end();
 }
@@ -461,7 +473,7 @@ void MainWindow::PaintPolarDiagramm()
     int a = X_Coordinates.last();
     if ( a%360 == 0)
     {
-//        X_Coordinates.clear();
+        //        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
