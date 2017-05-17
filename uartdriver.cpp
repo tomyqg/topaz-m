@@ -100,7 +100,10 @@ QByteArray UartDriver::ReadAllUartDataByteFormat()
         serial.setFlowControl(QSerialPort::NoFlowControl);
 
         while (serial.waitForReadyRead(10))
+        {
             bytedata.append( serial.readAll() );
+
+        }
     }
     return bytedata;
 }
@@ -126,7 +129,7 @@ QString UartDriver::ReadAllUartDataStringFormat()
     return DataAsString;
 }
 
-QString UartDriver::ReadAllAvailableCOMs()
+QString UartDriver::ReadAllAvailableCOMPorts()
 {
     QString a;
 

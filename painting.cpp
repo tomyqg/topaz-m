@@ -301,7 +301,6 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         SetChannel3Color(Channel3ColorNormal);
     }
 
-
     // увеличение уставки Channel 4
     if (channel4currentvalue>channel4state1value)
     {
@@ -321,7 +320,6 @@ void MainWindow::PaintStatesAndAlerts() // отрисовывает событи
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
         SetChannel4Color(Channel4ColorNormal);
     }
-
 
     if  (GetHalfSecFlag() == 1)
     {
@@ -376,8 +374,11 @@ void MainWindow::PaintPolarDiagramm()
     QPainter painter;
     int widgheight  = ui->MessagesWidget->height();
     double maximumradius;
+
     maximumradius = widgheight/4 - 10;
+
     painter.begin(ui->MessagesWidget);
+
     int channel1value = X_Coordinates.last();
     int channel2value = X_Coordinates.last();
     int channel3value = X_Coordinates.last();
@@ -458,9 +459,9 @@ void MainWindow::PaintPolarDiagramm()
     PolarChartPointsChannel4.append(NewPolarPointChannel4);
 
     int a = X_Coordinates.last();
-    if ( a%360 >= 0)
+    if ( a%360 == 0)
     {
-        //X_Coordinates.clear();
+//        X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();

@@ -40,7 +40,6 @@ extern QColor Channel4Color;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     MainWindowInitialization();
 }
 
@@ -61,12 +60,10 @@ void MainWindow::SetChannel1Color(QColor newcolor)
      Channel1Color = newcolor;
 }
 
-
 void MainWindow::SetChannel2Color(QColor newcolor)
 {
      Channel2Color = newcolor;
 }
-
 
 QColor MainWindow::GetChannel2Color()
 {
@@ -114,7 +111,7 @@ void MainWindow::updateDateLabel()
     process.startDetached("sudo config-pin P9.24 uart");
     process.startDetached("sudo config-pin P9.26 uart");
     process.startDetached("sudo config-pin P8.7 gpio_pd");
-UartDriver *UD = new UartDriver();
+UartDiriver *UD = new UartDriver();
     UD->SetRTSPinDirection();*/
 }
 
