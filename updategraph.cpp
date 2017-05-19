@@ -28,10 +28,6 @@ QColor ChannelColorHighState = QColor(200,30,30);
 
 QColor ChannelColorLowState = QColor(230,230,30);
 
-/*int color2rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-int color3rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};
-int color4rgb[]={rand()%245+10, rand()%245+10, rand()%245+10};*/
-
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
 void MainWindow::AddValuesToBuffer()
@@ -42,6 +38,22 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
     Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
     Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
+
+    int maximumdots = GetGraphWidthInPixels()/2 ;
+
+    while (X_Coordinates.length()>maximumdots)
+    {
+        X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
+    }
+
+    int tickstep = GetTickStep();
+
+    if (b%tickstep==0)
+    {
+        b=b;
+        LabelsCorrect();
+    }
+
     b++;
 }
 
@@ -79,16 +91,11 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->xAxis->setRange(b-300, b+300);
 
-    if (b%60<=5)
-    {
-        LabelsCorrect();
-    }
-
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(6);
+    graphPen.setWidth(3);
     graphPen.setColor(GetChannel1Color());
 
     ui->customPlot->graph()->setPen(graphPen);
@@ -111,7 +118,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     }
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
+    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
 
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
@@ -172,18 +179,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
 void MainWindow::GrafsUpdateTrends()
 {
-
-    while (X_Coordinates.length()>300)
-    {
-        X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
-    }
-
     ui->customPlot->xAxis->setRange(b-300, b+300);
-
-    if (b%60<=5)
-    {
-        LabelsCorrect();
-    }
 
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
@@ -212,7 +208,7 @@ void MainWindow::GrafsUpdateTrends()
     }
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
+    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
 
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);

@@ -19,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-//    UartDriver UD;
+    //UartDriver UD;
     ChannelOptions channel1object;
     ChannelOptions channel2object;
     ChannelOptions channel3object;
@@ -27,11 +27,13 @@ public:
 
     MessageWrite mr;
 
+    void ShowMessageBox (QString title,QString message);
+
 public slots:
 
     void updateText( const QString text );
     void NewTouchscreenCalibration();
-    void InitLabels();
+    void LabelsInit();
     void LabelsUpdate();
     void LabelsCorrect();
     void WriteGpio(int num, bool val);
@@ -70,6 +72,13 @@ private:
     void PowerOff();
     void CloseApplication();
     char GetHalfSecFlag();
+
+    int GetTimePeriodSecs() {return 10;}
+    int GetTickCountInOneSecond() {return 10;}
+    int GetGraphWidthInPixels() {return 600;}
+
+    int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
+    int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
 
     QColor GetChannel1Color();
     QColor GetChannel2Color();

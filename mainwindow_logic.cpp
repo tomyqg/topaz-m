@@ -35,7 +35,7 @@ void MainWindow::MainWindowInitialization()
     ui->MessagesWidget->installEventFilter(this);
     ui->centralWidget->installEventFilter(this);
 
-    ui->customPlot->xAxis->setRange(-8, 600);
+
     ui->customPlot->yAxis->setRange(-200, 200);
 
     MessageWrite mr ;
@@ -64,15 +64,15 @@ void MainWindow::MainWindowInitialization()
 
     tmr->start(100);// этот таймер тоже за обновление значений
     timer->start(1111);
-    UpdateGraficsTimer->start(400); // этот таймер отвечает за обновление графика
+    UpdateGraficsTimer->start(300); // этот таймер отвечает за обновление графика
     timetouch->start(5000);
 
 
     InitPins();
     InitTouchScreen();
     InitProcessorMaxFreq();
-    InitLabels();
     InitTimers();
+    LabelsInit();
 
     thread= new QThread();
     ModBus *MB = new ModBus();
@@ -96,17 +96,38 @@ void MainWindow::MainWindowInitialization()
     objectwithsignal->updateUI("NEW UI TEXT");
 }
 
-void MainWindow::InitLabels()
+void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
 
-    for (int var = 0; var <= 10; ++var) {
+    int half = GetTotalLabelsCount()/2;
+    int timeperiodseconds = GetTimePeriodSecs();
 
-        Dates.append(fisttime.addSecs((var-5)*6));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
-        Labels.append(fisttime.addSecs((var-5)*6).toString("hh:mm:ss") );
+    for (int var = 0; var <= GetTotalLabelsCount(); ++var) {
+        Dates.append(fisttime.addSecs((var-half)*timeperiodseconds));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels.append(fisttime.addSecs((var-half)*timeperiodseconds).toString("hh:mm:ss") );
     }
+
+    //    for (int var = 0; var <= GetTotalLabelsCount(); ++var) {
+    //        Labels.append(QString::number(var));
+    //    }
+
 }
+
+/*void MainWindow::InitLabels()
+{
+    QDateTime fisttime;
+    fisttime = QDateTime::currentDateTime();
+
+    int half = GetTotalLabelsCount()/2;
+    int timeperiodseconds = GetTimePeriodSecs();
+
+    for (int var = 0; var <= GetTotalLabelsCount(); ++var) {
+        Dates.append(fisttime.addSecs((var-half)*timeperiodseconds));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Labels.append(fisttime.addSecs((var-half)*timeperiodseconds).toString("hh:mm:ss") );
+    }
+}*/
 
 void MainWindow::InitPins()
 {
@@ -161,6 +182,7 @@ void MainWindow::OpenOptionsWindow()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 }
+
 void MainWindow::PowerOff()
 {
     QProcess process;
@@ -177,10 +199,7 @@ void MainWindow::InitProcessorMaxFreq()
 {
     // an object for make terminal requests
     QProcess process;
-    //Use NOPASSWD line for all commands, I mean:
-    //jenkins ALL=(ALL) NOPASSWD: ALL
-    //Put the line after all other lines in the sudoers file.
-
+    
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 1000MHz");
 }
@@ -189,10 +208,7 @@ void MainWindow::InitProcessorMinFreq()
 {
     // an object for make terminal requests
     QProcess process;
-    //Use NOPASSWD line for all commands, I mean:
-    //jenkins ALL=(ALL) NOPASSWD: ALL
-    //Put the line after all other lines in the sudoers file.
-
+    
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 300MHz");
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
@@ -223,8 +239,8 @@ void MainWindow::InitTimers()
     channeltimer2->start(100);
     channeltimer3->start(100);
     channeltimer4->start(100);
-    archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
     halfSecondTimer->start(500);
+    archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
 }
 
 void MainWindow::InitTouchScreen()
@@ -235,14 +251,21 @@ void MainWindow::InitTouchScreen()
     process.startDetached("sudo xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 }
 
+void MainWindow::DateUpdate()
+{
+    QDateTime local(QDateTime::currentDateTime());
+    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+}
+
 void MainWindow::LabelsUpdate()
 {
-    int i = 0;
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
 
-    while(i<=10) {
-        Dates[i] = Dates[i].addSecs(6);// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+    int i = 0;
+
+    while(i<=GetTotalLabelsCount()) {
+        Dates[i] = Dates[i].addSecs(GetTimePeriodSecs());// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
         i++;
     }
@@ -250,15 +273,18 @@ void MainWindow::LabelsUpdate()
 
 void MainWindow::LabelsCorrect()
 {
-    QDateTime fisttime;
+    QDateTime currnttime;
     qint16 timecorrectsec;
-    fisttime = QDateTime::currentDateTime();
-    timecorrectsec = Dates[5].msecsTo(fisttime);
+    currnttime = QDateTime::currentDateTime();
+
+    int middlelabelnumber = Dates.length()/2;
+
+    timecorrectsec = Dates[middlelabelnumber].secsTo(currnttime);
 
     int i = 0;
-    while(i<=10)
+    while(i<=GetTotalLabelsCount())
     {
-        Dates[i] = Dates[i].addMSecs(timecorrectsec );// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
+        Dates[i] = Dates[i].addSecs(timecorrectsec);// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
         i++;
     }
@@ -266,7 +292,7 @@ void MainWindow::LabelsCorrect()
 
 void MainWindow::HalfSecondGone()
 {
-InvertHalfSecFlag();
+    InvertHalfSecFlag();
 }
 
 char MainWindow::GetHalfSecFlag()
@@ -280,10 +306,48 @@ void MainWindow::InvertHalfSecFlag()
     halfSecondflag = halfSecondflag%2;
 }
 
-
 void MainWindow::NewTouchscreenCalibration()
 {
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
-}
+    
+    // следующий код почему-то не работает
+    /*
+    QProcess process1;
 
+    //    process1.start("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // max perfomance on
+    //    QString reqst = "xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm;
+
+    //    QString reqst = "xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599 ";
+
+    //    QString reqst = "sudo xinput_calibrator";
+
+    QString reqst = "ls";
+
+    process1.start(reqst); // max perfomance on
+
+    QString stringtofind = "unable to find device";
+    process1.waitForFinished();
+
+    QString output;
+
+    while (process1.bytesAvailable()>0)
+    {
+        output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
+    }
+
+    QString pice1 = output;
+
+    if (output.indexOf(stringtofind)>=0)
+    {
+        QString pice = output;
+
+        //ui->textEdit->setText(Options::calibrationprm);
+        //QString a = Options::calibrationprm;
+        //QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
+        //pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
+        //pice = pice.simplified();
+        //pice = pice.remove(0, stringtofind.length() );
+        //Options::calibrationprm = pice.remove('\"');
+    }*/
+}

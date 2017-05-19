@@ -349,7 +349,6 @@ void Options::ApplyNewSettingstoAllChannels()
     SetLogMessagesLimit(ui->spinBox->value());
 }
 
-
 void Options::on_pushButton_3_clicked()
 {
     QProcess process1;
@@ -384,8 +383,6 @@ double Options::GetLogMessagesLimit()
 {
     return maxmessageslimit;
 }
-
-
 
 void Options::SetLogMessagesLimit(double n)
 {

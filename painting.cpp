@@ -158,9 +158,8 @@ void MainWindow::PaintCyfrasFullScreen()
     int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
     int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
 
-
     painter.begin(ui->MessagesWidget);
-//    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
+    //    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
     painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
@@ -175,24 +174,24 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[borderwidth]));
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
 
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
     painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
     painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
 
     // подписываем букву m если канал математически обрабатывается
-    painter.setPen(Qt::darkRed);
+    painter.setPen(Qt::red);
     painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
         painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
@@ -202,6 +201,12 @@ void MainWindow::PaintCyfrasFullScreen()
         painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
     if (channel4object.IsChannelMathematical())
         painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+
+    painter.setFont(QFont("Times New Roman", 30, QFont::ExtraBold));
+    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom, " 1");
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom," 2");
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom," 3");
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom," 4");
 
     painter.end();
 }
@@ -518,13 +523,18 @@ void MainWindow::PaintOnWidget()
 
 void MainWindow::ReactOnTouch()
 {
+
+    // подкрашиваем квадраты куда коснулись в желтый цвет
     // отступ  сверху и слева в пикселях
     int borderwidth = 0 ;
 
     //высчитываются
 
-    int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
-    int widgheight  = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
+    //    int xcenter  = ui->MessagesWidget->width()-borderwidth/2;// высота всей области построения в пикселях
+    //    int ycenter  = ui->MessagesWidget->height()- borderwidth/2; // ширина всей области построения в пикселях
+
+    int xcenter  = 652;// общая точка четырех квадратов по иксу в пикселях
+    int ycenter  = 384; // ширина всей области построения в пикселях
 
     int xpos = QCursor::pos().x();
     int ypos = QCursor::pos().y();
@@ -538,41 +548,26 @@ void MainWindow::ReactOnTouch()
     SetChannel3Color(Channel3ColorNormal);
     SetChannel4Color(Channel4ColorNormal);
 
-
-    if (xpos< widgwidth/2)
-        if (ypos< widgheight/2)
+    if ((xpos < xcenter)&&(ypos < ycenter)) // если лев. верхн. квадрат
         {
-            // левый верхний квадрат
-
             SetChannel1Color(Qt::yellow);
-//             channel1object.SetUnitsName("lev verhn");
         }
 
 
-    if (xpos > widgwidth/2)
-        if (ypos< widgheight/2)
+    if ((xpos > xcenter)&& (ypos < ycenter)) // если правый верхний квадрат
         {
             SetChannel2Color(Qt::yellow);
-            // прав верхний квадрат
-
-//            channel1object.SetUnitsName("prav verhn");
         }
 
-    if (xpos< widgwidth/2)
-        if (ypos > widgheight/2)
+    if ((xpos < xcenter) && (ypos > ycenter)) // если левый нижний квадрат
         {
             SetChannel3Color(Qt::yellow);
-            // левый ниж квадрат
-//            channel1object.SetUnitsName("lev nizhn");
         }
 
 
-    if (xpos > widgwidth/2)
-        if (ypos > widgheight/2)
+    if ((xpos > xcenter)&& (ypos > ycenter)) // если правый нижний квадрат
         {
             SetChannel4Color(Qt::yellow);
-            // прав нижний
-//            channel1object.SetUnitsName("prav nizhn");
         }
 
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
