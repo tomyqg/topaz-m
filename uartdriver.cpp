@@ -478,8 +478,8 @@ double ModBus::DataChannelRead (char channel)
     //    xyi++;
     //    return eee.SolveEquation("sin(x/3)*30",xyi);
 
-        return 23.45;
-//    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+//        return 23.45;
+    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 void ModBus::ReadAllChannelsThread ()

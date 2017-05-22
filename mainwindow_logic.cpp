@@ -62,8 +62,9 @@ void MainWindow::MainWindowInitialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
     tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так
-    timer->start(1111);
     UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика)
+
+    timer->start(1111);
     timetouch->start(5000);
 
 
