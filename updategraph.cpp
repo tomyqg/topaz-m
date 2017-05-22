@@ -36,24 +36,20 @@ int xyi;
 
 void MainWindow::AddValuesToBuffer()
 {
+    X_Coordinates.append(b);
     UartDriver UD;
 
-    xyi++;
-    int  a = qRound( eee.SolveEquation("sin(x/5)*70-20",xyi) );
+//    xyi++;
+//    int  a = qRound( eee.SolveEquation("sin(x/5)*70-20",xyi) );
+//    Y_coordinates_Chanel_1.append(a+5);
+//    Y_coordinates_Chanel_2.append(a+30);
+//    Y_coordinates_Chanel_3.append(a+55);
+//    Y_coordinates_Chanel_4.append(a+70);
 
-//    int  a = 23;
-
-    X_Coordinates.append(b);
-
-    Y_coordinates_Chanel_1.append(a+5);
-    Y_coordinates_Chanel_2.append(a+30);
-    Y_coordinates_Chanel_3.append(a+55);
-    Y_coordinates_Chanel_4.append(a+70);
-
-    //    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
-    //    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
-    //    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
-    //    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
+    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
+    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
+    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
+    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
 
     int maximumdots = GetGraphWidthInPixels()/2 ;
 
@@ -108,7 +104,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     }
 
     ui->customPlot->xAxis->setRange(b-300, b+300);
-
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
@@ -119,17 +114,21 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    {ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    {
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
         graphPen.setColor(GetChannel2Color());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-    {ui->customPlot->addGraph();
+    {
+        ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
         graphPen.setColor(GetChannel3Color());
-        ui->customPlot->graph()->setPen(graphPen);}
+        ui->customPlot->graph()->setPen(graphPen);
+    }
 
-    {ui->customPlot->addGraph();
+    {
+        ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
         graphPen.setColor(GetChannel4Color());
         ui->customPlot->graph()->setPen(graphPen);
@@ -198,15 +197,15 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 void MainWindow::GrafsUpdateTrends()
 {
 
-//    int u = 0;
-//    while (u<X_Coordinates.length())
-//    {
-//        Y_coordinates_Chanel_1.replace(u,12);
-//        Y_coordinates_Chanel_2.replace(u,24);
-//        Y_coordinates_Chanel_3.replace(u,12+24);
-//        Y_coordinates_Chanel_4.replace(u,12+36);
-//        u++;
-//    }
+    //    int u = 0;
+    //    while (u<X_Coordinates.length())
+    //    {
+    //        Y_coordinates_Chanel_1.replace(u,12);
+    //        Y_coordinates_Chanel_2.replace(u,24);
+    //        Y_coordinates_Chanel_3.replace(u,12+24);
+    //        Y_coordinates_Chanel_4.replace(u,12+36);
+    //        u++;
+    //    }
 
     ui->customPlot->xAxis->setRange(b-300, b+300);
 
@@ -214,8 +213,8 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-//    graphPen.setWidth(2);
-//    graphPen.set
+    //    graphPen.setWidth(2);
+    //    graphPen.set
     graphPen.setColor(Channel1Color);
 
     ui->customPlot->graph()->setPen(graphPen);

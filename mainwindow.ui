@@ -52,7 +52,7 @@
       <x>10</x>
       <y>10</y>
       <width>1251</width>
-      <height>691</height>
+      <height>650</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -109,16 +109,6 @@
      </property>
      <property name="pixmap">
       <pixmap>logo.jpg</pixmap>
-     </property>
-    </widget>
-    <widget class="QWidget" name="MessagesWidget" native="true">
-     <property name="geometry">
-      <rect>
-       <x>39</x>
-       <y>30</y>
-       <width>1211</width>
-       <height>661</height>
-      </rect>
      </property>
     </widget>
    </widget>
@@ -240,10 +230,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>-41</y>
-      <width>1281</width>
-      <height>741</height>
+      <x>10</x>
+      <y>10</y>
+      <width>1250</width>
+      <height>650</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -252,6 +242,18 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <zorder>MessagesWidget</zorder>
+   </widget>
+   <widget class="QWidget" name="MessagesWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>49</x>
+      <y>40</y>
+      <width>1211</width>
+      <height>650</height>
+     </rect>
+    </property>
+    <zorder>frame</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

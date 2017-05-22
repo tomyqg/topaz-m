@@ -240,13 +240,13 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
 
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
 
-//    Q_ASSERT(2 < 3);
-//    return 7.7727;
-//    return 2.345;
-//    if (InputDataByteArray.size()==0)
-//    {
-//        return 2.345;
-//    }
+    //    Q_ASSERT(2 < 3);
+    //    return 7.7727;
+    //    return 2.345;
+    //    if (InputDataByteArray.size()==0)
+    //    {
+    //        return 2.345;
+    //    }
 
     int InputDataByteArraylenght = InputDataByteArray.length();
 
@@ -474,12 +474,12 @@ double ModBus::DataChannel1Read()
 double ModBus::DataChannelRead (char channel)
 {
 
-//    mathresolver eee;
-//    xyi++;
-//    return eee.SolveEquation("sin(x/3)*30",xyi);
+    //    mathresolver eee;
+    //    xyi++;
+    //    return eee.SolveEquation("sin(x/3)*30",xyi);
 
-    return 23.45;
-    //return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+//        return 23.45;
+    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 void ModBus::ReadAllChannelsThread ()
