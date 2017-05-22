@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <mainwindow.h>
 #include <channel1.h>
+#include <mathresolver.h>
 
 class UartDriver:public QObject
 {
@@ -52,6 +53,9 @@ public slots:
     void ReadAllChannelsThread();
 
 public:
+
+
+
 
     uint GetConnectFailureStatus(){return ConnectFailure;}
     void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }

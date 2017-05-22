@@ -6,6 +6,8 @@
 #include "metrologicalcalc.h"
 #include "mathresolver.h"
 #include "options.h"
+#include "qglobal.h"
+
 
 int a=0;int b=0;
 
@@ -30,18 +32,34 @@ QColor ChannelColorLowState = QColor(230,230,30);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
+int xyi;
+
 void MainWindow::AddValuesToBuffer()
 {
     UartDriver UD;
+
+    xyi++;
+    int  a = qRound( eee.SolveEquation("sin(x/5)*70-20",xyi) );
+
+//    int  a = 23;
+
     X_Coordinates.append(b);
-    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
-    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
-    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
-    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
+
+    Y_coordinates_Chanel_1.append(a+5);
+    Y_coordinates_Chanel_2.append(a+30);
+    Y_coordinates_Chanel_3.append(a+55);
+    Y_coordinates_Chanel_4.append(a+70);
+
+    //    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
+    //    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
+    //    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
+    //    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
 
     int maximumdots = GetGraphWidthInPixels()/2 ;
 
-    while (X_Coordinates.length()>maximumdots)
+    //    while (X_Coordinates.length()>maximumdots)
+
+    while (X_Coordinates.length()>300)
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
     }
@@ -179,29 +197,44 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
 void MainWindow::GrafsUpdateTrends()
 {
+
+//    int u = 0;
+//    while (u<X_Coordinates.length())
+//    {
+//        Y_coordinates_Chanel_1.replace(u,12);
+//        Y_coordinates_Chanel_2.replace(u,24);
+//        Y_coordinates_Chanel_3.replace(u,12+24);
+//        Y_coordinates_Chanel_4.replace(u,12+36);
+//        u++;
+//    }
+
     ui->customPlot->xAxis->setRange(b-300, b+300);
 
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(6);
+//    graphPen.setWidth(2);
+//    graphPen.set
     graphPen.setColor(Channel1Color);
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    {ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    {
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
         graphPen.setColor(Channel2Color);
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-    {ui->customPlot->addGraph();
+    {
+        ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
         graphPen.setColor(Channel3Color);
         ui->customPlot->graph()->setPen(graphPen);}
 
-    {ui->customPlot->addGraph();
+    {
+        ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
         graphPen.setColor(Channel4Color);
         ui->customPlot->graph()->setPen(graphPen);
@@ -213,15 +246,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-    /*  // add the text label at the top:
-    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-    ui->customPlot->addItem(textLabel);
-    textLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignHCenter);
-    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-    textLabel->setText("Dummy label");
-    textLabel->setFont(QFont("Times New Roman", 16)); // make font a bit larger
-    textLabel->setPen(QPen(Qt::black)); // show black border around text*/
     ui->customPlot->replot();
 }
 

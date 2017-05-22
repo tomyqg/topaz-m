@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
+#include <mathresolver.h>
 
 #define BeagleBone
 
@@ -31,6 +32,7 @@ double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
 uint ModBus::ConnectFailure =false;
+
 
 quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
@@ -471,7 +473,13 @@ double ModBus::DataChannel1Read()
 
 double ModBus::DataChannelRead (char channel)
 {
-    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+
+//    mathresolver eee;
+//    xyi++;
+//    return eee.SolveEquation("sin(x/3)*30",xyi);
+
+    return 23.45;
+    //return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 void ModBus::ReadAllChannelsThread ()

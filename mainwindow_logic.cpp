@@ -35,7 +35,6 @@ void MainWindow::MainWindowInitialization()
     ui->MessagesWidget->installEventFilter(this);
     ui->centralWidget->installEventFilter(this);
 
-
     ui->customPlot->yAxis->setRange(-200, 200);
 
     MessageWrite mr ;
@@ -62,9 +61,9 @@ void MainWindow::MainWindowInitialization()
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
-    tmr->start(100);// этот таймер тоже за обновление значений
+    tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так
     timer->start(1111);
-    UpdateGraficsTimer->start(300); // этот таймер отвечает за обновление графика
+    UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика)
     timetouch->start(5000);
 
 

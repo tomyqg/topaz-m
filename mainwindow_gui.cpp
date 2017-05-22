@@ -92,8 +92,7 @@ QColor MainWindow::GetChannel4Color()
 
 void MainWindow::updateDateLabel()
 {
-    QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+    DateUpdate();
 }
 
 

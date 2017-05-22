@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <channel1.h>
 #include "messages.h"
+#include "mathresolver.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,8 @@ public:
     ChannelOptions channel2object;
     ChannelOptions channel3object;
     ChannelOptions channel4object;
+
+    mathresolver eee;
 
     MessageWrite mr;
 
@@ -69,6 +72,7 @@ private:
     void InvertHalfSecFlag();
     void OpenMessagesWindow();
     void OpenOptionsWindow();
+    void DateUpdate();
     void PowerOff();
     void CloseApplication();
     char GetHalfSecFlag();
