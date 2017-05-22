@@ -39,17 +39,17 @@ void MainWindow::AddValuesToBuffer()
     X_Coordinates.append(b);
     UartDriver UD;
 
-//    xyi++;
-//    int  a = qRound( eee.SolveEquation("sin(x/5)*70-20",xyi) );
-//    Y_coordinates_Chanel_1.append(a+5);
-//    Y_coordinates_Chanel_2.append(a+30);
-//    Y_coordinates_Chanel_3.append(a+55);
-//    Y_coordinates_Chanel_4.append(a+70);
+    xyi++;
+    int  a = qRound( eee.SolveEquation("sin(x/5)*70-20",xyi) );
+    Y_coordinates_Chanel_1.append(a+5);
+    Y_coordinates_Chanel_2.append(a+30);
+    Y_coordinates_Chanel_3.append(a+55);
+    Y_coordinates_Chanel_4.append(a+70);
 
-    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
-    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
-    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
-    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
+//    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
+//    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
+//    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
+//    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
 
     int maximumdots = GetGraphWidthInPixels()/2 ;
 
@@ -213,7 +213,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    //    graphPen.setWidth(2);
+        graphPen.setWidth(2);
     //    graphPen.set
     graphPen.setColor(Channel1Color);
 
