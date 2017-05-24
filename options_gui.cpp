@@ -87,7 +87,6 @@ void Options::ApplyNewSettingstoOptionsUI()
             ui->ButonTermoparaChannel_1->setChecked(true);
         }
 
-
         if (sigtype == 6)
         {
             ui->ButonImpulseChannel_1->setChecked(true);

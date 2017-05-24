@@ -218,7 +218,8 @@ void MainWindow::GrafsUpdateTrends()
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
         graphPen.setColor(Channel3Color);
-        ui->customPlot->graph()->setPen(graphPen);}
+        ui->customPlot->graph()->setPen(graphPen);
+    }
 
     {
         ui->customPlot->addGraph();
@@ -420,7 +421,6 @@ void MainWindow::UpdateDataChannel2()
     }
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-
 }
 
 void MainWindow::UpdateDataChannel3()
@@ -498,4 +498,3 @@ void MainWindow::UpdateDataChannel4()
     int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
 }
-

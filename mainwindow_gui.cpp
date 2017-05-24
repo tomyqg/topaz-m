@@ -95,7 +95,6 @@ void MainWindow::updateDateLabel()
     DateUpdate();
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     PowerOff();

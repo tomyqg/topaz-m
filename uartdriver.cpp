@@ -9,7 +9,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-#define BeagleBone
+//#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
