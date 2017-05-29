@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-05-24T14:49:39. -->
+<!-- Written by QtCreator 4.1.0, 2017-05-29T10:47:18. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">1</value>
+  <value type="int">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -318,8 +318,8 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
-       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
        <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Release/untitled2</value>
+       <value type="QString">C:/Users/aashmele/build-untitled2-BBB-Debug/untitled2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.7.2</value>
@@ -327,9 +327,9 @@
        <value type="QString">192.168.7.2</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
-       <value type="QString">/usr/test</value>
-       <value type="QString">/usr/test</value>
        <value type="QString">/usr</value>
+       <value type="QString">/usr/test</value>
+       <value type="QString">/usr/test</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -337,9 +337,9 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-05-19T16:12:13</value>
-       <value type="QDateTime">2017-05-23T16:18:47</value>
        <value type="QDateTime">2017-05-15T15:41:21</value>
+       <value type="QDateTime">2017-05-29T10:01:06</value>
+       <value type="QDateTime">2017-05-29T10:35:39</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>

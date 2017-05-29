@@ -7,6 +7,7 @@
 #include <channel1.h>
 #include "messages.h"
 #include "mathresolver.h"
+#include <uartdriver.h>
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,7 @@ public:
     ChannelOptions channel2object;
     ChannelOptions channel3object;
     ChannelOptions channel4object;
+
 
     mathresolver eee;
 
@@ -144,6 +146,7 @@ private:
     QTimer *halfSecondTimer;
     QTimer *tmr;
     QThread *thread;
+
 
 protected:
 

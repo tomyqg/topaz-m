@@ -55,7 +55,7 @@ void MainWindow::AddValuesToBuffer()
 
     //    while (X_Coordinates.length()>maximumdots)
 
-    while (X_Coordinates.length()>300)
+    while (X_Coordinates.length()>200)
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
     }
@@ -64,7 +64,6 @@ void MainWindow::AddValuesToBuffer()
 
     if (b%tickstep==0)
     {
-        b=b;
         LabelsCorrect();
     }
 

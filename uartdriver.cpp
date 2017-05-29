@@ -9,12 +9,14 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-//#define BeagleBone
+#define BeagleBone
 
 #ifdef BeagleBone
 #define comportname "/dev/ttyS1"
 QString pathtofile = "/usr/test/";
 #define uartsleep DelayMsec(50);
+#define threadsleep DelayMsec(100);
+
 #define longsleep delay(1000);
 #endif
 
@@ -32,7 +34,6 @@ double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
 uint ModBus::ConnectFailure =false;
-
 
 quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
@@ -478,7 +479,7 @@ double ModBus::DataChannelRead (char channel)
     //    xyi++;
     //    return eee.SolveEquation("sin(x/3)*30",xyi);
 
-//        return 23.45;
+    //        return 23.45;
     return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
@@ -488,12 +489,15 @@ void ModBus::ReadAllChannelsThread ()
     double currentdata;
     while (1)
     {
-        //        uartsleep;
+
+        this->thread()->msleep(100);
+//        threadsleep;
+
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
-            while (currentdata==0)
-                currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            //            while (currentdata==0)
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
@@ -509,14 +513,14 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-            while (currentdata==0)
-                currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            //            while (currentdata==0)
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            if (currentdata!=0)
-                UD.writechannelvalue(2,currentdata);
+            //            if (currentdata!=0)
+            UD.writechannelvalue(2,currentdata+10);
             //            Sleep(100);
         }
 
@@ -525,14 +529,14 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-            while (currentdata==0)
-                currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            //            while (currentdata==0)
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             //        if (ch1.IsMathematical())
             //    {
             //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
             //    }
-            if (currentdata!=0)
-                UD.writechannelvalue(3,currentdata);
+            //            if (currentdata!=0)
+            UD.writechannelvalue(3,currentdata+20);
             //            Sleep(100);
         }
 
@@ -542,10 +546,10 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[3] = 0;
 
-            while (currentdata==0)
-                currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            if (currentdata!=0)
-                UD.writechannelvalue(4,currentdata);
+            //            while (currentdata==0)
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
+            //            if (currentdata!=0)
+            UD.writechannelvalue(4,currentdata+30);
         }
 
         currentdata=0;

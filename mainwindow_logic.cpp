@@ -62,11 +62,10 @@ void MainWindow::MainWindowInitialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
     tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так
-    UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика)
+    UpdateGraficsTimer->start(100); // этот таймер отвечает за обновление графика (частота отрисовки графика)
 
     timer->start(1111);
     timetouch->start(5000);
-
 
     InitPins();
     InitTouchScreen();
@@ -74,16 +73,22 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-    thread= new QThread();
-    ModBus *MB = new ModBus();
-    MB->moveToThread(thread);
-    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-    //connect(thread, SIGNAL(finished()), MB, SLOT(deleteLater()) );
-
     channel1object.ReadSingleChannelOptionFromFile(1);
     channel2object.ReadSingleChannelOptionFromFile(2);
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
+
+    thread= new QThread();
+
+    ModBus *MB;
+
+    MB = new ModBus();
+
+    MB->moveToThread(thread);
+
+    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
+
+    thread->start();
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -108,35 +113,12 @@ void MainWindow::LabelsInit()
         Dates.append(fisttime.addSecs((var-half)*timeperiodseconds));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels.append(fisttime.addSecs((var-half)*timeperiodseconds).toString("hh:mm:ss") );
     }
-
-    //    for (int var = 0; var <= GetTotalLabelsCount(); ++var) {
-    //        Labels.append(QString::number(var));
-    //    }
-
 }
-
-/*void MainWindow::InitLabels()
-{
-    QDateTime fisttime;
-    fisttime = QDateTime::currentDateTime();
-
-    int half = GetTotalLabelsCount()/2;
-    int timeperiodseconds = GetTimePeriodSecs();
-
-    for (int var = 0; var <= GetTotalLabelsCount(); ++var) {
-        Dates.append(fisttime.addSecs((var-half)*timeperiodseconds));// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
-        Labels.append(fisttime.addSecs((var-half)*timeperiodseconds).toString("hh:mm:ss") );
-    }
-}*/
 
 void MainWindow::InitPins()
 {
     // an object for make terminal requests
     QProcess process;
-
-    //    Use NOPASSWD line for all commands, I mean:
-    //    debian ALL=(ALL) NOPASSWD: ALL
-    //    Put the line after all other lines in the sudoers file.
 
     // allow to pin use
     process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/value");
@@ -223,15 +205,15 @@ void MainWindow::InitTimers()
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
 
-    //connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
-    //connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
-    //connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
-    //connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
+    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
 
@@ -310,44 +292,5 @@ void MainWindow::NewTouchscreenCalibration()
 {
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
-    
-    // следующий код почему-то не работает
-    /*
-    QProcess process1;
 
-    //    process1.start("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // max perfomance on
-    //    QString reqst = "xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm;
-
-    //    QString reqst = "xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599 ";
-
-    //    QString reqst = "sudo xinput_calibrator";
-
-    QString reqst = "ls";
-
-    process1.start(reqst); // max perfomance on
-
-    QString stringtofind = "unable to find device";
-    process1.waitForFinished();
-
-    QString output;
-
-    while (process1.bytesAvailable()>0)
-    {
-        output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
-    }
-
-    QString pice1 = output;
-
-    if (output.indexOf(stringtofind)>=0)
-    {
-        QString pice = output;
-
-        //ui->textEdit->setText(Options::calibrationprm);
-        //QString a = Options::calibrationprm;
-        //QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
-        //pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
-        //pice = pice.simplified();
-        //pice = pice.remove(0, stringtofind.length() );
-        //Options::calibrationprm = pice.remove('\"');
-    }*/
 }

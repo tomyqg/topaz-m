@@ -45,17 +45,14 @@ private:
 
     static uint ConnectFailure;
 
-
 public slots:
+
     double ReadTemperature(char channel);
     double ReadVoltage(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
 public:
-
-
-
 
     uint GetConnectFailureStatus(){return ConnectFailure;}
     void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }

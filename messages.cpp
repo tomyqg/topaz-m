@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QtWidgets>
 
-
 #include "messages.h"
 #include "ui_messages.h"
 
