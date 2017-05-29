@@ -25,6 +25,9 @@
 #include <QThread>
 #include <QPoint>
 
+
+#define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
+
 void MainWindow::MainWindowInitialization()
 {
     setWindowFlags(Qt::CustomizeWindowHint);
@@ -32,8 +35,7 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
-    ui->MessagesWidget->installEventFilter(this);
-    ui->centralWidget->installEventFilter(this);
+//    ui->MessagesWidget->installEventFilter(this);
 
     ui->customPlot->yAxis->setRange(-200, 200);
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
@@ -84,11 +86,13 @@ void MainWindow::MainWindowInitialization()
 
     MB = new ModBus();
 
+    #ifdef MultiThread
     MB->moveToThread(thread);
 
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
 
     thread->start();
+    #endif
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -205,15 +209,21 @@ void MainWindow::InitTimers()
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
 
+#ifdef MultiThread
+
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel111()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel222()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel333()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel444()));
 
-    //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-    //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
-    //    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
-    //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+#endif
+
+#ifndef MultiThread
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
+#endif
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
 
@@ -292,5 +302,4 @@ void MainWindow::NewTouchscreenCalibration()
 {
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
-
 }

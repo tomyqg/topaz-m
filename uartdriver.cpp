@@ -5,6 +5,7 @@
 #include "channel1.h"
 #include "uartdriver.h"
 #include <QFile>
+#include <QThread>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
@@ -94,6 +95,11 @@ quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 void UartDriver::writechannelvalue(int channel, double value)
 {
     this->channelinputbuffer[channel-1] = value;
+}
+
+double UartDriver::readchannelvalue(int channel)
+{
+    return this->channelinputbuffer[channel-1];
 }
 
 QByteArray UartDriver::ReadAllUartDataByteFormat()
@@ -221,7 +227,8 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     LenghtHi = (int) ((Lenght & 0xFF00)>>8);
     LenghtLo = (int) (Lenght & 0x00FF);
 
-    requestdata.append(DeviceAdress);
+//    requestdata.append(DeviceAdress);
+    requestdata.append(1);
     requestdata.append(Function);
     requestdata.append(AddressHi);
     requestdata.append(AddressLo);
@@ -254,7 +261,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
 
     if (InputDataByteArraylenght < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
     {
-        SetConnectFailure(1);
+        SetConnectFailure(DeviceAdress);
         return 0;
     }
     else
@@ -314,7 +321,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     }
     else
     {
-        SetConnectFailure(2);
+        SetConnectFailure(5);
         return 0;
     }
     return 0;
@@ -474,12 +481,6 @@ double ModBus::DataChannel1Read()
 
 double ModBus::DataChannelRead (char channel)
 {
-
-    //    mathresolver eee;
-    //    xyi++;
-    //    return eee.SolveEquation("sin(x/3)*30",xyi);
-
-    //        return 23.45;
     return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
@@ -487,25 +488,24 @@ void ModBus::ReadAllChannelsThread ()
 {
     UartDriver UD;
     double currentdata;
+    this->thread()->setPriority(QThread::LowPriority);
+
     while (1)
     {
-
         this->thread()->msleep(100);
-//        threadsleep;
 
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
+
+            this->thread()->msleep(10);
             //            while (currentdata==0)
             currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            //        if (ch1.IsMathematical())
-            //    {
-            //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
-            //    }
 
             if (currentdata!=0)
+            {
                 UD.writechannelvalue(1,currentdata);
-            //            Sleep(100);
+            }
         }
 
         currentdata=0;
@@ -513,15 +513,16 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-            //            while (currentdata==0)
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            //        if (ch1.IsMathematical())
-            //    {
-            //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
-            //    }
-            //            if (currentdata!=0)
-            UD.writechannelvalue(2,currentdata+10);
-            //            Sleep(100);
+
+            this->thread()->msleep(10);
+
+            currentdata = DataChannelRead(ModBus::UniversalChannel2);
+
+            if (currentdata!=0)
+            {
+
+                UD.writechannelvalue(2,currentdata+10);
+            }
         }
 
         currentdata=0;
@@ -529,15 +530,15 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-            //            while (currentdata==0)
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            //        if (ch1.IsMathematical())
-            //    {
-            //        currentdata = mathres.Solve(ch1.GetMathString(), currentdata); // + mathres.Solve("sin(x)*10", currentdata); //sqrt(abs(x))+20
-            //    }
-            //            if (currentdata!=0)
-            UD.writechannelvalue(3,currentdata+20);
-            //            Sleep(100);
+
+            this->thread()->msleep(10);
+
+            currentdata = DataChannelRead(ModBus::UniversalChannel3);
+
+            if (currentdata!=0)
+            {
+                UD.writechannelvalue(3,currentdata+20);
+            }
         }
 
         currentdata=0;
@@ -546,13 +547,14 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[3] = 0;
 
-            //            while (currentdata==0)
-            currentdata = DataChannelRead(ModBus::UniversalChannel1);
-            //            if (currentdata!=0)
-            UD.writechannelvalue(4,currentdata+30);
-        }
+            this->thread()->msleep(10);
 
+            currentdata = DataChannelRead(ModBus::UniversalChannel4);
+            if (currentdata!=0)
+            {
+                UD.writechannelvalue(4,currentdata+30);
+            }
+        }
         currentdata=0;
     }
-    thread()->deleteLater();
 }

@@ -27,7 +27,6 @@ public:
     ChannelOptions channel3object;
     ChannelOptions channel4object;
 
-
     mathresolver eee;
 
     MessageWrite mr;

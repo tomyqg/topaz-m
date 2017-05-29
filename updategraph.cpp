@@ -40,11 +40,11 @@ void MainWindow::AddValuesToBuffer()
     UartDriver UD;
 
     //xyi++;
-    //int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
-    //Y_coordinates_Chanel_1.append(a+5);
-    //Y_coordinates_Chanel_2.append(a+30);
-    //Y_coordinates_Chanel_3.append(a+55);
-    //Y_coordinates_Chanel_4.append(a+70);
+//    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
+//    Y_coordinates_Chanel_1.append(a+5);
+//    Y_coordinates_Chanel_2.append(a+30);
+//    Y_coordinates_Chanel_3.append(a+55);
+//    Y_coordinates_Chanel_4.append(a+70);
 
     Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
@@ -55,7 +55,7 @@ void MainWindow::AddValuesToBuffer()
 
     //    while (X_Coordinates.length()>maximumdots)
 
-    while (X_Coordinates.length()>200)
+    while (X_Coordinates.length()>300)
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
     }
@@ -308,12 +308,43 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->replot();
 }
 
+void MainWindow::UpdateDataChannel111()
+{
+    UartDriver::needtoupdatechannel[0] = 1;
+    int period = channel1object.GetMeasurePeriod()*1000;
+    channeltimer1->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel222()
+{
+    UartDriver::needtoupdatechannel[1] = 1;
+    int period = channel2object.GetMeasurePeriod()*1000;
+    channeltimer2->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel333()
+{
+    UartDriver::needtoupdatechannel[2] = 1;
+    int period = channel3object.GetMeasurePeriod()*1000;
+    channeltimer3->setInterval(period);
+}
+
+void MainWindow::UpdateDataChannel444()
+{
+    UartDriver::needtoupdatechannel[3] = 1;
+    int period = channel4object.GetMeasurePeriod()*1000;
+    channeltimer4->setInterval(period);
+}
+
 void MainWindow::UpdateDataChannel1()
 {
     UartDriver UD;
     ModBus modbus;
     mathresolver mathres;
     double currentdata;
+
+    int period = channel1object.GetMeasurePeriod()*1000;
+    channeltimer1->setInterval(period);
 
     UD.needtoupdatechannel[0] = 1;
 
@@ -345,41 +376,7 @@ void MainWindow::UpdateDataChannel1()
             channel1object.HighState1Setted = false;
             mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1LowMessage());
         }
-
     }
-    else {
-
-    }
-    int period = channel1object.GetMeasurePeriod()*1000;
-    channeltimer1->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel111()
-{
-    UartDriver::needtoupdatechannel[0] = 1;
-    int period = channel1object.GetMeasurePeriod()*1000;
-    channeltimer1->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel222()
-{
-    UartDriver::needtoupdatechannel[1] = 1;
-    int period = channel2object.GetMeasurePeriod()*1000;
-    channeltimer2->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel333()
-{
-    UartDriver::needtoupdatechannel[2] = 1;
-    int period = channel3object.GetMeasurePeriod()*1000;
-    channeltimer3->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel444()
-{
-    UartDriver::needtoupdatechannel[3] = 1;
-    int period = channel4object.GetMeasurePeriod()*1000;
-    channeltimer4->setInterval(period);
 }
 
 void MainWindow::UpdateDataChannel2()

@@ -12,6 +12,7 @@ class UartDriver:public QObject
 
 public slots:
     void writechannelvalue(int channel, double value);
+    double readchannelvalue(int channel);
     QString ReadAllAvailableCOMPorts();
     QString ReadAllUartDataStringFormat();
     QByteArray ReadAllUartDataByteFormat();
@@ -44,6 +45,11 @@ class ModBus: public UartDriver
 private:
 
     static uint ConnectFailure;
+
+    ChannelOptions channel1objectModbus;
+    ChannelOptions channel2objectModbus;
+    ChannelOptions channel3objectModbus;
+    ChannelOptions channel4objectModbus;
 
 public slots:
 

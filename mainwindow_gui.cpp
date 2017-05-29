@@ -136,9 +136,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         PaintOnWidget();
     }
 
-    if (watched == ui->centralWidget && event->type() == QEvent::MouseButtonPress) {
+    if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
         ReactOnTouch();
     }
+
     return true;
 }
 

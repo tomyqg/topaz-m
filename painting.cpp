@@ -69,7 +69,7 @@ void MainWindow::PaintCyfrasBottom()
         Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
     }
 
-    else if (mb.GetConnectFailureStatus() == 2)
+    else if (mb.GetConnectFailureStatus() == 5)
     {
         painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
         Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "CRC Error";
@@ -81,30 +81,6 @@ void MainWindow::PaintCyfrasBottom()
         Channel3ValueString = QString::number(UartDriver::channelinputbuffer[2]);
         Channel4ValueString = QString::number(UartDriver::channelinputbuffer[3]);
     }
-
-    //вычесление бесконечной суммы с нужной точностью eps
-
-    /*
-    double s = 0;
-    double a = 0;
-    double eps = 0.00001;
-    int i=1;
-
-    while (  i )
-    {
-
-        a = pow (i,2)/(pow(3,i));
-        s += a;
-        i++;
-        if (a < eps)
-        {
-            qDebug() << i;
-            qDebug() << s;
-            break;
-
-        }
-    }
-    */
 
     // выводим значения каналов большими цифрами
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
@@ -125,8 +101,6 @@ void MainWindow::PaintCyfrasBottom()
     painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
     painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
     painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
-
-
 
     // подписываем букву m если канал математически обрабатывается
     painter.setPen(Qt::darkRed);
@@ -368,7 +342,16 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
         painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
 
         painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
-        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
+
+        if ( mb.GetConnectFailureStatus()  == 1 )
+            Channel1ValueString = "Connection Fail";
+        if ( mb.GetConnectFailureStatus()  == 2 )
+            Channel2ValueString = "Connection Fail";
+        if ( mb.GetConnectFailureStatus()  == 3 )
+            Channel3ValueString = "Connection Fail";
+        if ( mb.GetConnectFailureStatus()  == 4 )
+            Channel4ValueString = "Connection Fail";
+
 
         // выводим значения каналов большими цифрами
         painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
@@ -549,26 +532,26 @@ void MainWindow::ReactOnTouch()
     SetChannel4Color(Channel4ColorNormal);
 
     if ((xpos < xcenter)&&(ypos < ycenter)) // если лев. верхн. квадрат
-        {
-            SetChannel1Color(Qt::yellow);
-        }
+    {
+        SetChannel1Color(Qt::yellow);
+    }
 
 
     if ((xpos > xcenter)&& (ypos < ycenter)) // если правый верхний квадрат
-        {
-            SetChannel2Color(Qt::yellow);
-        }
+    {
+        SetChannel2Color(Qt::yellow);
+    }
 
     if ((xpos < xcenter) && (ypos > ycenter)) // если левый нижний квадрат
-        {
-            SetChannel3Color(Qt::yellow);
-        }
+    {
+        SetChannel3Color(Qt::yellow);
+    }
 
 
     if ((xpos > xcenter)&& (ypos > ycenter)) // если правый нижний квадрат
-        {
-            SetChannel4Color(Qt::yellow);
-        }
+    {
+        SetChannel4Color(Qt::yellow);
+    }
 
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
 }
