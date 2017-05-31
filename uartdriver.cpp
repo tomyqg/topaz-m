@@ -492,13 +492,21 @@ void ModBus::ReadAllChannelsThread ()
 
     while (1)
     {
-        this->thread()->msleep(100);
+        while (
+               (UartDriver::needtoupdatechannel[0] == 0)&&
+               (UartDriver::needtoupdatechannel[1] == 0)&&
+               (UartDriver::needtoupdatechannel[2] == 0)&&
+               (UartDriver::needtoupdatechannel[3] == 0) )
+        {
+            this->thread()->msleep(20);
+        }
+
+//        this->thread()->msleep(100);
 
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
 
-            this->thread()->msleep(10);
             //            while (currentdata==0)
             currentdata = DataChannelRead(ModBus::UniversalChannel1);
 
@@ -506,6 +514,7 @@ void ModBus::ReadAllChannelsThread ()
             {
                 UD.writechannelvalue(1,currentdata);
             }
+            this->thread()->msleep(25);
         }
 
         currentdata=0;
@@ -514,15 +523,14 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[1] = 0;
 
-            this->thread()->msleep(10);
-
             currentdata = DataChannelRead(ModBus::UniversalChannel2);
 
             if (currentdata!=0)
             {
-
                 UD.writechannelvalue(2,currentdata+10);
             }
+
+            this->thread()->msleep(25);
         }
 
         currentdata=0;
@@ -531,14 +539,14 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[2] = 0;
 
-            this->thread()->msleep(10);
-
             currentdata = DataChannelRead(ModBus::UniversalChannel3);
 
             if (currentdata!=0)
             {
                 UD.writechannelvalue(3,currentdata+20);
             }
+
+            this->thread()->msleep(25);
         }
 
         currentdata=0;
@@ -547,13 +555,13 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[3] = 0;
 
-            this->thread()->msleep(10);
-
             currentdata = DataChannelRead(ModBus::UniversalChannel4);
             if (currentdata!=0)
             {
                 UD.writechannelvalue(4,currentdata+30);
             }
+
+            this->thread()->msleep(25);
         }
         currentdata=0;
     }

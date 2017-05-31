@@ -40,18 +40,19 @@ void MainWindow::PaintCyfrasBottom()
 
     // здесь мы рисуем прямоугольнички
     // если связб плохая и прошло пол секунды то нужно мигнуть красным цветом
-    if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
-    {
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
-    }
-    else
+
+    //    if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
+    //    {
+    //        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    //        painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
+    //        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    //        painter.drawRect(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight);
+    //        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    //        painter.drawRect(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
+    //        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    //        painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
+    //    }
+    //    else
     {
         painter.setBrush(QBrush(GetChannel1Color(), Qt::Dense4Pattern));
         painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
@@ -65,14 +66,14 @@ void MainWindow::PaintCyfrasBottom()
 
     if (mb.GetConnectFailureStatus() == 1)
     {
-        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
-        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
+        //        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
+        //        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "Connection Fail";
     }
 
     else if (mb.GetConnectFailureStatus() == 5)
     {
-        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
-        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "CRC Error";
+        //        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
+        //        Channel1ValueString=Channel2ValueString=Channel3ValueString=Channel4ValueString = "CRC Error";
     }
     else {
         painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
@@ -198,8 +199,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int otstupsverhu = widgheight - otstupsnizu;
 
     int alertwindowwidth = widgwidth/2-2;
-    int alertwindowheight = widgheight/2/4-2;
+//    int alertwindowheight = widgheight/2/4-2;
     int alerttextsize = 30;
+
+    int alertwindowheight  = 60;
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -503,6 +506,18 @@ void MainWindow::PaintOnWidget()
         break;
     }
 }
+
+void MainWindow::ReactOnMouseSlide()
+{
+    int  centerposY = 384 ;
+
+    int  y   =  QCursor::pos().y() ;
+
+    int k = 50*y/100;
+    ui->customPlot->yAxis->setRange(-k, k);
+
+}
+
 
 void MainWindow::ReactOnTouch()
 {

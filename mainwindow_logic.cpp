@@ -35,7 +35,9 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix("/usr/logo.jpg");
     ui->label->setPixmap(pix);
-//    ui->MessagesWidget->installEventFilter(this);
+
+    // нужно установить евент филтер чтобы отрисовывалась графика
+    ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
 
     ui->customPlot->yAxis->setRange(-200, 200);
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
@@ -46,7 +48,7 @@ void MainWindow::MainWindowInitialization()
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
 
     UpdateGraficsTimer = new QTimer(this);
-    //connect(timer2, SIGNAL(timeout()), this, SLOT(updatepicture()));
+
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
 
     QTimer *timetouch = new QTimer(this);
@@ -63,8 +65,8 @@ void MainWindow::MainWindowInitialization()
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
-    tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так
-    UpdateGraficsTimer->start(100); // этот таймер отвечает за обновление графика (частота отрисовки графика)
+    tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
+    UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть сто
 
     timer->start(1111);
     timetouch->start(5000);
@@ -80,19 +82,14 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
+#ifdef MultiThread
     thread= new QThread();
-
     ModBus *MB;
-
     MB = new ModBus();
-
-    #ifdef MultiThread
     MB->moveToThread(thread);
-
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-
     thread->start();
-    #endif
+#endif
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -226,7 +223,6 @@ void MainWindow::InitTimers()
 #endif
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
-
     channeltimer1->start(100);
     channeltimer2->start(100);
     channeltimer3->start(100);
@@ -302,4 +298,12 @@ void MainWindow::NewTouchscreenCalibration()
 {
     QProcess process;
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
+}
+
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    int i = 0;
+    i++;
+
 }

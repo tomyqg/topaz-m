@@ -242,6 +242,8 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <zorder>MessagesWidget</zorder>
+    <zorder>MessagesWidget</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">

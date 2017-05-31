@@ -33,6 +33,8 @@ public:
 
     void ShowMessageBox (QString title,QString message);
 
+    bool needupdatePainter;
+
 public slots:
 
     void updateText( const QString text );
@@ -66,6 +68,7 @@ private:
     void InitTouchScreen();
     void PaintOnWidget();
     void ReactOnTouch();
+    void ReactOnMouseSlide();
     void PaintCyfrasBottom();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
@@ -146,8 +149,8 @@ private:
     QTimer *tmr;
     QThread *thread;
 
-
 protected:
+    void paintEvent(QPaintEvent *event) ;
 
 };
 

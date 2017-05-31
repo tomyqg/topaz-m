@@ -133,11 +133,19 @@ void  MainWindow::updateText( const QString text ) // этот слот обно
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
-        PaintOnWidget();
+
+        if (needupdatePainter ==1)
+        {PaintOnWidget();
+            needupdatePainter = 0;}
     }
 
     if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
         ReactOnTouch();
+    }
+
+    if (watched == ui->MessagesWidget && event->type() == QEvent::MouseMove) {
+
+        ReactOnMouseSlide();
     }
 
     return true;

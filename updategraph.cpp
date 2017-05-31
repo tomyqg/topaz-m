@@ -8,7 +8,6 @@
 #include "options.h"
 #include "qglobal.h"
 
-
 int a=0;int b=0;
 
 int color1rgbnormal[]={30, 120, 120 };  //dark cyan
@@ -40,11 +39,11 @@ void MainWindow::AddValuesToBuffer()
     UartDriver UD;
 
     //xyi++;
-//    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
-//    Y_coordinates_Chanel_1.append(a+5);
-//    Y_coordinates_Chanel_2.append(a+30);
-//    Y_coordinates_Chanel_3.append(a+55);
-//    Y_coordinates_Chanel_4.append(a+70);
+    //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
+    //    Y_coordinates_Chanel_1.append(a+5);
+    //    Y_coordinates_Chanel_2.append(a+30);
+    //    Y_coordinates_Chanel_3.append(a+55);
+    //    Y_coordinates_Chanel_4.append(a+70);
 
     Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
@@ -52,8 +51,6 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
 
     int maximumdots = GetGraphWidthInPixels()/2 ;
-
-    //    while (X_Coordinates.length()>maximumdots)
 
     while (X_Coordinates.length()>300)
     {
@@ -72,6 +69,9 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
+
+    needupdatePainter = 1;
+
     switch( Options::DisplayParametr )
     {
     case Options::Trends:
@@ -93,6 +93,8 @@ void MainWindow::UpdateGraphics()
     default:
         break;
     }
+
+//    PaintCyfrasBottom();
 }
 
 void MainWindow::GrafsUpdateTrendsAndBars()
@@ -200,7 +202,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(3);
+    graphPen.setWidth(2);
     //    graphPen.set
     graphPen.setColor(Channel1Color);
 
@@ -268,7 +270,7 @@ void MainWindow::GrafsUpdateBars()
 
     ui->customPlot->clearGraphs();
     ui->customPlot->xAxis->setRange(0, 100);
-    graphPen.setWidth(1);
+    graphPen.setWidth(2);
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("Bargraf");
 
