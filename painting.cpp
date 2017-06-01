@@ -199,10 +199,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int otstupsverhu = widgheight - otstupsnizu;
 
     int alertwindowwidth = widgwidth/2-2;
-//    int alertwindowheight = widgheight/2/4-2;
+    //    int alertwindowheight = widgheight/2/4-2;
+    int alertwindowheight  = 60;
     int alerttextsize = 30;
 
-    int alertwindowheight  = 60;
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -329,6 +329,11 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
     }
 
+
+    //
+
+    return;
+    // дальше идет проверка связи, пока отключим
     ModBus mb;
     // если связб плохая и прошло пол секунды то нужно мигнуть красным цветом
     if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
@@ -510,11 +515,16 @@ void MainWindow::PaintOnWidget()
 void MainWindow::ReactOnMouseSlide()
 {
     int  centerposY = 384 ;
-
+    int centerposX  = 652;// общая точка четырех квадратов по иксу в пикселях
     int  y   =  QCursor::pos().y() ;
+    int  x   =  QCursor::pos().x() ;
+    int kx = 100 + x/5;
+    int ky = 20 + y/3;
 
-    int k = 50*y/100;
-    ui->customPlot->yAxis->setRange(-k, k);
+//    SetXRange(kx);
+
+    ui->customPlot->yAxis->setRange(-ky, ky);
+
 
 }
 

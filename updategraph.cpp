@@ -104,7 +104,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
     }
 
-    ui->customPlot->xAxis->setRange(b-300, b+300);
+    ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
@@ -197,12 +197,12 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
 void MainWindow::GrafsUpdateTrends()
 {
-    ui->customPlot->xAxis->setRange(b-300, b+300);
+    ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(2);
+    graphPen.setWidth(3);
     //    graphPen.set
     graphPen.setColor(Channel1Color);
 

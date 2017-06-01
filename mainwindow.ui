@@ -66,6 +66,7 @@
       <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
+      <stylestrategy>NoAntialias</stylestrategy>
      </font>
     </property>
     <property name="focusPolicy">
@@ -242,8 +243,6 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <zorder>MessagesWidget</zorder>
-    <zorder>MessagesWidget</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
@@ -253,6 +252,9 @@
       <width>1211</width>
       <height>650</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>BlankCursor</cursorShape>
     </property>
    </widget>
   </widget>

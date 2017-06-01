@@ -39,7 +39,10 @@ void MainWindow::MainWindowInitialization()
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
 
-    ui->customPlot->yAxis->setRange(-200, 200);
+    SetXRange(300);
+    SetYRange(180);
+
+    ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
     MessageWrite mr ;
     mr.LogAddMessage("Programm Started");

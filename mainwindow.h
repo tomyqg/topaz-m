@@ -81,6 +81,13 @@ private:
     void CloseApplication();
     char GetHalfSecFlag();
 
+    void SetXRange(int newxrange) {Xrange = newxrange;}
+    int GetXRange() {return Xrange;}
+
+
+    void SetYRange(int newyrange) {Yrange = newyrange;}
+    int GetYRange() {return Yrange;}
+
     int GetTimePeriodSecs() {return 10;}
     int GetTickCountInOneSecond() {return 10;}
     int GetGraphWidthInPixels() {return 600;}
@@ -148,6 +155,9 @@ private:
     QTimer *halfSecondTimer;
     QTimer *tmr;
     QThread *thread;
+
+    int Xrange;
+    int Yrange;
 
 protected:
     void paintEvent(QPaintEvent *event) ;
