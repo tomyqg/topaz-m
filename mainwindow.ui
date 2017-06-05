@@ -257,6 +257,19 @@
      <cursorShape>BlankCursor</cursorShape>
     </property>
    </widget>
+   <widget class="QCheckBox" name="ConfirmBox">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>700</y>
+      <width>141</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Квитирование</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -99,6 +99,10 @@ void MainWindow::MainWindowInitialization()
 
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
 
+
+    needConfirmation = 1;
+
+
     // connection for accessing to UI from another class
     ChannelOptions * objectwithsignal = new ChannelOptions;
     connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //

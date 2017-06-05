@@ -182,10 +182,22 @@ bool ChannelOptions::IsChannelMathematical()
     return this->MathematicalState;
 }
 
+// constructor
 ChannelOptions::ChannelOptions()
 {
     this->HighState1Setted = false;
     this->LowState1Setted= false;
     this->HighState2Setted= false;
     this->LowState2Setted= false;
+    SetConfirmationNeed(true);
+}
+
+bool ChannelOptions::GetConfirmationNeed()
+{
+    return this->needConfirmationchannel;
+}
+
+void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
+{
+    needConfirmationchannel = confirmationstate;
 }

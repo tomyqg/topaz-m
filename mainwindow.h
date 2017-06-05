@@ -34,6 +34,12 @@ public:
     void ShowMessageBox (QString title,QString message);
 
     bool needupdatePainter;
+    bool needConfirmation;
+
+    bool needConfirmationchannel1;
+    bool needConfirmationchannel2;
+    bool needConfirmationchannel3;
+    bool needConfirmationchannel4;
 
 public slots:
 

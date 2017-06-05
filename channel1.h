@@ -9,6 +9,7 @@ class ChannelOptions: public QObject
     Q_OBJECT
 
 public:
+    // constructor
     explicit ChannelOptions();
 
 public:
@@ -29,6 +30,9 @@ public:
     QString GetState2LowMessage();
     QString GetChannelName();
     QString GetMathString();
+    bool GetConfirmationNeed();
+    void SetConfirmationNeed(bool confirmationstate);
+
 
     void ReadSingleChannelOptionFromFile(int channel);
 
@@ -81,6 +85,8 @@ private:
     QString state2lowmessage;
     QString channelname;
     QString mathequationstring;
+
+    bool needConfirmationchannel;
 
 signals:
     void updateUI(const QString text);

@@ -16,7 +16,7 @@ TARGET = untitled2
 TEMPLATE = app
 
 SOURCES += main.cpp\
-         ../../qcustomplot.cpp \
+         qcustomplot.cpp \
     updategraph.cpp \
     keyboard.cpp \
     eventfilter.cpp \
@@ -34,7 +34,7 @@ SOURCES += main.cpp\
     painting.cpp
 
 HEADERS  += mainwindow.h \
-         ../../qcustomplot.h \
+         qcustomplot.h \
     updategraph.h \
     options.h \
     channel1.h\

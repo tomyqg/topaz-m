@@ -39,11 +39,11 @@ void MainWindow::AddValuesToBuffer()
     UartDriver UD;
 
     //xyi++;
-    //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
-    //    Y_coordinates_Chanel_1.append(a+5);
-    //    Y_coordinates_Chanel_2.append(a+30);
-    //    Y_coordinates_Chanel_3.append(a+55);
-    //    Y_coordinates_Chanel_4.append(a+70);
+    //int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
+    //Y_coordinates_Chanel_1.append(a+5);
+    //Y_coordinates_Chanel_2.append(a+30);
+    //Y_coordinates_Chanel_3.append(a+55);
+    //Y_coordinates_Chanel_4.append(a+70);
 
     Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
@@ -93,8 +93,6 @@ void MainWindow::UpdateGraphics()
     default:
         break;
     }
-
-//    PaintCyfrasBottom();
 }
 
 void MainWindow::GrafsUpdateTrendsAndBars()

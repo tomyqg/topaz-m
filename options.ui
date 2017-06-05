@@ -41,7 +41,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -551,6 +551,12 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
+        </property>
         <property name="value">
          <double>80.000000000000000</double>
         </property>
@@ -786,6 +792,12 @@
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
         </property>
         <property name="value">
          <double>40.000000000000000</double>
@@ -1547,6 +1559,12 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
+        </property>
         <property name="value">
          <double>40.000000000000000</double>
         </property>
@@ -1779,6 +1797,12 @@
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
         </property>
         <property name="value">
          <double>80.000000000000000</double>
@@ -2482,6 +2506,12 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
+        </property>
         <property name="value">
          <double>40.000000000000000</double>
         </property>
@@ -2714,6 +2744,12 @@
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
         </property>
         <property name="value">
          <double>80.000000000000000</double>
@@ -3459,6 +3495,12 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
+        </property>
         <property name="value">
          <double>40.000000000000000</double>
         </property>
@@ -3709,6 +3751,12 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="minimum">
+         <double>-300.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>300.000000000000000</double>
         </property>
         <property name="value">
          <double>80.000000000000000</double>
@@ -5231,9 +5279,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

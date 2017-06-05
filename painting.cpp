@@ -203,7 +203,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int alertwindowheight  = 60;
     int alerttextsize = 30;
 
-
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
     double channel3currentvalue = UartDriver::channelinputbuffer[2];
@@ -240,11 +239,26 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
 
+
+    int confirmwindowwidth = widgwidth/4;
+    int confirmwindowheight  = widgheight/4;
+    int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
+    int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
+    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
+    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
+
     // увеличение уставки Channel 1
     if (channel1currentvalue>channel1state1value)
     {
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState1HighMessage());
         SetChannel1Color(ChannelColorHighState);
+
+        if ( (channel1object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+        {
+            painter.setBrush(QBrush(Qt::blue, Qt::Dense2Pattern));
+            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel1object.GetState1HighMessage());
+        }
     }
     // уменьшение уставки  Channel 1
     else if (channel1currentvalue<channel1state2value)
@@ -263,6 +277,14 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     {
         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState1HighMessage());
         SetChannel2Color(ChannelColorHighState);
+
+        if ( (channel2object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+        {
+            painter.setBrush(QBrush(Qt::blue, Qt::Dense2Pattern));
+            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel2object.GetState1HighMessage());
+        }
+
     }
     // уменьшение уставки  Channel 2
     else if (channel2currentvalue<channel2state2value)
@@ -282,6 +304,13 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     {
         painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState1HighMessage());
         SetChannel3Color(ChannelColorHighState);
+
+        if ( (channel3object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+        {
+            painter.setBrush(QBrush(Qt::blue, Qt::Dense2Pattern));
+            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel3object.GetState1HighMessage());
+        }
     }
     // уменьшение уставки  Channel 3
     else if (channel3currentvalue<channel3state2value)
@@ -300,6 +329,13 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     {
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState1HighMessage());
         SetChannel4Color(ChannelColorHighState);
+
+        if ( (channel4object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+        {
+            painter.setBrush(QBrush(Qt::blue, Qt::Dense2Pattern));
+            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel4object.GetState1HighMessage());
+        }
     }
     // уменьшение уставки  Channel 4
     else if (channel4currentvalue<channel4state2value)
@@ -312,6 +348,19 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
         SetChannel4Color(Channel4ColorNormal);
     }
+    //здесь мы возвращаем окна квитирования
+
+    if (channel1currentvalue<channel1state1value)
+        channel1object.SetConfirmationNeed(true);
+
+    if (channel2currentvalue<channel2state1value)
+        channel2object.SetConfirmationNeed(true);
+
+    if (channel3currentvalue<channel3state1value)
+        channel3object.SetConfirmationNeed(true);
+
+    if (channel4currentvalue<channel4state1value)
+        channel4object.SetConfirmationNeed(true);
 
     if  (GetHalfSecFlag() == 1)
     {
@@ -329,9 +378,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
     }
 
-
-    //
-
+    // здесь мы рисуем квитирование если что...
     return;
     // дальше идет проверка связи, пока отключим
     ModBus mb;
@@ -359,7 +406,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             Channel3ValueString = "Connection Fail";
         if ( mb.GetConnectFailureStatus()  == 4 )
             Channel4ValueString = "Connection Fail";
-
 
         // выводим значения каналов большими цифрами
         painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
@@ -469,7 +515,7 @@ void MainWindow::PaintPolarDiagramm()
     int a = X_Coordinates.last();
     if ( a%360 == 0)
     {
-        //        X_Coordinates.clear();
+        //X_Coordinates.clear();
         PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
         PolarChartPointsChannel2.clear();
         PolarChartPointsChannel3.clear();
@@ -521,23 +567,14 @@ void MainWindow::ReactOnMouseSlide()
     int kx = 100 + x/5;
     int ky = 20 + y/3;
 
-//    SetXRange(kx);
-
     ui->customPlot->yAxis->setRange(-ky, ky);
-
-
 }
-
 
 void MainWindow::ReactOnTouch()
 {
-
     // подкрашиваем квадраты куда коснулись в желтый цвет
     // отступ  сверху и слева в пикселях
-    int borderwidth = 0 ;
-
     //высчитываются
-
     //    int xcenter  = ui->MessagesWidget->width()-borderwidth/2;// высота всей области построения в пикселях
     //    int ycenter  = ui->MessagesWidget->height()- borderwidth/2; // ширина всей области построения в пикселях
 
@@ -547,7 +584,6 @@ void MainWindow::ReactOnTouch()
     int xpos = QCursor::pos().x();
     int ypos = QCursor::pos().y();
 
-
     QString x = QString::number(xpos);
     QString y = QString::number(ypos);
 
@@ -556,11 +592,19 @@ void MainWindow::ReactOnTouch()
     SetChannel3Color(Channel3ColorNormal);
     SetChannel4Color(Channel4ColorNormal);
 
+    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
+    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
+    int confirmwindowwidth = widgwidth/4;
+    int confirmwindowheight  = widgheight/4;
+    int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
+    int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
+    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
+    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
+
     if ((xpos < xcenter)&&(ypos < ycenter)) // если лев. верхн. квадрат
     {
         SetChannel1Color(Qt::yellow);
     }
-
 
     if ((xpos > xcenter)&& (ypos < ycenter)) // если правый верхний квадрат
     {
@@ -572,11 +616,32 @@ void MainWindow::ReactOnTouch()
         SetChannel3Color(Qt::yellow);
     }
 
-
     if ((xpos > xcenter)&& (ypos > ycenter)) // если правый нижний квадрат
     {
         SetChannel4Color(Qt::yellow);
     }
 
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
+
+    // проверка если ткнули пальцем в окно квитирования
+
+    if ((xpos>confirmwindowposx) &&
+            (xpos<confirmwindowposx2) &&
+            (ypos>confirmwindowposy) &&
+            (ypos<confirmwindowposy2) )
+    {
+        if (channel4object.GetConfirmationNeed() == true)
+        {
+            channel4object.SetConfirmationNeed(false);
+        }
+        if (channel3object.GetConfirmationNeed() == true) {
+            channel3object.SetConfirmationNeed(false);
+        }
+        if (channel2object.GetConfirmationNeed() == true) {
+            channel2object.SetConfirmationNeed(false);
+        }
+        if (channel1object.GetConfirmationNeed() == true) {
+            channel1object.SetConfirmationNeed(false);
+        }
+    }
 }
