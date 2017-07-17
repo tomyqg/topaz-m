@@ -128,6 +128,11 @@ void MainWindow::InitPins()
     // an object for make terminal requests
     QProcess process;
 
+    //    importante!
+    //    Use NOPASSWD line for all commands, I mean:
+    //    debian ALL=(ALL) NOPASSWD: ALL
+    //    Put the line after all other lines in the sudoers file.
+
     // allow to pin use
     process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/value");
     process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/direction");

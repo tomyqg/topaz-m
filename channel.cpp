@@ -30,8 +30,6 @@ double ChannelOptions::GetSignalType()
     return this->signaltype;
 }
 
-
-
 void ChannelOptions::SetSignalType(double newsignaltype)
 {
     this->signaltype = newsignaltype;

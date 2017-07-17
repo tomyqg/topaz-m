@@ -88,11 +88,10 @@ private:
     char GetHalfSecFlag();
 
     void SetXRange(int newxrange) {Xrange = newxrange;}
-    int GetXRange() {return Xrange;}
-
+    int  GetXRange() {return Xrange;}
 
     void SetYRange(int newyrange) {Yrange = newyrange;}
-    int GetYRange() {return Yrange;}
+    int  GetYRange() {return Yrange;}
 
     int GetTimePeriodSecs() {return 10;}
     int GetTickCountInOneSecond() {return 10;}

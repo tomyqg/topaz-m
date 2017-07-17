@@ -33,9 +33,7 @@ public:
     bool GetConfirmationNeed();
     void SetConfirmationNeed(bool confirmationstate);
 
-
     void ReadSingleChannelOptionFromFile(int channel);
-
     void SetChannelName(QString newname);
     void SetSignalType(double newsignaltype);
     void SetLowerLimit(double newsignaltype);
@@ -58,7 +56,6 @@ public:
     bool IsHighState2Setted();
     bool IsLowState2Setted();
     bool IsChannelMathematical();
-
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;

@@ -50,6 +50,7 @@ FORMS    += mainwindow.ui \
     keyboard.ui \
     messages.ui
 #target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
-target.path  = /usr/test
+target.path  = /opt
 INSTALLS    += target
-DISTFILES +=
+DISTFILES += \
+    ../build-untitled2-MYD-Release/Makefile

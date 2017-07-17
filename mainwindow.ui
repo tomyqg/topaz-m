@@ -29,30 +29,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>700</y>
-      <width>90</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="text">
-     <string>Отключить
- питание</string>
-    </property>
-   </widget>
    <widget class="QCustomPlot" name="customPlot" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
       <width>1251</width>
-      <height>681</height>
+      <height>641</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -117,10 +100,15 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>700</y>
+      <y>660</y>
       <width>90</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
@@ -133,10 +121,15 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>700</y>
+      <y>660</y>
       <width>90</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
@@ -150,10 +143,15 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>700</y>
+      <y>660</y>
       <width>90</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
@@ -231,10 +229,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1250</width>
-      <height>650</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1281</width>
+      <height>651</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -243,6 +241,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <zorder>MessagesWidget</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
@@ -250,7 +249,7 @@
       <x>49</x>
       <y>40</y>
       <width>1211</width>
-      <height>650</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="cursor">
@@ -268,6 +267,28 @@
     </property>
     <property name="text">
      <string>Квитирование</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>660</y>
+      <width>90</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="text">
+     <string>Отключить
+ питание</string>
     </property>
    </widget>
   </widget>
