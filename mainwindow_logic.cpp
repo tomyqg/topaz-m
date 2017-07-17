@@ -255,6 +255,7 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+    ui->pushButton->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
 void MainWindow::LabelsUpdate()
@@ -263,7 +264,6 @@ void MainWindow::LabelsUpdate()
     fisttime = QDateTime::currentDateTime();
 
     int i = 0;
-
     while(i<=GetTotalLabelsCount()) {
         Dates[i] = Dates[i].addSecs(GetTimePeriodSecs());// << (fisttime.addSecs(i*6)).toString("hh:mm:ss");
         Labels[i] = Dates.at(i).toString("hh:mm:ss"); //Dates.at(i).toString("hh:mm:ss");
@@ -312,10 +312,8 @@ void MainWindow::NewTouchscreenCalibration()
     process.startDetached("xinput set-prop 7 \"Evdev Axis Calibration\" " + Options::calibrationprm); // каждую секунду вводим координаты тача вдруг чтобы не отвалился
 }
 
-
 void MainWindow::paintEvent(QPaintEvent *)
 {
     int i = 0;
     i++;
-
 }

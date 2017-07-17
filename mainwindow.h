@@ -18,6 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -32,6 +33,8 @@ public:
     MessageWrite mr;
 
     void ShowMessageBox (QString title,QString message);
+
+    void resizeWidgets(MainWindow & qw, qreal mratio);
 
     bool needupdatePainter;
     bool needConfirmation;
