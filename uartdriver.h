@@ -17,6 +17,8 @@ public slots:
     QString ReadAllUartDataStringFormat();
     QByteArray ReadAllUartDataByteFormat();
 
+
+
 private:
     static double channeltempbuffer[4];
 

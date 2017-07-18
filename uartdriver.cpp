@@ -13,7 +13,7 @@
 #define BeagleBone
 
 #ifdef BeagleBone
-#define comportname "/dev/ttyS1"
+#define comportname "/dev/ttyO1"
 QString pathtofile = "/opt/";
 #define uartsleep DelayMsec(50);
 #define threadsleep DelayMsec(100);

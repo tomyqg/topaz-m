@@ -37,19 +37,24 @@ void MainWindow::AddValuesToBuffer()
 {
     X_Coordinates.append(b);
     UartDriver UD;
-
+// закомменитть чтобы не рисовать синусоиду
     xyi++;
     int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
+    int  co = qRound( eee.SolveEquation("cos(x/3)*40-20",xyi) );
     Y_coordinates_Chanel_1.append(a+5);
-    Y_coordinates_Chanel_2.append(a+30);
+    Y_coordinates_Chanel_2.append(co+30);
     Y_coordinates_Chanel_3.append(a+55);
-    Y_coordinates_Chanel_4.append(a+70);
+    Y_coordinates_Chanel_4.append(co+70);
+
+    //// закоментить посюда
+// раскомментить чтобы рисовались нормальные графики
 
 //    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
 //    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
 //    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
 //    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
 
+    // раскоментить посюда
     int maximumdots = GetGraphWidthInPixels()/2 ;
 
     while (X_Coordinates.length()>300)
@@ -164,7 +169,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y4.append(UartDriver::channelinputbuffer[3]);
     y4.append(UartDriver::channelinputbuffer[3]);
 
-    graphPen.setWidth(1);
+    graphPen.setWidth(3);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);

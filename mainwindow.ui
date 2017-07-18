@@ -101,13 +101,14 @@
      <rect>
       <x>0</x>
       <y>660</y>
-      <width>90</width>
-      <height>41</height>
+      <width>200</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -120,15 +121,16 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>420</x>
       <y>660</y>
-      <width>90</width>
-      <height>41</height>
+      <width>200</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -142,15 +144,16 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>210</x>
       <y>660</y>
-      <width>90</width>
-      <height>41</height>
+      <width>200</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -161,6 +164,9 @@
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -174,6 +180,9 @@
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -190,6 +199,9 @@
     </property>
    </widget>
    <widget class="QListWidget" name="listWidget">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -214,16 +226,6 @@
     </property>
     <property name="modelColumn">
      <number>0</number>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>700</y>
-      <width>180</width>
-      <height>41</height>
-     </rect>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -255,12 +257,25 @@
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
     </property>
+    <widget class="QTextEdit" name="textEdit_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>320</y>
+       <width>371</width>
+       <height>191</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QCheckBox" name="ConfirmBox">
     <property name="geometry">
      <rect>
-      <x>920</x>
-      <y>700</y>
+      <x>870</x>
+      <y>670</y>
       <width>141</width>
       <height>19</height>
      </rect>
@@ -272,15 +287,16 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>630</x>
       <y>660</y>
-      <width>90</width>
-      <height>41</height>
+      <width>200</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Times New Roman</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -291,6 +307,17 @@
  питание</string>
     </property>
    </widget>
+   <zorder>customPlot</zorder>
+   <zorder>radioButton</zorder>
+   <zorder>radioButton_2</zorder>
+   <zorder>listWidget</zorder>
+   <zorder>frame</zorder>
+   <zorder>MessagesWidget</zorder>
+   <zorder>ConfirmBox</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton_3</zorder>
+   <zorder>pushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

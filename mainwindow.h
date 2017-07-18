@@ -44,6 +44,8 @@ public:
     bool needConfirmationchannel3;
     bool needConfirmationchannel4;
 
+    void GetAllUartPorts();
+
 public slots:
 
     void updateText( const QString text );
