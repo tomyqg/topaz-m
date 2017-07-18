@@ -257,19 +257,6 @@
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
     </property>
-    <widget class="QTextEdit" name="textEdit_2">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>320</y>
-       <width>371</width>
-       <height>191</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QCheckBox" name="ConfirmBox">
     <property name="geometry">
@@ -307,6 +294,20 @@
  питание</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>700</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>textEdit_2</zorder>
    <zorder>customPlot</zorder>
    <zorder>radioButton</zorder>
    <zorder>radioButton_2</zorder>
