@@ -61,6 +61,8 @@ private slots:
     void Channel3TypeChange();
     void Channel4TypeChange();
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
 
     QString GetNewDateString();

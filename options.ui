@@ -37,11 +37,16 @@
      <height>641</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+    </font>
+   </property>
    <property name="tabShape">
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -58,6 +63,11 @@
        <width>1280</width>
        <height>571</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+      </font>
      </property>
      <property name="cursor">
       <cursorShape>ArrowCursor</cursorShape>
@@ -4193,6 +4203,11 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Дата / Время</string>
      </property>
@@ -4321,6 +4336,11 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Дисплей</string>
      </property>
@@ -4348,7 +4368,12 @@
       </property>
       <item>
        <property name="text">
-        <string>1280*800</string>
+        <string>1024x768</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>1280x800</string>
        </property>
       </item>
      </widget>
@@ -4361,6 +4386,11 @@
        <width>220</width>
        <height>171</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="title">
       <string>Сообщения</string>
@@ -4428,6 +4458,11 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Информация</string>
      </property>
@@ -4443,6 +4478,7 @@
       <property name="font">
        <font>
         <family>Times New Roman</family>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4461,6 +4497,7 @@
       <property name="font">
        <font>
         <family>Times New Roman</family>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4525,6 +4562,7 @@
       <property name="font">
        <font>
         <family>Times New Roman</family>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4549,10 +4587,10 @@
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Times New Roman'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;ООО Теплоприбор-Сенсор&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;Адрес: 2-я Павелецкая ул., 36, Челябинск, Челябинская обл., 454047&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;Телефон: 8 (351) 725-76-31&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;ООО Теплоприбор-Сенсор&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;Адрес: 2-я Павелецкая ул., 36, Челябинск, Челябинская обл., 454047&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;Телефон: 8 (351) 725-76-31&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -5243,6 +5281,11 @@ p, li { white-space: pre-wrap; }
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+    </font>
+   </property>
    <property name="text">
     <string>Выйти с сохранением</string>
    </property>
@@ -5255,6 +5298,11 @@ p, li { white-space: pre-wrap; }
      <width>211</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+    </font>
    </property>
    <property name="text">
     <string>Выйти без сохранения</string>
@@ -5279,9 +5327,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

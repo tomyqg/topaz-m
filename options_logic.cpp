@@ -402,3 +402,9 @@ void Options::on_pushButton_5_clicked()
     process.startDetached("sudo date --set " + newdate);
     process.startDetached("sudo date --set " + newtime); // max freq on
 }
+
+void Options::on_comboBox_currentIndexChanged(int index)
+{
+    ui->lineEdit->setText(ui->comboBox->itemText(ui->comboBox->currentIndex()));
+
+}

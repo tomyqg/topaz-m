@@ -31,7 +31,7 @@ QColor ChannelColorLowState = QColor(230,230,30);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
-int xyi;
+//int xyi;
 
 void MainWindow::AddValuesToBuffer()
 {

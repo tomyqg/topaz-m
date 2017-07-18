@@ -104,9 +104,9 @@ void MainWindow::MainWindowInitialization()
 
 
     // connection for accessing to UI from another class
-    ChannelOptions * objectwithsignal = new ChannelOptions;
+    objectwithsignal = new ChannelOptions;
     connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
-    objectwithsignal->updateUI("NEW UI TEXT");
+
 }
 
 void MainWindow::LabelsInit()
@@ -256,7 +256,9 @@ void MainWindow::DateUpdate()
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 
-    GetAllUartPorts();
+    objectwithsignal->updateUI(local.time().toString());
+
+    //GetAllUartPorts();
     //ui->pushButton->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 

@@ -11,13 +11,13 @@
 #include <mathresolver.h>
 
 #define BeagleBone
+#define MYD
 
 #ifdef BeagleBone
-#define comportname "/dev/ttyO1"
+#define comportname "/dev/ttyO1" // com port for MYD board
 QString pathtofile = "/opt/";
 #define uartsleep DelayMsec(50);
 #define threadsleep DelayMsec(100);
-
 #define longsleep delay(1000);
 #endif
 
@@ -141,7 +141,7 @@ QString UartDriver::ReadAllUartDataStringFormat()
 
         while (serial.waitForReadyRead(10))
         {
-            if (serial.size() < 9)
+            if (serial.size() < 9) // защита от неправильных пакетов
                 return 0;
             bytedata.append( serial.readAll() );
         }
@@ -173,6 +173,11 @@ void UartDriver::DelayMsec(int n)
 
 void UartDriver::SetRTS(bool newstate)
 {
+    // если плата MYD то она автоматом делает направление линии. то есть RTS пин дергать не нужно.
+#ifdef MYD
+    return;
+#endif
+
 #ifdef BeagleBone
     QFile file(GetPathToRTSPinValue());
     QTextStream out(&file);
@@ -184,6 +189,11 @@ void UartDriver::SetRTS(bool newstate)
 
 void  UartDriver::SetRTSPinDirection()
 {
+    // если плата MYD то она автоматом делает направление линии. то есть RTS пин дергать не нужно.
+#ifdef MYD
+    return;
+#endif
+
 #ifdef BeagleBone
     QFile filedir(GetPathToRTSPinDirection());
     filedir.open(QIODevice::WriteOnly);
@@ -227,7 +237,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     LenghtHi = (int) ((Lenght & 0xFF00)>>8);
     LenghtLo = (int) (Lenght & 0x00FF);
 
-//    requestdata.append(DeviceAdress);
+    //    requestdata.append(DeviceAdress);
     requestdata.append(1);
     requestdata.append(Function);
     requestdata.append(AddressHi);
@@ -501,7 +511,7 @@ void ModBus::ReadAllChannelsThread ()
             this->thread()->msleep(20);
         }
 
-//        this->thread()->msleep(100);
+        //        this->thread()->msleep(100);
 
         if (UartDriver::needtoupdatechannel[0] == 1)
         {

@@ -165,6 +165,7 @@ private:
     QTimer *halfSecondTimer;
     QTimer *tmr;
     QThread *thread;
+    ChannelOptions *objectwithsignal;
 
     int Xrange;
     int Yrange;

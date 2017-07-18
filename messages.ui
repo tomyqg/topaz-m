@@ -30,12 +30,13 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>761</width>
+     <width>1261</width>
      <height>531</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>Times New Roman</family>
      <pointsize>16</pointsize>
      <weight>75</weight>
      <bold>true</bold>
@@ -54,11 +55,20 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>570</y>
+     <x>340</x>
+     <y>590</y>
      <width>131</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
+    </font>
    </property>
    <property name="text">
     <string>закрыть</string>
@@ -68,10 +78,31 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>590</y>
+     <y>540</y>
      <width>161</width>
      <height>151</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>690</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Прокрутка</string>
    </property>
   </widget>
  </widget>
