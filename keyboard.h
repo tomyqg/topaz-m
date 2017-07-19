@@ -22,8 +22,6 @@ public:
 
     bool onlydigits;
 
-    void resizeWidgets(QDialog & qw, qreal mratio);
-
 private slots:
 //    void on_buttonBox_accepted();
     void textinput();

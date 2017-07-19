@@ -336,8 +336,6 @@ void Options::CustomizeOptionsUI() // кастомизирует контрол�
 
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 40px }");
 
-    //    ui->NignPredelChannel_1->setStyleSheet( "QSpinBox::down-button { width: 10px;}""QSpinBox::up-button { width: 10px; }""QSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 70px}");//height: 20px;
-
     ui->NignPredelChannel_1->setStyleSheet( "QDoubleSpinBox { border: 2px solid red; border-radius: 5px; background-color: #e6ffff; height: 40px}""QSpinBox::down-button { width: 40px; height: 20px}""QDoubleSpinBox::down-button { width: 40px;height: 20px}" "QSpinBox::up-button { width: 40px; height: 20px}""QDoubleSpinBox::up-button { width: 40px;height: 20px}");//height: 20px;
 
     //    ui->pushButton_2->setIcon(QIcon("/usr/EXT.jpg"));
@@ -363,23 +361,6 @@ void Options::CustomizeOptionsUI() // кастомизирует контрол�
         dsb->setStyleSheet(commonstylesheet);
         //qDebug() << dsb;
     }
-
-    //this is a template
-    /*("QSpinBox { border: 2px solid red; border-radius: 5px; background-color: yellow; }"
-        "QSpinBox::up-arrow { border-left: 17px solid none;"
-        "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-        "QSpinBox::up-arrow:hover { border-left: 17px solid none;"
-        "border-right: 17px solid none; border-bottom: 17px solid black; width: 0px; height: 0px; }"
-        "QSpinBox::up-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-        "QSpinBox::up-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
-
-        "QSpinBox::down-arrow { border-left: 17px solid none;"
-        "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-        "QSpinBox::down-arrow:hover { border-left: 17px solid none;"
-        "border-right: 17px solid none; border-top: 17px solid black; width: 0px; height: 0px; }"
-        "QSpinBox::down-button { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.midlight().color())+") }"
-        "QSpinBox::down-button:hover { width: 50px; height: 37px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.25 "+getRGBhexColor(palspin.light().color())+", stop: 1 "+getRGBhexColor(palspin.shadow().color())+") }"
-        );*/
 }
 
 
@@ -426,3 +407,33 @@ void Options::UpdateCurrentDisplayParametr()
 
 QString Options::GetNewDateString() {return ui->timeEdit->time().toString();}
 QString Options::GetNewTimeString() {return ui->timeEdit->time().toString();}
+QString Options::GetNewDisplayResolution() {return ui->comboBox->itemText(ui->comboBox->currentIndex());}
+
+void Options::resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution)
+{
+    qreal xratio = xresolution / 1280;
+    qreal yratio = yresolution / 800;
+
+    QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+    foreach(QWidget * widget, widgets)
+    {
+        QRect g = widget->geometry();
+
+        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
+        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
+
+        widget->resize(widget->width() * xratio, widget->height() * yratio);
+        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
+        //qw.resizeFont(w);
+        //qDebug() << widget;
+    }
+
+
+    return;
+}
+
+void Options::OpenKeyboard()
+{
+
+}

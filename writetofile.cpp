@@ -33,6 +33,7 @@ void Options::WriteSystemOptionsToFile()
     systemoptions["Date"] = GetNewDateString();
     systemoptions["Display"] = GetCurrentDisplayParametr();
     systemoptions["Calibration"] = GetCalibration();
+    systemoptions["Resolution"] = GetNewDisplayResolution();
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(pathtofile + "systemoptions.txt");
     file.open(QIODevice::ReadWrite);

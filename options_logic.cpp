@@ -8,6 +8,7 @@
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
+QString Options::displayResolution = "1280x800";
 int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
@@ -433,44 +434,4 @@ void Options::TouchScreenCalibrate()
     }
 }
 
-void Options::resizeWidgets(QObject & qw, qreal mratio)
-{
-    QList<QWidget *> widgets = findChildren<QWidget *>();
 
-    foreach(QWidget * widget, widgets)
-    {
-        QRect g = widget->geometry();
-
-        widget->setMinimumSize(widget->minimumWidth() * mratio, widget->minimumHeight() * mratio);
-        widget->setMaximumSize(widget->maximumWidth() * mratio, widget->maximumHeight() * mratio);
-
-        //        w->setMinimumSize(100, 50);
-        //        w->setMaximumSize(100, 50);
-
-        widget->resize(widget->width() * mratio, widget->height() * mratio);
-        widget->move(QPoint(g.x() * mratio, g.y() * mratio));
-        //qw.resizeFont(w);
-        //qDebug() << widget;
-    }
-    return;
-}
-
-void Options::resizeWidgets(QObject & qw, qreal xratio, qreal yratio)
-{
-    QList<QWidget *> widgets = findChildren<QWidget *>();
-
-    foreach(QWidget * widget, widgets)
-    {
-
-        QRect g = widget->geometry();
-
-        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
-        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
-
-        widget->resize(widget->width() * xratio, widget->height() * yratio);
-        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
-        //qw.resizeFont(w);
-//        qDebug() << widget;
-    }
-    return;
-}

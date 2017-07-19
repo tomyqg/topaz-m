@@ -85,6 +85,12 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
+//    SetWindowHeightPixels(GetMonitorHeightPixels());
+//    SetWindowWidthPixels(GetMonitorWidthPixels());
+
+    SetWindowWidthPixels(1280);
+    SetWindowHeightPixels(800);
+
 #ifdef MultiThread
     thread= new QThread();
     ModBus *MB;
@@ -189,9 +195,21 @@ void MainWindow::OpenOptionsWindow()
     channel4object.ReadSingleChannelOptionFromFile(4);
 
 
-//    если вдруг поменялось время то нужно обновить лейблы
+    //    если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
+
+
+    // если что меняем разрешение
+    if (Options::displayResolution == "1024x768")
+    {
+        resizeSelf(1024,768);
+    }
+
+    if (Options::displayResolution == "1280x800")
+    {
+        resizeSelf(1280,800);
+    }
 }
 
 void MainWindow::PowerOff()

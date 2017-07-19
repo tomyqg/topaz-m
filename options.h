@@ -26,14 +26,15 @@ public:
 
     static QString calibrationprm;
     static QString olderprop;
+    static QString displayResolution;
     static int DisplayParametr;
     void SetLogMessagesLimit(double n);
     double GetLogMessagesLimit();
     QString GetCalibration() { return  calibrationprm;}
     void ReadSystemOptionsFromFile();
     void TouchScreenCalibrate();
-    void resizeWidgets(QObject & qw, qreal mratio);
-    void resizeWidgets(QObject & qw, qreal xratio, qreal yratio);
+    void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
+    void OpenKeyboard();
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,
@@ -68,7 +69,7 @@ private:
 
     QString GetNewDateString();
     QString GetNewTimeString();
-
+    QString GetNewDisplayResolution();
     int GetCurrentDisplayParametr() { return DisplayParametr;}
     void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
     void UpdateCurrentDisplayParametr() ;

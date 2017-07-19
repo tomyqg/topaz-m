@@ -261,6 +261,7 @@ void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresoluti
 
     QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
 
+
     foreach(QWidget * widget, widgets)
     {
 
@@ -272,30 +273,69 @@ void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresoluti
         widget->resize(widget->width() * xratio, widget->height() * yratio);
         widget->move(QPoint(g.x() * xratio, g.y() * yratio));
         //qw.resizeFont(w);
-//        qDebug() << widget;
+        //        qDebug() << widget;
     }
     return;
 }
 
 
+void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
+{
+    qreal xratio = xresolution / GetWindowWidthPixels();
+    qreal yratio = yresolution / GetWindowHeightPixels();
+
+    SetWindowHeightPixels(yresolution);
+    SetWindowWidthPixels(xresolution);
+
+    QList<QWidget *> widgets = findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+
+    foreach(QWidget * widget, widgets)
+    {
+
+        QRect g = widget->geometry();
+
+        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
+        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
+
+        widget->resize(widget->width() * xratio, widget->height() * yratio);
+        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
+        //qw.resizeFont(w);
+        //qDebug() << widget;
+    }
+    return;
+}
+
 int MainWindow::GetWindowHeightPixels()
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
-    int height = screenGeometry.height();
-    int width = screenGeometry.width();
-
-    return height;
+    return windowheight;
 }
 
 int MainWindow::GetWindowWidthPixels()
 {
+    return windowwidth;
+}
+
+int MainWindow::GetMonitorWidthPixels()
+{
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
     int width = screenGeometry.width();
-
     return width;
 }
 
+int MainWindow::GetMonitorHeightPixels()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    return height;
+}
 
+void MainWindow::SetWindowWidthPixels(int neww)
+{windowwidth = neww;}
+
+void MainWindow::SetWindowHeightPixels(int newh)
+{windowheight = newh;}

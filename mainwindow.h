@@ -37,6 +37,7 @@ public:
     void resizeWindow(QWidget & qw, qreal mratio);
 //    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
+    void resizeSelf(qreal xresolution, qreal yresolution);
 
     bool needupdatePainter;
     bool needConfirmation;
@@ -49,6 +50,12 @@ public:
     void GetAllUartPorts();
     int GetWindowWidthPixels();
     int GetWindowHeightPixels();
+
+    int GetMonitorWidthPixels();
+    int GetMonitorHeightPixels();
+
+    void SetWindowWidthPixels(int neww);
+    void SetWindowHeightPixels(int newh);
 
 public slots:
 
@@ -173,6 +180,9 @@ private:
 
     int Xrange;
     int Yrange;
+
+    int windowwidth;
+    int windowheight;
 
 protected:
     void paintEvent(QPaintEvent *event) ;
