@@ -10,7 +10,11 @@ bool Options::eventFilter(QObject *object, QEvent *event)
     {
         Options::olderprop = object->property("text").toString();
         keyboard kb;
+
         kb.setModal(true);
+
+
+        //this->resizeWindow(messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
         kb.exec();
         object->setProperty("value", kb.getcustomstring() );
         object->setProperty("text",kb.getcustomstring() );

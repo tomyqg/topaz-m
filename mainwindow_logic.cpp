@@ -162,6 +162,7 @@ void MainWindow::OpenMessagesWindow()
 {
     mr.WriteAllLogToFile();
     Messages messages;
+    this->resizeWindow(messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
     messages.setModal(true);
     messages.exec();
 }
@@ -177,7 +178,8 @@ void MainWindow::OpenOptionsWindow()
 {
     Options options;
 
-    this->resizeWidgets(options,0.8,0.96);
+
+    this->resizeWindow(options,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы

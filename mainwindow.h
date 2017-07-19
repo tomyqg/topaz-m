@@ -34,9 +34,9 @@ public:
 
     void ShowMessageBox (QString title,QString message);
 
-    void resizeWidgets(QWidget & qw, qreal mratio);
-
-    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
+    void resizeWindow(QWidget & qw, qreal mratio);
+//    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
+    void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
 
     bool needupdatePainter;
     bool needConfirmation;
@@ -47,6 +47,8 @@ public:
     bool needConfirmationchannel4;
 
     void GetAllUartPorts();
+    int GetWindowWidthPixels();
+    int GetWindowHeightPixels();
 
 public slots:
 

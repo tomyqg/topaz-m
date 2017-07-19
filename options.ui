@@ -46,7 +46,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -3986,11 +3986,6 @@
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="tab_4">
-      <attribute name="title">
-       <string>Добавить канал</string>
-      </attribute>
-     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_6">
@@ -4010,7 +4005,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab_9">
       <attribute name="title">

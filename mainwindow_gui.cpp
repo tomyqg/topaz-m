@@ -157,7 +157,7 @@ void MainWindow::ShowMessageBox (QString title,QString message)
 }
 
 
-void MainWindow::resizeWidgets(QWidget & qw, qreal mratio)
+void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
 {
 
     // ratio to calculate correct sizing
@@ -232,7 +232,8 @@ void MainWindow::resizeWidgets(QWidget & qw, qreal mratio)
     qw.setContentsMargins(m);
     qw.adjustSize();
 }
-
+/*
+ *
 void MainWindow::resizeWidgets(QObject & qobj, qreal xratio, qreal yratio)
 {
     QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
@@ -251,4 +252,50 @@ void MainWindow::resizeWidgets(QObject & qobj, qreal xratio, qreal yratio)
 //        qDebug() << widget;
     }
     return;
+}*/
+
+void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution)
+{
+    qreal xratio = xresolution / 1280;
+    qreal yratio = yresolution / 800;
+
+    QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+    foreach(QWidget * widget, widgets)
+    {
+
+        QRect g = widget->geometry();
+
+        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
+        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
+
+        widget->resize(widget->width() * xratio, widget->height() * yratio);
+        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
+        //qw.resizeFont(w);
+//        qDebug() << widget;
+    }
+    return;
 }
+
+
+int MainWindow::GetWindowHeightPixels()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+
+    return height;
+}
+
+int MainWindow::GetWindowWidthPixels()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+
+    return width;
+}
+
+
