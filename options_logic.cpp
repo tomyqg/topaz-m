@@ -4,6 +4,8 @@
 #include "keyboard.h"
 #include "messages.h"
 
+#define MYD
+
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
 int Options::DisplayParametr = DisplayParametrEnum::Polar;
@@ -14,6 +16,8 @@ Options::Options(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Options)
 {
+
+
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));
@@ -351,26 +355,7 @@ void Options::ApplyNewSettingstoAllChannels()
 
 void Options::on_pushButton_3_clicked()
 {
-    QProcess process1;
-    process1.start("xinput_calibrator"); // max perfomance on
-
-    QString stringtofind = "Option	\"Calibration\"";
-    QString stringtofind2 = "Option	\"SwapAxes\"";
-
-    process1.waitForFinished();
-
-    QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
-
-    if (output.indexOf(stringtofind)>=0)
-    {
-        //ui->textEdit->setText(Options::calibrationprm);
-        //QString a = Options::calibrationprm;
-        QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
-        pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
-        pice = pice.simplified();
-        pice = pice.remove(0, stringtofind.length() );
-        Options::calibrationprm = pice.remove('\"');
-    }
+    TouchScreenCalibrate();
 }
 
 void Options::on_pushButton_4_clicked()
@@ -391,20 +376,134 @@ void Options::SetLogMessagesLimit(double n)
 
 void Options::on_pushButton_5_clicked()
 {
-    // apply new time
     QProcess process;
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
 
+    #ifdef MYD
+
+
+    #endif
+
+    // apply new time
+
     QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
     QString newtime = newuitime.toString();
 
-    process.startDetached("sudo date --set " + newdate);
-    process.startDetached("sudo date --set " + newtime); // max freq on
+    process.startDetached("date --set " + newdate);
+    process.startDetached("date --set " + newtime); // max freq on
+
+
 }
 
 void Options::on_comboBox_currentIndexChanged(int index)
 {
     ui->lineEdit->setText(ui->comboBox->itemText(ui->comboBox->currentIndex()));
+}
 
+void Options::TouchScreenCalibrate()
+{
+
+    QProcess process1;
+
+#ifdef MYD // если плата MYD
+    process1.start("ts_calibrate"); // max perfomance on
+    process1.waitForFinished();
+    return;
+#endif
+
+    // если плата BBB
+    process1.start("xinput_calibrator"); // max perfomance on
+    QString stringtofind = "Option	\"Calibration\"";
+    QString stringtofind2 = "Option	\"SwapAxes\"";
+
+    process1.waitForFinished();
+
+    QString output = QTextCodec::codecForMib(106)->toUnicode(process1.readAll());
+
+    if (output.indexOf(stringtofind)>=0)
+    {
+        //ui->textEdit->setText(Options::calibrationprm);
+        //QString a = Options::calibrationprm;
+        QString pice = output.remove(0,(output.indexOf(stringtofind ) ) );
+        pice = pice.remove(pice.indexOf(stringtofind2), pice.length() - pice.indexOf(stringtofind2) );
+        pice = pice.simplified();
+        pice = pice.remove(0, stringtofind.length() );
+        Options::calibrationprm = pice.remove('\"');
+    }
+}
+
+void Options::resizeWidgets(QWidget & qw, qreal mratio)
+{
+
+    // ratio to calculate correct sizing
+    /*qreal mratio_bak = mratio;
+
+        if(qw.m_ratio != 0)
+            mratio /= qw.m_ratio;
+
+        // this all was done so that if its called 2 times with ratio = 2, total is not 4 but still just 2 (ratio is absolute)
+        qw.m_ratio = mratio_bak;
+        */
+    QLayout * ql = qw.layout();
+
+    if (ql == NULL)
+        return;
+
+    QWidget * pw = ql->parentWidget();
+
+    if (pw == NULL)
+        return;
+
+    QList<QLayout *> layouts;
+
+    foreach(QWidget *w, pw->findChildren<QWidget*>())
+    {
+        QRect g = w->geometry();
+
+        w->setMinimumSize(w->minimumWidth() * mratio, w->minimumHeight() * mratio);
+        w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
+
+        w->resize(w->width() * mratio, w->height() * mratio);
+        w->move(QPoint(g.x() * mratio, g.y() * mratio));
+        //qw.resizeFont(w);
+    }
+
+    foreach(QLayout *l, pw->findChildren<QLayout*>())
+    {
+        if(l != NULL && !(l->objectName().isEmpty()))
+            layouts.append(l);
+    }
+
+    foreach(QLayout *l, layouts) {
+        QMargins m = l->contentsMargins();
+
+        m.setBottom(m.bottom() * mratio);
+        m.setTop(m.top() * mratio);
+        m.setLeft(m.left() * mratio);
+        m.setRight(m.right() * mratio);
+
+        l->setContentsMargins(m);
+
+        l->setSpacing(l->spacing() * mratio);
+
+        if (l->inherits("QGridLayout")) {
+            QGridLayout* gl = ((QGridLayout*)l);
+
+            gl->setHorizontalSpacing(gl->horizontalSpacing() * mratio);
+            gl->setVerticalSpacing(gl->verticalSpacing() * mratio);
+        }
+    }
+
+    QMargins m = qw.contentsMargins();
+
+    m.setBottom(m.bottom() * mratio);
+    m.setTop(m.top() * mratio);
+    m.setLeft(m.left() * mratio);
+    m.setRight(m.right() * mratio);
+
+    // resize accordingly main window
+    qw.resize(qw.width() * mratio, qw.height() * mratio);
+    qw.setContentsMargins(m);
+    qw.adjustSize();
 }

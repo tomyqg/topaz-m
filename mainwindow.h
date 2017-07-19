@@ -34,7 +34,7 @@ public:
 
     void ShowMessageBox (QString title,QString message);
 
-    void resizeWidgets(MainWindow & qw, qreal mratio);
+    void resizeWidgets(QWidget & qw, qreal mratio);
 
     bool needupdatePainter;
     bool needConfirmation;
@@ -172,7 +172,6 @@ private:
 
 protected:
     void paintEvent(QPaintEvent *event) ;
-
 };
 
 #endif // MAINWINDOW_H

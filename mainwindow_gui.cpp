@@ -157,7 +157,7 @@ void MainWindow::ShowMessageBox (QString title,QString message)
 }
 
 
-void MainWindow::resizeWidgets(MainWindow & qw, qreal mratio)
+void MainWindow::resizeWidgets(QWidget & qw, qreal mratio)
 {
 
     // ratio to calculate correct sizing

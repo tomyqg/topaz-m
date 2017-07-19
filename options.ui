@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1280</width>
-    <height>800</height>
+    <width>1024</width>
+    <height>768</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -4199,8 +4199,8 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>220</width>
-       <height>171</height>
+       <width>255</width>
+       <height>180</height>
       </rect>
      </property>
      <property name="font">
@@ -4216,7 +4216,7 @@
        <rect>
         <x>10</x>
         <y>90</y>
-        <width>200</width>
+        <width>240</width>
         <height>45</height>
        </rect>
       </property>
@@ -4267,7 +4267,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>200</width>
+        <width>240</width>
         <height>45</height>
        </rect>
       </property>
@@ -4318,7 +4318,7 @@
        <rect>
         <x>10</x>
         <y>140</y>
-        <width>201</width>
+        <width>240</width>
         <height>31</height>
        </rect>
       </property>
@@ -4333,7 +4333,7 @@
        <x>270</x>
        <y>20</y>
        <width>220</width>
-       <height>171</height>
+       <height>180</height>
       </rect>
      </property>
      <property name="font">
@@ -4383,8 +4383,8 @@
       <rect>
        <x>10</x>
        <y>200</y>
-       <width>220</width>
-       <height>171</height>
+       <width>255</width>
+       <height>180</height>
       </rect>
      </property>
      <property name="font">
@@ -4440,7 +4440,7 @@
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>201</width>
+        <width>240</width>
         <height>31</height>
        </rect>
       </property>
@@ -4455,7 +4455,7 @@
        <x>270</x>
        <y>200</y>
        <width>221</width>
-       <height>171</height>
+       <height>180</height>
       </rect>
      </property>
      <property name="font">
@@ -4599,8 +4599,8 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>510</x>
        <y>40</y>
-       <width>280</width>
-       <height>156</height>
+       <width>281</width>
+       <height>341</height>
       </rect>
      </property>
     </widget>
@@ -5284,6 +5284,10 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>Times New Roman</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -5302,6 +5306,10 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>Times New Roman</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">

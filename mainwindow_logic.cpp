@@ -25,7 +25,7 @@
 #include <QThread>
 #include <QPoint>
 
-
+#define MYD
 #define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
 
 void MainWindow::MainWindowInitialization()
@@ -114,6 +114,12 @@ void MainWindow::LabelsInit()
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
 
+
+    // очищаем dates
+
+    Dates.clear();
+    Labels.clear();
+
     int half = GetTotalLabelsCount()/2;
     int timeperiodseconds = GetTimePeriodSecs();
 
@@ -125,6 +131,10 @@ void MainWindow::LabelsInit()
 
 void MainWindow::InitPins()
 {
+
+#ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
+    return;
+#endif
     // an object for make terminal requests
     QProcess process;
 
@@ -169,13 +179,22 @@ void MainWindow::DelaySec(int n)
 void MainWindow::OpenOptionsWindow()
 {
     Options options;
-    options.setModal(true);
+
+    options.resizeWidgets(options,0.5);
+
+    //options.setModal(true);
+    options.show();
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);
     channel2object.ReadSingleChannelOptionFromFile(2);
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
+
+
+//    если вдруг поменялось время то нужно обновить лейблы
+    LabelsInit();
+    LabelsCorrect();
 }
 
 void MainWindow::PowerOff()
@@ -326,36 +345,12 @@ void MainWindow::GetAllUartPorts()
 {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
 
-       //out << QObject::tr("Total number of ports available: ") << serialPortInfos.count() << endl;
+    //out << QObject::tr("Total number of ports available: ") << serialPortInfos.count() << endl;
+    QString infosss;
+    for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
 
-       const QString blankString = QObject::tr("N/A");
-       QString description;
-       QString manufacturer;
-       QString serialNumber;
+        infosss += serialPortInfo.portName();
 
-       QString infosss;
-
-       for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
-           description = serialPortInfo.description();
-           manufacturer = serialPortInfo.manufacturer();
-           serialNumber = serialPortInfo.serialNumber();
-
-           infosss += serialPortInfo.portName();
-
-
-
-           /*
-            * out << endl
-               << QObject::tr("Port: ") << serialPortInfo.portName() << endl
-               << QObject::tr("Location: ") << serialPortInfo.systemLocation() << endl
-               << QObject::tr("Description: ") << (!description.isEmpty() ? description : blankString) << endl
-               << QObject::tr("Manufacturer: ") << (!manufacturer.isEmpty() ? manufacturer : blankString) << endl
-               << QObject::tr("Serial number: ") << (!serialNumber.isEmpty() ? serialNumber : blankString) << endl
-               << QObject::tr("Vendor Identifier: ") << (serialPortInfo.hasVendorIdentifier() ? QByteArray::number(serialPortInfo.vendorIdentifier(), 16) : blankString) << endl
-               << QObject::tr("Product Identifier: ") << (serialPortInfo.hasProductIdentifier() ? QByteArray::number(serialPortInfo.productIdentifier(), 16) : blankString) << endl
-               << QObject::tr("Busy: ") << (serialPortInfo.isBusy() ? QObject::tr("Yes") : QObject::tr("No")) << endl;
-            */
-       }
-
-       ui->textEdit_2->setText(infosss);
+    }
+    ui->textEdit_2->setText(infosss);
 }

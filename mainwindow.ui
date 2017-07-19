@@ -204,8 +204,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>700</y>
+      <x>420</x>
+      <y>680</y>
       <width>180</width>
       <height>41</height>
      </rect>
@@ -247,36 +247,23 @@
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>49</x>
+      <x>60</x>
       <y>40</y>
-      <width>1211</width>
-      <height>611</height>
+      <width>1200</width>
+      <height>600</height>
      </rect>
     </property>
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
     </property>
-    <widget class="QTextEdit" name="textEdit_2">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>530</y>
-       <width>141</width>
-       <height>41</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QCheckBox" name="ConfirmBox">
     <property name="geometry">
      <rect>
       <x>870</x>
       <y>670</y>
-      <width>141</width>
-      <height>19</height>
+      <width>221</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -306,6 +293,20 @@
  питание</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>680</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>textEdit_2</zorder>
    <zorder>customPlot</zorder>
    <zorder>radioButton</zorder>
    <zorder>radioButton_2</zorder>

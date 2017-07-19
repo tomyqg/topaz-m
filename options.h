@@ -11,7 +11,6 @@ namespace Ui {
 class Options;
 }
 
-
 class Options : public QDialog
 {
     Q_OBJECT
@@ -31,8 +30,9 @@ public:
     void SetLogMessagesLimit(double n);
     double GetLogMessagesLimit();
     QString GetCalibration() { return  calibrationprm;}
-
     void ReadSystemOptionsFromFile();
+    void TouchScreenCalibrate();
+    void resizeWidgets(QWidget & qw, qreal mratio);
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,
