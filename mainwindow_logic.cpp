@@ -180,7 +180,7 @@ void MainWindow::OpenOptionsWindow()
 {
     Options options;
 
-    options.resizeWidgets(options,0.5);
+    options.resizeWidgets(options,0.8);
 
     //options.setModal(true);
     options.show();
