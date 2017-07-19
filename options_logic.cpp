@@ -433,7 +433,7 @@ void Options::TouchScreenCalibrate()
     }
 }
 
-void Options::resizeWidgets(QWidget & qw, qreal mratio)
+void Options::resizeWidgets(QDialog & qw, qreal mratio)
 {
 
     // ratio to calculate correct sizing
@@ -461,8 +461,11 @@ void Options::resizeWidgets(QWidget & qw, qreal mratio)
     {
         QRect g = w->geometry();
 
-        w->setMinimumSize(w->minimumWidth() * mratio, w->minimumHeight() * mratio);
-        w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
+//        w->setMinimumSize(w->minimumWidth() * mratio, w->minimumHeight() * mratio);
+//        w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
+
+        w->setMinimumSize(100, 50);
+        w->setMaximumSize(100, 50);
 
         w->resize(w->width() * mratio, w->height() * mratio);
         w->move(QPoint(g.x() * mratio, g.y() * mratio));

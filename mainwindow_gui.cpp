@@ -189,6 +189,7 @@ void MainWindow::resizeWidgets(QWidget & qw, qreal mratio)
         w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
 
         w->resize(w->width() * mratio, w->height() * mratio);
+
         w->move(QPoint(g.x() * mratio, g.y() * mratio));
         //qw.resizeFont(w);
     }
