@@ -32,7 +32,8 @@ public:
     QString GetCalibration() { return  calibrationprm;}
     void ReadSystemOptionsFromFile();
     void TouchScreenCalibrate();
-    void resizeWidgets(QDialog & qw, qreal mratio);
+    void resizeWidgets(QObject & qw, qreal mratio);
+    void resizeWidgets(QObject & qw, qreal xratio, qreal yratio);
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,

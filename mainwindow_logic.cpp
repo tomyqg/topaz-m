@@ -98,8 +98,6 @@ void MainWindow::MainWindowInitialization()
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
-
-
     needConfirmation = 1;
 
 
@@ -113,7 +111,6 @@ void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
-
 
     // очищаем dates
 
@@ -180,10 +177,8 @@ void MainWindow::OpenOptionsWindow()
 {
     Options options;
 
-    options.resizeWidgets(options,0.8);
+    this->resizeWidgets(options,0.8,0.96);
 
-    //options.setModal(true);
-    options.show();
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);
@@ -354,3 +349,4 @@ void MainWindow::GetAllUartPorts()
     }
     ui->textEdit_2->setText(infosss);
 }
+

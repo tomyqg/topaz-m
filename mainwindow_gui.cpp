@@ -232,3 +232,23 @@ void MainWindow::resizeWidgets(QWidget & qw, qreal mratio)
     qw.setContentsMargins(m);
     qw.adjustSize();
 }
+
+void MainWindow::resizeWidgets(QObject & qobj, qreal xratio, qreal yratio)
+{
+    QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+    foreach(QWidget * widget, widgets)
+    {
+
+        QRect g = widget->geometry();
+
+        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
+        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
+
+        widget->resize(widget->width() * xratio, widget->height() * yratio);
+        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
+        //qw.resizeFont(w);
+//        qDebug() << widget;
+    }
+    return;
+}

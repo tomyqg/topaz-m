@@ -433,12 +433,8 @@ void Options::TouchScreenCalibrate()
     }
 }
 
-void Options::resizeWidgets(QDialog & qw, qreal mratio)
+void Options::resizeWidgets(QObject & qw, qreal mratio)
 {
-
-    QList<QLayout *> layouts;
-
-
     QList<QWidget *> widgets = findChildren<QWidget *>();
 
     foreach(QWidget * widget, widgets)
@@ -454,82 +450,27 @@ void Options::resizeWidgets(QDialog & qw, qreal mratio)
         widget->resize(widget->width() * mratio, widget->height() * mratio);
         widget->move(QPoint(g.x() * mratio, g.y() * mratio));
         //qw.resizeFont(w);
-        qDebug() << widget;
+        //qDebug() << widget;
     }
-
     return;
+}
 
-    // ratio to calculate correct sizing
-    /*qreal mratio_bak = mratio;
+void Options::resizeWidgets(QObject & qw, qreal xratio, qreal yratio)
+{
+    QList<QWidget *> widgets = findChildren<QWidget *>();
 
-        if(qw.m_ratio != 0)
-            mratio /= qw.m_ratio;
+    foreach(QWidget * widget, widgets)
+    {
 
-        // this all was done so that if its called 2 times with ratio = 2, total is not 4 but still just 2 (ratio is absolute)
-        qw.m_ratio = mratio_bak;
-        */
-//    QLayout * ql = qw.layout();
+        QRect g = widget->geometry();
 
-//    if (ql == NULL)
-//        return;
+        widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
+        widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
 
-//    QWidget * pw = ql->parentWidget();
-
-//    if (pw == NULL)
-//        return;
-
-//    QList<QLayout *> layouts;
-
-//    foreach(QWidget *w, pw->findChildren<QWidget*>())
-//    {
-//        QRect g = w->geometry();
-
-////        w->setMinimumSize(w->minimumWidth() * mratio, w->minimumHeight() * mratio);
-////        w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
-
-//        w->setMinimumSize(100, 50);
-//        w->setMaximumSize(100, 50);
-
-//        w->resize(w->width() * mratio, w->height() * mratio);
-//        w->move(QPoint(g.x() * mratio, g.y() * mratio));
-//        //qw.resizeFont(w);
-//    }
-
-//    foreach(QLayout *l, pw->findChildren<QLayout*>())
-//    {
-//        if(l != NULL && !(l->objectName().isEmpty()))
-//            layouts.append(l);
-//    }
-
-//    foreach(QLayout *l, layouts) {
-//        QMargins m = l->contentsMargins();
-
-//        m.setBottom(m.bottom() * mratio);
-//        m.setTop(m.top() * mratio);
-//        m.setLeft(m.left() * mratio);
-//        m.setRight(m.right() * mratio);
-
-//        l->setContentsMargins(m);
-
-//        l->setSpacing(l->spacing() * mratio);
-
-//        if (l->inherits("QGridLayout")) {
-//            QGridLayout* gl = ((QGridLayout*)l);
-
-//            gl->setHorizontalSpacing(gl->horizontalSpacing() * mratio);
-//            gl->setVerticalSpacing(gl->verticalSpacing() * mratio);
-//        }
-//    }
-
-//    QMargins m = qw.contentsMargins();
-
-//    m.setBottom(m.bottom() * mratio);
-//    m.setTop(m.top() * mratio);
-//    m.setLeft(m.left() * mratio);
-//    m.setRight(m.right() * mratio);
-
-//    // resize accordingly main window
-//    qw.resize(qw.width() * mratio, qw.height() * mratio);
-//    qw.setContentsMargins(m);
-//    qw.adjustSize();
+        widget->resize(widget->width() * xratio, widget->height() * yratio);
+        widget->move(QPoint(g.x() * xratio, g.y() * yratio));
+        //qw.resizeFont(w);
+//        qDebug() << widget;
+    }
+    return;
 }

@@ -36,6 +36,8 @@ public:
 
     void resizeWidgets(QWidget & qw, qreal mratio);
 
+    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
+
     bool needupdatePainter;
     bool needConfirmation;
 
