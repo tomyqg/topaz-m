@@ -306,6 +306,19 @@ void Options::ApplyNewSettingstoOptionsUI()
     ui->Name_Channel_4->setText(options_channel4.GetChannelName());
     ui->math_text_ch_4->setText(options_channel4.GetMathString());
     ui->checkBox_4->setChecked(options_channel4.IsChannelMathematical());
+
+    // реальное разрешение монитора
+
+    ui->resolutionlabel->setText(Options::MonitorResolution);
+
+    if (Options::displayResolution == "1024x768")
+        ui->comboBox->setCurrentIndex(0);
+
+    if (Options::displayResolution == "1280x800")
+        ui->comboBox->setCurrentIndex(1);
+
+    if (Options::displayResolution == "1920x1080")
+        ui->comboBox->setCurrentIndex(2);
 }
 
 void Options::on_UnitsChannel_1_editingFinished()
@@ -367,42 +380,45 @@ void Options::CustomizeOptionsUI() // кастомизирует контрол�
 void Options::UpdateCurrentDisplayParametr()
 {
     if (ui->SetTrendsBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::Trends);
-        }
-        if (ui->SetPolarBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::Polar);
-        }
-        if (ui->SetBarsBtn->isChecked())
-        {
+    {
+        SetCurrentDisplayParametr(Options::Trends);
+    }
+    if (ui->SetPolarBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::Polar);
+    }
+    if (ui->SetBarsBtn->isChecked())
+    {
 
-            SetCurrentDisplayParametr(Options::Bars);
-        }
-        if (ui->SetTrendsBarsBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::TrendsBars);
-        }
+        SetCurrentDisplayParametr(Options::Bars);
+    }
+    if (ui->SetTrendsBarsBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::TrendsBars);
+    }
 
-        if (ui->SetCyfraBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::Cyfra);
-        }
+    if (ui->SetCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::Cyfra);
+    }
 
-        if (ui->SetTrendsBarsCyfraBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::TrendsCyfraBars);
-        }
+    if (ui->SetTrendsBarsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::TrendsCyfraBars);
+    }
 
-        if (ui->SetTrendsCyfraBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::TrendsCyfra);
-        }
+    if (ui->SetTrendsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::TrendsCyfra);
+    }
 
-        if (ui->SetBarsCyfraBtn->isChecked())
-        {
-            SetCurrentDisplayParametr(Options::BarsCyfra);
-        }
+    if (ui->SetBarsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(Options::BarsCyfra);
+    }
+
+
+
 }
 
 QString Options::GetNewDateString() {return ui->timeEdit->time().toString();}

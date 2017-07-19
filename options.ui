@@ -4371,35 +4371,37 @@
         <string>1280x800</string>
        </property>
       </item>
-     </widget>
-     <widget class="QLineEdit" name="DisplayRes">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>100</y>
-        <width>131</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
+      <item>
+       <property name="text">
+        <string>1920x1080</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="label_85">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>100</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Разрешение 
+ монитора</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resolutionlabel">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>120</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -4411,7 +4413,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Разрешение</string>
+       <string>0</string>
       </property>
      </widget>
     </widget>

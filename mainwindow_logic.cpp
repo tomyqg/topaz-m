@@ -187,6 +187,7 @@ void MainWindow::OpenOptionsWindow()
 
     this->resizeWindow(options,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
+    GetMonitorWidthPixels();
     options.exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);

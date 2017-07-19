@@ -26,7 +26,7 @@ public:
 
     static QString calibrationprm;
     static QString olderprop;
-    static QString displayResolution;
+    static QString displayResolution, MonitorResolution;
     static int DisplayParametr;
     void SetLogMessagesLimit(double n);
     double GetLogMessagesLimit();

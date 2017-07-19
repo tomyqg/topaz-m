@@ -9,6 +9,8 @@
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
 QString Options::displayResolution = "1280x800";
+QString Options::MonitorResolution = "35";
+
 int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
