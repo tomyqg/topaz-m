@@ -5328,6 +5328,16 @@ p, li { white-space: pre-wrap; }
  архив на USB drive</string>
      </property>
     </widget>
+    <widget class="QTextEdit" name="outputtext">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>100</y>
+       <width>561</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton">

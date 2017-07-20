@@ -383,10 +383,10 @@ void Options::on_pushButton_5_clicked()
     QDateTime newuidate = ui->dateEdit->dateTime();
     QTime newuitime = ui->timeEdit->time();
 
-    #ifdef MYD
+#ifdef MYD
 
 
-    #endif
+#endif
 
     // apply new time
 
@@ -443,13 +443,75 @@ void Options::TouchScreenCalibrate()
 
 void Options::ArchiveToUSBFlashDrive() // кастомизирует контроллы во вкладке опшнс
 {
+
+//    return;
+
+    // этот кусок кода ищет название куда смонтирована флешка
+    QProcess process1,process2;
+    process2.start("mount"); // команда которая покажет что подключено в данный момент
+    process2.waitForFinished();
+
+    QString output = QTextCodec::codecForMib(106)->toUnicode(process2.readAll());
+
+    QString stringtofind = "/media/sd";
+    QString stringtofind2 = " type vfat";
+
+    if (output.indexOf(stringtofind )==-1) // если строка не найдена то устройство не вставлено
+    {
+        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель\nформат FAT32\nот 4 до 32 Gb");
+        return;
+    }
+
+    QString peace;
+
+    peace = output;
+
+
+    peace = peace.remove(0,(output.lastIndexOf(stringtofind)));
+
+
+    peace = peace.remove(peace.lastIndexOf(stringtofind2), peace.length() - peace.lastIndexOf(stringtofind2) );
+
+//    ui->outputtext->setText(peace);
+//    return;
+
+    if ( (peace == "") || (peace == NULL) )
+    {
+        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель\nформат FAT32\nот 4 до 32 Gb");
+        return;
+    }
+    else
+    {
+        ui->outputtext->setText("Найдено USB: " + peace);
+    }
+
+    // конец кода который ищет название куда смонтирована флешка//  что то на подобие /media/sda1/
+
+
+    QString USBFlashPath = peace.trimmed().simplified();
+
+
     QString SourceFilePath = pathtofile + "archive.txt";
-    QString USBFlashPath = "/media/sda1/";
-    QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath;
-    QProcess process1;
 
 
+    QDateTime local(QDateTime::currentDateTime());
+
+
+    QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath  + "/USBArchive" + local.time().toString("HH-mm-ss")+ "_" +  local.date().toString("dd-MM-yyyy") + ".txt";
+
+    ui->outputtext->setText("Найдено USB: " + USBFlashPath);
+
+    QString removecommandstring = "rm " + SourceFilePath ;
+
+//    process1.start(removecommandstring); // удаляем старый файл
+//    process1.waitForFinished();
 
     process1.start(copycommandstring); // запускаем программу копирования файла на флешку
     process1.waitForFinished();
+
+
+
+    ui->outputtext->setText("Копирование на USB завершено. -->" + copycommandstring);
+
+
 }
