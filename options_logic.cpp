@@ -10,7 +10,7 @@ QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
 QString Options::displayResolution = "1280x800";
 QString Options::MonitorResolution = "35";
-
+extern QString pathtofile;
 int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
@@ -395,13 +395,16 @@ void Options::on_pushButton_5_clicked()
 
     process.startDetached("date --set " + newdate);
     process.startDetached("date --set " + newtime); // max freq on
-
-
 }
 
 void Options::on_comboBox_currentIndexChanged(int index)
 {
     ui->lineEdit->setText(ui->comboBox->itemText(ui->comboBox->currentIndex()));
+}
+
+void Options::on_ArchivetoUSB_button_clicked()
+{
+    ArchiveToUSBFlashDrive();
 }
 
 void Options::TouchScreenCalibrate()
@@ -437,3 +440,16 @@ void Options::TouchScreenCalibrate()
 }
 
 
+
+void Options::ArchiveToUSBFlashDrive() // кастомизирует контроллы во вкладке опшнс
+{
+    QString SourceFilePath = pathtofile + "archive.txt";
+    QString USBFlashPath = "/media/sda1/";
+    QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath;
+    QProcess process1;
+
+
+
+    process1.start(copycommandstring); // запускаем программу копирования файла на флешку
+    process1.waitForFinished();
+}

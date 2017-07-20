@@ -46,7 +46,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>6</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -5308,6 +5308,25 @@ p, li { white-space: pre-wrap; }
 редактор формул</string>
       </property>
      </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Архивация</string>
+    </attribute>
+    <widget class="QPushButton" name="ArchivetoUSB_button">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>121</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Копировать 
+ архив на USB drive</string>
+     </property>
     </widget>
    </widget>
   </widget>
