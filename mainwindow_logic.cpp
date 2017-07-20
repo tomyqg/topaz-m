@@ -195,11 +195,9 @@ void MainWindow::OpenOptionsWindow()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-
     //    если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
-
 
     // если что меняем разрешение
     if (Options::displayResolution == "1024x768")
