@@ -444,7 +444,7 @@ void Options::TouchScreenCalibrate()
 void Options::ArchiveToUSBFlashDrive() // кастомизирует контроллы во вкладке опшнс
 {
 
-//    return;
+    //    return;
 
     // этот кусок кода ищет название куда смонтирована флешка
     QProcess process1,process2;
@@ -458,7 +458,7 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
 
     if (output.indexOf(stringtofind )==-1) // если строка не найдена то устройство не вставлено
     {
-        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель\nформат FAT32\nот 4 до 32 Gb");
+        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель,подождите несколько секунд и повторите попытку\nформат FAT32\nот 4 до 32 Gb");
         return;
     }
 
@@ -466,18 +466,16 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
 
     peace = output;
 
-
     peace = peace.remove(0,(output.lastIndexOf(stringtofind)));
-
 
     peace = peace.remove(peace.lastIndexOf(stringtofind2), peace.length() - peace.lastIndexOf(stringtofind2) );
 
-//    ui->outputtext->setText(peace);
-//    return;
+    //    ui->outputtext->setText(peace);
+    //    return;
 
     if ( (peace == "") || (peace == NULL) )
     {
-        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель\nформат FAT32\nот 4 до 32 Gb");
+        ui->outputtext->setText("Нет USB, или неверный формат\nВставьте USB носитель,подождите несколько секунд и повторите попытку\nформат FAT32\nот 4 до 32 Gb");
         return;
     }
     else
@@ -488,14 +486,24 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
     // конец кода который ищет название куда смонтирована флешка//  что то на подобие /media/sda1/
 
 
+
+
     QString USBFlashPath = peace.trimmed().simplified();
 
+    // тест что флешка живая
+
+    process1.start("cat " + USBFlashPath  + "/testfile.txt"); // запускаем программу копирования файла на флешку
+    process1.waitForFinished();
+
+    if ((QTextCodec::codecForMib(106)->toUnicode(process1.readAll()) )!="testok")
+    {
+        ui->outputtext->setText("Ошибка тестирования USB\nОтсутствует файл testfile.txt\nСоздайте файл testfile.txt с содержимым \"testok\"\nи поместите в корень USB носителя\n");
+        return;
+    }
 
     QString SourceFilePath = pathtofile + "archive.txt";
 
-
     QDateTime local(QDateTime::currentDateTime());
-
 
     QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath  + "/USBArchive" + local.time().toString("HH-mm-ss")+ "_" +  local.date().toString("dd-MM-yyyy") + ".txt";
 
@@ -503,15 +511,12 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
 
     QString removecommandstring = "rm " + SourceFilePath ;
 
-//    process1.start(removecommandstring); // удаляем старый файл
-//    process1.waitForFinished();
+    process1.start(copycommandstring); // запускаем программу копирования файла на флешку
+    process1.waitForFinished();
 
     process1.start(copycommandstring); // запускаем программу копирования файла на флешку
     process1.waitForFinished();
 
 
-
-    ui->outputtext->setText("Копирование на USB завершено. -->" + copycommandstring);
-
-
+    ui->outputtext->setText("Копирование на USB завершено. -->" + USBFlashPath);
 }

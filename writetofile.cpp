@@ -203,14 +203,14 @@ void MainWindow::WriteArchiveToFile()
     archivechannel2["name"] = "channel_2";
 
     for(int y=0; y<Y_coordinates_Chanel_3.size(); y++)
-        valuesarray3.append(Y_coordinates_Chanel_3.at(y)*1.33);
+        valuesarray3.append(Y_coordinates_Chanel_3.at(y));
 
     archivechannel3["size"] = valuesarray3.size();
     archivechannel3["values"] = valuesarray3;
     archivechannel3["name"] = "channel_3";
 
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
-        valuesarray1.append(Y_coordinates_Chanel_4.at(y)*1.44);
+        valuesarray4.append(Y_coordinates_Chanel_4.at(y));
 
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;
