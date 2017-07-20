@@ -175,7 +175,7 @@ void MessageWrite::LogClear()
     file.close();
 }
 
-void MainWindow::WriteArchiveToFile()
+void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
@@ -189,28 +189,29 @@ void MainWindow::WriteArchiveToFile()
     QJsonArray valuesarray4;
 
     for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
-        valuesarray1.append(Y_coordinates_Chanel_1.at(y));
+        valuesarray1.append(QString::number( Y_coordinates_Chanel_1.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
     archivechannel1["name"] = "channel_1";
 
     for(int y=0; y<Y_coordinates_Chanel_2.size(); y++)
-        valuesarray2.append(Y_coordinates_Chanel_2.at(y));
+        valuesarray2.append(QString::number( Y_coordinates_Chanel_2.at(y), 'f', 3)); // округляем до 3 знаков после запятой
+//        valuesarray2.append(Y_coordinates_Chanel_2.at(y));
 
     archivechannel2["size"] = valuesarray2.size();
     archivechannel2["values"] = valuesarray2;
     archivechannel2["name"] = "channel_2";
 
     for(int y=0; y<Y_coordinates_Chanel_3.size(); y++)
-        valuesarray3.append(Y_coordinates_Chanel_3.at(y));
+        valuesarray3.append(QString::number( Y_coordinates_Chanel_3.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
     archivechannel3["size"] = valuesarray3.size();
     archivechannel3["values"] = valuesarray3;
     archivechannel3["name"] = "channel_3";
 
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
-        valuesarray4.append(Y_coordinates_Chanel_4.at(y));
+        valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;
