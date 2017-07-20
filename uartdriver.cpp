@@ -258,14 +258,6 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
 
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
 
-    //    Q_ASSERT(2 < 3);
-    //    return 7.7727;
-    //    return 2.345;
-    //    if (InputDataByteArray.size()==0)
-    //    {
-    //        return 2.345;
-    //    }
-
     int InputDataByteArraylenght = InputDataByteArray.length();
 
 

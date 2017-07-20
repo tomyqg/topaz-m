@@ -325,28 +325,58 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->replot();
 }
 
-void MainWindow::UpdateDataChannel111()
+void MainWindow::UpdateChannel1()
 {
     UartDriver::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
+
+
+    double channel1currentvalue = UartDriver::channelinputbuffer[0];
+    double channel2currentvalue = UartDriver::channelinputbuffer[1];
+    double channel3currentvalue = UartDriver::channelinputbuffer[2];
+    double channel4currentvalue = UartDriver::channelinputbuffer[3];
+
+    double channel1state1value = channel1object.GetState1Value();
+    double channel2state1value = channel2object.GetState1Value();
+    double channel3state1value = channel3object.GetState1Value();
+    double channel4state1value = channel4object.GetState1Value();
+
+    double channel1state2value = channel1object.GetState2Value();
+    double channel2state2value = channel2object.GetState2Value();
+    double channel3state2value = channel3object.GetState2Value();
+    double channel4state2value = channel4object.GetState2Value();
+
+    if ( (channel1currentvalue>channel1state1value) && ( channel1object.HighState1Setted == false ) )
+    {
+        channel1object.LowState1Setted = false;
+        channel1object.HighState1Setted = true;
+        mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1HighMessage());
+    }
+    // уменьшение уставки  Channel 1
+    else if ( (channel1currentvalue<channel1state2value) && ( channel1object.LowState1Setted == false ) )
+    {
+        channel1object.LowState1Setted = true;
+        channel1object.HighState1Setted = false;
+        mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1LowMessage());
+    }
 }
 
-void MainWindow::UpdateDataChannel222()
+void MainWindow::UpdateChannel2()
 {
     UartDriver::needtoupdatechannel[1] = 1;
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
 }
 
-void MainWindow::UpdateDataChannel333()
+void MainWindow::UpdateChannel3()
 {
     UartDriver::needtoupdatechannel[2] = 1;
     int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
 }
 
-void MainWindow::UpdateDataChannel444()
+void MainWindow::UpdateChannel4()
 {
     UartDriver::needtoupdatechannel[3] = 1;
     int period = channel4object.GetMeasurePeriod()*1000;

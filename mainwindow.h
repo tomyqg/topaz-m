@@ -74,10 +74,10 @@ public slots:
     void UpdateDataChannel3();
     void UpdateDataChannel4();
 
-    void UpdateDataChannel111();
-    void UpdateDataChannel222();
-    void UpdateDataChannel333();
-    void UpdateDataChannel444();
+    void UpdateChannel1();
+    void UpdateChannel2();
+    void UpdateChannel3();
+    void UpdateChannel4();
 
     bool eventFilter(QObject* watched, QEvent* event);
 
