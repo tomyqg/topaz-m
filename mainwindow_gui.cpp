@@ -115,16 +115,6 @@ void MainWindow::on_pushButton_4_clicked()
     OpenMessagesWindow();
 }
 
-void MainWindow::on_radioButton_clicked()
-{
-    InitProcessorMaxFreq();
-}
-
-void MainWindow::on_radioButton_2_clicked()
-{
-    InitProcessorMinFreq();
-}
-
 void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
 {
     ui->textEdit_2->setText(text);

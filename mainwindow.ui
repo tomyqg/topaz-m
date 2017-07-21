@@ -163,41 +163,6 @@
      <string>Сообщения</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>700</y>
-      <width>151</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>высокая скорость</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton_2">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>720</y>
-      <width>151</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>энергосбережение</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QListWidget" name="listWidget">
     <property name="enabled">
      <bool>false</bool>
@@ -308,8 +273,6 @@
    </widget>
    <zorder>textEdit_2</zorder>
    <zorder>customPlot</zorder>
-   <zorder>radioButton</zorder>
-   <zorder>radioButton_2</zorder>
    <zorder>listWidget</zorder>
    <zorder>frame</zorder>
    <zorder>MessagesWidget</zorder>

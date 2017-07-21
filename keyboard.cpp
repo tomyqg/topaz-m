@@ -29,10 +29,6 @@ keyboard::~keyboard()
     delete ui;
 }
 
-/*void keyboard::on_buttonBox_accepted()
-{
-}*/
-
 QString keyboard::getcustomstring()
 {
     return ui->textEdit->toPlainText();
@@ -43,6 +39,7 @@ void keyboard::textinput()
     QWidget *widget = QApplication::focusWidget();
     QString textwas = ui->textEdit->toPlainText();
     QPushButton *button = static_cast<QPushButton*>(widget);
+
     QString textnew = textwas  + button->text();
     ui->textEdit->setText(textnew);
 }
@@ -79,8 +76,7 @@ void keyboard::ChangeLanguage(char eng)
 
         foreach(QPushButton * widget, widgets)
         {
-            qDebug() << widget;
-
+            //qDebug() << widget;
 
             if (widget->property("text").toString() == "q")
                 widget->setProperty("text", "й");
@@ -111,8 +107,6 @@ void keyboard::ChangeLanguage(char eng)
 
             if (widget->property("text").toString() == "p")
                 widget->setProperty("text", "з");
-
-
 
             if (widget->property("text").toString() == "a")
                 widget->setProperty("text", "ф");
@@ -147,10 +141,6 @@ void keyboard::ChangeLanguage(char eng)
             if (widget->property("text").toString() == "'")
                 widget->setProperty("text", "э");
 
-
-
-
-
             if (widget->property("text").toString() == "z")
                 widget->setProperty("text", "я");
 
@@ -177,10 +167,110 @@ void keyboard::ChangeLanguage(char eng)
 
             if (widget->property("text").toString() == ">")
                 widget->setProperty("text", "ю");
-
         }
     }
 
     if (eng == 0) // если английский
-    {}
+    {
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            //qDebug() << widget;
+
+            if (widget->property("text").toString() == "й")
+                widget->setProperty("text", "q");
+
+            if (widget->property("text").toString() == "ц")
+                widget->setProperty("text", "w");
+
+            if (widget->property("text").toString() == "у")
+                widget->setProperty("text", "e");
+
+            if (widget->property("text").toString() == "к")
+                widget->setProperty("text", "r");
+
+            if (widget->property("text").toString() == "е")
+                widget->setProperty("text", "t");
+
+            if (widget->property("text").toString() == "н")
+                widget->setProperty("text", "y");
+
+            if (widget->property("text").toString() == "г")
+                widget->setProperty("text", "u");
+
+            if (widget->property("text").toString() == "ш")
+                widget->setProperty("text", "i");
+
+            if (widget->property("text").toString() == "щ")
+                widget->setProperty("text", "o");
+
+            if (widget->property("text").toString() == "з")
+                widget->setProperty("text", "p");
+
+
+
+
+            if (widget->property("text").toString() == "ф")
+                widget->setProperty("text", "a");
+
+            if (widget->property("text").toString() == "ы")
+                widget->setProperty("text", "s");
+
+            if (widget->property("text").toString() == "в")
+                widget->setProperty("text", "d");
+
+            if (widget->property("text").toString() == "а")
+                widget->setProperty("text", "f");
+
+            if (widget->property("text").toString() == "п")
+                widget->setProperty("text", "g");
+
+            if (widget->property("text").toString() == "р")
+                widget->setProperty("text", "h");
+
+            if (widget->property("text").toString() == "о")
+                widget->setProperty("text", "j");
+
+            if (widget->property("text").toString() == "л")
+                widget->setProperty("text", "k");
+
+            if (widget->property("text").toString() == "д")
+                widget->setProperty("text", "l");
+
+            if (widget->property("text").toString() == "ж")
+                widget->setProperty("text", ";");
+
+            if (widget->property("text").toString() == "э")
+                widget->setProperty("text", "'");
+
+
+            if (widget->property("text").toString() == "я")
+                widget->setProperty("text", "z");
+
+            if (widget->property("text").toString() == "ч")
+                widget->setProperty("text", "x");
+
+            if (widget->property("text").toString() == "с")
+                widget->setProperty("text", "c");
+
+            if (widget->property("text").toString() == "м")
+                widget->setProperty("text", "v");
+
+            if (widget->property("text").toString() == "и")
+                widget->setProperty("text", "b");
+
+            if (widget->property("text").toString() == "т")
+                widget->setProperty("text", "n");
+
+            if (widget->property("text").toString() == "ь")
+                widget->setProperty("text", "m");
+
+            if (widget->property("text").toString() == "б")
+                widget->setProperty("text", "<");
+
+            if (widget->property("text").toString() == "ю")
+                widget->setProperty("text", ">");
+        }
+    }
 }

@@ -10,13 +10,6 @@ bool Options::eventFilter(QObject *object, QEvent *event)
     {
         Options::olderprop = object->property("text").toString();
         keyboard kb;
-        // подстраиваем размер окна
-//        resizeWindow(kb, 1280*0.8*1,800*0.96*1);
-//        kb.setMaximumHeight(370*0.96*1);
-//        kb.setMinimumHeight(370*0.96*1);
-//        kb.setMaximumWidth(760*0.8*1);
-//        kb.setMinimumWidth(760*0.8*1);
-//        kb.resize(760*0.8*1,370*0.96*1);
         kb.setModal(true);
         kb.exec();
         object->setProperty("value", kb.getcustomstring() );

@@ -375,7 +375,6 @@ void MainWindow::CheckState(ChannelOptions&  channel)
     QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName();
 
     //    превысили верхнюю уставку
-
     if ( (channelcurrentvalue>channelstate1value) && ( channel.HighState1Setted == false ) )
     {
         channel.LowState1Setted = false;
@@ -384,24 +383,24 @@ void MainWindow::CheckState(ChannelOptions&  channel)
     }
 
     // было превышение а стало норма
-
-    else if ( (channelcurrentvalue>channelstate2value) && (channelcurrentvalue<channelstate1value) && ( channel.HighState1Setted == true ) )
+    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.HighState1Setted == true ) )
     {
         channel.HighState1Setted = false;
         mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
     }
 
-    else if ( (channelcurrentvalue>channelstate2value) && (channelcurrentvalue<channelstate1value) && ( channel.LowState1Setted == true ) )
+    // было уменьшение а стало норма
+    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.LowState1Setted == true ) )
     {
         channel.LowState1Setted = false;
         mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
     }
 
+    //стало ниже нижней уставки
     else if ( (channelcurrentvalue<channelstate2value) && ( channel.LowState1Setted == false ) )
     {
         channel.LowState1Setted = true;
         channel.HighState1Setted = false;
         mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
     }
-
 }

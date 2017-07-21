@@ -2,9 +2,7 @@
 #define OPTIONS_H
 
 #include <QDialog>
-
 #include <mainwindow.h>
-
 #include <channel1.h>
 
 namespace Ui {
@@ -47,8 +45,6 @@ public:
         TrendsCyfraBars = 0x08
     };
 
-//    void SetDisplayParametr();
-
 private slots:
 
     void on_pushButton_clicked();
@@ -62,11 +58,7 @@ private slots:
     void Channel2TypeChange();
     void Channel3TypeChange();
     void Channel4TypeChange();
-
     void on_comboBox_currentIndexChanged(int index);
-
-
-
     void on_ArchivetoUSB_button_clicked();
 
 private:
