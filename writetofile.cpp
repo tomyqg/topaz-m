@@ -238,5 +238,3 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     file.close();
     //    qDebug() << "writearchive";
 }
-
-

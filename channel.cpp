@@ -199,3 +199,13 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 {
     needConfirmationchannel = confirmationstate;
 }
+
+double ChannelOptions::GetCurrentValue()
+{
+    return currentvalue;
+}
+
+void ChannelOptions::SetCurrentValue(bool value)
+{
+    currentvalue = value;
+}

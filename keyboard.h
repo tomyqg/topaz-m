@@ -28,6 +28,7 @@ private slots:
     void on_pushButton_13_clicked();
     void on_pushButton_27_clicked();
     void on_pushButton_44_clicked();
+    void on_comboBox_currentIndexChanged(int index);
 
 public slots:
     QString getcustomstring();
@@ -36,6 +37,9 @@ public slots:
 
 private:
     Ui::keyboard *ui;
+
+private:
+    void ChangeLanguage(char eng);
 };
 
 #endif // KEYBOARD_H

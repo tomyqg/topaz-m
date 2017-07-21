@@ -101,6 +101,7 @@ private:
     void DateUpdate();
     void PowerOff();
     void CloseApplication();
+    void CheckState(ChannelOptions&  channel);
     char GetHalfSecFlag();
 
     void SetXRange(int newxrange) {Xrange = newxrange;}

@@ -502,21 +502,12 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
     }
 
     QString SourceFilePath = pathtofile + "archive.txt";
-
     QDateTime local(QDateTime::currentDateTime());
-
     QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath  + "/USBArchive" + local.time().toString("HH-mm-ss")+ "_" +  local.date().toString("dd-MM-yyyy") + ".txt";
 
     ui->outputtext->setText("Найдено USB: " + USBFlashPath);
-
-    QString removecommandstring = "rm " + SourceFilePath ;
-
+    ui->outputtext->setText("Копирование ...");
     process1.start(copycommandstring); // запускаем программу копирования файла на флешку
-    process1.waitForFinished();
-
-    process1.start(copycommandstring); // запускаем программу копирования файла на флешку
-    process1.waitForFinished();
-
-
+    process1.waitForFinished(1000);
     ui->outputtext->setText("Копирование на USB завершено. -->" + USBFlashPath);
 }

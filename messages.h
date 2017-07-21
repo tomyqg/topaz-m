@@ -31,8 +31,8 @@ public:
     QJsonArray LogMessageRead();
     void LogAddMessage(QString nm);
     void WriteAllLogToFile();
-    explicit  MessageWrite();
-    explicit MessageWrite(QString nm);
+    explicit  MessageWrite(); // конструктор
+    explicit MessageWrite(QString nm); // конструктор
 
     static QJsonArray messagesqueue;
     static QString strstr;

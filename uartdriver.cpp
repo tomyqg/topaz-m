@@ -10,7 +10,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-#define BeagleBone
+//#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone

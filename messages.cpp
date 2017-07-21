@@ -16,8 +16,8 @@ Messages::Messages(QDialog *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
-    setWindowTitle(tr("MESSAGES"));
-    MessageWrite mr2 ("Messages open");
+    setWindowTitle(tr("LOG"));
+    MessageWrite mr2 ;
     QJsonArray messagesarray = mr2.LogMessageRead();
     for (int var = 0; var < messagesarray.count() ; ++var) {
         QJsonObject mes = messagesarray.at(var).toObject();
@@ -29,7 +29,7 @@ Messages::Messages(QDialog *parent) :
 
 Messages::~Messages()
 {
-    MessageWrite mr ("Messages close");
+//    MessageWrite mr ("Messages close");
     delete ui;
 }
 
@@ -40,8 +40,8 @@ void Messages::on_pushButton_clicked()
 
 MessageWrite::MessageWrite()
 {
-    LogMessageRead();
-    LogAddMessage("message");
+//    LogMessageRead();
+//    LogAddMessage("message");
 }
 
 MessageWrite::MessageWrite( QString nm)

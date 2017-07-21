@@ -85,8 +85,8 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-//    SetWindowHeightPixels(GetMonitorHeightPixels());
-//    SetWindowWidthPixels(GetMonitorWidthPixels());
+    //    SetWindowHeightPixels(GetMonitorHeightPixels());
+    //    SetWindowWidthPixels(GetMonitorWidthPixels());
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(800);
@@ -339,7 +339,7 @@ char MainWindow::GetHalfSecFlag()
 
 void MainWindow::InvertHalfSecFlag()
 {
-    halfSecondflag++;
+    halfSecondflag ++;
     halfSecondflag = halfSecondflag%2;
 }
 
@@ -359,13 +359,49 @@ void MainWindow::GetAllUartPorts()
 {
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
 
-    //out << QObject::tr("Total number of ports available: ") << serialPortInfos.count() << endl;
     QString infosss;
     for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
-
         infosss += serialPortInfo.portName();
-
     }
     ui->textEdit_2->setText(infosss);
 }
 
+void MainWindow::CheckState(ChannelOptions&  channel)
+{
+    channel.GetCurrentValue();
+    double channelcurrentvalue = channel.GetCurrentValue();
+    double channelstate1value = channel.GetState1Value();
+    double channelstate2value = channel.GetState2Value();
+    QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName();
+
+    //    превысили верхнюю уставку
+
+    if ( (channelcurrentvalue>channelstate1value) && ( channel.HighState1Setted == false ) )
+    {
+        channel.LowState1Setted = false;
+        channel.HighState1Setted = true;
+        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+    }
+
+    // было превышение а стало норма
+
+    else if ( (channelcurrentvalue>channelstate2value) && (channelcurrentvalue<channelstate1value) && ( channel.HighState1Setted == true ) )
+    {
+        channel.HighState1Setted = false;
+        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
+    }
+
+    else if ( (channelcurrentvalue>channelstate2value) && (channelcurrentvalue<channelstate1value) && ( channel.LowState1Setted == true ) )
+    {
+        channel.LowState1Setted = false;
+        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
+    }
+
+    else if ( (channelcurrentvalue<channelstate2value) && ( channel.LowState1Setted == false ) )
+    {
+        channel.LowState1Setted = true;
+        channel.HighState1Setted = false;
+        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
+    }
+
+}
