@@ -4,14 +4,18 @@
 #include "keyboard.h"
 #include "channel1.h"
 #include "uartdriver.h"
+#include "QTModbusRTU/qmodbusclient.h"
+#include "QTModbusRTU/qmodbuspdu.h"
+
 #include <QFile>
 #include <QThread>
+#include <QDebug>
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
 
-//#define BeagleBone
+#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone
@@ -252,9 +256,13 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
-    InputDataByteArray  = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
+    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+
+
+
+
 
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
     int InputDataByteArraylenght = InputDataByteArray.length();
@@ -489,6 +497,13 @@ void ModBus::ReadAllChannelsThread ()
     UartDriver UD;
     double currentdata;
     this->thread()->setPriority(QThread::LowPriority);
+
+//    QModbusClient mbc;
+    QModbusPdu mbpdu;
+
+    mbpdu.data();
+
+    qDebug() << mbpdu.dataSize();
 
     while (1)
     {
