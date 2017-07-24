@@ -34,35 +34,23 @@
 **
 ****************************************************************************/
 
-#ifndef QMODBUSRTUSERIALSLAVE_H
-#define QMODBUSRTUSERIALSLAVE_H
+#ifndef QSERIALBUSGLOBAL_H
+#define QSERIALBUSGLOBAL_H
 
-#include <QtSerialBus/qmodbusserver.h>
+#include <QtCore/qglobal.h>
 
 QT_BEGIN_NAMESPACE
 
-class QModbusRtuSerialSlavePrivate;
-
-class Q_SERIALBUS_EXPORT QModbusRtuSerialSlave : public QModbusServer
-{
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(QModbusRtuSerialSlave)
-
-public:
-    explicit QModbusRtuSerialSlave(QObject *parent = nullptr);
-    ~QModbusRtuSerialSlave();
-
-    bool processesBroadcast() const override;
-
-protected:
-    QModbusRtuSerialSlave(QModbusRtuSerialSlavePrivate &dd, QObject *parent = nullptr);
-
-    bool open() override;
-    void close() override;
-
-    QModbusResponse processRequest(const QModbusPdu &request) override;
-};
+#ifndef QT_STATIC
+#  if defined(QT_BUILD_SERIALBUS_LIB)
+#    define Q_SERIALBUS_EXPORT Q_DECL_EXPORT
+#  else
+#    define Q_SERIALBUS_EXPORT Q_DECL_IMPORT
+#  endif
+#else
+#  define Q_SERIALBUS_EXPORT
+#endif
 
 QT_END_NAMESPACE
 
-#endif // QMODBUSRTUSERIALSLAVE_H
+#endif // QSERIALBUSGLOBAL_H

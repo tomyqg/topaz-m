@@ -32,16 +32,7 @@ SOURCES += main.cpp\
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
     painting.cpp \
-    QTModbusRTU/qmodbusclient.cpp \
-    QTModbusRTU/qmodbusdataunit.cpp \
-    QTModbusRTU/qmodbusdevice.cpp \
-    QTModbusRTU/qmodbusdeviceidentification.cpp \
-    QTModbusRTU/qmodbuspdu.cpp \
-    QTModbusRTU/qmodbusreply.cpp \
-    QTModbusRTU/qmodbusrtuserialmaster.cpp \
-    QTModbusRTU/qmodbusrtuserialslave.cpp \
-    QTModbusRTU/qmodbusserver.cpp
-
+    QTModbusRTU/qmodbuspdu.cpp
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
@@ -53,23 +44,9 @@ HEADERS  += mainwindow.h \
     uartdriver.h \
     metrologicalcalc.h \
     mathresolver.h \
-    QTModbusRTU/qmodbus_symbols_p.h \
-    QTModbusRTU/qmodbusadu_p.h \
-    QTModbusRTU/qmodbusclient.h \
-    QTModbusRTU/qmodbusclient_p.h \
-    QTModbusRTU/qmodbuscommevent_p.h \
-    QTModbusRTU/qmodbusdataunit.h \
-    QTModbusRTU/qmodbusdevice.h \
-    QTModbusRTU/qmodbusdevice_p.h \
-    QTModbusRTU/qmodbusdeviceidentification.h \
     QTModbusRTU/qmodbuspdu.h \
-    QTModbusRTU/qmodbusreply.h \
-    QTModbusRTU/qmodbusrtuserialmaster.h \
-    QTModbusRTU/qmodbusrtuserialmaster_p.h \
-    QTModbusRTU/qmodbusrtuserialslave.h \
-    QTModbusRTU/qmodbusrtuserialslave_p.h \
-    QTModbusRTU/qmodbusserver.h \
-    QTModbusRTU/qmodbusserver_p.h
+    QTModbusRTU/qserialbusglobal.h \
+    QTModbusRTU/qmodbus_symbols_p.h
 
 FORMS    += mainwindow.ui \
     options.ui \

@@ -4,8 +4,6 @@
 #include "keyboard.h"
 #include "channel1.h"
 #include "uartdriver.h"
-#include "QTModbusRTU/qmodbusclient.h"
-#include "QTModbusRTU/qmodbuspdu.h"
 
 #include <QFile>
 #include <QThread>
@@ -13,7 +11,6 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
-
 
 #define BeagleBone
 #define MYD
@@ -497,13 +494,6 @@ void ModBus::ReadAllChannelsThread ()
     UartDriver UD;
     double currentdata;
     this->thread()->setPriority(QThread::LowPriority);
-
-//    QModbusClient mbc;
-    QModbusPdu mbpdu;
-
-    mbpdu.data();
-
-    qDebug() << mbpdu.dataSize();
 
     while (1)
     {
