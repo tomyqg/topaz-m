@@ -172,7 +172,7 @@ void keyboard::ChangeLanguage(char eng)
 
     if (eng == 0) // если английский
     {
-        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты
 
         foreach(QPushButton * widget, widgets)
         {

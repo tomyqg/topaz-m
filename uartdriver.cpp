@@ -10,6 +10,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
+
 //#define BeagleBone
 #define MYD
 
@@ -245,7 +246,6 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-
     quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
@@ -257,9 +257,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
 
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-
     int InputDataByteArraylenght = InputDataByteArray.length();
-
 
     if (InputDataByteArraylenght < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
     {
@@ -503,13 +501,9 @@ void ModBus::ReadAllChannelsThread ()
             this->thread()->msleep(20);
         }
 
-        //        this->thread()->msleep(100);
-
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
-
-            //            while (currentdata==0)
             currentdata = DataChannelRead(ModBus::UniversalChannel1);
 
             if (currentdata!=0)
@@ -524,14 +518,11 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-
             currentdata = DataChannelRead(ModBus::UniversalChannel2);
-
             if (currentdata!=0)
             {
-                UD.writechannelvalue(2,currentdata+10);
+                UD.writechannelvalue(2,currentdata);
             }
-
             this->thread()->msleep(25);
         }
 
@@ -540,29 +531,23 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-
             currentdata = DataChannelRead(ModBus::UniversalChannel3);
-
             if (currentdata!=0)
             {
-                UD.writechannelvalue(3,currentdata+20);
+                UD.writechannelvalue(3,currentdata);
             }
-
             this->thread()->msleep(25);
         }
-
         currentdata=0;
 
         if (UartDriver::needtoupdatechannel[3] == 1)
         {
             UartDriver::needtoupdatechannel[3] = 0;
-
             currentdata = DataChannelRead(ModBus::UniversalChannel4);
             if (currentdata!=0)
             {
-                UD.writechannelvalue(4,currentdata+30);
+                UD.writechannelvalue(4,currentdata);
             }
-
             this->thread()->msleep(25);
         }
         currentdata=0;
