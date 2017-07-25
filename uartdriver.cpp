@@ -12,7 +12,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-#define BeagleBone
+//#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone
@@ -233,19 +233,19 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
     QByteArray requestdata;
     QByteArray InputDataByteArray;
 
-    char AddressHi,AddressLo,LenghtHi,LenghtLo,CRC16Hi,CRC16Lo;
+    char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
-    LenghtHi = (int) ((Lenght & 0xFF00)>>8);
-    LenghtLo = (int) (Lenght & 0x00FF);
+    RegisterLenghtHi = (int) ((Lenght & 0xFF00)>>8);
+    RegisterLenghtLo = (int) (Lenght & 0x00FF);
 
     //    requestdata.append(DeviceAdress);
-    requestdata.append(1);
+    requestdata.append(DeviceAdress);
     requestdata.append(Function);
     requestdata.append(AddressHi);
     requestdata.append(AddressLo);
-    requestdata.append(LenghtHi);
-    requestdata.append(LenghtLo);
+    requestdata.append(RegisterLenghtHi);
+    requestdata.append(RegisterLenghtLo);
 
     quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
@@ -257,21 +257,34 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
 
     QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
 
-
-
-
+    QByteArray InputDataByteArrayParsed;
 
     InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
     int InputDataByteArraylenght = InputDataByteArray.length();
 
-    if (InputDataByteArraylenght < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
+    if (InputDataByteArraylenght < 5) // если меньше пяти байтов пришло то выходим
     {
-        SetConnectFailure(DeviceAdress);
-        return 0;
+        return -1;
     }
-    else
+
+
+    // разбираем пакет данных
+
+    InputDataByteArrayParsed.clear();
+
+    for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
     {
-        SetConnectFailure(0);
+        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function))
+        {
+            InputDataByteArrayParsed.clear();
+
+            if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
+            {
+
+                break;
+                return Function;
+            }
+        }
     }
 
     quint8 inpcrchibyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 1);
@@ -523,7 +536,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel2);
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             if (currentdata!=0)
             {
                 UD.writechannelvalue(2,currentdata);
@@ -536,7 +549,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel3);
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             if (currentdata!=0)
             {
                 UD.writechannelvalue(3,currentdata);
@@ -548,7 +561,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[3] == 1)
         {
             UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = DataChannelRead(ModBus::UniversalChannel4);
+            currentdata = DataChannelRead(ModBus::UniversalChannel1);
             if (currentdata!=0)
             {
                 UD.writechannelvalue(4,currentdata);
