@@ -288,7 +288,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
                 quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
 
                 for (int var2 = 0; var2 < baytdalee; ++var2) {
-                    InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2+var2));
+                    InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
                 }
 
                 quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(byteindex+4+baytdalee);
@@ -297,69 +297,74 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
                 quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
 
                 ModBus modb;
-                quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+                quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayParsed);
+
+
 
                 if (inputcrc16summ1 == calculatedcrc16summ)
                 {
-
-                    SetConnectFailure(0);
-                    QByteArray arr;
-                    float val;
-
-                    arr.resize(4);
-
-                    if (InputDataByteArray.size()<3)
-                    {
-                        return 0;
-                    }
-
-                    if (InputDataByteArray.size()<4)
-                    {
-                        return 0;
-                    }
-
-                    if (InputDataByteArray.size()<5)
-                    {
-                        return 0;
-                    }
-
-                    if (InputDataByteArray.size()<6)
-                    {
-                        return 0;
-                    }
-
-                    if (InputDataByteArray.size()<7)
-                    {
-                        return 0;
-                    }
-
-                    arr[0] = InputDataByteArray.at(5);
-                    arr[1] = InputDataByteArray.at(6);
-                    arr[2] = InputDataByteArray.at(3);
-                    arr[3] = InputDataByteArray.at(4);
-                    //convert hex to double
-                    QDataStream stream(arr);
-                    stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-                    stream >> val;
-                    return val;
+                    return 42 ;
                 }
-                else
-                {
-                    SetConnectFailure(5);
-                    return 0;
-                }
+                return byteindex;
             }
         }
     }
 
+    quint8 inpcrchibyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 1);
+    quint8 inpcrclobyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 2);
+    quint16 inputcrc16summ = ((uint16_t) (inpcrchibyte<<8))|( (uint16_t) inpcrclobyte );
 
-    //    quint8 inpcrchibyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 1);
-    //    quint8 inpcrclobyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 2);
-    //    quint16 inputcrc16summ = ((uint16_t) (inpcrchibyte<<8))|( (uint16_t) inpcrclobyte );
+    ModBus modb;
+    quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
 
-    //    ModBus modb;
-    //    quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+    if (inputcrc16summ == calculatedcrc16summ)
+    {
+        SetConnectFailure(0);
+        QByteArray arr;
+        float val;
 
+        arr.resize(4);
+
+        if (InputDataByteArray.size()<3)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<4)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<5)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<6)
+        {
+            return 0;
+        }
+
+        if (InputDataByteArray.size()<7)
+        {
+            return 0;
+        }
+
+        arr[0] = InputDataByteArray.at(5);
+        arr[1] = InputDataByteArray.at(6);
+        arr[2] = InputDataByteArray.at(3);
+        arr[3] = InputDataByteArray.at(4);
+        //convert hex to double
+        QDataStream stream(arr);
+        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+        stream >> val;
+        return val;
+    }
+    else
+    {
+        SetConnectFailure(5);
+        return 0;
+    }
     return 0;
 }
 
