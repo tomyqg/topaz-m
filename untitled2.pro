@@ -31,8 +31,7 @@ SOURCES += main.cpp\
     channel.cpp \
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
-    painting.cpp \
-    QTModbusRTU/qmodbuspdu.cpp
+    painting.cpp
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
@@ -43,10 +42,7 @@ HEADERS  += mainwindow.h \
     messages.h \
     uartdriver.h \
     metrologicalcalc.h \
-    mathresolver.h \
-    QTModbusRTU/qmodbuspdu.h \
-    QTModbusRTU/qserialbusglobal.h \
-    QTModbusRTU/qmodbus_symbols_p.h
+    mathresolver.h
 
 FORMS    += mainwindow.ui \
     options.ui \
