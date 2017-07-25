@@ -207,7 +207,7 @@ void  UartDriver::SetRTSPinDirection()
 
 double ModBus::ReadTemperature(char channel)
 {
-    return ModBusGetValue(channel,ModBus::ReadHoldingRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+    return ModBusGetValue(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 double ModBus::ReadVoltage(char channel)
