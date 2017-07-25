@@ -352,15 +352,7 @@ float ModBus::ModBusGetValue(char DeviceAdress,char Function,uint16_t Address,ui
         }
     }
 
-
-    //    quint8 inpcrchibyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 1);
-    //    quint8 inpcrclobyte = (uint8_t)InputDataByteArray.at(InputDataByteArraylenght - 2);
-    //    quint16 inputcrc16summ = ((uint16_t) (inpcrchibyte<<8))|( (uint16_t) inpcrclobyte );
-
-    //    ModBus modb;
-    //    quint16 calculatedcrc16summ = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
-
-    return 0;
+    return -1;
 }
 
 QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
