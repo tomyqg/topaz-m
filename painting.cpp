@@ -77,10 +77,12 @@ void MainWindow::PaintCyfrasBottom()
     }
     else {
         painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
-        Channel1ValueString = QString::number(UartDriver::channelinputbuffer[0]);
-        Channel2ValueString = QString::number(UartDriver::channelinputbuffer[1]);
-        Channel3ValueString = QString::number(UartDriver::channelinputbuffer[2]);
-        Channel4ValueString = QString::number(UartDriver::channelinputbuffer[3]);
+
+
+        Channel1ValueString = QString::number( UartDriver::channelinputbuffer[0], 'f', 2);
+        Channel2ValueString = QString::number( UartDriver::channelinputbuffer[1], 'f', 2);
+        Channel3ValueString = QString::number( UartDriver::channelinputbuffer[2], 'f', 2);
+        Channel4ValueString = QString::number( UartDriver::channelinputbuffer[3], 'f', 2);
     }
 
     // выводим значения каналов большими цифрами
@@ -126,6 +128,14 @@ void MainWindow::PaintCyfrasFullScreen()
     // отступ  сверху и слева в пикселях
     int borderwidth = 0 ;
 
+    QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
+
+    // берем текущее значение каждого канала и округляем 2 знака после запятой
+    Channel1ValueString = QString::number( UartDriver::channelinputbuffer[0], 'f', 2);
+    Channel2ValueString = QString::number( UartDriver::channelinputbuffer[1], 'f', 2);
+    Channel3ValueString = QString::number( UartDriver::channelinputbuffer[2], 'f', 2);
+    Channel4ValueString = QString::number( UartDriver::channelinputbuffer[3], 'f', 2);
+
     //высчитываются
 
     int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
@@ -147,10 +157,10 @@ void MainWindow::PaintCyfrasFullScreen()
 
     painter.setPen(QPen(Qt::cyan, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
-    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[0]));
-    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[1]));
-    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[2]));
-    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,QString::number(UartDriver::channelinputbuffer[3]));
+    painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
+    painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
+    painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));

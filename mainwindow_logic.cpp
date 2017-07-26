@@ -28,6 +28,13 @@
 #define MYD
 #define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
 
+#define ValuesUpdateTimer 100
+#define GraphicsUpdateTimer 500
+#define ArchiveUpdateTimer 5000
+#define DateLabelUpdateTimer 1000
+#define XRange 300
+#define YRange 180
+
 void MainWindow::MainWindowInitialization()
 {
     setWindowFlags(Qt::CustomizeWindowHint);
@@ -39,8 +46,8 @@ void MainWindow::MainWindowInitialization()
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
 
-    SetXRange(300);
-    SetYRange(180);
+    SetXRange(XRange);
+    SetYRange(YRange);
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
@@ -58,21 +65,21 @@ void MainWindow::MainWindowInitialization()
     connect(timetouch, SIGNAL(timeout()), this, SLOT(NewTouchscreenCalibration()));
 
     tmr = new QTimer();
-    tmr->setInterval(500);
+    tmr->setInterval(ValuesUpdateTimer);
 
     QTimer *tmrarchive = new QTimer(this);
-    tmrarchive->setInterval(5000);
+    tmrarchive->setInterval(ArchiveUpdateTimer);
 
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
-    tmrarchive->start(5000);
+    tmrarchive->start(ArchiveUpdateTimer);
 
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
-    tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
-    UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
+    tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
+    UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
-    timer->start(1000);
-    timetouch->start(5000);
+    timer->start(DateLabelUpdateTimer);
+    timetouch->start(ArchiveUpdateTimer);
 
     InitPins();
     InitTouchScreen();
@@ -88,8 +95,11 @@ void MainWindow::MainWindowInitialization()
     //    SetWindowHeightPixels(GetMonitorHeightPixels());
     //    SetWindowWidthPixels(GetMonitorWidthPixels());
 
-    SetWindowWidthPixels(1280);
-    SetWindowHeightPixels(800);
+    //    SetWindowWidthPixels(1280);
+    //    SetWindowHeightPixels(800);
+
+    SetWindowWidthPixels(1024);
+    SetWindowHeightPixels(768);
 
 #ifdef MultiThread
     thread= new QThread();
@@ -97,19 +107,22 @@ void MainWindow::MainWindowInitialization()
     MB = new ModBus();
     MB->moveToThread(thread);
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-//    thread->start();
+    thread->start();
 #endif
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 
-    op.deleteLater();
+    //    op.deleteLater();
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
     needConfirmation = 1;
 
     // connection for accessing to UI from another class
     objectwithsignal = new ChannelOptions;
+    //    options1 = new Options;
     connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
+
+    //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }
 
 void MainWindow::LabelsInit()
@@ -181,13 +194,15 @@ void MainWindow::DelaySec(int n)
 
 void MainWindow::OpenOptionsWindow()
 {
-    Options options;
+    Options *options = new Options;
+
+    connect( options, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
 
 
-    this->resizeWindow(options,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
+    this->resizeWindow(*options,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
     GetMonitorWidthPixels();
-    options.exec();
+    options->exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);
     channel2object.ReadSingleChannelOptionFromFile(2);
@@ -208,6 +223,8 @@ void MainWindow::OpenOptionsWindow()
     {
         resizeSelf(1280,800);
     }
+
+    options->deleteLater(); // удаляем объект
 }
 
 void MainWindow::PowerOff()
@@ -226,7 +243,7 @@ void MainWindow::InitProcessorMaxFreq()
 {
     // an object for make terminal requests
     QProcess process;
-    
+
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 1000MHz");
 }
@@ -235,7 +252,7 @@ void MainWindow::InitProcessorMinFreq()
 {
     // an object for make terminal requests
     QProcess process;
-    
+
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 300MHz");
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on

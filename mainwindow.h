@@ -60,6 +60,7 @@ public:
 public slots:
 
     void updateText( const QString text );
+    void destroyedslot(QObject *);
     void NewTouchscreenCalibration();
     void LabelsInit();
     void LabelsUpdate();
@@ -176,6 +177,7 @@ private:
     QTimer *tmr;
     QThread *thread;
     ChannelOptions *objectwithsignal;
+
 
     int Xrange;
     int Yrange;

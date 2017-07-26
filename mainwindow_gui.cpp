@@ -118,6 +118,15 @@ void MainWindow::on_pushButton_4_clicked()
 void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
 {
     ui->textEdit_2->setText(text);
+    //    ui->textEdit_2->setText("Destroyed");
+    //    qDebug() << "destroyed" ;
+}
+
+void  MainWindow::destroyedslot(QObject *)
+{
+    //    ui->textEdit_2->setText(text);
+    //    ui->textEdit_2->setText("Destroyed");
+    qDebug() << "destroyed slot";
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
@@ -137,6 +146,8 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
         ReactOnMouseSlide();
     }
+
+
 
     return true;
 }
