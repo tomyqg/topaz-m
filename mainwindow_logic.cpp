@@ -71,7 +71,7 @@ void MainWindow::MainWindowInitialization()
     tmr->start(100);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
     UpdateGraficsTimer->start(200); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
-    timer->start(1111);
+    timer->start(1000);
     timetouch->start(5000);
 
     InitPins();
@@ -103,6 +103,7 @@ void MainWindow::MainWindowInitialization()
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 
+    op.deleteLater();
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
     needConfirmation = 1;
 

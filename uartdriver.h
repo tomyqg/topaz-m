@@ -80,12 +80,14 @@ public:
             uint16_t Lenght
             );
 
-    float ModBusGetValue(
+    float ModBusGetRegister(
             char DeviceAdress,
             char Function,
             uint16_t Address,
             uint16_t Lenght
             );
+
+    void ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
 
 public:
     double DataChannelRead (char channel);
@@ -162,9 +164,9 @@ public:
     {
         G00Bias = 0,
         DataChannel1 = G00Bias + 0 ,
-        DataChannel2 = G00Bias + 2,
-        DataChannel3 = G00Bias + 3,
-        DataChannel4 = G00Bias + 4,
+        DataChannel2 = G00Bias + 1,
+        DataChannel3 = G00Bias + 2,
+        DataChannel4 = G00Bias + 3,
         DataChannelLenght = 2
     };
     Q_ENUM(G00_Group)

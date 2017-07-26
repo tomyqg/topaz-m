@@ -18,7 +18,7 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_dial_valueChanged(int value);
+    void on_dial_valueChanged();
 
 private:
     Ui::Messages *ui;

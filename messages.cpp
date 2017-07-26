@@ -50,7 +50,7 @@ MessageWrite::MessageWrite( QString nm)
     LogAddMessage(nm);
 }
 
-void Messages::on_dial_valueChanged(int value)
+void Messages::on_dial_valueChanged()
 {
     ui->listWidget->setCurrentRow(ui->listWidget->count()/100*ui->dial->value());
 }
