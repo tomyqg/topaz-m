@@ -21,11 +21,13 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->installEventFilter(this);
 
     MessageWrite mr ("Keyboard Open");
+    mr.deleteLater();
 }
 
 keyboard::~keyboard()
 {
     MessageWrite mr ("Keyboard Close");
+    mr.deleteLater();
     delete ui;
 }
 

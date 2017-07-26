@@ -47,6 +47,7 @@ MainWindow::~MainWindow()
 {
     MessageWrite mr1 ("Programm Closed");
     mr1.WriteAllLogToFile();
+
     delete ui;
 }
 
@@ -126,7 +127,8 @@ void  MainWindow::destroyedslot(QObject *)
 {
     //    ui->textEdit_2->setText(text);
     //    ui->textEdit_2->setText("Destroyed");
-    qDebug() << "destroyed slot";
+
+//    qDebug() << "destroyed slot";
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)

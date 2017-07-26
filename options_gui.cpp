@@ -444,8 +444,6 @@ void Options::resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution)
         //qw.resizeFont(w);
         //qDebug() << widget;
     }
-
-
     return;
 }
 

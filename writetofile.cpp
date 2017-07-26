@@ -155,6 +155,8 @@ void MessageWrite::WriteAllLogToFile()
     QTextStream out(&file);
     out << setstr;
     file.close();
+
+    opt.deleteLater();
 }
 
 void MessageWrite::LogAddMessage(QString nm)

@@ -24,7 +24,7 @@ private:
     Ui::Messages *ui;
 };
 
-class MessageWrite
+class MessageWrite : public QObject
 {
 public:
 
@@ -33,6 +33,7 @@ public:
     void WriteAllLogToFile();
     explicit  MessageWrite(); // конструктор
     explicit MessageWrite(QString nm); // конструктор
+    ~MessageWrite(); // деструктор
 
     static QJsonArray messagesqueue;
     static QString strstr;

@@ -22,7 +22,7 @@ public:
     double GetMeasurePeriod();
     double GetState1Value();
     double GetState2Value();
-    double GetCurrentValue();
+    double GetCurrentChannelValue();
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -51,7 +51,7 @@ public:
     void SetState2LowMessage(QString newmessage);
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
-    void SetCurrentValue(bool value);
+    void SetCurrentChannelValue(bool value);
 
     bool IsHighState1Setted();
     bool IsLowState1Setted();

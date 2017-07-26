@@ -12,7 +12,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-//#define BeagleBone
+#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone
@@ -233,7 +233,7 @@ double ModBus::ReadTemperature(char channel)
 
 double ModBus::ReadVoltage(char channel)
 {
-    return DataChannelRead(ModBus::UniversalChannel1);
+    return ModBusGetRegister(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }
 
 //WriteSingleRegister

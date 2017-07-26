@@ -318,204 +318,43 @@ void MainWindow::GrafsUpdateBars()
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
-
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
-
     ui->customPlot->replot();
 }
 
-void MainWindow::UpdateChannel1()
+void MainWindow::UpdateChannel1Slot()
 {
     UartDriver::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1object.SetCurrentValue(UartDriver::channelinputbuffer[0]);
+    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
     CheckState(channel1object);
 }
 
-void MainWindow::UpdateChannel2()
+void MainWindow::UpdateChannel2Slot()
 {
     UartDriver::needtoupdatechannel[1] = 1;
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-    channel2object.SetCurrentValue(UartDriver::channelinputbuffer[1]);
+    channel2object.SetCurrentChannelValue(UartDriver::channelinputbuffer[1]);
     CheckState(channel2object);
 }
 
-void MainWindow::UpdateChannel3()
+void MainWindow::UpdateChannel3Slot()
 {
     UartDriver::needtoupdatechannel[2] = 1;
     int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
-    channel3object.SetCurrentValue(UartDriver::channelinputbuffer[2]);
+    channel3object.SetCurrentChannelValue(UartDriver::channelinputbuffer[2]);
     CheckState(channel3object);
 }
 
-void MainWindow::UpdateChannel4()
+void MainWindow::UpdateChannel4Slot()
 {
     UartDriver::needtoupdatechannel[3] = 1;
     int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
-    channel4object.SetCurrentValue(UartDriver::channelinputbuffer[3]);
+    channel4object.SetCurrentChannelValue(UartDriver::channelinputbuffer[3]);
     CheckState(channel4object);
-}
-
-void MainWindow::UpdateDataChannel1()
-{
-    UartDriver UD;
-    ModBus modbus;
-    mathresolver mathres;
-    double currentdata;
-
-    int period = channel1object.GetMeasurePeriod()*1000;
-    channeltimer1->setInterval(period);
-
-    UD.needtoupdatechannel[0] = 1;
-
-    currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-
-    if (currentdata!=0)
-    {
-
-        if (channel1object.IsChannelMathematical())
-        {
-            currentdata = mathres.SolveEquation(channel1object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
-        }
-        UD.writechannelvalue(1,currentdata);
-
-        if ((currentdata>=channel1object.GetState1Value() ) && ( channel1object.HighState1Setted == false ))
-        {
-            channel1object.LowState1Setted = false;
-            ui->listWidget->addItem(channel1object.GetState1HighMessage());
-            ui->listWidget->scrollToBottom();
-            channel1object.HighState1Setted = true;
-            mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1HighMessage());
-        }
-
-        if ((currentdata<channel1object.GetState1Value() ) && ( channel1object.LowState1Setted == false ))
-        {
-            channel1object.LowState1Setted = true;
-            ui->listWidget->addItem(channel1object.GetState1LowMessage());
-            ui->listWidget->scrollToBottom();
-            channel1object.HighState1Setted = false;
-            mr.LogAddMessage (channel1object.GetChannelName() + ":" + channel1object.GetState1LowMessage());
-        }
-    }
-}
-
-void MainWindow::UpdateDataChannel2()
-{
-    UartDriver UD;
-    ModBus modbus;
-    mathresolver mathres;
-
-    double currentdata;
-    double pressure;
-    currentdata = modbus.DataChannel1Read(); // тоже покатит:  modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (currentdata!=0)
-    {
-        if (channel2object.IsChannelMathematical())
-        {
-            currentdata = mathres.SolveEquation(channel2object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
-        }
-        pressure = currentdata;
-        UD.writechannelvalue(2,pressure);
-
-        if ((pressure>=channel2object.GetState1Value() ) && ( channel2object.HighState1Setted == false ))
-        {
-            channel2object.LowState1Setted = false;
-            ui->listWidget->addItem(channel2object.GetState1HighMessage());
-            ui->listWidget->scrollToBottom();
-            channel2object.HighState1Setted = true;
-            mr.LogAddMessage (channel2object.GetChannelName() + ":" + channel2object.GetState1HighMessage());
-        }
-
-        if ((pressure<channel2object.GetState1Value() ) && ( channel2object.LowState1Setted == false ))
-        {
-            channel2object.LowState1Setted = true;
-            ui->listWidget->addItem(channel2object.GetState1LowMessage());
-            ui->listWidget->scrollToBottom();
-            channel2object.HighState1Setted = false;
-            mr.LogAddMessage (channel2object.GetChannelName() + ":" + channel2object.GetState1LowMessage());
-        }
-    }
-    int period = channel2object.GetMeasurePeriod()*1000;
-    channeltimer2->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel3()
-{
-    UartDriver UD;
-    ModBus modbus;
-    mathresolver mathres;
-    double currentdata;
-
-    currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (currentdata!=0)
-    {
-        if (channel3object.IsChannelMathematical())
-        {
-            currentdata = mathres.SolveEquation(channel3object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
-        }
-        UD.writechannelvalue(3,currentdata);
-
-        if ((currentdata>=channel3object.GetState1Value() ) && ( channel3object.HighState1Setted == false ))
-        {
-            channel3object.LowState1Setted = false;
-            ui->listWidget->addItem(channel3object.GetState1HighMessage());
-            ui->listWidget->scrollToBottom();
-            channel3object.HighState1Setted = true;
-            mr.LogAddMessage (channel3object.GetChannelName() + ":" + channel3object.GetState1HighMessage());
-        }
-
-        if ((currentdata<channel3object.GetState1Value() ) && ( channel3object.LowState1Setted == false ))
-        {
-            channel3object.LowState1Setted = true;
-            ui->listWidget->addItem(channel3object.GetState1LowMessage());
-            ui->listWidget->scrollToBottom();
-            channel3object.HighState1Setted = false;
-            mr.LogAddMessage (channel3object.GetChannelName() + ":" + channel3object.GetState1LowMessage());
-        }
-    }
-    int period = channel3object.GetMeasurePeriod()*1000;
-    channeltimer3->setInterval(period);
-}
-
-void MainWindow::UpdateDataChannel4()
-{
-    UartDriver UD;
-    ModBus modbus;
-    mathresolver mathres;
-    double currentdata;
-
-    currentdata = modbus.DataChannelRead(ModBus::UniversalChannel1);
-    if (currentdata!=0)
-    {
-        if (channel4object.IsChannelMathematical())
-        {
-            currentdata = mathres.SolveEquation(channel4object.GetMathString(), currentdata); // + mathres.SolveEquation("sin(x)*10", currentdata); //sqrt(abs(x))+20
-        }
-        UD.writechannelvalue(4,currentdata);
-
-        if ((currentdata>=channel4object.GetState1Value() ) && ( channel4object.HighState1Setted == false ))
-        {
-            channel4object.LowState1Setted = false;
-            ui->listWidget->addItem(channel4object.GetState1HighMessage());
-            ui->listWidget->scrollToBottom();
-            channel4object.HighState1Setted = true;
-            mr.LogAddMessage (channel4object.GetChannelName() + ":" + channel4object.GetState1HighMessage());
-        }
-
-        if ((currentdata<channel4object.GetState1Value() ) && ( channel4object.LowState1Setted == false ))
-        {
-            channel4object.LowState1Setted = true;
-            ui->listWidget->addItem(channel4object.GetState1LowMessage());
-            ui->listWidget->scrollToBottom();
-            channel4object.HighState1Setted = false;
-            mr.LogAddMessage (channel4object.GetChannelName() + ":" + channel4object.GetState1LowMessage());
-        }
-    }
-    int period = channel4object.GetMeasurePeriod()*1000;
-    channeltimer4->setInterval(period);
 }

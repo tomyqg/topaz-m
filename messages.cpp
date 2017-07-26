@@ -25,11 +25,13 @@ Messages::Messages(QDialog *parent) :
     }
     ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
     ui->listWidget->scrollToBottom();
+
+    mr2.deleteLater();
 }
 
 Messages::~Messages()
 {
-//    MessageWrite mr ("Messages close");
+//    qDebug() << "Destructor";
     delete ui;
 }
 
@@ -48,6 +50,11 @@ MessageWrite::MessageWrite( QString nm)
 {
     LogMessageRead();
     LogAddMessage(nm);
+}
+
+MessageWrite::~MessageWrite()
+{
+//    qDebug() << "MessageWrite Destructor";
 }
 
 void Messages::on_dial_valueChanged()

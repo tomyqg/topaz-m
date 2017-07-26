@@ -70,15 +70,12 @@ public slots:
 
     void HalfSecondGone();
 
-    void UpdateDataChannel1();
-    void UpdateDataChannel2();
-    void UpdateDataChannel3();
-    void UpdateDataChannel4();
+    void UpdateChannel1Slot();
+    void UpdateChannel2Slot();
+    void UpdateChannel3Slot();
+    void UpdateChannel4Slot();
 
-    void UpdateChannel1();
-    void UpdateChannel2();
-    void UpdateChannel3();
-    void UpdateChannel4();
+        void OptionsWindowThread();
 
     bool eventFilter(QObject* watched, QEvent* event);
 
@@ -176,7 +173,9 @@ private:
     QTimer *halfSecondTimer;
     QTimer *tmr;
     QThread *thread;
+    QThread *optionsthread;
     ChannelOptions *objectwithsignal;
+
 
 
     int Xrange;

@@ -179,10 +179,15 @@ void MainWindow::InitPins()
 void MainWindow::OpenMessagesWindow()
 {
     mr.WriteAllLogToFile();
-    Messages messages;
-    this->resizeWindow(messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
-    messages.setModal(true);
-    messages.exec();
+
+    Messages *messages = new Messages;
+
+    connect( messages, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
+
+    this->resizeWindow(*messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
+    messages->setModal(true);
+    messages->exec();
+    messages->deleteLater();
 }
 
 void MainWindow::DelaySec(int n)
@@ -192,17 +197,28 @@ void MainWindow::DelaySec(int n)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
+
+void MainWindow::OptionsWindowThread()
+{
+
+}
+
 void MainWindow::OpenOptionsWindow()
 {
-    Options *options = new Options;
-
-    connect( options, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
 
 
-    this->resizeWindow(*options,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
+    Options *optionsobj = new Options;
+    this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
+
+    optionsthread= new QThread();
+    optionsobj->moveToThread(optionsthread);
+    connect(optionsthread, SIGNAL(started()), this, SLOT(OptionsWindowThread()));
+    optionsthread->start();
+
+    connect( optionsobj, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
     GetMonitorWidthPixels();
-    options->exec();
+    optionsobj->exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);
     channel2object.ReadSingleChannelOptionFromFile(2);
@@ -224,13 +240,13 @@ void MainWindow::OpenOptionsWindow()
         resizeSelf(1280,800);
     }
 
-    options->deleteLater(); // удаляем объект
+    optionsobj->deleteLater(); // удаляем объект
 }
 
 void MainWindow::PowerOff()
 {
     QProcess process;
-    process.startDetached("sudo poweroff");
+    process.startDetached("poweroff");
     QApplication::exit();
 }
 
@@ -269,18 +285,11 @@ void MainWindow::InitTimers()
 
 #ifdef MultiThread
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2()));
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3()));
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4()));
+    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
+    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
+    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
+    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
 
-#endif
-
-#ifndef MultiThread
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateDataChannel1()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateDataChannel2()));
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateDataChannel3()));
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateDataChannel4()));
 #endif
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
@@ -384,8 +393,8 @@ void MainWindow::GetAllUartPorts()
 
 void MainWindow::CheckState(ChannelOptions&  channel)
 {
-    channel.GetCurrentValue();
-    double channelcurrentvalue = channel.GetCurrentValue();
+    channel.GetCurrentChannelValue();
+    double channelcurrentvalue = channel.GetCurrentChannelValue();
     double channelstate1value = channel.GetState1Value();
     double channelstate2value = channel.GetState2Value();
     QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName();
@@ -420,3 +429,4 @@ void MainWindow::CheckState(ChannelOptions&  channel)
         mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
     }
 }
+

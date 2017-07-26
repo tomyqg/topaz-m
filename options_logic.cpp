@@ -54,6 +54,7 @@ Options::Options(QWidget *parent) :
 
 Options::~Options()
 {
+//    qDebug() << "Options Destructor" ;
     delete ui;
 }
 
@@ -365,6 +366,8 @@ void Options::on_pushButton_4_clicked()
 {
     MessageWrite ms;
     ms.LogClear();
+    ms.deleteLater();
+
 }
 
 double Options::GetLogMessagesLimit()

@@ -17,12 +17,8 @@ public slots:
     QString ReadAllUartDataStringFormat();
     QByteArray ReadAllUartDataByteFormat();
 
-
-
 private:
     static double channeltempbuffer[4];
-
-
     QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
     QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
 
@@ -34,9 +30,7 @@ protected:
 
 public:
     static double channelinputbuffer[4];
-
     static bool needtoupdatechannel[4];
-
     void SetRTSPinDirection();
 };
 
