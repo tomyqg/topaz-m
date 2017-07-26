@@ -97,7 +97,7 @@ void MainWindow::MainWindowInitialization()
     MB = new ModBus();
     MB->moveToThread(thread);
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-    thread->start();
+//    thread->start();
 #endif
 
     Options op;
@@ -107,11 +107,9 @@ void MainWindow::MainWindowInitialization()
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
     needConfirmation = 1;
 
-
     // connection for accessing to UI from another class
     objectwithsignal = new ChannelOptions;
     connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
-
 }
 
 void MainWindow::LabelsInit()

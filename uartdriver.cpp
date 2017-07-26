@@ -12,7 +12,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-//#define BeagleBone
+#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone
@@ -257,7 +257,6 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     requestdata.append(RegisterLenghtHi); // Количество регистров Hi байт
     requestdata.append(RegisterLenghtLo); // Количество регистров Lo байт
 
-
 //    qDebug() << requestdata;
     quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
@@ -272,21 +271,15 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     int InputDataByteArraylenght = InputDataByteArray.length();
 
-//    if (InputDataByteArraylenght < 5) // если меньше пяти байтов пришло то выходим
-//    {
-//        return -1;
-//    }
-
-
     // разбираем пакет данных
 
-    InputDataByteArrayParsed.clear();
+//    InputDataByteArrayParsed.clear();
 
     for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
     {
         if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
         {
-            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
+//            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
 
             //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
             if (  (Function==0x04) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
@@ -326,6 +319,7 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QDataStream stream(arraytofloat);
                     stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
                     stream >> val;
+                    //
                     return val;
                 }
                 else
