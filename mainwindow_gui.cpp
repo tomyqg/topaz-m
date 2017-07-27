@@ -116,6 +116,20 @@ void MainWindow::on_pushButton_4_clicked()
     OpenMessagesWindow();
 }
 
+void MainWindow::on_RelayChanger_toggled(bool checked)
+
+{
+
+    ModBus mbus;
+
+    mbus.SetSingleCoil(ModBus::Board4AIAddress,ModBus::ElmetroRelayAddress,checked);
+
+    mbus.deleteLater();
+
+    ui->RelayChanger->setText("Реле " + QString::number(checked));
+
+}
+
 void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
 {
     ui->textEdit_2->setText(text);

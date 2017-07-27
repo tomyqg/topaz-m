@@ -49,7 +49,7 @@ private:
 
 public slots:
 
-    double ReadDataChannel1();
+    double ReadDataChannel(int channeladdress);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     double ClickRelay(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
@@ -119,7 +119,9 @@ public:
         FrequencyAdressLo     = 0x00,
         ElmetroRelayAddress = 0x01,
         ElmetroChannelAB1Address = 0x00,
-        ElmetroChannelAB2Address = 0x02
+        ElmetroChannelAB2Address = 0x02,
+        ElmetroChannelAB3Address = 0x04,
+        ElmetroChannelAB4Address = 0x06
 
     };
     Q_ENUM(RegisterAdress)
