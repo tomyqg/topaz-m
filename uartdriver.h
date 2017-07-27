@@ -49,8 +49,9 @@ private:
 
 public slots:
 
-    double ReadTemperature(char channel);
-    double ReadVoltage(char channel);
+    double ReadDataChannel1();
+    void SetSingleCoil(char channel, uint16_t Address, bool newstate);
+    double ClickRelay(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
@@ -98,7 +99,7 @@ public:
 
     enum DeviceAdress {
         MainDeviceAddress = 0x01 ,
-        UniversalChannel1 = 0x01 ,
+        Board4AIAddress = 0x01 ,
         UniversalChannel2 = 0x02 ,
         UniversalChannel3 = 0x04 ,
         UniversalChannel4 = 0x08
@@ -115,7 +116,11 @@ public:
         VoltageAdressLo       = 0x00,
         CurrentAdressLo       = 0x00,
         ResistanceAdressLo    = 0x00,
-        FrequencyAdressLo     = 0x00
+        FrequencyAdressLo     = 0x00,
+        ElmetroRelayAddress = 0x01,
+        ElmetroChannelAB1Address = 0x00,
+        ElmetroChannelAB2Address = 0x02
+
     };
     Q_ENUM(RegisterAdress)
 
@@ -157,10 +162,10 @@ public:
     enum G00_Group
     {
         G00Bias = 0,
-        DataChannel1 = G00Bias + 0 ,
-        DataChannel2 = G00Bias + 1,
-        DataChannel3 = G00Bias + 2,
-        DataChannel4 = G00Bias + 3,
+        DataChannel1 = G00Bias + 0,
+        DataChannel2 = G00Bias + 2,
+        DataChannel3 = G00Bias + 4,
+        DataChannel4 = G00Bias + 6,
         DataChannelLenght = 2
     };
     Q_ENUM(G00_Group)

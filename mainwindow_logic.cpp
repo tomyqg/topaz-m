@@ -37,6 +37,8 @@
 
 void MainWindow::MainWindowInitialization()
 {
+    CreateMODBusConfigFile();
+
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
 
@@ -205,18 +207,15 @@ void MainWindow::OptionsWindowThread()
 
 void MainWindow::OpenOptionsWindow()
 {
-
-
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
+    //    optionsthread= new QThread();
+    //    optionsobj->moveToThread(optionsthread);
+    //    connect(optionsthread, SIGNAL(started()), this, SLOT(OptionsWindowThread()));
+    //    optionsthread->start();
+    //    connect( optionsobj, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
 
-    optionsthread= new QThread();
-    optionsobj->moveToThread(optionsthread);
-    connect(optionsthread, SIGNAL(started()), this, SLOT(OptionsWindowThread()));
-    optionsthread->start();
-
-    connect( optionsobj, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
     GetMonitorWidthPixels();
     optionsobj->exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
@@ -240,7 +239,7 @@ void MainWindow::OpenOptionsWindow()
         resizeSelf(1280,800);
     }
 
-    optionsobj->deleteLater(); // удаляем объект
+    optionsobj->deleteLater(); // удаляем объект опций
 }
 
 void MainWindow::PowerOff()

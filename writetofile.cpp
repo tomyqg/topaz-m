@@ -240,3 +240,58 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     file.close();
     //    qDebug() << "writearchive";
 }
+
+void MainWindow::CreateMODBusConfigFile() // пишет архив в файл каждые пять сек... вроде...
+{
+    QJsonArray Devices;
+    QJsonObject Device1;
+    QJsonObject Device2;
+    QJsonObject Device;
+
+    QJsonArray Device1ReadCommands;
+    QJsonArray Device1WriteCommands;
+
+    QJsonArray Device2ReadCommands;
+    QJsonArray Device2WriteCommands;
+
+
+    // конфиг для платы 4AI
+    Device1ReadCommands.append(0x04); // на чтение аналогового ввода? Команда 0x04
+    Device1WriteCommands.append(0x06); // на запись аналогового вывода? Команда 0x06
+
+    Device1["Address"] = 0x01;
+    Device1["Name"] = "4AI";
+    Device1["Speed"] = 9600;
+    Device1["Other"] = "Other";
+    Device1["Stuff"] = "Stuff";
+    Device1["ReadCommands"] = Device1ReadCommands;
+    Device1["WriteCommands"] = Device1WriteCommands;
+    Device1["Type"] = "float";
+
+    // конфиг для платы Relays
+    Device2ReadCommands.append(0x01); //чтение дискретного вывода? Команда 0x01
+    Device2WriteCommands.append(0x05); // на запись дискретного вывода? Команда 0x05
+
+    Device2["Address"] = 0x02;
+    Device2["Name"] = "Relay";
+    Device2["Speed"] = 115200;
+    Device2["Other"] = "Relay";
+    Device2["Stuff"] = "Module";
+    Device2["ReadCommands"] = Device2ReadCommands;
+    Device2["WriteCommands"] = Device2WriteCommands;
+    Device2["Type"] = "bool";
+
+    Devices.append(Device1);
+    Devices.append(Device2);
+
+    Device["Count"] = Devices.count();
+    Device["Devices"] = Devices;
+
+    QString setstr = QJsonDocument(Device).toJson(QJsonDocument::Compact);
+    QFile file(pathtofile + "MODBusConfigFile.txt");
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+}

@@ -83,6 +83,15 @@ void MainWindow::PaintCyfrasBottom()
         Channel2ValueString = QString::number( UartDriver::channelinputbuffer[1], 'f', 2);
         Channel3ValueString = QString::number( UartDriver::channelinputbuffer[2], 'f', 2);
         Channel4ValueString = QString::number( UartDriver::channelinputbuffer[3], 'f', 2);
+
+        if (Channel1ValueString== "nan")
+            Channel1ValueString = "обр.";
+        if (Channel2ValueString== "nan")
+            Channel2ValueString = "обр.";
+        if (Channel3ValueString== "nan")
+            Channel3ValueString = "обр.";
+        if (Channel4ValueString== "nan")
+            Channel4ValueString = "обр.";
     }
 
     // выводим значения каналов большими цифрами
@@ -570,11 +579,8 @@ void MainWindow::PaintOnWidget()
 
 void MainWindow::ReactOnMouseSlide()
 {
-    int  centerposY = 384 ;
-    int centerposX  = 652;// общая точка четырех квадратов по иксу в пикселях
     int  y   =  QCursor::pos().y() ;
     int  x   =  QCursor::pos().x() ;
-    int kx = 100 + x/5;
     int ky = 20 + y/3;
 
     ui->customPlot->yAxis->setRange(-ky, ky);

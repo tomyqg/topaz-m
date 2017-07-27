@@ -67,6 +67,8 @@ public slots:
     void LabelsCorrect();
     void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
+    void CreateMODBusConfigFile();
+
 
     void HalfSecondGone();
 

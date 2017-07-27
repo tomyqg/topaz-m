@@ -20,7 +20,7 @@
 QString pathtofile = "/opt/";
 #define uartsleep DelayMsec(50);
 #define threadsleep DelayMsec(100);
-#define longsleep delay(1000);
+#define longsleep DelayMsec(1000);
 #endif
 
 #ifndef BeagleBone
@@ -205,35 +205,34 @@ void  UartDriver::SetRTSPinDirection()
 #endif
 }
 
-double ModBus::ReadTemperature(char channel)
+void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
 {
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x01,0xFF00);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x01,0x0000);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x00,0xFF00);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x00,0x0000);
-//    Sleep(1000);
+    switch (newstate) {
+    case 0:
+        ModBusSetRegister(channel,ModBus::WriteSingleCoil,Address,0x0000);
+        break;
 
+    case 1:
+        ModBusSetRegister(channel,ModBus::WriteSingleCoil,Address,0xFF00);
+        break;
 
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x01,0xFF00);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x01,0x0000);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x00,0xFF00);
-//    Sleep(1000);
-//    ModBusSetRegister(channel,ModBus::WriteSingleCoil,0x00,0x0000);
-//    Sleep(1000);
-
-    return ModBusGetRegister(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
-//    return -99;
-
+    default:
+        break;
+    }
 }
 
-double ModBus::ReadVoltage(char channel)
+double ModBus::ReadDataChannel1()
 {
-    return ModBusGetRegister(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+    return ModBusGetRegister(0x01,ModBus::ReadInputRegisters,ModBus::ElmetroChannelAB2Address,ModBus::DataChannelLenght);
+}
+
+double ModBus::ClickRelay(char channel)
+{
+    SetSingleCoil(channel,ModBus::ElmetroRelayAddress,1);
+    longsleep;
+    SetSingleCoil(channel,ModBus::ElmetroRelayAddress,0);
+    longsleep;
+    return 2;
 }
 
 //WriteSingleRegister
@@ -257,14 +256,14 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     requestdata.append(RegisterLenghtHi); // Количество регистров Hi байт
     requestdata.append(RegisterLenghtLo); // Количество регистров Lo байт
 
-//    qDebug() << requestdata;
+    //    qDebug() << requestdata;
     quint16 CRC16 = Calculate_crc16_modbus(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
-//    qDebug() << requestdata;
+    //    qDebug() << requestdata;
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
     QByteArray InputDataByteArrayParsed;
@@ -273,13 +272,13 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     // разбираем пакет данных
 
-//    InputDataByteArrayParsed.clear();
+    //    InputDataByteArrayParsed.clear();
 
     for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
     {
         if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
         {
-//            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
+            //            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
 
             //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
             if (  (Function==0x04) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
@@ -368,80 +367,80 @@ void ModBus::ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,
     return;
 
 
-//    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
+    //    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
 
-//    QByteArray InputDataByteArrayParsed;
+    //    QByteArray InputDataByteArrayParsed;
 
-//    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-//    int InputDataByteArraylenght = InputDataByteArray.length();
+    //    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
+    //    int InputDataByteArraylenght = InputDataByteArray.length();
 
-//    if (InputDataByteArraylenght < 5) // если меньше пяти байтов пришло то выходим
-//    {
-//        return -1;
-//    }
+    //    if (InputDataByteArraylenght < 5) // если меньше пяти байтов пришло то выходим
+    //    {
+    //        return -1;
+    //    }
 
 
-//    // разбираем пакет данных
+    //    // разбираем пакет данных
 
-//    InputDataByteArrayParsed.clear();
+    //    InputDataByteArrayParsed.clear();
 
-//    for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
-//    {
-//        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
-//        {
-//            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
+    //    for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
+    //    {
+    //        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
+    //        {
+    //            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
 
-//            //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
-//            if (  (Function==0x06) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
-//            {
+    //            //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
+    //            if (  (Function==0x06) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
+    //            {
 
-//                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
-//                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
-//                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2)); // количество байт далее
+    //                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
+    //                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
+    //                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2)); // количество байт далее
 
-//                quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
+    //                quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
 
-//                for (int var2 = 0; var2 < baytdalee; ++var2) {
-//                    InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
-//                }
+    //                for (int var2 = 0; var2 < baytdalee; ++var2) {
+    //                    InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
+    //                }
 
-//                quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(byteindex+4+baytdalee);
-//                quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(byteindex+3+baytdalee);
+    //                quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(byteindex+4+baytdalee);
+    //                quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(byteindex+3+baytdalee);
 
-//                quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
+    //                quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
 
-//                quint16 calculatedcrc16summ = Calculate_crc16_modbus(InputDataByteArrayParsed);
+    //                quint16 calculatedcrc16summ = Calculate_crc16_modbus(InputDataByteArrayParsed);
 
-//                if (inputcrc16summ1 == calculatedcrc16summ)
-//                {
-//                    SetConnectFailure(0);
-//                    QByteArray arraytofloat;
-//                    float val;
+    //                if (inputcrc16summ1 == calculatedcrc16summ)
+    //                {
+    //                    SetConnectFailure(0);
+    //                    QByteArray arraytofloat;
+    //                    float val;
 
-//                    arraytofloat.resize(4);
+    //                    arraytofloat.resize(4);
 
-//                    arraytofloat[0] = InputDataByteArrayParsed.at(5);
-//                    arraytofloat[1] = InputDataByteArrayParsed.at(6);
-//                    arraytofloat[2] = InputDataByteArrayParsed.at(3);
-//                    arraytofloat[3] = InputDataByteArrayParsed.at(4);
+    //                    arraytofloat[0] = InputDataByteArrayParsed.at(5);
+    //                    arraytofloat[1] = InputDataByteArrayParsed.at(6);
+    //                    arraytofloat[2] = InputDataByteArrayParsed.at(3);
+    //                    arraytofloat[3] = InputDataByteArrayParsed.at(4);
 
-//                    //convert hex to double
-//                    QDataStream stream(arraytofloat);
-//                    stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-//                    stream >> val;
-//                    return val;
-//                }
-//                else
-//                {
-//                    SetConnectFailure(5);
-//                    return -1;
-//                }
+    //                    //convert hex to double
+    //                    QDataStream stream(arraytofloat);
+    //                    stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+    //                    stream >> val;
+    //                    return val;
+    //                }
+    //                else
+    //                {
+    //                    SetConnectFailure(5);
+    //                    return -1;
+    //                }
 
-//                return -1;
-//            }
-//        }
-//    }
-//    return -1;
+    //                return -1;
+    //            }
+    //        }
+    //    }
+    //    return -1;
 }
 
 QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
@@ -593,7 +592,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
 double ModBus::DataChannel1Read()
 {
-    return DataChannelRead(ModBus::UniversalChannel1);
+    return DataChannelRead(ModBus::Board4AIAddress);
 }
 
 double ModBus::DataChannelRead (char channel)
@@ -613,7 +612,7 @@ void ModBus::ReadAllChannelsThread ()
                (UartDriver::needtoupdatechannel[0] == 0)&&
                (UartDriver::needtoupdatechannel[1] == 0)&&
                (UartDriver::needtoupdatechannel[2] == 0)&&
-               (UartDriver::needtoupdatechannel[3] == 0) )
+               (UartDriver::needtoupdatechannel[3] == 0))
         {
             this->thread()->msleep(20);
         }
@@ -621,7 +620,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
             UartDriver::needtoupdatechannel[0] = 0;
-            currentdata = ReadTemperature(ModBus::UniversalChannel1);
+            currentdata = ClickRelay(ModBus::Board4AIAddress);
 
             if (currentdata!=0)
             {
@@ -635,7 +634,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = ReadTemperature(ModBus::UniversalChannel1);
+            currentdata = ReadDataChannel1();
             if (currentdata!=0)
             {
                 UD.writechannelvalue(2,currentdata);
@@ -648,7 +647,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[2] == 1)
         {
             UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = ReadTemperature(ModBus::UniversalChannel1);
+            currentdata = ReadDataChannel1();
             if (currentdata!=0)
             {
                 UD.writechannelvalue(3,currentdata);
@@ -660,7 +659,7 @@ void ModBus::ReadAllChannelsThread ()
         if (UartDriver::needtoupdatechannel[3] == 1)
         {
             UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = ReadTemperature(ModBus::UniversalChannel1);
+            currentdata = ReadDataChannel1();
             if (currentdata!=0)
             {
                 UD.writechannelvalue(4,currentdata);
