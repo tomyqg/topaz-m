@@ -221,6 +221,16 @@ void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
     }
 }
 
+double ModBus::ReadOnBoardVoltage()
+{
+    return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,ModBus::OnboardVoltageAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
+}
+
+double ModBus::ReadOnBoardTemperature()
+{
+    return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,ModBus::OnboardTempAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
+}
+
 double ModBus::ReadDataChannel(int channeladdress)
 {
     return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,channeladdress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
@@ -512,6 +522,56 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         }
     }
     return 0;
+}
+
+uint16_t ModBus::GetChannelSignalType(uint8_t channel)
+{
+    int channelbias;
+
+    switch (channel) {
+    case ModBus::DataChannel1:
+        channelbias = ModBus::Channel1AddressBias;
+        break;
+    case ModBus::DataChannel2:
+        channelbias = ModBus::Channel2AddressBias;
+        break;
+    case ModBus::DataChannel3:
+        channelbias = ModBus::Channel3AddressBias;
+        break;
+    case ModBus::DataChannel4:
+        channelbias = ModBus::Channel4AddressBias;
+        break;
+    }
+
+    uint16_t address = ModBus::SignalTypeAddress + channelbias;
+
+    return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
+}
+
+void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
+{
+    uint8_t channelbias;
+
+    switch (channel) {
+    case ModBus::DataChannel1:
+        channelbias = ModBus::Channel1AddressBias;
+        break;
+    case ModBus::DataChannel2:
+        channelbias = ModBus::Channel2AddressBias;
+        break;
+    case ModBus::DataChannel3:
+        channelbias = ModBus::Channel3AddressBias;
+        break;
+    case ModBus::DataChannel4:
+        channelbias = ModBus::Channel4AddressBias;
+        break;
+    }
+
+    uint16_t address = ModBus::SignalTypeAddress + channelbias;
+
+    ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,signaltype);
+
+//     return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
 }
 
 double ModBus::DataChannel1Read()

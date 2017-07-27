@@ -50,6 +50,14 @@ private:
 public slots:
 
     double ReadDataChannel(int channeladdress);
+    double ReadOnBoardTemperature ();
+    double ReadOnBoardVoltage();
+
+    uint16_t  GetChannelSignalType(uint8_t channel);
+
+    void  SetChannelSignalType(uint8_t channel, uint8_t signaltype);
+
+
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     double ClickRelay(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
@@ -189,7 +197,7 @@ public:
         SoftwareRevisionLenght = 1,
         DeviceTypeAddress  = G01Bias + 4,
         DeviceTypeLenght = 1,
-        ModbusAddressAddress  = G01Bias + 5,
+        ModbusAddress  = G01Bias + 5,
         ModbusAddressLenght = 1,
         ModbusbaudrateAddress  = G01Bias + 6,
         ModbusbaudrateLenght = 1,
@@ -247,6 +255,7 @@ public:
 
     enum G02_Group{
         G02Bias = 0x8000,
+        ChannelAddressBias = 128,
         Channel1AddressBias = 0,
         Channel2AddressBias = 128,
         Channel3AddressBias = 256,

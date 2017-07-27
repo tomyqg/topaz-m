@@ -65,7 +65,7 @@ void keyboard::on_pushButton_44_clicked()
     ui->textEdit->setText(textnew);
 }
 
-void keyboard::on_comboBox_currentIndexChanged(int index)
+void keyboard::on_comboBox_currentIndexChanged()
 {
     ChangeLanguage(ui->comboBox->currentIndex() );
 }

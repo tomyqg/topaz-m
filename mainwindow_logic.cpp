@@ -194,7 +194,7 @@ void MainWindow::OpenMessagesWindow()
 
 void MainWindow::DelaySec(int n)
 {
-    QTime dieTime= QTime::currentTime().addSecs(1);
+    QTime dieTime= QTime::currentTime().addSecs(n);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }

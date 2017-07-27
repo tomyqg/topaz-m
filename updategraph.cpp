@@ -67,7 +67,7 @@ void MainWindow::AddValuesToBuffer()
     */
 
     // раскоментить посюда
-    int maximumdots = GetGraphWidthInPixels()/2 ;
+    //int maximumdots = GetGraphWidthInPixels()/2 ;
 
     while (X_Coordinates.length()>300)
     {

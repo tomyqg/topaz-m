@@ -117,17 +117,11 @@ void MainWindow::on_pushButton_4_clicked()
 }
 
 void MainWindow::on_RelayChanger_toggled(bool checked)
-
 {
-
     ModBus mbus;
-
     mbus.SetSingleCoil(ModBus::Board4AIAddress,ModBus::ElmetroRelayAddress,checked);
-
     mbus.deleteLater();
-
     ui->RelayChanger->setText("Реле " + QString::number(checked));
-
 }
 
 void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
@@ -142,7 +136,7 @@ void  MainWindow::destroyedslot(QObject *)
     //    ui->textEdit_2->setText(text);
     //    ui->textEdit_2->setText("Destroyed");
 
-//    qDebug() << "destroyed slot";
+    //    qDebug() << "destroyed slot";
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
@@ -162,9 +156,6 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
         ReactOnMouseSlide();
     }
-
-
-
     return true;
 }
 
@@ -176,16 +167,6 @@ void MainWindow::ShowMessageBox (QString title,QString message)
 
 void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
 {
-
-    // ratio to calculate correct sizing
-    /*qreal mratio_bak = mratio;
-
-        if(qw.m_ratio != 0)
-            mratio /= qw.m_ratio;
-
-        // this all was done so that if its called 2 times with ratio = 2, total is not 4 but still just 2 (ratio is absolute)
-        qw.m_ratio = mratio_bak;
-        */
     QLayout * ql = qw.layout();
 
     if (ql == NULL)
@@ -268,8 +249,6 @@ void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresoluti
 
         widget->resize(widget->width() * xratio, widget->height() * yratio);
         widget->move(QPoint(g.x() * xratio, g.y() * yratio));
-        //qw.resizeFont(w);
-        //        qDebug() << widget;
     }
     return;
 }
@@ -288,7 +267,6 @@ void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
 
     foreach(QWidget * widget, widgets)
     {
-
         QRect g = widget->geometry();
 
         widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
@@ -296,8 +274,6 @@ void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
 
         widget->resize(widget->width() * xratio, widget->height() * yratio);
         widget->move(QPoint(g.x() * xratio, g.y() * yratio));
-        //qw.resizeFont(w);
-        //qDebug() << widget;
     }
     return;
 }
@@ -328,7 +304,6 @@ int MainWindow::GetMonitorHeightPixels()
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
-    int width = screenGeometry.width();
     return height;
 }
 

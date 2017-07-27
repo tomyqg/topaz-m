@@ -28,7 +28,7 @@ private slots:
     void on_pushButton_13_clicked();
     void on_pushButton_27_clicked();
     void on_pushButton_44_clicked();
-    void on_comboBox_currentIndexChanged(int index);
+    void on_comboBox_currentIndexChanged();
 
 public slots:
     QString getcustomstring();

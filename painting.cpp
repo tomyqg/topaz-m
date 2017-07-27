@@ -263,8 +263,8 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int confirmwindowheight  = widgheight/4;
     int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
     int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
-    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
-    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
+//    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
+//    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
 
     // увеличение уставки Channel 1
     if (channel1currentvalue>channel1state1value)
@@ -580,7 +580,7 @@ void MainWindow::PaintOnWidget()
 void MainWindow::ReactOnMouseSlide()
 {
     int  y   =  QCursor::pos().y() ;
-    int  x   =  QCursor::pos().x() ;
+//    int  x   =  QCursor::pos().x() ;
     int ky = 20 + y/3;
 
     ui->customPlot->yAxis->setRange(-ky, ky);
