@@ -118,6 +118,7 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_RelayChanger_toggled(bool checked)
 {
+//    thread->wait(100);
     ModBus mbus;
     mbus.SetSingleCoil(ModBus::Board4AIAddress,ModBus::ElmetroRelayAddress,checked);
     mbus.deleteLater();
@@ -135,7 +136,6 @@ void  MainWindow::destroyedslot(QObject *)
 {
     //    ui->textEdit_2->setText(text);
     //    ui->textEdit_2->setText("Destroyed");
-
     //    qDebug() << "destroyed slot";
 }
 
@@ -205,9 +205,7 @@ void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
         m.setTop(m.top() * mratio);
         m.setLeft(m.left() * mratio);
         m.setRight(m.right() * mratio);
-
         l->setContentsMargins(m);
-
         l->setSpacing(l->spacing() * mratio);
 
         if (l->inherits("QGridLayout")) {
@@ -238,7 +236,6 @@ void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresoluti
 
     QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
 
-
     foreach(QWidget * widget, widgets)
     {
 
@@ -263,7 +260,6 @@ void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
     SetWindowWidthPixels(xresolution);
 
     QList<QWidget *> widgets = findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
-
 
     foreach(QWidget * widget, widgets)
     {

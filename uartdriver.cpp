@@ -35,8 +35,10 @@ extern QString inputstr;
 double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
-
 uint ModBus::ConnectFailure =false;
+
+#define BADCRCCODE -9999
+#define CONNECTERROR -9998
 
 quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
@@ -245,8 +247,6 @@ double ModBus::ClickRelay(char channel)
     return 2;
 }
 
-//WriteSingleRegister
-
 float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
 {
     QByteArray requestdata;
@@ -276,13 +276,14 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     //    qDebug() << requestdata;
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
+    if (InputDataByteArray.length()<3)
+        return ModBus::ConnectionError;
+
     QByteArray InputDataByteArrayParsed;
 
     int InputDataByteArraylenght = InputDataByteArray.length();
 
     // разбираем пакет данных
-
-    //    InputDataByteArrayParsed.clear();
 
     for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
     {
@@ -304,8 +305,12 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
                 }
 
-                quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(byteindex+4+baytdalee);
-                quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(byteindex+3+baytdalee);
+
+                quint8 inpbytecrchibyteindex = byteindex+4+baytdalee;
+                quint8 inpbytecrclobyteindex = inpbytecrchibyteindex-1;
+
+                quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(inpbytecrchibyteindex);
+                quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(inpbytecrclobyteindex);
 
                 quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
 
@@ -313,16 +318,14 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
                 if (inputcrc16summ1 == calculatedcrc16summ)
                 {
-                    SetConnectFailure(0);
+                    //                    SetConnectFailure(0);
                     QByteArray arraytofloat;
                     float val;
 
-                    arraytofloat.resize(4);
-
-                    arraytofloat[0] = InputDataByteArrayParsed.at(5);
-                    arraytofloat[1] = InputDataByteArrayParsed.at(6);
-                    arraytofloat[2] = InputDataByteArrayParsed.at(3);
-                    arraytofloat[3] = InputDataByteArrayParsed.at(4);
+                    arraytofloat.append(InputDataByteArrayParsed.at(5));
+                    arraytofloat.append(InputDataByteArrayParsed.at(6));
+                    arraytofloat.append(InputDataByteArrayParsed.at(3));
+                    arraytofloat.append(InputDataByteArrayParsed.at(4));
 
                     //convert hex to double
                     QDataStream stream(arraytofloat);
@@ -333,15 +336,12 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                 }
                 else
                 {
-                    SetConnectFailure(5);
-                    return -1;
+                    return ModBus::BadCRC;
                 }
-
-                return -1;
             }
         }
     }
-    return -1;
+    return ModBus::ConnectionError;
 }
 
 void ModBus::ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
@@ -571,7 +571,7 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
 
     ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,signaltype);
 
-//     return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
+    //     return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
 }
 
 double ModBus::DataChannel1Read()

@@ -55,7 +55,7 @@ public slots:
 
     uint16_t  GetChannelSignalType(uint8_t channel);
 
-    void  SetChannelSignalType(uint8_t channel, uint8_t signaltype);
+    void  SetChannelSignalType(uint16_t channel, uint16_t signaltype);
 
 
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
@@ -97,6 +97,14 @@ public:
     double DataChannel1Read();
 
 public:
+
+
+    enum ModBusErrors {
+        ConnectionError = -9998 ,
+//        ConnectionErrorMessage = "ошибка\nсоединения",
+        BadCRC = -9999 ,
+    };
+    Q_ENUM(ModBusErrors)
 
     enum UartErrors {
         NoResponse = 0x01 ,

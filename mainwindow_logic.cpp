@@ -94,14 +94,14 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-    //    SetWindowHeightPixels(GetMonitorHeightPixels());
-    //    SetWindowWidthPixels(GetMonitorWidthPixels());
+    //SetWindowHeightPixels(GetMonitorHeightPixels());
+    //SetWindowWidthPixels(GetMonitorWidthPixels());
 
-    //    SetWindowWidthPixels(1280);
-    //    SetWindowHeightPixels(800);
+    SetWindowWidthPixels(1280);
+    SetWindowHeightPixels(720);
 
-    SetWindowWidthPixels(1024);
-    SetWindowHeightPixels(768);
+    //SetWindowWidthPixels(1024);
+    //SetWindowHeightPixels(768);
 
 #ifdef MultiThread
     thread= new QThread();
@@ -236,7 +236,7 @@ void MainWindow::OpenOptionsWindow()
 
     if (Options::displayResolution == "1280x800")
     {
-        resizeSelf(1280,800);
+        resizeSelf(1280,720);
     }
 
     optionsobj->deleteLater(); // удаляем объект опций
