@@ -2,6 +2,7 @@
 #define UARTDRIVER_H
 
 #include <QDialog>
+#include <QDebug>
 #include <mainwindow.h>
 #include <channel1.h>
 #include <mathresolver.h>
@@ -60,13 +61,13 @@ public slots:
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
-    void ThreadReact() {qDebug() << "Finished";}
+    void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
 
 public:
 
     ~ModBus() // деструктор
     {
-        qDebug() << "Modbus Deleted";
+//        qDebug() << "Modbus Deleted";
     }
 
 

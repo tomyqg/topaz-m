@@ -24,6 +24,7 @@
 #include <QtWidgets>
 #include <QThread>
 #include <QPoint>
+#include <QMetaType>
 
 #define MYD
 #define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
@@ -108,10 +109,11 @@ void MainWindow::MainWindowInitialization()
     ModBus *MB;
     MB = new ModBus();
     MB->moveToThread(thread);
-    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
-    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
-    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
-    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
+    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()) );
+//    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
+//    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
+//    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
+//    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
 
 //    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
     thread->start();
@@ -127,10 +129,13 @@ void MainWindow::MainWindowInitialization()
     // connection for accessing to UI from another class
     objectwithsignal = new ChannelOptions;
 
+//    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
 
-    connect( this, SIGNAL(ThreadSignal(const ChannelOptions)), MB, SLOT(ThreadReact()) ); //
+    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
 
-    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
+    ThreadSignal(&channel1object);
+
+//    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }
 
 void MainWindow::LabelsInit()
@@ -187,7 +192,6 @@ void MainWindow::InitPins()
 void MainWindow::OpenMessagesWindow()
 {
 
-    emit ThreadSignal();
     mr.WriteAllLogToFile();
 
     Messages *messages = new Messages;

@@ -35,7 +35,7 @@ public:
     void ShowMessageBox (QString title,QString message);
 
     void resizeWindow(QWidget & qw, qreal mratio);
-//    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
+    //    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void resizeSelf(qreal xresolution, qreal yresolution);
 
@@ -77,7 +77,7 @@ public slots:
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
 
-        void OptionsWindowThread();
+    void OptionsWindowThread();
 
     bool eventFilter(QObject* watched, QEvent* event);
 
@@ -149,7 +149,7 @@ private slots:
 
 signals:
     void error(const QString &s);
-      void ThreadSignal();
+    void ThreadSignal(ChannelOptions*  channel);
 
 private:
     Ui::MainWindow *ui;
