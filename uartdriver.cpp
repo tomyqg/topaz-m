@@ -12,7 +12,7 @@
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 
-#define BeagleBone
+//#define BeagleBone
 #define MYD
 
 #ifdef BeagleBone
@@ -458,12 +458,10 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
 
     if (inpcrc == crc)
     {
-        // qDebug() << "CRC GOOD";
         return InputDataByteArray;
     }
     else
     {
-        // qDebug() << "CRC BAD";
         return 0;
     }
     return 0;
@@ -590,16 +588,16 @@ void ModBus::ReadAllChannelsThread ()
     double currentdata;
     this->thread()->setPriority(QThread::LowPriority);
 
-    while (1)
+//    while (1)
     {
-        while (
+        /*while (
                (UartDriver::needtoupdatechannel[0] == 0)&&
                (UartDriver::needtoupdatechannel[1] == 0)&&
                (UartDriver::needtoupdatechannel[2] == 0)&&
                (UartDriver::needtoupdatechannel[3] == 0))
         {
             this->thread()->msleep(20);
-        }
+        }*/
 
         if (UartDriver::needtoupdatechannel[0] == 1)
         {
@@ -608,10 +606,12 @@ void ModBus::ReadAllChannelsThread ()
 
             currentdata = ReadDataChannel(ModBus::ElmetroChannelAB1Address);
 
-            if (currentdata!=0)
+            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
             {
                 UD.writechannelvalue(1,currentdata);
             }
+            else
+            {UD.writechannelvalue(1,0);}
             this->thread()->msleep(25);
         }
 
@@ -621,10 +621,12 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[1] = 0;
             currentdata = ReadDataChannel(ModBus::ElmetroChannelAB2Address);
-            if (currentdata!=0)
+            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
             {
                 UD.writechannelvalue(2,currentdata);
             }
+            else
+            {UD.writechannelvalue(2,0);}
             this->thread()->msleep(25);
         }
 
@@ -634,10 +636,12 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[2] = 0;
             currentdata = ReadDataChannel(ModBus::ElmetroChannelAB3Address);
-            if (currentdata!=0)
+            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
             {
                 UD.writechannelvalue(3,currentdata);
             }
+            else
+            {UD.writechannelvalue(3,0);}
             this->thread()->msleep(25);
         }
         currentdata=0;
@@ -646,12 +650,18 @@ void ModBus::ReadAllChannelsThread ()
         {
             UartDriver::needtoupdatechannel[3] = 0;
             currentdata = ReadDataChannel(ModBus::ElmetroChannelAB4Address);
-            if (currentdata!=0)
+            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
             {
                 UD.writechannelvalue(4,currentdata);
             }
+            else
+            {UD.writechannelvalue(4,0);}
             this->thread()->msleep(25);
         }
         currentdata=0;
     }
+
+    emit finished();
+
+
 }

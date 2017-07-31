@@ -52,22 +52,23 @@ public slots:
     double ReadDataChannel(int channeladdress);
     double ReadOnBoardTemperature ();
     double ReadOnBoardVoltage();
-
     uint16_t  GetChannelSignalType(uint8_t channel);
-
     void  SetChannelSignalType(uint16_t channel, uint16_t signaltype);
-
 
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     double ClickRelay(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
-//    void ThreadReact;
-
-
+    void ThreadReact() {qDebug() << "Finished";}
 
 public:
+
+    ~ModBus() // деструктор
+    {
+        qDebug() << "Modbus Deleted";
+    }
+
 
     uint GetConnectFailureStatus(){return ConnectFailure;}
     void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
@@ -96,11 +97,12 @@ public:
 
     void ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
 
+signals:
+        void finished();
+
 public:
     double DataChannelRead (char channel);
     double DataChannel1Read();
-
-public:
 
 
     enum ModBusErrors {

@@ -19,8 +19,6 @@ Options::Options(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Options)
 {
-
-
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("OPTIONS"));

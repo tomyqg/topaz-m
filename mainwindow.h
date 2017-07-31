@@ -7,7 +7,7 @@
 #include <channel1.h>
 #include "messages.h"
 #include "mathresolver.h"
-#include <uartdriver.h>
+#include "uartdriver.h"
 
 namespace Ui {
 class MainWindow;
@@ -149,6 +149,7 @@ private slots:
 
 signals:
     void error(const QString &s);
+      void ThreadSignal();
 
 private:
     Ui::MainWindow *ui;
@@ -178,6 +179,7 @@ private:
     QTimer *UpdateGraficsTimer;
     QTimer *halfSecondTimer;
     QTimer *tmr;
+
     QThread *thread;
     QThread *optionsthread;
     ChannelOptions *objectwithsignal;

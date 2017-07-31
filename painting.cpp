@@ -46,8 +46,6 @@ void MainWindow::PaintCyfrasBottom()
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
 
-    ModBus mb;
-
     {
         painter.setBrush(QBrush(GetChannel1Color(), Qt::Dense4Pattern));
         painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
@@ -59,39 +57,35 @@ void MainWindow::PaintCyfrasBottom()
         painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
     }
 
+    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
 
-        painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    double Channel1ValueNumber =  UartDriver::channelinputbuffer[0];
+    double Channel2ValueNumber =  UartDriver::channelinputbuffer[1];
+    double Channel3ValueNumber =  UartDriver::channelinputbuffer[2];
+    double Channel4ValueNumber =  UartDriver::channelinputbuffer[3];
 
+    Channel1ValueString = QString::number( Channel1ValueNumber, 'f', 2);
+    Channel2ValueString = QString::number( Channel2ValueNumber, 'f', 2);
+    Channel3ValueString = QString::number( Channel3ValueNumber, 'f', 2);
+    Channel4ValueString = QString::number( Channel4ValueNumber, 'f', 2);
 
-        double Channel1ValueNumber =  UartDriver::channelinputbuffer[0];
-        double Channel2ValueNumber =  UartDriver::channelinputbuffer[1];
-        double Channel3ValueNumber =  UartDriver::channelinputbuffer[2];
-        double Channel4ValueNumber =  UartDriver::channelinputbuffer[3];
+    if (Channel1ValueString== NaNMessage)
+        Channel1ValueString = ObryvErrorMessage;
+    if (Channel2ValueString== NaNMessage)
+        Channel2ValueString = ObryvErrorMessage;
+    if (Channel3ValueString== NaNMessage)
+        Channel3ValueString = ObryvErrorMessage;
+    if (Channel4ValueString== NaNMessage)
+        Channel4ValueString = ObryvErrorMessage;
 
-
-        Channel1ValueString = QString::number( Channel1ValueNumber, 'f', 2);
-        Channel2ValueString = QString::number( Channel2ValueNumber, 'f', 2);
-        Channel3ValueString = QString::number( Channel3ValueNumber, 'f', 2);
-        Channel4ValueString = QString::number( Channel4ValueNumber, 'f', 2);
-
-        if (Channel1ValueString== NaNMessage)
-            Channel1ValueString = ObryvErrorMessage;
-        if (Channel2ValueString== NaNMessage)
-            Channel2ValueString = ObryvErrorMessage;
-        if (Channel3ValueString== NaNMessage)
-            Channel3ValueString = ObryvErrorMessage;
-        if (Channel4ValueString== NaNMessage)
-            Channel4ValueString = ObryvErrorMessage;
-
-        if (Channel1ValueNumber== ModBus::ConnectionError)
-            Channel1ValueString = ConnectionErrorMessage;
-        if (Channel2ValueNumber== ModBus::ConnectionError)
-            Channel2ValueString =  ConnectionErrorMessage;
-        if (Channel3ValueNumber== ModBus::ConnectionError)
-            Channel3ValueString =  ConnectionErrorMessage;
-        if (Channel4ValueNumber== ModBus::ConnectionError)
-            Channel4ValueString = ConnectionErrorMessage;
-
+    if (Channel1ValueNumber== ModBus::ConnectionError)
+        Channel1ValueString = ConnectionErrorMessage;
+    if (Channel2ValueNumber== ModBus::ConnectionError)
+        Channel2ValueString =  ConnectionErrorMessage;
+    if (Channel3ValueNumber== ModBus::ConnectionError)
+        Channel3ValueString =  ConnectionErrorMessage;
+    if (Channel4ValueNumber== ModBus::ConnectionError)
+        Channel4ValueString = ConnectionErrorMessage;
 
     // выводим значения каналов большими цифрами
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
@@ -126,8 +120,6 @@ void MainWindow::PaintCyfrasBottom()
         painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
 
     painter.end();
-
-    mb.deleteLater();
 }
 
 void MainWindow::PaintCyfrasFullScreen()
@@ -424,51 +416,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
     }
 
-    // здесь мы рисуем квитирование если что...
     return;
-    // дальше идет проверка связи, пока отключим
-    ModBus mb;
-    // если связб плохая и прошло пол секунды то нужно мигнуть красным цветом
-    if ( (GetHalfSecFlag() == 1)&&(mb.GetConnectFailureStatus() >0) )
-    {
-        QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
-
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight);
-        painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-        painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
-
-        painter.setFont(QFont("Times New Roman", 25, QFont::ExtraBold));
-
-        if ( mb.GetConnectFailureStatus()  == 1 )
-            Channel1ValueString = "Connection Fail";
-        if ( mb.GetConnectFailureStatus()  == 2 )
-            Channel2ValueString = "Connection Fail";
-        if ( mb.GetConnectFailureStatus()  == 3 )
-            Channel3ValueString = "Connection Fail";
-        if ( mb.GetConnectFailureStatus()  == 4 )
-            Channel4ValueString = "Connection Fail";
-
-        // выводим значения каналов большими цифрами
-        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
-        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
-        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
-        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
-
-        // подписываем названия каналов
-        painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
-        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
-        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
-        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
-        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
-    }
-    painter.end();
-
-    mb.deleteLater();
 }
 
 void MainWindow::PaintPolarDiagramm()
@@ -610,7 +558,7 @@ void MainWindow::ReactOnMouseSlide()
 {
     int  y   =  QCursor::pos().y() ;
     //    int  x   =  QCursor::pos().x() ;
-    int ky = 20 + y/3;
+    int ky = 20 + y*3;
 
     ui->customPlot->yAxis->setRange(-ky, ky);
 }

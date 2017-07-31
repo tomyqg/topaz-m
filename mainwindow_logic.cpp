@@ -37,7 +37,7 @@
 
 void MainWindow::MainWindowInitialization()
 {
-//    CreateMODBusConfigFile();
+    //    CreateMODBusConfigFile();
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
@@ -109,6 +109,11 @@ void MainWindow::MainWindowInitialization()
     MB = new ModBus();
     MB->moveToThread(thread);
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()));
+    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
+    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
+    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
+
+//    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
     thread->start();
 #endif
 
@@ -121,10 +126,11 @@ void MainWindow::MainWindowInitialization()
 
     // connection for accessing to UI from another class
     objectwithsignal = new ChannelOptions;
-    //    options1 = new Options;
-    connect( objectwithsignal, SIGNAL(updateUI(const QString)), this, SLOT( updateText(const QString) ) ); //
 
-    //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
+
+    connect( this, SIGNAL(ThreadSignal(const ChannelOptions)), MB, SLOT(ThreadReact()) ); //
+
+    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }
 
 void MainWindow::LabelsInit()
@@ -180,6 +186,8 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
+
+    emit ThreadSignal();
     mr.WriteAllLogToFile();
 
     Messages *messages = new Messages;
@@ -306,11 +314,7 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-
     objectwithsignal->updateUI(local.time().toString());
-
-    //GetAllUartPorts();
-    //ui->pushButton->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
 void MainWindow::LabelsUpdate()
@@ -331,9 +335,7 @@ void MainWindow::LabelsCorrect()
     QDateTime currnttime;
     qint16 timecorrectsec;
     currnttime = QDateTime::currentDateTime();
-
     int middlelabelnumber = Dates.length()/2;
-
     timecorrectsec = Dates[middlelabelnumber].secsTo(currnttime);
 
     int i = 0;

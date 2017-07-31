@@ -70,6 +70,8 @@
      <property name="font">
       <font>
        <family>Times New Roman</family>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="cursor">
@@ -101,6 +103,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -111,13 +115,15 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>219</width>
+          <width>272</width>
           <height>201</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -195,7 +201,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Резистивный датчик       </string>
+            <string>Термосопротивление</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup</string>
@@ -257,6 +263,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="toolTip">
@@ -277,6 +285,8 @@
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -292,6 +302,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -311,6 +323,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="inputMethodHints">
@@ -339,6 +353,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="accelerated">
@@ -364,6 +380,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="accelerated">
@@ -389,6 +407,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="accelerated">
@@ -414,6 +434,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="accelerated">
@@ -440,13 +462,15 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>131</width>
+          <width>172</width>
           <height>371</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -456,6 +480,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -469,6 +495,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -482,6 +510,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -495,6 +525,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -508,6 +540,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -521,6 +555,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -544,6 +580,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -562,6 +600,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -587,6 +627,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -606,6 +648,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -625,6 +669,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -644,6 +690,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -663,6 +711,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -682,6 +732,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -704,8 +756,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -735,6 +787,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -757,8 +811,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -786,6 +840,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -804,6 +860,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -829,6 +887,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -848,6 +908,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -867,6 +929,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -886,6 +950,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -905,6 +971,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -924,6 +992,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -946,8 +1016,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -974,6 +1044,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -996,8 +1068,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -1025,6 +1097,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -1042,6 +1116,8 @@
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
@@ -1051,6 +1127,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1064,6 +1142,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1092,6 +1172,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -1102,13 +1184,15 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>219</width>
+          <width>272</width>
           <height>201</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1186,7 +1270,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Резистивный датчик       </string>
+            <string>Термосопротивление</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup_2</string>
@@ -1247,6 +1331,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="title">
@@ -1264,6 +1350,8 @@
          <property name="font">
           <font>
            <family>Times New Roman</family>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1273,6 +1361,8 @@
              <font>
               <family>Times New Roman</family>
               <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -1286,6 +1376,8 @@
              <font>
               <family>Times New Roman</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -1310,6 +1402,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -1327,6 +1421,8 @@
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1342,6 +1438,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1361,6 +1459,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -1377,6 +1477,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -1393,6 +1495,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -1409,6 +1513,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -1425,6 +1531,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="decimals">
@@ -1448,13 +1556,15 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>140</width>
+          <width>172</width>
           <height>371</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1464,6 +1574,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1477,6 +1589,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1490,6 +1604,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1503,6 +1619,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1516,6 +1634,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1529,6 +1649,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -1552,6 +1674,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -1570,6 +1694,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -1595,6 +1721,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1614,6 +1742,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1633,6 +1763,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1652,6 +1784,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1671,6 +1805,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1690,6 +1826,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1712,8 +1850,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -1740,6 +1878,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1762,8 +1902,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -1791,6 +1931,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -1809,6 +1951,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -1834,6 +1978,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1853,6 +1999,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1872,6 +2020,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1891,6 +2041,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1910,6 +2062,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1929,6 +2083,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -1951,8 +2107,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -1982,6 +2138,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2004,8 +2162,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -2038,6 +2196,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -2048,13 +2208,15 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>219</width>
+          <width>272</width>
           <height>201</height>
          </rect>
         </property>
         <property name="font">
          <font>
+          <weight>75</weight>
           <italic>false</italic>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -2136,7 +2298,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Резистивный датчик       </string>
+            <string>Термосопротивление</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup_3</string>
@@ -2199,7 +2361,9 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>14</pointsize>
+          <weight>75</weight>
           <italic>false</italic>
+          <bold>true</bold>
          </font>
         </property>
         <property name="title">
@@ -2216,7 +2380,9 @@
          </property>
          <property name="font">
           <font>
+           <weight>75</weight>
            <italic>false</italic>
+           <bold>true</bold>
           </font>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -2226,7 +2392,9 @@
              <font>
               <family>Times New Roman</family>
               <pointsize>10</pointsize>
+              <weight>75</weight>
               <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -2239,7 +2407,9 @@
             <property name="font">
              <font>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -2264,6 +2434,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -2278,6 +2450,12 @@
           <height>371</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_8">
          <item>
           <widget class="QLineEdit" name="UnitsChannel_3">
@@ -2291,6 +2469,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2310,6 +2490,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -2326,6 +2508,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -2342,6 +2526,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="inputMethodHints">
@@ -2361,6 +2547,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -2377,6 +2565,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="decimals">
@@ -2400,9 +2590,15 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>146</width>
+          <width>172</width>
           <height>371</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
@@ -2411,6 +2607,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2424,6 +2622,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2437,6 +2637,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2450,6 +2652,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2463,6 +2667,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2476,6 +2682,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -2499,6 +2707,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -2517,6 +2727,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -2542,6 +2754,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2561,6 +2775,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2580,6 +2796,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2599,6 +2817,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2618,6 +2838,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2637,6 +2859,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2659,8 +2883,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -2687,6 +2911,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2709,8 +2935,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -2738,6 +2964,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -2756,6 +2984,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -2781,6 +3011,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2800,6 +3032,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2819,6 +3053,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2838,6 +3074,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2857,6 +3095,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2876,6 +3116,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2898,8 +3140,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -2929,6 +3171,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -2951,8 +3195,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -2985,8 +3229,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -2997,15 +3241,15 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>219</width>
+          <width>272</width>
           <height>201</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -3083,7 +3327,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Резистивный датчик       </string>
+            <string>Термосопротивление</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup_4</string>
@@ -3117,8 +3361,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3144,8 +3388,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>14</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="title">
@@ -3163,8 +3407,8 @@
          <property name="font">
           <font>
            <family>Times New Roman</family>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -3174,8 +3418,8 @@
              <font>
               <family>Times New Roman</family>
               <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
+              <weight>75</weight>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -3189,8 +3433,8 @@
              <font>
               <family>Times New Roman</family>
               <pointsize>12</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
+              <weight>75</weight>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
@@ -3215,8 +3459,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -3234,8 +3478,8 @@
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -3251,8 +3495,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3272,8 +3516,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -3290,8 +3534,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -3308,8 +3552,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -3326,8 +3570,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
           </widget>
@@ -3344,8 +3588,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>12</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="decimals">
@@ -3366,15 +3610,15 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>146</width>
+          <width>172</width>
           <height>371</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Times New Roman</family>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -3384,8 +3628,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3399,8 +3643,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3414,8 +3658,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3429,8 +3673,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3444,8 +3688,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3459,8 +3703,8 @@
             <font>
              <family>Times New Roman</family>
              <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -3484,8 +3728,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -3504,8 +3748,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -3531,8 +3775,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3552,8 +3796,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3573,8 +3817,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3594,8 +3838,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3615,8 +3859,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3636,8 +3880,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3660,8 +3904,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -3688,8 +3932,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3712,8 +3956,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -3741,8 +3985,8 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>14</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="title">
@@ -3761,8 +4005,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="minimum">
@@ -3788,8 +4032,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3809,8 +4053,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3830,8 +4074,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3851,8 +4095,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3872,8 +4116,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3893,8 +4137,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3917,8 +4161,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -3948,8 +4192,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -3972,8 +4216,8 @@
          <font>
           <family>Times New Roman</family>
           <pointsize>12</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <item>
@@ -4674,8 +4918,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>50</y>
-        <width>219</width>
-        <height>241</height>
+        <width>262</width>
+        <height>269</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -4936,7 +5180,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>71</width>
+        <width>75</width>
         <height>311</height>
        </rect>
       </property>
@@ -5421,9 +5665,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>
