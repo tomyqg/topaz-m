@@ -232,7 +232,7 @@ void MainWindow::OpenOptionsWindow()
     {
         resizeSelf(1280,720);
     }
-
+    
     optionsobj->deleteLater(); // удаляем объект опций
 }
 
@@ -306,11 +306,7 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-
     objectwithsignal->updateUI(local.time().toString());
-
-    //GetAllUartPorts();
-    //ui->pushButton->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
 void MainWindow::LabelsUpdate()
@@ -331,9 +327,7 @@ void MainWindow::LabelsCorrect()
     QDateTime currnttime;
     qint16 timecorrectsec;
     currnttime = QDateTime::currentDateTime();
-
     int middlelabelnumber = Dates.length()/2;
-
     timecorrectsec = Dates[middlelabelnumber].secsTo(currnttime);
 
     int i = 0;

@@ -63,6 +63,10 @@ public slots:
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     void ReadAllChannelsThread();
 
+//    void ThreadReact;
+
+
+
 public:
 
     uint GetConnectFailureStatus(){return ConnectFailure;}

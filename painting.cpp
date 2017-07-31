@@ -25,7 +25,7 @@ extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chan
 
 #define ConnectionErrorMessage "ош.соед"
 #define CRCErrorMessage "ош.crc"
-#define ObryvErrorMessage "обр.дат"
+#define ObryvErrorMessage "обрыв"
 
 #define NaNMessage "nan"
 
