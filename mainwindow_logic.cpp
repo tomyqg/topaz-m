@@ -130,6 +130,10 @@ void MainWindow::MainWindowInitialization()
 
     startWork();
 
+
+    Sleep(1000);
+    stopWork();
+
 #endif
 
     Options op;

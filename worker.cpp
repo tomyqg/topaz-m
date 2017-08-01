@@ -2,36 +2,41 @@
 #include <QDebug>
 
 worker::worker(QObject *parent) :
-  QObject(parent), isstopped(false), isrunning(false)
+    QObject(parent), isstopped(false), isrunning(false)
 {}
 
 void worker::do_Work()
 {
-  emit SignalToObj_mainThreadGUI();
-
-    qDebug()<< "Do_Work";
-
-  if ( !isrunning || isstopped ) return;
+    emit SignalToObj_mainThreadGUI();
 
 
-  // do important work here
+    if ( !isrunning || isstopped )
+    {
+        qDebug()<< "Stop_Work";
+        return;
+    }
 
-  // allow the thread's event loop to process other events before doing more "work"
-  // for instance, your start/stop signals from the MainWindow
-  QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
+    if ( isrunning || !isstopped )
+        qDebug()<< "Start_Work";
+
+    // do important work here
+
+    // allow the thread's event loop to process other events before doing more "work"
+    // for instance, your start/stop signals from the MainWindow
+    QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
 }
 
 void worker::StopWork()
 {
-  isstopped = true;
-  isrunning = false;
-  emit stopped();
+    isstopped = true;
+    isrunning = false;
+    emit stopped();
 }
 
 void worker::StartWork()
 {
-  isstopped = false;
-  isrunning = true;
-  emit running();
-  do_Work();
+    isstopped = false;
+    isrunning = true;
+    emit running();
+    do_Work();
 }
