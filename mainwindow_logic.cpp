@@ -131,9 +131,9 @@ void MainWindow::MainWindowInitialization()
 
 //    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
 
-    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
+//    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
 
-    ThreadSignal(&channel1object);
+//    ThreadSignal(&channel1object);
 
 //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }

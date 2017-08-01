@@ -588,7 +588,7 @@ void ModBus::ReadAllChannelsThread ()
     double currentdata;
     this->thread()->setPriority(QThread::LowPriority);
 
-//    while (1)
+    while (1)
     {
         /*while (
                (UartDriver::needtoupdatechannel[0] == 0)&&
@@ -610,9 +610,7 @@ void ModBus::ReadAllChannelsThread ()
             {
                 UD.writechannelvalue(1,currentdata);
             }
-            else
-            {UD.writechannelvalue(1,0);}
-            this->thread()->msleep(25);
+
         }
 
         currentdata=0;
@@ -625,9 +623,7 @@ void ModBus::ReadAllChannelsThread ()
             {
                 UD.writechannelvalue(2,currentdata);
             }
-            else
-            {UD.writechannelvalue(2,0);}
-            this->thread()->msleep(25);
+
         }
 
         currentdata=0;
@@ -640,9 +636,7 @@ void ModBus::ReadAllChannelsThread ()
             {
                 UD.writechannelvalue(3,currentdata);
             }
-            else
-            {UD.writechannelvalue(3,0);}
-            this->thread()->msleep(25);
+
         }
         currentdata=0;
 
@@ -654,9 +648,7 @@ void ModBus::ReadAllChannelsThread ()
             {
                 UD.writechannelvalue(4,currentdata);
             }
-            else
-            {UD.writechannelvalue(4,0);}
-            this->thread()->msleep(25);
+
         }
         currentdata=0;
     }
