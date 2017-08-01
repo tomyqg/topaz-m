@@ -29,10 +29,10 @@ void worker::do_Work()
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
 
-        this->thread()->sleep(100);
+//        this->thread()->sleep(100);
 
 
-        UD.writechannelvalue(1,321);
+//        UD.writechannelvalue(1,321);
 
        // while (1)
         {
