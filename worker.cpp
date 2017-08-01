@@ -5,6 +5,8 @@ worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
 {}
 
+ModBus MB;
+
 void worker::do_Work()
 {
     emit SignalToObj_mainThreadGUI();
@@ -12,7 +14,7 @@ void worker::do_Work()
 
     if ( !isrunning || isstopped )
     {
-        qDebug()<< "Stop_Work";
+//        qDebug()<< "Stop_Work";
 //        emit finished();
         return;
     }
@@ -20,12 +22,17 @@ void worker::do_Work()
     if ( isrunning || !isstopped )
 
     {
-        qDebug()<< "Start_Work";
+//        qDebug()<< "Start_Work";
 
         UartDriver UD;
-        ModBus MB;
+
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
+
+        this->thread()->sleep(100);
+
+
+        UD.writechannelvalue(1,321);
 
        // while (1)
         {
@@ -91,7 +98,7 @@ void worker::do_Work()
             }
             currentdata=0;
         }
-        MB.deleteLater();
+//        MB.deleteLater();
     }
 
     // do important work here
@@ -101,17 +108,25 @@ void worker::do_Work()
     QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
 }
 
-void worker::StopWork()
+void worker::StopWorkSlot()
 {
     isstopped = true;
     isrunning = false;
     emit stopped();
 }
 
-void worker::StartWork()
+void worker::StartWorkSlot()
 {
     isstopped = false;
     isrunning = true;
     emit running();
     do_Work();
+}
+
+void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
+{
+//    qDebug() << c1->GetChannelName();
+//    qDebug() << c2->GetChannelName();
+//    qDebug() << c3->GetChannelName();
+//    qDebug() << c4->GetChannelName();
 }

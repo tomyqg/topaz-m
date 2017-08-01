@@ -153,8 +153,9 @@ signals:
     void ThreadSignal(ChannelOptions*  channel);
 
 signals:
-  void startWork();
-  void stopWork();
+  void startWorkSignal();
+  void stopWorkSignal();
+  void SetObjectsSignal(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
 
 private:
     Ui::MainWindow *ui;

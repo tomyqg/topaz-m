@@ -106,33 +106,20 @@ void MainWindow::MainWindowInitialization()
     //SetWindowHeightPixels(768);
 
 #ifdef MultiThread
-//    thread= new QThread();
-//    ModBus *MB;
-//    MB = new ModBus();
-//    MB->moveToThread(thread);
-//    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()) );
-//    //    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
-//    //    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
-//    //    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
-//    //    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
-
-//    //    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
-////    thread->start();
 
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     myWorker->moveToThread(WorkerThread);
 
-    connect( this, SIGNAL(startWork()), myWorker, SLOT(StartWork()) );
-    connect( this, SIGNAL(stopWork()), myWorker, SLOT(StopWork()) );
+    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
+    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
 
-    WorkerThread ->start();
+    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    startWork();
+    WorkerThread ->start(); // запускаем сам поток
 
-
-//    Sleep(1000);
-//    stopWork();
+    startWorkSignal(); // запускаем работу в отдельном потоке
 
 #endif
 
@@ -208,7 +195,9 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-    stopWork();
+    stopWorkSignal();
+    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
+
     mr.WriteAllLogToFile();
 
     Messages *messages = new Messages;
@@ -237,7 +226,7 @@ void MainWindow::OptionsWindowThread()
 void MainWindow::OpenOptionsWindow()
 {
 
-    startWork();
+    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
