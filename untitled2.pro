@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     channel.cpp \
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
-    painting.cpp
+    painting.cpp \
+    worker.cpp
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
@@ -42,7 +43,8 @@ HEADERS  += mainwindow.h \
     messages.h \
     uartdriver.h \
     metrologicalcalc.h \
-    mathresolver.h
+    mathresolver.h \
+    worker.h
 
 FORMS    += mainwindow.ui \
     options.ui \

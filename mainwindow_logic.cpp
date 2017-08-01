@@ -6,6 +6,7 @@
 #include "mathresolver.h"
 #include "channel1.h"
 #include "uartdriver.h"
+#include "worker.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -110,13 +111,25 @@ void MainWindow::MainWindowInitialization()
     MB = new ModBus();
     MB->moveToThread(thread);
     connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()) );
-//    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
-//    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
-//    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
-//    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
+    //    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
+    //    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
+    //    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
+    //    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
 
-//    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
+    //    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
     thread->start();
+
+    WorkerThread = new QThread;
+    worker* myWorker = new worker;
+    myWorker->moveToThread(WorkerThread);
+
+    connect( this, SIGNAL(startWork()), myWorker, SLOT(StartWork()) );
+    connect( this, SIGNAL(stopWork()), myWorker, SLOT(StopWork()) );
+
+    WorkerThread ->start();
+
+    startWork();
+
 #endif
 
     Options op;
@@ -129,13 +142,13 @@ void MainWindow::MainWindowInitialization()
     // connection for accessing to UI from another class
     objectwithsignal = new ChannelOptions;
 
-//    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
+    //    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
 
-//    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
+    //    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
 
-//    ThreadSignal(&channel1object);
+    //    ThreadSignal(&channel1object);
 
-//    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
+    //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }
 
 void MainWindow::LabelsInit()

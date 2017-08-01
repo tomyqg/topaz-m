@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <channel1.h>
 #include "messages.h"
+#include "worker.h"
 #include "mathresolver.h"
 #include "uartdriver.h"
 
@@ -151,8 +152,15 @@ signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);
 
+signals:
+  void startWork();
+  void stopWork();
+
 private:
     Ui::MainWindow *ui;
+
+
+
     void MainWindowInitialization();
 
     char halfSecondflag;
@@ -180,6 +188,7 @@ private:
     QTimer *halfSecondTimer;
     QTimer *tmr;
 
+    QThread *WorkerThread;
     QThread *thread;
     QThread *optionsthread;
     ChannelOptions *objectwithsignal;
