@@ -106,18 +106,18 @@ void MainWindow::MainWindowInitialization()
     //SetWindowHeightPixels(768);
 
 #ifdef MultiThread
-    thread= new QThread();
-    ModBus *MB;
-    MB = new ModBus();
-    MB->moveToThread(thread);
-    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()) );
-    //    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
-    //    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
-    //    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
-    //    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
+//    thread= new QThread();
+//    ModBus *MB;
+//    MB = new ModBus();
+//    MB->moveToThread(thread);
+//    connect(thread, SIGNAL(started()), MB, SLOT(ReadAllChannelsThread()) );
+//    //    connect( thread, SIGNAL(started()), MB, SLOT(ThreadReact(ChannelOptions&)) ); //
+//    //    connect(MB, SIGNAL(finished()), MB, SLOT(ThreadReact()));
+//    //    connect(MB, SIGNAL(finished()), thread, SLOT(quit()));
+//    //    connect(MB, SIGNAL(finished()), MB, SLOT(deleteLater()));
 
-    //    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
-    thread->start();
+//    //    connect(ui->pushButton_4, SIGNAL(clicked(bool)), thread, SLOT(quit()));
+////    thread->start();
 
     WorkerThread = new QThread;
     worker* myWorker = new worker;
@@ -131,8 +131,8 @@ void MainWindow::MainWindowInitialization()
     startWork();
 
 
-    Sleep(1000);
-    stopWork();
+//    Sleep(1000);
+//    stopWork();
 
 #endif
 
@@ -208,7 +208,7 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-
+    stopWork();
     mr.WriteAllLogToFile();
 
     Messages *messages = new Messages;
@@ -236,6 +236,8 @@ void MainWindow::OptionsWindowThread()
 
 void MainWindow::OpenOptionsWindow()
 {
+
+    startWork();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
