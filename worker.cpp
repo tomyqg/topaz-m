@@ -6,6 +6,8 @@ worker::worker(QObject *parent) :
 {}
 
 ModBus MB;
+UartDriver UD;
+mathresolver mr;
 
 void worker::do_Work()
 {
@@ -14,36 +16,24 @@ void worker::do_Work()
 
     if ( !isrunning || isstopped )
     {
-//        qDebug()<< "Stop_Work";
-//        emit finished();
+        //        qDebug()<< "Stop_Work";
+        //        emit finished();
         return;
     }
 
     if ( isrunning || !isstopped )
 
     {
-//        qDebug()<< "Start_Work";
+        //        qDebug()<< "Start_Work";
 
-        UartDriver UD;
+
 
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
 
-//        this->thread()->sleep(100);
 
-
-//        UD.writechannelvalue(1,321);
-
-       // while (1)
         {
-            /*while (
-                   (UartDriver::needtoupdatechannel[0] == 0)&&
-                   (UartDriver::needtoupdatechannel[1] == 0)&&
-                   (UartDriver::needtoupdatechannel[2] == 0)&&
-                   (UartDriver::needtoupdatechannel[3] == 0))
-            {
-                this->thread()->msleep(20);
-            }*/
+
 
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
@@ -54,6 +44,12 @@ void worker::do_Work()
 
                 if ( (currentdata!=-9999)&&(currentdata!=-9998) )
                 {
+                    if (ThreadChannelOptions1->IsChannelMathematical())
+                    {
+
+                        double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
                     UD.writechannelvalue(1,currentdata);
                 }
 
@@ -67,11 +63,15 @@ void worker::do_Work()
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
                 if ( (currentdata!=-9999)&&(currentdata!=-9998) )
                 {
+                    if (ThreadChannelOptions2->IsChannelMathematical())
+                    {
+
+                        double mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
                     UD.writechannelvalue(2,currentdata);
                 }
-
             }
-
             currentdata=0;
 
             if (UartDriver::needtoupdatechannel[2] == 1)
@@ -80,9 +80,14 @@ void worker::do_Work()
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
                 if ( (currentdata!=-9999)&&(currentdata!=-9998) )
                 {
+                    if (ThreadChannelOptions3->IsChannelMathematical())
+                    {
+
+                        double mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
                     UD.writechannelvalue(3,currentdata);
                 }
-
             }
             currentdata=0;
 
@@ -92,13 +97,18 @@ void worker::do_Work()
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
                 if ( (currentdata!=-9999)&&(currentdata!=-9998) )
                 {
+                    if (ThreadChannelOptions4->IsChannelMathematical())
+                    {
+
+                        double mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
                     UD.writechannelvalue(4,currentdata);
                 }
-
             }
             currentdata=0;
         }
-//        MB.deleteLater();
+        //        MB.deleteLater();
     }
 
     // do important work here
@@ -125,8 +135,8 @@ void worker::StartWorkSlot()
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-//    qDebug() << c1->GetChannelName();
-//    qDebug() << c2->GetChannelName();
-//    qDebug() << c3->GetChannelName();
-//    qDebug() << c4->GetChannelName();
+    ThreadChannelOptions1 = c1;
+    ThreadChannelOptions2 = c2;
+    ThreadChannelOptions3 = c3;
+    ThreadChannelOptions4 = c4;
 }

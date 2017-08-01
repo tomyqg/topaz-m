@@ -195,8 +195,6 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-    stopWorkSignal();
-    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
     mr.WriteAllLogToFile();
 
@@ -254,6 +252,12 @@ void MainWindow::OpenOptionsWindow()
     }
 
     optionsobj->deleteLater(); // удаляем объект опций
+
+    //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
+
+    stopWorkSignal();
+    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
+    startWorkSignal();
 }
 
 void MainWindow::PowerOff()
