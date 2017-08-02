@@ -1,7 +1,7 @@
 #-------------------------------------------------
 #
 # Project created by QtCreator 2012-03-04T23:24:55
-#
+# By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
 #-------------------------------------------------
 
 QT += core gui script

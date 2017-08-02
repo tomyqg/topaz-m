@@ -3,6 +3,8 @@
 #include "keyboard.h"
 #include <QApplication>
 
+//By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

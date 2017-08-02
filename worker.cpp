@@ -17,25 +17,17 @@ void worker::do_Work()
 
     if ( !isrunning || isstopped )
     {
-        //        qDebug()<< "Stop_Work";
-        //        emit finished();
+        //qDebug()<< "Stop_Work";
+        //emit finished();
         return;
     }
-
     if ( isrunning || !isstopped )
 
     {
-        //        qDebug()<< "Start_Work";
-
-
-
+        //qDebug()<< "Start_Work";
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
-
-
         {
-
-
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
                 UartDriver::needtoupdatechannel[0] = 0;
@@ -43,7 +35,7 @@ void worker::do_Work()
 
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB1Address);
 
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
@@ -53,16 +45,13 @@ void worker::do_Work()
                     }
                     UD.writechannelvalue(1,currentdata);
                 }
-
             }
-
-            currentdata=0;
 
             if (UartDriver::needtoupdatechannel[1] == 1)
             {
                 UartDriver::needtoupdatechannel[1] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions2->IsChannelMathematical())
                     {
@@ -73,13 +62,12 @@ void worker::do_Work()
                     UD.writechannelvalue(2,currentdata);
                 }
             }
-            currentdata=0;
 
             if (UartDriver::needtoupdatechannel[2] == 1)
             {
                 UartDriver::needtoupdatechannel[2] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions3->IsChannelMathematical())
                     {
@@ -90,13 +78,12 @@ void worker::do_Work()
                     UD.writechannelvalue(3,currentdata);
                 }
             }
-            currentdata=0;
 
             if (UartDriver::needtoupdatechannel[3] == 1)
             {
                 UartDriver::needtoupdatechannel[3] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions4->IsChannelMathematical())
                     {
@@ -107,7 +94,6 @@ void worker::do_Work()
                     UD.writechannelvalue(4,currentdata);
                 }
             }
-            currentdata=0;
         }
     }
 

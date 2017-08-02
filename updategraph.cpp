@@ -35,6 +35,8 @@ int xyi;
 
 void MainWindow::AddValuesToBuffer()
 {
+
+    startWorkSignal();
     X_Coordinates.append(b);
     UartDriver UD;
 // закомменитть чтобы не рисовать синусоиду
@@ -82,6 +84,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     b++;
+    stopWorkSignal();
 }
 
 void MainWindow::UpdateGraphics()

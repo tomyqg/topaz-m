@@ -4,7 +4,7 @@
 
 #define CURRENT_VER "0.51"
 
-#define LinuxBoard
+#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату
 #define MYD
 
 #ifdef LinuxBoard
@@ -31,7 +31,7 @@
 #endif
 
 #define BADCRCCODE -9999
-#define CONNECTERROR -9998
+#define CONNECTERRORCODE -9998
 
 #define ConnectionErrorMessage "ош.соед"
 #define CRCErrorMessage "ош.crc"

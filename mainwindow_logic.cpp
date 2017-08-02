@@ -111,7 +111,7 @@ void MainWindow::MainWindowInitialization()
 
     WorkerThread ->start(); // запускаем сам поток
 
-    startWorkSignal(); // запускаем работу в отдельном потоке
+//    startWorkSignal(); // запускаем работу в отдельном потоке
 
 #endif
 
@@ -216,7 +216,7 @@ void MainWindow::OptionsWindowThread()
 void MainWindow::OpenOptionsWindow()
 {
 
-    startWorkSignal();
+//    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
@@ -249,7 +249,7 @@ void MainWindow::OpenOptionsWindow()
 
     stopWorkSignal();
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
-    startWorkSignal();
+//    startWorkSignal();
 }
 
 void MainWindow::PowerOff()
