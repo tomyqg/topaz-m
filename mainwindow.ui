@@ -76,25 +76,8 @@
       <string>Date/Time</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>30</y>
-       <width>241</width>
-       <height>111</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::ClickFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>logo.jpg</pixmap>
-     </property>
-    </widget>
+    <zorder>time_label</zorder>
+    <zorder>frame</zorder>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
@@ -208,6 +191,9 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <zorder>MessagesWidget</zorder>
+    <zorder>MessagesWidget</zorder>
+    <zorder>MessagesWidget</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
@@ -284,6 +270,26 @@
      <string>Реле</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>630</y>
+      <width>231</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>logo.jpg</pixmap>
+    </property>
+   </widget>
+   <zorder>label</zorder>
    <zorder>textEdit_2</zorder>
    <zorder>customPlot</zorder>
    <zorder>listWidget</zorder>
@@ -321,7 +327,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header location="global">../../qcustomplot.h</header>
+   <header>qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

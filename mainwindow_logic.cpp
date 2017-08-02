@@ -36,7 +36,7 @@ void MainWindow::MainWindowInitialization()
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
 
-    QPixmap pix("/usr/logo.jpg");
+    QPixmap pix(pathtologotip);
     ui->label->setPixmap(pix);
 
     // нужно установить евент филтер чтобы отрисовывалась графика

@@ -59,7 +59,7 @@ public slots:
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     double ClickRelay(char channel);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
-    void ReadAllChannelsThread();
+
 
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
 

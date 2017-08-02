@@ -225,18 +225,19 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 {
     QPainter painter;
 
-    int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
+    //int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 24;
-    int otstupsverhu = widgheight - otstupsnizu;
+    //    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
+    //    int otstupsnizu = smallrectingleheight + 24;
+    //    int otstupsverhu = widgheight - otstupsnizu;
 
     int alertwindowwidth = widgwidth/2-2;
     //    int alertwindowheight = widgheight/2/4-2;
-    int alertwindowheight  = 60;
-    int alerttextsize = 30;
+    int alertwindowheight  = widgheight/10;
+    int alerttextsize = alertwindowheight/2;
+    int smalltextsize = (alerttextsize/2);
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -273,7 +274,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
-
 
     int confirmwindowwidth = widgwidth/4;
     int confirmwindowheight  = widgheight/4;

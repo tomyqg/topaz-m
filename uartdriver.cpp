@@ -158,6 +158,7 @@ void UartDriver::DelayMsec(int n)
 
 void UartDriver::SetRTS(bool newstate)
 {
+    newstate;
     // если плата MYD то она автоматом делает направление линии. то есть RTS пин дергать не нужно.
 #ifdef MYD
     return;
@@ -545,9 +546,7 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
         channelbias = ModBus::Channel4AddressBias;
         break;
     }
-
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
-
     ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,signaltype);
 
     //     return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
@@ -561,80 +560,4 @@ double ModBus::DataChannel1Read()
 double ModBus::DataChannelRead (char channel)
 {
     return ModBusGetRegister(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
-}
-
-void ModBus::ReadAllChannelsThread ()
-{
-    UartDriver UD;
-    double currentdata;
-    this->thread()->setPriority(QThread::LowPriority);
-
-    while (1)
-    {
-        /*while (
-               (UartDriver::needtoupdatechannel[0] == 0)&&
-               (UartDriver::needtoupdatechannel[1] == 0)&&
-               (UartDriver::needtoupdatechannel[2] == 0)&&
-               (UartDriver::needtoupdatechannel[3] == 0))
-        {
-            this->thread()->msleep(20);
-        }*/
-
-        if (UartDriver::needtoupdatechannel[0] == 1)
-        {
-            UartDriver::needtoupdatechannel[0] = 0;
-            //  currentdata = ClickRelay(ModBus::Board4AIAddress);
-
-            currentdata = ReadDataChannel(ModBus::ElmetroChannelAB1Address);
-
-            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
-            {
-                UD.writechannelvalue(1,currentdata);
-            }
-
-        }
-
-        currentdata=0;
-
-        if (UartDriver::needtoupdatechannel[1] == 1)
-        {
-            UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = ReadDataChannel(ModBus::ElmetroChannelAB2Address);
-            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
-            {
-                UD.writechannelvalue(2,currentdata);
-            }
-
-        }
-
-        currentdata=0;
-
-        if (UartDriver::needtoupdatechannel[2] == 1)
-        {
-            UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = ReadDataChannel(ModBus::ElmetroChannelAB3Address);
-            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
-            {
-                UD.writechannelvalue(3,currentdata);
-            }
-
-        }
-        currentdata=0;
-
-        if (UartDriver::needtoupdatechannel[3] == 1)
-        {
-            UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = ReadDataChannel(ModBus::ElmetroChannelAB4Address);
-            if ( (currentdata!=-9999)&&(currentdata!=-9998) )
-            {
-                UD.writechannelvalue(4,currentdata);
-            }
-
-        }
-        currentdata=0;
-    }
-
-    emit finished();
-
-
 }
