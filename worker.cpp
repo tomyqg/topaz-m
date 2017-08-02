@@ -1,4 +1,5 @@
 #include "worker.h"
+#include "defines.h"
 #include <QDebug>
 
 worker::worker(QObject *parent) :
@@ -42,7 +43,7 @@ void worker::do_Work()
 
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB1Address);
 
-                if ( (currentdata!=-9999)&&(currentdata!=-9998) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
                 {
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
@@ -61,7 +62,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[1] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
-                if ( (currentdata!=-9999)&&(currentdata!=-9998) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
                 {
                     if (ThreadChannelOptions2->IsChannelMathematical())
                     {
@@ -78,7 +79,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[2] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
-                if ( (currentdata!=-9999)&&(currentdata!=-9998) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
                 {
                     if (ThreadChannelOptions3->IsChannelMathematical())
                     {
@@ -95,7 +96,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[3] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
-                if ( (currentdata!=-9999)&&(currentdata!=-9998) )
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERROR) )
                 {
                     if (ThreadChannelOptions4->IsChannelMathematical())
                     {
@@ -108,7 +109,6 @@ void worker::do_Work()
             }
             currentdata=0;
         }
-        //        MB.deleteLater();
     }
 
     // do important work here

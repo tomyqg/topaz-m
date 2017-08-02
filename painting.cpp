@@ -6,6 +6,7 @@
 #include "metrologicalcalc.h"
 #include "mathresolver.h"
 #include "options.h"
+#include "defines.h"
 
 extern QColor Channel1Color;
 extern QColor Channel2Color;
@@ -23,11 +24,7 @@ extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chan
 //#define CRCErrorMessage "ошибка конт.\nсуммы"
 //#define ObryvErrorMessage "обрыв\nдатчика"
 
-#define ConnectionErrorMessage "ош.соед"
-#define CRCErrorMessage "ош.crc"
-#define ObryvErrorMessage "обрыв"
 
-#define NaNMessage "nan"
 
 void MainWindow::PaintCyfrasBottom()
 {

@@ -8,6 +8,7 @@ QT += core gui script
 QT += serialport
 QT += testlib
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     uartdriver.h \
     metrologicalcalc.h \
     mathresolver.h \
-    worker.h
+    worker.h \
+    defines.h
 
 FORMS    += mainwindow.ui \
     options.ui \

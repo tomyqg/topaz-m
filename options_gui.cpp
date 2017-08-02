@@ -3,9 +3,13 @@
 #include "channel1.h"
 #include "keyboard.h"
 #include "messages.h"
+#include "defines.h"
 
 void Options::ApplyNewSettingstoOptionsUI()
 {
+
+    ui->HashLine->setText(CURRENT_VER);
+
     int sigtype = options_channel1.GetSignalType();
     int sigtype2 = options_channel2.GetSignalType();
     int sigtype3 = options_channel3.GetSignalType();

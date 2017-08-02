@@ -26,16 +26,8 @@
 #include <QThread>
 #include <QPoint>
 #include <QMetaType>
+#include "defines.h"
 
-#define MYD
-#define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
-
-#define ValuesUpdateTimer 100
-#define GraphicsUpdateTimer 500
-#define ArchiveUpdateTimer 5000
-#define DateLabelUpdateTimer 1000
-#define XRange 300
-#define YRange 180
 
 void MainWindow::MainWindowInitialization()
 {

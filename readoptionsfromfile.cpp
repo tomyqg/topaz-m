@@ -2,12 +2,13 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
+#include "defines.h"
 
-extern QString pathtofile;
+QString pathtofile2 = "";
 
 void Options::ReadSystemOptionsFromFile()
 {
-    QFile infile(pathtofile + "systemoptions.txt");
+    QFile infile(pathtosystemoptions);
     infile.open(QIODevice::ReadOnly);
     QTextStream in(&infile);
     QString sss = in.readLine();
@@ -17,13 +18,12 @@ void Options::ReadSystemOptionsFromFile()
     Options::DisplayParametr = json["Display"].toInt();
     Options::displayResolution = json["Resolution"].toString();
 
-//    qDebug() << displayResolution;
     infile.close();
 }
 
 void Options::ReadChannelsOptionsFromFile()
 {
-    QFile infile(pathtofile + "options.txt");
+    QFile infile(pathtooptions);
     infile.open(QIODevice::ReadOnly);
     QTextStream in(&infile);
     QString sss = in.readLine();
@@ -107,7 +107,7 @@ void Options::ReadChannelsOptionsFromFile()
 
 QJsonArray MessageWrite::LogMessageRead()
 {
-    QFile file(pathtofile + "Log.txt");
+    QFile file(pathtolog);
     file.open(QIODevice::ReadOnly);
     QTextStream in(&file);
     QString sss = in.readLine();
@@ -122,7 +122,7 @@ QJsonArray MessageWrite::LogMessageRead()
 
 void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
 {
-    QFile infile(pathtofile + "options.txt");
+    QFile infile(pathtooptions);
     infile.open(QIODevice::ReadOnly);
     QTextStream in(&infile);
     QString sss = in.readLine();

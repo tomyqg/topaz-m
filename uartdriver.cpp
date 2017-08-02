@@ -11,24 +11,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
-
-#define BeagleBone
-#define MYD
-
-#ifdef BeagleBone
-#define comportname "/dev/ttyO1" // com port for MYD board
-QString pathtofile = "/opt/";
-#define uartsleep DelayMsec(50);
-#define threadsleep DelayMsec(100);
-#define longsleep DelayMsec(1000);
-#endif
-
-#ifndef BeagleBone
-#define comportname "COM3"
-#define uartsleep Sleep(50);
-#define longsleep Sleep(1000);
-QString pathtofile = "C:/Work/";
-#endif
+#include "defines.h"
 
 extern QString inputstr;
 
@@ -37,8 +20,6 @@ double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 uint ModBus::ConnectFailure =false;
 
-#define BADCRCCODE -9999
-#define CONNECTERROR -9998
 
 quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
 {
@@ -182,7 +163,7 @@ void UartDriver::SetRTS(bool newstate)
     return;
 #endif
 
-#ifdef BeagleBone
+#ifdef LinuxBoard
     QFile file(GetPathToRTSPinValue());
     QTextStream out(&file);
     file.open(QIODevice::WriteOnly);
@@ -198,7 +179,7 @@ void  UartDriver::SetRTSPinDirection()
     return;
 #endif
 
-#ifdef BeagleBone
+#ifdef LinuxBoard
     QFile filedir(GetPathToRTSPinDirection());
     filedir.open(QIODevice::WriteOnly);
     QTextStream outdir(&filedir);

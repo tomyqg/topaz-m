@@ -3,14 +3,13 @@
 #include "channel1.h"
 #include "keyboard.h"
 #include "messages.h"
-
-#define MYD
+#include "defines.h"
 
 QString Options::calibrationprm = "3383 3962 234 599";
 QString Options::olderprop = "";
 QString Options::displayResolution = "1280x800";
 QString Options::MonitorResolution = "35";
-extern QString pathtofile;
+//extern QString pathtofile;
 int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
@@ -503,7 +502,7 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
         return;
     }
 
-    QString SourceFilePath = pathtofile + "archive.txt";
+    QString SourceFilePath = pathtoarchive;
     QDateTime local(QDateTime::currentDateTime());
     QString copycommandstring = "cp " + SourceFilePath + " " + USBFlashPath  + "/USBArchive" + local.time().toString("HH-mm-ss")+ "_" +  local.date().toString("dd-MM-yyyy") + ".txt";
 

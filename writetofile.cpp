@@ -5,10 +5,11 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "channel1.h"
+#include "defines.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 
-extern QString pathtofile ;
+//extern QString pathtofile ;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -35,7 +36,7 @@ void Options::WriteSystemOptionsToFile()
     systemoptions["Calibration"] = GetCalibration();
     systemoptions["Resolution"] = GetNewDisplayResolution();
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-    QFile file(pathtofile + "systemoptions.txt");
+    QFile file(pathtosystemoptions);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
@@ -128,7 +129,7 @@ void Options::WriteAllChannelsOptionsToFile()
     channels["channels"] = settings;
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
-    QFile file(pathtofile + "options.txt");
+    QFile file(pathtooptions);
     QTextStream out(&file);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
@@ -149,7 +150,7 @@ void MessageWrite::WriteAllLogToFile()
     archive["messagesqueue"] = messagesqueue;
     archive["totalmsg"] = messagesqueue.count();
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtofile + "Log.txt");
+    QFile file(pathtolog);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
@@ -171,7 +172,7 @@ void MessageWrite::LogAddMessage(QString nm)
 
 void MessageWrite::LogClear()
 {
-    QFile file(pathtofile + "Log.txt");
+    QFile file(pathtolog);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     file.close();
@@ -232,7 +233,7 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     archive["EndTime"] = end.toString("hh:mm:ss");
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtofile + "archive.txt");
+    QFile file(pathtolog);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
@@ -288,7 +289,7 @@ void MainWindow::CreateMODBusConfigFile() // пишет архив в файл �
     Device["Devices"] = Devices;
 
     QString setstr = QJsonDocument(Device).toJson(QJsonDocument::Compact);
-    QFile file(pathtofile + "MODBusConfigFile.txt");
+    QFile file(pathtolog);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
