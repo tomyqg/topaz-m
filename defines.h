@@ -4,18 +4,18 @@
 
 #define CURRENT_VER "0.51" //версия ПО
 
-//#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату
+#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату
 #define MYD
 
 #ifdef LinuxBoard
 #define comportname "/dev/ttyO1" // com port for MYD board
-#define pathtofile  "/opt/"
+#define pathtofiles  "/opt/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
 #define pathtoarchive  "/opt/archive.txt"
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
-#define uartsleep DelayMsec(50);
+#define uartsleep DelayMsec(25);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
 #endif
@@ -24,7 +24,7 @@
 #define comportname "COM3"
 #define uartsleep Sleep(50);
 #define longsleep Sleep(1000);
-#define pathtofile  "C:/Work/"
+#define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
 #define pathtooptions  "C:/Work/options.txt"
 #define pathtolog  "C:/Work/Log.txt"

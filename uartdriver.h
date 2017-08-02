@@ -23,7 +23,6 @@ private:
     QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
     QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
 
-
 protected:
     void DelayMsec(int n);
     void SetRTS(bool newstate);
@@ -53,13 +52,11 @@ public slots:
     double ReadDataChannel(int channeladdress);
     double ReadOnBoardTemperature ();
     double ReadOnBoardVoltage();
-    uint16_t  GetChannelSignalType(uint8_t channel);
-    void  SetChannelSignalType(uint16_t channel, uint16_t signaltype);
-
-    void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     double ClickRelay(char channel);
+    void  SetChannelSignalType(uint16_t channel, uint16_t signaltype);
+    void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
-
+    uint16_t GetChannelSignalType(uint8_t channel);
 
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
 
@@ -70,8 +67,6 @@ public:
 //        qDebug() << "Modbus Deleted";
     }
 
-
-    uint GetConnectFailureStatus(){return ConnectFailure;}
     void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
 
     QByteArray ModBusMakeRequest(
@@ -108,7 +103,6 @@ public:
 
     enum ModBusErrors {
         ConnectionError = -9998 ,
-//        ConnectionErrorMessage = "ошибка\nсоединения",
         BadCRC = -9999 ,
     };
     Q_ENUM(ModBusErrors)
@@ -123,6 +117,7 @@ public:
     enum DeviceAdress {
         MainDeviceAddress = 0x01 ,
         Board4AIAddress = 0x01 ,
+        UniversalChannel1 = 0x01 ,
         UniversalChannel2 = 0x02 ,
         UniversalChannel3 = 0x04 ,
         UniversalChannel4 = 0x08
@@ -145,7 +140,6 @@ public:
         ElmetroChannelAB2Address = 0x02,
         ElmetroChannelAB3Address = 0x04,
         ElmetroChannelAB4Address = 0x06
-
     };
     Q_ENUM(RegisterAdress)
 
@@ -177,7 +171,6 @@ public:
         WriteMultipleRegisters = 0x10
     };
     Q_ENUM(Function)
-
 
     /* Параметры устройства для группы G00 (выходные данные канала):
      * Для модуля типа 4AI при доступе по команде 03 (0x03)

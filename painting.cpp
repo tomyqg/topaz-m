@@ -275,8 +275,8 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
 
-    int confirmwindowwidth = widgwidth/4;
-    int confirmwindowheight  = widgheight/4;
+    int confirmwindowwidth = widgwidth/3;
+    int confirmwindowheight  = widgheight/3;
     int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
     int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
     //    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
@@ -319,7 +319,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
             painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel2object.GetState1HighMessage());
         }
-
     }
     // уменьшение уставки  Channel 2
     else if (channel2currentvalue<channel2state2value)

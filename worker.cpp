@@ -19,82 +19,98 @@ void worker::do_Work()
     {
         //qDebug()<< "Stop_Work";
         //emit finished();
-        return;
+       // this->thread()->usleep(1000);
+                return;
     }
     if ( isrunning || !isstopped )
 
     {
+//       // this->thread()->usleep(1000*1000);
         //qDebug()<< "Start_Work";
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
+
+        if (UartDriver::needtoupdatechannel[0] == 1)
         {
-            if (UartDriver::needtoupdatechannel[0] == 1)
+            UartDriver::needtoupdatechannel[0] = 0;
+            //  currentdata = ClickRelay(ModBus::Board4AIAddress);
+
+            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB1Address);
+
+            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
             {
-                UartDriver::needtoupdatechannel[0] = 0;
-                //  currentdata = ClickRelay(ModBus::Board4AIAddress);
-
-                currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB1Address);
-
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+                if (ThreadChannelOptions1->IsChannelMathematical())
                 {
-                    if (ThreadChannelOptions1->IsChannelMathematical())
-                    {
 
-                        double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-                        currentdata = mathresult;
-                    }
-                    UD.writechannelvalue(1,currentdata);
+                    double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+                    currentdata = mathresult;
                 }
+                UD.writechannelvalue(1,currentdata);
             }
+           // this->thread()->usleep(25000);
 
-            if (UartDriver::needtoupdatechannel[1] == 1)
-            {
-                UartDriver::needtoupdatechannel[1] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-                {
-                    if (ThreadChannelOptions2->IsChannelMathematical())
-                    {
-
-                        double mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-                        currentdata = mathresult;
-                    }
-                    UD.writechannelvalue(2,currentdata);
-                }
-            }
-
-            if (UartDriver::needtoupdatechannel[2] == 1)
-            {
-                UartDriver::needtoupdatechannel[2] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-                {
-                    if (ThreadChannelOptions3->IsChannelMathematical())
-                    {
-
-                        double mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-                        currentdata = mathresult;
-                    }
-                    UD.writechannelvalue(3,currentdata);
-                }
-            }
-
-            if (UartDriver::needtoupdatechannel[3] == 1)
-            {
-                UartDriver::needtoupdatechannel[3] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
-                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-                {
-                    if (ThreadChannelOptions4->IsChannelMathematical())
-                    {
-
-                        double mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-                        currentdata = mathresult;
-                    }
-                    UD.writechannelvalue(4,currentdata);
-                }
-            }
         }
+
+
+        if (UartDriver::needtoupdatechannel[1] == 1)
+        {
+            UartDriver::needtoupdatechannel[1] = 0;
+            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
+            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+            {
+                if (ThreadChannelOptions2->IsChannelMathematical())
+                {
+
+                    double mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+                UD.writechannelvalue(2,currentdata);
+            }
+           // this->thread()->usleep(25000);
+        }
+
+        if (UartDriver::needtoupdatechannel[2] == 1)
+        {
+            UartDriver::needtoupdatechannel[2] = 0;
+            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
+            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+            {
+                if (ThreadChannelOptions3->IsChannelMathematical())
+                {
+
+                    double mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+                UD.writechannelvalue(3,currentdata);
+            }
+           // this->thread()->usleep(25000);
+        }
+
+        if (UartDriver::needtoupdatechannel[3] == 1)
+        {
+            UartDriver::needtoupdatechannel[3] = 0;
+            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
+            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+            {
+                if (ThreadChannelOptions4->IsChannelMathematical())
+                {
+
+                    double mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+                UD.writechannelvalue(4,currentdata);
+            }
+           // this->thread()->usleep(25000);
+        }
+
+        if (UartDriver::needtoupdatechannel[0] == 0)
+            if (UartDriver::needtoupdatechannel[1] == 0)
+                if (UartDriver::needtoupdatechannel[2] == 0)
+                    if (UartDriver::needtoupdatechannel[3] == 0)
+                    {
+                        this->thread()->usleep(1000);
+                    }
+
     }
 
     // do important work here

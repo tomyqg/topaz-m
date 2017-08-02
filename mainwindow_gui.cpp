@@ -118,19 +118,21 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_RelayChanger_toggled(bool checked)
 {
-//    thread->wait(100);
+    //    thread->wait(100);
+    stopWorkSignal();
     ModBus mbus;
     mbus.SetSingleCoil(ModBus::Board4AIAddress,ModBus::ElmetroRelayAddress,checked);
     mbus.deleteLater();
     ui->RelayChanger->setText("Реле " + QString::number(checked));
+    mbus.deleteLater();
+    startWorkSignal();
 }
 
 void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
 {
-//    ui->textEdit_2->setText(text);
-    //    ui->textEdit_2->setText("Destroyed");
-        qDebug() << "text" ;
-        qDebug() << text ;
+    //ui->textEdit_2->setText(text);
+    //ui->textEdit_2->setText("Destroyed");
+    //qDebug() << "text" ;
 }
 
 void  MainWindow::destroyedslot(QObject *)
@@ -164,7 +166,6 @@ void MainWindow::ShowMessageBox (QString title,QString message)
 {
     QMessageBox::information(this, title, message);
 }
-
 
 void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
 {
