@@ -14,7 +14,7 @@ public:
 
 public:
 
-    double GetSignalType();
+    uint16_t GetSignalType();
     double GetLowerLimit();
     double GetHigherLimit();
     double GetLowerMeasureLimit();
@@ -68,7 +68,7 @@ public:
 
 private:
 
-    double signaltype;
+    uint16_t signaltype;
     double lowerlimit;
     double higherlimit;
     double lowermeasurelimit;

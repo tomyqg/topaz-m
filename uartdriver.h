@@ -53,7 +53,8 @@ public slots:
     double ReadOnBoardTemperature ();
     double ReadOnBoardVoltage();
     double ClickRelay(char channel);
-    void  SetChannelSignalType(uint16_t channel, uint16_t signaltype);
+    void  SetChannelSignalType(uint16_t channel, uint16_t additionalparametr);
+    void  SetChannelAdditionalParametr(uint16_t channel, uint16_t signaltype);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
     quint16 Calculate_crc16_modbus(const QByteArray &array);
     uint16_t GetChannelSignalType(uint8_t channel);
@@ -100,6 +101,30 @@ public:
     double DataChannelRead (char channel);
     double DataChannel1Read();
 
+
+//    Значение:
+//    0 – канал выключен
+//    1 – измерение тока
+//    2 – измерение напряжения
+//    3 – измерение сопротивления
+//    4 – измерение термопары
+//    5 – измерение термосопротивления
+//    6 – дискретный вход
+//    7 – счет импульсов
+//    8 – частота
+
+    enum SignalType {
+        NoMeasure= 0,
+        CurrentMeasure= 1,
+        VoltageMeasure= 2,
+        ResistanceMeasure= 3,
+        TermoCoupleMeasure= 4,
+        TermoResistanceMeasure= 5,
+        DiscretMeasure= 6,
+        ImpulseCounterMeasure= 7,
+        FrequencyMeasure= 8
+    };
+    Q_ENUM(SignalType)
 
     enum ModBusErrors {
         ConnectionError = -9998 ,
@@ -264,10 +289,10 @@ public:
     enum G02_Group{
         G02Bias = 0x8000,
         ChannelAddressBias = 128,
-        Channel1AddressBias = 0,
-        Channel2AddressBias = 128,
-        Channel3AddressBias = 256,
-        Channel4AddressBias = 512,
+        Channel1AddressBias = ChannelAddressBias*0,
+        Channel2AddressBias = ChannelAddressBias*1,
+        Channel3AddressBias = ChannelAddressBias*2,
+        Channel4AddressBias = ChannelAddressBias*3,
         DataMeasureGenerateAddress =  G02Bias + 0,
         DataMeasureGenerateLenght = 2,
         DataFlagsAddress =  G02Bias + 2,

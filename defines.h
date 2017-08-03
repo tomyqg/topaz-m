@@ -4,7 +4,7 @@
 
 #define CURRENT_VER "0.51" //версия ПО
 
-#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату
+//#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату
 #define MYD
 
 #ifdef LinuxBoard
@@ -44,12 +44,11 @@
 #define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
 
 #define ValuesUpdateTimer 100
-#define GraphicsUpdateTimer 250
+#define GraphicsUpdateTimer 500
 #define ArchiveUpdateTimer 5000
-#define DateLabelUpdateTimer 1000
+#define DateLabelUpdateTimer 1000 // время обновления времени
 #define XRange 300
 #define YRange 180
-
-
+#define GraphWidthinPixels 3 // толщина графика линий в пикселях
 
 #endif // DEFINES_H

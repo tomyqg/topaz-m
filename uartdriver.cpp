@@ -528,6 +528,31 @@ uint16_t ModBus::GetChannelSignalType(uint8_t channel)
     return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
 }
 
+void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalparametr)
+{
+
+    qDebug() << "SetChannelAdditionalParametr" ;
+    uint8_t channelbias;
+
+    switch (channel) {
+    case ModBus::DataChannel1:
+        channelbias = ModBus::Channel1AddressBias;
+        break;
+    case ModBus::DataChannel2:
+        channelbias = ModBus::Channel2AddressBias;
+        break;
+    case ModBus::DataChannel3:
+        channelbias = ModBus::Channel3AddressBias;
+        break;
+    case ModBus::DataChannel4:
+        channelbias = ModBus::Channel4AddressBias;
+        break;
+    }
+
+    uint16_t address = ModBus::AdditionalParameterAddress + channelbias;
+    ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,additionalparametr);
+}
+
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
 {
     uint8_t channelbias;

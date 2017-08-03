@@ -7,6 +7,7 @@
 #include "mathresolver.h"
 #include "options.h"
 #include "qglobal.h"
+#include "defines.h"
 
 int a=0;int b=0;
 
@@ -36,20 +37,20 @@ int xyi;
 void MainWindow::AddValuesToBuffer()
 {
 
-    startWorkSignal();
+        startWorkSignal();
     X_Coordinates.append(b);
     UartDriver UD;
-// закомменитть чтобы не рисовать синусоиду
-//    xyi++;
-//    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
-//    int  co = qRound( eee.SolveEquation("cos(x/3)*40-20",xyi) );
-//    Y_coordinates_Chanel_1.append(a+5);
-//    Y_coordinates_Chanel_2.append(co+30);
-//    Y_coordinates_Chanel_3.append(a+55);
-//    Y_coordinates_Chanel_4.append(co+70);
+    // закомменитть чтобы не рисовать синусоиду
+    //    xyi++;
+    //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
+    //    int  co = qRound( eee.SolveEquation("cos(x/3)*40-20",xyi) );
+    //    Y_coordinates_Chanel_1.append(a+5);
+    //    Y_coordinates_Chanel_2.append(co+30);
+    //    Y_coordinates_Chanel_3.append(a+55);
+    //    Y_coordinates_Chanel_4.append(co+70);
 
     //// закоментить посюда
-// раскомментить чтобы рисовались нормальные графики
+    // раскомментить чтобы рисовались нормальные графики
 
     Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
@@ -84,7 +85,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     b++;
-    stopWorkSignal();
+        stopWorkSignal();
 }
 
 void MainWindow::UpdateGraphics()
@@ -127,7 +128,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(3);
+    graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(GetChannel1Color());
 
     ui->customPlot->graph()->setPen(graphPen);
@@ -184,7 +185,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y4.append(UartDriver::channelinputbuffer[3]);
     y4.append(UartDriver::channelinputbuffer[3]);
 
-    graphPen.setWidth(3);
+    graphPen.setWidth(GraphWidthinPixels);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
@@ -220,7 +221,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-    graphPen.setWidth(3);
+    graphPen.setWidth(GraphWidthinPixels);
     //    graphPen.set
     graphPen.setColor(Channel1Color);
 
@@ -288,7 +289,7 @@ void MainWindow::GrafsUpdateBars()
 
     ui->customPlot->clearGraphs();
     ui->customPlot->xAxis->setRange(0, 100);
-    graphPen.setWidth(2);
+    graphPen.setWidth(GraphWidthinPixels);
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("Bargraf");
 

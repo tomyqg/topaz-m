@@ -111,7 +111,7 @@ void MainWindow::MainWindowInitialization()
 
     WorkerThread ->start(); // запускаем сам поток
 
-//    startWorkSignal(); // запускаем работу в отдельном потоке
+    startWorkSignal(); // запускаем работу в отдельном потоке
 
 #endif
 
@@ -126,12 +126,11 @@ void MainWindow::MainWindowInitialization()
     objectwithsignal = new ChannelOptions;
 
     //    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
-
     //    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
-
     //    ThreadSignal(&channel1object);
-
     //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
+
+    startWorkSignal();
 }
 
 void MainWindow::LabelsInit()
@@ -247,9 +246,7 @@ void MainWindow::OpenOptionsWindow()
 
     //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
 
-    stopWorkSignal();
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
-//    startWorkSignal();
 }
 
 void MainWindow::PowerOff()
