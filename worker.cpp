@@ -135,7 +135,7 @@ void worker::StartWorkSlot()
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-    thread()->sleep(100000);
+    thread()->usleep(100000);
 
     ThreadChannelOptions1 = c1;
     ThreadChannelOptions2 = c2;
@@ -147,15 +147,96 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     //устанавливаем новый тип сигнала для каждого типа сигнала (посылаем соотв-ю ком-ду по модбас)
     type = ThreadChannelOptions1->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel1, type);
+    switch (type) {
+    case ModBus::CurrentMeasure:
+        break;
+    case ModBus::VoltageMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Voltage100mVoltNoBreakControl);
+        break;
+    case ModBus::ResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Wire3NoBreakControl);
+        break;
+    case ModBus::TermoCoupleMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::R);
+        break;
+    case ModBus::TermoResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Wire3NoBreakControl);
+        break;
+    default:
+        break;
+    }
+
+    //qDebug() << type;
+
+
     type = ThreadChannelOptions2->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel2, type);
+    switch (type) {
+    case ModBus::CurrentMeasure:
+        break;
+    case ModBus::VoltageMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel2, ModBus::Voltage100mVoltNoBreakControl);
+        break;
+    case ModBus::ResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel2, ModBus::Wire3NoBreakControl);
+        break;
+    case ModBus::TermoCoupleMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel2, ModBus::R);
+        break;
+    case ModBus::TermoResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel2, ModBus::Wire3NoBreakControl);
+        break;
+    default:
+        break;
+    }
+
+    //qDebug() << type;
+
     type = ThreadChannelOptions3->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel3, type);
+    switch (type) {
+    case ModBus::CurrentMeasure:
+        break;
+    case ModBus::VoltageMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel3, ModBus::Voltage100mVoltNoBreakControl);
+        break;
+    case ModBus::ResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel3, ModBus::Wire3NoBreakControl);
+        break;
+    case ModBus::TermoCoupleMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel3, ModBus::R);
+        break;
+    case ModBus::TermoResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel3, ModBus::Wire3NoBreakControl);
+        break;
+    default:
+        break;
+    }
+
+    //qDebug() << type;
+
     type = ThreadChannelOptions4->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel4, type);
+    switch (type) {
+    case ModBus::CurrentMeasure:
+        break;
+    case ModBus::VoltageMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel4, ModBus::Voltage100mVoltNoBreakControl);
+        break;
+    case ModBus::ResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel4, ModBus::Wire4NoBreakControl);
+        break;
+    case ModBus::TermoCoupleMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel4, ModBus::R);
+        break;
+    case ModBus::TermoResistanceMeasure:
+        MB.SetChannelAdditionalParametr(ModBus::DataChannel4, ModBus::Wire4NoBreakControl);
+        break;
+    default:
+        break;
+    }
 
-
-    MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Voltage1VoltNoBreakControl);
-
-    thread()->sleep(100000);
+    //qDebug() << type;
+    thread()->usleep(100000);
+    //    thread()->sleep(10);
 }

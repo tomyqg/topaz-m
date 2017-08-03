@@ -215,7 +215,7 @@ void MainWindow::OptionsWindowThread()
 void MainWindow::OpenOptionsWindow()
 {
 
-//    startWorkSignal();
+    //    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
