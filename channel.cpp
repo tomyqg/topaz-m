@@ -30,7 +30,7 @@ uint16_t ChannelOptions::GetSignalType()
     return this->signaltype;
 }
 
-void ChannelOptions::SetSignalType(double newsignaltype)
+void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
 }

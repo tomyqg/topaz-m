@@ -13,11 +13,9 @@ mathresolver mr;
 void worker::do_Work()
 {
     emit SignalToObj_mainThreadGUI();
-
-
     if ( !isrunning || isstopped ) // если воркер остановлен
     {
-        this->thread()->usleep(100); // 100 мксек ждем прост.
+        this->thread()->usleep(100); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
         return;
     }
     if ( isrunning || !isstopped ) // если воркер запущен
@@ -27,33 +25,34 @@ void worker::do_Work()
         double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
 
-        if (UartDriver::needtoupdatechannel[0] == 1)
-        {
-            this->thread()->usleep(100); // 100 мксек ждем прост.
-            UartDriver::needtoupdatechannel[0] = 0;
-            //  currentdata = ClickRelay(ModBus::Board4AIAddress);
-
-            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB1Address);
-
-            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
+            if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                if (ThreadChannelOptions1->IsChannelMathematical())
-                {
+                this->thread()->usleep(100); // 100 мксек ждем прост.
+                UartDriver::needtoupdatechannel[0] = 0;
+                //  currentdata = ClickRelay(ModBus::Board4AIAddress);
 
-                    double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-                    currentdata = mathresult;
+                currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
+
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+                {
+                    if (ThreadChannelOptions1->IsChannelMathematical())
+                    {
+
+                        double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
+                    UD.writechannelvalue(1,currentdata);
                 }
-                UD.writechannelvalue(1,currentdata);
+                // this->thread()->usleep(25000);
             }
-            // this->thread()->usleep(25000);
-        }
 
 
         if (UartDriver::needtoupdatechannel[1] == 1)
         {
             this->thread()->usleep(100); // 100 мксек ждем прост.
             UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB2Address);
+            currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
             if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
             {
                 if (ThreadChannelOptions2->IsChannelMathematical())
@@ -71,7 +70,7 @@ void worker::do_Work()
         {
             this->thread()->usleep(100); // 100 мксек ждем прост.
             UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB3Address);
+            currentdata = MB.ReadDataChannel(ModBus::DataChannel3);
             if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
             {
                 if (ThreadChannelOptions3->IsChannelMathematical())
@@ -88,12 +87,11 @@ void worker::do_Work()
         {
             this->thread()->usleep(100); // 100 мксек ждем прост.
             UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::ElmetroChannelAB4Address);
+            currentdata = MB.ReadDataChannel(ModBus::DataChannel4);
             if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
             {
                 if (ThreadChannelOptions4->IsChannelMathematical())
                 {
-
                     double mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
                     currentdata = mathresult;
                 }
@@ -166,8 +164,6 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         break;
     }
 
-    //qDebug() << type;
-
 
     type = ThreadChannelOptions2->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel2, type);
@@ -190,8 +186,6 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         break;
     }
 
-    //qDebug() << type;
-
     type = ThreadChannelOptions3->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel3, type);
     switch (type) {
@@ -212,8 +206,6 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     default:
         break;
     }
-
-    //qDebug() << type;
 
     type = ThreadChannelOptions4->GetSignalType();
     MB.SetChannelSignalType(ModBus::DataChannel4, type);
@@ -236,7 +228,6 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         break;
     }
 
-    //qDebug() << type;
     thread()->usleep(100000);
     //    thread()->sleep(10);
 }

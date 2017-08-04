@@ -5,7 +5,6 @@
 
 class ChannelOptions: public QObject
 {
-
     Q_OBJECT
 
 public:
@@ -15,6 +14,7 @@ public:
 public:
 
     uint16_t GetSignalType();
+    void SetSignalType(uint16_t newsignaltype);
     double GetLowerLimit();
     double GetHigherLimit();
     double GetLowerMeasureLimit();
@@ -36,7 +36,6 @@ public:
 
     void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
-    void SetSignalType(double newsignaltype);
     void SetLowerLimit(double newsignaltype);
     void SetHigherLimit(double newhigherlimit);
     void SetLowerMeasureLimit(double newlowermeaslimit);
