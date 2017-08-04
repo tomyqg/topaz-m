@@ -7,13 +7,7 @@
 
 void Options::ApplyNewSettingstoOptionsUI()
 {
-
     ui->HashLine->setText(CURRENT_VER);
-
-    int sigtype  = options_channel1.GetSignalType();
-    int sigtype2 = options_channel2.GetSignalType();
-    int sigtype3 = options_channel3.GetSignalType();
-    int sigtype4 = options_channel4.GetSignalType();
 
     if (GetCurrentDisplayParametr() == Trends)
     {
@@ -47,9 +41,15 @@ void Options::ApplyNewSettingstoOptionsUI()
     {
         ui->SetBarsCyfraBtn->setChecked(true);
     }
+
+    int sigtype  = options_channel1.GetSignalType();
+    int sigtype2 = options_channel2.GetSignalType();
+    int sigtype3 = options_channel3.GetSignalType();
+    int sigtype4 = options_channel4.GetSignalType();
+
     // channel 1
     {
-        if (sigtype == 1)
+        if (sigtype == ModBus::NoMeasure)
         {
             ui->ButonOtklChannel_1->setChecked(true);
 
@@ -99,7 +99,7 @@ void Options::ApplyNewSettingstoOptionsUI()
 
     // channel 2
     {
-        if (sigtype2 == 1)
+        if (sigtype2 == ModBus::NoMeasure)
         {
             ui->ButonOtklChannel_2->setChecked(true);
             ui->UnitsChannel_2->setText("None");
@@ -120,27 +120,27 @@ void Options::ApplyNewSettingstoOptionsUI()
             ui->PeriodIzmerChannel_2->setEnabled(true);
         }
 
-        if (sigtype == ModBus::CurrentMeasure)
+        if (sigtype2 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_2->setChecked(true);
         }
 
-        if (sigtype == ModBus::VoltageMeasure)
+        if (sigtype2 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_2->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoResistanceMeasure)
+        if (sigtype2 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_2->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoCoupleMeasure)
+        if (sigtype2 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_2->setChecked(true);
         }
 
-        if (sigtype == ModBus::ImpulseCounterMeasure)
+        if (sigtype2 == ModBus::ImpulseCounterMeasure)
         {
             ui->ButonImpulseChannel_2->setChecked(true);
         }
@@ -148,7 +148,7 @@ void Options::ApplyNewSettingstoOptionsUI()
 
     // channel 3
     {
-        if (sigtype3 == 1)
+        if (sigtype3 == ModBus::NoMeasure)
         {
             ui->ButonOtklChannel_3->setChecked(true);
 
@@ -170,27 +170,27 @@ void Options::ApplyNewSettingstoOptionsUI()
             ui->PeriodIzmerChannel_3->setEnabled(true);
         }
 
-        if (sigtype == ModBus::CurrentMeasure)
+        if (sigtype3 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_3->setChecked(true);
         }
 
-        if (sigtype == ModBus::VoltageMeasure)
+        if (sigtype3 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_3->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoResistanceMeasure)
+        if (sigtype3 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_3->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoCoupleMeasure)
+        if (sigtype3 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_3->setChecked(true);
         }
 
-        if (sigtype == ModBus::ImpulseCounterMeasure)
+        if (sigtype3 == ModBus::ImpulseCounterMeasure)
         {
             ui->ButonImpulseChannel_3->setChecked(true);
         }
@@ -198,7 +198,7 @@ void Options::ApplyNewSettingstoOptionsUI()
 
     // channel 4
     {
-        if (sigtype4 == 1)
+        if (sigtype4 == ModBus::NoMeasure)
         {
             ui->ButonOtklChannel_4->setChecked(true);
 
@@ -220,27 +220,27 @@ void Options::ApplyNewSettingstoOptionsUI()
             ui->PeriodIzmerChannel_4->setEnabled(true);
         }
 
-        if (sigtype == ModBus::CurrentMeasure)
+        if (sigtype4 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_4->setChecked(true);
         }
 
-        if (sigtype == ModBus::VoltageMeasure)
+        if (sigtype4 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_4->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoResistanceMeasure)
+        if (sigtype4 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_4->setChecked(true);
         }
 
-        if (sigtype == ModBus::TermoCoupleMeasure)
+        if (sigtype4 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_4->setChecked(true);
         }
 
-        if (sigtype == ModBus::ImpulseCounterMeasure)
+        if (sigtype4 == ModBus::ImpulseCounterMeasure)
         {
             ui->ButonImpulseChannel_4->setChecked(true);
         }

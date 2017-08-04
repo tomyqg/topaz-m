@@ -26,9 +26,9 @@ QColor Channel2ColorNormal = QColor(color2rgbnormal[0],color2rgbnormal[1],color2
 QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
 QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
 
-QColor ChannelColorHighState = QColor(200,30,30);
+QColor ChannelColorHighState = QColor(220,100,100);
 
-QColor ChannelColorLowState = QColor(230,230,30);
+QColor ChannelColorLowState = QColor(140,220,220);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
@@ -37,9 +37,8 @@ int xyi;
 void MainWindow::AddValuesToBuffer()
 {
 
-        startWorkSignal();
+    startWorkSignal();
     X_Coordinates.append(b);
-    UartDriver UD;
     // закомменитть чтобы не рисовать синусоиду
     //    xyi++;
     //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
@@ -52,10 +51,13 @@ void MainWindow::AddValuesToBuffer()
     //// закоментить посюда
     // раскомментить чтобы рисовались нормальные графики
 
-    Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
-    Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
-    Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
-    Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
+//    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
+
+//    UartDriver::channelinputbuffer[0] = b;
+    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
+    Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
+    Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
+    Y_coordinates_Chanel_4.append(UartDriver::channelinputbuffer[3]);
 
     /*
     //чтоб графики рисовались не постоянно а с периодом их обновления
@@ -85,7 +87,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     b++;
-        stopWorkSignal();
+//    stopWorkSignal();
 }
 
 void MainWindow::UpdateGraphics()
@@ -332,7 +334,8 @@ void MainWindow::UpdateChannel1Slot()
     UartDriver::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
+//    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
+    channel1object.SetCurrentChannelValue(b);
     CheckState(channel1object);
 }
 

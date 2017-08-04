@@ -83,10 +83,10 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-//    channel1object.ReadSingleChannelOptionFromFile(1);
-//    channel2object.ReadSingleChannelOptionFromFile(2);
-//    channel3object.ReadSingleChannelOptionFromFile(3);
-//    channel4object.ReadSingleChannelOptionFromFile(4);
+    channel1object.ReadSingleChannelOptionFromFile(1);
+    channel2object.ReadSingleChannelOptionFromFile(2);
+    channel3object.ReadSingleChannelOptionFromFile(3);
+    channel4object.ReadSingleChannelOptionFromFile(4);
 
 //    //SetWindowHeightPixels(GetMonitorHeightPixels());
 //    //SetWindowWidthPixels(GetMonitorWidthPixels());
@@ -109,14 +109,16 @@ void MainWindow::MainWindowInitialization()
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+//    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
+
     connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
     WorkerThread->start(); // запускаем сам поток
 
-    startWorkSignal(); // запускаем работу в отдельном потоке
+//    startWorkSignal(); // запускаем работу в отдельном потоке
 
 #endif
 
@@ -134,8 +136,6 @@ void MainWindow::MainWindowInitialization()
     //    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
     //    ThreadSignal(&channel1object);
     //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
-
-    startWorkSignal();
 }
 
 void MainWindow::LabelsInit()

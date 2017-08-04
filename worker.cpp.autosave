@@ -129,7 +129,6 @@ void worker::StartWorkSlot()
     isrunning = true;
     emit running();
     do_Work();
-
 }
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)

@@ -19,6 +19,7 @@ signals:
     void SignalToObj_mainThreadGUI();
     void running();
     void stopped();
+    void Finished();
 
 public slots:
     void StopWorkSlot();

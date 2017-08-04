@@ -135,7 +135,7 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetLowerLimit(ch.value("LowerLimit").toDouble());
     this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
     this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
-    this->SetSignalType(ch.value("Type").toDouble());
+    this->SetSignalType(ch.value("Type").toInt());
     this->SetUnitsName(ch.value("Units").toString());
     this->SetMeasurePeriod(ch.value("Period").toDouble());
     this->SetState1HighMessage(ch.value("State1HighMessage").toString());

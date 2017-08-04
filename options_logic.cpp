@@ -107,13 +107,13 @@ void Options::Channel1TypeChange()
     if (ui->ButonResistorChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
-        ui->UnitsChannel_1->setText("°С (RTD)");
+        ui->UnitsChannel_1->setText("°C (RTD)");
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
-        ui->UnitsChannel_1->setText("°С (TC)");
+        ui->UnitsChannel_1->setText("°C (TC)");
     }
     
     if (ui->ButonImpulseChannel_1->isChecked())
@@ -161,13 +161,13 @@ void Options::Channel2TypeChange()
     if (ui->ButonResistorChannel_2->isChecked())
     {
         options_channel2.SetSignalType(ModBus::TermoResistanceMeasure);
-        ui->UnitsChannel_2->setText("°С (RTD)");
+        ui->UnitsChannel_2->setText("°C (RTD)");
     }
 
     if (ui->ButonTermoparaChannel_2->isChecked())
     {
         options_channel2.SetSignalType(ModBus::TermoCoupleMeasure);
-        ui->UnitsChannel_2->setText("°С (TC)");
+        ui->UnitsChannel_2->setText("°C (TC)");
     }
 
     if (ui->ButonImpulseChannel_2->isChecked())
@@ -215,13 +215,13 @@ void Options::Channel3TypeChange()
     if (ui->ButonResistorChannel_3->isChecked())
     {
         options_channel3.SetSignalType(ModBus::TermoResistanceMeasure);
-        ui->UnitsChannel_3->setText("°С (RTD)");
+        ui->UnitsChannel_3->setText("°C (RTD)");
     }
 
     if (ui->ButonTermoparaChannel_3->isChecked())
     {
         options_channel3.SetSignalType(ModBus::TermoCoupleMeasure);
-        ui->UnitsChannel_3->setText("°С (TC)");
+        ui->UnitsChannel_3->setText("°C (TC)");
     }
 
     if (ui->ButonImpulseChannel_3->isChecked())
@@ -269,13 +269,13 @@ void Options::Channel4TypeChange()
     if (ui->ButonResistorChannel_4->isChecked())
     {
         options_channel4.SetSignalType(ModBus::TermoResistanceMeasure);
-        ui->UnitsChannel_4->setText("°С (RTD)");
+        ui->UnitsChannel_4->setText("°C (RTD)");
     }
 
     if (ui->ButonTermoparaChannel_4->isChecked())
     {
         options_channel4.SetSignalType(ModBus::TermoCoupleMeasure);
-        ui->UnitsChannel_4->setText("°С (TC)");
+        ui->UnitsChannel_4->setText("°C (TC)");
     }
 
     if (ui->ButonImpulseChannel_4->isChecked())
