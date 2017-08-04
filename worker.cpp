@@ -12,6 +12,9 @@ mathresolver mr;
 
 void worker::do_Work()
 {
+    double mathresult;
+    double currentdata;
+
     emit SignalToObj_mainThreadGUI();
     if ( !isrunning || isstopped ) // если воркер остановлен
     {
@@ -21,84 +24,77 @@ void worker::do_Work()
     if ( isrunning || !isstopped ) // если воркер запущен
     {
         this->thread()->usleep(100); // 100 мксек ждем прост.
-
-        double currentdata;
         this->thread()->setPriority(QThread::LowPriority);
-
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
-                //  currentdata = ClickRelay(ModBus::Board4AIAddress);
-
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
-
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
 
-                        double mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+                        mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
                         currentdata = mathresult;
                     }
                     UD.writechannelvalue(1,currentdata);
                 }
-                // this->thread()->usleep(25000);
+                this->thread()->usleep(1000); // 1000 мксек ждем прост.
             }
 
-
-        if (UartDriver::needtoupdatechannel[1] == 1)
-        {
-            this->thread()->usleep(100); // 100 мксек ждем прост.
-            UartDriver::needtoupdatechannel[1] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
-            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+            if (UartDriver::needtoupdatechannel[1] == 1)
             {
-                if (ThreadChannelOptions2->IsChannelMathematical())
+                this->thread()->usleep(100); // 100 мксек ждем прост.
+                UartDriver::needtoupdatechannel[1] = 0;
+                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
+                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
-
-                    double mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-                    currentdata = mathresult;
+                    if (ThreadChannelOptions2->IsChannelMathematical())
+                    {
+                        mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
+                    UD.writechannelvalue(2,currentdata);
                 }
-                UD.writechannelvalue(2,currentdata);
+                this->thread()->usleep(1000); // 1000 мксек ждем прост.
             }
-            // this->thread()->usleep(25000);
-        }
-
-        if (UartDriver::needtoupdatechannel[2] == 1)
-        {
-            this->thread()->usleep(100); // 100 мксек ждем прост.
-            UartDriver::needtoupdatechannel[2] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::DataChannel3);
-            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-            {
-                if (ThreadChannelOptions3->IsChannelMathematical())
+            if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+                if (UartDriver::needtoupdatechannel[2] == 1)
                 {
-
-                    double mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-                    currentdata = mathresult;
+                    this->thread()->usleep(100); // 100 мксек ждем прост.
+                    UartDriver::needtoupdatechannel[2] = 0;
+                    currentdata = MB.ReadDataChannel(ModBus::DataChannel3);
+                    if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+                    {
+                        if (ThreadChannelOptions3->IsChannelMathematical())
+                        {
+                            mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
+                            currentdata = mathresult;
+                        }
+                        UD.writechannelvalue(3,currentdata);
+                    }
+                    this->thread()->usleep(1000); // 1000 мксек ждем прост.
                 }
-                UD.writechannelvalue(3,currentdata);
-            }
-        }
-
-        if (UartDriver::needtoupdatechannel[3] == 1)
-        {
-            this->thread()->usleep(100); // 100 мксек ждем прост.
-            UartDriver::needtoupdatechannel[3] = 0;
-            currentdata = MB.ReadDataChannel(ModBus::DataChannel4);
-            if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-            {
-                if (ThreadChannelOptions4->IsChannelMathematical())
+        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+                if (UartDriver::needtoupdatechannel[3] == 1)
                 {
-                    double mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-                    currentdata = mathresult;
+                    this->thread()->usleep(100); // 100 мксек ждем прост.
+                    UartDriver::needtoupdatechannel[3] = 0;
+                    currentdata = MB.ReadDataChannel(ModBus::DataChannel4);
+                    if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+                    {
+                        if (ThreadChannelOptions4->IsChannelMathematical())
+                        {
+                            mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
+                            currentdata = mathresult;
+                        }
+                        UD.writechannelvalue(4,currentdata);
+                    }
+                    this->thread()->usleep(1000); // 1000 мксек ждем прост.
                 }
-                UD.writechannelvalue(4,currentdata);
-            }
-            // this->thread()->usleep(25000);
-        }
 
         if (UartDriver::needtoupdatechannel[0] == 0)
             if (UartDriver::needtoupdatechannel[1] == 0)

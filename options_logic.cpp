@@ -72,7 +72,7 @@ void Options::Channel1TypeChange()
 {
     if (ui->ButonOtklChannel_1->isChecked())
     {
-        options_channel1.SetSignalType(1);
+        options_channel1.SetSignalType(ModBus::NoMeasure);
 
         ui->UnitsChannel_1->setText("None");
         ui->UnitsChannel_1->setEnabled(false);
@@ -94,32 +94,32 @@ void Options::Channel1TypeChange()
     
     if (ui->ButonTokChannel_1->isChecked())
     {
+        options_channel1.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_1->setText("mA");
-        options_channel1.SetSignalType(2);
     }
     
     if (ui->ButonNapryagenieChannel_1->isChecked())
     {
-        options_channel1.SetSignalType(3);
+        options_channel1.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_1->setText("V");
     }
     
     if (ui->ButonResistorChannel_1->isChecked())
     {
-        options_channel1.SetSignalType(4);
-        ui->UnitsChannel_1->setText("Om");
+        options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
+        ui->UnitsChannel_1->setText("°С (RTD)");
     }
     
     if (ui->ButonTermoparaChannel_1->isChecked())
     {
-        options_channel1.SetSignalType(5);
-        ui->UnitsChannel_1->setText("mV");
+        options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
+        ui->UnitsChannel_1->setText("°С (TC)");
     }
     
     if (ui->ButonImpulseChannel_1->isChecked())
     {
-        options_channel1.SetSignalType(6);
-        ui->UnitsChannel_1->setText("1");
+        options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
+        ui->UnitsChannel_1->setText("imp.cnt");
     }
 }
 
@@ -127,7 +127,7 @@ void Options::Channel2TypeChange()
 {
     if (ui->ButonOtklChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(1);
+        options_channel2.SetSignalType(ModBus::NoMeasure);
         ui->UnitsChannel_2->setText("None");
         ui->UnitsChannel_2->setEnabled(false);
         ui->VerhnPredelChannel_2->setEnabled(false);
@@ -148,32 +148,32 @@ void Options::Channel2TypeChange()
     
     if (ui->ButonTokChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(2);
+        options_channel2.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_2->setText("mA");
     }
-    
+
     if (ui->ButonNapryagenieChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(3);
+        options_channel2.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_2->setText("V");
     }
-    
+
     if (ui->ButonResistorChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(4);
-        ui->UnitsChannel_2->setText("Om");
+        options_channel2.SetSignalType(ModBus::TermoResistanceMeasure);
+        ui->UnitsChannel_2->setText("°С (RTD)");
     }
-    
+
     if (ui->ButonTermoparaChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(5);
-        ui->UnitsChannel_2->setText("mV");
+        options_channel2.SetSignalType(ModBus::TermoCoupleMeasure);
+        ui->UnitsChannel_2->setText("°С (TC)");
     }
-    
+
     if (ui->ButonImpulseChannel_2->isChecked())
     {
-        options_channel2.SetSignalType(6);
-        ui->UnitsChannel_2->setText("1");
+        options_channel2.SetSignalType(ModBus::ImpulseCounterMeasure);
+        ui->UnitsChannel_2->setText("imp.cnt");
     }
 }
 
@@ -181,7 +181,7 @@ void Options::Channel3TypeChange()
 {
     if (ui->ButonOtklChannel_3->isChecked())
     {
-        options_channel2.SetSignalType(1);
+        options_channel3.SetSignalType(ModBus::NoMeasure);
         ui->UnitsChannel_3->setText("None");
         ui->UnitsChannel_3->setEnabled(false);
         ui->VerhnPredelChannel_3->setEnabled(false);
@@ -200,34 +200,34 @@ void Options::Channel3TypeChange()
         ui->PeriodIzmerChannel_3->setEnabled(true);
     }
 
-    if (ui->ButonOtklChannel_3->isChecked())
-    {
-        options_channel3.SetSignalType(1);
-    }
-
     if (ui->ButonTokChannel_3->isChecked())
     {
-        options_channel3.SetSignalType(2);
+        options_channel3.SetSignalType(ModBus::CurrentMeasure);
+        ui->UnitsChannel_3->setText("mA");
     }
 
     if (ui->ButonNapryagenieChannel_3->isChecked())
     {
-        options_channel3.SetSignalType(3);
+        options_channel3.SetSignalType(ModBus::VoltageMeasure);
+        ui->UnitsChannel_3->setText("V");
     }
 
     if (ui->ButonResistorChannel_3->isChecked())
     {
-        options_channel3.SetSignalType(4);
+        options_channel3.SetSignalType(ModBus::TermoResistanceMeasure);
+        ui->UnitsChannel_3->setText("°С (RTD)");
     }
 
     if (ui->ButonTermoparaChannel_3->isChecked())
     {
-        options_channel3.SetSignalType(5);
+        options_channel3.SetSignalType(ModBus::TermoCoupleMeasure);
+        ui->UnitsChannel_3->setText("°С (TC)");
     }
 
     if (ui->ButonImpulseChannel_3->isChecked())
     {
-        options_channel3.SetSignalType(6);
+        options_channel3.SetSignalType(ModBus::ImpulseCounterMeasure);
+        ui->UnitsChannel_3->setText("imp.cnt");
     }
 }
 
@@ -235,7 +235,7 @@ void Options::Channel4TypeChange()
 {
     if (ui->ButonOtklChannel_4->isChecked())
     {
-        options_channel2.SetSignalType(1);
+        options_channel4.SetSignalType(ModBus::NoMeasure);
         ui->UnitsChannel_4->setText("None");
         ui->UnitsChannel_4->setEnabled(false);
         ui->VerhnPredelChannel_4->setEnabled(false);
@@ -254,34 +254,34 @@ void Options::Channel4TypeChange()
         ui->PeriodIzmerChannel_4->setEnabled(true);
     }
 
-    if (ui->ButonOtklChannel_4->isChecked())
-    {
-        options_channel4.SetSignalType(1);
-    }
-
     if (ui->ButonTokChannel_4->isChecked())
     {
-        options_channel4.SetSignalType(2);
+        options_channel4.SetSignalType(ModBus::CurrentMeasure);
+        ui->UnitsChannel_4->setText("mA");
     }
 
     if (ui->ButonNapryagenieChannel_4->isChecked())
     {
-        options_channel4.SetSignalType(3);
+        options_channel4.SetSignalType(ModBus::VoltageMeasure);
+        ui->UnitsChannel_4->setText("V");
     }
 
     if (ui->ButonResistorChannel_4->isChecked())
     {
-        options_channel4.SetSignalType(4);
+        options_channel4.SetSignalType(ModBus::TermoResistanceMeasure);
+        ui->UnitsChannel_4->setText("°С (RTD)");
     }
 
     if (ui->ButonTermoparaChannel_4->isChecked())
     {
-        options_channel4.SetSignalType(5);
+        options_channel4.SetSignalType(ModBus::TermoCoupleMeasure);
+        ui->UnitsChannel_4->setText("°С (TC)");
     }
 
     if (ui->ButonImpulseChannel_4->isChecked())
     {
-        options_channel4.SetSignalType(6);
+        options_channel4.SetSignalType(ModBus::ImpulseCounterMeasure);
+        ui->UnitsChannel_4->setText("imp.cnt");
     }
 }
 

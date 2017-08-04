@@ -83,13 +83,18 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-    channel1object.ReadSingleChannelOptionFromFile(1);
-    channel2object.ReadSingleChannelOptionFromFile(2);
-    channel3object.ReadSingleChannelOptionFromFile(3);
-    channel4object.ReadSingleChannelOptionFromFile(4);
+//    channel1object.ReadSingleChannelOptionFromFile(1);
+//    channel2object.ReadSingleChannelOptionFromFile(2);
+//    channel3object.ReadSingleChannelOptionFromFile(3);
+//    channel4object.ReadSingleChannelOptionFromFile(4);
 
-    //SetWindowHeightPixels(GetMonitorHeightPixels());
-    //SetWindowWidthPixels(GetMonitorWidthPixels());
+//    //SetWindowHeightPixels(GetMonitorHeightPixels());
+//    //SetWindowWidthPixels(GetMonitorWidthPixels());
+
+//    channel1object.SetSignalType(3);
+//    channel2object.SetSignalType(3);
+//    channel3object.SetSignalType(3);
+//    channel4object.SetSignalType(3);
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
@@ -109,7 +114,7 @@ void MainWindow::MainWindowInitialization()
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    WorkerThread ->start(); // запускаем сам поток
+    WorkerThread->start(); // запускаем сам поток
 
     startWorkSignal(); // запускаем работу в отдельном потоке
 
