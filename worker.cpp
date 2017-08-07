@@ -117,7 +117,7 @@ void worker::StopWorkSlot()
     isstopped = true;
     isrunning = false;
 
-    qDebug() << "stopped";
+//    qDebug() << "stopped";
     emit stopped();
 
     this->thread()->usleep(50000);

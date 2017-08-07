@@ -4,7 +4,7 @@
 
 #define CURRENT_VER "0.51" //версия ПО
 
-#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
+//#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
 
 #ifdef LinuxBoard
