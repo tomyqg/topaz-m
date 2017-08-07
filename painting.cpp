@@ -512,7 +512,7 @@ void MainWindow::PaintPolarDiagramm()
         PolarChartPointsChannel4.clear();
     }
 
-    painter.setRenderHint(QPainter::Antialiasing, true);
+    //    painter.setRenderHint(QPainter::Antialiasing, true);
 
     painter.setPen(QPen(Channel1Color, 4));
     painter.drawPolyline(PolarChartPointsChannel1);
@@ -536,7 +536,7 @@ void MainWindow::PaintOnWidget()
     case Options::TrendsCyfra:
         PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::Trends:
-        PaintStatesAndAlertsAtTop();PaintStatesAndAlertsAtTop();break;
+        PaintStatesAndAlertsAtTop();break;
     case Options::TrendsCyfraBars:
         PaintStatesAndAlertsAtTop();PaintCyfrasBottom();break;
     case Options::BarsCyfra:
@@ -551,7 +551,6 @@ void MainWindow::PaintOnWidget()
 void MainWindow::ReactOnMouseSlide()
 {
     int  y   =  QCursor::pos().y() ;
-    //    int  x   =  QCursor::pos().x() ;
     int ky = 20 + y*3;
 
     ui->customPlot->yAxis->setRange(-ky, ky);
@@ -561,9 +560,7 @@ void MainWindow::ReactOnTouch()
 {
     // подкрашиваем квадраты куда коснулись в желтый цвет
     // отступ  сверху и слева в пикселях
-    //высчитываются
-    //    int xcenter  = ui->MessagesWidget->width()-borderwidth/2;// высота всей области построения в пикселях
-    //    int ycenter  = ui->MessagesWidget->height()- borderwidth/2; // ширина всей области построения в пикселях
+    // высчитываются
 
     int xcenter  = 652;// общая точка четырех квадратов по иксу в пикселях
     int ycenter  = 384; // ширина всей области построения в пикселях
@@ -610,12 +607,10 @@ void MainWindow::ReactOnTouch()
 
     channel1object.SetChannelName("x : " + x + "; Y : " + y);
 
-    // проверка если ткнули пальцем в окно квитирования
-
-    if ((xpos>confirmwindowposx) &&
-            (xpos<confirmwindowposx2) &&
-            (ypos>confirmwindowposy) &&
-            (ypos<confirmwindowposy2) )
+    if      ((xpos>confirmwindowposx) &&
+             (xpos<confirmwindowposx2) &&
+             (ypos>confirmwindowposy) &&
+             (ypos<confirmwindowposy2) )
     {
         if (channel4object.GetConfirmationNeed() == true)
         {

@@ -47,7 +47,6 @@ MainWindow::~MainWindow()
 {
     MessageWrite mr1 ("Programm Closed");
     mr1.WriteAllLogToFile();
-
     delete ui;
 }
 
@@ -184,14 +183,10 @@ void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
     foreach(QWidget *w, pw->findChildren<QWidget*>())
     {
         QRect g = w->geometry();
-
         w->setMinimumSize(w->minimumWidth() * mratio, w->minimumHeight() * mratio);
         w->setMaximumSize(w->maximumWidth() * mratio, w->maximumHeight() * mratio);
-
         w->resize(w->width() * mratio, w->height() * mratio);
-
         w->move(QPoint(g.x() * mratio, g.y() * mratio));
-        //qw.resizeFont(w);
     }
 
     foreach(QLayout *l, pw->findChildren<QLayout*>())
@@ -240,18 +235,14 @@ void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresoluti
 
     foreach(QWidget * widget, widgets)
     {
-
         QRect g = widget->geometry();
-
         widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
         widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
-
         widget->resize(widget->width() * xratio, widget->height() * yratio);
         widget->move(QPoint(g.x() * xratio, g.y() * yratio));
     }
     return;
 }
-
 
 void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
 {
@@ -266,10 +257,8 @@ void MainWindow::resizeSelf(qreal xresolution, qreal yresolution)
     foreach(QWidget * widget, widgets)
     {
         QRect g = widget->geometry();
-
         widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
         widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
-
         widget->resize(widget->width() * xratio, widget->height() * yratio);
         widget->move(QPoint(g.x() * xratio, g.y() * yratio));
     }

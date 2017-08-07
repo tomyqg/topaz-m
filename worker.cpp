@@ -104,7 +104,6 @@ void worker::do_Work()
                     }
     }
 
-
     emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
     // do important work here
     // allow the thread's event loop to process other events before doing more "work"
@@ -116,10 +115,7 @@ void worker::StopWorkSlot()
 {
     isstopped = true;
     isrunning = false;
-
-//    qDebug() << "stopped";
     emit stopped();
-
     this->thread()->usleep(50000);
 }
 
@@ -129,7 +125,6 @@ void worker::StartWorkSlot()
     isrunning = true;
     emit running();
     do_Work();
-
 }
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
@@ -227,7 +222,5 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     default:
         break;
     }
-
-    thread()->usleep(100000);
-    //    thread()->sleep(10);
+    thread()->usleep(10000);
 }

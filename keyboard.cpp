@@ -78,8 +78,6 @@ void keyboard::ChangeLanguage(char eng)
 
         foreach(QPushButton * widget, widgets)
         {
-            //qDebug() << widget;
-
             if (widget->property("text").toString() == "q")
                 widget->setProperty("text", "й");
 
@@ -178,8 +176,6 @@ void keyboard::ChangeLanguage(char eng)
 
         foreach(QPushButton * widget, widgets)
         {
-            //qDebug() << widget;
-
             if (widget->property("text").toString() == "й")
                 widget->setProperty("text", "q");
 
@@ -209,9 +205,6 @@ void keyboard::ChangeLanguage(char eng)
 
             if (widget->property("text").toString() == "з")
                 widget->setProperty("text", "p");
-
-
-
 
             if (widget->property("text").toString() == "ф")
                 widget->setProperty("text", "a");
@@ -245,7 +238,6 @@ void keyboard::ChangeLanguage(char eng)
 
             if (widget->property("text").toString() == "э")
                 widget->setProperty("text", "'");
-
 
             if (widget->property("text").toString() == "я")
                 widget->setProperty("text", "z");

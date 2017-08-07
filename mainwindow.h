@@ -192,7 +192,6 @@ private:
     QThread *WorkerThread;
     QThread *thread;
     QThread *optionsthread;
-    ChannelOptions *objectwithsignal;
 
 
 

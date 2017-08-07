@@ -1,7 +1,6 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-
 #define CURRENT_VER "0.51" //версия ПО
 
 //#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
@@ -40,15 +39,13 @@
 #define ObryvErrorMessage "обрыв"
 
 #define NaNMessage "nan"
-
-#define MultiThread // если убрать , то приложение будет однопоточное (пока многопоточное предпочтительнее по скорости и т.п.)
-
+#define MultiThread
 #define ValuesUpdateTimer 100
 #define GraphicsUpdateTimer 500
-#define ArchiveUpdateTimer 5000
-#define DateLabelUpdateTimer 1000 // время обновления времени
-#define XRange 300
-#define YRange 180
-#define GraphWidthinPixels 3 // толщина графика линий в пикселях
+#define ArchiveUpdateTimer 5000      // время архивации на флешку в секундах
+#define DateLabelUpdateTimer 1000    // время обновления времени
+#define XRange 300                   // изначальный размер графика по иксу в 1 сторону
+#define YRange 180                   // изначальный размер графика по игреку в 1 сторону
+#define GraphWidthinPixels 2         // толщина графика линий в пикселях
 
 #endif // DEFINES_H

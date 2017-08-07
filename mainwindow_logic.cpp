@@ -88,13 +88,13 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-//    //SetWindowHeightPixels(GetMonitorHeightPixels());
-//    //SetWindowWidthPixels(GetMonitorWidthPixels());
+    //    //SetWindowHeightPixels(GetMonitorHeightPixels());
+    //    //SetWindowWidthPixels(GetMonitorWidthPixels());
 
-//    channel1object.SetSignalType(3);
-//    channel2object.SetSignalType(3);
-//    channel3object.SetSignalType(3);
-//    channel4object.SetSignalType(3);
+    //    channel1object.SetSignalType(3);
+    //    channel2object.SetSignalType(3);
+    //    channel3object.SetSignalType(3);
+    //    channel4object.SetSignalType(3);
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
@@ -102,14 +102,12 @@ void MainWindow::MainWindowInitialization()
     //SetWindowWidthPixels(1024);
     //SetWindowHeightPixels(768);
 
-#ifdef MultiThread
-
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-//    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+    //    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
     connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
@@ -118,31 +116,18 @@ void MainWindow::MainWindowInitialization()
 
     WorkerThread->start(); // запускаем сам поток
 
-//    startWorkSignal(); // запускаем работу в отдельном потоке
-
-#endif
-
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 
     //    op.deleteLater();
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
     needConfirmation = 1;
-
-    // connection for accessing to UI from another class
-    objectwithsignal = new ChannelOptions;
-
-    //    qRegisterMetaType<ChannelOptions&>("ChannelOptions");
-    //    connect( this, SIGNAL(ThreadSignal( ChannelOptions* )), MB, SLOT(ThreadReact( ChannelOptions*)) ); //
-    //    ThreadSignal(&channel1object);
-    //    connect( options1, SIGNAL(destroyed(QObject*)), this, SLOT( updateText(const QString) ) ); //
 }
 
 void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
     fisttime = QDateTime::currentDateTime();
-
     // очищаем dates
 
     Dates.clear();
@@ -191,13 +176,9 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-
     mr.WriteAllLogToFile();
-
     Messages *messages = new Messages;
-
     connect( messages, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
-
     this->resizeWindow(*messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
     messages->setModal(true);
     messages->exec();
@@ -214,12 +195,10 @@ void MainWindow::DelaySec(int n)
 
 void MainWindow::OptionsWindowThread()
 {
-
 }
 
 void MainWindow::OpenOptionsWindow()
 {
-
     //    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
@@ -279,7 +258,6 @@ void MainWindow::InitProcessorMinFreq()
 {
     // an object for make terminal requests
     QProcess process;
-
     // the maximum processor speed
     process.startDetached("sudo cpufreq-set -f 300MHz");
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
@@ -295,12 +273,10 @@ void MainWindow::InitTimers()
     halfSecondTimer  = new QTimer();
 
 #ifdef MultiThread
-
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
-
 #endif
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
@@ -324,7 +300,6 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-    objectwithsignal->updateUI(local.time().toString());
 }
 
 void MainWindow::LabelsUpdate()
@@ -434,4 +409,3 @@ void MainWindow::CheckState(ChannelOptions&  channel)
         mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
     }
 }
-
