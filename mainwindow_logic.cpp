@@ -358,7 +358,6 @@ void MainWindow::GetAllUartPorts()
     for (const QSerialPortInfo &serialPortInfo : serialPortInfos) {
         infosss += serialPortInfo.portName();
     }
-    ui->textEdit_2->setText(infosss);
 }
 
 void MainWindow::CheckState(ChannelOptions&  channel)

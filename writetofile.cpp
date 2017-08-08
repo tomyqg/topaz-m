@@ -180,6 +180,9 @@ void MessageWrite::LogClear()
 
 void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
+    this->update(); // мы апдейтим нашу главную форму
+
+    // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
     QJsonObject archivechannel3;

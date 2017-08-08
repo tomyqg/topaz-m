@@ -95,19 +95,9 @@ void MainWindow::updateDateLabel()
     DateUpdate();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    PowerOff();
-}
-
 void MainWindow::on_pushButton_2_clicked()
 {
     OpenOptionsWindow();
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    CloseApplication();
 }
 
 void MainWindow::on_pushButton_4_clicked()

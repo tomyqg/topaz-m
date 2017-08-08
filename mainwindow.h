@@ -139,14 +139,8 @@ private slots:
     void GrafsUpdateNone();
     void AddValuesToBuffer();
     void DelaySec(int n);
-
-    void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
-
-
-
     void on_RelayChanger_toggled(bool checked);
 
 signals:

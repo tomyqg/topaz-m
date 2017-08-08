@@ -43,7 +43,7 @@ void MainWindow::PaintCyfrasBottom()
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
     {
         painter.setBrush(QBrush(GetChannel1Color(), Qt::Dense4Pattern));
@@ -131,27 +131,24 @@ void MainWindow::PaintCyfrasRight()
     int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
     int otstupsnizu = smallrectingleheight + 24;
     int otstupsverhu = widgheight - otstupsnizu;
-    int otstupsverhu1 = widgheight - otstupsnizu*2;
-    int otstupsverhu2 = widgheight - otstupsnizu*3;
-    int otstupsverhu3 = widgheight - otstupsnizu*4;
+    int otstupsverhu1 = otstupsverhu-smallrectingleheight;
+    int otstupsverhu2 = otstupsverhu-smallrectingleheight*2;
+    int otstupsverhu3 = otstupsverhu-smallrectingleheight*3;
 
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
-    {
-        painter.setBrush(QBrush(GetChannel1Color(), Qt::Dense4Pattern));
-        painter.drawRect(rect1coords);
-        painter.setBrush(QBrush(GetChannel2Color(), Qt::Dense4Pattern));
-        painter.drawRect(rect2coords);
-        painter.setBrush(QBrush(GetChannel3Color(), Qt::Dense4Pattern));
-        painter.drawRect(rect3coords);
-        painter.setBrush(QBrush(GetChannel4Color(), Qt::Dense4Pattern));
-        painter.drawRect(rect4coords);
-//        qDebug() << smallrectinglewidth;
-    }
+    painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
+    painter.drawRect(rect1coords);
+    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
+    painter.drawRect(rect2coords);
+    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
+    painter.drawRect(rect3coords);
+    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
+    painter.drawRect(rect4coords);
 
     painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
 
@@ -265,7 +262,7 @@ void MainWindow::PaintCyfrasFullScreen()
 
     painter.begin(ui->MessagesWidget);
     //    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
-    painter.setPen(QPen(Qt::black, 4));
+    painter.setPen(QPen(Qt::black, 2));
     painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
     painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
@@ -351,7 +348,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.setPen(QPen(Qt::black, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
     painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(2, 2, alertwindowwidth, alertwindowheight);
     painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
@@ -609,8 +606,6 @@ void MainWindow::PaintPolarDiagramm()
         PolarChartPointsChannel4.clear();
     }
 
-
-
     painter.setPen(QPen(Channel1Color, 4));
     painter.drawPolyline(PolarChartPointsChannel1);
     painter.setPen(QPen(Channel2Color, 4));
@@ -632,22 +627,23 @@ void MainWindow::PaintOnWidget()
         PaintCyfrasFullScreen();
         break;
     case Options::TrendsCyfra:
-//        PaintStatesAndAlertsAtTop();
+        PaintStatesAndAlertsAtTop();
         PaintCyfrasRight();
         break;
     case Options::Trends:
-//        PaintStatesAndAlertsAtTop();
+        PaintStatesAndAlertsAtTop();
         break;
     case Options::TrendsCyfraBars:
-//        PaintStatesAndAlertsAtTop();
-        PaintCyfrasRight();
+        PaintStatesAndAlertsAtTop();
+        PaintCyfrasBottom();
         break;
     case Options::BarsCyfra:
-//        PaintStatesAndAlertsAtTop();
-        PaintCyfrasRight();
+        PaintStatesAndAlertsAtTop();
+        PaintCyfrasBottom();
         break;
     case Options::Polar:
-//        PaintStatesAndAlertsAtTop();
+        PaintStatesAndAlertsAtTop();
+        PaintCyfrasRight();
         PaintPolarDiagramm();
         break;
     default:
@@ -712,7 +708,7 @@ void MainWindow::ReactOnTouch()
         SetChannel4Color(Qt::yellow);
     }
 
-    channel1object.SetChannelName("x : " + x + "; Y : " + y);
+//    channel1object.SetChannelName("x : " + x + "; Y : " + y);
 
     if      ((xpos>confirmwindowposx) &&
              (xpos<confirmwindowposx2) &&
@@ -732,5 +728,38 @@ void MainWindow::ReactOnTouch()
         if (channel1object.GetConfirmationNeed() == true) {
             channel1object.SetConfirmationNeed(false);
         }
+    }
+
+
+
+    int x1right  = 940;
+    int x2right  = 1240;
+    int y0right  = 162;
+    int y1right  = 258;
+    int y2right  = 258;
+    int y3right  = 371;
+    int y4right  = 468;
+    int y5right  = 567;
+
+    if      ((xpos>x1right) &&
+             (xpos<x2right) &&
+             (ypos>y0right) &&
+             (ypos<y1right) )
+    {
+        {
+            QPainter painter;
+            painter.begin(ui->MessagesWidget);
+            painter.setRenderHint(QPainter::Antialiasing, false);
+            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+
+            int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
+            int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
+            painter.setBrush(QBrush(Qt::blue, Qt::Dense2Pattern));
+            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,"Allelua");
+
+            painter.end();
+        }
+
     }
 }
