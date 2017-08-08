@@ -50,4 +50,10 @@
 #define YRange 180                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 
+#define rect1coords smallrectinglewidth*3-5, otstupsverhu3, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
+#define rect2coords smallrectinglewidth*3-5, otstupsverhu2, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
+#define rect3coords smallrectinglewidth*3-5, otstupsverhu1, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
+#define rect4coords smallrectinglewidth*3-5, otstupsverhu, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
+
+
 #endif // DEFINES_H

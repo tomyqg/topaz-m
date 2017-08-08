@@ -93,6 +93,7 @@ private:
     void ReactOnTouch();
     void ReactOnMouseSlide();
     void PaintCyfrasBottom();
+    void PaintCyfrasRight();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
     void PaintStatesAndAlertsAtTop();

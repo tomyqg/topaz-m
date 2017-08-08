@@ -168,7 +168,6 @@ void MessageWrite::LogAddMessage(QString nm)
     themessage["D"] = local.date().toString("dd/MM/yy");
     themessage["M"] = nm;
     messagesqueue.append(themessage);
-    qDebug() << themessage;
 }
 
 void MessageWrite::LogClear()
