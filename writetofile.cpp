@@ -143,14 +143,14 @@ void MessageWrite::WriteAllLogToFile()
     Options opt;
     double maxmes  = opt.GetLogMessagesLimit();
 
-    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
-    {
-        messagesqueue.removeFirst();
-    }
-    archive["messagesqueue"] = messagesqueue;
+//    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
+//    {
+//        messagesqueue.removeFirst();
+//    }
+    archive["messages"] = messagesqueue;
     archive["totalmsg"] = messagesqueue.count();
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtolog);
+    QFile file(pathtomessages);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
@@ -164,15 +164,16 @@ void MessageWrite::LogAddMessage(QString nm)
 {
     QJsonObject themessage;
     QDateTime local (QDateTime::currentDateTime());
-    themessage["Time"] = local.time().toString();
-    themessage["Date"] = local.date().toString("dd/MM/yy");
-    themessage["Message"] = nm;
+    themessage["T"] = local.time().toString();
+    themessage["D"] = local.date().toString("dd/MM/yy");
+    themessage["M"] = nm;
     messagesqueue.append(themessage);
+    qDebug() << themessage;
 }
 
 void MessageWrite::LogClear()
 {
-    QFile file(pathtolog);
+    QFile file(pathtomessages);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     file.close();
@@ -193,56 +194,72 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
 
     for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
         valuesarray1.append(QString::number( Y_coordinates_Chanel_1.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-
-    archivechannel1["size"] = valuesarray1.size();
-    archivechannel1["values"] = valuesarray1;
-    archivechannel1["name"] = "channel_1";
-
     for(int y=0; y<Y_coordinates_Chanel_2.size(); y++)
         valuesarray2.append(QString::number( Y_coordinates_Chanel_2.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-//        valuesarray2.append(Y_coordinates_Chanel_2.at(y));
-
-    archivechannel2["size"] = valuesarray2.size();
-    archivechannel2["values"] = valuesarray2;
-    archivechannel2["name"] = "channel_2";
-
     for(int y=0; y<Y_coordinates_Chanel_3.size(); y++)
         valuesarray3.append(QString::number( Y_coordinates_Chanel_3.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-
-    archivechannel3["size"] = valuesarray3.size();
-    archivechannel3["values"] = valuesarray3;
-    archivechannel3["name"] = "channel_3";
-
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
         valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
+    QString channel1period = QString::number( channel1object.GetMeasurePeriod(), 'f', 1);
+    QString channel2period = QString::number( channel2object.GetMeasurePeriod(), 'f', 1);
+    QString channel3period = QString::number( channel3object.GetMeasurePeriod(), 'f', 1);
+    QString channel4period = QString::number( channel4object.GetMeasurePeriod(), 'f', 1);
+
+    archivechannel1["size"] = valuesarray1.size();
+    archivechannel1["values"] = valuesarray1;
+    archivechannel1["name"] = "AI4ch1";
+    archivechannel1["T"] = channel1period;
+
+
+    archivechannel2["size"] = valuesarray2.size();
+    archivechannel2["values"] = valuesarray2;
+    archivechannel2["name"] = "AI4ch2";
+    archivechannel2["T"] = channel2period;
+
+
+    archivechannel3["size"] = valuesarray3.size();
+    archivechannel3["values"] = valuesarray3;
+    archivechannel3["name"] = "AI4ch3";
+    archivechannel3["T"] = channel3period;
+
+
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;
-    archivechannel4["name"] = "channel_4";
+    archivechannel4["name"] = "AI4ch4";
+    archivechannel4["T"] = channel4period;
 
     archives.append(archivechannel1);
     archives.append(archivechannel2);
     archives.append(archivechannel3);
     archives.append(archivechannel4);
 
-    QDateTime end(QDateTime::currentDateTime());
+    QDateTime CurrentDateTime(QDateTime::currentDateTime());
     archive["Archives"] = archives;
     archive["StartDate"] = MainWindow::startdate;
     archive["StartTime"] = MainWindow::starttime;
-    archive["EndDate"] = end.toString("dd/MM/yy");
-    archive["EndTime"] = end.toString("hh:mm:ss");
+    archive["EndDate"] = CurrentDateTime.toString("dd/MM/yy");
+    archive["EndTime"] = CurrentDateTime.toString("hh:mm:ss");
+
+    MainWindow::startdate = CurrentDateTime.toString("dd/MM/yy");
+    MainWindow::starttime = CurrentDateTime.toString("hh:mm:ss");
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtolog);
+
+    QString pathtologs = pathtolog;
+    // создаем файл с именем текстового файла архива
+    pathtologs.append(CurrentDateTime.toString("ddMMyy"));
+    pathtologs.append(CurrentDateTime.toString("hhmmss"));
+    pathtologs.append(".txt");
+    QFile file(pathtologs);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
     out << setstr;
     file.close();
-    //    qDebug() << "writearchive";
 }
 
-void MainWindow::CreateMODBusConfigFile() // пишет архив в файл каждые пять сек... вроде...
+void MainWindow::CreateMODBusConfigFile() // создает файл дескрипотор системы
 {
     QJsonArray Devices;
     QJsonObject Device1;
@@ -254,7 +271,6 @@ void MainWindow::CreateMODBusConfigFile() // пишет архив в файл �
 
     QJsonArray Device2ReadCommands;
     QJsonArray Device2WriteCommands;
-
 
     // конфиг для платы 4AI
     Device1ReadCommands.append(0x04); // на чтение аналогового ввода? Команда 0x04

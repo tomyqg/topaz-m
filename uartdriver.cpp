@@ -18,10 +18,8 @@ extern QString inputstr;
 double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
-uint ModBus::ConnectFailure =false;
 
-
-quint16 ModBus::Calculate_crc16_modbus(const QByteArray &array)
+quint16 UartDriver::Calculate_crc16_modbus(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -489,8 +487,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
         uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo);
 
-        ModBus modb;
-        uint16_t crc = modb.Calculate_crc16_modbus(InputDataByteArrayNoCRC);
+        uint16_t crc = Calculate_crc16_modbus(InputDataByteArrayNoCRC);
 
         if (inpcrc == crc)
         {
@@ -574,10 +571,6 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
     //return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
 }
 
-double ModBus::DataChannel1Read()
-{
-    return DataChannelRead(ModBus::Board4AIAddress);
-}
 
 double ModBus::DataChannelRead (char channel)
 {

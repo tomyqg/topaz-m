@@ -12,7 +12,8 @@
 #define pathtosystemoptions  "/opt/systemoptions.txt"
 #define pathtoarchive  "/opt/archive.txt"
 #define pathtooptions  "/opt/options.txt"
-#define pathtolog  "/opt/Log.txt"
+#define pathtolog  "/opt/Log/"
+#define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
 #define uartsleep DelayMsec(25);
 #define threadsleep DelayMsec(100);
@@ -26,7 +27,8 @@
 #define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
 #define pathtooptions  "C:/Work/options.txt"
-#define pathtolog  "C:/Work/Log.txt"
+#define pathtolog  "C:/Work/txtes/"
+#define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
 #define pathtologotip  "C:/Work/logo.jpg"
 #endif
@@ -42,7 +44,7 @@
 #define MultiThread
 #define ValuesUpdateTimer 100
 #define GraphicsUpdateTimer 500
-#define ArchiveUpdateTimer 5000      // время архивации на флешку в секундах
+#define ArchiveUpdateTimer 30000      // время архивации на флешку в секундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 180                   // изначальный размер графика по игреку в 1 сторону

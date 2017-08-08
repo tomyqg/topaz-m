@@ -107,16 +107,16 @@ void Options::ReadChannelsOptionsFromFile()
 
 QJsonArray MessageWrite::LogMessageRead()
 {
-    QFile file(pathtolog);
+    QFile file(pathtomessages);
     file.open(QIODevice::ReadOnly);
     QTextStream in(&file);
     QString sss = in.readLine();
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
-    QJsonArray array = json["messagesqueue"].toArray();
+    QJsonArray array = json["messages"].toArray();
     MessageWrite::messagesqueue = array;
+    qDebug() << array;
     file.close();
-    //    qDebug() << MessageWrite::messagesqueue;
     return MessageWrite::messagesqueue;
 }
 

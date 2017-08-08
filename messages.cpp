@@ -21,7 +21,7 @@ Messages::Messages(QDialog *parent) :
     QJsonArray messagesarray = mr2.LogMessageRead();
     for (int var = 0; var < messagesarray.count() ; ++var) {
         QJsonObject mes = messagesarray.at(var).toObject();
-        ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("Date").toString() +" "+  mes.value("Time").toString()+" "+ mes.value("Message").toString());
+        ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("D").toString() +" "+  mes.value("T").toString()+" "+ mes.value("M").toString());
     }
     ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
     ui->listWidget->scrollToBottom();
@@ -42,14 +42,14 @@ void Messages::on_pushButton_clicked()
 
 MessageWrite::MessageWrite()
 {
-//    LogMessageRead();
+    LogMessageRead();
 //    LogAddMessage("message");
 }
 
 MessageWrite::MessageWrite( QString nm)
 {
     LogMessageRead();
-    LogAddMessage(nm);
+//    LogAddMessage(nm);
 }
 
 MessageWrite::~MessageWrite()

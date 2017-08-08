@@ -88,8 +88,7 @@ void MainWindow::AddValuesToBuffer()
 
     b++;
 
-    QDateTime local(QDateTime::currentDateTime());
-    mr.LogAddMessage(local.time().toString());
+
 //    stopWorkSignal();
 }
 

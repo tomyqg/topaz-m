@@ -47,8 +47,12 @@ void MainWindow::MainWindowInitialization()
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
     MessageWrite mr ;
-    mr.LogAddMessage("Programm Started");
+
+    qDebug () << mr.LogMessageRead();
+
+//    mr.LogAddMessage("Programm Started");
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
@@ -64,8 +68,6 @@ void MainWindow::MainWindowInitialization()
     tmr->setInterval(ValuesUpdateTimer);
 
     QTimer *tmrarchive = new QTimer(this);
-    tmrarchive->setInterval(ArchiveUpdateTimer);
-
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
 
@@ -299,6 +301,7 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
+    mr.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
@@ -373,7 +376,7 @@ void MainWindow::GetAllUartPorts()
 
 void MainWindow::CheckState(ChannelOptions&  channel)
 {
-    channel.GetCurrentChannelValue();
+//    channel.GetCurrentChannelValue();
     double channelcurrentvalue = channel.GetCurrentChannelValue();
     double channelstate1value = channel.GetState1Value();
     double channelstate2value = channel.GetState2Value();

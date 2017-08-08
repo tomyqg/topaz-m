@@ -27,6 +27,7 @@ protected:
     void DelayMsec(int n);
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
+        quint16 Calculate_crc16_modbus(const QByteArray &array);
 
 public:
     static double channelinputbuffer[4];
@@ -39,8 +40,6 @@ class ModBus: public UartDriver
     Q_OBJECT
 
 private:
-
-    static uint ConnectFailure;
 
     ChannelOptions channel1objectModbus;
     ChannelOptions channel2objectModbus;
@@ -56,7 +55,7 @@ public slots:
     void  SetChannelSignalType(uint16_t channel, uint16_t additionalparametr);
     void  SetChannelAdditionalParametr(uint16_t channel, uint16_t signaltype);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
-    quint16 Calculate_crc16_modbus(const QByteArray &array);
+
     uint16_t GetChannelSignalType(uint8_t channel);
 
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
@@ -67,8 +66,6 @@ public:
     {
 //        qDebug() << "Modbus Deleted";
     }
-
-    void SetConnectFailure(uint newconnectfailurestate) {ConnectFailure = newconnectfailurestate; }
 
     QByteArray ModBusMakeRequest(
             char DeviceAdress,
@@ -99,8 +96,6 @@ signals:
 
 public:
     double DataChannelRead (char channel);
-    double DataChannel1Read();
-
 
 //    Значение:
 //    0 – канал выключен
