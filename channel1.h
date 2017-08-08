@@ -50,7 +50,7 @@ public:
     void SetState2LowMessage(QString newmessage);
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
-    void SetCurrentChannelValue(bool value);
+    void SetCurrentChannelValue(double value);
 
     bool IsHighState1Setted();
     bool IsLowState1Setted();

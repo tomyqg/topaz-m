@@ -143,10 +143,10 @@ void MessageWrite::WriteAllLogToFile()
     Options opt;
     double maxmes  = opt.GetLogMessagesLimit();
 
-//    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
-//    {
-//        messagesqueue.removeFirst();
-//    }
+    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
+    {
+        messagesqueue.removeFirst();
+    }
     archive["messages"] = messagesqueue;
     archive["totalmsg"] = messagesqueue.count();
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);

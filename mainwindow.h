@@ -31,7 +31,7 @@ public:
 
     mathresolver eee;
 
-    MessageWrite mr;
+    MessageWrite messwrite;
 
     void ShowMessageBox (QString title,QString message);
 

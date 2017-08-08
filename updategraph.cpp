@@ -87,10 +87,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     b++;
-
-    QDateTime local(QDateTime::currentDateTime());
-    mr.LogAddMessage(local.time().toString());
-//    stopWorkSignal();
+    stopWorkSignal();
 }
 
 void MainWindow::UpdateGraphics()
@@ -337,8 +334,7 @@ void MainWindow::UpdateChannel1Slot()
     UartDriver::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-//    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
-    channel1object.SetCurrentChannelValue(b);
+    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
     CheckState(channel1object);
 }
 
@@ -348,6 +344,7 @@ void MainWindow::UpdateChannel2Slot()
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
     channel2object.SetCurrentChannelValue(UartDriver::channelinputbuffer[1]);
+//    qDebug()<<UartDriver::channelinputbuffer[1];
     CheckState(channel2object);
 }
 

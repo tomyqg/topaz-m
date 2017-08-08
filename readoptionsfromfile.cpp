@@ -115,7 +115,6 @@ QJsonArray MessageWrite::LogMessageRead()
     QJsonObject json = doc.object();
     QJsonArray array = json["messages"].toArray();
     MessageWrite::messagesqueue = array;
-    qDebug() << array;
     file.close();
     return MessageWrite::messagesqueue;
 }

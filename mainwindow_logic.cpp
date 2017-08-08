@@ -48,11 +48,9 @@ void MainWindow::MainWindowInitialization()
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
-    MessageWrite mr ;
-
-    qDebug () << mr.LogMessageRead();
-
-//    mr.LogAddMessage("Programm Started");
+    //    MessageWrite mr ;
+    messwrite.LogAddMessage("Programm Started");
+    //    mr.deleteLater();
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
@@ -90,19 +88,8 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-    //    //SetWindowHeightPixels(GetMonitorHeightPixels());
-    //    //SetWindowWidthPixels(GetMonitorWidthPixels());
-
-    //    channel1object.SetSignalType(3);
-    //    channel2object.SetSignalType(3);
-    //    channel3object.SetSignalType(3);
-    //    channel4object.SetSignalType(3);
-
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
-
-    //SetWindowWidthPixels(1024);
-    //SetWindowHeightPixels(768);
 
     WorkerThread = new QThread;
     worker* myWorker = new worker;
@@ -120,6 +107,7 @@ void MainWindow::MainWindowInitialization()
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
+    op.deleteLater();
 
     //    op.deleteLater();
     InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
@@ -178,7 +166,7 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-    mr.WriteAllLogToFile();
+    messwrite.WriteAllLogToFile();
     Messages *messages = new Messages;
     connect( messages, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
     this->resizeWindow(*messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
@@ -193,7 +181,6 @@ void MainWindow::DelaySec(int n)
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
-
 
 void MainWindow::OptionsWindowThread()
 {
@@ -301,7 +288,7 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
-    mr.LogAddMessage(local.time().toString());
+    //    messwrite.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 }
 
@@ -376,7 +363,7 @@ void MainWindow::GetAllUartPorts()
 
 void MainWindow::CheckState(ChannelOptions&  channel)
 {
-//    channel.GetCurrentChannelValue();
+    //    channel.GetCurrentChannelValue();
     double channelcurrentvalue = channel.GetCurrentChannelValue();
     double channelstate1value = channel.GetState1Value();
     double channelstate2value = channel.GetState2Value();
@@ -387,21 +374,21 @@ void MainWindow::CheckState(ChannelOptions&  channel)
     {
         channel.LowState1Setted = false;
         channel.HighState1Setted = true;
-        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
     }
 
     // было превышение а стало норма
     else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.HighState1Setted == true ) )
     {
         channel.HighState1Setted = false;
-        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
+        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
     }
 
     // было уменьшение а стало норма
     else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.LowState1Setted == true ) )
     {
         channel.LowState1Setted = false;
-        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
+        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
     }
 
     //стало ниже нижней уставки
@@ -409,6 +396,6 @@ void MainWindow::CheckState(ChannelOptions&  channel)
     {
         channel.LowState1Setted = true;
         channel.HighState1Setted = false;
-        mr.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
+        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
     }
 }

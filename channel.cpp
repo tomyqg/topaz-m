@@ -205,7 +205,7 @@ double ChannelOptions::GetCurrentChannelValue()
     return currentvalue;
 }
 
-void ChannelOptions::SetCurrentChannelValue(bool value)
+void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = value;
 }
