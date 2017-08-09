@@ -306,12 +306,13 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QByteArray arraytofloat;
                     float val;
 
-                    InputDataByteArrayParsed = InputDataByteArray;
+//                    InputDataByteArrayParsed.clear();
+//                    InputDataByteArrayParsed = InputDataByteArray;
 
-                    arraytofloat.append(InputDataByteArrayParsed.at(5));
-                    arraytofloat.append(InputDataByteArrayParsed.at(6));
                     arraytofloat.append(InputDataByteArrayParsed.at(3));
                     arraytofloat.append(InputDataByteArrayParsed.at(4));
+                    arraytofloat.append(InputDataByteArrayParsed.at(5));
+                    arraytofloat.append(InputDataByteArrayParsed.at(6));
 
                     //convert hex to double
                     QDataStream stream(arraytofloat);
@@ -322,6 +323,8 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     qDebug() << "----------";
                     qDebug() << InputDataByteArray ;
                     qDebug() << InputDataByteArrayParsed;
+                    qDebug() << arraytofloat;
+
 
                     return val;
                 }
