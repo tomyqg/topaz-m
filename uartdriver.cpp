@@ -233,6 +233,9 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     QByteArray InputDataByteArray;
 
     char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
+
+    Address = 2;
+
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
     RegisterLenghtHi = (int) ((Lenght & 0xFF00)>>8);
@@ -253,7 +256,6 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
-    //    qDebug() << requestdata;
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
     if (InputDataByteArray.length()<3)
@@ -274,6 +276,8 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
             //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
             if (  (Function==0x04) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
             {
+
+
 
                 InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
                 InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
@@ -302,6 +306,8 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QByteArray arraytofloat;
                     float val;
 
+                    InputDataByteArrayParsed = InputDataByteArray;
+
                     arraytofloat.append(InputDataByteArrayParsed.at(5));
                     arraytofloat.append(InputDataByteArrayParsed.at(6));
                     arraytofloat.append(InputDataByteArrayParsed.at(3));
@@ -312,10 +318,16 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
                     stream >> val;
                     //
+
+                    qDebug() << "----------";
+                    qDebug() << InputDataByteArray ;
+                    qDebug() << InputDataByteArrayParsed;
+
                     return val;
                 }
                 else
                 {
+                    qDebug() << "BadCRC";
                     return ModBus::BadCRC;
                 }
             }
@@ -473,9 +485,21 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
             InputDataByteArray = serial.readAll();
         }
 
+        int lengggh = InputDataByteArray.length() ;
+        int lastindex = lengggh - 1;
+        int lastitem = InputDataByteArray.at(lastindex);
+        //qDebug() << lastitem;
+
+        if ((lastitem==-1) && (lengggh>9)) //(lengggh>9)&&
+        {
+            //            qDebug() << InputDataByteArray ;
+            qDebug() << "*****";
+            InputDataByteArray.remove(lastindex,1);
+//            qDebug() << InputDataByteArray;
+        }
+
         if (InputDataByteArray.length() < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
         {
-            int lengggh = InputDataByteArray.length() ;
             lengggh  = lengggh ;
             return 0;
         }
@@ -491,12 +515,18 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         if (inpcrc == crc)
         {
+            qDebug() << "Crc ok,return";
             return InputDataByteArray;
         }
         else
         {
+            qDebug() << "Crc Bad";
             return 0;
         }
+    }
+    else
+    {
+        qDebug() << "Not Open";
     }
     return 0;
 }

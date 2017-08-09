@@ -270,6 +270,7 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
 
     QJsonArray Device1ReadCommands;
     QJsonArray Device1WriteCommands;
+    QJsonArray Registration1,Registration2;
 
     QJsonArray Device2ReadCommands;
     QJsonArray Device2WriteCommands;
@@ -278,6 +279,9 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     Device1ReadCommands.append(0x04); // на чтение аналогового ввода? Команда 0x04
     Device1WriteCommands.append(0x06); // на запись аналогового вывода? Команда 0x06
 
+    Registration1.append("Screen");
+    Registration1.append("Memory");
+
     Device1["Address"] = 0x01;
     Device1["Name"] = "4AI";
     Device1["Speed"] = 9600;
@@ -285,11 +289,14 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     Device1["Stuff"] = "Stuff";
     Device1["ReadCommands"] = Device1ReadCommands;
     Device1["WriteCommands"] = Device1WriteCommands;
-    Device1["Type"] = "float";
+    Device1["DataType"] = "float";
+    Device1["Registration"] = Registration1;
+
 
     // конфиг для платы Relays
     Device2ReadCommands.append(0x01); //чтение дискретного вывода? Команда 0x01
     Device2WriteCommands.append(0x05); // на запись дискретного вывода? Команда 0x05
+    Registration1.append("Memory");
 
     Device2["Address"] = 0x02;
     Device2["Name"] = "Relay";
@@ -298,7 +305,8 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     Device2["Stuff"] = "Module";
     Device2["ReadCommands"] = Device2ReadCommands;
     Device2["WriteCommands"] = Device2WriteCommands;
-    Device2["Type"] = "bool";
+    Device2["DataType"] = "bool";
+    Device2["Registration"] = Registration2;
 
     Devices.append(Device1);
     Devices.append(Device2);
@@ -307,7 +315,7 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     Device["Devices"] = Devices;
 
     QString setstr = QJsonDocument(Device).toJson(QJsonDocument::Compact);
-    QFile file(pathtolog);
+    QFile file(pathtomodbusconfigfile);
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);

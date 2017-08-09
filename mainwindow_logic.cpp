@@ -31,7 +31,7 @@
 
 void MainWindow::MainWindowInitialization()
 {
-    //    CreateMODBusConfigFile();
+    CreateMODBusConfigFile();
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
