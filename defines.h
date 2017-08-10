@@ -16,14 +16,14 @@
 #define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
-#define uartsleep DelayMsec(25);
+#define uartsleep DelayMsec(100);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
 #endif
 
 #ifndef LinuxBoard
 #define comportname "COM3"
-#define uartsleep Sleep(50);
+#define uartsleep Sleep(100);
 #define longsleep Sleep(1000);
 #define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
@@ -45,8 +45,8 @@
 #define NaNMessage "nan"
 #define MultiThread
 #define ValuesUpdateTimer 100
-#define GraphicsUpdateTimer 500
-#define ArchiveUpdateTimer 30000      // время архивации на флешку в секундах
+#define GraphicsUpdateTimer 200
+#define ArchiveUpdateTimer 30000     // время архивации на флешку в секундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 180                   // изначальный размер графика по игреку в 1 сторону
@@ -56,6 +56,5 @@
 #define rect2coords smallrectinglewidth*3-5, otstupsverhu2, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
 #define rect3coords smallrectinglewidth*3-5, otstupsverhu1, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
 #define rect4coords smallrectinglewidth*3-5, otstupsverhu, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
-
 
 #endif // DEFINES_H

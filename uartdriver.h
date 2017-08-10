@@ -200,10 +200,10 @@ public:
     enum G00_Group
     {
         G00Bias = 0,
-        DataChannel1 = G00Bias + 0,
-        DataChannel2 = G00Bias + 2,
-        DataChannel3 = G00Bias + 4,
-        DataChannel4 = G00Bias + 6,
+        DataChannel1 = G00Bias + 2,
+        DataChannel2 = G00Bias + 6,
+        DataChannel3 = G00Bias + 10,
+        DataChannel4 = G00Bias + 14,
         DataChannelLenght = 2
     };
     Q_ENUM(G00_Group)

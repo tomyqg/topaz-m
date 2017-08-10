@@ -234,7 +234,9 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
 
-    Address = 2;
+//    Address = 2;
+
+//    qDebug()<< Address ;
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
@@ -306,9 +308,6 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QByteArray arraytofloat;
                     float val;
 
-//                    InputDataByteArrayParsed.clear();
-//                    InputDataByteArrayParsed = InputDataByteArray;
-
                     arraytofloat.append(InputDataByteArrayParsed.at(3));
                     arraytofloat.append(InputDataByteArrayParsed.at(4));
                     arraytofloat.append(InputDataByteArrayParsed.at(5));
@@ -318,19 +317,11 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QDataStream stream(arraytofloat);
                     stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
                     stream >> val;
-                    //
-
-                    qDebug() << "----------";
-                    qDebug() << InputDataByteArray ;
-                    qDebug() << InputDataByteArrayParsed;
-                    qDebug() << arraytofloat;
-
-
                     return val;
                 }
                 else
                 {
-                    qDebug() << "BadCRC";
+                    //                    qDebug() << "BadCRC";
                     return ModBus::BadCRC;
                 }
             }
@@ -366,9 +357,7 @@ void ModBus::ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,
     requestdata.append(CRC16Hi); // Контрольная сумма CRC
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
-    //qDebug() << requestdata;
-    //qDebug() << InputDataByteArray ;
-    //qDebug() << "----------";
+
     return;
 }
 
@@ -491,14 +480,10 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         int lengggh = InputDataByteArray.length() ;
         int lastindex = lengggh - 1;
         int lastitem = InputDataByteArray.at(lastindex);
-        //qDebug() << lastitem;
 
         if ((lastitem==-1) && (lengggh>9)) //(lengggh>9)&&
         {
-            //            qDebug() << InputDataByteArray ;
-            qDebug() << "*****";
             InputDataByteArray.remove(lastindex,1);
-//            qDebug() << InputDataByteArray;
         }
 
         if (InputDataByteArray.length() < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
@@ -518,18 +503,18 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         if (inpcrc == crc)
         {
-            qDebug() << "Crc ok,return";
+            //qDebug() << "Crc ok,return";
             return InputDataByteArray;
         }
         else
         {
-            qDebug() << "Crc Bad";
+            //qDebug() << "Crc Bad";
             return 0;
         }
     }
     else
     {
-        qDebug() << "Not Open";
+        //qDebug() << "Not Open";
     }
     return 0;
 }
@@ -559,7 +544,6 @@ uint16_t ModBus::GetChannelSignalType(uint8_t channel)
 
 void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalparametr)
 {
-    //qDebug() << additionalparametr ;
     uint8_t channelbias;
 
     switch (channel) {
