@@ -27,7 +27,7 @@ protected:
     void DelayMsec(int n);
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
-        quint16 Calculate_crc16_modbus(const QByteArray &array);
+    quint16 Calculate_crc16_modbus(const QByteArray &array);
 
 public:
     static double channelinputbuffer[4];
@@ -64,7 +64,7 @@ public:
 
     ~ModBus() // деструктор
     {
-//        qDebug() << "Modbus Deleted";
+        //        qDebug() << "Modbus Deleted";
     }
 
     QByteArray ModBusMakeRequest(
@@ -92,21 +92,21 @@ public:
     void ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
 
 signals:
-        void finished();
+    void finished();
 
 public:
     double DataChannelRead (char channel);
 
-//    Значение:
-//    0 – канал выключен
-//    1 – измерение тока
-//    2 – измерение напряжения
-//    3 – измерение сопротивления
-//    4 – измерение термопары
-//    5 – измерение термосопротивления
-//    6 – дискретный вход
-//    7 – счет импульсов
-//    8 – частота
+    //    Значение:
+    //    0 – канал выключен
+    //    1 – измерение тока
+    //    2 – измерение напряжения
+    //    3 – измерение сопротивления
+    //    4 – измерение термопары
+    //    5 – измерение термосопротивления
+    //    6 – дискретный вход
+    //    7 – счет импульсов
+    //    8 – частота
 
     enum SignalType {
         NoMeasure= 0,
@@ -463,6 +463,26 @@ public:
     enum Errors{
     };
     Q_ENUM(Errors)
+
+    struct ModbusDevice
+    {
+        uint16_t ID;
+        int DeviceType;
+        int ModbusNetworkAddress;
+        int ModbusBaudrate;
+        int AIcount;
+        int address;
+        int registrationtype;
+        int signaltype;
+        QString name;
+        float UserCalibration1Gain;
+        float UserCalibration1Date;
+        float UserCalibration1Offset;
+        float UserCalibration2Gain;
+        float UserCalibration2Date;
+        float UserCalibration2Offset;
+
+    };
 };
 
 #endif // UARTDRIVER_H
