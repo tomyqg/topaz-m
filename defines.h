@@ -3,7 +3,7 @@
 
 #define CURRENT_VER "0.51" //версия ПО
 
-//#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
+#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
 
 #ifdef LinuxBoard
@@ -16,7 +16,7 @@
 #define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
-#define uartsleep DelayMsec(100);
+#define uartsleep DelayMsec(160);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
 #endif
