@@ -7,6 +7,51 @@
 #include <channel1.h>
 #include <mathresolver.h>
 
+struct ModbusDeviceStruct
+{
+    uint16_t ID;
+    QString name;
+    int DeviceType;
+    int ModbusNetworkAddress;
+    int ModbusBaudrate;
+    int AIcount;
+    int address;
+    int Measuretype;
+    uint16_t SignalType;
+    uint16_t FilterType;
+    uint16_t Status;
+    uint16_t SupportedSignals;
+    float Data;
+
+    float UserCalibration1Gain;
+    float UserCalibration1Offset;
+    uint32_t UserCalibration1Date;
+    float UserCalibration2Gain;
+    float UserCalibration2Offset;
+    uint32_t UserCalibrat2on1Date;
+    float UserCalibration3Gain;
+    float UserCalibration3Offset;
+    uint32_t UserCalibrat3on1Date;
+    float UserCalibration4Gain;
+    float UserCalibration4Offset;
+    uint32_t UserCalibraton4Date;
+
+    float FactoryCalibration1Gain;
+    float FactoryCalibration1Offset;
+    uint32_t FactoryCalibration1Date;
+    float FactoryCalibration2Gain;
+    float FactoryCalibration2Offset;
+    uint32_t FactoryCalibrat2on1Date;
+    float FactoryCalibration3Gain;
+    float FactoryCalibration3Offset;
+    uint32_t FactoryCalibrat3on1Date;
+    float FactoryCalibration4Gain;
+    float FactoryCalibration4Offset;
+    uint32_t FactoryCalibraton4Date;
+};
+
+
+
 class UartDriver:public QObject
 {
     Q_OBJECT
@@ -463,50 +508,6 @@ public:
     enum Errors{
     };
     Q_ENUM(Errors)
-
-    struct ModbusDevice
-    {
-        uint16_t ID;
-        QString name;
-        int DeviceType;
-        int ModbusNetworkAddress;
-        int ModbusBaudrate;
-        int AIcount;
-        int address;
-        int Measuretype;
-        uint16_t SignalType;
-        uint16_t FilterType;
-        uint16_t Status;
-        uint16_t SupportedSignals;
-        float Data;
-
-        float UserCalibration1Gain;
-        float UserCalibration1Offset;
-        uint32_t UserCalibration1Date;
-        float UserCalibration2Gain;
-        float UserCalibration2Offset;
-        uint32_t UserCalibrat2on1Date;
-        float UserCalibration3Gain;
-        float UserCalibration3Offset;
-        uint32_t UserCalibrat3on1Date;
-        float UserCalibration4Gain;
-        float UserCalibration4Offset;
-        uint32_t UserCalibraton4Date;
-
-        float FactoryCalibration1Gain;
-        float FactoryCalibration1Offset;
-        uint32_t FactoryCalibration1Date;
-        float FactoryCalibration2Gain;
-        float FactoryCalibration2Offset;
-        uint32_t FactoryCalibrat2on1Date;
-        float FactoryCalibration3Gain;
-        float FactoryCalibration3Offset;
-        uint32_t FactoryCalibrat3on1Date;
-        float FactoryCalibration4Gain;
-        float FactoryCalibration4Offset;
-        uint32_t FactoryCalibraton4Date;
-
-    };
 };
 
 #endif // UARTDRIVER_H

@@ -11,9 +11,9 @@ public:
     explicit worker(QObject *parent = 0);
 
     ChannelOptions* ThreadChannelOptions1;
-ChannelOptions* ThreadChannelOptions2;
-ChannelOptions* ThreadChannelOptions3;
-ChannelOptions* ThreadChannelOptions4;
+    ChannelOptions* ThreadChannelOptions2;
+    ChannelOptions* ThreadChannelOptions3;
+    ChannelOptions* ThreadChannelOptions4;
 
 signals:
     void SignalToObj_mainThreadGUI();
@@ -30,7 +30,7 @@ private slots:
     void do_Work();
 
 private:
-//    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
+    //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
 };
 

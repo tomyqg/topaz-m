@@ -134,7 +134,6 @@ void MainWindow::LabelsInit()
 
 void MainWindow::InitPins()
 {
-
 #ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
     return;
 #endif
