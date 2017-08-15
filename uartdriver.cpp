@@ -187,6 +187,11 @@ void  UartDriver::SetRTSPinDirection()
 #endif
 }
 
+void  ModBus::ConfigureChannel(ModbusDeviceStruct* devstruct)
+{
+
+}
+
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
 {
     switch (newstate) {
@@ -234,9 +239,9 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
 
-//    Address = 2;
+    //    Address = 2;
 
-//    qDebug()<< Address ;
+    //    qDebug()<< Address ;
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);

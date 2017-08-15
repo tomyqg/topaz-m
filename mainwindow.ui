@@ -46,6 +46,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Rubik</family>
       <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -66,7 +67,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Times New Roman</family>
+       <family>Rubik</family>
        <pointsize>18</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -88,7 +89,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
+      <family>Rubik</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -110,7 +111,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
+      <family>Rubik</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -130,14 +131,17 @@
       <height>651</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+     </font>
+    </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <zorder>MessagesWidget</zorder>
-    <zorder>MessagesWidget</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
@@ -147,6 +151,11 @@
       <width>1200</width>
       <height>600</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+     </font>
     </property>
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
@@ -161,6 +170,11 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+     </font>
+    </property>
     <property name="text">
      <string>Квитирование</string>
     </property>
@@ -174,6 +188,11 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+     </font>
+    </property>
     <property name="text">
      <string>Реле</string>
     </property>
@@ -181,11 +200,16 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>450</y>
-      <width>231</width>
-      <height>121</height>
+      <x>10</x>
+      <y>650</y>
+      <width>160</width>
+      <height>78</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>

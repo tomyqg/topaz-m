@@ -101,6 +101,8 @@ public slots:
     void  SetChannelAdditionalParametr(uint16_t channel, uint16_t signaltype);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
 
+    void ConfigureChannel(ModbusDeviceStruct* devstruct);
+
     uint16_t GetChannelSignalType(uint8_t channel);
 
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
@@ -166,6 +168,32 @@ public:
     };
     Q_ENUM(SignalType)
 
+    enum SupportedSignals {
+        SupportedSignalError= 0,
+        SupportedSignalCurrent = 1,
+        SupportedSignalVoltage = 2,
+        SupportedSignalResistance = 4,
+        SupportedSignalTermoCouple = 8,
+        SupportedSignalTermoResistance = 16,
+        SupportedSignalDiscret = 32,
+        SupportedSignalImpulseCounter = 64,
+        SupportedSignalFrequency = 128
+    };
+    Q_ENUM(SupportedSignals)
+
+    enum Status {
+        StatusOff = 0,
+        StatusOn = 1,
+        StatusConfigWait = 2,
+        StatusConfigWorking = 3,
+        StatusConfigCompleted = 4,
+        StatusWaitForUpdateData = 5,
+        StatusDataWorking = 6,
+        StatusDataCompleted = 7
+    };
+    Q_ENUM(Status)
+
+
     enum ModBusErrors {
         ConnectionError = -9998 ,
         BadCRC = -9999 ,
@@ -188,6 +216,12 @@ public:
         UniversalChannel4 = 0x08
     };
     Q_ENUM(DeviceAdress)
+
+    enum DeviceType{
+        DeviceType4AI = 1,
+        DeviceType8RP = 5
+    };
+    Q_ENUM(DeviceType)
 
     enum RegisterAdress {
         TemperetureAdress     = 0x0000,

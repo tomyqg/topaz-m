@@ -33,36 +33,6 @@ void worker::do_Work()
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                //                структура девайса
-                modbusdevice.address = 0x01;
-                modbusdevice.name = ThreadChannelOptions1->GetChannelName();
-                modbusdevice.Status = 5;
-                modbusdevice.SupportedSignals= 0xA2;
-                ModbusDevicesList.append(modbusdevice);
-
-                modbusdevice.address = 0x02;
-                modbusdevice.name = ThreadChannelOptions2->GetChannelName();
-                modbusdevice.Status = 25;
-                modbusdevice.SupportedSignals= 0xC3;
-                ModbusDevicesList.append(modbusdevice);
-
-                modbusdevice.address = 0x03;
-                modbusdevice.name = ThreadChannelOptions3->GetChannelName();
-                modbusdevice.Status = 35;
-                modbusdevice.SupportedSignals= 0xB4;
-                ModbusDevicesList.append(modbusdevice);
-
-                modbusdevice.address = 0x04;
-                modbusdevice.name = ThreadChannelOptions1->GetChannelName();
-                modbusdevice.Status = 45;
-                modbusdevice.SupportedSignals= 0xD5;
-                ModbusDevicesList.append(modbusdevice);
-
-                qDebug() << ModbusDevicesList.at(0).Status;
-                qDebug() << ModbusDevicesList.at(1).Status;
-                qDebug() << ModbusDevicesList.at(2).Status;
-                qDebug() << ModbusDevicesList.at(3).Status;
-
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
@@ -259,5 +229,62 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     default:
         break;
     }
+
+    //делаем список объектов каналов, чтобы в цикле можно было их обрабатывать
+    QList<ChannelOptions *> ChannelsObjectsList;
+    ChannelsObjectsList.append(c1);
+    ChannelsObjectsList.append(c2);
+    ChannelsObjectsList.append(c3);
+    ChannelsObjectsList.append(c4);
+    //qDebug() << ChannelsObjectsList.at(1)->GetChannelName();
+    ModbusDevicesList.clear();
+
+    // Переносим список этих объектов в список структур
+    int i = 0;
+    foreach(ChannelOptions * cobj, ChannelsObjectsList)
+    {
+        modbusdevice.address = ModBus::Board4AIAddress; // пока только 1 адрес
+        modbusdevice.Status = ModBus::StatusOn; // канал включен
+        modbusdevice.DeviceType = ModBus::DeviceType4AI;
+        modbusdevice.SignalType = cobj->GetSignalType(); // какой тип сигнала
+
+        switch (modbusdevice.SignalType ) {
+        case ModBus::CurrentMeasure:
+            modbusdevice.Measuretype  = 0; // у тока всегда ноль
+            break;
+        case ModBus::VoltageMeasure:
+            modbusdevice.Measuretype  = ModBus::Voltage1VoltNoBreakControl; // для напряжения оставим пока 1 вольт
+            break;
+        case ModBus::ResistanceMeasure:
+            modbusdevice.Measuretype  = ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку пока.
+            break;
+        case ModBus::TermoCoupleMeasure:
+            modbusdevice.Measuretype  = ModBus::R; // для термопары ставим тип ТПП 13
+            break;
+        case ModBus::TermoResistanceMeasure:
+            modbusdevice.Measuretype  =  ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку
+            break;
+        default:
+            modbusdevice.Measuretype  = 0; // по умолчанию ставим ноль.
+            break;
+        }
+
+        modbusdevice.name = cobj->GetChannelName();
+        modbusdevice.ID = i;
+        modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
+        ModbusDevicesList.append(modbusdevice);
+        qDebug() << i << ":" << modbusdevice.Measuretype;
+        i++;
+    }
+
+    //список структур девайсов готов.
+
+    //проверяем
+    //qDebug() << ModbusDevicesList.at(0).ID << ":" << ModbusDevicesList.at(0).name;
+    //qDebug() << ModbusDevicesList.at(1).ID << ":" << ModbusDevicesList.at(1).name;
+    //qDebug() << ModbusDevicesList.at(2).ID << ":" << ModbusDevicesList.at(2).name;
+    //qDebug() << ModbusDevicesList.at(3).ID << ":" << ModbusDevicesList.at(3).name;
+
     thread()->usleep(10000);
 }
+

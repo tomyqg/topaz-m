@@ -11,10 +11,13 @@
 
 int a=0;int b=0;
 
-int color1rgbnormal[]={30, 120, 120 };  //dark cyan
-int color2rgbnormal[]={40, 40, 220};  // dark blue
-int color3rgbnormal[]={30, 100, 30};  // dark green
-int color4rgbnormal[]={150, 50, 170}; // dark phiolet
+int color1rgbnormal[]={0x00, 0x71, 0x43};  //dark cyan
+int color2rgbnormal[]={0x6C, 0x8D, 0xD5};  // dark blue
+int color3rgbnormal[]={0xFF, 0xCF, 0x73};  // dark green
+int color4rgbnormal[]={0xFF, 0x9D, 0x73}; // dark phiolet
+
+QColor ChannelColorHighState = QColor(0xA6,0x31,0x00);
+QColor ChannelColorLowState = QColor(0xA6,0x6E,0x00);
 
 QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
 QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
@@ -25,10 +28,6 @@ QColor Channel1ColorNormal = QColor(color1rgbnormal[0],color1rgbnormal[1],color1
 QColor Channel2ColorNormal = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
 QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
 QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
-
-QColor ChannelColorHighState = QColor(220,100,100);
-
-QColor ChannelColorLowState = QColor(140,220,220);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 

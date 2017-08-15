@@ -26,6 +26,7 @@ public slots:
     void StartWorkSlot();
     void GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
 
+
 private slots:
     void do_Work();
 

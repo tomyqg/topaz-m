@@ -37,7 +37,10 @@ void MainWindow::MainWindowInitialization()
     setWindowTitle(tr("VISION"));
 
     QPixmap pix(pathtologotip);
+
+//    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
+    ui->label->setScaledContents(true);
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
