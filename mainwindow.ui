@@ -46,7 +46,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
       <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -61,13 +61,13 @@
       <rect>
        <x>50</x>
        <y>0</y>
-       <width>331</width>
+       <width>611</width>
        <height>30</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Rubik</family>
+       <family>Open Sans Semibold</family>
        <pointsize>18</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -89,7 +89,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -111,7 +111,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -133,7 +133,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
      </font>
     </property>
     <property name="frameShape">
@@ -154,7 +154,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
      </font>
     </property>
     <property name="cursor">
@@ -172,7 +172,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
      </font>
     </property>
     <property name="text">
@@ -190,7 +190,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
      </font>
     </property>
     <property name="text">
@@ -208,7 +208,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rubik</family>
+      <family>Open Sans Semibold</family>
      </font>
     </property>
     <property name="focusPolicy">

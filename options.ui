@@ -39,8 +39,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Times New Roman</family>
-     <pointsize>10</pointsize>
+     <family>Open Sans Semibold</family>
+     <pointsize>8</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -69,7 +69,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Times New Roman</family>
+       <family>Open Sans Semibold</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -101,7 +101,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Open Sans Semibold</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -115,13 +115,13 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>272</width>
+          <width>291</width>
           <height>201</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Open Sans Semibold</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -134,7 +134,7 @@
           <widget class="QRadioButton" name="ButonOtklChannel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -155,7 +155,7 @@
           <widget class="QRadioButton" name="ButonTokChannel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -176,7 +176,7 @@
           <widget class="QRadioButton" name="ButonNapryagenieChannel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -194,7 +194,7 @@
           <widget class="QRadioButton" name="ButonResistorChannel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -212,7 +212,7 @@
           <widget class="QRadioButton" name="ButonTermoparaChannel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -233,7 +233,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -255,13 +255,13 @@
         <rect>
          <x>230</x>
          <y>10</y>
-         <width>250</width>
+         <width>400</width>
          <height>430</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Open Sans Semibold</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -276,7 +276,7 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>130</x>
+          <x>240</x>
           <y>20</y>
           <width>111</width>
           <height>371</height>
@@ -284,7 +284,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Open Sans Semibold</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -300,7 +300,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -321,7 +321,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -351,7 +351,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -378,7 +378,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -405,7 +405,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -432,7 +432,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -462,13 +462,13 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>172</width>
+          <width>190</width>
           <height>371</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Open Sans Semibold</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -478,7 +478,7 @@
           <widget class="QLabel" name="label_18">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -493,7 +493,7 @@
           <widget class="QLabel" name="label_13">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -508,7 +508,7 @@
           <widget class="QLabel" name="label_14">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -523,7 +523,7 @@
           <widget class="QLabel" name="label_16">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -538,7 +538,7 @@
           <widget class="QLabel" name="label_15">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -553,7 +553,7 @@
           <widget class="QLabel" name="label_17">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -570,15 +570,15 @@
       <widget class="QGroupBox" name="groupBox_4">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>10</y>
          <width>450</width>
-         <height>241</height>
+         <height>251</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Open Sans Semibold</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -590,16 +590,16 @@
        <widget class="QDoubleSpinBox" name="State1ValueChannel_1">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -619,14 +619,14 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -640,14 +640,14 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -661,14 +661,14 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -682,14 +682,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -709,8 +709,8 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -724,14 +724,14 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -746,16 +746,16 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -779,14 +779,14 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -801,16 +801,16 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -830,7 +830,7 @@
       <widget class="QGroupBox" name="groupBox_15">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>260</y>
          <width>450</width>
          <height>251</height>
@@ -838,7 +838,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Open Sans Semibold</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -850,16 +850,16 @@
        <widget class="QDoubleSpinBox" name="State2ValueChannel_1">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -879,14 +879,14 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -900,14 +900,14 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -921,14 +921,14 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -942,14 +942,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -969,8 +969,8 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -984,14 +984,14 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1006,16 +1006,16 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1036,14 +1036,14 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1058,16 +1058,16 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Open Sans Semibold</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1095,7 +1095,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Open Sans Semibold</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1110,12 +1110,12 @@
           <x>0</x>
           <y>20</y>
           <width>221</width>
-          <height>41</height>
+          <height>81</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Open Sans Semibold</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1125,7 +1125,7 @@
           <widget class="QLabel" name="label_59">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1140,7 +1140,7 @@
           <widget class="QLineEdit" name="Name_Channel_1">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Open Sans Semibold</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1170,7 +1170,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Rubik Light</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1184,13 +1184,13 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>272</width>
-          <height>201</height>
+          <width>311</width>
+          <height>207</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1203,7 +1203,7 @@
           <widget class="QRadioButton" name="ButonOtklChannel_2">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1224,7 +1224,7 @@
           <widget class="QRadioButton" name="ButonTokChannel_2">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1245,7 +1245,7 @@
           <widget class="QRadioButton" name="ButonNapryagenieChannel_2">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1263,7 +1263,7 @@
           <widget class="QRadioButton" name="ButonResistorChannel_2">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1281,7 +1281,7 @@
           <widget class="QRadioButton" name="ButonTermoparaChannel_2">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1302,7 +1302,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1329,7 +1329,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>14</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -1343,13 +1343,13 @@
           <rect>
            <x>0</x>
            <y>20</y>
-           <width>211</width>
-           <height>41</height>
+           <width>221</width>
+           <height>81</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
+           <family>Rubik Light</family>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -1359,7 +1359,7 @@
            <widget class="QLabel" name="label_60">
             <property name="font">
              <font>
-              <family>Times New Roman</family>
+              <family>Rubik Light</family>
               <pointsize>10</pointsize>
               <weight>75</weight>
               <bold>true</bold>
@@ -1374,7 +1374,7 @@
            <widget class="QLineEdit" name="Name_Channel_2">
             <property name="font">
              <font>
-              <family>Times New Roman</family>
+              <family>Rubik Light</family>
               <pointsize>12</pointsize>
               <weight>75</weight>
               <bold>true</bold>
@@ -1394,13 +1394,13 @@
         <rect>
          <x>230</x>
          <y>10</y>
-         <width>250</width>
+         <width>400</width>
          <height>430</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Rubik Light</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1412,7 +1412,7 @@
        <widget class="QWidget" name="layoutWidget_3">
         <property name="geometry">
          <rect>
-          <x>130</x>
+          <x>240</x>
           <y>20</y>
           <width>111</width>
           <height>371</height>
@@ -1420,7 +1420,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1436,7 +1436,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1457,7 +1457,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1475,7 +1475,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1493,7 +1493,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1511,7 +1511,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1529,7 +1529,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1556,13 +1556,13 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>172</width>
+          <width>187</width>
           <height>371</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1572,7 +1572,7 @@
           <widget class="QLabel" name="label_20">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1587,7 +1587,7 @@
           <widget class="QLabel" name="label_21">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1602,7 +1602,7 @@
           <widget class="QLabel" name="label_22">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1617,7 +1617,7 @@
           <widget class="QLabel" name="label_24">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1632,7 +1632,7 @@
           <widget class="QLabel" name="label_25">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1647,7 +1647,7 @@
           <widget class="QLabel" name="label_26">
            <property name="font">
             <font>
-             <family>Times New Roman</family>
+             <family>Rubik Light</family>
              <pointsize>10</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -1664,7 +1664,7 @@
       <widget class="QGroupBox" name="groupBox_24">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>260</y>
          <width>450</width>
          <height>241</height>
@@ -1672,7 +1672,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Rubik Light</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1684,15 +1684,15 @@
        <widget class="QDoubleSpinBox" name="State2ValueChannel_2">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -1713,14 +1713,14 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1734,14 +1734,14 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1755,14 +1755,14 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1776,14 +1776,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1803,8 +1803,8 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1818,14 +1818,14 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1840,15 +1840,15 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
-          <height>22</height>
+          <width>160</width>
+          <height>27</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -1870,14 +1870,14 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1892,15 +1892,15 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
-          <height>22</height>
+          <width>160</width>
+          <height>27</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -1921,15 +1921,15 @@
       <widget class="QGroupBox" name="groupBox_6">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>10</y>
          <width>450</width>
-         <height>241</height>
+         <height>251</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Times New Roman</family>
+         <family>Rubik Light</family>
          <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1941,15 +1941,15 @@
        <widget class="QDoubleSpinBox" name="State1ValueChannel_2">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -1970,14 +1970,14 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1991,14 +1991,14 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2012,14 +2012,14 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2033,14 +2033,14 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2060,8 +2060,8 @@
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2075,14 +2075,14 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2097,15 +2097,15 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
-          <height>22</height>
+          <width>160</width>
+          <height>27</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -2130,14 +2130,14 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
+          <family>Rubik Light</family>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -2152,15 +2152,15 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
-          <height>22</height>
+          <width>160</width>
+          <height>27</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <family>Times New Roman</family>
+          <family>Rubik Light</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -2375,7 +2375,7 @@
            <x>0</x>
            <y>20</y>
            <width>221</width>
-           <height>41</height>
+           <height>81</height>
           </rect>
          </property>
          <property name="font">
@@ -2426,7 +2426,7 @@
         <rect>
          <x>230</x>
          <y>10</y>
-         <width>250</width>
+         <width>400</width>
          <height>430</height>
         </rect>
        </property>
@@ -2444,7 +2444,7 @@
        <widget class="QWidget" name="layoutWidget_6">
         <property name="geometry">
          <rect>
-          <x>130</x>
+          <x>240</x>
           <y>20</y>
           <width>111</width>
           <height>371</height>
@@ -2697,7 +2697,7 @@
       <widget class="QGroupBox" name="groupBox_25">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>260</y>
          <width>450</width>
          <height>241</height>
@@ -2717,9 +2717,9 @@
        <widget class="QDoubleSpinBox" name="State2ValueChannel_3">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
@@ -2746,7 +2746,7 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -2767,7 +2767,7 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -2788,8 +2788,8 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -2809,7 +2809,7 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -2851,7 +2851,7 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -2873,9 +2873,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -2903,8 +2903,8 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -2925,9 +2925,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -2954,10 +2954,10 @@
       <widget class="QGroupBox" name="groupBox_9">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>10</y>
          <width>450</width>
-         <height>241</height>
+         <height>251</height>
         </rect>
        </property>
        <property name="font">
@@ -2974,9 +2974,9 @@
        <widget class="QDoubleSpinBox" name="State1ValueChannel_3">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
@@ -3003,7 +3003,7 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -3024,7 +3024,7 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -3045,8 +3045,8 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -3066,7 +3066,7 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -3108,7 +3108,7 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -3130,9 +3130,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -3163,8 +3163,8 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -3185,9 +3185,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -3401,7 +3401,7 @@
            <x>0</x>
            <y>20</y>
            <width>221</width>
-           <height>41</height>
+           <height>81</height>
           </rect>
          </property>
          <property name="font">
@@ -3451,7 +3451,7 @@
         <rect>
          <x>230</x>
          <y>10</y>
-         <width>250</width>
+         <width>400</width>
          <height>430</height>
         </rect>
        </property>
@@ -3466,145 +3466,6 @@
        <property name="title">
         <string>Параметры Канала 4</string>
        </property>
-       <widget class="QWidget" name="layoutWidget_9">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>20</y>
-          <width>111</width>
-          <height>371</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_11">
-         <item>
-          <widget class="QLineEdit" name="UnitsChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>мА</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="NignPredelChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_4">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Times New Roman</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="decimals">
-            <number>1</number>
-           </property>
-           <property name="minimum">
-            <double>0.100000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="layoutWidget_10">
         <property name="geometry">
          <rect>
@@ -3718,7 +3579,7 @@
       <widget class="QGroupBox" name="groupBox_26">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>260</y>
          <width>450</width>
          <height>241</height>
@@ -3738,9 +3599,9 @@
        <widget class="QDoubleSpinBox" name="State2ValueChannel_4">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
@@ -3767,7 +3628,7 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -3788,7 +3649,7 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -3809,8 +3670,8 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -3830,7 +3691,7 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -3872,7 +3733,7 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -3894,9 +3755,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -3924,8 +3785,8 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -3946,9 +3807,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -3975,10 +3836,10 @@
       <widget class="QGroupBox" name="groupBox_12">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>690</x>
          <y>10</y>
          <width>450</width>
-         <height>241</height>
+         <height>251</height>
         </rect>
        </property>
        <property name="font">
@@ -3995,9 +3856,9 @@
        <widget class="QDoubleSpinBox" name="State1ValueChannel_4">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>30</y>
-          <width>100</width>
+          <width>160</width>
           <height>40</height>
          </rect>
         </property>
@@ -4024,7 +3885,7 @@
          <rect>
           <x>0</x>
           <y>100</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -4045,7 +3906,7 @@
          <rect>
           <x>0</x>
           <y>130</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -4066,8 +3927,8 @@
          <rect>
           <x>0</x>
           <y>160</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -4087,7 +3948,7 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>230</width>
+          <width>250</width>
           <height>16</height>
          </rect>
         </property>
@@ -4129,7 +3990,7 @@
          <rect>
           <x>0</x>
           <y>190</y>
-          <width>230</width>
+          <width>400</width>
           <height>16</height>
          </rect>
         </property>
@@ -4151,9 +4012,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>70</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -4184,8 +4045,8 @@
          <rect>
           <x>0</x>
           <y>220</y>
-          <width>230</width>
-          <height>20</height>
+          <width>400</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="font">
@@ -4206,9 +4067,9 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>260</x>
           <y>100</y>
-          <width>180</width>
+          <width>160</width>
           <height>22</height>
          </rect>
         </property>
@@ -4232,6 +4093,145 @@
         </item>
        </widget>
       </widget>
+      <widget class="QWidget" name="layoutWidget_9">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>30</y>
+         <width>111</width>
+         <height>371</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <widget class="QLineEdit" name="UnitsChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>мА</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="NignPredelChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="VerhnPredelChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_4">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -4252,7 +4252,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_9">
       <attribute name="title">
@@ -4447,6 +4447,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Rubik Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -4464,7 +4465,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
+        <family>Rubik Light</family>
         <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -4515,7 +4516,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
+        <family>Rubik Light</family>
         <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -4564,6 +4565,11 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Rubik Light</family>
+       </font>
+      </property>
       <property name="text">
        <string>Сохранить Время</string>
       </property>
@@ -4580,6 +4586,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Rubik Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -4595,6 +4602,12 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Калибровать Тач-скрин</string>
       </property>
@@ -4607,6 +4620,12 @@
         <width>201</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
+       </font>
       </property>
       <item>
        <property name="text">
@@ -4635,8 +4654,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4655,8 +4674,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4675,6 +4694,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Rubik Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -4686,18 +4706,24 @@
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>101</width>
+        <width>121</width>
         <height>16</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Максимум записей</string>
+       <string>Максимум зап.</string>
       </property>
      </widget>
      <widget class="QSpinBox" name="spinBox">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>150</x>
         <y>30</y>
         <width>91</width>
         <height>41</height>
@@ -4705,7 +4731,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="minimum">
@@ -4727,11 +4754,17 @@
         <x>10</x>
         <y>80</y>
         <width>240</width>
-        <height>31</height>
+        <height>71</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Rubik Light</family>
+       </font>
+      </property>
       <property name="text">
-       <string>Очистить список сообщений</string>
+       <string>Очистить список 
+сообщений</string>
       </property>
      </widget>
     </widget>
@@ -4746,6 +4779,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Rubik Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -4763,12 +4797,12 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Версия ПО</string>
+       <string>Версия</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_12">
@@ -4782,8 +4816,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="text">
@@ -4804,7 +4838,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -4830,7 +4865,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
+        <family>Rubik Light</family>
+        <pointsize>8</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -4853,14 +4889,14 @@
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
+        <family>Rubik Light</family>
        </font>
       </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Times New Roman'; font-size:12pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Rubik Light'; font-size:12pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400;&quot;&gt;ООО Теплоприбор-Сенсор&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400;&quot;&gt;Адрес: 2-я Павелецкая ул., 36, Челябинск, Челябинская обл., 454047&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400;&quot;&gt;Телефон: 8 (351) 725-76-31&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4876,6 +4912,11 @@ p, li { white-space: pre-wrap; }
        <height>341</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Rubik Light</family>
+      </font>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
@@ -4887,7 +4928,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>40</x>
        <y>30</y>
-       <width>221</width>
+       <width>481</width>
        <height>331</height>
       </rect>
      </property>
@@ -4903,8 +4944,8 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="layoutWidget_11">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>50</y>
+        <x>10</x>
+        <y>40</y>
         <width>262</width>
         <height>269</height>
        </rect>
@@ -5079,7 +5120,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>531</width>
+       <width>601</width>
        <height>541</height>
       </rect>
      </property>
@@ -5407,7 +5448,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>290</x>
         <y>40</y>
-        <width>210</width>
+        <width>300</width>
         <height>19</height>
        </rect>
       </property>
@@ -5430,7 +5471,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>290</x>
         <y>80</y>
-        <width>210</width>
+        <width>300</width>
         <height>19</height>
        </rect>
       </property>
@@ -5453,7 +5494,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>290</x>
         <y>120</y>
-        <width>210</width>
+        <width>300</width>
         <height>19</height>
        </rect>
       </property>
@@ -5476,7 +5517,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>290</x>
         <y>160</y>
-        <width>210</width>
+        <width>300</width>
         <height>19</height>
        </rect>
       </property>
@@ -5494,9 +5535,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="label_63">
       <property name="geometry">
        <rect>
-        <x>300</x>
+        <x>290</x>
         <y>200</y>
-        <width>191</width>
+        <width>300</width>
         <height>111</height>
        </rect>
       </property>
@@ -5516,7 +5557,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>460</y>
-        <width>271</width>
+        <width>561</width>
         <height>51</height>
        </rect>
       </property>
@@ -5530,9 +5571,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="label_84">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>10</x>
         <y>380</y>
-        <width>151</width>
+        <width>300</width>
         <height>61</height>
        </rect>
       </property>
@@ -5553,7 +5594,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>181</width>
+       <width>441</width>
        <height>61</height>
       </rect>
      </property>
@@ -5573,7 +5614,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>140</y>
        <width>441</width>
        <height>121</height>
@@ -5594,13 +5635,13 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>30</x>
      <y>670</y>
-     <width>211</width>
+     <width>300</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Times New Roman</family>
+     <family>Open Sans Semibold</family>
      <pointsize>12</pointsize>
      <weight>75</weight>
      <italic>false</italic>
@@ -5614,15 +5655,15 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>330</x>
      <y>670</y>
-     <width>211</width>
+     <width>300</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Times New Roman</family>
+     <family>Open Sans Semibold</family>
      <pointsize>12</pointsize>
      <weight>75</weight>
      <italic>false</italic>
@@ -5652,9 +5693,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

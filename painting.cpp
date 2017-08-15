@@ -56,7 +56,7 @@ void MainWindow::PaintCyfrasBottom()
         painter.drawRect(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth-4, smallrectingleheight);
     }
 
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 50, QFont::ExtraBold));
 
     double Channel1ValueNumber =  UartDriver::channelinputbuffer[0];
     double Channel2ValueNumber =  UartDriver::channelinputbuffer[1];
@@ -93,14 +93,14 @@ void MainWindow::PaintCyfrasBottom()
     painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
     // подписываем названия каналов
-    painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 15, QFont::ExtraBold));
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
     painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
     painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
     painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     // подписываем единицы измерения
-    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 12, QFont::ExtraBold));
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
     painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
     painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
@@ -108,7 +108,7 @@ void MainWindow::PaintCyfrasBottom()
 
     // подписываем букву m если канал математически обрабатывается
     painter.setPen(Qt::darkRed);
-    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 12, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
         painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
     if (channel2object.IsChannelMathematical())
@@ -150,7 +150,7 @@ void MainWindow::PaintCyfrasRight()
     painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
     painter.drawRect(rect4coords);
 
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 50, QFont::ExtraBold));
 
     double Channel1ValueNumber =  UartDriver::channelinputbuffer[0];
     double Channel2ValueNumber =  UartDriver::channelinputbuffer[1];
@@ -187,14 +187,14 @@ void MainWindow::PaintCyfrasRight()
     painter.drawText(rect4coords, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
     // подписываем названия каналов
-    painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 15, QFont::ExtraBold));
     painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
     painter.drawText(rect2coords, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
     painter.drawText(rect3coords, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
     painter.drawText(rect4coords, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     // подписываем единицы измерения
-    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 12, QFont::ExtraBold));
     painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
     painter.drawText(rect2coords, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
     painter.drawText(rect3coords, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
@@ -202,7 +202,7 @@ void MainWindow::PaintCyfrasRight()
 
     // подписываем букву m если канал математически обрабатывается
     painter.setPen(Qt::darkRed);
-    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 12, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
         painter.drawText(rect1coords, Qt::AlignRight | Qt::AlignTop, "math ");
     if (channel2object.IsChannelMathematical())
@@ -273,14 +273,14 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
 
     painter.setPen(QPen(Qt::cyan, 1));
-    painter.setFont(QFont("Times New Roman", 110, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 110, QFont::ExtraBold));
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);
     painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel3ValueString);
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel4ValueString);
 
     painter.setPen(QPen(Qt::white, 1));
-    painter.setFont(QFont("Times New Roman", 50, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 50, QFont::ExtraBold));
 
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
@@ -294,7 +294,7 @@ void MainWindow::PaintCyfrasFullScreen()
 
     // подписываем букву m если канал математически обрабатывается
     painter.setPen(Qt::red);
-    painter.setFont(QFont("Times New Roman", 15, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 15, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
         painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
     if (channel2object.IsChannelMathematical())
@@ -304,7 +304,7 @@ void MainWindow::PaintCyfrasFullScreen()
     if (channel4object.IsChannelMathematical())
         painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
 
-    painter.setFont(QFont("Times New Roman", 30, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 30, QFont::ExtraBold));
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom, " 1");
     painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom," 2");
     painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom," 3");
@@ -359,13 +359,13 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     painter.drawRect(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
 
     painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setFont(QFont("Times New Roman", 12, QFont::ExtraBold));
+    painter.setFont(QFont(Font, 12, QFont::ExtraBold));
     painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
     painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
     painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
     painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
-    painter.setFont(QFont("Times New Roman", alerttextsize, QFont::ExtraBold));
+    painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
     int confirmwindowwidth = widgwidth/3;
     int confirmwindowheight  = widgheight/3;
@@ -491,7 +491,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if  (GetHalfSecFlag() == 1)
     {
         painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-        painter.setFont(QFont("Times New Roman", 40, QFont::ExtraBold));
+        painter.setFont(QFont(Font, 40, QFont::ExtraBold));
 
         // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
         if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
