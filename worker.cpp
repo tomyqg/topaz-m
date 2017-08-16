@@ -36,6 +36,10 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
+
+                MB.WriteDataChannel(ModBus::DataChannel1, 88.88 );
+
+
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions1->IsChannelMathematical())
@@ -54,9 +58,6 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[1] = 0;
 
-
-
-                MB.writechannelvalue(ModBus::DataChannel2, 123.456 );
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {

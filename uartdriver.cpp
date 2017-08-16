@@ -19,6 +19,8 @@ double UartDriver::channelinputbuffer[4];
 double UartDriver::channeltempbuffer[4];
 bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
+QByteArray copyarray;
+
 quint16 UartDriver::Calculate_crc16_modbus(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
@@ -225,7 +227,7 @@ double ModBus::ReadDataChannel(int channeladdress)
 
 void ModBus::WriteDataChannel(int channeladdress, double data)
 {
-    ModBusSetRegisterFloat(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,channeladdress,data);
+    ModBusSetRegisterFloat(ModBus::Board4AIAddress,ModBus::WriteMultipleRegisters,channeladdress,data);
 }
 
 double ModBus::ClickRelay(char channel)
@@ -266,6 +268,7 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     requestdata.append(CRC16Hi);
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
+    //    qDebug() << requestdata << "requestdata ";
     if (InputDataByteArray.length()<3)
         return ModBus::ConnectionError;
 
@@ -314,10 +317,29 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
                     QByteArray arraytofloat;
                     float val;
 
+                    copyarray.clear();
+
                     arraytofloat.append(InputDataByteArrayParsed.at(3));
                     arraytofloat.append(InputDataByteArrayParsed.at(4));
                     arraytofloat.append(InputDataByteArrayParsed.at(5));
                     arraytofloat.append(InputDataByteArrayParsed.at(6));
+
+                    //                    arraytofloat.append(0x01);
+                    //                    arraytofloat.append(0x02);
+                    //                    arraytofloat.append(0xFC);
+                    //                    arraytofloat.append(0x19);
+
+                    copyarray.append(InputDataByteArrayParsed.at(3));
+                    copyarray.append(InputDataByteArrayParsed.at(4));
+                    copyarray.append(InputDataByteArrayParsed.at(5));
+                    copyarray.append(InputDataByteArrayParsed.at(6));
+
+                    //                    qDebug() << arraytofloat << "arraytofloat ";
+                    //                    qDebug() << arraytofloat.at(0) << arraytofloat.at(1) << arraytofloat.at(2) << arraytofloat.at(3) << arraytofloat.at(4) ;
+
+                    //qDebug() << copyarray << "copyarray ";
+                    //qDebug() << arraytofloat.at(1) << "arraytofloat.at(0) ";
+                    //qDebug() << copyarray.at(1) << "copyarray.at(0) ";
 
                     //convert hex to double
                     QDataStream stream(arraytofloat);
@@ -338,10 +360,47 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
 void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Address,float Value)
 {
+    QByteArray requestdata;
+    QByteArray InputDataByteArray;
 
+    char AddressHi,AddressLo,RegisterCountHi,RegisterCountLo,CRC16Hi,CRC16Lo;
+
+    RegisterCountHi =  (int) ((0x02 & 0xFF00)>>8);
+    RegisterCountLo = (int) (0x02 & 0x00FF);
+
+    AddressHi = (int) ((Address & 0xFF00)>>8);
+    AddressLo = (int) (Address & 0x00FF);
+
+    requestdata.append(DeviceAdress); //Адрес устройства
+    requestdata.append(Function); //Функциональный код
+    requestdata.append(AddressHi); //	Адрес первого регистра Hi байт
+    requestdata.append(AddressLo); // Адрес первого регистра  hi
+
+    requestdata.append(RegisterCountHi); // длина hi
+    requestdata.append(RegisterCountLo); // длина Lo
+
+    requestdata.append(0x04); // количество байт
+
+    // записываем 88.88
+    requestdata.append(0x42);
+    requestdata.append(0xB1);
+    requestdata.append(0xC2);
+    requestdata.append(0x8F);
+
+    quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
+    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    CRC16Lo = (int) (CRC16 & 0x00FF);
+
+    requestdata.append(CRC16Lo); // Контрольная сумма CRC
+    requestdata.append(CRC16Hi); // Контрольная сумма CRC
+
+    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
+
+    qDebug() << requestdata << "requestdata ";
+    qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
-void ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
+void ModBus::ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -360,14 +419,14 @@ void ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,ui
     requestdata.append(RegisterValueHi); //Значение Hi байт
     requestdata.append(RegisterValueLo); //Значение Lo байт
 
-    quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
-    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
-    CRC16Lo = (int) (CRC16 & 0x00FF);
+    //    quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
+    //    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    //    CRC16Lo = (int) (CRC16 & 0x00FF);
 
-    requestdata.append(CRC16Lo); // Контрольная сумма CRC
-    requestdata.append(CRC16Hi); // Контрольная сумма CRC
+    //    requestdata.append(CRC16Lo); // Контрольная сумма CRC
+    //    requestdata.append(CRC16Hi); // Контрольная сумма CRC
 
-    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
+    //    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
 
     return;
 }
