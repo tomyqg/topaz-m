@@ -379,13 +379,19 @@ void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Add
     requestdata.append(RegisterCountHi); // длина hi
     requestdata.append(RegisterCountLo); // длина Lo
 
-    requestdata.append(0x04); // количество байт
+    requestdata.append(0x04); // количество байт 4 - фиксированное т.к. посылаем только 1 значение флоата... затем их можно будет посылать несколько но это потом
 
-    // записываем 88.88
-    requestdata.append(0x42);
-    requestdata.append(0xB1);
-    requestdata.append(0xC2);
-    requestdata.append(0x8F);
+    // раскладываем флоат в массив
+
+    float f = Value;
+    QByteArray floatarray(reinterpret_cast<const char*>(&f), sizeof(f));
+
+    // флоат интерпретируется задом наперед поэтому такая вот рокировочка
+
+    requestdata.append(floatarray.at(3));
+    requestdata.append(floatarray.at(2));
+    requestdata.append(floatarray.at(1));
+    requestdata.append(floatarray.at(0));
 
     quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
