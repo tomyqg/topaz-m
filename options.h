@@ -61,6 +61,8 @@ private slots:
     void on_comboBox_currentIndexChanged(int index);
     void on_ArchivetoUSB_button_clicked();
 
+    void on_pushButton_6_clicked();
+
 private:
 
     QString GetNewDateString();
@@ -79,6 +81,7 @@ private:
     void ReadChannelsOptionsFromFile();
 
     void ArchiveToUSBFlashDrive();
+    void ResetToDefaults();
 
     static double maxmessageslimit;
     Ui::Options *ui;

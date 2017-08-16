@@ -112,8 +112,10 @@ void MainWindow::MainWindowInitialization()
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
     op.deleteLater();
 
-    //    op.deleteLater();
-    InitPins(); // почему-то нужно дважды вызывать эту функцию - нужно узнать - почему
+    // сразу активируем отладку по USB
+    QProcess process;
+    process.startDetached("ifconfig usb0 192.168.1.115");
+
     needConfirmation = 1;
 }
 

@@ -450,10 +450,7 @@ void Options::TouchScreenCalibrate()
 void Options::ResetToDefaults() // кастомизирует контроллы во вкладке опшнс
 {
     QProcess process;
-
-//    process.waitForFinished();
-
-//    process.startDetached("cp /opt/Defaults/*.txt /opt/");
+    //копируем файлы настроек каналов в рабочий каталог
     process.startDetached("cp -a /opt/Defaults/. /opt/");
     qDebug() << "ResetToDefaults";
 

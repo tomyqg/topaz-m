@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "0.51" //версия ПО
+#define CURRENT_VER "0.55" //версия ПО
 
 #define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
@@ -46,7 +46,7 @@
 #define NaNMessage "nan"
 #define MultiThread
 #define ValuesUpdateTimer 100
-#define GraphicsUpdateTimer 200
+#define GraphicsUpdateTimer 300
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в секундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
