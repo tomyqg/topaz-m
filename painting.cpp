@@ -127,10 +127,10 @@ void MainWindow::PaintCyfrasBottom()
 void MainWindow::PaintCyfrasRight()
 {
     // задается вручную
-    int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
+    int smallrectingleheight = widgheight/4-30; // высота прямоугольничка в пикселях задается вручную
     int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
     int otstupsnizu = smallrectingleheight + 24;
     int otstupsverhu = widgheight - otstupsnizu;
@@ -139,8 +139,8 @@ void MainWindow::PaintCyfrasRight()
     int otstupsverhu3 = otstupsverhu-smallrectingleheight*3;
 
 
-    int alerttextsize = smallrectingleheight/2.5;
-    int smalltextsize = (smallrectingleheight - alerttextsize ) / 5;
+    int alerttextsize = smallrectingleheight/2;
+    int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
@@ -208,7 +208,7 @@ void MainWindow::PaintCyfrasRight()
     painter.drawText(rect4coords, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
 
     // подписываем букву m если канал математически обрабатывается
-    painter.setPen(Qt::darkRed);
+    painter.setPen(Qt::white);
     painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
         painter.drawText(rect1coords, Qt::AlignRight | Qt::AlignTop, "math ");
@@ -338,9 +338,9 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     int alertwindowwidth = widgwidth/2-2;
     //    int alertwindowheight = widgheight/2/4-2;
-    int alertwindowheight  = widgheight/10;
-    int alerttextsize = alertwindowheight/3;
-    int smalltextsize = (alerttextsize/2);
+    int alertwindowheight  = widgheight/12;
+    int alerttextsize = alertwindowheight/2;
+    int smalltextsize = (alertwindowheight - alerttextsize)/2.5;
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -502,7 +502,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if  (GetHalfSecFlag() == 1)
     {
         painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-        painter.setFont(QFont(Font, 40, QFont::ExtraBold));
+        painter.setFont(QFont(Font, alertwindowheight-5, QFont::ExtraBold));
 
         // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
         if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))

@@ -137,6 +137,7 @@ public:
             uint16_t Lenght
             );
 
+    void ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
     void ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
 
 signals:

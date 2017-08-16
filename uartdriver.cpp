@@ -196,11 +196,11 @@ void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
 {
     switch (newstate) {
     case 0:
-        ModBusSetRegister(channel,ModBus::WriteSingleCoil,Address,0x0000);
+        ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,Address,0x0000);
         break;
 
     case 1:
-        ModBusSetRegister(channel,ModBus::WriteSingleCoil,Address,0xFF00);
+        ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,Address,0xFF00);
         break;
 
     default:
@@ -223,6 +223,11 @@ double ModBus::ReadDataChannel(int channeladdress)
     return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,channeladdress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
 }
 
+void ModBus::WriteDataChannel(int channeladdress, double data)
+{
+    ModBusSetRegisterFloat(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,channeladdress,data);
+}
+
 double ModBus::ClickRelay(char channel)
 {
     SetSingleCoil(channel,ModBus::ElmetroRelayAddress,1);
@@ -238,10 +243,6 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     QByteArray InputDataByteArray;
 
     char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
-
-    //    Address = 2;
-
-    //    qDebug()<< Address ;
 
     AddressHi = (int) ((Address & 0xFF00)>>8);
     AddressLo = (int) (Address & 0x00FF);
@@ -335,7 +336,12 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
     return ModBus::ConnectionError;
 }
 
-void ModBus::ModBusSetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
+void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Address,float Value)
+{
+
+}
+
+void ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -567,7 +573,7 @@ void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalp
     }
 
     uint16_t address = ModBus::AdditionalParameterAddress + channelbias;
-    ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,additionalparametr);
+    ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,address,additionalparametr);
 }
 
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
@@ -589,7 +595,7 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
         break;
     }
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
-    ModBusSetRegister(channel,ModBus::WriteSingleCoil,address,signaltype);
+    ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,address,signaltype);
     //return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
 }
 
