@@ -37,7 +37,7 @@ void worker::do_Work()
                 UartDriver::needtoupdatechannel[0] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
 
-                MB.WriteDataChannel(ModBus::DataChannel1, currentdata );
+                MB.WriteDataChannel(ModBus::DataChannel2, currentdata );
 
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
