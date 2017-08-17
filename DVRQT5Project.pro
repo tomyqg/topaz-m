@@ -8,11 +8,10 @@ QT += core gui script
 QT += serialport
 QT += testlib
 
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
-TARGET = untitled2
+TARGET = DVRQT5Project
 
 TEMPLATE = app
 
@@ -52,7 +51,6 @@ FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
     messages.ui
-#target.path  = $$[QT_INSTALL_EXAMPLES]/quick/demos
 target.path  = /opt
 INSTALLS    += target
 DISTFILES += \

@@ -21,7 +21,7 @@ bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
 
 QByteArray copyarray;
 
-quint16 UartDriver::Calculate_crc16_modbus(const QByteArray &array)
+quint16 UartDriver::CalculateCRC16RTU(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -191,43 +191,31 @@ void  UartDriver::SetRTSPinDirection()
 
 void  ModBus::ConfigureChannel(ModbusDeviceStruct* devstruct)
 {
-
 }
 
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
 {
-    switch (newstate) {
-    case 0:
-        ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,Address,0x0000);
-        break;
-
-    case 1:
-        ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,Address,0xFF00);
-        break;
-
-    default:
-        break;
-    }
+    ModBusSetSingleRegisterUint16(channel,ModBus::WriteSingleCoil,Address,newstate*0xFF00); // если вкл то посылаем FF00 иначе посылаем 0x0000
 }
 
 double ModBus::ReadOnBoardVoltage()
 {
-    return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,ModBus::OnboardVoltageAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
+    return ModBusGetInputRegister(ModBus::Board4AIAddress,ModBus::OnboardVoltageAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
 }
 
 double ModBus::ReadOnBoardTemperature()
 {
-    return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,ModBus::OnboardTempAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
+    return ModBusGetInputRegister(ModBus::Board4AIAddress,ModBus::OnboardTempAddress,ModBus::OnboardVoltageLenght); //ModBus::ElmetroChannelAB2Address
 }
 
 double ModBus::ReadDataChannel(int channeladdress)
 {
-    return ModBusGetRegister(ModBus::Board4AIAddress,ModBus::ReadInputRegisters,channeladdress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
+    return ModBusGetInputRegister(ModBus::Board4AIAddress,channeladdress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
 }
 
 void ModBus::WriteDataChannel(int channeladdress, double data)
 {
-    ModBusSetRegisterFloat(ModBus::Board4AIAddress,ModBus::WriteMultipleRegisters,channeladdress,data);
+    ModBusSetSingleRegisterFloat(ModBus::Board4AIAddress,channeladdress,data);
 }
 
 double ModBus::ClickRelay(char channel)
@@ -239,7 +227,7 @@ double ModBus::ClickRelay(char channel)
     return 2;
 }
 
-float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
+float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -253,20 +241,23 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     //    requestdata.append(DeviceAdress);
     requestdata.append(DeviceAdress); // Адрес устройства
-    requestdata.append(Function); // Функциональный код
+    requestdata.append(ModBus::ReadInputRegisters); // Функциональный код - читать регистр
     requestdata.append(AddressHi); // Адрес первого регистра Hi байт
     requestdata.append(AddressLo); //Адрес первого регистра Lo байт
     requestdata.append(RegisterLenghtHi); // Количество регистров Hi байт
     requestdata.append(RegisterLenghtLo); // Количество регистров Lo байт
 
     //    qDebug() << requestdata;
-    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
+    quint16 CRC16 = CalculateCRC16RTU(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
 
     requestdata.append(CRC16Lo);
     requestdata.append(CRC16Hi);
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
+
+    qDebug() << requestdata << "requestdata ";
+    qDebug() << InputDataByteArray << "InputDataByteArray";
 
     //    qDebug() << requestdata << "requestdata ";
     if (InputDataByteArray.length()<3)
@@ -280,85 +271,145 @@ float ModBus::ModBusGetRegister(char DeviceAdress,char Function,uint16_t Address
 
     for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
     {
-        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == Function)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
+        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == ModBus::ReadInputRegisters)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
         {
-            //            InputDataByteArrayParsed.clear(); // если нашли такую последовательность то пошли дальше обрабатывать данные
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2)); // количество байт далее
 
-            //if ( (Function>=0x01)|| (Function<=0x04) ) // если запрос на чтение 01 (0x01)	Чтение DO 02 (0x02)	Чтение DI 03 (0x03)	Чтение AO 04 (0x04)	Чтение AI
-            if (  (Function==0x04) ) // если запрос на Чтение AO 04 (0x04)	Чтение AI
+            quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
+
+            for (int var2 = 0; var2 < baytdalee; ++var2) {
+                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
+            }
+
+            quint8 inpbytecrchibyteindex = byteindex+4+baytdalee;
+            quint8 inpbytecrclobyteindex = inpbytecrchibyteindex-1;
+            quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(inpbytecrchibyteindex);
+            quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(inpbytecrclobyteindex);
+            quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
+            quint16 calculatedcrc16summ = CalculateCRC16RTU(InputDataByteArrayParsed);
+
+            if (inputcrc16summ1 == calculatedcrc16summ)
             {
+                QByteArray arraytofloat;
+                float val;
+
+                copyarray.clear();
+                arraytofloat.append(InputDataByteArrayParsed.at(3));
+                arraytofloat.append(InputDataByteArrayParsed.at(4));
+                arraytofloat.append(InputDataByteArrayParsed.at(5));
+                arraytofloat.append(InputDataByteArrayParsed.at(6));
+
+                //convert hex to double
+                QDataStream stream(arraytofloat);
+                stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+                stream >> val;
 
 
-
-                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
-                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
-                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2)); // количество байт далее
-
-                quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
-
-                for (int var2 = 0; var2 < baytdalee; ++var2) {
-                    InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
-                }
-
-
-                quint8 inpbytecrchibyteindex = byteindex+4+baytdalee;
-                quint8 inpbytecrclobyteindex = inpbytecrchibyteindex-1;
-
-                quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(inpbytecrchibyteindex);
-                quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(inpbytecrclobyteindex);
-
-                quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
-
-                quint16 calculatedcrc16summ = Calculate_crc16_modbus(InputDataByteArrayParsed);
-
-                if (inputcrc16summ1 == calculatedcrc16summ)
-                {
-                    //                    SetConnectFailure(0);
-                    QByteArray arraytofloat;
-                    float val;
-
-                    copyarray.clear();
-
-                    arraytofloat.append(InputDataByteArrayParsed.at(3));
-                    arraytofloat.append(InputDataByteArrayParsed.at(4));
-                    arraytofloat.append(InputDataByteArrayParsed.at(5));
-                    arraytofloat.append(InputDataByteArrayParsed.at(6));
-
-                    //                    arraytofloat.append(0x01);
-                    //                    arraytofloat.append(0x02);
-                    //                    arraytofloat.append(0xFC);
-                    //                    arraytofloat.append(0x19);
-
-                    copyarray.append(InputDataByteArrayParsed.at(3));
-                    copyarray.append(InputDataByteArrayParsed.at(4));
-                    copyarray.append(InputDataByteArrayParsed.at(5));
-                    copyarray.append(InputDataByteArrayParsed.at(6));
-
-                    //                    qDebug() << arraytofloat << "arraytofloat ";
-                    //                    qDebug() << arraytofloat.at(0) << arraytofloat.at(1) << arraytofloat.at(2) << arraytofloat.at(3) << arraytofloat.at(4) ;
-
-                    //qDebug() << copyarray << "copyarray ";
-                    //qDebug() << arraytofloat.at(1) << "arraytofloat.at(0) ";
-                    //qDebug() << copyarray.at(1) << "copyarray.at(0) ";
-
-                    //convert hex to double
-                    QDataStream stream(arraytofloat);
-                    stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-                    stream >> val;
-                    return val;
-                }
-                else
-                {
-                    //                    qDebug() << "BadCRC";
-                    return ModBus::BadCRC;
-                }
+                return val;
+            }
+            else
+            {
+                return ModBus::BadCRC;
             }
         }
     }
     return ModBus::ConnectionError;
 }
 
-void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Address,float Value)
+float ModBus::ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght)
+{
+    QByteArray requestdata;
+    QByteArray InputDataByteArray;
+
+    char AddressHi,AddressLo,RegisterLenghtHi,RegisterLenghtLo,CRC16Hi,CRC16Lo;
+
+    AddressHi = (int) ((Address & 0xFF00)>>8);
+    AddressLo = (int) (Address & 0x00FF);
+    RegisterLenghtHi = (int) ((Lenght & 0xFF00)>>8);
+    RegisterLenghtLo = (int) (Lenght & 0x00FF);
+
+    //    requestdata.append(DeviceAdress);
+    requestdata.append(DeviceAdress); // Адрес устройства
+    requestdata.append(ModBus::ReadHoldingRegisters); // Функциональный код - читать регистр
+    requestdata.append(AddressHi); // Адрес первого регистра Hi байт
+    requestdata.append(AddressLo); //Адрес первого регистра Lo байт
+    requestdata.append(RegisterLenghtHi); // Количество регистров Hi байт
+    requestdata.append(RegisterLenghtLo); // Количество регистров Lo байт
+
+    //    qDebug() << requestdata;
+    quint16 CRC16 = CalculateCRC16RTU(requestdata);
+    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    CRC16Lo = (int) (CRC16 & 0x00FF);
+
+    requestdata.append(CRC16Lo);
+    requestdata.append(CRC16Hi);
+    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
+
+    qDebug() << requestdata << "requestdata ";
+    qDebug() << InputDataByteArray << "InputDataByteArray";
+
+    //    qDebug() << requestdata << "requestdata ";
+    if (InputDataByteArray.length()<3)
+        return ModBus::ConnectionError;
+
+    QByteArray InputDataByteArrayParsed;
+
+    int InputDataByteArraylenght = InputDataByteArray.length();
+
+    // разбираем пакет данных
+
+    for (int byteindex = 0; byteindex < InputDataByteArraylenght; ++byteindex)
+    {
+        if ((InputDataByteArray.at(byteindex)  == DeviceAdress) && (InputDataByteArray.at(byteindex+1)  == ModBus::ReadHoldingRegisters)) // ищем когда нулевой байт равен адресу а следующий байт равен функции
+        {
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex)); // адрес девайса
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+1)); // функция
+            InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+2)); // количество байт далее
+
+            quint8 baytdalee = InputDataByteArray.at(byteindex+2) ; // узнали сколько байт идет далее и записываем их в аррэй
+
+            for (int var2 = 0; var2 < baytdalee; ++var2) {
+                InputDataByteArrayParsed.append(InputDataByteArray.at(byteindex+3+var2));
+            }
+
+            quint8 inpbytecrchibyteindex = byteindex+4+baytdalee;
+            quint8 inpbytecrclobyteindex = inpbytecrchibyteindex-1;
+            quint8 inpbytecrchibyte = (uint8_t)InputDataByteArray.at(inpbytecrchibyteindex);
+            quint8 inpbytecrclobyte = (uint8_t)InputDataByteArray.at(inpbytecrclobyteindex);
+            quint16 inputcrc16summ1 = ((uint16_t) (inpbytecrchibyte<<8))|( (uint16_t) inpbytecrclobyte );
+            quint16 calculatedcrc16summ = CalculateCRC16RTU(InputDataByteArrayParsed);
+
+            if (inputcrc16summ1 == calculatedcrc16summ)
+            {
+                QByteArray arraytofloat;
+                float val;
+
+                copyarray.clear();
+                arraytofloat.append(InputDataByteArrayParsed.at(3));
+                arraytofloat.append(InputDataByteArrayParsed.at(4));
+                arraytofloat.append(InputDataByteArrayParsed.at(5));
+                arraytofloat.append(InputDataByteArrayParsed.at(6));
+
+                //convert hex to double
+                QDataStream stream(arraytofloat);
+                stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+                stream >> val;
+
+
+                return val;
+            }
+            else
+            {
+                return ModBus::BadCRC;
+            }
+        }
+    }
+    return ModBus::ConnectionError;
+}
+
+void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,float Value)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -372,33 +423,29 @@ void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Add
     AddressLo = (int) (Address & 0x00FF);
 
     requestdata.append(DeviceAdress); //Адрес устройства
-    requestdata.append(Function); //Функциональный код
-    requestdata.append(AddressHi); //	Адрес первого регистра Hi байт
-    requestdata.append(AddressLo); // Адрес первого регистра  hi
-
+    requestdata.append(ModBus::WriteMultipleRegisters); //Функциональный код
+    requestdata.append(AddressHi);
+    requestdata.append(AddressLo);
     requestdata.append(RegisterCountHi); // длина hi
     requestdata.append(RegisterCountLo); // длина Lo
-
     requestdata.append(0x04); // количество байт 4 - фиксированное т.к. посылаем только 1 значение флоата... затем их можно будет посылать несколько но это потом
 
     // раскладываем флоат в массив
-
     float f = Value;
     QByteArray floatarray(reinterpret_cast<const char*>(&f), sizeof(f));
 
     // флоат интерпретируется задом наперед поэтому такая вот рокировочка
-
-    requestdata.append(floatarray.at(3));
+    requestdata.append(floatarray.at(3)); // вставляем флоат в запрос
     requestdata.append(floatarray.at(2));
     requestdata.append(floatarray.at(1));
     requestdata.append(floatarray.at(0));
 
-    quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
+    quint16 CRC16 = CalculateCRC16RTU(requestdata); // считаем срс исходящего пакета
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
 
-    requestdata.append(CRC16Lo); // Контрольная сумма CRC
-    requestdata.append(CRC16Hi); // Контрольная сумма CRC
+    requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
+    requestdata.append(CRC16Hi);
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
 
@@ -406,7 +453,7 @@ void ModBus::ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Add
     qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
-void ModBus::ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
+void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value)
 {
     QByteArray requestdata;
     QByteArray InputDataByteArray;
@@ -425,16 +472,18 @@ void ModBus::ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Ad
     requestdata.append(RegisterValueHi); //Значение Hi байт
     requestdata.append(RegisterValueLo); //Значение Lo байт
 
-    //    quint16 CRC16 = Calculate_crc16_modbus(requestdata); // считаем срс исходящего пакета
-    //    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
-    //    CRC16Lo = (int) (CRC16 & 0x00FF);
+    quint16 CRC16 = CalculateCRC16RTU(requestdata); // считаем срс исходящего пакета
+    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
+    CRC16Lo = (int) (CRC16 & 0x00FF);
 
-    //    requestdata.append(CRC16Lo); // Контрольная сумма CRC
-    //    requestdata.append(CRC16Hi); // Контрольная сумма CRC
+    requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
+    requestdata.append(CRC16Hi);
+    UartWriteData(requestdata); // делаем запрос
 
-    //    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response // после этой строки точно вылетает ассерт
-
-    return;
+    if(InputDataByteArray == requestdata)
+    {
+//        qDebug() << "InputDataByteArray = requestdata";
+    }
 }
 
 QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
@@ -456,7 +505,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
+    quint16 CRC16 = CalculateCRC16RTU(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
     requestdata.append(CRC16Hi);
@@ -470,7 +519,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
     quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
 
-    quint16 crc = Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16 crc = CalculateCRC16RTU(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -502,7 +551,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     requestdata.append(LenghtHi);
     requestdata.append(LenghtLo);
 
-    quint16 CRC16 = Calculate_crc16_modbus(requestdata);
+    quint16 CRC16 = CalculateCRC16RTU(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
     requestdata.append(CRC16Hi);
@@ -514,7 +563,7 @@ QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Ad
     quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
     quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
     quint16  inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-    quint16  crc = Calculate_crc16_modbus(InputDataByteArrayNoCRCnew);
+    quint16  crc = CalculateCRC16RTU(InputDataByteArrayNoCRCnew);
 
     if (inpcrc == crc)
     {
@@ -575,7 +624,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         uint8_t inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
         uint16_t inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo);
 
-        uint16_t crc = Calculate_crc16_modbus(InputDataByteArrayNoCRC);
+        uint16_t crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
 
         if (inpcrc == crc)
         {
@@ -615,7 +664,7 @@ uint16_t ModBus::GetChannelSignalType(uint8_t channel)
     }
 
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
-    return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
+    return (uint16_t) ModBusGetInputRegister(channel,address,ModBus::DataChannelLenght);
 }
 
 void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalparametr)
@@ -638,7 +687,7 @@ void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalp
     }
 
     uint16_t address = ModBus::AdditionalParameterAddress + channelbias;
-    ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,address,additionalparametr);
+    ModBusSetSingleRegisterUint16(channel,ModBus::WriteSingleCoil,address,additionalparametr);
 }
 
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
@@ -660,12 +709,11 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
         break;
     }
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
-    ModBusSetRegisterUint16(channel,ModBus::WriteSingleCoil,address,signaltype);
-    //return (uint16_t) ModBusGetRegister(channel,ModBus::ReadInputRegisters,address,ModBus::DataChannelLenght);
+    ModBusSetSingleRegisterUint16(channel,ModBus::WriteSingleCoil,address,signaltype);
 }
 
 
 double ModBus::DataChannelRead (char channel)
 {
-    return ModBusGetRegister(channel,ModBus::ReadInputRegisters,ModBus::DataChannel1,ModBus::DataChannelLenght);
+    return ModBusGetInputRegister(channel,ModBus::DataChannel1,ModBus::DataChannelLenght);
 }

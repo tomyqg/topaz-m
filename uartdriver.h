@@ -72,7 +72,7 @@ protected:
     void DelayMsec(int n);
     void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
-    quint16 Calculate_crc16_modbus(const QByteArray &array);
+    quint16 CalculateCRC16RTU(const QByteArray &array);
 
 public:
     static double channelinputbuffer[4];
@@ -112,7 +112,7 @@ public:
 
     ~ModBus() // деструктор
     {
-        //        qDebug() << "Modbus Deleted";
+        //qDebug() << "Modbus Deleted";
     }
 
     QByteArray ModBusMakeRequest(
@@ -130,15 +130,10 @@ public:
             uint16_t Lenght
             );
 
-    float ModBusGetRegister(
-            char DeviceAdress,
-            char Function,
-            uint16_t Address,
-            uint16_t Lenght
-            );
-
-    void ModBusSetRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
-    void ModBusSetRegisterFloat(char DeviceAdress,char Function,uint16_t Address,float Value);
+    float ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
+    float ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
+    void ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,float Value);
+    void ModBusSetSingleRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
 
 signals:
     void finished();

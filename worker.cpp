@@ -35,9 +35,13 @@ void worker::do_Work()
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
+//               currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
 
-                MB.WriteDataChannel(ModBus::DataChannel2, currentdata );
+//                currentdata = MB.ReadDataChannel(32816);
+               currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
+
+               // пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
+                MB.WriteDataChannel(32816, currentdata*(-1) );
 
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
@@ -58,7 +62,11 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[1] = 0;
 
-                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
+//                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
+
+                // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+                currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,32816,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
+
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions2->IsChannelMathematical())
