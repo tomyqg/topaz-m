@@ -698,7 +698,6 @@ void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalp
         channelbias = ModBus::Channel4AddressBias;
         break;
     }
-
 }
 
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
@@ -721,7 +720,6 @@ void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
     }
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
 }
-
 
 double ModBus::DataChannelRead (char channel)
 {

@@ -304,4 +304,3 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
 
     thread()->usleep(10000);
 }
-

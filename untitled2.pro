@@ -11,7 +11,7 @@ QT += testlib
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
-TARGET = DVRQT5Project
+TARGET = untitled2
 
 TEMPLATE = app
 

@@ -15,12 +15,22 @@ struct ModbusDeviceStruct
     int ModbusNetworkAddress;
     int ModbusBaudrate;
     int AIcount;
-    int address;
+    int channeladdress;
     int Measuretype;
+    uint16_t SignalTypeAddress;
     uint16_t SignalType;
+    uint16_t FilterTypeAddress;
     uint16_t FilterType;
+    uint16_t TransferFunction;
+    uint16_t TransferFunctionAddress;
     uint16_t Status;
     uint16_t SupportedSignals;
+    float TransferSignalLowLimit;
+    float TransferSignalLowLimitAddress;
+    float TransferSignalHiLimit;
+    float TransferSignalHiLimitAddress;
+
+
     float Data;
 
     float UserCalibration1Gain;
@@ -133,7 +143,7 @@ public:
     float ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
     float ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
     void ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,float Value);
-    void ModBusSetSingleRegisterUint16(char DeviceAdress,char Function,uint16_t Address,uint16_t Value);
+    void ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value);
 
 signals:
     void finished();
