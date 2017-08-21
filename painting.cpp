@@ -20,14 +20,6 @@ extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
-
-extern int b;
-//#define ConnectionErrorMessage "ошибка\nсоединения"
-//#define CRCErrorMessage "ошибка конт.\nсуммы"
-//#define ObryvErrorMessage "обрыв\nдатчика"
-
-
-
 void MainWindow::PaintCyfrasBottom()
 {
     // задается вручную
@@ -38,17 +30,15 @@ void MainWindow::PaintCyfrasBottom()
     int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
     int otstupsnizu = smallrectingleheight + 24;
     int otstupsverhu = widgheight - otstupsnizu;
-
     int alerttextsize = smallrectingleheight/2.5;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 5;
 
 #ifndef LinuxBoard
-alerttextsize/=1.5;
-smalltextsize/=1.5;
+    alerttextsize/=1.5;
+    smalltextsize/=1.5;
 #endif
 
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
-
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -118,13 +108,13 @@ smalltextsize/=1.5;
     painter.setPen(Qt::darkRed);
     painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
-        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
+        painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop, MathString);
     if (channel2object.IsChannelMathematical())
-        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel3object.IsChannelMathematical())
-        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(2+smallrectinglewidth*2, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel4object.IsChannelMathematical())
-        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(2+smallrectinglewidth*3, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
 
     painter.end();
 }
@@ -177,22 +167,22 @@ void MainWindow::PaintCyfrasRight()
     Channel3ValueString = QString::number( Channel3ValueNumber, 'f', 2);
     Channel4ValueString = QString::number( Channel4ValueNumber, 'f', 2);
 
-    if (Channel1ValueString== NaNMessage)
+    if (Channel1ValueString == NaNMessage)
         Channel1ValueString = ObryvErrorMessage;
-    if (Channel2ValueString== NaNMessage)
+    if (Channel2ValueString == NaNMessage)
         Channel2ValueString = ObryvErrorMessage;
-    if (Channel3ValueString== NaNMessage)
+    if (Channel3ValueString == NaNMessage)
         Channel3ValueString = ObryvErrorMessage;
-    if (Channel4ValueString== NaNMessage)
+    if (Channel4ValueString == NaNMessage)
         Channel4ValueString = ObryvErrorMessage;
 
-    if (Channel1ValueNumber== ModBus::ConnectionError)
+    if (Channel1ValueNumber == ModBus::ConnectionError)
         Channel1ValueString = ConnectionErrorMessage;
-    if (Channel2ValueNumber== ModBus::ConnectionError)
+    if (Channel2ValueNumber == ModBus::ConnectionError)
         Channel2ValueString =  ConnectionErrorMessage;
-    if (Channel3ValueNumber== ModBus::ConnectionError)
+    if (Channel3ValueNumber == ModBus::ConnectionError)
         Channel3ValueString =  ConnectionErrorMessage;
-    if (Channel4ValueNumber== ModBus::ConnectionError)
+    if (Channel4ValueNumber == ModBus::ConnectionError)
         Channel4ValueString = ConnectionErrorMessage;
 
     // выводим значения каналов большими цифрами
@@ -203,14 +193,14 @@ void MainWindow::PaintCyfrasRight()
 
     // подписываем названия каналов
     painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-    painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
+    painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignTop,channel1object.GetChannelName());
     painter.drawText(rect2coords, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
     painter.drawText(rect3coords, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
     painter.drawText(rect4coords, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     // подписываем единицы измерения
     painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-    painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetUnitsName());
+    painter.drawText(rect1coords, Qt::AlignHCenter | Qt::AlignBottom,channel1object.GetUnitsName());
     painter.drawText(rect2coords, Qt::AlignHCenter | Qt::AlignBottom,channel2object.GetUnitsName());
     painter.drawText(rect3coords, Qt::AlignHCenter | Qt::AlignBottom,channel3object.GetUnitsName());
     painter.drawText(rect4coords, Qt::AlignHCenter | Qt::AlignBottom,channel4object.GetUnitsName());
@@ -219,13 +209,13 @@ void MainWindow::PaintCyfrasRight()
     painter.setPen(Qt::white);
     painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
-        painter.drawText(rect1coords, Qt::AlignRight | Qt::AlignTop, "math ");
+        painter.drawText(rect1coords, Qt::AlignRight | Qt::AlignTop, MathString);
     if (channel2object.IsChannelMathematical())
-        painter.drawText(rect2coords, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(rect2coords, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel3object.IsChannelMathematical())
-        painter.drawText(rect3coords, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(rect3coords, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel4object.IsChannelMathematical())
-        painter.drawText(rect4coords, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(rect4coords, Qt::AlignRight | Qt::AlignTop,MathString);
 
     painter.end();
 }
@@ -251,27 +241,27 @@ void MainWindow::PaintCyfrasFullScreen()
     Channel3ValueString = QString::number( Channel3ValueNumber, 'f', 2);
     Channel4ValueString = QString::number( Channel4ValueNumber, 'f', 2);
 
-    if (Channel1ValueString== NaNMessage)
+    if (Channel1ValueString == NaNMessage)
         Channel1ValueString = ObryvErrorMessage;
-    if (Channel2ValueString== NaNMessage)
+    if (Channel2ValueString == NaNMessage)
         Channel2ValueString = ObryvErrorMessage;
-    if (Channel3ValueString== NaNMessage)
+    if (Channel3ValueString == NaNMessage)
         Channel3ValueString = ObryvErrorMessage;
-    if (Channel4ValueString== NaNMessage)
+    if (Channel4ValueString == NaNMessage)
         Channel4ValueString = ObryvErrorMessage;
 
-    if (Channel1ValueNumber== ModBus::ConnectionError)
+    if (Channel1ValueNumber == ModBus::ConnectionError)
         Channel1ValueString = ConnectionErrorMessage;
-    if (Channel2ValueNumber== ModBus::ConnectionError)
+    if (Channel2ValueNumber == ModBus::ConnectionError)
         Channel2ValueString =  ConnectionErrorMessage;
-    if (Channel3ValueNumber== ModBus::ConnectionError)
+    if (Channel3ValueNumber == ModBus::ConnectionError)
         Channel3ValueString =  ConnectionErrorMessage;
-    if (Channel4ValueNumber== ModBus::ConnectionError)
+    if (Channel4ValueNumber == ModBus::ConnectionError)
         Channel4ValueString = ConnectionErrorMessage;
 
     //высчитываются
-    int widgwidth  = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
-    int widgheight  = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
+    int widgwidth = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
+    int widgheight = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
     int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
     int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
 
@@ -285,7 +275,6 @@ void MainWindow::PaintCyfrasFullScreen()
 #endif
 
     painter.begin(ui->MessagesWidget);
-    //    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
     painter.setPen(QPen(Qt::black, 2));
     painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
     painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
@@ -320,13 +309,13 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.setPen(Qt::red);
     painter.setFont(QFont(Font, smalltextsize/2, QFont::ExtraBold));
     if (channel1object.IsChannelMathematical())
-        painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop, "math ");
+        painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop, MathString);
     if (channel2object.IsChannelMathematical())
-        painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel3object.IsChannelMathematical())
-        painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
     if (channel4object.IsChannelMathematical())
-        painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,"math ");
+        painter.drawText(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight, Qt::AlignRight | Qt::AlignTop,MathString);
 
     painter.setFont(QFont(Font, smalltextsize/2, QFont::ExtraBold));
     painter.drawText(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight, Qt::AlignLeft | Qt::AlignBottom, " 1");
@@ -341,16 +330,11 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 {
     QPainter painter;
 
-    //int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    //    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    //    int otstupsnizu = smallrectingleheight + 24;
-    //    int otstupsverhu = widgheight - otstupsnizu;
 
     int alertwindowwidth = widgwidth/2-2;
-    //    int alertwindowheight = widgheight/2/4-2;
     int alertwindowheight  = widgheight/12;
     int alerttextsize = alertwindowheight/2;
     int smalltextsize = (alertwindowheight - alerttextsize)/2.5;
@@ -424,7 +408,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     }
     else
     {
-        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
         SetChannel1Color(Channel1ColorNormal);
     }
 
@@ -450,7 +434,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     else
     {
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
         SetChannel2Color(Channel2ColorNormal);
     }
 
@@ -475,7 +459,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     }
     else
     {
-        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
         SetChannel3Color(Channel3ColorNormal);
     }
 
@@ -500,7 +484,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     }
     else
     {
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, "Ok");
+        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
         SetChannel4Color(Channel4ColorNormal);
     }
     //здесь мы возвращаем окна квитирования
@@ -524,15 +508,14 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
         // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
         if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
-            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, "!");
+            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
         if ((channel2currentvalue>channel2state1value) || (channel2currentvalue<channel2state2value))
-            painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
+            painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
         if ((channel3currentvalue>channel3state1value) || (channel3currentvalue<channel3state2value))
-            painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
+            painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
         if ((channel4currentvalue>channel4state1value) || (channel4currentvalue<channel4state2value))
-            painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,"!");
+            painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
     }
-
     return;
 }
 
@@ -542,7 +525,7 @@ void MainWindow::PaintPolarDiagramm()
     int widgheight  = ui->MessagesWidget->height();
     double maximumradius;
 
-    maximumradius = widgheight/4 - 10;
+    maximumradius = 400;
 
     painter.begin(ui->MessagesWidget);
 
@@ -556,11 +539,20 @@ void MainWindow::PaintPolarDiagramm()
     int channel3length = UartDriver::channelinputbuffer[2]/200*maximumradius;
     int channel4length = UartDriver::channelinputbuffer[3]/200*maximumradius;
 
+    int centerx1,centerx2,centerx3,centerx4;
+    int centery1,centery2,centery3,centery4;
+
+    centerx1 = centerx2 =  300;
+    centerx3 = centerx4 =  600;
+
+    centery1 = centery3 =  200;
+    centery2 = centery4 =  400;
+
     /* Create the line object: */
     QLineF Channel1Line;
-    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel1Line.setP1(QPointF(widgheight/2-2, maximumradius + 10));
+    Channel1Line.setP1(QPointF(centerx1, centery1));
     Channel1Line.setAngle(channel1value);
     Channel1Line.setLength(channel1length);
 
@@ -569,19 +561,20 @@ void MainWindow::PaintPolarDiagramm()
 
     /* Create the line object: */
     QLineF Channel2Line;
-    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel2Line.setP1(QPointF(widgheight-2, maximumradius + 10));
+    Channel2Line.setP1(QPointF(centerx2, centery2));
     Channel2Line.setAngle(channel2value);
     Channel2Line.setLength(channel2length);
+
     int x2 = Channel2Line.x2(); // мы берем координаты `1 точки
     int y2 = Channel2Line.y2(); // мы берем координаты второй точки
 
     /* Create the line object: */
     QLineF Channel3Line;
-    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel3Line.setP1(QPointF(widgheight/2-2, widgheight - (maximumradius + 10)));
+    Channel3Line.setP1(QPointF(centerx3, centery3));
     Channel3Line.setAngle(channel3value);
     Channel3Line.setLength(channel3length);
     int x3 = Channel3Line.x2(); // мы берем координаты `1 точки
@@ -589,16 +582,14 @@ void MainWindow::PaintPolarDiagramm()
 
     /* Create the line object: */
     QLineF Channel4Line;
-    painter.setPen(QPen(Qt::green, 4)); //, Qt::DashDotLine, Qt::RoundCap));
+    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
-    Channel4Line.setP1(QPointF(widgheight-2,  widgheight - (maximumradius + 10)) );
+    Channel4Line.setP1(QPointF(centerx4, centery4) );
     Channel4Line.setAngle(channel4value);
     Channel4Line.setLength(channel4length);
 
     int x4 = Channel4Line.x2(); // мы берем координаты `1 точки
     int y4 = Channel4Line.y2(); // мы берем координаты второй точки
-
-    //qDebug() << Channel1Line.y2(); // мы берем координаты второй точки
 
     painter.setPen(QPen(Qt::green,2,  Qt::DashLine)); //, Qt::DashDotLine, Qt::RoundCap));
 
@@ -635,13 +626,13 @@ void MainWindow::PaintPolarDiagramm()
         PolarChartPointsChannel4.clear();
     }
 
-    painter.setPen(QPen(Channel1Color, 4));
+    painter.setPen(QPen(Channel1Color, 1));
     painter.drawPolyline(PolarChartPointsChannel1);
-    painter.setPen(QPen(Channel2Color, 4));
+    painter.setPen(QPen(Channel2Color, 1));
     painter.drawPolyline(PolarChartPointsChannel2);
-    painter.setPen(QPen(Channel3Color, 4));
+    painter.setPen(QPen(Channel3Color, 1));
     painter.drawPolyline(PolarChartPointsChannel3);
-    painter.setPen(QPen(Channel4Color, 4));
+    painter.setPen(QPen(Channel4Color, 1));
     painter.drawPolyline(PolarChartPointsChannel4);
     painter.setRenderHint(QPainter::Antialiasing, false);
 
@@ -737,8 +728,6 @@ void MainWindow::ReactOnTouch()
         SetChannel4Color(Qt::yellow);
     }
 
-    //    channel1object.SetChannelName("x : " + x + "; Y : " + y);
-
     if      ((xpos>confirmwindowposx) &&
              (xpos<confirmwindowposx2) &&
              (ypos>confirmwindowposy) &&
@@ -759,8 +748,6 @@ void MainWindow::ReactOnTouch()
         }
     }
 
-
-
     int x1right  = 940;
     int x2right  = 1240;
     int y0right  = 162;
@@ -780,15 +767,12 @@ void MainWindow::ReactOnTouch()
             painter.begin(ui->MessagesWidget);
             painter.setRenderHint(QPainter::Antialiasing, false);
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-
             int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
             int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
             painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
             painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
             painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,"Allelua");
-
             painter.end();
         }
-
     }
 }

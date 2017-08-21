@@ -44,6 +44,10 @@
 
 #define Font "Open Sans Semibold"
 #define NaNMessage "nan"
+#define OKMessage "OK"
+#define AlertSign "!"
+#define MathString "math "
+
 #define MultiThread
 #define ValuesUpdateTimer 100
 #define GraphicsUpdateTimer 300
