@@ -284,12 +284,12 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         modbusdevice.ID = i;
         modbusdevice.name = cobj->GetChannelName();
         modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
+        modbusdevice.UserCalibration1DateAddress = 32814;
+        modbusdevice.UserCalibration1Date = 0x08080000;
         ModbusDevicesList.append(modbusdevice);
         //MB.ConfigureChannel(&modbusdevice);
-
         i++;
     }
-
 
     MB.ConfigureDevices(&ModbusDevicesList);
     //список структур девайсов готов.

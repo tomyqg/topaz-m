@@ -213,22 +213,24 @@ void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
     //  transfer scale
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleHiLimitAddress,devicestructure->TransferScaleHiLimit);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleLoLimitAddress,devicestructure->TransferScaleLoLimit);
+
     //  UserCalibration1
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1GainAddress,devicestructure->UserCalibration1Gain);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1OffsetAddress,devicestructure->UserCalibration1Offset);
     ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1DateAddress,devicestructure->UserCalibration1Date);
-    //  UserCalibration2
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2GainAddress,devicestructure->UserCalibration2Gain);
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2OffsetAddress,devicestructure->UserCalibration2Offset);
-    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2DateAddress,devicestructure->UserCalibration2Date);
-    //  UserCalibration3
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3GainAddress,devicestructure->UserCalibration3Gain);
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3OffsetAddress,devicestructure->UserCalibration3Offset);
-    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3DateAddress,devicestructure->UserCalibration3Date);
-    //  UserCalibration4
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4GainAddress,devicestructure->UserCalibration4Gain);
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
-    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
+
+    //    //  UserCalibration2
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2GainAddress,devicestructure->UserCalibration2Gain);
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2OffsetAddress,devicestructure->UserCalibration2Offset);
+    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2DateAddress,devicestructure->UserCalibration2Date);
+    //    //  UserCalibration3
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3GainAddress,devicestructure->UserCalibration3Gain);
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3OffsetAddress,devicestructure->UserCalibration3Offset);
+    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3DateAddress,devicestructure->UserCalibration3Date);
+    //    //  UserCalibration4
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4GainAddress,devicestructure->UserCalibration4Gain);
+    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
+    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
 
     qDebug() << devicestructure->name;
 }
@@ -528,29 +530,34 @@ void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,ui
 
 void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,uint32_t Value)
 {
-    QByteArray requestdata;
-    QByteArray InputDataByteArray;
-
-    char RegisterValueMegaHi, RegisterValueVeryHi, AddressHi,AddressLo,RegisterValueHi,RegisterValueLo,CRC16Hi,CRC16Lo;
-
-
-    AddressHi = (int) ((Address & 0xFF00)>>8);
-    AddressLo = (int) (Address & 0x00FF);
-
+    char RegisterValueMegaHi, RegisterValueVeryHi, RegisterValueHi,RegisterValueLo;
     RegisterValueMegaHi= (int) ((Value & 0xFF000000)>>24);
     RegisterValueVeryHi = (int) ((Value & 0xFF0000)>>16);
     RegisterValueHi = (int) ((Value & 0xFF00)>>8);
     RegisterValueLo = (int) (Value & 0x00FF);
+    QByteArray requestdata;
+    QByteArray InputDataByteArray;
 
-    //    requestdata.append(DeviceAdress);
+    char AddressHi,AddressLo,RegisterCountHi,RegisterCountLo,CRC16Hi,CRC16Lo;
+
+    RegisterCountHi =  (int) ((0x02 & 0xFF00)>>8);
+    RegisterCountLo = (int) (0x02 & 0x00FF);
+
+    AddressHi = (int) ((Address & 0xFF00)>>8);
+    AddressLo = (int) (Address & 0x00FF);
+
     requestdata.append(DeviceAdress); //Адрес устройства
-    requestdata.append(ModBus::WriteSingleRegister); //Функциональный код
-    requestdata.append(AddressHi); //	Адрес первого регистра Hi байт
-    requestdata.append(AddressLo); // Адрес первого регистра Lo байт
-    requestdata.append(RegisterValueMegaHi); //Значение Hi байт
-    requestdata.append(RegisterValueVeryHi); //Значение Hi байт
-    requestdata.append(RegisterValueHi); //Значение Hi байт
-    requestdata.append(RegisterValueLo); //Значение Lo байт
+    requestdata.append(ModBus::WriteMultipleRegisters); //Функциональный код
+    requestdata.append(AddressHi);
+    requestdata.append(AddressLo);
+    requestdata.append(RegisterCountHi); // длина hi
+    requestdata.append(RegisterCountLo); // длина Lo
+    requestdata.append(0x04); // количество байт 4 - фиксированное т.к. посылаем только 1 значение флоата... затем их можно будет посылать несколько но это потом
+
+    requestdata.append(RegisterValueMegaHi); // вставляем uint32
+    requestdata.append(RegisterValueVeryHi);
+    requestdata.append(RegisterValueHi);
+    requestdata.append(RegisterValueLo);
 
     quint16 CRC16 = CalculateCRC16RTU(requestdata); // считаем срс исходящего пакета
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
@@ -558,12 +565,12 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
 
     requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
     requestdata.append(CRC16Hi);
-    UartWriteData(requestdata); // делаем запрос
 
-    if(InputDataByteArray == requestdata)
-    {
-//        qDebug() << "InputDataByteArray = requestdata";
-    }
+    InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
+
+    qDebug() << requestdata << "requestdata uint32";
+    qDebug() << InputDataByteArray << "InputDataByteArray uint32";
+
 }
 QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
 {
@@ -687,9 +694,9 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         int lastindex = lengggh - 1;
         int lastitem = InputDataByteArray.at(lastindex);
 
-        if ((lastitem==-1) && (lengggh>9)) //(lengggh>9)&&
+        if ((lastitem==-1) && (lengggh>9)) // если последний символ прилетел 0xFF
         {
-            InputDataByteArray.remove(lastindex,1);
+            InputDataByteArray.remove(lastindex,1); // убираем последний символ 0xff
         }
 
         if (InputDataByteArray.length() < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
