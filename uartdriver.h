@@ -9,58 +9,98 @@
 
 struct ModbusDeviceStruct
 {
-    uint16_t ID;
     QString name;
-    int DeviceType;
-    int ModbusNetworkAddress;
-    int ModbusBaudrate;
-    int AIcount;
-    int channeladdress;
-    int Measuretype;
-    uint16_t SignalTypeAddress;
+    uint16_t ID;
+    uint16_t DeviceType;
+    uint16_t ModbusNetworkAddress;
+    uint16_t ModbusBaudrate;
+    uint16_t AIcount;
+    uint16_t channeladdress;
+    uint16_t MeasureType;
+    uint16_t MeasureTypeAddress;
     uint16_t SignalType;
-    uint16_t FilterTypeAddress;
+    uint16_t SignalTypeAddress;
     uint16_t FilterType;
+    uint16_t FilterTypeAddress;
     uint16_t TransferFunction;
     uint16_t TransferFunctionAddress;
     uint16_t Status;
+    uint16_t StatusAddress;
     uint16_t SupportedSignals;
+    uint16_t SupportedSignalsAddress;
     float TransferSignalLowLimit;
-    float TransferSignalLowLimitAddress;
+    uint16_t TransferSignalLowLimitAddress;
     float TransferSignalHiLimit;
-    float TransferSignalHiLimitAddress;
-
-
-    float Data;
+    uint16_t TransferSignalHiLimitAddress;
+    float TransferScaleHiLimit;
+    uint16_t TransferScaleHiLimitAddress;
+    float TransferScaleLoLimit;
+    uint16_t TransferScaleLoLimitAddress;
+    float DataMeasureGenerate;
+    uint16_t DataMeasureGenerateAddress;
 
     float UserCalibration1Gain;
+    uint16_t UserCalibration1GainAddress;
     float UserCalibration1Offset;
+    uint16_t UserCalibration1OffsetAddress;
     uint32_t UserCalibration1Date;
+    uint16_t UserCalibration1DateAddress;
+
     float UserCalibration2Gain;
+    uint16_t UserCalibration2GainAddress;
     float UserCalibration2Offset;
-    uint32_t UserCalibrat2on1Date;
+    uint16_t UserCalibration2OffsetAddress;
+    uint32_t UserCalibration2Date;
+    uint16_t UserCalibration2DateAddress;
+
     float UserCalibration3Gain;
+    uint16_t UserCalibration3GainAddress;
     float UserCalibration3Offset;
-    uint32_t UserCalibrat3on1Date;
+    uint16_t UserCalibration3OffsetAddress;
+    uint32_t UserCalibration3Date;
+    uint16_t UserCalibration3DateAddress;
+
     float UserCalibration4Gain;
+    uint16_t UserCalibration4GainAddress;
     float UserCalibration4Offset;
-    uint32_t UserCalibraton4Date;
+    uint16_t UserCalibration4OffsetAddress;
+    uint32_t UserCalibration4Date;
+    uint16_t UserCalibration4DateAddress;
 
     float FactoryCalibration1Gain;
+    uint16_t FactoryCalibration1GainAddress;
     float FactoryCalibration1Offset;
+    uint16_t FactoryCalibration1OffsetAddress;
     uint32_t FactoryCalibration1Date;
+    uint16_t FactoryCalibration1DateAddress;
+
     float FactoryCalibration2Gain;
+    uint16_t FactoryCalibration2GainAddress;
     float FactoryCalibration2Offset;
-    uint32_t FactoryCalibrat2on1Date;
+    uint16_t FactoryCalibration2OffsetAddress;
+    uint32_t FactoryCalibration2Date;
+    uint16_t FactoryCalibration2DateAddress;
+
     float FactoryCalibration3Gain;
+    uint16_t FactoryCalibration3GainAddress;
     float FactoryCalibration3Offset;
-    uint32_t FactoryCalibrat3on1Date;
+    uint16_t FactoryCalibration3OffsetAddress;
+    uint32_t FactoryCalibration3Date;
+    uint16_t FactoryCalibration3DateAddress;
+
     float FactoryCalibration4Gain;
+    uint16_t FactoryCalibration4GainAddress;
     float FactoryCalibration4Offset;
-    uint32_t FactoryCalibraton4Date;
+    uint16_t FactoryCalibration4OffsetAddress;
+    uint32_t FactoryCalibration4Date;
+    uint16_t FactoryCalibration4DateAddress;
+
+    uint16_t DataFlags;
+    uint16_t DataFlagsAddress;
+
+    uint16_t AdditionalCustomParameter;
+    uint16_t AdditionalCustomParameterAddress;
 };
-
-
 
 class UartDriver:public QObject
 {
@@ -144,6 +184,7 @@ public:
     float ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
     void ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,float Value);
     void ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value);
+    void ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,uint32_t Value);
 
 signals:
     void finished();

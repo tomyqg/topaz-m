@@ -40,14 +40,14 @@ void worker::do_Work()
                 //                currentdata = MB.ReadDataChannel(32816);
 
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
-                this->thread()->usleep(500*1000);
+                this->thread()->usleep(5000);
 
                 // пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
 
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
-//                    MB.WriteDataChannel(ModBus::UserCalibration2GainAddress, currentdata*(-1) );
+                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1) );
 //                    this->thread()->usleep(500*1000);
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
@@ -65,8 +65,8 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[1] = 0;
 
-                //currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
-                currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,ModBus::UserCalibration2GainAddress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
+                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
+                //currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,ModBus::BadGoodCommAddress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
                 mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
@@ -266,32 +266,33 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
 
         switch (modbusdevice.SignalType ) {
         case ModBus::CurrentMeasure:
-            modbusdevice.Measuretype  = 0; // у тока всегда ноль
+            modbusdevice.MeasureType  = 0; // у тока всегда ноль
             break;
         case ModBus::VoltageMeasure:
-            modbusdevice.Measuretype  = ModBus::Voltage1VoltNoBreakControl; // для напряжения оставим пока 1 вольт
+            modbusdevice.MeasureType  = ModBus::Voltage1VoltNoBreakControl; // для напряжения оставим пока 1 вольт
             break;
         case ModBus::ResistanceMeasure:
-            modbusdevice.Measuretype  = ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку пока.
+            modbusdevice.MeasureType  = ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку пока.
             break;
         case ModBus::TermoCoupleMeasure:
-            modbusdevice.Measuretype  = ModBus::R; // для термопары ставим тип ТПП 13
+            modbusdevice.MeasureType  = ModBus::R; // для термопары ставим тип ТПП 13
             break;
         case ModBus::TermoResistanceMeasure:
-            modbusdevice.Measuretype  =  ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку
+            modbusdevice.MeasureType  =  ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку
             break;
         default:
-            modbusdevice.Measuretype  = 0; // по умолчанию ставим ноль.
+            modbusdevice.MeasureType  = 0; // по умолчанию ставим ноль.
             break;
         }
 
-        modbusdevice.name = cobj->GetChannelName();
         modbusdevice.ID = i;
+        modbusdevice.name = cobj->GetChannelName();
         modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
         ModbusDevicesList.append(modbusdevice);
-        //        qDebug() << i << ":" << modbusdevice.Measuretype;
         MB.ConfigureChannel(&modbusdevice);
 
+
+        //        qDebug() << i << ":" << modbusdevice.Measuretype;
         i++;
     }
 
@@ -304,4 +305,3 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
 
     thread()->usleep(10000);
 }
-
