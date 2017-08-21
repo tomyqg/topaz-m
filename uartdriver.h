@@ -153,6 +153,7 @@ public slots:
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
 
     void ConfigureChannel(ModbusDeviceStruct* devstruct);
+    void ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist);
 
     uint16_t GetChannelSignalType(uint8_t channel);
 

@@ -189,6 +189,15 @@ void  UartDriver::SetRTSPinDirection()
 #endif
 }
 
+void ModBus::ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist)
+{
+    ModbusDeviceStruct a ;
+    for (int index = 0; index < devstructlist->length(); ++index) {
+        a = devstructlist->at(index);
+        ConfigureChannel(&a);
+    }
+}
+
 void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
 {
     // Задаем тип сигнала

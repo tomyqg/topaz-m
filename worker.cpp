@@ -43,7 +43,7 @@ void worker::do_Work()
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
-                    MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1) );
+                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
                     //this->thread()->usleep(500*1000);
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
@@ -63,13 +63,13 @@ void worker::do_Work()
 
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
                 //currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,ModBus::BadGoodCommAddress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
-                mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions2->IsChannelMathematical())
                     {
                         // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+                        mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
                         currentdata = mathresult;
                     }
                     UD.writechannelvalue(2,currentdata);
@@ -285,10 +285,13 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         modbusdevice.name = cobj->GetChannelName();
         modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
         ModbusDevicesList.append(modbusdevice);
-        MB.ConfigureChannel(&modbusdevice);
-        //        qDebug() << i << ":" << modbusdevice.Measuretype;
+        //MB.ConfigureChannel(&modbusdevice);
+
         i++;
     }
+
+
+    MB.ConfigureDevices(&ModbusDevicesList);
     //список структур девайсов готов.
     //проверяем
     //qDebug() << ModbusDevicesList.at(0).ID << ":" << ModbusDevicesList.at(0).name;
