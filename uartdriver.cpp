@@ -200,39 +200,39 @@ void ModBus::ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist)
 
 void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
 {
-    // Задаем тип сигнала
-    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->SignalTypeAddress,devicestructure->SignalType);
-    // Задаем тип фильтрации
-    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->FilterTypeAddress,devicestructure->FilterType);
-    //  TransferFunction
-    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->TransferFunctionAddress,devicestructure->TransferFunction);
-    //  transfer signal hi limit
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferSignalHiLimitAddress,devicestructure->TransferSignalHiLimit);
-    //  transfer lo limit
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferSignalLowLimitAddress,devicestructure->TransferSignalLowLimit);
-    //  transfer scale
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleHiLimitAddress,devicestructure->TransferScaleHiLimit);
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleLoLimitAddress,devicestructure->TransferScaleLoLimit);
+//    // Задаем тип сигнала
+//    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->SignalTypeAddress,devicestructure->SignalType);
+//    // Задаем тип фильтрации
+//    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->FilterTypeAddress,devicestructure->FilterType);
+//    //  TransferFunction
+//    ModBusSetSingleRegisterUint16(devicestructure->ModbusNetworkAddress,devicestructure->TransferFunctionAddress,devicestructure->TransferFunction);
+//    //  transfer signal hi limit
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferSignalHiLimitAddress,devicestructure->TransferSignalHiLimit);
+//    //  transfer lo limit
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferSignalLowLimitAddress,devicestructure->TransferSignalLowLimit);
+//    //  transfer scale
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleHiLimitAddress,devicestructure->TransferScaleHiLimit);
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleLoLimitAddress,devicestructure->TransferScaleLoLimit);
 
-    //  UserCalibration1
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1GainAddress,devicestructure->UserCalibration1Gain);
-    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1OffsetAddress,devicestructure->UserCalibration1Offset);
-    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1DateAddress,devicestructure->UserCalibration1Date);
+//    //  UserCalibration1
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1GainAddress,devicestructure->UserCalibration1Gain);
+//    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1OffsetAddress,devicestructure->UserCalibration1Offset);
+//    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1DateAddress,devicestructure->UserCalibration1Date);
 
-    //    //  UserCalibration2
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2GainAddress,devicestructure->UserCalibration2Gain);
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2OffsetAddress,devicestructure->UserCalibration2Offset);
-    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2DateAddress,devicestructure->UserCalibration2Date);
-    //    //  UserCalibration3
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3GainAddress,devicestructure->UserCalibration3Gain);
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3OffsetAddress,devicestructure->UserCalibration3Offset);
-    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3DateAddress,devicestructure->UserCalibration3Date);
-    //    //  UserCalibration4
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4GainAddress,devicestructure->UserCalibration4Gain);
-    //    ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
-    //    ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
+//        //  UserCalibration2
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2GainAddress,devicestructure->UserCalibration2Gain);
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2OffsetAddress,devicestructure->UserCalibration2Offset);
+//        ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2DateAddress,devicestructure->UserCalibration2Date);
+//        //  UserCalibration3
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3GainAddress,devicestructure->UserCalibration3Gain);
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3OffsetAddress,devicestructure->UserCalibration3Offset);
+//        ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration3DateAddress,devicestructure->UserCalibration3Date);
+//        //  UserCalibration4
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4GainAddress,devicestructure->UserCalibration4Gain);
+//        ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
+        ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
 
-    qDebug() << devicestructure->name;
+//    qDebug() << devicestructure->name;
 }
 
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
@@ -565,102 +565,12 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
 
     requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
     requestdata.append(CRC16Hi);
-
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
-
     qDebug() << requestdata << "requestdata uint32";
     qDebug() << InputDataByteArray << "InputDataByteArray uint32";
-
-}
-QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t Lenght)
-{
-    QByteArray requestdata;
-    QByteArray InputDataByteArray;
-
-    char AddressHi,AddressLo,LenghtHi,LenghtLo,CRC16Hi,CRC16Lo;
-
-    AddressHi = (int) ((Address & 0xFF00)>>8);
-    AddressLo = (int) (Address & 0x00FF);
-    LenghtHi = (int) ((Lenght & 0xFF00)>>8);
-    LenghtLo = (int) (Lenght & 0x00FF);
-
-    requestdata.append(DeviceAdress);
-    requestdata.append(Function);
-    requestdata.append(AddressHi);
-    requestdata.append(AddressLo);
-    requestdata.append(LenghtHi);
-    requestdata.append(LenghtLo);
-
-    quint16 CRC16 = CalculateCRC16RTU(requestdata);
-    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
-    CRC16Lo = (int) (CRC16 & 0x00FF);
-    requestdata.append(CRC16Hi);
-    requestdata.append(CRC16Lo);
-
-    InputDataByteArray  = UartWriteData(requestdata);
-
-    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
-    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    quint16 inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-
-    quint16 crc = CalculateCRC16RTU(InputDataByteArrayNoCRCnew);
-
-    if (inpcrc == crc)
-    {
-        return InputDataByteArray;// qDebug() << "CRC GOOD";
-    }
-    else
-    {
-        return 0;// qDebug() << "CRC BAD";
-    }
-    return 0;
+    uartsleep;
 }
 
-QByteArray ModBus::ModBusMakeRequest(char DeviceAdress,char Function,uint16_t Address,uint16_t AddressBias,uint16_t Lenght)
-{
-    QByteArray requestdata;
-    QByteArray InputDataByteArray;
-
-    char AddressHi,AddressLo,LenghtHi,LenghtLo,CRC16Hi,CRC16Lo;
-
-    AddressHi = (int) (((Address + AddressBias) & 0xFF00)>>8);
-    AddressLo = (int) ((Address + AddressBias) & 0x00FF);
-    LenghtHi = (int) ((Lenght & 0xFF00)>>8);
-    LenghtLo = (int) (Lenght & 0x00FF);
-
-    requestdata.append(DeviceAdress);
-    requestdata.append(Function);
-    requestdata.append(AddressHi);
-    requestdata.append(AddressLo);
-    requestdata.append(LenghtHi);
-    requestdata.append(LenghtLo);
-
-    quint16 CRC16 = CalculateCRC16RTU(requestdata);
-    CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
-    CRC16Lo = (int) (CRC16 & 0x00FF);
-    requestdata.append(CRC16Hi);
-    requestdata.append(CRC16Lo);
-    InputDataByteArray  = UartWriteData(requestdata);
-
-    QByteArray InputDataByteArrayNoCRCnew = InputDataByteArray;
-    InputDataByteArrayNoCRCnew.remove(InputDataByteArray.length()-2,2);
-    quint8 inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);
-    quint8 inpcrclo = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-2);
-    quint16  inpcrc = ((uint16_t) (inpcrchi<<8))|( (uint16_t) inpcrclo );
-    quint16  crc = CalculateCRC16RTU(InputDataByteArrayNoCRCnew);
-
-    if (inpcrc == crc)
-    {
-        return InputDataByteArray;
-    }
-    else
-    {
-        return 0;
-    }
-    return 0;
-}
 
 QByteArray UartDriver::UartWriteData(QByteArray data)
 {
@@ -716,19 +626,14 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         if (inpcrc == crc)
         {
-            //qDebug() << "Crc ok,return";
             return InputDataByteArray;
         }
         else
         {
-            //qDebug() << "Crc Bad";
             return 0;
         }
     }
-    else
-    {
-        //qDebug() << "Not Open";
-    }
+
     return 0;
 }
 

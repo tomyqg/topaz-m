@@ -452,7 +452,7 @@ void Options::ResetToDefaults() // кастомизирует контроллы
     QProcess process;
     //копируем файлы настроек каналов в рабочий каталог
     process.startDetached("cp -a /opt/Defaults/. /opt/");
-    qDebug() << "ResetToDefaults";
+    //qDebug() << "ResetToDefaults";
 
 }
 

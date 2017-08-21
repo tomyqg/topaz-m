@@ -522,7 +522,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 void MainWindow::PaintPolarDiagramm()
 {
     QPainter painter;
-    int widgheight  = ui->MessagesWidget->height();
     double maximumradius;
 
     maximumradius = 400;
@@ -752,10 +751,6 @@ void MainWindow::ReactOnTouch()
     int x2right  = 1240;
     int y0right  = 162;
     int y1right  = 258;
-    int y2right  = 258;
-    int y3right  = 371;
-    int y4right  = 468;
-    int y5right  = 567;
 
     if      ((xpos>x1right) &&
              (xpos<x2right) &&

@@ -166,21 +166,6 @@ public:
         //qDebug() << "Modbus Deleted";
     }
 
-    QByteArray ModBusMakeRequest(
-            char DeviceAdress,
-            char Function,
-            uint16_t Address,
-            uint16_t Lenght
-            );
-
-    QByteArray ModBusMakeRequest(
-            char DeviceAdress,
-            char Function,
-            uint16_t Address,
-            uint16_t AddressBias,
-            uint16_t Lenght
-            );
-
     float ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
     float ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16_t Lenght);
     void ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,float Value);
