@@ -42,6 +42,11 @@ void MainWindow::PaintCyfrasBottom()
     int alerttextsize = smallrectingleheight/2.5;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 5;
 
+#ifndef LinuxBoard
+alerttextsize/=1.5;
+smalltextsize/=1.5;
+#endif
+
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
     painter.begin(ui->MessagesWidget);
@@ -137,10 +142,13 @@ void MainWindow::PaintCyfrasRight()
     int otstupsverhu1 = otstupsverhu-smallrectingleheight;
     int otstupsverhu2 = otstupsverhu-smallrectingleheight*2;
     int otstupsverhu3 = otstupsverhu-smallrectingleheight*3;
-
-
     int alerttextsize = smallrectingleheight/2;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
+
+#ifndef LinuxBoard
+    alerttextsize/=1.5;
+    smalltextsize/=1.5;
+#endif
 
     QString Channel1ValueString,Channel2ValueString,Channel3ValueString,Channel4ValueString ;
 
@@ -271,6 +279,11 @@ void MainWindow::PaintCyfrasFullScreen()
     int alerttextsize = bigrectingleheight/2.8;
     int smalltextsize = (bigrectingleheight - alerttextsize ) / 5;
 
+#ifndef LinuxBoard
+    alerttextsize/=1.5;
+    smalltextsize/=1.5;
+#endif
+
     painter.begin(ui->MessagesWidget);
     //    painter.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
     painter.setPen(QPen(Qt::black, 2));
@@ -341,6 +354,11 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int alertwindowheight  = widgheight/12;
     int alerttextsize = alertwindowheight/2;
     int smalltextsize = (alertwindowheight - alerttextsize)/2.5;
+
+#ifndef LinuxBoard
+    alerttextsize/=1.5;
+    smalltextsize/=1.5;
+#endif
 
     double channel1currentvalue = UartDriver::channelinputbuffer[0];
     double channel2currentvalue = UartDriver::channelinputbuffer[1];
@@ -502,7 +520,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if  (GetHalfSecFlag() == 1)
     {
         painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-        painter.setFont(QFont(Font, alertwindowheight-5, QFont::ExtraBold));
+        painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
 
         // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
         if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
@@ -719,7 +737,7 @@ void MainWindow::ReactOnTouch()
         SetChannel4Color(Qt::yellow);
     }
 
-//    channel1object.SetChannelName("x : " + x + "; Y : " + y);
+    //    channel1object.SetChannelName("x : " + x + "; Y : " + y);
 
     if      ((xpos>confirmwindowposx) &&
              (xpos<confirmwindowposx2) &&

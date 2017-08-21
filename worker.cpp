@@ -36,19 +36,15 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
 
-                //               currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
-                //                currentdata = MB.ReadDataChannel(32816);
-
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
                 this->thread()->usleep(5000);
 
-                // пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
-
+                //пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
-                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1) );
-//                    this->thread()->usleep(500*1000);
+                    MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1) );
+                    //this->thread()->usleep(500*1000);
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
                         mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
@@ -290,18 +286,14 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
         ModbusDevicesList.append(modbusdevice);
         MB.ConfigureChannel(&modbusdevice);
-
-
         //        qDebug() << i << ":" << modbusdevice.Measuretype;
         i++;
     }
-
     //список структур девайсов готов.
     //проверяем
     //qDebug() << ModbusDevicesList.at(0).ID << ":" << ModbusDevicesList.at(0).name;
     //qDebug() << ModbusDevicesList.at(1).ID << ":" << ModbusDevicesList.at(1).name;
     //qDebug() << ModbusDevicesList.at(2).ID << ":" << ModbusDevicesList.at(2).name;
     //qDebug() << ModbusDevicesList.at(3).ID << ":" << ModbusDevicesList.at(3).name;
-
     thread()->usleep(10000);
 }
