@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QThread>
 #include <QDebug>
-#include <QtScript/QScriptEngine>
+//#include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 #include "defines.h"
@@ -231,7 +231,7 @@ void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
     ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
 
-    qDebug() << devicestructure->name;
+//    qDebug() << devicestructure->name;
 }
 
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
@@ -488,6 +488,9 @@ void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,flo
     requestdata.append(CRC16Hi);
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
+
+    qDebug() << requestdata << "requestdata";
+    qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
 void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value)
@@ -561,8 +564,8 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
     requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
     requestdata.append(CRC16Hi);
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
-        qDebug() << requestdata << "requestdata uint32";
-        qDebug() << InputDataByteArray << "InputDataByteArray uint32";
+//        qDebug() << requestdata << "requestdata uint32";
+//        qDebug() << InputDataByteArray << "InputDataByteArray uint32";
 }
 
 
@@ -637,7 +640,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
             crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
             if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
             {
-                qDebug() << "вот щас нормально";
+//                qDebug() << "вот щас нормально";
 //                qDebug() << InputDataByteArray << "InputDataByteArray вот щас нормально";
                 return InputDataByteArray;
             }

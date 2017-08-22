@@ -1,5 +1,6 @@
 #include "mathresolver.h"
 #include <QtMath>
+#include <QtScript/QScriptEngine>
 
 mathresolver::mathresolver()
 {

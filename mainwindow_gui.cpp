@@ -14,8 +14,6 @@
 #include <QVector>
 #include <QFile>
 #include <QDataStream>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
 #include <QPainterPath>
 #include <QPainter>
 #include <QDateTime>
