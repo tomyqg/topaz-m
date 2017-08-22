@@ -472,8 +472,7 @@ void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,flo
     requestdata.append(0x04); // количество байт 4 - фиксированное т.к. посылаем только 1 значение флоата... затем их можно будет посылать несколько но это потом
 
     // раскладываем флоат в массив
-    float f = Value;
-    QByteArray floatarray(reinterpret_cast<const char*>(&f), sizeof(f));
+    QByteArray floatarray(reinterpret_cast<const char*>(&Value), sizeof(Value));
 
     // флоат интерпретируется задом наперед поэтому такая вот рокировочка
     requestdata.append(floatarray.at(3)); // вставляем флоат в запрос
@@ -489,9 +488,6 @@ void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,flo
     requestdata.append(CRC16Hi);
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
-
-    //    qDebug() << requestdata << "requestdata ";
-    //    qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
 void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value)
@@ -584,11 +580,10 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         serial.setStopBits(QSerialPort::OneStop);
         serial.setFlowControl(QSerialPort::NoFlowControl);
 
-        SetRTS(1);
         serial.write(data);
         while (serial.waitForBytesWritten(10))
             ;
-        SetRTS(0);
+
         uartsleep;
 
         while (serial.waitForReadyRead(10))
@@ -596,22 +591,20 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
             InputDataByteArray = serial.readAll();
         }
 
-        //uartsleep;
-
-        int lengggh = InputDataByteArray.length() ;
-        int lastindex = lengggh - 1;
-        int lastitem = InputDataByteArray.at(lastindex);
-
-        //TODO нужно поправить  - не всегда последний символ 0xff  режется потому что длина иногда может быть >9
-
-        if ((lastitem==-1) && (lengggh>9)) // если последний символ прилетел 0xFF
-        {
-            InputDataByteArray.remove(lastindex,1); // убираем последний символ 0xff
-        }
-
         if (InputDataByteArray.length() < 2) // проверка если длина пакета меньше двух, иначе вываливается ассерт
         {
             return 0;
+        }
+
+        int inpbytelenght = InputDataByteArray.length() ;
+        int lastitemindex = inpbytelenght - 1;
+        int lastitem = InputDataByteArray.at(lastitemindex);
+
+        //TODO нужно поправить  - не всегда последний символ 0xff  режется потому что длина иногда может быть >9
+
+        if ((lastitem==-1) && (inpbytelenght>9)) // если последний символ прилетел 0xFF
+        {
+            InputDataByteArray.remove(lastitemindex,1); // убираем последний символ 0xff
         }
 
         QByteArray InputDataByteArrayNoCRC = InputDataByteArray;
@@ -632,10 +625,10 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
         }
 
         // если срс не совпало и все-таки последний символ == 0xff
-        if (lastitem==-1)
+        else if (lastitem==-1)
         {
             // повторяем то же самое но уже с удаленным последним символом 0xFF
-            InputDataByteArray.remove(lastindex,1);
+            InputDataByteArray.remove(lastitemindex,1);
             InputDataByteArrayNoCRC.remove(InputDataByteArray.length()-2,2);
 
             inpcrchi = (uint8_t)InputDataByteArray.at(InputDataByteArray.length()-1);// до этой строки вроде все нормально работает, ассерт не вылетает // ассерт вываливается на этой строке, сука
@@ -644,7 +637,7 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
             crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
             if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
             {
-//                qDebug() << data << "data  вот щас нормально";
+                qDebug() << "вот щас нормально";
 //                qDebug() << InputDataByteArray << "InputDataByteArray вот щас нормально";
                 return InputDataByteArray;
             }

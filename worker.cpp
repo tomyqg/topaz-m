@@ -285,7 +285,9 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         modbusdevice.name = cobj->GetChannelName();
         modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
         modbusdevice.UserCalibration1DateAddress = 32814;
-        modbusdevice.UserCalibration1Date = 0x08080000;
+
+        //старший байт: год (в формате YY + 2000), месяц (от 0 до 12), день (от 1 до 31). Младший байт пустой (не используется).
+        modbusdevice.UserCalibration1Date = 0x17083100;
         ModbusDevicesList.append(modbusdevice);
         //MB.ConfigureChannel(&modbusdevice);
         i++;
@@ -293,7 +295,7 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
 
     MB.ConfigureDevices(&ModbusDevicesList);
 
-//    while (1);
+    //while (1);
     //список структур девайсов готов.
     //проверяем
     //qDebug() << ModbusDevicesList.at(0).ID << ":" << ModbusDevicesList.at(0).name;
