@@ -34,5 +34,3 @@ void keyboard::setolderproperty(QString str)
 {
     this->olderproperty = str;
 }
-
-

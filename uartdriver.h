@@ -227,7 +227,6 @@ public:
     };
     Q_ENUM(Status)
 
-
     enum ModBusErrors {
         ConnectionError = -9998 ,
         BadCRC = -9999 ,
@@ -239,7 +238,6 @@ public:
         CrcError = 0x02
     };
     Q_ENUM(UartErrors)
-
 
     enum DeviceAdress {
         MainDeviceAddress = 0x01 ,

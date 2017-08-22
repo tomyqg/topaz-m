@@ -23,7 +23,7 @@
 
 #ifndef LinuxBoard
 #define comportname "COM3"
-#define uartsleep Sleep(150);
+#define uartsleep Sleep(100);
 #define longsleep Sleep(1000);
 #define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"

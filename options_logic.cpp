@@ -399,8 +399,7 @@ void Options::on_pushButton_5_clicked()
 
 void Options::on_comboBox_currentIndexChanged(int index)
 {
-    index;
-    ui->lineEdit->setText(ui->comboBox->itemText(ui->comboBox->currentIndex()));
+    ui->lineEdit->setText(ui->comboBox->itemText(ui->comboBox->currentIndex()) + index);
 }
 
 void Options::on_ArchivetoUSB_button_clicked()

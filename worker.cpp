@@ -292,6 +292,8 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     }
 
     MB.ConfigureDevices(&ModbusDevicesList);
+
+//    while (1);
     //список структур девайсов готов.
     //проверяем
     //qDebug() << ModbusDevicesList.at(0).ID << ":" << ModbusDevicesList.at(0).name;
