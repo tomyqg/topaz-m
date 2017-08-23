@@ -47,7 +47,6 @@ SOURCES += main.cpp\
 #    3rdparty/qextserialport/qextserialenumerator_win.cpp \
 #    3rdparty/qextserialport/qextserialenumerator_unix.cpp \
 #    3rdparty/qextserialport/posix_qextserialport.cpp \
-    channel.cpp \
     3rdparty/libmodbus/src/modbus-data.c \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
