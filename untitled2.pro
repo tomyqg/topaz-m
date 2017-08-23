@@ -8,11 +8,20 @@ QT += core gui script
 QT += serialport
 QT += testlib
 
+
+Q_OS_LINUX = 1
+
+#раскомментить если хотим чтобы запустилось на винде
+LIBS += -lws2_32
+QT_IM_MODULE=mockup
+CONFIG += mockup
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
 TARGET = untitled2
-
+INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport
 TEMPLATE = app
 
 SOURCES += main.cpp\
@@ -33,9 +42,27 @@ SOURCES += main.cpp\
     mainwindow_logic.cpp \
     painting.cpp \
     worker.cpp \
-    3rdparty/qextserialport/qextserialport.cpp \
-    3rdparty/qextserialport/win_qextserialport.cpp \
-    3rdparty/qextserialport/qextserialenumerator_win.cpp
+#    3rdparty/qextserialport/qextserialport.cpp \
+#    3rdparty/qextserialport/win_qextserialport.cpp \
+#    3rdparty/qextserialport/qextserialenumerator_win.cpp \
+#    3rdparty/qextserialport/qextserialenumerator_unix.cpp \
+#    3rdparty/qextserialport/posix_qextserialport.cpp \
+    channel.cpp \
+    3rdparty/libmodbus/src/modbus-data.c \
+    3rdparty/libmodbus/src/modbus-rtu.c \
+    3rdparty/libmodbus/src/modbus-tcp.c \
+    3rdparty/libmodbus/src/modbus.c
+
+unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
+                3rdparty/qextserialport/qextserialenumerator_unix.cpp
+
+unix:DEFINES += _TTY_POSIX_
+
+win32:SOURCES += 3rdparty/qextserialport/win_qextserialport.cpp \
+                        3rdparty/qextserialport/qextserialenumerator_win.cpp
+win32:DEFINES += _TTY_WIN_  WINVER=0x0501
+win32:LIBS += -lsetupapi -lwsock32
+
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
