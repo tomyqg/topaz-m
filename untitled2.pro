@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     3rdparty/libmodbus/src/modbus-data.c \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
-    3rdparty/libmodbus/src/modbus.c
+    3rdparty/libmodbus/src/modbus.c \
+    3rdparty/qextserialport/qextserialport.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp

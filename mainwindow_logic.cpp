@@ -28,6 +28,8 @@
 #include <QMetaType>
 #include "defines.h"
 
+extern MainWindow * globalMainWin;
+
 
 void MainWindow::MainWindowInitialization()
 {
@@ -401,4 +403,38 @@ void MainWindow::CheckState(ChannelOptions&  channel)
         channel.HighState1Setted = false;
         messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
     }
+}
+
+extern "C" {
+
+void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
+{
+    globalMainWin->busMonitorAddItem( isRequest, slave, func, addr, nb, expectedCRC, actualCRC );
+}
+
+void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
+{
+    globalMainWin->busMonitorRawData( data, dataLen, addNewline != 0 );
+}
+
+}
+
+
+void MainWindow::busMonitorAddItem( bool isRequest,
+                    uint8_t slave,
+                    uint8_t func,
+                    uint16_t addr,
+                    uint16_t nb,
+                    uint16_t expectedCRC,
+                    uint16_t actualCRC )
+{
+
+}
+
+
+
+
+void MainWindow::busMonitorRawData( uint8_t * data, uint8_t dataLen, bool addNewline )
+{
+
 }

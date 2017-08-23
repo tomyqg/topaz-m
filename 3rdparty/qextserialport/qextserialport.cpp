@@ -241,14 +241,14 @@ QString QextSerialPort::errorString()
     }
 }
 
-/*!
-Standard destructor.
-*/
-QextSerialPort::~QextSerialPort()
-{
-    if (isOpen()) {
-        close();
-    }
-    platformSpecificDestruct();
-    delete mutex;
-}
+///*!
+//Standard destructor.
+//*/
+//QextSerialPort::~QextSerialPort()
+//{
+//    if (isOpen()) {
+//        close();
+//    }
+//    platformSpecificDestruct();
+//    delete mutex;
+//}
