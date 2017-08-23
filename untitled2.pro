@@ -32,7 +32,10 @@ SOURCES += main.cpp\
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
     painting.cpp \
-    worker.cpp
+    worker.cpp \
+    3rdparty/qextserialport/qextserialport.cpp \
+    3rdparty/qextserialport/win_qextserialport.cpp \
+    3rdparty/qextserialport/qextserialenumerator_win.cpp
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
@@ -45,7 +48,10 @@ HEADERS  += mainwindow.h \
     metrologicalcalc.h \
     mathresolver.h \
     worker.h \
-    defines.h
+    defines.h \
+    3rdparty/qextserialport/qextserialenumerator.h \
+    3rdparty/qextserialport/qextserialport.h \
+    3rdparty/qextserialport/qwineventnotifier_p.h
 
 FORMS    += mainwindow.ui \
     options.ui \
