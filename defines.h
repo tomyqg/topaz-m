@@ -1,3 +1,34 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "options.h"
+#include "messages.h"
+#include "keyboard.h"
+#include "mathresolver.h"
+#include "channel1.h"
+#include "uartdriver.h"
+#include "worker.h"
+#include "src/modbus-private.h"
+#include "qextserialenumerator.h"
+
+#include <QPixmap>
+#include <QTimer>
+#include <QTime>
+#include <QPen>
+#include <QVector>
+#include <QFile>
+#include <QDataStream>
+#include <QtScript/QScriptEngine>
+#include <QtSerialPort/QtSerialPort>
+#include <QPainterPath>
+#include <QPainter>
+#include <QDateTime>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QtWidgets>
+#include <QThread>
+#include <QPoint>
+#include <QMetaType>
+
 #ifndef DEFINES_H
 #define DEFINES_H
 
@@ -6,7 +37,9 @@
 //#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
 
-#ifdef LinuxBoard
+
+
+#ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
 #define pathtofiles  "/opt/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
@@ -19,9 +52,8 @@
 #define uartsleep DelayMsec(160);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
-#endif
 
-#ifndef LinuxBoard
+#else
 #define comportname "COM3"
 #define uartsleep Sleep(100);
 #define longsleep Sleep(1000);

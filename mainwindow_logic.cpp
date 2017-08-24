@@ -625,14 +625,15 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 
 void MainWindow::resetStatus( void )
 {
-    qDebug() << "Ready" ;
+    ;
+//    qDebug() << "Ready" ;
 }
 
 
 
 void MainWindow::changeSerialPort( int )
 {
-    qDebug() << "changeSerialPort ( int )" ;
+//    qDebug() << "changeSerialPort ( int )" ;
 
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
@@ -654,24 +655,21 @@ void MainWindow::changeSerialPort( int )
         {
             modbus_close( m_modbus );
             modbus_free( m_modbus );
-            qDebug() << "free!";
         }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-
-            qDebug() << "Could not connect serial port!";
             QMessageBox::critical( this, tr( "Connection failed" ),
                                    tr( "Could not connect serial port!" ) );
         }
         else
-        {qDebug() << "serial port connected!";}
+        {
+        }
     }
     else
     {
-        qDebug() << "Could not find any serial port ";
         QMessageBox::critical( this, tr( "No serial port found" ),
                                tr( "Could not find any serial port "
                                    "on this computer!" ) );
