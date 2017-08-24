@@ -99,9 +99,6 @@ void MainWindow::MainWindowInitialization()
     timer->start(DateLabelUpdateTimer);
     timetouch->start(ArchiveUpdateTimer);
 
-    InitPins();
-    InitTouchScreen();
-    InitProcessorMaxFreq();
     InitTimers();
     LabelsInit();
 
@@ -353,14 +350,18 @@ void MainWindow::DateUpdate()
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 
 
-    sendModbusRequest(0x01,0x04,0x00,0x02,0,0);
+    float destfloat[1024];
+    memset( destfloat, 0, 1024 );
 
-//    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
 
-    Sleep(500);
+    sendModbusRequest(0x01,0x04,0x00,0x02,0,0,destfloat);
+
+    qDebug() << destfloat[0]<< "destfloat[0]" ;
+
+    //    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
+    //    Sleep(500);
     //    sendModbusRequest(0x01,0x05,0x01,0x01,0x00,0);
-
-    Sleep(500);
+    //    Sleep(500);
 }
 
 void MainWindow::LabelsUpdate()
@@ -485,7 +486,7 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 }
 
 
-void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src)
+void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
 {
     if( m_modbus == NULL )
     {
@@ -518,7 +519,6 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         break;
     case _FC_READ_INPUT_REGISTERS:
         ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
-
         is16Bit = true;
         break;
     case _FC_WRITE_SINGLE_COIL:
@@ -569,6 +569,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         }
         else
         {
+            // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
             QByteArray arraytofloat;
 
             for( int i = num-1; i >=0; --i )
@@ -576,9 +577,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
                 int data = is16Bit ? dest16[i] : dest[i];
                 arraytofloat.append((data & 0xFF00)>>8);
                 arraytofloat.append(data & 0x00FF);
-                qDebug() << data << "data";
             }
-
 
             float val;
             //convert hex to double
@@ -586,10 +585,11 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
             stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
             stream >> val;
 
-            qDebug() << arraytofloat << "arraytofloat";
+            data_dest_float[0] = val;
+
+//            qDebug() << arraytofloat << "arraytofloat";
             qDebug() << val << "val";
         }
-        qDebug() << "writeAccess" << writeAccess ;
     }
     else
     {
@@ -622,8 +622,6 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         }
     }
 }
-
-
 
 
 
