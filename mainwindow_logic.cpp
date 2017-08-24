@@ -579,6 +579,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
                 qDebug() << data << "data";
             }
 
+
             float val;
             //convert hex to double
             QDataStream stream(arraytofloat);
