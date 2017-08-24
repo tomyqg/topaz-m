@@ -42,11 +42,14 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
+
+    // находим все com - порты
     int portIndex = 0;
     int i = 0;
     QSettings s;
     foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
     {
+        //        qDebug() << port.portName;
         if( port.friendName == s.value( "serialinterface" ) )
         {
             portIndex = i;
@@ -122,9 +125,11 @@ void MainWindow::MainWindowInitialization()
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
+
+    // активируем сериал порт для модбаса
     changeSerialPort( portIndex );
 
-//    WorkerThread->start(); // запускаем сам поток
+    //    WorkerThread->start(); // запускаем сам поток
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -161,6 +166,8 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
+
+
 void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
@@ -178,6 +185,9 @@ void MainWindow::LabelsInit()
         Labels.append(fisttime.addSecs((var-half)*timeperiodseconds).toString("hh:mm:ss") );
     }
 }
+
+
+
 
 void MainWindow::InitPins()
 {
@@ -210,6 +220,9 @@ void MainWindow::InitPins()
     filedir.close();
 }
 
+
+
+
 void MainWindow::OpenMessagesWindow()
 {
     messwrite.WriteAllLogToFile();
@@ -221,6 +234,9 @@ void MainWindow::OpenMessagesWindow()
     messages->deleteLater();
 }
 
+
+
+
 void MainWindow::DelaySec(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(n);
@@ -228,9 +244,8 @@ void MainWindow::DelaySec(int n)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
-void MainWindow::OptionsWindowThread()
-{
-}
+
+
 
 void MainWindow::OpenOptionsWindow()
 {
@@ -336,6 +351,8 @@ void MainWindow::DateUpdate()
     QDateTime local(QDateTime::currentDateTime());
     //    messwrite.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+
+    sendModbusRequest(0x01,0x04,0x00,0x02,0,0);
 }
 
 void MainWindow::LabelsUpdate()
@@ -493,6 +510,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         break;
     case _FC_READ_INPUT_REGISTERS:
         ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
+
         is16Bit = true;
         break;
     case _FC_WRITE_SINGLE_COIL:
@@ -536,6 +554,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 
     if( ret == num  )
     {
+
         if( writeAccess )
         {
             qDebug() << "Values successfully sent" ;
@@ -543,44 +562,33 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         }
         else
         {
+            //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
+            //            qDebug() << dest16;
 
-            qDebug() << "ret != num  " ;
+            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
+            //            ui->regTable->setRowCount( num );
 
+            QString qs_num;
+            for( int i = 0; i < num; ++i )
+            {
+                int data = is16Bit ? dest16[i] : dest[i];
 
-//            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
-//            QString qs_num;
+                qs_num.sprintf( false ? "0x%04x" : "%d", data);
 
-//            ui->regTable->setRowCount( num );
-//            for( int i = 0; i < num; ++i )
-//            {
-//                int data = is16Bit ? dest16[i] : dest[i];
+                qDebug() << qs_num << "qs_num";
+                qDebug() << data << "data";
 
-//                QTableWidgetItem * dtItem =
-//                        new QTableWidgetItem( dataType );
-//                QTableWidgetItem * addrItem =
-//                        new QTableWidgetItem(
-//                            QString::number( addr+i ) );
-//                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
-//                QTableWidgetItem * dataItem =
-//                        new QTableWidgetItem( qs_num );
-//                dtItem->setFlags( dtItem->flags() &
-//                                  ~Qt::ItemIsEditable );
-//                addrItem->setFlags( addrItem->flags() &
-//                                    ~Qt::ItemIsEditable );
-//                dataItem->setFlags( dataItem->flags() &
-//                                    ~Qt::ItemIsEditable );
-
-//                ui->regTable->setItem( i, DataTypeColumn,
-//                                       dtItem );
-//                ui->regTable->setItem( i, AddrColumn,
-//                                       addrItem );
-//                ui->regTable->setItem( i, DataColumn,
-//                                       dataItem );
-//            }
+            }
         }
+
+        qDebug() << "writeAccess" << writeAccess ;
     }
     else
     {
+        qDebug() << "ret != num  " ;
+        qDebug() << ret << "ret" ;
+        qDebug() << num << "num" ;
+
         if( ret < 0 )
         {
             if(
@@ -646,7 +654,7 @@ void MainWindow::changeSerialPort( int )
         {
             modbus_close( m_modbus );
             modbus_free( m_modbus );
-             qDebug() << "free!";
+            qDebug() << "free!";
         }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
@@ -656,14 +664,16 @@ void MainWindow::changeSerialPort( int )
 
             qDebug() << "Could not connect serial port!";
             QMessageBox::critical( this, tr( "Connection failed" ),
-                tr( "Could not connect serial port!" ) );
+                                   tr( "Could not connect serial port!" ) );
         }
+        else
+        {qDebug() << "serial port connected!";}
     }
     else
     {
         qDebug() << "Could not find any serial port ";
         QMessageBox::critical( this, tr( "No serial port found" ),
-                tr( "Could not find any serial port "
-                        "on this computer!" ) );
+                               tr( "Could not find any serial port "
+                                   "on this computer!" ) );
     }
 }

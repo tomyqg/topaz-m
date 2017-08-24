@@ -77,9 +77,6 @@ public slots:
     void UpdateChannel2Slot();
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
-
-    void OptionsWindowThread();
-
     bool eventFilter(QObject* watched, QEvent* event);
 
 private:
