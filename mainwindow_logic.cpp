@@ -352,7 +352,15 @@ void MainWindow::DateUpdate()
     //    messwrite.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 
+
     sendModbusRequest(0x01,0x04,0x00,0x02,0,0);
+
+//    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
+
+    Sleep(500);
+    //    sendModbusRequest(0x01,0x05,0x01,0x01,0x00,0);
+
+    Sleep(500);
 }
 
 void MainWindow::LabelsUpdate()
@@ -554,7 +562,6 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 
     if( ret == num  )
     {
-
         if( writeAccess )
         {
             qDebug() << "Values successfully sent" ;
@@ -562,33 +569,29 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
         }
         else
         {
-            //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
-            //            qDebug() << dest16;
+            QByteArray arraytofloat;
 
-            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
-            //            ui->regTable->setRowCount( num );
-
-            QString qs_num;
-            for( int i = 0; i < num; ++i )
+            for( int i = num-1; i >=0; --i )
             {
                 int data = is16Bit ? dest16[i] : dest[i];
-
-                qs_num.sprintf( false ? "0x%04x" : "%d", data);
-
-                qDebug() << qs_num << "qs_num";
+                arraytofloat.append((data & 0xFF00)>>8);
+                arraytofloat.append(data & 0x00FF);
                 qDebug() << data << "data";
-
             }
-        }
 
+            float val;
+            //convert hex to double
+            QDataStream stream(arraytofloat);
+            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+            stream >> val;
+
+            qDebug() << arraytofloat << "arraytofloat";
+            qDebug() << val << "val";
+        }
         qDebug() << "writeAccess" << writeAccess ;
     }
     else
     {
-        qDebug() << "ret != num  " ;
-        qDebug() << ret << "ret" ;
-        qDebug() << num << "num" ;
-
         if( ret < 0 )
         {
             if(
@@ -626,14 +629,14 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 void MainWindow::resetStatus( void )
 {
     ;
-//    qDebug() << "Ready" ;
+    //    qDebug() << "Ready" ;
 }
 
 
 
 void MainWindow::changeSerialPort( int )
 {
-//    qDebug() << "changeSerialPort ( int )" ;
+    //    qDebug() << "changeSerialPort ( int )" ;
 
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )

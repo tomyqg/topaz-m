@@ -37,8 +37,6 @@
 //#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
 
-
-
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
 #define pathtofiles  "/opt/"
