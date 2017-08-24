@@ -822,6 +822,7 @@ modbus_t* modbus_new_rtu(const char *device,
                          int baud, char parity, int data_bit,
                          int stop_bit)
 {
+
     modbus_t *ctx;
     modbus_rtu_t *ctx_rtu;
     size_t dest_size;

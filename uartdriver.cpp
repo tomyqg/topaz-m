@@ -156,38 +156,6 @@ void UartDriver::DelayMsec(int n)
         ;
 }
 
-void UartDriver::SetRTS(bool newstate)
-{
-    // если плата MYD то она автоматом делает направление линии. то есть RTS пин дергать не нужно.
-#ifdef MYD
-    return;
-#endif
-
-#ifdef LinuxBoard
-    QFile file(GetPathToRTSPinValue());
-    QTextStream out(&file);
-    file.open(QIODevice::WriteOnly);
-    out << newstate;
-    file.close();
-#endif
-}
-
-void  UartDriver::SetRTSPinDirection()
-{
-    // если плата MYD то она автоматом делает направление линии. то есть RTS пин дергать не нужно.
-#ifdef MYD
-    return;
-#endif
-
-#ifdef LinuxBoard
-    QFile filedir(GetPathToRTSPinDirection());
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-    outdir << "out";
-    filedir.close();
-#endif
-}
-
 void ModBus::ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist)
 {
     ModbusDeviceStruct a ;
@@ -231,7 +199,7 @@ void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
     ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
 
-//    qDebug() << devicestructure->name;
+    //    qDebug() << devicestructure->name;
 }
 
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
@@ -564,8 +532,8 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
     requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
     requestdata.append(CRC16Hi);
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
-//        qDebug() << requestdata << "requestdata uint32";
-//        qDebug() << InputDataByteArray << "InputDataByteArray uint32";
+    //        qDebug() << requestdata << "requestdata uint32";
+    //        qDebug() << InputDataByteArray << "InputDataByteArray uint32";
 }
 
 
@@ -619,8 +587,8 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
 
         uint16_t crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
 
-//        qDebug() << data << "data";
-//        qDebug() << InputDataByteArray << "InputDataByteArray";
+        //        qDebug() << data << "data";
+        //        qDebug() << InputDataByteArray << "InputDataByteArray";
 
         if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
         {
@@ -640,8 +608,8 @@ QByteArray UartDriver::UartWriteData(QByteArray data)
             crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
             if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
             {
-//                qDebug() << "вот щас нормально";
-//                qDebug() << InputDataByteArray << "InputDataByteArray вот щас нормально";
+                //                qDebug() << "вот щас нормально";
+                //                qDebug() << InputDataByteArray << "InputDataByteArray вот щас нормально";
                 return InputDataByteArray;
             }
         }
@@ -666,6 +634,8 @@ uint16_t ModBus::GetChannelSignalType(uint8_t channel)
     case ModBus::DataChannel4:
         channelbias = ModBus::Channel4AddressBias;
         break;
+    default:
+        channelbias=0;
     }
 
     uint16_t address = ModBus::SignalTypeAddress + channelbias;
@@ -674,7 +644,10 @@ uint16_t ModBus::GetChannelSignalType(uint8_t channel)
 
 void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalparametr)
 {
-    uint8_t channelbias;
+    uint16_t channelbias;
+
+    // avoid warnings
+additionalparametr = channelbias+1;
 
     switch (channel) {
     case ModBus::DataChannel1:
@@ -689,11 +662,15 @@ void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalp
     case ModBus::DataChannel4:
         channelbias = ModBus::Channel4AddressBias;
         break;
+    default:
+        channelbias=0;
     }
 }
 
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
 {
+
+    channel = signaltype;
     //    uint8_t channelbias;
 
     //    switch (channel) {

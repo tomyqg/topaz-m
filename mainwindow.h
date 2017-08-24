@@ -9,6 +9,7 @@
 #include "worker.h"
 #include "mathresolver.h"
 #include "uartdriver.h"
+#include "src/modbus.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,19 +23,6 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-
-    void busMonitorAddItem( bool isRequest,
-                uint8_t slave,
-                uint8_t func,
-                uint16_t addr,
-                uint16_t nb,
-                uint16_t expectedCRC,
-                uint16_t actualCRC );
-    void busMonitorRawData( uint8_t * data, uint8_t dataLen, bool addNewline );
-
-
-
 
     //UartDriver UD;
     ChannelOptions channel1object;
@@ -73,7 +61,6 @@ public:
 
 public slots:
 
-    void updateText( const QString text );
     void destroyedslot(QObject *);
     void NewTouchscreenCalibration();
     void LabelsInit();
@@ -82,7 +69,7 @@ public slots:
     void WriteGpio(int num, bool val);
     void WriteArchiveToFile();
     void CreateMODBusConfigFile();
-
+    void resetStatus( void );
 
     void HalfSecondGone();
 
@@ -144,6 +131,8 @@ private:
 
 private slots:
 
+
+    void changeSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
     void GrafsUpdateBars();
@@ -155,6 +144,7 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_4_clicked();
     void on_RelayChanger_toggled(bool checked);
+    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src);
 
 signals:
     void error(const QString &s);
@@ -168,10 +158,9 @@ signals:
 private:
     Ui::MainWindow *ui;
 
-
+    modbus_t * m_modbus;
 
     void MainWindowInitialization();
-
     char halfSecondflag;
     QPen graphPen;
     QPainter painter;
@@ -201,11 +190,8 @@ private:
     QThread *thread;
     QThread *optionsthread;
 
-
-
     int Xrange;
     int Yrange;
-
     int windowwidth;
     int windowheight;
 

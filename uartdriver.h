@@ -120,14 +120,12 @@ private:
 
 protected:
     void DelayMsec(int n);
-    void SetRTS(bool newstate);
     QByteArray UartWriteData(QByteArray data);
     quint16 CalculateCRC16RTU(const QByteArray &array);
 
 public:
     static double channelinputbuffer[4];
     static bool needtoupdatechannel[4];
-    void SetRTSPinDirection();
 };
 
 class ModBus: public UartDriver

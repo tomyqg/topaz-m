@@ -7,6 +7,8 @@
 #include "channel1.h"
 #include "uartdriver.h"
 #include "worker.h"
+#include "src/modbus-private.h"
+#include "qextserialenumerator.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -40,7 +42,19 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
-//    ui->label->setScaledContents(true);
+    int portIndex = 0;
+    int i = 0;
+    QSettings s;
+    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+    {
+        if( port.friendName == s.value( "serialinterface" ) )
+        {
+            portIndex = i;
+        }
+        ++i;
+    }
+
+    //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
 
@@ -108,7 +122,9 @@ void MainWindow::MainWindowInitialization()
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    WorkerThread->start(); // запускаем сам поток
+    changeSerialPort( portIndex );
+
+//    WorkerThread->start(); // запускаем сам поток
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -119,6 +135,30 @@ void MainWindow::MainWindowInitialization()
     process.startDetached("ifconfig usb0 192.168.1.115");
 
     needConfirmation = 1;
+}
+
+
+
+static QString descriptiveDataTypeName( int funcCode )
+{
+    switch( funcCode )
+    {
+    case _FC_READ_COILS:
+    case _FC_WRITE_SINGLE_COIL:
+    case _FC_WRITE_MULTIPLE_COILS:
+        return "Coil (binary)";
+    case _FC_READ_DISCRETE_INPUTS:
+        return "Discrete Input (binary)";
+    case _FC_READ_HOLDING_REGISTERS:
+    case _FC_WRITE_SINGLE_REGISTER:
+    case _FC_WRITE_MULTIPLE_REGISTERS:
+        return "Holding Register (16 bit)";
+    case _FC_READ_INPUT_REGISTERS:
+        return "Input Register (16 bit)";
+    default:
+        break;
+    }
+    return "Unknown";
 }
 
 void MainWindow::LabelsInit()
@@ -409,32 +449,221 @@ extern "C" {
 
 void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
 {
-    globalMainWin->busMonitorAddItem( isRequest, slave, func, addr, nb, expectedCRC, actualCRC );
+
 }
 
 void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 {
-    globalMainWin->busMonitorRawData( data, dataLen, addNewline != 0 );
-}
 
 }
 
+}
 
-void MainWindow::busMonitorAddItem( bool isRequest,
-                    uint8_t slave,
-                    uint8_t func,
-                    uint16_t addr,
-                    uint16_t nb,
-                    uint16_t expectedCRC,
-                    uint16_t actualCRC )
+
+void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src)
 {
+    if( m_modbus == NULL )
+    {
+        return;
+    }
 
+    uint8_t dest[1024];
+    uint16_t * dest16 = (uint16_t *) dest;
+
+    memset( dest, 0, 1024 );
+
+    int ret = -1;
+    bool is16Bit = false;
+    bool writeAccess = false;
+    const QString dataType = descriptiveDataTypeName( func );
+
+    modbus_set_slave( m_modbus, slave );
+
+    switch( func )
+    {
+    case _FC_READ_COILS:
+        ret = modbus_read_bits( m_modbus, addr, num, dest );
+        break;
+    case _FC_READ_DISCRETE_INPUTS:
+        ret = modbus_read_input_bits( m_modbus, addr, num, dest );
+        break;
+    case _FC_READ_HOLDING_REGISTERS:
+        ret = modbus_read_registers( m_modbus, addr, num, dest16 );
+        is16Bit = true;
+        break;
+    case _FC_READ_INPUT_REGISTERS:
+        ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
+        is16Bit = true;
+        break;
+    case _FC_WRITE_SINGLE_COIL:
+        ret = modbus_write_bit( m_modbus, addr, state);
+        writeAccess = true;
+        num = 1;
+        break;
+    case _FC_WRITE_SINGLE_REGISTER:
+        ret = modbus_write_register( m_modbus, addr, state);
+        writeAccess = true;
+        num = 1;
+        break;
+
+    case _FC_WRITE_MULTIPLE_COILS:
+    {
+        uint8_t * data = new uint8_t[num];
+        for( int i = 0; i < num; ++i )
+        {
+            data[i] = ( uint8_t ) data_src[i];
+        }
+        ret = modbus_write_bits( m_modbus, addr, num, data );
+        delete[] data;
+        writeAccess = true;
+        break;
+    }
+    case _FC_WRITE_MULTIPLE_REGISTERS:
+    {
+        uint16_t * data = new uint16_t[num];
+        for( int i = 0; i < num; ++i )
+        {
+            data[i] = ( uint16_t ) data_src[i];
+        }
+        ret = modbus_write_registers( m_modbus, addr, num, data );
+        delete[] data;
+        writeAccess = true;
+        break;
+    }
+    default:
+        break;
+    }
+
+    if( ret == num  )
+    {
+        if( writeAccess )
+        {
+            qDebug() << "Values successfully sent" ;
+            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
+        }
+        else
+        {
+
+            qDebug() << "ret != num  " ;
+
+
+//            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
+//            QString qs_num;
+
+//            ui->regTable->setRowCount( num );
+//            for( int i = 0; i < num; ++i )
+//            {
+//                int data = is16Bit ? dest16[i] : dest[i];
+
+//                QTableWidgetItem * dtItem =
+//                        new QTableWidgetItem( dataType );
+//                QTableWidgetItem * addrItem =
+//                        new QTableWidgetItem(
+//                            QString::number( addr+i ) );
+//                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
+//                QTableWidgetItem * dataItem =
+//                        new QTableWidgetItem( qs_num );
+//                dtItem->setFlags( dtItem->flags() &
+//                                  ~Qt::ItemIsEditable );
+//                addrItem->setFlags( addrItem->flags() &
+//                                    ~Qt::ItemIsEditable );
+//                dataItem->setFlags( dataItem->flags() &
+//                                    ~Qt::ItemIsEditable );
+
+//                ui->regTable->setItem( i, DataTypeColumn,
+//                                       dtItem );
+//                ui->regTable->setItem( i, AddrColumn,
+//                                       addrItem );
+//                ui->regTable->setItem( i, DataColumn,
+//                                       dataItem );
+//            }
+        }
+    }
+    else
+    {
+        if( ret < 0 )
+        {
+            if(
+        #ifdef WIN32
+                    errno == WSAETIMEDOUT ||
+        #endif
+                    errno == EIO
+                    )
+            {
+                QMessageBox::critical( this, tr( "I/O error" ),
+                                       tr( "I/O error: did not receive any data from slave." ) );
+            }
+            else
+            {
+                QMessageBox::critical( this, tr( "Protocol error" ),
+                                       tr( "Slave threw exception \"%1\" or "
+                                           "function not implemented." ).
+                                       arg( modbus_strerror( errno ) ) );
+            }
+        }
+        else
+        {
+            QMessageBox::critical( this, tr( "Protocol error" ),
+                                   tr( "Number of registers returned does not "
+                                       "match number of registers "
+                                       "requested!" ) );
+        }
+    }
 }
 
 
 
 
-void MainWindow::busMonitorRawData( uint8_t * data, uint8_t dataLen, bool addNewline )
-{
 
+void MainWindow::resetStatus( void )
+{
+    qDebug() << "Ready" ;
+}
+
+
+
+void MainWindow::changeSerialPort( int )
+{
+    qDebug() << "changeSerialPort ( int )" ;
+
+    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
+    if( !ports.isEmpty() )
+    {
+
+#ifdef Q_OS_WIN32
+        const QString port = comportname;
+#else
+        // const QString port = ports[iface].physName;
+        // точно знаем что этот порт работает на rs485
+        const QString port = "/dev/ttyO1";
+#endif
+
+        char parity;
+
+        parity = comportparity;
+
+        if( m_modbus )
+        {
+            modbus_close( m_modbus );
+            modbus_free( m_modbus );
+             qDebug() << "free!";
+        }
+
+        m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+
+        if( modbus_connect( m_modbus ) == -1 )
+        {
+
+            qDebug() << "Could not connect serial port!";
+            QMessageBox::critical( this, tr( "Connection failed" ),
+                tr( "Could not connect serial port!" ) );
+        }
+    }
+    else
+    {
+        qDebug() << "Could not find any serial port ";
+        QMessageBox::critical( this, tr( "No serial port found" ),
+                tr( "Could not find any serial port "
+                        "on this computer!" ) );
+    }
 }

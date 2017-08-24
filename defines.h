@@ -35,6 +35,13 @@
 #define pathtologotip  "C:/Work/logo.jpg"
 #endif
 
+
+#define comportparity 'N'
+#define comportbaud 9600
+#define comportdatabit 8
+#define comportstopbit 1
+
+
 #define BADCRCCODE -9999
 #define CONNECTERRORCODE -9998
 

@@ -115,13 +115,6 @@ void MainWindow::on_RelayChanger_toggled(bool checked)
     startWorkSignal();
 }
 
-void  MainWindow::updateText( const QString text ) // этот слот обновляет текстовое окно, когда мы эмитируем сигнал
-{
-    //ui->textEdit_2->setText(text);
-    //ui->textEdit_2->setText("Destroyed");
-    //qDebug() << "text" ;
-}
-
 void  MainWindow::destroyedslot(QObject *)
 {
     //    ui->textEdit_2->setText(text);

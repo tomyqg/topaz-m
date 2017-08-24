@@ -322,3 +322,5 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     out << setstr;
     file.close();
 }
+
+
