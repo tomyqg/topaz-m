@@ -353,11 +353,12 @@ void MainWindow::DateUpdate()
     float destfloat[1024];
     memset( destfloat, 0, 1024 );
 
+    sendModbusRequest(0x01, 0x04, 0x00, 0x04, 0, 0, destfloat);
 
-    sendModbusRequest(0x01,0x04,0x00,0x02,0,0,destfloat);
+    qDebug() << destfloat[0]<< destfloat[2]<< destfloat[2]<< destfloat[3]<< "destfloat";
 
-    qDebug() << destfloat[0]<< "destfloat[0]" ;
-
+    //    qDebug() << destfloat[0]<< "destfloat[0]";
+    //    qDebug() << destfloat[1]<< "destfloat[1]";
     //    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
     //    Sleep(500);
     //    sendModbusRequest(0x01,0x05,0x01,0x01,0x00,0);
@@ -406,8 +407,7 @@ char MainWindow::GetHalfSecFlag()
 
 void MainWindow::InvertHalfSecFlag()
 {
-    halfSecondflag ++;
-    halfSecondflag = halfSecondflag%2;
+    halfSecondflag = ~halfSecondflag;
 }
 
 void MainWindow::NewTouchscreenCalibration()
@@ -574,21 +574,20 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 
             for( int i = num-1; i >=0; --i )
             {
+                qDebug() << num<< "num" ;
+
                 int data = is16Bit ? dest16[i] : dest[i];
                 arraytofloat.append((data & 0xFF00)>>8);
                 arraytofloat.append(data & 0x00FF);
+//                data_dest_float[num - 1 - i] = data;
             }
 
-            float val;
-            //convert hex to double
-            QDataStream stream(arraytofloat);
-            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-            stream >> val;
-
-            data_dest_float[0] = val;
-
-//            qDebug() << arraytofloat << "arraytofloat";
-            qDebug() << val << "val";
+                        float val;
+                        //convert hex to double
+                        QDataStream stream(arraytofloat);
+                        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+                        stream >> val;
+                        data_dest_float[0] = val;
         }
     }
     else
