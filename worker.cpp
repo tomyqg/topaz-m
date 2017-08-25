@@ -1,11 +1,34 @@
 #include "worker.h"
 #include "defines.h"
 #include "uartdriver.h"
-//#include <QDebug>
+#include "src/modbus-private.h"
+#include "qextserialenumerator.h"
 
+
+// constructor
 worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
-{}
+{
+
+    qDebug() << "Worker Constructor" ;
+    // находим все com - порты
+
+    int portIndex = 0;
+    int i = 0;
+    QSettings s;
+    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+    {
+        //        qDebug() << port.portName;
+        if( port.friendName == s.value( "serialinterface" ) )
+        {
+            portIndex = i;
+        }
+        ++i;
+    }
+
+    // активируем сериал порт для модбаса
+    changeSerialPort( portIndex );
+}
 
 ModBus MB;
 UartDriver UD;
@@ -35,14 +58,11 @@ void worker::do_Work()
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[0] = 0;
-
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
                 this->thread()->usleep(5000);
 
-
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
-
                     //пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
                     MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
                     //this->thread()->usleep(500*1000);
@@ -145,6 +165,54 @@ void worker::StartWorkSlot()
     emit running();
     do_Work();
 }
+
+
+
+
+void worker::changeSerialPort( int )
+{
+    //    qDebug() << "changeSerialPort ( int )" ;
+
+    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
+    if( !ports.isEmpty() )
+    {
+
+#ifdef Q_OS_WIN32
+        const QString port = comportname;
+#else
+        // const QString port = ports[iface].physName;
+        // точно знаем что этот порт работает на rs485
+        const QString port = "/dev/ttyO1";
+#endif
+
+        char parity;
+
+        parity = comportparity;
+
+        if( m_modbus )
+        {
+            modbus_close( m_modbus );
+            modbus_free( m_modbus );
+        }
+
+        m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+
+        if( modbus_connect( m_modbus ) == -1 )
+        {
+           qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+        }
+        else
+        {
+        }
+    }
+    else
+    {
+        qDebug() << "No serial port found" <<"Could not find any serial port " <<"on this computer!"  ;
+    }
+}
+
+
+
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {

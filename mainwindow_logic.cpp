@@ -578,15 +578,15 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
                 int data = is16Bit ? dest16[i] : dest[i];
                 arraytofloat.append((data & 0xFF00)>>8);
                 arraytofloat.append(data & 0x00FF);
-//                data_dest_float[num - 1 - i] = data;
+                //                data_dest_float[num - 1 - i] = data;
             }
 
-                        float val;
-                        //convert hex to double
-                        QDataStream stream(arraytofloat);
-                        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-                        stream >> val;
-                        data_dest_float[0] = val;
+            float val;
+            //convert hex to double
+            QDataStream stream(arraytofloat);
+            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+            stream >> val;
+            data_dest_float[0] = val;
         }
     }
     else

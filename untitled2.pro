@@ -8,6 +8,7 @@ QT += core gui script
 QT += serialport
 QT += testlib
 
+VERSION = 0.5.5
 
 Q_OS_LINUX = 1
 
@@ -16,7 +17,6 @@ LIBS += -lws2_32
 QT_IM_MODULE=mockup
 CONFIG += mockup
 
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
@@ -24,8 +24,8 @@ TARGET = untitled2
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport
 TEMPLATE = app
 
-SOURCES += main.cpp\
-         qcustomplot.cpp \
+SOURCES += main.cpp \
+    qcustomplot.cpp \
     updategraph.cpp \
     keyboard.cpp \
     eventfilter.cpp \
@@ -42,11 +42,6 @@ SOURCES += main.cpp\
     mainwindow_logic.cpp \
     painting.cpp \
     worker.cpp \
-#    3rdparty/qextserialport/qextserialport.cpp \
-#    3rdparty/qextserialport/win_qextserialport.cpp \
-#    3rdparty/qextserialport/qextserialenumerator_win.cpp \
-#    3rdparty/qextserialport/qextserialenumerator_unix.cpp \
-#    3rdparty/qextserialport/posix_qextserialport.cpp \
     3rdparty/libmodbus/src/modbus-data.c \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \

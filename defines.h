@@ -10,31 +10,11 @@
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
 
-#include <QPixmap>
-#include <QTimer>
-#include <QTime>
-#include <QPen>
-#include <QVector>
-#include <QFile>
-#include <QDataStream>
-#include <QtScript/QScriptEngine>
-#include <QtSerialPort/QtSerialPort>
-#include <QPainterPath>
-#include <QPainter>
-#include <QDateTime>
-#include <QCloseEvent>
-#include <QMessageBox>
-#include <QtWidgets>
-#include <QThread>
-#include <QPoint>
-#include <QMetaType>
 
 #ifndef DEFINES_H
 #define DEFINES_H
 
 #define CURRENT_VER "0.55" //версия ПО
-
-//#define LinuxBoard // раздефайнить если мы ходим скомпилировать на плату Linux
 #define MYD
 
 #ifndef Q_OS_WIN32
@@ -65,12 +45,10 @@
 #define pathtologotip  "C:/Work/logo.jpg"
 #endif
 
-
 #define comportparity 'N'
 #define comportbaud 9600
 #define comportdatabit 8
 #define comportstopbit 1
-
 
 #define BADCRCCODE -9999
 #define CONNECTERRORCODE -9998
