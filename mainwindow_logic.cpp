@@ -349,13 +349,12 @@ void MainWindow::DateUpdate()
     //    messwrite.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 
-
     float destfloat[1024];
     memset( destfloat, 0, 1024 );
 
     sendModbusRequest(0x01, 0x04, 0x00, 0x04, 0, 0, destfloat);
 
-    qDebug() << destfloat[0]<< destfloat[2]<< destfloat[2]<< destfloat[3]<< "destfloat";
+    qDebug() << destfloat[0] << "destfloat[0]";
 
     //    qDebug() << destfloat[0]<< "destfloat[0]";
     //    qDebug() << destfloat[1]<< "destfloat[1]";
