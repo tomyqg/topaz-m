@@ -37,6 +37,7 @@ private:
     //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
     modbus_t * m_modbus;
+//    Device * device;
 };
 
 #endif // WORKER_H

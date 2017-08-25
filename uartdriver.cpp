@@ -457,8 +457,8 @@ void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,flo
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
 
-    qDebug() << requestdata << "requestdata";
-    qDebug() << InputDataByteArray << "InputDataByteArray";
+//    qDebug() << requestdata << "requestdata";
+//    qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
 void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value)

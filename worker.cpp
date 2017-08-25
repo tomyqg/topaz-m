@@ -1,5 +1,6 @@
 #include "worker.h"
 #include "defines.h"
+#include "device.h"
 #include "uartdriver.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
@@ -9,16 +10,18 @@
 worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
 {
-
-
 }
 
 ModBus MB;
 UartDriver UD;
 mathresolver mr;
 
+Device device;
+
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
+
+//deviceparametrs dp;
 
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -202,8 +205,10 @@ void worker::do_Work()
 
                 // делаем запросики
                 sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-
                 qDebug() << destfloat[0] << "destfloat[0]";
+
+
+
 
                 currentdata = destfloat[0];
 
