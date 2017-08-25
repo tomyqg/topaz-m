@@ -10,24 +10,7 @@ worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
 {
 
-    qDebug() << "Worker Constructor" ;
-    // находим все com - порты
 
-    int portIndex = 0;
-    int i = 0;
-    QSettings s;
-    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
-    {
-        //        qDebug() << port.portName;
-        if( port.friendName == s.value( "serialinterface" ) )
-        {
-            portIndex = i;
-        }
-        ++i;
-    }
-
-    // активируем сериал порт для модбаса
-    changeSerialPort( portIndex );
 }
 
 ModBus MB;
@@ -36,6 +19,159 @@ mathresolver mr;
 
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
+
+
+static QString descriptiveDataTypeName( int funcCode )
+{
+    switch( funcCode )
+    {
+    case _FC_READ_COILS:
+    case _FC_WRITE_SINGLE_COIL:
+    case _FC_WRITE_MULTIPLE_COILS:
+        return "Coil (binary)";
+    case _FC_READ_DISCRETE_INPUTS:
+        return "Discrete Input (binary)";
+    case _FC_READ_HOLDING_REGISTERS:
+    case _FC_WRITE_SINGLE_REGISTER:
+    case _FC_WRITE_MULTIPLE_REGISTERS:
+        return "Holding Register (16 bit)";
+    case _FC_READ_INPUT_REGISTERS:
+        return "Input Register (16 bit)";
+    default:
+        break;
+    }
+    return "Unknown";
+}
+
+void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
+{
+    if( m_modbus == NULL )
+    {
+        return;
+    }
+
+    uint8_t dest[1024];
+    uint16_t * dest16 = (uint16_t *) dest;
+
+    memset( dest, 0, 1024 );
+
+    int ret = -1;
+    bool is16Bit = false;
+    bool writeAccess = false;
+    const QString dataType = descriptiveDataTypeName( func );
+
+    modbus_set_slave( m_modbus, slave );
+
+    switch( func )
+    {
+    case _FC_READ_COILS:
+        ret = modbus_read_bits( m_modbus, addr, num, dest );
+        break;
+    case _FC_READ_DISCRETE_INPUTS:
+        ret = modbus_read_input_bits( m_modbus, addr, num, dest );
+        break;
+    case _FC_READ_HOLDING_REGISTERS:
+        ret = modbus_read_registers( m_modbus, addr, num, dest16 );
+        is16Bit = true;
+        break;
+    case _FC_READ_INPUT_REGISTERS:
+        ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
+        is16Bit = true;
+        break;
+    case _FC_WRITE_SINGLE_COIL:
+        ret = modbus_write_bit( m_modbus, addr, state);
+        writeAccess = true;
+        num = 1;
+        break;
+    case _FC_WRITE_SINGLE_REGISTER:
+        ret = modbus_write_register( m_modbus, addr, state);
+        writeAccess = true;
+        num = 1;
+        break;
+
+    case _FC_WRITE_MULTIPLE_COILS:
+    {
+        uint8_t * data = new uint8_t[num];
+        for( int i = 0; i < num; ++i )
+        {
+            data[i] = ( uint8_t ) data_src[i];
+        }
+        ret = modbus_write_bits( m_modbus, addr, num, data );
+        delete[] data;
+        writeAccess = true;
+        break;
+    }
+    case _FC_WRITE_MULTIPLE_REGISTERS:
+    {
+        uint16_t * data = new uint16_t[num];
+        for( int i = 0; i < num; ++i )
+        {
+            data[i] = ( uint16_t ) data_src[i];
+        }
+        ret = modbus_write_registers( m_modbus, addr, num, data );
+        delete[] data;
+        writeAccess = true;
+        break;
+    }
+    default:
+        break;
+    }
+
+    if( ret == num  )
+    {
+        if( writeAccess )
+        {
+            //qDebug() << "Values successfully sent" ;
+            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
+        }
+        else
+        {
+            // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
+            QByteArray arraytofloat;
+
+            for( int i = num-1; i >=0; --i )
+            {
+                //qDebug() << num<< "num" ;
+                int data = is16Bit ? dest16[i] : dest[i];
+                arraytofloat.append((data & 0xFF00)>>8);
+                arraytofloat.append(data & 0x00FF);
+                //data_dest_float[num - 1 - i] = data;
+            }
+
+            float val;
+            //convert hex to double
+            QDataStream stream(arraytofloat);
+            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+            stream >> val;
+            data_dest_float[0] = val;
+        }
+    }
+    else
+    {
+        if( ret < 0 )
+        {
+            if(
+        #ifdef WIN32
+                    errno == WSAETIMEDOUT ||
+        #endif
+                    errno == EIO
+                    )
+            {
+                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+            }
+            else
+            {
+                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+            }
+        }
+        else
+        {
+            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+        }
+    }
+}
+
+
 
 void worker::do_Work()
 {
@@ -57,14 +193,26 @@ void worker::do_Work()
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                UartDriver::needtoupdatechannel[0] = 0;
+
+                //UartDriver::needtoupdatechannel[0] = 0;
                 currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
+
+                float destfloat[1024];
+                memset( destfloat, 0, 1024 );
+
+                // делаем запросики
+                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+
+                qDebug() << destfloat[0] << "destfloat[0]";
+
+                currentdata = destfloat[0];
+
                 this->thread()->usleep(5000);
 
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     //пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
-                    MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
+                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
                     //this->thread()->usleep(500*1000);
                     if (ThreadChannelOptions1->IsChannelMathematical())
                     {
@@ -81,10 +229,8 @@ void worker::do_Work()
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[1] = 0;
-
-//                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
-                currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,ModBus::BadGoodCommAddress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
-
+                //                currentdata = MB.ReadDataChannel(ModBus::DataChannel2);
+                //                currentdata = MB.ModBusGetHoldingRegister(ModBus::Board4AIAddress,ModBus::BadGoodCommAddress,ModBus::DataChannelLenght); //ModBus::ElmetroChannelAB2Address
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions2->IsChannelMathematical())
@@ -103,7 +249,7 @@ void worker::do_Work()
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[2] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::DataChannel3);
+                //                currentdata = MB.ReadDataChannel(ModBus::DataChannel3);
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions3->IsChannelMathematical())
@@ -121,7 +267,7 @@ void worker::do_Work()
             {
                 this->thread()->usleep(100); // 100 мксек ждем прост.
                 UartDriver::needtoupdatechannel[3] = 0;
-                currentdata = MB.ReadDataChannel(ModBus::DataChannel4);
+                //                currentdata = MB.ReadDataChannel(ModBus::DataChannel4);
                 if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
                 {
                     if (ThreadChannelOptions4->IsChannelMathematical())
@@ -199,7 +345,7 @@ void worker::changeSerialPort( int )
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-           qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
         }
         else
         {
@@ -207,7 +353,7 @@ void worker::changeSerialPort( int )
     }
     else
     {
-        qDebug() << "No serial port found" <<"Could not find any serial port " <<"on this computer!"  ;
+        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 
@@ -216,6 +362,25 @@ void worker::changeSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
+    //qDebug() << "Worker Constructor" ;
+    // находим все com - порты
+
+    int portIndex = 0;
+    int i = 0;
+    QSettings s;
+    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+    {
+        //        qDebug() << port.portName;
+        if( port.friendName == s.value( "serialinterface" ) )
+        {
+            portIndex = i;
+        }
+        ++i;
+    }
+
+    // активируем сериал порт для модбаса
+    changeSerialPort( portIndex );
+
     thread()->usleep(100000);
 
     ThreadChannelOptions1 = c1;
@@ -320,7 +485,7 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ModbusDevicesList.clear();
 
     // Переносим список этих объектов в список структур
-    int i = 0;
+    i = 0;
 
     foreach(ChannelOptions * cobj, ChannelsObjectsList)
     {
@@ -365,3 +530,4 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     MB.ConfigureDevices(&ModbusDevicesList);
     thread()->usleep(10000);
 }
+

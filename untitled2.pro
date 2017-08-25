@@ -46,7 +46,8 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
     3rdparty/libmodbus/src/modbus.c \
-    3rdparty/qextserialport/qextserialport.cpp
+    3rdparty/qextserialport/qextserialport.cpp \
+    device.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -73,7 +74,8 @@ HEADERS  += mainwindow.h \
     defines.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
-    3rdparty/qextserialport/qwineventnotifier_p.h
+    3rdparty/qextserialport/qwineventnotifier_p.h \
+    device.h
 
 FORMS    += mainwindow.ui \
     options.ui \

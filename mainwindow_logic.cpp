@@ -43,19 +43,19 @@ void MainWindow::MainWindowInitialization()
     QPixmap pix(pathtologotip);
 
 
-    // находим все com - порты
-    int portIndex = 0;
-    int i = 0;
-    QSettings s;
-    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
-    {
-        //        qDebug() << port.portName;
-        if( port.friendName == s.value( "serialinterface" ) )
-        {
-            portIndex = i;
-        }
-        ++i;
-    }
+    //    // находим все com - порты
+    //    int portIndex = 0;
+    //    int i = 0;
+    //    QSettings s;
+    //    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+    //    {
+    //        //        qDebug() << port.portName;
+    //        if( port.friendName == s.value( "serialinterface" ) )
+    //        {
+    //            portIndex = i;
+    //        }
+    //        ++i;
+    //    }
 
     //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
@@ -115,7 +115,7 @@ void MainWindow::MainWindowInitialization()
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    //    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
     connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
@@ -123,10 +123,10 @@ void MainWindow::MainWindowInitialization()
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
 
-    // активируем сериал порт для модбаса
-    changeSerialPort( portIndex );
+    //    // активируем сериал порт для модбаса
+    //    changeSerialPort( portIndex );
 
-    //    WorkerThread->start(); // запускаем сам поток
+    WorkerThread->start(); // запускаем сам поток
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -346,16 +346,13 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
-    //    messwrite.LogAddMessage(local.time().toString());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
 
-    float destfloat[1024];
-    memset( destfloat, 0, 1024 );
-
-    sendModbusRequest(0x01, 0x04, 0x00, 0x04, 0, 0, destfloat);
-
-    qDebug() << destfloat[0] << "destfloat[0]";
-
+    //    messwrite.LogAddMessage(local.time().toString());
+    //    float destfloat[1024];
+    //    memset( destfloat, 0, 1024 );
+//        sendModbusRequest(0x01, 0x04, 0x00, 0x04, 0, 0, destfloat);
+    //    qDebug() << destfloat[0] << "destfloat[0]";
     //    qDebug() << destfloat[0]<< "destfloat[0]";
     //    qDebug() << destfloat[1]<< "destfloat[1]";
     //    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
