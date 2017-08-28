@@ -162,18 +162,18 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+//                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
 
-                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
-                qDebug() << modbus_strerror( errno ) ;
+//                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+//                qDebug() << modbus_strerror( errno ) ;
             }
         }
         else
         {
-            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+//            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
