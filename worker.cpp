@@ -346,11 +346,11 @@ void worker::OpenSerialPort( int )
 
         parity = comportparity;
 
-        //        if( m_modbus )
-        //        {
-        //            modbus_close( m_modbus );
-        //            modbus_free( m_modbus );
-        //        }
+        if( m_modbus )
+        {
+            modbus_close( m_modbus );
+            modbus_free( m_modbus );
+        }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 

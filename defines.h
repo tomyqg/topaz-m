@@ -27,13 +27,13 @@
 #define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
-#define uartsleep DelayMsec(160);
+#define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
 
 #else
 #define comportname "COM3"
-#define uartsleep Sleep(100);
+#define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 #define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
@@ -65,7 +65,7 @@
 
 #define MultiThread
 #define ValuesUpdateTimer 100
-#define GraphicsUpdateTimer 300
+#define GraphicsUpdateTimer 100
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в секундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
