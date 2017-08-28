@@ -24,7 +24,7 @@ worker::worker(QObject *parent) :
     }
 
     // активируем сериал порт для модбаса
-//    OpenSerialPort( portIndex );
+    OpenSerialPort( portIndex );
 }
 
 ModBus MB;
@@ -207,22 +207,26 @@ void worker::do_Work()
     {
         this->thread()->usleep(100); // 100 мксек ждем прост.
         this->thread()->setPriority(QThread::LowPriority);
-        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
+//        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                this->thread()->usleep(100); // 100 мксек ждем прост.
+
+//                this->thread()->usleep(100); // 100 мксек ждем прост.
 
 //                //UartDriver::needtoupdatechannel[0] = 0;
 //                currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
 
-//                float destfloat[1024];
-//                memset( destfloat, 0, 1024 );
+                float destfloat[1024];
+                memset( destfloat, 0, 1024 );
 
 //                // делаем запросики
-////                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-////                qDebug() << destfloat[0] << "destfloat[0]";
+                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
 
-//                currentdata = destfloat[0];
+
+                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
+
+                currentdata = destfloat[0];
+                UD.writechannelvalue(1,currentdata);
 
 //                this->thread()->usleep(5000);
             }
@@ -391,6 +395,9 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
+
+
+    return;
 
     uint16_t type;
 

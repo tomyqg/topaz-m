@@ -118,7 +118,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
-    //    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
+        connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 

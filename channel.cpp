@@ -27,7 +27,7 @@ double ChannelOptions::GetMeasurePeriod()
 
 uint16_t ChannelOptions::GetSignalType()
 {
-    return this->signaltype;
+    return signaltype;
 }
 
 void ChannelOptions::SetSignalType(uint16_t newsignaltype)
