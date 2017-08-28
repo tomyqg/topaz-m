@@ -273,13 +273,24 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     crc_calculated = crc16(msg, msg_length - 2);
     crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
 
-	ctx->last_crc_expected = crc_calculated;
-	ctx->last_crc_received = crc_received;
+    ctx->last_crc_expected = crc_calculated;
+    ctx->last_crc_received = crc_received;
+
+    if ( msg[msg_length - 1] != 0 )
+    {
+        fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
+                crc_received, crc_calculated);
+        errno = EMBBADDATA;
+        return -1;
+    }
 
     /* Check CRC of msg */
     if (crc_calculated == crc_received) {
         return msg_length;
     } else {
+
+        // added to filter last 0xFx symbol
+
         if (ctx->debug) {
             fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
                     crc_received, crc_calculated);

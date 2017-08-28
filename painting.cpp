@@ -20,6 +20,9 @@ extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
+
+QString Codestring;
+
 void MainWindow::PaintCyfrasBottom()
 {
     // задается вручную
@@ -83,6 +86,9 @@ void MainWindow::PaintCyfrasBottom()
         Channel3ValueString =  ConnectionErrorMessage;
     if (Channel4ValueNumber== ModBus::ConnectionError)
         Channel4ValueString = ConnectionErrorMessage;
+
+
+    qDebug() << stderr; // чтобы выводить ошибку подсчета срс
 
     // выводим значения каналов большими цифрами
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);

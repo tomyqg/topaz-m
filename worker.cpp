@@ -10,21 +10,11 @@
 worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
 {
-    int portIndex = 0;
-    int i = 0;
-    QSettings s;
-    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
-    {
-        //        qDebug() << port.portName;
-        if( port.friendName == s.value( "serialinterface" ) )
-        {
-            portIndex = i;
-        }
-        ++i;
-    }
+    //qDebug() << "Worker Constructor" ;
+    // открываем порт
 
     // активируем сериал порт для модбаса
-    OpenSerialPort( portIndex );
+    OpenSerialPort( 1 );
 }
 
 ModBus MB;
@@ -172,16 +162,18 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                //                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
-                //                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+
+                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+                qDebug() << modbus_strerror( errno ) ;
             }
         }
         else
         {
-            //            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
@@ -192,6 +184,9 @@ void worker::do_Work()
 {
     double mathresult;
     double currentdata;
+
+    float destfloat[1024];
+    memset( destfloat, 0, 1024 );
 
     emit SignalToObj_mainThreadGUI();
 
@@ -210,16 +205,47 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                float destfloat[1024];
-                memset( destfloat, 0, 1024 );
+
                 // делаем запросики
                 sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
+                //                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
                 currentdata = destfloat[0];
+
+                if (ThreadChannelOptions1->IsChannelMathematical())
+                {
+                    // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+                    mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+
                 UD.writechannelvalue(1,currentdata);
                 this->thread()->usleep(5000);
             }
+
+        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
+            if (UartDriver::needtoupdatechannel[1] == 1)
+            {
+                UartDriver::needtoupdatechannel[1] = 0;
+                this->thread()->usleep(100); // 100 мксек ждем прост.
+
+                // делаем запросики
+                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
+                //                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
+                currentdata = destfloat[0];
+
+                if (ThreadChannelOptions2->IsChannelMathematical())
+                {
+                    // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+
+                UD.writechannelvalue(2,currentdata);
+
+                this->thread()->usleep(5000);
+            }
     }
+
 
     //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
     //                {
@@ -346,17 +372,17 @@ void worker::OpenSerialPort( int )
 
         parity = comportparity;
 
-        if( m_modbus )
-        {
-            modbus_close( m_modbus );
-            modbus_free( m_modbus );
-        }
+        //        if( m_modbus )
+        //        {
+        //            modbus_close( m_modbus );
+        //            modbus_free( m_modbus );
+        //        }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-            //            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
         }
         else
         {
@@ -364,7 +390,7 @@ void worker::OpenSerialPort( int )
     }
     else
     {
-        //        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
+        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 
@@ -373,10 +399,6 @@ void worker::OpenSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-    //qDebug() << "Worker Constructor" ;
-    // находим все com - порты
-
-
 
     thread()->usleep(100000);
 
@@ -384,7 +406,6 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
-
 
     return;
 

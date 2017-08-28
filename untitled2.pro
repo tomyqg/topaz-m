@@ -13,7 +13,7 @@ VERSION = 0.5.5
 Q_OS_LINUX = 1
 
 #раскомментить если хотим чтобы запустилось на винде и закомментить если на линухе
-LIBS += -lws2_32
+#LIBS += -lws2_32
 
 QT_IM_MODULE=mockup
 CONFIG += mockup
