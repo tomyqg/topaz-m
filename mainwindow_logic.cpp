@@ -122,10 +122,8 @@ void MainWindow::MainWindowInitialization()
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-
-    //    // активируем сериал порт для модбаса
-    //    changeSerialPort( portIndex );
-
+    // // активируем сериал порт для модбаса
+    //changeSerialPort( portIndex );
     WorkerThread->start(); // запускаем сам поток
 
     Options op;
@@ -347,18 +345,6 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-
-    //    messwrite.LogAddMessage(local.time().toString());
-    //    float destfloat[1024];
-    //    memset( destfloat, 0, 1024 );
-//        sendModbusRequest(0x01, 0x04, 0x00, 0x04, 0, 0, destfloat);
-    //    qDebug() << destfloat[0] << "destfloat[0]";
-    //    qDebug() << destfloat[0]<< "destfloat[0]";
-    //    qDebug() << destfloat[1]<< "destfloat[1]";
-    //    sendModbusRequest(0x01,0x05,0x01,0x01,0x01,0);
-    //    Sleep(500);
-    //    sendModbusRequest(0x01,0x05,0x01,0x01,0x00,0);
-    //    Sleep(500);
 }
 
 void MainWindow::LabelsUpdate()

@@ -4,7 +4,7 @@
 #include "uartdriver.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
-
+#include <QDebug>
 
 // constructor
 worker::worker(QObject *parent) :
@@ -16,7 +16,7 @@ ModBus MB;
 UartDriver UD;
 mathresolver mr;
 
-Device device;
+//Device device;
 
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
@@ -160,16 +160,16 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+//                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
-                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+//                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
             }
         }
         else
         {
-            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+//            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
@@ -205,7 +205,7 @@ void worker::do_Work()
 
                 // делаем запросики
                 sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-                qDebug() << destfloat[0] << "destfloat[0]";
+//                qDebug() << destfloat[0] << "destfloat[0]";
 
 
 
@@ -350,7 +350,7 @@ void worker::changeSerialPort( int )
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+//            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
         }
         else
         {
@@ -358,7 +358,7 @@ void worker::changeSerialPort( int )
     }
     else
     {
-        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
+//        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 

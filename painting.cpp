@@ -33,7 +33,7 @@ void MainWindow::PaintCyfrasBottom()
     int alerttextsize = smallrectingleheight/2.5;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 5;
 
-#ifndef LinuxBoard
+#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.5;
 #endif
@@ -135,7 +135,7 @@ void MainWindow::PaintCyfrasRight()
     int alerttextsize = smallrectingleheight/2;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
-#ifndef LinuxBoard
+#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.5;
 #endif
@@ -269,7 +269,7 @@ void MainWindow::PaintCyfrasFullScreen()
     int alerttextsize = bigrectingleheight/2.8;
     int smalltextsize = (bigrectingleheight - alerttextsize ) / 5;
 
-#ifndef LinuxBoard
+#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.5;
 #endif
@@ -339,7 +339,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int alerttextsize = alertwindowheight/2;
     int smalltextsize = (alertwindowheight - alerttextsize)/2.5;
 
-#ifndef LinuxBoard
+#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.5;
 #endif

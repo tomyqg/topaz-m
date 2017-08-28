@@ -73,7 +73,6 @@ HEADERS  += mainwindow.h \
     defines.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
-    3rdparty/qextserialport/qwineventnotifier_p.h \
     device.h
 
 FORMS    += mainwindow.ui \

@@ -2,6 +2,7 @@
 #define DEVICE_H
 
 #include <QObject>
+#include <QDebug>
 
 struct deviceparametrs
 {
@@ -184,7 +185,7 @@ Device::Device()
     DeviceParametrsList.append(chan0AdditionalParameter2);
 
     foreach (deviceparametrs dp, DeviceParametrsList) {
-        qDebug() << dp.name;
+//        qDebug() << dp.name;
     }
 }
 
