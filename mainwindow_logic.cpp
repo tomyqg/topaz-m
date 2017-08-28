@@ -42,20 +42,19 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
-
-    //    // находим все com - порты
-    //    int portIndex = 0;
-    //    int i = 0;
-    //    QSettings s;
-    //    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
-    //    {
-    //        //        qDebug() << port.portName;
-    //        if( port.friendName == s.value( "serialinterface" ) )
-    //        {
-    //            portIndex = i;
-    //        }
-    //        ++i;
-    //    }
+    // находим все com - порты
+    int portIndex = 0;
+    int i = 0;
+    QSettings s;
+    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+    {
+        //        qDebug() << port.portName;
+        if( port.friendName == s.value( "serialinterface" ) )
+        {
+            portIndex = i;
+        }
+        ++i;
+    }
 
     //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
@@ -114,18 +113,19 @@ void MainWindow::MainWindowInitialization()
     worker* myWorker = new worker;
     myWorker->moveToThread(WorkerThread);
 
+//    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
-    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
+    //    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
 
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    // // активируем сериал порт для модбаса
-    //changeSerialPort( portIndex );
-    WorkerThread->start(); // запускаем сам поток
+    // активируем сериал порт для модбаса
+    //    OpenSerialPort( portIndex );
 
+    WorkerThread->start(); // запускаем сам поток
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
     op.deleteLater();
@@ -160,7 +160,6 @@ static QString descriptiveDataTypeName( int funcCode )
     }
     return "Unknown";
 }
-
 
 
 void MainWindow::LabelsInit()
@@ -345,6 +344,13 @@ void MainWindow::DateUpdate()
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+
+    float destfloat[1024];
+    //    memset( destfloat, 0, 1024 );
+
+    //    // делаем запросики
+//    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+//    UartDriver::channelinputbuffer[0] = destfloat[0];
 }
 
 void MainWindow::LabelsUpdate()
@@ -546,7 +552,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
     {
         if( writeAccess )
         {
-            qDebug() << "Values successfully sent" ;
+            //            qDebug() << "Values successfully sent" ;
             QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
         }
         else
@@ -556,7 +562,7 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 
             for( int i = num-1; i >=0; --i )
             {
-                qDebug() << num<< "num" ;
+                //                qDebug() << num<< "num" ;
 
                 int data = is16Bit ? dest16[i] : dest[i];
                 arraytofloat.append((data & 0xFF00)>>8);
@@ -605,7 +611,6 @@ void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int 
 }
 
 
-
 void MainWindow::resetStatus( void )
 {
     ;
@@ -614,7 +619,7 @@ void MainWindow::resetStatus( void )
 
 
 
-void MainWindow::changeSerialPort( int )
+void MainWindow::OpenSerialPort( int )
 {
     //    qDebug() << "changeSerialPort ( int )" ;
 
@@ -634,13 +639,15 @@ void MainWindow::changeSerialPort( int )
 
         parity = comportparity;
 
-        if( m_modbus )
-        {
-            modbus_close( m_modbus );
-            modbus_free( m_modbus );
-        }
+        // TODO: если раскомментить то  будет вываливаться ошибка при дебаге.
+        //        if( m_modbus )
+        //        {
+        //            modbus_close( m_modbus );
+        //            modbus_free( m_modbus );
+        //        }
 
-        m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+        //подключаемси.
+        m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
         if( modbus_connect( m_modbus ) == -1 )
         {
@@ -650,6 +657,7 @@ void MainWindow::changeSerialPort( int )
         else
         {
         }
+
     }
     else
     {

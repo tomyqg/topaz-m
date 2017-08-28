@@ -129,7 +129,7 @@ private:
 private slots:
 
 
-    void changeSerialPort( int );
+    void OpenSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
     void GrafsUpdateBars();
