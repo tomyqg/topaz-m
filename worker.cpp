@@ -36,9 +36,6 @@ mathresolver mr;
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
 
-//deviceparametrs dp;
-
-
 static QString descriptiveDataTypeName( int funcCode )
 {
     switch( funcCode )
@@ -175,16 +172,16 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-//                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                //                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
-//                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+                //                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
             }
         }
         else
         {
-//            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+            //            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
@@ -207,109 +204,101 @@ void worker::do_Work()
     {
         this->thread()->usleep(100); // 100 мксек ждем прост.
         this->thread()->setPriority(QThread::LowPriority);
-//        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
+
+        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-//                //UartDriver::needtoupdatechannel[0] = 0;
-//                currentdata = MB.ReadDataChannel(ModBus::DataChannel1);
-
+                UartDriver::needtoupdatechannel[0] = 0;
+                this->thread()->usleep(100); // 100 мксек ждем прост.
                 float destfloat[1024];
                 memset( destfloat, 0, 1024 );
-
-//                // делаем запросики
+                // делаем запросики
                 sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-
-
                 qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
-
                 currentdata = destfloat[0];
                 UD.writechannelvalue(1,currentdata);
-
-//                this->thread()->usleep(5000);
+                this->thread()->usleep(5000);
             }
     }
 
-//                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-//                {
-//                    //пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
-//                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
-//                    //this->thread()->usleep(500*1000);
-//                    if (ThreadChannelOptions1->IsChannelMathematical())
-//                    {
-//                        mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-//                        currentdata = mathresult;
-//                    }
-//                    UD.writechannelvalue(1,currentdata);
-//                }
-//                this->thread()->usleep(1000); // 1000 мксек ждем прост.
-//            }
+    //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+    //                {
+    //                    //пишем по адресу 32816 (User calibration 2, gain) отрицательное значение
+    //                    //MB.WriteDataChannel(ModBus::BadGoodCommAddress, currentdata*(-1));
+    //                    //this->thread()->usleep(500*1000);
+    //                    if (ThreadChannelOptions1->IsChannelMathematical())
+    //                    {
+    //                        mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
+    //                        currentdata = mathresult;
+    //                    }
+    //                    UD.writechannelvalue(1,currentdata);
+    //                }
+    //                this->thread()->usleep(1000); // 1000 мксек ждем прост.
+    //            }
 
-//        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
-//            if (UartDriver::needtoupdatechannel[1] == 1)
-//            {
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                UartDriver::needtoupdatechannel[1] = 0;
+    //        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+    //            if (UartDriver::needtoupdatechannel[1] == 1)
+    //            {
+    //                this->thread()->usleep(100); // 100 мксек ждем прост.
+    //                UartDriver::needtoupdatechannel[1] = 0;
 
-//                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-//                {
-//                    if (ThreadChannelOptions2->IsChannelMathematical())
-//                    {
-//                        // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
-//                        mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-//                        currentdata = mathresult;
-//                    }
-//                    UD.writechannelvalue(2,currentdata);
-//                }
-//                this->thread()->usleep(1000); // 1000 мксек ждем прост.
-//            }
+    //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+    //                {
+    //                    if (ThreadChannelOptions2->IsChannelMathematical())
+    //                    {
+    //                        // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+    //                        mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+    //                        currentdata = mathresult;
+    //                    }
+    //                    UD.writechannelvalue(2,currentdata);
+    //                }
+    //                this->thread()->usleep(1000); // 1000 мксек ждем прост.
+    //            }
 
-//        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
-//            if (UartDriver::needtoupdatechannel[2] == 1)
-//            {
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                UartDriver::needtoupdatechannel[2] = 0;
+    //        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+    //            if (UartDriver::needtoupdatechannel[2] == 1)
+    //            {
+    //                this->thread()->usleep(100); // 100 мксек ждем прост.
+    //                UartDriver::needtoupdatechannel[2] = 0;
 
-//                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-//                {
-//                    if (ThreadChannelOptions3->IsChannelMathematical())
-//                    {
-//                        mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-//                        currentdata = mathresult;
-//                    }
-//                    UD.writechannelvalue(3,currentdata);
-//                }
-//                this->thread()->usleep(1000); // 1000 мксек ждем прост.
-//            }
+    //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+    //                {
+    //                    if (ThreadChannelOptions3->IsChannelMathematical())
+    //                    {
+    //                        mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
+    //                        currentdata = mathresult;
+    //                    }
+    //                    UD.writechannelvalue(3,currentdata);
+    //                }
+    //                this->thread()->usleep(1000); // 1000 мксек ждем прост.
+    //            }
 
-//        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
-//            if (UartDriver::needtoupdatechannel[3] == 1)
-//            {
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                UartDriver::needtoupdatechannel[3] = 0;
+    //        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff) // если не нужно мерить то пропускаем измерения
+    //            if (UartDriver::needtoupdatechannel[3] == 1)
+    //            {
+    //                this->thread()->usleep(100); // 100 мксек ждем прост.
+    //                UartDriver::needtoupdatechannel[3] = 0;
 
-//                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
-//                {
-//                    if (ThreadChannelOptions4->IsChannelMathematical())
-//                    {
-//                        mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-//                        currentdata = mathresult;
-//                    }
-//                    UD.writechannelvalue(4,currentdata);
-//                }
-//                this->thread()->usleep(1000); // 1000 мксек ждем прост.
-//            }
+    //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
+    //                {
+    //                    if (ThreadChannelOptions4->IsChannelMathematical())
+    //                    {
+    //                        mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
+    //                        currentdata = mathresult;
+    //                    }
+    //                    UD.writechannelvalue(4,currentdata);
+    //                }
+    //                this->thread()->usleep(1000); // 1000 мксек ждем прост.
+    //            }
 
-//        if (UartDriver::needtoupdatechannel[0] == 0)
-//            if (UartDriver::needtoupdatechannel[1] == 0)
-//                if (UartDriver::needtoupdatechannel[2] == 0)
-//                    if (UartDriver::needtoupdatechannel[3] == 0)
-//                    {
-//                        this->thread()->usleep(1000);
-//                    }
-//    }
+    //        if (UartDriver::needtoupdatechannel[0] == 0)
+    //            if (UartDriver::needtoupdatechannel[1] == 0)
+    //                if (UartDriver::needtoupdatechannel[2] == 0)
+    //                    if (UartDriver::needtoupdatechannel[3] == 0)
+    //                    {
+    //                        this->thread()->usleep(1000);
+    //                    }
+    //    }
 
     emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
     // do important work here
@@ -357,17 +346,17 @@ void worker::OpenSerialPort( int )
 
         parity = comportparity;
 
-//        if( m_modbus )
-//        {
-//            modbus_close( m_modbus );
-//            modbus_free( m_modbus );
-//        }
+        //        if( m_modbus )
+        //        {
+        //            modbus_close( m_modbus );
+        //            modbus_free( m_modbus );
+        //        }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-//            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            //            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
         }
         else
         {
@@ -375,7 +364,7 @@ void worker::OpenSerialPort( int )
     }
     else
     {
-//        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
+        //        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 
@@ -538,7 +527,7 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
         i++;
     }
 
-//    MB.ConfigureDevices(&ModbusDevicesList);
+    //    MB.ConfigureDevices(&ModbusDevicesList);
     thread()->usleep(10000);
 }
 
