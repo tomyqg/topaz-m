@@ -265,41 +265,11 @@ int _modbus_rtu_flush(modbus_t *);
 /* The check_crc16 function shall return the message length if the CRC is
    valid. Otherwise it shall return -1 and set errno to EMBADCRC. */
 int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
-                                 int msg_length)
+                                int msg_length)
 {
     uint16_t crc_calculated;
     uint16_t crc_received;
-
-    int o;
-
-    // выскакивает первый байт == 0xFF поэтому нам нужно его под - удалить...
-
-    if ( (msg[0] >> 4  ) == 0x0F){
-        fprintf(stderr, "Bad %0X\n",
-                msg[0] );
-
-                for (o = 0; o <  msg_length; ++o) {
-                    msg[o] = msg[o + 1] ;
-                }
-                msg_length--;
-    }
-
-    else
-    {
-        fprintf(stderr, "Good %0X\n",
-                msg[0] );
-    }
-
-
-//    if ( (msg[msg_length - 1] & 0xF0 ) == 0xF0){
-//        fprintf(stderr, "last byte is %0X\n",
-//                msg[msg_length - 1] & 0xF0);
-//    }
-
-//    if (msg[msg_length - 1] == 0xFF){
-//        fprintf(stderr, "last byte is %0X\n",
-//                msg[msg_length - 1]);
-//    }
+    int var;
 
     crc_calculated = crc16(msg, msg_length - 2);
     crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
@@ -307,23 +277,40 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     ctx->last_crc_expected = crc_calculated;
     ctx->last_crc_received = crc_received;
 
-    //    if ( msg[msg_length - 1] != 0 )
-    //    {
-    //        fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
-    //                crc_received, crc_calculated);
-    //        errno = EMBBADDATA;
-    //        return -1;
-    //    }
+
+    while ( ( msg[0]>>4 ) == 0x0F)
+    {
+        for (var = 0; var < msg_length-1; ++var) {
+            msg[var] = msg[var+1];
+        }
+        msg_length--;
+    }
+
 
     /* Check CRC of msg */
     if (crc_calculated == crc_received) {
+
+        ////        if ( ( msg[0]>>4 ) == 0x0F)
+
+        //        {
+        //            fprintf(stderr, "msg_length = %0X msg_lengthbyte =  %0X\n",
+        //                    msg_length, msg[1]);
+        //        }
+
         return msg_length;
     } else {
 
-        // added to filter last 0xFx symbol
+        //        fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
+        //                crc_received, crc_calculated);
 
-//        fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
-//        crc_received, crc_calculated);
+//        if ( ( msg[0]>>4 ) == 0x0F)
+
+        {
+            fprintf(stderr, "FB = %0X Sec byte = %0X Lenght= %0X \n",
+                    msg[0], msg[1], msg_length);
+        }
+
+        //        fprintf(stderr, "ERROR CRC received %0s", msg);
 
 
         if (ctx->debug) {

@@ -1007,6 +1007,9 @@ static int read_registers(modbus_t *ctx, int function, int addr, int nb,
     req_length = ctx->backend->build_request_basis(ctx, function, addr, nb, req);
 
     rc = send_msg(ctx, req, req_length);
+
+    sleep(0.1);
+
     if (rc > 0) {
         int offset;
         int i;
