@@ -1008,7 +1008,7 @@ static int read_registers(modbus_t *ctx, int function, int addr, int nb,
 
     rc = send_msg(ctx, req, req_length);
 
-    sleep(0.1);
+//    sleep(0.1);
 
     if (rc > 0) {
         int offset;

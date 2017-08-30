@@ -113,7 +113,7 @@ void MainWindow::MainWindowInitialization()
     worker* myWorker = new worker;
     myWorker->moveToThread(WorkerThread);
 
-    //    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
+    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
@@ -136,14 +136,14 @@ void MainWindow::MainWindowInitialization()
 
     needConfirmation = 1;
 
-    //     активируем сериал порт для модбаса
-//    OpenSerialPort( portIndex );
-//    QTimer * t2 = new QTimer( this );
-//    connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
-//    t2->setInterval( 70 );
-//    t2->start( 70 );
-    //    t2->stop();
+    //         активируем сериал порт для модбаса
 
+    //    OpenSerialPort( portIndex );
+    //    QTimer * t2 = new QTimer( this );
+    //    connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
+    //    t2->setInterval( 70 );
+    //    t2->start( 70 );
+    //    t2->stop();
 }
 
 
@@ -500,7 +500,7 @@ void MainWindow::sendModbusRequest( )
     const uint16_t *data_src;
     float *data_dest_float = 0;
 
-    qDebug() << 'x';
+    //    qDebug() << 'x';
 
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;

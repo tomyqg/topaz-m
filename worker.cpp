@@ -204,11 +204,12 @@ void worker::do_Work()
         this->thread()->usleep(100); // 100 мксек ждем прост.
         this->thread()->setPriority(QThread::LowPriority);
 
+
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                ic ++;
-                qDebug() << ic;
+                qDebug() << ++ic;
+
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 

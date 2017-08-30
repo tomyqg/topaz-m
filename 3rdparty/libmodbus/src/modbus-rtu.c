@@ -273,24 +273,27 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     crc_calculated = crc16(msg, msg_length - 2);
     crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
 
-//    if (msg[0] == 0xFF)
-//    {
-//        // если первый символ фф, то удаляем его
+    if (msg[0] != 0x01)
+    {
+        // если первый символ фф, то удаляем его
 
-//        int z;
-//        for ( z = 0; z < msg_length-1; z++) {
-//            msg[z] = msg[z+1];
+        int z;
 
-//            //            пересчитываем срс
-//            // младшие тетрады не совпадают потому что изначально мы потеряли одну младшую тетраду
+        fprintf(stderr,"_modbus_rtu_check_integrity : msg[0] == %X\n", msg[0] );
 
-//            crc_calculated = crc16(msg, msg_length - 2) ;
-//            crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
+        for ( z = 0; z < msg_length-1; z++) {
+            msg[z] = msg[z+1];
 
-//            crc_calculated = crc_calculated  >> 8;
-//            crc_received = crc_received >>8;
-//        }
-//    }
+            //            пересчитываем срс
+            // младшие тетрады не совпадают потому что изначально мы потеряли одну младшую тетраду
+
+            crc_calculated = crc16(msg, msg_length - 2) ;
+            crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
+
+            crc_calculated = crc_calculated  >> 8;
+            crc_received = crc_received >>8;
+        }
+    }
 
     ctx->last_crc_expected = crc_calculated;
     ctx->last_crc_received = crc_received;
@@ -305,15 +308,21 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     //                    crc_received, crc_calculated, msg[0]);
 
 
+     fprintf(stderr,"msg_length %X\n" , msg_length );
+
     /* Check CRC of msg */
     if (crc_calculated == crc_received) {
+
         return msg_length;
+        return;
     } else {
 
         int z;
 
+
+
         fprintf(stderr,
-                "No CRC: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
+                "yeah: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
 
         //        if (msg[0] == 0xFF)
         //        {
