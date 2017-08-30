@@ -21,6 +21,8 @@ ModBus MB;
 UartDriver UD;
 mathresolver mr;
 
+int ic ;
+
 //Device device;
 
 ModbusDeviceStruct modbusdevice;
@@ -205,6 +207,8 @@ void worker::do_Work()
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
+                ic ++;
+                qDebug() << ic;
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
@@ -224,28 +228,28 @@ void worker::do_Work()
                 this->thread()->usleep(5000);
             }
 
-        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
-            if (UartDriver::needtoupdatechannel[1] == 1)
-            {
-                UartDriver::needtoupdatechannel[1] = 0;
-                this->thread()->usleep(100); // 100 мксек ждем прост.
+//        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
+//            if (UartDriver::needtoupdatechannel[1] == 1)
+//            {
+//                UartDriver::needtoupdatechannel[1] = 0;
+//                this->thread()->usleep(100); // 100 мксек ждем прост.
 
-                // делаем запросики
-                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
-                //                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
-                currentdata = destfloat[0];
+//                // делаем запросики
+////                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
+//                //                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
+//                currentdata = destfloat[0];
 
-                if (ThreadChannelOptions2->IsChannelMathematical())
-                {
-                    // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
-                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
+//                if (ThreadChannelOptions2->IsChannelMathematical())
+//                {
+//                    // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
+//                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
+//                    currentdata = mathresult;
+//                }
 
-                UD.writechannelvalue(2,currentdata);
+//                UD.writechannelvalue(2,currentdata);
 
-                this->thread()->usleep(5000);
-            }
+//                this->thread()->usleep(5000);
+//            }
     }
 
 

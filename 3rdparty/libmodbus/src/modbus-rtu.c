@@ -265,53 +265,77 @@ int _modbus_rtu_flush(modbus_t *);
 /* The check_crc16 function shall return the message length if the CRC is
    valid. Otherwise it shall return -1 and set errno to EMBADCRC. */
 int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
-                                int msg_length)
+                                const int msg_length)
 {
     uint16_t crc_calculated;
     uint16_t crc_received;
-    int var;
 
     crc_calculated = crc16(msg, msg_length - 2);
     crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
 
+//    if (msg[0] == 0xFF)
+//    {
+//        // если первый символ фф, то удаляем его
+
+//        int z;
+//        for ( z = 0; z < msg_length-1; z++) {
+//            msg[z] = msg[z+1];
+
+//            //            пересчитываем срс
+//            // младшие тетрады не совпадают потому что изначально мы потеряли одну младшую тетраду
+
+//            crc_calculated = crc16(msg, msg_length - 2) ;
+//            crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
+
+//            crc_calculated = crc_calculated  >> 8;
+//            crc_received = crc_received >>8;
+//        }
+//    }
+
     ctx->last_crc_expected = crc_calculated;
     ctx->last_crc_received = crc_received;
 
+    //    fprintf(stderr,
+    //            " msg1 %X %X %X %X %X %X %X %X %X %X lenght %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
 
-    while ( ( msg[0]>>4 ) == 0x0F)
-    {
-        for (var = 0; var < msg_length-1; ++var) {
-            msg[var] = msg[var+1];
-        }
-        msg_length--;
-    }
+    //    fprintf(stderr,
+    //            "first byte is %X last byte is %X \n",msg[0], msg[msg_length - 1] );
+
+    //            fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
+    //                    crc_received, crc_calculated, msg[0]);
 
 
     /* Check CRC of msg */
     if (crc_calculated == crc_received) {
-
-        ////        if ( ( msg[0]>>4 ) == 0x0F)
-
-        //        {
-        //            fprintf(stderr, "msg_length = %0X msg_lengthbyte =  %0X\n",
-        //                    msg_length, msg[1]);
-        //        }
-
         return msg_length;
     } else {
 
-        //        fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",
-        //                crc_received, crc_calculated);
+        int z;
 
-//        if ( ( msg[0]>>4 ) == 0x0F)
+        fprintf(stderr,
+                "No CRC: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
 
-        {
-            fprintf(stderr, "FB = %0X Sec byte = %0X Lenght= %0X \n",
-                    msg[0], msg[1], msg_length);
-        }
+        //        if (msg[0] == 0xFF)
+        //        {
+        //            //        msg[0] = 0x00;
+        //            //p_msg[0] = 0;
+        //            //        fprintf(stderr,
+        //            //                "p_mes was: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",p_msg[0],p_msg[1],p_msg[2],p_msg[3],p_msg[4],p_msg[5],p_msg[6],p_msg[7],p_msg[8],p_msg[9], length_to_read );
 
-        //        fprintf(stderr, "ERROR CRC received %0s", msg);
+        //            for ( z = 0; z < msg_length-1; z++) {
+        //                msg[z] = z ;
+        //            }
 
+        //                    fprintf(stderr,
+        //                            "p_mes now: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
+
+        //        }
+
+        fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
+                crc_received, crc_calculated, msg[0]);
+
+        //        fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
+        //                crc_received, crc_calculated, msg[0]);
 
         if (ctx->debug) {
             fprintf(stderr, "ERROR CRC received %0X != CRC calculated %0X\n",

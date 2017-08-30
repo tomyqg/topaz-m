@@ -113,19 +113,19 @@ void MainWindow::MainWindowInitialization()
     worker* myWorker = new worker;
     myWorker->moveToThread(WorkerThread);
 
-//    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
+    //    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
-        connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-
+    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    // активируем сериал порт для модбаса
-    //    OpenSerialPort( portIndex );
 
-    WorkerThread->start(); // запускаем сам поток
+
+        WorkerThread->start(); // запускаем сам поток
+
+
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
     op.deleteLater();
@@ -135,6 +135,15 @@ void MainWindow::MainWindowInitialization()
     process.startDetached("ifconfig usb0 192.168.1.115");
 
     needConfirmation = 1;
+
+    //     активируем сериал порт для модбаса
+//    OpenSerialPort( portIndex );
+//    QTimer * t2 = new QTimer( this );
+//    connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
+//    t2->setInterval( 70 );
+//    t2->start( 70 );
+    //    t2->stop();
+
 }
 
 
@@ -349,8 +358,8 @@ void MainWindow::DateUpdate()
     //    memset( destfloat, 0, 1024 );
 
     //    // делаем запросики
-//    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-//    UartDriver::channelinputbuffer[0] = destfloat[0];
+    //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+    //    UartDriver::channelinputbuffer[0] = destfloat[0];
 }
 
 void MainWindow::LabelsUpdate()
@@ -474,12 +483,24 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 }
 
 
-void MainWindow::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
+void MainWindow::sendModbusRequest( )
 {
     if( m_modbus == NULL )
     {
         return;
     }
+
+    int slave = 0x01;
+    int func = 0x04;
+    int addr = 0x00;
+
+    int num = 0x02;
+    int state = 0x00;
+
+    const uint16_t *data_src;
+    float *data_dest_float = 0;
+
+    qDebug() << 'x';
 
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;

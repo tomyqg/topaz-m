@@ -141,7 +141,7 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_4_clicked();
     void on_RelayChanger_toggled(bool checked);
-    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float);
+    void sendModbusRequest( );
 
 signals:
     void error(const QString &s);
