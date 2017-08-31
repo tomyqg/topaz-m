@@ -140,8 +140,8 @@ void MainWindow::MainWindowInitialization()
         OpenSerialPort( portIndex );
         QTimer * t2 = new QTimer( this );
         connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
-        t2->setInterval( 200 );
-        t2->start( 200 );
+        t2->setInterval( 70 );
+        t2->start( 70 );
 //        t2->stop();
 }
 
