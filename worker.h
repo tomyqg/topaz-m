@@ -3,6 +3,7 @@
 
 #include "uartdriver.h"
 #include "channel1.h"
+#include "device.h"
 #include "src/modbus.h"
 
 class worker : public QObject
@@ -31,12 +32,14 @@ public slots:
 private slots:
     void do_Work();
     void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float);
+    void sendModbusRequest(deviceparametrs* dp);
     void OpenSerialPort( int );
 
 private:
     //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
     modbus_t * m_modbus;
+    Device device;
 };
 
 #endif // WORKER_H

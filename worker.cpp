@@ -18,7 +18,7 @@ worker::worker(QObject *parent) :
 
     // создаем девайсы
 
-    Device devices;
+
 }
 
 ModBus MB;
@@ -50,6 +50,11 @@ static QString descriptiveDataTypeName( int funcCode )
         break;
     }
     return "Unknown";
+}
+
+void worker:: sendModbusRequest(deviceparametrs* dp)
+{
+    qDebug() << dp->name;
 }
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
@@ -216,6 +221,9 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
+
+
+                sendModbusRequest(&device.chan0SignalType);
                 sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
 
                 currentdata = destfloat[0];
