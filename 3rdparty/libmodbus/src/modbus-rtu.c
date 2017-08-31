@@ -298,18 +298,6 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     ctx->last_crc_expected = crc_calculated;
     ctx->last_crc_received = crc_received;
 
-    //    fprintf(stderr,
-    //            " msg1 %X %X %X %X %X %X %X %X %X %X lenght %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
-
-    //    fprintf(stderr,
-    //            "first byte is %X last byte is %X \n",msg[0], msg[msg_length - 1] );
-
-    //            fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
-    //                    crc_received, crc_calculated, msg[0]);
-
-
-     fprintf(stderr,"msg_length %X\n" , msg_length );
-
     /* Check CRC of msg */
     if (crc_calculated == crc_received) {
 
@@ -318,27 +306,6 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     } else {
 
         int z;
-
-
-
-        fprintf(stderr,
-                "yeah: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
-
-        //        if (msg[0] == 0xFF)
-        //        {
-        //            //        msg[0] = 0x00;
-        //            //p_msg[0] = 0;
-        //            //        fprintf(stderr,
-        //            //                "p_mes was: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",p_msg[0],p_msg[1],p_msg[2],p_msg[3],p_msg[4],p_msg[5],p_msg[6],p_msg[7],p_msg[8],p_msg[9], length_to_read );
-
-        //            for ( z = 0; z < msg_length-1; z++) {
-        //                msg[z] = z ;
-        //            }
-
-        //                    fprintf(stderr,
-        //                            "p_mes now: %X %X %X %X %X %X %X %X %X %X length_to_read %x\n",msg[0],msg[1],msg[2],msg[3],msg[4],msg[5],msg[6],msg[7],msg[8],msg[9], msg_length );
-
-        //        }
 
         fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
                 crc_received, crc_calculated, msg[0]);

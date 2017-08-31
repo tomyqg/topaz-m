@@ -111,19 +111,19 @@ void MainWindow::MainWindowInitialization()
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
 
-    //    WorkerThread = new QThread;
-    //    worker* myWorker = new worker;
-    //    myWorker->moveToThread(WorkerThread);
+    WorkerThread = new QThread;
+    worker* myWorker = new worker;
+    myWorker->moveToThread(WorkerThread);
 
-    //    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    //    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    //    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
-    //    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
+    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
+    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
+    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
+    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
-    //    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-    //    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
+    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
+    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    //    WorkerThread->start(); // запускаем сам поток
+    WorkerThread->start(); // запускаем сам поток
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -137,12 +137,12 @@ void MainWindow::MainWindowInitialization()
 
     //    активируем сериал порт для модбаса
 
-        OpenSerialPort( portIndex );
-        QTimer * t2 = new QTimer( this );
-        connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
-        t2->setInterval( 70 );
-        t2->start( 70 );
-//        t2->stop();
+    //        OpenSerialPort( portIndex );
+    //        QTimer * t2 = new QTimer( this );
+    //        connect( t2, SIGNAL(timeout()), this, SLOT(sendModbusRequest()));
+    //        t2->setInterval( 70 );
+    //        t2->start( 70 );
+    //        t2->stop();
 }
 
 
@@ -528,9 +528,9 @@ void MainWindow::sendModbusRequest( void )
         is16Bit = true;
         break;
     case _FC_WRITE_SINGLE_COIL:
-//        ret = modbus_write_bit( m_modbus, addr,
-//                                ui->regTable->item( 0, DataColumn )->
-//                                text().toInt(0, 0) ? 1 : 0 );
+        //        ret = modbus_write_bit( m_modbus, addr,
+        //                                ui->regTable->item( 0, DataColumn )->
+        //                                text().toInt(0, 0) ? 1 : 0 );
         writeAccess = true;
         num = 1;
         break;
@@ -543,11 +543,11 @@ void MainWindow::sendModbusRequest( void )
     case _FC_WRITE_MULTIPLE_COILS:
     {
         uint8_t * data = new uint8_t[num];
-//        for( int i = 0; i < num; ++i )
-//        {
-//            data[i] = ui->regTable->item( i, DataColumn )->
-//                    text().toInt(0, 0);
-//        }
+        //        for( int i = 0; i < num; ++i )
+        //        {
+        //            data[i] = ui->regTable->item( i, DataColumn )->
+        //                    text().toInt(0, 0);
+        //        }
         ret = modbus_write_bits( m_modbus, addr, num, data );
         delete[] data;
         writeAccess = true;
@@ -556,11 +556,11 @@ void MainWindow::sendModbusRequest( void )
     case _FC_WRITE_MULTIPLE_REGISTERS:
     {
         uint16_t * data = new uint16_t[num];
-//        for( int i = 0; i < num; ++i )
-//        {
-//            data[i] = ui->regTable->item( i, DataColumn )->
-//                    text().toInt(0, 0);
-//        }
+        //        for( int i = 0; i < num; ++i )
+        //        {
+        //            data[i] = ui->regTable->item( i, DataColumn )->
+        //                    text().toInt(0, 0);
+        //        }
         ret = modbus_write_registers( m_modbus, addr, num, data );
         delete[] data;
         writeAccess = true;
@@ -575,9 +575,9 @@ void MainWindow::sendModbusRequest( void )
     {
         if( writeAccess )
         {
-//            m_statusText->setText(
-//                        tr( "Values successfully sent" ) );
-//            m_statusInd->setStyleSheet( "background: #0b0;" );
+            //            m_statusText->setText(
+            //                        tr( "Values successfully sent" ) );
+            //            m_statusInd->setStyleSheet( "background: #0b0;" );
             QTimer::singleShot( 200, this, SLOT( resetStatus() ) );
         }
         else
@@ -585,10 +585,10 @@ void MainWindow::sendModbusRequest( void )
 
             //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
 
-//            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
+            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
             QString qs_num;
 
-//            ui->regTable->setRowCount( num );
+            //            ui->regTable->setRowCount( num );
             for( int i = 0; i < num; ++i )
             {
                 int data = is16Bit ? dest16[i] : dest[i];
@@ -598,7 +598,7 @@ void MainWindow::sendModbusRequest( void )
                 QTableWidgetItem * addrItem =
                         new QTableWidgetItem(
                             QString::number( addr+i ) );
-//                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
+                //                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
                 QTableWidgetItem * dataItem =
                         new QTableWidgetItem( qs_num );
                 dtItem->setFlags( dtItem->flags() &
@@ -608,12 +608,12 @@ void MainWindow::sendModbusRequest( void )
                 dataItem->setFlags( dataItem->flags() &
                                     ~Qt::ItemIsEditable );
 
-//                ui->regTable->setItem( i, DataTypeColumn,
-//                                       dtItem );
-//                ui->regTable->setItem( i, AddrColumn,
-//                                       addrItem );
-//                ui->regTable->setItem( i, DataColumn,
-//                                       dataItem );
+                //                ui->regTable->setItem( i, DataTypeColumn,
+                //                                       dtItem );
+                //                ui->regTable->setItem( i, AddrColumn,
+                //                                       addrItem );
+                //                ui->regTable->setItem( i, DataColumn,
+                //                                       dataItem );
             }
         }
     }
