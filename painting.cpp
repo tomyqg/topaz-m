@@ -88,8 +88,6 @@ void MainWindow::PaintCyfrasBottom()
         Channel4ValueString = ConnectionErrorMessage;
 
 
-    qDebug() << stderr; // чтобы выводить ошибку подсчета срс
-
     // выводим значения каналов большими цифрами
     painter.drawText(2, otstupsverhu, smallrectinglewidth, smallrectingleheight,     Qt::AlignHCenter | Qt::AlignVCenter,Channel1ValueString);
     painter.drawText(2+smallrectinglewidth, otstupsverhu, smallrectinglewidth, smallrectingleheight, Qt::AlignHCenter | Qt::AlignVCenter,Channel2ValueString);

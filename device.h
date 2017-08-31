@@ -185,7 +185,7 @@ Device::Device()
     DeviceParametrsList.append(chan0AdditionalParameter2);
 
     foreach (deviceparametrs dp, DeviceParametrsList) {
-//        qDebug() << dp.name;
+        qDebug() << "Device: " << dp.name;
     }
 }
 

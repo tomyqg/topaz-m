@@ -15,6 +15,10 @@ worker::worker(QObject *parent) :
 
     // активируем сериал порт для модбаса
     OpenSerialPort( 1 );
+
+    // создаем девайсы
+
+    Device devices;
 }
 
 ModBus MB;
@@ -22,8 +26,6 @@ UartDriver UD;
 mathresolver mr;
 
 int ic ;
-
-//Device device;
 
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
@@ -172,7 +174,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                 //                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
                 //                qDebug() << modbus_strerror( errno ) ;
 
-                qDebug() << stderr;
+//                qDebug() << stderr;
             }
         }
         else
@@ -190,6 +192,7 @@ void worker::do_Work()
 
     float destfloat[1024];
     memset( destfloat, 0, 1024 );
+
 
     emit SignalToObj_mainThreadGUI();
 
