@@ -286,6 +286,10 @@ void worker::do_Work()
                 ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
+                WriteModbusData(&device.badgoodcomm, -1 * currentdata);
+
+
+
                 if (ThreadChannelOptions1->IsChannelMathematical())
                 {
                     // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
@@ -296,6 +300,8 @@ void worker::do_Work()
                 UD.writechannelvalue(1,currentdata);
                 this->thread()->usleep(5000);
             }
+
+        currentdata = destfloat[0] = 0;
 
         if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[1] == 1)

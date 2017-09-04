@@ -157,6 +157,13 @@ public:
         elmetroAB1.WorkLevelAccess = Device::R;
         elmetroAB1.name = "elmetroAB1";
 
+        badgoodcomm.Offset = 32935;
+        badgoodcomm.StorageType = Device::D;
+        badgoodcomm.ParamType = Device::F32;
+        badgoodcomm.WorkLevelAccess = Device::RW;
+        badgoodcomm.name = "badgoodcomm";
+
+
         foreach (deviceparametrs dp, DeviceParametrsList) {
             qDebug() << "Device: " << dp.name;
         }
@@ -185,7 +192,7 @@ public:
     deviceparametrs chan1AdditionalParameter2;
 
     deviceparametrs elmetroAB1;
-
+    deviceparametrs badgoodcomm;
 
 public:
     enum StorageType { D  = 0,
