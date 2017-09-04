@@ -97,7 +97,7 @@ public:
 
         DeviceParametrsList.append(deviceStatus);
 
-        chan0Data.Offset = 32768;
+        chan0Data.Offset = 0 ; // 32768
         chan0Data.StorageType = Device::D;
         chan0Data.ParamType = Device::F32;
         chan0Data.WorkLevelAccess = Device::R;
@@ -145,7 +145,7 @@ public:
 
         DeviceParametrsList.append(chan0AdditionalParameter2);
 
-        chan1Data.Offset = 32768;
+        chan1Data.Offset = 4 ; //32768
         chan1Data.StorageType = Device::D;
         chan1Data.ParamType = Device::F32;
         chan1Data.WorkLevelAccess = Device::R;

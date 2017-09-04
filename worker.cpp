@@ -54,6 +54,34 @@ void worker::sendModbusRequest(const deviceparametrs* dp)
     //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
 }
 
+void worker::WriteModbusData(const deviceparametrs* dp, float value)
+{
+    if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
+        return;
+    int num;
+
+    switch (dp->ParamType) {
+    case Device::A12:
+        num = 12;
+        break;
+    case Device::U16:
+        num = 1;
+        break;
+    case Device::U32:
+        num = 2;
+        break;
+    case Device::F32:
+        num = 2;
+        break;
+    default:
+        num = 0;
+        break;
+    }
+
+    sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_SINGLE_REGISTER, dp->Offset, num, value,0,0);
+    //                      0, 0,data_dest);
+}
+
 void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
 {
 
@@ -83,7 +111,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         break;
     }
 
-    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, dp->Offset, num, 0, 0,data_dest);
+    sendModbusRequest(ModBus::Board4AIAddress, _FC_READ_INPUT_REGISTERS, dp->Offset, num, 0, 0,data_dest);
 }
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
@@ -249,12 +277,13 @@ void worker::do_Work()
 
                 // делаем запросики
 
-
                 //sendModbusRequest(&device.chan0SignalType);
                 //sendModbusRequest(&device.DeviceParametrsList.at(ic%8));
-//                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+                //sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
 
-//                ReadModbusData(&device.elmetroAB1,destfloat );
+                //ReadModbusData(&device.elmetroAB1,destfloat );
+
+                ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
@@ -275,8 +304,8 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
-                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
-                //                qDebug() << ThreadChannelOptions1->GetMeasurePeriod() << "MeasurePeriod" ;
+
+                ReadModbusData(&device.chan1Data,destfloat );
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
