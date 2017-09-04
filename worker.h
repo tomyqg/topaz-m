@@ -32,7 +32,8 @@ public slots:
 private slots:
     void do_Work();
     void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float);
-    void sendModbusRequest(deviceparametrs* dp);
+    void sendModbusRequest(const deviceparametrs* dp);
+    void ReadModbusData(const deviceparametrs* dp, float *data_dest);
     void OpenSerialPort( int );
 
 private:

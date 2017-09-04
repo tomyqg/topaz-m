@@ -15,6 +15,10 @@ worker::worker(QObject *parent) :
 
     // активируем сериал порт для модбаса
     OpenSerialPort( 1 );
+
+    // создаем девайсы
+
+
 }
 
 ModBus MB;
@@ -48,42 +52,9 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-void worker::sendModbusRequest(const deviceparametrs* dp)
+void worker:: sendModbusRequest(deviceparametrs* dp)
 {
     qDebug() << dp->name;
-    //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
-}
-
-void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
-{
-
-    // если запрещено чтение, а только запись разрешена, то возвращаем функцию
-    if ( ( dp->WorkLevelAccess!= Device::R ) && ( dp->WorkLevelAccess!= Device::RW ))
-        return;
-
-    int num;
-
-    // количество блоков в зависимости от типа параметра
-
-    switch (dp->ParamType) {
-    case Device::A12:
-        num = 12;
-        break;
-    case Device::U16:
-        num = 1;
-        break;
-    case Device::U32:
-        num = 2;
-        break;
-    case Device::F32:
-        num = 2;
-        break;
-    default:
-        num = 0;
-        break;
-    }
-
-    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, dp->Offset, num, 0, 0,data_dest);
 }
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
@@ -207,7 +178,8 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
 
                 //                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
                 //                qDebug() << modbus_strerror( errno ) ;
-                //                qDebug() << stderr;
+
+//                qDebug() << stderr;
             }
         }
         else
@@ -225,6 +197,7 @@ void worker::do_Work()
 
     float destfloat[1024];
     memset( destfloat, 0, 1024 );
+
 
     emit SignalToObj_mainThreadGUI();
 
@@ -249,12 +222,10 @@ void worker::do_Work()
 
                 // делаем запросики
 
+                sendModbusRequest(&device.chan0SignalType);
 
-                //sendModbusRequest(&device.chan0SignalType);
-                //sendModbusRequest(&device.DeviceParametrsList.at(ic%8));
-//                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
 
-//                ReadModbusData(&device.elmetroAB1,destfloat );
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
@@ -411,18 +382,18 @@ void worker::OpenSerialPort( int )
 #else
         // const QString port = ports[iface].physName;
         // точно знаем что этот порт работает на rs485
-        const QString port = comportname;
+        const QString port = "/dev/ttyO1";
 #endif
 
         char parity;
 
         parity = comportparity;
 
-        //                if( m_modbus )
-        //                {
-        //                    modbus_close( m_modbus );
-        //                    modbus_free( m_modbus );
-        //                }
+        //        if( m_modbus )
+        //        {
+        //            modbus_close( m_modbus );
+        //            modbus_free( m_modbus );
+        //        }
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
@@ -439,6 +410,8 @@ void worker::OpenSerialPort( int )
         qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
+
+
 
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
@@ -595,3 +568,4 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     //    MB.ConfigureDevices(&ModbusDevicesList);
     thread()->usleep(10000);
 }
+

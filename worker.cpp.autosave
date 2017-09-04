@@ -252,9 +252,9 @@ void worker::do_Work()
 
                 //sendModbusRequest(&device.chan0SignalType);
                 //sendModbusRequest(&device.DeviceParametrsList.at(ic%8));
-//                sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
+                //sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
 
-//                ReadModbusData(&device.elmetroAB1,destfloat );
+                ReadModbusData(&device.elmetroAB1,destfloat );
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions1->IsChannelMathematical())

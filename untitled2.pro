@@ -13,7 +13,7 @@ VERSION = 0.5.5
 Q_OS_LINUX = 1
 
 #раскомментить если хотим чтобы запустилось на винде и закомментить если на линухе
-LIBS += -lws2_32
+
 
 QT_IM_MODULE=mockup
 CONFIG += mockup
@@ -58,6 +58,7 @@ win32:SOURCES += 3rdparty/qextserialport/win_qextserialport.cpp \
                         3rdparty/qextserialport/qextserialenumerator_win.cpp
 win32:DEFINES += _TTY_WIN_  WINVER=0x0501
 win32:LIBS += -lsetupapi -lwsock32
+win32:LIBS += -lws2_32
 
 HEADERS  += mainwindow.h \
          qcustomplot.h \

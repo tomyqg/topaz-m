@@ -7,12 +7,11 @@
 struct deviceparametrs
 {
     QString name;
-    uint16_t MBOffset;
+    uint16_t Offset;
     uint8_t StorageType;
     uint8_t ParamType;
     uint8_t WorkLevelAccess;
 };
-
 
 struct devicestruct
 {
@@ -72,7 +71,9 @@ class Device
 public:
     Device()
     {
-        DataChan0.MBOffset = 0;
+        // constructor blt
+
+        DataChan0.Offset = 0;
         DataChan0.StorageType = Device::D;
         DataChan0.ParamType = Device::F32;
         DataChan0.WorkLevelAccess = Device::R;
@@ -80,7 +81,7 @@ public:
 
         DeviceParametrsList.append(DataChan0);
 
-        modbusAddress.MBOffset = 16389;
+        modbusAddress.Offset = 16389;
         modbusAddress.StorageType = Device::D;
         modbusAddress.ParamType = Device::U16;
         modbusAddress.WorkLevelAccess = Device::R;
@@ -88,7 +89,7 @@ public:
 
         DeviceParametrsList.append(modbusAddress);
 
-        deviceStatus.MBOffset = 16406;
+        deviceStatus.Offset = 16406;
         deviceStatus.StorageType = Device::D;
         deviceStatus.ParamType = Device::U16;
         deviceStatus.WorkLevelAccess = Device::R;
@@ -96,7 +97,7 @@ public:
 
         DeviceParametrsList.append(deviceStatus);
 
-        chan0Data.MBOffset = 32768;
+        chan0Data.Offset = 32768;
         chan0Data.StorageType = Device::D;
         chan0Data.ParamType = Device::F32;
         chan0Data.WorkLevelAccess = Device::R;
@@ -104,7 +105,7 @@ public:
 
         DeviceParametrsList.append(chan0Data);
 
-        chan0Status.MBOffset = 32771;
+        chan0Status.Offset = 32771;
         chan0Status.StorageType = Device::D;
         chan0Status.ParamType = Device::U16;
         chan0Status.WorkLevelAccess = Device::R;
@@ -112,7 +113,7 @@ public:
 
         DeviceParametrsList.append(chan0Status);
 
-        chan0SupportedSignals.MBOffset = 32780;
+        chan0SupportedSignals.Offset = 32780;
         chan0SupportedSignals.StorageType = Device::D;
         chan0SupportedSignals.ParamType = Device::U16;
         chan0SupportedSignals.WorkLevelAccess = Device::R;
@@ -120,7 +121,7 @@ public:
 
         DeviceParametrsList.append(chan0SupportedSignals);
 
-        chan0SignalType.MBOffset = 32781;
+        chan0SignalType.Offset = 32781;
         chan0SignalType.StorageType = Device::NV;
         chan0SignalType.ParamType = Device::U16;
         chan0SignalType.WorkLevelAccess = Device::RW;
@@ -128,7 +129,7 @@ public:
 
         DeviceParametrsList.append(chan0SignalType);
 
-        chan0AdditionalParameter1.MBOffset = 32782;
+        chan0AdditionalParameter1.Offset = 32782;
         chan0AdditionalParameter1.StorageType = Device::NV;
         chan0AdditionalParameter1.ParamType = Device::A12;
         chan0AdditionalParameter1.WorkLevelAccess = Device::RW;
@@ -136,13 +137,25 @@ public:
 
         DeviceParametrsList.append(chan0AdditionalParameter1);
 
-        chan0AdditionalParameter2.MBOffset = 32788;
+        chan0AdditionalParameter2.Offset = 32788;
         chan0AdditionalParameter2.StorageType = Device::NV;
         chan0AdditionalParameter2.ParamType = Device::A12;
         chan0AdditionalParameter2.WorkLevelAccess = Device::RW;
         chan0AdditionalParameter2.name = "chan0AdditionalParameter2";
 
         DeviceParametrsList.append(chan0AdditionalParameter2);
+
+        chan1Data.Offset = 32768;
+        chan1Data.StorageType = Device::D;
+        chan1Data.ParamType = Device::F32;
+        chan1Data.WorkLevelAccess = Device::R;
+        chan1Data.name = "chan1Data";
+
+        elmetroAB1.Offset = 0;
+        elmetroAB1.StorageType = Device::D;
+        elmetroAB1.ParamType = Device::F32;
+        elmetroAB1.WorkLevelAccess = Device::R;
+        elmetroAB1.name = "elmetroAB1";
 
         foreach (deviceparametrs dp, DeviceParametrsList) {
             qDebug() << "Device: " << dp.name;
@@ -164,11 +177,20 @@ public:
     deviceparametrs chan0SignalType;
     deviceparametrs chan0AdditionalParameter1;
     deviceparametrs chan0AdditionalParameter2;
+    deviceparametrs chan1Data;
+    deviceparametrs chan1Status;
+    deviceparametrs chan1SupportedSignals;
+    deviceparametrs chan1SignalType;
+    deviceparametrs chan1AdditionalParameter1;
+    deviceparametrs chan1AdditionalParameter2;
+
+    deviceparametrs elmetroAB1;
+
 
 public:
-    enum StorageType { D = 0,
-                       S = 1,
-                       NV= 2,
+    enum StorageType { D  = 0,
+                       S  = 1,
+                       NV = 2,
                      };
 
     enum ParamType { U16 = 0,
@@ -177,8 +199,8 @@ public:
                      A12 = 3
                    };
 
-    enum WorkLevelAccess{ R = 0,
-                          W = 1,
+    enum WorkLevelAccess{ R  = 0,
+                          W  = 1,
                           RW = 2,
                         };
 };
