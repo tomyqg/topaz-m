@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -116,7 +116,7 @@
           <x>0</x>
           <y>30</y>
           <width>291</width>
-          <height>201</height>
+          <height>225</height>
          </rect>
         </property>
         <property name="font">
@@ -277,7 +277,7 @@
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>20</y>
+          <y>50</y>
           <width>111</width>
           <height>371</height>
          </rect>
@@ -296,6 +296,12 @@
             <size>
              <width>100</width>
              <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
             </size>
            </property>
            <property name="font">
@@ -461,7 +467,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>20</y>
+          <y>50</y>
           <width>190</width>
           <height>371</height>
          </rect>
@@ -1138,6 +1144,12 @@
          </item>
          <item>
           <widget class="QLineEdit" name="Name_Channel_1">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
@@ -1184,8 +1196,8 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>221</width>
-          <height>201</height>
+          <width>291</width>
+          <height>225</height>
          </rect>
         </property>
         <property name="font">
@@ -1372,6 +1384,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="Name_Channel_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Open Sans Semibold</family>
@@ -1413,7 +1431,7 @@
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>20</y>
+          <y>50</y>
           <width>111</width>
           <height>371</height>
          </rect>
@@ -1432,6 +1450,12 @@
             <size>
              <width>100</width>
              <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
             </size>
            </property>
            <property name="font">
@@ -1555,7 +1579,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>20</y>
+          <y>50</y>
           <width>190</width>
           <height>371</height>
          </rect>
@@ -2208,8 +2232,8 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>221</width>
-          <height>201</height>
+          <width>291</width>
+          <height>225</height>
          </rect>
         </property>
         <property name="font">
@@ -2404,6 +2428,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="Name_Channel_3">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -2445,7 +2475,7 @@
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>20</y>
+          <y>50</y>
           <width>111</width>
           <height>371</height>
          </rect>
@@ -2463,6 +2493,12 @@
             <size>
              <width>100</width>
              <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
             </size>
            </property>
            <property name="font">
@@ -2589,7 +2625,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>20</y>
+          <y>50</y>
           <width>190</width>
           <height>371</height>
          </rect>
@@ -3241,8 +3277,8 @@
          <rect>
           <x>0</x>
           <y>30</y>
-          <width>221</width>
-          <height>201</height>
+          <width>291</width>
+          <height>225</height>
          </rect>
         </property>
         <property name="font">
@@ -3429,6 +3465,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="Name_Channel_4">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Open Sans Semibold</family>
@@ -3470,7 +3512,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>20</y>
+          <y>50</y>
           <width>190</width>
           <height>371</height>
          </rect>
@@ -4097,7 +4139,7 @@
        <property name="geometry">
         <rect>
          <x>470</x>
-         <y>30</y>
+         <y>60</y>
          <width>111</width>
          <height>371</height>
         </rect>
@@ -4116,6 +4158,12 @@
            <size>
             <width>100</width>
             <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
            </size>
           </property>
           <property name="font">
@@ -5722,9 +5770,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

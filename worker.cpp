@@ -305,8 +305,7 @@ void worker::do_Work()
                 ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
-                WriteModbusData(&device.badgoodcomm, 525.67);
-
+                WriteModbusData(&device.badgoodcomm, currentdata);
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
                 {
