@@ -11,6 +11,7 @@ struct deviceparametrs
     uint8_t StorageType;
     uint8_t ParamType;
     uint8_t WorkLevelAccess;
+    uint8_t RegisterType;
 };
 
 struct devicestruct
@@ -73,17 +74,10 @@ public:
     {
         // constructor blt
 
-        DataChan0.Offset = 0;
-        DataChan0.StorageType = Device::D;
-        DataChan0.ParamType = Device::F32;
-        DataChan0.WorkLevelAccess = Device::R;
-        DataChan0.name = "DataChan0";
-
-        DeviceParametrsList.append(DataChan0);
-
         modbusAddress.Offset = 16389;
         modbusAddress.StorageType = Device::D;
         modbusAddress.ParamType = Device::U16;
+        modbusAddress.RegisterType = Device::HoldingReg;
         modbusAddress.WorkLevelAccess = Device::R;
         modbusAddress.name = "modbusAddress";
 
@@ -92,6 +86,7 @@ public:
         deviceStatus.Offset = 16406;
         deviceStatus.StorageType = Device::D;
         deviceStatus.ParamType = Device::U16;
+        deviceStatus.RegisterType = Device::HoldingReg;
         deviceStatus.WorkLevelAccess = Device::R;
         deviceStatus.name = "deviceStatus";
 
@@ -101,6 +96,7 @@ public:
         chan0Data.StorageType = Device::D;
         chan0Data.ParamType = Device::F32;
         chan0Data.WorkLevelAccess = Device::R;
+        chan0Data.RegisterType = Device::InputReg;
         chan0Data.name = "chan0Data";
 
         DeviceParametrsList.append(chan0Data);
@@ -108,6 +104,7 @@ public:
         chan0Status.Offset = 32771;
         chan0Status.StorageType = Device::D;
         chan0Status.ParamType = Device::U16;
+        chan0Status.RegisterType = Device::HoldingReg;
         chan0Status.WorkLevelAccess = Device::R;
         chan0Status.name = "chan0Status";
 
@@ -116,6 +113,7 @@ public:
         chan0SupportedSignals.Offset = 32780;
         chan0SupportedSignals.StorageType = Device::D;
         chan0SupportedSignals.ParamType = Device::U16;
+        chan0SupportedSignals.RegisterType = Device::HoldingReg;
         chan0SupportedSignals.WorkLevelAccess = Device::R;
         chan0SupportedSignals.name = "chan0SupportedSignals";
 
@@ -132,6 +130,7 @@ public:
         chan0AdditionalParameter1.Offset = 32782;
         chan0AdditionalParameter1.StorageType = Device::NV;
         chan0AdditionalParameter1.ParamType = Device::A12;
+        chan0AdditionalParameter1.RegisterType = Device::HoldingReg;
         chan0AdditionalParameter1.WorkLevelAccess = Device::RW;
         chan0AdditionalParameter1.name = "chan0AdditionalParameter1";
 
@@ -140,6 +139,7 @@ public:
         chan0AdditionalParameter2.Offset = 32788;
         chan0AdditionalParameter2.StorageType = Device::NV;
         chan0AdditionalParameter2.ParamType = Device::A12;
+        chan0AdditionalParameter2.RegisterType = Device::HoldingReg;
         chan0AdditionalParameter2.WorkLevelAccess = Device::RW;
         chan0AdditionalParameter2.name = "chan0AdditionalParameter2";
 
@@ -148,6 +148,7 @@ public:
         chan1Data.Offset = 4 ; //32768
         chan1Data.StorageType = Device::D;
         chan1Data.ParamType = Device::F32;
+        chan1Data.RegisterType = Device::InputReg;
         chan1Data.WorkLevelAccess = Device::R;
         chan1Data.name = "chan1Data";
 
@@ -155,12 +156,14 @@ public:
         elmetroAB1.StorageType = Device::D;
         elmetroAB1.ParamType = Device::F32;
         elmetroAB1.WorkLevelAccess = Device::R;
+        elmetroAB1.RegisterType = Device::InputReg;
         elmetroAB1.name = "elmetroAB1";
 
         badgoodcomm.Offset = 32935;
         badgoodcomm.StorageType = Device::D;
         badgoodcomm.ParamType = Device::F32;
         badgoodcomm.WorkLevelAccess = Device::RW;
+        badgoodcomm.RegisterType = Device::HoldingReg;
         badgoodcomm.name = "badgoodcomm";
 
 
@@ -205,6 +208,10 @@ public:
                      F32 = 2,
                      A12 = 3
                    };
+
+    enum RegisterType { HoldingReg = 0,
+                        InputReg = 1
+                      };
 
     enum WorkLevelAccess{ R  = 0,
                           W  = 1,

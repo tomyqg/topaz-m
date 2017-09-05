@@ -108,6 +108,8 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         return;
 
     int num;
+    int comm;
+    int add;
 
     // количество блоков в зависимости от типа параметра
 
@@ -129,7 +131,21 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         break;
     }
 
-    sendModbusRequest(ModBus::Board4AIAddress, _FC_READ_HOLDING_REGISTERS, dp->Offset, num, 0, 0,data_dest);
+    switch (dp->RegisterType) {
+    case Device::HoldingReg:
+        comm = _FC_READ_HOLDING_REGISTERS;
+        break;
+    case Device::InputReg:
+        comm = _FC_READ_INPUT_REGISTERS;
+        break;
+    default:
+        comm = _FC_READ_INPUT_REGISTERS;
+        break;
+    }
+
+    add = dp->Offset;
+
+    sendModbusRequest(ModBus::Board4AIAddress, comm, add, num, 0, 0,data_dest);
 }
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
@@ -302,10 +318,10 @@ void worker::do_Work()
 
                 //ReadModbusData(&device.elmetroAB1,destfloat ); badgoodcomm    chan0Data
 
-                ReadModbusData(&device.badgoodcomm,destfloat );
+                ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
-//                WriteModbusData(&device.badgoodcomm, currentdata);
+//                WriteModbusData(&device.badgoodcomm, currentdata*-1);
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
                 {
@@ -328,10 +344,10 @@ void worker::do_Work()
 
                 // делаем запросики
 
-                //ReadModbusData(&device.badgoodcomm,destfloat );
-                //currentdata = destfloat[0];
+//                ReadModbusData(&device.chan0Data,destfloat );
+//                currentdata = destfloat[0];
 
-                currentdata = 777;
+//                currentdata = 777;
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
