@@ -78,8 +78,26 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
         break;
     }
 
-    sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_SINGLE_REGISTER, dp->Offset, num, value,0,0);
-    //                      0, 0,data_dest);
+    QByteArray requestdata;
+
+//    value = 456.131;
+    QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
+
+    // флоат интерпретируется задом наперед поэтому такая вот рокировочка
+    requestdata.append(floatarray.at(3)); // вставляем флоат в запрос
+    requestdata.append(floatarray.at(2));
+    requestdata.append(floatarray.at(1));
+    requestdata.append(floatarray.at(0));
+
+    uint16_t * data = new uint16_t[num];
+
+    data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
+    data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
+
+    qDebug() << requestdata ;
+
+    sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
+    //0, 0,data_dest);
 }
 
 void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
@@ -178,6 +196,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         for( int i = 0; i < num; ++i )
         {
             data[i] = ( uint16_t ) data_src[i];
+            qDebug() << data[i] << " : " << i;
         }
         ret = modbus_write_registers( m_modbus, addr, num, data );
         delete[] data;
@@ -192,8 +211,8 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     {
         if( writeAccess )
         {
-            //qDebug() << "Values successfully sent" ;
-            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
+            qDebug() << "Values successfully sent" ;
+//            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
         }
         else
         {
@@ -286,8 +305,7 @@ void worker::do_Work()
                 ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
-                WriteModbusData(&device.badgoodcomm, -1 * currentdata);
-
+                WriteModbusData(&device.badgoodcomm, 525.67);
 
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
@@ -311,7 +329,7 @@ void worker::do_Work()
 
                 // делаем запросики
 
-                ReadModbusData(&device.chan1Data,destfloat );
+                ReadModbusData(&device.badgoodcomm,destfloat );
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
@@ -326,7 +344,6 @@ void worker::do_Work()
                 this->thread()->usleep(5000);
             }
     }
-
 
     //                if ( (currentdata!=BADCRCCODE)&&(currentdata!=CONNECTERRORCODE) )
     //                {
