@@ -80,7 +80,7 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
 
     QByteArray requestdata;
 
-//    value = 456.131;
+    //    value = 456.131;
     QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
 
     // флоат интерпретируется задом наперед поэтому такая вот рокировочка
@@ -228,7 +228,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         if( writeAccess )
         {
             qDebug() << "Values successfully sent" ;
-//            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
+            //            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
         }
         else
         {
@@ -321,7 +321,7 @@ void worker::do_Work()
                 ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
 
-//                WriteModbusData(&device.badgoodcomm, currentdata*-1);
+                WriteModbusData(&device.badgoodcomm, currentdata*-1);
 
                 if (ThreadChannelOptions1->IsChannelMathematical())
                 {
@@ -344,10 +344,8 @@ void worker::do_Work()
 
                 // делаем запросики
 
-//                ReadModbusData(&device.chan0Data,destfloat );
-//                currentdata = destfloat[0];
-
-//                currentdata = 777;
+                ReadModbusData(&device.badgoodcomm,destfloat );
+                currentdata = destfloat[0];
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
