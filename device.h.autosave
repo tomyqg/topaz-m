@@ -87,7 +87,6 @@ public:
         deviceStatus.WorkLevelAccess = Device::R;
         deviceStatus.name = "deviceStatus";
 
-
         elmetroAB1.Offset = 0;
         elmetroAB1.StorageType = Device::D;
         elmetroAB1.ParamType = Device::F32;
@@ -112,6 +111,14 @@ public:
         channel0.Data.WorkLevelAccess = Device::R;
         channel0.Data.RegisterType = Device::InputReg;
         channel0.Data.name = "chan0.chanData";
+        
+        
+        channel0.DataFlags.Offset = 0 ; // 32768
+        channel0.DataFlags.StorageType = Device::D;
+        channel0.DataFlags.ParamType = Device::F32;
+        channel0.DataFlags.WorkLevelAccess = Device::R;
+        channel0.DataFlags.RegisterType = Device::InputReg;
+        channel0.DataFlags.name = "chan0.chanData";
 
         channel0.Status.Offset = 32771;
         channel0.Status.StorageType = Device::D;
