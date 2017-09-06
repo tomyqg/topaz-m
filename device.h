@@ -16,80 +16,54 @@ struct deviceparametrs
 
 struct channelparametrs
 {
-    deviceparametrs chanData;
-    deviceparametrs chanDataFlags;
-    deviceparametrs chanStatus;
-    deviceparametrs chanError;
-    deviceparametrs chanQuantity;
-    deviceparametrs chanUptime;
-    deviceparametrs chanRawData;
-    deviceparametrs chanRawDataFlags;
-    deviceparametrs chanSupportedSignals;
-    deviceparametrs chanSignalType;
-    deviceparametrs chanAdditionalParameter1;
-    deviceparametrs chanAdditionalParameter2;
-    deviceparametrs chanFilterType;
-    deviceparametrs chanFilterLength;
-    deviceparametrs chanTransferFunction;
-    deviceparametrs chanTransferSignalLowLim;
-    deviceparametrs chanTransferSignalHighLim;
-    deviceparametrs chanTransferScaleLowLim;
-    deviceparametrs chanTransferScaleHighLim;
-    deviceparametrs chanBadGoodComm;
-    deviceparametrs chanUserCalibGain1;
-};
-
-struct devicestruct
-{
-    QString name;
-    uint16_t ID;
-    uint16_t DeviceType;
-    uint16_t ModbusNetworkAddress;
-    uint16_t AIcount;
-    uint16_t MeasureType;
-    uint16_t SignalType;
-    uint16_t FilterType;
-    uint16_t TransferFunction;
-    uint16_t Status;
-    uint16_t SupportedSignals;
-
-    float TransferSignalLowLimit;
-    float TransferSignalHiLimit;
-    float TransferScaleHiLimit;
-    float TransferScaleLoLimit;
-    float DataMeasureGenerate;
-    float UserCalibration1Gain;
-    float UserCalibration1Offset;
-    uint32_t UserCalibration1Date;
-
-    float UserCalibration2Gain;
-    float UserCalibration2Offset;
-    uint32_t UserCalibration2Date;
-    float UserCalibration3Gain;
-    float UserCalibration3Offset;
-    uint32_t UserCalibration3Date;
-
-    float UserCalibration4Gain;
-    float UserCalibration4Offset;
-    uint32_t UserCalibration4Date;
-
-    float FactoryCalibration1Gain;
-    float FactoryCalibration1Offset;
-    uint32_t FactoryCalibration1Date;
-
-    float FactoryCalibration2Gain;
-    float FactoryCalibration2Offset;
-    uint32_t FactoryCalibration2Date;
-
-    float FactoryCalibration3Gain;
-    float FactoryCalibration3Offset;
-    uint32_t FactoryCalibration3Date;
-
-    float FactoryCalibration4Gain;
-    float FactoryCalibration4Offset;
-    uint32_t FactoryCalibration4Date;
-    uint16_t DataFlags;
-    uint16_t AdditionalCustomParameter;
+    int BaseAddress;
+    int AddressOffset;
+    deviceparametrs Data;
+    deviceparametrs DataFlags;
+    deviceparametrs Status;
+    deviceparametrs Error;
+    deviceparametrs Quantity;
+    deviceparametrs Uptime;
+    deviceparametrs RawData;
+    deviceparametrs RawDataFlags;
+    deviceparametrs SupportedSignals;
+    deviceparametrs SignalType;
+    deviceparametrs AdditionalParameter1;
+    deviceparametrs AdditionalParameter2;
+    deviceparametrs FilterType;
+    deviceparametrs FilterLength;
+    deviceparametrs TransferFunction;
+    deviceparametrs TransferSignalLowLim;
+    deviceparametrs TransferSignalHighLim;
+    deviceparametrs TransferScaleLowLim;
+    deviceparametrs TransferScaleHighLim;
+    deviceparametrs BadGoodComm;
+    deviceparametrs UserCalibGain1;
+    deviceparametrs UserCalibOffset1;
+    deviceparametrs UserCalibDate1;
+    deviceparametrs UserCalibGain2;
+    deviceparametrs UserCalibOffset2;
+    deviceparametrs UserCalibDate2;
+    deviceparametrs UserCalibGain3;
+    deviceparametrs UserCalibOffset3;
+    deviceparametrs UserCalibDate3;
+    deviceparametrs UserCalibGain4;
+    deviceparametrs UserCalibOffset4;
+    deviceparametrs UserCalibDate4;
+    deviceparametrs FactoryCalibGain1;
+    deviceparametrs FactoryCalibOffset1;
+    deviceparametrs FactoryCalibDate1;
+    deviceparametrs FactoryCalibGain2;
+    deviceparametrs FactoryCalibOffset2;
+    deviceparametrs FactoryCalibDate2;
+    deviceparametrs FactoryCalibGain3;
+    deviceparametrs FactoryCalibOffset3;
+    deviceparametrs FactoryCalibDate3;
+    deviceparametrs FactoryCalibGain4;
+    deviceparametrs FactoryCalibOffset4;
+    deviceparametrs FactoryCalibDate4;
+    deviceparametrs CjValue;
+    deviceparametrs ResultCjValue;
 };
 
 class Device
@@ -106,8 +80,6 @@ public:
         modbusAddress.WorkLevelAccess = Device::R;
         modbusAddress.name = "modbusAddress";
 
-        DeviceParametrsList.append(modbusAddress);
-
         deviceStatus.Offset = 16406;
         deviceStatus.StorageType = Device::D;
         deviceStatus.ParamType = Device::U16;
@@ -115,67 +87,6 @@ public:
         deviceStatus.WorkLevelAccess = Device::R;
         deviceStatus.name = "deviceStatus";
 
-        DeviceParametrsList.append(deviceStatus);
-
-        chan0Data.Offset = 0 ; // 32768
-        chan0Data.StorageType = Device::D;
-        chan0Data.ParamType = Device::F32;
-        chan0Data.WorkLevelAccess = Device::R;
-        chan0Data.RegisterType = Device::InputReg;
-        chan0Data.name = "chan0Data";
-
-        DeviceParametrsList.append(chan0Data);
-
-        chan0Status.Offset = 32771;
-        chan0Status.StorageType = Device::D;
-        chan0Status.ParamType = Device::U16;
-        chan0Status.RegisterType = Device::HoldingReg;
-        chan0Status.WorkLevelAccess = Device::R;
-        chan0Status.name = "chan0Status";
-
-        DeviceParametrsList.append(chan0Status);
-
-        chan0SupportedSignals.Offset = 32780;
-        chan0SupportedSignals.StorageType = Device::D;
-        chan0SupportedSignals.ParamType = Device::U16;
-        chan0SupportedSignals.RegisterType = Device::HoldingReg;
-        chan0SupportedSignals.WorkLevelAccess = Device::R;
-        chan0SupportedSignals.name = "chan0SupportedSignals";
-
-        DeviceParametrsList.append(chan0SupportedSignals);
-
-        chan0SignalType.Offset = 32781;
-        chan0SignalType.StorageType = Device::NV;
-        chan0SignalType.ParamType = Device::U16;
-        chan0SignalType.WorkLevelAccess = Device::RW;
-        chan0SignalType.name = "chan0SignalType";
-
-        DeviceParametrsList.append(chan0SignalType);
-
-        chan0AdditionalParameter1.Offset = 32782;
-        chan0AdditionalParameter1.StorageType = Device::NV;
-        chan0AdditionalParameter1.ParamType = Device::A12;
-        chan0AdditionalParameter1.RegisterType = Device::HoldingReg;
-        chan0AdditionalParameter1.WorkLevelAccess = Device::RW;
-        chan0AdditionalParameter1.name = "chan0AdditionalParameter1";
-
-        DeviceParametrsList.append(chan0AdditionalParameter1);
-
-        chan0AdditionalParameter2.Offset = 32788;
-        chan0AdditionalParameter2.StorageType = Device::NV;
-        chan0AdditionalParameter2.ParamType = Device::A12;
-        chan0AdditionalParameter2.RegisterType = Device::HoldingReg;
-        chan0AdditionalParameter2.WorkLevelAccess = Device::RW;
-        chan0AdditionalParameter2.name = "chan0AdditionalParameter2";
-
-        DeviceParametrsList.append(chan0AdditionalParameter2);
-
-        chan1Data.Offset = 4 ; //32768
-        chan1Data.StorageType = Device::D;
-        chan1Data.ParamType = Device::F32;
-        chan1Data.RegisterType = Device::InputReg;
-        chan1Data.WorkLevelAccess = Device::R;
-        chan1Data.name = "chan1Data";
 
         elmetroAB1.Offset = 0;
         elmetroAB1.StorageType = Device::D;
@@ -184,6 +95,7 @@ public:
         elmetroAB1.RegisterType = Device::InputReg;
         elmetroAB1.name = "elmetroAB1";
 
+
         badgoodcomm.Offset = 32935;
         badgoodcomm.StorageType = Device::D;
         badgoodcomm.ParamType = Device::F32;
@@ -191,12 +103,63 @@ public:
         badgoodcomm.RegisterType = Device::HoldingReg;
         badgoodcomm.name = "badgoodcomm";
 
+        channel0.BaseAddress = 32768;
+        channel0.AddressOffset = 0;
 
-        foreach (deviceparametrs dp, DeviceParametrsList) {
-//            qDebug() << "Device: " << dp.name;
-        }
+        channel0.Data.Offset = 0 ; // 32768
+        channel0.Data.StorageType = Device::D;
+        channel0.Data.ParamType = Device::F32;
+        channel0.Data.WorkLevelAccess = Device::R;
+        channel0.Data.RegisterType = Device::InputReg;
+        channel0.Data.name = "chan0.chanData";
+
+        channel0.Status.Offset = 32771;
+        channel0.Status.StorageType = Device::D;
+        channel0.Status.ParamType = Device::U16;
+        channel0.Status.RegisterType = Device::HoldingReg;
+        channel0.Status.WorkLevelAccess = Device::R;
+        channel0.Status.name = "chan0.chanStatus";
+
+
+        channel0.SupportedSignals.Offset = 32780;
+        channel0.SupportedSignals.StorageType = Device::D;
+        channel0.SupportedSignals.ParamType = Device::U16;
+        channel0.SupportedSignals.RegisterType = Device::HoldingReg;
+        channel0.SupportedSignals.WorkLevelAccess = Device::R;
+        channel0.SupportedSignals.name = "chan0SupportedSignals";
+
+        channel0.SignalType.Offset = 32781;
+        channel0.SignalType.StorageType = Device::NV;
+        channel0.SignalType.ParamType = Device::U16;
+        channel0.SignalType.WorkLevelAccess = Device::RW;
+        channel0.SignalType.name = "chan0SignalType";
+
+        channel0.AdditionalParameter1.Offset = 32782;
+        channel0.AdditionalParameter1.StorageType = Device::NV;
+        channel0.AdditionalParameter1.ParamType = Device::A12;
+        channel0.AdditionalParameter1.RegisterType = Device::HoldingReg;
+        channel0.AdditionalParameter1.WorkLevelAccess = Device::RW;
+        channel0.AdditionalParameter1.name = "chan0AdditionalParameter1";
+
+        channel0.AdditionalParameter2.Offset = 32788;
+        channel0.AdditionalParameter2.StorageType = Device::NV;
+        channel0.AdditionalParameter2.ParamType = Device::A12;
+        channel0.AdditionalParameter2.RegisterType = Device::HoldingReg;
+        channel0.AdditionalParameter2.WorkLevelAccess = Device::RW;
+        channel0.AdditionalParameter2.name = "chan0AdditionalParameter2";
+
+        channel1 = channel0;
+        channel1.AddressOffset = 128;
+        channel1.Data.Offset = 4;
+
+        channel2 = channel0;
+        channel2.AddressOffset = 128*2;
+        channel2.Data.Offset = 8;
+
+        channel3 = channel0;
+        channel3.AddressOffset = 128*3;
+        channel3.Data.Offset = 12;
     }
-
 
     QList<deviceparametrs> DeviceParametrsList;
 
@@ -233,14 +196,10 @@ public:
     deviceparametrs diCount;
     deviceparametrs deviceModel;
 
-    channelparametrs chan0;
-    channelparametrs chan1;
-    channelparametrs chan2;
-    channelparametrs chan3;
-
-
-
-
+    channelparametrs channel0;
+    channelparametrs channel1;
+    channelparametrs channel2;
+    channelparametrs channel3;
 
     deviceparametrs chan1Data;
     deviceparametrs chan1Status;

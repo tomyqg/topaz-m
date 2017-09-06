@@ -300,14 +300,13 @@ void worker::do_Work()
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                //                qDebug() << ++ic;
 
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
 
-                ReadModbusData(&device.chan0Data,destfloat );
+                ReadModbusData(&device.channel0.Data,destfloat );
                 currentdata = destfloat[0];
 
                 WriteModbusData(&device.badgoodcomm, currentdata*-1);
@@ -333,19 +332,52 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
-                ReadModbusData(&device.badgoodcomm,destfloat );
+                //                ReadModbusData(&device.badgoodcomm,destfloat );
+                ReadModbusData(&device.channel1.Data,destfloat );
 
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
-                    // читаем по адресу 32816 (User calibration 2, gain) отрицательное значение
                     mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
                     currentdata = mathresult;
                 }
 
                 UD.writechannelvalue(2,currentdata);
                 //                this->thread()->usleep(5000);
+            }
+
+
+        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
+            if (UartDriver::needtoupdatechannel[2] == 1)
+            {
+                UartDriver::needtoupdatechannel[2] = 0;
+                this->thread()->usleep(100); // 100 мксек ждем прост.
+                ReadModbusData(&device.channel2.Data,destfloat );
+                currentdata = destfloat[0];
+                if (ThreadChannelOptions3->IsChannelMathematical())
+                {
+                    mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+
+                UD.writechannelvalue(3,currentdata);
+            }
+
+        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
+            if (UartDriver::needtoupdatechannel[3] == 1)
+            {
+                UartDriver::needtoupdatechannel[3] = 0;
+                this->thread()->usleep(100); // 100 мксек ждем прост.
+                ReadModbusData(&device.channel3.Data,destfloat );
+                currentdata = destfloat[0];
+                if (ThreadChannelOptions4->IsChannelMathematical())
+                {
+                    mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
+
+                UD.writechannelvalue(4,currentdata);
             }
     }
 
