@@ -94,14 +94,13 @@ private:
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
     void PaintStatesAndAlertsAtTop();
-    void InvertHalfSecFlag();
     void OpenMessagesWindow();
     void OpenOptionsWindow();
     void DateUpdate();
     void PowerOff();
     void CloseApplication();
     void CheckState(ChannelOptions&  channel);
-    char GetHalfSecFlag();
+    uint8_t GetHalfSecFlag();
 
     void SetXRange(int newxrange) {Xrange = newxrange;}
     int  GetXRange() {return Xrange;}
@@ -158,7 +157,7 @@ private:
     modbus_t * m_modbus;
 
     void MainWindowInitialization();
-    char halfSecondflag;
+    uint8_t halfSecondflag;
     QPen graphPen;
     QPainter painter;
 

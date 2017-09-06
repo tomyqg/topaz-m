@@ -505,7 +505,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if (channel4currentvalue<channel4state1value)
         channel4object.SetConfirmationNeed(true);
 
-    if  (GetHalfSecFlag() == 1)
+    if  (GetHalfSecFlag())
     {
         painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
         painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));

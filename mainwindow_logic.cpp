@@ -324,12 +324,10 @@ void MainWindow::InitTimers()
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
 
-#ifdef MultiThread
     connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
     connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
     connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
-#endif
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
     channeltimer1->start(100);
@@ -393,17 +391,15 @@ void MainWindow::LabelsCorrect()
 
 void MainWindow::HalfSecondGone()
 {
-    InvertHalfSecFlag();
+    if (halfSecondflag == 1)
+        halfSecondflag = 0;
+    else
+        halfSecondflag = 1;
 }
 
-char MainWindow::GetHalfSecFlag()
+uint8_t MainWindow::GetHalfSecFlag()
 {
     return halfSecondflag;
-}
-
-void MainWindow::InvertHalfSecFlag()
-{
-    halfSecondflag = ~halfSecondflag;
 }
 
 void MainWindow::NewTouchscreenCalibration()

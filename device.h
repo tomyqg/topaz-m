@@ -14,6 +14,31 @@ struct deviceparametrs
     uint8_t RegisterType;
 };
 
+struct channelparametrs
+{
+    deviceparametrs chanData;
+    deviceparametrs chanDataFlags;
+    deviceparametrs chanStatus;
+    deviceparametrs chanError;
+    deviceparametrs chanQuantity;
+    deviceparametrs chanUptime;
+    deviceparametrs chanRawData;
+    deviceparametrs chanRawDataFlags;
+    deviceparametrs chanSupportedSignals;
+    deviceparametrs chanSignalType;
+    deviceparametrs chanAdditionalParameter1;
+    deviceparametrs chanAdditionalParameter2;
+    deviceparametrs chanFilterType;
+    deviceparametrs chanFilterLength;
+    deviceparametrs chanTransferFunction;
+    deviceparametrs chanTransferSignalLowLim;
+    deviceparametrs chanTransferSignalHighLim;
+    deviceparametrs chanTransferScaleLowLim;
+    deviceparametrs chanTransferScaleHighLim;
+    deviceparametrs chanBadGoodComm;
+    deviceparametrs chanUserCalibGain1;
+};
+
 struct devicestruct
 {
     QString name;
@@ -176,17 +201,47 @@ public:
     QList<deviceparametrs> DeviceParametrsList;
 
     deviceparametrs DataChan0;
+    deviceparametrs DataChan1;
+    deviceparametrs DataChan2;
+    deviceparametrs DataChan3;
     deviceparametrs protocolVersion;
     deviceparametrs hardwareVersion;
     deviceparametrs softwareVersion;
+    deviceparametrs softwareRevision;
+    deviceparametrs deviceType;
     deviceparametrs modbusAddress;
+    deviceparametrs modbusBaud;
+    deviceparametrs modbusParity;
+    deviceparametrs mbStopBits;
+    deviceparametrs mbBraceCtrl;
+    deviceparametrs serialNumber;
+    deviceparametrs uptime;
+    deviceparametrs deviceState;
+    deviceparametrs disState;
+    deviceparametrs accessType;
+    deviceparametrs dataOrder;
+    deviceparametrs mbCommCount;
+    deviceparametrs mbCommError;
     deviceparametrs deviceStatus;
-    deviceparametrs chan0Data;
-    deviceparametrs chan0Status;
-    deviceparametrs chan0SupportedSignals;
-    deviceparametrs chan0SignalType;
-    deviceparametrs chan0AdditionalParameter1;
-    deviceparametrs chan0AdditionalParameter2;
+    deviceparametrs devErrors;
+    deviceparametrs factoryDate;
+    deviceparametrs softwareCrc32;
+    deviceparametrs uniqueId;
+    deviceparametrs onBoardTemp;
+    deviceparametrs onBoardVoltage;
+    deviceparametrs aiCount;
+    deviceparametrs diCount;
+    deviceparametrs deviceModel;
+
+    channelparametrs chan0;
+    channelparametrs chan1;
+    channelparametrs chan2;
+    channelparametrs chan3;
+
+
+
+
+
     deviceparametrs chan1Data;
     deviceparametrs chan1Status;
     deviceparametrs chan1SupportedSignals;
