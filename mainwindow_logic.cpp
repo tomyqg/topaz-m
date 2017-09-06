@@ -135,7 +135,7 @@ void MainWindow::MainWindowInitialization()
 
     needConfirmation = 1;
 
-    //    активируем сериал порт для модбаса
+    //        активируем сериал порт для модбаса
 
     //        OpenSerialPort( portIndex );
     //        QTimer * t2 = new QTimer( this );

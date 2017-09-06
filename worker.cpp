@@ -50,7 +50,7 @@ static QString descriptiveDataTypeName( int funcCode )
 
 void worker::sendModbusRequest(const deviceparametrs* dp)
 {
-    qDebug() << dp->name;
+    //    qDebug() << dp->name;
     //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
 }
 
@@ -93,16 +93,11 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
 
     data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
     data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
-
-    qDebug() << requestdata ;
-
     sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
-    //0, 0,data_dest);
 }
 
 void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
 {
-
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
     if ( ( dp->WorkLevelAccess!= Device::R ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
@@ -127,7 +122,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
         break;
     default:
-        num = 0;
+        num = 0; // просто так решил что ноль, мб другое число.
         break;
     }
 
@@ -212,7 +207,6 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         for( int i = 0; i < num; ++i )
         {
             data[i] = ( uint16_t ) data_src[i];
-            qDebug() << data[i] << " : " << i;
         }
         ret = modbus_write_registers( m_modbus, addr, num, data );
         delete[] data;
@@ -227,8 +221,8 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     {
         if( writeAccess )
         {
-            qDebug() << "Values successfully sent" ;
-            //            QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
+            //qDebug() << "Values successfully sent" ;
+            //QTimer::singleShot( 2000, this, SLOT( resetStatus() ) );
         }
         else
         {
@@ -263,19 +257,19 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                //                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
 
-                //                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
-                //                qDebug() << modbus_strerror( errno ) ;
-                //                qDebug() << stderr;
+                //qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+                //qDebug() << modbus_strerror( errno ) ;
+                //qDebug() << stderr;
             }
         }
         else
         {
-            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+            //            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
@@ -298,6 +292,7 @@ void worker::do_Work()
 
     if ( isrunning || !isstopped ) // если воркер запущен
     {
+        //        qDebug() << ++ic;
         //this->thread()->usleep(1000 * 1000); // 100 мксек ждем прост.
 
         this->thread()->setPriority(QThread::LowPriority);
@@ -305,18 +300,12 @@ void worker::do_Work()
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-                qDebug() << ++ic;
+                //                qDebug() << ++ic;
 
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
-
-                //sendModbusRequest(&device.chan0SignalType);
-                //sendModbusRequest(&device.DeviceParametrsList.at(ic%8));
-                //sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-
-                //ReadModbusData(&device.elmetroAB1,destfloat ); badgoodcomm    chan0Data
 
                 ReadModbusData(&device.chan0Data,destfloat );
                 currentdata = destfloat[0];
@@ -331,7 +320,7 @@ void worker::do_Work()
                 }
 
                 UD.writechannelvalue(1,currentdata);
-                this->thread()->usleep(5000);
+                //                this->thread()->usleep(5000);
             }
 
         currentdata = destfloat[0] = 0;
@@ -339,12 +328,13 @@ void worker::do_Work()
         if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[1] == 1)
             {
+                //                qDebug() << ++ic;
                 UartDriver::needtoupdatechannel[1] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 // делаем запросики
-
                 ReadModbusData(&device.badgoodcomm,destfloat );
+
                 currentdata = destfloat[0];
 
                 if (ThreadChannelOptions2->IsChannelMathematical())
@@ -355,8 +345,7 @@ void worker::do_Work()
                 }
 
                 UD.writechannelvalue(2,currentdata);
-
-                this->thread()->usleep(5000);
+                //                this->thread()->usleep(5000);
             }
     }
 
@@ -462,9 +451,6 @@ void worker::StartWorkSlot()
     do_Work();
 }
 
-
-
-
 void worker::OpenSerialPort( int )
 {
     //    qDebug() << "changeSerialPort ( int )" ;
@@ -495,7 +481,7 @@ void worker::OpenSerialPort( int )
 
         if( modbus_connect( m_modbus ) == -1 )
         {
-            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            //            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
         }
         else
         {
@@ -503,7 +489,7 @@ void worker::OpenSerialPort( int )
     }
     else
     {
-        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
+        //        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 

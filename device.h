@@ -168,7 +168,7 @@ public:
 
 
         foreach (deviceparametrs dp, DeviceParametrsList) {
-            qDebug() << "Device: " << dp.name;
+//            qDebug() << "Device: " << dp.name;
         }
     }
 
