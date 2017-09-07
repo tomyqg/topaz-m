@@ -42,8 +42,6 @@ public:
     void resizeSelf(qreal xresolution, qreal yresolution);
 
     bool needupdatePainter;
-    bool needConfirmation;
-
     bool needConfirmationchannel1;
     bool needConfirmationchannel2;
     bool needConfirmationchannel3;

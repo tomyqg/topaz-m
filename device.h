@@ -95,8 +95,8 @@ public:
         badgoodcomm.RegisterType = Device::HoldingReg;
         badgoodcomm.name = "badgoodcomm";
 
-        {
             //configure chanel
+        {
 
             channel0.BaseAddress = 32768;
             channel0.AddressOffset = 0;

@@ -12,7 +12,7 @@ worker::worker(QObject *parent) :
 {
     //qDebug() << "Worker Constructor" ;
     // открываем порт
-
+    
     // активируем сериал порт для модбаса
     OpenSerialPort( 1 );
 }
@@ -60,7 +60,7 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
         return;
     int num;
     uint16_t * data;
-
+    
     switch (dp->ParamType) {
     case Device::A12:
         num = 12;
@@ -77,7 +77,7 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
         //        data[0] = ( (value&0xFF )<< 24 ) |( (value&0xFF ) << 16 );
         //        data[1] = ( (value&0xFF )<< 8 ) |( (value&0xFF )  );
         //        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
-
+        
         break;
     case Device::F32:
     {
@@ -92,9 +92,9 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
     default:
         break;
     }
-
-
-
+    
+    
+    
 }
 
 void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
@@ -102,13 +102,13 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
     if ( ( dp->WorkLevelAccess!= Device::R ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
-
+    
     int num;
     int comm;
     int add;
-
+    
     // количество блоков в зависимости от типа параметра
-
+    
     switch (dp->ParamType) {
     case Device::A12:
         num = 12;
@@ -126,7 +126,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 0; // просто так решил что ноль, мб другое число.
         break;
     }
-
+    
     switch (dp->RegisterType) {
     case Device::HoldingReg:
         comm = _FC_READ_HOLDING_REGISTERS;
@@ -138,9 +138,9 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         comm = _FC_READ_INPUT_REGISTERS;
         break;
     }
-
+    
     add = dp->Offset;
-
+    
     sendModbusRequest(ModBus::Board4AIAddress, comm, add, num, 0, 0,data_dest);
 }
 
@@ -150,19 +150,19 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     {
         return;
     }
-
+    
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;
-
+    
     memset( dest, 0, 1024 );
-
+    
     int ret = -1;
     bool is16Bit = false;
     bool writeAccess = false;
     const QString dataType = descriptiveDataTypeName( func );
-
+    
     modbus_set_slave( m_modbus, slave );
-
+    
     switch( func )
     {
     case _FC_READ_COILS:
@@ -189,7 +189,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         writeAccess = true;
         num = 1;
         break;
-
+        
     case _FC_WRITE_MULTIPLE_COILS:
     {
         uint8_t * data = new uint8_t[num];
@@ -217,7 +217,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     default:
         break;
     }
-
+    
     if( ret == num  )
     {
         if( writeAccess )
@@ -229,7 +229,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         {
             // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
             QByteArray arraytofloat;
-
+            
             for( int i = num-1; i >=0; --i )
             {
                 //qDebug() << num<< "num" ;
@@ -238,7 +238,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                 arraytofloat.append(data & 0x00FF);
                 //data_dest_float[num - 1 - i] = data;
             }
-
+            
             float val;
             //convert hex to double
             QDataStream stream(arraytofloat);
@@ -262,7 +262,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
             }
             else
             {
-
+                
                 //qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
                 //qDebug() << modbus_strerror( errno ) ;
                 //qDebug() << stderr;
@@ -280,34 +280,34 @@ void worker::do_Work()
 {
     double mathresult;
     double currentdata;
-
+    
     float destfloat[1024];
     memset( destfloat, 0, 1024 );
-
+    
     emit SignalToObj_mainThreadGUI();
-
+    
     if ( !isrunning || isstopped ) // если воркер остановлен
     {
         this->thread()->usleep(100); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
     }
-
+    
     if ( isrunning || !isstopped ) // если воркер запущен
     {
         this->thread()->setPriority(QThread::LowPriority);
-
+        
         if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[0] == 1)
             {
-
+                
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-
+                
                 ReadModbusData(&device.channel0.Data,destfloat );
                 currentdata = destfloat[0];
-
+                
                 //WriteModbusData(&device.badgoodcomm, currentdata*-1);
                 WriteModbusData(&device.channel0.FilterType, 2) ;
-
+                
                 if (ThreadChannelOptions1->IsChannelMathematical())
                 {
                     mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
@@ -315,17 +315,20 @@ void worker::do_Work()
                 }
                 UD.writechannelvalue(1,currentdata);
             }
-
+        
         currentdata = destfloat[0] = 0;
-
+        
         if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[1] == 1)
             {
                 UartDriver::needtoupdatechannel[1] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-
+                
                 //ReadModbusData(&device.badgoodcomm,destfloat );
-                ReadModbusData(&device.channel1.Data,&destfloat[0] );
+                //ReadModbusData(&device.channel1.Data,&destfloat[0] );
+                
+                ReadModbusData(&device.channel1.FilterType,&destfloat[0] );
+                
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
@@ -334,8 +337,8 @@ void worker::do_Work()
                 }
                 UD.writechannelvalue(2,currentdata);
             }
-
-
+        
+        
         if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[2] == 1)
             {
@@ -348,10 +351,10 @@ void worker::do_Work()
                     mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
                     currentdata = mathresult;
                 }
-
+                
                 UD.writechannelvalue(3,currentdata);
             }
-
+        
         if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[3] == 1)
             {
@@ -364,11 +367,11 @@ void worker::do_Work()
                     mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
                     currentdata = mathresult;
                 }
-
+                
                 UD.writechannelvalue(4,currentdata);
             }
     }
-
+    
     emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
     // do important work here
     // allow the thread's event loop to process other events before doing more "work"
@@ -397,15 +400,15 @@ void worker::OpenSerialPort( int )
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
-
+        
         //if( m_modbus )
         //{
         //modbus_close( m_modbus );
         //modbus_free( m_modbus );
         //}
-
+        
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
-
+        
         if( modbus_connect( m_modbus ) == -1 )
         {
             //qDebug() << "Connection failed"  << "Could not connect serial port!" ;
@@ -423,24 +426,24 @@ void worker::OpenSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-
+    
     thread()->usleep(100000);
-
+    
     ThreadChannelOptions1 = c1;
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
-
+    
     //устанавливаем новый тип сигнала для каждого типа сигнала (посылаем соотв-ю ком-ду по модбас)
     uint16_t type = ThreadChannelOptions1->GetSignalType();
-
+    
     //    WriteModbusData(&device.channel0.SignalType, type) ;
-
+    
     switch (type) {
     case ModBus::CurrentMeasure:
         break;
     case ModBus::VoltageMeasure:
-
+        
         //        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Voltage100mVoltNoBreakControl);
         break;
     case ModBus::ResistanceMeasure:
@@ -455,10 +458,10 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     default:
         break;
     }
-
-
-
-
+    
+    
+    
+    
     //    //делаем список объектов каналов, чтобы в цикле можно было их обрабатывать
     //    QList<ChannelOptions *> ChannelsObjectsList;
     //    ChannelsObjectsList.append(c1);
@@ -467,13 +470,13 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     //    ChannelsObjectsList.append(c4);
     //    //qDebug() << ChannelsObjectsList.at(1)->GetChannelName();
     //    ModbusDevicesList.clear();
-
-
-
-
-
+    
+    
+    
+    
+    
     // Переносим список этих объектов в список структур
-
+    
     //    int i = 0;
     //    foreach(ChannelOptions * cobj, ChannelsObjectsList)
     //    {
@@ -481,7 +484,7 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     //        modbusdevice.Status = ModBus::StatusOn; // канал включен
     //        modbusdevice.DeviceType = ModBus::DeviceType4AI;
     //        modbusdevice.SignalType = cobj->GetSignalType(); // какой тип сигнала
-
+    
     //        switch (modbusdevice.SignalType ) {
     //        case ModBus::CurrentMeasure:
     //            modbusdevice.MeasureType  = 0; // у тока всегда ноль
@@ -502,19 +505,19 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     //            modbusdevice.MeasureType  = 0; // по умолчанию ставим ноль.
     //            break;
     //        }
-
+    
     //        modbusdevice.ID = i;
     //        modbusdevice.name = cobj->GetChannelName();
     //        modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
     //        modbusdevice.UserCalibration1DateAddress = 32814;
-
+    
     //        //старший байт: год (в формате YY + 2000), месяц (от 0 до 12), день (от 1 до 31). Младший байт пустой (не используется).
     //        modbusdevice.UserCalibration1Date = 0x17083100;
     //        ModbusDevicesList.append(modbusdevice);
     //        //MB.ConfigureChannel(&modbusdevice);
     //        i++;
     //    }
-
+    
     //    MB.ConfigureDevices(&ModbusDevicesList);
     thread()->usleep(10000);
 }
