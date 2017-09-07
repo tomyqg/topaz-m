@@ -8,7 +8,9 @@ class ChannelOptions: public QObject
     Q_OBJECT
 
 public:
+
     // constructor
+
     explicit ChannelOptions();
 
 public:
@@ -89,7 +91,5 @@ private:
 
 signals:
     void updateUI(const QString text);
-
-
 };
 #endif // CHANNEL1_H

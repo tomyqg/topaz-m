@@ -37,6 +37,7 @@ private slots:
     void WriteModbusData(const deviceparametrs* dp, float value);
     void OpenSerialPort( int );
 
+
 private:
     //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
