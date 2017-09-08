@@ -153,12 +153,64 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         break;
     case Device::U32:
         num = 2;
+    {
+        qDebug() << data_dest[0] << data_dest[1] << "U32";
+
+        uint32_t a ;
+        uint32_t b ;
+        float c;
+        float d;
+        c  =  data_dest[0];
+        d  =  data_dest[1];
+
+        a = (uint32_t)(c);
+                b = (uint32_t)(d);
+
+
+uint32_t x ;
+x = b<<4;
+        qDebug() << b << "b";
+        qDebug() << a << "a";
+        qDebug() << x << "x";
+
+//        a = & ( (uint32_t) data_dest[0] );
+        b == (a  ) ;
+
+        qDebug() << c << "c";
+
+        uint32_t val;
+
+        //val =  ( data_dest[0]<<16 ) | data_dest[1];
+        QByteArray arraytofloat;
+
+        // в массив раскладываем принятые данные чтобы преобразовать в флоат
+        for( int i = 0; i <num; i++ )
+        {
+            arraytofloat.append( ( ( (int)data_dest[i] ) & 0xFF00) >>8);
+            arraytofloat.append( ( (int)data_dest[i] ) & 0x00FF);
+        }
+
+        data_dest[ 0 ] = arraytofloat.at( 0 );
+        data_dest[ 1 ] = arraytofloat.at( 1 );
+        data_dest[ 2 ] = arraytofloat.at( 2 );
+        data_dest[ 3 ] = arraytofloat.at( 3 );
+
+        qDebug() << data_dest[ 0 ] <<data_dest[ 1 ] << data_dest[ 2 ] << data_dest[ 3 ] << "U32"; //
+
+        //convert hex to double
+        //QDataStream stream(arraytofloat);
+        //stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+        //stream >> val;
+
+        data_dest[0] = val;
+    }
         break;
     case Device::F32:
         num = 2;
 
     {
-        qDebug() << data_dest[0] << data_dest[1] ;
+        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
+
 
         QByteArray arraytofloat;
 
@@ -341,7 +393,7 @@ void worker::do_Work()
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
-                ReadModbusData(&device.channel0.Data,destfloat );
+                //                ReadModbusData(&device.channel0.Data,destfloat );
                 currentdata = destfloat[0];
 
                 //WriteModbusData(&device.badgoodcomm, currentdata*-1);
@@ -364,7 +416,7 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 //ReadModbusData(&device.badgoodcomm,destfloat );
-                ReadModbusData(&device.channel1.Data,&destfloat[0] );
+                //                ReadModbusData(&device.channel1.Data,&destfloat[0] );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
@@ -374,13 +426,13 @@ void worker::do_Work()
                 UD.writechannelvalue(2,currentdata);
             }
 
-
+        currentdata = destfloat[0] = 0;
         if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[2] == 1)
             {
                 UartDriver::needtoupdatechannel[2] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                ReadModbusData(&device.channel2.Data,destfloat );
+                ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions3->IsChannelMathematical())
                 {
@@ -391,12 +443,14 @@ void worker::do_Work()
                 UD.writechannelvalue(3,currentdata);
             }
 
+        currentdata = destfloat[0] = 0;
+
         if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
             if (UartDriver::needtoupdatechannel[3] == 1)
             {
                 UartDriver::needtoupdatechannel[3] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                ReadModbusData(&device.channel3.Data,destfloat );
+                //                ReadModbusData(&device.channel3.Data,destfloat );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions4->IsChannelMathematical())
                 {
