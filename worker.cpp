@@ -142,6 +142,45 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     add = dp->Offset;
 
     sendModbusRequest(ModBus::Board4AIAddress, comm, add, num, 0, 0,data_dest);
+
+
+    switch (dp->ParamType) {
+    case Device::A12:
+        num = 12;
+        break;
+    case Device::U16:
+        num = 1;
+        break;
+    case Device::U32:
+        num = 2;
+        break;
+    case Device::F32:
+        num = 2;
+
+    {
+        qDebug() << data_dest[0] << data_dest[1] ;
+
+        QByteArray arraytofloat;
+
+        // в массив раскладываем принятые данные чтобы преобразовать в флоат
+        for( int i = 0; i <num; i++ )
+        {
+            arraytofloat.append( ( ( (int)data_dest[i] ) & 0xFF00) >>8);
+            arraytofloat.append( ( (int)data_dest[i] ) & 0x00FF);
+        }
+
+        float val;
+        //convert hex to double
+        QDataStream stream(arraytofloat);
+        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+        stream >> val;
+        data_dest[0] = val;
+    }
+        break;
+    default:
+        num = 0; // просто так решил что ноль, мб другое число.
+        break;
+    }
 }
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
@@ -228,23 +267,23 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         else
         {
             // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
-            QByteArray arraytofloat;
+            //            QByteArray arraytofloat;
 
             for( int i = num-1; i >=0; --i )
             {
                 //qDebug() << num<< "num" ;
                 int data = is16Bit ? dest16[i] : dest[i];
-                arraytofloat.append((data & 0xFF00)>>8);
-                arraytofloat.append(data & 0x00FF);
-                //data_dest_float[num - 1 - i] = data;
+                //                arraytofloat.append((data & 0xFF00)>>8);
+                //                arraytofloat.append(data & 0x00FF);
+                data_dest_float[num - 1 - i] = data;
             }
 
-            float val;
-            //convert hex to double
-            QDataStream stream(arraytofloat);
-            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-            stream >> val;
-            data_dest_float[0] = val;
+            //            float val;
+            //            //convert hex to double
+            //            QDataStream stream(arraytofloat);
+            //            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+            //            stream >> val;
+            //            data_dest_float[0] = val;
         }
     }
     else
