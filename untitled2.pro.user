@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-09-04T09:33:47. -->
+<!-- Written by QtCreator 4.1.0, 2017-09-08T16:24:07. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -573,7 +573,7 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-08-31T10:40:46</value>
+       <value type="QDateTime">2017-09-07T08:09:30</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -1242,7 +1242,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.8.0 MinGW</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.8.0 MinGW</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{9b10514d-4bba-4528-a4a1-812591b886f8}</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
@@ -1472,7 +1472,7 @@
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">untitled2.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Work/build-untitled2-Desktop_Qt_5_8_0_MinGW-Release</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Work/build-untitled2-Desktop_Qt_5_8_0_MinGW-Debug</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

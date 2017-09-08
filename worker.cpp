@@ -73,10 +73,14 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
         break;
     case Device::U32:
         num = 2;
-        //        data = new uint16_t[num];
-        //        data[0] = ( (value&0xFF )<< 24 ) |( (value&0xFF ) << 16 );
-        //        data[1] = ( (value&0xFF )<< 8 ) |( (value&0xFF )  );
-        //        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
+
+    {
+        uint32_t a = (uint32_t)(value);
+        data = new uint16_t[num];
+        data[1] = ( a >> 16 );
+        data[0] = ( a & 0xFFFF);
+        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
+    }
 
         break;
     case Device::F32:
@@ -156,31 +160,12 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     {
         qDebug() << data_dest[0] << data_dest[1] << "U32";
 
-        uint32_t a ;
-        uint32_t b ;
-        float c;
-        float d;
-        c  =  data_dest[0];
-        d  =  data_dest[1];
-
-        a = (uint32_t)(c);
-                b = (uint32_t)(d);
-
-
-uint32_t x ;
-x = b<<4;
-        qDebug() << b << "b";
-        qDebug() << a << "a";
-        qDebug() << x << "x";
-
-//        a = & ( (uint32_t) data_dest[0] );
-        b == (a  ) ;
-
-        qDebug() << c << "c";
+        uint32_t a = (uint32_t)(data_dest[0]);
+        uint32_t b = (uint32_t)(data_dest[1]);
 
         uint32_t val;
+        val = ( a<<16 ) | ( b ) ;
 
-        //val =  ( data_dest[0]<<16 ) | data_dest[1];
         QByteArray arraytofloat;
 
         // в массив раскладываем принятые данные чтобы преобразовать в флоат
@@ -393,7 +378,7 @@ void worker::do_Work()
                 UartDriver::needtoupdatechannel[0] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
-                //                ReadModbusData(&device.channel0.Data,destfloat );
+                ReadModbusData(&device.channel0.Data,destfloat );
                 currentdata = destfloat[0];
 
                 //WriteModbusData(&device.badgoodcomm, currentdata*-1);
@@ -416,7 +401,7 @@ void worker::do_Work()
                 this->thread()->usleep(100); // 100 мксек ждем прост.
 
                 //ReadModbusData(&device.badgoodcomm,destfloat );
-                //                ReadModbusData(&device.channel1.Data,&destfloat[0] );
+                ReadModbusData(&device.channel1.Data,&destfloat[0] );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions2->IsChannelMathematical())
                 {
@@ -432,6 +417,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[2] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
+                WriteModbusData(&device.channel0.UserCalibDate2, 45678910 );
                 ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions3->IsChannelMathematical())
@@ -450,7 +436,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[3] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                //                ReadModbusData(&device.channel3.Data,destfloat );
+                ReadModbusData(&device.channel3.Data,destfloat );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions4->IsChannelMathematical())
                 {
