@@ -6,6 +6,8 @@
 #include "qextserialenumerator.h"
 #include <QDebug>
 
+uint32_t total =0;
+
 // constructor
 worker::worker(QObject *parent) :
     QObject(parent), isstopped(false), isrunning(false)
@@ -58,6 +60,8 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
 {
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
+
+
     int num;
     uint16_t * data;
 
@@ -77,8 +81,8 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
     {
         uint32_t a = (uint32_t)(value);
         data = new uint16_t[num];
-        data[1] = ( a >> 16 );
         data[0] = ( a & 0xFFFF);
+        data[1] = ( a >> 16 );
         sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
     }
 
@@ -226,6 +230,8 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     {
         return;
     }
+
+        total ++;
 
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;
@@ -417,7 +423,7 @@ void worker::do_Work()
             {
                 UartDriver::needtoupdatechannel[2] = 0;
                 this->thread()->usleep(100); // 100 мксек ждем прост.
-                WriteModbusData(&device.channel0.UserCalibDate2, 45678910 );
+                WriteModbusData(&device.channel0.UserCalibDate2, total );
                 ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
                 currentdata = destfloat[0];
                 if (ThreadChannelOptions3->IsChannelMathematical())
