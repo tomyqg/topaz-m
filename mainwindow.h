@@ -140,6 +140,8 @@ private slots:
     void on_RelayChanger_toggled(bool checked);
     void sendModbusRequest( );
 
+    void ChangePalette(int i);
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);

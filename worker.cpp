@@ -162,7 +162,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     case Device::U32:
         num = 2;
     {
-//        qDebug() << data_dest[0] << data_dest[1] << "U32";
+        //        qDebug() << data_dest[0] << data_dest[1] << "U32";
 
         uint32_t a = (uint32_t)(data_dest[0]);
         uint32_t b = (uint32_t)(data_dest[1]);
@@ -197,7 +197,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
 
     {
-//        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
+        //        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
         QByteArray arraytofloat;
 
@@ -232,7 +232,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         return;
     }
 
-        total ++;
+    total ++;
 
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;

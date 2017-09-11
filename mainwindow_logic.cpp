@@ -35,6 +35,18 @@ int odin;
 extern MainWindow * globalMainWin;
 
 
+extern QColor Channel1Color;
+extern QColor Channel2Color;
+extern QColor Channel3Color;
+extern QColor Channel4Color;
+extern QColor Channel1ColorNormal;
+extern QColor Channel2ColorNormal ;
+extern QColor Channel3ColorNormal;
+extern QColor Channel4ColorNormal ;
+extern QColor ChannelColorHighState;
+extern QColor ChannelColorLowState;
+
+
 void MainWindow::MainWindowInitialization()
 {
     CreateMODBusConfigFile();
@@ -119,6 +131,9 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
+
+
+    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
 
     connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
@@ -461,6 +476,61 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 
 }
 
+void MainWindow::ChangePalette(int i)
+{
+    switch (ui->horizontalSlider->value()) {
+    case 1:
+
+        Channel1Color = Channel1ColorNormal = QColor(0x00, 0x71, 0x43);
+        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
+        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
+        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+        break;
+    case 2:
+        Channel1Color = Channel1ColorNormal = QColor(0xAB, 0x2B, 0x52);
+        Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x49, 0x00);
+        Channel3Color = Channel3ColorNormal = QColor(0x00, 0xAF, 0x64);
+        Channel4Color = Channel4ColorNormal = QColor(0x67, 0xE3, 0x00);
+        break;
+    case 3:
+        Channel1Color = Channel1ColorNormal = QColor(0x00, 0xC1, 0x2B);
+        Channel2Color = Channel2ColorNormal = QColor(0x04, 0x85, 0x9D);
+        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x7C, 0x00);
+        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x52, 0x40);
+        break;
+    case 4:
+        Channel1Color = Channel1ColorNormal = QColor(0xCF, 0xF7, 0x00);
+        Channel2Color = Channel2ColorNormal = QColor(0x00, 0xAE, 0x68);
+        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x4C, 0x00);
+        Channel4Color = Channel4ColorNormal = QColor(0xA1, 0x01, 0xA6);
+        break;
+
+    case 5:
+        Channel1Color = Channel1ColorNormal = QColor(0x00, 0xb0, 0x60);
+        Channel2Color = Channel2ColorNormal = QColor(0x1d, 0x1a, 0xb2);
+        Channel3Color = Channel3ColorNormal = QColor(0xd5, 0xf8, 0x00);
+        Channel4Color = Channel4ColorNormal = QColor(0xff, 0x45, 0x00);
+        break;
+
+    case 6:
+        Channel1Color = Channel1ColorNormal = QColor(0x10, 0x49, 0xa9);
+        Channel2Color = Channel2ColorNormal = QColor(0x6c, 0x0a, 0xab);
+        Channel3Color = Channel3ColorNormal = QColor(0x34, 0xd8, 0x00);
+        Channel4Color = Channel4ColorNormal = QColor(0xff, 0xa4, 0x00);
+        break;
+
+
+    default:
+        Channel1Color = Channel1ColorNormal = QColor(0x00, 0x71, 0x43);
+        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
+        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
+        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+        break;
+
+    }
+
+    qDebug() <<ui->horizontalSlider->value();
+}
 
 void MainWindow::sendModbusRequest( void )
 {
