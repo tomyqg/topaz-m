@@ -162,7 +162,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     case Device::U32:
         num = 2;
     {
-        qDebug() << data_dest[0] << data_dest[1] << "U32";
+//        qDebug() << data_dest[0] << data_dest[1] << "U32";
 
         uint32_t a = (uint32_t)(data_dest[0]);
         uint32_t b = (uint32_t)(data_dest[1]);
@@ -184,8 +184,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         data_dest[ 2 ] = arraytofloat.at( 2 );
         data_dest[ 3 ] = arraytofloat.at( 3 );
 
-        qDebug() << data_dest[ 0 ] <<data_dest[ 1 ] << data_dest[ 2 ] << data_dest[ 3 ] << "U32"; //
-
+        //qDebug() << data_dest[ 0 ] <<data_dest[ 1 ] << data_dest[ 2 ] << data_dest[ 3 ] << "U32";
         //convert hex to double
         //QDataStream stream(arraytofloat);
         //stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
@@ -198,8 +197,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
 
     {
-        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
-
+//        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
         QByteArray arraytofloat;
 
@@ -226,6 +224,9 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
 
 void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
 {
+
+    this->thread()->msleep(100); // 100 мксек ждем между запросами чтобы плата не зависала
+
     if( m_modbus == NULL )
     {
         return;
