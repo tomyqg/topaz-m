@@ -100,6 +100,12 @@ QString ChannelOptions::GetMathString()
     return this->mathequationstring;
 }
 
+QColor ChannelOptions::GetColor()
+{
+    return color;
+}
+
+
 void ChannelOptions::SetMathEquation(QString newmathstring)
 {
     this->mathequationstring = newmathstring;
@@ -208,4 +214,9 @@ double ChannelOptions::GetCurrentChannelValue()
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = value;
+}
+
+void ChannelOptions::SetColor(QColor newcolor)
+{
+    color = newcolor;
 }

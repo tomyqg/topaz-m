@@ -12,7 +12,7 @@ extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
-extern QColor Channel1ColorNormal;
+extern QColor ChannelColorNormal;
 extern QColor Channel2ColorNormal ;
 extern QColor Channel3ColorNormal;
 extern QColor Channel4ColorNormal ;
@@ -348,20 +348,21 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     smalltextsize/=1.5;
 #endif
 
-    double channel1currentvalue = UartDriver::channelinputbuffer[0];
-    double channel2currentvalue = UartDriver::channelinputbuffer[1];
-    double channel3currentvalue = UartDriver::channelinputbuffer[2];
-    double channel4currentvalue = UartDriver::channelinputbuffer[3];
+    channel1object.SetCurrentChannelValue( UartDriver::channelinputbuffer[0]);
+    channel2object.SetCurrentChannelValue( UartDriver::channelinputbuffer[1]);
+    channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
+    channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
 
-    double channel1state1value = channel1object.GetState1Value();
-    double channel2state1value = channel2object.GetState1Value();
-    double channel3state1value = channel3object.GetState1Value();
-    double channel4state1value = channel4object.GetState1Value();
 
-    double channel1state2value = channel1object.GetState2Value();
-    double channel2state2value = channel2object.GetState2Value();
-    double channel3state2value = channel3object.GetState2Value();
-    double channel4state2value = channel4object.GetState2Value();
+    // создаем лист объектов для его отображения на графике
+
+    QList<ChannelOptions *> ChannelsObjectsList;
+
+    ChannelsObjectsList.append(&channel1object);
+    ChannelsObjectsList.append(&channel2object);
+    ChannelsObjectsList.append(&channel3object);
+    ChannelsObjectsList.append(&channel4object);
+
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
@@ -388,163 +389,223 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int confirmwindowheight  = widgheight/3;
     int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
     int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
-    //    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
-    //    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
+
+
+    int index = 0;
+    foreach (ChannelOptions * co, ChannelsObjectsList) {
+
+        if (index!=0)
+            break;
+        qDebug() << co->GetChannelName();
+
+        double channelcurrentvalue =co->GetCurrentChannelValue();
+        double channelstate1value = co->GetState1Value();
+        double channelstate2value = co->GetState2Value();
+        QColor channelcolor = co->GetColor();
+
+
+        if (channelcurrentvalue>channelstate1value)
+        {
+            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, co->GetState1HighMessage());
+            if  (GetHalfSecFlag())
+                SetChannel1Color(ChannelColorHighState);
+            else
+                SetChannel1Color(channelcolor);
+
+            if ( (co->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+            {
+                painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+                painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+                painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,co->GetState1HighMessage());
+            }
+        }
+        // уменьшение уставки  Channel 1
+        else if (channelcurrentvalue<channelstate2value)
+        {
+            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, co->GetState2LowMessage());
+            if  (GetHalfSecFlag())
+                SetChannel1Color(ChannelColorLowState);
+            else
+                SetChannel1Color(channelcolor);
+
+        }
+        else
+        {
+            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+            SetChannel1Color( channelcolor);
+        }
+
+
+        if  (GetHalfSecFlag())
+        {
+            painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+            painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
+
+            // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
+            if ((channelcurrentvalue>channelstate1value) || (channelcurrentvalue<channelstate2value))
+                painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
+        }
+
+        if (channelcurrentvalue<channelstate1value)
+            co->SetConfirmationNeed(true);
+
+        index++;
+    }
 
     // увеличение уставки Channel 1
-    if (channel1currentvalue>channel1state1value)
-    {
-        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState1HighMessage());
-        if  (GetHalfSecFlag())
-            SetChannel1Color(ChannelColorHighState);
-        else
-            SetChannel1Color(Channel1ColorNormal);
+    //    if (channel1currentvalue>channel1state1value)
+    //    {
+    //        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState1HighMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel1Color(ChannelColorHighState);
+    //        else
+    //            SetChannel1Color(Channel1ColorNormal);
 
-        if ( (channel1object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
-        {
-            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel1object.GetState1HighMessage());
-        }
-    }
-    // уменьшение уставки  Channel 1
-    else if (channel1currentvalue<channel1state2value)
-    {
-        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState2LowMessage());
-        if  (GetHalfSecFlag())
-            SetChannel1Color(ChannelColorLowState);
-        else
-            SetChannel1Color(Channel1ColorNormal);
+    //        if ( (channel1object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+    //        {
+    //            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    //            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+    //            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel1object.GetState1HighMessage());
+    //        }
+    //    }
+    //    // уменьшение уставки  Channel 1
+    //    else if (channel1currentvalue<channel1state2value)
+    //    {
+    //        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState2LowMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel1Color(ChannelColorLowState);
+    //        else
+    //            SetChannel1Color(Channel1ColorNormal);
 
-    }
-    else
-    {
-        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
-        SetChannel1Color(Channel1ColorNormal);
-    }
+    //    }
+    //    else
+    //    {
+    //        painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+    //        SetChannel1Color(Channel1ColorNormal);
+    //    }
 
-    // увеличение уставки Channel 2
-    if (channel2currentvalue>channel2state1value)
-    {
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState1HighMessage());
-        if  (GetHalfSecFlag())
-            SetChannel2Color(ChannelColorHighState);
-        else
-            SetChannel2Color(Channel2ColorNormal);
+    //    // увеличение уставки Channel 2
+    //    if (channel2currentvalue>channel2state1value)
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState1HighMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel2Color(ChannelColorHighState);
+    //        else
+    //            SetChannel2Color(Channel2ColorNormal);
 
-        if ( (channel2object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
-        {
-            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel2object.GetState1HighMessage());
-        }
-    }
-    // уменьшение уставки  Channel 2
-    else if (channel2currentvalue<channel2state2value)
-    {
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState2LowMessage());
-        if  (GetHalfSecFlag())
-            SetChannel2Color(ChannelColorLowState);
-        else
-            SetChannel2Color(Channel1ColorNormal);
-    }
+    //        if ( (channel2object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+    //        {
+    //            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    //            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+    //            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel2object.GetState1HighMessage());
+    //        }
+    //    }
+    //    // уменьшение уставки  Channel 2
+    //    else if (channel2currentvalue<channel2state2value)
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState2LowMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel2Color(ChannelColorLowState);
+    //        else
+    //            SetChannel2Color(Channel1ColorNormal);
+    //    }
 
-    else
-    {
-        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
-        SetChannel2Color(Channel2ColorNormal);
-    }
+    //    else
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+    //        SetChannel2Color(Channel2ColorNormal);
+    //    }
 
-    // увеличение уставки Channel 3
-    if (channel3currentvalue>channel3state1value)
-    {
-        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState1HighMessage());
-        if  (GetHalfSecFlag())
-            SetChannel3Color(ChannelColorHighState);
-        else
-            SetChannel3Color(Channel3ColorNormal);
+    //    // увеличение уставки Channel 3
+    //    if (channel3currentvalue>channel3state1value)
+    //    {
+    //        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState1HighMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel3Color(ChannelColorHighState);
+    //        else
+    //            SetChannel3Color(Channel3ColorNormal);
 
-        if ( (channel3object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
-        {
-            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel3object.GetState1HighMessage());
-        }
-    }
-    // уменьшение уставки  Channel 3
-    else if (channel3currentvalue<channel3state2value)
-    {
-        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState2LowMessage());
-        if  (GetHalfSecFlag())
-            SetChannel3Color(ChannelColorLowState);
-        else
-            SetChannel3Color(Channel3ColorNormal);
-    }
-    else
-    {
-        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
-        SetChannel3Color(Channel3ColorNormal);
-    }
+    //        if ( (channel3object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+    //        {
+    //            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    //            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+    //            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel3object.GetState1HighMessage());
+    //        }
+    //    }
+    //    // уменьшение уставки  Channel 3
+    //    else if (channel3currentvalue<channel3state2value)
+    //    {
+    //        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState2LowMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel3Color(ChannelColorLowState);
+    //        else
+    //            SetChannel3Color(Channel3ColorNormal);
+    //    }
+    //    else
+    //    {
+    //        painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+    //        SetChannel3Color(Channel3ColorNormal);
+    //    }
 
-    // увеличение уставки Channel 4
-    if (channel4currentvalue>channel4state1value)
-    {
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState1HighMessage());
-        if  (GetHalfSecFlag())
-            SetChannel4Color(ChannelColorHighState);
-        else
-            SetChannel4Color(Channel4ColorNormal);
+    //    // увеличение уставки Channel 4
+    //    if (channel4currentvalue>channel4state1value)
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState1HighMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel4Color(ChannelColorHighState);
+    //        else
+    //            SetChannel4Color(Channel4ColorNormal);
 
-        if ( (channel4object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
-        {
-            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel4object.GetState1HighMessage());
-        }
-    }
-    // уменьшение уставки  Channel 4
-    else if (channel4currentvalue<channel4state2value)
-    {
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState2LowMessage());
-        if  (GetHalfSecFlag())
-            SetChannel4Color(ChannelColorLowState);
-        else
-            SetChannel4Color(Channel4ColorNormal);
-    }
-    else
-    {
-        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
-        SetChannel4Color(Channel4ColorNormal);
-    }
-    //здесь мы возвращаем окна квитирования
+    //        if ( (channel4object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+    //        {
+    //            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    //            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+    //            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,channel4object.GetState1HighMessage());
+    //        }
+    //    }
+    //    // уменьшение уставки  Channel 4
+    //    else if (channel4currentvalue<channel4state2value)
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState2LowMessage());
+    //        if  (GetHalfSecFlag())
+    //            SetChannel4Color(ChannelColorLowState);
+    //        else
+    //            SetChannel4Color(Channel4ColorNormal);
+    //    }
+    //    else
+    //    {
+    //        painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+    //        SetChannel4Color(Channel4ColorNormal);
+    //    }
+    //    //здесь мы возвращаем окна квитирования
 
-    if (channel1currentvalue<channel1state1value)
-        channel1object.SetConfirmationNeed(true);
+    //    if (channel1currentvalue<channel1state1value)
+    //        channel1object.SetConfirmationNeed(true);
 
-    if (channel2currentvalue<channel2state1value)
-        channel2object.SetConfirmationNeed(true);
+    //    if (channel2currentvalue<channel2state1value)
+    //        channel2object.SetConfirmationNeed(true);
 
-    if (channel3currentvalue<channel3state1value)
-        channel3object.SetConfirmationNeed(true);
+    //    if (channel3currentvalue<channel3state1value)
+    //        channel3object.SetConfirmationNeed(true);
 
-    if (channel4currentvalue<channel4state1value)
-        channel4object.SetConfirmationNeed(true);
+    //    if (channel4currentvalue<channel4state1value)
+    //        channel4object.SetConfirmationNeed(true);
 
-    if  (GetHalfSecFlag())
-    {
-        painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-        painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
+    //    if  (GetHalfSecFlag())
+    //    {
+    //        painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    //        painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
 
-        // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
-        if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
-            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
-        if ((channel2currentvalue>channel2state1value) || (channel2currentvalue<channel2state2value))
-            painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
-        if ((channel3currentvalue>channel3state1value) || (channel3currentvalue<channel3state2value))
-            painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
-        if ((channel4currentvalue>channel4state1value) || (channel4currentvalue<channel4state2value))
-            painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
-    }
+    //        // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
+    //        if ((channel1currentvalue>channel1state1value) || (channel1currentvalue<channel1state2value))
+    //            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
+    //        if ((channel2currentvalue>channel2state1value) || (channel2currentvalue<channel2state2value))
+    //            painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
+    //        if ((channel3currentvalue>channel3state1value) || (channel3currentvalue<channel3state2value))
+    //            painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
+    //        if ((channel4currentvalue>channel4state1value) || (channel4currentvalue<channel4state2value))
+    //            painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter,AlertSign);
+    //    }
     return;
 }
 
@@ -722,7 +783,7 @@ void MainWindow::ReactOnTouch()
     QString x = QString::number(xpos);
     QString y = QString::number(ypos);
 
-    SetChannel1Color(Channel1ColorNormal);
+    SetChannel1Color(ChannelColorNormal);
     SetChannel2Color(Channel2ColorNormal);
     SetChannel3Color(Channel3ColorNormal);
     SetChannel4Color(Channel4ColorNormal);

@@ -2,6 +2,7 @@
 #define CHANNEL1_H
 
 #include <QObject>
+#include <QColor>
 
 class ChannelOptions: public QObject
 {
@@ -33,6 +34,7 @@ public:
     QString GetState2LowMessage();
     QString GetChannelName();
     QString GetMathString();
+    QColor GetColor();
     bool GetConfirmationNeed();
     void SetConfirmationNeed(bool confirmationstate);
 
@@ -53,6 +55,7 @@ public:
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
+    void SetColor(QColor newcolor);
 
     bool IsHighState1Setted();
     bool IsLowState1Setted();
@@ -88,6 +91,8 @@ private:
     QString mathequationstring;
 
     bool needConfirmationchannel;
+
+    QColor color; // цвет канала на графике
 
 signals:
     void updateUI(const QString text);

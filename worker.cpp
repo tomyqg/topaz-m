@@ -371,7 +371,7 @@ void worker::do_Work()
 
     if ( !isrunning || isstopped ) // если воркер остановлен
     {
-        this->thread()->usleep(100); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
+        this->thread()->usleep(1000); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
     }
 
     if ( isrunning || !isstopped ) // если воркер запущен
@@ -484,11 +484,7 @@ void worker::OpenSerialPort( int )
     if( !ports.isEmpty() )
     {
 
-        //if( m_modbus )
-        //{
-        //modbus_close( m_modbus );
-        //modbus_free( m_modbus );
-        //}
+        // инициализируем  объект модбаса...
 
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
