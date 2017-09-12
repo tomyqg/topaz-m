@@ -463,17 +463,15 @@ void MainWindow::CheckState(ChannelOptions&  channel)
 }
 
 extern "C" {
+    void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
+    {
 
-void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
-{
+    }
 
-}
+    void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
+    {
 
-void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
-{
-
-}
-
+    }
 }
 
 void MainWindow::ChangePalette(int i)
@@ -529,15 +527,11 @@ void MainWindow::ChangePalette(int i)
 
     }
 
-    qDebug() <<ui->horizontalSlider->value();
+    ui->label_3->setText("#" + QString::number( ui->horizontalSlider->value() ) );
 }
 
 void MainWindow::sendModbusRequest( void )
 {
-    qDebug() << ++odin;
-
-    //    qDebug() << stderr;
-    //    return;
 
     if( m_modbus == NULL )
     {
@@ -703,15 +697,11 @@ void MainWindow::sendModbusRequest( void )
 void MainWindow::resetStatus( void )
 {
     ;
-    //    qDebug() << "Ready" ;
 }
-
 
 
 void MainWindow::OpenSerialPort( int )
 {
-    //    qDebug() << "changeSerialPort ( int )" ;
-
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {

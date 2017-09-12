@@ -395,7 +395,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if (channel1currentvalue>channel1state1value)
     {
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState1HighMessage());
-        SetChannel1Color(ChannelColorHighState);
+        if  (GetHalfSecFlag())
+            SetChannel1Color(ChannelColorHighState);
+        else
+            SetChannel1Color(Channel1ColorNormal);
 
         if ( (channel1object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
         {
@@ -420,7 +423,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if (channel2currentvalue>channel2state1value)
     {
         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState1HighMessage());
-        SetChannel2Color(ChannelColorHighState);
+        if  (GetHalfSecFlag())
+            SetChannel2Color(ChannelColorHighState);
+        else
+            SetChannel2Color(Channel2ColorNormal);
 
         if ( (channel2object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
         {
@@ -446,7 +452,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if (channel3currentvalue>channel3state1value)
     {
         painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState1HighMessage());
-        SetChannel3Color(ChannelColorHighState);
+        if  (GetHalfSecFlag())
+            SetChannel3Color(ChannelColorHighState);
+        else
+            SetChannel3Color(Channel3ColorNormal);
 
         if ( (channel3object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
         {
@@ -471,7 +480,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     if (channel4currentvalue>channel4state1value)
     {
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState1HighMessage());
-        SetChannel4Color(ChannelColorHighState);
+        if  (GetHalfSecFlag())
+            SetChannel4Color(ChannelColorHighState);
+        else
+            SetChannel4Color(Channel4ColorNormal);
 
         if ( (channel4object.GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
         {
