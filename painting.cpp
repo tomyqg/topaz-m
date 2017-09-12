@@ -411,7 +411,11 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     else if (channel1currentvalue<channel1state2value)
     {
         painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel1object.GetState2LowMessage());
-        SetChannel1Color(ChannelColorLowState);
+        if  (GetHalfSecFlag())
+            SetChannel1Color(ChannelColorLowState);
+        else
+            SetChannel1Color(Channel1ColorNormal);
+
     }
     else
     {
@@ -439,7 +443,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     else if (channel2currentvalue<channel2state2value)
     {
         painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel2object.GetState2LowMessage());
-        SetChannel2Color(ChannelColorLowState);
+        if  (GetHalfSecFlag())
+            SetChannel2Color(ChannelColorLowState);
+        else
+            SetChannel2Color(Channel1ColorNormal);
     }
 
     else
@@ -468,7 +475,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     else if (channel3currentvalue<channel3state2value)
     {
         painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel3object.GetState2LowMessage());
-        SetChannel3Color(ChannelColorLowState);
+        if  (GetHalfSecFlag())
+            SetChannel3Color(ChannelColorLowState);
+        else
+            SetChannel3Color(Channel3ColorNormal);
     }
     else
     {
@@ -496,7 +506,10 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     else if (channel4currentvalue<channel4state2value)
     {
         painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, channel4object.GetState2LowMessage());
-        SetChannel4Color(ChannelColorLowState);
+        if  (GetHalfSecFlag())
+            SetChannel4Color(ChannelColorLowState);
+        else
+            SetChannel4Color(Channel4ColorNormal);
     }
     else
     {

@@ -14,7 +14,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "0.55" //версия ПО
+#define CURRENT_VER "0.6" //версия ПО
 #define MYD
 
 #ifndef Q_OS_WIN32
@@ -58,6 +58,10 @@
 #define ObryvErrorMessage "обрыв"
 
 #define Font "Open Sans Semibold"
+//#define Font "Rubik"
+//#define Font "Arial"
+//#define Font "Orbitron Light"
+
 #define NaNMessage "nan"
 #define OKMessage "OK"
 #define AlertSign "!"
