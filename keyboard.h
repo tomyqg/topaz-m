@@ -30,6 +30,8 @@ private slots:
     void on_pushButton_44_clicked();
     void on_comboBox_currentIndexChanged();
 
+    void on_pushButton_28_clicked();
+
 public slots:
     QString getcustomstring();
     void setolderproperty(QString str);

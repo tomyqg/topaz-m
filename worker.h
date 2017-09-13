@@ -42,6 +42,8 @@ private:
     //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
     modbus_t * m_modbus;
+    QList<ChannelOptions *> ChannelsObjectsList;
+    QList< Device * > Devices;
     Device device;
 };
 

@@ -5,6 +5,7 @@
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
 #include <QDebug>
+#include <QList>
 
 uint32_t total =0;
 
@@ -378,81 +379,37 @@ void worker::do_Work()
     {
         this->thread()->setPriority(QThread::LowPriority);
 
-        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
-            if (UartDriver::needtoupdatechannel[0] == 1)
-            {
+        // пихаем все каналы в один массив
+        // тут опрашиваем каждый канал
+        int index = 0;
 
-                UartDriver::needtoupdatechannel[0] = 0;
-                this->thread()->usleep(100); // 100 мксек ждем прост.
+        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+        {
+            qDebug() << Chanel->GetChannelName();
 
-                ReadModbusData(&device.channel0.Data,destfloat );
-                currentdata = destfloat[0];
-
-                //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-                WriteModbusData(&device.channel0.FilterType, 2) ;
-
-                if (ThreadChannelOptions1->IsChannelMathematical())
+            if (Chanel->GetSignalType() != ModBus::MeasureOff)
+                if (UartDriver::needtoupdatechannel[index] == 1)
                 {
-                    mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-                    currentdata = mathresult;
+
+                    UartDriver::needtoupdatechannel[index] = 0;
+                    //ReadModbusData(&device.channel0.Data,destfloat );
+                    if (index !=1)
+                        ReadModbusData(&device.Channels.at(index).Data,destfloat );
+                    else
+                        ReadModbusData(&device.badgoodcomm,destfloat );
+                    currentdata = destfloat[index];
+
+                    //WriteModbusData(&device.badgoodcomm, currentdata*-1);
+
+                    if (Chanel->IsChannelMathematical())
+                    {
+                        mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
+                        currentdata = mathresult;
+                    }
+                    UD.writechannelvalue(index,currentdata);
                 }
-                UD.writechannelvalue(1,currentdata);
-            }
-
-        currentdata = destfloat[0] = 0;
-
-        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
-            if (UartDriver::needtoupdatechannel[1] == 1)
-            {
-                UartDriver::needtoupdatechannel[1] = 0;
-                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-                //ReadModbusData(&device.badgoodcomm,destfloat );
-                ReadModbusData(&device.channel1.Data,&destfloat[0] );
-                currentdata = destfloat[0];
-                if (ThreadChannelOptions2->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
-                UD.writechannelvalue(2,currentdata);
-            }
-
-        currentdata = destfloat[0] = 0;
-        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
-            if (UartDriver::needtoupdatechannel[2] == 1)
-            {
-                UartDriver::needtoupdatechannel[2] = 0;
-                this->thread()->usleep(100); // 100 мксек ждем прост.
-                WriteModbusData(&device.channel0.UserCalibDate2, total );
-                ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
-                currentdata = destfloat[0];
-                if (ThreadChannelOptions3->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
-
-                UD.writechannelvalue(3,currentdata);
-            }
-
-        currentdata = destfloat[0] = 0;
-
-        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
-            if (UartDriver::needtoupdatechannel[3] == 1)
-            {
-                UartDriver::needtoupdatechannel[3] = 0;
-                this->thread()->usleep(100); // 100 мксек ждем прост.
-                ReadModbusData(&device.channel3.Data,destfloat );
-                currentdata = destfloat[0];
-                if (ThreadChannelOptions4->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
-
-                UD.writechannelvalue(4,currentdata);
-            }
+            ++index;
+        }
     }
 
     emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
@@ -505,7 +462,6 @@ void worker::OpenSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-
     thread()->usleep(100000);
 
     ThreadChannelOptions1 = c1;
@@ -513,90 +469,10 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
 
-    //устанавливаем новый тип сигнала для каждого типа сигнала (посылаем соотв-ю ком-ду по модбас)
-    uint16_t type = ThreadChannelOptions1->GetSignalType();
+    ChannelsObjectsList.append(ThreadChannelOptions1);
+    ChannelsObjectsList.append(ThreadChannelOptions2);
+    ChannelsObjectsList.append(ThreadChannelOptions3);
+    ChannelsObjectsList.append(ThreadChannelOptions4);
 
-    //    WriteModbusData(&device.channel0.SignalType, type) ;
-
-    switch (type) {
-    case ModBus::CurrentMeasure:
-        break;
-    case ModBus::VoltageMeasure:
-
-        //        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Voltage100mVoltNoBreakControl);
-        break;
-    case ModBus::ResistanceMeasure:
-        //        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Wire3NoBreakControl);
-        break;
-    case ModBus::TermoCoupleMeasure:
-        //        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::R);
-        break;
-    case ModBus::TermoResistanceMeasure:
-        //        MB.SetChannelAdditionalParametr(ModBus::DataChannel1, ModBus::Wire3NoBreakControl);
-        break;
-    default:
-        break;
-    }
-
-
-
-
-    //    //делаем список объектов каналов, чтобы в цикле можно было их обрабатывать
-    //    QList<ChannelOptions *> ChannelsObjectsList;
-    //    ChannelsObjectsList.append(c1);
-    //    ChannelsObjectsList.append(c2);
-    //    ChannelsObjectsList.append(c3);
-    //    ChannelsObjectsList.append(c4);
-    //    //qDebug() << ChannelsObjectsList.at(1)->GetChannelName();
-    //    ModbusDevicesList.clear();
-
-
-
-
-
-    // Переносим список этих объектов в список структур
-
-    //    int i = 0;
-    //    foreach(ChannelOptions * cobj, ChannelsObjectsList)
-    //    {
-    //        modbusdevice.ModbusNetworkAddress = ModBus::Board4AIAddress; // пока только 1 адрес
-    //        modbusdevice.Status = ModBus::StatusOn; // канал включен
-    //        modbusdevice.DeviceType = ModBus::DeviceType4AI;
-    //        modbusdevice.SignalType = cobj->GetSignalType(); // какой тип сигнала
-
-    //        switch (modbusdevice.SignalType ) {
-    //        case ModBus::CurrentMeasure:
-    //            modbusdevice.MeasureType  = 0; // у тока всегда ноль
-    //            break;
-    //        case ModBus::VoltageMeasure:
-    //            modbusdevice.MeasureType  = ModBus::Voltage1VoltNoBreakControl; // для напряжения оставим пока 1 вольт
-    //            break;
-    //        case ModBus::ResistanceMeasure:
-    //            modbusdevice.MeasureType  = ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку пока.
-    //            break;
-    //        case ModBus::TermoCoupleMeasure:
-    //            modbusdevice.MeasureType  = ModBus::R; // для термопары ставим тип ТПП 13
-    //            break;
-    //        case ModBus::TermoResistanceMeasure:
-    //            modbusdevice.MeasureType  =  ModBus::Wire3NoBreakControl; // для ТС ставим 3-х проводку
-    //            break;
-    //        default:
-    //            modbusdevice.MeasureType  = 0; // по умолчанию ставим ноль.
-    //            break;
-    //        }
-
-    //        modbusdevice.ID = i;
-    //        modbusdevice.name = cobj->GetChannelName();
-    //        modbusdevice.SupportedSignals = ModBus::SupportedSignalCurrent | ModBus::SupportedSignalVoltage | ModBus::SupportedSignalTermoCouple| ModBus::SupportedSignalTermoResistance;
-    //        modbusdevice.UserCalibration1DateAddress = 32814;
-
-    //        //старший байт: год (в формате YY + 2000), месяц (от 0 до 12), день (от 1 до 31). Младший байт пустой (не используется).
-    //        modbusdevice.UserCalibration1Date = 0x17083100;
-    //        ModbusDevicesList.append(modbusdevice);
-    //        //MB.ConfigureChannel(&modbusdevice);
-    //        i++;
-    //    }
-
-    //    MB.ConfigureDevices(&ModbusDevicesList);
     thread()->usleep(10000);
 }

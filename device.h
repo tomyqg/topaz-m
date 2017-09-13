@@ -677,9 +677,13 @@ public:
         deviceModel.WorkLevelAccess = Device::R;
         deviceModel.name = "deviceModel";
 
-    }
 
-    QList<deviceparametrs> DeviceParametrsList;
+        Channels.append(channel0);
+        Channels.append(channel1);
+        Channels.append(channel2);
+        Channels.append(channel3);
+
+    }
 
     deviceparametrs protocolVersion;
     deviceparametrs hardwareVersion;
@@ -714,6 +718,8 @@ public:
     channelparametrs channel1;
     channelparametrs channel2;
     channelparametrs channel3;
+
+    QList <channelparametrs> Channels;
 
     deviceparametrs elmetroAB1;
     deviceparametrs badgoodcomm;

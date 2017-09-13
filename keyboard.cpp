@@ -268,3 +268,10 @@ void keyboard::ChangeLanguage(char eng)
         }
     }
 }
+
+void keyboard::on_pushButton_28_clicked()
+{
+    QString textwas = ui->textEdit->toPlainText();
+    QString textnew = textwas.remove(textwas.length()-1,1);
+    ui->textEdit->setText(textnew);
+}

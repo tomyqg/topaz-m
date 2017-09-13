@@ -410,6 +410,7 @@ void Options::on_ArchivetoUSB_button_clicked()
 void Options::on_pushButton_6_clicked()
 {
     ResetToDefaults();
+//    this->close();
 }
 
 

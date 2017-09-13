@@ -283,13 +283,13 @@ void MainWindow::PaintCyfrasFullScreen()
     int smalltextsize = (bigrectingleheight - alerttextsize ) / 5;
 
 
-//    painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-//    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
-//    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-//    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
-//    painter.drawRect(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
-//    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
-//    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
+    //    painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
+    //    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
+    //    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight);
+    //    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
+    //    painter.drawRect(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
+    //    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
+    //    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
 
 #ifdef Q_OS_WIN32
     alerttextsize/=1.5;
@@ -335,6 +335,8 @@ void MainWindow::PaintCyfrasFullScreen()
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
 
+
+    int index = 1;
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
@@ -389,14 +391,16 @@ void MainWindow::PaintCyfrasFullScreen()
 
             //    // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);
-            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+            painter.setFont(QFont(Font, smalltextsize/2, QFont::ExtraBold));
 
             if (Chanel->IsChannelMathematical())
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
 
+            painter.setFont(QFont(Font, smalltextsize/2, QFont::ExtraBold));
+            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignLeft | Qt::AlignBottom, QString::number(index) );
+            ++index;
             ////
         }
-
     }
     painter.end();
 }

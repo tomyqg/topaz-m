@@ -139,7 +139,7 @@ void MainWindow::MainWindowInitialization()
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
 
-    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
 
     connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
@@ -482,31 +482,57 @@ extern "C" {
 
 void MainWindow::ChangePalette(int i)
 {
-    switch (ui->horizontalSlider->value()) {
+    switch (ui->horizontalScrollBar->value()) {
     case 1:
 
         Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
         Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
         Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
         Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+
+        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
+        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
+        channel3object.SetColor( QColor(0xFF, 0xCF, 0x73));
+        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
+
+
         break;
     case 2:
         Channel1Color = ChannelColorNormal = QColor(0xAB, 0x2B, 0x52);
         Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x49, 0x00);
         Channel3Color = Channel3ColorNormal = QColor(0x00, 0xAF, 0x64);
         Channel4Color = Channel4ColorNormal = QColor(0x67, 0xE3, 0x00);
+
+
+        channel1object.SetColor(QColor(0xAB, 0x2B, 0x52));
+        channel2object.SetColor( QColor(0xFF, 0x49, 0x00));
+        channel3object.SetColor(QColor(0x00, 0xAF, 0x64));
+        channel4object.SetColor (QColor(0x67, 0xE3, 0x00));
+
         break;
     case 3:
         Channel1Color = ChannelColorNormal = QColor(0x00, 0xC1, 0x2B);
         Channel2Color = Channel2ColorNormal = QColor(0x04, 0x85, 0x9D);
         Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x7C, 0x00);
         Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x52, 0x40);
+
+        channel1object.SetColor(QColor(0x00, 0xC1, 0x2B));
+        channel2object.SetColor( QColor(0x04, 0x85, 0x9D));
+        channel3object.SetColor(QColor(0xFF, 0x7C, 0x00));
+        channel4object.SetColor (QColor(0xFF, 0x52, 0x40));
+
         break;
     case 4:
         Channel1Color = ChannelColorNormal = QColor(0xCF, 0xF7, 0x00);
         Channel2Color = Channel2ColorNormal = QColor(0x00, 0xAE, 0x68);
         Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x4C, 0x00);
         Channel4Color = Channel4ColorNormal = QColor(0xA1, 0x01, 0xA6);
+
+        channel1object.SetColor(QColor(0xCF, 0xF7, 0x00));
+        channel2object.SetColor( QColor(0x00, 0xAE, 0x68));
+        channel3object.SetColor(QColor(0xFF, 0x4C, 0x00));
+        channel4object.SetColor (QColor(0xA1, 0x01, 0xA6));
+
         break;
 
     case 5:
@@ -514,6 +540,13 @@ void MainWindow::ChangePalette(int i)
         Channel2Color = Channel2ColorNormal = QColor(0x1d, 0x1a, 0xb2);
         Channel3Color = Channel3ColorNormal = QColor(0xd5, 0xf8, 0x00);
         Channel4Color = Channel4ColorNormal = QColor(0xff, 0x45, 0x00);
+
+
+        channel1object.SetColor(QColor(0x00, 0xb0, 0x60));
+        channel2object.SetColor( QColor(0x1d, 0x1a, 0xb2));
+        channel3object.SetColor(QColor(0xd5, 0xf8, 0x00));
+        channel4object.SetColor (QColor(0xff, 0x45, 0x00));
+
         break;
 
     case 6:
@@ -521,6 +554,12 @@ void MainWindow::ChangePalette(int i)
         Channel2Color = Channel2ColorNormal = QColor(0x6c, 0x0a, 0xab);
         Channel3Color = Channel3ColorNormal = QColor(0x34, 0xd8, 0x00);
         Channel4Color = Channel4ColorNormal = QColor(0xff, 0xa4, 0x00);
+
+        channel1object.SetColor(QColor(0x10, 0x49, 0xa9));
+        channel2object.SetColor( QColor(0x6c, 0x0a, 0xab));
+        channel3object.SetColor(QColor(0x34, 0xd8, 0x00));
+        channel4object.SetColor (QColor(0xff, 0xa4, 0x00));
+
         break;
 
 
@@ -529,11 +568,17 @@ void MainWindow::ChangePalette(int i)
         Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
         Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
         Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+
+        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
+        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
+        channel3object.SetColor(QColor(0xFF, 0xCF, 0x73));
+        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
+
         break;
 
     }
 
-    ui->label_3->setText("#" + QString::number( ui->horizontalSlider->value() ) );
+    ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }
 
 void MainWindow::sendModbusRequest( void )
