@@ -68,6 +68,11 @@ public:
     bool LowState2Setted ;
     bool MathematicalState;
 
+    int xposition;
+    int yposition;
+    int w;
+    int h;
+
     // приватные переменные настроек канала
 
 private:

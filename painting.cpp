@@ -353,6 +353,27 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
     channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
 
+    channel1object.xposition = 2;
+    channel1object.yposition = 2;
+    channel1object.w = alertwindowwidth;
+    channel1object.h = alertwindowheight;
+
+    channel2object.xposition = 2+alertwindowwidth;
+    channel2object.yposition = 2;
+    channel2object.w = alertwindowwidth;
+    channel2object.h = alertwindowheight;
+
+    channel3object.xposition = 2;
+    channel3object.yposition = 2+alertwindowheight;
+    channel3object.w = alertwindowwidth;
+    channel3object.h = alertwindowheight;
+
+    channel4object.xposition = 2+alertwindowwidth;
+    channel4object.yposition = 2+alertwindowheight;
+    channel4object.w = alertwindowwidth;
+    channel4object.h = alertwindowheight;
+
+
 
     // создаем лист объектов для его отображения на графике
 
@@ -366,22 +387,23 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
-    painter.drawRect(2, 2, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
-    painter.drawRect(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
-    painter.drawRect(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
-    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
-    painter.drawRect(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
+    //    painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+    //    painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
+    //    painter.drawRect(2, 2, alertwindowwidth, alertwindowheight);
+    //    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
+    //    painter.drawRect(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight);
+    //    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
+    //    painter.drawRect(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
+    //    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
+    //    painter.drawRect(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight);
 
-    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-    painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
-    painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
-    painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
-    painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
+
+    //    painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+    //    painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+    //    painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop, channel1object.GetChannelName());
+    //    painter.drawText(2+alertwindowwidth, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel2object.GetChannelName());
+    //    painter.drawText(2, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel3object.GetChannelName());
+    //    painter.drawText(2+alertwindowwidth, 2+alertwindowheight, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignTop,channel4object.GetChannelName());
 
     painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
@@ -389,68 +411,77 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     int confirmwindowheight  = widgheight/3;
     int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
     int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
-
-
     int index = 0;
+
     foreach (ChannelOptions * co, ChannelsObjectsList) {
 
-        if (index!=0)
-            break;
-        qDebug() << co->GetChannelName();
-
-        double channelcurrentvalue =co->GetCurrentChannelValue();
-        double channelstate1value = co->GetState1Value();
-        double channelstate2value = co->GetState2Value();
-        QColor channelcolor = co->GetColor();
-
-
-        if (channelcurrentvalue>channelstate1value)
+//        if (index==2 )
         {
-            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, co->GetState1HighMessage());
-            if  (GetHalfSecFlag())
-                SetChannel1Color(ChannelColorHighState);
-            else
-                SetChannel1Color(channelcolor);
+            qDebug() << co->GetChannelName();
 
-            if ( (co->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
-            {
-                painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-                painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-                painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,co->GetState1HighMessage());
-            }
-        }
-        // уменьшение уставки  Channel 1
-        else if (channelcurrentvalue<channelstate2value)
-        {
-            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, co->GetState2LowMessage());
-            if  (GetHalfSecFlag())
-                SetChannel1Color(ChannelColorLowState);
-            else
-                SetChannel1Color(channelcolor);
+            double channelcurrentvalue =co->GetCurrentChannelValue();
+            double channelstate1value = co->GetState1Value();
+            double channelstate2value = co->GetState2Value();
+            QColor channelcolor = co->GetColor();
 
-        }
-        else
-        {
-            painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
-            SetChannel1Color( channelcolor);
-        }
+            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+            painter.setBrush(QBrush(GetChannel1Color(), Qt::SolidPattern));
+            painter.drawRect(co->xposition, co->yposition, co->w, co->h);
 
-
-        if  (GetHalfSecFlag())
-        {
             painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-            painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
+            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+            painter.drawText(co->xposition, co->yposition, co->w, co->h, Qt::AlignHCenter | Qt::AlignTop, co->GetChannelName());
+            painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
-            // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
-            if ((channelcurrentvalue>channelstate1value) || (channelcurrentvalue<channelstate2value))
-                painter.drawText(2, 2, alertwindowwidth, alertwindowheight, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
+            if (channelcurrentvalue>channelstate1value)
+            {
+                painter.drawText(co->xposition, co->yposition, co->w, co->h, Qt::AlignHCenter | Qt::AlignBottom, co->GetState1HighMessage());
+                if  (GetHalfSecFlag())
+                    SetChannel1Color(ChannelColorHighState);
+                else
+                    SetChannel1Color(channelcolor);
+
+                // часть квитирования
+                if ( (co->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+                {
+                    painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+                    painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+                    painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,co->GetState1HighMessage());
+                }
+            }
+            // уменьшение уставки  Channel 1
+            else if (channelcurrentvalue<channelstate2value)
+            {
+                painter.drawText(co->xposition, co->yposition, co->w, co->h, Qt::AlignHCenter | Qt::AlignBottom, co->GetState2LowMessage());
+                if  (GetHalfSecFlag())
+                    SetChannel1Color(ChannelColorLowState);
+                else
+                    SetChannel1Color(channelcolor);
+
+            }
+            else
+            {
+                painter.drawText(co->xposition, co->yposition, co->w, co->h, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+                SetChannel1Color( channelcolor);
+            }
+
+
+            if  (GetHalfSecFlag())
+            {
+                painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+                painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
+
+                // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
+                if ((channelcurrentvalue>channelstate1value) || (channelcurrentvalue<channelstate2value))
+                    painter.drawText(co->xposition, co->yposition, co->w, co->h, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
+            }
+
+            if (channelcurrentvalue<channelstate1value)
+                co->SetConfirmationNeed(true);
         }
-
-        if (channelcurrentvalue<channelstate1value)
-            co->SetConfirmationNeed(true);
-
         index++;
     }
+
 
     // увеличение уставки Channel 1
     //    if (channel1currentvalue>channel1state1value)
