@@ -26,6 +26,8 @@ mathresolver mr;
 
 int ic ;
 
+int globalindex;
+
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
 
@@ -383,9 +385,13 @@ void worker::do_Work()
         // тут опрашиваем каждый канал
         int index = 0;
 
+        globalindex++;
+
+        if (globalindex > 215)
+            globalindex = - 15;
+
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-//            qDebug() << QCoreApplication::applicationDirPath();
 
             if (Chanel->GetSignalType() != ModBus::MeasureOff)
                 if (UartDriver::needtoupdatechannel[index] == 1)
@@ -395,10 +401,11 @@ void worker::do_Work()
 
                     UartDriver::needtoupdatechannel[index] = 0;
                     //ReadModbusData(&device.channel0.Data,destfloat );
-                    if (index !=1)
-                        ReadModbusData(&device.Channels.at(index).Data,destfloat );
-                    else
-                        ReadModbusData(&device.badgoodcomm,destfloat );
+//                    if (index !=1)
+//                        ReadModbusData(&device.Channels.at(index).Data,destfloat );
+//                    else
+//                        ReadModbusData(&device.badgoodcomm,destfloat );
+
                     currentdata = destfloat[index];
 
                     //WriteModbusData(&device.badgoodcomm, currentdata*-1);
@@ -408,8 +415,14 @@ void worker::do_Work()
                         mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
                         currentdata = mathresult;
                     }
-                    UD.writechannelvalue(index,currentdata);
+
+
+                    UD.writechannelvalue(1, globalindex/2);
+                    UD.writechannelvalue(2, 2*globalindex);
+                    UD.writechannelvalue(3,  mr.SolveEquation("sin(x/5)*50",globalindex) );
+                    UD.writechannelvalue(4, 7*globalindex*-1);
                 }
+//            qDebug() << Chanel->GetChannelName() << currentdata ;
             ++index;
         }
     }
