@@ -385,11 +385,13 @@ void worker::do_Work()
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-            qDebug() << Chanel->GetChannelName();
+//            qDebug() << QCoreApplication::applicationDirPath();
 
             if (Chanel->GetSignalType() != ModBus::MeasureOff)
                 if (UartDriver::needtoupdatechannel[index] == 1)
                 {
+
+                    QCoreApplication::applicationDirPath();
 
                     UartDriver::needtoupdatechannel[index] = 0;
                     //ReadModbusData(&device.channel0.Data,destfloat );

@@ -35,14 +35,25 @@
 #define comportname "COM3"
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
-#define pathtofiles  "C:/Work/"
-#define pathtosystemoptions  "C:/Work/systemoptions.txt"
-#define pathtooptions  "C:/Work/options.txt"
-#define pathtolog  "C:/Work/txtes/"
-#define pathtomodbusconfigfile  "C:/Work/MODBusConfigFile.txt"
-#define pathtomessages  "C:/Work/Log.txt"
-#define pathtoarchive  "C:/Work/archive.txt"
-#define pathtologotip  "C:/Work/logo.jpg"
+//#define pathtofiles  "C:/Work/"
+//#define pathtosystemoptions  "C:/Work/systemoptions.txt"
+//#define pathtooptions  "C:/Work/options.txt"
+//#define pathtolog  "C:/Work/txtes/"
+//#define pathtomodbusconfigfile  "C:/Work/MODBusConfigFile.txt"
+//#define pathtomessages  "C:/Work/Log.txt"
+//#define pathtoarchive  "C:/Work/archive.txt"
+//#define pathtologotip  "C:/Work/logo.jpg"
+
+
+#define pathtofiles  QCoreApplication::applicationDirPath()
+#define pathtosystemoptions  QCoreApplication::applicationDirPath() + "/systemoptions.txt"
+#define pathtooptions  QCoreApplication::applicationDirPath() + "/options.txt"
+#define pathtolog  QCoreApplication::applicationDirPath() + "/txtes/"
+#define pathtomodbusconfigfile  QCoreApplication::applicationDirPath() + "/MODBusConfigFile.txt"
+#define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
+#define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
+#define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
+
 #endif
 
 #define comportparity 'N'
