@@ -100,7 +100,7 @@ QString ChannelOptions::GetMathString()
     return this->mathequationstring;
 }
 
-QColor ChannelOptions::GetColor()
+QColor ChannelOptions::GetCurrentColor()
 {
     return color;
 }

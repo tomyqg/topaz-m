@@ -34,7 +34,7 @@ public:
     QString GetState2LowMessage();
     QString GetChannelName();
     QString GetMathString();
-    QColor GetColor();
+    QColor GetCurrentColor();
     bool GetConfirmationNeed();
     void SetConfirmationNeed(bool confirmationstate);
 
