@@ -60,12 +60,7 @@ private slots:
     void Channel4TypeChange();
     void on_comboBox_currentIndexChanged(int index);
     void on_ArchivetoUSB_button_clicked();
-
     void on_pushButton_6_clicked();
-
-    void on_pushButton_7_clicked();
-
-    void on_pushButton_8_clicked();
 
 private:
 
