@@ -103,9 +103,6 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
     default:
         break;
     }
-
-
-
 }
 
 void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
@@ -393,19 +390,20 @@ void worker::do_Work()
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
 
-            if (Chanel->GetSignalType() != ModBus::MeasureOff)
-                if (UartDriver::needtoupdatechannel[index] == 1)
+            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (UartDriver::needtoupdatechannel[index] == 1) )
                 {
-
                     QCoreApplication::applicationDirPath();
-
                     UartDriver::needtoupdatechannel[index] = 0;
-                    //ReadModbusData(&device.channel0.Data,destfloat );
-//                    if (index !=1)
-//                        ReadModbusData(&device.Channels.at(index).Data,destfloat );
-//                    else
-//                        ReadModbusData(&device.badgoodcomm,destfloat );
 
+                    //ReadModbusData(&device.channel0.Data,destfloat );
+                    //                    if (index !=1)
+                    //                        ReadModbusData(&device.Channels.at(index).Data,destfloat );
+                    //                    else
+                    //                        ReadModbusData(&device.badgoodcomm,destfloat );
+                    //currentdata = destfloat[index];
+
+                    ReadModbusData(&device.Channels.at(index).Data,destfloat );
+                    
                     currentdata = destfloat[index];
 
                     //WriteModbusData(&device.badgoodcomm, currentdata*-1);
@@ -416,13 +414,16 @@ void worker::do_Work()
                         currentdata = mathresult;
                     }
 
-
-                    UD.writechannelvalue(1, globalindex/2);
-                    UD.writechannelvalue(2, 2*globalindex);
-                    UD.writechannelvalue(3,  mr.SolveEquation("sin(x/5)*50",globalindex) );
-                    UD.writechannelvalue(4, 7*globalindex*-1);
+//                    if (index== 0)
+//                        UD.writechannelvalue(1, globalindex/2);
+//                    if (index== 1)
+//                        UD.writechannelvalue(2, 2*globalindex);
+//                    if (index== 2)
+//                        UD.writechannelvalue(3,  mr.SolveEquation("sin(x/5)*50",globalindex) );
+//                    if (index== 3)
+//                        UD.writechannelvalue(4, 7*globalindex*-1);
                 }
-//            qDebug() << Chanel->GetChannelName() << currentdata ;
+            //            qDebug() << Chanel->GetChannelName() << currentdata ;
             ++index;
         }
     }

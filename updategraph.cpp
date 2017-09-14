@@ -50,9 +50,9 @@ void MainWindow::AddValuesToBuffer()
     //// закоментить посюда
     // раскомментить чтобы рисовались нормальные графики
 
-//    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
+    //    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
 
-//    UartDriver::channelinputbuffer[0] = b;
+    //    UartDriver::channelinputbuffer[0] = b;
     Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
     Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
@@ -126,6 +126,8 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
+
+
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
@@ -212,13 +214,19 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
+
+    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
+
     ui->customPlot->replot();
 }
 
 void MainWindow::GrafsUpdateTrends()
 {
+
     ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
+
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
@@ -254,6 +262,10 @@ void MainWindow::GrafsUpdateTrends()
 
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
+
+
+    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
 
     ui->customPlot->replot();
 }
@@ -325,6 +337,11 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
+
+
+    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
+
     ui->customPlot->replot();
 }
 
@@ -343,7 +360,7 @@ void MainWindow::UpdateChannel2Slot()
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
     channel2object.SetCurrentChannelValue(UartDriver::channelinputbuffer[1]);
-//    qDebug()<<UartDriver::channelinputbuffer[1];
+    //    qDebug()<<UartDriver::channelinputbuffer[1];
     CheckState(channel2object);
 }
 
