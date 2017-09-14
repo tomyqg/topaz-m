@@ -283,14 +283,6 @@ void MainWindow::PaintCyfrasFullScreen()
     int smalltextsize = (bigrectingleheight - alerttextsize ) / 5;
 
 
-    //    painter.drawRect(borderwidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-    //    painter.setBrush(QBrush(GetChannel2Color(), Qt::SolidPattern));
-    //    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth, bigrectinglewidth, bigrectingleheight);
-    //    painter.setBrush(QBrush(GetChannel3Color(), Qt::SolidPattern));
-    //    painter.drawRect(borderwidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
-    //    painter.setBrush(QBrush(GetChannel4Color(), Qt::SolidPattern));
-    //    painter.drawRect(borderwidth+bigrectinglewidth, borderwidth+bigrectingleheight, bigrectinglewidth, bigrectingleheight);
-
 #ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.2;
@@ -516,17 +508,35 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState1HighMessage());
 
                 // часть квитирования
+                // если превысила уставку
                 if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
                 {
-                    painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+                    if  (GetHalfSecFlag())
+                        painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
+                    else
+                        painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
                     painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
                     painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,Chanel->GetState1HighMessage());
                 }
+
+
             }
             // уменьшение уставки  Channel 1
             else if (channelcurrentvalue<channelstate2value)
             {
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState2LowMessage());
+
+                // если ниже уставки
+                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+                {
+                    if  (GetHalfSecFlag())
+                        painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
+                    else
+                        painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
+                    painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+                    painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,Chanel->GetState2LowMessage());
+                }
+
             }
             else
             {

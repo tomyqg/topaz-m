@@ -232,22 +232,57 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
 
-//    // add the text label at the top:
-//    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-//    ui->customPlot->addItem(textLabel);
-//    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-//    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-//    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-//    textLabel->setText("Text Item Demo");
-//    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
-//    textLabel->setPen(QPen(Qt::black)); // show black border around text
+    //    // add the text label at the top:
+    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    //    ui->customPlot->addItem(textLabel);
+    //    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
+    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    //    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+    //    textLabel->setText("Text Item Demo");
+    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
+    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
 
     // add the arrow:
-    QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-    arrow->start->setCoords(400,200);
-    arrow->end->setCoords(b, Y_coordinates_Chanel_1.last()); // point to (4, 1.6) in x-y-plot coordinates
-    arrow->setHead(QCPLineEnding::esSpikeArrow);
-    ui->customPlot->addItem(arrow);
+
+    if (ui->arrowscheckBox->checkState())
+    {
+        QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+        //    arrow->start->setCoords(400,200);
+
+        int ystart = 150;
+        int xstart = 950;
+
+        arrow->start->setPixelPoint(QPointF(xstart, ystart));
+        arrow->end->setCoords(b, Y_coordinates_Chanel_1.last()); // point to (4, 1.6) in x-y-plot coordinates
+        arrow->setHead(QCPLineEnding::esSpikeArrow);
+        arrow->setPen(QPen(channel1object.GetCurrentColor(),1,  Qt::DashLine));
+        ui->customPlot->addItem(arrow);
+
+        QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
+
+        arrow2->start->setPixelPoint(QPointF(xstart, ystart+105));
+        arrow2->end->setCoords(b, Y_coordinates_Chanel_2.last()); // point to (4, 1.6) in x-y-plot coordinates
+        arrow2->setHead(QCPLineEnding::esSpikeArrow);
+        arrow2->setPen(QPen(channel2object.GetCurrentColor(),1,  Qt::DashLine));
+        ui->customPlot->addItem(arrow2);
+
+        QCPItemLine *arrow3 = new QCPItemLine(ui->customPlot);
+
+        arrow3->start->setPixelPoint(QPointF(xstart, ystart+105*2));
+        arrow3->end->setCoords(b, Y_coordinates_Chanel_3.last()); // point to (4, 1.6) in x-y-plot coordinates
+        arrow3->setHead(QCPLineEnding::esSpikeArrow);
+        arrow3->setPen(QPen(channel3object.GetCurrentColor(),1,  Qt::DashLine));
+        ui->customPlot->addItem(arrow3);
+
+        QCPItemLine *arrow4 = new QCPItemLine(ui->customPlot);
+
+        arrow4->start->setPixelPoint(QPointF(xstart, ystart+105*3));
+        arrow4->end->setCoords(b, Y_coordinates_Chanel_4.last()); // point to (4, 1.6) in x-y-plot coordinates
+        arrow4->setHead(QCPLineEnding::esSpikeArrow);
+        arrow4->setPen(QPen(channel4object.GetCurrentColor(),1,  Qt::DashLine));
+        ui->customPlot->addItem(arrow4);
+
+    }
 
     graphPen.setWidth(GraphWidthinPixels);
     //    graphPen.set
@@ -286,9 +321,14 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
 
-    ui->customPlot->replot();
+    // авто масшабирование
+    if (ui->autoscalecheckbox->checkState())
+    {
+        ui->customPlot->rescaleAxes();
+    }
 
-    arrow->deleteLater(); // удаляем стрелочку а то она будет потом мешаться
+    ui->customPlot->replot();
+    ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
 }
 
 void MainWindow::GrafsUpdateNone()

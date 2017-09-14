@@ -164,10 +164,10 @@
    <widget class="QCheckBox" name="ConfirmBox">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>640</y>
-      <width>221</width>
-      <height>51</height>
+      <x>910</x>
+      <y>650</y>
+      <width>300</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -182,15 +182,17 @@
    <widget class="QCheckBox" name="RelayChanger">
     <property name="geometry">
      <rect>
-      <x>1030</x>
-      <y>680</y>
-      <width>221</width>
-      <height>51</height>
+      <x>910</x>
+      <y>670</y>
+      <width>300</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Open Sans Semibold</family>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
@@ -271,6 +273,11 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+     </font>
+    </property>
     <property name="minimum">
      <number>1</number>
     </property>
@@ -284,6 +291,46 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QCheckBox" name="arrowscheckBox">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>690</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Вспомогательные стрелки</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="autoscalecheckbox">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>710</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Автомасшабирование графика</string>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>MessagesWidget</zorder>
@@ -295,6 +342,8 @@
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
    <zorder>horizontalScrollBar</zorder>
+   <zorder>arrowscheckBox</zorder>
+   <zorder>autoscalecheckbox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
