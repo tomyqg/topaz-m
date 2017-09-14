@@ -70,6 +70,7 @@ void MainWindow::MainWindowInitialization()
         ++i;
     }
 
+
     //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
