@@ -413,6 +413,15 @@ void Options::on_pushButton_6_clicked()
 //    this->close();
 }
 
+void Options::on_pushButton_7_clicked()
+{
+    ui->toolBox->setCurrentIndex(0);
+}
+
+void Options::on_pushButton_8_clicked()
+{
+    ui->toolBox->setCurrentIndex(1);
+}
 
 void Options::TouchScreenCalibrate()
 {
