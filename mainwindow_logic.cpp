@@ -131,13 +131,13 @@ void MainWindow::MainWindowInitialization()
 
     WorkerThread = new QThread;
     worker* myWorker = new worker;
+    connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
+
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
-
 
     connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
 
@@ -153,6 +153,8 @@ void MainWindow::MainWindowInitialization()
     // сразу активируем отладку по USB
     QProcess process;
     process.startDetached("ifconfig usb0 192.168.1.115");
+
+//    startWorkSignal();
 }
 
 
@@ -394,6 +396,13 @@ void MainWindow::LabelsCorrect()
     }
 }
 
+void MainWindow::ModbusConnectionErrorSlot()
+{
+    qDebug() << "Sss" ;
+    QMessageBox::critical( this, tr( "Connection Error" ),
+                           tr( "Could not connect serial port!" ) );
+}
+
 void MainWindow::HalfSecondGone()
 {
     if (halfSecondflag == 1)
@@ -469,15 +478,15 @@ void MainWindow::CheckState(ChannelOptions&  channel)
 }
 
 extern "C" {
-    void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
-    {
+void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t expectedCRC, uint16_t actualCRC )
+{
 
-    }
+}
 
-    void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
-    {
+void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
+{
 
-    }
+}
 }
 
 void MainWindow::ChangePalette(int i)

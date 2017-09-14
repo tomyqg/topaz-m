@@ -230,6 +230,25 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
+
+
+//    // add the text label at the top:
+//    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+//    ui->customPlot->addItem(textLabel);
+//    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
+//    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+//    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+//    textLabel->setText("Text Item Demo");
+//    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
+//    textLabel->setPen(QPen(Qt::black)); // show black border around text
+
+    // add the arrow:
+    QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+    arrow->start->setCoords(400,200);
+    arrow->end->setCoords(b, Y_coordinates_Chanel_1.last()); // point to (4, 1.6) in x-y-plot coordinates
+    arrow->setHead(QCPLineEnding::esSpikeArrow);
+    ui->customPlot->addItem(arrow);
+
     graphPen.setWidth(GraphWidthinPixels);
     //    graphPen.set
     graphPen.setColor(Channel1Color);
@@ -268,6 +287,8 @@ void MainWindow::GrafsUpdateTrends()
 
 
     ui->customPlot->replot();
+
+    arrow->deleteLater(); // удаляем стрелочку а то она будет потом мешаться
 }
 
 void MainWindow::GrafsUpdateNone()

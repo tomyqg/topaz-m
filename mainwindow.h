@@ -71,6 +71,10 @@ public slots:
 
     void HalfSecondGone();
 
+    void ModbusConnectionErrorSlot();
+
+
+
     void UpdateChannel1Slot();
     void UpdateChannel2Slot();
     void UpdateChannel3Slot();

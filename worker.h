@@ -22,6 +22,7 @@ signals:
     void running();
     void stopped();
     void Finished();
+    void ModbusConnectionError();
 
 public slots:
     void StopWorkSlot();
