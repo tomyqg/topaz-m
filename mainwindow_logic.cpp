@@ -245,8 +245,6 @@ void MainWindow::OpenMessagesWindow()
 }
 
 
-
-
 void MainWindow::DelaySec(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(n);
@@ -255,10 +253,15 @@ void MainWindow::DelaySec(int n)
 }
 
 
-
-
 void MainWindow::OpenOptionsWindow()
 {
+
+//    StackedWidget *sw= new StackedWidget;
+
+
+//    sw->exec();
+    return;
+
     //    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());

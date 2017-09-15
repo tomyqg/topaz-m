@@ -416,6 +416,8 @@ void Options::on_pushButton_6_clicked()
 void Options::on_pushButton_7_clicked()
 {
     ui->toolBox->setCurrentIndex(0);
+
+    ui->toolBox->setWindowTitle("");
 }
 
 void Options::on_pushButton_8_clicked()

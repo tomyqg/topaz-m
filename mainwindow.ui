@@ -97,7 +97,7 @@
      <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
-     <string>Настройки</string>
+     <string>Меню</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">

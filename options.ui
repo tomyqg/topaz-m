@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -5603,115 +5603,25 @@ p, li { white-space: pre-wrap; }
     <attribute name="title">
      <string>Выходы</string>
     </attribute>
-    <widget class="QCheckBox" name="checkBox_5">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>50</y>
-       <width>200</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Реле 1 НЗ</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_6">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>90</y>
-       <width>200</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Реле 2 НЗ</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_7">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>130</y>
-       <width>200</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Реле 3 НЗ</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_8">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>170</y>
-       <width>200</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Реле 4 НЗ</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_9">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>210</y>
-       <width>200</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Петля 4-20 мА</string>
-     </property>
-    </widget>
     <widget class="QToolBox" name="toolBox">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>34</y>
-       <width>841</width>
-       <height>501</height>
+       <x>190</x>
+       <y>70</y>
+       <width>521</width>
+       <height>451</height>
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>841</width>
-        <height>435</height>
+        <width>521</width>
+        <height>385</height>
        </rect>
       </property>
       <attribute name="label">
@@ -5720,275 +5630,42 @@ p, li { white-space: pre-wrap; }
       <widget class="QGroupBox" name="groupBox_27">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>260</y>
-         <width>221</width>
-         <height>121</height>
+         <x>40</x>
+         <y>10</y>
+         <width>481</width>
+         <height>351</height>
         </rect>
        </property>
        <property name="font">
         <font>
          <family>Open Sans Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="title">
-        <string>Имя канала</string>
+        <string>Режим Отображения</string>
        </property>
        <widget class="QWidget" name="layoutWidget_15">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>20</y>
-          <width>221</width>
-          <height>81</height>
+          <x>10</x>
+          <y>40</y>
+          <width>286</width>
+          <height>301</height>
          </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Open Sans Semibold</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_86">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Имя канала</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="Name_Channel_5">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Kanal 1</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_28">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>220</width>
-         <height>231</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="title">
-        <string>Тип канала 1</string>
-       </property>
-       <widget class="QWidget" name="layoutWidget_16">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>30</y>
-          <width>291</width>
-          <height>225</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Open Sans Semibold</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_15">
          <property name="spacing">
           <number>5</number>
          </property>
          <item>
-          <widget class="QRadioButton" name="ButonOtklChannel_5">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Отключен                      </string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="ButonTokChannel_5">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Ток                                    </string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="ButonNapryagenieChannel_5">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Напряжение                     </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="ButonResistorChannel_5">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Термосопротивление</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="ButonTermoparaChannel_5">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Термопара                           </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="ButonImpulseChannel_5">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Счетчик Импульсов           </string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_29">
-       <property name="geometry">
-        <rect>
-         <x>240</x>
-         <y>10</y>
-         <width>400</width>
-         <height>430</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="title">
-        <string>Параметры Канала 1</string>
-       </property>
-       <widget class="QWidget" name="layoutWidget_17">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>50</y>
-          <width>111</width>
-          <height>371</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Open Sans Semibold</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_16">
-         <item>
-          <widget class="QLineEdit" name="UnitsChannel_5">
+          <widget class="QRadioButton" name="SetTrendsBtn_2">
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
@@ -5998,16 +5675,19 @@ p, li { white-space: pre-wrap; }
             </font>
            </property>
            <property name="text">
-            <string>мА</string>
+            <string>Тренд</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="NignPredelChannel_5">
+          <widget class="QRadioButton" name="SetCyfraBtn_2">
            <property name="minimumSize">
             <size>
-             <width>100</width>
-             <height>40</height>
+             <width>0</width>
+             <height>0</height>
             </size>
            </property>
            <property name="font">
@@ -6018,26 +5698,20 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
-           <property name="inputMethodHints">
-            <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+           <property name="text">
+            <string>Цифра</string>
            </property>
-           <property name="accelerated">
+           <property name="checked">
             <bool>true</bool>
-           </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
-           <property name="singleStep">
-            <double>0.010000000000000</double>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="VerhnPredelChannel_5">
+          <widget class="QRadioButton" name="SetTrendsCyfraBtn_2">
            <property name="minimumSize">
             <size>
-             <width>100</width>
-             <height>40</height>
+             <width>0</width>
+             <height>0</height>
             </size>
            </property>
            <property name="font">
@@ -6048,25 +5722,16 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
-           <property name="accelerated">
-            <bool>true</bool>
+           <property name="text">
+            <string>Тренд + Цифра      </string>
            </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
-           <property name="singleStep">
-            <double>0.010000000000000</double>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_5">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
+          <widget class="QRadioButton" name="SetBarsBtn_2">
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
@@ -6075,25 +5740,16 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
-           <property name="accelerated">
-            <bool>true</bool>
+           <property name="text">
+            <string>Барграф</string>
            </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
-           <property name="singleStep">
-            <double>0.010000000000000</double>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_5">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
+          <widget class="QRadioButton" name="SetBarsCyfraBtn_2">
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
@@ -6102,25 +5758,16 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
-           <property name="accelerated">
-            <bool>true</bool>
+           <property name="text">
+            <string>Барграф + Цифра</string>
            </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
-           <property name="singleStep">
-            <double>0.010000000000000</double>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_5">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>40</height>
-            </size>
-           </property>
+          <widget class="QRadioButton" name="SetTrendsBarsBtn_2">
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
@@ -6129,129 +5776,38 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
-           <property name="accelerated">
-            <bool>true</bool>
-           </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
-           <property name="minimum">
-            <double>0.050000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.050000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
+           <property name="text">
+            <string>Тренд + Барграф</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="layoutWidget_18">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>50</y>
-          <width>190</width>
-          <height>371</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Open Sans Semibold</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_17">
          <item>
-          <widget class="QLabel" name="label_19">
+          <widget class="QRadioButton" name="SetTrendsBarsCyfraBtn_2">
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
+             <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
            <property name="text">
-            <string>Ед. измер.</string>
+            <string>Тренд + Барграф + Цифра</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_87">
+          <widget class="QRadioButton" name="SetPolarBtn_2">
            <property name="font">
             <font>
              <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
+             <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
            <property name="text">
-            <string>НП (Нижний предел)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_88">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>ВП (Верхний предел)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_89">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>НПИ (нижн.пред.изм)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_90">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>ВПИ (верх.пред.изм)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_91">
-           <property name="font">
-            <font>
-             <family>Open Sans Semibold</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Период измерений,с</string>
+            <string>Круговая диаграмма</string>
            </property>
           </widget>
          </item>
@@ -6264,214 +5820,113 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>841</width>
-        <height>435</height>
+        <width>521</width>
+        <height>385</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Page 2</string>
       </attribute>
-      <widget class="QRadioButton" name="SetTrendsBtn_2">
+      <widget class="QCheckBox" name="checkBox_8">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>4</y>
-         <width>284</width>
-         <height>33</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Тренд</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="SetBarsCyfraBtn_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>156</y>
-         <width>284</width>
-         <height>33</height>
+         <y>130</y>
+         <width>200</width>
+         <height>22</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Барграф + Цифра</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
+        <string>Реле 4 НЗ</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="SetTrendsBarsBtn_2">
+      <widget class="QCheckBox" name="checkBox_7">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>194</y>
-         <width>284</width>
-         <height>33</height>
+         <y>90</y>
+         <width>200</width>
+         <height>22</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Тренд + Барграф</string>
+        <string>Реле 3 НЗ</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="SetTrendsBarsCyfraBtn_2">
+      <widget class="QCheckBox" name="checkBox_6">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>232</y>
-         <width>284</width>
-         <height>33</height>
+         <y>50</y>
+         <width>200</width>
+         <height>22</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Тренд + Барграф + Цифра</string>
+        <string>Реле 2 НЗ</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="SetCyfraBtn_2">
+      <widget class="QCheckBox" name="checkBox_9">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>42</y>
-         <width>284</width>
-         <height>33</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Цифра</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="SetBarsBtn_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>118</y>
-         <width>284</width>
-         <height>33</height>
+         <y>170</y>
+         <width>200</width>
+         <height>22</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Барграф</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
+        <string>Петля 4-20 мА</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="SetTrendsCyfraBtn_2">
+      <widget class="QCheckBox" name="checkBox_5">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>80</y>
-         <width>284</width>
-         <height>33</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Тренд + Цифра      </string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="SetPolarBtn_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>270</y>
-         <width>284</width>
-         <height>33</height>
+         <y>10</y>
+         <width>200</width>
+         <height>22</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Open Sans Semibold</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Круговая диаграмма</string>
+        <string>Реле 1 НЗ</string>
        </property>
       </widget>
+      <zorder>checkBox_9</zorder>
+      <zorder>checkBox_7</zorder>
+      <zorder>checkBox_6</zorder>
+      <zorder>checkBox_5</zorder>
+      <zorder>checkBox_8</zorder>
+      <zorder>checkBox_8</zorder>
+      <zorder>checkBox_7</zorder>
+      <zorder>checkBox_6</zorder>
+      <zorder>checkBox_9</zorder>
+      <zorder>checkBox_5</zorder>
      </widget>
     </widget>
     <widget class="QPushButton" name="pushButton_7">
@@ -6490,7 +5945,7 @@ p, li { white-space: pre-wrap; }
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>460</x>
        <y>540</y>
        <width>80</width>
        <height>25</height>
@@ -6499,6 +5954,18 @@ p, li { white-space: pre-wrap; }
      <property name="text">
       <string>&gt;</string>
      </property>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>130</y>
+       <width>361</width>
+       <height>381</height>
+      </rect>
+     </property>
+     <widget class="QWidget" name="page_3"/>
+     <widget class="QWidget" name="page_4"/>
     </widget>
    </widget>
   </widget>

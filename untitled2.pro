@@ -47,7 +47,8 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
     3rdparty/libmodbus/src/modbus.c \
-    3rdparty/qextserialport/qextserialport.cpp
+    3rdparty/qextserialport/qextserialport.cpp \
+    stackedoptions.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -75,12 +76,14 @@ HEADERS  += mainwindow.h \
     defines.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
-    device.h
+    device.h \
+    stackedoptions.h
 
 FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
-    messages.ui
+    messages.ui \
+    stackedoptions.ui
 target.path  = /opt
 INSTALLS    += target
 DISTFILES += \
