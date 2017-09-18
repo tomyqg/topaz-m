@@ -320,13 +320,11 @@ void MainWindow::GrafsUpdateTrends()
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
-
     // авто масшабирование
     if (ui->autoscalecheckbox->checkState())
     {
         ui->customPlot->rescaleAxes();
     }
-
     ui->customPlot->replot();
     ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
 }
@@ -334,7 +332,12 @@ void MainWindow::GrafsUpdateTrends()
 void MainWindow::GrafsUpdateNone()
 {
     ui->MessagesWidget->update();
-    ui->customPlot->clearGraphs();
+
+    //ui->customPlot->clearGraphs();
+    //ui->customPlot->clearFocus();
+    //ui->customPlot->clearItems();
+    //ui->customPlot->clearMask();
+
     ui->customPlot->replot();
 }
 

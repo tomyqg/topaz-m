@@ -397,7 +397,8 @@ void worker::do_Work()
                 ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
 
-                currentdata = globalindex*(index + 2);
+                //currentdata = globalindex;
+                //currentdata = globalindex*(index + 2)*5;
 
                 if (Chanel->IsChannelMathematical())
                 {

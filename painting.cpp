@@ -260,10 +260,7 @@ void MainWindow::PaintCyfrasRight()
 
             if (Chanel->IsChannelMathematical())
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-
-            ////
         }
-
     }
     painter.end();
 }
@@ -518,8 +515,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                     painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
                     painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,Chanel->GetState1HighMessage());
                 }
-
-
             }
             // уменьшение уставки  Channel 1
             else if (channelcurrentvalue<channelstate2value)
@@ -562,6 +557,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     return;
 }
 
+// полярные координаты
 void MainWindow::PaintPolarDiagramm()
 {
     QPainter painter;
@@ -583,16 +579,73 @@ void MainWindow::PaintPolarDiagramm()
 
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
+    int newxcenter = 0, newycenter = 550;
 
-    centerx1 = centerx2 =  300;
-    centerx3 = centerx4 =  600;
+    centerx1 = centerx2 = centerx3 = centerx4  = 1;
+    centery1 = centery3 =  centery2 = centery4 = 1;
 
-    centery1 = centery3 =  200;
-    centery2 = centery4 =  400;
-
+    painter.translate(newxcenter, newycenter);
     /* Create the line object: */
+
+    painter.setPen(QPen(Qt::black, 1));
+    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+    painter.drawRect(0, -newycenter,newycenter+100,newycenter+100);
+
+    // Рисуем пять гругов разметочки
+
+    painter.setPen(QPen(Qt::black,1,  Qt::DashLine));
+    painter.drawEllipse(QPointF(centerx1,centery1), 500, 500);
+    painter.drawEllipse(QPointF(centerx1,centery1), 400, 400);
+    painter.drawEllipse(QPointF(centerx1,centery1), 300, 300);
+    painter.drawEllipse(QPointF(centerx1,centery1), 200, 200);
+    painter.drawEllipse(QPointF(centerx1,centery1), 100, 100);
+
     QLineF Channel1Line;
-    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+
+
+    if (channel1value>=90) // если больше 90 градусов то поворачиваем диск
+
+    {
+        painter.rotate(channel1value-90);
+        if (channel1value>=180) // если больше 90 градусов то поворачиваем диск
+        {
+            PolarChartPointsChannel1.removeFirst();
+            PolarChartPointsChannel2.removeFirst();
+            PolarChartPointsChannel3.removeFirst();
+            PolarChartPointsChannel4.removeFirst();
+        }
+    }
+
+    QLineF Line1,Line2,Line3,Line4,Line5,Line6,Line7,Line8,Line9,Line10,Line11,Line12;
+
+    QList<QLineF> LineList;
+
+    LineList.append(Line1);
+    LineList.append(Line2);
+    LineList.append(Line3);
+    LineList.append(Line4);
+    LineList.append(Line5);
+    LineList.append(Line6);
+    LineList.append(Line7);
+    LineList.append(Line8);
+    LineList.append(Line9);
+    LineList.append(Line10);
+    LineList.append(Line11);
+    LineList.append(Line12);
+
+    int ind = 0;
+
+    painter.setPen(QPen(Qt::black,1,  Qt::DashLine));
+    foreach (QLineF Line, LineList) {
+
+        Line.setP1(QPointF(centerx1, centery1));
+        Line.setAngle(30*ind);
+        Line.setLength(500);
+        painter.drawLine(Line);
+        ++ind;
+    }
+
+    painter.setPen(QPen(Qt::green, 1));
     /* Set the origin: */
     Channel1Line.setP1(QPointF(centerx1, centery1));
     Channel1Line.setAngle(channel1value);
@@ -634,13 +687,14 @@ void MainWindow::PaintPolarDiagramm()
     int y4 = Channel4Line.y2(); // мы берем координаты второй точки
 
     painter.setPen(QPen(Qt::green,2,  Qt::DashLine)); //, Qt::DashDotLine, Qt::RoundCap));
-
     painter.drawLine(Channel1Line);
-    painter.drawLine(Channel2Line);
-    painter.drawLine(Channel3Line);
-    painter.drawLine(Channel4Line);
+
+    //painter.drawLine(Channel2Line);
+    //    painter.drawLine(Channel3Line);
+    //    painter.drawLine(Channel4Line);
 
     QPoint NewPolarPointChannel1,NewPolarPointChannel2,NewPolarPointChannel3,NewPolarPointChannel4;
+
     NewPolarPointChannel1.setX(x1);
     NewPolarPointChannel1.setY(y1);
 
@@ -659,24 +713,20 @@ void MainWindow::PaintPolarDiagramm()
     PolarChartPointsChannel4.append(NewPolarPointChannel4);
 
     int a = X_Coordinates.last();
-    if ( a%360 == 0)
-    {
-        //X_Coordinates.clear();
-        PolarChartPointsChannel1.clear(); //*** после продолжительной работы замедляется (тормзоит ) построение графика - проверить
-        PolarChartPointsChannel2.clear();
-        PolarChartPointsChannel3.clear();
-        PolarChartPointsChannel4.clear();
-    }
 
-    painter.setPen(QPen(Channel1Color, 1));
+    painter.setPen(QPen(Channel1Color, 2));
     painter.drawPolyline(PolarChartPointsChannel1);
-    painter.setPen(QPen(Channel2Color, 1));
+    painter.setPen(QPen(Channel2Color, 2));
     painter.drawPolyline(PolarChartPointsChannel2);
-    painter.setPen(QPen(Channel3Color, 1));
+    painter.setPen(QPen(Channel3Color, 2));
     painter.drawPolyline(PolarChartPointsChannel3);
-    painter.setPen(QPen(Channel4Color, 1));
+    painter.setPen(QPen(Channel4Color, 2));
     painter.drawPolyline(PolarChartPointsChannel4);
     painter.setRenderHint(QPainter::Antialiasing, false);
+
+    //    painter.setPen(QPen(Qt::black, 1));
+    //    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+    //    painter.drawRect(0, 0,newycenter+100,100);
 
     painter.end();
 }
@@ -704,7 +754,7 @@ void MainWindow::PaintOnWidget()
         PaintCyfrasBottom();
         break;
     case Options::Polar:
-        PaintStatesAndAlertsAtTop();
+        //        PaintStatesAndAlertsAtTop();
         PaintCyfrasRight();
         PaintPolarDiagramm();
         break;
