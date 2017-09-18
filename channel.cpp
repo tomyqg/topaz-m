@@ -216,14 +216,10 @@ double ChannelOptions::GetValuePercent()
 {
     float razmah = highermeasurelimit - lowermeasurelimit;
     float x = 100 * (currentvalue - lowermeasurelimit)/razmah;
-
-    qDebug() << highermeasurelimit << "highermeasurelimit";
-    qDebug() << lowermeasurelimit << "lowermeasurelimit";
-    qDebug() << currentvalue << "currentvalue";
-    qDebug() << x << "x";
-
-
-
+//    qDebug() << highermeasurelimit << "highermeasurelimit";
+//    qDebug() << lowermeasurelimit << "lowermeasurelimit";
+//    qDebug() << currentvalue << "currentvalue";
+//    qDebug() << x << "x";
     return x;
 }
 

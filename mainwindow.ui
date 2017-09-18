@@ -331,6 +331,26 @@
      <string>Автомасшабирование графика</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="percentCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>1140</x>
+      <y>650</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>В процентах</string>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>MessagesWidget</zorder>
@@ -344,6 +364,7 @@
    <zorder>horizontalScrollBar</zorder>
    <zorder>arrowscheckBox</zorder>
    <zorder>autoscalecheckbox</zorder>
+   <zorder>percentCheckBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
