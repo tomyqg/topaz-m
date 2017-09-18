@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -84,7 +84,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab_13">
       <attribute name="title">
@@ -342,6 +342,12 @@
            <property name="decimals">
             <number>2</number>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
            </property>
@@ -368,6 +374,12 @@
            </property>
            <property name="decimals">
             <number>2</number>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
@@ -396,6 +408,12 @@
            <property name="decimals">
             <number>2</number>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
            </property>
@@ -422,6 +440,12 @@
            </property>
            <property name="decimals">
             <number>2</number>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
@@ -1487,6 +1511,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -1504,6 +1534,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -1523,6 +1559,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -1540,6 +1582,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -2530,6 +2578,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -2547,6 +2601,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -2569,6 +2629,12 @@
            <property name="inputMethodHints">
             <set>Qt::ImhFormattedNumbersOnly</set>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -2586,6 +2652,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>500.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -4195,6 +4267,12 @@
             <bold>true</bold>
            </font>
           </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>500.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -4212,6 +4290,12 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>500.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -4231,6 +4315,12 @@
             <bold>true</bold>
            </font>
           </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>500.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -4248,6 +4338,12 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>500.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -5620,8 +5716,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>521</width>
-        <height>385</height>
+        <width>98</width>
+        <height>28</height>
        </rect>
       </property>
       <attribute name="label">
@@ -5917,16 +6013,6 @@ p, li { white-space: pre-wrap; }
         <string>Реле 1 НЗ</string>
        </property>
       </widget>
-      <zorder>checkBox_9</zorder>
-      <zorder>checkBox_7</zorder>
-      <zorder>checkBox_6</zorder>
-      <zorder>checkBox_5</zorder>
-      <zorder>checkBox_8</zorder>
-      <zorder>checkBox_8</zorder>
-      <zorder>checkBox_7</zorder>
-      <zorder>checkBox_6</zorder>
-      <zorder>checkBox_9</zorder>
-      <zorder>checkBox_5</zorder>
      </widget>
     </widget>
     <widget class="QPushButton" name="pushButton_7">
@@ -6029,9 +6115,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

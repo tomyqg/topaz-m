@@ -1,4 +1,5 @@
 #include "channel1.h"
+#include "QDebug"
 
 double ChannelOptions::GetHigherLimit()
 {
@@ -209,6 +210,21 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 double ChannelOptions::GetCurrentChannelValue()
 {
     return currentvalue;
+}
+
+double ChannelOptions::GetValuePercent()
+{
+    float razmah = highermeasurelimit - lowermeasurelimit;
+    float x = 100 * (currentvalue - lowermeasurelimit)/razmah;
+
+    qDebug() << highermeasurelimit << "highermeasurelimit";
+    qDebug() << lowermeasurelimit << "lowermeasurelimit";
+    qDebug() << currentvalue << "currentvalue";
+    qDebug() << x << "x";
+
+
+
+    return x;
 }
 
 void ChannelOptions::SetCurrentChannelValue(double value)

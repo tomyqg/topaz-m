@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     MainWindow w;
 
     //делаем ресайз
-        w.resizeWindow(w,w.GetWindowWidthPixels(),w.GetWindowHeightPixels());
+    w.resizeWindow(w,w.GetWindowWidthPixels(),w.GetWindowHeightPixels());
     w.show();
     return a.exec();
 }

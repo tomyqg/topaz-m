@@ -26,6 +26,7 @@ public:
     double GetState1Value();
     double GetState2Value();
     double GetCurrentChannelValue();
+    double GetValuePercent();
 
     QString GetUnitsName();
     QString GetState1HighMessage();

@@ -572,10 +572,15 @@ void MainWindow::PaintPolarDiagramm()
     int channel3value = X_Coordinates.last();
     int channel4value = X_Coordinates.last();
 
-    int channel1length = UartDriver::channelinputbuffer[0]/200*maximumradius;
-    int channel2length = UartDriver::channelinputbuffer[1]/200*maximumradius;
-    int channel3length = UartDriver::channelinputbuffer[2]/200*maximumradius;
-    int channel4length = UartDriver::channelinputbuffer[3]/200*maximumradius;
+//    int channel1length = UartDriver::channelinputbuffer[0]/200*maximumradius;
+//    int channel2length = UartDriver::channelinputbuffer[1]/200*maximumradius;
+//    int channel3length = UartDriver::channelinputbuffer[2]/200*maximumradius;
+//    int channel4length = UartDriver::channelinputbuffer[3]/200*maximumradius;
+
+    float channel1length = channel1object.GetValuePercent() * 5;
+    float channel2length = channel2object.GetValuePercent() * 5;
+    float channel3length = channel3object.GetValuePercent() * 5;
+    float channel4length = channel4object.GetValuePercent() * 5;
 
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
@@ -599,6 +604,8 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawEllipse(QPointF(centerx1,centery1), 300, 300);
     painter.drawEllipse(QPointF(centerx1,centery1), 200, 200);
     painter.drawEllipse(QPointF(centerx1,centery1), 100, 100);
+
+
 
     QLineF Channel1Line;
 
@@ -724,9 +731,17 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawPolyline(PolarChartPointsChannel4);
     painter.setRenderHint(QPainter::Antialiasing, false);
 
-    //    painter.setPen(QPen(Qt::black, 1));
-    //    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
-    //    painter.drawRect(0, 0,newycenter+100,100);
+    painter.resetTransform();
+
+    // все что дальше - не поворачивается
+    painter.translate(newxcenter, newycenter);
+    painter.drawText(10, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"0%");
+    painter.drawText(110, -40, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"20%");
+    painter.drawText(210, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"40%");
+    painter.drawText(310, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"60%");
+    painter.drawText(410, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"80%");
+    painter.drawText(510, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,"100%");
+
 
     painter.end();
 }
