@@ -11,16 +11,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
-//    MainWindow w;
-
-    StackedOptions w;
-
-
-
+    MainWindow w;
 
     //делаем ресайз
-//    w.resizeWindow(w,w.GetWindowWidthPixels(),w.GetWindowHeightPixels());
+    //    w.resizeWindow(w,w.GetWindowWidthPixels(),w.GetWindowHeightPixels());
     w.show();
     return a.exec();
 }

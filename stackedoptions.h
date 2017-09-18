@@ -1,13 +1,13 @@
 #ifndef STACKEDOPTIONS_H
 #define STACKEDOPTIONS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class StackedOptions;
 }
 
-class StackedOptions : public QWidget
+class StackedOptions : public QDialog
 {
     Q_OBJECT
 
@@ -23,6 +23,14 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
 
 private:
     Ui::StackedOptions *ui;

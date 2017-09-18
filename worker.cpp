@@ -356,109 +356,6 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
 }
 
 
-//void worker::do_Work()
-//{
-//    double mathresult;
-//    double currentdata;
-
-//    float destfloat[1024];
-//    memset( destfloat, 0, 1024 );
-
-//    emit SignalToObj_mainThreadGUI();
-
-//    if ( !isrunning || isstopped ) // если воркер остановлен
-//    {
-//        this->thread()->usleep(1000); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
-//    }
-
-//    if ( isrunning || !isstopped ) // если воркер запущен
-//    {
-//        this->thread()->setPriority(QThread::LowPriority);
-
-//        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[0] == 1)
-//            {
-
-//                UartDriver::needtoupdatechannel[0] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-//                ReadModbusData(&device.channel0.Data,destfloat );
-//                currentdata = destfloat[0];
-
-//                //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-//                WriteModbusData(&device.channel0.FilterType, 2) ;
-
-//                if (ThreadChannelOptions1->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-//                UD.writechannelvalue(1,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-
-//        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[1] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[1] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-//                //ReadModbusData(&device.badgoodcomm,destfloat );
-//                ReadModbusData(&device.channel1.Data,&destfloat[0] );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions2->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-//                UD.writechannelvalue(2,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-//        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[2] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[2] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                WriteModbusData(&device.channel0.UserCalibDate2, total );
-//                ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions3->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-
-//                UD.writechannelvalue(3,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-
-//        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[3] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[3] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                ReadModbusData(&device.channel3.Data,destfloat );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions4->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-
-//                UD.writechannelvalue(4,currentdata);
-//            }
-//    }
-
-//    emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
-//    // do important work here
-//    // allow the thread's event loop to process other events before doing more "work"
-//    // for instance, your start/stop signals from the MainWindow
-//    QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
-//}
-
 void worker::do_Work()
 {
     double mathresult;
@@ -499,6 +396,8 @@ void worker::do_Work()
                 //ReadModbusData(&device.channel0.Data,&destfloat[0] );
                 ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
+
+                currentdata = globalindex*(index + 2);
 
                 if (Chanel->IsChannelMathematical())
                 {

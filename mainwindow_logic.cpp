@@ -6,6 +6,7 @@
 #include "mathresolver.h"
 #include "channel1.h"
 #include "uartdriver.h"
+#include "stackedoptions.h"
 #include "worker.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
@@ -33,7 +34,6 @@
 int odin;
 
 extern MainWindow * globalMainWin;
-
 
 extern QColor Channel1Color;
 extern QColor Channel2Color;
@@ -155,7 +155,7 @@ void MainWindow::MainWindowInitialization()
     QProcess process;
     process.startDetached("ifconfig usb0 192.168.1.115");
 
-//    startWorkSignal();
+    //    startWorkSignal();
 }
 
 
@@ -255,14 +255,14 @@ void MainWindow::DelaySec(int n)
 
 void MainWindow::OpenOptionsWindow()
 {
+    //здесь запускаем меню обновленное как в эндресе
 
-//    StackedWidget *sw= new StackedWidget;
+    //StackedOptions *sw= new StackedOptions;
+    //sw->exec();
+    //return;
 
+    //startWorkSignal();
 
-//    sw->exec();
-    return;
-
-    //    startWorkSignal();
     Options *optionsobj = new Options;
     this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
 
