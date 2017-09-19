@@ -5,6 +5,8 @@ StackedOptions::StackedOptions(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StackedOptions)
 {
+
+    connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(setindex(int)) );
     ui->setupUi(this);
 }
 
@@ -17,6 +19,13 @@ void StackedOptions::on_pushButton_9_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+
+void StackedOptions::setindex(int newindex)
+{
+//    ui->indexLabel->setText("Index " + QString::number(newindex));
+    ui->indexLabel->setText("Index x");
+}
+
 
 void StackedOptions::on_pushButton_10_clicked()
 {
@@ -51,4 +60,9 @@ void StackedOptions::on_pushButton_6_clicked()
 void StackedOptions::on_pushButton_7_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+}
+
+void StackedOptions::on_pushButton_8_clicked()
+{
+    this->close();
 }

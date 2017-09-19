@@ -133,11 +133,11 @@ void MainWindow::PaintCyfrasBottom()
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
             painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
             
-            //    // подписываем единицы измерения
+                // подписываем единицы измерения
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
             painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,channel1object.GetUnitsName());
             
-            //    // подписываем math, если канал математически обрабатывается
+                // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
             

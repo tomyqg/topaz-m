@@ -16,6 +16,9 @@ public:
     ~StackedOptions();
 
 private slots:
+
+    void setindex(int newindex);
+
     void on_pushButton_9_clicked();
 
     void on_pushButton_10_clicked();
@@ -31,6 +34,8 @@ private slots:
     void on_pushButton_6_clicked();
 
     void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::StackedOptions *ui;

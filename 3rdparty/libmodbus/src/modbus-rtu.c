@@ -273,7 +273,9 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
     crc_calculated = crc16(msg, msg_length - 2);
     crc_received = (msg[msg_length - 2] << 8) | msg[msg_length - 1];
 
-    if (msg[0] != 0x01)
+    // если первый символ 0xFF
+
+    if ( msg[0] == 0xFF )
     {
         // если первый символ фф, то удаляем его
 

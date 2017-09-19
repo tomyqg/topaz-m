@@ -257,9 +257,9 @@ void MainWindow::OpenOptionsWindow()
 {
     //здесь запускаем меню обновленное как в эндресе
 
-    //StackedOptions *sw= new StackedOptions;
-    //sw->exec();
-    //return;
+    StackedOptions *sw= new StackedOptions;
+    sw->exec();
+    return;
 
     //startWorkSignal();
 
