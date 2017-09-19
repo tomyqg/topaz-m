@@ -17,7 +17,9 @@ public:
 
 private slots:
 
-    void setindex(int newindex);
+    void SetLabelIndex(int newlabelindex);
+
+    void SetStackIndex(int newstackindex);
 
     void on_pushButton_9_clicked();
 
@@ -36,6 +38,12 @@ private slots:
     void on_pushButton_7_clicked();
 
     void on_pushButton_8_clicked();
+
+    void on_pushButton_13_clicked();
+
+    void on_ChangeDateButton_clicked();
+
+    void on_pushButton_15_clicked();
 
 private:
     Ui::StackedOptions *ui;

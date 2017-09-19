@@ -800,7 +800,6 @@ void MainWindow::OpenSerialPort( int )
         else
         {
         }
-
     }
     else
     {

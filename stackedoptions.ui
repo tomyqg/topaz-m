@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="mainpage">
     <widget class="QPushButton" name="pushButton">
@@ -121,6 +121,28 @@
       <string>Назад</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Меню</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_2">
     <widget class="QPushButton" name="pushButton_10">
@@ -140,25 +162,6 @@
      </property>
      <property name="text">
       <string>Назад</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>-10</y>
-       <width>201</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Open Sans Semibold</family>
-       <pointsize>16</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Настройки</string>
      </property>
     </widget>
     <widget class="QPushButton" name="ExtendedOptionsButton">
@@ -237,32 +240,55 @@
       <string>Текущие Дата/Время : </string>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="page_5">
-    <widget class="QPushButton" name="pushButton_9">
+    <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>490</y>
-       <width>291</width>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Настройки</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_5">
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>340</y>
+       <width>350</width>
        <height>61</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
       <string>Назад</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>0</x>
        <y>0</y>
-       <width>201</width>
+       <width>350</width>
        <height>50</height>
       </rect>
      </property>
@@ -275,15 +301,37 @@
      <property name="text">
       <string>Работа</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page">
-    <widget class="QLabel" name="label_4">
+    <widget class="QPushButton" name="pushButton_12">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>0</x>
+       <y>340</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
        <y>0</y>
-       <width>201</width>
+       <width>350</width>
        <height>50</height>
       </rect>
      </property>
@@ -296,33 +344,37 @@
      <property name="text">
       <string>Диагностика</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_11">
+   </widget>
+   <widget class="QWidget" name="page_6">
+    <widget class="QPushButton" name="pushButton_13">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>380</y>
-       <width>291</width>
+       <x>0</x>
+       <y>340</y>
+       <width>350</width>
        <height>61</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
       <string>Назад</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="page_6">
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>0</x>
        <y>0</y>
-       <width>201</width>
+       <width>350</width>
        <height>50</height>
       </rect>
      </property>
@@ -335,19 +387,168 @@
      <property name="text">
       <string>Эксперт</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_12">
+   </widget>
+   <widget class="QWidget" name="ChangeDateTime">
+    <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>380</y>
-       <width>291</width>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Изменить Дату/Время</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="timeEdit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>350</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="showGroupSeparator" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="maximumDate">
+      <date>
+       <year>2017</year>
+       <month>1</month>
+       <day>1</day>
+      </date>
+     </property>
+     <property name="minimumDate">
+      <date>
+       <year>2017</year>
+       <month>1</month>
+       <day>1</day>
+      </date>
+     </property>
+     <property name="displayFormat">
+      <string>H:mm:ss</string>
+     </property>
+     <property name="time">
+      <time>
+       <hour>15</hour>
+       <minute>0</minute>
+       <second>0</second>
+      </time>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dateEdit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>350</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="showGroupSeparator" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="maximumDate">
+      <date>
+       <year>2027</year>
+       <month>12</month>
+       <day>31</day>
+      </date>
+     </property>
+     <property name="minimumDate">
+      <date>
+       <year>2016</year>
+       <month>12</month>
+       <day>31</day>
+      </date>
+     </property>
+     <property name="displayFormat">
+      <string>dd.MM.yy</string>
+     </property>
+     <property name="date">
+      <date>
+       <year>2017</year>
+       <month>2</month>
+       <day>8</day>
+      </date>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_14">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>200</y>
+       <width>170</width>
        <height>61</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Сохранить</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_15">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>200</y>
+       <width>171</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -376,6 +577,19 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>ChangeDateButton</tabstop>
+  <tabstop>ExtendedOptionsButton</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton_12</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
