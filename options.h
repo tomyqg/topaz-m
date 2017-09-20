@@ -13,7 +13,7 @@ class Options : public QDialog
 {
     Q_OBJECT
 
-    ChannelOptions options_channel1;
+    ChannelOptions options_channel1; //#include <channel1.h>
     ChannelOptions options_channel2;
     ChannelOptions options_channel3;
     ChannelOptions options_channel4;

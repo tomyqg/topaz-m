@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include <channel1.h>
+
 namespace Ui {
 class StackedOptions;
 }
@@ -10,6 +12,11 @@ class StackedOptions;
 class StackedOptions : public QDialog
 {
     Q_OBJECT
+
+    ChannelOptions options_channel1;
+    ChannelOptions options_channel2;
+    ChannelOptions options_channel3;
+    ChannelOptions options_channel4;
 
 public:
     explicit StackedOptions(QWidget *parent = 0);
@@ -87,8 +94,37 @@ private slots:
 
     void on_pushButton_39_clicked();
 
+    void on_pushButton_41_clicked();
+
+    void on_pushButton_37_clicked();
+
+    void on_pushButton_45_clicked();
+
+    void on_pushButton_38_clicked();
+
+    void on_pushButton_46_clicked();
+
+    void on_pushButton_47_clicked();
+
+    void on_pushButton_48_clicked();
+
+    void on_pushButton_49_clicked();
+
+    void on_pushButton_50_clicked();
+
+    void on_pushButton_44_clicked();
+
+    void on_pushButton_42_clicked();
+
+    void on_pushButton_43_clicked();
+
+    void on_pushButton_51_clicked();
+
 private:
     Ui::StackedOptions *ui;
+    void ReadChannelsOptionsFromFile();
+    void ReadSystemOptionsFromFile();
+    void ApplyNewSettingstoOptionsUI();
 };
 
 #endif // STACKEDOPTIONS_H

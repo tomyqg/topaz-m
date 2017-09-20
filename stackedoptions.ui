@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>15</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -118,7 +118,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Назад</string>
+      <string>Выйти без сохранения</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
@@ -141,6 +141,25 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_51">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>400</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Сохранить и выйти</string>
      </property>
     </widget>
    </widget>
@@ -983,7 +1002,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="PriborIdentifier">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1473,7 +1492,7 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QRadioButton" name="ButonOtklChannel">
+        <widget class="QRadioButton" name="ButonOtklChannel_1">
          <property name="font">
           <font>
            <family>Open Sans Semibold</family>
@@ -1491,7 +1510,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonTokChannel">
+        <widget class="QRadioButton" name="ButonTokChannel_1">
          <property name="font">
           <font>
            <family>Open Sans Semibold</family>
@@ -1509,7 +1528,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonNapryagenieChannel">
+        <widget class="QRadioButton" name="ButonNapryagenieChannel_1">
          <property name="font">
           <font>
            <family>Open Sans Semibold</family>
@@ -1524,7 +1543,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonResistorChannel">
+        <widget class="QRadioButton" name="ButonResistorChannel_1">
          <property name="font">
           <font>
            <family>Open Sans Semibold</family>
@@ -1539,7 +1558,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonTermoparaChannel">
+        <widget class="QRadioButton" name="ButonTermoparaChannel_1">
          <property name="font">
           <font>
            <family>Open Sans Semibold</family>
@@ -1554,7 +1573,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="ButonImpulseChannel">
+        <widget class="QRadioButton" name="ButonImpulseChannel_1">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -1596,7 +1615,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="Name_Channel">
+    <widget class="QLineEdit" name="Name_Channel_1">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1664,7 +1683,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
-        <widget class="QLineEdit" name="UnitsChannel">
+        <widget class="QLineEdit" name="UnitsChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1691,7 +1710,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="NignPredelChannel">
+        <widget class="QDoubleSpinBox" name="NignPredelChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1727,7 +1746,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="VerhnPredelChannel">
+        <widget class="QDoubleSpinBox" name="VerhnPredelChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1760,7 +1779,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="NignPredIzmerChannel">
+        <widget class="QDoubleSpinBox" name="NignPredIzmerChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1793,7 +1812,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel">
+        <widget class="QDoubleSpinBox" name="VerhnPredIzmerChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1826,7 +1845,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="PeriodIzmerChannel">
+        <widget class="QDoubleSpinBox" name="PeriodIzmerChannel_1">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -1859,7 +1878,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="DiapasonChannel">
+        <widget class="QComboBox" name="DiapasonChannel_1">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -2030,7 +2049,7 @@
       <string>Тип регистрации</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="RegType_Channel">
+    <widget class="QComboBox" name="RegType_Channel_1">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -4424,7 +4443,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Предел. значения</string>
+      <string>Предел. значения/уставки</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_40">
@@ -4465,6 +4484,3998 @@
       <string>Назад</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="Matematica">
+    <widget class="QGroupBox" name="groupBox_14">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>601</width>
+       <height>511</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QTextEdit" name="textEdit_10">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>200</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_11">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>240</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_12">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>280</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_13">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>320</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_15">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>80</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+       </font>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_18">
+       <item>
+        <widget class="QLabel" name="label_74">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 1</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_75">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_76">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 3</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_77">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 4</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_78">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 5</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_79">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 6</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_80">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 7</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_81">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал 8</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLineEdit" name="math_text_channel_1">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>40</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="math_text_channel_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>80</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="math_text_channel_3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>120</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="math_text_channel_4">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>160</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Open Sans Semibold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="math_checkbox_channel_1">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>40</y>
+        <width>300</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Включить мат.обработку 1</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="math_checkbox_channel_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>80</y>
+        <width>300</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Включить мат.обработку 2</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="math_checkbox_channel_3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>120</y>
+        <width>300</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Включить мат.обработку 3</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="math_checkbox_channel_4">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>160</y>
+        <width>300</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Включить мат.обработку 4</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_82">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>180</y>
+        <width>300</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>     * доступные функции:
+     * сложение: x+1
+     * вычитание: x-1
+     * синус: cos(x)
+     * косинус: sin(x)
+     * взятие по модулю: abs(x)
+     * число в степени: pow (x, 2)
+     * извлечение корня: sqrt(x)</string>
+      </property>
+     </widget>
+     <widget class="QScrollBar" name="horizontalScrollBar_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>561</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="pageStep">
+       <number>30</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_85">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>360</y>
+        <width>561</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string> Сдвиньте слайдер вправо,
+ чтобы разблокировать редактор формул</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_83">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Математика</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_41">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>540</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page">
+    <widget class="QLabel" name="label_86">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Предельные значения</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_42">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>220</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_43">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>280</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 4</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_44">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>160</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_45">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>340</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_46">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>100</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 1</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_2">
+    <widget class="QLabel" name="label_87">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_15">
+     <property name="geometry">
+      <rect>
+       <x>559</x>
+       <y>50</y>
+       <width>511</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 2</string>
+     </property>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_100">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_91">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_101">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_90">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_88">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_106">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_89">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2HighMessageChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_92">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>303</x>
+        <y>40</y>
+        <width>171</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_19">
+       <item>
+        <widget class="QComboBox" name="comboBox_2">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2ValueChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>40.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2HisteresisChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionHigh_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionLow_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_Kvitir_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>531</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 1</string>
+     </property>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_99">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_96">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_98">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_95">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_93">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_94">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_105">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1HighMessageChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_97">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1LowMessageChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>40</y>
+        <width>171</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1ValueChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>80.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1HisteresisChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionHigh_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionLow_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_Kvitir_Channel_1">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_47">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>470</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <zorder>label_87</zorder>
+    <zorder>groupBox_15</zorder>
+    <zorder>groupBox_9</zorder>
+    <zorder>pushButton_47</zorder>
+    <zorder>pushButton_47</zorder>
+   </widget>
+   <widget class="QWidget" name="page_3">
+    <widget class="QPushButton" name="pushButton_48">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>470</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_122">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 2</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_16">
+     <property name="geometry">
+      <rect>
+       <x>559</x>
+       <y>50</y>
+       <width>511</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 2</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_16">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_20">
+       <item>
+        <widget class="QLabel" name="label_102">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_107">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_108">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_109">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_110">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_111">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_112">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2HighMessageChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_113">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_17">
+      <property name="geometry">
+       <rect>
+        <x>303</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_21">
+       <item>
+        <widget class="QComboBox" name="comboBox_3">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2ValueChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>40.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2HisteresisChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionHigh_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionLow_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_Kvitir_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>531</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 1</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_18">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_22">
+       <item>
+        <widget class="QLabel" name="label_114">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_115">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_116">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_117">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_118">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_119">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_120">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1HighMessageChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_121">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1LowMessageChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_19">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_23">
+       <item>
+        <widget class="QComboBox" name="comboBox_4">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1ValueChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>80.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1HisteresisChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionHigh_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionLow_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_Kvitir_Channel_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_4">
+    <widget class="QPushButton" name="pushButton_49">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>470</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_138">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 3</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_17">
+     <property name="geometry">
+      <rect>
+       <x>559</x>
+       <y>50</y>
+       <width>511</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 2</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_20">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_24">
+       <item>
+        <widget class="QLabel" name="label_103">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_123">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_124">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_125">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_126">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_127">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_128">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2HighMessageChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_129">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_21">
+      <property name="geometry">
+       <rect>
+        <x>303</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_25">
+       <item>
+        <widget class="QComboBox" name="comboBox_5">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2ValueChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>40.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2HisteresisChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionHigh_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionLow_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_Kvitir_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_11">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>531</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 1</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_22">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_26">
+       <item>
+        <widget class="QLabel" name="label_130">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_131">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_132">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_133">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_134">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_135">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_136">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1HighMessageChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_137">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1LowMessageChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_23">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_27">
+       <item>
+        <widget class="QComboBox" name="comboBox_6">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1ValueChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>80.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1HisteresisChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionHigh_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionLow_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_Kvitir_Channel_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_5">
+    <widget class="QPushButton" name="pushButton_50">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>470</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>531</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 1</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_26">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_30">
+       <item>
+        <widget class="QLabel" name="label_146">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_147">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_148">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_149">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_150">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_151">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_152">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1HighMessageChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_153">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State1LowMessageChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_27">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_31">
+       <item>
+        <widget class="QComboBox" name="comboBox_8">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1ValueChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>80.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State1HisteresisChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionHigh_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_actionLow_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State1_Kvitir_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_18">
+     <property name="geometry">
+      <rect>
+       <x>559</x>
+       <y>50</y>
+       <width>511</width>
+       <height>411</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Уставка 2</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_24">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>301</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_28">
+       <item>
+        <widget class="QLabel" name="label_104">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Канал/значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_139">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Значение уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_140">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Гистерезис</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_141">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при превышении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_142">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Переключатель при уменьшении</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_143">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Квитирование</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_144">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2HighMessageChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_145">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение выключения уставки</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_25">
+      <property name="geometry">
+       <rect>
+        <x>303</x>
+        <y>40</y>
+        <width>174</width>
+        <height>225</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_29">
+       <item>
+        <widget class="QComboBox" name="comboBox_7">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2ValueChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>40.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="State2HisteresisChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="minimum">
+          <double>-300.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3000.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionHigh_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_actionLow_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Реле 8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="State2_Kvitir_Channel_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans Semibold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не квитировать</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Квитировать</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_154">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Уставки канал 4</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <zorder>pushButton_50</zorder>
+    <zorder>label_154</zorder>
+    <zorder>groupBox_18</zorder>
+    <zorder>groupBox_12</zorder>
+    <zorder>groupBox_12</zorder>
+    <zorder>groupBox_18</zorder>
+    <zorder>label_154</zorder>
    </widget>
   </widget>
   <widget class="QLabel" name="indexLabel">
@@ -4522,21 +8533,21 @@
   <tabstop>pushButton_21</tabstop>
   <tabstop>pushButton_24</tabstop>
   <tabstop>pushButton_25</tabstop>
-  <tabstop>ButonOtklChannel</tabstop>
-  <tabstop>ButonTokChannel</tabstop>
-  <tabstop>ButonNapryagenieChannel</tabstop>
-  <tabstop>ButonResistorChannel</tabstop>
-  <tabstop>ButonTermoparaChannel</tabstop>
-  <tabstop>ButonImpulseChannel</tabstop>
-  <tabstop>Name_Channel</tabstop>
-  <tabstop>UnitsChannel</tabstop>
-  <tabstop>NignPredelChannel</tabstop>
-  <tabstop>VerhnPredelChannel</tabstop>
-  <tabstop>NignPredIzmerChannel</tabstop>
-  <tabstop>VerhnPredIzmerChannel</tabstop>
-  <tabstop>PeriodIzmerChannel</tabstop>
-  <tabstop>DiapasonChannel</tabstop>
-  <tabstop>RegType_Channel</tabstop>
+  <tabstop>ButonOtklChannel_1</tabstop>
+  <tabstop>ButonTokChannel_1</tabstop>
+  <tabstop>ButonNapryagenieChannel_1</tabstop>
+  <tabstop>ButonResistorChannel_1</tabstop>
+  <tabstop>ButonTermoparaChannel_1</tabstop>
+  <tabstop>ButonImpulseChannel_1</tabstop>
+  <tabstop>Name_Channel_1</tabstop>
+  <tabstop>UnitsChannel_1</tabstop>
+  <tabstop>NignPredelChannel_1</tabstop>
+  <tabstop>VerhnPredelChannel_1</tabstop>
+  <tabstop>NignPredIzmerChannel_1</tabstop>
+  <tabstop>VerhnPredIzmerChannel_1</tabstop>
+  <tabstop>PeriodIzmerChannel_1</tabstop>
+  <tabstop>DiapasonChannel_1</tabstop>
+  <tabstop>RegType_Channel_1</tabstop>
   <tabstop>pushButton_27</tabstop>
   <tabstop>UnitsChannel_2</tabstop>
   <tabstop>NignPredelChannel_2</tabstop>

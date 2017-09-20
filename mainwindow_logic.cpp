@@ -261,6 +261,16 @@ void MainWindow::OpenOptionsWindow()
     {
         StackedOptions *sw= new StackedOptions;
         sw->exec();
+        //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
+        channel1object.ReadSingleChannelOptionFromFile(1);
+        channel2object.ReadSingleChannelOptionFromFile(2);
+        channel3object.ReadSingleChannelOptionFromFile(3);
+        channel4object.ReadSingleChannelOptionFromFile(4);
+
+        //    если вдруг поменялось время то нужно обновить лейблы
+        LabelsInit();
+        LabelsCorrect();
+        sw->deleteLater();
         return;
     }
 
