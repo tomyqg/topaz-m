@@ -142,8 +142,8 @@ void MainWindow::MainWindowInitialization()
 
     connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
 
-    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
+    connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
+    SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
 
     WorkerThread->start(); // запускаем сам поток
 
@@ -267,6 +267,9 @@ void MainWindow::OpenOptionsWindow()
         channel3object.ReadSingleChannelOptionFromFile(3);
         channel4object.ReadSingleChannelOptionFromFile(4);
 
+
+        SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
+
         //    если вдруг поменялось время то нужно обновить лейблы
         LabelsInit();
         LabelsCorrect();
@@ -291,6 +294,8 @@ void MainWindow::OpenOptionsWindow()
     LabelsInit();
     LabelsCorrect();
 
+    SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
+
     // если что меняем разрешение
     if (Options::displayResolution == "1024x768")
     {
@@ -306,7 +311,6 @@ void MainWindow::OpenOptionsWindow()
 
     //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
 
-    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
 }
 
 void MainWindow::PowerOff()

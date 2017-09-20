@@ -151,7 +151,7 @@ signals:
 signals:
   void startWorkSignal();
   void stopWorkSignal();
-  void SetObjectsSignal(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
+  void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
 
 private:
     Ui::MainWindow *ui;

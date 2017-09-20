@@ -2,6 +2,9 @@
 #include "ui_stackedoptions.h"
 #include "defines.h"
 
+QString StackedOptions::calibrationprm = "3383 3962 234 599";
+int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
+
 
 #define MainMenuIndex 0
 #define OptionsIndex 1
@@ -703,5 +706,196 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
 
 void StackedOptions::on_pushButton_51_clicked()
 {
+    ApplyNewSettingstoAllChannels();
+    WriteSystemOptionsToFile();
+    WriteAllChannelsOptionsToFile();
+    this->close();
 
+}
+
+void StackedOptions::WriteAllChannelsOptionsToFile()
+{
+    QJsonObject channel1,channel2,channel3,channel4,channels;
+    QJsonArray settings;
+
+    channel1["Type"] = options_channel1.GetSignalType();
+    channel1["Name"] = options_channel1.GetChannelName();
+    channel1["Units"] = options_channel1.GetUnitsName();
+    channel1["HigherLimit"] = options_channel1.GetHigherLimit();
+    channel1["LowerLimit"] = options_channel1.GetLowerLimit();
+    channel1["HigherMeasLimit"] = options_channel1.GetHigherMeasureLimit();
+    channel1["LowerMeasLimit"] = options_channel1.GetLowerMeasureLimit();
+    channel1["Period"] = options_channel1.GetMeasurePeriod();
+    channel1["State1HighMessage"] = options_channel1.GetState1HighMessage();
+    channel1["State1LowMessage"] = options_channel1.GetState1LowMessage();
+    channel1["State2HighMessage"] = options_channel1.GetState2HighMessage();
+    channel1["State2LowMessage"] = options_channel1.GetState2LowMessage();
+    channel1["State1Value"] = options_channel1.GetState1Value();
+    channel1["State2Value"] = options_channel1.GetState2Value();
+    channel1["MathString"] = options_channel1.GetMathString();
+    channel1["MathWork"] = options_channel1.IsChannelMathematical();
+
+    settings.append(channel1);
+
+    channel2["Type"] = options_channel2.GetSignalType();
+    channel2["Name"] = options_channel2.GetChannelName();
+    channel2["Units"] = options_channel2.GetUnitsName();
+    channel2["HigherLimit"] = options_channel2.GetHigherLimit();
+    channel2["LowerLimit"] = options_channel2.GetLowerLimit();
+    channel2["HigherMeasLimit"] = options_channel2.GetHigherMeasureLimit();
+    channel2["LowerMeasLimit"] = options_channel2.GetLowerMeasureLimit();
+    channel2["Period"] = options_channel2.GetMeasurePeriod();
+    channel2["State1HighMessage"] = options_channel2.GetState1HighMessage();
+    channel2["State1LowMessage"] = options_channel2.GetState1LowMessage();
+    channel2["State2HighMessage"] = options_channel2.GetState2HighMessage();
+    channel2["State2LowMessage"] = options_channel2.GetState2LowMessage();
+    channel2["State1Value"] = options_channel2.GetState1Value();
+    channel2["State2Value"] = options_channel2.GetState2Value();
+    channel2["MathString"] = options_channel2.GetMathString();
+    channel2["MathWork"] = options_channel2.IsChannelMathematical();
+
+    settings.append(channel2);
+
+    channel3["Type"] = options_channel3.GetSignalType();
+    channel3["Name"] = options_channel3.GetChannelName();
+    channel3["Units"] = options_channel3.GetUnitsName();
+    channel3["HigherLimit"] = options_channel3.GetHigherLimit();
+    channel3["LowerLimit"] = options_channel3.GetLowerLimit();
+    channel3["HigherMeasLimit"] = options_channel3.GetHigherMeasureLimit();
+    channel3["LowerMeasLimit"] = options_channel3.GetLowerMeasureLimit();
+    channel3["Period"] = options_channel3.GetMeasurePeriod();
+    channel3["State1HighMessage"] = options_channel3.GetState1HighMessage();
+    channel3["State1LowMessage"] = options_channel3.GetState1LowMessage();
+    channel3["State2HighMessage"] = options_channel3.GetState2HighMessage();
+    channel3["State2LowMessage"] = options_channel3.GetState2LowMessage();
+    channel3["State1Value"] = options_channel3.GetState1Value();
+    channel3["State2Value"] = options_channel3.GetState2Value();
+    channel3["MathString"] = options_channel3.GetMathString();
+    channel3["MathWork"] = options_channel3.IsChannelMathematical();
+
+    settings.append(channel3);
+
+    channel4["Type"] = options_channel4.GetSignalType();
+    channel4["Name"] = options_channel4.GetChannelName();
+    channel4["Units"] = options_channel4.GetUnitsName();
+    channel4["HigherLimit"] = options_channel4.GetHigherLimit();
+    channel4["LowerLimit"] = options_channel4.GetLowerLimit();
+    channel4["HigherMeasLimit"] = options_channel4.GetHigherMeasureLimit();
+    channel4["LowerMeasLimit"] = options_channel4.GetLowerMeasureLimit();
+    channel4["Period"] = options_channel4.GetMeasurePeriod();
+    channel4["State1HighMessage"] = options_channel4.GetState1HighMessage();
+    channel4["State1LowMessage"] = options_channel4.GetState1LowMessage();
+    channel4["State2HighMessage"] = options_channel4.GetState2HighMessage();
+    channel4["State2LowMessage"] = options_channel4.GetState2LowMessage();
+    channel4["State1Value"] = options_channel4.GetState1Value();
+    channel4["State2Value"] = options_channel4.GetState2Value();
+    channel4["MathString"] = options_channel4.GetMathString();
+    channel4["MathWork"] = options_channel4.IsChannelMathematical();
+
+    settings.append(channel4);
+
+    channels["count"] = 4;
+    channels["channels"] = settings;
+
+    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
+    QFile file(pathtooptions);
+    QTextStream out(&file);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    out << setstr;
+    file.close();
+}
+
+void StackedOptions::WriteSystemOptionsToFile()
+{
+//    UpdateCurrentDisplayParametr();
+
+    QJsonObject systemoptions;
+    systemoptions["Time"] = GetNewTimeString();
+    systemoptions["Date"] = GetNewDateString();
+    systemoptions["Display"] = GetCurrentDisplayParametr();
+    systemoptions["Calibration"] = GetCalibration();
+    systemoptions["Resolution"] = GetNewDisplayResolution();
+    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+    QFile file(pathtosystemoptions);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+}
+
+QString StackedOptions::GetNewDateString() {return ui->timeEdit->time().toString();}
+QString StackedOptions::GetNewTimeString() {return ui->timeEdit->time().toString();}
+QString StackedOptions::GetNewDisplayResolution() {return ui->comboBox->itemText(ui->comboBox->currentIndex());}
+
+void StackedOptions::ApplyNewSettingstoAllChannels()
+{
+    options_channel1.SetUnitsName(ui->UnitsChannel_1->text());
+    options_channel1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
+    options_channel1.SetLowerLimit(ui->NignPredelChannel_1->value());
+    options_channel1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
+    options_channel1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
+    options_channel1.SetMeasurePeriod(ui->PeriodIzmerChannel_1->value());
+    options_channel1.SetState1HighMessage(ui->State1HighMessageChannel_1->text());
+    options_channel1.SetState1LowMessage(ui->State1LowMessageChannel_1->text());
+    options_channel1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
+    options_channel1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
+    options_channel1.SetState1Value(ui->State1ValueChannel_1->value());
+    options_channel1.SetState2Value(ui->State2ValueChannel_1->value());
+    options_channel1.SetChannelName(ui->Name_Channel_1->text());
+    options_channel1.SetMathEquation(ui->math_text_channel_1->text());
+    options_channel1.SetMathematical(ui->math_checkbox_channel_1->isChecked());
+
+
+
+    options_channel2.SetUnitsName(ui->UnitsChannel_2->text());
+    options_channel2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
+    options_channel2.SetLowerLimit(ui->NignPredelChannel_2->value());
+    options_channel2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
+    options_channel2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
+    options_channel2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
+    options_channel2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
+    options_channel2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
+    options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
+    options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
+    options_channel2.SetState1Value(ui->State1ValueChannel_2->value());
+    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
+    options_channel2.SetChannelName(ui->Name_Channel_2->text());
+    options_channel2.SetMathEquation(ui->math_text_channel_2->text());
+    options_channel2.SetMathematical(ui->math_checkbox_channel_2->isChecked());
+
+    options_channel3.SetUnitsName(ui->UnitsChannel_3->text());
+    options_channel3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
+    options_channel3.SetLowerLimit(ui->NignPredelChannel_3->value());
+    options_channel3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
+    options_channel3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
+    options_channel3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
+    options_channel3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
+    options_channel3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
+    options_channel3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
+    options_channel3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
+    options_channel3.SetState1Value(ui->State1ValueChannel_3->value());
+    options_channel3.SetState2Value(ui->State2ValueChannel_3->value());
+    options_channel3.SetChannelName(ui->Name_Channel_3->text());
+    options_channel3.SetMathEquation(ui->math_text_channel_3->text());
+    options_channel3.SetMathematical(ui->math_checkbox_channel_3->isChecked());
+
+    options_channel4.SetUnitsName(ui->UnitsChannel_4->text());
+    options_channel4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
+    options_channel4.SetLowerLimit(ui->NignPredelChannel_4->value());
+    options_channel4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
+    options_channel4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
+    options_channel4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
+    options_channel4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
+    options_channel4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
+    options_channel4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
+    options_channel4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
+    options_channel4.SetState1Value(ui->State1ValueChannel_4->value());
+    options_channel4.SetState2Value(ui->State2ValueChannel_4->value());
+    options_channel4.SetChannelName(ui->Name_Channel_4->text());
+    options_channel4.SetMathEquation(ui->math_text_channel_4->text());
+    options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
+
+//    SetLogMessagesLimit(ui->spinBox->value());
 }
