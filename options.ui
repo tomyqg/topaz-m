@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -6116,8 +6116,8 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

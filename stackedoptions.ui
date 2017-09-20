@@ -23,9 +23,9 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>13</number>
+    <number>15</number>
    </property>
-   <widget class="QWidget" name="mainpage">
+   <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
@@ -144,7 +144,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QWidget" name="Settings">
     <widget class="QPushButton" name="pushButton_10">
      <property name="geometry">
       <rect>
@@ -263,12 +263,12 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_5">
+   <widget class="QWidget" name="Work">
     <widget class="QPushButton" name="pushButton_11">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>340</y>
+       <y>360</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -305,13 +305,108 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_31">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Поиск в записях</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_32">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>240</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Сохранение текста</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_33">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>180</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Изменить режим отображения</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_34">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Анализ сигнала</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_35">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>300</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Регулировка яркости</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="page">
+   <widget class="QWidget" name="Diagnostic">
     <widget class="QPushButton" name="pushButton_12">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>340</y>
+       <y>520</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -348,8 +443,179 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QPushButton" name="ExtendedOptionsButton_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>220</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Журнал событий</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>350</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Текущая диагностика</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ChangeDateButton_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>160</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Список диагност.</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>90</y>
+       <width>350</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Последняя диагностика</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>350</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Последний перезапуск</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ExtendedOptionsButton_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>280</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Сведения о приборе</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ExtendedOptionsButton_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>340</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Измер. Значения</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ExtendedOptionsButton_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>400</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Выходы</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ExtendedOptionsButton_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>460</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Моделирование</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="page_6">
+   <widget class="QWidget" name="Expert">
     <widget class="QPushButton" name="pushButton_13">
      <property name="geometry">
       <rect>
@@ -945,6 +1211,25 @@
       <string>Опции прибора</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_30">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>280</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Inputs">
     <widget class="QPushButton" name="pushButton_19">
@@ -1173,7 +1458,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>225</height>
+        <height>181</height>
        </rect>
       </property>
       <property name="font">
@@ -1401,7 +1686,7 @@
           </font>
          </property>
          <property name="text">
-          <string>мА</string>
+          <string>%</string>
          </property>
         </widget>
        </item>
@@ -1604,7 +1889,7 @@
        <rect>
         <x>0</x>
         <y>50</y>
-        <width>190</width>
+        <width>196</width>
         <height>371</height>
        </rect>
       </property>
@@ -1642,7 +1927,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НП (Нижний предел)</string>
+          <string>Начало поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -1657,7 +1942,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВП (Верхний предел)</string>
+          <string>Конец поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -1672,7 +1957,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НПИ (нижн.пред.изм)</string>
+          <string>Начало диапазона</string>
          </property>
         </widget>
        </item>
@@ -1687,7 +1972,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВПИ (верх.пред.изм)</string>
+          <string>Конец диапазона</string>
          </property>
         </widget>
        </item>
@@ -2094,7 +2379,7 @@
        <rect>
         <x>0</x>
         <y>50</y>
-        <width>190</width>
+        <width>196</width>
         <height>371</height>
        </rect>
       </property>
@@ -2132,7 +2417,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НП (Нижний предел)</string>
+          <string>Начало поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -2147,7 +2432,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВП (Верхний предел)</string>
+          <string>Конец поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -2162,7 +2447,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НПИ (нижн.пред.изм)</string>
+          <string>Начало диапазона</string>
          </property>
         </widget>
        </item>
@@ -2177,7 +2462,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВПИ (верх.пред.изм)</string>
+          <string>Конец диапазона</string>
          </property>
         </widget>
        </item>
@@ -2958,7 +3243,7 @@
        <rect>
         <x>0</x>
         <y>50</y>
-        <width>190</width>
+        <width>196</width>
         <height>371</height>
        </rect>
       </property>
@@ -2996,7 +3281,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НП (Нижний предел)</string>
+          <string>Начало поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -3011,7 +3296,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВП (Верхний предел)</string>
+          <string>Конец поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -3026,7 +3311,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НПИ (нижн.пред.изм)</string>
+          <string>Начало диапазона</string>
          </property>
         </widget>
        </item>
@@ -3041,7 +3326,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВПИ (верх.пред.изм)</string>
+          <string>Конец диапазона</string>
          </property>
         </widget>
        </item>
@@ -3639,7 +3924,7 @@
        <rect>
         <x>0</x>
         <y>50</y>
-        <width>190</width>
+        <width>196</width>
         <height>371</height>
        </rect>
       </property>
@@ -3677,7 +3962,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НП (Нижний предел)</string>
+          <string>Начало поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -3692,7 +3977,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВП (Верхний предел)</string>
+          <string>Конец поддиапазона</string>
          </property>
         </widget>
        </item>
@@ -3707,7 +3992,7 @@
           </font>
          </property>
          <property name="text">
-          <string>НПИ (нижн.пред.изм)</string>
+          <string>Начало диапазона</string>
          </property>
         </widget>
        </item>
@@ -3722,7 +4007,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ВПИ (верх.пред.изм)</string>
+          <string>Конец диапазона</string>
          </property>
         </widget>
        </item>
@@ -3870,6 +4155,317 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="RegimOtobragenia">
+    <widget class="QLabel" name="label_58">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Режим отображения</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_14">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>341</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_16">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="QRadioButton" name="SetTrendsBtn">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Кривая</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetCyfraBtn">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Цифра</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetTrendsCyfraBtn">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Кривая и цифра</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetBarsBtn">
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Барграф</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetBarsCyfraBtn">
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Барграф и цифра</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetTrendsBarsBtn">
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Кривая и барграф</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetTrendsBarsCyfraBtn">
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Кривая, барграф и цифра</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="SetPolarBtn">
+        <property name="font">
+         <font>
+          <family>Open Sans Semibold</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Круговая диаграмма</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButton_36">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>380</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="Prilogenia">
+    <widget class="QLabel" name="label_67">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Приложения</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_37">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Математика</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_38">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>180</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Предел. значения</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_40">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Анализ сигнала</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_39">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>240</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QLabel" name="indexLabel">
    <property name="geometry">
@@ -3892,12 +4488,12 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>ChangeDateButton_2</tabstop>
-  <tabstop>SecurityButton</tabstop>
-  <tabstop>SecurityButton_2</tabstop>
-  <tabstop>SecurityButton_3</tabstop>
-  <tabstop>SecurityButton_4</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_34</tabstop>
+  <tabstop>pushButton_31</tabstop>
+  <tabstop>pushButton_33</tabstop>
+  <tabstop>pushButton_32</tabstop>
+  <tabstop>pushButton_35</tabstop>
+  <tabstop>pushButton_11</tabstop>
   <tabstop>pushButton_2</tabstop>
   <tabstop>pushButton_6</tabstop>
   <tabstop>pushButton_7</tabstop>
@@ -3905,7 +4501,7 @@
   <tabstop>ChangeDateButton</tabstop>
   <tabstop>ExtendedOptionsButton</tabstop>
   <tabstop>pushButton_10</tabstop>
-  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton</tabstop>
   <tabstop>pushButton_12</tabstop>
   <tabstop>pushButton_13</tabstop>
   <tabstop>timeEdit</tabstop>
@@ -3918,6 +4514,90 @@
   <tabstop>pushButton_17</tabstop>
   <tabstop>pushButton_18</tabstop>
   <tabstop>pushButton_16</tabstop>
+  <tabstop>pushButton_19</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_20</tabstop>
+  <tabstop>pushButton_23</tabstop>
+  <tabstop>pushButton_22</tabstop>
+  <tabstop>pushButton_21</tabstop>
+  <tabstop>pushButton_24</tabstop>
+  <tabstop>pushButton_25</tabstop>
+  <tabstop>ButonOtklChannel</tabstop>
+  <tabstop>ButonTokChannel</tabstop>
+  <tabstop>ButonNapryagenieChannel</tabstop>
+  <tabstop>ButonResistorChannel</tabstop>
+  <tabstop>ButonTermoparaChannel</tabstop>
+  <tabstop>ButonImpulseChannel</tabstop>
+  <tabstop>Name_Channel</tabstop>
+  <tabstop>UnitsChannel</tabstop>
+  <tabstop>NignPredelChannel</tabstop>
+  <tabstop>VerhnPredelChannel</tabstop>
+  <tabstop>NignPredIzmerChannel</tabstop>
+  <tabstop>VerhnPredIzmerChannel</tabstop>
+  <tabstop>PeriodIzmerChannel</tabstop>
+  <tabstop>DiapasonChannel</tabstop>
+  <tabstop>RegType_Channel</tabstop>
+  <tabstop>pushButton_27</tabstop>
+  <tabstop>UnitsChannel_2</tabstop>
+  <tabstop>NignPredelChannel_2</tabstop>
+  <tabstop>VerhnPredelChannel_2</tabstop>
+  <tabstop>NignPredIzmerChannel_2</tabstop>
+  <tabstop>VerhnPredIzmerChannel_2</tabstop>
+  <tabstop>PeriodIzmerChannel_2</tabstop>
+  <tabstop>DiapasonChannel_2</tabstop>
+  <tabstop>ButonOtklChannel_2</tabstop>
+  <tabstop>ButonTokChannel_2</tabstop>
+  <tabstop>ButonNapryagenieChannel_2</tabstop>
+  <tabstop>ButonResistorChannel_2</tabstop>
+  <tabstop>ButonTermoparaChannel_2</tabstop>
+  <tabstop>ButonImpulseChannel_2</tabstop>
+  <tabstop>Name_Channel_2</tabstop>
+  <tabstop>RegType_Channel_2</tabstop>
+  <tabstop>pushButton_26</tabstop>
+  <tabstop>RegType_Channel_3</tabstop>
+  <tabstop>ButonOtklChannel_3</tabstop>
+  <tabstop>ButonTokChannel_3</tabstop>
+  <tabstop>ButonNapryagenieChannel_3</tabstop>
+  <tabstop>ButonResistorChannel_3</tabstop>
+  <tabstop>ButonTermoparaChannel_3</tabstop>
+  <tabstop>ButonImpulseChannel_3</tabstop>
+  <tabstop>UnitsChannel_3</tabstop>
+  <tabstop>NignPredelChannel_3</tabstop>
+  <tabstop>VerhnPredelChannel_3</tabstop>
+  <tabstop>NignPredIzmerChannel_3</tabstop>
+  <tabstop>VerhnPredIzmerChannel_3</tabstop>
+  <tabstop>PeriodIzmerChannel_3</tabstop>
+  <tabstop>DiapasonChannel_3</tabstop>
+  <tabstop>Name_Channel_3</tabstop>
+  <tabstop>pushButton_28</tabstop>
+  <tabstop>RegType_Channel_4</tabstop>
+  <tabstop>ButonOtklChannel_4</tabstop>
+  <tabstop>ButonTokChannel_4</tabstop>
+  <tabstop>ButonNapryagenieChannel_4</tabstop>
+  <tabstop>ButonResistorChannel_4</tabstop>
+  <tabstop>ButonTermoparaChannel_4</tabstop>
+  <tabstop>ButonImpulseChannel_4</tabstop>
+  <tabstop>UnitsChannel_4</tabstop>
+  <tabstop>NignPredelChannel_4</tabstop>
+  <tabstop>VerhnPredelChannel_4</tabstop>
+  <tabstop>NignPredIzmerChannel_4</tabstop>
+  <tabstop>VerhnPredIzmerChannel_4</tabstop>
+  <tabstop>PeriodIzmerChannel_4</tabstop>
+  <tabstop>DiapasonChannel_4</tabstop>
+  <tabstop>Name_Channel_4</tabstop>
+  <tabstop>pushButton_29</tabstop>
+  <tabstop>ExtendedOptionsButton_2</tabstop>
+  <tabstop>ChangeDateButton_3</tabstop>
+  <tabstop>ExtendedOptionsButton_3</tabstop>
+  <tabstop>ExtendedOptionsButton_4</tabstop>
+  <tabstop>ExtendedOptionsButton_5</tabstop>
+  <tabstop>ExtendedOptionsButton_6</tabstop>
+  <tabstop>pushButton_30</tabstop>
+  <tabstop>SecurityButton</tabstop>
+  <tabstop>SecurityButton_3</tabstop>
+  <tabstop>SecurityButton_2</tabstop>
+  <tabstop>ChangeDateButton_2</tabstop>
+  <tabstop>SecurityButton_4</tabstop>
  </tabstops>
  <resources/>
  <connections/>

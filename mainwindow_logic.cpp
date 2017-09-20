@@ -257,9 +257,12 @@ void MainWindow::OpenOptionsWindow()
 {
     //здесь запускаем меню обновленное как в эндресе
 
-    StackedOptions *sw= new StackedOptions;
-    sw->exec();
-    return;
+    if (ui->endressmenucheckbox->checkState())
+    {
+        StackedOptions *sw= new StackedOptions;
+        sw->exec();
+        return;
+    }
 
     //startWorkSignal();
 

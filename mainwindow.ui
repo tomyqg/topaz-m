@@ -351,6 +351,29 @@
      <string>В процентах</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="endressmenucheckbox">
+    <property name="geometry">
+     <rect>
+      <x>1140</x>
+      <y>670</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Endress Menu</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>MessagesWidget</zorder>
@@ -365,6 +388,7 @@
    <zorder>arrowscheckBox</zorder>
    <zorder>autoscalecheckbox</zorder>
    <zorder>percentCheckBox</zorder>
+   <zorder>endressmenucheckbox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -372,7 +396,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

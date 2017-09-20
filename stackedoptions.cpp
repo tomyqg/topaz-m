@@ -15,16 +15,16 @@
 #define Channel2Index 11
 #define Channel3Index 12
 #define Channel4Index 13
+#define RegimOtobrageniaIndex 14
+#define PrilogenieIndex 15
 
 StackedOptions::StackedOptions(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StackedOptions)
 {
-
     ui->setupUi(this);
     connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
-        SetStackIndex(MainMenuIndex);
-
+    SetStackIndex(MainMenuIndex);
 }
 
 StackedOptions::~StackedOptions()
@@ -181,5 +181,30 @@ void StackedOptions::on_pushButton_28_clicked()
 
 void StackedOptions::on_pushButton_29_clicked()
 {
-      SetStackIndex(UniversalInputsIndex);
+    SetStackIndex(UniversalInputsIndex);
+}
+
+void StackedOptions::on_pushButton_30_clicked()
+{
+    SetStackIndex(ExtendedOptionsIndex);
+}
+
+void StackedOptions::on_pushButton_36_clicked()
+{
+    SetStackIndex(WorkIndex);
+}
+
+void StackedOptions::on_pushButton_33_clicked()
+{
+    SetStackIndex(RegimOtobrageniaIndex);
+}
+
+void StackedOptions::on_pushButton_18_clicked()
+{
+    SetStackIndex(PrilogenieIndex);
+}
+
+void StackedOptions::on_pushButton_39_clicked()
+{
+    SetStackIndex(ExtendedOptionsIndex);
 }
