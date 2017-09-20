@@ -388,7 +388,7 @@ void StackedOptions::ReadChannelsOptionsFromFile()
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
     ui->PriborIdentifier->setText(CURRENT_VER);
-/*
+
     if (GetCurrentDisplayParametr() == Trends)
     {
         ui->SetTrendsBtn->setChecked(true);
@@ -421,7 +421,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     {
         ui->SetBarsCyfraBtn->setChecked(true);
     }
-*/
+
     int sigtype  = options_channel1.GetSignalType();
     int sigtype2 = options_channel2.GetSignalType();
     int sigtype3 = options_channel3.GetSignalType();
