@@ -591,6 +591,20 @@ void MainWindow::ChangePalette(int i)
         break;
 
 
+    case 7:
+        Channel1Color = ChannelColorNormal = QColor(0xD2, 0x35, 0xD2);
+        Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x8C, 0x00);
+        Channel3Color = Channel3ColorNormal = QColor(0x3D, 0x9A, 0x01);
+        Channel4Color = Channel4ColorNormal = QColor(0xa1, 0xb9, 0x2e);
+
+        channel1object.SetColor(QColor(0xD2, 0x35, 0xD2));
+        channel2object.SetColor( QColor(0xFF, 0x8C, 0x00));
+        channel3object.SetColor(QColor(0x3D, 0x9A, 0x01));
+        channel4object.SetColor (QColor(0xa1, 0xb9, 0x2e));
+
+        break;
+
+
     default:
         Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
         Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);

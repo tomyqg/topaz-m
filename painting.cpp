@@ -771,6 +771,8 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
+
+
     switch( StackedOptions::GetCurrentDisplayParametr())
     {
     case Options::Cyfra:

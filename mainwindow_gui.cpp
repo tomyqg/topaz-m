@@ -105,14 +105,11 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_RelayChanger_toggled(bool checked)
 {
-
     ui->RelayChanger->setText("Сглаживание " + QString::number(checked));
     if (checked)
         ui->customPlot->setAntialiasedElements(QCP::aeAll);
     else
         ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
-
 }
 
 void  MainWindow::destroyedslot(QObject *)
@@ -276,7 +273,11 @@ int MainWindow::GetMonitorHeightPixels()
 }
 
 void MainWindow::SetWindowWidthPixels(int neww)
-{windowwidth = neww;}
+{
+    windowwidth = neww;
+}
 
 void MainWindow::SetWindowHeightPixels(int newh)
-{windowheight = newh;}
+{
+    windowheight = newh;
+}

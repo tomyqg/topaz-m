@@ -121,8 +121,11 @@ private slots:
 
     void on_pushButton_51_clicked();
 
+    void on_pushButton_52_clicked();
+
 private:
     Ui::StackedOptions *ui;
+    bool eventFilter(QObject *object, QEvent *event);
     void ReadChannelsOptionsFromFile();
     void ReadSystemOptionsFromFile();
     void ApplyNewSettingstoOptionsUI();

@@ -30,6 +30,7 @@ int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
 #define UstavkiKanal2Index 19
 #define UstavkiKanal3Index 20
 #define UstavkiKanal4Index 21
+#define Vyhody 22
 
 StackedOptions::StackedOptions(QWidget *parent) :
     QDialog(parent),
@@ -41,6 +42,23 @@ StackedOptions::StackedOptions(QWidget *parent) :
     ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
     ApplyNewSettingstoOptionsUI();
+
+    // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
+
+    QList<QSpinBox*> spinList = StackedOptions::findChildren<QSpinBox*> ();
+
+    for (int i = 0; i < spinList.count(); ++i) {
+        QSpinBox *sb = spinList.at(i);
+        sb->installEventFilter(this);
+    }
+
+    QList<QLineEdit*> lineeditList = StackedOptions::findChildren<QLineEdit*> (  );
+
+    for (int i = 0; i < lineeditList.count(); ++i) {
+        QLineEdit *le = lineeditList.at(i);
+        le->installEventFilter(this);
+    }
+
 }
 
 StackedOptions::~StackedOptions()
@@ -50,7 +68,7 @@ StackedOptions::~StackedOptions()
 
 void StackedOptions::on_pushButton_9_clicked()
 {
-
+    SetStackIndex(Vyhody );
 }
 
 void StackedOptions::SetLabelIndex(int newindex)
@@ -237,7 +255,7 @@ void StackedOptions::on_pushButton_37_clicked()
 
 void StackedOptions::on_pushButton_45_clicked()
 {
-     SetStackIndex(PrilogenieIndex);
+    SetStackIndex(PrilogenieIndex);
 }
 
 void StackedOptions::on_pushButton_38_clicked()
@@ -267,7 +285,7 @@ void StackedOptions::on_pushButton_49_clicked()
 
 void StackedOptions::on_pushButton_50_clicked()
 {
-     SetStackIndex(PredelnieZnacheniaIndex);
+    SetStackIndex(PredelnieZnacheniaIndex);
 }
 
 void StackedOptions::on_pushButton_44_clicked()
@@ -694,16 +712,16 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
 
     // реальное разрешение монитора
 
-//    ui->resolutionlabel->setText(Options::MonitorResolution);
+    //    ui->resolutionlabel->setText(Options::MonitorResolution);
 
-//    if (Options::displayResolution == "1024x768")
-//        ui->comboBox->setCurrentIndex(0);
+    //    if (Options::displayResolution == "1024x768")
+    //        ui->comboBox->setCurrentIndex(0);
 
-//    if (Options::displayResolution == "1280x800")
-//        ui->comboBox->setCurrentIndex(1);
+    //    if (Options::displayResolution == "1280x800")
+    //        ui->comboBox->setCurrentIndex(1);
 
-//    if (Options::displayResolution == "1920x1080")
-//        ui->comboBox->setCurrentIndex(2);
+    //    if (Options::displayResolution == "1920x1080")
+    //        ui->comboBox->setCurrentIndex(2);
 }
 
 void StackedOptions::on_pushButton_51_clicked()
@@ -899,7 +917,7 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathEquation(ui->math_text_channel_4->text());
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
 
-//    SetLogMessagesLimit(ui->spinBox->value());
+    //    SetLogMessagesLimit(ui->spinBox->value());
 }
 
 void StackedOptions::UpdateCurrentDisplayParametr()
@@ -941,4 +959,26 @@ void StackedOptions::UpdateCurrentDisplayParametr()
     {
         SetCurrentDisplayParametr(StackedOptions::BarsCyfra);
     }
+}
+
+void StackedOptions::on_pushButton_52_clicked()
+{
+SetStackIndex(ExtendedOptionsIndex);
+}
+
+bool StackedOptions::eventFilter(QObject *object, QEvent *event)
+{
+    if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") )
+    {
+        Options::olderprop = object->property("text").toString();
+        keyboard kb;
+        kb.setModal(true);
+        kb.exec();
+        object->setProperty("value", kb.getcustomstring() );
+        object->setProperty("text",kb.getcustomstring() );
+        ui->pushButton->setFocus();
+        kb.close();
+        kb.deleteLater();
+    }
+    return QObject::eventFilter(object, event);
 }

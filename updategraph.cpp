@@ -17,8 +17,8 @@ int color2rgbnormal[]={0x00, 0xAE, 0x68};
 int color3rgbnormal[]={0xFF, 0x4C, 0x00};
 int color4rgbnormal[]={0xA1, 0x01, 0xA6};
 
-QColor ChannelColorHighState = QColor(0xA6,0x31,0x00);
-QColor ChannelColorLowState = QColor(0xA6,0x6E,0x00);
+QColor ChannelColorHighState = QColor(0xFF,0x00,0x00);
+QColor ChannelColorLowState = QColor(0xFF,0xCA,0x00);
 
 QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
 QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
