@@ -25,6 +25,8 @@ public:
 
 private slots:
 
+    void Channel1TypeChange(int i);
+
     void SetLabelIndex(int newlabelindex);
 
     void SetStackIndex(int newstackindex);

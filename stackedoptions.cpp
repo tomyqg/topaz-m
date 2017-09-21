@@ -59,6 +59,8 @@ StackedOptions::StackedOptions(QWidget *parent) :
         le->installEventFilter(this);
     }
 
+    connect(ui->buttonGroup,   SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange( int )) );
+
 }
 
 StackedOptions::~StackedOptions()
@@ -80,7 +82,6 @@ void StackedOptions::SetStackIndex(int newstackindex)
 {
     ui->stackedWidget->setCurrentIndex(newstackindex);
 }
-
 
 void StackedOptions::on_pushButton_10_clicked()
 {
@@ -963,7 +964,7 @@ void StackedOptions::UpdateCurrentDisplayParametr()
 
 void StackedOptions::on_pushButton_52_clicked()
 {
-SetStackIndex(ExtendedOptionsIndex);
+    SetStackIndex(ExtendedOptionsIndex);
 }
 
 bool StackedOptions::eventFilter(QObject *object, QEvent *event)
@@ -981,4 +982,138 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
         kb.deleteLater();
     }
     return QObject::eventFilter(object, event);
+}
+
+void StackedOptions::Channel1TypeChange(int i)
+{
+    //    qDebug() << i;
+
+    QStringList qlist;
+    ui->UnitsChannel_1->setEnabled(true);
+    ui->VerhnPredelChannel_1->setEnabled(true);
+    ui->NignPredelChannel_1->setEnabled(true);
+    ui->NignPredIzmerChannel_1->setEnabled(true);
+    ui->VerhnPredIzmerChannel_1->setEnabled(true);
+    ui->PeriodIzmerChannel_1->setEnabled(true);
+
+    switch (i) {
+    case -2:
+    {
+        options_channel1.SetSignalType(ModBus::NoMeasure);
+
+        ui->UnitsChannel_1->setText("None");
+        ui->UnitsChannel_1->setEnabled(false);
+        ui->VerhnPredelChannel_1->setEnabled(false);
+        ui->NignPredelChannel_1->setEnabled(false);
+        ui->NignPredIzmerChannel_1->setEnabled(false);
+        ui->VerhnPredIzmerChannel_1->setEnabled(false);
+        ui->PeriodIzmerChannel_1->setEnabled(false);
+
+        qlist.clear();
+        qlist.append("None");
+        ui->DiapasonChannel_1->clear();
+        ui->DiapasonChannel_1->addItems(qlist);
+
+        break;
+    }
+
+
+
+    case -3: // ButonTokChannel_1
+    {
+        options_channel1.SetSignalType(ModBus::CurrentMeasure);
+        ui->UnitsChannel_1->setText("mA");
+
+        qlist.clear();
+        qlist.append("4-20 мA");
+        qlist.append("0-20 мA");
+        qlist.append("0-5 мA");
+        qlist.append("0-20 мA с корнеизвлеч.");
+        qlist.append("0-20 мA с корнеизвлеч.");
+        qlist.append("±20 мA");
+        ui->DiapasonChannel_1->clear();
+        ui->DiapasonChannel_1->addItems(qlist);
+        break;
+    }
+
+    case -4: //(ui->ButonNapryagenieChannel_1->isChecked())
+    {
+        options_channel1.SetSignalType(ModBus::VoltageMeasure);
+        ui->UnitsChannel_1->setText("V");
+
+        qlist.clear();
+        qlist.append("0-1 В");
+        qlist.append("0-10 В");
+        qlist.append("0-5 В");
+        qlist.append("1-5 В");
+        qlist.append("±150 мВ");
+        qlist.append("±1 мВ");;
+        qlist.append("±10 мВ");
+        qlist.append("±30 мВ");
+        qlist.append("0-1 В с корнеизвлеч.");
+        qlist.append("0-10 В с корнеизвлеч.");
+        qlist.append("1-5 В с корнеизвлеч.");
+        ui->DiapasonChannel_1->clear();
+        ui->DiapasonChannel_1->addItems(qlist);
+        break;
+    }
+
+    case -5: //(ui->ButonResistorChannel_1->isChecked())
+    {
+        options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
+        ui->UnitsChannel_1->setText("°C (RTD)");
+        qlist.clear();
+        qlist.append("Pt100 (IEC)");
+        qlist.append("Pt100 (JIS)");
+        qlist.append("Pt100 (GOST)");
+        qlist.append("Pt500 (IEC)");
+        qlist.append("Pt500 (JIS)");
+        qlist.append("Pt1000 (IEC)");
+        qlist.append("Pt1000 (JIS)");
+        qlist.append("Pt45 (GOST)");
+        qlist.append("Pt50 (GOST)");
+        qlist.append("Cu50(GOST, α=4260)");
+        qlist.append("Cu50 (GOST, α=4280)");
+        qlist.append("Cu53 (GOST, α=4280)");
+        qlist.append("Cu100 (GOST, α=4280)");
+
+        ui->DiapasonChannel_1->clear();
+        ui->DiapasonChannel_1->addItems(qlist);
+        break;
+        break;
+    }
+
+    case -6: //(ui->ButonTermoparaChannel_1->isChecked())
+    {
+        options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
+        ui->UnitsChannel_1->setText("°C (TC)");
+        qlist.clear();
+        qlist.append("Тип А (W5Re-W20Re)");
+        qlist.append("Тип B (Pt30Rh-Pt60Rh)");
+        qlist.append("Тип C (W50Re-W26Re)");
+        qlist.append("Тип D (W30Re-W25Re)");
+        qlist.append("Тип J (Fe-CuNi)");
+        qlist.append("Тип K (NiCr-Ni)");
+        qlist.append("Тип L (Fe-CuNi)");
+        qlist.append("Тип L (NiCr-CuNi, GOST)");
+        qlist.append("Тип N (NiCrSi-NiSi)");
+        qlist.append("Тип R (Pt13Rh-Pt)");
+        qlist.append("Тип S (Pt10Rh-Pt)");
+        qlist.append("Тип T (Cu-CuNi)");
+
+        ui->DiapasonChannel_1->clear();
+        ui->DiapasonChannel_1->addItems(qlist);
+        break;
+    }
+
+    case -7:
+    {
+        options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
+        ui->UnitsChannel_1->setText("imp.cnt");
+        break;
+    }
+    default:
+
+        break;
+    }
 }

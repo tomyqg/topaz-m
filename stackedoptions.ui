@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>22</number>
+    <number>10</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -1451,7 +1451,7 @@
     </widget>
    </widget>
    <widget class="QWidget" name="Channel1">
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="groupBox_1">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1477,7 +1477,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>225</height>
+        <height>181</height>
        </rect>
       </property>
       <property name="font">
@@ -1507,6 +1507,9 @@
          <property name="checked">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -1525,6 +1528,9 @@
          <property name="checked">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -1540,6 +1546,9 @@
          <property name="text">
           <string>Напряжение                     </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -1555,6 +1564,9 @@
          <property name="text">
           <string>Термосопротивление</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -1570,6 +1582,9 @@
          <property name="text">
           <string>Термопара                           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -1588,6 +1603,9 @@
          <property name="text">
           <string>Счетчик Импульсов           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -1668,7 +1686,7 @@
      <widget class="QWidget" name="layoutWidget_10">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>210</x>
         <y>50</y>
         <width>275</width>
         <height>371</height>
@@ -2158,7 +2176,7 @@
      <widget class="QWidget" name="layoutWidget_6">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>210</x>
         <y>50</y>
         <width>275</width>
         <height>371</height>
@@ -2539,7 +2557,7 @@
       <string>Тип регистрации</string>
      </property>
     </widget>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -2565,7 +2583,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>225</height>
+        <height>181</height>
        </rect>
       </property>
       <property name="font">
@@ -2595,6 +2613,9 @@
          <property name="checked">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2613,6 +2634,9 @@
          <property name="checked">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2628,6 +2652,9 @@
          <property name="text">
           <string>Напряжение                     </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2643,6 +2670,9 @@
          <property name="text">
           <string>Термосопротивление</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2658,6 +2688,9 @@
          <property name="text">
           <string>Термопара                           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2676,6 +2709,9 @@
          <property name="text">
           <string>Счетчик Импульсов           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_2</string>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -2880,7 +2916,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>225</height>
+        <height>181</height>
        </rect>
       </property>
       <property name="font">
@@ -2910,6 +2946,9 @@
          <property name="checked">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2928,6 +2967,9 @@
          <property name="checked">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2943,6 +2985,9 @@
          <property name="text">
           <string>Напряжение                     </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2958,6 +3003,9 @@
          <property name="text">
           <string>Термосопротивление</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2973,6 +3021,9 @@
          <property name="text">
           <string>Термопара                           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -2991,6 +3042,9 @@
          <property name="text">
           <string>Счетчик Импульсов           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_3</string>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -3022,7 +3076,7 @@
      <widget class="QWidget" name="layoutWidget_8">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>210</x>
         <y>50</y>
         <width>275</width>
         <height>371</height>
@@ -3561,7 +3615,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>225</height>
+        <height>181</height>
        </rect>
       </property>
       <property name="font">
@@ -3591,6 +3645,9 @@
          <property name="checked">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -3609,6 +3666,9 @@
          <property name="checked">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -3624,6 +3684,9 @@
          <property name="text">
           <string>Напряжение                     </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -3639,6 +3702,9 @@
          <property name="text">
           <string>Термосопротивление</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -3654,6 +3720,9 @@
          <property name="text">
           <string>Термопара                           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -3672,6 +3741,9 @@
          <property name="text">
           <string>Счетчик Импульсов           </string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup_4</string>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -3703,7 +3775,7 @@
      <widget class="QWidget" name="layoutWidget_12">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>210</x>
         <y>50</y>
         <width>275</width>
         <height>371</height>
@@ -9325,4 +9397,10 @@
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_4"/>
+ </buttongroups>
 </ui>
