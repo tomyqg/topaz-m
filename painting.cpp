@@ -7,6 +7,7 @@
 #include "mathresolver.h"
 #include "options.h"
 #include "defines.h"
+#include "stackedoptions.h"
 
 extern QColor Channel1Color;
 extern QColor Channel2Color;
@@ -19,7 +20,6 @@ extern QColor Channel4ColorNormal ;
 extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
-
 
 QString Codestring;
 
@@ -79,7 +79,6 @@ void MainWindow::PaintCyfrasBottom()
     
     painter.begin(ui->MessagesWidget);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    
     
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
@@ -213,8 +212,6 @@ void MainWindow::PaintCyfrasRight()
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
-            //            qDebug() << Chanel->GetChannelName();
-
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
@@ -349,8 +346,6 @@ void MainWindow::PaintCyfrasFullScreen()
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
-            //            qDebug() << Chanel->GetChannelName();
-            
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
@@ -488,8 +483,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
-            //            qDebug() << Chanel->GetChannelName();
-            
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
@@ -778,7 +771,7 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
-    switch( Options::DisplayParametr )
+    switch( StackedOptions::GetCurrentDisplayParametr())
     {
     case Options::Cyfra:
         PaintCyfrasFullScreen();

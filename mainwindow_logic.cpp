@@ -308,9 +308,7 @@ void MainWindow::OpenOptionsWindow()
     }
 
     optionsobj->deleteLater(); // удаляем объект опций
-
     //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
-
 }
 
 void MainWindow::PowerOff()

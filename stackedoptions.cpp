@@ -3,6 +3,8 @@
 #include "defines.h"
 
 QString StackedOptions::calibrationprm = "3383 3962 234 599";
+QString StackedOptions::displayResolution = "1280x800";
+QString StackedOptions::MonitorResolution = "35";
 int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
 
 
@@ -292,9 +294,9 @@ void StackedOptions::ReadSystemOptionsFromFile()
     QString sss = in.readLine();
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
-    Options::calibrationprm = json["Calibration"].toString();
-    Options::DisplayParametr = json["Display"].toInt();
-    Options::displayResolution = json["Resolution"].toString();
+    StackedOptions::calibrationprm = json["Calibration"].toString();
+    StackedOptions::DisplayParametr = json["Display"].toInt();
+    StackedOptions::displayResolution = json["Resolution"].toString();
 
     infile.close();
 }
@@ -808,7 +810,7 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
 
 void StackedOptions::WriteSystemOptionsToFile()
 {
-//    UpdateCurrentDisplayParametr();
+    UpdateCurrentDisplayParametr();
 
     QJsonObject systemoptions;
     systemoptions["Time"] = GetNewTimeString();
@@ -898,4 +900,45 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
 
 //    SetLogMessagesLimit(ui->spinBox->value());
+}
+
+void StackedOptions::UpdateCurrentDisplayParametr()
+{
+    if (ui->SetTrendsBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::Trends);
+    }
+    if (ui->SetPolarBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::Polar);
+    }
+    if (ui->SetBarsBtn->isChecked())
+    {
+
+        SetCurrentDisplayParametr(StackedOptions::Bars);
+    }
+    if (ui->SetTrendsBarsBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::TrendsBars);
+    }
+
+    if (ui->SetCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::Cyfra);
+    }
+
+    if (ui->SetTrendsBarsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::TrendsCyfraBars);
+    }
+
+    if (ui->SetTrendsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::TrendsCyfra);
+    }
+
+    if (ui->SetBarsCyfraBtn->isChecked())
+    {
+        SetCurrentDisplayParametr(StackedOptions::BarsCyfra);
+    }
 }

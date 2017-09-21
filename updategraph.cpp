@@ -6,6 +6,7 @@
 #include "metrologicalcalc.h"
 #include "mathresolver.h"
 #include "options.h"
+#include "stackedoptions.h"
 #include "qglobal.h"
 #include "defines.h"
 
@@ -91,10 +92,9 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
-
     needupdatePainter = 1;
 
-    switch( Options::DisplayParametr )
+    switch( StackedOptions::GetCurrentDisplayParametr() )
     {
     case Options::Trends:
         GrafsUpdateTrends();break;

@@ -21,6 +21,7 @@ class StackedOptions : public QDialog
 public:
     explicit StackedOptions(QWidget *parent = 0);
     ~StackedOptions();
+    static int GetCurrentDisplayParametr() { return DisplayParametr;}
 
 private slots:
 
@@ -128,13 +129,16 @@ private:
     void ApplyNewSettingstoAllChannels();
     void WriteSystemOptionsToFile();
     void WriteAllChannelsOptionsToFile();
+    void UpdateCurrentDisplayParametr() ;
     QString GetNewDateString();
     QString GetNewTimeString();
     QString GetNewDisplayResolution();
-    int GetCurrentDisplayParametr() { return DisplayParametr;}
+
     QString GetCalibration() { return  calibrationprm;}
     static int DisplayParametr;
+    static QString displayResolution, MonitorResolution;
     static QString calibrationprm;
+
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,
@@ -146,6 +150,7 @@ private:
         BarsCyfra = 0x07,
         TrendsCyfraBars = 0x08
     };
+    void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
 };
 
 #endif // STACKEDOPTIONS_H
