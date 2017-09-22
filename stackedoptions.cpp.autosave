@@ -80,9 +80,9 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListNapryagenie.append("0-5 В");
     StringListNapryagenie.append("1-5 В");
     StringListNapryagenie.append("±150 мВ");
-    StringListNapryagenie.append("±1 мВ");;
-    StringListNapryagenie.append("±10 мВ");
-    StringListNapryagenie.append("±30 мВ");
+    StringListNapryagenie.append("±1 В");;
+    StringListNapryagenie.append("±10 В");
+    StringListNapryagenie.append("±30 В");
     StringListNapryagenie.append("0-1 В с корнеизвлеч.");
     StringListNapryagenie.append("0-10 В с корнеизвлеч.");
     StringListNapryagenie.append("1-5 В с корнеизвлеч.");
