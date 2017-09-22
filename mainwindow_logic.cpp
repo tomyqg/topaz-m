@@ -372,17 +372,10 @@ void MainWindow::InitTouchScreen()
     process.startDetached("sudo xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 }
 
-void MainWindow::DateUpdate()
+void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-
-    float destfloat[1024];
-    //    memset( destfloat, 0, 1024 );
-
-    //    // делаем запросики
-    //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-    //    UartDriver::channelinputbuffer[0] = destfloat[0];
 }
 
 void MainWindow::LabelsUpdate()
