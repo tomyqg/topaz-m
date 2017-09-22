@@ -134,7 +134,7 @@ void MainWindow::PaintCyfrasBottom()
             
                 // подписываем единицы измерения
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,channel1object.GetUnitsName());
+            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
             
                 // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);
@@ -268,7 +268,7 @@ void MainWindow::PaintCyfrasRight()
             
             //    // подписываем единицы измерения
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,channel1object.GetUnitsName());
+            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
             
             //    // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);
@@ -397,7 +397,7 @@ void MainWindow::PaintCyfrasFullScreen()
             
             //    // подписываем единицы измерения
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,channel1object.GetUnitsName());
+            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
             
             //    // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);

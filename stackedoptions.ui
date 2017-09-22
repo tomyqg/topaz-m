@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>10</number>
+    <number>13</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -1637,10 +1637,16 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>320</y>
        <width>300</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
      </property>
      <property name="maximumSize">
       <size>
@@ -2050,10 +2056,16 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>350</y>
        <width>300</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
      </property>
      <property name="font">
       <font>
@@ -2071,10 +2083,16 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>430</y>
+       <y>380</y>
        <width>300</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
      </property>
      <property name="font">
       <font>
@@ -2112,10 +2130,16 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
+       <y>290</y>
        <width>300</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
      </property>
      <property name="font">
       <font>
@@ -2146,6 +2170,75 @@
      </property>
      <property name="text">
       <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_68">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>410</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Демпфирование</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="DemphirChannel_1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>301</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+     </property>
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>999.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
      </property>
     </widget>
    </widget>
@@ -2540,7 +2633,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>350</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -2721,7 +2814,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
+       <y>290</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -2742,7 +2835,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>320</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -2769,7 +2862,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>430</y>
+       <y>380</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -2847,13 +2940,82 @@
       <string>Назад</string>
      </property>
     </widget>
+    <widget class="QDoubleSpinBox" name="DemphirChannel_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>301</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+     </property>
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>999.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_69">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>410</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Демпфирование</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Channel3">
     <widget class="QComboBox" name="RegType_Channel_3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>430</y>
+       <y>380</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -3440,7 +3602,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
+       <y>290</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -3483,7 +3645,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>320</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -3510,7 +3672,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>350</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -3546,13 +3708,82 @@
       <string>Назад</string>
      </property>
     </widget>
+    <widget class="QDoubleSpinBox" name="DemphirChannel_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>301</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+     </property>
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>999.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_70">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>410</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Демпфирование</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Channel4">
     <widget class="QComboBox" name="RegType_Channel_4">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>430</y>
+       <y>380</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -4139,7 +4370,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
+       <y>290</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -4182,7 +4413,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>320</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -4209,7 +4440,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>350</y>
        <width>300</width>
        <height>30</height>
       </rect>
@@ -4243,6 +4474,75 @@
      </property>
      <property name="text">
       <string>Назад</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="DemphirChannel_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>301</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+     </property>
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>999.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_71">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>410</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Демпфирование</string>
      </property>
     </widget>
    </widget>

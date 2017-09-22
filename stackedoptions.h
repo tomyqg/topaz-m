@@ -26,6 +26,9 @@ public:
 private slots:
 
     void Channel1TypeChange(int i);
+    void Channel2TypeChange(int i);
+    void Channel3TypeChange(int i);
+    void Channel4TypeChange(int i);
 
     void SetLabelIndex(int newlabelindex);
 
