@@ -50,6 +50,7 @@ void Options::ReadChannelsOptionsFromFile()
     options_channel1.SetMathEquation(ch1.value("MathString").toString());
     options_channel1.SetMathematical(ch1.value("MathWork").toBool());
 
+
     QJsonObject ch2 = array.at(1).toObject();
     options_channel2.SetHigherLimit(ch2.value("HigherLimit").toDouble());
     options_channel2.SetLowerLimit(ch2.value("LowerLimit").toDouble());
@@ -146,6 +147,8 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetChannelName(ch.value("Name").toString());
     this->SetMathematical(ch.value("MathWork").toBool());
     this->SetMathEquation(ch.value("MathString").toString());
+    this->SetDempher(ch.value("Dempher").toDouble());
+    this->SetDiapason(ch.value("Diapason").toInt());
 
     infile.close();
 }

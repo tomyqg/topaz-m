@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>13</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -1477,7 +1477,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>181</height>
+        <height>225</height>
        </rect>
       </property>
       <property name="font">
@@ -2676,7 +2676,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>181</height>
+        <height>225</height>
        </rect>
       </property>
       <property name="font">
@@ -3078,7 +3078,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>181</height>
+        <height>225</height>
        </rect>
       </property>
       <property name="font">
@@ -3846,7 +3846,7 @@
         <x>10</x>
         <y>44</y>
         <width>291</width>
-        <height>181</height>
+        <height>225</height>
        </rect>
       </property>
       <property name="font">
@@ -9699,8 +9699,8 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

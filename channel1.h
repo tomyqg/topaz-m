@@ -17,7 +17,7 @@ public:
 public:
 
     uint16_t GetSignalType();
-    void SetSignalType(uint16_t newsignaltype);
+    int GetDiapason();
     double GetLowerLimit();
     double GetHigherLimit();
     double GetLowerMeasureLimit();
@@ -25,6 +25,8 @@ public:
     double GetMeasurePeriod();
     double GetState1Value();
     double GetState2Value();
+    double GetDempherValue();
+
     double GetCurrentChannelValue();
     double GetValuePercent();
 
@@ -37,8 +39,10 @@ public:
     QString GetMathString();
     QColor GetCurrentColor();
     bool GetConfirmationNeed();
-    void SetConfirmationNeed(bool confirmationstate);
 
+    void SetConfirmationNeed(bool confirmationstate);
+    void SetSignalType(uint16_t newsignaltype);
+    void SetDiapason(int newdiapason);
     void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
     void SetLowerLimit(double newsignaltype);
@@ -56,6 +60,7 @@ public:
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
+    void SetDempher(double newdempher);
     void SetColor(QColor newcolor);
 
     bool IsHighState1Setted();
@@ -87,6 +92,7 @@ private:
     double state1value;
     double state2value;
     double currentvalue;
+    double demphervalue;
 
     QString unitsname;
     QString state1highmessage;
@@ -96,9 +102,9 @@ private:
     QString channelname;
     QString mathequationstring;
 
-    bool needConfirmationchannel;
-
     QColor color; // цвет канала на графике
+    bool needConfirmationchannel;
+    int diapason;
 
 signals:
     void updateUI(const QString text);

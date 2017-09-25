@@ -31,9 +31,20 @@ uint16_t ChannelOptions::GetSignalType()
     return signaltype;
 }
 
+int ChannelOptions::GetDiapason()
+{
+    return diapason;
+}
+
+
 void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
+}
+
+void ChannelOptions::SetDiapason(int newdiapason)
+{
+    this->diapason = newdiapason;
 }
 
 void ChannelOptions::SetUnitsName(QString unitsname)
@@ -162,6 +173,11 @@ double ChannelOptions::GetState2Value()
     return this->state2value;
 }
 
+double ChannelOptions::GetDempherValue()
+{
+    return demphervalue;
+}
+
 bool ChannelOptions::IsHighState1Setted()
 {
     return this->HighState1Setted;
@@ -216,16 +232,18 @@ double ChannelOptions::GetValuePercent()
 {
     float razmah = highermeasurelimit - lowermeasurelimit;
     float x = 100 * (currentvalue - lowermeasurelimit)/razmah;
-//    qDebug() << highermeasurelimit << "highermeasurelimit";
-//    qDebug() << lowermeasurelimit << "lowermeasurelimit";
-//    qDebug() << currentvalue << "currentvalue";
-//    qDebug() << x << "x";
+
     return x;
 }
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = value;
+}
+
+void ChannelOptions::SetDempher(double newdempher)
+{
+    demphervalue = newdempher;
 }
 
 void ChannelOptions::SetColor(QColor newcolor)

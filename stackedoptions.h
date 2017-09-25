@@ -128,6 +128,8 @@ private slots:
 
     void on_pushButton_52_clicked();
 
+    void on_pushButton_14_clicked();
+
 private:
     Ui::StackedOptions *ui;
     bool eventFilter(QObject *object, QEvent *event);
