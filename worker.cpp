@@ -386,15 +386,15 @@ void worker::do_Work()
         int index = 0;
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-//            qDebug() << Chanel->GetChannelName();
+            //            qDebug() << Chanel->GetChannelName();
             if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (UartDriver::needtoupdatechannel[index] == 1) )
             {
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
                 //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-                //ReadModbusData(&device.channel0.Data,&destfloat[0] );
-                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
+                ReadModbusData(&device.channel0.Data,&destfloat[0] );
+                //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
 
                 //currentdata = globalindex;
@@ -407,6 +407,12 @@ void worker::do_Work()
                 }
 
                 UD.writechannelvalue(index,currentdata);
+
+                //UD.writechannelvalue(0, globalindex/2);
+                //UD.writechannelvalue(1, 2*globalindex);
+                //UD.writechannelvalue(2,  mr.SolveEquation("sin(x/5)*50",globalindex) );
+                //UD.writechannelvalue(3, 7*globalindex*-1);
+
             }
             ++index;
         }
@@ -447,7 +453,7 @@ void worker::OpenSerialPort( int )
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
         if( modbus_connect( m_modbus ) == -1 )
         {
-//            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            //            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
 
             emit ModbusConnectionError();
 
