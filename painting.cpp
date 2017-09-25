@@ -26,7 +26,7 @@ QString Codestring;
 void MainWindow::PaintCyfrasBottom()
 {
     // задается вручную
-    int smallrectingleheight = 100; // высота прямоугольничка в пикселях задается вручную
+    int smallrectingleheight = 80; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
@@ -176,22 +176,24 @@ void MainWindow::PaintCyfrasRight()
     channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
     
     // задаем координаты отображения квадратов
-    channel1object.xposition = smallrectinglewidth*3-5;
+    int xpositionall = widgwidth - smallrectinglewidth;
+
+    channel1object.xposition = xpositionall;
     channel1object.yposition = otstupsverhu3;
     channel1object.w = smallrectinglewidth;
     channel1object.h = smallrectingleheight;
     
-    channel2object.xposition = smallrectinglewidth*3-5;
+    channel2object.xposition = xpositionall;
     channel2object.yposition = otstupsverhu2;
     channel2object.w = smallrectinglewidth;
     channel2object.h = smallrectingleheight;
     
-    channel3object.xposition = smallrectinglewidth*3-5;
+    channel3object.xposition = xpositionall;
     channel3object.yposition = otstupsverhu1;
     channel3object.w = smallrectinglewidth;
     channel3object.h = smallrectingleheight;
     
-    channel4object.xposition = smallrectinglewidth*3-5;
+    channel4object.xposition = xpositionall;
     channel4object.yposition = otstupsverhu;
     channel4object.w = smallrectinglewidth;
     channel4object.h = smallrectingleheight;
@@ -604,7 +606,7 @@ void MainWindow::PaintPolarDiagramm()
     
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
-    int newxcenter = 0, newycenter = 550;
+    int newxcenter = 0, newycenter = 500;
     
     centerx1 = centerx2 = centerx3 = centerx4  = 1;
     centery1 = centery3 =  centery2 = centery4 = 1;
@@ -787,12 +789,12 @@ void MainWindow::PaintOnWidget()
         PaintStatesAndAlertsAtTop();
         break;
     case Options::TrendsCyfraBars:
-        PaintStatesAndAlertsAtTop();
         PaintCyfrasBottom();
+        PaintStatesAndAlertsAtTop();
         break;
     case Options::BarsCyfra:
-        PaintStatesAndAlertsAtTop();
         PaintCyfrasBottom();
+        PaintStatesAndAlertsAtTop();
         break;
     case Options::Polar:
         //        PaintStatesAndAlertsAtTop();

@@ -375,7 +375,8 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+//    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+    ui->time_label->setText(local.date().toString("dd.MM.yyyy " ) + local.time().toString());
 }
 
 void MainWindow::LabelsUpdate()
