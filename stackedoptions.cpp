@@ -427,16 +427,17 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         index ++ ;
     }
 
-    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
-    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
-    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
-    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
-
 }
 
 
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
+    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
+    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
+    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
+    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
+
+
     ui->PriborIdentifier->setText(CURRENT_VER);
 
     if (GetCurrentDisplayParametr() == Trends)
@@ -477,10 +478,10 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
 
-    ui->DiapasonChannel_1->clear();
-    ui->DiapasonChannel_2->clear();
-    ui->DiapasonChannel_3->clear();
-    ui->DiapasonChannel_4->clear();
+//    ui->DiapasonChannel_1->clear();
+//    ui->DiapasonChannel_2->clear();
+//    ui->DiapasonChannel_3->clear();
+//    ui->DiapasonChannel_4->clear();
 
     // channel 1
     {
@@ -535,6 +536,9 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         {
             ui->ButonImpulseChannel_1->setChecked(true);
         }
+
+
+        ui->DiapasonChannel_1->setCurrentIndex(options_channel1.GetDempherValue());
     }
 
     // channel 2
@@ -589,6 +593,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         {
             ui->ButonImpulseChannel_2->setChecked(true);
         }
+
+        ui->DiapasonChannel_2->setCurrentIndex(options_channel2.GetDempherValue());
     }
 
     // channel 3
@@ -644,6 +650,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         {
             ui->ButonImpulseChannel_3->setChecked(true);
         }
+
+        ui->DiapasonChannel_3->setCurrentIndex(options_channel3.GetDempherValue());
     }
 
     // channel 4
@@ -699,6 +707,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         {
             ui->ButonImpulseChannel_4->setChecked(true);
         }
+
+        ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDempherValue());
     }
 
     ui->UnitsChannel_1->setText(options_channel1.GetUnitsName());

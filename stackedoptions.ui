@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>13</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -1687,7 +1687,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="title">
-      <string>Параметры Канала 1</string>
+      <string>Параметры Канала</string>
      </property>
      <widget class="QWidget" name="layoutWidget_10">
       <property name="geometry">
@@ -2264,7 +2264,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="title">
-      <string>Параметры Канала 1</string>
+      <string>Параметры Канала</string>
      </property>
      <widget class="QWidget" name="layoutWidget_6">
       <property name="geometry">
@@ -3233,7 +3233,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="title">
-      <string>Параметры Канала 1</string>
+      <string>Параметры Канала</string>
      </property>
      <widget class="QWidget" name="layoutWidget_8">
       <property name="geometry">
@@ -4001,7 +4001,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="title">
-      <string>Параметры Канала 1</string>
+      <string>Параметры Канала</string>
      </property>
      <widget class="QWidget" name="layoutWidget_12">
       <property name="geometry">
