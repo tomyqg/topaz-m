@@ -75,9 +75,9 @@ void Options::WriteAllChannelsOptionsToFile()
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
-
             settings.append(channeljsonobj);
         }
+
 
     channels["count"] = ChannelsObjectsList.length();
     channels["channels"] = settings;

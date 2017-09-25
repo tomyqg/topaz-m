@@ -89,34 +89,34 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListNapryagenie.append("0-10 В с корнеизвлеч.");
     StringListNapryagenie.append("1-5  В с корнеизвлеч.");
 
-    StringListRTD.clear();
-    StringListRTD.append("Pt100  (IEC)");
-    StringListRTD.append("Pt100  (JIS)");
-    StringListRTD.append("Pt100  (GOST)");
-    StringListRTD.append("Pt500  (IEC)");
-    StringListRTD.append("Pt500  (JIS)");
-    StringListRTD.append("Pt1000 (IEC)");
-    StringListRTD.append("Pt1000 (JIS)");
-    StringListRTD.append("Pt45   (GOST)");
-    StringListRTD.append("Pt50   (GOST)");
-    StringListRTD.append("Cu50   (GOST, α=4260)");
-    StringListRTD.append("Cu50   (GOST, α=4280)");
-    StringListRTD.append("Cu53   (GOST, α=4280)");
-    StringListRTD.append("Cu100  (GOST, α=4280)");
-
     StringListTC.clear();
-    StringListTC.append("Тип А (W5Re-W20Re)");
-    StringListTC.append("Тип B (Pt30Rh-Pt60Rh)");
-    StringListTC.append("Тип C (W50Re-W26Re)");
-    StringListTC.append("Тип D (W30Re-W25Re)");
-    StringListTC.append("Тип J (Fe-CuNi)");
-    StringListTC.append("Тип K (NiCr-Ni)");
-    StringListTC.append("Тип L (Fe-CuNi)");
-    StringListTC.append("Тип L (NiCr-CuNi, GOST)");
-    StringListTC.append("Тип N (NiCrSi-NiSi)");
-    StringListTC.append("Тип R (Pt13Rh-Pt)");
-    StringListTC.append("Тип S (Pt10Rh-Pt)");
-    StringListTC.append("Тип T (Cu-CuNi)");
+    StringListTC.append("Pt100  (IEC)");
+    StringListTC.append("Pt100  (JIS)");
+    StringListTC.append("Pt100  (GOST)");
+    StringListTC.append("Pt500  (IEC)");
+    StringListTC.append("Pt500  (JIS)");
+    StringListTC.append("Pt1000 (IEC)");
+    StringListTC.append("Pt1000 (JIS)");
+    StringListTC.append("Pt45   (GOST)");
+    StringListTC.append("Pt50   (GOST)");
+    StringListTC.append("Cu50   (GOST, a=4260)");
+    StringListTC.append("Cu50   (GOST, a=4280)");
+    StringListTC.append("Cu53   (GOST, a=4280)");
+    StringListTC.append("Cu100  (GOST, a=4280)");
+
+    StringListRTD.clear();
+    StringListRTD.append("Тип А (W5Re-W20Re)");
+    StringListRTD.append("Тип B (Pt30Rh-Pt60Rh)");
+    StringListRTD.append("Тип C (W50Re-W26Re)");
+    StringListRTD.append("Тип D (W30Re-W25Re)");
+    StringListRTD.append("Тип J (Fe-CuNi)");
+    StringListRTD.append("Тип K (NiCr-Ni)");
+    StringListRTD.append("Тип L (Fe-CuNi)");
+    StringListRTD.append("Тип L (NiCr-CuNi, GOST)");
+    StringListRTD.append("Тип N (NiCrSi-NiSi)");
+    StringListRTD.append("Тип R (Pt13Rh-Pt)");
+    StringListRTD.append("Тип S (Pt10Rh-Pt)");
+    StringListRTD.append("Тип T (Cu-CuNi)");
 }
 
 StackedOptions::~StackedOptions()
@@ -388,77 +388,50 @@ void StackedOptions::ReadChannelsOptionsFromFile()
     QJsonArray array = json["channels"].toArray();
     infile.close();
 
-    QJsonObject ch1 = array.at(0).toObject();
-    options_channel1.SetHigherLimit(ch1.value("HigherLimit").toDouble());
-    options_channel1.SetLowerLimit(ch1.value("LowerLimit").toDouble());
-    options_channel1.SetHigherMeasureLimit(ch1.value("HigherMeasLimit").toDouble());
-    options_channel1.SetLowerMeasureLimit(ch1.value("LowerMeasLimit").toDouble());
-    options_channel1.SetSignalType(ch1.value("Type").toDouble());
-    options_channel1.SetUnitsName(ch1.value("Units").toString());
-    options_channel1.SetMeasurePeriod(ch1.value("Period").toDouble());
-    options_channel1.SetState1HighMessage(ch1.value("State1HighMessage").toString());
-    options_channel1.SetState1LowMessage(ch1.value("State1LowMessage").toString());
-    options_channel1.SetState2HighMessage(ch1.value("State2HighMessage").toString());
-    options_channel1.SetState2LowMessage(ch1.value("State2LowMessage").toString());
-    options_channel1.SetState1Value(ch1.value("State1Value").toDouble());
-    options_channel1.SetState2Value(ch1.value("State2Value").toDouble());
-    options_channel1.SetChannelName(ch1.value("Name").toString());
-    options_channel1.SetMathEquation(ch1.value("MathString").toString());
-    options_channel1.SetMathematical(ch1.value("MathWork").toBool());
 
-    QJsonObject ch2 = array.at(1).toObject();
-    options_channel2.SetHigherLimit(ch2.value("HigherLimit").toDouble());
-    options_channel2.SetLowerLimit(ch2.value("LowerLimit").toDouble());
-    options_channel2.SetHigherMeasureLimit(ch2.value("HigherMeasLimit").toDouble());
-    options_channel2.SetLowerMeasureLimit(ch2.value("LowerMeasLimit").toDouble());
-    options_channel2.SetSignalType(ch2.value("Type").toDouble());
-    options_channel2.SetUnitsName(ch2.value("Units").toString());
-    options_channel2.SetMeasurePeriod(ch2.value("Period").toDouble());
-    options_channel2.SetState1HighMessage(ch2.value("State1HighMessage").toString());
-    options_channel2.SetState1LowMessage(ch2.value("State1LowMessage").toString());
-    options_channel2.SetState2HighMessage(ch2.value("State2HighMessage").toString());
-    options_channel2.SetState2LowMessage(ch2.value("State2LowMessage").toString());
-    options_channel2.SetState1Value(ch2.value("State1Value").toDouble());
-    options_channel2.SetState2Value(ch2.value("State2Value").toDouble());
-    options_channel2.SetChannelName(ch2.value("Name").toString());
-    options_channel2.SetMathEquation(ch2.value("MathString").toString());
-    options_channel2.SetMathematical(ch2.value("MathWork").toBool());
+    QJsonArray settings;
 
-    QJsonObject ch3 = array.at(2).toObject();
-    options_channel3.SetHigherLimit(ch3.value("HigherLimit").toDouble());
-    options_channel3.SetLowerLimit(ch3.value("LowerLimit").toDouble());
-    options_channel3.SetHigherMeasureLimit(ch3.value("HigherMeasLimit").toDouble());
-    options_channel3.SetLowerMeasureLimit(ch3.value("LowerMeasLimit").toDouble());
-    options_channel3.SetSignalType(ch3.value("Type").toDouble());
-    options_channel3.SetUnitsName(ch3.value("Units").toString());
-    options_channel3.SetMeasurePeriod(ch3.value("Period").toDouble());
-    options_channel3.SetState1HighMessage(ch3.value("State1HighMessage").toString());
-    options_channel3.SetState1LowMessage(ch3.value("State1LowMessage").toString());
-    options_channel3.SetState2HighMessage(ch3.value("State2HighMessage").toString());
-    options_channel3.SetState2LowMessage(ch3.value("State2LowMessage").toString());
-    options_channel3.SetState1Value(ch3.value("State1Value").toDouble());
-    options_channel3.SetState2Value(ch3.value("State2Value").toDouble());
-    options_channel3.SetChannelName(ch3.value("Name").toString());
-    options_channel3.SetMathEquation(ch3.value("MathString").toString());
-    options_channel3.SetMathematical(ch3.value("MathWork").toBool());
+    QList<ChannelOptions *> ChannelsObjectsList;
 
-    QJsonObject ch4 = array.at(3).toObject();
-    options_channel4.SetHigherLimit(ch4.value("HigherLimit").toDouble());
-    options_channel4.SetLowerLimit(ch4.value("LowerLimit").toDouble());
-    options_channel4.SetHigherMeasureLimit(ch4.value("HigherMeasLimit").toDouble());
-    options_channel4.SetLowerMeasureLimit(ch4.value("LowerMeasLimit").toDouble());
-    options_channel4.SetSignalType(ch4.value("Type").toDouble());
-    options_channel4.SetUnitsName(ch4.value("Units").toString());
-    options_channel4.SetMeasurePeriod(ch4.value("Period").toDouble());
-    options_channel4.SetState1HighMessage(ch4.value("State1HighMessage").toString());
-    options_channel4.SetState1LowMessage(ch4.value("State1LowMessage").toString());
-    options_channel4.SetState2HighMessage(ch4.value("State2HighMessage").toString());
-    options_channel4.SetState2LowMessage(ch4.value("State2LowMessage").toString());
-    options_channel4.SetState1Value(ch4.value("State1Value").toDouble());
-    options_channel4.SetState2Value(ch4.value("State2Value").toDouble());
-    options_channel4.SetChannelName(ch4.value("Name").toString());
-    options_channel4.SetMathEquation(ch4.value("MathString").toString());
-    options_channel4.SetMathematical(ch4.value("MathWork").toBool());
+    // Запихиваем адреса объектов каналов чтобы работать не с копиями а с оригиналами объектов
+    ChannelsObjectsList.append(&options_channel1);
+    ChannelsObjectsList.append(&options_channel2);
+    ChannelsObjectsList.append(&options_channel3);
+    ChannelsObjectsList.append(&options_channel4);
+    QJsonObject jsonobj;
+
+    int index = 0;
+
+
+    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
+        jsonobj = array.at(index).toObject();
+
+        Channel->SetHigherLimit(jsonobj.value("HigherLimit").toDouble());
+        Channel->SetLowerLimit(jsonobj.value("LowerLimit").toDouble());
+        Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
+        Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
+        Channel->SetSignalType(jsonobj.value("Type").toDouble());
+        Channel->SetUnitsName(jsonobj.value("Units").toString());
+        Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
+        Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
+        Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
+        Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
+        Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
+        Channel->SetState1Value(jsonobj.value("State1Value").toDouble());
+        Channel->SetState2Value(jsonobj.value("State2Value").toDouble());
+        Channel->SetChannelName(jsonobj.value("Name").toString());
+        Channel->SetMathEquation(jsonobj.value("MathString").toString());
+        Channel->SetMathematical(jsonobj.value("MathWork").toBool());
+        Channel->SetDiapason(jsonobj.value("Diapason").toDouble());
+
+        index ++ ;
+    }
+
+    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
+    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
+    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
+    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
+
 }
 
 
@@ -504,6 +477,11 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
 
+    ui->DiapasonChannel_1->clear();
+    ui->DiapasonChannel_2->clear();
+    ui->DiapasonChannel_3->clear();
+    ui->DiapasonChannel_4->clear();
+
     // channel 1
     {
         if (sigtype == ModBus::NoMeasure)
@@ -531,21 +509,26 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         if (sigtype == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_1->setChecked(true);
+            ui->DiapasonChannel_1->addItems(StringListTok);
         }
 
         if (sigtype == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_1->setChecked(true);
+            ui->DiapasonChannel_1->addItems(StringListNapryagenie);
+
         }
 
         if (sigtype == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_1->setChecked(true);
+            ui->DiapasonChannel_1->addItems(StringListRTD);
         }
 
         if (sigtype == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_1->setChecked(true);
+            ui->DiapasonChannel_1->addItems(StringListTC);
         }
 
         if (sigtype == ModBus::ImpulseCounterMeasure)
@@ -580,21 +563,26 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         if (sigtype2 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_2->setChecked(true);
+            ui->DiapasonChannel_2->clear();
+            ui->DiapasonChannel_2->addItems(StringListTok);
         }
 
         if (sigtype2 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_2->setChecked(true);
+            ui->DiapasonChannel_2->addItems(StringListNapryagenie);
         }
 
         if (sigtype2 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_2->setChecked(true);
+            ui->DiapasonChannel_2->addItems(StringListRTD);
         }
 
         if (sigtype2 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_2->setChecked(true);
+            ui->DiapasonChannel_2->addItems(StringListTC);
         }
 
         if (sigtype2 == ModBus::ImpulseCounterMeasure)
@@ -630,21 +618,26 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         if (sigtype3 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_3->setChecked(true);
+            ui->DiapasonChannel_3->clear();
+            ui->DiapasonChannel_3->addItems(StringListTok);
         }
 
         if (sigtype3 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_3->setChecked(true);
+            ui->DiapasonChannel_3->addItems(StringListNapryagenie);
         }
 
         if (sigtype3 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_3->setChecked(true);
+            ui->DiapasonChannel_3->addItems(StringListRTD);
         }
 
         if (sigtype3 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_3->setChecked(true);
+            ui->DiapasonChannel_3->addItems(StringListTC);
         }
 
         if (sigtype3 == ModBus::ImpulseCounterMeasure)
@@ -680,21 +673,26 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         if (sigtype4 == ModBus::CurrentMeasure)
         {
             ui->ButonTokChannel_4->setChecked(true);
+            ui->DiapasonChannel_4->clear();
+            ui->DiapasonChannel_4->addItems(StringListTok);
         }
 
         if (sigtype4 == ModBus::VoltageMeasure)
         {
             ui->ButonNapryagenieChannel_4->setChecked(true);
+            ui->DiapasonChannel_4->addItems(StringListNapryagenie);
         }
 
         if (sigtype4 == ModBus::TermoResistanceMeasure)
         {
             ui->ButonResistorChannel_4->setChecked(true);
+            ui->DiapasonChannel_4->addItems(StringListRTD);
         }
 
         if (sigtype4 == ModBus::TermoCoupleMeasure)
         {
             ui->ButonTermoparaChannel_4->setChecked(true);
+            ui->DiapasonChannel_4->addItems(StringListTC);
         }
 
         if (sigtype4 == ModBus::ImpulseCounterMeasure)
@@ -718,6 +716,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->Name_Channel_1->setText(options_channel1.GetChannelName());
     ui->math_text_channel_1->setText(options_channel1.GetMathString());
     ui->math_checkbox_channel_1->setChecked(options_channel1.IsChannelMathematical());
+    ui->DemphirChannel_1->setValue(options_channel1.GetDempherValue());
+    ui->DiapasonChannel_1->setCurrentIndex(options_channel1.GetDiapason());
 
     ui->UnitsChannel_2->setText(options_channel2.GetUnitsName());
     ui->VerhnPredelChannel_2->setValue(options_channel2.GetHigherLimit());
@@ -734,6 +734,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->Name_Channel_2->setText(options_channel2.GetChannelName());
     ui->math_text_channel_2->setText(options_channel2.GetMathString());
     ui->math_checkbox_channel_2->setChecked(options_channel2.IsChannelMathematical());
+    ui->DemphirChannel_2->setValue(options_channel2.GetDempherValue());
+    ui->DiapasonChannel_2->setCurrentIndex(options_channel2.GetDiapason());
 
     ui->UnitsChannel_3->setText(options_channel3.GetUnitsName());
     ui->VerhnPredelChannel_3->setValue(options_channel3.GetHigherLimit());
@@ -750,6 +752,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->Name_Channel_3->setText(options_channel3.GetChannelName());
     ui->math_text_channel_3->setText(options_channel3.GetMathString());
     ui->math_checkbox_channel_3->setChecked(options_channel3.IsChannelMathematical());
+    ui->DemphirChannel_3->setValue(options_channel3.GetDempherValue());
+    ui->DiapasonChannel_3->setCurrentIndex(options_channel3.GetDiapason());
 
     ui->UnitsChannel_4->setText(options_channel4.GetUnitsName());
     ui->VerhnPredelChannel_4->setValue(options_channel4.GetHigherLimit());
@@ -766,6 +770,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->Name_Channel_4->setText(options_channel4.GetChannelName());
     ui->math_text_channel_4->setText(options_channel4.GetMathString());
     ui->math_checkbox_channel_4->setChecked(options_channel4.IsChannelMathematical());
+    ui->DemphirChannel_4->setValue(options_channel4.GetDempherValue());
+    ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDiapason());
 
     // реальное разрешение монитора
 
@@ -801,6 +807,7 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
     QJsonObject channeljsonobj,channels;
     QJsonArray settings;
 
+    int m = 0 ;
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
             channeljsonobj["Type"] = Channel->GetSignalType();
             channeljsonobj["Name"] = Channel->GetChannelName();
@@ -822,6 +829,8 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
 
             settings.append(channeljsonobj);
+
+            ++m;
         }
 
     channels["count"] = ChannelsObjectsList.length();
@@ -876,6 +885,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel1.SetChannelName(ui->Name_Channel_1->text());
     options_channel1.SetMathEquation(ui->math_text_channel_1->text());
     options_channel1.SetMathematical(ui->math_checkbox_channel_1->isChecked());
+    options_channel1.SetDempher(ui->DemphirChannel_1->value());
+    options_channel1.SetDiapason(ui->DiapasonChannel_1->currentIndex());
 
 
 
@@ -894,6 +905,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel2.SetChannelName(ui->Name_Channel_2->text());
     options_channel2.SetMathEquation(ui->math_text_channel_2->text());
     options_channel2.SetMathematical(ui->math_checkbox_channel_2->isChecked());
+    options_channel2.SetDempher(ui->DemphirChannel_2->value());
+    options_channel2.SetDiapason(ui->DiapasonChannel_2->currentIndex());
 
     options_channel3.SetUnitsName(ui->UnitsChannel_3->text());
     options_channel3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
@@ -910,6 +923,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel3.SetChannelName(ui->Name_Channel_3->text());
     options_channel3.SetMathEquation(ui->math_text_channel_3->text());
     options_channel3.SetMathematical(ui->math_checkbox_channel_3->isChecked());
+    options_channel3.SetDempher(ui->DemphirChannel_3->value());
+    options_channel3.SetDiapason(ui->DiapasonChannel_3->currentIndex());
 
     options_channel4.SetUnitsName(ui->UnitsChannel_4->text());
     options_channel4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
@@ -926,6 +941,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetChannelName(ui->Name_Channel_4->text());
     options_channel4.SetMathEquation(ui->math_text_channel_4->text());
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
+    options_channel4.SetDempher(ui->DemphirChannel_4->value());
+    options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
 
     //    SetLogMessagesLimit(ui->spinBox->value());
 }
