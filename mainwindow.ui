@@ -428,7 +428,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="ArchiveButton">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -454,7 +454,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <string>Архив</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="WorkButton">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -496,8 +496,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <zorder>percentCheckBox</zorder>
    <zorder>endressmenucheckbox</zorder>
    <zorder>MessagesWidget</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_5</zorder>
+   <zorder>ArchiveButton</zorder>
+   <zorder>WorkButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

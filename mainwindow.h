@@ -97,7 +97,9 @@ private:
     void PaintPolarDiagramm();
     void PaintStatesAndAlertsAtTop();
     void OpenMessagesWindow();
-    void OpenOptionsWindow();
+    void OpenOptionsWindow( int index);
+    void OpenWorkWindow( );
+    void OpenArchiveWindow( );
     void DateUpdate();
     void PowerOff();
     void CloseApplication();
@@ -144,6 +146,10 @@ private slots:
     void on_RelayChanger_toggled(bool checked);
     void sendModbusRequest( );
     void ChangePalette(int i);
+    void on_WorkButton_clicked();
+
+    void on_ArchiveButton_clicked();
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);

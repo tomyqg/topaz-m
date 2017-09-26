@@ -355,7 +355,6 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     }
 }
 
-
 void worker::do_Work()
 {
     double mathresult;
@@ -381,7 +380,7 @@ void worker::do_Work()
         globalindex++;
 
         if (globalindex > 215)
-            globalindex = - 15;
+            globalindex = - 50;
 
         int index = 0;
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
@@ -393,12 +392,9 @@ void worker::do_Work()
                 UartDriver::needtoupdatechannel[index] = 0;
 
                 //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-                ReadModbusData(&device.channel0.Data,&destfloat[0] );
+                //                ReadModbusData(&device.channel0.Data,&destfloat[0] );
                 //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
-
-                //currentdata = globalindex;
-                //currentdata = globalindex*(index + 2)*5;
 
                 if (Chanel->IsChannelMathematical())
                 {
@@ -406,13 +402,23 @@ void worker::do_Work()
                     currentdata = mathresult;
                 }
 
+                switch (index) {
+                case 0:
+                    currentdata = globalindex/2;
+                    break;
+                case 1:
+                    currentdata = 2*globalindex;
+                    break;
+                case 2:
+                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                    break;
+                case 3:
+                    currentdata =  -2*globalindex;
+                    break;
+                default:
+                    break;
+                }
                 UD.writechannelvalue(index,currentdata);
-
-                //UD.writechannelvalue(0, globalindex/2);
-                //UD.writechannelvalue(1, 2*globalindex);
-                //UD.writechannelvalue(2,  mr.SolveEquation("sin(x/5)*50",globalindex) );
-                //UD.writechannelvalue(3, 7*globalindex*-1);
-
             }
             ++index;
         }
@@ -431,7 +437,6 @@ void worker::StopWorkSlot()
     isrunning = false;
     emit stopped();
     this->thread()->usleep(50000);
-
 }
 
 void worker::StartWorkSlot()
@@ -439,7 +444,6 @@ void worker::StartWorkSlot()
     isstopped = false;
     isrunning = true;
     emit running();
-
     do_Work();
 }
 
@@ -454,10 +458,7 @@ void worker::OpenSerialPort( int )
         if( modbus_connect( m_modbus ) == -1 )
         {
             //            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
-
             emit ModbusConnectionError();
-
-
         }
         else
         {

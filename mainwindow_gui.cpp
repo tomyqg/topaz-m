@@ -93,9 +93,19 @@ void MainWindow::updateDateLabel()
     DateUpdate();
 }
 
+void MainWindow::on_WorkButton_clicked()
+{
+    OpenWorkWindow();
+}
+
+void MainWindow::on_ArchiveButton_clicked()
+{
+    OpenArchiveWindow();
+}
+
 void MainWindow::on_pushButton_2_clicked()
 {
-    OpenOptionsWindow();
+    OpenOptionsWindow(0);
 }
 
 void MainWindow::on_pushButton_4_clicked()

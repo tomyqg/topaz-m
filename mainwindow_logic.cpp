@@ -253,13 +253,13 @@ void MainWindow::DelaySec(int n)
 }
 
 
-void MainWindow::OpenOptionsWindow()
+void MainWindow::OpenOptionsWindow( int index )
 {
     //здесь запускаем меню обновленное как в эндресе
 
     if (ui->endressmenucheckbox->checkState())
     {
-        StackedOptions *sw= new StackedOptions;
+        StackedOptions *sw= new StackedOptions(index,0);
         sw->exec();
         //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
         channel1object.ReadSingleChannelOptionFromFile(1);
@@ -309,6 +309,17 @@ void MainWindow::OpenOptionsWindow()
 
     optionsobj->deleteLater(); // удаляем объект опций
     //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
+}
+
+void MainWindow::OpenArchiveWindow()
+{
+    OpenOptionsWindow(23);
+}
+
+
+void MainWindow::OpenWorkWindow()
+{
+    OpenOptionsWindow(2);
 }
 
 void MainWindow::PowerOff()

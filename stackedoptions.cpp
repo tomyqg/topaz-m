@@ -31,9 +31,9 @@ int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
 #define UstavkiKanal3Index 20
 #define UstavkiKanal4Index 21
 #define Vyhody 22
+#define ArchiveIndex 23
 
-
-StackedOptions::StackedOptions(QWidget *parent) :
+StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StackedOptions)
 {
@@ -98,8 +98,8 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListRTD.append("Тип T (Cu-CuNi)");
 
     connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
-    SetStackIndex(MainMenuIndex);
 
+    SetStackIndex(pageindex);
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
 
@@ -117,10 +117,10 @@ StackedOptions::StackedOptions(QWidget *parent) :
         le->installEventFilter(this);
     }
 
-    connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange( int )) );
-    connect(ui->buttonGroup_2,SIGNAL(buttonClicked( int )), this, SLOT(Channel2TypeChange( int )) );
-    connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange( int )) );
-    connect(ui->buttonGroup_4,SIGNAL(buttonClicked( int )), this, SLOT(Channel4TypeChange( int )) );
+    connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange(  )) );
+    connect(ui->buttonGroup_2,SIGNAL(buttonClicked( int )), this, SLOT(Channel2TypeChange(  )) );
+    connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange(  )) );
+    connect(ui->buttonGroup_4,SIGNAL(buttonClicked( int )), this, SLOT(Channel4TypeChange(  )) );
 
     ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
@@ -397,7 +397,6 @@ void StackedOptions::ReadChannelsOptionsFromFile()
     QJsonArray array = json["channels"].toArray();
     infile.close();
 
-
     QJsonArray settings;
 
     QList<ChannelOptions *> ChannelsObjectsList;
@@ -420,6 +419,7 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
         Channel->SetSignalType(jsonobj.value("Type").toInt());
+        //        Channel->SetSignalType(index);
         Channel->SetUnitsName(jsonobj.value("Units").toString());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
         Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
@@ -434,9 +434,8 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetDiapason(jsonobj.value("Diapason").toInt());
         Channel->SetDempher(jsonobj.value("Dempher").toDouble());
 
-//        qDebug() <<  index << ":" << jsonobj.value("Type").toInt() <<  " jsonobj.value(Type).toDouble() ";
-
-        qDebug() <<  index << Channel->GetSignalType() << "xxx Channel->GetSignalType()";
+        //        qDebug() <<  index << ":" << jsonobj.value("Type").toInt() <<  " jsonobj.value(Type).toInt() ";
+        //        qDebug() <<  index << Channel->GetSignalType() << "xxx Channel->GetSignalType()";
 
         index ++ ;
     }
@@ -836,7 +835,6 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
 
         channeljsonobj["Type"] = Channel->GetSignalType();
-//        channeljsonobj["Type"] = 5-m;
         channeljsonobj["Name"] = Channel->GetChannelName();
         channeljsonobj["Units"] = Channel->GetUnitsName();
         channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
@@ -855,10 +853,8 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
         channeljsonobj["Diapason"] = Channel->GetDiapason();
         channeljsonobj["Dempher"] = Channel->GetDempherValue();
 
-//        qDebug() <<  m << ":" << Channel->GetDempherValue() <<  "  Channel->GetDempherValue() ";
-
+        //qDebug() <<  m << ":" << Channel->GetSignalType()  <<  "yyy  Channel->GetSignalType() ";
         settings.append(channeljsonobj);
-
         ++m;
     }
 
@@ -916,8 +912,6 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel1.SetMathematical(ui->math_checkbox_channel_1->isChecked());
     options_channel1.SetDempher(ui->DemphirChannel_1->value());
     options_channel1.SetDiapason(ui->DiapasonChannel_1->currentIndex());
-
-
 
     options_channel2.SetUnitsName(ui->UnitsChannel_2->text());
     options_channel2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
@@ -980,6 +974,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
 
     //    SetLogMessagesLimit(ui->spinBox->value());
+}
+
+void StackedOptions::InitiateArchive()
+{
+
+    ui->customPlot->yAxis->setRange(-300, 500);
+    ui->customPlot->xAxis->setRange(-300, 300);
+
 }
 
 void StackedOptions::UpdateCurrentDisplayParametr()
@@ -1045,24 +1047,16 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
     return QObject::eventFilter(object, event);
 }
 
-void StackedOptions::Channel1TypeChange(int i)
+void StackedOptions::Channel1TypeChange()
 {
+    ui->DiapasonChannel_1->clear();
 
-    qDebug() << i << "index";
-    QStringList qlist;
-    ui->UnitsChannel_1->setEnabled(true);
-    ui->VerhnPredelChannel_1->setEnabled(true);
-    ui->NignPredelChannel_1->setEnabled(true);
-    ui->NignPredIzmerChannel_1->setEnabled(true);
-    ui->VerhnPredIzmerChannel_1->setEnabled(true);
-    ui->PeriodIzmerChannel_1->setEnabled(true);
 
-    switch (i) {
-    case -2:
+    if (ui->ButonOtklChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::NoMeasure);
 
-        ui->UnitsChannel_1->setText("Нет");
+        ui->UnitsChannel_1->setText("None");
         ui->UnitsChannel_1->setEnabled(false);
         ui->VerhnPredelChannel_1->setEnabled(false);
         ui->NignPredelChannel_1->setEnabled(false);
@@ -1070,76 +1064,63 @@ void StackedOptions::Channel1TypeChange(int i)
         ui->VerhnPredIzmerChannel_1->setEnabled(false);
         ui->PeriodIzmerChannel_1->setEnabled(false);
 
-        ui->DiapasonChannel_1->clear();
         ui->DiapasonChannel_1->addItems(StringListNone);
-
-        break;
+    }
+    else
+    {
+        ui->UnitsChannel_1->setEnabled(true);
+        ui->VerhnPredelChannel_1->setEnabled(true);
+        ui->NignPredelChannel_1->setEnabled(true);
+        ui->NignPredIzmerChannel_1->setEnabled(true);
+        ui->VerhnPredIzmerChannel_1->setEnabled(true);
+        ui->PeriodIzmerChannel_1->setEnabled(true);
     }
 
-    case -3: // ButonTokChannel_1
+    if (ui->ButonTokChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_1->setText("mA");
-        ui->DiapasonChannel_1->clear();
+
         ui->DiapasonChannel_1->addItems(StringListTok);
-        break;
+
     }
 
-    case -4: //(ui->ButonNapryagenieChannel_1->isChecked())
+    if (ui->ButonNapryagenieChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_1->setText("V");
-        ui->DiapasonChannel_1->clear();
         ui->DiapasonChannel_1->addItems(StringListNapryagenie);
-        break;
     }
 
-    case -5: //(ui->ButonResistorChannel_1->isChecked())
+    if (ui->ButonResistorChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
         ui->UnitsChannel_1->setText("°C (RTD)");
-        ui->DiapasonChannel_1->clear();
         ui->DiapasonChannel_1->addItems(StringListRTD);
-        break;
-        break;
     }
 
-    case -6: //(ui->ButonTermoparaChannel_1->isChecked())
+    if (ui->ButonTermoparaChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
         ui->UnitsChannel_1->setText("°C (TC)");
-        ui->DiapasonChannel_1->clear();
         ui->DiapasonChannel_1->addItems(StringListTC);
-        break;
     }
 
-    case -7:
+    if (ui->ButonImpulseChannel_1->isChecked())
     {
         options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
         ui->UnitsChannel_1->setText("imp.cnt");
-        break;
-    }
-    default:
-
-        break;
     }
 }
 
-void StackedOptions::Channel2TypeChange(int i)
+void StackedOptions::Channel2TypeChange()
 {
-    ui->UnitsChannel_2->setEnabled(true);
-    ui->VerhnPredelChannel_2->setEnabled(true);
-    ui->NignPredelChannel_2->setEnabled(true);
-    ui->NignPredIzmerChannel_2->setEnabled(true);
-    ui->VerhnPredIzmerChannel_2->setEnabled(true);
-    ui->PeriodIzmerChannel_2->setEnabled(true);
+    ui->DiapasonChannel_2->clear();
 
-    switch (i) {
-    case -2:
+    if (ui->ButonOtklChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::NoMeasure);
-
-        ui->UnitsChannel_2->setText("Нет");
+        options_channel2.SetSignalType(ModBus::NoMeasure);
+        ui->UnitsChannel_2->setText("None");
         ui->UnitsChannel_2->setEnabled(false);
         ui->VerhnPredelChannel_2->setEnabled(false);
         ui->NignPredelChannel_2->setEnabled(false);
@@ -1147,77 +1128,62 @@ void StackedOptions::Channel2TypeChange(int i)
         ui->VerhnPredIzmerChannel_2->setEnabled(false);
         ui->PeriodIzmerChannel_2->setEnabled(false);
 
-        ui->DiapasonChannel_2->clear();
         ui->DiapasonChannel_2->addItems(StringListNone);
-
-        break;
+    }
+    else
+    {
+        ui->UnitsChannel_2->setEnabled(true);
+        ui->VerhnPredelChannel_2->setEnabled(true);
+        ui->NignPredelChannel_2->setEnabled(true);
+        ui->NignPredIzmerChannel_2->setEnabled(true);
+        ui->VerhnPredIzmerChannel_2->setEnabled(true);
+        ui->PeriodIzmerChannel_2->setEnabled(true);
     }
 
-    case -3: // ButonTokChannel_2
+    if (ui->ButonTokChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::CurrentMeasure);
+        options_channel2.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_2->setText("mA");
-        ui->DiapasonChannel_2->clear();
         ui->DiapasonChannel_2->addItems(StringListTok);
-        break;
     }
 
-    case -4: //(ui->ButonNapryagenieChannel_2->isChecked())
+    if (ui->ButonNapryagenieChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::VoltageMeasure);
+        options_channel2.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_2->setText("V");
-        ui->DiapasonChannel_2->clear();
         ui->DiapasonChannel_2->addItems(StringListNapryagenie);
-        break;
     }
 
-    case -5: //(ui->ButonResistorChannel_2->isChecked())
+    if (ui->ButonResistorChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
+        options_channel2.SetSignalType(ModBus::TermoResistanceMeasure);
         ui->UnitsChannel_2->setText("°C (RTD)");
-        ui->DiapasonChannel_2->clear();
         ui->DiapasonChannel_2->addItems(StringListRTD);
-        break;
-        break;
     }
 
-    case -6: //(ui->ButonTermoparaChannel_2->isChecked())
+    if (ui->ButonTermoparaChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
+        options_channel2.SetSignalType(ModBus::TermoCoupleMeasure);
         ui->UnitsChannel_2->setText("°C (TC)");
-        ui->DiapasonChannel_2->clear();
         ui->DiapasonChannel_2->addItems(StringListTC);
-        break;
     }
 
-    case -7:
+    if (ui->ButonImpulseChannel_2->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
+        options_channel2.SetSignalType(ModBus::ImpulseCounterMeasure);
         ui->UnitsChannel_2->setText("imp.cnt");
-        break;
-    }
-    default:
-
-        break;
     }
 }
 
-
-void StackedOptions::Channel3TypeChange(int i)
+void StackedOptions::Channel3TypeChange()
 {
-    ui->UnitsChannel_3->setEnabled(true);
-    ui->VerhnPredelChannel_3->setEnabled(true);
-    ui->NignPredelChannel_3->setEnabled(true);
-    ui->NignPredIzmerChannel_3->setEnabled(true);
-    ui->VerhnPredIzmerChannel_3->setEnabled(true);
-    ui->PeriodIzmerChannel_3->setEnabled(true);
 
-    switch (i) {
-    case -2:
+    ui->DiapasonChannel_3->clear();
+
+    if (ui->ButonOtklChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::NoMeasure);
-
-        ui->UnitsChannel_3->setText("Нет");
+        options_channel3.SetSignalType(ModBus::NoMeasure);
+        ui->UnitsChannel_3->setText("None");
         ui->UnitsChannel_3->setEnabled(false);
         ui->VerhnPredelChannel_3->setEnabled(false);
         ui->NignPredelChannel_3->setEnabled(false);
@@ -1225,76 +1191,60 @@ void StackedOptions::Channel3TypeChange(int i)
         ui->VerhnPredIzmerChannel_3->setEnabled(false);
         ui->PeriodIzmerChannel_3->setEnabled(false);
 
-        ui->DiapasonChannel_3->clear();
         ui->DiapasonChannel_3->addItems(StringListNone);
-
-        break;
+    }
+    else
+    {
+        ui->UnitsChannel_3->setEnabled(true);
+        ui->VerhnPredelChannel_3->setEnabled(true);
+        ui->NignPredelChannel_3->setEnabled(true);
+        ui->NignPredIzmerChannel_3->setEnabled(true);
+        ui->VerhnPredIzmerChannel_3->setEnabled(true);
+        ui->PeriodIzmerChannel_3->setEnabled(true);
     }
 
-    case -3: // ButonTokChannel_3
+    if (ui->ButonTokChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::CurrentMeasure);
+        options_channel3.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_3->setText("mA");
-        ui->DiapasonChannel_3->clear();
         ui->DiapasonChannel_3->addItems(StringListTok);
-        break;
     }
 
-    case -4: //(ui->ButonNapryagenieChannel_3->isChecked())
+    if (ui->ButonNapryagenieChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::VoltageMeasure);
+        options_channel3.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_3->setText("V");
-        ui->DiapasonChannel_3->clear();
         ui->DiapasonChannel_3->addItems(StringListNapryagenie);
-        break;
     }
 
-    case -5: //(ui->ButonResistorChannel_3->isChecked())
+    if (ui->ButonResistorChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
+        options_channel3.SetSignalType(ModBus::TermoResistanceMeasure);
         ui->UnitsChannel_3->setText("°C (RTD)");
-        ui->DiapasonChannel_3->clear();
         ui->DiapasonChannel_3->addItems(StringListRTD);
-        break;
-        break;
     }
 
-    case -6: //(ui->ButonTermoparaChannel_3->isChecked())
+    if (ui->ButonTermoparaChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
+        options_channel3.SetSignalType(ModBus::TermoCoupleMeasure);
         ui->UnitsChannel_3->setText("°C (TC)");
-        ui->DiapasonChannel_3->clear();
         ui->DiapasonChannel_3->addItems(StringListTC);
-        break;
     }
 
-    case -7:
+    if (ui->ButonImpulseChannel_3->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
+        options_channel3.SetSignalType(ModBus::ImpulseCounterMeasure);
         ui->UnitsChannel_3->setText("imp.cnt");
-        break;
-    }
-    default:
-
-        break;
     }
 }
 
-void StackedOptions::Channel4TypeChange(int i)
+void StackedOptions::Channel4TypeChange()
 {
-    ui->UnitsChannel_4->setEnabled(true);
-    ui->VerhnPredelChannel_4->setEnabled(true);
-    ui->NignPredelChannel_4->setEnabled(true);
-    ui->NignPredIzmerChannel_4->setEnabled(true);
-    ui->VerhnPredIzmerChannel_4->setEnabled(true);
-    ui->PeriodIzmerChannel_4->setEnabled(true);
-
-    switch (i) {
-    case -2:
+    ui->DiapasonChannel_4->clear();
+    if (ui->ButonOtklChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::NoMeasure);
-
-        ui->UnitsChannel_4->setText("Нет");
+        options_channel4.SetSignalType(ModBus::NoMeasure);
+        ui->UnitsChannel_4->setText("None");
         ui->UnitsChannel_4->setEnabled(false);
         ui->VerhnPredelChannel_4->setEnabled(false);
         ui->NignPredelChannel_4->setEnabled(false);
@@ -1302,61 +1252,53 @@ void StackedOptions::Channel4TypeChange(int i)
         ui->VerhnPredIzmerChannel_4->setEnabled(false);
         ui->PeriodIzmerChannel_4->setEnabled(false);
 
-        ui->DiapasonChannel_4->clear();
         ui->DiapasonChannel_4->addItems(StringListNone);
-
-        break;
+    }
+    else
+    {
+        ui->UnitsChannel_4->setEnabled(true);
+        ui->VerhnPredelChannel_4->setEnabled(true);
+        ui->NignPredelChannel_4->setEnabled(true);
+        ui->NignPredIzmerChannel_4->setEnabled(true);
+        ui->VerhnPredIzmerChannel_4->setEnabled(true);
+        ui->PeriodIzmerChannel_4->setEnabled(true);
     }
 
-    case -3: // ButonTokChannel_4
+    if (ui->ButonTokChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::CurrentMeasure);
+        options_channel4.SetSignalType(ModBus::CurrentMeasure);
         ui->UnitsChannel_4->setText("mA");
-        ui->DiapasonChannel_4->clear();
         ui->DiapasonChannel_4->addItems(StringListTok);
-        break;
     }
 
-    case -4: //(ui->ButonNapryagenieChannel_4->isChecked())
+    if (ui->ButonNapryagenieChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::VoltageMeasure);
+        options_channel4.SetSignalType(ModBus::VoltageMeasure);
         ui->UnitsChannel_4->setText("V");
-        ui->DiapasonChannel_4->clear();
         ui->DiapasonChannel_4->addItems(StringListNapryagenie);
-        break;
     }
 
-    case -5: //(ui->ButonResistorChannel_4->isChecked())
+    if (ui->ButonResistorChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoResistanceMeasure);
+        options_channel4.SetSignalType(ModBus::TermoResistanceMeasure);
         ui->UnitsChannel_4->setText("°C (RTD)");
-        ui->DiapasonChannel_4->clear();
         ui->DiapasonChannel_4->addItems(StringListRTD);
-        break;
-        break;
     }
 
-    case -6: //(ui->ButonTermoparaChannel_4->isChecked())
+    if (ui->ButonTermoparaChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::TermoCoupleMeasure);
+        options_channel4.SetSignalType(ModBus::TermoCoupleMeasure);
         ui->UnitsChannel_4->setText("°C (TC)");
-        ui->DiapasonChannel_4->clear();
         ui->DiapasonChannel_4->addItems(StringListTC);
-        break;
     }
 
-    case -7:
+    if (ui->ButonImpulseChannel_4->isChecked())
     {
-        options_channel1.SetSignalType(ModBus::ImpulseCounterMeasure);
+        options_channel4.SetSignalType(ModBus::ImpulseCounterMeasure);
         ui->UnitsChannel_4->setText("imp.cnt");
-        break;
-    }
-
-    default:
-        break;
-
     }
 }
+
 
 void StackedOptions::on_pushButton_14_clicked()
 {
@@ -1371,4 +1313,19 @@ void StackedOptions::on_pushButton_14_clicked()
     process.startDetached("date --set " + newdate);
     process.startDetached("date --set " + newtime); // max freq on
 #endif
+}
+
+void StackedOptions::on_pushButton_53_clicked()
+{
+
+    InitiateArchive();
+SetStackIndex(ArchiveIndex);
+
+
+
+}
+
+void StackedOptions::on_pushButton_54_clicked()
+{
+  SetStackIndex(WorkIndex);
 }

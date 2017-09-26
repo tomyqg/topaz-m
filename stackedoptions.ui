@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>10</number>
+    <number>23</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -287,7 +287,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>360</y>
+       <y>420</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -328,7 +328,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>120</y>
+       <y>180</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -347,7 +347,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>240</y>
+       <y>300</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -366,7 +366,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>180</y>
+       <y>240</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -385,7 +385,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>60</y>
+       <y>120</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -404,7 +404,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>300</y>
+       <y>360</y>
        <width>350</width>
        <height>61</height>
       </rect>
@@ -417,6 +417,25 @@
      </property>
      <property name="text">
       <string>Регулировка яркости</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_53">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Архив</string>
      </property>
     </widget>
    </widget>
@@ -9562,6 +9581,77 @@
      </item>
     </widget>
    </widget>
+   <widget class="QWidget" name="ArchivePage">
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Архив</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QCustomPlot" name="customPlot" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>1081</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <stylestrategy>NoAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_54">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>560</y>
+       <width>350</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QLabel" name="indexLabel">
    <property name="geometry">
@@ -9583,6 +9673,14 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>pushButton_34</tabstop>
   <tabstop>pushButton_31</tabstop>
@@ -9698,9 +9796,9 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

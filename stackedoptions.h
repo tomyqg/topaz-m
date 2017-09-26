@@ -19,16 +19,26 @@ class StackedOptions : public QDialog
     ChannelOptions options_channel4;
 
 public:
-    explicit StackedOptions(QWidget *parent = 0);
+    explicit StackedOptions(int pageindex, QWidget *parent);
     ~StackedOptions();
     static int GetCurrentDisplayParametr() { return DisplayParametr;}
 
+    void SetPageIndex(int newpageindex)
+    {
+        pageindex = newpageindex;
+    }
+
+    int GetPageIndex ()
+    {
+        return pageindex;
+    }
+
 private slots:
 
-    void Channel1TypeChange(int i);
-    void Channel2TypeChange(int i);
-    void Channel3TypeChange(int i);
-    void Channel4TypeChange(int i);
+    void Channel1TypeChange();
+    void Channel2TypeChange();
+    void Channel3TypeChange();
+    void Channel4TypeChange();
 
     void SetLabelIndex(int newlabelindex);
 
@@ -130,6 +140,10 @@ private slots:
 
     void on_pushButton_14_clicked();
 
+    void on_pushButton_53_clicked();
+
+    void on_pushButton_54_clicked();
+
 private:
     Ui::StackedOptions *ui;
     bool eventFilter(QObject *object, QEvent *event);
@@ -140,6 +154,7 @@ private:
     void WriteSystemOptionsToFile();
     void WriteAllChannelsOptionsToFile();
     void UpdateCurrentDisplayParametr() ;
+    void InitiateArchive() ;
     QString GetNewDateString();
     QString GetNewTimeString();
     QString GetNewDisplayResolution();
@@ -148,6 +163,8 @@ private:
     static int DisplayParametr;
     static QString displayResolution, MonitorResolution;
     static QString calibrationprm;
+
+    int pageindex = 0;
 
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
 
