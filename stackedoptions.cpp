@@ -966,12 +966,10 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
     options_channel4.SetDempher(ui->DemphirChannel_4->value());
     options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
-
-
-    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
-    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
-    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
-    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
+//    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
+//    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
+//    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
+//    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
 
     //    SetLogMessagesLimit(ui->spinBox->value());
 }

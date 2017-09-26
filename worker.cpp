@@ -391,9 +391,9 @@ void worker::do_Work()
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
-                //WriteModbusData(&device.badgoodcomm, currentdata*-1);
+                //                WriteModbusData(&device.badgoodcomm, currentdata*-1);
                 //                ReadModbusData(&device.channel0.Data,&destfloat[0] );
-                //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
+                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
 
                 if (Chanel->IsChannelMathematical())
@@ -402,6 +402,7 @@ void worker::do_Work()
                     currentdata = mathresult;
                 }
 
+#ifdef Demo
                 switch (index) {
                 case 0:
                     currentdata = globalindex/2;
@@ -418,6 +419,8 @@ void worker::do_Work()
                 default:
                     break;
                 }
+#endif
+
                 UD.writechannelvalue(index,currentdata);
             }
             ++index;

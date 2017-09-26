@@ -164,7 +164,7 @@ private:
     static QString displayResolution, MonitorResolution;
     static QString calibrationprm;
 
-    int pageindex = 0;
+    int pageindex ;
 
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
 
