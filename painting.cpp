@@ -626,7 +626,6 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawEllipse(QPointF(centerx1,centery1), 100, 100);// 20%
 
 
-    
     QLineF Channel1Line;
     
     

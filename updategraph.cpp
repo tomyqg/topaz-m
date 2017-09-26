@@ -333,11 +333,11 @@ void MainWindow::GrafsUpdateNone()
 {
     ui->MessagesWidget->update();
 
-    //ui->customPlot->clearGraphs();
-    //ui->customPlot->clearFocus();
-    //ui->customPlot->clearItems();
-    //ui->customPlot->clearMask();
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
 
+    //ui->customPlot->clearMask();
+    //ui->customPlot->clearFocus();
     ui->customPlot->replot();
 }
 

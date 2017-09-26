@@ -38,32 +38,11 @@ StackedOptions::StackedOptions(QWidget *parent) :
     ui(new Ui::StackedOptions)
 {
     ui->setupUi(this);
-    connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
-    SetStackIndex(MainMenuIndex);
-    ReadSystemOptionsFromFile();
-    ReadChannelsOptionsFromFile();
-    ApplyNewSettingstoOptionsUI();
 
-    // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
-
-    QList<QSpinBox*> spinList = StackedOptions::findChildren<QSpinBox*> ();
-
-    for (int i = 0; i < spinList.count(); ++i) {
-        QSpinBox *sb = spinList.at(i);
-        sb->installEventFilter(this);
-    }
-
-    QList<QLineEdit*> lineeditList = StackedOptions::findChildren<QLineEdit*> (  );
-
-    for (int i = 0; i < lineeditList.count(); ++i) {
-        QLineEdit *le = lineeditList.at(i);
-        le->installEventFilter(this);
-    }
-
-    connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange( int )) );
-    connect(ui->buttonGroup_2,SIGNAL(buttonClicked( int )), this, SLOT(Channel2TypeChange( int )) );
-    connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange( int )) );
-    connect(ui->buttonGroup_4,SIGNAL(buttonClicked( int )), this, SLOT(Channel4TypeChange( int )) );
+    ui->DiapasonChannel_1->clear();
+    ui->DiapasonChannel_2->clear();
+    ui->DiapasonChannel_3->clear();
+    ui->DiapasonChannel_4->clear();
 
     StringListNone.clear();
     StringListNone.append("Нет");
@@ -73,7 +52,7 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListTok.append("0-20 мA");
     StringListTok.append("0-5  мA");
     StringListTok.append("0-20 мA с корнеизвлеч.");
-    StringListTok.append("0-20 мA с корнеизвлеч.");
+    StringListTok.append("4-20 мA с корнеизвлеч.");
     StringListTok.append("± 20 мA");
 
     StringListNapryagenie.clear();
@@ -82,7 +61,7 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListNapryagenie.append("0-5  В");
     StringListNapryagenie.append("1-5  В");
     StringListNapryagenie.append("±150 мВ");
-    StringListNapryagenie.append("±1   В");;
+    StringListNapryagenie.append("±1   В");
     StringListNapryagenie.append("±10  В");
     StringListNapryagenie.append("±30  В");
     StringListNapryagenie.append("0-1  В с корнеизвлеч.");
@@ -117,6 +96,36 @@ StackedOptions::StackedOptions(QWidget *parent) :
     StringListRTD.append("Тип R (Pt13Rh-Pt)");
     StringListRTD.append("Тип S (Pt10Rh-Pt)");
     StringListRTD.append("Тип T (Cu-CuNi)");
+
+    connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
+    SetStackIndex(MainMenuIndex);
+
+
+    // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
+
+    QList<QSpinBox*> spinList = StackedOptions::findChildren<QSpinBox*> ();
+
+    for (int i = 0; i < spinList.count(); ++i) {
+        QSpinBox *sb = spinList.at(i);
+        sb->installEventFilter(this);
+    }
+
+    QList<QLineEdit*> lineeditList = StackedOptions::findChildren<QLineEdit*> (  );
+
+    for (int i = 0; i < lineeditList.count(); ++i) {
+        QLineEdit *le = lineeditList.at(i);
+        le->installEventFilter(this);
+    }
+
+    connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange( int )) );
+    connect(ui->buttonGroup_2,SIGNAL(buttonClicked( int )), this, SLOT(Channel2TypeChange( int )) );
+    connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange( int )) );
+    connect(ui->buttonGroup_4,SIGNAL(buttonClicked( int )), this, SLOT(Channel4TypeChange( int )) );
+
+    ReadSystemOptionsFromFile();
+    ReadChannelsOptionsFromFile();
+    ApplyNewSettingstoOptionsUI();
+
 }
 
 StackedOptions::~StackedOptions()
@@ -410,7 +419,7 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetLowerLimit(jsonobj.value("LowerLimit").toDouble());
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
-        Channel->SetSignalType(jsonobj.value("Type").toDouble());
+        Channel->SetSignalType(jsonobj.value("Type").toInt());
         Channel->SetUnitsName(jsonobj.value("Units").toString());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
         Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
@@ -422,21 +431,23 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetChannelName(jsonobj.value("Name").toString());
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
-        Channel->SetDiapason(jsonobj.value("Diapason").toDouble());
+        Channel->SetDiapason(jsonobj.value("Diapason").toInt());
+        Channel->SetDempher(jsonobj.value("Dempher").toDouble());
+
+//        qDebug() <<  index << ":" << jsonobj.value("Type").toInt() <<  " jsonobj.value(Type).toDouble() ";
+
+        qDebug() <<  index << Channel->GetSignalType() << "xxx Channel->GetSignalType()";
 
         index ++ ;
     }
-
 }
-
 
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
-    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
-    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
-    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
-    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
-
+    //    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
+    //    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
+    //    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
+    //    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
 
     ui->PriborIdentifier->setText(CURRENT_VER);
 
@@ -478,10 +489,17 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
 
-//    ui->DiapasonChannel_1->clear();
-//    ui->DiapasonChannel_2->clear();
-//    ui->DiapasonChannel_3->clear();
-//    ui->DiapasonChannel_4->clear();
+    //    qDebug() << sigtype <<  " sigtype ";
+    //    qDebug() << sigtype2 << " sigtype2 ";
+    //    qDebug() << sigtype3 << " sigtype3 ";
+    //    qDebug() << sigtype4 << " sigtype4 ";
+
+
+
+    //    ui->DiapasonChannel_1->clear();
+    //    ui->DiapasonChannel_2->clear();
+    //    ui->DiapasonChannel_3->clear();
+    //    ui->DiapasonChannel_4->clear();
 
     // channel 1
     {
@@ -786,13 +804,10 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     // реальное разрешение монитора
 
     //    ui->resolutionlabel->setText(Options::MonitorResolution);
-
     //    if (Options::displayResolution == "1024x768")
     //        ui->comboBox->setCurrentIndex(0);
-
     //    if (Options::displayResolution == "1280x800")
     //        ui->comboBox->setCurrentIndex(1);
-
     //    if (Options::displayResolution == "1920x1080")
     //        ui->comboBox->setCurrentIndex(2);
 }
@@ -819,29 +834,33 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
 
     int m = 0 ;
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
-            channeljsonobj["Type"] = Channel->GetSignalType();
-            channeljsonobj["Name"] = Channel->GetChannelName();
-            channeljsonobj["Units"] = Channel->GetUnitsName();
-            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
-            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
-            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
-            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
-            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-            channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
-            channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
-            channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
-            channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
-            channeljsonobj["State1Value"] = Channel->GetState1Value();
-            channeljsonobj["State2Value"] = Channel->GetState2Value();
-            channeljsonobj["MathString"] = Channel->GetMathString();
-            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
-            channeljsonobj["Diapason"] = Channel->GetDiapason();
-            channeljsonobj["Dempher"] = Channel->GetDempherValue();
 
-            settings.append(channeljsonobj);
+        channeljsonobj["Type"] = Channel->GetSignalType();
+//        channeljsonobj["Type"] = 5-m;
+        channeljsonobj["Name"] = Channel->GetChannelName();
+        channeljsonobj["Units"] = Channel->GetUnitsName();
+        channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+        channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+        channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+        channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+        channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+        channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
+        channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
+        channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
+        channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
+        channeljsonobj["State1Value"] = Channel->GetState1Value();
+        channeljsonobj["State2Value"] = Channel->GetState2Value();
+        channeljsonobj["MathString"] = Channel->GetMathString();
+        channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+        channeljsonobj["Diapason"] = Channel->GetDiapason();
+        channeljsonobj["Dempher"] = Channel->GetDempherValue();
 
-            ++m;
-        }
+//        qDebug() <<  m << ":" << Channel->GetDempherValue() <<  "  Channel->GetDempherValue() ";
+
+        settings.append(channeljsonobj);
+
+        ++m;
+    }
 
     channels["count"] = ChannelsObjectsList.length();
     channels["channels"] = settings;
@@ -954,6 +973,12 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetDempher(ui->DemphirChannel_4->value());
     options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
 
+
+    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
+    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
+    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
+    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
+
     //    SetLogMessagesLimit(ui->spinBox->value());
 }
 
@@ -1022,6 +1047,8 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 
 void StackedOptions::Channel1TypeChange(int i)
 {
+
+    qDebug() << i << "index";
     QStringList qlist;
     ui->UnitsChannel_1->setEnabled(true);
     ui->VerhnPredelChannel_1->setEnabled(true);
