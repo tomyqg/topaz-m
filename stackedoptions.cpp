@@ -1345,37 +1345,33 @@ void StackedOptions::on_pushButton_54_clicked()
 
 void StackedOptions::UpdateAnalyze()
 {
-    ui->analizenameChannel_1->setText( ui->Name_Channel_1->text() );
-    ui->analizenameChannel_2->setText( ui->Name_Channel_2->text() );
-    ui->analizenameChannel_3->setText( ui->Name_Channel_3->text() );
-    ui->analizenameChannel_4->setText( ui->Name_Channel_4->text() );
 
     double averagechannel_1 , averagechannel_2 , averagechannel_3,averagechannel_4 , sum;
 
     averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
 
+    sum   = 0;
     for(double a : Y_coordinates_Chanel_1_archive)
         sum += a;
 
     if (Y_coordinates_Chanel_1_archive.size()>0)
         averagechannel_1 = sum/Y_coordinates_Chanel_1_archive.size();
-    sum   = 0;
 
+    sum   = 0;
     for(double a : Y_coordinates_Chanel_2_archive)
         sum += a;
-    sum   = 0;
     if (Y_coordinates_Chanel_2_archive.size()>0)
         averagechannel_2 = sum/Y_coordinates_Chanel_2_archive.size();
 
+    sum   = 0;
     for(double a : Y_coordinates_Chanel_3_archive)
         sum += a;
-    sum   = 0;
     if (Y_coordinates_Chanel_3_archive.size()>0)
         averagechannel_3 = sum/Y_coordinates_Chanel_3_archive.size();
 
+    sum  = 0;
     for(double a : Y_coordinates_Chanel_4_archive)
         sum += a;
-    sum  = 0;
 
     if (Y_coordinates_Chanel_4_archive.size()>0)
         averagechannel_4 = sum/Y_coordinates_Chanel_4_archive.size();
@@ -1393,14 +1389,28 @@ void StackedOptions::UpdateAnalyze()
     double maximumchannel_4 =  *std::max_element(&Y_coordinates_Chanel_4_archive[0], &Y_coordinates_Chanel_4_archive[0] + Y_coordinates_Chanel_4_archive.length());
 
 
-    ui->analizeavgvaluechannel_1->setText(QString::number(averagechannel_1));
-    ui->analizeavgvaluechannel_2->setText(QString::number(averagechannel_2));
-    ui->analizeavgvaluechannel_3->setText(QString::number(averagechannel_3));
-    ui->analizeavgvaluechannel_4->setText(QString::number(averagechannel_4));
 
-    //QVector<double>::iterator maxElement;
-    //maxElement = max_element (Y_coordinates_Chanel_2_archive.begin(), Y_coordinates_Chanel_2_archive.end());
-    //    qDebug() << averagechannel1<< "averagechannel1";
+    // ui set
+
+    ui->analizenameChannel_1->setText( ": " + ui->Name_Channel_1->text() );
+    ui->analizenameChannel_2->setText( ": " + ui->Name_Channel_2->text() );
+    ui->analizenameChannel_3->setText( ": " + ui->Name_Channel_3->text() );
+    ui->analizenameChannel_4->setText( ": " + ui->Name_Channel_4->text() );
+
+    ui->analizeavgvaluechannel_1->setText(": " + QString::number(averagechannel_1));
+    ui->analizeavgvaluechannel_2->setText(": " + QString::number(averagechannel_2));
+    ui->analizeavgvaluechannel_3->setText(": " + QString::number(averagechannel_3));
+    ui->analizeavgvaluechannel_4->setText(": " + QString::number(averagechannel_4));
+
+    ui->analizeminvaluechannel_1->setText(": " + QString::number(minimumchannel_1));
+    ui->analizeminvaluechannel_2->setText(": " + QString::number(minimumchannel_2));
+    ui->analizeminvaluechannel_3->setText(": " + QString::number(minimumchannel_3));
+    ui->analizeminvaluechannel_4->setText(": " + QString::number(minimumchannel_4));
+
+    ui->analizemaxvaluechannel_1->setText(": " + QString::number(maximumchannel_1));
+    ui->analizemaxvaluechannel_2->setText(": " + QString::number(maximumchannel_2));
+    ui->analizemaxvaluechannel_3->setText(": " + QString::number(maximumchannel_3));
+    ui->analizemaxvaluechannel_4->setText(": " + QString::number(maximumchannel_4));
 
 }
 
@@ -1472,6 +1482,7 @@ void StackedOptions::UpdateArchiveData()
 
 void StackedOptions::on_pushButton_34_clicked()
 {
+    UpdateAnalyze();
 SetStackIndex(AnalizeIndex);
 }
 
