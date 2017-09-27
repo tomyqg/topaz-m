@@ -1388,8 +1388,6 @@ void StackedOptions::UpdateAnalyze()
     double minimumchannel_4 =  *std::min_element(&Y_coordinates_Chanel_4_archive[0], &Y_coordinates_Chanel_4_archive[0] + Y_coordinates_Chanel_4_archive.length());
     double maximumchannel_4 =  *std::max_element(&Y_coordinates_Chanel_4_archive[0], &Y_coordinates_Chanel_4_archive[0] + Y_coordinates_Chanel_4_archive.length());
 
-
-
     // ui set
 
     ui->analizenameChannel_1->setText( ": " + ui->Name_Channel_1->text() );
