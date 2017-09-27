@@ -313,6 +313,7 @@ void MainWindow::OpenOptionsWindow( int index )
 
 void MainWindow::OpenArchiveWindow()
 {
+
     OpenOptionsWindow(23);
 }
 

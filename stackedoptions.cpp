@@ -7,6 +7,18 @@ QString StackedOptions::displayResolution = "1280x800";
 QString StackedOptions::MonitorResolution = "35";
 int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
 
+extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+extern QColor Channel1Color;
+extern QColor Channel2Color;
+extern QColor Channel3Color;
+extern QColor Channel4Color;
+extern QColor ChannelColorNormal;
+extern QColor Channel2ColorNormal ;
+extern QColor Channel3ColorNormal;
+extern QColor Channel4ColorNormal ;
+extern QColor ChannelColorHighState;
+extern QColor ChannelColorLowState;
+
 
 #define MainMenuIndex 0
 #define OptionsIndex 1
@@ -125,6 +137,11 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
     ApplyNewSettingstoOptionsUI();
+
+//    ui->customPlot->yAxis->setRange(-300, 500);
+//    ui->customPlot->xAxis->setRange(-300, 300);
+
+    UpdateArchiveData();
 
 }
 
@@ -966,10 +983,10 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
     options_channel4.SetDempher(ui->DemphirChannel_4->value());
     options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
-//    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
-//    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
-//    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
-//    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
+    //    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
+    //    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
+    //    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
+    //    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
 
     //    SetLogMessagesLimit(ui->spinBox->value());
 }
@@ -979,6 +996,8 @@ void StackedOptions::InitiateArchive()
 
     ui->customPlot->yAxis->setRange(-300, 500);
     ui->customPlot->xAxis->setRange(-300, 300);
+
+    ui->customPlot->replot();;
 
 }
 
@@ -1315,15 +1334,79 @@ void StackedOptions::on_pushButton_14_clicked()
 
 void StackedOptions::on_pushButton_53_clicked()
 {
-
+    SetStackIndex(ArchiveIndex);
     InitiateArchive();
-SetStackIndex(ArchiveIndex);
-
-
-
+    UpdateArchiveData();
 }
 
 void StackedOptions::on_pushButton_54_clicked()
 {
-  SetStackIndex(WorkIndex);
+    SetStackIndex(WorkIndex);
+}
+
+
+void StackedOptions::UpdateArchiveData()
+{
+
+    ui->customPlot->xAxis->setRange(-1000, 2000);
+    ui->customPlot->clearGraphs();
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setName("graph #1");
+    ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_1_archive);
+
+
+    //    // add the text label at the top:
+    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
+    //    ui->customPlot->addItem(textLabel);
+    //    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
+    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    //    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
+    //    textLabel->setText("Text Item Demo");
+    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
+    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
+
+    // add the arrow:
+
+
+
+    graphPen.setWidth(GraphWidthinPixels);
+    //    graphPen.set
+    graphPen.setColor(Channel1Color);
+
+    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->addGraph();
+
+    {
+        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_2_archive);
+        graphPen.setColor(Channel2Color);
+        ui->customPlot->graph()->setPen(graphPen);
+    }
+
+    {
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_3_archive);
+        graphPen.setColor(Channel3Color);
+        ui->customPlot->graph()->setPen(graphPen);
+    }
+
+    {
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_4_archive);
+        graphPen.setColor(Channel4Color);
+        ui->customPlot->graph()->setPen(graphPen);
+    }
+
+    //    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
+    //    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
+
+    //    ui->customPlot->xAxis->setAutoTickLabels(false);
+    //    ui->customPlot->xAxis->setTickVectorLabels(Labels);
+
+    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
+    // авто масшабирование
+    ui->customPlot->rescaleAxes();
+    ui->customPlot->replot();
+    ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
 }

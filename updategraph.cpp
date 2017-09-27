@@ -31,6 +31,7 @@ QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3
 QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
+QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
 int xyi;
 
@@ -39,6 +40,7 @@ void MainWindow::AddValuesToBuffer()
 
     startWorkSignal();
     X_Coordinates.append(b);
+    X_Coordinates_archive.append(b);
     // закомменитть чтобы не рисовать синусоиду
     //    xyi++;
     //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
@@ -58,6 +60,11 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
     Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
     Y_coordinates_Chanel_4.append(UartDriver::channelinputbuffer[3]);
+
+    Y_coordinates_Chanel_1_archive.append(UartDriver::channelinputbuffer[0]);
+    Y_coordinates_Chanel_2_archive.append(UartDriver::channelinputbuffer[1]);
+    Y_coordinates_Chanel_3_archive.append(UartDriver::channelinputbuffer[2]);
+    Y_coordinates_Chanel_4_archive.append(UartDriver::channelinputbuffer[3]);
 
     /*
     //чтоб графики рисовались не постоянно а с периодом их обновления

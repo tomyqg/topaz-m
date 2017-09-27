@@ -2,6 +2,7 @@
 #define STACKEDOPTIONS_H
 
 #include <QDialog>
+#include <QtGui>
 
 #include <channel1.h>
 
@@ -39,6 +40,8 @@ private slots:
     void Channel2TypeChange();
     void Channel3TypeChange();
     void Channel4TypeChange();
+
+    void UpdateArchiveData();
 
     void SetLabelIndex(int newlabelindex);
 
@@ -165,6 +168,7 @@ private:
     static QString calibrationprm;
 
     int pageindex ;
+    QPen graphPen;
 
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
 
