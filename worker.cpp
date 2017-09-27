@@ -383,20 +383,19 @@ void worker::do_Work()
             globalindex = - 50;
 
         int index = 0;
+
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-            //            qDebug() << Chanel->GetChannelName();
             if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (UartDriver::needtoupdatechannel[index] == 1) )
             {
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
-                //                WriteModbusData(&device.badgoodcomm, currentdata*-1);
-                //                ReadModbusData(&device.channel0.Data,&destfloat[0] );
 
+                #ifndef Demo
+//                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
+                #endif
 
-
-                //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
 
                 if (Chanel->IsChannelMathematical())
@@ -405,7 +404,7 @@ void worker::do_Work()
                     currentdata = mathresult;
                 }
 
-                //#ifdef Demo
+                #ifdef Demo
                 switch (index) {
                 case 0:
                     currentdata = globalindex/2;
@@ -422,7 +421,24 @@ void worker::do_Work()
                 default:
                     break;
                 }
-                //#endif
+                #endif
+
+                switch (index) {
+                case 0:
+                    currentdata = globalindex/2;
+                    break;
+                case 1:
+                    currentdata = 2*globalindex;
+                    break;
+                case 2:
+                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                    break;
+                case 3:
+                    currentdata =  -2*globalindex;
+                    break;
+                default:
+                    break;
+                }
 
                 UD.writechannelvalue(index,currentdata);
             }
@@ -479,8 +495,6 @@ void worker::OpenSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-
-
     thread()->usleep(100000);
 
     ThreadChannelOptions1 = c1;

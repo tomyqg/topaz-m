@@ -43,6 +43,8 @@ private slots:
 
     void UpdateArchiveData();
 
+    void UpdateAnalyze();
+
     void SetLabelIndex(int newlabelindex);
 
     void SetStackIndex(int newstackindex);
@@ -146,6 +148,10 @@ private slots:
     void on_pushButton_53_clicked();
 
     void on_pushButton_54_clicked();
+
+    void on_pushButton_34_clicked();
+
+    void on_analyzebackbutton_clicked();
 
 private:
     Ui::StackedOptions *ui;
