@@ -175,7 +175,86 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     QVector<double> x1,x2,x3,x4;
     QVector<double> y1,y2,y3,y4;
 
+    QVector<double> x1lim,x2lim,x3lim,x4lim;
+    QVector<double> y1max,y2max,y3max,y4max;
+    QVector<double> y1min,y2min,y3min,y4min;
+
     int lastindex = X_Coordinates.at(X_Coordinates.length()-1);
+
+
+    double chan1higherstate = channel1object.GetState1Value();
+    double chan2higherstate = channel2object.GetState1Value();
+    double chan3higherstate = channel3object.GetState1Value();
+    double chan4higherstate = channel4object.GetState1Value();
+
+    double chan1lowerstate = channel1object.GetState2Value();
+    double chan2lowerstate = channel2object.GetState2Value();
+    double chan3lowerstate = channel3object.GetState2Value();
+    double chan4lowerstate = channel4object.GetState2Value();
+
+    y1max.append(chan1higherstate);
+    y1max.append(chan1higherstate);
+    y1max.append(0);
+    y1max.append(chan1higherstate);
+    y1max.append(0);
+    y1max.append(chan1higherstate);
+
+    y2max.append(chan2higherstate);
+    y2max.append(chan2higherstate);
+    y2max.append(0);
+    y2max.append(chan2higherstate);
+    y2max.append(0);
+    y2max.append(chan2higherstate);
+
+
+    y3max.append(chan3higherstate);
+    y3max.append(chan3higherstate);
+    y3max.append(0);
+    y3max.append(chan3higherstate);
+    y3max.append(0);
+    y3max.append(chan3higherstate);
+
+    y4max.append(chan4higherstate);
+    y4max.append(chan4higherstate);
+    y4max.append(0);
+    y4max.append(chan4higherstate);
+    y4max.append(0);
+    y4max.append(chan4higherstate);
+
+
+    y1min.append(chan1lowerstate);
+    y1min.append(chan1lowerstate);
+    y1min.append(0);
+    y1min.append(chan1lowerstate);
+    y1min.append(0);
+    y1min.append(chan1lowerstate);
+
+    y2min.append(chan2lowerstate);
+    y2min.append(chan2lowerstate);
+    y2min.append(0);
+    y2min.append(chan2lowerstate);
+    y2min.append(0);
+    y2min.append(chan2lowerstate);
+
+
+    y3min.append(chan3lowerstate);
+    y3min.append(chan3lowerstate);
+    y3min.append(0);
+    y3min.append(chan3lowerstate);
+    y3min.append(0);
+    y3min.append(chan3lowerstate);
+
+    y4min.append(chan4lowerstate);
+    y4min.append(chan4lowerstate);
+    y4min.append(0);
+    y4min.append(chan4lowerstate);
+    y4min.append(0);
+    y4min.append(chan4lowerstate);
+
+    //    qDebug() << channel1object.GetHigherMeasureLimit() ;
+    //    qDebug() << channel2object.GetHigherMeasureLimit() ;
+    //    qDebug() << channel3object.GetHigherMeasureLimit() ;
+    //    qDebug() << channel4object.GetHigherMeasureLimit() ;
 
     x1.append(430-300+lastindex);
     x1.append(460-300+lastindex);
@@ -186,14 +265,42 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     x4.append(550-300+lastindex);
     x4.append(580-300+lastindex);
 
-    y1.append(UartDriver::channelinputbuffer[0]);
-    y1.append(UartDriver::channelinputbuffer[0]);
-    y2.append(UartDriver::channelinputbuffer[1]);
-    y2.append(UartDriver::channelinputbuffer[1]);
-    y3.append(UartDriver::channelinputbuffer[2]);
-    y3.append(UartDriver::channelinputbuffer[2]);
-    y4.append(UartDriver::channelinputbuffer[3]);
-    y4.append(UartDriver::channelinputbuffer[3]);
+    x1lim.append(x1.at(0));
+    x1lim.append(x1.at(1));
+    x1lim.append(x1.at(0));
+    x1lim.append(x1.at(0));
+    x1lim.append(x1.at(1));
+    x1lim.append(x1.at(1));
+
+    x2lim.append(x2.at(0));
+    x2lim.append(x2.at(1));
+    x2lim.append(x2.at(0));
+    x2lim.append(x2.at(0));
+    x2lim.append(x2.at(1));
+    x2lim.append(x2.at(1));
+
+    x3lim.append(x3.at(0));
+    x3lim.append(x3.at(1));
+    x3lim.append(x3.at(0));
+    x3lim.append(x3.at(0));
+    x3lim.append(x3.at(1));
+    x3lim.append(x3.at(1));
+
+    x4lim.append(x4.at(0));
+    x4lim.append(x4.at(1));
+    x4lim.append(x4.at(0));
+    x4lim.append(x4.at(0));
+    x4lim.append(x4.at(1));
+    x4lim.append(x4.at(1));
+
+    y1.append(channel1object.GetCurrentChannelValue());
+    y1.append(channel1object.GetCurrentChannelValue());
+    y2.append(channel2object.GetCurrentChannelValue());
+    y2.append(channel2object.GetCurrentChannelValue());
+    y3.append(channel3object.GetCurrentChannelValue());
+    y3.append(channel3object.GetCurrentChannelValue());
+    y4.append(channel4object.GetCurrentChannelValue());
+    y4.append(channel4object.GetCurrentChannelValue());
 
     graphPen.setWidth(GraphWidthinPixels);
 
@@ -221,23 +328,62 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
+    // рисуем границы каналов каждого барграфа
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x1lim, y1max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x2lim, y2max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x3lim, y3max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x4lim, y4max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x1lim, y1min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x2lim, y2min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x3lim, y3min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x4lim, y4min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
-
     ui->customPlot->replot();
 }
 
 void MainWindow::GrafsUpdateTrends()
 {
-
     ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-
 
     //    // add the text label at the top:
     //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
@@ -370,6 +516,81 @@ void MainWindow::GrafsUpdateBars()
     Bar3_Y_Coord.append(UartDriver::channelinputbuffer[2]);
     Bar4_Y_Coord.append(UartDriver::channelinputbuffer[3]);
     Bar4_Y_Coord.append(UartDriver::channelinputbuffer[3]);
+
+    QVector<double> x1lim,x2lim,x3lim,x4lim;
+    QVector<double> y1max,y2max,y3max,y4max;
+    QVector<double> y1min,y2min,y3min,y4min;
+
+
+    double chan1higherstate = channel1object.GetState1Value();
+    double chan2higherstate = channel2object.GetState1Value();
+    double chan3higherstate = channel3object.GetState1Value();
+    double chan4higherstate = channel4object.GetState1Value();
+
+    double chan1lowerstate = channel1object.GetState2Value();
+    double chan2lowerstate = channel2object.GetState2Value();
+    double chan3lowerstate = channel3object.GetState2Value();
+    double chan4lowerstate = channel4object.GetState2Value();
+
+    y1max.append(chan1higherstate);
+    y1max.append(chan1higherstate);
+    y1max.append(0);
+    y1max.append(chan1higherstate);
+    y1max.append(0);
+    y1max.append(chan1higherstate);
+
+    y2max.append(chan2higherstate);
+    y2max.append(chan2higherstate);
+    y2max.append(0);
+    y2max.append(chan2higherstate);
+    y2max.append(0);
+    y2max.append(chan2higherstate);
+
+
+    y3max.append(chan3higherstate);
+    y3max.append(chan3higherstate);
+    y3max.append(0);
+    y3max.append(chan3higherstate);
+    y3max.append(0);
+    y3max.append(chan3higherstate);
+
+    y4max.append(chan4higherstate);
+    y4max.append(chan4higherstate);
+    y4max.append(0);
+    y4max.append(chan4higherstate);
+    y4max.append(0);
+    y4max.append(chan4higherstate);
+
+
+    y1min.append(chan1lowerstate);
+    y1min.append(chan1lowerstate);
+    y1min.append(0);
+    y1min.append(chan1lowerstate);
+    y1min.append(0);
+    y1min.append(chan1lowerstate);
+
+    y2min.append(chan2lowerstate);
+    y2min.append(chan2lowerstate);
+    y2min.append(0);
+    y2min.append(chan2lowerstate);
+    y2min.append(0);
+    y2min.append(chan2lowerstate);
+
+
+    y3min.append(chan3lowerstate);
+    y3min.append(chan3lowerstate);
+    y3min.append(0);
+    y3min.append(chan3lowerstate);
+    y3min.append(0);
+    y3min.append(chan3lowerstate);
+
+    y4min.append(chan4lowerstate);
+    y4min.append(chan4lowerstate);
+    y4min.append(0);
+    y4min.append(chan4lowerstate);
+    y4min.append(0);
+    y4min.append(chan4lowerstate);
+
 
     ui->customPlot->clearGraphs();
     ui->customPlot->xAxis->setRange(0, 100);

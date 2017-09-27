@@ -410,13 +410,11 @@ void Options::on_ArchivetoUSB_button_clicked()
 void Options::on_pushButton_6_clicked()
 {
     ResetToDefaults();
-//    this->close();
 }
 
 void Options::on_pushButton_7_clicked()
 {
     ui->toolBox->setCurrentIndex(0);
-
     ui->toolBox->setWindowTitle("");
 }
 
@@ -427,7 +425,6 @@ void Options::on_pushButton_8_clicked()
 
 void Options::TouchScreenCalibrate()
 {
-
     QProcess process1;
 
 #ifdef MYD // если плата MYD

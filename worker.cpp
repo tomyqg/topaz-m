@@ -391,10 +391,7 @@ void worker::do_Work()
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
-
-                #ifndef Demo
-                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
-                #endif
+                //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
 
                 currentdata = destfloat[0];
 
@@ -404,23 +401,22 @@ void worker::do_Work()
                     currentdata = mathresult;
                 }
 
-
-//                switch (index) {
-//                case 0:
-//                    currentdata = globalindex/2;
-//                    break;
-//                case 1:
-//                    currentdata = 2*globalindex;
-//                    break;
-//                case 2:
-//                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
-//                    break;
-//                case 3:
-//                    currentdata =  -2*globalindex;
-//                    break;
-//                default:
-//                    break;
-//                }
+                switch (index) {
+                case 0:
+                    currentdata = globalindex/2;
+                    break;
+                case 1:
+                    currentdata = 2*globalindex;
+                    break;
+                case 2:
+                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                    break;
+                case 3:
+                    currentdata =  -2*globalindex;
+                    break;
+                default:
+                    break;
+                }
 
                 UD.writechannelvalue(index,currentdata);
             }

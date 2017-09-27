@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>10</number>
+    <number>21</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -5557,7 +5557,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 2</string>
+      <string>Нижняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -5953,7 +5953,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 1</string>
+      <string>Верхняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -6411,7 +6411,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 2</string>
+      <string>Нижняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_16">
       <property name="geometry">
@@ -6807,7 +6807,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 1</string>
+      <string>Верхняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_18">
       <property name="geometry">
@@ -7246,7 +7246,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 2</string>
+      <string>Нижняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_20">
       <property name="geometry">
@@ -7642,7 +7642,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 1</string>
+      <string>Верхняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_22">
       <property name="geometry">
@@ -8059,7 +8059,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 1</string>
+      <string>Верхняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_26">
       <property name="geometry">
@@ -8455,7 +8455,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Уставка 2</string>
+      <string>Нижняя уставка</string>
      </property>
      <widget class="QWidget" name="layoutWidget_24">
       <property name="geometry">
