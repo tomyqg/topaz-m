@@ -16,7 +16,7 @@
 
 #define CURRENT_VER "0.6" //версия ПО
 #define MYD
-//#define Demo
+
 
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
@@ -37,6 +37,7 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
+#define Demo
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
@@ -48,6 +49,7 @@
 #define pathtoarchive  "C:/Work/archive.txt"
 #define pathtologotip  "C:/Work/logo.jpg"
 #else
+
 #define pathtofiles  QCoreApplication::applicationDirPath()
 #define pathtosystemoptions  QCoreApplication::applicationDirPath() + "/systemoptions.txt"
 #define pathtooptions  QCoreApplication::applicationDirPath() + "/options.txt"
@@ -56,6 +58,7 @@
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
+
 #endif
 
 

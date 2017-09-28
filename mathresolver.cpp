@@ -38,3 +38,6 @@ double mathresolver::SolveEquation(QString eqstring)
     replaced.replace(QString("x"), QString(""));
     return SolveEquation(replaced,0);
 }
+
+double mathresolver::dGetAverageValue()
+{}

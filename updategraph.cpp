@@ -592,6 +592,35 @@ void MainWindow::GrafsUpdateBars()
     y4min.append(chan4lowerstate);
 
 
+    x1lim.append(Bar1_X_Coord.at(0));
+    x1lim.append(Bar1_X_Coord.at(1));
+    x1lim.append(Bar1_X_Coord.at(0));
+    x1lim.append(Bar1_X_Coord.at(0));
+    x1lim.append(Bar1_X_Coord.at(1));
+    x1lim.append(Bar1_X_Coord.at(1));
+
+    x2lim.append(Bar2_X_Coord.at(0));
+    x2lim.append(Bar2_X_Coord.at(1));
+    x2lim.append(Bar2_X_Coord.at(0));
+    x2lim.append(Bar2_X_Coord.at(0));
+    x2lim.append(Bar2_X_Coord.at(1));
+    x2lim.append(Bar2_X_Coord.at(1));
+
+    x3lim.append(Bar3_X_Coord.at(0));
+    x3lim.append(Bar3_X_Coord.at(1));
+    x3lim.append(Bar3_X_Coord.at(0));
+    x3lim.append(Bar3_X_Coord.at(0));
+    x3lim.append(Bar3_X_Coord.at(1));
+    x3lim.append(Bar3_X_Coord.at(1));
+
+    x4lim.append(Bar4_X_Coord.at(0));
+    x4lim.append(Bar4_X_Coord.at(1));
+    x4lim.append(Bar4_X_Coord.at(0));
+    x4lim.append(Bar4_X_Coord.at(0));
+    x4lim.append(Bar4_X_Coord.at(1));
+    x4lim.append(Bar4_X_Coord.at(1));
+
+
     ui->customPlot->clearGraphs();
     ui->customPlot->xAxis->setRange(0, 100);
     graphPen.setWidth(GraphWidthinPixels);
@@ -629,6 +658,50 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
+
+
+    // рисуем границы каналов каждого барграфа
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x1lim, y1max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x2lim, y2max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x3lim, y3max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x4lim, y4max);
+    graphPen.setColor(QColor(Qt::red));
+    ui->customPlot->graph()->setPen(graphPen);
+
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x1lim, y1min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x2lim, y2min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x3lim, y3min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x4lim, y4min);
+    graphPen.setColor(QColor(Qt::green));
+    ui->customPlot->graph()->setPen(graphPen);
 
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);

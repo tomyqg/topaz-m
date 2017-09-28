@@ -12,6 +12,12 @@ public:
     mathresolver();
     double SolveEquation(QString eqstring, double x);
     double SolveEquation(QString eqstring);
+
+    static double dGetAverageValue();
+
+
 };
+
+
 
 #endif // MATHRESOLVER_H
