@@ -13,8 +13,9 @@ public:
     double SolveEquation(QString eqstring, double x);
     double SolveEquation(QString eqstring);
 
-    static double dGetAverageValue();
-
+    template< typename T >
+    static T GetAverageValue();
+//    static T GetAverageValue(QVector<T> & qvect);
 
 };
 

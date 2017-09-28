@@ -175,9 +175,7 @@ private:
 
     int pageindex ;
     QPen graphPen;
-
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
-
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,

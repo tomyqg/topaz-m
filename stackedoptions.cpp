@@ -1,6 +1,7 @@
 #include "stackedoptions.h"
 #include "ui_stackedoptions.h"
 #include "defines.h"
+#include "mathresolver.h"
 
 QString StackedOptions::calibrationprm = "3383 3962 234 599";
 QString StackedOptions::displayResolution = "1280x800";
@@ -1350,7 +1351,14 @@ void StackedOptions::UpdateAnalyze()
 
     averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
 
-    sum   = 0;
+
+    averagechannel_1 = mathresolver::GetAverageValue< double >(); // &Y_coordinates_Chanel_1_archive
+
+    qDebug() << averagechannel_1 << "averagechannel_1";
+
+//    sort< int >( c, 5 );
+
+    /*  sum   = 0;
     for(double a : Y_coordinates_Chanel_1_archive)
         sum += a;
 
@@ -1375,7 +1383,7 @@ void StackedOptions::UpdateAnalyze()
 
     if (Y_coordinates_Chanel_4_archive.size()>0)
         averagechannel_4 = sum/Y_coordinates_Chanel_4_archive.size();
-
+*/
     double minimumchannel_1 =  *std::min_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
     double maximumchannel_1 =  *std::max_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
 

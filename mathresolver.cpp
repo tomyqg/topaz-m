@@ -1,6 +1,8 @@
 #include "mathresolver.h"
+
 #include <QtMath>
 #include <QtScript/QScriptEngine>
+#include "defines.h"
 
 mathresolver::mathresolver()
 {
@@ -17,12 +19,15 @@ double mathresolver::SolveEquation(QString eqstring, double x)
     replaced.replace(QString("abs"), QString("Math.abs"));
     replaced.replace(QString("x"), QString::number(x));
     double Result = myEngine.evaluate(replaced).toNumber();
+
+    double averagechannel_1 = mathresolver::GetAverageValue< double >();
+
     return Result;
 }
 
 double mathresolver::SolveEquation(QString eqstring)
 {
-     /*QScriptEngine myEngine;
+    /*QScriptEngine myEngine;
      * доступные функции:
      * сложение: x+1
      * вычитание: x-1
@@ -39,5 +44,26 @@ double mathresolver::SolveEquation(QString eqstring)
     return SolveEquation(replaced,0);
 }
 
-double mathresolver::dGetAverageValue()
-{}
+template< typename T >
+//T mathresolver::GetAverageValue(QVector<T> & qvect)
+T mathresolver::GetAverageValue()
+{
+
+    QVector<double> qvect;
+
+    qvect.append(3);
+    qvect.append(10);
+    qvect.append(15);
+    qvect.append(30);
+
+
+    T sum   = 0;
+    T averagevalue = 0 ;
+    for(T a : qvect)
+        sum += a;
+
+    if (qvect.size()>0)
+        averagevalue = sum/qvect.size();
+
+    return averagevalue ;
+}
