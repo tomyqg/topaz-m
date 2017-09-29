@@ -18,7 +18,7 @@ int color3rgbnormal[]={0xFF, 0x4C, 0x00};
 int color4rgbnormal[]={0xA1, 0x01, 0xA6};
 
 QColor ChannelColorHighState = QColor(0xFF,0x00,0x00);
-QColor ChannelColorLowState = QColor(0xFF,0xCA,0x00);
+QColor ChannelColorLowState  = QColor(0xFF,0xCA,0x00);
 
 QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
 QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
@@ -41,21 +41,7 @@ void MainWindow::AddValuesToBuffer()
     startWorkSignal();
     X_Coordinates.append(b);
     X_Coordinates_archive.append(b);
-    // закомменитть чтобы не рисовать синусоиду
-    //    xyi++;
-    //    int  a = qRound( eee.SolveEquation("sin(x/6)*40-20",xyi) );
-    //    int  co = qRound( eee.SolveEquation("cos(x/3)*40-20",xyi) );
-    //    Y_coordinates_Chanel_1.append(a+5);
-    //    Y_coordinates_Chanel_2.append(co+30);
-    //    Y_coordinates_Chanel_3.append(a+55);
-    //    Y_coordinates_Chanel_4.append(co+70);
 
-    //// закоментить посюда
-    // раскомментить чтобы рисовались нормальные графики
-
-    //    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
-
-    //    UartDriver::channelinputbuffer[0] = b;
     Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
     Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
     Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
@@ -65,21 +51,6 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_2_archive.append(UartDriver::channelinputbuffer[1]);
     Y_coordinates_Chanel_3_archive.append(UartDriver::channelinputbuffer[2]);
     Y_coordinates_Chanel_4_archive.append(UartDriver::channelinputbuffer[3]);
-
-    /*
-    //чтоб графики рисовались не постоянно а с периодом их обновления
-    if (UartDriver::needtoupdatechannel[0] == 1)
-        Y_coordinates_Chanel_1.append(UD.channelinputbuffer[0]);
-    if (UartDriver::needtoupdatechannel[1] == 1)
-        Y_coordinates_Chanel_2.append(UD.channelinputbuffer[1]);
-    if (UartDriver::needtoupdatechannel[2] == 1)
-        Y_coordinates_Chanel_3.append(UD.channelinputbuffer[2]);
-    if (UartDriver::needtoupdatechannel[3] == 1)
-        Y_coordinates_Chanel_4.append(UD.channelinputbuffer[3]);
-    */
-
-    // раскоментить посюда
-    //int maximumdots = GetGraphWidthInPixels()/2 ;
 
     while (X_Coordinates.length()>300)
     {
@@ -251,10 +222,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y4min.append(0);
     y4min.append(chan4lowerstate);
 
-    //    qDebug() << channel1object.GetHigherMeasureLimit() ;
-    //    qDebug() << channel2object.GetHigherMeasureLimit() ;
-    //    qDebug() << channel3object.GetHigherMeasureLimit() ;
-    //    qDebug() << channel4object.GetHigherMeasureLimit() ;
 
     x1.append(430-300+lastindex);
     x1.append(460-300+lastindex);

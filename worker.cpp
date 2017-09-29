@@ -61,7 +61,6 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
 
-
     int num;
     uint16_t * data;
 
@@ -391,33 +390,62 @@ void worker::do_Work()
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
-                //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
-
+                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
                 currentdata = destfloat[0];
 
-                if (Chanel->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
+                ////
 
-                switch (index) {
-                case 0:
-                    currentdata = globalindex/2;
-                    break;
-                case 1:
-                    currentdata = 2*globalindex;
-                    break;
-                case 2:
-                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
-                    break;
-                case 3:
-                    currentdata =  -2*globalindex;
-                    break;
-                default:
-                    break;
-                }
+                //                if (Chanel->IsChannelMathematical())
+                //                {
+                //                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
+                //                    currentdata = mathresult;
+                //                }
 
+                //                switch (index) {
+                //                case 0:
+                //                    currentdata = globalindex/2;
+                //                    break;
+                //                case 1:
+                //                    currentdata = 2*globalindex;
+                //                    break;
+                //                case 2:
+                //                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                //                    break;
+                //                case 3:
+                //                    currentdata =  -2*globalindex;
+                //                    break;
+                //                default:
+                //                    break;
+                //                }
+
+                //                Chanel->SetRegistrationType(1); // принудительно заставляем среднее значение
+
+                //                int regtype = Chanel->GetRegistrationType();
+
+                //                switch (regtype) {
+                //                case 0: // мгновенное значение
+                //                    //                    currentvalue;
+                //                    break;
+                //                case 1: // среднее значение
+                //                {
+                //                    //currentvalue = MR.dGetAverageValue(channelbuffer);
+                //                    //qDebug() << channelname << currentvalue ;
+                //                    //qDebug() << channelbuffer;
+                //                }
+                //                    break;
+                //                case 2: //минимум значение
+                //                    break;
+                //                case 3: //максимум значение
+                //                    break;
+                //                case 4: //минимум плюс максимум значение
+                //                    break;
+                //                default:
+                //                    //currentvalue;
+                //                    break;
+                //                }
+
+
+                //////
                 UD.writechannelvalue(index,currentdata);
             }
             ++index;
@@ -478,11 +506,9 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
-
     ChannelsObjectsList.append(ThreadChannelOptions1);
     ChannelsObjectsList.append(ThreadChannelOptions2);
     ChannelsObjectsList.append(ThreadChannelOptions3);
     ChannelsObjectsList.append(ThreadChannelOptions4);
-
     thread()->usleep(10000);
 }

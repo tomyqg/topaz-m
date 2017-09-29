@@ -75,6 +75,7 @@ void Options::WriteAllChannelsOptionsToFile()
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
+            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
             settings.append(channeljsonobj);
         }
 
@@ -276,5 +277,3 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     out << setstr;
     file.close();
 }
-
-

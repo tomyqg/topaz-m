@@ -141,8 +141,6 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
     ApplyNewSettingstoOptionsUI();
-
-    UpdateArchiveData();
 }
 
 StackedOptions::~StackedOptions()
@@ -450,9 +448,7 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
         Channel->SetDiapason(jsonobj.value("Diapason").toInt());
         Channel->SetDempher(jsonobj.value("Dempher").toDouble());
-
-        //        qDebug() <<  index << ":" << jsonobj.value("Type").toInt() <<  " jsonobj.value(Type).toInt() ";
-        //        qDebug() <<  index << Channel->GetSignalType() << "xxx Channel->GetSignalType()";
+        Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
 
         index ++ ;
     }
@@ -460,11 +456,6 @@ void StackedOptions::ReadChannelsOptionsFromFile()
 
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
-    //    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
-    //    qDebug() << options_channel2.GetDiapason() << " options_channel2.GetDiapason() ";
-    //    qDebug() << options_channel3.GetDiapason() << " options_channel3.GetDiapason() ";
-    //    qDebug() << options_channel4.GetDiapason() << " options_channel4.GetDiapason() ";
-
     ui->PriborIdentifier->setText(CURRENT_VER);
 
     if (GetCurrentDisplayParametr() == Trends)
@@ -504,18 +495,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     int sigtype2 = options_channel2.GetSignalType();
     int sigtype3 = options_channel3.GetSignalType();
     int sigtype4 = options_channel4.GetSignalType();
-
-    //    qDebug() << sigtype <<  " sigtype ";
-    //    qDebug() << sigtype2 << " sigtype2 ";
-    //    qDebug() << sigtype3 << " sigtype3 ";
-    //    qDebug() << sigtype4 << " sigtype4 ";
-
-
-
-    //    ui->DiapasonChannel_1->clear();
-    //    ui->DiapasonChannel_2->clear();
-    //    ui->DiapasonChannel_3->clear();
-    //    ui->DiapasonChannel_4->clear();
 
     // channel 1
     {
@@ -762,6 +741,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->math_checkbox_channel_1->setChecked(options_channel1.IsChannelMathematical());
     ui->DemphirChannel_1->setValue(options_channel1.GetDempherValue());
     ui->DiapasonChannel_1->setCurrentIndex(options_channel1.GetDiapason());
+    ui->RegType_Channel_1->setCurrentIndex(options_channel1.GetRegistrationType());
 
     ui->UnitsChannel_2->setText(options_channel2.GetUnitsName());
     ui->VerhnPredelChannel_2->setValue(options_channel2.GetHigherLimit());
@@ -780,6 +760,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->math_checkbox_channel_2->setChecked(options_channel2.IsChannelMathematical());
     ui->DemphirChannel_2->setValue(options_channel2.GetDempherValue());
     ui->DiapasonChannel_2->setCurrentIndex(options_channel2.GetDiapason());
+    ui->RegType_Channel_2->setCurrentIndex(options_channel2.GetRegistrationType());
 
     ui->UnitsChannel_3->setText(options_channel3.GetUnitsName());
     ui->VerhnPredelChannel_3->setValue(options_channel3.GetHigherLimit());
@@ -798,6 +779,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->math_checkbox_channel_3->setChecked(options_channel3.IsChannelMathematical());
     ui->DemphirChannel_3->setValue(options_channel3.GetDempherValue());
     ui->DiapasonChannel_3->setCurrentIndex(options_channel3.GetDiapason());
+    ui->RegType_Channel_3->setCurrentIndex(options_channel3.GetRegistrationType());
 
     ui->UnitsChannel_4->setText(options_channel4.GetUnitsName());
     ui->VerhnPredelChannel_4->setValue(options_channel4.GetHigherLimit());
@@ -816,16 +798,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->math_checkbox_channel_4->setChecked(options_channel4.IsChannelMathematical());
     ui->DemphirChannel_4->setValue(options_channel4.GetDempherValue());
     ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDiapason());
-
-    // реальное разрешение монитора
-
-    //    ui->resolutionlabel->setText(Options::MonitorResolution);
-    //    if (Options::displayResolution == "1024x768")
-    //        ui->comboBox->setCurrentIndex(0);
-    //    if (Options::displayResolution == "1280x800")
-    //        ui->comboBox->setCurrentIndex(1);
-    //    if (Options::displayResolution == "1920x1080")
-    //        ui->comboBox->setCurrentIndex(2);
+    ui->RegType_Channel_4->setCurrentIndex(options_channel4.GetRegistrationType());
 }
 
 void StackedOptions::on_pushButton_51_clicked()
@@ -869,6 +842,7 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
         channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
         channeljsonobj["Diapason"] = Channel->GetDiapason();
         channeljsonobj["Dempher"] = Channel->GetDempherValue();
+        channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
 
         //qDebug() <<  m << ":" << Channel->GetSignalType()  <<  "yyy  Channel->GetSignalType() ";
         settings.append(channeljsonobj);
@@ -929,6 +903,7 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel1.SetMathematical(ui->math_checkbox_channel_1->isChecked());
     options_channel1.SetDempher(ui->DemphirChannel_1->value());
     options_channel1.SetDiapason(ui->DiapasonChannel_1->currentIndex());
+    options_channel1.SetRegistrationType(ui->RegType_Channel_1->currentIndex());
 
     options_channel2.SetUnitsName(ui->UnitsChannel_2->text());
     options_channel2.SetHigherLimit(ui->VerhnPredelChannel_2->value());
@@ -947,6 +922,7 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel2.SetMathematical(ui->math_checkbox_channel_2->isChecked());
     options_channel2.SetDempher(ui->DemphirChannel_2->value());
     options_channel2.SetDiapason(ui->DiapasonChannel_2->currentIndex());
+    options_channel2.SetRegistrationType(ui->RegType_Channel_2->currentIndex());
 
     options_channel3.SetUnitsName(ui->UnitsChannel_3->text());
     options_channel3.SetHigherLimit(ui->VerhnPredelChannel_3->value());
@@ -965,6 +941,7 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel3.SetMathematical(ui->math_checkbox_channel_3->isChecked());
     options_channel3.SetDempher(ui->DemphirChannel_3->value());
     options_channel3.SetDiapason(ui->DiapasonChannel_3->currentIndex());
+    options_channel3.SetRegistrationType(ui->RegType_Channel_3->currentIndex());
 
     options_channel4.SetUnitsName(ui->UnitsChannel_4->text());
     options_channel4.SetHigherLimit(ui->VerhnPredelChannel_4->value());
@@ -983,22 +960,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
     options_channel4.SetDempher(ui->DemphirChannel_4->value());
     options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
-    //    qDebug() << options_channel1.GetDempherValue() <<  " DempherValue()  1";
-    //    qDebug() << options_channel2.GetDempherValue() <<  " DempherValue()  2";
-    //    qDebug() << options_channel3.GetDempherValue() <<  " DempherValue()  3";
-    //    qDebug() << options_channel4.GetDempherValue() <<  " DempherValue()  4";
-
-    //    SetLogMessagesLimit(ui->spinBox->value());
+    options_channel4.SetRegistrationType(ui->RegType_Channel_4->currentIndex());
 }
 
 void StackedOptions::InitiateArchive()
 {
-
     ui->customPlot->yAxis->setRange(-300, 500);
     ui->customPlot->xAxis->setRange(-300, 300);
-
     ui->customPlot->replot();;
-
 }
 
 void StackedOptions::UpdateCurrentDisplayParametr()
@@ -1067,7 +1036,6 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 void StackedOptions::Channel1TypeChange()
 {
     ui->DiapasonChannel_1->clear();
-
 
     if (ui->ButonOtklChannel_1->isChecked())
     {
@@ -1316,7 +1284,6 @@ void StackedOptions::Channel4TypeChange()
     }
 }
 
-
 void StackedOptions::on_pushButton_14_clicked()
 {
 #ifndef WIN32
@@ -1335,8 +1302,6 @@ void StackedOptions::on_pushButton_14_clicked()
 void StackedOptions::on_pushButton_53_clicked()
 {
     SetStackIndex(ArchiveIndex);
-    InitiateArchive();
-    UpdateArchiveData();
 }
 
 void StackedOptions::on_pushButton_54_clicked()
@@ -1346,44 +1311,31 @@ void StackedOptions::on_pushButton_54_clicked()
 
 void StackedOptions::UpdateAnalyze()
 {
-
     double averagechannel_1 , averagechannel_2 , averagechannel_3,averagechannel_4 , sum;
 
     averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
 
+    //    averagechannel_1 = mathresolver::GetAverageValue < double >() ; // (&Y_coordinates_Chanel_1_archive);
+    //    QVector<double> zzz;
+    //    averagechannel_1 = mathresolver::GetAverageValue< double >(zzz);
 
-    averagechannel_1 = mathresolver::GetAverageValue< double >(); // &Y_coordinates_Chanel_1_archive
+    mathresolver mr;
+    mr.SolveEquation("1+1");
 
-    qDebug() << averagechannel_1 << "averagechannel_1";
+    QVector<double> zzz;
 
-//    sort< int >( c, 5 );
+    zzz.append(220);
+    zzz.append(362);
+    zzz.append(435);
+    zzz.append(554);
 
-    /*  sum   = 0;
-    for(double a : Y_coordinates_Chanel_1_archive)
-        sum += a;
+    //    averagechannel_1 = mr.GetAverageValue< double >(zzz);
 
-    if (Y_coordinates_Chanel_1_archive.size()>0)
-        averagechannel_1 = sum/Y_coordinates_Chanel_1_archive.size();
+    averagechannel_1 = mr.dGetAverageValue(Y_coordinates_Chanel_1_archive);
+    averagechannel_2 = mr.dGetAverageValue(Y_coordinates_Chanel_2_archive);
+    averagechannel_3 = mr.dGetAverageValue(Y_coordinates_Chanel_3_archive);
+    averagechannel_4 = mr.dGetAverageValue(Y_coordinates_Chanel_4_archive);
 
-    sum   = 0;
-    for(double a : Y_coordinates_Chanel_2_archive)
-        sum += a;
-    if (Y_coordinates_Chanel_2_archive.size()>0)
-        averagechannel_2 = sum/Y_coordinates_Chanel_2_archive.size();
-
-    sum   = 0;
-    for(double a : Y_coordinates_Chanel_3_archive)
-        sum += a;
-    if (Y_coordinates_Chanel_3_archive.size()>0)
-        averagechannel_3 = sum/Y_coordinates_Chanel_3_archive.size();
-
-    sum  = 0;
-    for(double a : Y_coordinates_Chanel_4_archive)
-        sum += a;
-
-    if (Y_coordinates_Chanel_4_archive.size()>0)
-        averagechannel_4 = sum/Y_coordinates_Chanel_4_archive.size();
-*/
     double minimumchannel_1 =  *std::min_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
     double maximumchannel_1 =  *std::max_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
 
@@ -1417,6 +1369,8 @@ void StackedOptions::UpdateAnalyze()
     ui->analizemaxvaluechannel_2->setText(": " + QString::number(maximumchannel_2));
     ui->analizemaxvaluechannel_3->setText(": " + QString::number(maximumchannel_3));
     ui->analizemaxvaluechannel_4->setText(": " + QString::number(maximumchannel_4));
+
+
 
 }
 
@@ -1489,10 +1443,16 @@ void StackedOptions::UpdateArchiveData()
 void StackedOptions::on_pushButton_34_clicked()
 {
     UpdateAnalyze();
-SetStackIndex(AnalizeIndex);
+    SetStackIndex(AnalizeIndex);
 }
 
 void StackedOptions::on_analyzebackbutton_clicked()
 {
-SetStackIndex(WorkIndex);
+    SetStackIndex(WorkIndex);
+}
+
+void StackedOptions::on_plotarchive_clicked()
+{
+    InitiateArchive();
+    UpdateArchiveData();
 }

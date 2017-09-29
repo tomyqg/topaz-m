@@ -153,6 +153,8 @@ private slots:
 
     void on_analyzebackbutton_clicked();
 
+    void on_plotarchive_clicked();
+
 private:
     Ui::StackedOptions *ui;
     bool eventFilter(QObject *object, QEvent *event);

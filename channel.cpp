@@ -1,6 +1,11 @@
 #include "channel1.h"
 #include "QDebug"
 
+
+int tata ;
+
+extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
+
 double ChannelOptions::GetHigherLimit()
 {
     return this->higherlimit;
@@ -36,6 +41,10 @@ int ChannelOptions::GetDiapason()
     return diapason;
 }
 
+int ChannelOptions::GetRegistrationType()
+{
+    return registrationtype;
+}
 
 void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
@@ -45,6 +54,11 @@ void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 void ChannelOptions::SetDiapason(int newdiapason)
 {
     this->diapason = newdiapason;
+}
+
+void ChannelOptions::SetRegistrationType(int newdregistrationtype)
+{
+    this->registrationtype = newdregistrationtype;
 }
 
 void ChannelOptions::SetUnitsName(QString unitsname)
@@ -225,6 +239,32 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 
 double ChannelOptions::GetCurrentChannelValue()
 {
+
+    //    int regtype = GetRegistrationType();
+    //    regtype = 1;
+
+    //    switch (regtype) {
+    //    case 0: // мгновенное значение
+    //        currentvalue;
+    //        break;
+    //    case 1: // среднее значение
+    //    {
+    //        currentvalue = MR.dGetAverageValue(channelbuffer);
+    //        qDebug() << channelname << currentvalue ;
+    //        qDebug() << channelbuffer;
+    //    }
+    //        break;
+    //    case 2: // минимум значение
+    //        break;
+    //    case 3: // максимум значение
+    //        break;
+    //    case 4: // минимум плюс максимум значение
+    //        break;
+    //    default:
+    //        currentvalue;
+    //        break;
+    //    }
+
     return currentvalue;
 }
 
@@ -239,6 +279,7 @@ double ChannelOptions::GetValuePercent()
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = value;
+    //    channelbuffer.append(tata++);
 }
 
 void ChannelOptions::SetDempher(double newdempher)

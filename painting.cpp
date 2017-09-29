@@ -41,11 +41,7 @@ void MainWindow::PaintCyfrasBottom()
     smalltextsize/=1.2;
 #endif
     
-    channel1object.SetCurrentChannelValue( UartDriver::channelinputbuffer[0]);
-    channel2object.SetCurrentChannelValue( UartDriver::channelinputbuffer[1]);
-    channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
-    channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
-    
+
     // задаем координаты отображения квадратов
     channel1object.xposition = 0;
     channel1object.yposition = otstupsverhu;
@@ -167,11 +163,6 @@ void MainWindow::PaintCyfrasRight()
     alerttextsize/=1.5;
     smalltextsize/=1.2;
 #endif
-    
-    channel1object.SetCurrentChannelValue( UartDriver::channelinputbuffer[0]);
-    channel2object.SetCurrentChannelValue( UartDriver::channelinputbuffer[1]);
-    channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
-    channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
     
     // задаем координаты отображения квадратов
     int xpositionall = widgwidth - smallrectinglewidth;
@@ -302,11 +293,7 @@ void MainWindow::PaintCyfrasFullScreen()
     smalltextsize/=1.2;
 #endif
     
-    channel1object.SetCurrentChannelValue( UartDriver::channelinputbuffer[0]);
-    channel2object.SetCurrentChannelValue( UartDriver::channelinputbuffer[1]);
-    channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
-    channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
-    
+
     // задаем координаты отображения квадратов
     channel1object.xposition = borderwidth;
     channel1object.yposition = borderwidth;
@@ -435,12 +422,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     alerttextsize/=1.5;
     smalltextsize/=1.5;
 #endif
-    
-    channel1object.SetCurrentChannelValue( UartDriver::channelinputbuffer[0]);
-    channel2object.SetCurrentChannelValue( UartDriver::channelinputbuffer[1]);
-    channel3object.SetCurrentChannelValue( UartDriver::channelinputbuffer[2]);
-    channel4object.SetCurrentChannelValue( UartDriver::channelinputbuffer[3]);
-    
+
     // задаем координаты отображения квадратов
     channel1object.xposition = 0;
     channel1object.yposition = 0;

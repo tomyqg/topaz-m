@@ -8,7 +8,6 @@
 #include <QFile>
 #include <QThread>
 #include <QDebug>
-//#include <QtScript/QScriptEngine>
 #include <QtSerialPort/QtSerialPort>
 #include <mathresolver.h>
 #include "defines.h"

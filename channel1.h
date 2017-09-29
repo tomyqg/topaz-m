@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QColor>
+#include <QVector>
+#include "mathresolver.h"
 
 class ChannelOptions: public QObject
 {
@@ -18,6 +20,7 @@ public:
 
     uint16_t GetSignalType();
     int GetDiapason();
+    int GetRegistrationType();
     double GetLowerLimit();
     double GetHigherLimit();
     double GetLowerMeasureLimit();
@@ -42,7 +45,6 @@ public:
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
-    void SetDiapason(int newdiapason);
     void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
     void SetLowerLimit(double newsignaltype);
@@ -62,6 +64,9 @@ public:
     void SetCurrentChannelValue(double value);
     void SetDempher(double newdempher);
     void SetColor(QColor newcolor);
+    void SetDiapason(int newdiapason);
+    void SetRegistrationType(int newdregistrationtype);
+
 
     bool IsHighState1Setted();
     bool IsLowState1Setted();
@@ -105,6 +110,11 @@ private:
     QColor color; // цвет канала на графике
     bool needConfirmationchannel;
     int diapason;
+    int registrationtype;
+
+    mathresolver MR;
+
+    QVector<double> channelbuffer;
 
 signals:
     void updateUI(const QString text);

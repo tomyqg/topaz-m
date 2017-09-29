@@ -6,7 +6,7 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 
-class mathresolver
+class mathresolver : public QObject
 {
 public:
     mathresolver();
@@ -14,8 +14,10 @@ public:
     double SolveEquation(QString eqstring);
 
     template< typename T >
-    static T GetAverageValue();
-//    static T GetAverageValue(QVector<T> & qvect);
+    T GetAverageValue(QVector<T>& qvect2);
+    double dGetAverageValue(QVector<double >& qvect2);
+
+    //static T GetAverageValue();
 
 };
 

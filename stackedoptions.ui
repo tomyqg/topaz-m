@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>21</number>
+    <number>23</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -9651,6 +9651,67 @@
       <string>Назад</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="plotarchive">
+     <property name="geometry">
+      <rect>
+       <x>549</x>
+       <y>560</y>
+       <width>181</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Показать архив</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="archive_period">
+     <property name="geometry">
+      <rect>
+       <x>860</x>
+       <y>570</y>
+       <width>151</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <item>
+      <property name="text">
+       <string>Всё время</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="LabelRelay_9">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>570</y>
+       <width>111</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans Semibold</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>За период</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="AnalizePage">
     <widget class="QLabel" name="analyzelabel">
@@ -10447,9 +10508,9 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

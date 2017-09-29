@@ -44,6 +44,7 @@ private:
     bool isrunning,isstopped;
     modbus_t * m_modbus;
     QList<ChannelOptions *> ChannelsObjectsList;
+    QList<QVector<double> *> arrayarray;
     QList< Device * > Devices;
     Device device;
 };
