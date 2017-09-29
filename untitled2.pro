@@ -12,9 +12,6 @@ VERSION = 0.5.5
 
 Q_OS_LINUX = 1
 
-#раскомментить если хотим чтобы запустилось на винде и закомментить если на линухе
-
-
 QT_IM_MODULE=mockup
 CONFIG += mockup
 
@@ -87,4 +84,16 @@ FORMS    += mainwindow.ui \
 target.path  = /opt
 INSTALLS    += target
 DISTFILES += \
-    ../build-untitled2-MYD-Release/Makefile
+    ../build-untitled2-MYD-Release/Makefile \
+    translator_en.ts \
+    untitled_2_de.ts \
+    untitled_2_en.ts \
+    untitled_2_ru.ts \
+    untitled2_de.ts \
+    untitled2_en.ts \
+    untitled2_ru.ts
+
+
+TRANSLATIONS +=  untitled2_en.ts \
+                 untitled2_ru.ts \
+                 untitled2_de.ts
