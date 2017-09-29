@@ -65,11 +65,9 @@ void Options::ReadChannelsOptionsFromFile()
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
         Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
-        Channel->SetDiapason(77);
-
+        Channel->SetDiapason(jsonobj.value("Diapason").toInt());
         index ++ ;
     }
-    qDebug() << options_channel1.GetDiapason() << " options_channel1.GetDiapason() ";
 }
 
 QJsonArray MessageWrite::LogMessageRead()
