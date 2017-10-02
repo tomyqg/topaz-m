@@ -21,27 +21,27 @@
     <message>
         <location filename="mainwindow.ui" line="147"/>
         <source>Меню</source>
-        <translation>asd</translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="173"/>
         <source>Сообщения</source>
-        <translation></translation>
+        <translation>Messages</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="230"/>
         <source>Квитирование</source>
-        <translation></translation>
+        <translation>Confirming</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="250"/>
         <source>Сглаживание</source>
-        <translation></translation>
+        <translation>Smooth</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="296"/>
         <source>Цветовые схемы</source>
-        <translation></translation>
+        <translation>Color schemes</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="315"/>
@@ -51,17 +51,17 @@
     <message>
         <location filename="mainwindow.ui" line="365"/>
         <source>Вспомогательные стрелки</source>
-        <translation></translation>
+        <translation>Arrows</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="385"/>
         <source>Автомасшабирование графика</source>
-        <translation></translation>
+        <translation>Auto scaling</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="405"/>
         <source>В процентах</source>
-        <translation></translation>
+        <translation>Percents</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="425"/>
@@ -71,12 +71,12 @@
     <message>
         <location filename="mainwindow.ui" line="454"/>
         <source>Архив</source>
-        <translation></translation>
+        <translation>History</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="481"/>
         <source>Работа</source>
-        <translation></translation>
+        <translation>Work</translation>
     </message>
     <message>
         <location filename="mainwindow_logic.cpp" line="55"/>
@@ -141,22 +141,22 @@
     <message>
         <location filename="messages.ui" line="26"/>
         <source>Form</source>
-        <translation></translation>
+        <translation>Messages</translation>
     </message>
     <message>
         <location filename="messages.ui" line="74"/>
         <source>закрыть</source>
-        <translation></translation>
+        <translation>Close</translation>
     </message>
     <message>
         <location filename="messages.ui" line="110"/>
         <source>Прокрутка</source>
-        <translation></translation>
+        <translation>Scrolling</translation>
     </message>
     <message>
         <location filename="messages.cpp" line="19"/>
         <source>LOG</source>
-        <translation></translation>
+        <translation>Log</translation>
     </message>
 </context>
 <context>
@@ -932,47 +932,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="stackedoptions.ui" line="14"/>
         <source>МЕНЮ</source>
-        <translation></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="45"/>
         <location filename="stackedoptions.ui" line="371"/>
         <source>Работа</source>
-        <translation></translation>
+        <translation>Work</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="64"/>
         <location filename="stackedoptions.ui" line="328"/>
         <source>Настройки</source>
-        <translation></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="83"/>
         <location filename="stackedoptions.ui" line="528"/>
         <source>Диагностика</source>
-        <translation></translation>
+        <translation>Diagnostics</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="102"/>
         <location filename="stackedoptions.ui" line="742"/>
         <source>Эксперт</source>
-        <translation></translation>
+        <translation>Expert options</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="121"/>
         <source>Выйти без сохранения</source>
-        <translation></translation>
+        <translation>Close without saving</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="140"/>
         <location filename="stackedoptions.ui" line="8945"/>
         <source>Меню</source>
-        <translation></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="162"/>
         <source>Сохранить и выйти</source>
-        <translation></translation>
+        <translation>Save and exit</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="181"/>
@@ -1020,82 +1020,82 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="9701"/>
         <location filename="stackedoptions.ui" line="9805"/>
         <source>Назад</source>
-        <translation></translation>
+        <translation>Back</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="252"/>
         <source>Расширенные настройки</source>
-        <translation></translation>
+        <translation>Extended options</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="271"/>
         <location filename="stackedoptions.ui" line="766"/>
         <location filename="stackedoptions.ui" line="1223"/>
         <source>Изменить Дату/Время</source>
-        <translation></translation>
+        <translation>Change Date/time</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="290"/>
         <source>Часовой пояс: +03:00 : Москва</source>
-        <translation></translation>
+        <translation>Time Zone</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="309"/>
         <source>Текущие Дата/Время : </source>
-        <translation></translation>
+        <translation>Date/Time</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="393"/>
         <source>Поиск в записях</source>
-        <translation></translation>
+        <translation>Search in history</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="412"/>
         <source>Сохранение текста</source>
-        <translation></translation>
+        <translation>Text saving</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="431"/>
         <source>Изменить режим отображения</source>
-        <translation></translation>
+        <translation>Change display mode</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="450"/>
         <location filename="stackedoptions.ui" line="4906"/>
         <location filename="stackedoptions.ui" line="9783"/>
         <source>Анализ сигнала</source>
-        <translation></translation>
+        <translation>Signal analyze</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="469"/>
         <source>Регулировка яркости</source>
-        <translation></translation>
+        <translation>Display brightness</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="488"/>
         <location filename="stackedoptions.ui" line="9651"/>
         <source>Архив</source>
-        <translation></translation>
+        <translation>History</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="550"/>
         <source>Журнал событий</source>
-        <translation></translation>
+        <translation>Messages</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="569"/>
         <source>Текущая диагностика</source>
-        <translation></translation>
+        <translation>Current diagnostics</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="588"/>
         <source>Список диагност.</source>
-        <translation></translation>
+        <translation>Diagnostics list</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="607"/>
         <source>Последняя диагностика</source>
-        <translation></translation>
+        <translation>The latest diagnostics</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="626"/>
@@ -2127,7 +2127,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="stackedoptions.ui" line="10434"/>
         <source>Index: </source>
-        <translation></translation>
+        <translation>Index</translation>
     </message>
 </context>
 <context>

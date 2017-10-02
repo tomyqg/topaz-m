@@ -82,7 +82,7 @@
 //#define Font "Orbitron Light"
 
 #define NaNMessage "nan"
-#define OKMessage "OK"
+#define OKMessage "норма"
 #define AlertSign "!"
 #define MathString "math "
 
