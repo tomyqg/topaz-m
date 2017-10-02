@@ -156,7 +156,7 @@ void MainWindow::PaintCyfrasRight()
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
     int smallrectingleheight = widgheight/4-30; // высота прямоугольничка в пикселях задается вручную
-    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
+    int smallrectinglewidth = widgwidth / (4 *1024/1280); // ширина прямоугольничка в пикселях высчитывается
     int otstupsnizu = smallrectingleheight + 24;
     int otstupsverhu = widgheight - otstupsnizu;
     int otstupsverhu1 = otstupsverhu-smallrectingleheight;
@@ -561,7 +561,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             else
             {
                 painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, OKMessage);
+                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, tr(OKMessage));
             }
             
             if  (GetHalfSecFlag())
@@ -633,7 +633,6 @@ void MainWindow::PaintPolarDiagramm()
 
 
     QLineF Channel1Line;
-    
     
     if (channel1value>=90) // если больше 90 градусов то поворачиваем диск
         

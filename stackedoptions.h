@@ -155,6 +155,8 @@ private slots:
 
     void on_plotarchive_clicked();
 
+    void on_pushButton_109_clicked();
+
 private:
     Ui::StackedOptions *ui;
     bool eventFilter(QObject *object, QEvent *event);
@@ -166,6 +168,7 @@ private:
     void WriteAllChannelsOptionsToFile();
     void UpdateCurrentDisplayParametr() ;
     void InitiateArchive() ;
+    void ResetToDefaults();
     QString GetNewDateString();
     QString GetNewTimeString();
     QString GetNewDisplayResolution();

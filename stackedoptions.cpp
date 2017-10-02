@@ -970,6 +970,15 @@ void StackedOptions::InitiateArchive()
     ui->customPlot->replot();;
 }
 
+void StackedOptions::ResetToDefaults() // кастомизирует контроллы во вкладке опшнс
+{
+    QProcess process;
+    //копируем файлы настроек каналов в рабочий каталог
+    process.startDetached("cp -a /opt/Defaults/. /opt/");
+    //qDebug() << "ResetToDefaults";
+
+}
+
 void StackedOptions::UpdateCurrentDisplayParametr()
 {
     if (ui->SetTrendsBtn->isChecked())
@@ -1369,9 +1378,6 @@ void StackedOptions::UpdateAnalyze()
     ui->analizemaxvaluechannel_2->setText(": " + QString::number(maximumchannel_2));
     ui->analizemaxvaluechannel_3->setText(": " + QString::number(maximumchannel_3));
     ui->analizemaxvaluechannel_4->setText(": " + QString::number(maximumchannel_4));
-
-
-
 }
 
 void StackedOptions::UpdateArchiveData()
@@ -1455,4 +1461,10 @@ void StackedOptions::on_plotarchive_clicked()
 {
     InitiateArchive();
     UpdateArchiveData();
+}
+
+void StackedOptions::on_pushButton_109_clicked()
+{
+    ResetToDefaults();
+    this->close();
 }

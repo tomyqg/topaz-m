@@ -14,12 +14,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QTranslator translator;
 
-    //translator.load(QApplication::applicationName() + "_" + QLocale::system().name());
-    qDebug() << QApplication::applicationName() + "_" + QLocale::system().name();
-
-    translator.load("untitled2_en_EN");
-    qApp->installTranslator(&translator);
-
     MainWindow w;
 
     //делаем ресайз

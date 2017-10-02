@@ -31,8 +31,6 @@
 #include <QMetaType>
 #include "defines.h"
 
-int odin;
-
 extern MainWindow * globalMainWin;
 
 extern QColor Channel1Color;
@@ -49,7 +47,7 @@ extern QColor ChannelColorLowState;
 
 void MainWindow::MainWindowInitialization()
 {
-    CreateMODBusConfigFile();
+//    CreateMODBusConfigFile();
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
@@ -130,6 +128,10 @@ void MainWindow::MainWindowInitialization()
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
 
+
+    //    SetWindowWidthPixels(1024);
+    //    SetWindowHeightPixels(768);
+
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
@@ -155,9 +157,8 @@ void MainWindow::MainWindowInitialization()
     QProcess process;
     process.startDetached("ifconfig usb0 192.168.1.115");
 
-    //    startWorkSignal();
+//    Options::displayResolution = "1280x800";
 }
-
 
 static QString descriptiveDataTypeName( int funcCode )
 {
@@ -180,7 +181,6 @@ static QString descriptiveDataTypeName( int funcCode )
     }
     return "Unknown";
 }
-
 
 void MainWindow::LabelsInit()
 {
@@ -256,7 +256,6 @@ void MainWindow::DelaySec(int n)
 void MainWindow::OpenOptionsWindow( int index )
 {
     //здесь запускаем меню обновленное как в эндресе
-
     if (ui->endressmenucheckbox->checkState())
     {
         StackedOptions *sw= new StackedOptions(index,0);
@@ -267,13 +266,13 @@ void MainWindow::OpenOptionsWindow( int index )
         channel3object.ReadSingleChannelOptionFromFile(3);
         channel4object.ReadSingleChannelOptionFromFile(4);
 
-
         SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
-
         //    если вдруг поменялось время то нужно обновить лейблы
         LabelsInit();
         LabelsCorrect();
         sw->deleteLater();
+
+        resizeSelf(1024,768);
         return;
     }
 
@@ -294,18 +293,22 @@ void MainWindow::OpenOptionsWindow( int index )
     LabelsInit();
     LabelsCorrect();
 
+
+    // пересылаем ссылки на объекты в воркер
     SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
 
     // если что меняем разрешение
-    if (Options::displayResolution == "1024x768")
-    {
-        resizeSelf(1024,768);
-    }
+        if (Options::displayResolution == "1024x768")
+        {
+            resizeSelf(1024,768);
+        }
 
-    if (Options::displayResolution == "1280x800")
-    {
-        resizeSelf(1280,720);
-    }
+        if (Options::displayResolution == "1280x800")
+        {
+            resizeSelf(1280,720);
+        }
+
+    resizeSelf(1024,768);
 
     optionsobj->deleteLater(); // удаляем объект опций
     //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
@@ -313,7 +316,6 @@ void MainWindow::OpenOptionsWindow( int index )
 
 void MainWindow::OpenArchiveWindow()
 {
-
     OpenOptionsWindow(23);
 }
 
@@ -387,8 +389,10 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-//    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
+    //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
     ui->time_label->setText(local.date().toString("dd.MM.yyyy " ) + local.time().toString());
+
+    resizeSelf(1024,768);
 }
 
 void MainWindow::LabelsUpdate()
@@ -792,10 +796,30 @@ void MainWindow::sendModbusRequest( void )
     }
 }
 
-
 void MainWindow::resetStatus( void )
 {
     ;
+}
+
+void MainWindow::changeTranslator(int langindex)
+{
+    QApplication::removeTranslator(translator);
+    translator = new QTranslator();
+
+    switch (langindex) {
+    case 0:
+        translator->load("untitled2_en_EN");
+        break;
+    case 1:
+        translator->load("untitled2_ru_RU");
+        break;
+    case 2:
+        translator->load("untitled2_de_DE");
+        break;
+    default:
+        return;
+    }
+    QApplication::installTranslator(translator);
 }
 
 

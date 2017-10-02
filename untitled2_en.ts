@@ -1100,28 +1100,28 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="stackedoptions.ui" line="626"/>
         <source>Последний перезапуск</source>
-        <translation></translation>
+        <translation>The latest reboot</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="645"/>
         <source>Сведения о приборе</source>
-        <translation></translation>
+        <translation>Device info</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="664"/>
         <source>Измер. Значения</source>
-        <translation></translation>
+        <translation>Measured values</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="683"/>
         <location filename="stackedoptions.ui" line="1009"/>
         <source>Выходы</source>
-        <translation></translation>
+        <translation>Outputs</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="702"/>
         <source>Моделирование</source>
-        <translation></translation>
+        <translation>Modelling</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="813"/>
@@ -1136,100 +1136,100 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="stackedoptions.ui" line="890"/>
         <source>Сохранить</source>
-        <translation></translation>
+        <translation>Save</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="930"/>
         <location filename="stackedoptions.ui" line="1396"/>
         <source>Входы</source>
-        <translation></translation>
+        <translation>Inputs</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="949"/>
         <source>Тип связи</source>
-        <translation></translation>
+        <translation>Communication</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="968"/>
         <source>Расшир. настройки</source>
-        <translation></translation>
+        <translation>Advanced setup</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="990"/>
         <location filename="stackedoptions.ui" line="1068"/>
         <source>Система</source>
-        <translation></translation>
+        <translation>System</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1047"/>
         <source>Приложение</source>
-        <translation></translation>
+        <translation>Application</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1090"/>
         <source>Идентиф. прибора</source>
-        <translation></translation>
+        <translation>Device tag</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1109"/>
         <source>Ед. Измер. Темп</source>
-        <translation></translation>
+        <translation>Temp unit</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1128"/>
         <source>Десятичный знак</source>
-        <translation></translation>
+        <translation>Decmal separator</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1147"/>
         <source>Сбой переключения</source>
-        <translation></translation>
+        <translation>fault switching</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1166"/>
         <source>Распределение клавиш</source>
-        <translation></translation>
+        <translation>Keyboard layout</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1185"/>
         <source>Формат бумаги</source>
-        <translation></translation>
+        <translation>Paper size</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1204"/>
         <source>Блокирование управления</source>
-        <translation></translation>
+        <translation>Lock operation</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1242"/>
         <source>Безопасность</source>
-        <translation></translation>
+        <translation>Security</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1261"/>
         <source>Внешний накопитель данных</source>
-        <translation></translation>
+        <translation>External memory</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1280"/>
         <source>Сообщения</source>
-        <translation></translation>
+        <translation>Messages</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1299"/>
         <source>Опции прибора</source>
-        <translation></translation>
+        <translation>Deviceoptions</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1339"/>
         <source>Цифровые входы</source>
-        <translation></translation>
+        <translation>Digital inputs</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1358"/>
         <location filename="stackedoptions.ui" line="1420"/>
         <source>Универсальные входы</source>
-        <translation></translation>
+        <translation>Universal inputs</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1461"/>
@@ -1239,7 +1239,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="7043"/>
         <location filename="stackedoptions.ui" line="9995"/>
         <source>Канал 2</source>
-        <translation></translation>
+        <translation>Channel 2</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1480"/>
@@ -1249,7 +1249,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="6189"/>
         <location filename="stackedoptions.ui" line="9824"/>
         <source>Канал 1</source>
-        <translation></translation>
+        <translation>Channel 1</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1499"/>
@@ -1259,7 +1259,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="7878"/>
         <location filename="stackedoptions.ui" line="10147"/>
         <source>Канал 3</source>
-        <translation></translation>
+        <translation>Channel 3</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1518"/>
@@ -1269,7 +1269,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="8691"/>
         <location filename="stackedoptions.ui" line="10299"/>
         <source>Канал 4</source>
-        <translation></translation>
+        <translation>Channel 4</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1541"/>
@@ -1277,7 +1277,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3142"/>
         <location filename="stackedoptions.ui" line="3910"/>
         <source>Сигнал</source>
-        <translation></translation>
+        <translation>Sighal</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1574"/>
@@ -1285,7 +1285,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3175"/>
         <location filename="stackedoptions.ui" line="3943"/>
         <source>Отключен                      </source>
-        <translation></translation>
+        <translation>Off</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1595"/>
@@ -1293,7 +1293,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3196"/>
         <location filename="stackedoptions.ui" line="3964"/>
         <source>Ток                                    </source>
-        <translation></translation>
+        <translation>Current</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1616"/>
@@ -1301,7 +1301,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3217"/>
         <location filename="stackedoptions.ui" line="3985"/>
         <source>Напряжение                     </source>
-        <translation></translation>
+        <translation>Voltage</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1634"/>
@@ -1309,7 +1309,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3235"/>
         <location filename="stackedoptions.ui" line="4003"/>
         <source>Термосопротивление</source>
-        <translation></translation>
+        <translation>Resistance therm., RTD</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1652"/>
@@ -1317,7 +1317,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3253"/>
         <location filename="stackedoptions.ui" line="4021"/>
         <source>Термопара                           </source>
-        <translation></translation>
+        <translation>Thermocouple</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1673"/>
@@ -1325,7 +1325,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3274"/>
         <location filename="stackedoptions.ui" line="4042"/>
         <source>Счетчик Импульсов           </source>
-        <translation></translation>
+        <translation>Pulse counter</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1735"/>
@@ -1346,7 +1346,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3305"/>
         <location filename="stackedoptions.ui" line="4073"/>
         <source>Параметры Канала</source>
-        <translation></translation>
+        <translation>Channel parametrs</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1801"/>
@@ -1359,7 +1359,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3528"/>
         <location filename="stackedoptions.ui" line="4296"/>
         <source>4-20 мА</source>
-        <translation></translation>
+        <translation>4-20 mA</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="1987"/>
@@ -1383,7 +1383,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3573"/>
         <location filename="stackedoptions.ui" line="4341"/>
         <source>Единицы измерения</source>
-        <translation></translation>
+        <translation>Engineering unit</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2042"/>
@@ -1391,7 +1391,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3588"/>
         <location filename="stackedoptions.ui" line="4356"/>
         <source>Начало поддиапазона</source>
-        <translation></translation>
+        <translation>Sub-range start</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2057"/>
@@ -1399,7 +1399,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3603"/>
         <location filename="stackedoptions.ui" line="4371"/>
         <source>Конец поддиапазона</source>
-        <translation></translation>
+        <translation>Sub-range end</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2072"/>
@@ -1407,7 +1407,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3618"/>
         <location filename="stackedoptions.ui" line="4386"/>
         <source>Начало диапазона</source>
-        <translation></translation>
+        <translation>Range start</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2087"/>
@@ -1415,7 +1415,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3633"/>
         <location filename="stackedoptions.ui" line="4401"/>
         <source>Конец диапазона</source>
-        <translation></translation>
+        <translation>Range end</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2102"/>
@@ -1423,7 +1423,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3648"/>
         <location filename="stackedoptions.ui" line="4416"/>
         <source>Период измерений,с</source>
-        <translation></translation>
+        <translation>Measure period</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2117"/>
@@ -1431,7 +1431,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3663"/>
         <location filename="stackedoptions.ui" line="4431"/>
         <source>Диапазон</source>
-        <translation></translation>
+        <translation>Range</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2148"/>
@@ -1439,7 +1439,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3758"/>
         <location filename="stackedoptions.ui" line="4526"/>
         <source>Тип регистрации</source>
-        <translation></translation>
+        <translation>Plot type</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2174"/>
@@ -1447,7 +1447,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3100"/>
         <location filename="stackedoptions.ui" line="3868"/>
         <source>Мгновенное значение</source>
-        <translation></translation>
+        <translation>Instantaneous value</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2179"/>
@@ -1455,7 +1455,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3105"/>
         <location filename="stackedoptions.ui" line="3873"/>
         <source>Среднее значение</source>
-        <translation></translation>
+        <translation>Average</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2184"/>
@@ -1467,7 +1467,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="10223"/>
         <location filename="stackedoptions.ui" line="10375"/>
         <source>Минимум</source>
-        <translation></translation>
+        <translation>Minimum</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2189"/>
@@ -1479,7 +1479,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="10242"/>
         <location filename="stackedoptions.ui" line="10394"/>
         <source>Максимум</source>
-        <translation></translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2194"/>
@@ -1487,7 +1487,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3120"/>
         <location filename="stackedoptions.ui" line="3888"/>
         <source>Минимум + максимум</source>
-        <translation></translation>
+        <translation>Minimum+maximum</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2222"/>
@@ -1495,7 +1495,7 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3688"/>
         <location filename="stackedoptions.ui" line="4456"/>
         <source>Идентификатор канала</source>
-        <translation></translation>
+        <translation>Channel ident.</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2268"/>
@@ -1503,14 +1503,14 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="3846"/>
         <location filename="stackedoptions.ui" line="4614"/>
         <source>Демпфирование</source>
-        <translation></translation>
+        <translation>Damping</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2378"/>
         <location filename="stackedoptions.ui" line="3347"/>
         <location filename="stackedoptions.ui" line="4115"/>
         <source>мА</source>
-        <translation></translation>
+        <translation>mA</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="2927"/>
@@ -1530,68 +1530,68 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="stackedoptions.ui" line="4635"/>
         <source>Режим отображения</source>
-        <translation></translation>
+        <translation>Display mode</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4671"/>
         <source>Кривая</source>
-        <translation></translation>
+        <translation>Curve</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4695"/>
         <source>Цифра</source>
-        <translation></translation>
+        <translation>Digits</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4719"/>
         <source>Кривая и цифра</source>
-        <translation></translation>
+        <translation>Curves and digits</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4737"/>
         <source>Барграф</source>
-        <translation></translation>
+        <translation>Bargraph</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4755"/>
         <source>Барграф и цифра</source>
-        <translation></translation>
+        <translation>Bargraph and digits</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4773"/>
         <source>Кривая и барграф</source>
-        <translation></translation>
+        <translation>Curves and bargraph</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4788"/>
         <source>Кривая, барграф и цифра</source>
-        <translation></translation>
+        <translation>Curves, bargraph and digits</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4803"/>
         <source>Круговая диаграмма</source>
-        <translation></translation>
+        <translation>Circular chart</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4846"/>
         <source>Приложения</source>
-        <translation></translation>
+        <translation type="unfinished">Application</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4868"/>
         <location filename="stackedoptions.ui" line="5424"/>
         <source>Математика</source>
-        <translation></translation>
+        <translation type="unfinished">Math</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="4887"/>
         <source>Предел. значения/уставки</source>
-        <translation></translation>
+        <translation type="unfinished">Linits</translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="5107"/>
         <source>Канал 5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="stackedoptions.ui" line="5125"/>

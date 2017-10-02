@@ -390,38 +390,36 @@ void worker::do_Work()
                 QCoreApplication::applicationDirPath();
                 UartDriver::needtoupdatechannel[index] = 0;
 
-                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
+                //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
                 currentdata = destfloat[0];
 
                 ////
 
-                //                if (Chanel->IsChannelMathematical())
-                //                {
-                //                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
-                //                    currentdata = mathresult;
-                //                }
+                if (Chanel->IsChannelMathematical())
+                {
+                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
+                    currentdata = mathresult;
+                }
 
-                //                switch (index) {
-                //                case 0:
-                //                    currentdata = globalindex/2;
-                //                    break;
-                //                case 1:
-                //                    currentdata = 2*globalindex;
-                //                    break;
-                //                case 2:
-                //                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
-                //                    break;
-                //                case 3:
-                //                    currentdata =  -2*globalindex;
-                //                    break;
-                //                default:
-                //                    break;
-                //                }
+                switch (index) {
+                case 0:
+                    currentdata = globalindex/2;
+                    break;
+                case 1:
+                    currentdata = 2*globalindex;
+                    break;
+                case 2:
+                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                    break;
+                case 3:
+                    currentdata =  -2*globalindex;
+                    break;
+                default:
+                    break;
+                }
 
                 //                Chanel->SetRegistrationType(1); // принудительно заставляем среднее значение
-
                 //                int regtype = Chanel->GetRegistrationType();
-
                 //                switch (regtype) {
                 //                case 0: // мгновенное значение
                 //                    //                    currentvalue;
@@ -443,7 +441,6 @@ void worker::do_Work()
                 //                    //currentvalue;
                 //                    break;
                 //                }
-
 
                 //////
                 UD.writechannelvalue(index,currentdata);

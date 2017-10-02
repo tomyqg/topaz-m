@@ -103,6 +103,29 @@ void MainWindow::on_ArchiveButton_clicked()
     OpenArchiveWindow();
 }
 
+//void MainWindow::on_comboBox_currentIndexChanged(int index)
+//{
+//    switch (index) {
+//    case 0:
+//        if (Options::displayResolution == "1280x800")
+//        {
+//            resizeSelf(1024,768);
+//            Options::displayResolution = "1024x768";
+//        }
+//        break;
+//    case 1:
+//        if (Options::displayResolution == "1024x768")
+//        {
+//            resizeSelf(1280,800);
+//            Options::displayResolution = "1024x768";
+//        }
+//        break;
+//    default:
+//        break;
+//    }
+//}
+
+
 void MainWindow::on_pushButton_2_clicked()
 {
     OpenOptionsWindow(0);

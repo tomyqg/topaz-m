@@ -51,7 +51,7 @@ Options::Options(QWidget *parent) :
 
 Options::~Options()
 {
-//    qDebug() << "Options Destructor" ;
+    //    qDebug() << "Options Destructor" ;
     delete ui;
 }
 
@@ -466,9 +466,6 @@ void Options::ResetToDefaults() // кастомизирует контроллы
 
 void Options::ArchiveToUSBFlashDrive() // кастомизирует контроллы во вкладке опшнс
 {
-
-    //    return;
-
     // этот кусок кода ищет название куда смонтирована флешка
     QProcess process1,process2;
     process2.start("mount"); // команда которая покажет что подключено в данный момент

@@ -150,6 +150,8 @@ private slots:
 
     void on_ArchiveButton_clicked();
 
+//    void on_comboBox_currentIndexChanged(int index);
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);
@@ -161,6 +163,9 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+
+    QTranslator* translator;
+    void changeTranslator(int langindex) ;
 
     modbus_t * m_modbus;
 
