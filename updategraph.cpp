@@ -632,43 +632,50 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1max);
     graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+
+    QPen dottedpen = QPen(Qt::red, 2, Qt::DashLine);
+
+    ui->customPlot->graph()->setPen(dottedpen);
+
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2max);
     graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3max);
     graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4max);
     graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
+    // Qt::DashDotLine, Qt::RoundCap
+
+    dottedpen = QPen(Qt::green, 2, Qt::DashLine);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1min);
     graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2min);
     graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3min);
     graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4min);
     graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);

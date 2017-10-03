@@ -79,59 +79,59 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="55"/>
+        <location filename="mainwindow_logic.cpp" line="53"/>
         <source>VISION</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="427"/>
+        <location filename="mainwindow_logic.cpp" line="431"/>
         <source>Connection Error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="428"/>
-        <location filename="mainwindow_logic.cpp" line="833"/>
+        <location filename="mainwindow_logic.cpp" line="432"/>
+        <location filename="mainwindow_logic.cpp" line="857"/>
         <source>Could not connect serial port!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="774"/>
+        <location filename="mainwindow_logic.cpp" line="778"/>
         <source>I/O error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="775"/>
+        <location filename="mainwindow_logic.cpp" line="779"/>
         <source>I/O error: did not receive any data from slave.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="779"/>
-        <location filename="mainwindow_logic.cpp" line="787"/>
+        <location filename="mainwindow_logic.cpp" line="783"/>
+        <location filename="mainwindow_logic.cpp" line="791"/>
         <source>Protocol error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="780"/>
+        <location filename="mainwindow_logic.cpp" line="784"/>
         <source>Slave threw exception &quot;%1&quot; or function not implemented.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="788"/>
+        <location filename="mainwindow_logic.cpp" line="792"/>
         <source>Number of registers returned does not match number of registers requested!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="832"/>
+        <location filename="mainwindow_logic.cpp" line="856"/>
         <source>Connection failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="841"/>
+        <location filename="mainwindow_logic.cpp" line="865"/>
         <source>No serial port found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow_logic.cpp" line="842"/>
+        <location filename="mainwindow_logic.cpp" line="866"/>
         <source>Could not find any serial port on this computer!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -965,7 +965,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="stackedoptions.ui" line="140"/>
-        <location filename="stackedoptions.ui" line="8945"/>
+        <location filename="stackedoptions.ui" line="8817"/>
         <source>Меню</source>
         <translation type="unfinished">Menu</translation>
     </message>
@@ -999,26 +999,26 @@ p, li { white-space: pre-wrap; }
         <location filename="stackedoptions.ui" line="352"/>
         <location filename="stackedoptions.ui" line="509"/>
         <location filename="stackedoptions.ui" line="723"/>
-        <location filename="stackedoptions.ui" line="909"/>
-        <location filename="stackedoptions.ui" line="1028"/>
-        <location filename="stackedoptions.ui" line="1318"/>
-        <location filename="stackedoptions.ui" line="1377"/>
-        <location filename="stackedoptions.ui" line="1442"/>
-        <location filename="stackedoptions.ui" line="2241"/>
-        <location filename="stackedoptions.ui" line="3009"/>
-        <location filename="stackedoptions.ui" line="3777"/>
-        <location filename="stackedoptions.ui" line="4545"/>
-        <location filename="stackedoptions.ui" line="4825"/>
-        <location filename="stackedoptions.ui" line="4925"/>
-        <location filename="stackedoptions.ui" line="5446"/>
-        <location filename="stackedoptions.ui" line="5546"/>
-        <location filename="stackedoptions.ui" line="6400"/>
-        <location filename="stackedoptions.ui" line="6421"/>
-        <location filename="stackedoptions.ui" line="7256"/>
-        <location filename="stackedoptions.ui" line="8091"/>
-        <location filename="stackedoptions.ui" line="8926"/>
-        <location filename="stackedoptions.ui" line="9701"/>
-        <location filename="stackedoptions.ui" line="9805"/>
+        <location filename="stackedoptions.ui" line="928"/>
+        <location filename="stackedoptions.ui" line="1047"/>
+        <location filename="stackedoptions.ui" line="1337"/>
+        <location filename="stackedoptions.ui" line="1396"/>
+        <location filename="stackedoptions.ui" line="1461"/>
+        <location filename="stackedoptions.ui" line="2260"/>
+        <location filename="stackedoptions.ui" line="3028"/>
+        <location filename="stackedoptions.ui" line="3796"/>
+        <location filename="stackedoptions.ui" line="4564"/>
+        <location filename="stackedoptions.ui" line="4844"/>
+        <location filename="stackedoptions.ui" line="4944"/>
+        <location filename="stackedoptions.ui" line="5318"/>
+        <location filename="stackedoptions.ui" line="5418"/>
+        <location filename="stackedoptions.ui" line="6272"/>
+        <location filename="stackedoptions.ui" line="6293"/>
+        <location filename="stackedoptions.ui" line="7128"/>
+        <location filename="stackedoptions.ui" line="7963"/>
+        <location filename="stackedoptions.ui" line="8798"/>
+        <location filename="stackedoptions.ui" line="9573"/>
+        <location filename="stackedoptions.ui" line="9677"/>
         <source>Назад</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1029,8 +1029,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="stackedoptions.ui" line="271"/>
-        <location filename="stackedoptions.ui" line="766"/>
-        <location filename="stackedoptions.ui" line="1223"/>
+        <location filename="stackedoptions.ui" line="785"/>
+        <location filename="stackedoptions.ui" line="1242"/>
         <source>Изменить Дату/Время</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1061,8 +1061,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="stackedoptions.ui" line="450"/>
-        <location filename="stackedoptions.ui" line="4906"/>
-        <location filename="stackedoptions.ui" line="9783"/>
+        <location filename="stackedoptions.ui" line="4925"/>
+        <location filename="stackedoptions.ui" line="9655"/>
         <source>Анализ сигнала</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1073,7 +1073,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="stackedoptions.ui" line="488"/>
-        <location filename="stackedoptions.ui" line="9651"/>
+        <location filename="stackedoptions.ui" line="9523"/>
         <source>Архив</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1114,7 +1114,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="stackedoptions.ui" line="683"/>
-        <location filename="stackedoptions.ui" line="1009"/>
+        <location filename="stackedoptions.ui" line="1028"/>
         <source>Выходы</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1124,520 +1124,512 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="813"/>
+        <location filename="stackedoptions.ui" line="764"/>
+        <source>Reset to defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="stackedoptions.ui" line="832"/>
         <source>H:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="864"/>
+        <location filename="stackedoptions.ui" line="883"/>
         <source>dd.MM.yy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="890"/>
+        <location filename="stackedoptions.ui" line="909"/>
         <source>Сохранить</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="930"/>
-        <location filename="stackedoptions.ui" line="1396"/>
+        <location filename="stackedoptions.ui" line="949"/>
+        <location filename="stackedoptions.ui" line="1415"/>
         <source>Входы</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="949"/>
+        <location filename="stackedoptions.ui" line="968"/>
         <source>Тип связи</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="968"/>
+        <location filename="stackedoptions.ui" line="987"/>
         <source>Расшир. настройки</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="990"/>
-        <location filename="stackedoptions.ui" line="1068"/>
+        <location filename="stackedoptions.ui" line="1009"/>
+        <location filename="stackedoptions.ui" line="1087"/>
         <source>Система</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1047"/>
+        <location filename="stackedoptions.ui" line="1066"/>
         <source>Приложение</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1090"/>
+        <location filename="stackedoptions.ui" line="1109"/>
         <source>Идентиф. прибора</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1109"/>
+        <location filename="stackedoptions.ui" line="1128"/>
         <source>Ед. Измер. Темп</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1128"/>
+        <location filename="stackedoptions.ui" line="1147"/>
         <source>Десятичный знак</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1147"/>
+        <location filename="stackedoptions.ui" line="1166"/>
         <source>Сбой переключения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1166"/>
+        <location filename="stackedoptions.ui" line="1185"/>
         <source>Распределение клавиш</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1185"/>
+        <location filename="stackedoptions.ui" line="1204"/>
         <source>Формат бумаги</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1204"/>
+        <location filename="stackedoptions.ui" line="1223"/>
         <source>Блокирование управления</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1242"/>
+        <location filename="stackedoptions.ui" line="1261"/>
         <source>Безопасность</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1261"/>
+        <location filename="stackedoptions.ui" line="1280"/>
         <source>Внешний накопитель данных</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1280"/>
+        <location filename="stackedoptions.ui" line="1299"/>
         <source>Сообщения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1299"/>
+        <location filename="stackedoptions.ui" line="1318"/>
         <source>Опции прибора</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1339"/>
+        <location filename="stackedoptions.ui" line="1358"/>
         <source>Цифровые входы</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1358"/>
-        <location filename="stackedoptions.ui" line="1420"/>
+        <location filename="stackedoptions.ui" line="1377"/>
+        <location filename="stackedoptions.ui" line="1439"/>
         <source>Универсальные входы</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1461"/>
-        <location filename="stackedoptions.ui" line="2987"/>
-        <location filename="stackedoptions.ui" line="5059"/>
-        <location filename="stackedoptions.ui" line="6647"/>
-        <location filename="stackedoptions.ui" line="7043"/>
-        <location filename="stackedoptions.ui" line="9995"/>
+        <location filename="stackedoptions.ui" line="1480"/>
+        <location filename="stackedoptions.ui" line="3006"/>
+        <location filename="stackedoptions.ui" line="5002"/>
+        <location filename="stackedoptions.ui" line="6519"/>
+        <location filename="stackedoptions.ui" line="6915"/>
+        <location filename="stackedoptions.ui" line="9867"/>
         <source>Канал 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1480"/>
-        <location filename="stackedoptions.ui" line="1699"/>
-        <location filename="stackedoptions.ui" line="5044"/>
-        <location filename="stackedoptions.ui" line="5793"/>
-        <location filename="stackedoptions.ui" line="6189"/>
-        <location filename="stackedoptions.ui" line="9824"/>
+        <location filename="stackedoptions.ui" line="1499"/>
+        <location filename="stackedoptions.ui" line="1718"/>
+        <location filename="stackedoptions.ui" line="4987"/>
+        <location filename="stackedoptions.ui" line="5665"/>
+        <location filename="stackedoptions.ui" line="6061"/>
+        <location filename="stackedoptions.ui" line="9696"/>
         <source>Канал 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1499"/>
-        <location filename="stackedoptions.ui" line="3707"/>
-        <location filename="stackedoptions.ui" line="5074"/>
-        <location filename="stackedoptions.ui" line="7482"/>
-        <location filename="stackedoptions.ui" line="7878"/>
-        <location filename="stackedoptions.ui" line="10147"/>
+        <location filename="stackedoptions.ui" line="1518"/>
+        <location filename="stackedoptions.ui" line="3726"/>
+        <location filename="stackedoptions.ui" line="5017"/>
+        <location filename="stackedoptions.ui" line="7354"/>
+        <location filename="stackedoptions.ui" line="7750"/>
+        <location filename="stackedoptions.ui" line="10019"/>
         <source>Канал 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1518"/>
-        <location filename="stackedoptions.ui" line="4475"/>
-        <location filename="stackedoptions.ui" line="5089"/>
-        <location filename="stackedoptions.ui" line="8295"/>
-        <location filename="stackedoptions.ui" line="8691"/>
-        <location filename="stackedoptions.ui" line="10299"/>
+        <location filename="stackedoptions.ui" line="1537"/>
+        <location filename="stackedoptions.ui" line="4494"/>
+        <location filename="stackedoptions.ui" line="5032"/>
+        <location filename="stackedoptions.ui" line="8167"/>
+        <location filename="stackedoptions.ui" line="8563"/>
+        <location filename="stackedoptions.ui" line="10171"/>
         <source>Канал 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1541"/>
-        <location filename="stackedoptions.ui" line="2740"/>
-        <location filename="stackedoptions.ui" line="3142"/>
-        <location filename="stackedoptions.ui" line="3910"/>
+        <location filename="stackedoptions.ui" line="1560"/>
+        <location filename="stackedoptions.ui" line="2759"/>
+        <location filename="stackedoptions.ui" line="3161"/>
+        <location filename="stackedoptions.ui" line="3929"/>
         <source>Сигнал</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1574"/>
-        <location filename="stackedoptions.ui" line="2773"/>
-        <location filename="stackedoptions.ui" line="3175"/>
-        <location filename="stackedoptions.ui" line="3943"/>
+        <location filename="stackedoptions.ui" line="1593"/>
+        <location filename="stackedoptions.ui" line="2792"/>
+        <location filename="stackedoptions.ui" line="3194"/>
+        <location filename="stackedoptions.ui" line="3962"/>
         <source>Отключен                      </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1595"/>
-        <location filename="stackedoptions.ui" line="2794"/>
-        <location filename="stackedoptions.ui" line="3196"/>
-        <location filename="stackedoptions.ui" line="3964"/>
+        <location filename="stackedoptions.ui" line="1614"/>
+        <location filename="stackedoptions.ui" line="2813"/>
+        <location filename="stackedoptions.ui" line="3215"/>
+        <location filename="stackedoptions.ui" line="3983"/>
         <source>Ток                                    </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1616"/>
-        <location filename="stackedoptions.ui" line="2815"/>
-        <location filename="stackedoptions.ui" line="3217"/>
-        <location filename="stackedoptions.ui" line="3985"/>
+        <location filename="stackedoptions.ui" line="1635"/>
+        <location filename="stackedoptions.ui" line="2834"/>
+        <location filename="stackedoptions.ui" line="3236"/>
+        <location filename="stackedoptions.ui" line="4004"/>
         <source>Напряжение                     </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1634"/>
-        <location filename="stackedoptions.ui" line="2833"/>
-        <location filename="stackedoptions.ui" line="3235"/>
-        <location filename="stackedoptions.ui" line="4003"/>
+        <location filename="stackedoptions.ui" line="1653"/>
+        <location filename="stackedoptions.ui" line="2852"/>
+        <location filename="stackedoptions.ui" line="3254"/>
+        <location filename="stackedoptions.ui" line="4022"/>
         <source>Термосопротивление</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1652"/>
-        <location filename="stackedoptions.ui" line="2851"/>
-        <location filename="stackedoptions.ui" line="3253"/>
-        <location filename="stackedoptions.ui" line="4021"/>
+        <location filename="stackedoptions.ui" line="1671"/>
+        <location filename="stackedoptions.ui" line="2870"/>
+        <location filename="stackedoptions.ui" line="3272"/>
+        <location filename="stackedoptions.ui" line="4040"/>
         <source>Термопара                           </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1673"/>
-        <location filename="stackedoptions.ui" line="2872"/>
-        <location filename="stackedoptions.ui" line="3274"/>
-        <location filename="stackedoptions.ui" line="4042"/>
+        <location filename="stackedoptions.ui" line="1692"/>
+        <location filename="stackedoptions.ui" line="2891"/>
+        <location filename="stackedoptions.ui" line="3293"/>
+        <location filename="stackedoptions.ui" line="4061"/>
         <source>Счетчик Импульсов           </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1735"/>
+        <location filename="stackedoptions.ui" line="1754"/>
         <source>Channel 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1756"/>
-        <location filename="stackedoptions.ui" line="2333"/>
-        <location filename="stackedoptions.ui" line="3302"/>
-        <location filename="stackedoptions.ui" line="4070"/>
+        <location filename="stackedoptions.ui" line="1775"/>
+        <location filename="stackedoptions.ui" line="2352"/>
+        <location filename="stackedoptions.ui" line="3321"/>
+        <location filename="stackedoptions.ui" line="4089"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на значение чтобы изменить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1759"/>
-        <location filename="stackedoptions.ui" line="2336"/>
-        <location filename="stackedoptions.ui" line="3305"/>
-        <location filename="stackedoptions.ui" line="4073"/>
+        <location filename="stackedoptions.ui" line="1778"/>
+        <location filename="stackedoptions.ui" line="2355"/>
+        <location filename="stackedoptions.ui" line="3324"/>
+        <location filename="stackedoptions.ui" line="4092"/>
         <source>Параметры Канала</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1801"/>
+        <location filename="stackedoptions.ui" line="1820"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1982"/>
-        <location filename="stackedoptions.ui" line="2559"/>
-        <location filename="stackedoptions.ui" line="3528"/>
-        <location filename="stackedoptions.ui" line="4296"/>
+        <location filename="stackedoptions.ui" line="2001"/>
+        <location filename="stackedoptions.ui" line="2578"/>
+        <location filename="stackedoptions.ui" line="3547"/>
+        <location filename="stackedoptions.ui" line="4315"/>
         <source>4-20 мА</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1987"/>
-        <location filename="stackedoptions.ui" line="2564"/>
-        <location filename="stackedoptions.ui" line="3533"/>
-        <location filename="stackedoptions.ui" line="4301"/>
+        <location filename="stackedoptions.ui" line="2006"/>
+        <location filename="stackedoptions.ui" line="2583"/>
+        <location filename="stackedoptions.ui" line="3552"/>
+        <location filename="stackedoptions.ui" line="4320"/>
         <source>0-20 мА</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="1992"/>
-        <location filename="stackedoptions.ui" line="2569"/>
-        <location filename="stackedoptions.ui" line="3538"/>
-        <location filename="stackedoptions.ui" line="4306"/>
+        <location filename="stackedoptions.ui" line="2011"/>
+        <location filename="stackedoptions.ui" line="2588"/>
+        <location filename="stackedoptions.ui" line="3557"/>
+        <location filename="stackedoptions.ui" line="4325"/>
         <source>0-5 мА</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2027"/>
-        <location filename="stackedoptions.ui" line="2604"/>
-        <location filename="stackedoptions.ui" line="3573"/>
-        <location filename="stackedoptions.ui" line="4341"/>
+        <location filename="stackedoptions.ui" line="2046"/>
+        <location filename="stackedoptions.ui" line="2623"/>
+        <location filename="stackedoptions.ui" line="3592"/>
+        <location filename="stackedoptions.ui" line="4360"/>
         <source>Единицы измерения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2042"/>
-        <location filename="stackedoptions.ui" line="2619"/>
-        <location filename="stackedoptions.ui" line="3588"/>
-        <location filename="stackedoptions.ui" line="4356"/>
+        <location filename="stackedoptions.ui" line="2061"/>
+        <location filename="stackedoptions.ui" line="2638"/>
+        <location filename="stackedoptions.ui" line="3607"/>
+        <location filename="stackedoptions.ui" line="4375"/>
         <source>Начало поддиапазона</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2057"/>
-        <location filename="stackedoptions.ui" line="2634"/>
-        <location filename="stackedoptions.ui" line="3603"/>
-        <location filename="stackedoptions.ui" line="4371"/>
+        <location filename="stackedoptions.ui" line="2076"/>
+        <location filename="stackedoptions.ui" line="2653"/>
+        <location filename="stackedoptions.ui" line="3622"/>
+        <location filename="stackedoptions.ui" line="4390"/>
         <source>Конец поддиапазона</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2072"/>
-        <location filename="stackedoptions.ui" line="2649"/>
-        <location filename="stackedoptions.ui" line="3618"/>
-        <location filename="stackedoptions.ui" line="4386"/>
+        <location filename="stackedoptions.ui" line="2091"/>
+        <location filename="stackedoptions.ui" line="2668"/>
+        <location filename="stackedoptions.ui" line="3637"/>
+        <location filename="stackedoptions.ui" line="4405"/>
         <source>Начало диапазона</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2087"/>
-        <location filename="stackedoptions.ui" line="2664"/>
-        <location filename="stackedoptions.ui" line="3633"/>
-        <location filename="stackedoptions.ui" line="4401"/>
+        <location filename="stackedoptions.ui" line="2106"/>
+        <location filename="stackedoptions.ui" line="2683"/>
+        <location filename="stackedoptions.ui" line="3652"/>
+        <location filename="stackedoptions.ui" line="4420"/>
         <source>Конец диапазона</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2102"/>
-        <location filename="stackedoptions.ui" line="2679"/>
-        <location filename="stackedoptions.ui" line="3648"/>
-        <location filename="stackedoptions.ui" line="4416"/>
+        <location filename="stackedoptions.ui" line="2121"/>
+        <location filename="stackedoptions.ui" line="2698"/>
+        <location filename="stackedoptions.ui" line="3667"/>
+        <location filename="stackedoptions.ui" line="4435"/>
         <source>Период измерений,с</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2117"/>
-        <location filename="stackedoptions.ui" line="2694"/>
-        <location filename="stackedoptions.ui" line="3663"/>
-        <location filename="stackedoptions.ui" line="4431"/>
+        <location filename="stackedoptions.ui" line="2136"/>
+        <location filename="stackedoptions.ui" line="2713"/>
+        <location filename="stackedoptions.ui" line="3682"/>
+        <location filename="stackedoptions.ui" line="4450"/>
         <source>Диапазон</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2148"/>
-        <location filename="stackedoptions.ui" line="2719"/>
-        <location filename="stackedoptions.ui" line="3758"/>
-        <location filename="stackedoptions.ui" line="4526"/>
+        <location filename="stackedoptions.ui" line="2167"/>
+        <location filename="stackedoptions.ui" line="2738"/>
+        <location filename="stackedoptions.ui" line="3777"/>
+        <location filename="stackedoptions.ui" line="4545"/>
         <source>Тип регистрации</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2174"/>
-        <location filename="stackedoptions.ui" line="2947"/>
-        <location filename="stackedoptions.ui" line="3100"/>
-        <location filename="stackedoptions.ui" line="3868"/>
+        <location filename="stackedoptions.ui" line="2193"/>
+        <location filename="stackedoptions.ui" line="2966"/>
+        <location filename="stackedoptions.ui" line="3119"/>
+        <location filename="stackedoptions.ui" line="3887"/>
         <source>Мгновенное значение</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2179"/>
-        <location filename="stackedoptions.ui" line="2952"/>
-        <location filename="stackedoptions.ui" line="3105"/>
-        <location filename="stackedoptions.ui" line="3873"/>
+        <location filename="stackedoptions.ui" line="2198"/>
+        <location filename="stackedoptions.ui" line="2971"/>
+        <location filename="stackedoptions.ui" line="3124"/>
+        <location filename="stackedoptions.ui" line="3892"/>
         <source>Среднее значение</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2184"/>
-        <location filename="stackedoptions.ui" line="2957"/>
-        <location filename="stackedoptions.ui" line="3110"/>
-        <location filename="stackedoptions.ui" line="3878"/>
-        <location filename="stackedoptions.ui" line="9862"/>
-        <location filename="stackedoptions.ui" line="10071"/>
-        <location filename="stackedoptions.ui" line="10223"/>
-        <location filename="stackedoptions.ui" line="10375"/>
+        <location filename="stackedoptions.ui" line="2203"/>
+        <location filename="stackedoptions.ui" line="2976"/>
+        <location filename="stackedoptions.ui" line="3129"/>
+        <location filename="stackedoptions.ui" line="3897"/>
+        <location filename="stackedoptions.ui" line="9734"/>
+        <location filename="stackedoptions.ui" line="9943"/>
+        <location filename="stackedoptions.ui" line="10095"/>
+        <location filename="stackedoptions.ui" line="10247"/>
         <source>Минимум</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2189"/>
-        <location filename="stackedoptions.ui" line="2962"/>
-        <location filename="stackedoptions.ui" line="3115"/>
-        <location filename="stackedoptions.ui" line="3883"/>
-        <location filename="stackedoptions.ui" line="9881"/>
-        <location filename="stackedoptions.ui" line="10090"/>
-        <location filename="stackedoptions.ui" line="10242"/>
-        <location filename="stackedoptions.ui" line="10394"/>
+        <location filename="stackedoptions.ui" line="2208"/>
+        <location filename="stackedoptions.ui" line="2981"/>
+        <location filename="stackedoptions.ui" line="3134"/>
+        <location filename="stackedoptions.ui" line="3902"/>
+        <location filename="stackedoptions.ui" line="9753"/>
+        <location filename="stackedoptions.ui" line="9962"/>
+        <location filename="stackedoptions.ui" line="10114"/>
+        <location filename="stackedoptions.ui" line="10266"/>
         <source>Максимум</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2194"/>
-        <location filename="stackedoptions.ui" line="2967"/>
-        <location filename="stackedoptions.ui" line="3120"/>
-        <location filename="stackedoptions.ui" line="3888"/>
+        <location filename="stackedoptions.ui" line="2213"/>
+        <location filename="stackedoptions.ui" line="2986"/>
+        <location filename="stackedoptions.ui" line="3139"/>
+        <location filename="stackedoptions.ui" line="3907"/>
         <source>Минимум + максимум</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2222"/>
-        <location filename="stackedoptions.ui" line="2900"/>
-        <location filename="stackedoptions.ui" line="3688"/>
-        <location filename="stackedoptions.ui" line="4456"/>
+        <location filename="stackedoptions.ui" line="2241"/>
+        <location filename="stackedoptions.ui" line="2919"/>
+        <location filename="stackedoptions.ui" line="3707"/>
+        <location filename="stackedoptions.ui" line="4475"/>
         <source>Идентификатор канала</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2268"/>
-        <location filename="stackedoptions.ui" line="3078"/>
-        <location filename="stackedoptions.ui" line="3846"/>
-        <location filename="stackedoptions.ui" line="4614"/>
+        <location filename="stackedoptions.ui" line="2287"/>
+        <location filename="stackedoptions.ui" line="3097"/>
+        <location filename="stackedoptions.ui" line="3865"/>
+        <location filename="stackedoptions.ui" line="4633"/>
         <source>Демпфирование</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2378"/>
-        <location filename="stackedoptions.ui" line="3347"/>
-        <location filename="stackedoptions.ui" line="4115"/>
+        <location filename="stackedoptions.ui" line="2397"/>
+        <location filename="stackedoptions.ui" line="3366"/>
+        <location filename="stackedoptions.ui" line="4134"/>
         <source>мА</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="2927"/>
+        <location filename="stackedoptions.ui" line="2946"/>
         <source>Channel 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="3737"/>
+        <location filename="stackedoptions.ui" line="3756"/>
         <source>Channel 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4505"/>
+        <location filename="stackedoptions.ui" line="4524"/>
         <source>Channel 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4635"/>
+        <location filename="stackedoptions.ui" line="4654"/>
         <source>Режим отображения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4671"/>
+        <location filename="stackedoptions.ui" line="4690"/>
         <source>Кривая</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4695"/>
+        <location filename="stackedoptions.ui" line="4714"/>
         <source>Цифра</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4719"/>
+        <location filename="stackedoptions.ui" line="4738"/>
         <source>Кривая и цифра</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4737"/>
+        <location filename="stackedoptions.ui" line="4756"/>
         <source>Барграф</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4755"/>
+        <location filename="stackedoptions.ui" line="4774"/>
         <source>Барграф и цифра</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4773"/>
+        <location filename="stackedoptions.ui" line="4792"/>
         <source>Кривая и барграф</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4788"/>
+        <location filename="stackedoptions.ui" line="4807"/>
         <source>Кривая, барграф и цифра</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4803"/>
+        <location filename="stackedoptions.ui" line="4822"/>
         <source>Круговая диаграмма</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4846"/>
+        <location filename="stackedoptions.ui" line="4865"/>
         <source>Приложения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4868"/>
-        <location filename="stackedoptions.ui" line="5424"/>
+        <location filename="stackedoptions.ui" line="4887"/>
+        <location filename="stackedoptions.ui" line="5296"/>
         <source>Математика</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="4887"/>
+        <location filename="stackedoptions.ui" line="4906"/>
         <source>Предел. значения/уставки</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5107"/>
-        <source>Канал 5</source>
+        <location filename="stackedoptions.ui" line="5274"/>
+        <source> Сдвиньте слайдер вправо,
+ чтобы разблокировать
+редактор формул</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5125"/>
-        <source>Канал 6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="stackedoptions.ui" line="5143"/>
-        <source>Канал 7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="stackedoptions.ui" line="5161"/>
-        <source>Канал 8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="stackedoptions.ui" line="5186"/>
-        <location filename="stackedoptions.ui" line="5208"/>
-        <location filename="stackedoptions.ui" line="5230"/>
-        <location filename="stackedoptions.ui" line="5252"/>
+        <location filename="stackedoptions.ui" line="5057"/>
+        <location filename="stackedoptions.ui" line="5079"/>
+        <location filename="stackedoptions.ui" line="5101"/>
+        <location filename="stackedoptions.ui" line="5123"/>
         <source>x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5275"/>
+        <location filename="stackedoptions.ui" line="5146"/>
         <source>Включить мат.обработку 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5298"/>
+        <location filename="stackedoptions.ui" line="5169"/>
         <source>Включить мат.обработку 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5321"/>
+        <location filename="stackedoptions.ui" line="5192"/>
         <source>Включить мат.обработку 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5344"/>
+        <location filename="stackedoptions.ui" line="5215"/>
         <source>Включить мат.обработку 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5362"/>
+        <location filename="stackedoptions.ui" line="5233"/>
         <source>     * доступные функции:
      * сложение: x+1
      * вычитание: x-1
@@ -1649,483 +1641,477 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5403"/>
-        <source> Сдвиньте слайдер вправо,
- чтобы разблокировать редактор формул</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="stackedoptions.ui" line="5467"/>
+        <location filename="stackedoptions.ui" line="5339"/>
         <source>Предельные значения</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5489"/>
-        <location filename="stackedoptions.ui" line="7275"/>
+        <location filename="stackedoptions.ui" line="5361"/>
+        <location filename="stackedoptions.ui" line="7147"/>
         <source>Уставки канал 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5508"/>
-        <location filename="stackedoptions.ui" line="8902"/>
+        <location filename="stackedoptions.ui" line="5380"/>
+        <location filename="stackedoptions.ui" line="8774"/>
         <source>Уставки канал 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5527"/>
-        <location filename="stackedoptions.ui" line="6440"/>
+        <location filename="stackedoptions.ui" line="5399"/>
+        <location filename="stackedoptions.ui" line="6312"/>
         <source>Уставки канал 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5565"/>
-        <location filename="stackedoptions.ui" line="5586"/>
+        <location filename="stackedoptions.ui" line="5437"/>
+        <location filename="stackedoptions.ui" line="5458"/>
         <source>Уставки канал 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5610"/>
-        <location filename="stackedoptions.ui" line="6464"/>
-        <location filename="stackedoptions.ui" line="7299"/>
-        <location filename="stackedoptions.ui" line="8508"/>
+        <location filename="stackedoptions.ui" line="5482"/>
+        <location filename="stackedoptions.ui" line="6336"/>
+        <location filename="stackedoptions.ui" line="7171"/>
+        <location filename="stackedoptions.ui" line="8380"/>
         <source>Нижняя уставка</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5633"/>
-        <location filename="stackedoptions.ui" line="6029"/>
-        <location filename="stackedoptions.ui" line="6487"/>
-        <location filename="stackedoptions.ui" line="6883"/>
-        <location filename="stackedoptions.ui" line="7322"/>
-        <location filename="stackedoptions.ui" line="7718"/>
-        <location filename="stackedoptions.ui" line="8135"/>
-        <location filename="stackedoptions.ui" line="8531"/>
+        <location filename="stackedoptions.ui" line="5505"/>
+        <location filename="stackedoptions.ui" line="5901"/>
+        <location filename="stackedoptions.ui" line="6359"/>
+        <location filename="stackedoptions.ui" line="6755"/>
+        <location filename="stackedoptions.ui" line="7194"/>
+        <location filename="stackedoptions.ui" line="7590"/>
+        <location filename="stackedoptions.ui" line="8007"/>
+        <location filename="stackedoptions.ui" line="8403"/>
         <source>Канал/значение</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5648"/>
-        <location filename="stackedoptions.ui" line="6044"/>
-        <location filename="stackedoptions.ui" line="6502"/>
-        <location filename="stackedoptions.ui" line="6898"/>
-        <location filename="stackedoptions.ui" line="7337"/>
-        <location filename="stackedoptions.ui" line="7733"/>
-        <location filename="stackedoptions.ui" line="8150"/>
-        <location filename="stackedoptions.ui" line="8546"/>
+        <location filename="stackedoptions.ui" line="5520"/>
+        <location filename="stackedoptions.ui" line="5916"/>
+        <location filename="stackedoptions.ui" line="6374"/>
+        <location filename="stackedoptions.ui" line="6770"/>
+        <location filename="stackedoptions.ui" line="7209"/>
+        <location filename="stackedoptions.ui" line="7605"/>
+        <location filename="stackedoptions.ui" line="8022"/>
+        <location filename="stackedoptions.ui" line="8418"/>
         <source>Значение уставки</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5663"/>
-        <location filename="stackedoptions.ui" line="6059"/>
-        <location filename="stackedoptions.ui" line="6517"/>
-        <location filename="stackedoptions.ui" line="6913"/>
-        <location filename="stackedoptions.ui" line="7352"/>
-        <location filename="stackedoptions.ui" line="7748"/>
-        <location filename="stackedoptions.ui" line="8165"/>
-        <location filename="stackedoptions.ui" line="8561"/>
+        <location filename="stackedoptions.ui" line="5535"/>
+        <location filename="stackedoptions.ui" line="5931"/>
+        <location filename="stackedoptions.ui" line="6389"/>
+        <location filename="stackedoptions.ui" line="6785"/>
+        <location filename="stackedoptions.ui" line="7224"/>
+        <location filename="stackedoptions.ui" line="7620"/>
+        <location filename="stackedoptions.ui" line="8037"/>
+        <location filename="stackedoptions.ui" line="8433"/>
         <source>Гистерезис</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5678"/>
-        <location filename="stackedoptions.ui" line="6074"/>
-        <location filename="stackedoptions.ui" line="6532"/>
-        <location filename="stackedoptions.ui" line="6928"/>
-        <location filename="stackedoptions.ui" line="7367"/>
-        <location filename="stackedoptions.ui" line="7763"/>
-        <location filename="stackedoptions.ui" line="8180"/>
-        <location filename="stackedoptions.ui" line="8576"/>
+        <location filename="stackedoptions.ui" line="5550"/>
+        <location filename="stackedoptions.ui" line="5946"/>
+        <location filename="stackedoptions.ui" line="6404"/>
+        <location filename="stackedoptions.ui" line="6800"/>
+        <location filename="stackedoptions.ui" line="7239"/>
+        <location filename="stackedoptions.ui" line="7635"/>
+        <location filename="stackedoptions.ui" line="8052"/>
+        <location filename="stackedoptions.ui" line="8448"/>
         <source>Переключатель при превышении</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5693"/>
-        <location filename="stackedoptions.ui" line="6089"/>
-        <location filename="stackedoptions.ui" line="6547"/>
-        <location filename="stackedoptions.ui" line="6943"/>
-        <location filename="stackedoptions.ui" line="7382"/>
-        <location filename="stackedoptions.ui" line="7778"/>
-        <location filename="stackedoptions.ui" line="8195"/>
-        <location filename="stackedoptions.ui" line="8591"/>
+        <location filename="stackedoptions.ui" line="5565"/>
+        <location filename="stackedoptions.ui" line="5961"/>
+        <location filename="stackedoptions.ui" line="6419"/>
+        <location filename="stackedoptions.ui" line="6815"/>
+        <location filename="stackedoptions.ui" line="7254"/>
+        <location filename="stackedoptions.ui" line="7650"/>
+        <location filename="stackedoptions.ui" line="8067"/>
+        <location filename="stackedoptions.ui" line="8463"/>
         <source>Переключатель при уменьшении</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5708"/>
-        <location filename="stackedoptions.ui" line="6104"/>
-        <location filename="stackedoptions.ui" line="6562"/>
-        <location filename="stackedoptions.ui" line="6958"/>
-        <location filename="stackedoptions.ui" line="7397"/>
-        <location filename="stackedoptions.ui" line="7793"/>
-        <location filename="stackedoptions.ui" line="8210"/>
-        <location filename="stackedoptions.ui" line="8606"/>
+        <location filename="stackedoptions.ui" line="5580"/>
+        <location filename="stackedoptions.ui" line="5976"/>
+        <location filename="stackedoptions.ui" line="6434"/>
+        <location filename="stackedoptions.ui" line="6830"/>
+        <location filename="stackedoptions.ui" line="7269"/>
+        <location filename="stackedoptions.ui" line="7665"/>
+        <location filename="stackedoptions.ui" line="8082"/>
+        <location filename="stackedoptions.ui" line="8478"/>
         <source>Квитирование</source>
         <translation type="unfinished">Confirming</translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5723"/>
-        <location filename="stackedoptions.ui" line="5738"/>
-        <location filename="stackedoptions.ui" line="6119"/>
-        <location filename="stackedoptions.ui" line="6134"/>
-        <location filename="stackedoptions.ui" line="6577"/>
-        <location filename="stackedoptions.ui" line="6592"/>
-        <location filename="stackedoptions.ui" line="6973"/>
-        <location filename="stackedoptions.ui" line="6988"/>
-        <location filename="stackedoptions.ui" line="7412"/>
-        <location filename="stackedoptions.ui" line="7427"/>
-        <location filename="stackedoptions.ui" line="7808"/>
-        <location filename="stackedoptions.ui" line="7823"/>
-        <location filename="stackedoptions.ui" line="8225"/>
-        <location filename="stackedoptions.ui" line="8240"/>
-        <location filename="stackedoptions.ui" line="8621"/>
-        <location filename="stackedoptions.ui" line="8636"/>
+        <location filename="stackedoptions.ui" line="5595"/>
+        <location filename="stackedoptions.ui" line="5610"/>
+        <location filename="stackedoptions.ui" line="5991"/>
+        <location filename="stackedoptions.ui" line="6006"/>
+        <location filename="stackedoptions.ui" line="6449"/>
+        <location filename="stackedoptions.ui" line="6464"/>
+        <location filename="stackedoptions.ui" line="6845"/>
+        <location filename="stackedoptions.ui" line="6860"/>
+        <location filename="stackedoptions.ui" line="7284"/>
+        <location filename="stackedoptions.ui" line="7299"/>
+        <location filename="stackedoptions.ui" line="7680"/>
+        <location filename="stackedoptions.ui" line="7695"/>
+        <location filename="stackedoptions.ui" line="8097"/>
+        <location filename="stackedoptions.ui" line="8112"/>
+        <location filename="stackedoptions.ui" line="8493"/>
+        <location filename="stackedoptions.ui" line="8508"/>
         <source>Сообщение включения уставки</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5753"/>
-        <location filename="stackedoptions.ui" line="5768"/>
-        <location filename="stackedoptions.ui" line="6149"/>
-        <location filename="stackedoptions.ui" line="6164"/>
-        <location filename="stackedoptions.ui" line="6607"/>
-        <location filename="stackedoptions.ui" line="6622"/>
-        <location filename="stackedoptions.ui" line="7003"/>
-        <location filename="stackedoptions.ui" line="7018"/>
-        <location filename="stackedoptions.ui" line="7442"/>
-        <location filename="stackedoptions.ui" line="7457"/>
-        <location filename="stackedoptions.ui" line="7838"/>
-        <location filename="stackedoptions.ui" line="7853"/>
-        <location filename="stackedoptions.ui" line="8255"/>
-        <location filename="stackedoptions.ui" line="8270"/>
-        <location filename="stackedoptions.ui" line="8651"/>
-        <location filename="stackedoptions.ui" line="8666"/>
+        <location filename="stackedoptions.ui" line="5625"/>
+        <location filename="stackedoptions.ui" line="5640"/>
+        <location filename="stackedoptions.ui" line="6021"/>
+        <location filename="stackedoptions.ui" line="6036"/>
+        <location filename="stackedoptions.ui" line="6479"/>
+        <location filename="stackedoptions.ui" line="6494"/>
+        <location filename="stackedoptions.ui" line="6875"/>
+        <location filename="stackedoptions.ui" line="6890"/>
+        <location filename="stackedoptions.ui" line="7314"/>
+        <location filename="stackedoptions.ui" line="7329"/>
+        <location filename="stackedoptions.ui" line="7710"/>
+        <location filename="stackedoptions.ui" line="7725"/>
+        <location filename="stackedoptions.ui" line="8127"/>
+        <location filename="stackedoptions.ui" line="8142"/>
+        <location filename="stackedoptions.ui" line="8523"/>
+        <location filename="stackedoptions.ui" line="8538"/>
         <source>Сообщение выключения уставки</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5855"/>
-        <location filename="stackedoptions.ui" line="5915"/>
-        <location filename="stackedoptions.ui" line="6251"/>
-        <location filename="stackedoptions.ui" line="6311"/>
-        <location filename="stackedoptions.ui" line="6709"/>
-        <location filename="stackedoptions.ui" line="6769"/>
-        <location filename="stackedoptions.ui" line="7105"/>
-        <location filename="stackedoptions.ui" line="7165"/>
-        <location filename="stackedoptions.ui" line="7544"/>
-        <location filename="stackedoptions.ui" line="7604"/>
-        <location filename="stackedoptions.ui" line="7940"/>
-        <location filename="stackedoptions.ui" line="8000"/>
-        <location filename="stackedoptions.ui" line="8357"/>
-        <location filename="stackedoptions.ui" line="8417"/>
-        <location filename="stackedoptions.ui" line="8753"/>
-        <location filename="stackedoptions.ui" line="8813"/>
+        <location filename="stackedoptions.ui" line="5727"/>
+        <location filename="stackedoptions.ui" line="5787"/>
+        <location filename="stackedoptions.ui" line="6123"/>
+        <location filename="stackedoptions.ui" line="6183"/>
+        <location filename="stackedoptions.ui" line="6581"/>
+        <location filename="stackedoptions.ui" line="6641"/>
+        <location filename="stackedoptions.ui" line="6977"/>
+        <location filename="stackedoptions.ui" line="7037"/>
+        <location filename="stackedoptions.ui" line="7416"/>
+        <location filename="stackedoptions.ui" line="7476"/>
+        <location filename="stackedoptions.ui" line="7812"/>
+        <location filename="stackedoptions.ui" line="7872"/>
+        <location filename="stackedoptions.ui" line="8229"/>
+        <location filename="stackedoptions.ui" line="8289"/>
+        <location filename="stackedoptions.ui" line="8625"/>
+        <location filename="stackedoptions.ui" line="8685"/>
         <source>Не исп.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5860"/>
-        <location filename="stackedoptions.ui" line="5920"/>
-        <location filename="stackedoptions.ui" line="6256"/>
-        <location filename="stackedoptions.ui" line="6316"/>
-        <location filename="stackedoptions.ui" line="6714"/>
-        <location filename="stackedoptions.ui" line="6774"/>
-        <location filename="stackedoptions.ui" line="7110"/>
-        <location filename="stackedoptions.ui" line="7170"/>
-        <location filename="stackedoptions.ui" line="7549"/>
-        <location filename="stackedoptions.ui" line="7609"/>
-        <location filename="stackedoptions.ui" line="7945"/>
-        <location filename="stackedoptions.ui" line="8005"/>
-        <location filename="stackedoptions.ui" line="8362"/>
-        <location filename="stackedoptions.ui" line="8422"/>
-        <location filename="stackedoptions.ui" line="8758"/>
-        <location filename="stackedoptions.ui" line="8818"/>
-        <location filename="stackedoptions.ui" line="8969"/>
-        <location filename="stackedoptions.ui" line="9070"/>
+        <location filename="stackedoptions.ui" line="5732"/>
+        <location filename="stackedoptions.ui" line="5792"/>
+        <location filename="stackedoptions.ui" line="6128"/>
+        <location filename="stackedoptions.ui" line="6188"/>
+        <location filename="stackedoptions.ui" line="6586"/>
+        <location filename="stackedoptions.ui" line="6646"/>
+        <location filename="stackedoptions.ui" line="6982"/>
+        <location filename="stackedoptions.ui" line="7042"/>
+        <location filename="stackedoptions.ui" line="7421"/>
+        <location filename="stackedoptions.ui" line="7481"/>
+        <location filename="stackedoptions.ui" line="7817"/>
+        <location filename="stackedoptions.ui" line="7877"/>
+        <location filename="stackedoptions.ui" line="8234"/>
+        <location filename="stackedoptions.ui" line="8294"/>
+        <location filename="stackedoptions.ui" line="8630"/>
+        <location filename="stackedoptions.ui" line="8690"/>
+        <location filename="stackedoptions.ui" line="8841"/>
+        <location filename="stackedoptions.ui" line="8942"/>
         <source>Реле 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5865"/>
-        <location filename="stackedoptions.ui" line="5925"/>
-        <location filename="stackedoptions.ui" line="6261"/>
-        <location filename="stackedoptions.ui" line="6321"/>
-        <location filename="stackedoptions.ui" line="6719"/>
-        <location filename="stackedoptions.ui" line="6779"/>
-        <location filename="stackedoptions.ui" line="7115"/>
-        <location filename="stackedoptions.ui" line="7175"/>
-        <location filename="stackedoptions.ui" line="7554"/>
-        <location filename="stackedoptions.ui" line="7614"/>
-        <location filename="stackedoptions.ui" line="7950"/>
-        <location filename="stackedoptions.ui" line="8010"/>
-        <location filename="stackedoptions.ui" line="8367"/>
-        <location filename="stackedoptions.ui" line="8427"/>
-        <location filename="stackedoptions.ui" line="8763"/>
-        <location filename="stackedoptions.ui" line="8823"/>
-        <location filename="stackedoptions.ui" line="9103"/>
-        <location filename="stackedoptions.ui" line="9124"/>
+        <location filename="stackedoptions.ui" line="5737"/>
+        <location filename="stackedoptions.ui" line="5797"/>
+        <location filename="stackedoptions.ui" line="6133"/>
+        <location filename="stackedoptions.ui" line="6193"/>
+        <location filename="stackedoptions.ui" line="6591"/>
+        <location filename="stackedoptions.ui" line="6651"/>
+        <location filename="stackedoptions.ui" line="6987"/>
+        <location filename="stackedoptions.ui" line="7047"/>
+        <location filename="stackedoptions.ui" line="7426"/>
+        <location filename="stackedoptions.ui" line="7486"/>
+        <location filename="stackedoptions.ui" line="7822"/>
+        <location filename="stackedoptions.ui" line="7882"/>
+        <location filename="stackedoptions.ui" line="8239"/>
+        <location filename="stackedoptions.ui" line="8299"/>
+        <location filename="stackedoptions.ui" line="8635"/>
+        <location filename="stackedoptions.ui" line="8695"/>
+        <location filename="stackedoptions.ui" line="8975"/>
+        <location filename="stackedoptions.ui" line="8996"/>
         <source>Реле 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5870"/>
-        <location filename="stackedoptions.ui" line="5930"/>
-        <location filename="stackedoptions.ui" line="6266"/>
-        <location filename="stackedoptions.ui" line="6326"/>
-        <location filename="stackedoptions.ui" line="6724"/>
-        <location filename="stackedoptions.ui" line="6784"/>
-        <location filename="stackedoptions.ui" line="7120"/>
-        <location filename="stackedoptions.ui" line="7180"/>
-        <location filename="stackedoptions.ui" line="7559"/>
-        <location filename="stackedoptions.ui" line="7619"/>
-        <location filename="stackedoptions.ui" line="7955"/>
-        <location filename="stackedoptions.ui" line="8015"/>
-        <location filename="stackedoptions.ui" line="8372"/>
-        <location filename="stackedoptions.ui" line="8432"/>
-        <location filename="stackedoptions.ui" line="8768"/>
-        <location filename="stackedoptions.ui" line="8828"/>
-        <location filename="stackedoptions.ui" line="9209"/>
-        <location filename="stackedoptions.ui" line="9251"/>
+        <location filename="stackedoptions.ui" line="5742"/>
+        <location filename="stackedoptions.ui" line="5802"/>
+        <location filename="stackedoptions.ui" line="6138"/>
+        <location filename="stackedoptions.ui" line="6198"/>
+        <location filename="stackedoptions.ui" line="6596"/>
+        <location filename="stackedoptions.ui" line="6656"/>
+        <location filename="stackedoptions.ui" line="6992"/>
+        <location filename="stackedoptions.ui" line="7052"/>
+        <location filename="stackedoptions.ui" line="7431"/>
+        <location filename="stackedoptions.ui" line="7491"/>
+        <location filename="stackedoptions.ui" line="7827"/>
+        <location filename="stackedoptions.ui" line="7887"/>
+        <location filename="stackedoptions.ui" line="8244"/>
+        <location filename="stackedoptions.ui" line="8304"/>
+        <location filename="stackedoptions.ui" line="8640"/>
+        <location filename="stackedoptions.ui" line="8700"/>
+        <location filename="stackedoptions.ui" line="9081"/>
+        <location filename="stackedoptions.ui" line="9123"/>
         <source>Реле 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5875"/>
-        <location filename="stackedoptions.ui" line="5935"/>
-        <location filename="stackedoptions.ui" line="6271"/>
-        <location filename="stackedoptions.ui" line="6331"/>
-        <location filename="stackedoptions.ui" line="6729"/>
-        <location filename="stackedoptions.ui" line="6789"/>
-        <location filename="stackedoptions.ui" line="7125"/>
-        <location filename="stackedoptions.ui" line="7185"/>
-        <location filename="stackedoptions.ui" line="7564"/>
-        <location filename="stackedoptions.ui" line="7624"/>
-        <location filename="stackedoptions.ui" line="7960"/>
-        <location filename="stackedoptions.ui" line="8020"/>
-        <location filename="stackedoptions.ui" line="8377"/>
-        <location filename="stackedoptions.ui" line="8437"/>
-        <location filename="stackedoptions.ui" line="8773"/>
-        <location filename="stackedoptions.ui" line="8833"/>
-        <location filename="stackedoptions.ui" line="9230"/>
-        <location filename="stackedoptions.ui" line="9310"/>
+        <location filename="stackedoptions.ui" line="5747"/>
+        <location filename="stackedoptions.ui" line="5807"/>
+        <location filename="stackedoptions.ui" line="6143"/>
+        <location filename="stackedoptions.ui" line="6203"/>
+        <location filename="stackedoptions.ui" line="6601"/>
+        <location filename="stackedoptions.ui" line="6661"/>
+        <location filename="stackedoptions.ui" line="6997"/>
+        <location filename="stackedoptions.ui" line="7057"/>
+        <location filename="stackedoptions.ui" line="7436"/>
+        <location filename="stackedoptions.ui" line="7496"/>
+        <location filename="stackedoptions.ui" line="7832"/>
+        <location filename="stackedoptions.ui" line="7892"/>
+        <location filename="stackedoptions.ui" line="8249"/>
+        <location filename="stackedoptions.ui" line="8309"/>
+        <location filename="stackedoptions.ui" line="8645"/>
+        <location filename="stackedoptions.ui" line="8705"/>
+        <location filename="stackedoptions.ui" line="9102"/>
+        <location filename="stackedoptions.ui" line="9182"/>
         <source>Реле 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5880"/>
-        <location filename="stackedoptions.ui" line="5940"/>
-        <location filename="stackedoptions.ui" line="6276"/>
-        <location filename="stackedoptions.ui" line="6336"/>
-        <location filename="stackedoptions.ui" line="6734"/>
-        <location filename="stackedoptions.ui" line="6794"/>
-        <location filename="stackedoptions.ui" line="7130"/>
-        <location filename="stackedoptions.ui" line="7190"/>
-        <location filename="stackedoptions.ui" line="7569"/>
-        <location filename="stackedoptions.ui" line="7629"/>
-        <location filename="stackedoptions.ui" line="7965"/>
-        <location filename="stackedoptions.ui" line="8025"/>
-        <location filename="stackedoptions.ui" line="8382"/>
-        <location filename="stackedoptions.ui" line="8442"/>
-        <location filename="stackedoptions.ui" line="8778"/>
-        <location filename="stackedoptions.ui" line="8838"/>
-        <location filename="stackedoptions.ui" line="9376"/>
-        <location filename="stackedoptions.ui" line="9465"/>
+        <location filename="stackedoptions.ui" line="5752"/>
+        <location filename="stackedoptions.ui" line="5812"/>
+        <location filename="stackedoptions.ui" line="6148"/>
+        <location filename="stackedoptions.ui" line="6208"/>
+        <location filename="stackedoptions.ui" line="6606"/>
+        <location filename="stackedoptions.ui" line="6666"/>
+        <location filename="stackedoptions.ui" line="7002"/>
+        <location filename="stackedoptions.ui" line="7062"/>
+        <location filename="stackedoptions.ui" line="7441"/>
+        <location filename="stackedoptions.ui" line="7501"/>
+        <location filename="stackedoptions.ui" line="7837"/>
+        <location filename="stackedoptions.ui" line="7897"/>
+        <location filename="stackedoptions.ui" line="8254"/>
+        <location filename="stackedoptions.ui" line="8314"/>
+        <location filename="stackedoptions.ui" line="8650"/>
+        <location filename="stackedoptions.ui" line="8710"/>
+        <location filename="stackedoptions.ui" line="9248"/>
+        <location filename="stackedoptions.ui" line="9337"/>
         <source>Реле 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5885"/>
-        <location filename="stackedoptions.ui" line="5945"/>
-        <location filename="stackedoptions.ui" line="6281"/>
-        <location filename="stackedoptions.ui" line="6341"/>
-        <location filename="stackedoptions.ui" line="6739"/>
-        <location filename="stackedoptions.ui" line="6799"/>
-        <location filename="stackedoptions.ui" line="7135"/>
-        <location filename="stackedoptions.ui" line="7195"/>
-        <location filename="stackedoptions.ui" line="7574"/>
-        <location filename="stackedoptions.ui" line="7634"/>
-        <location filename="stackedoptions.ui" line="7970"/>
-        <location filename="stackedoptions.ui" line="8030"/>
-        <location filename="stackedoptions.ui" line="8387"/>
-        <location filename="stackedoptions.ui" line="8447"/>
-        <location filename="stackedoptions.ui" line="8783"/>
-        <location filename="stackedoptions.ui" line="8843"/>
-        <location filename="stackedoptions.ui" line="9397"/>
-        <location filename="stackedoptions.ui" line="9524"/>
+        <location filename="stackedoptions.ui" line="5757"/>
+        <location filename="stackedoptions.ui" line="5817"/>
+        <location filename="stackedoptions.ui" line="6153"/>
+        <location filename="stackedoptions.ui" line="6213"/>
+        <location filename="stackedoptions.ui" line="6611"/>
+        <location filename="stackedoptions.ui" line="6671"/>
+        <location filename="stackedoptions.ui" line="7007"/>
+        <location filename="stackedoptions.ui" line="7067"/>
+        <location filename="stackedoptions.ui" line="7446"/>
+        <location filename="stackedoptions.ui" line="7506"/>
+        <location filename="stackedoptions.ui" line="7842"/>
+        <location filename="stackedoptions.ui" line="7902"/>
+        <location filename="stackedoptions.ui" line="8259"/>
+        <location filename="stackedoptions.ui" line="8319"/>
+        <location filename="stackedoptions.ui" line="8655"/>
+        <location filename="stackedoptions.ui" line="8715"/>
+        <location filename="stackedoptions.ui" line="9269"/>
+        <location filename="stackedoptions.ui" line="9396"/>
         <source>Реле 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5890"/>
-        <location filename="stackedoptions.ui" line="5950"/>
-        <location filename="stackedoptions.ui" line="6286"/>
-        <location filename="stackedoptions.ui" line="6346"/>
-        <location filename="stackedoptions.ui" line="6744"/>
-        <location filename="stackedoptions.ui" line="6804"/>
-        <location filename="stackedoptions.ui" line="7140"/>
-        <location filename="stackedoptions.ui" line="7200"/>
-        <location filename="stackedoptions.ui" line="7579"/>
-        <location filename="stackedoptions.ui" line="7639"/>
-        <location filename="stackedoptions.ui" line="7975"/>
-        <location filename="stackedoptions.ui" line="8035"/>
-        <location filename="stackedoptions.ui" line="8392"/>
-        <location filename="stackedoptions.ui" line="8452"/>
-        <location filename="stackedoptions.ui" line="8788"/>
-        <location filename="stackedoptions.ui" line="8848"/>
-        <location filename="stackedoptions.ui" line="9444"/>
-        <location filename="stackedoptions.ui" line="9578"/>
+        <location filename="stackedoptions.ui" line="5762"/>
+        <location filename="stackedoptions.ui" line="5822"/>
+        <location filename="stackedoptions.ui" line="6158"/>
+        <location filename="stackedoptions.ui" line="6218"/>
+        <location filename="stackedoptions.ui" line="6616"/>
+        <location filename="stackedoptions.ui" line="6676"/>
+        <location filename="stackedoptions.ui" line="7012"/>
+        <location filename="stackedoptions.ui" line="7072"/>
+        <location filename="stackedoptions.ui" line="7451"/>
+        <location filename="stackedoptions.ui" line="7511"/>
+        <location filename="stackedoptions.ui" line="7847"/>
+        <location filename="stackedoptions.ui" line="7907"/>
+        <location filename="stackedoptions.ui" line="8264"/>
+        <location filename="stackedoptions.ui" line="8324"/>
+        <location filename="stackedoptions.ui" line="8660"/>
+        <location filename="stackedoptions.ui" line="8720"/>
+        <location filename="stackedoptions.ui" line="9316"/>
+        <location filename="stackedoptions.ui" line="9450"/>
         <source>Реле 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5895"/>
-        <location filename="stackedoptions.ui" line="5955"/>
-        <location filename="stackedoptions.ui" line="6291"/>
-        <location filename="stackedoptions.ui" line="6351"/>
-        <location filename="stackedoptions.ui" line="6749"/>
-        <location filename="stackedoptions.ui" line="6809"/>
-        <location filename="stackedoptions.ui" line="7145"/>
-        <location filename="stackedoptions.ui" line="7205"/>
-        <location filename="stackedoptions.ui" line="7584"/>
-        <location filename="stackedoptions.ui" line="7644"/>
-        <location filename="stackedoptions.ui" line="7980"/>
-        <location filename="stackedoptions.ui" line="8040"/>
-        <location filename="stackedoptions.ui" line="8397"/>
-        <location filename="stackedoptions.ui" line="8457"/>
-        <location filename="stackedoptions.ui" line="8793"/>
-        <location filename="stackedoptions.ui" line="8853"/>
-        <location filename="stackedoptions.ui" line="9343"/>
-        <location filename="stackedoptions.ui" line="9545"/>
+        <location filename="stackedoptions.ui" line="5767"/>
+        <location filename="stackedoptions.ui" line="5827"/>
+        <location filename="stackedoptions.ui" line="6163"/>
+        <location filename="stackedoptions.ui" line="6223"/>
+        <location filename="stackedoptions.ui" line="6621"/>
+        <location filename="stackedoptions.ui" line="6681"/>
+        <location filename="stackedoptions.ui" line="7017"/>
+        <location filename="stackedoptions.ui" line="7077"/>
+        <location filename="stackedoptions.ui" line="7456"/>
+        <location filename="stackedoptions.ui" line="7516"/>
+        <location filename="stackedoptions.ui" line="7852"/>
+        <location filename="stackedoptions.ui" line="7912"/>
+        <location filename="stackedoptions.ui" line="8269"/>
+        <location filename="stackedoptions.ui" line="8329"/>
+        <location filename="stackedoptions.ui" line="8665"/>
+        <location filename="stackedoptions.ui" line="8725"/>
+        <location filename="stackedoptions.ui" line="9215"/>
+        <location filename="stackedoptions.ui" line="9417"/>
         <source>Реле 8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5975"/>
-        <location filename="stackedoptions.ui" line="6371"/>
-        <location filename="stackedoptions.ui" line="6829"/>
-        <location filename="stackedoptions.ui" line="7225"/>
-        <location filename="stackedoptions.ui" line="7664"/>
-        <location filename="stackedoptions.ui" line="8060"/>
-        <location filename="stackedoptions.ui" line="8477"/>
-        <location filename="stackedoptions.ui" line="8873"/>
+        <location filename="stackedoptions.ui" line="5847"/>
+        <location filename="stackedoptions.ui" line="6243"/>
+        <location filename="stackedoptions.ui" line="6701"/>
+        <location filename="stackedoptions.ui" line="7097"/>
+        <location filename="stackedoptions.ui" line="7536"/>
+        <location filename="stackedoptions.ui" line="7932"/>
+        <location filename="stackedoptions.ui" line="8349"/>
+        <location filename="stackedoptions.ui" line="8745"/>
         <source>Не квитировать</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="5980"/>
-        <location filename="stackedoptions.ui" line="6376"/>
-        <location filename="stackedoptions.ui" line="6834"/>
-        <location filename="stackedoptions.ui" line="7230"/>
-        <location filename="stackedoptions.ui" line="7669"/>
-        <location filename="stackedoptions.ui" line="8065"/>
-        <location filename="stackedoptions.ui" line="8482"/>
-        <location filename="stackedoptions.ui" line="8878"/>
+        <location filename="stackedoptions.ui" line="5852"/>
+        <location filename="stackedoptions.ui" line="6248"/>
+        <location filename="stackedoptions.ui" line="6706"/>
+        <location filename="stackedoptions.ui" line="7102"/>
+        <location filename="stackedoptions.ui" line="7541"/>
+        <location filename="stackedoptions.ui" line="7937"/>
+        <location filename="stackedoptions.ui" line="8354"/>
+        <location filename="stackedoptions.ui" line="8750"/>
         <source>Квитировать</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="6006"/>
-        <location filename="stackedoptions.ui" line="6860"/>
-        <location filename="stackedoptions.ui" line="7695"/>
-        <location filename="stackedoptions.ui" line="8112"/>
+        <location filename="stackedoptions.ui" line="5878"/>
+        <location filename="stackedoptions.ui" line="6732"/>
+        <location filename="stackedoptions.ui" line="7567"/>
+        <location filename="stackedoptions.ui" line="7984"/>
         <source>Верхняя уставка</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="8990"/>
+        <location filename="stackedoptions.ui" line="8862"/>
         <source>Режим работы</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9011"/>
+        <location filename="stackedoptions.ui" line="8883"/>
         <source>Идентификатор</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9031"/>
-        <location filename="stackedoptions.ui" line="9144"/>
-        <location filename="stackedoptions.ui" line="9170"/>
-        <location filename="stackedoptions.ui" line="9271"/>
-        <location filename="stackedoptions.ui" line="9417"/>
-        <location filename="stackedoptions.ui" line="9485"/>
-        <location filename="stackedoptions.ui" line="9598"/>
-        <location filename="stackedoptions.ui" line="9624"/>
+        <location filename="stackedoptions.ui" line="8903"/>
+        <location filename="stackedoptions.ui" line="9016"/>
+        <location filename="stackedoptions.ui" line="9042"/>
+        <location filename="stackedoptions.ui" line="9143"/>
+        <location filename="stackedoptions.ui" line="9289"/>
+        <location filename="stackedoptions.ui" line="9357"/>
+        <location filename="stackedoptions.ui" line="9470"/>
+        <location filename="stackedoptions.ui" line="9496"/>
         <source>Замыкание</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9036"/>
-        <location filename="stackedoptions.ui" line="9149"/>
-        <location filename="stackedoptions.ui" line="9175"/>
-        <location filename="stackedoptions.ui" line="9276"/>
-        <location filename="stackedoptions.ui" line="9422"/>
-        <location filename="stackedoptions.ui" line="9490"/>
-        <location filename="stackedoptions.ui" line="9603"/>
-        <location filename="stackedoptions.ui" line="9629"/>
+        <location filename="stackedoptions.ui" line="8908"/>
+        <location filename="stackedoptions.ui" line="9021"/>
+        <location filename="stackedoptions.ui" line="9047"/>
+        <location filename="stackedoptions.ui" line="9148"/>
+        <location filename="stackedoptions.ui" line="9294"/>
+        <location filename="stackedoptions.ui" line="9362"/>
+        <location filename="stackedoptions.ui" line="9475"/>
+        <location filename="stackedoptions.ui" line="9501"/>
         <source>Размыкание</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9720"/>
+        <location filename="stackedoptions.ui" line="9592"/>
         <source>Показать архив</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9740"/>
+        <location filename="stackedoptions.ui" line="9612"/>
         <source>Всё время</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9762"/>
+        <location filename="stackedoptions.ui" line="9634"/>
         <source>За период</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9843"/>
+        <location filename="stackedoptions.ui" line="9715"/>
         <source>Канал 1 имя</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9900"/>
-        <location filename="stackedoptions.ui" line="10014"/>
-        <location filename="stackedoptions.ui" line="10166"/>
-        <location filename="stackedoptions.ui" line="10318"/>
+        <location filename="stackedoptions.ui" line="9772"/>
+        <location filename="stackedoptions.ui" line="9886"/>
+        <location filename="stackedoptions.ui" line="10038"/>
+        <location filename="stackedoptions.ui" line="10190"/>
         <source>Среднее</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9919"/>
-        <location filename="stackedoptions.ui" line="9938"/>
-        <location filename="stackedoptions.ui" line="9957"/>
-        <location filename="stackedoptions.ui" line="10033"/>
-        <location filename="stackedoptions.ui" line="10052"/>
-        <location filename="stackedoptions.ui" line="10109"/>
-        <location filename="stackedoptions.ui" line="10185"/>
-        <location filename="stackedoptions.ui" line="10204"/>
-        <location filename="stackedoptions.ui" line="10261"/>
-        <location filename="stackedoptions.ui" line="10337"/>
-        <location filename="stackedoptions.ui" line="10356"/>
-        <location filename="stackedoptions.ui" line="10413"/>
+        <location filename="stackedoptions.ui" line="9791"/>
+        <location filename="stackedoptions.ui" line="9810"/>
+        <location filename="stackedoptions.ui" line="9829"/>
+        <location filename="stackedoptions.ui" line="9905"/>
+        <location filename="stackedoptions.ui" line="9924"/>
+        <location filename="stackedoptions.ui" line="9981"/>
+        <location filename="stackedoptions.ui" line="10057"/>
+        <location filename="stackedoptions.ui" line="10076"/>
+        <location filename="stackedoptions.ui" line="10133"/>
+        <location filename="stackedoptions.ui" line="10209"/>
+        <location filename="stackedoptions.ui" line="10228"/>
+        <location filename="stackedoptions.ui" line="10285"/>
         <source>: 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="9976"/>
+        <location filename="stackedoptions.ui" line="9848"/>
         <source>Канал 2 имя</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="10128"/>
+        <location filename="stackedoptions.ui" line="10000"/>
         <source>Канал 3 имя</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="10280"/>
+        <location filename="stackedoptions.ui" line="10152"/>
         <source>Канал 4 имя</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="stackedoptions.ui" line="10434"/>
+        <location filename="stackedoptions.ui" line="10306"/>
         <source>Index: </source>
         <translation type="unfinished"></translation>
     </message>

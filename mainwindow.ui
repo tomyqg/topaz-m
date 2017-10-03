@@ -277,7 +277,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>460</x>
       <y>710</y>
       <width>201</width>
       <height>21</height>
@@ -299,7 +299,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>860</x>
       <y>705</y>
       <width>41</width>
       <height>31</height>
@@ -318,7 +318,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QScrollBar" name="horizontalScrollBar">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>660</x>
       <y>710</y>
       <width>181</width>
       <height>21</height>
@@ -481,6 +481,37 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <string>Работа</string>
     </property>
    </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>660</y>
+      <width>75</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans Semibold</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Рус.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Eng.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>De.</string>
+     </property>
+    </item>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>ConfirmBox</zorder>
@@ -498,6 +529,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <zorder>MessagesWidget</zorder>
    <zorder>ArchiveButton</zorder>
    <zorder>WorkButton</zorder>
+   <zorder>comboBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

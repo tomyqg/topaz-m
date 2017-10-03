@@ -749,15 +749,15 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>160</y>
+       <y>170</y>
        <width>350</width>
        <height>61</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
-       <pointsize>10</pointsize>
+       <family>Open Sans Light</family>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -10430,9 +10430,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>
