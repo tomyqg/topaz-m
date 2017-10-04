@@ -79,3 +79,15 @@ double mathresolver::dGetAverageValue(QVector<double>& qvect)
 
     return averagevalue ;
 }
+
+double mathresolver::dGetMinimumValue(QVector<double> &qvect)
+{
+    double minimum = *std::min_element(&qvect[0], &qvect[0] + qvect.length());
+    return minimum;
+}
+
+double mathresolver::dGetMaximumValue(QVector<double> &qvect)
+{
+    double maximum = *std::max_element(&qvect[0], &qvect[0] + qvect.length());
+    return maximum;
+}

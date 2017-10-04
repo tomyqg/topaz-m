@@ -1345,19 +1345,17 @@ void StackedOptions::UpdateAnalyze()
     averagechannel_3 = mr.dGetAverageValue(Y_coordinates_Chanel_3_archive);
     averagechannel_4 = mr.dGetAverageValue(Y_coordinates_Chanel_4_archive);
 
-    double minimumchannel_1 =  *std::min_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
-    double maximumchannel_1 =  *std::max_element(&Y_coordinates_Chanel_1_archive[0], &Y_coordinates_Chanel_1_archive[0] + Y_coordinates_Chanel_1_archive.length());
+    double minimumchannel_1 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1_archive);
+    double maximumchannel_1 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1_archive);
 
-    double minimumchannel_2 =  *std::min_element(&Y_coordinates_Chanel_2_archive[0], &Y_coordinates_Chanel_2_archive[0] + Y_coordinates_Chanel_2_archive.length());
-    double maximumchannel_2 =  *std::max_element(&Y_coordinates_Chanel_2_archive[0], &Y_coordinates_Chanel_2_archive[0] + Y_coordinates_Chanel_2_archive.length());
+    double minimumchannel_2 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2_archive);
+    double maximumchannel_2 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2_archive);
 
-    double minimumchannel_3 =  *std::min_element(&Y_coordinates_Chanel_3_archive[0], &Y_coordinates_Chanel_3_archive[0] + Y_coordinates_Chanel_3_archive.length());
-    double maximumchannel_3 =  *std::max_element(&Y_coordinates_Chanel_3_archive[0], &Y_coordinates_Chanel_3_archive[0] + Y_coordinates_Chanel_3_archive.length());
+    double minimumchannel_3 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3_archive);
+    double maximumchannel_3 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3_archive);
 
-    double minimumchannel_4 =  *std::min_element(&Y_coordinates_Chanel_4_archive[0], &Y_coordinates_Chanel_4_archive[0] + Y_coordinates_Chanel_4_archive.length());
-    double maximumchannel_4 =  *std::max_element(&Y_coordinates_Chanel_4_archive[0], &Y_coordinates_Chanel_4_archive[0] + Y_coordinates_Chanel_4_archive.length());
-
-    // ui set
+    double minimumchannel_4 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4_archive);
+    double maximumchannel_4 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4_archive);
 
     ui->analizenameChannel_1->setText( ": " + ui->Name_Channel_1->text() );
     ui->analizenameChannel_2->setText( ": " + ui->Name_Channel_2->text() );
@@ -1434,7 +1432,6 @@ void StackedOptions::UpdateArchiveData()
 
     //    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     //    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
-
     //    ui->customPlot->xAxis->setAutoTickLabels(false);
     //    ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
@@ -1467,4 +1464,11 @@ void StackedOptions::on_pushButton_109_clicked()
 {
     ResetToDefaults();
     this->close();
+}
+
+void StackedOptions::on_gamebutton_clicked()
+{
+    QProcess process1;
+    process1.start("/opt/gotted");
+    process1.waitForFinished();
 }
