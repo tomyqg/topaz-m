@@ -76,7 +76,7 @@
 #define CRCErrorMessage "ош.crc"
 #define ObryvErrorMessage "обрыв"
 
-#define Font "Open Sans Semibold"
+#define Font "Open Sans"
 //#define Font "Rubik"
 //#define Font "Arial"
 //#define Font "Orbitron Light"

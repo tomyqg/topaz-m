@@ -37,7 +37,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -56,7 +56,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -75,7 +75,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -94,7 +94,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -113,7 +113,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -132,7 +132,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -154,7 +154,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -173,7 +173,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -192,7 +192,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -225,7 +225,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -244,7 +244,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -263,7 +263,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -282,7 +282,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -301,7 +301,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -320,7 +320,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -344,7 +344,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -363,7 +363,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -385,7 +385,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -404,7 +404,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -423,7 +423,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -442,7 +442,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -461,7 +461,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -480,7 +480,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -501,7 +501,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -520,7 +520,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -542,7 +542,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -561,7 +561,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -580,7 +580,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -599,7 +599,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -618,7 +618,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -637,7 +637,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -656,7 +656,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -675,7 +675,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -694,7 +694,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -715,7 +715,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -734,7 +734,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -756,7 +756,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Light</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
       </font>
      </property>
@@ -777,7 +777,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -799,7 +799,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -850,7 +850,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -901,7 +901,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -920,7 +920,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -941,7 +941,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -960,7 +960,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -979,7 +979,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -1001,7 +1001,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1020,7 +1020,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1039,7 +1039,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1058,7 +1058,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1079,7 +1079,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -1101,7 +1101,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1120,7 +1120,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1139,7 +1139,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1158,7 +1158,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1177,7 +1177,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1196,7 +1196,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1215,7 +1215,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1234,7 +1234,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1253,7 +1253,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1272,7 +1272,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1291,7 +1291,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1310,7 +1310,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1329,7 +1329,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1350,7 +1350,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1369,7 +1369,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1388,7 +1388,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1407,7 +1407,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -1431,7 +1431,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -1453,7 +1453,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1472,7 +1472,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1491,7 +1491,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1510,7 +1510,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1529,7 +1529,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -1550,7 +1550,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -1570,7 +1570,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1583,7 +1583,7 @@
         <widget class="QRadioButton" name="ButonOtklChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1604,7 +1604,7 @@
         <widget class="QRadioButton" name="ButonTokChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1625,7 +1625,7 @@
         <widget class="QRadioButton" name="ButonNapryagenieChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1643,7 +1643,7 @@
         <widget class="QRadioButton" name="ButonResistorChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1661,7 +1661,7 @@
         <widget class="QRadioButton" name="ButonTermoparaChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1682,7 +1682,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1710,7 +1710,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -1744,7 +1744,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -1765,7 +1765,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -1788,7 +1788,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1810,7 +1810,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1831,7 +1831,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1867,7 +1867,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1900,7 +1900,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1933,7 +1933,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -1966,7 +1966,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2026,7 +2026,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -2036,7 +2036,7 @@
         <widget class="QLabel" name="label_42">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2051,7 +2051,7 @@
         <widget class="QLabel" name="label_43">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2066,7 +2066,7 @@
         <widget class="QLabel" name="label_44">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2081,7 +2081,7 @@
         <widget class="QLabel" name="label_45">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2096,7 +2096,7 @@
         <widget class="QLabel" name="label_46">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2111,7 +2111,7 @@
         <widget class="QLabel" name="label_47">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2126,7 +2126,7 @@
         <widget class="QLabel" name="label_48">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2157,7 +2157,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2184,7 +2184,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -2231,7 +2231,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2252,7 +2252,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -2277,7 +2277,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2304,7 +2304,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2342,7 +2342,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2365,7 +2365,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -2387,7 +2387,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2408,7 +2408,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2444,7 +2444,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2477,7 +2477,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2510,7 +2510,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2543,7 +2543,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2603,7 +2603,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -2613,7 +2613,7 @@
         <widget class="QLabel" name="label_27">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2628,7 +2628,7 @@
         <widget class="QLabel" name="label_28">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2643,7 +2643,7 @@
         <widget class="QLabel" name="label_29">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2658,7 +2658,7 @@
         <widget class="QLabel" name="label_30">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2673,7 +2673,7 @@
         <widget class="QLabel" name="label_31">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2688,7 +2688,7 @@
         <widget class="QLabel" name="label_38">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2703,7 +2703,7 @@
         <widget class="QLabel" name="label_32">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2728,7 +2728,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2749,7 +2749,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2769,7 +2769,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -2782,7 +2782,7 @@
         <widget class="QRadioButton" name="ButonOtklChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2803,7 +2803,7 @@
         <widget class="QRadioButton" name="ButonTokChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2824,7 +2824,7 @@
         <widget class="QRadioButton" name="ButonNapryagenieChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2842,7 +2842,7 @@
         <widget class="QRadioButton" name="ButonResistorChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2860,7 +2860,7 @@
         <widget class="QRadioButton" name="ButonTermoparaChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2881,7 +2881,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -2909,7 +2909,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2936,7 +2936,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -2957,7 +2957,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -2998,7 +2998,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -3020,7 +3020,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -3045,7 +3045,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3087,7 +3087,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3110,7 +3110,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -3151,7 +3151,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3171,7 +3171,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -3184,7 +3184,7 @@
         <widget class="QRadioButton" name="ButonOtklChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3205,7 +3205,7 @@
         <widget class="QRadioButton" name="ButonTokChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3226,7 +3226,7 @@
         <widget class="QRadioButton" name="ButonNapryagenieChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3244,7 +3244,7 @@
         <widget class="QRadioButton" name="ButonResistorChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3262,7 +3262,7 @@
         <widget class="QRadioButton" name="ButonTermoparaChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3283,7 +3283,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3311,7 +3311,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3334,7 +3334,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -3356,7 +3356,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3377,7 +3377,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3413,7 +3413,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3446,7 +3446,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3479,7 +3479,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3512,7 +3512,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3572,7 +3572,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -3582,7 +3582,7 @@
         <widget class="QLabel" name="label_34">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3597,7 +3597,7 @@
         <widget class="QLabel" name="label_35">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3612,7 +3612,7 @@
         <widget class="QLabel" name="label_36">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3627,7 +3627,7 @@
         <widget class="QLabel" name="label_37">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3642,7 +3642,7 @@
         <widget class="QLabel" name="label_39">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3657,7 +3657,7 @@
         <widget class="QLabel" name="label_40">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3672,7 +3672,7 @@
         <widget class="QLabel" name="label_41">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3697,7 +3697,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3718,7 +3718,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -3746,7 +3746,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3767,7 +3767,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3788,7 +3788,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -3813,7 +3813,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3855,7 +3855,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3878,7 +3878,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -3919,7 +3919,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -3939,7 +3939,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -3952,7 +3952,7 @@
         <widget class="QRadioButton" name="ButonOtklChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3973,7 +3973,7 @@
         <widget class="QRadioButton" name="ButonTokChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -3994,7 +3994,7 @@
         <widget class="QRadioButton" name="ButonNapryagenieChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4012,7 +4012,7 @@
         <widget class="QRadioButton" name="ButonResistorChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4030,7 +4030,7 @@
         <widget class="QRadioButton" name="ButonTermoparaChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4051,7 +4051,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4079,7 +4079,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4102,7 +4102,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -4124,7 +4124,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4145,7 +4145,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4181,7 +4181,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4214,7 +4214,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4247,7 +4247,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4280,7 +4280,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4340,7 +4340,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -4350,7 +4350,7 @@
         <widget class="QLabel" name="label_50">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4365,7 +4365,7 @@
         <widget class="QLabel" name="label_51">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4380,7 +4380,7 @@
         <widget class="QLabel" name="label_52">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4395,7 +4395,7 @@
         <widget class="QLabel" name="label_53">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4410,7 +4410,7 @@
         <widget class="QLabel" name="label_54">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4425,7 +4425,7 @@
         <widget class="QLabel" name="label_55">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4440,7 +4440,7 @@
         <widget class="QLabel" name="label_56">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4465,7 +4465,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4486,7 +4486,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -4514,7 +4514,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4535,7 +4535,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4556,7 +4556,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4581,7 +4581,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4623,7 +4623,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -4646,7 +4646,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -4680,7 +4680,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4704,7 +4704,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4728,7 +4728,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4746,7 +4746,7 @@
        <widget class="QRadioButton" name="SetBarsBtn">
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4764,7 +4764,7 @@
        <widget class="QRadioButton" name="SetBarsCyfraBtn">
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4782,7 +4782,7 @@
        <widget class="QRadioButton" name="SetTrendsBarsBtn">
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4797,7 +4797,7 @@
        <widget class="QRadioButton" name="SetTrendsBarsCyfraBtn">
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4812,7 +4812,7 @@
        <widget class="QRadioButton" name="SetPolarBtn">
         <property name="font">
          <font>
-          <family>Open Sans Semibold</family>
+          <family>Open Sans</family>
           <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
@@ -4836,7 +4836,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4857,7 +4857,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -4879,7 +4879,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4898,7 +4898,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4917,7 +4917,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4936,7 +4936,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -4969,7 +4969,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
        </font>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -4977,7 +4977,7 @@
         <widget class="QLabel" name="label_74">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -4992,7 +4992,7 @@
         <widget class="QLabel" name="label_75">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5007,7 +5007,7 @@
         <widget class="QLabel" name="label_76">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5022,7 +5022,7 @@
         <widget class="QLabel" name="label_77">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5049,7 +5049,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <pointsize>12</pointsize>
        </font>
       </property>
@@ -5071,7 +5071,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <pointsize>12</pointsize>
        </font>
       </property>
@@ -5093,7 +5093,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <pointsize>12</pointsize>
        </font>
       </property>
@@ -5115,7 +5115,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Open Sans Semibold</family>
+        <family>Open Sans</family>
         <pointsize>12</pointsize>
        </font>
       </property>
@@ -5288,7 +5288,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -5310,7 +5310,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5331,7 +5331,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -5353,7 +5353,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5372,7 +5372,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5391,7 +5391,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5410,7 +5410,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5429,7 +5429,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -5450,7 +5450,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -5472,7 +5472,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -5495,7 +5495,7 @@
         <widget class="QLabel" name="label_100">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5510,7 +5510,7 @@
         <widget class="QLabel" name="label_91">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5525,7 +5525,7 @@
         <widget class="QLabel" name="label_101">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5540,7 +5540,7 @@
         <widget class="QLabel" name="label_90">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5555,7 +5555,7 @@
         <widget class="QLabel" name="label_88">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5570,7 +5570,7 @@
         <widget class="QLabel" name="label_106">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5585,7 +5585,7 @@
         <widget class="QLabel" name="label_89">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5600,7 +5600,7 @@
         <widget class="QLineEdit" name="State2HighMessageChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5615,7 +5615,7 @@
         <widget class="QLabel" name="label_92">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5630,7 +5630,7 @@
         <widget class="QLineEdit" name="State2LowMessageChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5671,7 +5671,7 @@
         <widget class="QDoubleSpinBox" name="State2ValueChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5692,7 +5692,7 @@
         <widget class="QDoubleSpinBox" name="State2HisteresisChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5716,7 +5716,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5776,7 +5776,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5836,7 +5836,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5868,7 +5868,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -5891,7 +5891,7 @@
         <widget class="QLabel" name="label_99">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5906,7 +5906,7 @@
         <widget class="QLabel" name="label_96">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5921,7 +5921,7 @@
         <widget class="QLabel" name="label_98">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5936,7 +5936,7 @@
         <widget class="QLabel" name="label_95">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5951,7 +5951,7 @@
         <widget class="QLabel" name="label_93">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5966,7 +5966,7 @@
         <widget class="QLabel" name="label_94">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5981,7 +5981,7 @@
         <widget class="QLabel" name="label_105">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -5996,7 +5996,7 @@
         <widget class="QLineEdit" name="State1HighMessageChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6011,7 +6011,7 @@
         <widget class="QLabel" name="label_97">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6026,7 +6026,7 @@
         <widget class="QLineEdit" name="State1LowMessageChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6067,7 +6067,7 @@
         <widget class="QDoubleSpinBox" name="State1ValueChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6088,7 +6088,7 @@
         <widget class="QDoubleSpinBox" name="State1HisteresisChannel_1">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6112,7 +6112,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6172,7 +6172,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6232,7 +6232,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6264,7 +6264,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -6285,7 +6285,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -6304,7 +6304,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -6326,7 +6326,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -6349,7 +6349,7 @@
         <widget class="QLabel" name="label_102">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6364,7 +6364,7 @@
         <widget class="QLabel" name="label_107">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6379,7 +6379,7 @@
         <widget class="QLabel" name="label_108">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6394,7 +6394,7 @@
         <widget class="QLabel" name="label_109">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6409,7 +6409,7 @@
         <widget class="QLabel" name="label_110">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6424,7 +6424,7 @@
         <widget class="QLabel" name="label_111">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6439,7 +6439,7 @@
         <widget class="QLabel" name="label_112">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6454,7 +6454,7 @@
         <widget class="QLineEdit" name="State2HighMessageChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6469,7 +6469,7 @@
         <widget class="QLabel" name="label_113">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6484,7 +6484,7 @@
         <widget class="QLineEdit" name="State2LowMessageChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6525,7 +6525,7 @@
         <widget class="QDoubleSpinBox" name="State2ValueChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6546,7 +6546,7 @@
         <widget class="QDoubleSpinBox" name="State2HisteresisChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6570,7 +6570,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6630,7 +6630,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6690,7 +6690,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6722,7 +6722,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -6745,7 +6745,7 @@
         <widget class="QLabel" name="label_114">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6760,7 +6760,7 @@
         <widget class="QLabel" name="label_115">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6775,7 +6775,7 @@
         <widget class="QLabel" name="label_116">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6790,7 +6790,7 @@
         <widget class="QLabel" name="label_117">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6805,7 +6805,7 @@
         <widget class="QLabel" name="label_118">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6820,7 +6820,7 @@
         <widget class="QLabel" name="label_119">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6835,7 +6835,7 @@
         <widget class="QLabel" name="label_120">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6850,7 +6850,7 @@
         <widget class="QLineEdit" name="State1HighMessageChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6865,7 +6865,7 @@
         <widget class="QLabel" name="label_121">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6880,7 +6880,7 @@
         <widget class="QLineEdit" name="State1LowMessageChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6921,7 +6921,7 @@
         <widget class="QDoubleSpinBox" name="State1ValueChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6942,7 +6942,7 @@
         <widget class="QDoubleSpinBox" name="State1HisteresisChannel_2">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -6966,7 +6966,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7026,7 +7026,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7086,7 +7086,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7120,7 +7120,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -7139,7 +7139,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -7161,7 +7161,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -7184,7 +7184,7 @@
         <widget class="QLabel" name="label_103">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7199,7 +7199,7 @@
         <widget class="QLabel" name="label_123">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7214,7 +7214,7 @@
         <widget class="QLabel" name="label_124">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7229,7 +7229,7 @@
         <widget class="QLabel" name="label_125">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7244,7 +7244,7 @@
         <widget class="QLabel" name="label_126">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7259,7 +7259,7 @@
         <widget class="QLabel" name="label_127">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7274,7 +7274,7 @@
         <widget class="QLabel" name="label_128">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7289,7 +7289,7 @@
         <widget class="QLineEdit" name="State2HighMessageChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7304,7 +7304,7 @@
         <widget class="QLabel" name="label_129">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7319,7 +7319,7 @@
         <widget class="QLineEdit" name="State2LowMessageChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7360,7 +7360,7 @@
         <widget class="QDoubleSpinBox" name="State2ValueChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7381,7 +7381,7 @@
         <widget class="QDoubleSpinBox" name="State2HisteresisChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7405,7 +7405,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7465,7 +7465,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7525,7 +7525,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7557,7 +7557,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -7580,7 +7580,7 @@
         <widget class="QLabel" name="label_130">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7595,7 +7595,7 @@
         <widget class="QLabel" name="label_131">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7610,7 +7610,7 @@
         <widget class="QLabel" name="label_132">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7625,7 +7625,7 @@
         <widget class="QLabel" name="label_133">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7640,7 +7640,7 @@
         <widget class="QLabel" name="label_134">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7655,7 +7655,7 @@
         <widget class="QLabel" name="label_135">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7670,7 +7670,7 @@
         <widget class="QLabel" name="label_136">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7685,7 +7685,7 @@
         <widget class="QLineEdit" name="State1HighMessageChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7700,7 +7700,7 @@
         <widget class="QLabel" name="label_137">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7715,7 +7715,7 @@
         <widget class="QLineEdit" name="State1LowMessageChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7756,7 +7756,7 @@
         <widget class="QDoubleSpinBox" name="State1ValueChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7777,7 +7777,7 @@
         <widget class="QDoubleSpinBox" name="State1HisteresisChannel_3">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7801,7 +7801,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7861,7 +7861,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7921,7 +7921,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -7955,7 +7955,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -7974,7 +7974,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -7997,7 +7997,7 @@
         <widget class="QLabel" name="label_146">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8012,7 +8012,7 @@
         <widget class="QLabel" name="label_147">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8027,7 +8027,7 @@
         <widget class="QLabel" name="label_148">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8042,7 +8042,7 @@
         <widget class="QLabel" name="label_149">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8057,7 +8057,7 @@
         <widget class="QLabel" name="label_150">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8072,7 +8072,7 @@
         <widget class="QLabel" name="label_151">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8087,7 +8087,7 @@
         <widget class="QLabel" name="label_152">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8102,7 +8102,7 @@
         <widget class="QLineEdit" name="State1HighMessageChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8117,7 +8117,7 @@
         <widget class="QLabel" name="label_153">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8132,7 +8132,7 @@
         <widget class="QLineEdit" name="State1LowMessageChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8173,7 +8173,7 @@
         <widget class="QDoubleSpinBox" name="State1ValueChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8194,7 +8194,7 @@
         <widget class="QDoubleSpinBox" name="State1HisteresisChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8218,7 +8218,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8278,7 +8278,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8338,7 +8338,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8370,7 +8370,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8393,7 +8393,7 @@
         <widget class="QLabel" name="label_104">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8408,7 +8408,7 @@
         <widget class="QLabel" name="label_139">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8423,7 +8423,7 @@
         <widget class="QLabel" name="label_140">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8438,7 +8438,7 @@
         <widget class="QLabel" name="label_141">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8453,7 +8453,7 @@
         <widget class="QLabel" name="label_142">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8468,7 +8468,7 @@
         <widget class="QLabel" name="label_143">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8483,7 +8483,7 @@
         <widget class="QLabel" name="label_144">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8498,7 +8498,7 @@
         <widget class="QLineEdit" name="State2HighMessageChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8513,7 +8513,7 @@
         <widget class="QLabel" name="label_145">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8528,7 +8528,7 @@
         <widget class="QLineEdit" name="State2LowMessageChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8569,7 +8569,7 @@
         <widget class="QDoubleSpinBox" name="State2ValueChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8590,7 +8590,7 @@
         <widget class="QDoubleSpinBox" name="State2HisteresisChannel_4">
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8614,7 +8614,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8674,7 +8674,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8734,7 +8734,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Open Sans Semibold</family>
+           <family>Open Sans</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -8766,7 +8766,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -8790,7 +8790,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -8809,7 +8809,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -8831,7 +8831,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8852,7 +8852,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8873,7 +8873,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8894,7 +8894,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -8932,7 +8932,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8965,7 +8965,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -8986,7 +8986,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9007,7 +9007,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9033,7 +9033,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9071,7 +9071,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9092,7 +9092,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9113,7 +9113,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9134,7 +9134,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9172,7 +9172,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9205,7 +9205,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9238,7 +9238,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9259,7 +9259,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9280,7 +9280,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9306,7 +9306,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9327,7 +9327,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9348,7 +9348,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9386,7 +9386,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9407,7 +9407,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9440,7 +9440,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9461,7 +9461,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9487,7 +9487,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9515,7 +9515,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -9543,7 +9543,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9565,7 +9565,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9584,7 +9584,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9603,7 +9603,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9624,7 +9624,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -9647,7 +9647,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>16</pointsize>
       </font>
      </property>
@@ -9669,7 +9669,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9688,7 +9688,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9707,7 +9707,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9726,7 +9726,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9745,7 +9745,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9764,7 +9764,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9783,7 +9783,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9802,7 +9802,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9821,7 +9821,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9840,7 +9840,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9859,7 +9859,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9878,7 +9878,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9897,7 +9897,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9916,7 +9916,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9935,7 +9935,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9954,7 +9954,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9973,7 +9973,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -9992,7 +9992,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10011,7 +10011,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10030,7 +10030,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10049,7 +10049,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10068,7 +10068,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10087,7 +10087,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10106,7 +10106,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10125,7 +10125,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10144,7 +10144,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10163,7 +10163,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10182,7 +10182,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10201,7 +10201,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10220,7 +10220,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10239,7 +10239,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10258,7 +10258,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10277,7 +10277,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
+       <family>Open Sans</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -10298,7 +10298,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Semibold</family>
+     <family>Open Sans</family>
      <pointsize>12</pointsize>
     </font>
    </property>

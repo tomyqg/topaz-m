@@ -418,6 +418,8 @@ void worker::do_Work()
                     break;
                 }
 
+
+
                 //                Chanel->SetRegistrationType(1); // принудительно заставляем среднее значение
                 //                int regtype = Chanel->GetRegistrationType();
                 //                switch (regtype) {
