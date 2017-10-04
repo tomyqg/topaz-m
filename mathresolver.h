@@ -16,7 +16,7 @@ public:
     template< typename T >
     T GetAverageValue(QVector<T>& qvect2);
 
-    double dGetAverageValue(QVector<double >& qvect2);
+    static double dGetAverageValue(QVector<double >& qvect2);
     static double dGetMinimumValue(QVector<double >& qvect);
     static double dGetMaximumValue(QVector<double >& qvect);
 };

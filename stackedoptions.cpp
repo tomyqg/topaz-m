@@ -1338,12 +1338,10 @@ void StackedOptions::UpdateAnalyze()
     zzz.append(435);
     zzz.append(554);
 
-    //    averagechannel_1 = mr.GetAverageValue< double >(zzz);
-
-    averagechannel_1 = mr.dGetAverageValue(Y_coordinates_Chanel_1_archive);
-    averagechannel_2 = mr.dGetAverageValue(Y_coordinates_Chanel_2_archive);
-    averagechannel_3 = mr.dGetAverageValue(Y_coordinates_Chanel_3_archive);
-    averagechannel_4 = mr.dGetAverageValue(Y_coordinates_Chanel_4_archive);
+    averagechannel_1 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_1_archive);
+    averagechannel_2 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_2_archive);
+    averagechannel_3 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_3_archive);
+    averagechannel_4 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_4_archive);
 
     double minimumchannel_1 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1_archive);
     double maximumchannel_1 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1_archive);

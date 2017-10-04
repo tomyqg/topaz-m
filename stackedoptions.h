@@ -34,6 +34,19 @@ public:
         return pageindex;
     }
 
+    enum DisplayParametrEnum {
+        Trends = 0x01 ,
+        Polar = 0x02 ,
+        Bars = 0x03 ,
+        TrendsBars = 0x04,
+        Cyfra = 0x05,
+        TrendsCyfra = 0x06,
+        BarsCyfra = 0x07,
+        TrendsCyfraBars = 0x08
+    };
+
+    static void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
+
 private slots:
 
     void Channel1TypeChange();
@@ -184,17 +197,8 @@ private:
     QPen graphPen;
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
 
-    enum DisplayParametrEnum {
-        Trends = 0x01 ,
-        Polar = 0x02 ,
-        Bars = 0x03 ,
-        TrendsBars = 0x04,
-        Cyfra = 0x05,
-        TrendsCyfra = 0x06,
-        BarsCyfra = 0x07,
-        TrendsCyfraBars = 0x08
-    };
-    void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
+
+
 };
 
 #endif // STACKEDOPTIONS_H

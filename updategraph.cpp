@@ -72,6 +72,8 @@ void MainWindow::UpdateGraphics()
 {
     needupdatePainter = 1;
 
+//    StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
+
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {
     case Options::Trends:
@@ -489,15 +491,27 @@ void MainWindow::GrafsUpdateBars()
     QVector<double> y1min,y2min,y3min,y4min;
 
 
-    double chan1higherstate = channel1object.GetState1Value();
-    double chan2higherstate = channel2object.GetState1Value();
-    double chan3higherstate = channel3object.GetState1Value();
-    double chan4higherstate = channel4object.GetState1Value();
+    //    double chan1higherstate = channel1object.GetState1Value();
+    //    double chan2higherstate = channel2object.GetState1Value();
+    //    double chan3higherstate = channel3object.GetState1Value();
+    //    double chan4higherstate = channel4object.GetState1Value();
 
-    double chan1lowerstate = channel1object.GetState2Value();
-    double chan2lowerstate = channel2object.GetState2Value();
-    double chan3lowerstate = channel3object.GetState2Value();
-    double chan4lowerstate = channel4object.GetState2Value();
+    //    double chan1lowerstate = channel1object.GetState2Value();
+    //    double chan2lowerstate = channel2object.GetState2Value();
+    //    double chan3lowerstate = channel3object.GetState2Value();
+    //    double chan4lowerstate = channel4object.GetState2Value();
+
+    // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
+
+    double chan1higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1);
+    double chan2higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2);
+    double chan3higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3);
+    double chan4higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4);
+
+    double chan1lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1);
+    double chan2lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2);
+    double chan3lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3);
+    double chan4lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4);
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
