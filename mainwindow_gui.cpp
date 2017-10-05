@@ -103,6 +103,12 @@ void MainWindow::on_ArchiveButton_clicked()
     OpenArchiveWindow();
 }
 
+
+void MainWindow::on_EcoCheckBox_toggled(bool checked)
+{
+   SetEcoMode(checked);
+}
+
 //void MainWindow::on_comboBox_currentIndexChanged(int index)
 //{
 //    switch (index) {

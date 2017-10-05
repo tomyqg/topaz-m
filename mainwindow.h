@@ -68,11 +68,9 @@ public slots:
     void WriteArchiveToFile();
     void CreateMODBusConfigFile();
     void resetStatus( void );
-
     void HalfSecondGone();
-
     void ModbusConnectionErrorSlot();
-
+    void SetEcoMode(bool seteco);
 
 
     void UpdateChannel1Slot();
@@ -150,7 +148,7 @@ private slots:
 
     void on_ArchiveButton_clicked();
 
-//    void on_comboBox_currentIndexChanged(int index);
+    void on_EcoCheckBox_toggled(bool checked);
 
 signals:
     void error(const QString &s);

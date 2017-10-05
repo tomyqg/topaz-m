@@ -124,7 +124,7 @@ color : white;</string>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>720</x>
       <y>660</y>
       <width>140</width>
       <height>45</height>
@@ -150,7 +150,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>300</x>
       <y>660</y>
       <width>140</width>
       <height>45</height>
@@ -431,7 +431,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QPushButton" name="ArchiveButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>440</x>
       <y>660</y>
       <width>140</width>
       <height>45</height>
@@ -457,7 +457,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QPushButton" name="WorkButton">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>580</x>
       <y>660</y>
       <width>140</width>
       <height>45</height>
@@ -481,36 +481,27 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <string>Работа</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QCheckBox" name="EcoCheckBox">
     <property name="geometry">
      <rect>
       <x>180</x>
       <y>660</y>
-      <width>75</width>
+      <width>121</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>10</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
-    <item>
-     <property name="text">
-      <string>Рус.</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Eng.</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>De.</string>
-     </property>
-    </item>
+    <property name="text">
+     <string>Eco</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
@@ -529,7 +520,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <zorder>MessagesWidget</zorder>
    <zorder>ArchiveButton</zorder>
    <zorder>WorkButton</zorder>
-   <zorder>comboBox</zorder>
+   <zorder>EcoCheckBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

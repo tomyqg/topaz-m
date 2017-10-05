@@ -47,7 +47,7 @@ extern QColor ChannelColorLowState;
 
 void MainWindow::MainWindowInitialization()
 {
-//    CreateMODBusConfigFile();
+    //    CreateMODBusConfigFile();
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
@@ -157,7 +157,9 @@ void MainWindow::MainWindowInitialization()
     QProcess process;
     process.startDetached("ifconfig usb0 192.168.1.115");
 
-//    Options::displayResolution = "1280x800";
+    // включаем эко режим
+    SetEcoMode(true);
+
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -200,36 +202,12 @@ void MainWindow::LabelsInit()
     }
 }
 
-
 void MainWindow::InitPins()
 {
 #ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
     return;
 #endif
-    // an object for make terminal requests
-    QProcess process;
 
-    //    importante!
-    //    Use NOPASSWD line for all commands, I mean:
-    //    debian ALL=(ALL) NOPASSWD: ALL
-    //    Put the line after all other lines in the sudoers file.
-
-    // allow to pin use
-    process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/value");
-    process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/direction");
-
-    // config pins as uart
-    process.startDetached("sudo config-pin P9.24 uart");
-    process.startDetached("sudo config-pin P9.26 uart");
-
-    //config RTS pin as gpio pull-down
-    process.startDetached("sudo config-pin P8.7 gpio_pd");
-
-    QFile filedir("/sys/class/gpio/gpio66/direction");
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-    outdir << "out";
-    filedir.close();
 }
 
 
@@ -298,15 +276,15 @@ void MainWindow::OpenOptionsWindow( int index )
     SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
 
     // если что меняем разрешение
-        if (Options::displayResolution == "1024x768")
-        {
-            resizeSelf(1024,768);
-        }
+    if (Options::displayResolution == "1024x768")
+    {
+        resizeSelf(1024,768);
+    }
 
-        if (Options::displayResolution == "1280x800")
-        {
-            resizeSelf(1280,720);
-        }
+    if (Options::displayResolution == "1280x800")
+    {
+        resizeSelf(1280,720);
+    }
 
     resizeSelf(1024,768);
 
@@ -430,6 +408,32 @@ void MainWindow::ModbusConnectionErrorSlot()
     qDebug() << "Sss" ;
     QMessageBox::critical( this, tr( "Connection Error" ),
                            tr( "Could not connect serial port!" ) );
+}
+
+void MainWindow::SetEcoMode(bool seteco)
+{
+    switch (seteco) {
+    case 0:
+    {
+        ui->customPlot->setBackground(QBrush(QColor(0xff,0xff,0xff)));
+        ui->customPlot->xAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::black));
+        ui->customPlot->yAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::black));
+    }
+        break;
+    case 1:
+    {
+        ui->customPlot->setBackground(QBrush(QColor (0x00,0x00,0x4d) )); // ("#b3daff")
+        ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::white));
+        ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::white));
+    }
+        break;
+    default:
+        break;
+    }
 }
 
 void MainWindow::HalfSecondGone()

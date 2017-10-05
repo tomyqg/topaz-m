@@ -689,27 +689,46 @@ void MainWindow::GrafsUpdateBars()
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
-    // add the arrow:
+    // add the arrows:
 
-    QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-    //    arrow->start->setCoords(400,200);
+    QList<ChannelOptions *> ChannelsObjectsList;
 
-    int ystart = 150;
-    int xstart = 950;
+    ChannelsObjectsList.append(&channel1object);
+    ChannelsObjectsList.append(&channel2object);
+    ChannelsObjectsList.append(&channel3object);
+    ChannelsObjectsList.append(&channel4object);
 
-    //    arrow->start->setPixelPoint(QPointF(22, 22));
-    //    arrow->end->setCoords(x1lim.at(0)-10, y1min.at(0) );
-    //    arrow->start->setCoords(x1lim.at(0)-7, y1min.at(0) );
-    //    arrow->end->setCoords(x1lim.at(0)-3, y1min.at(0) );
-    //    setPixelPoint(QPointF(xstart, ystart));
+    QList<int> arrowsendcoords;
 
-    arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
-    arrow->start->setCoords(Bar1_X_Coord.at(0)-5,channel1object.GetState1Value() );
-    arrow->end->setCoords(Bar1_X_Coord.at(0)-2,channel1object.GetState1Value() );
-    arrow->setHead(QCPLineEnding::esSpikeArrow);
-    ui->customPlot->addItem(arrow);
+    arrowsendcoords.append(Bar1_X_Coord.at(0));
+    arrowsendcoords.append(Bar2_X_Coord.at(0));
+    arrowsendcoords.append(Bar3_X_Coord.at(0));
+    arrowsendcoords.append(Bar4_X_Coord.at(0));
 
+
+    // рисуем стрелки для каждой уставки
+
+    int barindex = 0 ;
+    foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+    {
+        QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+        arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
+        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState1Value() );
+        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState1Value() );
+        arrow->setHead(QCPLineEnding::esSpikeArrow);
+        ui->customPlot->addItem(arrow);
+
+        QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
+        arrow2->setPen(QPen(Qt::green, 3, Qt::SolidLine));
+        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState2Value() );
+        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->GetState2Value() );
+        arrow2->setHead(QCPLineEnding::esSpikeArrow);
+        ui->customPlot->addItem(arrow2);
+    }
     ui->customPlot->replot();
+
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
 }
 
 void MainWindow::UpdateChannel1Slot()
