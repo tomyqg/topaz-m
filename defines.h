@@ -61,7 +61,6 @@
 
 #endif
 
-
 #endif
 
 #define comportparity 'N'
@@ -77,10 +76,6 @@
 #define ObryvErrorMessage "обрыв"
 
 #define Font "Open Sans"
-//#define Font "Rubik"
-//#define Font "Arial"
-//#define Font "Orbitron Light"
-
 #define NaNMessage "nan"
 #define OKMessage "норма"
 #define AlertSign "!"

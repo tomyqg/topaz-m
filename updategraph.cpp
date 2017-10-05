@@ -275,72 +275,109 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel1Color())); // first graph will be filled with translucent blue
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel1Color()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2, y2);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel2Color())); // first graph will be filled with translucent blue
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel2Color()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3, y3);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel3Color())); // first graph will be filled with translucent blue
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel3Color()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4, y4);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel4Color())); // first graph will be filled with translucent blue
+    ui->customPlot->graph()->setBrush(QBrush(GetChannel4Color()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     // рисуем границы каналов каждого барграфа
 
+    QPen dottedpen = QPen(Qt::red, 1, Qt::DashLine);
+
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1max);
-    graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2max);
-    graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3max);
-    graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4max);
-    graphPen.setColor(QColor(Qt::red));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
+
+
+    dottedpen = QPen(Qt::green, 1, Qt::DashLine);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1min);
-    graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2min);
-    graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3min);
-    graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4min);
-    graphPen.setColor(QColor(Qt::green));
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
+    // add the arrows:
+
+    QList<ChannelOptions *> ChannelsObjectsList;
+
+    ChannelsObjectsList.append(&channel1object);
+    ChannelsObjectsList.append(&channel2object);
+    ChannelsObjectsList.append(&channel3object);
+    ChannelsObjectsList.append(&channel4object);
+
+    QList<int> arrowsendcoords;
+
+    arrowsendcoords.append(x1.at(0));
+    arrowsendcoords.append(x2.at(0));
+    arrowsendcoords.append(x3.at(0));
+    arrowsendcoords.append(x4.at(0));
+
+    // рисуем стрелки для каждой уставки
+
+    int barindex = 0 ;
+    foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+    {
+        QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+        arrow->setPen(QPen(Qt::red, 1, Qt::SolidLine));
+        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState1Value() );
+        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState1Value() );
+        arrow->setHead(QCPLineEnding::esSpikeArrow);
+        ui->customPlot->addItem(arrow);
+
+        QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
+        arrow2->setPen(QPen(Qt::green, 1, Qt::SolidLine));
+        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState2Value() );
+        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->GetState2Value() );
+        arrow2->setHead(QCPLineEnding::esSpikeArrow);
+        ui->customPlot->addItem(arrow2);
+    }
+
     ui->customPlot->replot();
+
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
 }
 
 void MainWindow::GrafsUpdateTrends()
@@ -446,7 +483,8 @@ void MainWindow::GrafsUpdateTrends()
         ui->customPlot->rescaleAxes();
     }
     ui->customPlot->replot();
-    ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
 }
 
 void MainWindow::GrafsUpdateNone()
@@ -459,6 +497,8 @@ void MainWindow::GrafsUpdateNone()
     //ui->customPlot->clearMask();
     //ui->customPlot->clearFocus();
     ui->customPlot->replot();
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
 }
 
 void MainWindow::GrafsUpdateBars()
@@ -646,7 +686,7 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setData(x1lim, y1max);
     graphPen.setColor(QColor(Qt::red));
 
-    QPen dottedpen = QPen(Qt::red, 2, Qt::DashLine);
+    QPen dottedpen = QPen(Qt::red, 1, Qt::DashLine);
 
     ui->customPlot->graph()->setPen(dottedpen);
 
@@ -665,7 +705,7 @@ void MainWindow::GrafsUpdateBars()
     graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(dottedpen);
 
-    dottedpen = QPen(Qt::green, 2, Qt::DashLine);
+    dottedpen = QPen(Qt::green, 1, Qt::DashLine);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1min);
