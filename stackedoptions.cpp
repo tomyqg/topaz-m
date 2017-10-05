@@ -1387,18 +1387,7 @@ void StackedOptions::UpdateArchiveData()
     ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_1_archive);
 
 
-    //    // add the text label at the top:
-    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-    //    ui->customPlot->addItem(textLabel);
-    //    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-    //    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-    //    textLabel->setText("Text Item Demo");
-    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
-    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
-
     // add the arrow:
-
 
 
     graphPen.setWidth(GraphWidthinPixels);

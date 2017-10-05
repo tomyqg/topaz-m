@@ -372,10 +372,87 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->GetState2Value() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
+
+
+        QPointF Label1PixPoint = arrow->start->pixelPoint();
+        QPointF Label2PixPoint = arrow2->start->pixelPoint();
+
+        Label1PixPoint.setY(Label1PixPoint.y() - 20);
+        Label2PixPoint.setY(Label2PixPoint.y() - 20);
+
+        // add the text label at the top limit:
+        QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
+        ui->customPlot->addItem(textLabelHi);
+        textLabelHi->position->setPixelPoint(Label1PixPoint);
+        textLabelHi->setText(QString::number(Chanel->GetState1Value() ));
+        textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
+        textLabelHi->setColor(QColor(Qt::red));
+
+        // add the text label at the bottom limit
+
+        QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
+        ui->customPlot->addItem(textLabelLo);
+        textLabelLo->position->setPixelPoint(Label2PixPoint);
+        textLabelLo->setText(QString::number(Chanel->GetState2Value() ));
+        textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
+        textLabelLo->setColor(QColor(Qt::green));
+    }
+
+
+    if (ui->autoscalecheckbox->checkState())
+    {
+        ui->customPlot->yAxis->rescale();
+    }
+
+    // add the helper arrow:
+
+    if (ui->arrowscheckBox->checkState()) // if it s needed
+    {
+        // add the arrows:
+
+        QList<ChannelOptions *> ChannelsObjectsList;
+
+        ChannelsObjectsList.append(&channel1object);
+        ChannelsObjectsList.append(&channel2object);
+        ChannelsObjectsList.append(&channel3object);
+        ChannelsObjectsList.append(&channel4object);
+
+        QList<int> arrowsendcoords;
+
+        arrowsendcoords.append(x1.at(0));
+        arrowsendcoords.append(x2.at(0));
+        arrowsendcoords.append(x3.at(0));
+        arrowsendcoords.append(x4.at(0));
+
+        // рисуем стрелки для каждой уставки
+
+        int index = 0 ;
+        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+        {
+            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+            //    arrow->start->setCoords(400,200);
+
+            int ystart = 150;
+            int xstart = 600;
+
+            arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
+            arrow->end->setCoords(b, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->setHead(QCPLineEnding::esSpikeArrow);
+            arrow->setPen(QPen(Chanel->GetCurrentColor(),1,  Qt::DashLine));
+            ui->customPlot->addItem(arrow);
+
+            QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
+            ui->customPlot->addItem(NameLabel);
+            NameLabel->position->setPixelPoint(arrow->start->pixelPoint());
+            NameLabel->setText(Chanel->GetChannelName() );
+            NameLabel->setFont(QFont(Font, 8, QFont::Bold));
+            NameLabel->setColor(Chanel->GetCurrentColor());
+
+            ++index;
+        }
     }
 
     ui->customPlot->replot();
-
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
 }
@@ -399,45 +476,48 @@ void MainWindow::GrafsUpdateTrends()
     //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
     //    textLabel->setPen(QPen(Qt::black)); // show black border around text
 
-    // add the arrow:
+    // add the helper arrow:
 
     if (ui->arrowscheckBox->checkState())
     {
-        QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-        //    arrow->start->setCoords(400,200);
+        // add the arrows:
 
-        int ystart = 150;
-        int xstart = 950;
+        QList<ChannelOptions *> ChannelsObjectsList;
 
-        arrow->start->setPixelPoint(QPointF(xstart, ystart));
-        arrow->end->setCoords(b, Y_coordinates_Chanel_1.last()); // point to (4, 1.6) in x-y-plot coordinates
-        arrow->setHead(QCPLineEnding::esSpikeArrow);
-        arrow->setPen(QPen(channel1object.GetCurrentColor(),1,  Qt::DashLine));
-        ui->customPlot->addItem(arrow);
+        ChannelsObjectsList.append(&channel1object);
+        ChannelsObjectsList.append(&channel2object);
+        ChannelsObjectsList.append(&channel3object);
+        ChannelsObjectsList.append(&channel4object);
 
-        QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
+        QList<int> arrowsendcoords;
 
-        arrow2->start->setPixelPoint(QPointF(xstart, ystart+105));
-        arrow2->end->setCoords(b, Y_coordinates_Chanel_2.last()); // point to (4, 1.6) in x-y-plot coordinates
-        arrow2->setHead(QCPLineEnding::esSpikeArrow);
-        arrow2->setPen(QPen(channel2object.GetCurrentColor(),1,  Qt::DashLine));
-        ui->customPlot->addItem(arrow2);
 
-        QCPItemLine *arrow3 = new QCPItemLine(ui->customPlot);
+        // рисуем стрелки для каждой уставки
 
-        arrow3->start->setPixelPoint(QPointF(xstart, ystart+105*2));
-        arrow3->end->setCoords(b, Y_coordinates_Chanel_3.last()); // point to (4, 1.6) in x-y-plot coordinates
-        arrow3->setHead(QCPLineEnding::esSpikeArrow);
-        arrow3->setPen(QPen(channel3object.GetCurrentColor(),1,  Qt::DashLine));
-        ui->customPlot->addItem(arrow3);
+        int index = 0 ;
+        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+        {
+            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+            //    arrow->start->setCoords(400,200);
 
-        QCPItemLine *arrow4 = new QCPItemLine(ui->customPlot);
+            int ystart = 150;
+            int xstart = 600;
 
-        arrow4->start->setPixelPoint(QPointF(xstart, ystart+105*3));
-        arrow4->end->setCoords(b, Y_coordinates_Chanel_4.last()); // point to (4, 1.6) in x-y-plot coordinates
-        arrow4->setHead(QCPLineEnding::esSpikeArrow);
-        arrow4->setPen(QPen(channel4object.GetCurrentColor(),1,  Qt::DashLine));
-        ui->customPlot->addItem(arrow4);
+            arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
+            arrow->end->setCoords(b, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->setHead(QCPLineEnding::esSpikeArrow);
+            arrow->setPen(QPen(Chanel->GetCurrentColor(),1,  Qt::DashLine));
+            ui->customPlot->addItem(arrow);
+
+            QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
+            ui->customPlot->addItem(NameLabel);
+            NameLabel->position->setPixelPoint(arrow->start->pixelPoint());
+            NameLabel->setText(Chanel->GetChannelName() );
+            NameLabel->setFont(QFont(Font, 8, QFont::Bold));
+            NameLabel->setColor(Chanel->GetCurrentColor());
+
+            ++index;
+        }
 
     }
 
@@ -682,49 +762,39 @@ void MainWindow::GrafsUpdateBars()
 
     // рисуем границы каналов каждого барграфа
 
+    QPen dottedpen = QPen(Qt::red, 1, Qt::DashLine);
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1max);
-    graphPen.setColor(QColor(Qt::red));
-
-    QPen dottedpen = QPen(Qt::red, 1, Qt::DashLine);
-
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2max);
-    graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3max);
-    graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4max);
-    graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(dottedpen);
 
     dottedpen = QPen(Qt::green, 1, Qt::DashLine);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1min);
-    graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2min);
-    graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3lim, y3min);
-    graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4lim, y4min);
-    graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(dottedpen);
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
@@ -745,7 +815,6 @@ void MainWindow::GrafsUpdateBars()
     arrowsendcoords.append(Bar3_X_Coord.at(0));
     arrowsendcoords.append(Bar4_X_Coord.at(0));
 
-
     // рисуем стрелки для каждой уставки
 
     int barindex = 0 ;
@@ -761,10 +830,45 @@ void MainWindow::GrafsUpdateBars()
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 3, Qt::SolidLine));
         arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState2Value() );
-        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->GetState2Value() );
+        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState2Value() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
+
+
+        QPointF Label1PixPoint = arrow->start->pixelPoint();
+        QPointF Label2PixPoint = arrow2->start->pixelPoint();
+
+        Label1PixPoint.setY(Label1PixPoint.y() - 20);
+        Label2PixPoint.setY(Label2PixPoint.y() - 20);
+
+        // add the text label at the top limit:
+        QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
+        ui->customPlot->addItem(textLabelHi);
+        textLabelHi->position->setPixelPoint(Label1PixPoint);
+        textLabelHi->setText(QString::number(Chanel->GetState1Value() ));
+        textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
+        textLabelHi->setColor(QColor(Qt::red));
+
+        // add the text label at the bottom limit
+
+        QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
+        ui->customPlot->addItem(textLabelLo);
+        textLabelLo->position->setPixelPoint(Label2PixPoint);
+        textLabelLo->setText(QString::number(Chanel->GetState2Value() ));
+        textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
+        textLabelLo->setColor(QColor(Qt::green));
+
+        ++barindex;
     }
+
+
+
+
+    if (ui->autoscalecheckbox->checkState())
+    {
+        ui->customPlot->yAxis->rescale();
+    }
+
     ui->customPlot->replot();
 
     ui->customPlot->clearGraphs();
