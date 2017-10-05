@@ -691,23 +691,22 @@ void MainWindow::GrafsUpdateBars()
 
     // add the arrow:
 
-
     QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
     //    arrow->start->setCoords(400,200);
 
     int ystart = 150;
     int xstart = 950;
 
-    //    arrow->start->setCoords(Bar1_X_Coord.at(0)-100,channel1object.GetState1Value() );
-    //    arrow->end->setCoords(Bar1_X_Coord.at(0)-50,channel1object.GetState1Value() );
+    //    arrow->start->setPixelPoint(QPointF(22, 22));
+    //    arrow->end->setCoords(x1lim.at(0)-10, y1min.at(0) );
+    //    arrow->start->setCoords(x1lim.at(0)-7, y1min.at(0) );
+    //    arrow->end->setCoords(x1lim.at(0)-3, y1min.at(0) );
+    //    setPixelPoint(QPointF(xstart, ystart));
 
-    arrow->start->setPixelPoint(QPointF(22, 22));
-    arrow->end->setPixelPoint(QPointF(444, 444));
-
-//    setPixelPoint(QPointF(xstart, ystart));
-
+    arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
+    arrow->start->setCoords(Bar1_X_Coord.at(0)-5,channel1object.GetState1Value() );
+    arrow->end->setCoords(Bar1_X_Coord.at(0)-2,channel1object.GetState1Value() );
     arrow->setHead(QCPLineEnding::esSpikeArrow);
-    arrow->setPen(QPen(channel1object.GetCurrentColor(),1,  Qt::DashLine));
     ui->customPlot->addItem(arrow);
 
     ui->customPlot->replot();
