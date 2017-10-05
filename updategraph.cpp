@@ -72,7 +72,7 @@ void MainWindow::UpdateGraphics()
 {
     needupdatePainter = 1;
 
-//    StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
+    //    StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
 
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {
@@ -154,16 +154,17 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     int lastindex = X_Coordinates.at(X_Coordinates.length()-1);
 
+    // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
-    double chan1higherstate = channel1object.GetState1Value();
-    double chan2higherstate = channel2object.GetState1Value();
-    double chan3higherstate = channel3object.GetState1Value();
-    double chan4higherstate = channel4object.GetState1Value();
+    double chan1higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1);
+    double chan2higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2);
+    double chan3higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3);
+    double chan4higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4);
 
-    double chan1lowerstate = channel1object.GetState2Value();
-    double chan2lowerstate = channel2object.GetState2Value();
-    double chan3lowerstate = channel3object.GetState2Value();
-    double chan4lowerstate = channel4object.GetState2Value();
+    double chan1lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1);
+    double chan2lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2);
+    double chan3lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3);
+    double chan4lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4);
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -178,7 +179,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y2max.append(chan2higherstate);
     y2max.append(0);
     y2max.append(chan2higherstate);
-
 
     y3max.append(chan3higherstate);
     y3max.append(chan3higherstate);
@@ -319,7 +319,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(graphPen);
 
-
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1lim, y1min);
     graphPen.setColor(QColor(Qt::green));
@@ -339,7 +338,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setData(x4lim, y4min);
     graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(graphPen);
-
 
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
     ui->customPlot->replot();
@@ -603,6 +601,8 @@ void MainWindow::GrafsUpdateBars()
 
 
     ui->customPlot->clearGraphs();
+    ui->customPlot->clearItems();
+
     ui->customPlot->xAxis->setRange(0, 100);
     graphPen.setWidth(GraphWidthinPixels);
     ui->customPlot->addGraph();
@@ -640,7 +640,6 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
 
-
     // рисуем границы каналов каждого барграфа
 
     ui->customPlot->addGraph();
@@ -650,7 +649,6 @@ void MainWindow::GrafsUpdateBars()
     QPen dottedpen = QPen(Qt::red, 2, Qt::DashLine);
 
     ui->customPlot->graph()->setPen(dottedpen);
-
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2lim, y2max);
@@ -666,8 +664,6 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setData(x4lim, y4max);
     graphPen.setColor(QColor(Qt::red));
     ui->customPlot->graph()->setPen(dottedpen);
-
-    // Qt::DashDotLine, Qt::RoundCap
 
     dottedpen = QPen(Qt::green, 2, Qt::DashLine);
 
@@ -691,9 +687,28 @@ void MainWindow::GrafsUpdateBars()
     graphPen.setColor(QColor(Qt::green));
     ui->customPlot->graph()->setPen(dottedpen);
 
-
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
+    // add the arrow:
+
+
+    QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+    //    arrow->start->setCoords(400,200);
+
+    int ystart = 150;
+    int xstart = 950;
+
+    //    arrow->start->setCoords(Bar1_X_Coord.at(0)-100,channel1object.GetState1Value() );
+    //    arrow->end->setCoords(Bar1_X_Coord.at(0)-50,channel1object.GetState1Value() );
+
+    arrow->start->setPixelPoint(QPointF(22, 22));
+    arrow->end->setPixelPoint(QPointF(444, 444));
+
+//    setPixelPoint(QPointF(xstart, ystart));
+
+    arrow->setHead(QCPLineEnding::esSpikeArrow);
+    arrow->setPen(QPen(channel1object.GetCurrentColor(),1,  Qt::DashLine));
+    ui->customPlot->addItem(arrow);
 
     ui->customPlot->replot();
 }
