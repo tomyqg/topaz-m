@@ -106,45 +106,19 @@ void MainWindow::on_ArchiveButton_clicked()
 
 void MainWindow::on_EcoCheckBox_toggled(bool checked)
 {
-   SetEcoMode(checked);
+    SetEcoMode(checked);
 
-   switch (checked) {
-   case 0:
-       ui->EcoCheckBox->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
-       break;
-   case 1:
-       ui->EcoCheckBox->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
-       break;
-   default:
-       break;
-
-   }
-
-   qDebug() << ui->EcoCheckBox->styleSheet();;
+    switch (checked) {
+    case 0:
+        ui->EcoCheckBox->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+        break;
+    case 1:
+        ui->EcoCheckBox->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+        break;
+    default:
+        break;
+    }
 }
-
-//void MainWindow::on_comboBox_currentIndexChanged(int index)
-//{
-//    switch (index) {
-//    case 0:
-//        if (Options::displayResolution == "1280x800")
-//        {
-//            resizeSelf(1024,768);
-//            Options::displayResolution = "1024x768";
-//        }
-//        break;
-//    case 1:
-//        if (Options::displayResolution == "1024x768")
-//        {
-//            resizeSelf(1280,800);
-//            Options::displayResolution = "1024x768";
-//        }
-//        break;
-//    default:
-//        break;
-//    }
-//}
-
 
 void MainWindow::on_pushButton_2_clicked()
 {
@@ -156,14 +130,6 @@ void MainWindow::on_pushButton_4_clicked()
     OpenMessagesWindow();
 }
 
-void MainWindow::on_RelayChanger_toggled(bool checked)
-{
-    ui->RelayChanger->setText("Сглаживание " + QString::number(checked));
-    if (checked)
-        ui->customPlot->setAntialiasedElements(QCP::aeAll);
-    else
-        ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-}
 
 void  MainWindow::destroyedslot(QObject *)
 {
@@ -189,7 +155,43 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
         ReactOnMouseSlide();
     }
-    return true;
+
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == watched->property("objectName"))
+            {
+
+                qDebug() << widget->objectName();
+
+                widget->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+            }
+        }
+    }
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == watched->property("objectName"))
+            {
+                widget->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+            }
+        }
+    }
+
+    return QWidget::eventFilter(watched, event);
 }
 
 void MainWindow::ShowMessageBox (QString title,QString message)

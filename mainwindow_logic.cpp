@@ -76,6 +76,17 @@ void MainWindow::MainWindowInitialization()
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
 
+
+    QList<QPushButton*> ButtonList = MainWindow::findChildren<QPushButton*> ();
+
+
+    // добавляем все кнопошки в евентфильтр
+    for (int i = 0; i < ButtonList.count(); ++i) {
+        QPushButton *but = ButtonList.at(i);
+        but->installEventFilter(this);
+//        qDebug() << but->text();
+    }
+
     SetXRange(XRange);
     SetYRange(YRange);
 
@@ -234,7 +245,7 @@ void MainWindow::DelaySec(int n)
 void MainWindow::OpenOptionsWindow( int index )
 {
     //здесь запускаем меню обновленное как в эндресе
-    if (ui->endressmenucheckbox->checkState())
+
     {
         StackedOptions *sw= new StackedOptions(index,0);
         sw->exec();

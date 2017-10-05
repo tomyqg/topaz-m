@@ -212,44 +212,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <cursorShape>BlankCursor</cursorShape>
     </property>
    </widget>
-   <widget class="QCheckBox" name="ConfirmBox">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>650</y>
-      <width>300</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-     </font>
-    </property>
-    <property name="text">
-     <string>Квитирование</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="RelayChanger">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>670</y>
-      <width>300</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Сглаживание</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
@@ -348,8 +310,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QCheckBox" name="arrowscheckBox">
     <property name="geometry">
      <rect>
-      <x>910</x>
-      <y>690</y>
+      <x>900</x>
+      <y>650</y>
       <width>300</width>
       <height>30</height>
      </rect>
@@ -368,8 +330,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QCheckBox" name="autoscalecheckbox">
     <property name="geometry">
      <rect>
-      <x>910</x>
-      <y>710</y>
+      <x>900</x>
+      <y>670</y>
       <width>300</width>
       <height>30</height>
      </rect>
@@ -388,8 +350,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
    <widget class="QCheckBox" name="percentCheckBox">
     <property name="geometry">
      <rect>
-      <x>1140</x>
-      <y>650</y>
+      <x>900</x>
+      <y>690</y>
       <width>300</width>
       <height>30</height>
      </rect>
@@ -403,29 +365,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     </property>
     <property name="text">
      <string>В процентах</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="endressmenucheckbox">
-    <property name="geometry">
-     <rect>
-      <x>1140</x>
-      <y>670</y>
-      <width>300</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Endress Menu</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="ArchiveButton">
@@ -510,10 +449,8 @@ color : white;</string>
    </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
-   <zorder>ConfirmBox</zorder>
    <zorder>pushButton_4</zorder>
    <zorder>pushButton_2</zorder>
-   <zorder>RelayChanger</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
@@ -521,7 +458,6 @@ color : white;</string>
    <zorder>arrowscheckBox</zorder>
    <zorder>autoscalecheckbox</zorder>
    <zorder>percentCheckBox</zorder>
-   <zorder>endressmenucheckbox</zorder>
    <zorder>MessagesWidget</zorder>
    <zorder>ArchiveButton</zorder>
    <zorder>WorkButton</zorder>

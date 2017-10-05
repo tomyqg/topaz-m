@@ -141,7 +141,6 @@ private slots:
     void DelaySec(int n);
     void on_pushButton_2_clicked();
     void on_pushButton_4_clicked();
-    void on_RelayChanger_toggled(bool checked);
     void sendModbusRequest( );
     void ChangePalette(int i);
     void on_WorkButton_clicked();

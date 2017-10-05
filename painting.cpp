@@ -527,7 +527,9 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 
                 // часть квитирования
                 // если превысила уставку
-                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+//                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+
+                if (0)
                 {
                     painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
 
@@ -546,7 +548,9 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState2LowMessage());
                 
                 // если ниже уставки
-                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+//                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+
+                if (0)
                 {
                     painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
                     if  (GetHalfSecFlag())
