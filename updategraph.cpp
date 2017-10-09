@@ -336,7 +336,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setData(x4lim, y4min);
     ui->customPlot->graph()->setPen(dottedpen);
 
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
     // add the arrows:
 
@@ -459,6 +458,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
 void MainWindow::GrafsUpdateTrends()
 {
+
     ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
 
@@ -466,15 +466,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
-    //    // add the text label at the top:
-    //    QCPItemText *textLabel = new QCPItemText(ui->customPlot);
-    //    ui->customPlot->addItem(textLabel);
-    //    textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-    //    textLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
-    //    textLabel->position->setCoords(0.5, 0); // place position at center/top of axis rect
-    //    textLabel->setText("Text Item Demo");
-    //    textLabel->setFont(QFont(font().family(), 16)); // make font a bit larger
-    //    textLabel->setPen(QPen(Qt::black)); // show black border around text
 
     // add the helper arrow:
 
@@ -507,7 +498,12 @@ void MainWindow::GrafsUpdateTrends()
             arrow->end->setCoords(b, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(Chanel->GetCurrentColor(),1,  Qt::DashLine));
+            arrow->setAntialiased(true);
+            ui->customPlot->setAntialiasedElements(QCP::aeAll);
             ui->customPlot->addItem(arrow);
+
+            arrow->setAntialiased(true);
+            ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
             QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
             ui->customPlot->addItem(NameLabel);
@@ -554,14 +550,15 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
     // авто масшабирование
     if (ui->autoscalecheckbox->checkState())
     {
-        ui->customPlot->rescaleAxes();
+        ui->customPlot->yAxis->rescale();
     }
+
+
+    ui->customPlot->setAntialiasedElements(QCP::aeAll);
+
     ui->customPlot->replot();
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
@@ -574,8 +571,6 @@ void MainWindow::GrafsUpdateNone()
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
 
-    //ui->customPlot->clearMask();
-    //ui->customPlot->clearFocus();
     ui->customPlot->replot();
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
@@ -786,8 +781,6 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setData(x4lim, y4min);
     ui->customPlot->graph()->setPen(dottedpen);
 
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
     // add the arrows:
 
     QList<ChannelOptions *> ChannelsObjectsList;
@@ -859,7 +852,6 @@ void MainWindow::GrafsUpdateBars()
     }
 
     ui->customPlot->replot();
-
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
 }

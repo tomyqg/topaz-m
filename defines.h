@@ -88,7 +88,7 @@
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 180                   // изначальный размер графика по игреку в 1 сторону
-#define GraphWidthinPixels 2         // толщина графика линий в пикселях
+#define GraphWidthinPixels 1         // толщина графика линий в пикселях
 
 #define rect1coords smallrectinglewidth*3-5, otstupsverhu3, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
 #define rect2coords smallrectinglewidth*3-5, otstupsverhu2, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях

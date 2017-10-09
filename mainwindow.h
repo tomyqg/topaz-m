@@ -152,6 +152,8 @@ private slots:
 
     void on_EcoCheckBox_toggled(bool checked);
 
+    void on_smoothCheckBox_toggled(bool checked);
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);

@@ -73,7 +73,6 @@ void MainWindow::PaintCyfrasBottom()
     ChannelsObjectsList.append(&channel4object);
     
     painter.begin(ui->MessagesWidget);
-    painter.setRenderHint(QPainter::Antialiasing, false);
     
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
@@ -204,9 +203,8 @@ void MainWindow::PaintCyfrasRight()
     
     
     painter.begin(ui->MessagesWidget);
-    painter.setRenderHint(QPainter::Antialiasing, false);
-    
-    
+
+
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
@@ -290,6 +288,7 @@ void MainWindow::PaintCyfrasFullScreen()
 {
     QPainter painter;
     // задаётся параметры вручную
+
     
     // отступ  сверху и слева в пикселях
     int borderwidth = 0 ;
@@ -340,9 +339,8 @@ void MainWindow::PaintCyfrasFullScreen()
     
     
     painter.begin(ui->MessagesWidget);
-    painter.setRenderHint(QPainter::Antialiasing, false);
-    
-    
+
+
     int index = 1;
     
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
@@ -422,6 +420,7 @@ void MainWindow::PaintCyfrasFullScreen()
 void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает события на уставки
 {
     QPainter painter;
+
     
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
@@ -470,7 +469,14 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     ChannelsObjectsList.append(&channel4object);
     
     painter.begin(ui->MessagesWidget);
-    painter.setRenderHint(QPainter::Antialiasing, false);
+
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    //    if (ui->smoothCheckBox->checkState())
+    //        painter.setRenderHint(QPainter::Antialiasing, true);
+    //    else
+    //        painter.setRenderHint(QPainter::Antialiasing, false);
+
     painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
     
     int confirmwindowwidth = widgwidth/3;
@@ -592,11 +598,13 @@ void MainWindow::PaintPolarDiagramm()
 {
     QPainter painter;
     double maximumradius;
-    
     maximumradius = 400;
     
     painter.begin(ui->MessagesWidget);
-    
+
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+
     int channel1value = X_Coordinates.last();
     int channel2value = X_Coordinates.last();
     int channel3value = X_Coordinates.last();
@@ -611,8 +619,8 @@ void MainWindow::PaintPolarDiagramm()
     int centery1,centery2,centery3,centery4;
     int newxcenter = 0, newycenter = 500;
     
-    centerx1 = centerx2 = centerx3 = centerx4  = 1;
-    centery1 = centery3 =  centery2 = centery4 = 1;
+    centerx1 = centerx2 = centerx3 = centerx4 = 1;
+    centery1 = centery2 = centery3 = centery4 = 1;
     
     painter.translate(newxcenter, newycenter);
     /* Create the line object: */
@@ -757,7 +765,7 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawPolyline(PolarChartPointsChannel3);
     painter.setPen(QPen(Channel4Color, 2));
     painter.drawPolyline(PolarChartPointsChannel4);
-    painter.setRenderHint(QPainter::Antialiasing, false);
+
 
     painter.resetTransform(); // все что дальше - не поворачивается динамически
 
@@ -902,7 +910,6 @@ void MainWindow::ReactOnTouch()
         {
             QPainter painter;
             painter.begin(ui->MessagesWidget);
-            painter.setRenderHint(QPainter::Antialiasing, false);
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
             int confirmwindowposy = (widgheight -  confirmwindowheight)/2;

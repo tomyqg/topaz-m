@@ -87,7 +87,9 @@ void MainWindow::MainWindowInitialization()
     SetYRange(YRange);
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+
+    ui->customPlot->setAntialiasedElements(QCP::aeNone);
+//    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
     messwrite.LogAddMessage("Programm Started");
 
@@ -372,11 +374,7 @@ void MainWindow::DateUpdate() // каждую секунду обновляем 
     QDateTime local(QDateTime::currentDateTime());
     //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
     ui->time_label->setText(local.date().toString("dd.MM.yyyy " ) + local.time().toString());
-
     resizeSelf(1024,768);
-
-    qDebug() << ui->label->width() << "width()";
-    qDebug() << ui->label->height() << "height()";
 }
 
 void MainWindow::LabelsUpdate()

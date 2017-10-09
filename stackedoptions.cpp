@@ -1469,7 +1469,7 @@ void StackedOptions::UpdateArchiveData()
     //    ui->customPlot->xAxis->setAutoTickLabels(false);
     //    ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
+//    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
     // авто масшабирование
     ui->customPlot->rescaleAxes();
