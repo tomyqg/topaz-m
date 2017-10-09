@@ -167,9 +167,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-
-                qDebug() << widget->objectName();
-
+//                qDebug() << widget->objectName();
                 widget->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
             }
         }

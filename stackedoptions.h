@@ -49,6 +49,8 @@ public:
 
 private slots:
 
+    bool eventFilter(QObject* watched, QEvent* event);
+
     void Channel1TypeChange();
     void Channel2TypeChange();
     void Channel3TypeChange();
@@ -173,8 +175,8 @@ private slots:
     void on_gamebutton_clicked();
 
 private:
+
     Ui::StackedOptions *ui;
-    bool eventFilter(QObject *object, QEvent *event);
     void ReadChannelsOptionsFromFile();
     void ReadSystemOptionsFromFile();
     void ApplyNewSettingstoOptionsUI();

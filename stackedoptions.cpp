@@ -133,6 +133,18 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
         le->installEventFilter(this);
     }
 
+    // ставим евент фильтр на кнопки чтоб они подсвечивались
+
+    QList<QPushButton*> ButtonList = StackedOptions::findChildren<QPushButton*> ();
+    // добавляем все кнопошки в евентфильтр
+    for (int i = 0; i < ButtonList.count(); ++i) {
+        QPushButton *but = ButtonList.at(i);
+        but->installEventFilter(this);
+        // ставим везде стайлшит
+
+        but->setStyleSheet(stylesheetUnclicked);
+    }
+
     connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange(  )) );
     connect(ui->buttonGroup_2,SIGNAL(buttonClicked( int )), this, SLOT(Channel2TypeChange(  )) );
     connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange(  )) );
@@ -1027,7 +1039,7 @@ void StackedOptions::on_pushButton_52_clicked()
 
 bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 {
-    if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") )
+    if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") && ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
     {
         Options::olderprop = object->property("text").toString();
         keyboard kb;
@@ -1039,6 +1051,41 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
+
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+//                qDebug() << widget->objectName();
+                widget->setStyleSheet(stylesheetclicked);
+            }
+        }
+    }
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(stylesheetUnclicked);
+            }
+        }
+    }
+
+
     return QObject::eventFilter(object, event);
 }
 
@@ -1459,3 +1506,4 @@ void StackedOptions::on_gamebutton_clicked()
     process1.start("/opt/gotted");
     process1.waitForFinished();
 }
+

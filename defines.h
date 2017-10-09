@@ -96,3 +96,10 @@
 #define rect4coords smallrectinglewidth*3-5, otstupsverhu, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях
 
 #endif // DEFINES_H
+
+#define stylesheetUnclicked " color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); "
+#define stylesheetclicked "background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
+
+
+#define EcoColor QColor(0x00,0x00,0x4d)
+#define NotEcoColor QColor(0xff,0xff,0xff)

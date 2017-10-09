@@ -608,17 +608,6 @@ void MainWindow::GrafsUpdateBars()
     QVector<double> y1max,y2max,y3max,y4max;
     QVector<double> y1min,y2min,y3min,y4min;
 
-
-    //    double chan1higherstate = channel1object.GetState1Value();
-    //    double chan2higherstate = channel2object.GetState1Value();
-    //    double chan3higherstate = channel3object.GetState1Value();
-    //    double chan4higherstate = channel4object.GetState1Value();
-
-    //    double chan1lowerstate = channel1object.GetState2Value();
-    //    double chan2lowerstate = channel2object.GetState2Value();
-    //    double chan3lowerstate = channel3object.GetState2Value();
-    //    double chan4lowerstate = channel4object.GetState2Value();
-
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
     double chan1higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1);

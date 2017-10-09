@@ -527,7 +527,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 
                 // часть квитирования
                 // если превысила уставку
-//                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+                //                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
 
                 if (0)
                 {
@@ -548,7 +548,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState2LowMessage());
                 
                 // если ниже уставки
-//                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
+                //                if ( (Chanel->GetConfirmationNeed() == true) && (ui->ConfirmBox->isChecked()) )
 
                 if (0)
                 {
@@ -601,11 +601,6 @@ void MainWindow::PaintPolarDiagramm()
     int channel2value = X_Coordinates.last();
     int channel3value = X_Coordinates.last();
     int channel4value = X_Coordinates.last();
-    
-    //    int channel1length = UartDriver::channelinputbuffer[0]/200*maximumradius;
-    //    int channel2length = UartDriver::channelinputbuffer[1]/200*maximumradius;
-    //    int channel3length = UartDriver::channelinputbuffer[2]/200*maximumradius;
-    //    int channel4length = UartDriver::channelinputbuffer[3]/200*maximumradius;
 
     float channel1length = channel1object.GetValuePercent() * 5;
     float channel2length = channel2object.GetValuePercent() * 5;
@@ -623,18 +618,24 @@ void MainWindow::PaintPolarDiagramm()
     /* Create the line object: */
     
     painter.setPen(QPen(Qt::black, 1));
-    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
-    painter.drawRect(0, -newycenter,newycenter+100,newycenter+100);
+    if (GetEcoMode()){
+        painter.setBrush(QBrush(EcoColor, Qt::SolidPattern));
+        painter.setPen(QPen(NotEcoColor,1,  Qt::DashLine));
+    }
+    else
+    {
+        painter.setBrush(QBrush(NotEcoColor, Qt::SolidPattern));
+        painter.setPen(QPen(EcoColor,1,  Qt::DashLine));
+    }
+    painter.drawRect(0, -newycenter,ui->MessagesWidget->width()-1,ui->MessagesWidget->height());
     
     // Рисуем пять гругов разметочки
     
-    painter.setPen(QPen(Qt::black,1,  Qt::DashLine));
     painter.drawEllipse(QPointF(centerx1,centery1), 500, 500); // 100%
     painter.drawEllipse(QPointF(centerx1,centery1), 400, 400);// 80%
     painter.drawEllipse(QPointF(centerx1,centery1), 300, 300);// 60%
     painter.drawEllipse(QPointF(centerx1,centery1), 200, 200);// 40%
     painter.drawEllipse(QPointF(centerx1,centery1), 100, 100);// 20%
-
 
     QLineF Channel1Line;
     
@@ -669,8 +670,7 @@ void MainWindow::PaintPolarDiagramm()
     LineList.append(Line12);
     
     int ind = 0;
-    
-    painter.setPen(QPen(Qt::black,1,  Qt::DashLine));
+
     foreach (QLineF Line, LineList) {
         
         Line.setP1(QPointF(centerx1, centery1));
@@ -761,6 +761,8 @@ void MainWindow::PaintPolarDiagramm()
 
     painter.resetTransform(); // все что дальше - не поворачивается динамически
 
+    painter.setFont(QFont(Font, 10, QFont::Bold));
+
     painter.translate(newxcenter, newycenter);
     painter.drawText(5, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,    "0%");
     painter.drawText(105, -40, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "20%");
@@ -780,8 +782,6 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
-
-
     switch( StackedOptions::GetCurrentDisplayParametr())
     {
     case Options::Cyfra:
@@ -804,8 +804,8 @@ void MainWindow::PaintOnWidget()
         break;
     case Options::Polar:
         //        PaintStatesAndAlertsAtTop();
-        PaintCyfrasRight();
         PaintPolarDiagramm();
+        PaintCyfrasRight();
         break;
     default:
         break;

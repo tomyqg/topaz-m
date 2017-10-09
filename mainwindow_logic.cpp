@@ -68,7 +68,6 @@ void MainWindow::MainWindowInitialization()
         ++i;
     }
 
-
     //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
@@ -78,13 +77,10 @@ void MainWindow::MainWindowInitialization()
 
 
     QList<QPushButton*> ButtonList = MainWindow::findChildren<QPushButton*> ();
-
-
     // добавляем все кнопошки в евентфильтр
     for (int i = 0; i < ButtonList.count(); ++i) {
         QPushButton *but = ButtonList.at(i);
         but->installEventFilter(this);
-//        qDebug() << but->text();
     }
 
     SetXRange(XRange);
@@ -93,9 +89,7 @@ void MainWindow::MainWindowInitialization()
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
 
-    //    MessageWrite mr ;
     messwrite.LogAddMessage("Programm Started");
-    //    mr.deleteLater();
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
@@ -130,7 +124,6 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-
     channel1object.SetColor(Channel1Color);
     channel2object.SetColor(Channel2Color);
     channel3object.SetColor(Channel3Color);
@@ -138,7 +131,6 @@ void MainWindow::MainWindowInitialization()
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
-
 
     //    SetWindowWidthPixels(1024);
     //    SetWindowHeightPixels(768);
@@ -382,6 +374,9 @@ void MainWindow::DateUpdate() // каждую секунду обновляем 
     ui->time_label->setText(local.date().toString("dd.MM.yyyy " ) + local.time().toString());
 
     resizeSelf(1024,768);
+
+    qDebug() << ui->label->width() << "width()";
+    qDebug() << ui->label->height() << "height()";
 }
 
 void MainWindow::LabelsUpdate()
@@ -423,10 +418,11 @@ void MainWindow::ModbusConnectionErrorSlot()
 
 void MainWindow::SetEcoMode(bool seteco)
 {
+    EcoMode = seteco;
     switch (seteco) {
     case 0:
     {
-        ui->customPlot->setBackground(QBrush(QColor(0xff,0xff,0xff)));
+        ui->customPlot->setBackground(QBrush(NotEcoColor));
         ui->customPlot->xAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
         ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::black));
         ui->customPlot->yAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
@@ -435,7 +431,7 @@ void MainWindow::SetEcoMode(bool seteco)
         break;
     case 1:
     {
-        ui->customPlot->setBackground(QBrush(QColor (0x00,0x00,0x4d) )); // ("#b3daff")
+        ui->customPlot->setBackground(QBrush(EcoColor));
         ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
         ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::white));
         ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
@@ -445,6 +441,11 @@ void MainWindow::SetEcoMode(bool seteco)
     default:
         break;
     }
+}
+
+bool MainWindow::GetEcoMode()
+{
+    return EcoMode;
 }
 
 void MainWindow::HalfSecondGone()

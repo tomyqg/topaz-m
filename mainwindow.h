@@ -72,6 +72,7 @@ public slots:
     void ModbusConnectionErrorSlot();
     void SetEcoMode(bool seteco);
 
+    bool GetEcoMode();
 
     void UpdateChannel1Slot();
     void UpdateChannel2Slot();
@@ -126,6 +127,8 @@ private:
     void SetChannel2Color( QColor newcolor);
     void SetChannel3Color( QColor newcolor);
     void SetChannel4Color( QColor newcolor);
+
+    bool EcoMode;
 
 private slots:
 
