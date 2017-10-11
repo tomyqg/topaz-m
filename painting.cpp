@@ -31,7 +31,7 @@ void MainWindow::PaintCyfrasBottom()
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
     int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 24;
+    int otstupsnizu = smallrectingleheight + 28;
     int otstupsverhu = widgheight - otstupsnizu;
     int alerttextsize = smallrectingleheight/2;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;

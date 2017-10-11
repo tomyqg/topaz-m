@@ -126,6 +126,20 @@ QString ChannelOptions::GetMathString()
     return this->mathequationstring;
 }
 
+QColor ChannelOptions::GetStateDependentColor()
+{
+    QColor color;
+
+    if (this->GetCurrentChannelValue() > this->GetState1Value())
+        color = this->GetMaximumColor();
+    else if (this->GetCurrentChannelValue() < this->GetState2Value())
+        color = this->GetMinimumColor();
+    else
+        color = this->GetNormalColor();
+
+    return color;
+}
+
 QColor ChannelOptions::GetNormalColor()
 {
     return normalcolor;

@@ -111,8 +111,8 @@ private:
     void SetYRange(int newyrange) {Yrange = newyrange;}
     int  GetYRange() {return Yrange;}
 
-    int GetTimePeriodSecs() {return 10;}
-    int GetTickCountInOneSecond() {return 10;}
+    int GetTimePeriodSecs() {return 20;}
+    int GetTickCountInOneSecond() {return 5;}
     int GetGraphWidthInPixels() {return 600;}
 
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}

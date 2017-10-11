@@ -40,6 +40,7 @@ public:
     QString GetState2LowMessage();
     QString GetChannelName();
     QString GetMathString();
+    QColor GetStateDependentColor();
     QColor GetNormalColor();
     QColor GetMaximumColor();
     QColor GetMinimumColor();

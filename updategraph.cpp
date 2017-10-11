@@ -113,7 +113,7 @@ void MainWindow::UpdateGraphics()
 {
     needupdatePainter = 1;
 
-    //    StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
+    //StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
 
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {
@@ -153,28 +153,28 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(GraphWidthinPixels);
-    graphPen.setColor(GetChannel1Color());
+    graphPen.setColor(channel1object.GetStateDependentColor());
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     {
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-        graphPen.setColor(GetChannel2Color());
+        graphPen.setColor(channel2object.GetStateDependentColor());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-        graphPen.setColor(GetChannel3Color());
+        graphPen.setColor(channel3object.GetStateDependentColor());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-        graphPen.setColor(GetChannel4Color());
+        graphPen.setColor(channel4object.GetStateDependentColor());
         ui->customPlot->graph()->setPen(graphPen);
     }
 
