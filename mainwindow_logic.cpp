@@ -150,9 +150,6 @@ void MainWindow::MainWindowInitialization()
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
 
-    //    SetWindowWidthPixels(1024);
-    //    SetWindowHeightPixels(768);
-
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
@@ -561,22 +558,35 @@ void MainWindow::ChangePalette(int i)
         Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
         Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
 
-        channel1object.SetNormalColor(Channel1Color);
-        channel2object.SetNormalColor(Channel2Color);
-        channel3object.SetNormalColor(Channel3Color);
-        channel4object.SetNormalColor(Channel4Color);
+        Channel1ColorMaximum = QColor(61, 56, 85);
+        Channel2ColorMaximum = QColor(0, 105, 76);
+        Channel3ColorMaximum = QColor(56,62,66);
+        Channel4ColorMaximum = QColor(121,80,56);
+
+        Channel1ColorMinimum = QColor(96,147,172);
+        Channel2ColorMinimum = QColor(97,153,59);
+        Channel3ColorMinimum = QColor(142,146,145);
+        Channel4ColorMinimum = QColor(157,98,43);
+
         break;
 
     case 2:
+
         Channel1Color = Channel1ColorNormal = QColor(144,51,115);// RAL 4006 colour
         Channel2Color = Channel2ColorNormal = QColor(203,115,117);// RAL 3014 colour
         Channel3Color = Channel3ColorNormal = QColor(218,110,0);// RAL 2000 colour
         Channel4Color = Channel4ColorNormal = QColor(108,124,89);// RAL 6011 colour
 
-        channel1object.SetNormalColor(Channel1Color);
-        channel2object.SetNormalColor(Channel2Color);
-        channel3object.SetNormalColor(Channel3Color);
-        channel4object.SetNormalColor(Channel4Color);
+        Channel1ColorMaximum = QColor(132,76,130);
+        Channel2ColorMaximum = QColor(134,26,34);
+        Channel3ColorMaximum = QColor(208,93,40);
+        Channel4ColorMaximum = QColor(94,110,59);
+
+        Channel1ColorMinimum = QColor(129,97,131);
+        Channel2ColorMinimum = QColor(216,160,166);
+        Channel3ColorMinimum = QColor(255,155,0);
+        Channel4ColorMinimum = QColor(138,153,119);
+
         break;
 
     default:
@@ -585,13 +595,24 @@ void MainWindow::ChangePalette(int i)
         Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
         Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
 
-        channel1object.SetNormalColor(Channel1Color);
-        channel2object.SetNormalColor(Channel2Color);
-        channel3object.SetNormalColor(Channel3Color);
-        channel4object.SetNormalColor(Channel4Color);
         break;
 
     }
+
+    channel1object.SetNormalColor(Channel1ColorNormal);
+    channel2object.SetNormalColor(Channel2ColorNormal);
+    channel3object.SetNormalColor(Channel3ColorNormal);
+    channel4object.SetNormalColor(Channel4ColorNormal);
+
+    channel1object.SetMaximumColor(Channel1ColorMaximum);
+    channel2object.SetMaximumColor(Channel2ColorMaximum);
+    channel3object.SetMaximumColor(Channel3ColorMaximum);
+    channel4object.SetMaximumColor(Channel4ColorMaximum);
+
+    channel1object.SetMinimumColor(Channel1ColorMinimum);
+    channel2object.SetMinimumColor(Channel2ColorMinimum);
+    channel3object.SetMinimumColor(Channel3ColorMinimum);
+    channel4object.SetMinimumColor(Channel4ColorMinimum);
 
     ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }

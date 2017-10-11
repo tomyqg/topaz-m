@@ -113,7 +113,7 @@ void MainWindow::UpdateGraphics()
 {
     needupdatePainter = 1;
 
-    //    StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
+    //StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
 
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {

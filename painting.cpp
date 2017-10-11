@@ -80,7 +80,6 @@ void MainWindow::PaintCyfrasBottom()
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
-            QColor channelcolor = Chanel->GetCurrentColor();
             
             // рисуем прямоугольник  с заполненным цветом
 
@@ -88,7 +87,7 @@ void MainWindow::PaintCyfrasBottom()
 
             if (channelcurrentvalue>channelstate1value)
             {
-                painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -97,7 +96,7 @@ void MainWindow::PaintCyfrasBottom()
             }
             else if (channelcurrentvalue<channelstate2value)
             {
-                painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -106,7 +105,7 @@ void MainWindow::PaintCyfrasBottom()
             }
             else
             {
-                painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
+                painter.setBrush(QBrush( Chanel->GetNormalColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
 
@@ -211,7 +210,6 @@ void MainWindow::PaintCyfrasRight()
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
-            QColor channelcolor = Chanel->GetCurrentColor();
             
             // рисуем прямоугольник  с заполненным цветом
             
@@ -219,7 +217,7 @@ void MainWindow::PaintCyfrasRight()
 
             if (channelcurrentvalue>channelstate1value)
             {
-                painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -228,7 +226,7 @@ void MainWindow::PaintCyfrasRight()
             }
             else if (channelcurrentvalue<channelstate2value)
             {
-                painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
@@ -237,7 +235,7 @@ void MainWindow::PaintCyfrasRight()
             }
             else
             {
-                painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
 
@@ -349,14 +347,13 @@ void MainWindow::PaintCyfrasFullScreen()
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
-            QColor channelcolor = Chanel->GetCurrentColor();
             
             // рисуем прямоугольник  с заполненным цветом
             
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             if (channelcurrentvalue>channelstate1value)
             {
-                painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
                 else
@@ -364,7 +361,7 @@ void MainWindow::PaintCyfrasFullScreen()
             }
             else if (channelcurrentvalue<channelstate2value)
             {
-                painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 if  (GetHalfSecFlag())
                     painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
                 else
@@ -372,7 +369,7 @@ void MainWindow::PaintCyfrasFullScreen()
             }
             else
             {
-                painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
             }
 
             painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -491,24 +488,23 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
             double channelstate1value = Chanel->GetState1Value();
             double channelstate2value = Chanel->GetState2Value();
-            QColor channelcolor = Chanel->GetCurrentColor();
             
             // рисуем прямоугольник  с заполненным цветом
 
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             if (channelcurrentvalue>channelstate1value)
             {
-                painter.setBrush(QBrush(ChannelColorHighState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
             else if (channelcurrentvalue<channelstate2value)
             {
-                painter.setBrush(QBrush(ChannelColorLowState, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
             else
             {
-                painter.setBrush(QBrush(channelcolor, Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
 

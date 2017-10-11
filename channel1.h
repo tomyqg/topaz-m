@@ -40,7 +40,9 @@ public:
     QString GetState2LowMessage();
     QString GetChannelName();
     QString GetMathString();
-    QColor GetCurrentColor();
+    QColor GetNormalColor();
+    QColor GetMaximumColor();
+    QColor GetMinimumColor();
     bool GetConfirmationNeed();
 
     void SetConfirmationNeed(bool confirmationstate);

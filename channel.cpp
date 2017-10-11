@@ -126,11 +126,20 @@ QString ChannelOptions::GetMathString()
     return this->mathequationstring;
 }
 
-QColor ChannelOptions::GetCurrentColor()
+QColor ChannelOptions::GetNormalColor()
 {
     return normalcolor;
 }
 
+QColor ChannelOptions::GetMaximumColor()
+{
+    return maximumcolor;
+}
+
+QColor ChannelOptions::GetMinimumColor()
+{
+    return minimumcolor;
+}
 
 void ChannelOptions::SetMathEquation(QString newmathstring)
 {
