@@ -316,25 +316,25 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel1Color()));
+    ui->customPlot->graph()->setBrush(QBrush(channel1object.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2, y2);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel2Color()));
+    ui->customPlot->graph()->setBrush(QBrush(channel2object.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3, y3);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel3Color()));
+    ui->customPlot->graph()->setBrush(QBrush(channel3object.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4, y4);
-    ui->customPlot->graph()->setBrush(QBrush(GetChannel4Color()));
+    ui->customPlot->graph()->setBrush(QBrush(channel4object.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 

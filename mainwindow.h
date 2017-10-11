@@ -118,16 +118,6 @@ private:
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
 
-    QColor GetChannel1Color();
-    QColor GetChannel2Color();
-    QColor GetChannel3Color();
-    QColor GetChannel4Color();
-
-    void SetChannel1Color( QColor newcolor);
-    void SetChannel2Color( QColor newcolor);
-    void SetChannel3Color( QColor newcolor);
-    void SetChannel4Color( QColor newcolor);
-
     bool EcoMode;
 
     QVector<QString> datestrings;

@@ -49,45 +49,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QColor MainWindow::GetChannel1Color()
-{
-    return Channel1Color;
-}
-
-void MainWindow::SetChannel1Color(QColor newcolor)
-{
-    Channel1Color = newcolor;
-}
-
-void MainWindow::SetChannel2Color(QColor newcolor)
-{
-    Channel2Color = newcolor;
-}
-
-QColor MainWindow::GetChannel2Color()
-{
-    return Channel2Color;
-}
-
-void MainWindow::SetChannel3Color(QColor newcolor)
-{
-    Channel3Color = newcolor;
-}
-
-QColor MainWindow::GetChannel3Color()
-{
-    return Channel3Color;
-}
-
-void MainWindow::SetChannel4Color(QColor newcolor)
-{
-    Channel4Color = newcolor;
-}
-
-QColor MainWindow::GetChannel4Color()
-{
-    return Channel4Color;
-}
 
 void MainWindow::updateDateLabel()
 {

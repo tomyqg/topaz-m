@@ -838,12 +838,7 @@ void MainWindow::ReactOnTouch()
     
     QString x = QString::number(xpos);
     QString y = QString::number(ypos);
-    
-    SetChannel1Color(Channel1ColorNormal);
-    SetChannel2Color(Channel2ColorNormal);
-    SetChannel3Color(Channel3ColorNormal);
-    SetChannel4Color(Channel4ColorNormal);
-    
+
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
     int confirmwindowwidth = widgwidth/4;
@@ -853,26 +848,7 @@ void MainWindow::ReactOnTouch()
     int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
     int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
     
-    if ((xpos < xcenter)&&(ypos < ycenter)) // если лев. верхн. квадрат
-    {
-        SetChannel1Color(Qt::yellow);
-    }
-    
-    if ((xpos > xcenter)&& (ypos < ycenter)) // если правый верхний квадрат
-    {
-        SetChannel2Color(Qt::yellow);
-    }
-    
-    if ((xpos < xcenter) && (ypos > ycenter)) // если левый нижний квадрат
-    {
-        SetChannel3Color(Qt::yellow);
-    }
-    
-    if ((xpos > xcenter)&& (ypos > ycenter)) // если правый нижний квадрат
-    {
-        SetChannel4Color(Qt::yellow);
-    }
-    
+
     if      ((xpos>confirmwindowposx) &&
              (xpos<confirmwindowposx2) &&
              (ypos>confirmwindowposy) &&
