@@ -37,15 +37,16 @@ extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
-extern QColor ChannelColorNormal;
+extern QColor Channel1ColorNormal;
 extern QColor Channel2ColorNormal ;
 extern QColor Channel3ColorNormal;
 extern QColor Channel4ColorNormal ;
+
+extern QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
+extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;
+
 extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
-
-
-
 
 void MainWindow::MainWindowInitialization()
 {
@@ -131,10 +132,20 @@ void MainWindow::MainWindowInitialization()
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
 
-    channel1object.SetColor(Channel1Color);
-    channel2object.SetColor(Channel2Color);
-    channel3object.SetColor(Channel3Color);
-    channel4object.SetColor(Channel4Color);
+    channel1object.SetNormalColor(Channel1ColorNormal);
+    channel2object.SetNormalColor(Channel2ColorNormal);
+    channel3object.SetNormalColor(Channel3ColorNormal);
+    channel4object.SetNormalColor(Channel4ColorNormal);
+
+    channel1object.SetMaximumColor(Channel1ColorMaximum);
+    channel2object.SetMaximumColor(Channel2ColorMaximum);
+    channel3object.SetMaximumColor(Channel3ColorMaximum);
+    channel4object.SetMaximumColor(Channel4ColorMaximum);
+
+    channel1object.SetMinimumColor(Channel1ColorMinimum);
+    channel2object.SetMinimumColor(Channel2ColorMinimum);
+    channel3object.SetMinimumColor(Channel3ColorMinimum);
+    channel4object.SetMinimumColor(Channel4ColorMinimum);
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
@@ -543,111 +554,41 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 void MainWindow::ChangePalette(int i)
 {
     switch (ui->horizontalScrollBar->value()) {
+
     case 1:
+        Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
+        Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
+        Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
+        Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
 
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
-        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
-
-        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
-        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
-        channel3object.SetColor( QColor(0xFF, 0xCF, 0x73));
-        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
-
-
+        channel1object.SetNormalColor(Channel1Color);
+        channel2object.SetNormalColor(Channel2Color);
+        channel3object.SetNormalColor(Channel3Color);
+        channel4object.SetNormalColor(Channel4Color);
         break;
+
     case 2:
-        Channel1Color = ChannelColorNormal = QColor(0xAB, 0x2B, 0x52);
-        Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x49, 0x00);
-        Channel3Color = Channel3ColorNormal = QColor(0x00, 0xAF, 0x64);
-        Channel4Color = Channel4ColorNormal = QColor(0x67, 0xE3, 0x00);
+        Channel1Color = Channel1ColorNormal = QColor(144,51,115);// RAL 4006 colour
+        Channel2Color = Channel2ColorNormal = QColor(203,115,117);// RAL 3014 colour
+        Channel3Color = Channel3ColorNormal = QColor(218,110,0);// RAL 2000 colour
+        Channel4Color = Channel4ColorNormal = QColor(108,124,89);// RAL 6011 colour
 
-
-        channel1object.SetColor(QColor(0xAB, 0x2B, 0x52));
-        channel2object.SetColor( QColor(0xFF, 0x49, 0x00));
-        channel3object.SetColor(QColor(0x00, 0xAF, 0x64));
-        channel4object.SetColor (QColor(0x67, 0xE3, 0x00));
-
+        channel1object.SetNormalColor(Channel1Color);
+        channel2object.SetNormalColor(Channel2Color);
+        channel3object.SetNormalColor(Channel3Color);
+        channel4object.SetNormalColor(Channel4Color);
         break;
-    case 3:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0xC1, 0x2B);
-        Channel2Color = Channel2ColorNormal = QColor(0x04, 0x85, 0x9D);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x7C, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x52, 0x40);
-
-        channel1object.SetColor(QColor(0x00, 0xC1, 0x2B));
-        channel2object.SetColor( QColor(0x04, 0x85, 0x9D));
-        channel3object.SetColor(QColor(0xFF, 0x7C, 0x00));
-        channel4object.SetColor (QColor(0xFF, 0x52, 0x40));
-
-        break;
-    case 4:
-        Channel1Color = ChannelColorNormal = QColor(0xCF, 0xF7, 0x00);
-        Channel2Color = Channel2ColorNormal = QColor(0x00, 0xAE, 0x68);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x4C, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xA1, 0x01, 0xA6);
-
-        channel1object.SetColor(QColor(0xCF, 0xF7, 0x00));
-        channel2object.SetColor( QColor(0x00, 0xAE, 0x68));
-        channel3object.SetColor(QColor(0xFF, 0x4C, 0x00));
-        channel4object.SetColor (QColor(0xA1, 0x01, 0xA6));
-
-        break;
-
-    case 5:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0xb0, 0x60);
-        Channel2Color = Channel2ColorNormal = QColor(0x1d, 0x1a, 0xb2);
-        Channel3Color = Channel3ColorNormal = QColor(0xd5, 0xf8, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xff, 0x45, 0x00);
-
-
-        channel1object.SetColor(QColor(0x00, 0xb0, 0x60));
-        channel2object.SetColor( QColor(0x1d, 0x1a, 0xb2));
-        channel3object.SetColor(QColor(0xd5, 0xf8, 0x00));
-        channel4object.SetColor (QColor(0xff, 0x45, 0x00));
-
-        break;
-
-    case 6:
-        Channel1Color = ChannelColorNormal = QColor(0x10, 0x49, 0xa9);
-        Channel2Color = Channel2ColorNormal = QColor(0x6c, 0x0a, 0xab);
-        Channel3Color = Channel3ColorNormal = QColor(0x34, 0xd8, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xff, 0xa4, 0x00);
-
-        channel1object.SetColor(QColor(0x10, 0x49, 0xa9));
-        channel2object.SetColor( QColor(0x6c, 0x0a, 0xab));
-        channel3object.SetColor(QColor(0x34, 0xd8, 0x00));
-        channel4object.SetColor (QColor(0xff, 0xa4, 0x00));
-
-        break;
-
-
-    case 7:
-        Channel1Color = ChannelColorNormal = QColor(0xD2, 0x35, 0xD2);
-        Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x8C, 0x00);
-        Channel3Color = Channel3ColorNormal = QColor(0x3D, 0x9A, 0x01);
-        Channel4Color = Channel4ColorNormal = QColor(0xa1, 0xb9, 0x2e);
-
-        channel1object.SetColor(QColor(0xD2, 0x35, 0xD2));
-        channel2object.SetColor( QColor(0xFF, 0x8C, 0x00));
-        channel3object.SetColor(QColor(0x3D, 0x9A, 0x01));
-        channel4object.SetColor (QColor(0xa1, 0xb9, 0x2e));
-
-        break;
-
 
     default:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
-        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+        Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
+        Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
+        Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
+        Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
 
-        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
-        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
-        channel3object.SetColor(QColor(0xFF, 0xCF, 0x73));
-        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
-
+        channel1object.SetNormalColor(Channel1Color);
+        channel2object.SetNormalColor(Channel2Color);
+        channel3object.SetNormalColor(Channel3Color);
+        channel4object.SetNormalColor(Channel4Color);
         break;
 
     }

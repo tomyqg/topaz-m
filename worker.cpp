@@ -24,6 +24,7 @@ mathresolver mr;
 int ic ;
 
 int globalindex;
+int globalindex2;
 
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
@@ -376,7 +377,10 @@ void worker::do_Work()
         // пихаем все каналы в один массив
         // тут опрашиваем каждый канал
 
-        globalindex++;
+        globalindex2++;
+
+        if (globalindex2%4==0)
+            globalindex++;
 
         if (globalindex > 215)
             globalindex = - 50;

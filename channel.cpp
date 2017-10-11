@@ -128,7 +128,7 @@ QString ChannelOptions::GetMathString()
 
 QColor ChannelOptions::GetCurrentColor()
 {
-    return color;
+    return normalcolor;
 }
 
 
@@ -279,7 +279,6 @@ double ChannelOptions::GetValuePercent()
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = value;
-    //    channelbuffer.append(tata++);
 }
 
 void ChannelOptions::SetDempher(double newdempher)
@@ -287,7 +286,17 @@ void ChannelOptions::SetDempher(double newdempher)
     demphervalue = newdempher;
 }
 
-void ChannelOptions::SetColor(QColor newcolor)
+void ChannelOptions::SetNormalColor(QColor newcolor)
 {
-    color = newcolor;
+    normalcolor = newcolor;
+}
+
+void ChannelOptions::SetMaximumColor(QColor newmaxcolor)
+{
+    maximumcolor = newmaxcolor;
+}
+
+void ChannelOptions::SetMinimumColor(QColor newmincolor)
+{
+    minimumcolor = newmincolor;
 }

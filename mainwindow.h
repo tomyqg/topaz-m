@@ -160,6 +160,7 @@ private slots:
 
     void on_timeButton_clicked();
 
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);

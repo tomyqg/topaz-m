@@ -13,7 +13,7 @@ extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
-extern QColor ChannelColorNormal;
+extern QColor Channel1ColorNormal;
 extern QColor Channel2ColorNormal ;
 extern QColor Channel3ColorNormal;
 extern QColor Channel4ColorNormal ;
@@ -843,7 +843,7 @@ void MainWindow::ReactOnTouch()
     QString x = QString::number(xpos);
     QString y = QString::number(ypos);
     
-    SetChannel1Color(ChannelColorNormal);
+    SetChannel1Color(Channel1ColorNormal);
     SetChannel2Color(Channel2ColorNormal);
     SetChannel3Color(Channel3ColorNormal);
     SetChannel4Color(Channel4ColorNormal);

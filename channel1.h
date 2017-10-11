@@ -63,9 +63,11 @@ public:
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
     void SetDempher(double newdempher);
-    void SetColor(QColor newcolor);
     void SetDiapason(int newdiapason);
     void SetRegistrationType(int newdregistrationtype);
+    void SetNormalColor(QColor newcolor);
+    void SetMaximumColor(QColor newmaxcolor);
+    void SetMinimumColor(QColor newmincolor);
 
 
     bool IsHighState1Setted();
@@ -107,7 +109,9 @@ private:
     QString channelname;
     QString mathequationstring;
 
-    QColor color; // цвет канала на графике
+    QColor normalcolor; // цвет канала на графике норм
+    QColor maximumcolor; // цвет канала на графике макс
+    QColor minimumcolor; // цвет канала на графике мин
     bool needConfirmationchannel;
     int diapason;
     int registrationtype;

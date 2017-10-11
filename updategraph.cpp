@@ -12,11 +12,40 @@
 
 int a=0;int b=0;
 
-//int color1rgbnormal[]={0xCF, 0xF7, 0x00};
-int color1rgbnormal[]={216, 160, 166};
-int color2rgbnormal[]={0x00, 0xAE, 0x68};
-int color3rgbnormal[]={0xFF, 0x4C, 0x00};
-int color4rgbnormal[]={0xA1, 0x01, 0xA6};
+// пара 1
+
+int color1rgbnormal[]={0, 137, 182};    // RAL 5012 colour
+int color2rgbnormal[]={0, 131, 81};     // RAL 6024 colour
+int color3rgbnormal[]={91, 104, 109};   // RAL 7031 colour
+int color4rgbnormal[]={126, 75, 38};   // RAL 8003 colour
+
+int color1rgbmaximum[]={61, 56, 85};       // RAL  5003
+int color2rgbmaximum[]={0, 131, 81};       // RAL  6024
+int color3rgbmaximum[]={56,62,66};         // 7016
+int color4rgbmaximum[]={121,80,56};        // ral 8024
+
+int color1rgbminimum[]={96,147,172};    // RAL 5024
+int color2rgbminimum[]={97,153,59};     // RAL 6018
+int color3rgbminimum[]={142,146,145};   // RAL 7042
+int color4rgbminimum[]={157,98,43};    // RAL 8001
+
+
+// пара 2
+
+//int color1rgbnormal[]={144,51,115};    // RAL 4006 colour
+//int color2rgbnormal[]={203,115,117};     // RAL 3014 colour
+//int color3rgbnormal[]={218,110,0};   // RAL 2000 colour
+//int color4rgbnormal[]={108,124,89};   // RAL 6011 colour
+
+//int color1rgbmaximum[]={132,76,130};       // RAL  4008
+//int color2rgbmaximum[]={134,26,34};        // RAL  3003
+//int color3rgbmaximum[]={208,93,40};         // RAL  2010
+//int color4rgbmaximum[]={94,110,59};        // RAL  6025
+
+//int color1rgbminimum[]={129,97,131};    // RAL 4001
+//int color2rgbminimum[]={216,160,166};   // RAL 3015
+//int color3rgbminimum[]={255,155,0};   // RAL 1028
+//int color4rgbminimum[]={138,153,119};    // RAL 6021
 
 QColor ChannelColorHighState = QColor(0xFF,0x00,0x00);
 QColor ChannelColorLowState  = QColor(0xFF,0xCA,0x00);
@@ -26,10 +55,21 @@ QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnor
 QColor Channel3Color = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
 QColor Channel4Color = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
 
-QColor ChannelColorNormal = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
+QColor Channel1ColorNormal = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
 QColor Channel2ColorNormal = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
 QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
 QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
+
+QColor Channel1ColorMaximum = QColor(color1rgbmaximum[0],color1rgbmaximum[1],color1rgbmaximum[2]);
+QColor Channel2ColorMaximum = QColor(color2rgbmaximum[0],color2rgbmaximum[1],color2rgbmaximum[2]);
+QColor Channel3ColorMaximum = QColor(color3rgbmaximum[0],color3rgbmaximum[1],color3rgbmaximum[2]);
+QColor Channel4ColorMaximum = QColor(color4rgbmaximum[0],color4rgbmaximum[1],color4rgbmaximum[2]);
+
+QColor Channel1ColorMinimum = QColor(color1rgbminimum[0],color1rgbminimum[1],color1rgbminimum[2]);
+QColor Channel2ColorMinimum = QColor(color2rgbminimum[0],color2rgbminimum[1],color2rgbminimum[2]);
+QColor Channel3ColorMinimum = QColor(color3rgbminimum[0],color3rgbminimum[1],color3rgbminimum[2]);
+QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],color4rgbminimum[2]);
+
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
