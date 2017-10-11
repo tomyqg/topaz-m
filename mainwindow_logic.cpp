@@ -45,9 +45,17 @@ extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 
 
+
+
 void MainWindow::MainWindowInitialization()
 {
-    //    CreateMODBusConfigFile();
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("dd/MM/yyyy ");
+    datestrings.append("MM.dd.yyyy ");
+    datestrings.append("MM/dd/yyyy ");
+    datestrings.append("dd-MM-yyyy ");
+    datestrings.append("MM-dd-yyyy ");
+    dateindex = 0 ;
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
@@ -87,10 +95,7 @@ void MainWindow::MainWindowInitialization()
     SetYRange(YRange);
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
-
     ui->customPlot->setAntialiasedElements(QCP::aeNone);
-//    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
     messwrite.LogAddMessage("Programm Started");
 
     QTimer *timer = new QTimer(this);
@@ -373,7 +378,10 @@ void MainWindow::DateUpdate() // каждую секунду обновляем 
 {
     QDateTime local(QDateTime::currentDateTime());
     //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-    ui->time_label->setText(local.date().toString("dd.MM.yyyy " ) + local.time().toString());
+    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
+
+
+
     resizeSelf(1024,768);
 }
 
@@ -836,31 +844,11 @@ void MainWindow::changeTranslator(int langindex)
     QApplication::installTranslator(translator);
 }
 
-
 void MainWindow::OpenSerialPort( int )
 {
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
-
-#ifdef Q_OS_WIN32
-        const QString port = comportname;
-#else
-        // const QString port = ports[iface].physName;
-        // точно знаем что этот порт работает на rs485
-        const QString port = "/dev/ttyO1";
-#endif
-
-        char parity;
-
-        parity = comportparity;
-
-        // TODO: если раскомментить то  будет вываливаться ошибка при дебаге.
-        //        if( m_modbus )
-        //        {
-        //            modbus_close( m_modbus );
-        //            modbus_free( m_modbus );
-        //        }
 
         //подключаемси.
         m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);

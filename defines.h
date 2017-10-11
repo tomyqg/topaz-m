@@ -78,7 +78,7 @@
 #define Font "Open Sans"
 #define NaNMessage "nan"
 #define OKMessage "норма"
-#define AlertSign "!"
+#define AlertSign ""
 #define MathString "math "
 
 #define MultiThread

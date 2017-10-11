@@ -12,7 +12,8 @@
 
 int a=0;int b=0;
 
-int color1rgbnormal[]={0xCF, 0xF7, 0x00};
+//int color1rgbnormal[]={0xCF, 0xF7, 0x00};
+int color1rgbnormal[]={216, 160, 166};
 int color2rgbnormal[]={0x00, 0xAE, 0x68};
 int color3rgbnormal[]={0xFF, 0x4C, 0x00};
 int color4rgbnormal[]={0xA1, 0x01, 0xA6};
@@ -465,7 +466,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
-
 
     // add the helper arrow:
 

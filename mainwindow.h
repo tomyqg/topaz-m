@@ -130,6 +130,10 @@ private:
 
     bool EcoMode;
 
+    QVector<QString> datestrings;
+
+
+    int dateindex;
 private slots:
 
 
@@ -153,6 +157,8 @@ private slots:
     void on_EcoCheckBox_toggled(bool checked);
 
     void on_smoothCheckBox_toggled(bool checked);
+
+    void on_timeButton_clicked();
 
 signals:
     void error(const QString &s);

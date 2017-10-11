@@ -882,8 +882,7 @@ void MainWindow::ReactOnTouch()
              (ypos>confirmwindowposy) &&
              (ypos<confirmwindowposy2) )
     {
-        if (channel4object.GetConfirmationNeed() == true)
-        {
+        if (channel4object.GetConfirmationNeed() == true) {
             channel4object.SetConfirmationNeed(false);
         }
         if (channel3object.GetConfirmationNeed() == true) {

@@ -193,6 +193,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <zorder>timeButton</zorder>
    </widget>
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
@@ -447,6 +448,30 @@ color : white;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="timeButton">
+    <property name="geometry">
+     <rect>
+      <x>1220</x>
+      <y>10</y>
+      <width>41</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 108, 217);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 0), stop:1 rgba(0, 170, 255, 0));
+color : white;</string>
+    </property>
+    <property name="text">
+     <string>⟳</string>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>pushButton_4</zorder>
@@ -462,6 +487,7 @@ color : white;</string>
    <zorder>ArchiveButton</zorder>
    <zorder>WorkButton</zorder>
    <zorder>EcoCheckBox</zorder>
+   <zorder>timeButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
