@@ -93,6 +93,17 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_3_archive.append(UartDriver::channelinputbuffer[2]);
     Y_coordinates_Chanel_4_archive.append(UartDriver::channelinputbuffer[3]);
 
+
+//    Y_coordinates_Chanel_1.append(channel1object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_2.append(channel2object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_3.append(channel3object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_4.append(channel4object.GetCurrentChannelValue());
+
+//    Y_coordinates_Chanel_1_archive.append(channel1object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_2_archive.append(channel2object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_3_archive.append(channel3object.GetCurrentChannelValue());
+//    Y_coordinates_Chanel_4_archive.append(channel4object.GetCurrentChannelValue());
+
     while (X_Coordinates.length()>300)
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
@@ -147,7 +158,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
     ui->customPlot->clearGraphs();
-
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
@@ -521,7 +531,6 @@ void MainWindow::GrafsUpdateTrends()
         ChannelsObjectsList.append(&channel4object);
 
         QList<int> arrowsendcoords;
-
 
         // рисуем стрелки для каждой уставки
 

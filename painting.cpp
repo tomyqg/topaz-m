@@ -78,14 +78,12 @@ void MainWindow::PaintCyfrasBottom()
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
-            double channelstate1value = Chanel->GetState1Value();
-            double channelstate2value = Chanel->GetState2Value();
             
             // рисуем прямоугольник  с заполненным цветом
 
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
-            if (channelcurrentvalue>channelstate1value)
+            if (Chanel->MaximumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -94,7 +92,7 @@ void MainWindow::PaintCyfrasBottom()
                 else
                     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             }
-            else if (channelcurrentvalue<channelstate2value)
+            else if (Chanel->MinimumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -149,14 +147,15 @@ void MainWindow::PaintCyfrasBottom()
 
 void MainWindow::PaintCyfrasRight()
 {
-    // задается вручную
+    //задается вручную
     //высчитываются
+
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    int smallrectingleheight = widgheight/4-30; // высота прямоугольничка в пикселях задается вручную
-    int smallrectinglewidth = widgwidth / (4 *1024/1280); // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 24;
-    int otstupsverhu = widgheight - otstupsnizu;
+    int smallrectingleheight = widgheight/4-33; // высота прямоугольничка в пикселях задается вручную
+    int smallrectinglewidth = widgwidth / (4 *1024/1280)*0.8; // ширина прямоугольничка в пикселях высчитывается
+    int otstupsnizu = smallrectingleheight + 37;
+    int otstupsverhu = widgheight - otstupsnizu; //  widgheight/12*2-otstupsnizu;
     int otstupsverhu1 = otstupsverhu-smallrectingleheight;
     int otstupsverhu2 = otstupsverhu-smallrectingleheight*2;
     int otstupsverhu3 = otstupsverhu-smallrectingleheight*3;
@@ -200,9 +199,7 @@ void MainWindow::PaintCyfrasRight()
     ChannelsObjectsList.append(&channel3object);
     ChannelsObjectsList.append(&channel4object);
     
-    
     painter.begin(ui->MessagesWidget);
-
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
@@ -215,7 +212,7 @@ void MainWindow::PaintCyfrasRight()
             
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
-            if (channelcurrentvalue>channelstate1value)
+            if (Chanel->MaximumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -224,7 +221,7 @@ void MainWindow::PaintCyfrasRight()
                 else
                     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             }
-            else if (channelcurrentvalue<channelstate2value)
+            else if (Chanel->MinimumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -238,7 +235,6 @@ void MainWindow::PaintCyfrasRight()
                 painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
-
 
 
             QString ChannelValueString ;
@@ -286,24 +282,21 @@ void MainWindow::PaintCyfrasFullScreen()
 {
     QPainter painter;
     // задаётся параметры вручную
-
     
     // отступ  сверху и слева в пикселях
     int borderwidth = 0 ;
     //высчитываются
     int widgwidth = ui->MessagesWidget->width()-borderwidth;// высота всей области построения в пикселях
     int widgheight = ui->MessagesWidget->height()- borderwidth; // ширина всей области построения в пикселях
-    int bigrectingleheight = (widgheight)/2-2; // высота прямоугольничка в пикселях задается вручную
-    int bigrectinglewidth = (widgwidth)/2-2; // ширина прямоугольничка в пикселях высчитывается
+    int bigrectingleheight = (widgheight)/2; // высота прямоугольничка в пикселях задается вручную
+    int bigrectinglewidth = (widgwidth)/2; // ширина прямоугольничка в пикселях высчитывается
     int alerttextsize = bigrectingleheight/2.8;
     int smalltextsize = (bigrectingleheight - alerttextsize ) / 5;
-    
     
 #ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.2;
 #endif
-    
 
     // задаем координаты отображения квадратов
     channel1object.xposition = borderwidth;
@@ -335,9 +328,7 @@ void MainWindow::PaintCyfrasFullScreen()
     ChannelsObjectsList.append(&channel3object);
     ChannelsObjectsList.append(&channel4object);
     
-    
     painter.begin(ui->MessagesWidget);
-
 
     int index = 1;
     
@@ -345,13 +336,11 @@ void MainWindow::PaintCyfrasFullScreen()
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
-            double channelstate1value = Chanel->GetState1Value();
-            double channelstate2value = Chanel->GetState2Value();
             
             // рисуем прямоугольник  с заполненным цветом
             
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (channelcurrentvalue>channelstate1value)
+            if (Chanel->MaximumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 if  (GetHalfSecFlag())
@@ -359,7 +348,7 @@ void MainWindow::PaintCyfrasFullScreen()
                 else
                     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             }
-            else if (channelcurrentvalue<channelstate2value)
+            else if (Chanel->MinimumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 if  (GetHalfSecFlag())
@@ -418,7 +407,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 {
     QPainter painter;
 
-    
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
@@ -469,11 +457,6 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    //    if (ui->smoothCheckBox->checkState())
-    //        painter.setRenderHint(QPainter::Antialiasing, true);
-    //    else
-    //        painter.setRenderHint(QPainter::Antialiasing, false);
-
     painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
     
     int confirmwindowwidth = widgwidth/3;
@@ -485,19 +468,16 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
-            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
-            double channelstate1value = Chanel->GetState1Value();
-            double channelstate2value = Chanel->GetState2Value();
-            
+
             // рисуем прямоугольник  с заполненным цветом
 
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (channelcurrentvalue>channelstate1value)
+            if (Chanel->MaximumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
-            else if (channelcurrentvalue<channelstate2value)
+            else if (Chanel->MinimumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -508,22 +488,20 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
 
-            ////
-
             // рисуем текстовую инфу
             painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
             painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop, Chanel->GetChannelName());
             painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
-            if ( GetHalfSecFlag() && ( channelcurrentvalue<channelstate2value || channelcurrentvalue>channelstate1value ) )
+            if ( GetHalfSecFlag() && ( Chanel->MinimumNow() || Chanel->MaximumNow()) )
             {
                 painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
             }
             else
                 painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
             
-            if (channelcurrentvalue>channelstate1value)
+            if (Chanel->MaximumNow())
             {
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState1HighMessage());
                 
@@ -545,7 +523,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
                 }
             }
             // уменьшение уставки  Channel 1
-            else if (channelcurrentvalue<channelstate2value)
+            else if (Chanel->MinimumNow())
             {
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState2LowMessage());
                 
@@ -574,14 +552,7 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
             {
                 painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
                 painter.setFont(QFont(Font, alerttextsize*2, QFont::ExtraBold));
-                
-                // если сработала какая-то уставка, то начинаем мигать восклицательным флагом
-                if ((channelcurrentvalue>channelstate1value) || (channelcurrentvalue<channelstate2value))
-                    painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignVCenter, AlertSign);
             }
-            
-            if (channelcurrentvalue<channelstate1value)
-                Chanel->SetConfirmationNeed(true);
         }
         index++;
     }
@@ -600,7 +571,6 @@ void MainWindow::PaintPolarDiagramm()
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-
     int channel1value = X_Coordinates.last();
     int channel2value = X_Coordinates.last();
     int channel3value = X_Coordinates.last();
@@ -610,6 +580,15 @@ void MainWindow::PaintPolarDiagramm()
     float channel2length = channel2object.GetValuePercent() * 5;
     float channel3length = channel3object.GetValuePercent() * 5;
     float channel4length = channel4object.GetValuePercent() * 5;
+
+    QColor color1,color2,color3,color4;
+
+    color1 = channel1object.GetStateDependentColor();
+    color2 = channel2object.GetStateDependentColor();
+    color3 = channel3object.GetStateDependentColor();
+    color4 = channel4object.GetStateDependentColor();
+
+
     
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
@@ -647,6 +626,7 @@ void MainWindow::PaintPolarDiagramm()
         
     {
         painter.rotate(channel1value-90);
+        // оставляем только 180 точек (на 180 градусов)
         if (channel1value>=180) // если больше 90 градусов то поворачиваем диск
         {
             PolarChartPointsChannel1.removeFirst();
@@ -684,6 +664,7 @@ void MainWindow::PaintPolarDiagramm()
         ++ind;
     }
     
+    // отсюда начинаем рисовать значения на круговой диаграмме
     painter.setPen(QPen(Qt::green, 1));
     /* Set the origin: */
     Channel1Line.setP1(QPointF(centerx1, centery1));
@@ -729,8 +710,8 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawLine(Channel1Line);
     
     //painter.drawLine(Channel2Line);
-    //    painter.drawLine(Channel3Line);
-    //    painter.drawLine(Channel4Line);
+    //painter.drawLine(Channel3Line);
+    //painter.drawLine(Channel4Line);
     
     QPoint NewPolarPointChannel1,NewPolarPointChannel2,NewPolarPointChannel3,NewPolarPointChannel4;
     
@@ -751,17 +732,14 @@ void MainWindow::PaintPolarDiagramm()
     PolarChartPointsChannel3.append(NewPolarPointChannel3);
     PolarChartPointsChannel4.append(NewPolarPointChannel4);
     
-    int a = X_Coordinates.last();
-    
-    painter.setPen(QPen(Channel1Color, 2));
+    painter.setPen(QPen(color1, 2));
     painter.drawPolyline(PolarChartPointsChannel1);
-    painter.setPen(QPen(Channel2Color, 2));
+    painter.setPen(QPen(color2, 2));
     painter.drawPolyline(PolarChartPointsChannel2);
-    painter.setPen(QPen(Channel3Color, 2));
+    painter.setPen(QPen(color3, 2));
     painter.drawPolyline(PolarChartPointsChannel3);
-    painter.setPen(QPen(Channel4Color, 2));
+    painter.setPen(QPen(color4, 2));
     painter.drawPolyline(PolarChartPointsChannel4);
-
 
     painter.resetTransform(); // все что дальше - не поворачивается динамически
 
@@ -799,8 +777,8 @@ void MainWindow::PaintOnWidget()
         PaintStatesAndAlertsAtTop();
         break;
     case Options::TrendsCyfraBars:
-        PaintCyfrasBottom();
         PaintStatesAndAlertsAtTop();
+        PaintCyfrasBottom();
         break;
     case Options::BarsCyfra:
         PaintCyfrasBottom();
@@ -826,6 +804,9 @@ void MainWindow::ReactOnMouseSlide()
 
 void MainWindow::ReactOnTouch()
 {
+    //пока просто возвращаем
+
+    return;
     // подкрашиваем квадраты куда коснулись в желтый цвет
     // отступ  сверху и слева в пикселях
     // высчитываются
@@ -847,7 +828,6 @@ void MainWindow::ReactOnTouch()
     int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
     int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
     int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
-    
 
     if      ((xpos>confirmwindowposx) &&
              (xpos<confirmwindowposx2) &&

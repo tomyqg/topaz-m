@@ -255,6 +255,18 @@ bool ChannelOptions::GetConfirmationNeed()
     return this->needConfirmationchannel;
 }
 
+bool ChannelOptions::MaximumNow()
+{
+    bool result = (this->GetCurrentChannelValue() > this->GetState1Value() ? true : false);
+    return result;
+}
+
+bool ChannelOptions::MinimumNow()
+{
+    bool result = (this->GetCurrentChannelValue() < this->GetState2Value() ? true : false);
+    return result;
+}
+
 void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 {
     needConfirmationchannel = confirmationstate;
@@ -263,30 +275,33 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 double ChannelOptions::GetCurrentChannelValue()
 {
 
-    //    int regtype = GetRegistrationType();
-    //    regtype = 1;
+    int regtype = GetRegistrationType();
+    regtype = 1;
 
-    //    switch (regtype) {
-    //    case 0: // мгновенное значение
-    //        currentvalue;
-    //        break;
-    //    case 1: // среднее значение
-    //    {
-    //        currentvalue = MR.dGetAverageValue(channelbuffer);
-    //        qDebug() << channelname << currentvalue ;
-    //        qDebug() << channelbuffer;
-    //    }
-    //        break;
-    //    case 2: // минимум значение
-    //        break;
-    //    case 3: // максимум значение
-    //        break;
-    //    case 4: // минимум плюс максимум значение
-    //        break;
-    //    default:
-    //        currentvalue;
-    //        break;
-    //    }
+    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
+
+    switch (regtype) {
+    case 0: // мгновенное значение
+        currentvalue;
+        break;
+    case 1: // среднее значение
+    {
+        currentvalue = MR.dGetAverageValue(channelbuffer);
+    }
+        break;
+    case 2: // минимум значение
+        currentvalue = MR.dGetMinimumValue(channelbuffer);
+        break;
+    case 3: // максимум значение
+        currentvalue = MR.dGetMaximumValue(channelbuffer);
+        break;
+    case 4: // минимум плюс максимум значение
+        currentvalue = MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
+        break;
+    default:
+        currentvalue;
+        break;
+    }
 
     return currentvalue;
 }
@@ -301,6 +316,11 @@ double ChannelOptions::GetValuePercent()
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
+    channelbuffer.append(value);
+
+    if (channelbuffer.length()>300)
+        channelbuffer.removeFirst();
+
     currentvalue = value;
 }
 

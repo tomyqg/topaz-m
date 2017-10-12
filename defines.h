@@ -37,7 +37,7 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
-#define Demo
+//#define Demo
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
@@ -58,7 +58,6 @@
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
-
 #endif
 
 #endif

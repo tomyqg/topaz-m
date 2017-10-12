@@ -45,6 +45,9 @@ public:
     QColor GetMaximumColor();
     QColor GetMinimumColor();
     bool GetConfirmationNeed();
+    bool MaximumNow();
+    bool MinimumNow();
+
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
