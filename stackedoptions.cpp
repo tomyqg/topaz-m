@@ -1375,9 +1375,6 @@ void StackedOptions::UpdateAnalyze()
     //    QVector<double> zzz;
     //    averagechannel_1 = mathresolver::GetAverageValue< double >(zzz);
 
-    mathresolver mr;
-    mr.SolveEquation("1+1");
-
     QVector<double> zzz;
 
     zzz.append(220);

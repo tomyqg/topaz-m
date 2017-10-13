@@ -83,26 +83,26 @@ void MainWindow::AddValuesToBuffer()
     X_Coordinates.append(b);
     X_Coordinates_archive.append(b);
 
-    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
-    Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
-    Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
-    Y_coordinates_Chanel_4.append(UartDriver::channelinputbuffer[3]);
+    //    Y_coordinates_Chanel_1.append(UartDriver::channelinputbuffer[0]);
+    //    Y_coordinates_Chanel_2.append(UartDriver::channelinputbuffer[1]);
+    //    Y_coordinates_Chanel_3.append(UartDriver::channelinputbuffer[2]);
+    //    Y_coordinates_Chanel_4.append(UartDriver::channelinputbuffer[3]);
 
-    Y_coordinates_Chanel_1_archive.append(UartDriver::channelinputbuffer[0]);
-    Y_coordinates_Chanel_2_archive.append(UartDriver::channelinputbuffer[1]);
-    Y_coordinates_Chanel_3_archive.append(UartDriver::channelinputbuffer[2]);
-    Y_coordinates_Chanel_4_archive.append(UartDriver::channelinputbuffer[3]);
+    //    Y_coordinates_Chanel_1_archive.append(UartDriver::channelinputbuffer[0]);
+    //    Y_coordinates_Chanel_2_archive.append(UartDriver::channelinputbuffer[1]);
+    //    Y_coordinates_Chanel_3_archive.append(UartDriver::channelinputbuffer[2]);
+    //    Y_coordinates_Chanel_4_archive.append(UartDriver::channelinputbuffer[3]);
 
 
-//    Y_coordinates_Chanel_1.append(channel1object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_2.append(channel2object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_3.append(channel3object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_4.append(channel4object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_1.append(channel1object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_2.append(channel2object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_3.append(channel3object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_4.append(channel4object.GetCurrentChannelValue());
 
-//    Y_coordinates_Chanel_1_archive.append(channel1object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_2_archive.append(channel2object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_3_archive.append(channel3object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_4_archive.append(channel4object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_1_archive.append(channel1object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_2_archive.append(channel2object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_3_archive.append(channel3object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_4_archive.append(channel4object.GetCurrentChannelValue());
 
     while (X_Coordinates.length()>300)
     {

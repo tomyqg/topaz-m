@@ -276,9 +276,8 @@ double ChannelOptions::GetCurrentChannelValue()
 {
 
     int regtype = GetRegistrationType();
-    regtype = 1;
 
-    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
+//    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
 
     switch (regtype) {
     case 0: // мгновенное значение
@@ -286,24 +285,52 @@ double ChannelOptions::GetCurrentChannelValue()
         break;
     case 1: // среднее значение
     {
-        currentvalue = MR.dGetAverageValue(channelbuffer);
+        currentvalue = GetAverageChannelValue();
+        break;
     }
-        break;
     case 2: // минимум значение
-        currentvalue = MR.dGetMinimumValue(channelbuffer);
+    {
+        currentvalue = GetMinimumChannelValue();
         break;
+    }
     case 3: // максимум значение
-        currentvalue = MR.dGetMaximumValue(channelbuffer);
+     {
+        currentvalue = GetMaximumChannelValue();
         break;
+    }
     case 4: // минимум плюс максимум значение
-        currentvalue = MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
+     {
+        currentvalue = GetMaxplusMinChannelValue();
         break;
+    }
     default:
+     {
         currentvalue;
+     }
         break;
     }
 
     return currentvalue;
+}
+
+double ChannelOptions::GetMaximumChannelValue()
+{
+    return MR.dGetMaximumValue(channelbuffer);
+}
+
+double ChannelOptions::GetMinimumChannelValue()
+{
+    return MR.dGetMinimumValue(channelbuffer);
+}
+
+double ChannelOptions::GetAverageChannelValue()
+{
+     return MR.dGetAverageValue(channelbuffer);
+}
+
+double ChannelOptions::GetMaxplusMinChannelValue()
+{
+   return  MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
 }
 
 double ChannelOptions::GetValuePercent()

@@ -107,7 +107,7 @@ class UartDriver:public QObject
     Q_OBJECT
 
 public slots:
-    void writechannelvalue(int channel, double value);
+     static void writechannelvalue(int channel, double value);
     double readchannelvalue(int channel);
     QString ReadAllAvailableCOMPorts();
     QString ReadAllUartDataStringFormat();

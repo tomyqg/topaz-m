@@ -31,6 +31,10 @@ public:
     double GetDempherValue();
 
     double GetCurrentChannelValue();
+    double GetMaximumChannelValue();
+    double GetMinimumChannelValue();
+    double GetAverageChannelValue();
+    double GetMaxplusMinChannelValue();
     double GetValuePercent();
 
     QString GetUnitsName();
@@ -47,7 +51,6 @@ public:
     bool GetConfirmationNeed();
     bool MaximumNow();
     bool MinimumNow();
-
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);

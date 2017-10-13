@@ -449,7 +449,7 @@ void worker::do_Work()
                 //                }
 
                 //////
-                UD.writechannelvalue(index,currentdata);
+                UartDriver::writechannelvalue(index,currentdata);
             }
             ++index;
         }

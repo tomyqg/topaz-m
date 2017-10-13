@@ -78,7 +78,7 @@ quint16 UartDriver::CalculateCRC16RTU(const QByteArray &array)
 
 void UartDriver::writechannelvalue(int channel, double value)
 {
-    this->channelinputbuffer[channel] = value;
+    channelinputbuffer[channel] = value;
 }
 
 double UartDriver::readchannelvalue(int channel)
