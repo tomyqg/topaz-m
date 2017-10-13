@@ -349,6 +349,10 @@ void ChannelOptions::SetCurrentChannelValue(double value)
         channelbuffer.removeFirst();
 
     currentvalue = value;
+
+    this->GetDempherValue();
+
+    qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();;
 }
 
 void ChannelOptions::SetDempher(double newdempher)

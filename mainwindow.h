@@ -103,30 +103,21 @@ private:
     void PowerOff();
     void CloseApplication();
     void CheckState(ChannelOptions&  channel);
-    uint8_t GetHalfSecFlag();
-
     void SetXRange(int newxrange) {Xrange = newxrange;}
-    int  GetXRange() {return Xrange;}
-
     void SetYRange(int newyrange) {Yrange = newyrange;}
+    uint8_t GetHalfSecFlag();
+    int  GetXRange() {return Xrange;}
     int  GetYRange() {return Yrange;}
-
     int GetTimePeriodSecs() {return 20;}
     int GetTickCountInOneSecond() {return 5;}
     int GetGraphWidthInPixels() {return 600;}
-
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
-
+    int dateindex;
     bool EcoMode;
-
     QVector<QString> datestrings;
 
-
-    int dateindex;
 private slots:
-
-
     void OpenSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
@@ -141,15 +132,10 @@ private slots:
     void sendModbusRequest( );
     void ChangePalette(int i);
     void on_WorkButton_clicked();
-
     void on_ArchiveButton_clicked();
-
     void on_EcoCheckBox_toggled(bool checked);
-
     void on_smoothCheckBox_toggled(bool checked);
-
     void on_timeButton_clicked();
-
 
 signals:
     void error(const QString &s);

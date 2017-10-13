@@ -160,7 +160,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
-    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
+    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
 
     connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
@@ -177,7 +177,6 @@ void MainWindow::MainWindowInitialization()
 
     // включаем эко режим
     SetEcoMode(true);
-
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -550,93 +549,44 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 
 void MainWindow::ChangePalette(int i)
 {
+
     if (ui->EcoCheckBox->checkState())
     {
-        switch (ui->horizontalScrollBar->value()) { // эко режим
-        case 1:
-            Channel1Color = Channel1ColorNormal = QColor(8,124,205);
-            Channel2Color = Channel2ColorNormal = QColor(2,115,72);
-            Channel3Color = Channel3ColorNormal = QColor(99,98,102);
-            Channel4Color = Channel4ColorNormal = QColor(125,70,46);
+        qDebug() << "1";
 
-            Channel1ColorMaximum = QColor(43,40,59);
-            Channel2ColorMaximum = QColor(0,56,40);
-            Channel3ColorMaximum = QColor(44,48,51);
-            Channel4ColorMaximum = QColor(87,58,42);
+        Channel1Color = Channel1ColorNormal = QColor(8,124,205);
+        Channel2Color = Channel2ColorNormal = QColor(2,115,72);
+        Channel3Color = Channel3ColorNormal = QColor(99,98,102);
+        Channel4Color = Channel4ColorNormal = QColor(125,70,46);
 
-            Channel1ColorMinimum = QColor(73,111,130);
-            Channel2ColorMinimum = QColor(79,125,49);
-            Channel3ColorMinimum = QColor(106,107,107);
-            Channel4ColorMinimum = QColor(130,79,31);
+        Channel1ColorMaximum = QColor(43,40,59);
+        Channel2ColorMaximum = QColor(0,56,40);
+        Channel3ColorMaximum = QColor(44,48,51);
+        Channel4ColorMaximum = QColor(87,58,42);
 
-            break;
-
-        case 2:
-
-            Channel1Color = Channel1ColorNormal = QColor(144,51,115);// RAL 4006 colour
-            Channel2Color = Channel2ColorNormal = QColor(203,115,117);// RAL 3014 colour
-            Channel3Color = Channel3ColorNormal = QColor(218,110,0);// RAL 2000 colour
-            Channel4Color = Channel4ColorNormal = QColor(108,124,89);// RAL 6011 colour
-
-            Channel1ColorMaximum = QColor(132,76,130);
-            Channel2ColorMaximum = QColor(134,26,34);
-            Channel3ColorMaximum = QColor(208,93,40);
-            Channel4ColorMaximum = QColor(94,110,59);
-
-            Channel1ColorMinimum = QColor(129,97,131);
-            Channel2ColorMinimum = QColor(216,160,166);
-            Channel3ColorMinimum = QColor(255,155,0);
-            Channel4ColorMinimum = QColor(138,153,119);
-
-            break;
-
-        default:
-            break;
-        }
+        Channel1ColorMinimum = QColor(73,111,130);
+        Channel2ColorMinimum = QColor(79,125,49);
+        Channel3ColorMinimum = QColor(106,107,107);
+        Channel4ColorMinimum = QColor(130,79,31);
     }
     else
     {
-        switch (ui->horizontalScrollBar->value()) { // обычный  режим
-        case 1:
-            Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
-            Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
-            Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
-            Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
+        qDebug() << "2";
 
-            Channel1ColorMaximum = QColor(61, 56, 85);
-            Channel2ColorMaximum = QColor(0, 105, 76);
-            Channel3ColorMaximum = QColor(56,62,66);
-            Channel4ColorMaximum = QColor(121,80,56);
+        Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
+        Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
+        Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
+        Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
 
-            Channel1ColorMinimum = QColor(96,147,172);
-            Channel2ColorMinimum = QColor(97,153,59);
-            Channel3ColorMinimum = QColor(142,146,145);
-            Channel4ColorMinimum = QColor(157,98,43);
+        Channel1ColorMaximum = QColor(61, 56, 85);
+        Channel2ColorMaximum = QColor(0, 105, 76);
+        Channel3ColorMaximum = QColor(56,62,66);
+        Channel4ColorMaximum = QColor(121,80,56);
 
-            break;
-
-        case 2:
-
-            Channel1Color = Channel1ColorNormal = QColor(144,51,115);// RAL 4006 colour
-            Channel2Color = Channel2ColorNormal = QColor(203,115,117);// RAL 3014 colour
-            Channel3Color = Channel3ColorNormal = QColor(218,110,0);// RAL 2000 colour
-            Channel4Color = Channel4ColorNormal = QColor(108,124,89);// RAL 6011 colour
-
-            Channel1ColorMaximum = QColor(132,76,130);
-            Channel2ColorMaximum = QColor(134,26,34);
-            Channel3ColorMaximum = QColor(208,93,40);
-            Channel4ColorMaximum = QColor(94,110,59);
-
-            Channel1ColorMinimum = QColor(129,97,131);
-            Channel2ColorMinimum = QColor(216,160,166);
-            Channel3ColorMinimum = QColor(255,155,0);
-            Channel4ColorMinimum = QColor(138,153,119);
-
-            break;
-
-        default:
-            break;
-        }
+        Channel1ColorMinimum = QColor(96,147,172);
+        Channel2ColorMinimum = QColor(97,153,59);
+        Channel3ColorMinimum = QColor(142,146,145);
+        Channel4ColorMinimum = QColor(157,98,43);
     }
 
     channel1object.SetNormalColor(Channel1ColorNormal);
@@ -659,7 +609,6 @@ void MainWindow::ChangePalette(int i)
 
 void MainWindow::sendModbusRequest( void )
 {
-
     if( m_modbus == NULL )
     {
         return;

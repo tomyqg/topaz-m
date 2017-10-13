@@ -80,6 +80,10 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
     default:
         break;
     }
+
+    ChangePalette(checked);
+
+
 }
 
 void MainWindow::on_smoothCheckBox_toggled(bool checked)
