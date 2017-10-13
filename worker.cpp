@@ -397,20 +397,22 @@ void worker::do_Work()
                 //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
                 currentdata = destfloat[0];
 
-                ////
-
                 if (Chanel->IsChannelMathematical())
                 {
                     mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
                     currentdata = mathresult;
                 }
 
+                double r = rand()%50;
+
+                qDebug() << r << "rand";
+
                 switch (index) {
                 case 0:
-                    currentdata = globalindex/2;
+                    currentdata = globalindex + r;
                     break;
                 case 1:
-                    currentdata = 2*globalindex;
+                    currentdata = globalindex + r - 50;
                     break;
                 case 2:
                     currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
@@ -450,6 +452,11 @@ void worker::do_Work()
 
                 //////
                 UartDriver::writechannelvalue(index,currentdata);
+
+                r = rand()%50;
+                 UartDriver::writechannelvalue(0,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом
+                 UartDriver::writechannelvalue(1,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом но демпфирует ее
+
             }
             ++index;
         }

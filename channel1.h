@@ -35,6 +35,7 @@ public:
     double GetMinimumChannelValue();
     double GetAverageChannelValue();
     double GetMaxplusMinChannelValue();
+    double GetDempheredChannelValue();
     double GetValuePercent();
 
     QString GetUnitsName();

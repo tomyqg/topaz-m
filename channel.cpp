@@ -277,7 +277,7 @@ double ChannelOptions::GetCurrentChannelValue()
 
     int regtype = GetRegistrationType();
 
-//    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
+    //    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
 
     switch (regtype) {
     case 0: // мгновенное значение
@@ -294,19 +294,19 @@ double ChannelOptions::GetCurrentChannelValue()
         break;
     }
     case 3: // максимум значение
-     {
+    {
         currentvalue = GetMaximumChannelValue();
         break;
     }
     case 4: // минимум плюс максимум значение
-     {
+    {
         currentvalue = GetMaxplusMinChannelValue();
         break;
     }
     default:
-     {
+    {
         currentvalue;
-     }
+    }
         break;
     }
 
@@ -325,12 +325,17 @@ double ChannelOptions::GetMinimumChannelValue()
 
 double ChannelOptions::GetAverageChannelValue()
 {
-     return MR.dGetAverageValue(channelbuffer);
+    return MR.dGetAverageValue(channelbuffer);
 }
 
 double ChannelOptions::GetMaxplusMinChannelValue()
 {
-   return  MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
+    return  MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
+}
+
+double ChannelOptions::GetDempheredChannelValue()
+{
+    return mathresolver::dGetDempheredValue(channelbuffer,this->GetDempherValue());
 }
 
 double ChannelOptions::GetValuePercent()
@@ -352,7 +357,7 @@ void ChannelOptions::SetCurrentChannelValue(double value)
 
     this->GetDempherValue();
 
-    qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();;
+    //    qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();;
 }
 
 void ChannelOptions::SetDempher(double newdempher)

@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>13</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -2339,7 +2339,7 @@
       <bool>true</bool>
      </property>
      <property name="decimals">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="minimum">
       <double>0.000000000000000</double>
@@ -2348,7 +2348,7 @@
       <double>999.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>1.000000000000000</double>
      </property>
     </widget>
    </widget>
@@ -3080,7 +3080,7 @@
       <bool>true</bool>
      </property>
      <property name="decimals">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="minimum">
       <double>0.000000000000000</double>
@@ -3089,7 +3089,7 @@
       <double>999.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_69">
@@ -3848,7 +3848,7 @@
       <bool>true</bool>
      </property>
      <property name="decimals">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="minimum">
       <double>0.000000000000000</double>
@@ -3857,7 +3857,7 @@
       <double>999.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_70">
@@ -4616,7 +4616,7 @@
       <bool>true</bool>
      </property>
      <property name="decimals">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="minimum">
       <double>0.000000000000000</double>
@@ -4625,7 +4625,7 @@
       <double>999.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_71">
@@ -10452,9 +10452,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

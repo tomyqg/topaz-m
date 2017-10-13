@@ -91,3 +91,24 @@ double mathresolver::dGetMaximumValue(QVector<double> &qvect)
     double maximum = *std::max_element(&qvect[0], &qvect[0] + qvect.length());
     return maximum;
 }
+
+double mathresolver::dGetDempheredValue(QVector<double> &qvect, int count)
+{
+    QVector<double> qvecttemp = qvect;
+    double dempheredvalue = 0;
+
+    Q_ASSERT(count <= 0);
+
+    if (count <= 0)
+        return 0 ;
+
+    for (int var = 0; var < count; ++var) {
+        if (qvecttemp.isEmpty())
+            break;
+        dempheredvalue += qvecttemp.last();
+        qvecttemp.removeLast();
+    }
+
+    dempheredvalue /= count;
+    return dempheredvalue;
+}

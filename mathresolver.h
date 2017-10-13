@@ -19,6 +19,7 @@ public:
     static double dGetAverageValue(QVector<double >& qvect2);
     static double dGetMinimumValue(QVector<double >& qvect);
     static double dGetMaximumValue(QVector<double >& qvect);
+    static double dGetDempheredValue(QVector<double >& qvect, int count);
 };
 
 
