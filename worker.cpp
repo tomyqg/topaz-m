@@ -409,13 +409,14 @@ void worker::do_Work()
 
                 switch (index) {
                 case 0:
-                    currentdata = globalindex + r;
+                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 50 + r;
                     break;
                 case 1:
-                    currentdata = globalindex + r - 50;
+                    currentdata = UartDriver::readchannelvalue(1) - 5;
                     break;
                 case 2:
-                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+//                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
+                    currentdata =  1.5*globalindex;
                     break;
                 case 3:
                     currentdata =  -2*globalindex;
@@ -453,9 +454,8 @@ void worker::do_Work()
                 //////
                 UartDriver::writechannelvalue(index,currentdata);
 
-                r = rand()%50;
-                 UartDriver::writechannelvalue(0,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом
-                 UartDriver::writechannelvalue(1,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом но демпфирует ее
+//                 UartDriver::writechannelvalue(0,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом
+//                 UartDriver::writechannelvalue(1,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом но демпфирует ее
 
             }
             ++index;

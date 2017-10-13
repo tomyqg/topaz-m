@@ -83,7 +83,7 @@ void UartDriver::writechannelvalue(int channel, double value)
 
 double UartDriver::readchannelvalue(int channel)
 {
-    return this->channelinputbuffer[channel-1];
+    return channelinputbuffer[channel-1];
 }
 
 QByteArray UartDriver::ReadAllUartDataByteFormat()
