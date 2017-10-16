@@ -282,6 +282,8 @@ double ChannelOptions::GetCurrentChannelValue()
     switch (regtype) {
     case 0: // мгновенное значение
         currentvalue;
+        if (GetDempherValue()>1)
+            currentvalue = GetDempheredChannelValue();
         break;
     case 1: // среднее значение
     {

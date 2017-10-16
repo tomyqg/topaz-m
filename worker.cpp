@@ -405,17 +405,14 @@ void worker::do_Work()
 
                 double r = rand()%50;
 
-                qDebug() << r << "rand";
-
                 switch (index) {
                 case 0:
-                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 50 + r;
+                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 1:
                     currentdata = UartDriver::readchannelvalue(1) - 5;
                     break;
                 case 2:
-//                    currentdata =  mr.SolveEquation("sin(x/5)*50",globalindex );
                     currentdata =  1.5*globalindex;
                     break;
                 case 3:
@@ -425,38 +422,7 @@ void worker::do_Work()
                     break;
                 }
 
-
-
-                //                Chanel->SetRegistrationType(1); // принудительно заставляем среднее значение
-                //                int regtype = Chanel->GetRegistrationType();
-                //                switch (regtype) {
-                //                case 0: // мгновенное значение
-                //                    //                    currentvalue;
-                //                    break;
-                //                case 1: // среднее значение
-                //                {
-                //                    //currentvalue = MR.dGetAverageValue(channelbuffer);
-                //                    //qDebug() << channelname << currentvalue ;
-                //                    //qDebug() << channelbuffer;
-                //                }
-                //                    break;
-                //                case 2: //минимум значение
-                //                    break;
-                //                case 3: //максимум значение
-                //                    break;
-                //                case 4: //минимум плюс максимум значение
-                //                    break;
-                //                default:
-                //                    //currentvalue;
-                //                    break;
-                //                }
-
-                //////
                 UartDriver::writechannelvalue(index,currentdata);
-
-//                 UartDriver::writechannelvalue(0,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом
-//                 UartDriver::writechannelvalue(1,mr.SolveEquation("sin(x/5)*50",globalindex )+ r ); // рисует синусоиду с разбросом но демпфирует ее
-
             }
             ++index;
         }

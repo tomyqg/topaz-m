@@ -9,7 +9,7 @@
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 
-//extern QString pathtofile ;
+//  extern QString pathtofile ;
 
 void MainWindow::WriteGpio(int num, bool val)
 {

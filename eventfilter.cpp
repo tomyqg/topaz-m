@@ -16,6 +16,7 @@ bool Options::eventFilter(QObject *object, QEvent *event)
         object->setProperty("text",kb.getcustomstring() );
         ui->pushButton->setFocus();
         kb.close();
+        kb.deleteLater();
     }
     return QObject::eventFilter(object, event);
 }
