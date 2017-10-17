@@ -47,6 +47,7 @@ private:
     QList<QVector<double> *> arrayarray;
     QList< Device * > Devices;
     Device device;
+    QMutex ReadModbusDataMutex;
 };
 
 #endif // WORKER_H

@@ -14,13 +14,13 @@
 
 extern QString inputstr;
 
-double UartDriver::channelinputbuffer[4];
-double UartDriver::channeltempbuffer[4];
-bool UartDriver::needtoupdatechannel[4] = {0,0,0,0};
+double SendDriver::channelinputbuffer[4];
+double SendDriver::channeltempbuffer[4];
+bool SendDriver::needtoupdatechannel[4] = {0,0,0,0};
 
 QByteArray copyarray;
 
-quint16 UartDriver::CalculateCRC16RTU(const QByteArray &array)
+quint16 SendDriver::CalculateCRC16RTU(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -76,17 +76,17 @@ quint16 UartDriver::CalculateCRC16RTU(const QByteArray &array)
     return wCRCWord;
 }
 
-void UartDriver::writechannelvalue(int channel, double value)
+void SendDriver::writechannelvalue(int channel, double value)
 {
     channelinputbuffer[channel] = value;
 }
 
-double UartDriver::readchannelvalue(int channel)
+double SendDriver::readchannelvalue(int channel)
 {
     return channelinputbuffer[channel-1];
 }
 
-QByteArray UartDriver::ReadAllUartDataByteFormat()
+QByteArray SendDriver::ReadAllUartDataByteFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -109,7 +109,7 @@ QByteArray UartDriver::ReadAllUartDataByteFormat()
     return bytedata;
 }
 
-QString UartDriver::ReadAllUartDataStringFormat()
+QString SendDriver::ReadAllUartDataStringFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -134,7 +134,7 @@ QString UartDriver::ReadAllUartDataStringFormat()
     return DataAsString;
 }
 
-QString UartDriver::ReadAllAvailableCOMPorts()
+QString SendDriver::ReadAllAvailableCOMPorts()
 {
     QString a;
 
@@ -148,7 +148,7 @@ QString UartDriver::ReadAllAvailableCOMPorts()
     return a;
 }
 
-void UartDriver::DelayMsec(int n)
+void SendDriver::DelayMsec(int n)
 {
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
@@ -536,7 +536,7 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
 }
 
 
-QByteArray UartDriver::UartWriteData(QByteArray data)
+QByteArray SendDriver::UartWriteData(QByteArray data)
 {
     QByteArray InputDataByteArray;
     QSerialPort serial;

@@ -129,6 +129,7 @@ private:
     mathresolver MR;
 
     QVector<double> channelbuffer;
+    QVector<double> channelpercentbuffer;
 
 signals:
     void updateUI(const QString text);

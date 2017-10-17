@@ -112,6 +112,8 @@ void MainWindow::MainWindowInitialization()
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
 
+    mutex = new QMutex();
+
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
@@ -224,9 +226,7 @@ void MainWindow::InitPins()
 #ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
     return;
 #endif
-
 }
-
 
 void MainWindow::OpenMessagesWindow()
 {
@@ -252,61 +252,21 @@ void MainWindow::OpenOptionsWindow( int index )
 {
     //здесь запускаем меню обновленное как в эндресе
 
-    {
-        StackedOptions *sw= new StackedOptions(index,0);
-        sw->exec();
-        //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-        channel1object.ReadSingleChannelOptionFromFile(1);
-        channel2object.ReadSingleChannelOptionFromFile(2);
-        channel3object.ReadSingleChannelOptionFromFile(3);
-        channel4object.ReadSingleChannelOptionFromFile(4);
-
-        SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
-        //    если вдруг поменялось время то нужно обновить лейблы
-        LabelsInit();
-        LabelsCorrect();
-        sw->deleteLater();
-
-        resizeSelf(1024,768);
-        return;
-    }
-
-    //startWorkSignal();
-
-    Options *optionsobj = new Options;
-    this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
-
-    GetMonitorWidthPixels();
-    optionsobj->exec();
+    StackedOptions *sw= new StackedOptions(index,0);
+    sw->exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1object.ReadSingleChannelOptionFromFile(1);
     channel2object.ReadSingleChannelOptionFromFile(2);
     channel3object.ReadSingleChannelOptionFromFile(3);
     channel4object.ReadSingleChannelOptionFromFile(4);
-
-    //    если вдруг поменялось время то нужно обновить лейблы
-    LabelsInit();
-    LabelsCorrect();
-
-
-    // пересылаем ссылки на объекты в воркер
     SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
 
-    // если что меняем разрешение
-    if (Options::displayResolution == "1024x768")
-    {
-        resizeSelf(1024,768);
-    }
-
-    if (Options::displayResolution == "1280x800")
-    {
-        resizeSelf(1280,720);
-    }
-
+    //если вдруг поменялось время то нужно обновить лейблы
+    LabelsInit();
+    LabelsCorrect();
+    sw->deleteLater();
     resizeSelf(1024,768);
-
-    optionsobj->deleteLater(); // удаляем объект опций
-    //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
+    return;
 }
 
 void MainWindow::OpenArchiveWindow()
@@ -384,11 +344,7 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    //    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
     ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
-
-
-
     resizeSelf(1024,768);
 }
 
@@ -552,8 +508,6 @@ void MainWindow::ChangePalette(int i)
 
     if (ui->EcoCheckBox->checkState())
     {
-        qDebug() << "1";
-
         Channel1Color = Channel1ColorNormal = QColor(8,124,205);
         Channel2Color = Channel2ColorNormal = QColor(2,115,72);
         Channel3Color = Channel3ColorNormal = QColor(99,98,102);
@@ -571,8 +525,6 @@ void MainWindow::ChangePalette(int i)
     }
     else
     {
-        qDebug() << "2";
-
         Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
         Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
         Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
@@ -800,7 +752,6 @@ void MainWindow::OpenSerialPort( int )
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
-
         //подключаемси.
         m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 

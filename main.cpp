@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QTranslator translator;
 
     MainWindow w;
-
+//    qApp->closeAllWindows();
     //делаем ресайз
     w.resizeWindow(w,w.GetWindowWidthPixels(),w.GetWindowHeightPixels());
     w.show();

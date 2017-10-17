@@ -102,7 +102,7 @@ struct ModbusDeviceStruct
     uint16_t AdditionalCustomParameterAddress;
 };
 
-class UartDriver:public QObject
+class SendDriver:public QObject
 {
     Q_OBJECT
 
@@ -128,7 +128,7 @@ public:
     static bool needtoupdatechannel[4];
 };
 
-class ModBus: public UartDriver
+class ModBus: public SendDriver
 {
     Q_OBJECT
 

@@ -184,6 +184,8 @@ private:
     QThread *thread;
     QThread *optionsthread;
 
+    QMutex *mutex;
+
     int Xrange;
     int Yrange;
     int windowwidth;

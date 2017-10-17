@@ -629,14 +629,14 @@ void MainWindow::GrafsUpdateBars()
     Bar4_X_Coord.append(75);
     Bar4_X_Coord.append(85);
 
-    Bar1_Y_Coord.append(UartDriver::channelinputbuffer[0]);
-    Bar1_Y_Coord.append(UartDriver::channelinputbuffer[0]);
-    Bar2_Y_Coord.append(UartDriver::channelinputbuffer[1]);
-    Bar2_Y_Coord.append(UartDriver::channelinputbuffer[1]);
-    Bar3_Y_Coord.append(UartDriver::channelinputbuffer[2]);
-    Bar3_Y_Coord.append(UartDriver::channelinputbuffer[2]);
-    Bar4_Y_Coord.append(UartDriver::channelinputbuffer[3]);
-    Bar4_Y_Coord.append(UartDriver::channelinputbuffer[3]);
+    Bar1_Y_Coord.append(SendDriver::channelinputbuffer[0]);
+    Bar1_Y_Coord.append(SendDriver::channelinputbuffer[0]);
+    Bar2_Y_Coord.append(SendDriver::channelinputbuffer[1]);
+    Bar2_Y_Coord.append(SendDriver::channelinputbuffer[1]);
+    Bar3_Y_Coord.append(SendDriver::channelinputbuffer[2]);
+    Bar3_Y_Coord.append(SendDriver::channelinputbuffer[2]);
+    Bar4_Y_Coord.append(SendDriver::channelinputbuffer[3]);
+    Bar4_Y_Coord.append(SendDriver::channelinputbuffer[3]);
 
     QVector<double> x1lim,x2lim,x3lim,x4lim;
     QVector<double> y1max,y2max,y3max,y4max;
@@ -897,37 +897,37 @@ void MainWindow::GrafsUpdateBars()
 
 void MainWindow::UpdateChannel1Slot()
 {
-    UartDriver::needtoupdatechannel[0] = 1;
+    SendDriver::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1object.SetCurrentChannelValue(UartDriver::channelinputbuffer[0]);
+    channel1object.SetCurrentChannelValue(SendDriver::channelinputbuffer[0]);
     CheckState(channel1object);
 }
 
 void MainWindow::UpdateChannel2Slot()
 {
-    UartDriver::needtoupdatechannel[1] = 1;
+    SendDriver::needtoupdatechannel[1] = 1;
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-    channel2object.SetCurrentChannelValue(UartDriver::channelinputbuffer[1]);
+    channel2object.SetCurrentChannelValue(SendDriver::channelinputbuffer[1]);
     //    qDebug()<<UartDriver::channelinputbuffer[1];
     CheckState(channel2object);
 }
 
 void MainWindow::UpdateChannel3Slot()
 {
-    UartDriver::needtoupdatechannel[2] = 1;
+    SendDriver::needtoupdatechannel[2] = 1;
     int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
-    channel3object.SetCurrentChannelValue(UartDriver::channelinputbuffer[2]);
+    channel3object.SetCurrentChannelValue(SendDriver::channelinputbuffer[2]);
     CheckState(channel3object);
 }
 
 void MainWindow::UpdateChannel4Slot()
 {
-    UartDriver::needtoupdatechannel[3] = 1;
+    SendDriver::needtoupdatechannel[3] = 1;
     int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
-    channel4object.SetCurrentChannelValue(UartDriver::channelinputbuffer[3]);
+    channel4object.SetCurrentChannelValue(SendDriver::channelinputbuffer[3]);
     CheckState(channel4object);
 }

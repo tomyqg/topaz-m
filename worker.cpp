@@ -18,7 +18,7 @@ worker::worker(QObject *parent) :
 }
 
 ModBus MB;
-UartDriver UD;
+SendDriver UD;
 mathresolver mr;
 
 int ic ;
@@ -389,12 +389,15 @@ void worker::do_Work()
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (UartDriver::needtoupdatechannel[index] == 1) )
+            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (SendDriver::needtoupdatechannel[index] == 1) )
             {
                 QCoreApplication::applicationDirPath();
-                UartDriver::needtoupdatechannel[index] = 0;
+                SendDriver::needtoupdatechannel[index] = 0;
 
-                //                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
+                ReadModbusDataMutex.lock();
+                //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
+                ReadModbusDataMutex.unlock();
+
                 currentdata = destfloat[0];
 
                 if (Chanel->IsChannelMathematical())
@@ -410,7 +413,7 @@ void worker::do_Work()
                     currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = UartDriver::readchannelvalue(1) - 5;
+                    currentdata = SendDriver::readchannelvalue(1) - 5;
                     break;
                 case 2:
                     currentdata =  1.5*globalindex;
@@ -422,7 +425,7 @@ void worker::do_Work()
                     break;
                 }
 
-                UartDriver::writechannelvalue(index,currentdata);
+                SendDriver::writechannelvalue(index,currentdata);
             }
             ++index;
         }
