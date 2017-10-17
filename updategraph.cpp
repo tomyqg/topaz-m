@@ -10,7 +10,7 @@
 #include "qglobal.h"
 #include "defines.h"
 
-int a=0;int b=0;
+int xoffset=0;
 
 // пара 1
 
@@ -74,40 +74,36 @@ QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],col
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
-int xyi;
-
 void MainWindow::AddValuesToBuffer()
 {
-
-    startWorkSignal();
-    X_Coordinates.append(b);
-    X_Coordinates_archive.append(b);
+    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
+    X_Coordinates.append(xoffset); // добавляем смещение по иксу
+    X_Coordinates_archive.append(xoffset);
 
     Y_coordinates_Chanel_1.append(channel1object.GetCurrentChannelValue());
     Y_coordinates_Chanel_2.append(channel2object.GetCurrentChannelValue());
     Y_coordinates_Chanel_3.append(channel3object.GetCurrentChannelValue());
     Y_coordinates_Chanel_4.append(channel4object.GetCurrentChannelValue());
-//    Y_coordinates_Chanel_2.append(channel2object.GetDempheredChannelValue());
 
     Y_coordinates_Chanel_1_archive.append(channel1object.GetCurrentChannelValue());
     Y_coordinates_Chanel_2_archive.append(channel2object.GetCurrentChannelValue());
     Y_coordinates_Chanel_3_archive.append(channel3object.GetCurrentChannelValue());
     Y_coordinates_Chanel_4_archive.append(channel4object.GetCurrentChannelValue());
 
-    while (X_Coordinates.length()>300)
+    while (X_Coordinates.length()>GetXRange())
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
     }
 
     int tickstep = GetTickStep();
 
-    if (b%tickstep==0)
+    if (xoffset%tickstep==0) // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
     {
         LabelsCorrect();
     }
 
-    b++;
-    stopWorkSignal();
+    xoffset++;
+    stopWorkSignal(); // стопим воркер если не нужно считывать данные
 }
 
 void MainWindow::UpdateGraphics()
@@ -141,12 +137,12 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
-    while (X_Coordinates.length()>300)
+    while (X_Coordinates.length()>GetXRange())
     {
         X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
     }
 
-    ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
+    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
@@ -158,25 +154,19 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    {
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-        graphPen.setColor(channel2object.GetStateDependentColor());
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    graphPen.setColor(channel2object.GetStateDependentColor());
+    ui->customPlot->graph()->setPen(graphPen);
 
-    {
-        ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-        graphPen.setColor(channel3object.GetStateDependentColor());
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
+    graphPen.setColor(channel3object.GetStateDependentColor());
+    ui->customPlot->graph()->setPen(graphPen);
 
-    {
-        ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-        graphPen.setColor(channel4object.GetStateDependentColor());
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
+    graphPen.setColor(channel4object.GetStateDependentColor());
+    ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
@@ -197,15 +187,15 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
-    double chan1higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1);
-    double chan2higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2);
-    double chan3higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3);
-    double chan4higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4);
+    double chan1higherstate = channel1object.GetMaximumChannelValue();
+    double chan2higherstate = channel2object.GetMaximumChannelValue();
+    double chan3higherstate = channel3object.GetMaximumChannelValue();
+    double chan4higherstate = channel4object.GetMaximumChannelValue();
 
-    double chan1lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1);
-    double chan2lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2);
-    double chan3lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3);
-    double chan4lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4);
+    double chan1lowerstate = channel1object.GetMinimumChannelValue();
+    double chan2lowerstate = channel2object.GetMinimumChannelValue();
+    double chan3lowerstate = channel3object.GetMinimumChannelValue();
+    double chan4lowerstate = channel4object.GetMinimumChannelValue();
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -235,7 +225,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y4max.append(0);
     y4max.append(chan4higherstate);
 
-
     y1min.append(chan1lowerstate);
     y1min.append(chan1lowerstate);
     y1min.append(0);
@@ -249,7 +238,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y2min.append(chan2lowerstate);
     y2min.append(0);
     y2min.append(chan2lowerstate);
-
 
     y3min.append(chan3lowerstate);
     y3min.append(chan3lowerstate);
@@ -265,15 +253,14 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     y4min.append(0);
     y4min.append(chan4lowerstate);
 
-
-    x1.append(430-300+lastindex);
-    x1.append(460-300+lastindex);
-    x2.append(470-300+lastindex);
-    x2.append(500-300+lastindex);
-    x3.append(510-300+lastindex);
-    x3.append(540-300+lastindex);
-    x4.append(550-300+lastindex);
-    x4.append(580-300+lastindex);
+    x1.append(430-300-100+25+lastindex);
+    x1.append(460-300-100+25+lastindex);
+    x2.append(470-300-75+25+lastindex);
+    x2.append(500-300-75+25+lastindex);
+    x3.append(510-300-50+25+lastindex);
+    x3.append(540-300-50+25+lastindex);
+    x4.append(550-300-25+25+lastindex);
+    x4.append(580-300-25+25+lastindex);
 
     x1lim.append(x1.at(0));
     x1lim.append(x1.at(1));
@@ -389,10 +376,10 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     QList<int> arrowsendcoords;
 
-    arrowsendcoords.append(x1.at(0));
-    arrowsendcoords.append(x2.at(0));
-    arrowsendcoords.append(x3.at(0));
-    arrowsendcoords.append(x4.at(0));
+    arrowsendcoords.append(x1.at(0)-10);
+    arrowsendcoords.append(x2.at(0)-10);
+    arrowsendcoords.append(x3.at(0)-10);
+    arrowsendcoords.append(x4.at(0)-10);
 
     // рисуем стрелки для каждой уставки
 
@@ -444,7 +431,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         ui->customPlot->yAxis->rescale();
     }
 
-    // add the helper arrow:
+    // add the helper arrows:
 
     if (ui->arrowscheckBox->checkState()) // if it s needed
     {
@@ -476,7 +463,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
             int xstart = 600;
 
             arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
-            arrow->end->setCoords(b, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
             ui->customPlot->addItem(arrow);
@@ -500,7 +487,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 void MainWindow::GrafsUpdateTrends()
 {
 
-    ui->customPlot->xAxis->setRange(b-GetXRange(), b+GetXRange());
+    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
@@ -534,7 +521,7 @@ void MainWindow::GrafsUpdateTrends()
             int xstart = 600;
 
             arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
-            arrow->end->setCoords(b, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
             arrow->setAntialiased(true);
@@ -629,14 +616,14 @@ void MainWindow::GrafsUpdateBars()
     Bar4_X_Coord.append(75);
     Bar4_X_Coord.append(85);
 
-    Bar1_Y_Coord.append(SendDriver::channelinputbuffer[0]);
-    Bar1_Y_Coord.append(SendDriver::channelinputbuffer[0]);
-    Bar2_Y_Coord.append(SendDriver::channelinputbuffer[1]);
-    Bar2_Y_Coord.append(SendDriver::channelinputbuffer[1]);
-    Bar3_Y_Coord.append(SendDriver::channelinputbuffer[2]);
-    Bar3_Y_Coord.append(SendDriver::channelinputbuffer[2]);
-    Bar4_Y_Coord.append(SendDriver::channelinputbuffer[3]);
-    Bar4_Y_Coord.append(SendDriver::channelinputbuffer[3]);
+    Bar1_Y_Coord.append(DataBuffer::readchannelvalue(0));
+    Bar1_Y_Coord.append(DataBuffer::readchannelvalue(0));
+    Bar2_Y_Coord.append(DataBuffer::readchannelvalue(1));
+    Bar2_Y_Coord.append(DataBuffer::readchannelvalue(1));
+    Bar3_Y_Coord.append(DataBuffer::readchannelvalue(2));
+    Bar3_Y_Coord.append(DataBuffer::readchannelvalue(2));
+    Bar4_Y_Coord.append(DataBuffer::readchannelvalue(3));
+    Bar4_Y_Coord.append(DataBuffer::readchannelvalue(3));
 
     QVector<double> x1lim,x2lim,x3lim,x4lim;
     QVector<double> y1max,y2max,y3max,y4max;
@@ -683,7 +670,6 @@ void MainWindow::GrafsUpdateBars()
     y4max.append(0);
     y4max.append(chan4higherstate);
 
-
     y1min.append(chan1lowerstate);
     y1min.append(chan1lowerstate);
     y1min.append(0);
@@ -697,7 +683,6 @@ void MainWindow::GrafsUpdateBars()
     y2min.append(chan2lowerstate);
     y2min.append(0);
     y2min.append(chan2lowerstate);
-
 
     y3min.append(chan3lowerstate);
     y3min.append(chan3lowerstate);
@@ -713,7 +698,6 @@ void MainWindow::GrafsUpdateBars()
     y4min.append(0);
     y4min.append(chan4lowerstate);
 
-
     x1lim.append(Bar1_X_Coord.at(0));
     x1lim.append(Bar1_X_Coord.at(1));
     x1lim.append(Bar1_X_Coord.at(0));
@@ -741,7 +725,6 @@ void MainWindow::GrafsUpdateBars()
     x4lim.append(Bar4_X_Coord.at(0));
     x4lim.append(Bar4_X_Coord.at(1));
     x4lim.append(Bar4_X_Coord.at(1));
-
 
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems();
@@ -855,7 +838,6 @@ void MainWindow::GrafsUpdateBars()
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
 
-
         QPointF Label1PixPoint = arrow->start->pixelPoint();
         QPointF Label2PixPoint = arrow2->start->pixelPoint();
 
@@ -871,19 +853,14 @@ void MainWindow::GrafsUpdateBars()
         textLabelHi->setColor(QColor(Qt::red));
 
         // add the text label at the bottom limit
-
         QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelLo);
         textLabelLo->position->setPixelPoint(Label2PixPoint);
         textLabelLo->setText(QString::number(Chanel->GetState2Value() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
-
         ++barindex;
     }
-
-
-
 
     if (ui->autoscalecheckbox->checkState())
     {
@@ -897,37 +874,36 @@ void MainWindow::GrafsUpdateBars()
 
 void MainWindow::UpdateChannel1Slot()
 {
-    SendDriver::needtoupdatechannel[0] = 1;
+    DataBuffer::needtoupdatechannel[0] = 1;
     int period = channel1object.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1object.SetCurrentChannelValue(SendDriver::channelinputbuffer[0]);
+    channel1object.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
     CheckState(channel1object);
 }
 
 void MainWindow::UpdateChannel2Slot()
 {
-    SendDriver::needtoupdatechannel[1] = 1;
+    DataBuffer::needtoupdatechannel[1] = 1;
     int period = channel2object.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-    channel2object.SetCurrentChannelValue(SendDriver::channelinputbuffer[1]);
-    //    qDebug()<<UartDriver::channelinputbuffer[1];
+    channel2object.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
     CheckState(channel2object);
 }
 
 void MainWindow::UpdateChannel3Slot()
 {
-    SendDriver::needtoupdatechannel[2] = 1;
+    DataBuffer::needtoupdatechannel[2] = 1;
     int period = channel3object.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
-    channel3object.SetCurrentChannelValue(SendDriver::channelinputbuffer[2]);
+    channel3object.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
     CheckState(channel3object);
 }
 
 void MainWindow::UpdateChannel4Slot()
 {
-    SendDriver::needtoupdatechannel[3] = 1;
+    DataBuffer::needtoupdatechannel[3] = 1;
     int period = channel4object.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
-    channel4object.SetCurrentChannelValue(SendDriver::channelinputbuffer[3]);
+    channel4object.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
     CheckState(channel4object);
 }

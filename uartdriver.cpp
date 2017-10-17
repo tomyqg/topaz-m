@@ -14,13 +14,15 @@
 
 extern QString inputstr;
 
-double SendDriver::channelinputbuffer[4];
-double SendDriver::channeltempbuffer[4];
-bool SendDriver::needtoupdatechannel[4] = {0,0,0,0};
+double DataBuffer::channelinputbuffer[4];
+double DataBuffer::channeltempbuffer[4];
+bool DataBuffer::needtoupdatechannel[4] = {0,0,0,0};
+
+QMutex *DataBuffer::channeldatamutex = new QMutex();
 
 QByteArray copyarray;
 
-quint16 SendDriver::CalculateCRC16RTU(const QByteArray &array)
+quint16 DataBuffer::CalculateCRC16RTU(const QByteArray &array)
 {
     static const quint16 wCRCTable[] = {
         0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
@@ -76,17 +78,22 @@ quint16 SendDriver::CalculateCRC16RTU(const QByteArray &array)
     return wCRCWord;
 }
 
-void SendDriver::writechannelvalue(int channel, double value)
+void DataBuffer::writechannelvalue(int channel, double value)
 {
+    channeldatamutex->lock();
     channelinputbuffer[channel] = value;
+    channeldatamutex->unlock();
 }
 
-double SendDriver::readchannelvalue(int channel)
+double DataBuffer::readchannelvalue(int channel)
 {
-    return channelinputbuffer[channel-1];
+    channeldatamutex->lock();
+    double res = channelinputbuffer[channel];
+    channeldatamutex->unlock();
+    return res;
 }
 
-QByteArray SendDriver::ReadAllUartDataByteFormat()
+QByteArray DataBuffer::ReadAllUartDataByteFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -109,7 +116,7 @@ QByteArray SendDriver::ReadAllUartDataByteFormat()
     return bytedata;
 }
 
-QString SendDriver::ReadAllUartDataStringFormat()
+QString DataBuffer::ReadAllUartDataStringFormat()
 {
     QSerialPort serial;
     QByteArray bytedata;
@@ -134,7 +141,7 @@ QString SendDriver::ReadAllUartDataStringFormat()
     return DataAsString;
 }
 
-QString SendDriver::ReadAllAvailableCOMPorts()
+QString DataBuffer::ReadAllAvailableCOMPorts()
 {
     QString a;
 
@@ -148,7 +155,7 @@ QString SendDriver::ReadAllAvailableCOMPorts()
     return a;
 }
 
-void SendDriver::DelayMsec(int n)
+void DataBuffer::DelayMsec(int n)
 {
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
@@ -536,7 +543,7 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
 }
 
 
-QByteArray SendDriver::UartWriteData(QByteArray data)
+QByteArray DataBuffer::UartWriteData(QByteArray data)
 {
     QByteArray InputDataByteArray;
     QSerialPort serial;

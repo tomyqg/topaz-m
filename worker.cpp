@@ -18,7 +18,7 @@ worker::worker(QObject *parent) :
 }
 
 ModBus MB;
-SendDriver UD;
+DataBuffer UD;
 mathresolver mr;
 
 int ic ;
@@ -389,14 +389,14 @@ void worker::do_Work()
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (SendDriver::needtoupdatechannel[index] == 1) )
+            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::needtoupdatechannel[index] == 1) )
             {
                 QCoreApplication::applicationDirPath();
-                SendDriver::needtoupdatechannel[index] = 0;
+                DataBuffer::needtoupdatechannel[index] = 0;
 
-                ReadModbusDataMutex.lock();
+                //ReadModbusDataMutex.lock();
                 //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
-                ReadModbusDataMutex.unlock();
+                //ReadModbusDataMutex.unlock();
 
                 currentdata = destfloat[0];
 
@@ -413,7 +413,7 @@ void worker::do_Work()
                     currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = SendDriver::readchannelvalue(1) - 5;
+                    currentdata = DataBuffer::readchannelvalue(0) - 5;
                     break;
                 case 2:
                     currentdata =  1.5*globalindex;
@@ -425,7 +425,7 @@ void worker::do_Work()
                     break;
                 }
 
-                SendDriver::writechannelvalue(index,currentdata);
+                DataBuffer::writechannelvalue(index,currentdata);
             }
             ++index;
         }

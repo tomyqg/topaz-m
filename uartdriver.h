@@ -102,7 +102,7 @@ struct ModbusDeviceStruct
     uint16_t AdditionalCustomParameterAddress;
 };
 
-class SendDriver:public QObject
+class DataBuffer:public QObject
 {
     Q_OBJECT
 
@@ -117,6 +117,7 @@ private:
     static double channeltempbuffer[4];
     QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
     QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
+    static QMutex *channeldatamutex;
 
 protected:
     void DelayMsec(int n);
@@ -128,7 +129,7 @@ public:
     static bool needtoupdatechannel[4];
 };
 
-class ModBus: public SendDriver
+class ModBus: public DataBuffer
 {
     Q_OBJECT
 
@@ -142,20 +143,17 @@ private:
 public slots:
 
     double ReadDataChannel(int channeladdress);
-    void WriteDataChannel(int channeladdress, double data);
     double ReadOnBoardTemperature ();
     double ReadOnBoardVoltage();
     double ClickRelay(char channel);
     void  SetChannelSignalType(uint16_t channel, uint16_t additionalparametr);
     void  SetChannelAdditionalParametr(uint16_t channel, uint16_t signaltype);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
-
+    void WriteDataChannel(int channeladdress, double data);
     void ConfigureChannel(ModbusDeviceStruct* devstruct);
     void ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist);
-
-    uint16_t GetChannelSignalType(uint8_t channel);
-
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
+    uint16_t GetChannelSignalType(uint8_t channel);
 
 public:
 

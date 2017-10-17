@@ -48,6 +48,7 @@ private:
     QList< Device * > Devices;
     Device device;
     QMutex ReadModbusDataMutex;
+    QMutex TestMutex;
 };
 
 #endif // WORKER_H
