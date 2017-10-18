@@ -113,12 +113,26 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListRTD.append("Тип S (Pt10Rh-Pt)");
     StringListRTD.append("Тип T (Cu-CuNi)");
 
-    connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM-dd-yyyy ");
+    datestrings.append("dd-MM-yyyy ");
+    datestrings.append("dd/MM/yyyy ");
+    datestrings.append("MM/dd/yyyy ");
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM.dd.yyyy ");
+    datestrings.append("yyyy-MM-dd ");
 
+    timestrings.append("hh:mm:ss ");
+    timestrings.append("hh.mm.ss ");
+    timestrings.append("hh,mm,ss ");
+
+    ui->timeformat->addItems(timestrings);
+    ui->DateFormat->addItems(datestrings);
+
+    connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SetLabelIndex(int)) );
     SetStackIndex(pageindex);
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
-
     QList<QSpinBox*> spinList = StackedOptions::findChildren<QSpinBox*> ();
 
     for (int i = 0; i < spinList.count(); ++i) {

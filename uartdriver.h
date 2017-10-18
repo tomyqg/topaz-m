@@ -109,24 +109,21 @@ class DataBuffer:public QObject
 public slots:
     static void writechannelvalue(int channel, double value);
     static double readchannelvalue(int channel);
+    static bool readupdatestatus(int channel);
+    static void writeupdatestatus(int channel, bool value);
     QString ReadAllAvailableCOMPorts();
     QString ReadAllUartDataStringFormat();
     QByteArray ReadAllUartDataByteFormat();
 
 private:
-    static double channeltempbuffer[4];
-    QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
-    QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
-    static QMutex *channeldatamutex;
-
-protected:
-    void DelayMsec(int n);
-    QByteArray UartWriteData(QByteArray data);
-    quint16 CalculateCRC16RTU(const QByteArray &array);
-
-public:
     static double channelinputbuffer[4];
     static bool needtoupdatechannel[4];
+    static QMutex *channeldatamutex;
+    static QMutex *channelupdatemutex;
+
+protected:
+    QByteArray UartWriteData(QByteArray data);
+    quint16 CalculateCRC16RTU(const QByteArray &array);
 };
 
 class ModBus: public DataBuffer

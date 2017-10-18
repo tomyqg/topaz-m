@@ -43,34 +43,34 @@ void MainWindow::PaintCyfrasBottom()
     
 
     // задаем координаты отображения квадратов
-    channel1object.xposition = 0;
-    channel1object.yposition = otstupsverhu;
-    channel1object.w = smallrectinglewidth;
-    channel1object.h = smallrectingleheight;
+    channel1.xposition = 0;
+    channel1.yposition = otstupsverhu;
+    channel1.w = smallrectinglewidth;
+    channel1.h = smallrectingleheight;
     
-    channel2object.xposition = smallrectinglewidth;
-    channel2object.yposition = otstupsverhu;
-    channel2object.w = smallrectinglewidth;
-    channel2object.h = smallrectingleheight;
+    channel2.xposition = smallrectinglewidth;
+    channel2.yposition = otstupsverhu;
+    channel2.w = smallrectinglewidth;
+    channel2.h = smallrectingleheight;
     
-    channel3object.xposition = smallrectinglewidth*2;
-    channel3object.yposition = otstupsverhu;
-    channel3object.w = smallrectinglewidth;
-    channel3object.h = smallrectingleheight;
+    channel3.xposition = smallrectinglewidth*2;
+    channel3.yposition = otstupsverhu;
+    channel3.w = smallrectinglewidth;
+    channel3.h = smallrectingleheight;
     
-    channel4object.xposition = smallrectinglewidth*3;
-    channel4object.yposition = otstupsverhu;
-    channel4object.w = smallrectinglewidth;
-    channel4object.h = smallrectingleheight;
+    channel4.xposition = smallrectinglewidth*3;
+    channel4.yposition = otstupsverhu;
+    channel4.w = smallrectinglewidth;
+    channel4.h = smallrectingleheight;
     
     // создаем лист объектов для его отображения на графике
     
     QList<ChannelOptions *> ChannelsObjectsList;
     
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
     
     painter.begin(ui->MessagesWidget);
     
@@ -170,34 +170,34 @@ void MainWindow::PaintCyfrasRight()
     // задаем координаты отображения квадратов
     int xpositionall = widgwidth - smallrectinglewidth;
 
-    channel1object.xposition = xpositionall;
-    channel1object.yposition = otstupsverhu3;
-    channel1object.w = smallrectinglewidth;
-    channel1object.h = smallrectingleheight;
+    channel1.xposition = xpositionall;
+    channel1.yposition = otstupsverhu3;
+    channel1.w = smallrectinglewidth;
+    channel1.h = smallrectingleheight;
     
-    channel2object.xposition = xpositionall;
-    channel2object.yposition = otstupsverhu2;
-    channel2object.w = smallrectinglewidth;
-    channel2object.h = smallrectingleheight;
+    channel2.xposition = xpositionall;
+    channel2.yposition = otstupsverhu2;
+    channel2.w = smallrectinglewidth;
+    channel2.h = smallrectingleheight;
     
-    channel3object.xposition = xpositionall;
-    channel3object.yposition = otstupsverhu1;
-    channel3object.w = smallrectinglewidth;
-    channel3object.h = smallrectingleheight;
+    channel3.xposition = xpositionall;
+    channel3.yposition = otstupsverhu1;
+    channel3.w = smallrectinglewidth;
+    channel3.h = smallrectingleheight;
     
-    channel4object.xposition = xpositionall;
-    channel4object.yposition = otstupsverhu;
-    channel4object.w = smallrectinglewidth;
-    channel4object.h = smallrectingleheight;
+    channel4.xposition = xpositionall;
+    channel4.yposition = otstupsverhu;
+    channel4.w = smallrectinglewidth;
+    channel4.h = smallrectingleheight;
     
     // создаем лист объектов для его отображения на графике
     
     QList<ChannelOptions *> ChannelsObjectsList;
     
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
     
     painter.begin(ui->MessagesWidget);
 
@@ -299,34 +299,34 @@ void MainWindow::PaintCyfrasFullScreen()
 #endif
 
     // задаем координаты отображения квадратов
-    channel1object.xposition = borderwidth;
-    channel1object.yposition = borderwidth;
-    channel1object.w = bigrectinglewidth;
-    channel1object.h = bigrectingleheight;
+    channel1.xposition = borderwidth;
+    channel1.yposition = borderwidth;
+    channel1.w = bigrectinglewidth;
+    channel1.h = bigrectingleheight;
     
-    channel2object.xposition = borderwidth+bigrectinglewidth;
-    channel2object.yposition = borderwidth;
-    channel2object.w = bigrectinglewidth;
-    channel2object.h = bigrectingleheight;
+    channel2.xposition = borderwidth+bigrectinglewidth;
+    channel2.yposition = borderwidth;
+    channel2.w = bigrectinglewidth;
+    channel2.h = bigrectingleheight;
     
-    channel3object.xposition = borderwidth;
-    channel3object.yposition = borderwidth+bigrectingleheight;
-    channel3object.w = bigrectinglewidth;
-    channel3object.h = bigrectingleheight;
+    channel3.xposition = borderwidth;
+    channel3.yposition = borderwidth+bigrectingleheight;
+    channel3.w = bigrectinglewidth;
+    channel3.h = bigrectingleheight;
     
-    channel4object.xposition = borderwidth+bigrectinglewidth;
-    channel4object.yposition = borderwidth+bigrectingleheight;
-    channel4object.w = bigrectinglewidth;
-    channel4object.h = bigrectingleheight;
+    channel4.xposition = borderwidth+bigrectinglewidth;
+    channel4.yposition = borderwidth+bigrectingleheight;
+    channel4.w = bigrectinglewidth;
+    channel4.h = bigrectingleheight;
     
     // создаем лист объектов для его отображения на графике
     
     QList<ChannelOptions *> ChannelsObjectsList;
     
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
     
     painter.begin(ui->MessagesWidget);
 
@@ -424,34 +424,34 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 #endif
 
     // задаем координаты отображения квадратов
-    channel1object.xposition = 0;
-    channel1object.yposition = 0;
-    channel1object.w = alertwindowwidth;
-    channel1object.h = alertwindowheight;
+    channel1.xposition = 0;
+    channel1.yposition = 0;
+    channel1.w = alertwindowwidth;
+    channel1.h = alertwindowheight;
     
-    channel2object.xposition = alertwindowwidth;
-    channel2object.yposition = 0;
-    channel2object.w = alertwindowwidth;
-    channel2object.h = alertwindowheight;
+    channel2.xposition = alertwindowwidth;
+    channel2.yposition = 0;
+    channel2.w = alertwindowwidth;
+    channel2.h = alertwindowheight;
     
-    channel3object.xposition = 0;
-    channel3object.yposition = alertwindowheight;
-    channel3object.w = alertwindowwidth;
-    channel3object.h = alertwindowheight;
+    channel3.xposition = 0;
+    channel3.yposition = alertwindowheight;
+    channel3.w = alertwindowwidth;
+    channel3.h = alertwindowheight;
     
-    channel4object.xposition = alertwindowwidth;
-    channel4object.yposition = alertwindowheight;
-    channel4object.w = alertwindowwidth;
-    channel4object.h = alertwindowheight;
+    channel4.xposition = alertwindowwidth;
+    channel4.yposition = alertwindowheight;
+    channel4.w = alertwindowwidth;
+    channel4.h = alertwindowheight;
     
     // создаем лист объектов для его отображения на графике
     
     QList<ChannelOptions *> ChannelsObjectsList;
     
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
     
     painter.begin(ui->MessagesWidget);
 
@@ -576,17 +576,17 @@ void MainWindow::PaintPolarDiagramm()
     int channel3value = X_Coordinates.last();
     int channel4value = X_Coordinates.last();
 
-    float channel1length = channel1object.GetValuePercent() * 5;
-    float channel2length = channel2object.GetValuePercent() * 5;
-    float channel3length = channel3object.GetValuePercent() * 5;
-    float channel4length = channel4object.GetValuePercent() * 5;
+    float channel1length = channel1.GetValuePercent() * 5;
+    float channel2length = channel2.GetValuePercent() * 5;
+    float channel3length = channel3.GetValuePercent() * 5;
+    float channel4length = channel4.GetValuePercent() * 5;
 
     QColor color1,color2,color3,color4;
 
-    color1 = channel1object.GetStateDependentColor();
-    color2 = channel2object.GetStateDependentColor();
-    color3 = channel3object.GetStateDependentColor();
-    color4 = channel4object.GetStateDependentColor();
+    color1 = channel1.GetStateDependentColor();
+    color2 = channel2.GetStateDependentColor();
+    color3 = channel3.GetStateDependentColor();
+    color4 = channel4.GetStateDependentColor();
 
 
     
@@ -834,17 +834,17 @@ void MainWindow::ReactOnTouch()
              (ypos>confirmwindowposy) &&
              (ypos<confirmwindowposy2) )
     {
-        if (channel4object.GetConfirmationNeed() == true) {
-            channel4object.SetConfirmationNeed(false);
+        if (channel4.GetConfirmationNeed() == true) {
+            channel4.SetConfirmationNeed(false);
         }
-        if (channel3object.GetConfirmationNeed() == true) {
-            channel3object.SetConfirmationNeed(false);
+        if (channel3.GetConfirmationNeed() == true) {
+            channel3.SetConfirmationNeed(false);
         }
-        if (channel2object.GetConfirmationNeed() == true) {
-            channel2object.SetConfirmationNeed(false);
+        if (channel2.GetConfirmationNeed() == true) {
+            channel2.SetConfirmationNeed(false);
         }
-        if (channel1object.GetConfirmationNeed() == true) {
-            channel1object.SetConfirmationNeed(false);
+        if (channel1.GetConfirmationNeed() == true) {
+            channel1.SetConfirmationNeed(false);
         }
     }
     

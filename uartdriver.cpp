@@ -15,10 +15,10 @@
 extern QString inputstr;
 
 double DataBuffer::channelinputbuffer[4];
-double DataBuffer::channeltempbuffer[4];
 bool DataBuffer::needtoupdatechannel[4] = {0,0,0,0};
 
-QMutex *DataBuffer::channeldatamutex = new QMutex();
+QMutex *DataBuffer::channeldatamutex    = new QMutex();
+QMutex *DataBuffer::channelupdatemutex  = new QMutex();
 
 QByteArray copyarray;
 
@@ -93,6 +93,22 @@ double DataBuffer::readchannelvalue(int channel)
     return res;
 }
 
+bool DataBuffer::readupdatestatus(int channel)
+{
+    bool res;
+    channelupdatemutex->lock();
+    res = DataBuffer::needtoupdatechannel[channel];
+    channelupdatemutex->unlock();
+    return res;
+}
+
+void DataBuffer::writeupdatestatus(int channel, bool value)
+{
+    channelupdatemutex->lock();
+    DataBuffer::needtoupdatechannel[channel] = value;
+    channelupdatemutex->unlock();
+}
+
 QByteArray DataBuffer::ReadAllUartDataByteFormat()
 {
     QSerialPort serial;
@@ -144,7 +160,6 @@ QString DataBuffer::ReadAllUartDataStringFormat()
 QString DataBuffer::ReadAllAvailableCOMPorts()
 {
     QString a;
-
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         {
             QSerialPort serial;
@@ -155,12 +170,6 @@ QString DataBuffer::ReadAllAvailableCOMPorts()
     return a;
 }
 
-void DataBuffer::DelayMsec(int n)
-{
-    QTime dieTime= QTime::currentTime().addMSecs(n);
-    while (QTime::currentTime() < dieTime)
-        ;
-}
 
 void ModBus::ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist)
 {
@@ -186,12 +195,10 @@ void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
     //  transfer scale
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleHiLimitAddress,devicestructure->TransferScaleHiLimit);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->TransferScaleLoLimitAddress,devicestructure->TransferScaleLoLimit);
-
     //  UserCalibration1
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1GainAddress,devicestructure->UserCalibration1Gain);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1OffsetAddress,devicestructure->UserCalibration1Offset);
     ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration1DateAddress,devicestructure->UserCalibration1Date);
-
     //  UserCalibration2
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2GainAddress,devicestructure->UserCalibration2Gain);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration2OffsetAddress,devicestructure->UserCalibration2Offset);
@@ -204,8 +211,6 @@ void  ModBus::ConfigureChannel(ModbusDeviceStruct* devicestructure)
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4GainAddress,devicestructure->UserCalibration4Gain);
     ModBusSetSingleRegisterFloat(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4OffsetAddress,devicestructure->UserCalibration4Offset);
     ModBusSetSingleRegisterUint32(devicestructure->ModbusNetworkAddress,devicestructure->UserCalibration4DateAddress,devicestructure->UserCalibration4Date);
-
-    //    qDebug() << devicestructure->name;
 }
 
 void ModBus::SetSingleCoil(char channel, uint16_t Address, bool newstate)
@@ -254,7 +259,6 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
     RegisterLenghtHi = (int) ((Lenght & 0xFF00)>>8);
     RegisterLenghtLo = (int) (Lenght & 0x00FF);
 
-    //    requestdata.append(DeviceAdress);
     requestdata.append(DeviceAdress); // Адрес устройства
     requestdata.append(ModBus::ReadInputRegisters); // Функциональный код - читать регистр
     requestdata.append(AddressHi); // Адрес первого регистра Hi байт
@@ -262,7 +266,6 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
     requestdata.append(RegisterLenghtHi); // Количество регистров Hi байт
     requestdata.append(RegisterLenghtLo); // Количество регистров Lo байт
 
-    //    qDebug() << requestdata;
     quint16 CRC16 = CalculateCRC16RTU(requestdata);
     CRC16Hi = (int) ((CRC16 & 0xFF00)>>8);
     CRC16Lo = (int) (CRC16 & 0x00FF);
@@ -273,8 +276,8 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
 
     //    qDebug() << requestdata << "requestdata ";
     //    qDebug() << InputDataByteArray << "InputDataByteArray";
-
     //    qDebug() << requestdata << "requestdata ";
+
     if (InputDataByteArray.length()<3)
         return ModBus::ConnectionError;
 
@@ -321,7 +324,6 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
                 stream >> val;
 
-
                 return val;
             }
             else
@@ -364,8 +366,8 @@ float ModBus::ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16
 
     //    qDebug() << requestdata << "requestdata ";
     //    qDebug() << InputDataByteArray << "InputDataByteArray";
-
     //    qDebug() << requestdata << "requestdata ";
+
     if (InputDataByteArray.length()<3)
         return ModBus::ConnectionError;
 
@@ -411,8 +413,6 @@ float ModBus::ModBusGetHoldingRegister(char DeviceAdress,uint16_t Address,uint16
                 QDataStream stream(arraytofloat);
                 stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
                 stream >> val;
-
-
                 return val;
             }
             else
@@ -463,8 +463,8 @@ void ModBus::ModBusSetSingleRegisterFloat(char DeviceAdress,uint16_t Address,flo
 
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
 
-//    qDebug() << requestdata << "requestdata";
-//    qDebug() << InputDataByteArray << "InputDataByteArray";
+    //    qDebug() << requestdata << "requestdata";
+    //    qDebug() << InputDataByteArray << "InputDataByteArray";
 }
 
 void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,uint16_t Value)
@@ -478,7 +478,7 @@ void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,ui
     RegisterValueHi = (int) ((Value & 0xFF00)>>8);
     RegisterValueLo = (int) (Value & 0x00FF);
 
-    //    requestdata.append(DeviceAdress);
+    //requestdata.append(DeviceAdress);
     requestdata.append(DeviceAdress); //Адрес устройства
     requestdata.append(ModBus::WriteSingleRegister); //Функциональный код
     requestdata.append(AddressHi); //	Адрес первого регистра Hi байт
@@ -496,7 +496,7 @@ void ModBus::ModBusSetSingleRegisterUint16(char DeviceAdress,uint16_t Address,ui
 
     if(InputDataByteArray == requestdata)
     {
-        //        qDebug() << "InputDataByteArray = requestdata";
+        //qDebug() << "InputDataByteArray = requestdata";
     }
 }
 
@@ -538,8 +538,8 @@ void ModBus::ModBusSetSingleRegisterUint32(char DeviceAdress,uint16_t Address,ui
     requestdata.append(CRC16Lo); // подставляем в конец контрольную сумму
     requestdata.append(CRC16Hi);
     InputDataByteArray = UartWriteData(requestdata); // make request and recieve response
-    //        qDebug() << requestdata << "requestdata uint32";
-    //        qDebug() << InputDataByteArray << "InputDataByteArray uint32";
+    //qDebug() << requestdata << "requestdata uint32";
+    //qDebug() << InputDataByteArray << "InputDataByteArray uint32";
 }
 
 
@@ -653,7 +653,7 @@ void ModBus::SetChannelAdditionalParametr(uint16_t channel, uint16_t additionalp
     uint16_t channelbias;
 
     // avoid warnings
-additionalparametr = channelbias+1;
+    additionalparametr = channelbias+1;
 
     switch (channel) {
     case ModBus::DataChannel1:
@@ -675,10 +675,9 @@ additionalparametr = channelbias+1;
 
 void ModBus::SetChannelSignalType(uint16_t channel, uint16_t signaltype)
 {
-
     channel = signaltype;
-    //    uint8_t channelbias;
 
+    //    uint8_t channelbias;
     //    switch (channel) {
     //    case ModBus::DataChannel1:
     //        channelbias = ModBus::Channel1AddressBias;

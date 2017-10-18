@@ -25,10 +25,10 @@ public:
     ~MainWindow();
 
     //UartDriver UD;
-    ChannelOptions channel1object;
-    ChannelOptions channel2object;
-    ChannelOptions channel3object;
-    ChannelOptions channel4object;
+    ChannelOptions channel1;
+    ChannelOptions channel2;
+    ChannelOptions channel3;
+    ChannelOptions channel4;
 
     mathresolver eee;
 
@@ -115,7 +115,10 @@ private:
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
     int dateindex;
     bool EcoMode;
-    QVector<QString> datestrings;
+//    QVector<QString> datestrings;
+//    QVector<QString> timestrings;
+
+    QStringList datestrings, timestrings;
 
 private slots:
     void OpenSerialPort( int );

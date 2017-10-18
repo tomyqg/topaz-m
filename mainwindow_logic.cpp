@@ -51,11 +51,18 @@ extern QColor ChannelColorLowState;
 void MainWindow::MainWindowInitialization()
 {
     datestrings.append("dd.MM.yyyy ");
-    datestrings.append("dd/MM/yyyy ");
-    datestrings.append("MM.dd.yyyy ");
-    datestrings.append("MM/dd/yyyy ");
-    datestrings.append("dd-MM-yyyy ");
     datestrings.append("MM-dd-yyyy ");
+    datestrings.append("dd-MM-yyyy ");
+    datestrings.append("dd/MM/yyyy ");
+    datestrings.append("MM/dd/yyyy ");
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM.dd.yyyy ");
+    datestrings.append("yyyy-MM-dd ");
+
+    timestrings.append("hh:mm:ss ");
+    timestrings.append("hh.mm.ss ");
+    timestrings.append("hh,mm,ss ");
+
     dateindex = 0 ;
 
     setWindowFlags(Qt::CustomizeWindowHint);
@@ -77,7 +84,6 @@ void MainWindow::MainWindowInitialization()
         ++i;
     }
 
-    //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
 
@@ -129,25 +135,25 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-    channel1object.ReadSingleChannelOptionFromFile(1);
-    channel2object.ReadSingleChannelOptionFromFile(2);
-    channel3object.ReadSingleChannelOptionFromFile(3);
-    channel4object.ReadSingleChannelOptionFromFile(4);
+    channel1.ReadSingleChannelOptionFromFile(1);
+    channel2.ReadSingleChannelOptionFromFile(2);
+    channel3.ReadSingleChannelOptionFromFile(3);
+    channel4.ReadSingleChannelOptionFromFile(4);
 
-    channel1object.SetNormalColor(Channel1ColorNormal);
-    channel2object.SetNormalColor(Channel2ColorNormal);
-    channel3object.SetNormalColor(Channel3ColorNormal);
-    channel4object.SetNormalColor(Channel4ColorNormal);
+    channel1.SetNormalColor(Channel1ColorNormal);
+    channel2.SetNormalColor(Channel2ColorNormal);
+    channel3.SetNormalColor(Channel3ColorNormal);
+    channel4.SetNormalColor(Channel4ColorNormal);
 
-    channel1object.SetMaximumColor(Channel1ColorMaximum);
-    channel2object.SetMaximumColor(Channel2ColorMaximum);
-    channel3object.SetMaximumColor(Channel3ColorMaximum);
-    channel4object.SetMaximumColor(Channel4ColorMaximum);
+    channel1.SetMaximumColor(Channel1ColorMaximum);
+    channel2.SetMaximumColor(Channel2ColorMaximum);
+    channel3.SetMaximumColor(Channel3ColorMaximum);
+    channel4.SetMaximumColor(Channel4ColorMaximum);
 
-    channel1object.SetMinimumColor(Channel1ColorMinimum);
-    channel2object.SetMinimumColor(Channel2ColorMinimum);
-    channel3object.SetMinimumColor(Channel3ColorMinimum);
-    channel4object.SetMinimumColor(Channel4ColorMinimum);
+    channel1.SetMinimumColor(Channel1ColorMinimum);
+    channel2.SetMinimumColor(Channel2ColorMinimum);
+    channel3.SetMinimumColor(Channel3ColorMinimum);
+    channel4.SetMinimumColor(Channel4ColorMinimum);
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
@@ -160,12 +166,12 @@ void MainWindow::MainWindowInitialization()
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
-    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
+//    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
     connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
 
     connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-    SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
+    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
 
     WorkerThread->start(); // запускаем сам поток
 
@@ -179,6 +185,8 @@ void MainWindow::MainWindowInitialization()
 
     // включаем эко режим
     SetEcoMode(true);
+
+    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -255,12 +263,12 @@ void MainWindow::OpenOptionsWindow( int index )
     StackedOptions *sw= new StackedOptions(index,0);
     sw->exec();
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    channel1object.ReadSingleChannelOptionFromFile(1);
-    channel2object.ReadSingleChannelOptionFromFile(2);
-    channel3object.ReadSingleChannelOptionFromFile(3);
-    channel4object.ReadSingleChannelOptionFromFile(4);
-    SendObjectsToWorker(&channel1object,&channel2object,&channel3object,&channel4object);
-
+    channel1.ReadSingleChannelOptionFromFile(1);
+    channel2.ReadSingleChannelOptionFromFile(2);
+    channel3.ReadSingleChannelOptionFromFile(3);
+    channel4.ReadSingleChannelOptionFromFile(4);
+    // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
+    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
     //если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
@@ -344,7 +352,7 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
+    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString(timestrings.at(0)));
     resizeSelf(1024,768);
 }
 
@@ -541,20 +549,20 @@ void MainWindow::ChangePalette(int i)
         Channel4ColorMinimum = QColor(157,98,43);
     }
 
-    channel1object.SetNormalColor(Channel1ColorNormal);
-    channel2object.SetNormalColor(Channel2ColorNormal);
-    channel3object.SetNormalColor(Channel3ColorNormal);
-    channel4object.SetNormalColor(Channel4ColorNormal);
+    channel1.SetNormalColor(Channel1ColorNormal);
+    channel2.SetNormalColor(Channel2ColorNormal);
+    channel3.SetNormalColor(Channel3ColorNormal);
+    channel4.SetNormalColor(Channel4ColorNormal);
 
-    channel1object.SetMaximumColor(Channel1ColorMaximum);
-    channel2object.SetMaximumColor(Channel2ColorMaximum);
-    channel3object.SetMaximumColor(Channel3ColorMaximum);
-    channel4object.SetMaximumColor(Channel4ColorMaximum);
+    channel1.SetMaximumColor(Channel1ColorMaximum);
+    channel2.SetMaximumColor(Channel2ColorMaximum);
+    channel3.SetMaximumColor(Channel3ColorMaximum);
+    channel4.SetMaximumColor(Channel4ColorMaximum);
 
-    channel1object.SetMinimumColor(Channel1ColorMinimum);
-    channel2object.SetMinimumColor(Channel2ColorMinimum);
-    channel3object.SetMinimumColor(Channel3ColorMinimum);
-    channel4object.SetMinimumColor(Channel4ColorMinimum);
+    channel1.SetMinimumColor(Channel1ColorMinimum);
+    channel2.SetMinimumColor(Channel2ColorMinimum);
+    channel3.SetMinimumColor(Channel3ColorMinimum);
+    channel4.SetMinimumColor(Channel4ColorMinimum);
 
     ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }

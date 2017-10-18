@@ -76,19 +76,19 @@ QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordin
 
 void MainWindow::AddValuesToBuffer()
 {
-    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
+//    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
 
-    Y_coordinates_Chanel_1.append(channel1object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_2.append(channel2object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_3.append(channel3object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_4.append(channel4object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_1.append(channel1.GetCurrentChannelValue());
+    Y_coordinates_Chanel_2.append(channel2.GetCurrentChannelValue());
+    Y_coordinates_Chanel_3.append(channel3.GetCurrentChannelValue());
+    Y_coordinates_Chanel_4.append(channel4.GetCurrentChannelValue());
 
-    Y_coordinates_Chanel_1_archive.append(channel1object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_2_archive.append(channel2object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_3_archive.append(channel3object.GetCurrentChannelValue());
-    Y_coordinates_Chanel_4_archive.append(channel4object.GetCurrentChannelValue());
+    Y_coordinates_Chanel_1_archive.append(channel1.GetCurrentChannelValue());
+    Y_coordinates_Chanel_2_archive.append(channel2.GetCurrentChannelValue());
+    Y_coordinates_Chanel_3_archive.append(channel3.GetCurrentChannelValue());
+    Y_coordinates_Chanel_4_archive.append(channel4.GetCurrentChannelValue());
 
     while (X_Coordinates.length()>GetXRange())
     {
@@ -103,7 +103,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     xoffset++;
-    stopWorkSignal(); // стопим воркер если не нужно считывать данные
+//    stopWorkSignal(); // стопим воркер если не нужно считывать данные
 }
 
 void MainWindow::UpdateGraphics()
@@ -149,23 +149,23 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(GraphWidthinPixels);
-    graphPen.setColor(channel1object.GetStateDependentColor());
+    graphPen.setColor(channel1.GetStateDependentColor());
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-    graphPen.setColor(channel2object.GetStateDependentColor());
+    graphPen.setColor(channel2.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-    graphPen.setColor(channel3object.GetStateDependentColor());
+    graphPen.setColor(channel3.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-    graphPen.setColor(channel4object.GetStateDependentColor());
+    graphPen.setColor(channel4.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
@@ -187,15 +187,15 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
-    double chan1higherstate = channel1object.GetMaximumChannelValue();
-    double chan2higherstate = channel2object.GetMaximumChannelValue();
-    double chan3higherstate = channel3object.GetMaximumChannelValue();
-    double chan4higherstate = channel4object.GetMaximumChannelValue();
+    double chan1higherstate = channel1.GetMaximumChannelValue();
+    double chan2higherstate = channel2.GetMaximumChannelValue();
+    double chan3higherstate = channel3.GetMaximumChannelValue();
+    double chan4higherstate = channel4.GetMaximumChannelValue();
 
-    double chan1lowerstate = channel1object.GetMinimumChannelValue();
-    double chan2lowerstate = channel2object.GetMinimumChannelValue();
-    double chan3lowerstate = channel3object.GetMinimumChannelValue();
-    double chan4lowerstate = channel4object.GetMinimumChannelValue();
+    double chan1lowerstate = channel1.GetMinimumChannelValue();
+    double chan2lowerstate = channel2.GetMinimumChannelValue();
+    double chan3lowerstate = channel3.GetMinimumChannelValue();
+    double chan4lowerstate = channel4.GetMinimumChannelValue();
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -290,38 +290,38 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     x4lim.append(x4.at(1));
     x4lim.append(x4.at(1));
 
-    y1.append(channel1object.GetCurrentChannelValue());
-    y1.append(channel1object.GetCurrentChannelValue());
-    y2.append(channel2object.GetCurrentChannelValue());
-    y2.append(channel2object.GetCurrentChannelValue());
-    y3.append(channel3object.GetCurrentChannelValue());
-    y3.append(channel3object.GetCurrentChannelValue());
-    y4.append(channel4object.GetCurrentChannelValue());
-    y4.append(channel4object.GetCurrentChannelValue());
+    y1.append(channel1.GetCurrentChannelValue());
+    y1.append(channel1.GetCurrentChannelValue());
+    y2.append(channel2.GetCurrentChannelValue());
+    y2.append(channel2.GetCurrentChannelValue());
+    y3.append(channel3.GetCurrentChannelValue());
+    y3.append(channel3.GetCurrentChannelValue());
+    y4.append(channel4.GetCurrentChannelValue());
+    y4.append(channel4.GetCurrentChannelValue());
 
     graphPen.setWidth(GraphWidthinPixels);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x1, y1);
-    ui->customPlot->graph()->setBrush(QBrush(channel1object.GetStateDependentColor()));
+    ui->customPlot->graph()->setBrush(QBrush(channel1.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x2, y2);
-    ui->customPlot->graph()->setBrush(QBrush(channel2object.GetStateDependentColor()));
+    ui->customPlot->graph()->setBrush(QBrush(channel2.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x3, y3);
-    ui->customPlot->graph()->setBrush(QBrush(channel3object.GetStateDependentColor()));
+    ui->customPlot->graph()->setBrush(QBrush(channel3.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x4, y4);
-    ui->customPlot->graph()->setBrush(QBrush(channel4object.GetStateDependentColor()));
+    ui->customPlot->graph()->setBrush(QBrush(channel4.GetStateDependentColor()));
     graphPen.setColor(QColor(Qt::black));
     ui->customPlot->graph()->setPen(graphPen);
 
@@ -369,10 +369,10 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     QList<ChannelOptions *> ChannelsObjectsList;
 
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
 
     QList<int> arrowsendcoords;
 
@@ -439,10 +439,10 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
         QList<ChannelOptions *> ChannelsObjectsList;
 
-        ChannelsObjectsList.append(&channel1object);
-        ChannelsObjectsList.append(&channel2object);
-        ChannelsObjectsList.append(&channel3object);
-        ChannelsObjectsList.append(&channel4object);
+        ChannelsObjectsList.append(&channel1);
+        ChannelsObjectsList.append(&channel2);
+        ChannelsObjectsList.append(&channel3);
+        ChannelsObjectsList.append(&channel4);
 
         QList<int> arrowsendcoords;
 
@@ -481,7 +481,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->replot();
     ui->customPlot->clearGraphs();
-    ui->customPlot->clearItems();
+    ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
 }
 
 void MainWindow::GrafsUpdateTrends()
@@ -502,20 +502,17 @@ void MainWindow::GrafsUpdateTrends()
 
         QList<ChannelOptions *> ChannelsObjectsList;
 
-        ChannelsObjectsList.append(&channel1object);
-        ChannelsObjectsList.append(&channel2object);
-        ChannelsObjectsList.append(&channel3object);
-        ChannelsObjectsList.append(&channel4object);
-
-        QList<int> arrowsendcoords;
+        ChannelsObjectsList.append(&channel1);
+        ChannelsObjectsList.append(&channel2);
+        ChannelsObjectsList.append(&channel3);
+        ChannelsObjectsList.append(&channel4);
 
         // рисуем стрелки для каждой уставки
 
-        int index = 0 ;
+        int index = 0;
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
             QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-            //    arrow->start->setCoords(400,200);
 
             int ystart = 150;
             int xstart = 600;
@@ -540,35 +537,28 @@ void MainWindow::GrafsUpdateTrends()
 
             ++index;
         }
-
     }
 
     graphPen.setWidth(GraphWidthinPixels);
-    //    graphPen.set
     graphPen.setColor(Channel1Color);
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    {
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-        graphPen.setColor(Channel2Color);
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    graphPen.setColor(Channel2Color);
+    ui->customPlot->graph()->setPen(graphPen);
 
-    {
-        ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-        graphPen.setColor(Channel3Color);
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
+    graphPen.setColor(Channel3Color);
+    ui->customPlot->graph()->setPen(graphPen);
 
-    {
-        ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-        graphPen.setColor(Channel4Color);
-        ui->customPlot->graph()->setPen(graphPen);
-    }
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
+    graphPen.setColor(Channel4Color);
+    ui->customPlot->graph()->setPen(graphPen);
+
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
@@ -581,7 +571,6 @@ void MainWindow::GrafsUpdateTrends()
     {
         ui->customPlot->yAxis->rescale();
     }
-
 
     ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
@@ -616,14 +605,14 @@ void MainWindow::GrafsUpdateBars()
     Bar4_X_Coord.append(75);
     Bar4_X_Coord.append(85);
 
-    Bar1_Y_Coord.append(DataBuffer::readchannelvalue(0));
-    Bar1_Y_Coord.append(DataBuffer::readchannelvalue(0));
-    Bar2_Y_Coord.append(DataBuffer::readchannelvalue(1));
-    Bar2_Y_Coord.append(DataBuffer::readchannelvalue(1));
-    Bar3_Y_Coord.append(DataBuffer::readchannelvalue(2));
-    Bar3_Y_Coord.append(DataBuffer::readchannelvalue(2));
-    Bar4_Y_Coord.append(DataBuffer::readchannelvalue(3));
-    Bar4_Y_Coord.append(DataBuffer::readchannelvalue(3));
+    Bar1_Y_Coord.append(channel1.GetCurrentChannelValue());
+    Bar1_Y_Coord.append(channel1.GetCurrentChannelValue());
+    Bar2_Y_Coord.append(channel2.GetCurrentChannelValue());
+    Bar2_Y_Coord.append(channel2.GetCurrentChannelValue());
+    Bar3_Y_Coord.append(channel3.GetCurrentChannelValue());
+    Bar3_Y_Coord.append(channel3.GetCurrentChannelValue());
+    Bar4_Y_Coord.append(channel4.GetCurrentChannelValue());
+    Bar4_Y_Coord.append(channel4.GetCurrentChannelValue());
 
     QVector<double> x1lim,x2lim,x3lim,x4lim;
     QVector<double> y1max,y2max,y3max,y4max;
@@ -631,15 +620,15 @@ void MainWindow::GrafsUpdateBars()
 
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
-    double chan1higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1);
-    double chan2higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2);
-    double chan3higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3);
-    double chan4higherstate = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4);
+    double chan1higherstate = channel1.GetMaximumChannelValue();
+    double chan2higherstate = channel2.GetMaximumChannelValue();
+    double chan3higherstate = channel3.GetMaximumChannelValue();
+    double chan4higherstate = channel4.GetMaximumChannelValue();
 
-    double chan1lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1);
-    double chan2lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2);
-    double chan3lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3);
-    double chan4lowerstate = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4);
+    double chan1lowerstate = channel1.GetMinimumChannelValue();
+    double chan2lowerstate = channel2.GetMinimumChannelValue();
+    double chan3lowerstate = channel3.GetMinimumChannelValue();
+    double chan4lowerstate = channel4.GetMinimumChannelValue();
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -654,7 +643,6 @@ void MainWindow::GrafsUpdateBars()
     y2max.append(chan2higherstate);
     y2max.append(0);
     y2max.append(chan2higherstate);
-
 
     y3max.append(chan3higherstate);
     y3max.append(chan3higherstate);
@@ -759,7 +747,7 @@ void MainWindow::GrafsUpdateBars()
     ui->customPlot->graph()->setPen(graphPen);
 
     LabelsBar.clear();
-    LabelsBar.append("0");LabelsBar.append(channel1object.GetChannelName());LabelsBar.append(channel2object.GetChannelName());LabelsBar.append(channel3object.GetChannelName());LabelsBar.append(channel4object.GetChannelName());
+    LabelsBar.append("0");LabelsBar.append(channel1.GetChannelName());LabelsBar.append(channel2.GetChannelName());LabelsBar.append(channel3.GetChannelName());LabelsBar.append(channel4.GetChannelName());
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
@@ -807,17 +795,17 @@ void MainWindow::GrafsUpdateBars()
 
     QList<ChannelOptions *> ChannelsObjectsList;
 
-    ChannelsObjectsList.append(&channel1object);
-    ChannelsObjectsList.append(&channel2object);
-    ChannelsObjectsList.append(&channel3object);
-    ChannelsObjectsList.append(&channel4object);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
 
     QList<int> arrowsendcoords;
 
-    arrowsendcoords.append(Bar1_X_Coord.at(0));
-    arrowsendcoords.append(Bar2_X_Coord.at(0));
-    arrowsendcoords.append(Bar3_X_Coord.at(0));
-    arrowsendcoords.append(Bar4_X_Coord.at(0));
+    arrowsendcoords.append(Bar1_X_Coord.at(0) - 1);
+    arrowsendcoords.append(Bar2_X_Coord.at(0) - 1);
+    arrowsendcoords.append(Bar3_X_Coord.at(0) - 1);
+    arrowsendcoords.append(Bar4_X_Coord.at(0) - 1);
 
     // рисуем стрелки для каждой уставки
 
@@ -874,36 +862,36 @@ void MainWindow::GrafsUpdateBars()
 
 void MainWindow::UpdateChannel1Slot()
 {
-    DataBuffer::needtoupdatechannel[0] = 1;
-    int period = channel1object.GetMeasurePeriod()*1000;
+    DataBuffer::writeupdatestatus(0,true);
+    int period = channel1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1object.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
-    CheckState(channel1object);
+    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
+    CheckState(channel1);
 }
 
 void MainWindow::UpdateChannel2Slot()
 {
-    DataBuffer::needtoupdatechannel[1] = 1;
-    int period = channel2object.GetMeasurePeriod()*1000;
+    DataBuffer::writeupdatestatus(1,true);
+    int period = channel2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-    channel2object.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
-    CheckState(channel2object);
+    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
+    CheckState(channel2);
 }
 
 void MainWindow::UpdateChannel3Slot()
 {
-    DataBuffer::needtoupdatechannel[2] = 1;
-    int period = channel3object.GetMeasurePeriod()*1000;
+    DataBuffer::writeupdatestatus(2,true);
+    int period = channel3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
-    channel3object.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
-    CheckState(channel3object);
+    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
+    CheckState(channel3);
 }
 
 void MainWindow::UpdateChannel4Slot()
 {
-    DataBuffer::needtoupdatechannel[3] = 1;
-    int period = channel4object.GetMeasurePeriod()*1000;
+    DataBuffer::writeupdatestatus(3,true);
+    int period = channel4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
-    channel4object.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
-    CheckState(channel4object);
+    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
+    CheckState(channel4);
 }

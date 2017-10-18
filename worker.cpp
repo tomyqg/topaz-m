@@ -361,7 +361,8 @@ void worker::do_Work()
     double currentdata;
 
     float destfloat[1024];
-    memset( destfloat, 0, 1024 );
+
+    memset( destfloat, 0, 1024 );//заполняем нулями массив
 
     emit SignalToObj_mainThreadGUI();
 
@@ -372,6 +373,7 @@ void worker::do_Work()
 
     if ( isrunning || !isstopped ) // если воркер запущен
     {
+        qDebug() <<  "isrunning" ;
         this->thread()->setPriority(QThread::LowPriority);
 
         // пихаем все каналы в один массив
@@ -385,17 +387,17 @@ void worker::do_Work()
         if (globalindex > 215)
             globalindex = - 50;
 
-        int index = 0;
+        int chanelindex = 0;
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::needtoupdatechannel[index] == 1) )
+            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::readupdatestatus(chanelindex)) )
             {
                 QCoreApplication::applicationDirPath();
-                DataBuffer::needtoupdatechannel[index] = 0;
+                DataBuffer::writeupdatestatus(chanelindex,false);
 
                 //ReadModbusDataMutex.lock();
-                //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не  симуляция то читаем канал по модбас
+                //ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] ); //если не симуляция то читаем канал по модбас
                 //ReadModbusDataMutex.unlock();
 
                 currentdata = destfloat[0];
@@ -408,7 +410,7 @@ void worker::do_Work()
 
                 double r = rand()%50;
 
-                switch (index) {
+                switch (chanelindex) {
                 case 0:
                     currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
@@ -425,9 +427,12 @@ void worker::do_Work()
                     break;
                 }
 
-                DataBuffer::writechannelvalue(index,currentdata);
+                Chanel->SetCurrentChannelValue(currentdata );
+                //DataBuffer::writechannelvalue(chanelindex,currentdata);
+                //Chanel->SetCurrentChannelValue(chanelindex*10+10);
+                //DataBuffer::channeltempbuffer[1] = 1;
             }
-            ++index;
+            ++chanelindex;
         }
     }
 
@@ -435,7 +440,7 @@ void worker::do_Work()
     // do important work here
     // allow the thread's event loop to process other events before doing more "work"
     // for instance, your start/stop signals from the MainWindow
-    QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(this, "do_Work", Qt::QueuedConnection );
 }
 
 void worker::StopWorkSlot()

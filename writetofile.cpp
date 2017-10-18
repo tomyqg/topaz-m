@@ -158,10 +158,10 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
         valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
-    QString channel1period = QString::number( channel1object.GetMeasurePeriod(), 'f', 1);
-    QString channel2period = QString::number( channel2object.GetMeasurePeriod(), 'f', 1);
-    QString channel3period = QString::number( channel3object.GetMeasurePeriod(), 'f', 1);
-    QString channel4period = QString::number( channel4object.GetMeasurePeriod(), 'f', 1);
+    QString channel1period = QString::number( channel1.GetMeasurePeriod(), 'f', 1);
+    QString channel2period = QString::number( channel2.GetMeasurePeriod(), 'f', 1);
+    QString channel3period = QString::number( channel3.GetMeasurePeriod(), 'f', 1);
+    QString channel4period = QString::number( channel4.GetMeasurePeriod(), 'f', 1);
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
