@@ -131,6 +131,7 @@ private:
     mathresolver MR;
 
     QVector<double> channelvaluesbuffer;
+    QVector<double> dempheredvaluesbuffer;
     QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
 

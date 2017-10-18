@@ -269,6 +269,13 @@ bool ChannelOptions::MinimumNow()
 
 QVector<double> ChannelOptions::GetChannelValuesBuffer()
 {
+//    QVector<double> buf;
+
+//    if (demphervalue<=1)
+//        buf = channelvaluesbuffer;
+//    else
+//        buf = dempheredvaluesbuffer;
+
     return channelvaluesbuffer;
 }
 
@@ -345,7 +352,7 @@ double ChannelOptions::GetMaxplusMinChannelValue()
 
 double ChannelOptions::GetDempheredChannelValue()
 {
-    return mathresolver::dGetDempheredValue(channelvaluesbuffer,this->GetDempherValue());
+    return mathresolver::dGetDempheredValue(channelvaluesbuffer,GetDempherValue());
 }
 
 double ChannelOptions::GetValuePercent()
@@ -358,20 +365,17 @@ double ChannelOptions::GetValuePercent()
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
+    currentvalue = value;
     channelvaluesbuffer.append(value);
     channelxbuffer.append(X_Coordinates.last());
+    dempheredvaluesbuffer.append(GetDempherValue());
+    //    while (channelxbuffer.last()>300)
+    //    {
+    //        channelvaluesbuffer.removeFirst();
+    //        channelxbuffer.removeFirst();
+    //    }
 
-//    while (channelxbuffer.last()>300)
-//    {
-//        channelvaluesbuffer.removeFirst();
-//        channelxbuffer.removeFirst();
-//    }
-
-    currentvalue = value;
-
-    this->GetDempherValue();
-
-    //    qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();;
+    //    qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();
 }
 
 void ChannelOptions::SetDempher(double newdempher)
