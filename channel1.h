@@ -52,6 +52,8 @@ public:
     bool GetConfirmationNeed();
     bool MaximumNow();
     bool MinimumNow();
+    QVector<double> GetChannelValuesBuffer();
+    QVector<double> GetChannelXBuffer();
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
@@ -128,7 +130,8 @@ private:
 
     mathresolver MR;
 
-    QVector<double> channelbuffer;
+    QVector<double> channelvaluesbuffer;
+    QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
 
 signals:

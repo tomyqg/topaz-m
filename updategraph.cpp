@@ -138,7 +138,7 @@ void MainWindow::UpdateGraphics()
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
 //    while (X_Coordinates.length()>GetXRange())
-    while (X_Coordinates.length()>100)
+    while (X_Coordinates.length()>50)
     {
         X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
     }
@@ -154,24 +154,24 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
+    ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(channel1.GetStateDependentColor());
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    ui->customPlot->graph()->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
     graphPen.setColor(channel2.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
+    ui->customPlot->graph()->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
     graphPen.setColor(channel3.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
+    ui->customPlot->graph()->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
     graphPen.setColor(channel4.GetStateDependentColor());
     ui->customPlot->graph()->setPen(graphPen);
 

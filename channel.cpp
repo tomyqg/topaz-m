@@ -267,6 +267,16 @@ bool ChannelOptions::MinimumNow()
     return result;
 }
 
+QVector<double> ChannelOptions::GetChannelValuesBuffer()
+{
+    return channelvaluesbuffer;
+}
+
+QVector<double> ChannelOptions::GetChannelXBuffer()
+{
+    return channelxbuffer;
+}
+
 void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 {
     needConfirmationchannel = confirmationstate;
@@ -274,11 +284,9 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 
 double ChannelOptions::GetCurrentChannelValue()
 {
-
     int regtype = GetRegistrationType();
 
     //    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
-
     switch (regtype) {
     case 0: // мгновенное значение
         currentvalue;
@@ -317,27 +325,27 @@ double ChannelOptions::GetCurrentChannelValue()
 
 double ChannelOptions::GetMaximumChannelValue()
 {
-    return MR.dGetMaximumValue(channelbuffer);
+    return MR.dGetMaximumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMinimumChannelValue()
 {
-    return MR.dGetMinimumValue(channelbuffer);
+    return MR.dGetMinimumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetAverageChannelValue()
 {
-    return MR.dGetAverageValue(channelbuffer);
+    return MR.dGetAverageValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMaxplusMinChannelValue()
 {
-    return  MR.dGetMaximumValue(channelbuffer) + MR.dGetMinimumValue(channelbuffer);
+    return  MR.dGetMaximumValue(channelvaluesbuffer) + MR.dGetMinimumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetDempheredChannelValue()
 {
-    return mathresolver::dGetDempheredValue(channelbuffer,this->GetDempherValue());
+    return mathresolver::dGetDempheredValue(channelvaluesbuffer,this->GetDempherValue());
 }
 
 double ChannelOptions::GetValuePercent()
@@ -350,10 +358,14 @@ double ChannelOptions::GetValuePercent()
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-    channelbuffer.append(value);
+    channelvaluesbuffer.append(value);
+    channelxbuffer.append(X_Coordinates.last());
 
-    if (channelbuffer.length()>300)
-        channelbuffer.removeFirst();
+//    while (channelxbuffer.last()>300)
+//    {
+//        channelvaluesbuffer.removeFirst();
+//        channelxbuffer.removeFirst();
+//    }
 
     currentvalue = value;
 
