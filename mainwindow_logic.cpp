@@ -166,7 +166,7 @@ void MainWindow::MainWindowInitialization()
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
-//    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
+    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
 
     connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
 

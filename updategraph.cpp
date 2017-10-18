@@ -76,7 +76,7 @@ QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordin
 
 void MainWindow::AddValuesToBuffer()
 {
-//    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
+    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
 
@@ -103,7 +103,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     xoffset++;
-//    stopWorkSignal(); // стопим воркер если не нужно считывать данные
+    stopWorkSignal(); // стопим воркер если не нужно считывать данные
 }
 
 void MainWindow::UpdateGraphics()
@@ -137,10 +137,17 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
-    while (X_Coordinates.length()>GetXRange())
+//    while (X_Coordinates.length()>GetXRange())
+    while (X_Coordinates.length()>100)
     {
         X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
     }
+
+//    if (X_Coordinates.length()<100)
+    {
+        qDebug() << X_Coordinates.at(0) << "X" << Y_coordinates_Chanel_1.at(0) << "Y";
+    }
+
 
     ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
@@ -865,7 +872,7 @@ void MainWindow::UpdateChannel1Slot()
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
-    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
+//    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
     CheckState(channel1);
 }
 
@@ -874,7 +881,7 @@ void MainWindow::UpdateChannel2Slot()
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
-    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
+//    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
     CheckState(channel2);
 }
 
@@ -883,7 +890,7 @@ void MainWindow::UpdateChannel3Slot()
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
-    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
+//    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
     CheckState(channel3);
 }
 
@@ -892,6 +899,6 @@ void MainWindow::UpdateChannel4Slot()
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
-    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
+//    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
     CheckState(channel4);
 }

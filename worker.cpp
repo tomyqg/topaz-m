@@ -373,7 +373,7 @@ void worker::do_Work()
 
     if ( isrunning || !isstopped ) // если воркер запущен
     {
-        qDebug() <<  "isrunning" ;
+//        qDebug() <<  "isrunning" ;
         this->thread()->setPriority(QThread::LowPriority);
 
         // пихаем все каналы в один массив
@@ -415,7 +415,7 @@ void worker::do_Work()
                     currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = DataBuffer::readchannelvalue(0) - 5;
+                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 2:
                     currentdata =  1.5*globalindex;
