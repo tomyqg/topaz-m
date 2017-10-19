@@ -181,32 +181,18 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
 
     if (ui->showdots->checkState()) {
-//        ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
-        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
-
-//        ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
+ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
         ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
-
-//        ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
         ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
-
-//        ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
         ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
     }
 
 
     if (ui->showcenterdots->checkState()) {
         ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
-//        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
-
         ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
-//        ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
-
         ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
-//        ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
-
         ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
-//        ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
     }
 
 
@@ -535,7 +521,7 @@ void MainWindow::GrafsUpdateTrends()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
+    ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
 
     // add the helper arrow:
 
@@ -588,17 +574,17 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+    ui->customPlot->graph()->setData(channel2.GetChannelXBuffer(), channel2.GetChannelValuesBuffer());
     graphPen.setColor(Channel2Color);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
+    ui->customPlot->graph()->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
     graphPen.setColor(Channel3Color);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
+    ui->customPlot->graph()->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
     graphPen.setColor(Channel4Color);
     ui->customPlot->graph()->setPen(graphPen);
 
