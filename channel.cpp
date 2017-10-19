@@ -358,7 +358,7 @@ double ChannelOptions::GetDempheredChannelValue()
 double ChannelOptions::GetValuePercent()
 {
     float razmah = highermeasurelimit - lowermeasurelimit;
-    float x = 100 * (currentvalue - lowermeasurelimit)/razmah;
+    float x = 100 * (GetCurrentChannelValue() - lowermeasurelimit)/razmah;
 
     return x;
 }
