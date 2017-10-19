@@ -315,7 +315,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <rect>
       <x>900</x>
       <y>650</y>
-      <width>300</width>
+      <width>150</width>
       <height>30</height>
      </rect>
     </property>
@@ -327,15 +327,15 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      </font>
     </property>
     <property name="text">
-     <string>Вспомогательные стрелки</string>
+     <string>Cтрелки</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="autoscalecheckbox">
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>670</y>
-      <width>300</width>
+      <y>680</y>
+      <width>150</width>
       <height>30</height>
      </rect>
     </property>
@@ -347,15 +347,15 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      </font>
     </property>
     <property name="text">
-     <string>Автомасшабирование графика</string>
+     <string>Автомасшаб</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="percentCheckBox">
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>690</y>
-      <width>300</width>
+      <y>710</y>
+      <width>150</width>
       <height>30</height>
      </rect>
     </property>
@@ -474,6 +474,46 @@ color : white;</string>
      <string>⟳</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="showdots">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>650</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Отображать точки</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showcenterdots">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>680</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Точка в серед.</string>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>pushButton_4</zorder>
@@ -490,6 +530,8 @@ color : white;</string>
    <zorder>WorkButton</zorder>
    <zorder>EcoCheckBox</zorder>
    <zorder>timeButton</zorder>
+   <zorder>showdots</zorder>
+   <zorder>showcenterdots</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -153,27 +153,63 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setName("graph #1");
-    ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
+    ui->customPlot->graph(0)->setName("graph #1");
+    ui->customPlot->graph(0)->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(channel1.GetStateDependentColor());
+    ui->customPlot->graph(0)->setPen(graphPen);
 
-    ui->customPlot->graph()->setPen(graphPen);
+
+
     ui->customPlot->addGraph();
 
-    ui->customPlot->graph()->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
+    ui->customPlot->graph(1)->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
     graphPen.setColor(channel2.GetStateDependentColor());
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph(1)->setPen(graphPen);
+
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
+    ui->customPlot->graph(2)->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
     graphPen.setColor(channel3.GetStateDependentColor());
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph(2)->setPen(graphPen);
+
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
+    ui->customPlot->graph(3)->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
     graphPen.setColor(channel4.GetStateDependentColor());
-    ui->customPlot->graph()->setPen(graphPen);
+    ui->customPlot->graph(3)->setPen(graphPen);
+
+
+    if (ui->showdots->checkState()) {
+//        ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
+        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
+
+//        ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
+        ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
+
+//        ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
+        ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
+
+//        ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
+        ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
+    }
+
+
+    if (ui->showcenterdots->checkState()) {
+        ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
+
+        ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
+
+        ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
+
+        ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
+    }
+
+
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp

@@ -375,8 +375,8 @@ void ChannelOptions::SetCurrentChannelValue(double value)
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last());
 
-    qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
-    qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
+//    qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
+//    qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
 
     //    while (channelxbuffer.last()>300)
     //    {
