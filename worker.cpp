@@ -415,7 +415,7 @@ void worker::do_Work()
                     currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
+                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 50 + r;
                     break;
                 case 2:
                     currentdata =  1.5*globalindex;
