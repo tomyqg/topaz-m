@@ -282,14 +282,14 @@ ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCir
     y4min.append(0);
     y4min.append(chan4lowerstate);
 
-    x1.append(430-300-100+25+lastindex);
-    x1.append(460-300-100+25+lastindex);
-    x2.append(470-300-75+25+lastindex);
-    x2.append(500-300-75+25+lastindex);
-    x3.append(510-300-50+25+lastindex);
-    x3.append(540-300-50+25+lastindex);
-    x4.append(550-300-25+25+lastindex);
-    x4.append(580-300-25+25+lastindex);
+    x1.append(430-300-36+lastindex);
+    x1.append(460-300-36+lastindex);
+    x2.append(470-300-24+lastindex);
+    x2.append(500-300-24+lastindex);
+    x3.append(510-300-12+lastindex);
+    x3.append(540-300-12+lastindex);
+    x4.append(550-300+lastindex);
+    x4.append(580-300+lastindex);
 
     x1lim.append(x1.at(0));
     x1lim.append(x1.at(1));

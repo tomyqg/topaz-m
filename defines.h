@@ -37,7 +37,7 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
-//#define Demo
+#define Demo
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
