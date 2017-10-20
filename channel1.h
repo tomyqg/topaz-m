@@ -9,13 +9,10 @@
 class ChannelOptions: public QObject
 {
     Q_OBJECT
-
 public:
 
     // constructor
-
     explicit ChannelOptions();
-
 public:
 
     uint16_t GetSignalType();
@@ -37,6 +34,7 @@ public:
     double GetMaxplusMinChannelValue();
     double GetDempheredChannelValue();
     double GetValuePercent();
+    double ConvertSignalToValue(double value);
 
     QString GetUnitsName();
     QString GetState1HighMessage();

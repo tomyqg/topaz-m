@@ -1,4 +1,6 @@
 #include "channel1.h"
+#include "uartdriver.h"
+#include "metrologicalcalc.h"
 #include "QDebug"
 
 extern QVector<double> X_Coordinates;
@@ -365,15 +367,33 @@ double ChannelOptions::GetValuePercent()
     return x;
 }
 
+double ChannelOptions::ConvertSignalToValue(double value)
+{
+    double res = value;
+    if (GetSignalType() == ModBus::MeasureCurrent)
+        res = MetrologicalCalc::ConvertSignalToValue(value,4,20,100,400);
+
+    if (GetSignalType() == ModBus::MeasureVoltage)
+        res = MetrologicalCalc::ConvertSignalToValue(value,0,10,100,400);
+
+
+    return res;
+
+}
+
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-    currentvalue = value;
-    channelvaluesbuffer.append(value);
+
+    currentvalue = ConvertSignalToValue(value);
+    qDebug() << currentvalue << "currentvalue";
+
+    channelvaluesbuffer.append(currentvalue);
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last());
 
-//    qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
-//    qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
+
+    //    qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
+    //    qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
 
     //    while (channelxbuffer.last()>300)
     //    {
