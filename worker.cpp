@@ -379,20 +379,21 @@ void worker::do_Work()
         // пихаем все каналы в один массив
         // тут опрашиваем каждый канал
 
-        globalindex2++;
+        int chanelindex = 0;
 
-        if (globalindex2%4==0)
+        if ( (++globalindex2) %4==0)
             globalindex++;
 
         if (globalindex > 199)
-            globalindex = 0;
+            globalindex = 40;
 
-        int chanelindex = 0;
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
             if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::readupdatestatus(chanelindex)) )
             {
+
+                 qDebug() << globalindex << "globalindex";
                 QCoreApplication::applicationDirPath();
                 DataBuffer::writeupdatestatus(chanelindex,false);
 
@@ -421,7 +422,7 @@ void worker::do_Work()
                     currentdata =  0.1*globalindex;
                     break;
                 case 3:
-                    currentdata =  -0.1*globalindex;
+                    currentdata =  0.1*globalindex;
                     break;
                 default:
                     break;

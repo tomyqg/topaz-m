@@ -507,7 +507,7 @@ ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCir
     ui->customPlot->replot();
 
     int endd = clock();
-    qDebug() << endd - start ;
+//    qDebug() << endd - start ;
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
 }

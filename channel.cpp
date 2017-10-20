@@ -371,11 +371,10 @@ double ChannelOptions::ConvertSignalToValue(double value)
 {
     double res = value;
     if (GetSignalType() == ModBus::MeasureCurrent)
-        res = MetrologicalCalc::ConvertSignalToValue(value,4,20,100,400);
+        res = MetrologicalCalc::ConvertSignalToValue(value,4,20,GetLowerLimit(),GetHigherLimit()); // берем начало и конец под-диапазона
 
     if (GetSignalType() == ModBus::MeasureVoltage)
-        res = MetrologicalCalc::ConvertSignalToValue(value,0,10,100,400);
-
+        res = MetrologicalCalc::ConvertSignalToValue(value,0,10,GetLowerLimit(),GetHigherLimit());
 
     return res;
 
@@ -383,14 +382,13 @@ double ChannelOptions::ConvertSignalToValue(double value)
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-
     currentvalue = ConvertSignalToValue(value);
-    qDebug() << currentvalue << "currentvalue";
+
+    //    qDebug() << currentvalue << "currentvalue";
 
     channelvaluesbuffer.append(currentvalue);
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last());
-
 
     //    qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
     //    qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
