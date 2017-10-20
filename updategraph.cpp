@@ -143,12 +143,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
     }
 
-//    if (X_Coordinates.length()<100)
-    {
-        qDebug() << X_Coordinates.at(0) << "X" << Y_coordinates_Chanel_1.at(0) << "Y";
-    }
-
-
     ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
 
@@ -508,7 +502,12 @@ ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCir
         }
     }
 
+    int start = clock();
+
     ui->customPlot->replot();
+
+    int endd = clock();
+    qDebug() << endd - start ;
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
 }

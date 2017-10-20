@@ -261,7 +261,6 @@ void StackedOptions::on_ChangeDateButton_2_clicked()
 
 void StackedOptions::on_pushButton_3_clicked()
 {
-
     SetStackIndex(SystemIndex);
 }
 

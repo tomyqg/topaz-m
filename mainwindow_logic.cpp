@@ -161,18 +161,14 @@ void MainWindow::MainWindowInitialization()
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
-
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
-
     connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
-
     connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
-
     WorkerThread->start(); // запускаем сам поток
 
     Options op;
@@ -185,7 +181,6 @@ void MainWindow::MainWindowInitialization()
 
     // включаем эко режим
     SetEcoMode(true);
-
     startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
 }
 

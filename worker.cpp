@@ -384,8 +384,8 @@ void worker::do_Work()
         if (globalindex2%4==0)
             globalindex++;
 
-        if (globalindex > 215)
-            globalindex = - 50;
+        if (globalindex > 199)
+            globalindex = 0;
 
         int chanelindex = 0;
 
@@ -408,20 +408,20 @@ void worker::do_Work()
                     currentdata = mathresult;
                 }
 
-                double r = rand()%50;
+                double r = rand()%10;
 
                 switch (chanelindex) {
                 case 0:
-                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 0 + r;
+                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = mr.SolveEquation("sin(x/5)*50",globalindex ) + 50 + r;
+                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 5 + r;
                     break;
                 case 2:
-                    currentdata =  1.5*globalindex;
+                    currentdata =  0.1*globalindex;
                     break;
                 case 3:
-                    currentdata =  -2*globalindex;
+                    currentdata =  -0.1*globalindex;
                     break;
                 default:
                     break;

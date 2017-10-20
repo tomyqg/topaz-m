@@ -37,7 +37,7 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
-#define Demo
+//#define Demo
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
@@ -86,7 +86,7 @@
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в секундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
-#define YRange 180                   // изначальный размер графика по игреку в 1 сторону
+#define YRange 20                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 
 #define rect1coords smallrectinglewidth*3-5, otstupsverhu3, smallrectinglewidth, smallrectingleheight         // толщина графика линий в пикселях

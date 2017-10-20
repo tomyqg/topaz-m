@@ -241,9 +241,9 @@ void ModBus::WriteDataChannel(int channeladdress, double data)
 double ModBus::ClickRelay(char channel)
 {
     SetSingleCoil(channel,ModBus::ElmetroRelayAddress,1);
-    longsleep;
+//    longsleep;
     SetSingleCoil(channel,ModBus::ElmetroRelayAddress,0);
-    longsleep;
+//    longsleep;
     return 2;
 }
 
@@ -560,8 +560,6 @@ QByteArray DataBuffer::UartWriteData(QByteArray data)
         serial.write(data);
         while (serial.waitForBytesWritten(10))
             ;
-
-        uartsleep;
 
         while (serial.waitForReadyRead(10))
         {
