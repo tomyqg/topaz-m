@@ -361,9 +361,8 @@ double ChannelOptions::GetDempheredChannelValue()
 
 double ChannelOptions::GetValuePercent()
 {
-    float razmah = highermeasurelimit - lowermeasurelimit;
-    float x = 100 * (GetCurrentChannelValue() - lowermeasurelimit)/razmah;
-
+    float razmah = GetHigherMeasureLimit() - GetLowerMeasureLimit();
+    float x = 100 * (GetCurrentChannelValue() - GetLowerMeasureLimit())/razmah;
     return x;
 }
 
@@ -377,7 +376,6 @@ double ChannelOptions::ConvertSignalToValue(double value)
         res = MetrologicalCalc::ConvertSignalToValue(value,0,10,GetLowerLimit(),GetHigherLimit());
 
     return res;
-
 }
 
 void ChannelOptions::SetCurrentChannelValue(double value)
