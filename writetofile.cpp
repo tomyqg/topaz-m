@@ -135,6 +135,9 @@ void MessageWrite::LogClear()
 
 void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
+    QProcess process;
+    // запрещаем бланк экрана
+    process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
     this->update(); // мы апдейтим нашу главную форму
 
     // и начинаем архивацию

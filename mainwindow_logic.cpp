@@ -349,8 +349,6 @@ void MainWindow::DateUpdate() // каждую секунду обновляем 
     QDateTime local(QDateTime::currentDateTime());
     ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString(timestrings.at(0)));
     resizeSelf(1024,768);
-    QProcess process;
-    process.startDetached("echo 0 > /sys/class/graphics/fb0/blank"); //делаем запрет на гаснущий экран
 }
 
 void MainWindow::LabelsUpdate()
