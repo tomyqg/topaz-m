@@ -23,7 +23,7 @@ mathresolver mr;
 
 int ic ;
 
-int globalindex;
+int globalindex = 40;
 int globalindex2;
 
 ModbusDeviceStruct modbusdevice;
@@ -194,7 +194,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
 
     {
-        //        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
+        //qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
         QByteArray arraytofloat;
 

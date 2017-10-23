@@ -366,32 +366,159 @@ double ChannelOptions::GetValuePercent()
     return x;
 }
 
-double ChannelOptions::ConvertSignalToValue(double value)
+double ChannelOptions::ConvertSignalToValue(double signal)
 {
-    double res = value;
+    double value = signal;
 
     int lowlimit = GetLowerLimit();
     int hilimit = GetHigherLimit();
+    int hisignal = 0, lowsignal = 0 ;
 
-    if (GetSignalType() == ModBus::MeasureCurrent)
+
+    if (GetSignalType() == MeasureCurrent)
     {
+
         switch (GetDiapason()) {
         case Current4_20mA:
-            res = MetrologicalCalc::ConvertSignalToValue(value,4,20,lowlimit,hilimit); // берем начало и конец под-диапазона
+        {
+            hisignal = 20;
+            lowsignal = 4;
             break;
+        }
         case Current0_20mA:
-            res = MetrologicalCalc::ConvertSignalToValue(value,0,20,lowlimit,hilimit); // берем начало и конец под-диапазона
+        {
+            qDebug() << GetDiapason() << "GetDiapason()";
+            hisignal = 20;
+            lowsignal = 0;
             break;
+        }
+        case Current0_5mA:
+        {
+            hisignal = 5;
+            lowsignal = 0;
+            break;
+        }
+
+        case Current0_20mA_sqrt:
+        {
+            hisignal = 20;
+            lowsignal = 0;
+            break;
+        }
+
+        case Current4_20mA_sqrt:
+        {
+            hisignal = 20;
+            lowsignal = 4;
+            break;
+        }
+
+        case Current_20_20mA:
+        {
+            hisignal = 20;
+            lowsignal = -20;
+            break;
+        }
 
         default:
             break;
         }
+
+        value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
+    }
+
+    if (GetSignalType() == MeasureVoltage)
+    {
+        switch (GetDiapason()) {
+        case Voltage0_1V:
+        {
+            hisignal = 1;
+            lowsignal = 0;
+            break;
+        }
+
+        case Voltage0_10V:
+        {
+            hisignal = 10;
+            lowsignal = 0;
+            break;
+        }
+
+        case Voltage0_5V:
+        {
+            hisignal = 5;
+            lowsignal = 0;
+            break;
+        }
+
+        case Voltage1_5V:
+        {
+            hisignal = 5;
+            lowsignal = 1;
+            break;
+        }
+
+        case Voltage150_150mV:
+        {
+            hisignal = 0.15;
+            lowsignal = -0.15;
+            break;
+        }
+
+
+        case Voltage1_1V:
+        {
+            hisignal = 1;
+            lowsignal = -1;
+            break;
+        }
+
+        case Voltage10_10V:
+        {
+            hisignal = 10;
+            lowsignal = -10;
+            break;
+        }
+
+
+        case Voltage30_30V:
+        {
+            hisignal = 30;
+            lowsignal = -30;
+            break;
+        }
+
+        case Voltage0_1V_sqrt:
+        {
+            hisignal = 1;
+            lowsignal = 0;
+            break;
+        }
+
+        case Voltage0_10V_sqrt:
+        {
+            hisignal = 10;
+            lowsignal = 0;
+            break;
+        }
+
+        case Voltage1_5V_sqrt:
+        {
+            hisignal = 5;
+            lowsignal = 1;
+            break;
+        }
+        default:
+            break;
+        }
+
+        value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
     }
 
     if (GetSignalType() == ModBus::MeasureVoltage)
-        res = MetrologicalCalc::ConvertSignalToValue(value,0,10,GetLowerLimit(),GetHigherLimit());
+        value = MetrologicalCalc::ConvertSignalToValue(signal,0,10,GetLowerLimit(),GetHigherLimit());
 
-    return res;
+    return value;
 }
 
 void ChannelOptions::SetCurrentChannelValue(double value)

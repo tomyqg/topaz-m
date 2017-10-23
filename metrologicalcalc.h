@@ -7,7 +7,7 @@ class MetrologicalCalc :  public QObject
 {
 public:
     MetrologicalCalc();
-    static double ConvertSignalToValue(double current, double currentlow,double currenthigh,double valuelow,double valuehigh);
+    static double ConvertSignalToValue(double current, double signallow,double signalhigh,double valuelow,double valuehigh);
 };
 
 #endif // METROLOGICALCALC_H

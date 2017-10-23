@@ -34,7 +34,7 @@ public:
     double GetMaxplusMinChannelValue();
     double GetDempheredChannelValue();
     double GetValuePercent();
-    double ConvertSignalToValue(double value);
+    double ConvertSignalToValue(double signal);
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -285,20 +285,6 @@ public:
     };
     Q_ENUM(MeasureTypeVoltage)
 
-    enum VoltageDiapason{
-        Voltage0_1V ,
-        Voltage0_10V ,
-        Voltage0_5V ,
-        Voltage1_5V ,
-        Voltage150_150mV ,
-        Voltage1_1V ,
-        Voltage10_10V ,
-        Voltage30_30V ,
-        Voltage0_1V_sqrt ,
-        Voltage0_10V_sqrt ,
-        Voltage1_5V_sqrt
-    };
-    Q_ENUM(VoltageDiapason)
 
     enum MeasureTypeWireMode{
         Wire3NoBreakControl = 3,
@@ -372,6 +358,22 @@ public:
         Current_20_20mA
     };
     Q_ENUM(CurrentDiapason)
+
+
+    enum VoltageDiapason{
+        Voltage0_1V ,
+        Voltage0_10V ,
+        Voltage0_5V ,
+        Voltage1_5V ,
+        Voltage150_150mV ,
+        Voltage1_1V ,
+        Voltage10_10V ,
+        Voltage30_30V ,
+        Voltage0_1V_sqrt ,
+        Voltage0_10V_sqrt ,
+        Voltage1_5V_sqrt
+    };
+    Q_ENUM(VoltageDiapason)
 
 };
 #endif // CHANNEL1_H
