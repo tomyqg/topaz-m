@@ -23,7 +23,7 @@ mathresolver mr;
 
 int ic ;
 
-int globalindex = 40;
+int globalindex = 0;
 int globalindex2;
 
 ModbusDeviceStruct modbusdevice;
@@ -384,8 +384,8 @@ void worker::do_Work()
         if ( (++globalindex2) %4==0)
             globalindex++;
 
-        if (globalindex > 199)
-            globalindex = 40;
+        if (globalindex > 100)
+            globalindex = 0;
 
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)

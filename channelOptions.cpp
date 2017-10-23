@@ -372,7 +372,7 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
     int lowlimit = GetLowerLimit();
     int hilimit = GetHigherLimit();
-    int hisignal = 0, lowsignal = 0 ;
+    double hisignal = 0, lowsignal = 0 ;
 
 
     if (GetSignalType() == MeasureCurrent)
@@ -514,9 +514,6 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
         value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
     }
-
-    if (GetSignalType() == ModBus::MeasureVoltage)
-        value = MetrologicalCalc::ConvertSignalToValue(signal,0,10,GetLowerLimit(),GetHigherLimit());
 
     return value;
 }
