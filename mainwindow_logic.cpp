@@ -4,7 +4,7 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "uartdriver.h"
 #include "stackedoptions.h"
 #include "worker.h"

@@ -35,7 +35,6 @@ SOURCES += main.cpp \
     mathresolver.cpp \
     options_gui.cpp \
     options_logic.cpp \
-    channel.cpp \
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
     painting.cpp \
@@ -45,7 +44,8 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus-tcp.c \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
-    stackedoptions.cpp
+    stackedoptions.cpp \
+    channelOptions.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -62,8 +62,6 @@ HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
     options.h \
-    channel1.h\
-    channel1.h \
     keyboard.h \
     messages.h \
     uartdriver.h \
@@ -74,7 +72,8 @@ HEADERS  += mainwindow.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
     device.h \
-    stackedoptions.h
+    stackedoptions.h \
+    channelOptions.h
 
 FORMS    += mainwindow.ui \
     options.ui \

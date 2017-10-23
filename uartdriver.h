@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <mainwindow.h>
-#include <channel1.h>
+#include <channelOptions.h>
 #include <mathresolver.h>
 
 struct ModbusDeviceStruct

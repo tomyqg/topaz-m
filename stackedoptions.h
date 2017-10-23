@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QtGui>
 
-#include <channel1.h>
+#include <channelOptions.h>
 
 namespace Ui {
 class StackedOptions;

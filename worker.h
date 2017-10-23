@@ -2,7 +2,7 @@
 #define WORKER_H
 
 #include "uartdriver.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "device.h"
 #include "src/modbus.h"
 

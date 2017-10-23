@@ -1,4 +1,4 @@
-#include "channel1.h"
+#include "channelOptions.h"
 #include "uartdriver.h"
 #include "metrologicalcalc.h"
 #include "QDebug"
@@ -331,22 +331,22 @@ double ChannelOptions::GetCurrentChannelValue()
 
 double ChannelOptions::GetMaximumChannelValue()
 {
-    return MR.dGetMaximumValue(channelvaluesbuffer);
+    return mathresolver::dGetMaximumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMinimumChannelValue()
 {
-    return MR.dGetMinimumValue(channelvaluesbuffer);
+    return mathresolver::dGetMinimumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetAverageChannelValue()
 {
-    return MR.dGetAverageValue(channelvaluesbuffer);
+    return mathresolver::dGetAverageValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMaxplusMinChannelValue()
 {
-    return  MR.dGetMaximumValue(channelvaluesbuffer) + MR.dGetMinimumValue(channelvaluesbuffer);
+    return mathresolver::dGetMaximumValue(channelvaluesbuffer) + mathresolver::dGetMinimumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetDempheredChannelValue()
@@ -361,23 +361,37 @@ double ChannelOptions::GetDempheredChannelValue()
 
 double ChannelOptions::GetValuePercent()
 {
-    float razmah = highermeasurelimit - lowermeasurelimit;
-    float x = 100 * (GetCurrentChannelValue() - lowermeasurelimit)/razmah;
-
+    float razmah = GetHigherMeasureLimit() - GetLowerMeasureLimit();
+    float x = 100 * (GetCurrentChannelValue() - GetLowerMeasureLimit())/razmah;
     return x;
 }
 
 double ChannelOptions::ConvertSignalToValue(double value)
 {
     double res = value;
+
+    int lowlimit = GetLowerLimit();
+    int hilimit = GetHigherLimit();
+
     if (GetSignalType() == ModBus::MeasureCurrent)
-        res = MetrologicalCalc::ConvertSignalToValue(value,4,20,GetLowerLimit(),GetHigherLimit()); // берем начало и конец под-диапазона
+    {
+        switch (GetDiapason()) {
+        case Current4_20mA:
+            res = MetrologicalCalc::ConvertSignalToValue(value,4,20,lowlimit,hilimit); // берем начало и конец под-диапазона
+            break;
+        case Current0_20mA:
+            res = MetrologicalCalc::ConvertSignalToValue(value,0,20,lowlimit,hilimit); // берем начало и конец под-диапазона
+            break;
+
+        default:
+            break;
+        }
+    }
 
     if (GetSignalType() == ModBus::MeasureVoltage)
         res = MetrologicalCalc::ConvertSignalToValue(value,0,10,GetLowerLimit(),GetHigherLimit());
 
     return res;
-
 }
 
 void ChannelOptions::SetCurrentChannelValue(double value)

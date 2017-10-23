@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
-#include <channel1.h>
+#include <channelOptions.h>
 #include "messages.h"
 #include "worker.h"
 #include "mathresolver.h"

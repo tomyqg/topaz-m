@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "uartdriver.h"
 
 #include <QFile>
