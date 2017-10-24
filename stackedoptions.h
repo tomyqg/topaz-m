@@ -174,6 +174,8 @@ private slots:
 
     void on_gamebutton_clicked();
 
+    void on_horizontalScrollBar_2_sliderReleased();
+
 private:
 
     Ui::StackedOptions *ui;

@@ -9,8 +9,6 @@
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 
-//  extern QString pathtofile ;
-
 void MainWindow::WriteGpio(int num, bool val)
 {
     QFile filedir("/sys/class/gpio/gpio" + QString::number(num) + "/direction");
@@ -136,8 +134,20 @@ void MessageWrite::LogClear()
 void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
     QProcess process;
-    // запрещаем бланк экрана
+
+    //запрещаем бланк экрана
     process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
+    process.waitForFinished();
+
+    //qDebug() << "QProcess process;";
+    QStringList args;
+    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
+
+    //qDebug() << "QProcess args: " << args;
+
+    process.start("sh", args);
+    process.waitForFinished();
+
     this->update(); // мы апдейтим нашу главную форму
 
     // и начинаем архивацию

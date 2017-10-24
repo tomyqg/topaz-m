@@ -1517,3 +1517,19 @@ void StackedOptions::on_gamebutton_clicked()
     process1.waitForFinished();
 }
 
+
+void StackedOptions::on_horizontalScrollBar_2_sliderReleased()
+{
+    if (ui->horizontalScrollBar_2->value() == ui->horizontalScrollBar_2->maximum())
+    {
+        ui->math_text_channel_1->setEnabled(1);
+        ui->math_text_channel_2->setEnabled(1);
+        ui->math_text_channel_3->setEnabled(1);
+        ui->math_text_channel_4->setEnabled(1);
+        ui->math_checkbox_channel_1->setEnabled(1);
+        ui->math_checkbox_channel_2->setEnabled(1);
+        ui->math_checkbox_channel_3->setEnabled(1);
+        ui->math_checkbox_channel_4->setEnabled(1);
+    }
+    ui->horizontalScrollBar_2->setValue(0);
+}

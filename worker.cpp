@@ -393,7 +393,7 @@ void worker::do_Work()
             if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::readupdatestatus(chanelindex)) )
             {
 
-                 qDebug() << globalindex << "globalindex";
+//                 qDebug() << globalindex << "globalindex";
                 QCoreApplication::applicationDirPath();
                 DataBuffer::writeupdatestatus(chanelindex,false);
 
