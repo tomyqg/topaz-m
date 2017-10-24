@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>10</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -345,7 +345,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -386,7 +386,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -405,7 +405,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -424,11 +424,11 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>Изменить режим отображения</string>
+      <string>Изменить режим отображ.</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_34">
@@ -443,7 +443,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -462,7 +462,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -481,7 +481,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -502,7 +502,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -543,7 +543,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -581,7 +581,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -638,7 +638,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -657,7 +657,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -676,7 +676,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -695,7 +695,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -822,7 +822,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -873,7 +873,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -924,7 +924,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -943,7 +943,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -962,7 +962,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
     </widget>
@@ -978,7 +978,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
     </widget>
@@ -994,7 +994,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1013,7 +1013,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1034,7 +1034,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1053,7 +1053,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1094,7 +1094,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1113,7 +1113,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1132,7 +1132,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1151,7 +1151,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1327,7 +1327,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1346,7 +1346,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1365,11 +1365,11 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>Внешний накопитель данных</string>
+      <string>Внеш. накопитель данных</string>
      </property>
     </widget>
     <widget class="QPushButton" name="SecurityButton_3">
@@ -1384,7 +1384,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1403,7 +1403,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1422,7 +1422,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1443,7 +1443,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1462,7 +1462,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1481,7 +1481,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1546,7 +1546,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1565,7 +1565,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1584,7 +1584,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1603,7 +1603,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1622,7 +1622,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2345,7 +2345,7 @@
      <property name="font">
       <font>
        <family>Open Sans</family>
-       <pointsize>10</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">

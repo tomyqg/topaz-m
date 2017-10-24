@@ -157,6 +157,7 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
         // ставим везде стайлшит
 
         but->setStyleSheet(stylesheetUnclicked);
+        but->setFont(QFont(Font, 14, QFont::Bold));
     }
 
     connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange(  )) );
