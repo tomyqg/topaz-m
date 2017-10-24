@@ -3,6 +3,7 @@
 #include "ui_options.h"
 #include "channelOptions.h"
 #include "keyboard.h"
+#include "defines.h"
 
 bool Options::eventFilter(QObject *object, QEvent *event)
 {
@@ -28,6 +29,39 @@ bool keyboard::eventFilter(QObject *object, QEvent *event)
     {
         this->close();
     }
+
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(stylesheetclicked);
+            }
+        }
+    }
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(stylesheetUnclicked);
+            }
+        }
+    }
+
     return QObject::eventFilter(object, event);
 }
 

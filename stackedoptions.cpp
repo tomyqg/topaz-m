@@ -1077,7 +1077,6 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 
             if (widget->objectName() == object->property("objectName"))
             {
-//                qDebug() << widget->objectName();
                 widget->setStyleSheet(stylesheetclicked);
             }
         }

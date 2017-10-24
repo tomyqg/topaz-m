@@ -16,6 +16,7 @@
 
 #define CURRENT_VER "0.6" //версия ПО
 #define MYD
+//#define Demo // раскоментить если делаем демо программу на РС
 
 
 #ifndef Q_OS_WIN32
@@ -37,7 +38,6 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
-#define Demo
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
