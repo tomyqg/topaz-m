@@ -16,8 +16,10 @@ int main(int argc, char *argv[])
     QTranslator translator;
     MainWindow w;
 
+#ifndef Q_OS_WIN32
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
+#endif
 
     //    qApp->closeAllWindows();
     //делаем ресайз

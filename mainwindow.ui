@@ -133,7 +133,7 @@ color : white;</string>
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -159,7 +159,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -170,7 +170,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
 background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255));</string>
     </property>
     <property name="text">
-     <string>Сообщения</string>
+     <string>Сообщен.</string>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -322,6 +322,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="font">
      <font>
       <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -342,6 +343,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="font">
      <font>
       <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -356,12 +358,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
       <x>900</x>
       <y>710</y>
       <width>150</width>
-      <height>30</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -382,7 +385,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -408,7 +411,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -486,6 +489,7 @@ color : white;</string>
     <property name="font">
      <font>
       <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -506,6 +510,7 @@ color : white;</string>
     <property name="font">
      <font>
       <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
