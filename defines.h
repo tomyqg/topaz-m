@@ -28,6 +28,7 @@
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logo.jpg"
+#define pathtoqrcodetip "/opt/qr-code.jpg"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
@@ -38,7 +39,6 @@
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
-
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
@@ -48,6 +48,7 @@
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
 #define pathtologotip  "C:/Work/logo.jpg"
+#define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #else
 
 #define pathtofiles  QCoreApplication::applicationDirPath()
@@ -98,7 +99,8 @@
 
 #define stylesheetUnclicked " color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); "
 #define stylesheetclicked "background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
-
+#define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
+#define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
 #define EcoColor QColor(0x00,0x00,0x4d)
 #define NotEcoColor QColor(0xff,0xff,0xff)

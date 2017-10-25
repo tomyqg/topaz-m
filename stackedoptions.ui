@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>10</number>
+    <number>23</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -10396,6 +10396,22 @@
    </property>
    <property name="text">
     <string>Index: </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelqrcode">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>550</y>
+     <width>131</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../qr-code.jpg</pixmap>
    </property>
   </widget>
  </widget>

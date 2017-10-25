@@ -70,6 +70,7 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
+
     // находим все com - порты
     int portIndex = 0;
     int i = 0;
@@ -256,7 +257,9 @@ void MainWindow::OpenOptionsWindow( int index )
     //здесь запускаем меню обновленное как в эндресе
 
     StackedOptions *sw= new StackedOptions(index,0);
+
     sw->exec();
+
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1.ReadSingleChannelOptionFromFile(1);
     channel2.ReadSingleChannelOptionFromFile(2);
@@ -383,7 +386,7 @@ void MainWindow::LabelsCorrect()
 
 void MainWindow::ModbusConnectionErrorSlot()
 {
-    qDebug() << "Sss" ;
+    //qDebug() << "Sss" ;
     QMessageBox::critical( this, tr( "Connection Error" ),
                            tr( "Could not connect serial port!" ) );
 }

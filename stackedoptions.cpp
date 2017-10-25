@@ -55,6 +55,7 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->labelqrcode->setPixmap(QPixmap(pathtoqrcodetip));
     ui->DiapasonChannel_1->clear();
     ui->DiapasonChannel_2->clear();
     ui->DiapasonChannel_3->clear();
@@ -155,9 +156,17 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
         QPushButton *but = ButtonList.at(i);
         but->installEventFilter(this);
         // ставим везде стайлшит
-
         but->setStyleSheet(stylesheetUnclicked);
         but->setFont(QFont(Font, 14, QFont::Bold));
+    }
+
+    QList<QDoubleSpinBox*> SpinBox= StackedOptions::findChildren<QDoubleSpinBox*> ();
+    // добавляем все кнопошки в евентфильтр
+    for (int i = 0; i < SpinBox.count(); ++i) {
+        QDoubleSpinBox *spbox = SpinBox.at(i);
+        spbox->installEventFilter(this);
+        // ставим везде стайлшит
+        spbox->setStyleSheet(SpinboxstylesheetUnclicked);
     }
 
     connect(ui->buttonGroup,SIGNAL(buttonClicked( int )), this, SLOT(Channel1TypeChange(  )) );
@@ -1055,6 +1064,11 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 {
     if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") && ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
     {
+
+//        qDebug()<< QString::fromLatin1(object->metaObject()->className()) << "className()";
+//        qDebug()<<  object->property("objectName") << " object->property(objectName)";
+
+
         Options::olderprop = object->property("text").toString();
         keyboard kb;
         kb.setModal(true);
@@ -1098,6 +1112,37 @@ bool StackedOptions::eventFilter(QObject *object, QEvent *event)
         }
     }
 
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(object->metaObject()->className()) == "QLineEdit" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QLineEdit *> widgets = findChildren<QLineEdit *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QLineEdit * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(Spinboxstylesheetclicked);
+            }
+        }
+    }
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(object->metaObject()->className()) == "QLineEdit" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QLineEdit *> widgets = findChildren<QLineEdit *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QLineEdit * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(SpinboxstylesheetUnclicked);
+            }
+        }
+    }
 
     return QObject::eventFilter(object, event);
 }

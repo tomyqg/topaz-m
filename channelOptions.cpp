@@ -5,6 +5,8 @@
 
 extern QVector<double> X_Coordinates;
 
+int cnt;
+
 double ChannelOptions::GetHigherLimit()
 {
     return this->higherlimit;
@@ -387,7 +389,6 @@ double ChannelOptions::ConvertSignalToValue(double signal)
         }
         case Current0_20mA:
         {
-            qDebug() << GetDiapason() << "GetDiapason()";
             hisignal = 20;
             lowsignal = 0;
             break;
@@ -525,15 +526,18 @@ void ChannelOptions::SetCurrentChannelValue(double value)
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last());
 
-    //qDebug() << currentvalue << "currentvalue";
-    //qDebug() << channelvaluesbuffer << "channelvaluesbuffer";
-    //qDebug() << dempheredvaluesbuffer << "dempheredvaluesbuffer";
-    //while (channelxbuffer.last()>300)
-    //{
-    //channelvaluesbuffer.removeFirst();
-    //channelxbuffer.removeFirst();
-    //}
-    //qDebug() << this->GetChannelName() << "Dempher " <<   this->GetDempherValue();
+    while (channelxbuffer.length()>2048)
+        channelxbuffer.removeFirst();
+
+    while (channelvaluesbuffer.length()>2048)
+        channelvaluesbuffer.removeFirst();
+
+
+    qDebug() << channelxbuffer.length() <<  'x'; // << "channelxbuffer.length" ;
+    qDebug() << channelvaluesbuffer.length() <<  'z'; //<< "channelvaluesbuffer.length" ;
+    qDebug() << ++cnt <<  "cnt"; //<< "channelvaluesbuffer.length" ;
+
+
 }
 
 void ChannelOptions::SetDempher(double newdempher)
