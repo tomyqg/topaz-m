@@ -90,7 +90,7 @@ void MainWindow::AddValuesToBuffer()
     Y_coordinates_Chanel_3_archive.append(channel3.GetCurrentChannelValue());
     Y_coordinates_Chanel_4_archive.append(channel4.GetCurrentChannelValue());
 
-    while (X_Coordinates.length()>GetXRange())
+    while (X_Coordinates.length()>150)
     {
         X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
     }
@@ -137,11 +137,11 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
-//    while (X_Coordinates.length()>GetXRange())
-    while (X_Coordinates.length()>50)
-    {
-        X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
-    }
+////    while (X_Coordinates.length()>GetXRange())
+//    while (X_Coordinates.length()>50)
+//    {
+//        X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
+//    }
 
     ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
@@ -149,6 +149,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setName("graph #1");
     ui->customPlot->graph(0)->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
+//    ui->customPlot->graph(0)->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(channel1.GetStateDependentColor());
     ui->customPlot->graph(0)->setPen(graphPen);
@@ -158,18 +159,21 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->addGraph();
 
     ui->customPlot->graph(1)->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
+//    ui->customPlot->graph(1)->setData(X_Coordinates, Y_coordinates_Chanel_2);
     graphPen.setColor(channel2.GetStateDependentColor());
     ui->customPlot->graph(1)->setPen(graphPen);
 
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(2)->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
+//    ui->customPlot->graph(2)->setData(X_Coordinates, Y_coordinates_Chanel_3);
     graphPen.setColor(channel3.GetStateDependentColor());
     ui->customPlot->graph(2)->setPen(graphPen);
 
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(3)->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
+//    ui->customPlot->graph(3)->setData(X_Coordinates, Y_coordinates_Chanel_4);
     graphPen.setColor(channel4.GetStateDependentColor());
     ui->customPlot->graph(3)->setPen(graphPen);
 
@@ -206,7 +210,7 @@ ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCir
     QVector<double> y1max,y2max,y3max,y4max;
     QVector<double> y1min,y2min,y3min,y4min;
 
-    int lastindex = X_Coordinates.at(X_Coordinates.length()-1);
+    int lastindex = X_Coordinates.last();
 
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 
@@ -521,6 +525,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
     ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
+//    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
     // add the helper arrow:
 
@@ -574,19 +579,21 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->addGraph();
 
     ui->customPlot->graph()->setData(channel2.GetChannelXBuffer(), channel2.GetChannelValuesBuffer());
+//    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
     graphPen.setColor(Channel2Color);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
+//    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
     graphPen.setColor(Channel3Color);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
+//    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
     graphPen.setColor(Channel4Color);
     ui->customPlot->graph()->setPen(graphPen);
-
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp

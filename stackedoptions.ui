@@ -9687,9 +9687,9 @@
     <widget class="QComboBox" name="archive_period">
      <property name="geometry">
       <rect>
-       <x>860</x>
-       <y>570</y>
-       <width>151</width>
+       <x>750</x>
+       <y>580</y>
+       <width>171</width>
        <height>30</height>
       </rect>
      </property>
@@ -9704,12 +9704,77 @@
        <string>Всё время</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>1 минута</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>5 минут</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>10 минут</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>30 минут</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 час</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2 часа</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>5 часов</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>10 часов</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 суток</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>5 суток </string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 месяц</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2 месяца</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1 год</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLabel" name="LabelRelay_9">
      <property name="geometry">
       <rect>
        <x>750</x>
-       <y>570</y>
+       <y>550</y>
        <width>111</width>
        <height>30</height>
       </rect>

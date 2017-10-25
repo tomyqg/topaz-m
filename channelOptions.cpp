@@ -354,7 +354,7 @@ double ChannelOptions::GetMaxplusMinChannelValue()
 double ChannelOptions::GetDempheredChannelValue()
 {
     double res;
-    if (GetDempherValue()>=1)
+    if (GetDempherValue()>1)
         res = mathresolver::dGetDempheredValue(channelvaluesbuffer,GetDempherValue());
     else
         res = currentvalue;
@@ -522,22 +522,23 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = ConvertSignalToValue(value);
-    channelvaluesbuffer.append(currentvalue);
-    dempheredvaluesbuffer.append(GetDempheredChannelValue());
-    channelxbuffer.append(X_Coordinates.last());
-
-    while (channelxbuffer.length()>2048)
+    while (channelxbuffer.length()>300)
         channelxbuffer.removeFirst();
-
-    while (channelvaluesbuffer.length()>2048)
+    while (channelvaluesbuffer.length()>300)
         channelvaluesbuffer.removeFirst();
 
+    while (dempheredvaluesbuffer.length()>300)
+        dempheredvaluesbuffer.removeFirst();
 
     qDebug() << channelxbuffer.length() <<  'x'; // << "channelxbuffer.length" ;
-    qDebug() << channelvaluesbuffer.length() <<  'z'; //<< "channelvaluesbuffer.length" ;
+    qDebug() << channelvaluesbuffer.length() <<  'v'; //<< "channelvaluesbuffer.length" ;
+    qDebug() << dempheredvaluesbuffer.length() <<  'd'; //<< "channelvaluesbuffer.length" ;
+
+    channelvaluesbuffer.append(currentvalue);
+    dempheredvaluesbuffer.append(GetDempheredChannelValue());
+    channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+
     qDebug() << ++cnt <<  "cnt"; //<< "channelvaluesbuffer.length" ;
-
-
 }
 
 void ChannelOptions::SetDempher(double newdempher)
