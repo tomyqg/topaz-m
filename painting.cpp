@@ -281,40 +281,46 @@ void MainWindow::PaintCyfrasRight()
 
 void MainWindow::PaintCyfrasNew()
 {
-    // задается вручную
-    int smallrectingleheight = 80; // высота прямоугольничка в пикселях задается вручную
+    //задается вручную
     //высчитываются
+
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 28;
-    int otstupsverhu = widgheight - otstupsnizu;
-    int alerttextsize = smallrectingleheight/2;
-    int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
+    int smallrectingleheight = widgheight/4-9; // высота прямоугольничка в пикселях задается вручную
+    int smallrectinglewidth = 350; // ширина прямоугольничка в пикселях задаётся вручную
+    int otstupsnizu = smallrectingleheight + 37;
+    int otstupsverhu = widgheight - otstupsnizu; //  widgheight/12*2-otstupsnizu;
+    int otstupsverhu1 = otstupsverhu-smallrectingleheight;
+    int otstupsverhu2 = otstupsverhu-smallrectingleheight*2;
+    int otstupsverhu3 = otstupsverhu-smallrectingleheight*3;
+    //    int alerttextsize = smallrectingleheight/2;
+    int alerttextsize = 46;
+    int smalltextsize = 12;
 
 #ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.2;
 #endif
 
-
     // задаем координаты отображения квадратов
-    channel1.xposition = 0;
-    channel1.yposition = otstupsverhu;
+    int xpositionall = widgwidth - smallrectinglewidth;
+
+    channel1.xposition = xpositionall;
+    channel1.yposition = otstupsverhu3;
     channel1.w = smallrectinglewidth;
     channel1.h = smallrectingleheight;
 
-    channel2.xposition = smallrectinglewidth;
-    channel2.yposition = otstupsverhu;
+    channel2.xposition = xpositionall;
+    channel2.yposition = otstupsverhu2;
     channel2.w = smallrectinglewidth;
     channel2.h = smallrectingleheight;
 
-    channel3.xposition = smallrectinglewidth*2;
-    channel3.yposition = otstupsverhu;
+    channel3.xposition = xpositionall;
+    channel3.yposition = otstupsverhu1;
     channel3.w = smallrectinglewidth;
     channel3.h = smallrectingleheight;
 
-    channel4.xposition = smallrectinglewidth*3;
+    channel4.xposition = xpositionall;
     channel4.yposition = otstupsverhu;
     channel4.w = smallrectinglewidth;
     channel4.h = smallrectingleheight;
@@ -334,36 +340,44 @@ void MainWindow::PaintCyfrasNew()
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
+            double channelstate1value = Chanel->GetState1Value();
+            double channelstate2value = Chanel->GetState2Value();
 
             // рисуем прямоугольник  с заполненным цветом
 
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+            painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
             if (Chanel->MaximumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
-                    painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-                else
                     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+                else
+                    painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             }
             else if (Chanel->MinimumNow())
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
                 if  (GetHalfSecFlag())
-                    painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-                else
                     painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+                else
+                    painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
             }
             else
             {
-                painter.setBrush(QBrush( Chanel->GetNormalColor(), Qt::SolidPattern));
+                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
 
-            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
+
+            QString ChannelValueString ;
+
+            if (!ui->percentCheckBox->checkState())
+                ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
+            else
+                ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
 
             if (ChannelValueString == NaNMessage)
                 ChannelValueString = ObryvErrorMessage;
@@ -375,31 +389,92 @@ void MainWindow::PaintCyfrasNew()
                     ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
-            // выводим значения каналов большими цифрами
-            painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+            painter.setPen(QPen(Qt::black, 3)); //, Qt::DashDotLine, Qt::RoundCap));
 
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+            painter.setBrush(QBrush( Chanel->GetNormalColor(), Qt::NoBrush));
+            painter.drawRect(Chanel->xposition, Chanel->yposition, smallrectinglewidth, 35); // верхний квадрат
+            painter.drawRect(Chanel->xposition, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35); // рисуем левый нижний квадратик
+            painter.drawRect(Chanel->xposition + smallrectinglewidth/2, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35);// рисуем правый нижний квадратик
+
+            painter.setPen(QPen(Qt::white, 3)); //, Qt::DashDotLine, Qt::RoundCap));
+
+            // выводим значения каналов большими цифрами
+            if (ChannelValueString.length()>6)
+                painter.setFont(QFont(Font, alerttextsize/1.2, QFont::ExtraBold));
+            else  if (ChannelValueString.length()<6)
+                painter.setFont(QFont(Font, alerttextsize*1.2, QFont::ExtraBold));
+            else
+                painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
+
+            painter.drawText(Chanel->xposition, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+            painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+
 
             // подписываем названия каналов
-            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
+            painter.setFont(QFont(Font, 12, QFont::ExtraBold));
+            painter.drawText(Chanel->xposition, Chanel->yposition, smallrectinglewidth, 35, Qt::AlignHCenter | Qt::AlignVCenter,Chanel->GetChannelName());
 
-            // подписываем единицы измерения
+            //    // подписываем единицы измерения
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
+            painter.drawText(Chanel->xposition, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
 
-            // подписываем math, если канал математически обрабатывается
+            //    // подписываем math, если канал математически обрабатывается
             painter.setPen(Qt::white);
             painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
 
-            if (Chanel->IsChannelMathematical())
-                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-            ////
+            //
+
+            if ( GetHalfSecFlag() && ( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            {
+                painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+            }
+            else
+                painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+
+            QString statemessage;
+            statemessage = "" ;
+
+            if (Chanel->MaximumNow())
+            {
+                statemessage = Chanel->GetState1HighMessage();
+            }
+            // уменьшение уставки  Channel 1
+            else if (Chanel->MinimumNow())
+            {
+                statemessage = Chanel->GetState2LowMessage();
+            }
+            else
+            {
+                painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+                statemessage = OKMessage;
+            }
+
+            //            painter.setFont(QFont(Font, smallrectinglewidth/2/( statemessage.length() + 1 ) , QFont::ExtraBold));
+
+            // выводим сработки уставок
+
+            if (statemessage.length()>8)
+            {
+                if (statemessage.length()>12)
+                    statemessage.insert(12, "\n");
+                if (statemessage.length()>24)
+                    statemessage.insert(24, "\n");
+                if (statemessage.length()>36)
+                    statemessage.insert(36, "\n");
+                painter.setFont(QFont(Font, 14, QFont::ExtraBold));
+            }
+            else  if (statemessage.length()<6)
+                painter.setFont(QFont(Font, 30, QFont::ExtraBold));
+            else
+                painter.setFont(QFont(Font, 20, QFont::ExtraBold));
+
+            painter.drawText(Chanel->xposition + smallrectinglewidth/2, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35, Qt::AlignCenter, statemessage);
         }
     }
     painter.end();
 }
+
+
 
 
 void MainWindow::PaintCyfrasFullScreen()
@@ -912,7 +987,7 @@ void MainWindow::PaintOnWidget()
     case Options::Polar:
         //        PaintStatesAndAlertsAtTop();
         PaintPolarDiagramm();
-        PaintCyfrasRight();
+        PaintCyfrasNew();
         break;
     default:
         break;

@@ -137,12 +137,6 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
-    ////    while (X_Coordinates.length()>GetXRange())
-    //    while (X_Coordinates.length()>50)
-    //    {
-    //        X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
-    //    }
-
     ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
 
@@ -154,10 +148,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     graphPen.setColor(channel1.GetStateDependentColor());
     ui->customPlot->graph(0)->setPen(graphPen);
 
-
-
     ui->customPlot->addGraph();
-
     ui->customPlot->graph(1)->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
     //    ui->customPlot->graph(1)->setData(X_Coordinates, Y_coordinates_Chanel_2);
     graphPen.setColor(channel2.GetStateDependentColor());
@@ -169,7 +160,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     //    ui->customPlot->graph(2)->setData(X_Coordinates, Y_coordinates_Chanel_3);
     graphPen.setColor(channel3.GetStateDependentColor());
     ui->customPlot->graph(2)->setPen(graphPen);
-
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(3)->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
@@ -194,7 +184,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     }
 
 
-
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
 
@@ -202,7 +191,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
     /// bars
-
     QVector<double> x1,x2,x3,x4;
     QVector<double> y1,y2,y3,y4;
 
