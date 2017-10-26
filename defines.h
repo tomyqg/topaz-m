@@ -59,6 +59,7 @@
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
+#define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
 #endif
 
 #endif

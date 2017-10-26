@@ -92,6 +92,7 @@ private:
     void ReactOnMouseSlide();
     void PaintCyfrasBottom();
     void PaintCyfrasRight();
+    void PaintCyfrasNew();
     void PaintCyfrasFullScreen();
     void PaintPolarDiagramm();
     void PaintStatesAndAlertsAtTop();
