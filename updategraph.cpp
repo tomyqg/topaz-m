@@ -514,6 +514,9 @@ ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCir
 //    qDebug() << endd - start ;
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
+
+
+
 }
 
 void MainWindow::GrafsUpdateTrends()
