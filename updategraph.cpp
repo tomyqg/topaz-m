@@ -110,8 +110,6 @@ void MainWindow::UpdateGraphics()
 {
     needupdatePainter = 1;
 
-    //StackedOptions::SetCurrentDisplayParametr(StackedOptions::Bars ); // Bars
-
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {
     case Options::Trends:
@@ -137,43 +135,29 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
-    ////    while (X_Coordinates.length()>GetXRange())
-    //    while (X_Coordinates.length()>50)
-    //    {
-    //        X_Coordinates.remove(0);Y_coordinates_Chanel_1.remove(0);Y_coordinates_Chanel_2.remove(0);Y_coordinates_Chanel_3.remove(0);Y_coordinates_Chanel_4.remove(0);
-    //    }
-
     ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setName("graph #1");
     ui->customPlot->graph(0)->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
-    //    ui->customPlot->graph(0)->setData(X_Coordinates, Y_coordinates_Chanel_1);
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(channel1.GetStateDependentColor());
     ui->customPlot->graph(0)->setPen(graphPen);
 
-
-
     ui->customPlot->addGraph();
-
     ui->customPlot->graph(1)->setData(channel2.GetChannelXBuffer(),channel2.GetChannelValuesBuffer());
-    //    ui->customPlot->graph(1)->setData(X_Coordinates, Y_coordinates_Chanel_2);
     graphPen.setColor(channel2.GetStateDependentColor());
     ui->customPlot->graph(1)->setPen(graphPen);
 
 
     ui->customPlot->addGraph();
     ui->customPlot->graph(2)->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
-    //    ui->customPlot->graph(2)->setData(X_Coordinates, Y_coordinates_Chanel_3);
     graphPen.setColor(channel3.GetStateDependentColor());
     ui->customPlot->graph(2)->setPen(graphPen);
 
-
     ui->customPlot->addGraph();
     ui->customPlot->graph(3)->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
-    //    ui->customPlot->graph(3)->setData(X_Coordinates, Y_coordinates_Chanel_4);
     graphPen.setColor(channel4.GetStateDependentColor());
     ui->customPlot->graph(3)->setPen(graphPen);
 
@@ -194,7 +178,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     }
 
 
-
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
 
@@ -202,7 +185,6 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
     /// bars
-
     QVector<double> x1,x2,x3,x4;
     QVector<double> y1,y2,y3,y4;
 

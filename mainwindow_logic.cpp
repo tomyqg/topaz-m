@@ -119,12 +119,16 @@ void MainWindow::MainWindowInitialization()
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
 
+    displayrefreshtimer = new QTimer();
+    displayrefreshtimer->setInterval(30000);
+    displayrefreshtimer->start(30000);
+
+    connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
     mutex = new QMutex();
 
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
-
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
     tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто

@@ -23,6 +23,26 @@ void MainWindow::WriteGpio(int num, bool val)
     file.close();
 }
 
+void MainWindow::RefreshScreen()
+{
+    QProcess process;
+
+    //запрещаем бланк экрана
+    process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
+    process.waitForFinished();
+
+    //qDebug() << "QProcess process;";
+    QStringList args;
+    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
+
+    //qDebug() << "QProcess args: " << args;
+
+    process.start("sh", args);
+    process.waitForFinished();
+
+    this->update(); // мы апдейтим нашу главную форму
+}
+
 void Options::WriteSystemOptionsToFile()
 {
     UpdateCurrentDisplayParametr();
@@ -133,23 +153,6 @@ void MessageWrite::LogClear()
 
 void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
-    QProcess process;
-
-    //запрещаем бланк экрана
-    process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
-    process.waitForFinished();
-
-    //qDebug() << "QProcess process;";
-    QStringList args;
-    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
-
-    //qDebug() << "QProcess args: " << args;
-
-    process.start("sh", args);
-    process.waitForFinished();
-
-    this->update(); // мы апдейтим нашу главную форму
-
     // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;

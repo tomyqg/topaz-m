@@ -65,6 +65,7 @@ public slots:
     void LabelsUpdate();
     void LabelsCorrect();
     void WriteGpio(int num, bool val);
+    void RefreshScreen();
     void WriteArchiveToFile();
     void CreateMODBusConfigFile();
     void resetStatus( void );
@@ -183,6 +184,7 @@ private:
     QTimer *UpdateGraficsTimer;
     QTimer *halfSecondTimer;
     QTimer *tmr;
+    QTimer *displayrefreshtimer;
 
     QThread *WorkerThread;
     QThread *thread;
