@@ -250,7 +250,7 @@ ChannelOptions::ChannelOptions()
     this->LowState2Setted= false;
     SetConfirmationNeed(true);
 
-    //buffermutex = new QMutex();
+    buffermutex = new QMutex();
 }
 
 bool ChannelOptions::GetConfirmationNeed()
@@ -274,14 +274,14 @@ QVector<double> ChannelOptions::GetChannelValuesBuffer()
 {
     QVector<double> buf;
 
-    //buffermutex->lock();
+    buffermutex->lock();
 
     if (GetDempherValue()<=1)
         buf = channelvaluesbuffer;
     else
         buf = dempheredvaluesbuffer;
 
-    //buffermutex->unlock();
+    buffermutex->unlock();
 
     return buf;
 }
@@ -289,9 +289,9 @@ QVector<double> ChannelOptions::GetChannelValuesBuffer()
 QVector<double> ChannelOptions::GetChannelXBuffer()
 {
     QVector<double> buf;
-    //buffermutex->lock();
+    buffermutex->lock();
     buf = channelxbuffer;
-    //buffermutex->unlock();
+    buffermutex->unlock();
     return buf;
 }
 
@@ -532,7 +532,7 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = ConvertSignalToValue(value);
-    //buffermutex->lock();
+    buffermutex->lock();
     while (channelxbuffer.length()>300)
         channelxbuffer.removeFirst();
     while (channelvaluesbuffer.length()>300)
@@ -553,7 +553,7 @@ void ChannelOptions::SetCurrentChannelValue(double value)
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
 
-    //buffermutex->unlock();
+    buffermutex->unlock();
 }
 
 void ChannelOptions::SetDempher(double newdempher)
