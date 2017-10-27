@@ -393,13 +393,6 @@ void worker::do_Work()
                 DataBuffer::writeupdatestatus(chanelindex,false);
 
                 currentdata = destfloat[0];
-
-                if (Chanel->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
-                    currentdata = mathresult;
-                }
-
                 double r = rand()%10;
 
                 switch (chanelindex) {
@@ -407,7 +400,7 @@ void worker::do_Work()
                     currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
                     break;
                 case 1:
-                    currentdata = 0.15*globalindex;
+                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
                     break;
                 case 2:
                     currentdata =  0.095*globalindex;
@@ -419,6 +412,12 @@ void worker::do_Work()
                     break;
                 }
 
+                if (Chanel->IsChannelMathematical())
+                {
+                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
+                    currentdata = mathresult;
+//                    qDebug() << Chanel->GetMathString();
+                }
                 Chanel->SetCurrentChannelValue(currentdata );
             }
             ++chanelindex;

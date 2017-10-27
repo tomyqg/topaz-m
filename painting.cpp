@@ -297,10 +297,10 @@ void MainWindow::PaintCyfrasNew()
     int alerttextsize = 46;
     int smalltextsize = 12;
 
-#ifdef Q_OS_WIN32
+//#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.2;
-#endif
+//#endif
 
     // задаем координаты отображения квадратов
     int xpositionall = widgwidth - smallrectinglewidth;

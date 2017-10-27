@@ -18,7 +18,6 @@
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС
 
-
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
 #define pathtofiles  "/opt/"

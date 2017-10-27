@@ -124,7 +124,6 @@ void MainWindow::MainWindowInitialization()
     displayrefreshtimer->start(30000);
 
     connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
-    mutex = new QMutex();
 
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QColor>
+#include <QMutex>
 #include <QVector>
 #include "mathresolver.h"
 
@@ -132,6 +133,8 @@ private:
     QVector<double> dempheredvaluesbuffer;
     QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
+
+    QMutex *buffermutex;
 
 signals:
     void updateUI(const QString text);

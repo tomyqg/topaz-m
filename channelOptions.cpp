@@ -5,7 +5,7 @@
 
 extern QVector<double> X_Coordinates;
 
-int cnt;
+double cnt;
 
 double ChannelOptions::GetHigherLimit()
 {
@@ -249,6 +249,8 @@ ChannelOptions::ChannelOptions()
     this->HighState2Setted= false;
     this->LowState2Setted= false;
     SetConfirmationNeed(true);
+
+    //buffermutex = new QMutex();
 }
 
 bool ChannelOptions::GetConfirmationNeed()
@@ -272,17 +274,25 @@ QVector<double> ChannelOptions::GetChannelValuesBuffer()
 {
     QVector<double> buf;
 
+    //buffermutex->lock();
+
     if (GetDempherValue()<=1)
         buf = channelvaluesbuffer;
     else
         buf = dempheredvaluesbuffer;
+
+    //buffermutex->unlock();
 
     return buf;
 }
 
 QVector<double> ChannelOptions::GetChannelXBuffer()
 {
-    return channelxbuffer;
+    QVector<double> buf;
+    //buffermutex->lock();
+    buf = channelxbuffer;
+    //buffermutex->unlock();
+    return buf;
 }
 
 void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
@@ -522,23 +532,28 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
     currentvalue = ConvertSignalToValue(value);
+    //buffermutex->lock();
     while (channelxbuffer.length()>300)
         channelxbuffer.removeFirst();
     while (channelvaluesbuffer.length()>300)
         channelvaluesbuffer.removeFirst();
-
     while (dempheredvaluesbuffer.length()>300)
         dempheredvaluesbuffer.removeFirst();
 
-    qDebug() << channelxbuffer.length() <<  'x'; // << "channelxbuffer.length" ;
-    qDebug() << channelvaluesbuffer.length() <<  'v'; //<< "channelvaluesbuffer.length" ;
-    qDebug() << dempheredvaluesbuffer.length() <<  'd'; //<< "channelvaluesbuffer.length" ;
+    //qDebug() << channelxbuffer.length() <<  'x'; // << "channelxbuffer.length" ;
+    //qDebug() << channelvaluesbuffer.length() <<  'v'; //<< "channelvaluesbuffer.length" ;
+    //qDebug() << dempheredvaluesbuffer.length() <<  'd'; //<< "channelvaluesbuffer.length" ;
+
+
+    //++cnt;
+    //if (cnt%10 == 0)
+    qDebug() << ++cnt;
 
     channelvaluesbuffer.append(currentvalue);
     dempheredvaluesbuffer.append(GetDempheredChannelValue());
     channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
 
-    qDebug() << ++cnt <<  "cnt"; //<< "channelvaluesbuffer.length" ;
+    //buffermutex->unlock();
 }
 
 void ChannelOptions::SetDempher(double newdempher)
