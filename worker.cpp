@@ -401,7 +401,6 @@ void worker::do_Work()
                     currentdata =  0.110*globalindex;
                     break;
                 case 1:
-//                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
                     currentdata =  0.120*globalindex;
                     break;
                 case 2:
@@ -414,12 +413,6 @@ void worker::do_Work()
                     break;
                 }
 
-                if (Chanel->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
-                    currentdata = mathresult;
-//                    qDebug() << Chanel->GetMathString();
-                }
                 Chanel->SetCurrentChannelValue(currentdata );
             }
             ++chanelindex;

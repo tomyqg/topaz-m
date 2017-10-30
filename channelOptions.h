@@ -95,11 +95,10 @@ public:
     int yposition;
     int w;
     int h;
+
     // приватные переменные настроек канала
 
 private:
-
-
 
     uint16_t signaltype;
     double lowerlimit;
@@ -127,17 +126,12 @@ private:
     int diapason;
     int registrationtype;
 
-    mathresolver MR;
-
     QVector<double> channelvaluesbuffer;
     QVector<double> dempheredvaluesbuffer;
     QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
 
     QMutex *buffermutex;
-
-signals:
-    void updateUI(const QString text);
 
 public:
 
@@ -377,6 +371,5 @@ public:
         Voltage1_5V_sqrt
     };
     Q_ENUM(VoltageDiapason)
-
 };
 #endif // CHANNEL1_H

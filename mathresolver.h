@@ -10,8 +10,8 @@ class mathresolver : public QObject
 {
 public:
     mathresolver();
-    double SolveEquation(QString eqstring, double x);
-    double SolveEquation(QString eqstring);
+    static double SolveEquation(QString eqstring, double x);
+    static double SolveEquation(QString eqstring);
 
     template< typename T >
     T GetAverageValue(QVector<T>& qvect2);

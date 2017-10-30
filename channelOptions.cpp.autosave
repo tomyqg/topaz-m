@@ -529,9 +529,11 @@ double ChannelOptions::ConvertSignalToValue(double signal)
     return value;
 }
 
+void ChannelOptions::blablabla(void)
+{}
+
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-
     currentvalue = ConvertSignalToValue(value);
 
     if (this->IsChannelMathematical())
