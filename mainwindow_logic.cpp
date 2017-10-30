@@ -489,7 +489,7 @@ void MainWindow::GetAllUartPorts()
     }
 }
 
-void MainWindow::CheckState(ChannelOptions&  channel)
+void MainWindow::CheckAndLogginStates(ChannelOptions&  channel)
 {
     //    channel.GetCurrentChannelValue();
     double channelcurrentvalue = channel.GetCurrentChannelValue();

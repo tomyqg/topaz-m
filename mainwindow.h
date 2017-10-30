@@ -24,16 +24,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    //UartDriver UD;
     ChannelOptions channel1;
     ChannelOptions channel2;
     ChannelOptions channel3;
     ChannelOptions channel4;
 
     mathresolver eee;
-
     MessageWrite messwrite;
-
     void ShowMessageBox (QString title,QString message);
 
     void resizeWindow(QWidget & qw, qreal mratio);
@@ -41,15 +38,11 @@ public:
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void resizeSelf(qreal xresolution, qreal yresolution);
 
-
-
     void GetAllUartPorts();
     int GetWindowWidthPixels();
     int GetWindowHeightPixels();
-
     int GetMonitorWidthPixels();
     int GetMonitorHeightPixels();
-
     void SetWindowWidthPixels(int neww);
     void SetWindowHeightPixels(int newh);
 
@@ -105,7 +98,7 @@ private:
     void DateUpdate();
     void PowerOff();
     void CloseApplication();
-    void CheckState(ChannelOptions&  channel);
+    void CheckAndLogginStates(ChannelOptions&  channel);
     void SetXRange(int newxrange) {Xrange = newxrange;}
     void SetYRange(int newyrange) {Yrange = newyrange;}
     uint8_t GetHalfSecFlag();
@@ -122,8 +115,6 @@ private:
     int dateindex;
     bool EcoMode;
     int polar_angle;
-//    QVector<QString> datestrings;
-//    QVector<QString> timestrings;
 
     QStringList datestrings, timestrings;
 

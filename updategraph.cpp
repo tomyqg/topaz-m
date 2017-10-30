@@ -886,7 +886,7 @@ void MainWindow::UpdateChannel1Slot()
     int period = channel1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
-    CheckState(channel1);
+    CheckAndLogginStates(channel1);
 }
 
 void MainWindow::UpdateChannel2Slot()
@@ -895,7 +895,7 @@ void MainWindow::UpdateChannel2Slot()
     int period = channel2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
-    CheckState(channel2);
+    CheckAndLogginStates(channel2);
 }
 
 void MainWindow::UpdateChannel3Slot()
@@ -904,7 +904,7 @@ void MainWindow::UpdateChannel3Slot()
     int period = channel3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
-    CheckState(channel3);
+    CheckAndLogginStates(channel3);
 }
 
 void MainWindow::UpdateChannel4Slot()
@@ -913,5 +913,5 @@ void MainWindow::UpdateChannel4Slot()
     int period = channel4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
-    CheckState(channel4);
+    CheckAndLogginStates(channel4);
 }

@@ -95,12 +95,11 @@ public:
     int yposition;
     int w;
     int h;
+
     // приватные переменные настроек канала
 
 private:
-
-
-
+    
     uint16_t signaltype;
     double lowerlimit;
     double higherlimit;
@@ -127,17 +126,12 @@ private:
     int diapason;
     int registrationtype;
 
-    mathresolver MR;
-
     QVector<double> channelvaluesbuffer;
     QVector<double> dempheredvaluesbuffer;
     QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
 
     QMutex *buffermutex;
-
-signals:
-    void updateUI(const QString text);
 
 public:
 
