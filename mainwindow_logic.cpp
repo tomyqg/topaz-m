@@ -464,7 +464,7 @@ void MainWindow::ClearPolarCoords()
 void MainWindow::SetPolarAngle(int newangle)
 {
     polar_angle = newangle;
-    qDebug() << polar_angle << "polar_angle";
+//    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()

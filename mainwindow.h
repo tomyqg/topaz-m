@@ -41,11 +41,7 @@ public:
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void resizeSelf(qreal xresolution, qreal yresolution);
 
-    bool needupdatePainter;
-    bool needConfirmationchannel1;
-    bool needConfirmationchannel2;
-    bool needConfirmationchannel3;
-    bool needConfirmationchannel4;
+
 
     void GetAllUartPorts();
     int GetWindowWidthPixels();
@@ -83,6 +79,11 @@ public slots:
 
 private:
 
+    bool needupdatePainter;
+    bool needConfirmationchannel1;
+    bool needConfirmationchannel2;
+    bool needConfirmationchannel3;
+    bool needConfirmationchannel4;
     void InitPins();
     void InitProcessorMaxFreq();
     void InitProcessorMinFreq();
