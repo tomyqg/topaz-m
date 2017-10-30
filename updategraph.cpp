@@ -70,16 +70,15 @@ QColor Channel2ColorMinimum = QColor(color2rgbminimum[0],color2rgbminimum[1],col
 QColor Channel3ColorMinimum = QColor(color3rgbminimum[0],color3rgbminimum[1],color3rgbminimum[2]);
 QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],color4rgbminimum[2]);
 
-
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+
 
 void MainWindow::AddValuesToBuffer()
 {
     startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
-
     Y_coordinates_Chanel_1.append(channel1.GetCurrentChannelValue());
     Y_coordinates_Chanel_2.append(channel2.GetCurrentChannelValue());
     Y_coordinates_Chanel_3.append(channel3.GetCurrentChannelValue());
@@ -103,6 +102,7 @@ void MainWindow::AddValuesToBuffer()
     }
 
     xoffset++;
+    SetPolarAngle(GetPolarAngle()+1);
     stopWorkSignal(); // стопим воркер если не нужно считывать данные
 }
 

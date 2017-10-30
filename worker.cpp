@@ -379,11 +379,11 @@ void worker::do_Work()
 
         int chanelindex = 0;
 
-        if ( (++globalindex2)%4 == 0)
+        if ( (++globalindex2)%6 == 0)
             globalindex++;
 
-        if (globalindex > 200)
-            globalindex = 0;
+        if (globalindex > 100)
+            globalindex = 40;
 
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
@@ -397,10 +397,12 @@ void worker::do_Work()
 
                 switch (chanelindex) {
                 case 0:
-                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+//                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+                    currentdata =  0.110*globalindex;
                     break;
                 case 1:
-                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+//                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+                    currentdata =  0.120*globalindex;
                     break;
                 case 2:
                     currentdata =  0.095*globalindex;

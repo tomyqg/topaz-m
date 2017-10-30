@@ -110,6 +110,9 @@ private:
     uint8_t GetHalfSecFlag();
     int  GetXRange() {return Xrange;}
     int  GetYRange() {return Yrange;}
+    int  GetPolarAngle();
+    void  ClearPolarCoords();
+    void SetPolarAngle(int newangle);
     int GetTimePeriodSecs() {return 20;}
     int GetTickCountInOneSecond() {return 5;}
     int GetGraphWidthInPixels() {return 600;}
@@ -117,6 +120,7 @@ private:
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
     int dateindex;
     bool EcoMode;
+    int polar_angle;
 //    QVector<QString> datestrings;
 //    QVector<QString> timestrings;
 

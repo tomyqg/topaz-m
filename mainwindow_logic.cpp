@@ -186,6 +186,9 @@ void MainWindow::MainWindowInitialization()
     // включаем эко режим
     SetEcoMode(true);
     startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
+
+
+    ClearPolarCoords();
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -275,6 +278,9 @@ void MainWindow::OpenOptionsWindow( int index )
     LabelsCorrect();
     sw->deleteLater();
     resizeSelf(1024,768);
+
+    SetPolarAngle(0);
+
     return;
 }
 
@@ -437,6 +443,28 @@ void MainWindow::HalfSecondGone()
 uint8_t MainWindow::GetHalfSecFlag()
 {
     return halfSecondflag;
+}
+
+int MainWindow::GetPolarAngle()
+{
+//    if ( polar_angle>180 )
+//            polar_angle =  0;
+    return polar_angle;
+}
+
+void MainWindow::ClearPolarCoords()
+{
+    SetPolarAngle(0);
+    PolarChartPointsChannel1.clear();
+    PolarChartPointsChannel2.clear();
+    PolarChartPointsChannel3.clear();
+    PolarChartPointsChannel4.clear();
+}
+
+void MainWindow::SetPolarAngle(int newangle)
+{
+    polar_angle = newangle;
+    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()

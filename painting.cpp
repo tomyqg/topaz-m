@@ -297,10 +297,10 @@ void MainWindow::PaintCyfrasNew()
     int alerttextsize = 46;
     int smalltextsize = 12;
 
-//#ifdef Q_OS_WIN32
+    //#ifdef Q_OS_WIN32
     alerttextsize/=1.5;
     smalltextsize/=1.2;
-//#endif
+    //#endif
 
     // задаем координаты отображения квадратов
     int xpositionall = widgwidth - smallrectinglewidth;
@@ -406,6 +406,11 @@ void MainWindow::PaintCyfrasNew()
             else
                 painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
+            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            {
+                painter.setPen(QPen(Qt::red, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+            }
+
             painter.drawText(Chanel->xposition, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
             painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
@@ -424,24 +429,22 @@ void MainWindow::PaintCyfrasNew()
 
             //
 
-            if ( GetHalfSecFlag() && ( Chanel->MinimumNow() || Chanel->MaximumNow()) )
-            {
-                painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-            }
-            else
-                painter.setPen(QPen(Qt::black, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-
             QString statemessage;
             statemessage = "" ;
 
-            if (Chanel->MaximumNow())
+
+            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
             {
-                statemessage = Chanel->GetState1HighMessage();
-            }
-            // уменьшение уставки  Channel 1
-            else if (Chanel->MinimumNow())
-            {
-                statemessage = Chanel->GetState2LowMessage();
+                painter.setPen(QPen(Qt::red, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+                if (Chanel->MaximumNow())
+                {
+                    statemessage = Chanel->GetState1HighMessage();
+                }
+                // уменьшение уставки  Channel 1
+                else if (Chanel->MinimumNow())
+                {
+                    statemessage = Chanel->GetState2LowMessage();
+                }
             }
             else
             {
@@ -770,10 +773,10 @@ void MainWindow::PaintPolarDiagramm()
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    int channel1value = X_Coordinates.last();
-    int channel2value = X_Coordinates.last();
-    int channel3value = X_Coordinates.last();
-    int channel4value = X_Coordinates.last();
+    int channel1value = GetPolarAngle();
+    int channel2value = GetPolarAngle();
+    int channel3value = GetPolarAngle();
+    int channel4value = GetPolarAngle();
 
     float channel1length = channel1.GetValuePercent() * 5;
     float channel2length = channel2.GetValuePercent() * 5;
@@ -786,8 +789,6 @@ void MainWindow::PaintPolarDiagramm()
     color2 = channel2.GetStateDependentColor();
     color3 = channel3.GetStateDependentColor();
     color4 = channel4.GetStateDependentColor();
-
-
     
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
@@ -798,8 +799,8 @@ void MainWindow::PaintPolarDiagramm()
     
     painter.translate(newxcenter, newycenter);
     /* Create the line object: */
-    
     painter.setPen(QPen(Qt::black, 1));
+
     if (GetEcoMode()){
         painter.setBrush(QBrush(EcoColor, Qt::SolidPattern));
         painter.setPen(QPen(NotEcoColor,1,  Qt::DashLine));
@@ -821,17 +822,17 @@ void MainWindow::PaintPolarDiagramm()
 
     QLineF Channel1Line;
     
-    if (channel1value>=90) // если больше 90 градусов то поворачиваем диск
-        
+    if (GetPolarAngle()>=90) // если больше 90 градусов то поворачиваем диск
     {
-        painter.rotate(channel1value-90);
+        painter.rotate(GetPolarAngle()-90);
         // оставляем только 180 точек (на 180 градусов)
-        if (channel1value>=180) // если больше 90 градусов то поворачиваем диск
+        if (GetPolarAngle()>=180) // если больше 90 градусов то поворачиваем диск
         {
             PolarChartPointsChannel1.removeFirst();
             PolarChartPointsChannel2.removeFirst();
             PolarChartPointsChannel3.removeFirst();
             PolarChartPointsChannel4.removeFirst();
+            //SetPolarAngle(180);
         }
     }
     

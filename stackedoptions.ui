@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>23</number>
+    <number>21</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -5674,37 +5674,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_89">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="State2HighMessageChannel_1">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_92">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_1">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_89">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -5719,7 +5719,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="State2LowMessageChannel_1">
+        <widget class="QLineEdit" name="State2HighMessageChannel_1">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -6528,37 +6528,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_112">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="State2HighMessageChannel_2">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_113">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_2">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_112">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -6573,7 +6573,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="State2LowMessageChannel_2">
+        <widget class="QLineEdit" name="State2HighMessageChannel_2">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -7363,37 +7363,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_128">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="State2HighMessageChannel_3">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_129">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_3">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_128">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -7408,7 +7408,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="State2LowMessageChannel_3">
+        <widget class="QLineEdit" name="State2HighMessageChannel_3">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -8572,37 +8572,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_144">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="State2HighMessageChannel_4">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сообщение включения уставки</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_145">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="State2LowMessageChannel_4">
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сообщение включения уставки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_144">
          <property name="font">
           <font>
            <family>Open Sans</family>
@@ -8617,7 +8617,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="State2LowMessageChannel_4">
+        <widget class="QLineEdit" name="State2HighMessageChannel_4">
          <property name="font">
           <font>
            <family>Open Sans</family>
