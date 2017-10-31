@@ -32,9 +32,7 @@ public:
     mathresolver eee;
     MessageWrite messwrite;
     void ShowMessageBox (QString title,QString message);
-
     void resizeWindow(QWidget & qw, qreal mratio);
-    //    void resizeWidgets(QObject & qobj, qreal xratio, qreal yratio);
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void resizeSelf(qreal xresolution, qreal yresolution);
 
@@ -61,17 +59,15 @@ public slots:
     void HalfSecondGone();
     void ModbusConnectionErrorSlot();
     void SetEcoMode(bool seteco);
-
-    bool GetEcoMode();
-
     void UpdateChannel1Slot();
     void UpdateChannel2Slot();
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
-    bool eventFilter(QObject* watched, QEvent* event);
+    bool GetEcoMode();
 
 private:
 
+    bool eventFilter(QObject* watched, QEvent* event);
     bool needupdatePainter;
     bool needConfirmationchannel1;
     bool needConfirmationchannel2;
@@ -141,11 +137,9 @@ private slots:
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);
-
-signals:
-  void startWorkSignal();
-  void stopWorkSignal();
-  void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
+    void startWorkSignal();
+    void stopWorkSignal();
+    void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
 
 private:
     Ui::MainWindow *ui;
@@ -179,8 +173,8 @@ private:
     QTimer *archivetimer;
     QTimer *UpdateGraficsTimer;
     QTimer *halfSecondTimer;
-    QTimer *tmr;
     QTimer *displayrefreshtimer;
+    QTimer *tmr;
 
     QThread *WorkerThread;
     QThread *thread;
@@ -192,6 +186,13 @@ private:
     int Yrange;
     int windowwidth;
     int windowheight;
+
+    void DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize);
+    void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, QPainter painter, int alerttextsize, int smalltextsize);
+    void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, int smalltextsize, int alerttextsize);
+    void SetChannelRectPosition(int alertwindowwidth, int alertwindowheight);
+    void PaintCyfrasBottomSeparate();
+    void CheckState(ChannelOptions &channel);
 
 protected:
     void paintEvent(QPaintEvent *event) ;

@@ -371,5 +371,7 @@ public:
         Voltage1_5V_sqrt
     };
     Q_ENUM(VoltageDiapason)
+    void SetRectPosition();
+    void SetChannelCoords(int width, int xpos, int ypos, int height);
 };
 #endif // CHANNEL1_H

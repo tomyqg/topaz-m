@@ -201,6 +201,14 @@ void ChannelOptions::SetMathematical(bool newstate)
     this->MathematicalState = newstate;
 }
 
+void ChannelOptions::SetChannelCoords(int width, int xpos, int ypos, int height)
+{
+    this->xposition = xpos;
+    this->yposition = ypos;
+    this->w = width;
+    this->h = height;
+}
+
 double ChannelOptions::GetState1Value()
 {
     return this->state1value;
@@ -531,7 +539,6 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-
     currentvalue = ConvertSignalToValue(value);
 
     if (this->IsChannelMathematical())

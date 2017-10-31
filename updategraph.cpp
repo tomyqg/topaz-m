@@ -103,11 +103,13 @@ void MainWindow::AddValuesToBuffer()
 
     xoffset++;
     SetPolarAngle(GetPolarAngle()+1);
+
     stopWorkSignal(); // стопим воркер если не нужно считывать данные
 }
 
 void MainWindow::UpdateGraphics()
 {
+
     needupdatePainter = 1;
 
     switch( StackedOptions::GetCurrentDisplayParametr() )
