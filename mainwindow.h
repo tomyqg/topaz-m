@@ -199,6 +199,8 @@ private:
 
     void DrawScene();
 
+    void DrawSceneBottom();
+
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

@@ -83,19 +83,12 @@ void MainWindow::DrawScene()
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    //        scene->setSceneRect(10,10,20,20);
-
-    scene->addLine(10,10,20,20,QPen(Qt::black));   // Add horizontal line via center
-    scene->addLine(5,35,20,20,QPen(Qt::black));
-
     // задается вручную
     int smallrectingleheight = 78; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
     int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 28;
-    int otstupsverhu = widgheight - otstupsnizu;
     int alerttextsize = smallrectingleheight/2;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
@@ -140,11 +133,7 @@ void MainWindow::DrawScene()
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
 
             // рисуем прямоугольник  с заполненным цветом
-
             scene->addRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h,QPen(Qt::black),QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
-
-
-
             QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
 
             if (ChannelValueString == NaNMessage)
@@ -157,17 +146,39 @@ void MainWindow::DrawScene()
                     ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
+            QGraphicsTextItem *ChannelValueText = scene->addText(ChannelValueString); //ChannelValueString
+
+            ChannelValueText->setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
+            ChannelValueText->setTextWidth(ChannelValueText->boundingRect().width());
+            QTextBlockFormat format;
+            format.setAlignment(Qt::AlignCenter);
+            QTextCursor cursor = ChannelValueText->textCursor();
+            cursor.select(QTextCursor::Document);
+            cursor.mergeBlockFormat(format);
+            cursor.clearSelection();
+            ChannelValueText->setTextCursor(cursor);
+            int GW = smallrectinglewidth;
+            int lw =  ChannelValueText->boundingRect().width();
+            int xoffet = (GW  - lw) /2 ;
+            ChannelValueText->setPos(Chanel->xposition + xoffet, Chanel->yposition);
+
+            QGraphicsTextItem *ChannelNameText = scene->addText(Chanel->GetChannelName());
+            ChannelNameText->setPos(Chanel->xposition+60, 0);
+            ChannelNameText->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+
             if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
             {
-
-                QGraphicsTextItem *ChannelValueText = scene->addText(ChannelValueString);
-                ChannelValueText->setPos(Chanel->xposition + Chanel->w/2, Chanel->h/2);
-
-                //                    painter.setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
-                ;
+                ChannelValueText->setDefaultTextColor(Qt::red);
+                ChannelNameText->setDefaultTextColor(Qt::red);
             }
             else
-                ;
+            {
+                ChannelValueText->setDefaultTextColor(Qt::black);
+                ChannelNameText->setDefaultTextColor(Qt::black);
+            }
+
+
+
             //                    painter.setPen(QPen(Qt::black, 2)); // иначе черный цвет
 
             // выводим значения каналов большими цифрами
@@ -194,6 +205,22 @@ void MainWindow::DrawScene()
         }
     }
     //        painter.end();
+}
+
+void MainWindow::DrawSceneBottom()
+{
+    if ( (StackedOptions::GetCurrentDisplayParametr() != Options::Polar)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Cyfra) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsBars)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Bars) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsCyfra)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Trends) )
+    {
+        ui->customPlot->resize(1024,547);
+
+        ui->graphicsView->show();
+        DrawScene();   // Add vertical line via center
+    }
+    else
+    {
+        ui->customPlot->resize(1024,604);
+        ui->graphicsView->hide();
+    }
 }
 
 void MainWindow::AddValuesToBuffer()
@@ -228,27 +255,7 @@ void MainWindow::AddValuesToBuffer()
 
     stopWorkSignal(); // стопим воркер если не нужно считывать данные
 
-        QSize g =  ui->customPlot->size();
 
-        qDebug() << g ;
-    //    widget->setMinimumSize(widget->minimumWidth() * xratio, widget->minimumHeight() * xratio);
-    //    widget->setMaximumSize(widget->maximumWidth() * yratio, widget->maximumHeight() * yratio);
-
-
-    if ( (StackedOptions::GetCurrentDisplayParametr() != Options::Polar)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Cyfra) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsBars)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Bars) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsCyfra)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Trends) )
-    {
-        ui->customPlot->resize(1024,547);
-        ui->graphicsView->show();
-        DrawScene();   // Add vertical line via center
-    }
-    else
-    {
-        ui->customPlot->resize(1024,604);
-        ui->graphicsView->hide();
-    }
-
-    //    qDebug() <<  ui->graphicsView->size().width();
-    //qDebug() <<  ui->graphicsView->size().height();
 }
 
 void MainWindow::UpdateGraphics()
@@ -279,6 +286,8 @@ void MainWindow::UpdateGraphics()
     default:
         break;
     }
+
+    DrawSceneBottom();
 }
 
 void MainWindow::GrafsUpdateTrendsAndBars()
