@@ -94,7 +94,7 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
     painter.end();
 }
 
-void MainWindow::PaintCyfrasBottom()
+void MainWindow::PaintCyfrasBottom() // пока не используем
 {
     // задается вручную
     int smallrectingleheight = 80; // высота прямоугольничка в пикселях задается вручную
@@ -890,10 +890,10 @@ void MainWindow::PaintOnWidget()
         break;
     case Options::TrendsCyfraBars:
         PaintStatesAndAlertsAtTop();
-        PaintCyfrasBottom();
+
+
         break;
     case Options::BarsCyfra:
-        PaintCyfrasBottom();
         PaintStatesAndAlertsAtTop();
         break;
     case Options::Polar:

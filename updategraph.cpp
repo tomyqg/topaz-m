@@ -74,6 +74,23 @@ QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
 
+int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
+{
+    ChannelValueText->setTextWidth(ChannelValueText->boundingRect().width());
+    QTextBlockFormat format;
+    format.setAlignment(Qt::AlignCenter);
+    QTextCursor cursor = ChannelValueText->textCursor();
+    cursor.select(QTextCursor::Document);
+    cursor.mergeBlockFormat(format);
+    cursor.clearSelection();
+    ChannelValueText->setTextCursor(cursor);
+    int GW = smallrectinglewidth;
+    int lw =  ChannelValueText->boundingRect().width();
+    int xoffset = (GW  - lw) /2;
+
+    return xoffset;
+}
+
 void MainWindow::DrawScene()
 {
     scene = new QGraphicsScene();   // Init graphic scene
@@ -84,7 +101,7 @@ void MainWindow::DrawScene()
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // задается вручную
-    int smallrectingleheight = 78; // высота прямоугольничка в пикселях задается вручную
+    int smallrectingleheight = 90; // высота прямоугольничка в пикселях задается вручную
     //высчитываются
     int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
     int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
@@ -147,24 +164,20 @@ void MainWindow::DrawScene()
             }
 
             QGraphicsTextItem *ChannelValueText = scene->addText(ChannelValueString); //ChannelValueString
-
             ChannelValueText->setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-            ChannelValueText->setTextWidth(ChannelValueText->boundingRect().width());
-            QTextBlockFormat format;
-            format.setAlignment(Qt::AlignCenter);
-            QTextCursor cursor = ChannelValueText->textCursor();
-            cursor.select(QTextCursor::Document);
-            cursor.mergeBlockFormat(format);
-            cursor.clearSelection();
-            ChannelValueText->setTextCursor(cursor);
-            int GW = smallrectinglewidth;
-            int lw =  ChannelValueText->boundingRect().width();
-            int xoffet = (GW  - lw) /2 ;
-            ChannelValueText->setPos(Chanel->xposition + xoffet, Chanel->yposition);
+
+            int xoffset = GetXOffset(smallrectinglewidth, ChannelValueText);
+            ChannelValueText->setPos(Chanel->xposition + xoffset, 5);
 
             QGraphicsTextItem *ChannelNameText = scene->addText(Chanel->GetChannelName());
-            ChannelNameText->setPos(Chanel->xposition+60, 0);
             ChannelNameText->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+            xoffset = GetXOffset(smallrectinglewidth, ChannelNameText);
+            ChannelNameText->setPos(Chanel->xposition + xoffset, -5);
+
+            QGraphicsTextItem *UnitsNameText = scene->addText(Chanel->GetUnitsName());
+            UnitsNameText->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+            xoffset = GetXOffset(smallrectinglewidth, UnitsNameText);
+            UnitsNameText->setPos(Chanel->xposition + xoffset, 55);
 
             if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
             {
@@ -176,42 +189,17 @@ void MainWindow::DrawScene()
                 ChannelValueText->setDefaultTextColor(Qt::black);
                 ChannelNameText->setDefaultTextColor(Qt::black);
             }
-
-
-
-            //                    painter.setPen(QPen(Qt::black, 2)); // иначе черный цвет
-
-            // выводим значения каналов большими цифрами
-            //                painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-            //                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
-
-
-            // подписываем названия каналов
-            //                painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            //                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
-
-            //                painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            // подписываем единицы измерения
-            //                painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            //                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
-
-            // подписываем math, если канал математически обрабатывается
-            //                painter.setPen(Qt::white);
-            //                painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-
             if (Chanel->IsChannelMathematical())
                 ;//painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-            ///////
         }
     }
-    //        painter.end();
 }
 
 void MainWindow::DrawSceneBottom()
 {
     if ( (StackedOptions::GetCurrentDisplayParametr() != Options::Polar)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Cyfra) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsBars)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Bars) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsCyfra)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Trends) )
     {
-        ui->customPlot->resize(1024,547);
+        ui->customPlot->resize(1024,527);
 
         ui->graphicsView->show();
         DrawScene();   // Add vertical line via center
@@ -262,7 +250,7 @@ void MainWindow::UpdateGraphics()
 {
 
     needupdatePainter = 1;
-//     StackedOptions::SetCurrentDisplayParametr( Options::TrendsCyfraBars);
+    //     StackedOptions::SetCurrentDisplayParametr( Options::TrendsCyfraBars);
 
 
     switch( StackedOptions::GetCurrentDisplayParametr() )

@@ -235,16 +235,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
     </property>
-    <widget class="QGraphicsView" name="graphicsView">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>540</y>
-       <width>1280</width>
-       <height>90</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -529,6 +519,16 @@ color : white;</string>
      <string>Точка в серед.</string>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>540</y>
+      <width>1280</width>
+      <height>90</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>pushButton_4</zorder>
@@ -546,6 +546,7 @@ color : white;</string>
    <zorder>EcoCheckBox</zorder>
    <zorder>showdots</zorder>
    <zorder>showcenterdots</zorder>
+   <zorder>graphicsView</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

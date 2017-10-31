@@ -45,6 +45,10 @@ public:
     void SetWindowWidthPixels(int neww);
     void SetWindowHeightPixels(int newh);
 
+    int GetXOffsetForAlign(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText, int alerttextsize);
+
+    int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
+
 public slots:
 
     void destroyedslot(QObject *);
