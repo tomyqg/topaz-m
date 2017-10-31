@@ -35,7 +35,7 @@
       <x>0</x>
       <y>0</y>
       <width>1280</width>
-      <height>641</height>
+      <height>561</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -235,6 +235,16 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
     </property>
+    <widget class="QGraphicsView" name="graphicsView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>530</y>
+       <width>1280</width>
+       <height>80</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">

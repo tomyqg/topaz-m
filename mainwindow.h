@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <channelOptions.h>
+#include <QGraphicsScene>
 #include "messages.h"
 #include "worker.h"
 #include "mathresolver.h"
@@ -112,6 +113,8 @@ private:
     bool EcoMode;
     int polar_angle;
 
+    QGraphicsScene  *scene;
+
     QStringList datestrings, timestrings;
 
 private slots:
@@ -193,6 +196,8 @@ private:
     void SetChannelRectPosition(int alertwindowwidth, int alertwindowheight);
     void PaintCyfrasBottomSeparate();
     void CheckState(ChannelOptions &channel);
+
+    void DrawScene();
 
 protected:
     void paintEvent(QPaintEvent *event) ;
