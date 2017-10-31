@@ -70,6 +70,7 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
+    scene = new QGraphicsScene();   // Init graphic scene
 
     // находим все com - порты
     int portIndex = 0;

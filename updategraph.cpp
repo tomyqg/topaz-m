@@ -93,8 +93,7 @@ int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelVa
 
 void MainWindow::DrawScene()
 {
-    scene = new QGraphicsScene();   // Init graphic scene
-
+    scene->clear(); // очищаем чтобы не было утечек памяти
     ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -194,6 +193,8 @@ void MainWindow::DrawScene()
                 ;//painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
         }
     }
+
+
 }
 
 void MainWindow::DrawSceneBottom()

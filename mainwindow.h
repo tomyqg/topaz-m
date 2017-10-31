@@ -138,7 +138,6 @@ private slots:
     void on_WorkButton_clicked();
     void on_ArchiveButton_clicked();
     void on_EcoCheckBox_toggled(bool checked);
-    void on_smoothCheckBox_toggled(bool checked);
     void on_timeButton_clicked();
 
 signals:

@@ -86,11 +86,6 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
 
 }
 
-void MainWindow::on_smoothCheckBox_toggled(bool checked)
-{
-    //    qDebug()  <<  ui->customPlot->antialiasedElements();
-}
-
 void MainWindow::on_timeButton_clicked()
 {
     ++dateindex;
