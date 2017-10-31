@@ -110,10 +110,11 @@ void MainWindow::DrawScene()
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
 #ifdef Q_OS_WIN32
+
+#endif
+    //redice size anyway
     alerttextsize/=1.5;
     smalltextsize/=1.2;
-#endif
-
     // задаем координаты отображения квадратов
     channel1.xposition = 0;
     channel1.yposition = 0;
@@ -189,7 +190,7 @@ void MainWindow::DrawScene()
                 ChannelValueText->setDefaultTextColor(Qt::black);
                 ChannelNameText->setDefaultTextColor(Qt::black);
             }
-            if (Chanel->IsChannelMathematical())
+            if (Chanel->IsChannelMathematical()) // учесть позже матем.канал.
                 ;//painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
         }
     }
@@ -200,7 +201,6 @@ void MainWindow::DrawSceneBottom()
     if ( (StackedOptions::GetCurrentDisplayParametr() != Options::Polar)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Cyfra) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsBars)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Bars) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsCyfra)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Trends) )
     {
         ui->customPlot->resize(1024,527);
-
         ui->graphicsView->show();
         DrawScene();   // Add vertical line via center
     }
