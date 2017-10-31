@@ -12,9 +12,6 @@ VERSION = 0.5.5
 
 Q_OS_LINUX = 1
 
-#раскомментить если хотим чтобы запустилось на винде и закомментить если на линухе
-
-
 QT_IM_MODULE=mockup
 CONFIG += mockup
 
@@ -38,7 +35,6 @@ SOURCES += main.cpp \
     mathresolver.cpp \
     options_gui.cpp \
     options_logic.cpp \
-    channel.cpp \
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
     painting.cpp \
@@ -47,7 +43,9 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
     3rdparty/libmodbus/src/modbus.c \
-    3rdparty/qextserialport/qextserialport.cpp
+    3rdparty/qextserialport/qextserialport.cpp \
+    stackedoptions.cpp \
+    channelOptions.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -64,8 +62,6 @@ HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
     options.h \
-    channel1.h\
-    channel1.h \
     keyboard.h \
     messages.h \
     uartdriver.h \
@@ -75,13 +71,28 @@ HEADERS  += mainwindow.h \
     defines.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
-    device.h
+    device.h \
+    stackedoptions.h \
+    channelOptions.h
 
 FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
-    messages.ui
+    messages.ui \
+    stackedoptions.ui
 target.path  = /opt
 INSTALLS    += target
 DISTFILES += \
-    ../build-untitled2-MYD-Release/Makefile
+    ../build-untitled2-MYD-Release/Makefile \
+    translator_en.ts \
+    untitled_2_de.ts \
+    untitled_2_en.ts \
+    untitled_2_ru.ts \
+    untitled2_de.ts \
+    untitled2_en.ts \
+    untitled2_ru.ts
+
+
+TRANSLATIONS +=  untitled2_en.ts \
+                 untitled2_ru.ts \
+                 untitled2_de.ts

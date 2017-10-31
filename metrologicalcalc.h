@@ -7,7 +7,8 @@ class MetrologicalCalc :  public QObject
 {
 public:
     MetrologicalCalc();
-    double ConvertCurrentToPressure(double current, double currentlow,double currenthigh,double pressurelow,double pressurehigh);
+    static double ConvertSignalToValue(double current, double signallow,double signalhigh,double valuelow,double valuehigh);
+private:
 };
 
 #endif // METROLOGICALCALC_H

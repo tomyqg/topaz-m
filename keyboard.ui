@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>370</height>
+    <height>366</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -36,10 +36,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -60,10 +61,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -84,10 +86,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -108,10 +111,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -132,10 +136,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -156,10 +161,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -180,10 +186,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -204,10 +211,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -228,10 +236,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -252,10 +261,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -276,10 +286,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -300,8 +311,9 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
+     <family>Open Sans</family>
      <pointsize>12</pointsize>
+     <kerning>true</kerning>
     </font>
    </property>
   </widget>
@@ -316,10 +328,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -337,10 +350,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -361,10 +375,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -385,10 +400,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -409,10 +425,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -425,7 +442,7 @@
   <widget class="QPushButton" name="pushButton_18">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>340</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -433,10 +450,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -449,7 +467,7 @@
   <widget class="QPushButton" name="pushButton_19">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>290</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -457,10 +475,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -473,7 +492,7 @@
   <widget class="QPushButton" name="pushButton_20">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>240</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -481,10 +500,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -497,7 +517,7 @@
   <widget class="QPushButton" name="pushButton_21">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>390</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -505,10 +525,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -521,7 +542,7 @@
   <widget class="QPushButton" name="pushButton_22">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>410</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -529,10 +550,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -545,7 +567,7 @@
   <widget class="QPushButton" name="pushButton_23">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>310</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -553,10 +575,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -569,7 +592,7 @@
   <widget class="QPushButton" name="pushButton_24">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>260</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -577,10 +600,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -593,7 +617,7 @@
   <widget class="QPushButton" name="pushButton_25">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>360</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -601,10 +625,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -617,7 +642,7 @@
   <widget class="QPushButton" name="pushButton_26">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>560</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -625,10 +650,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -641,7 +667,7 @@
   <widget class="QPushButton" name="pushButton_29">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>440</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -649,10 +675,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -665,7 +692,7 @@
   <widget class="QPushButton" name="pushButton_30">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>490</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -673,10 +700,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -697,10 +725,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -713,7 +742,7 @@
   <widget class="QPushButton" name="pushButton_32">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>460</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -721,10 +750,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -745,10 +775,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -769,10 +800,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -793,10 +825,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -809,7 +842,7 @@
   <widget class="QPushButton" name="pushButton_36">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>540</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -817,10 +850,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -833,7 +867,7 @@
   <widget class="QPushButton" name="pushButton_37">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>510</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -841,10 +875,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="locale">
@@ -868,10 +903,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -892,10 +928,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -908,7 +945,7 @@
   <widget class="QPushButton" name="pushButton_40">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>640</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -916,10 +953,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -932,7 +970,7 @@
   <widget class="QPushButton" name="pushButton_41">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>590</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -940,10 +978,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -958,8 +997,8 @@
     <rect>
      <x>670</x>
      <y>240</y>
-     <width>80</width>
-     <height>50</height>
+     <width>81</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="palette">
@@ -1001,10 +1040,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
+     <family>Open Sans</family>
      <pointsize>16</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1022,10 +1062,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1049,10 +1090,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1065,25 +1107,27 @@
   <widget class="QPushButton" name="pushButton_44">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>220</x>
      <y>240</y>
-     <width>291</width>
-     <height>31</height>
+     <width>431</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
-    <string>The Long Space Button</string>
+    <string>Space</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_45">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>270</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1091,10 +1135,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1107,7 +1152,7 @@
   <widget class="QPushButton" name="pushButton_46">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>420</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1115,10 +1160,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1131,7 +1177,7 @@
   <widget class="QPushButton" name="pushButton_47">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>570</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1139,10 +1185,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1155,7 +1202,7 @@
   <widget class="QPushButton" name="pushButton_48">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>470</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1163,10 +1210,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1179,7 +1227,7 @@
   <widget class="QPushButton" name="pushButton_49">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>370</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1187,10 +1235,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1203,7 +1252,7 @@
   <widget class="QPushButton" name="pushButton_50">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>520</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1211,10 +1260,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1227,7 +1277,7 @@
   <widget class="QPushButton" name="pushButton_51">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>320</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1235,10 +1285,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1251,7 +1302,7 @@
   <widget class="QPushButton" name="pushButton_52">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>620</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1259,10 +1310,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1275,7 +1327,7 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>680</x>
      <y>310</y>
      <width>81</width>
      <height>31</height>
@@ -1283,10 +1335,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
+     <family>Open Sans</family>
      <pointsize>12</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="editable">
@@ -1306,7 +1359,7 @@
   <widget class="QPushButton" name="pushButton_53">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>660</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -1314,10 +1367,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1330,7 +1384,7 @@
   <widget class="QPushButton" name="pushButton_54">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>610</x>
      <y>180</y>
      <width>50</width>
      <height>50</height>
@@ -1338,10 +1392,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1354,7 +1409,7 @@
   <widget class="QPushButton" name="pushButton_55">
    <property name="geometry">
     <rect>
-     <x>730</x>
+     <x>740</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -1362,10 +1417,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1378,7 +1434,7 @@
   <widget class="QPushButton" name="pushButton_56">
    <property name="geometry">
     <rect>
-     <x>680</x>
+     <x>690</x>
      <y>120</y>
      <width>50</width>
      <height>50</height>
@@ -1386,10 +1442,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1402,7 +1459,7 @@
   <widget class="QPushButton" name="pushButton_57">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>220</x>
      <y>300</y>
      <width>50</width>
      <height>50</height>
@@ -1410,10 +1467,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
-     <pointsize>12</pointsize>
+     <family>Open Sans</family>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -1428,8 +1486,8 @@
     <rect>
      <x>670</x>
      <y>240</y>
-     <width>80</width>
-     <height>50</height>
+     <width>101</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="palette">
@@ -1471,14 +1529,15 @@
    </property>
    <property name="font">
     <font>
-     <family>Open Sans Light</family>
+     <family>Open Sans</family>
      <pointsize>8</pointsize>
      <weight>75</weight>
      <bold>true</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
-    <string>Backspace</string>
+    <string>← Backspace</string>
    </property>
   </widget>
  </widget>

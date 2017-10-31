@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <mainwindow.h>
-#include <channel1.h>
+#include <channelOptions.h>
 #include <mathresolver.h>
 
 struct ModbusDeviceStruct
@@ -102,33 +102,31 @@ struct ModbusDeviceStruct
     uint16_t AdditionalCustomParameterAddress;
 };
 
-class UartDriver:public QObject
+class DataBuffer:public QObject
 {
     Q_OBJECT
 
 public slots:
-    void writechannelvalue(int channel, double value);
-    double readchannelvalue(int channel);
+    static void writechannelvalue(int channel, double value);
+    static double readchannelvalue(int channel);
+    static bool readupdatestatus(int channel);
+    static void writeupdatestatus(int channel, bool value);
     QString ReadAllAvailableCOMPorts();
     QString ReadAllUartDataStringFormat();
     QByteArray ReadAllUartDataByteFormat();
 
 private:
-    static double channeltempbuffer[4];
-    QString GetPathToRTSPinValue () {return "/sys/class/gpio/gpio66/value";}
-    QString GetPathToRTSPinDirection () {return "/sys/class/gpio/gpio66/direction";}
-
-protected:
-    void DelayMsec(int n);
-    QByteArray UartWriteData(QByteArray data);
-    quint16 CalculateCRC16RTU(const QByteArray &array);
-
-public:
     static double channelinputbuffer[4];
     static bool needtoupdatechannel[4];
+    static QMutex *channeldatamutex;
+    static QMutex *channelupdatemutex;
+
+protected:
+    QByteArray UartWriteData(QByteArray data);
+    quint16 CalculateCRC16RTU(const QByteArray &array);
 };
 
-class ModBus: public UartDriver
+class ModBus: public DataBuffer
 {
     Q_OBJECT
 
@@ -142,20 +140,17 @@ private:
 public slots:
 
     double ReadDataChannel(int channeladdress);
-    void WriteDataChannel(int channeladdress, double data);
     double ReadOnBoardTemperature ();
     double ReadOnBoardVoltage();
     double ClickRelay(char channel);
     void  SetChannelSignalType(uint16_t channel, uint16_t additionalparametr);
     void  SetChannelAdditionalParametr(uint16_t channel, uint16_t signaltype);
     void SetSingleCoil(char channel, uint16_t Address, bool newstate);
-
+    void WriteDataChannel(int channeladdress, double data);
     void ConfigureChannel(ModbusDeviceStruct* devstruct);
     void ConfigureDevices(QList<ModbusDeviceStruct> * devstructlist);
-
-    uint16_t GetChannelSignalType(uint8_t channel);
-
     void ThreadReact( ChannelOptions*  channel) {qDebug() << channel->GetChannelName();}
+    uint16_t GetChannelSignalType(uint8_t channel);
 
 public:
 

@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 #include "messages.h"
 #include "options.h"
+#include "defines.h"
 
 #include <QtCore>
 #include <QtWidgets>
@@ -22,6 +23,17 @@ keyboard::keyboard(QWidget *parent) :
 
     MessageWrite mr ("Keyboard Open");
     mr.deleteLater();
+
+    QList<QPushButton*> ButtonList = keyboard::findChildren<QPushButton*> ();
+    // добавляем все кнопошки в евентфильтр
+    for (int i = 0; i < ButtonList.count(); ++i) {
+        QPushButton *but = ButtonList.at(i);
+        but->installEventFilter(this);
+        // ставим везде стайлшит
+
+        but->setStyleSheet(stylesheetUnclicked);
+    }
+
 }
 
 keyboard::~keyboard()

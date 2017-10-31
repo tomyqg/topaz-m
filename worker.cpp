@@ -18,12 +18,13 @@ worker::worker(QObject *parent) :
 }
 
 ModBus MB;
-UartDriver UD;
+DataBuffer UD;
 mathresolver mr;
 
 int ic ;
 
-int globalindex;
+int globalindex = 0;
+int globalindex2;
 
 ModbusDeviceStruct modbusdevice;
 QList<ModbusDeviceStruct> ModbusDevicesList;
@@ -60,7 +61,6 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
 {
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
-
 
     int num;
     uint16_t * data;
@@ -194,7 +194,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
 
     {
-        //        qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
+        //qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
         QByteArray arraytofloat;
 
@@ -355,117 +355,13 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     }
 }
 
-
-//void worker::do_Work()
-//{
-//    double mathresult;
-//    double currentdata;
-
-//    float destfloat[1024];
-//    memset( destfloat, 0, 1024 );
-
-//    emit SignalToObj_mainThreadGUI();
-
-//    if ( !isrunning || isstopped ) // если воркер остановлен
-//    {
-//        this->thread()->usleep(1000); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
-//    }
-
-//    if ( isrunning || !isstopped ) // если воркер запущен
-//    {
-//        this->thread()->setPriority(QThread::LowPriority);
-
-//        if (ThreadChannelOptions1->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[0] == 1)
-//            {
-
-//                UartDriver::needtoupdatechannel[0] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-//                ReadModbusData(&device.channel0.Data,destfloat );
-//                currentdata = destfloat[0];
-
-//                //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-//                WriteModbusData(&device.channel0.FilterType, 2) ;
-
-//                if (ThreadChannelOptions1->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions1->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-//                UD.writechannelvalue(1,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-
-//        if (ThreadChannelOptions2->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[1] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[1] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-
-//                //ReadModbusData(&device.badgoodcomm,destfloat );
-//                ReadModbusData(&device.channel1.Data,&destfloat[0] );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions2->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions2->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-//                UD.writechannelvalue(2,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-//        if (ThreadChannelOptions3->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[2] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[2] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                WriteModbusData(&device.channel0.UserCalibDate2, total );
-//                ReadModbusData(&device.channel0.UserCalibDate2,destfloat );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions3->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions3->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-
-//                UD.writechannelvalue(3,currentdata);
-//            }
-
-//        currentdata = destfloat[0] = 0;
-
-//        if (ThreadChannelOptions4->GetSignalType() != ModBus::MeasureOff)
-//            if (UartDriver::needtoupdatechannel[3] == 1)
-//            {
-//                UartDriver::needtoupdatechannel[3] = 0;
-//                this->thread()->usleep(100); // 100 мксек ждем прост.
-//                ReadModbusData(&device.channel3.Data,destfloat );
-//                currentdata = destfloat[0];
-//                if (ThreadChannelOptions4->IsChannelMathematical())
-//                {
-//                    mathresult = mr.SolveEquation(ThreadChannelOptions4->GetMathString(),currentdata);
-//                    currentdata = mathresult;
-//                }
-
-//                UD.writechannelvalue(4,currentdata);
-//            }
-//    }
-
-//    emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
-//    // do important work here
-//    // allow the thread's event loop to process other events before doing more "work"
-//    // for instance, your start/stop signals from the MainWindow
-//    QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
-//}
-
 void worker::do_Work()
 {
     double mathresult;
     double currentdata;
 
     float destfloat[1024];
-    memset( destfloat, 0, 1024 );
+    memset( destfloat, 0, 1024 );//заполняем нулями массив
 
     emit SignalToObj_mainThreadGUI();
 
@@ -481,34 +377,45 @@ void worker::do_Work()
         // пихаем все каналы в один массив
         // тут опрашиваем каждый канал
 
-        globalindex++;
+        int chanelindex = 0;
 
-        if (globalindex > 215)
-            globalindex = - 15;
+        if ( (++globalindex2)%6 == 0)
+            globalindex++;
 
-        int index = 0;
+        if (globalindex > 100)
+            globalindex = 40;
+
         foreach (ChannelOptions * Chanel, ChannelsObjectsList)
         {
-//            qDebug() << Chanel->GetChannelName();
-            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (UartDriver::needtoupdatechannel[index] == 1) )
+            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::readupdatestatus(chanelindex)) )
             {
                 QCoreApplication::applicationDirPath();
-                UartDriver::needtoupdatechannel[index] = 0;
+                DataBuffer::writeupdatestatus(chanelindex,false);
 
-                //WriteModbusData(&device.badgoodcomm, currentdata*-1);
-                //ReadModbusData(&device.channel0.Data,&destfloat[0] );
-                ReadModbusData(&device.Channels.at(index).Data,&destfloat[0] );
                 currentdata = destfloat[0];
+                double r = rand()%10;
 
-                if (Chanel->IsChannelMathematical())
-                {
-                    mathresult = mr.SolveEquation(Chanel->GetMathString(),currentdata);
-                    currentdata = mathresult;
+                switch (chanelindex) {
+                case 0:
+//                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+                    currentdata =  0.110*globalindex;
+                    break;
+                case 1:
+                    currentdata =  0.120*globalindex;
+                    break;
+                case 2:
+                    currentdata =  0.095*globalindex;
+                    break;
+                case 3:
+                    currentdata =  0.105*globalindex;
+                    break;
+                default:
+                    break;
                 }
 
-                UD.writechannelvalue(index,currentdata);
+                Chanel->SetCurrentChannelValue(currentdata );
             }
-            ++index;
+            ++chanelindex;
         }
     }
 
@@ -516,7 +423,7 @@ void worker::do_Work()
     // do important work here
     // allow the thread's event loop to process other events before doing more "work"
     // for instance, your start/stop signals from the MainWindow
-    QMetaObject::invokeMethod( this, "do_Work", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(this, "do_Work", Qt::QueuedConnection );
 }
 
 void worker::StopWorkSlot()
@@ -525,7 +432,6 @@ void worker::StopWorkSlot()
     isrunning = false;
     emit stopped();
     this->thread()->usleep(50000);
-
 }
 
 void worker::StartWorkSlot()
@@ -533,7 +439,6 @@ void worker::StartWorkSlot()
     isstopped = false;
     isrunning = true;
     emit running();
-
     do_Work();
 }
 
@@ -542,16 +447,12 @@ void worker::OpenSerialPort( int )
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
-
         // инициализируем  объект модбаса...
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
         if( modbus_connect( m_modbus ) == -1 )
         {
-//            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
-
+            //qDebug() << "Connection failed"  << "Could not connect serial port!" ;
             emit ModbusConnectionError();
-
-
         }
         else
         {
@@ -566,19 +467,15 @@ void worker::OpenSerialPort( int )
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-
-
     thread()->usleep(100000);
 
     ThreadChannelOptions1 = c1;
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
     ThreadChannelOptions4 = c4;
-
     ChannelsObjectsList.append(ThreadChannelOptions1);
     ChannelsObjectsList.append(ThreadChannelOptions2);
     ChannelsObjectsList.append(ThreadChannelOptions3);
     ChannelsObjectsList.append(ThreadChannelOptions4);
-
     thread()->usleep(10000);
 }

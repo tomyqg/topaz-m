@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <mainwindow.h>
 
-#include <channel1.h>
+#include <channelOptions.h>
 namespace Ui {
 class keyboard;
 }

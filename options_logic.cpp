@@ -1,16 +1,16 @@
 #include "options.h"
 #include "ui_options.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "keyboard.h"
 #include "messages.h"
 #include "defines.h"
 
 QString Options::calibrationprm = "3383 3962 234 599";
+int Options::DisplayParametr = DisplayParametrEnum::Polar;
 QString Options::olderprop = "";
 QString Options::displayResolution = "1280x800";
 QString Options::MonitorResolution = "35";
 //extern QString pathtofile;
-int Options::DisplayParametr = DisplayParametrEnum::Polar;
 
 double Options::maxmessageslimit=1000;
 
@@ -51,7 +51,7 @@ Options::Options(QWidget *parent) :
 
 Options::~Options()
 {
-//    qDebug() << "Options Destructor" ;
+    //    qDebug() << "Options Destructor" ;
     delete ui;
 }
 
@@ -410,15 +410,21 @@ void Options::on_ArchivetoUSB_button_clicked()
 void Options::on_pushButton_6_clicked()
 {
     ResetToDefaults();
-//    this->close();
 }
 
+<<<<<<< HEAD
+=======
+void Options::on_pushButton_7_clicked()
+{
+    ui->toolBox->setCurrentIndex(0);
+    ui->toolBox->setWindowTitle("");
+}
+>>>>>>> MYD_and_Endress_Menu
 
 
 
 void Options::TouchScreenCalibrate()
 {
-
     QProcess process1;
 
 #ifdef MYD // если плата MYD
@@ -460,9 +466,6 @@ void Options::ResetToDefaults() // кастомизирует контроллы
 
 void Options::ArchiveToUSBFlashDrive() // кастомизирует контроллы во вкладке опшнс
 {
-
-    //    return;
-
     // этот кусок кода ищет название куда смонтирована флешка
     QProcess process1,process2;
     process2.start("mount"); // команда которая покажет что подключено в данный момент
@@ -501,8 +504,6 @@ void Options::ArchiveToUSBFlashDrive() // кастомизирует контр�
     }
 
     // конец кода который ищет название куда смонтирована флешка//  что то на подобие /media/sda1/
-
-
 
 
     QString USBFlashPath = peace.trimmed().simplified();

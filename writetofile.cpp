@@ -4,12 +4,10 @@
 #include "ui_options.h"
 #include "messages.h"
 #include "keyboard.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "defines.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
-
-//extern QString pathtofile ;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -23,6 +21,26 @@ void MainWindow::WriteGpio(int num, bool val)
     QTextStream out(&file);
     out << val;
     file.close();
+}
+
+void MainWindow::RefreshScreen()
+{
+    QProcess process;
+
+    //запрещаем бланк экрана
+    process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
+    process.waitForFinished();
+
+    //qDebug() << "QProcess process;";
+    QStringList args;
+    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
+
+    //qDebug() << "QProcess args: " << args;
+
+    process.start("sh", args);
+    process.waitForFinished();
+
+    this->update(); // мы апдейтим нашу главную форму
 }
 
 void Options::WriteSystemOptionsToFile()
@@ -46,86 +64,41 @@ void Options::WriteSystemOptionsToFile()
 
 void Options::WriteAllChannelsOptionsToFile()
 {
-    QJsonObject channel1,channel2,channel3,channel4,channels;
+    QList<ChannelOptions *> ChannelsObjectsList;
+
+    ChannelsObjectsList.append(&options_channel1);
+    ChannelsObjectsList.append(&options_channel2);
+    ChannelsObjectsList.append(&options_channel3);
+    ChannelsObjectsList.append(&options_channel4);
+
+    QJsonObject channeljsonobj,channels;
     QJsonArray settings;
 
-    channel1["Type"] = options_channel1.GetSignalType();
-    channel1["Name"] = options_channel1.GetChannelName();
-    channel1["Units"] = options_channel1.GetUnitsName();
-    channel1["HigherLimit"] = options_channel1.GetHigherLimit();
-    channel1["LowerLimit"] = options_channel1.GetLowerLimit();
-    channel1["HigherMeasLimit"] = options_channel1.GetHigherMeasureLimit();
-    channel1["LowerMeasLimit"] = options_channel1.GetLowerMeasureLimit();
-    channel1["Period"] = options_channel1.GetMeasurePeriod();
-    channel1["State1HighMessage"] = options_channel1.GetState1HighMessage();
-    channel1["State1LowMessage"] = options_channel1.GetState1LowMessage();
-    channel1["State2HighMessage"] = options_channel1.GetState2HighMessage();
-    channel1["State2LowMessage"] = options_channel1.GetState2LowMessage();
-    channel1["State1Value"] = options_channel1.GetState1Value();
-    channel1["State2Value"] = options_channel1.GetState2Value();
-    channel1["MathString"] = options_channel1.GetMathString();
-    channel1["MathWork"] = options_channel1.IsChannelMathematical();
+    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
+            channeljsonobj["Type"] = Channel->GetSignalType();
+            channeljsonobj["Name"] = Channel->GetChannelName();
+            channeljsonobj["Units"] = Channel->GetUnitsName();
+            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+            channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
+            channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
+            channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
+            channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
+            channeljsonobj["State1Value"] = Channel->GetState1Value();
+            channeljsonobj["State2Value"] = Channel->GetState2Value();
+            channeljsonobj["MathString"] = Channel->GetMathString();
+            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+            channeljsonobj["Diapason"] = Channel->GetDiapason();
+            channeljsonobj["Dempher"] = Channel->GetDempherValue();
+            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+            settings.append(channeljsonobj);
+        }
 
-    settings.append(channel1);
 
-    channel2["Type"] = options_channel2.GetSignalType();
-    channel2["Name"] = options_channel2.GetChannelName();
-    channel2["Units"] = options_channel2.GetUnitsName();
-    channel2["HigherLimit"] = options_channel2.GetHigherLimit();
-    channel2["LowerLimit"] = options_channel2.GetLowerLimit();
-    channel2["HigherMeasLimit"] = options_channel2.GetHigherMeasureLimit();
-    channel2["LowerMeasLimit"] = options_channel2.GetLowerMeasureLimit();
-    channel2["Period"] = options_channel2.GetMeasurePeriod();
-    channel2["State1HighMessage"] = options_channel2.GetState1HighMessage();
-    channel2["State1LowMessage"] = options_channel2.GetState1LowMessage();
-    channel2["State2HighMessage"] = options_channel2.GetState2HighMessage();
-    channel2["State2LowMessage"] = options_channel2.GetState2LowMessage();
-    channel2["State1Value"] = options_channel2.GetState1Value();
-    channel2["State2Value"] = options_channel2.GetState2Value();
-    channel2["MathString"] = options_channel2.GetMathString();
-    channel2["MathWork"] = options_channel2.IsChannelMathematical();
-
-    settings.append(channel2);
-
-    channel3["Type"] = options_channel3.GetSignalType();
-    channel3["Name"] = options_channel3.GetChannelName();
-    channel3["Units"] = options_channel3.GetUnitsName();
-    channel3["HigherLimit"] = options_channel3.GetHigherLimit();
-    channel3["LowerLimit"] = options_channel3.GetLowerLimit();
-    channel3["HigherMeasLimit"] = options_channel3.GetHigherMeasureLimit();
-    channel3["LowerMeasLimit"] = options_channel3.GetLowerMeasureLimit();
-    channel3["Period"] = options_channel3.GetMeasurePeriod();
-    channel3["State1HighMessage"] = options_channel3.GetState1HighMessage();
-    channel3["State1LowMessage"] = options_channel3.GetState1LowMessage();
-    channel3["State2HighMessage"] = options_channel3.GetState2HighMessage();
-    channel3["State2LowMessage"] = options_channel3.GetState2LowMessage();
-    channel3["State1Value"] = options_channel3.GetState1Value();
-    channel3["State2Value"] = options_channel3.GetState2Value();
-    channel3["MathString"] = options_channel3.GetMathString();
-    channel3["MathWork"] = options_channel3.IsChannelMathematical();
-
-    settings.append(channel3);
-
-    channel4["Type"] = options_channel4.GetSignalType();
-    channel4["Name"] = options_channel4.GetChannelName();
-    channel4["Units"] = options_channel4.GetUnitsName();
-    channel4["HigherLimit"] = options_channel4.GetHigherLimit();
-    channel4["LowerLimit"] = options_channel4.GetLowerLimit();
-    channel4["HigherMeasLimit"] = options_channel4.GetHigherMeasureLimit();
-    channel4["LowerMeasLimit"] = options_channel4.GetLowerMeasureLimit();
-    channel4["Period"] = options_channel4.GetMeasurePeriod();
-    channel4["State1HighMessage"] = options_channel4.GetState1HighMessage();
-    channel4["State1LowMessage"] = options_channel4.GetState1LowMessage();
-    channel4["State2HighMessage"] = options_channel4.GetState2HighMessage();
-    channel4["State2LowMessage"] = options_channel4.GetState2LowMessage();
-    channel4["State1Value"] = options_channel4.GetState1Value();
-    channel4["State2Value"] = options_channel4.GetState2Value();
-    channel4["MathString"] = options_channel4.GetMathString();
-    channel4["MathWork"] = options_channel4.IsChannelMathematical();
-
-    settings.append(channel4);
-
-    channels["count"] = 4;
+    channels["count"] = ChannelsObjectsList.length();
     channels["channels"] = settings;
 
     QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
@@ -180,8 +153,6 @@ void MessageWrite::LogClear()
 
 void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
 {
-    this->update(); // мы апдейтим нашу главную форму
-
     // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
@@ -203,10 +174,10 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
         valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
-    QString channel1period = QString::number( channel1object.GetMeasurePeriod(), 'f', 1);
-    QString channel2period = QString::number( channel2object.GetMeasurePeriod(), 'f', 1);
-    QString channel3period = QString::number( channel3object.GetMeasurePeriod(), 'f', 1);
-    QString channel4period = QString::number( channel4object.GetMeasurePeriod(), 'f', 1);
+    QString channel1period = QString::number( channel1.GetMeasurePeriod(), 'f', 1);
+    QString channel2period = QString::number( channel2.GetMeasurePeriod(), 'f', 1);
+    QString channel3period = QString::number( channel3.GetMeasurePeriod(), 'f', 1);
+    QString channel4period = QString::number( channel4.GetMeasurePeriod(), 'f', 1);
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;
@@ -322,5 +293,3 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     out << setstr;
     file.close();
 }
-
-

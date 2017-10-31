@@ -6,12 +6,22 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 
-class mathresolver
+class mathresolver : public QObject
 {
 public:
     mathresolver();
-    double SolveEquation(QString eqstring, double x);
-    double SolveEquation(QString eqstring);
+    static double SolveEquation(QString eqstring, double x);
+    static double SolveEquation(QString eqstring);
+
+    template< typename T >
+    T GetAverageValue(QVector<T>& qvect2);
+
+    static double dGetAverageValue(QVector<double >& qvect2);
+    static double dGetMinimumValue(QVector<double >& qvect);
+    static double dGetMaximumValue(QVector<double >& qvect);
+    static double dGetDempheredValue(QVector<double >& qvect, int count);
 };
+
+
 
 #endif // MATHRESOLVER_H

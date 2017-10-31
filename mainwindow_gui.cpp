@@ -4,7 +4,7 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "uartdriver.h"
 
 #include <QPixmap>
@@ -30,6 +30,7 @@ QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
 QVector<QDateTime> MainWindow::Dates;
 
+
 extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
@@ -48,54 +49,63 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QColor MainWindow::GetChannel1Color()
-{
-    return Channel1Color;
-}
-
-void MainWindow::SetChannel1Color(QColor newcolor)
-{
-    Channel1Color = newcolor;
-}
-
-void MainWindow::SetChannel2Color(QColor newcolor)
-{
-    Channel2Color = newcolor;
-}
-
-QColor MainWindow::GetChannel2Color()
-{
-    return Channel2Color;
-}
-
-void MainWindow::SetChannel3Color(QColor newcolor)
-{
-    Channel3Color = newcolor;
-}
-
-QColor MainWindow::GetChannel3Color()
-{
-    return Channel3Color;
-}
-
-void MainWindow::SetChannel4Color(QColor newcolor)
-{
-    Channel4Color = newcolor;
-}
-
-QColor MainWindow::GetChannel4Color()
-{
-    return Channel4Color;
-}
 
 void MainWindow::updateDateLabel()
 {
     DateUpdate();
 }
 
+void MainWindow::on_WorkButton_clicked()
+{
+    OpenWorkWindow();
+}
+
+void MainWindow::on_ArchiveButton_clicked()
+{
+    OpenArchiveWindow();
+}
+
+
+void MainWindow::on_EcoCheckBox_toggled(bool checked)
+{
+    SetEcoMode(checked);
+
+    switch (checked) {
+    case 0:
+        ui->EcoCheckBox->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+        break;
+    case 1:
+        ui->EcoCheckBox->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+        break;
+    default:
+        break;
+    }
+
+    ChangePalette(checked);
+
+
+}
+
+void MainWindow::on_smoothCheckBox_toggled(bool checked)
+{
+    //    qDebug()  <<  ui->customPlot->antialiasedElements();
+}
+
+void MainWindow::on_timeButton_clicked()
+{
+    ++dateindex;
+    if (dateindex>=datestrings.length())
+        dateindex = 0 ;
+
+    QDateTime local(QDateTime::currentDateTime());
+
+    ui->timeButton->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
+}
+
 void MainWindow::on_pushButton_2_clicked()
 {
-    OpenOptionsWindow();
+    OpenOptionsWindow(0);
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -103,17 +113,6 @@ void MainWindow::on_pushButton_4_clicked()
     OpenMessagesWindow();
 }
 
-void MainWindow::on_RelayChanger_toggled(bool checked)
-{
-
-    ui->RelayChanger->setText("Сглаживание " + QString::number(checked));
-    if (checked)
-        ui->customPlot->setAntialiasedElements(QCP::aeAll);
-    else
-        ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
-
-}
 
 void  MainWindow::destroyedslot(QObject *)
 {
@@ -131,6 +130,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             needupdatePainter = 0;}
     }
 
+
     if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
         ReactOnTouch();
     }
@@ -139,7 +139,41 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
         ReactOnMouseSlide();
     }
-    return true;
+
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == watched->property("objectName"))
+            {
+                widget->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+            }
+        }
+    }
+
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == watched->property("objectName"))
+            {
+                widget->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+            }
+        }
+    }
+
+    return QWidget::eventFilter(watched, event);
 }
 
 void MainWindow::ShowMessageBox (QString title,QString message)
@@ -276,7 +310,11 @@ int MainWindow::GetMonitorHeightPixels()
 }
 
 void MainWindow::SetWindowWidthPixels(int neww)
-{windowwidth = neww;}
+{
+    windowwidth = neww;
+}
 
 void MainWindow::SetWindowHeightPixels(int newh)
-{windowheight = newh;}
+{
+    windowheight = newh;
+}

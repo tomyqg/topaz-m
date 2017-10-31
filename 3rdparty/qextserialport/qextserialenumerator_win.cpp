@@ -125,9 +125,9 @@ void QextSerialEnumerator::setUpNotifications( )
     dbh.dbcc_devicetype = DBT_DEVTYP_DEVICEINTERFACE;
     CopyMemory(&dbh.dbcc_classguid, &GUID_DEVCLASS_PORTS, sizeof(GUID));
     //if( RegisterDeviceNotification( notificationWidget->winId( ), &dbh, DEVICE_NOTIFY_WINDOW_HANDLE ) == NULL)
-      //  qWarning() << "RegisterDeviceNotification failed:" << GetLastError();
-    // setting up notifications doesn't tell us about devices already connected
-    // so get those manually
+    //qWarning() << "RegisterDeviceNotification failed:" << GetLastError();
+    //setting up notifications doesn't tell us about devices already connected
+    //so get those manually
     foreach( QextPortInfo port, getPorts() )
       emit deviceDiscovered( port );
     #else
@@ -203,4 +203,3 @@ bool QextSerialEnumerator::getDeviceDetailsWin( QextPortInfo* portInfo, HDEVINFO
     }
     return true;
 }
-

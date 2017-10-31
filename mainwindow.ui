@@ -32,10 +32,10 @@
    <widget class="QCustomPlot" name="customPlot" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1251</width>
-      <height>641</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>561</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -46,7 +46,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
       <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -59,67 +59,142 @@
     <widget class="QLabel" name="time_label">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>0</x>
        <y>0</y>
-       <width>611</width>
+       <width>1281</width>
        <height>30</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Open Sans Semibold</family>
-       <pointsize>18</pointsize>
+       <family>Open Sans</family>
+       <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 108, 217);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));
+color : white;</string>
+     </property>
      <property name="text">
       <string>Date/Time</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="multigrapf">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>211</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 108, 217);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));
+color : white;</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Мультиграф v0.6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="timeButton">
+     <property name="geometry">
+      <rect>
+       <x>1240</x>
+       <y>0</y>
+       <width>40</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 108, 217);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 0), stop:1 rgba(0, 170, 255, 0));
+color : white;</string>
+     </property>
+     <property name="text">
+      <string>⟳</string>
      </property>
     </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>720</x>
       <y>660</y>
-      <width>200</width>
-      <height>70</height>
+      <width>140</width>
+      <height>45</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
-      <pointsize>16</pointsize>
+      <family>Open Sans</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255));</string>
+    </property>
     <property name="text">
-     <string>Настройки</string>
+     <string>Меню</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>700</x>
+      <x>300</x>
       <y>660</y>
-      <width>200</width>
-      <height>70</height>
+      <width>140</width>
+      <height>45</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
-      <pointsize>16</pointsize>
+      <family>Open Sans</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::ClickFocus</enum>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255));</string>
+    </property>
     <property name="text">
-     <string>Сообщения</string>
+     <string>Сообщен.</string>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -133,7 +208,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
      </font>
     </property>
     <property name="frameShape">
@@ -146,57 +221,19 @@
    <widget class="QWidget" name="MessagesWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>40</y>
-      <width>1200</width>
-      <height>600</height>
+      <x>0</x>
+      <y>30</y>
+      <width>1280</width>
+      <height>611</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
      </font>
     </property>
     <property name="cursor">
      <cursorShape>BlankCursor</cursorShape>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="ConfirmBox">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>650</y>
-      <width>300</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans Semibold</family>
-     </font>
-    </property>
-    <property name="text">
-     <string>Квитирование</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="RelayChanger">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>670</y>
-      <width>300</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans Semibold</family>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Сглаживание</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -205,12 +242,12 @@
       <x>10</x>
       <y>650</y>
       <width>160</width>
-      <height>78</height>
+      <height>66</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
      </font>
     </property>
     <property name="focusPolicy">
@@ -226,15 +263,15 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>660</y>
+      <x>460</x>
+      <y>710</y>
       <width>201</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
       <pointsize>12</pointsize>
       <weight>75</weight>
       <italic>true</italic>
@@ -248,15 +285,15 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>690</y>
+      <x>860</x>
+      <y>705</y>
       <width>41</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
       <pointsize>12</pointsize>
      </font>
     </property>
@@ -267,24 +304,30 @@
    <widget class="QScrollBar" name="horizontalScrollBar">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>685</y>
+      <x>660</x>
+      <y>710</y>
       <width>181</width>
-      <height>41</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
      </font>
     </property>
     <property name="minimum">
      <number>1</number>
     </property>
     <property name="maximum">
-     <number>6</number>
+     <number>2</number>
     </property>
     <property name="pageStep">
+     <number>1</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+    <property name="sliderPosition">
      <number>1</number>
     </property>
     <property name="orientation">
@@ -294,56 +337,216 @@
    <widget class="QCheckBox" name="arrowscheckBox">
     <property name="geometry">
      <rect>
-      <x>910</x>
-      <y>690</y>
-      <width>300</width>
+      <x>900</x>
+      <y>650</y>
+      <width>150</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
     </property>
     <property name="text">
-     <string>Вспомогательные стрелки</string>
+     <string>Cтрелки</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="autoscalecheckbox">
     <property name="geometry">
      <rect>
-      <x>910</x>
+      <x>900</x>
+      <y>680</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Автомасшаб</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="percentCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
       <y>710</y>
+      <width>150</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>В процентах</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ArchiveButton">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>660</y>
+      <width>140</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255));</string>
+    </property>
+    <property name="text">
+     <string>Архив</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="WorkButton">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>660</y>
+      <width>140</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255));
+</string>
+    </property>
+    <property name="text">
+     <string>Работа</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="EcoCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>660</y>
+      <width>120</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 108, 217);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));
+color : white;</string>
+    </property>
+    <property name="text">
+     <string>Eco</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showdots">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>650</y>
       <width>300</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Open Sans Semibold</family>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
     </property>
     <property name="text">
-     <string>Автомасшабирование графика</string>
+     <string>Отображать точки</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showcenterdots">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>680</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Точка в серед.</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>540</y>
+      <width>1280</width>
+      <height>90</height>
+     </rect>
     </property>
    </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
-   <zorder>MessagesWidget</zorder>
-   <zorder>ConfirmBox</zorder>
    <zorder>pushButton_4</zorder>
    <zorder>pushButton_2</zorder>
-   <zorder>RelayChanger</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
    <zorder>horizontalScrollBar</zorder>
    <zorder>arrowscheckBox</zorder>
    <zorder>autoscalecheckbox</zorder>
+   <zorder>percentCheckBox</zorder>
+   <zorder>MessagesWidget</zorder>
+   <zorder>ArchiveButton</zorder>
+   <zorder>WorkButton</zorder>
+   <zorder>EcoCheckBox</zorder>
+   <zorder>showdots</zorder>
+   <zorder>showcenterdots</zorder>
+   <zorder>graphicsView</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

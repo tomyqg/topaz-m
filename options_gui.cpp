@@ -1,6 +1,6 @@
 #include "options.h"
 #include "ui_options.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "keyboard.h"
 #include "messages.h"
 #include "defines.h"

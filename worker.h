@@ -2,7 +2,7 @@
 #define WORKER_H
 
 #include "uartdriver.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "device.h"
 #include "src/modbus.h"
 
@@ -44,8 +44,11 @@ private:
     bool isrunning,isstopped;
     modbus_t * m_modbus;
     QList<ChannelOptions *> ChannelsObjectsList;
+    QList<QVector<double> *> arrayarray;
     QList< Device * > Devices;
     Device device;
+    QMutex ReadModbusDataMutex;
+    QMutex TestMutex;
 };
 
 #endif // WORKER_H

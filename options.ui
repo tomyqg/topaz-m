@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>3</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -342,6 +342,12 @@
            <property name="decimals">
             <number>2</number>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
            </property>
@@ -368,6 +374,12 @@
            </property>
            <property name="decimals">
             <number>2</number>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
@@ -396,6 +408,12 @@
            <property name="decimals">
             <number>2</number>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
            </property>
@@ -422,6 +440,12 @@
            </property>
            <property name="decimals">
             <number>2</number>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.010000000000000</double>
@@ -1487,6 +1511,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -1504,6 +1534,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -1523,6 +1559,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -1540,6 +1582,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -2530,6 +2578,12 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -2547,6 +2601,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -2569,6 +2629,12 @@
            <property name="inputMethodHints">
             <set>Qt::ImhFormattedNumbersOnly</set>
            </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item>
@@ -2586,6 +2652,12 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="minimum">
+            <double>-300.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -4195,6 +4267,12 @@
             <bold>true</bold>
            </font>
           </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -4212,6 +4290,12 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -4231,6 +4315,12 @@
             <bold>true</bold>
            </font>
           </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -4248,6 +4338,12 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="minimum">
+           <double>-300.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -4988,8 +5084,8 @@ p, li { white-space: pre-wrap; }
     <widget class="QGroupBox" name="groupBox_14">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
+       <x>70</x>
+       <y>20</y>
        <width>601</width>
        <height>541</height>
       </rect>
@@ -5603,6 +5699,7 @@ p, li { white-space: pre-wrap; }
     <attribute name="title">
      <string>Выходы</string>
     </attribute>
+<<<<<<< HEAD
     <widget class="QCheckBox" name="checkBox_5">
      <property name="geometry">
       <rect>
@@ -5692,6 +5789,361 @@ p, li { white-space: pre-wrap; }
      <property name="text">
       <string>Петля 4-20 мА</string>
      </property>
+=======
+    <widget class="QToolBox" name="toolBox">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>70</y>
+       <width>521</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>Page 1</string>
+      </attribute>
+      <widget class="QGroupBox" name="groupBox_27">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>10</y>
+         <width>481</width>
+         <height>351</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Open Sans Semibold</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Режим Отображения</string>
+       </property>
+       <widget class="QWidget" name="layoutWidget_15">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>286</width>
+          <height>301</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_15">
+         <property name="spacing">
+          <number>5</number>
+         </property>
+         <item>
+          <widget class="QRadioButton" name="SetTrendsBtn_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Тренд</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetCyfraBtn_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Цифра</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetTrendsCyfraBtn_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Тренд + Цифра      </string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetBarsBtn_2">
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Барграф</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetBarsCyfraBtn_2">
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Барграф + Цифра</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetTrendsBarsBtn_2">
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Тренд + Барграф</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetTrendsBarsCyfraBtn_2">
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Тренд + Барграф + Цифра</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="SetPolarBtn_2">
+           <property name="font">
+            <font>
+             <family>Open Sans Semibold</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Круговая диаграмма</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>521</width>
+        <height>385</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>Page 2</string>
+      </attribute>
+      <widget class="QCheckBox" name="checkBox_8">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>130</y>
+         <width>200</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Реле 4 НЗ</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_7">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>90</y>
+         <width>200</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Реле 3 НЗ</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>50</y>
+         <width>200</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Реле 2 НЗ</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_9">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>170</y>
+         <width>200</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Петля 4-20 мА</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_5">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>200</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Реле 1 НЗ</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>540</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>540</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&gt;</string>
+     </property>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>130</y>
+       <width>361</width>
+       <height>381</height>
+      </rect>
+     </property>
+     <widget class="QWidget" name="page_3"/>
+     <widget class="QWidget" name="page_4"/>
+>>>>>>> MYD_and_Endress_Menu
     </widget>
    </widget>
   </widget>
@@ -5756,8 +6208,8 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

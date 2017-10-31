@@ -4,8 +4,9 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channel1.h"
+#include "channelOptions.h"
 #include "uartdriver.h"
+#include "stackedoptions.h"
 #include "worker.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
@@ -30,31 +31,45 @@
 #include <QMetaType>
 #include "defines.h"
 
-int odin;
-
 extern MainWindow * globalMainWin;
-
 
 extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
-extern QColor ChannelColorNormal;
+extern QColor Channel1ColorNormal;
 extern QColor Channel2ColorNormal ;
 extern QColor Channel3ColorNormal;
 extern QColor Channel4ColorNormal ;
+
+extern QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
+extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;
+
 extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 
-
 void MainWindow::MainWindowInitialization()
 {
-    CreateMODBusConfigFile();
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM-dd-yyyy ");
+    datestrings.append("dd-MM-yyyy ");
+    datestrings.append("dd/MM/yyyy ");
+    datestrings.append("MM/dd/yyyy ");
+    datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM.dd.yyyy ");
+    datestrings.append("yyyy-MM-dd ");
+
+    timestrings.append("hh:mm:ss ");
+    timestrings.append("hh.mm.ss ");
+    timestrings.append("hh,mm,ss ");
+
+    dateindex = 0 ;
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
 
     QPixmap pix(pathtologotip);
+
 
     // находим все com - порты
     int portIndex = 0;
@@ -70,23 +85,26 @@ void MainWindow::MainWindowInitialization()
         ++i;
     }
 
-
-    //    ui->label->setScaledContents(true);
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
 
+
+    QList<QPushButton*> ButtonList = MainWindow::findChildren<QPushButton*> ();
+    // добавляем все кнопошки в евентфильтр
+    for (int i = 0; i < ButtonList.count(); ++i) {
+        QPushButton *but = ButtonList.at(i);
+        but->installEventFilter(this);
+    }
+
     SetXRange(XRange);
     SetYRange(YRange);
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
-    ui->customPlot->setNotAntialiasedElements(QCP::aeAll);
-
-    //    MessageWrite mr ;
+    ui->customPlot->setAntialiasedElements(QCP::aeNone);
     messwrite.LogAddMessage("Programm Started");
-    //    mr.deleteLater();
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
@@ -101,10 +119,15 @@ void MainWindow::MainWindowInitialization()
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
 
+    displayrefreshtimer = new QTimer();
+    displayrefreshtimer->setInterval(30000);
+    displayrefreshtimer->start(30000);
+
+    connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
+
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
-
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
     tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
@@ -116,16 +139,25 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-    channel1object.ReadSingleChannelOptionFromFile(1);
-    channel2object.ReadSingleChannelOptionFromFile(2);
-    channel3object.ReadSingleChannelOptionFromFile(3);
-    channel4object.ReadSingleChannelOptionFromFile(4);
+    channel1.ReadSingleChannelOptionFromFile(1);
+    channel2.ReadSingleChannelOptionFromFile(2);
+    channel3.ReadSingleChannelOptionFromFile(3);
+    channel4.ReadSingleChannelOptionFromFile(4);
 
+    channel1.SetNormalColor(Channel1ColorNormal);
+    channel2.SetNormalColor(Channel2ColorNormal);
+    channel3.SetNormalColor(Channel3ColorNormal);
+    channel4.SetNormalColor(Channel4ColorNormal);
 
-    channel1object.SetColor(Channel1Color);
-    channel2object.SetColor(Channel2Color);
-    channel3object.SetColor(Channel3Color);
-    channel4object.SetColor(Channel4Color);
+    channel1.SetMaximumColor(Channel1ColorMaximum);
+    channel2.SetMaximumColor(Channel2ColorMaximum);
+    channel3.SetMaximumColor(Channel3ColorMaximum);
+    channel4.SetMaximumColor(Channel4ColorMaximum);
+
+    channel1.SetMinimumColor(Channel1ColorMinimum);
+    channel2.SetMinimumColor(Channel2ColorMinimum);
+    channel3.SetMinimumColor(Channel3ColorMinimum);
+    channel4.SetMinimumColor(Channel4ColorMinimum);
 
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
@@ -133,18 +165,14 @@ void MainWindow::MainWindowInitialization()
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
-
     myWorker->moveToThread(WorkerThread);
 
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
-
-    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(ChangePalette(int)) );
-
-    connect(this, SIGNAL(SetObjectsSignal(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
-
+    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
+    connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
+    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
     WorkerThread->start(); // запускаем сам поток
 
     Options op;
@@ -155,9 +183,13 @@ void MainWindow::MainWindowInitialization()
     QProcess process;
     process.startDetached("ifconfig usb0 192.168.1.115");
 
-//    startWorkSignal();
-}
+    // включаем эко режим
+    SetEcoMode(true);
+    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
 
+
+    ClearPolarCoords();
+}
 
 static QString descriptiveDataTypeName( int funcCode )
 {
@@ -181,7 +213,6 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-
 void MainWindow::LabelsInit()
 {
     QDateTime fisttime;
@@ -200,38 +231,12 @@ void MainWindow::LabelsInit()
     }
 }
 
-
 void MainWindow::InitPins()
 {
 #ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
     return;
 #endif
-    // an object for make terminal requests
-    QProcess process;
-
-    //    importante!
-    //    Use NOPASSWD line for all commands, I mean:
-    //    debian ALL=(ALL) NOPASSWD: ALL
-    //    Put the line after all other lines in the sudoers file.
-
-    // allow to pin use
-    process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/value");
-    process.startDetached("sudo chmod 777 /sys/class/gpio/gpio66/direction");
-
-    // config pins as uart
-    process.startDetached("sudo config-pin P9.24 uart");
-    process.startDetached("sudo config-pin P9.26 uart");
-
-    //config RTS pin as gpio pull-down
-    process.startDetached("sudo config-pin P8.7 gpio_pd");
-
-    QFile filedir("/sys/class/gpio/gpio66/direction");
-    filedir.open(QIODevice::WriteOnly);
-    QTextStream outdir(&filedir);
-    outdir << "out";
-    filedir.close();
 }
-
 
 void MainWindow::OpenMessagesWindow()
 {
@@ -245,8 +250,6 @@ void MainWindow::OpenMessagesWindow()
 }
 
 
-
-
 void MainWindow::DelaySec(int n)
 {
     QTime dieTime= QTime::currentTime().addSecs(n);
@@ -255,42 +258,41 @@ void MainWindow::DelaySec(int n)
 }
 
 
-
-
-void MainWindow::OpenOptionsWindow()
+void MainWindow::OpenOptionsWindow( int index )
 {
-    //    startWorkSignal();
-    Options *optionsobj = new Options;
-    this->resizeWindow(*optionsobj,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
+    //здесь запускаем меню обновленное как в эндресе
 
-    GetMonitorWidthPixels();
-    optionsobj->exec();
+    StackedOptions *sw= new StackedOptions(index,0);
+
+    sw->exec();
+
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    channel1object.ReadSingleChannelOptionFromFile(1);
-    channel2object.ReadSingleChannelOptionFromFile(2);
-    channel3object.ReadSingleChannelOptionFromFile(3);
-    channel4object.ReadSingleChannelOptionFromFile(4);
-
-    //    если вдруг поменялось время то нужно обновить лейблы
+    channel1.ReadSingleChannelOptionFromFile(1);
+    channel2.ReadSingleChannelOptionFromFile(2);
+    channel3.ReadSingleChannelOptionFromFile(3);
+    channel4.ReadSingleChannelOptionFromFile(4);
+    // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
+    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
+    //если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
+    sw->deleteLater();
+    resizeSelf(1024,768);
 
-    // если что меняем разрешение
-    if (Options::displayResolution == "1024x768")
-    {
-        resizeSelf(1024,768);
-    }
+    SetPolarAngle(0);
 
-    if (Options::displayResolution == "1280x800")
-    {
-        resizeSelf(1280,720);
-    }
+    return;
+}
 
-    optionsobj->deleteLater(); // удаляем объект опций
+void MainWindow::OpenArchiveWindow()
+{
+    OpenOptionsWindow(23);
+}
 
-    //останавливаем поток, загружаем объекты в поток , и запускаем его уже с новыми параметрами
 
-    SetObjectsSignal(&channel1object,&channel2object,&channel3object,&channel4object);
+void MainWindow::OpenWorkWindow()
+{
+    OpenOptionsWindow(2);
 }
 
 void MainWindow::PowerOff()
@@ -354,17 +356,11 @@ void MainWindow::InitTouchScreen()
     process.startDetached("sudo xinput set-prop 7 \"Evdev Axis Calibration\" 3383 3962 234 599"); // вручную ввели координаты тача
 }
 
-void MainWindow::DateUpdate()
+void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.time().toString() + local.date().toString(" dd.MM.yyyy"));
-
-    float destfloat[1024];
-    //    memset( destfloat, 0, 1024 );
-
-    //    // делаем запросики
-    //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address, 2, 0, 0, destfloat);
-    //    UartDriver::channelinputbuffer[0] = destfloat[0];
+    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString(timestrings.at(0)));
+    resizeSelf(1024,768);
 }
 
 void MainWindow::LabelsUpdate()
@@ -399,9 +395,41 @@ void MainWindow::LabelsCorrect()
 
 void MainWindow::ModbusConnectionErrorSlot()
 {
-    qDebug() << "Sss" ;
+    //qDebug() << "Sss" ;
     QMessageBox::critical( this, tr( "Connection Error" ),
                            tr( "Could not connect serial port!" ) );
+}
+
+void MainWindow::SetEcoMode(bool seteco)
+{
+    EcoMode = seteco;
+    switch (seteco) {
+    case 0:
+    {
+        ui->customPlot->setBackground(QBrush(NotEcoColor));
+        ui->customPlot->xAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::black));
+        ui->customPlot->yAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::black));
+    }
+        break;
+    case 1:
+    {
+        ui->customPlot->setBackground(QBrush(EcoColor));
+        ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::white));
+        ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::white));
+    }
+        break;
+    default:
+        break;
+    }
+}
+
+bool MainWindow::GetEcoMode()
+{
+    return EcoMode;
 }
 
 void MainWindow::HalfSecondGone()
@@ -415,6 +443,28 @@ void MainWindow::HalfSecondGone()
 uint8_t MainWindow::GetHalfSecFlag()
 {
     return halfSecondflag;
+}
+
+int MainWindow::GetPolarAngle()
+{
+//    if ( polar_angle>180 )
+//            polar_angle =  0;
+    return polar_angle;
+}
+
+void MainWindow::ClearPolarCoords()
+{
+    SetPolarAngle(0);
+    PolarChartPointsChannel1.clear();
+    PolarChartPointsChannel2.clear();
+    PolarChartPointsChannel3.clear();
+    PolarChartPointsChannel4.clear();
+}
+
+void MainWindow::SetPolarAngle(int newangle)
+{
+    polar_angle = newangle;
+//    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()
@@ -439,7 +489,7 @@ void MainWindow::GetAllUartPorts()
     }
 }
 
-void MainWindow::CheckState(ChannelOptions&  channel)
+void MainWindow::CheckAndLogginStates(ChannelOptions&  channel)
 {
     //    channel.GetCurrentChannelValue();
     double channelcurrentvalue = channel.GetCurrentChannelValue();
@@ -492,108 +542,62 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 
 void MainWindow::ChangePalette(int i)
 {
-    switch (ui->horizontalScrollBar->value()) {
-    case 1:
 
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
-        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
+    if (ui->EcoCheckBox->checkState())
+    {
+        Channel1Color = Channel1ColorNormal = QColor(8,124,205);
+        Channel2Color = Channel2ColorNormal = QColor(2,115,72);
+        Channel3Color = Channel3ColorNormal = QColor(99,98,102);
+        Channel4Color = Channel4ColorNormal = QColor(125,70,46);
 
-        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
-        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
-        channel3object.SetColor( QColor(0xFF, 0xCF, 0x73));
-        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
+        Channel1ColorMaximum = QColor(43,40,59);
+        Channel2ColorMaximum = QColor(0,56,40);
+        Channel3ColorMaximum = QColor(44,48,51);
+        Channel4ColorMaximum = QColor(87,58,42);
 
-
-        break;
-    case 2:
-        Channel1Color = ChannelColorNormal = QColor(0xAB, 0x2B, 0x52);
-        Channel2Color = Channel2ColorNormal = QColor(0xFF, 0x49, 0x00);
-        Channel3Color = Channel3ColorNormal = QColor(0x00, 0xAF, 0x64);
-        Channel4Color = Channel4ColorNormal = QColor(0x67, 0xE3, 0x00);
-
-
-        channel1object.SetColor(QColor(0xAB, 0x2B, 0x52));
-        channel2object.SetColor( QColor(0xFF, 0x49, 0x00));
-        channel3object.SetColor(QColor(0x00, 0xAF, 0x64));
-        channel4object.SetColor (QColor(0x67, 0xE3, 0x00));
-
-        break;
-    case 3:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0xC1, 0x2B);
-        Channel2Color = Channel2ColorNormal = QColor(0x04, 0x85, 0x9D);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x7C, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x52, 0x40);
-
-        channel1object.SetColor(QColor(0x00, 0xC1, 0x2B));
-        channel2object.SetColor( QColor(0x04, 0x85, 0x9D));
-        channel3object.SetColor(QColor(0xFF, 0x7C, 0x00));
-        channel4object.SetColor (QColor(0xFF, 0x52, 0x40));
-
-        break;
-    case 4:
-        Channel1Color = ChannelColorNormal = QColor(0xCF, 0xF7, 0x00);
-        Channel2Color = Channel2ColorNormal = QColor(0x00, 0xAE, 0x68);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0x4C, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xA1, 0x01, 0xA6);
-
-        channel1object.SetColor(QColor(0xCF, 0xF7, 0x00));
-        channel2object.SetColor( QColor(0x00, 0xAE, 0x68));
-        channel3object.SetColor(QColor(0xFF, 0x4C, 0x00));
-        channel4object.SetColor (QColor(0xA1, 0x01, 0xA6));
-
-        break;
-
-    case 5:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0xb0, 0x60);
-        Channel2Color = Channel2ColorNormal = QColor(0x1d, 0x1a, 0xb2);
-        Channel3Color = Channel3ColorNormal = QColor(0xd5, 0xf8, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xff, 0x45, 0x00);
-
-
-        channel1object.SetColor(QColor(0x00, 0xb0, 0x60));
-        channel2object.SetColor( QColor(0x1d, 0x1a, 0xb2));
-        channel3object.SetColor(QColor(0xd5, 0xf8, 0x00));
-        channel4object.SetColor (QColor(0xff, 0x45, 0x00));
-
-        break;
-
-    case 6:
-        Channel1Color = ChannelColorNormal = QColor(0x10, 0x49, 0xa9);
-        Channel2Color = Channel2ColorNormal = QColor(0x6c, 0x0a, 0xab);
-        Channel3Color = Channel3ColorNormal = QColor(0x34, 0xd8, 0x00);
-        Channel4Color = Channel4ColorNormal = QColor(0xff, 0xa4, 0x00);
-
-        channel1object.SetColor(QColor(0x10, 0x49, 0xa9));
-        channel2object.SetColor( QColor(0x6c, 0x0a, 0xab));
-        channel3object.SetColor(QColor(0x34, 0xd8, 0x00));
-        channel4object.SetColor (QColor(0xff, 0xa4, 0x00));
-
-        break;
-
-
-    default:
-        Channel1Color = ChannelColorNormal = QColor(0x00, 0x71, 0x43);
-        Channel2Color = Channel2ColorNormal = QColor(0x6C, 0x8D, 0xD5);
-        Channel3Color = Channel3ColorNormal = QColor(0xFF, 0xCF, 0x73);
-        Channel4Color = Channel4ColorNormal = QColor(0xFF, 0x9D, 0x73);
-
-        channel1object.SetColor(QColor(0x00, 0x71, 0x43));
-        channel2object.SetColor( QColor(0x6C, 0x8D, 0xD5));
-        channel3object.SetColor(QColor(0xFF, 0xCF, 0x73));
-        channel4object.SetColor (QColor(0xFF, 0x9D, 0x73));
-
-        break;
-
+        Channel1ColorMinimum = QColor(73,111,130);
+        Channel2ColorMinimum = QColor(79,125,49);
+        Channel3ColorMinimum = QColor(106,107,107);
+        Channel4ColorMinimum = QColor(130,79,31);
     }
+    else
+    {
+        Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
+        Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
+        Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
+        Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
+
+        Channel1ColorMaximum = QColor(61, 56, 85);
+        Channel2ColorMaximum = QColor(0, 105, 76);
+        Channel3ColorMaximum = QColor(56,62,66);
+        Channel4ColorMaximum = QColor(121,80,56);
+
+        Channel1ColorMinimum = QColor(96,147,172);
+        Channel2ColorMinimum = QColor(97,153,59);
+        Channel3ColorMinimum = QColor(142,146,145);
+        Channel4ColorMinimum = QColor(157,98,43);
+    }
+
+    channel1.SetNormalColor(Channel1ColorNormal);
+    channel2.SetNormalColor(Channel2ColorNormal);
+    channel3.SetNormalColor(Channel3ColorNormal);
+    channel4.SetNormalColor(Channel4ColorNormal);
+
+    channel1.SetMaximumColor(Channel1ColorMaximum);
+    channel2.SetMaximumColor(Channel2ColorMaximum);
+    channel3.SetMaximumColor(Channel3ColorMaximum);
+    channel4.SetMaximumColor(Channel4ColorMaximum);
+
+    channel1.SetMinimumColor(Channel1ColorMinimum);
+    channel2.SetMinimumColor(Channel2ColorMinimum);
+    channel3.SetMinimumColor(Channel3ColorMinimum);
+    channel4.SetMinimumColor(Channel4ColorMinimum);
 
     ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }
 
 void MainWindow::sendModbusRequest( void )
 {
-
     if( m_modbus == NULL )
     {
         return;
@@ -754,38 +758,37 @@ void MainWindow::sendModbusRequest( void )
     }
 }
 
-
 void MainWindow::resetStatus( void )
 {
     ;
 }
 
+void MainWindow::changeTranslator(int langindex)
+{
+    QApplication::removeTranslator(translator);
+    translator = new QTranslator();
+
+    switch (langindex) {
+    case 0:
+        translator->load("untitled2_en_EN");
+        break;
+    case 1:
+        translator->load("untitled2_ru_RU");
+        break;
+    case 2:
+        translator->load("untitled2_de_DE");
+        break;
+    default:
+        return;
+    }
+    QApplication::installTranslator(translator);
+}
 
 void MainWindow::OpenSerialPort( int )
 {
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
-
-#ifdef Q_OS_WIN32
-        const QString port = comportname;
-#else
-        // const QString port = ports[iface].physName;
-        // точно знаем что этот порт работает на rs485
-        const QString port = "/dev/ttyO1";
-#endif
-
-        char parity;
-
-        parity = comportparity;
-
-        // TODO: если раскомментить то  будет вываливаться ошибка при дебаге.
-        //        if( m_modbus )
-        //        {
-        //            modbus_close( m_modbus );
-        //            modbus_free( m_modbus );
-        //        }
-
         //подключаемси.
         m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
 
@@ -797,7 +800,6 @@ void MainWindow::OpenSerialPort( int )
         else
         {
         }
-
     }
     else
     {

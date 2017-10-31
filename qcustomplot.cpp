@@ -142,6 +142,7 @@ void QCPPainter::drawLine(const QLineF &line)
 */
 void QCPPainter::setAntialiasing(bool enabled)
 {
+    enabled = true; // TODO делаем всегда сглаживание
   setRenderHint(QPainter::Antialiasing, enabled);
   if (mIsAntialiasing != enabled)
   {
