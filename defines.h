@@ -16,7 +16,7 @@
 
 #define CURRENT_VER "0.6" //версия ПО
 #define MYD
-//#define Demo // раскоментить если делаем демо программу на РС
+#define Demo // раскоментить если делаем демо программу на РС
 
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
