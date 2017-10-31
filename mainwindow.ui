@@ -35,7 +35,7 @@
       <x>0</x>
       <y>0</y>
       <width>1280</width>
-      <height>561</height>
+      <height>641</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -239,7 +239,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>530</y>
+       <y>540</y>
        <width>1280</width>
        <height>80</height>
       </rect>
