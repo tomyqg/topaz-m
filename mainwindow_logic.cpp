@@ -404,28 +404,23 @@ void MainWindow::ModbusConnectionErrorSlot()
 void MainWindow::SetEcoMode(bool seteco)
 {
     EcoMode = seteco;
-    switch (seteco) {
-    case 0:
+
+    QColor newlabelscolor;
+    if (seteco)
     {
         ui->customPlot->setBackground(QBrush(NotEcoColor));
-        ui->customPlot->xAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::black));
-        ui->customPlot->yAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::black));
+        newlabelscolor = QColor( Qt::black);
     }
-        break;
-    case 1:
+    else
     {
         ui->customPlot->setBackground(QBrush(EcoColor));
-        ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::white));
-        ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::white));
+        newlabelscolor = QColor( Qt::white);
     }
-        break;
-    default:
-        break;
-    }
+
+    ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+    ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+    ui->customPlot->xAxis->setTickLabelColor(newlabelscolor);
+    ui->customPlot->yAxis->setTickLabelColor(newlabelscolor);
 }
 
 bool MainWindow::GetEcoMode()
@@ -448,8 +443,8 @@ uint8_t MainWindow::GetHalfSecFlag()
 
 int MainWindow::GetPolarAngle()
 {
-//    if ( polar_angle>180 )
-//            polar_angle =  0;
+    //    if ( polar_angle>180 )
+    //            polar_angle =  0;
     return polar_angle;
 }
 
@@ -465,7 +460,7 @@ void MainWindow::ClearPolarCoords()
 void MainWindow::SetPolarAngle(int newangle)
 {
     polar_angle = newangle;
-//    qDebug() << polar_angle << "polar_angle";
+    //    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()
