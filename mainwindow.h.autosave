@@ -70,7 +70,6 @@ private:
     ChannelOptions channel3;
     ChannelOptions channel4;
 
-
     MessageWrite messwrite;
 
     bool eventFilter(QObject* watched, QEvent* event);

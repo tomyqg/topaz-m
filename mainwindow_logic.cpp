@@ -114,9 +114,6 @@ void MainWindow::MainWindowInitialization()
 
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
 
-    QTimer *timetouch = new QTimer(this);
-    connect(timetouch, SIGNAL(timeout()), this, SLOT(NewTouchscreenCalibration()));
-
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
 
@@ -135,7 +132,6 @@ void MainWindow::MainWindowInitialization()
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
     timer->start(DateLabelUpdateTimer);
-    timetouch->start(ArchiveUpdateTimer);
 
     InitTimers();
     LabelsInit();
@@ -171,7 +167,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
     connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
     connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
-    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
+    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
     connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
     SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
     WorkerThread->start(); // запускаем сам поток
@@ -187,8 +183,6 @@ void MainWindow::MainWindowInitialization()
     // включаем эко режим
     SetEcoMode(true);
     startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
-
-
     ClearPolarCoords();
 }
 
@@ -401,20 +395,19 @@ void MainWindow::ModbusConnectionErrorSlot()
                            tr( "Could not connect serial port!" ) );
 }
 
-void MainWindow::SetEcoMode(bool seteco)
+void MainWindow::SetEcoMode(bool EcoMode)
 {
-    EcoMode = seteco;
-
+    this->EcoMode = EcoMode;
     QColor newlabelscolor;
-    if (seteco)
+    if (!this->EcoMode)
     {
         ui->customPlot->setBackground(QBrush(NotEcoColor));
-        newlabelscolor = QColor( Qt::black);
+        newlabelscolor = QColor(Qt::black);
     }
     else
     {
         ui->customPlot->setBackground(QBrush(EcoColor));
-        newlabelscolor = QColor( Qt::white);
+        newlabelscolor = QColor(Qt::white);
     }
 
     ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
@@ -425,7 +418,7 @@ void MainWindow::SetEcoMode(bool seteco)
 
 bool MainWindow::GetEcoMode()
 {
-    return EcoMode;
+    return this->EcoMode;
 }
 
 void MainWindow::HalfSecondGone()
@@ -443,8 +436,6 @@ uint8_t MainWindow::GetHalfSecFlag()
 
 int MainWindow::GetPolarAngle()
 {
-    //    if ( polar_angle>180 )
-    //            polar_angle =  0;
     return polar_angle;
 }
 
@@ -460,7 +451,6 @@ void MainWindow::ClearPolarCoords()
 void MainWindow::SetPolarAngle(int newangle)
 {
     polar_angle = newangle;
-    //    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()
@@ -536,7 +526,7 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 }
 }
 
-void MainWindow::ChangePalette(int i)
+void MainWindow::ChangePalette(bool i)
 {
 
     if (ui->EcoCheckBox->checkState())
