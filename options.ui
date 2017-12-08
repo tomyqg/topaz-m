@@ -5507,11 +5507,6 @@ p, li { white-space: pre-wrap; }
         <height>201</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>9</pointsize>
-       </font>
-      </property>
       <property name="text">
        <string>     * доступные функции:
      * сложение: x+1
@@ -5917,7 +5912,7 @@ p, li { white-space: pre-wrap; }
         <x>0</x>
         <y>0</y>
         <width>521</width>
-        <height>385</height>
+        <height>397</height>
        </rect>
       </property>
       <attribute name="label">
@@ -6115,9 +6110,9 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

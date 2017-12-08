@@ -97,7 +97,7 @@ double mathresolver::dGetDempheredValue(QVector<double> &qvect, int count)
     QVector<double> qvecttemp = qvect;
     double dempheredvalue = 0;
 
-    Q_ASSERT(count <= 0);
+    Q_ASSERT(count > 0);
 
     if (count <= 0)
         return 0 ;
