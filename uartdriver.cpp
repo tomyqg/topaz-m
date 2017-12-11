@@ -279,7 +279,7 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
     //    qDebug() << requestdata << "requestdata ";
 
     if (InputDataByteArray.length()<3)
-        return 0;//ModBus::ConnectionError;
+        return ModBus::ConnectionError;
 
     QByteArray InputDataByteArrayParsed;
 
