@@ -279,7 +279,7 @@ float ModBus::ModBusGetInputRegister(char DeviceAdress,uint16_t Address,uint16_t
     //    qDebug() << requestdata << "requestdata ";
 
     if (InputDataByteArray.length()<3)
-        return ModBus::ConnectionError;
+        return 0;//ModBus::ConnectionError;
 
     QByteArray InputDataByteArrayParsed;
 
@@ -592,7 +592,7 @@ QByteArray DataBuffer::UartWriteData(QByteArray data)
         uint16_t crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
 
         //        qDebug() << data << "data";
-        //        qDebug() << InputDataByteArray << "InputDataByteArray";
+        //qDebug() << InputDataByteArray << "InputDataByteArray";
 
         if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
         {

@@ -18,7 +18,9 @@
 #include <QVector>
 #include <QFile>
 #include <QDataStream>
+#ifndef Q_OS_WIN32
 #include <QtScript/QScriptEngine>
+#endif
 #include <QtSerialPort/QtSerialPort>
 #include <QPainterPath>
 #include <QPainter>

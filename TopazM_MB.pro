@@ -4,7 +4,8 @@
 # By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
 #-------------------------------------------------
 
-QT += core gui script
+QT += core gui #script
+unix:QT += script
 QT += serialport
 QT += testlib
 
@@ -73,7 +74,17 @@ HEADERS  += mainwindow.h \
     3rdparty/qextserialport/qextserialport.h \
     device.h \
     stackedoptions.h \
-    channelOptions.h
+    channelOptions.h \
+    3rdparty/libmodbus/src/modbus.h \
+    3rdparty/libmodbus/src/modbus-private.h \
+    3rdparty/libmodbus/src/modbus-rtu.h \
+    3rdparty/libmodbus/src/modbus-rtu-private.h \
+    3rdparty/libmodbus/src/modbus-tcp.h \
+    3rdparty/libmodbus/src/modbus-tcp-private.h \
+    3rdparty/libmodbus/src/modbus-version.h \
+    3rdparty/libmodbus/src/modbus-version.h.in \
+    3rdparty/qextserialport/qextserialport_global.h \
+    3rdparty/qextserialport/qwineventnotifier_p.h
 
 FORMS    += mainwindow.ui \
     options.ui \

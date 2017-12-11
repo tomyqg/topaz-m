@@ -394,11 +394,16 @@ void worker::do_Work()
 
                 currentdata = destfloat[0];
                 double r = rand()%10;
+                float tmp;
 
                 switch (chanelindex) {
                 case 0:
-//                    currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
-                    currentdata =  0.110*globalindex;
+                    //currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
+                    //modbus_set_slave(m_modbus, 1);
+                    //modbus_read_input_registers(m_modbus, 0, 2, tmp); //(double)MB.ModBusGetInputRegister(1, 0, 2);
+                    //sendModbusRequest(1, 4, 0, 2, 0, 0, &tmp);
+                    //qDebug() << "sendModbusRequest: " << tmp;
+                    currentdata = 0.110*globalindex;
                     break;
                 case 1:
                     currentdata =  0.120*globalindex;
