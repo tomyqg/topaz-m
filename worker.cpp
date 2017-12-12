@@ -17,11 +17,6 @@ worker::worker(QObject *parent) :
     OpenSerialPort( 1 );
 }
 
-ModBus MB;
-DataBuffer UD;
-mathresolver mr;
-
-int ic ;
 
 int globalindex = 0;
 int globalindex2;
@@ -196,21 +191,21 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     {
         //qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
-        QByteArray arraytofloat;
+//        QByteArray arraytofloat;
 
-        // в массив раскладываем принятые данные чтобы преобразовать в флоат
-        for( int i = 0; i <num; i++ )
-        {
-            arraytofloat.append( ( ( (int)data_dest[i] ) & 0xFF00) >>8);
-            arraytofloat.append( ( (int)data_dest[i] ) & 0x00FF);
-        }
+//        // в массив раскладываем принятые данные чтобы преобразовать в флоат
+//        for( int i = 0; i <num; i++ )
+//        {
+//            arraytofloat.append( ( ( (int)data_dest[i] ) & 0xFF00) >>8);
+//            arraytofloat.append( ( (int)data_dest[i] ) & 0x00FF);
+//        }
 
-        float val;
-        //convert hex to double
-        QDataStream stream(arraytofloat);
-        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-        stream >> val;
-        data_dest[0] = val;
+//        float val;
+//        //convert hex to double
+//        QDataStream stream(arraytofloat);
+//        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
+//        stream >> val;
+//        data_dest[0] = val;
     }
         break;
     default:
@@ -310,14 +305,26 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
             // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
             //            QByteArray arraytofloat;
 
-            for( int i = num-1; i >=0; --i )
+            /*for( int i = num-1; i >=0; --i )
             {
                 //qDebug() << num<< "num" ;
-                int data = is16Bit ? dest16[i] : dest[i];
+                //int data = is16Bit ? dest16[i] : dest[i];
                 //                arraytofloat.append((data & 0xFF00)>>8);
                 //                arraytofloat.append(data & 0x00FF);
-                data_dest_float[num - 1 - i] = data;
+                if(is16Bit) {
+                    data_dest_float[num - 1 - i] = dest16[i];
+                }
+
+            }*/
+
+            if(is16Bit) {
+                float *var = (float *) dest16;
+                for( int i = num/2-1; i >=0; --i ) {
+                    data_dest_float[i] = var[i];
+                }
             }
+
+
 
             //            float val;
             //            //convert hex to double
@@ -395,24 +402,33 @@ void worker::do_Work()
                 currentdata = destfloat[0];
                 double r = rand()%10;
                 float tmp;
+                uint16_t dest16[4];
 
                 switch (chanelindex) {
                 case 0:
                     //currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
                     //modbus_set_slave(m_modbus, 1);
-                    //modbus_read_input_registers(m_modbus, 0, 2, tmp); //(double)MB.ModBusGetInputRegister(1, 0, 2);
+                    //modbus_read_input_registers(m_modbus, 0, 2, dest16); //(double)MB.ModBusGetInputRegister(1, 0, 2);
                     //sendModbusRequest(1, 4, 0, 2, 0, 0, &tmp);
-                    //qDebug() << "sendModbusRequest: " << tmp;
-                    currentdata = 0.110*globalindex;
+                    ReadModbusData(&device.channel0.Data, &tmp);
+                    qDebug() << "channel0: " << tmp;
+                    //qDebug() << "sendModbusRequest: " << dest16[0] << dest16[1];
+                    currentdata = tmp;//0.110*globalindex;
                     break;
                 case 1:
-                    currentdata =  0.120*globalindex;
+                    ReadModbusData(&device.channel1.Data, &tmp);
+                    qDebug() << "channel1: " << tmp;
+                    currentdata =  tmp;//0.120*globalindex;
                     break;
                 case 2:
-                    currentdata =  0.095*globalindex;
+                    ReadModbusData(&device.channel2.Data, &tmp);
+                    qDebug() << "channel2: " << tmp;
+                    currentdata =  tmp;//0.095*globalindex;
                     break;
                 case 3:
-                    currentdata =  0.105*globalindex;
+                    ReadModbusData(&device.channel3.Data, &tmp);
+                    qDebug() << "channel3: " << tmp;
+                    currentdata =  tmp;//0.105*globalindex;
                     break;
                 default:
                     break;

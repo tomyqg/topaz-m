@@ -1,7 +1,7 @@
 #include "channelOptions.h"
 #include "uartdriver.h"
 #include "metrologicalcalc.h"
-#include "QDebug"
+#include <QDebug>
 
 extern QVector<double> X_Coordinates;
 

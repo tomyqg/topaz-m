@@ -25,7 +25,7 @@ double mathresolver::SolveEquation(QString eqstring, double x)
 #ifndef Q_OS_WIN32
     double Result = myEngine.evaluate(replaced).toNumber();
 #else
-    double Result = 0;
+    double Result = x;
 #endif
 
 
