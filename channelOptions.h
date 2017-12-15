@@ -16,6 +16,7 @@ public:
     explicit ChannelOptions();
 public:
 
+    int chIndex;
     uint16_t GetSignalType();
     int GetDiapason();
     int GetRegistrationType();

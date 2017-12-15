@@ -6,12 +6,15 @@
 #include "qextserialenumerator.h"
 #include <QDebug>
 #include <QList>
+#include <QQueue>
+
 
 uint32_t total =0;
 
 // constructor
 worker::worker(QObject *parent) :
-    QObject(parent), isstopped(false), isrunning(false)
+    QObject(parent)/*, isstopped(false), isrunning(false)*/
+
 {
     // активируем сериал порт для модбаса
     OpenSerialPort( 1 );
@@ -189,23 +192,7 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         num = 2;
 
     {
-        //qDebug() << data_dest[0] << data_dest[1] << "F32"; // пришли два слова, парсим два слова
 
-//        QByteArray arraytofloat;
-
-//        // в массив раскладываем принятые данные чтобы преобразовать в флоат
-//        for( int i = 0; i <num; i++ )
-//        {
-//            arraytofloat.append( ( ( (int)data_dest[i] ) & 0xFF00) >>8);
-//            arraytofloat.append( ( (int)data_dest[i] ) & 0x00FF);
-//        }
-
-//        float val;
-//        //convert hex to double
-//        QDataStream stream(arraytofloat);
-//        stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-//        stream >> val;
-//        data_dest[0] = val;
     }
         break;
     default:
@@ -303,35 +290,12 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         else
         {
             // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
-            //            QByteArray arraytofloat;
-
-            /*for( int i = num-1; i >=0; --i )
-            {
-                //qDebug() << num<< "num" ;
-                //int data = is16Bit ? dest16[i] : dest[i];
-                //                arraytofloat.append((data & 0xFF00)>>8);
-                //                arraytofloat.append(data & 0x00FF);
-                if(is16Bit) {
-                    data_dest_float[num - 1 - i] = dest16[i];
-                }
-
-            }*/
-
             if(is16Bit) {
                 float *var = (float *) dest16;
                 for( int i = num/2-1; i >=0; --i ) {
                     data_dest_float[i] = var[i];
                 }
             }
-
-
-
-            //            float val;
-            //            //convert hex to double
-            //            QDataStream stream(arraytofloat);
-            //            stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-            //            stream >> val;
-            //            data_dest_float[0] = val;
         }
     }
     else
@@ -345,26 +309,25 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                //                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
             }
             else
             {
 
-                //qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
-                //qDebug() << modbus_strerror( errno ) ;
-                //qDebug() << stderr;
+                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+                qDebug() << modbus_strerror( errno ) ;
+                qDebug() << stderr;
             }
         }
         else
         {
-            //            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+                        qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }
 
 void worker::do_Work()
 {
-    double mathresult;
     double currentdata;
 
     float destfloat[1024];
@@ -400,35 +363,29 @@ void worker::do_Work()
                 DataBuffer::writeupdatestatus(chanelindex,false);
 
                 currentdata = destfloat[0];
-                double r = rand()%10;
-                float tmp;
+                float fl;
                 uint16_t dest16[4];
 
                 switch (chanelindex) {
                 case 0:
-                    //currentdata = mr.SolveEquation("sin(x/5)*10",globalindex ) + 0 + r;
-                    //modbus_set_slave(m_modbus, 1);
-                    //modbus_read_input_registers(m_modbus, 0, 2, dest16); //(double)MB.ModBusGetInputRegister(1, 0, 2);
-                    //sendModbusRequest(1, 4, 0, 2, 0, 0, &tmp);
-                    ReadModbusData(&device.channel0.Data, &tmp);
-                    qDebug() << "channel0: " << tmp;
-                    //qDebug() << "sendModbusRequest: " << dest16[0] << dest16[1];
-                    currentdata = tmp;//0.110*globalindex;
+                    ReadModbusData(&device.channel0.Data, &fl);
+                    qDebug() << "channel0: " << fl;
+                    currentdata = fl;//0.110*globalindex;
                     break;
                 case 1:
-                    ReadModbusData(&device.channel1.Data, &tmp);
-                    qDebug() << "channel1: " << tmp;
-                    currentdata =  tmp;//0.120*globalindex;
+                    ReadModbusData(&device.channel1.Data, &fl);
+                    qDebug() << "channel1: " << fl;
+                    currentdata =  fl;//0.120*globalindex;
                     break;
                 case 2:
-                    ReadModbusData(&device.channel2.Data, &tmp);
-                    qDebug() << "channel2: " << tmp;
-                    currentdata =  tmp;//0.095*globalindex;
+                    ReadModbusData(&device.channel2.Data, &fl);
+                    qDebug() << "channel2: " << fl;
+                    currentdata =  fl;//0.095*globalindex;
                     break;
                 case 3:
-                    ReadModbusData(&device.channel3.Data, &tmp);
-                    qDebug() << "channel3: " << tmp;
-                    currentdata =  tmp;//0.105*globalindex;
+                    ReadModbusData(&device.channel3.Data, &fl);
+                    qDebug() << "channel3: " << fl;
+                    currentdata =  fl;//0.105*globalindex;
                     break;
                 default:
                     break;
@@ -440,7 +397,7 @@ void worker::do_Work()
         }
     }
 
-    emit Finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
+    emit finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
     // do important work here
     // allow the thread's event loop to process other events before doing more "work"
     // for instance, your start/stop signals from the MainWindow
@@ -459,7 +416,7 @@ void worker::StartWorkSlot()
 {
     isstopped = false;
     isrunning = true;
-    emit running();
+//    emit running();
     do_Work();
 }
 
@@ -468,28 +425,41 @@ void worker::OpenSerialPort( int )
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
     if( !ports.isEmpty() )
     {
+
+//        foreach (QString str, ports) {
+//            QString cPort;
+//            if(QString.compare(comportname, ports.physName)) {
+//                // инициализируем  объект модбаса...
+//                m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+//            } else {
+
+//            }
+//        }
+
         // инициализируем  объект модбаса...
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+        //Включение отладки MODBAS
+        //modbus_set_debug(m_modbus, true);
         if( modbus_connect( m_modbus ) == -1 )
         {
-            //qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+            qDebug() << "Connection failed"  << "Could not connect serial port!" ;
             emit ModbusConnectionError();
         }
         else
         {
+            qDebug() << "Port OK";
         }
     }
     else
     {
-        //qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
+        qDebug() << "No serial port found" << "Could not find any serial port " << "on this computer!"  ;
     }
 }
 
 
 void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
 {
-    thread()->usleep(100000);
-
+    mChList.lock();
     ThreadChannelOptions1 = c1;
     ThreadChannelOptions2 = c2;
     ThreadChannelOptions3 = c3;
@@ -498,5 +468,36 @@ void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions*
     ChannelsObjectsList.append(ThreadChannelOptions2);
     ChannelsObjectsList.append(ThreadChannelOptions3);
     ChannelsObjectsList.append(ThreadChannelOptions4);
-    thread()->usleep(10000);
+    mChList.unlock();
+}
+
+
+void worker::run()
+{
+//    static int i;
+    float fl;
+//    double currentdata;
+    while(1)
+    {
+//        qDebug() << "worker::run()";
+        if(!trans.isEmpty()) {
+            transaction * tr = trans.dequeue();
+            transaction trLocal = *tr;
+//            qDebug() << "tr" << trLocal.param.Offset;
+            ReadModbusData(&trLocal.param, &fl);
+            uint32_t *data32 = (uint32_t*) &fl;
+//            qDebug() << "data32" << data32[0];
+            trLocal.vol = data32[0];
+//            qDebug() << "worker:" << tr.id;
+            qDebug() << "worker SIGNAL" << trLocal.id << "=" << fl;
+            emit sendTrans(&trLocal);
+        }
+        this->thread()->usleep(10000);
+    }
+}
+
+void worker::getTransSlot(transaction * tr)
+{
+    qDebug() << "worker SLOT" << tr->id;
+    trans.enqueue(tr);
 }

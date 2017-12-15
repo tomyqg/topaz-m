@@ -215,6 +215,19 @@ void MainWindow::DrawSceneBottom()
 void MainWindow::AddValuesToBuffer()
 {
     startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
+    //WorkerThread->start();
+
+//    queueTransaction.enqueue(device1);
+//    queueTransaction.enqueue(device2);
+//    queueTransaction.enqueue(device3);
+//    queueTransaction.enqueue(device4);
+
+//    emit sendTransToWorker(device1);
+//    emit sendTransToWorker(device2);
+//    emit sendTransToWorker(device3);
+//    emit sendTransToWorker(device4);
+
+
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
     Y_coordinates_Chanel_1.append(channel1.GetCurrentChannelValue());
@@ -1031,6 +1044,8 @@ void MainWindow::UpdateChannel1Slot()
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
     channeltimer1->setInterval(period);
+    qDebug() << "MainWindow SIGNAL" << device1.id;
+    emit sendTransToWorker(&device1);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
     CheckAndLogginStates(channel1);
 }
@@ -1040,6 +1055,8 @@ void MainWindow::UpdateChannel2Slot()
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
     channeltimer2->setInterval(period);
+    qDebug() << "MainWindow SIGNAL" << device2.id;
+    emit sendTransToWorker(&device2);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
     CheckAndLogginStates(channel2);
 }
@@ -1049,6 +1066,8 @@ void MainWindow::UpdateChannel3Slot()
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
     channeltimer3->setInterval(period);
+    qDebug() << "MainWindow SIGNAL" << device3.id;
+    emit sendTransToWorker(&device3);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
     CheckAndLogginStates(channel3);
 }
@@ -1058,6 +1077,36 @@ void MainWindow::UpdateChannel4Slot()
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
     channeltimer4->setInterval(period);
+    qDebug() << "MainWindow SIGNAL" << device4.id;
+    emit sendTransToWorker(&device4);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
     CheckAndLogginStates(channel4);
+}
+
+void MainWindow::getTransFromWorkerSlot(transaction * tr)
+{
+    transaction trLocal = *tr;
+    float *value = (float*)&trLocal.vol;
+    double dbl = (double)*value;
+
+//    qDebug() << "Channel" << trLocal.id << "=" << (float)dbl;
+    qDebug() << "MainWindow SLOT" << trLocal.id << "=" << (float)dbl;
+
+    switch(trLocal.id)
+    {
+    case 0:
+        channel1.SetCurrentChannelValue(dbl);
+        break;
+    case 1:
+        channel2.SetCurrentChannelValue(dbl);
+        break;
+    case 2:
+        channel3.SetCurrentChannelValue(dbl);
+        break;
+    case 3:
+        channel4.SetCurrentChannelValue(dbl);
+        break;
+    default:
+        break;
+    }
 }

@@ -14,6 +14,19 @@ struct deviceparametrs
     uint8_t RegisterType;
 };
 
+enum Direction {
+    DIR_R = 0,
+    DIR_W = 1,
+};
+
+struct transaction
+{
+    uint32_t id;
+    deviceparametrs param;
+    uint32_t vol;
+    Direction dir;
+};
+
 struct channelparametrs
 {
     int BaseAddress;
@@ -65,6 +78,10 @@ struct channelparametrs
     deviceparametrs CjValue;
     deviceparametrs ResultCjValue;
 };
+
+
+
+
 
 class Device
 {
@@ -458,15 +475,15 @@ public:
 
 
         channel1.AddressOffset = 128;
-        channel1.Data.Offset = 4;
+        channel1.Data.Offset = 2;
 
         channel2 = channel0;
         channel2.AddressOffset = 128*2;
-        channel2.Data.Offset = 8;
+        channel2.Data.Offset = 4;
 
         channel3 = channel0;
         channel3.AddressOffset = 128*3;
-        channel3.Data.Offset = 12;
+        channel3.Data.Offset = 6;
 
 
         protocolVersion.Offset = 16384;
@@ -724,6 +741,7 @@ public:
     deviceparametrs elmetroAB1;
     deviceparametrs badgoodcomm;
 
+
 public:
     enum StorageType { D  = 0,
                        S  = 1,
@@ -744,6 +762,8 @@ public:
                           W  = 1,
                           RW = 2,
                         };
+
+
 };
 
 #endif // DEVICE_H

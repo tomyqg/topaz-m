@@ -6,11 +6,13 @@
 #include <QtGui>
 #include <channelOptions.h>
 #include <QGraphicsScene>
+#include <QQueue>
 #include "messages.h"
 #include "worker.h"
 #include "mathresolver.h"
 #include "uartdriver.h"
 #include "src/modbus.h"
+#include "device.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +43,14 @@ public:
     int GetXOffsetForAlign(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText, int alerttextsize);
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
 
+    Device device;
+    QQueue<transaction *> queueTransaction;
+    transaction device1;
+    transaction device2;
+    transaction device3;
+    transaction device4;
+
+
 public slots:
 
     void destroyedslot(QObject *);
@@ -61,9 +71,11 @@ public slots:
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
     bool GetEcoMode();
+    void getTransFromWorkerSlot(transaction * tr);
+
+
 
 private:
-
 
     ChannelOptions channel1;
     ChannelOptions channel2;
@@ -122,7 +134,7 @@ private:
     QStringList datestrings, timestrings;
 
 private slots:
-    void OpenSerialPort( int );
+//    void OpenSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
     void GrafsUpdateBars();
@@ -145,7 +157,8 @@ signals:
     void ThreadSignal(ChannelOptions*  channel);
     void startWorkSignal();
     void stopWorkSignal();
-    void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
+//    void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
+    void sendTransToWorker(transaction * tr);
 
 private:
     Ui::MainWindow *ui;
@@ -183,8 +196,6 @@ private:
     QTimer *tmr;
 
     QThread *WorkerThread;
-    QThread *thread;
-    QThread *optionsthread;
 
     QMutex *mutex;
 
@@ -199,10 +210,9 @@ private:
     void SetChannelRectPosition(int alertwindowwidth, int alertwindowheight);
     void PaintCyfrasBottomSeparate();
     void CheckState(ChannelOptions &channel);
-
     void DrawScene();
-
     void DrawSceneBottom();
+
 
 protected:
     void paintEvent(QPaintEvent *event) ;
