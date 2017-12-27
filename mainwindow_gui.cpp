@@ -313,3 +313,16 @@ void MainWindow::SetWindowHeightPixels(int newh)
 {
     windowheight = newh;
 }
+
+void MainWindow::on_bWriteTypeSignal_clicked()
+{
+    uint32_t tmp = ui->setTypeSignal->text().toInt();
+//    typeSign1.dir = DIR_W;
+//    typeSign1.param = device.channel0.SignalType;
+//    typeSign1.id = 0;
+//    typeSign1.volInt = tmp;
+    Transaction trans(Transaction::W, 1, 32781, tmp);
+    emit sendTransToWorker(trans);
+}
+
+

@@ -556,15 +556,15 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     {
         QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
         arrow->setPen(QPen(Qt::red, 1, Qt::SolidLine));
-        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState1Value() );
-        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState1Value() );
+        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
+        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
         arrow->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow);
 
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 1, Qt::SolidLine));
-        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState2Value() );
-        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->GetState2Value() );
+        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
+        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->ustavka2.getStateValue() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
 
@@ -579,7 +579,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelHi);
         textLabelHi->position->setPixelPoint(Label1PixPoint);
-        textLabelHi->setText(QString::number(Chanel->GetState1Value() ));
+        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
         textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
         textLabelHi->setColor(QColor(Qt::red));
 
@@ -588,7 +588,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelLo);
         textLabelLo->position->setPixelPoint(Label2PixPoint);
-        textLabelLo->setText(QString::number(Chanel->GetState2Value() ));
+        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
     }
@@ -993,15 +993,15 @@ void MainWindow::GrafsUpdateBars()
     {
         QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
         arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
-        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState1Value() );
-        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState1Value() );
+        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
+        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
         arrow->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow);
 
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 3, Qt::SolidLine));
-        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->GetState2Value() );
-        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->GetState2Value() );
+        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
+        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka2.getStateValue() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
 
@@ -1015,7 +1015,7 @@ void MainWindow::GrafsUpdateBars()
         QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelHi);
         textLabelHi->position->setPixelPoint(Label1PixPoint);
-        textLabelHi->setText(QString::number(Chanel->GetState1Value() ));
+        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
         textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
         textLabelHi->setColor(QColor(Qt::red));
 
@@ -1023,7 +1023,7 @@ void MainWindow::GrafsUpdateBars()
         QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelLo);
         textLabelLo->position->setPixelPoint(Label2PixPoint);
-        textLabelLo->setText(QString::number(Chanel->GetState2Value() ));
+        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
         ++barindex;
@@ -1043,70 +1043,220 @@ void MainWindow::UpdateChannel1Slot()
 {
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
-    channeltimer1->setInterval(period);
-    qDebug() << "MainWindow SIGNAL" << device1.id;
-    emit sendTransToWorker(&device1);
+    Transaction tr(Transaction::R, 1, 0, 0);
+//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
     CheckAndLogginStates(channel1);
+    channeltimer1->setInterval(period);
 }
 
 void MainWindow::UpdateChannel2Slot()
 {
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
-    channeltimer2->setInterval(period);
-    qDebug() << "MainWindow SIGNAL" << device2.id;
-    emit sendTransToWorker(&device2);
+    Transaction tr(Transaction::R, 1, 2, 0);
+//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    emit sendTransToWorker(tr);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
     CheckAndLogginStates(channel2);
+    channeltimer2->setInterval(period);
 }
 
 void MainWindow::UpdateChannel3Slot()
 {
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
-    channeltimer3->setInterval(period);
-    qDebug() << "MainWindow SIGNAL" << device3.id;
-    emit sendTransToWorker(&device3);
+    Transaction tr(Transaction::R, 1, 4, 0);
+//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    emit sendTransToWorker(tr);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
     CheckAndLogginStates(channel3);
+    channeltimer3->setInterval(period);
 }
 
 void MainWindow::UpdateChannel4Slot()
 {
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
-    channeltimer4->setInterval(period);
-    qDebug() << "MainWindow SIGNAL" << device4.id;
-    emit sendTransToWorker(&device4);
+    Transaction tr(Transaction::R, 1, 6, 0);
+//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    emit sendTransToWorker(tr);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
     CheckAndLogginStates(channel4);
+    channeltimer4->setInterval(period);
 }
 
-void MainWindow::getTransFromWorkerSlot(transaction * tr)
+void MainWindow::UpdSignalTypeSlot(uint8_t ch)
 {
-    transaction trLocal = *tr;
-    float *value = (float*)&trLocal.vol;
-    double dbl = (double)*value;
-
-//    qDebug() << "Channel" << trLocal.id << "=" << (float)dbl;
-    qDebug() << "MainWindow SLOT" << trLocal.id << "=" << (float)dbl;
-
-    switch(trLocal.id)
+    qDebug() << "Upd" << ch;
+//    Transaction tr(Transaction::W,);
+//    tr.dir = Transaction::W;
+    switch(ch)
     {
-    case 0:
-        channel1.SetCurrentChannelValue(dbl);
-        break;
     case 1:
-        channel2.SetCurrentChannelValue(dbl);
+//        tr.param = device.channel0.SignalType;
         break;
     case 2:
-        channel3.SetCurrentChannelValue(dbl);
+//        tr.param = device.channel1.SignalType;
         break;
     case 3:
-        channel4.SetCurrentChannelValue(dbl);
+//        tr.param = device.channel2.SignalType;
+        break;
+    case 4:
+//        tr.param = device.channel3.SignalType;
+        break;
+    }
+//    tr.id = ch-1;
+//    emit sendTransToWorker(tr);
+}
+
+void MainWindow::releOutSlot(uint8_t code)
+{
+    Transaction tr(Transaction::W, 2, 32799, 0);
+
+    int rele = code >> 4;
+    int state = code & 0xF;
+
+    if(state == 0) {
+        tr.volFlo = 1;
+    } else {
+        tr.volFlo = 0;
+    }
+
+    uint16_t offset = 32799;
+    switch(rele)
+    {
+    case 0:
+        offset = 32799;
+        break;
+    case 1:
+        offset = 32801;
+        break;
+    case 2:
+        offset = 32927;
+        break;
+    case 3:
+        offset = 32929;
+        break;
+    case 4:
+        offset = 33055;
+        break;
+    case 5:
+        offset = 33057;
+        break;
+    case 6:
+        offset = 33183;
+        break;
+    case 7:
+        offset = 33185;
         break;
     default:
         break;
     }
+    tr.offset = offset;
+    emit sendTransToWorker(tr);
 }
+
+
+void MainWindow::readReleSlot(uint8_t code)
+{
+    Transaction tr(Transaction::R, 2, 32799, 0);
+    uint16_t offset = 32799;
+    switch(code)
+    {
+    case 0:
+        offset = 32799;
+        break;
+    case 1:
+        offset = 32801;
+        break;
+    case 2:
+        offset = 32927;
+        break;
+    case 3:
+        offset = 32929;
+        break;
+    case 4:
+        offset = 33055;
+        break;
+    case 5:
+        offset = 33057;
+        break;
+    case 6:
+        offset = 33183;
+        break;
+    case 7:
+        offset = 33185;
+        break;
+    default:
+        break;
+    }
+    tr.offset = offset;
+    emit sendTransToWorker(tr);
+}
+
+
+void MainWindow::getTransFromWorkerSlot(Transaction tr)
+{
+    Transaction trLocal = tr;
+
+    if(trLocal.offset == 32781)
+    {
+//        uint32_t tmp = (uint32_t)trLocal.vol;
+        QString str;
+        str.setNum(trLocal.volInt);
+        ui->getTypeSignal->setText(str);
+    } else {
+//        float *value = (float*)&trLocal.vol;
+        double dbl = (double)trLocal.volFlo;
+
+        if(trLocal.slave == 2)
+        {
+            qDebug() << "MainWindow SLOT" << trLocal.offset << "=" << (float)dbl;
+        }
+
+        switch(trLocal.offset)
+        {
+        case 0:
+            channel1.SetCurrentChannelValue(dbl);
+            break;
+        case 2:
+            channel2.SetCurrentChannelValue(dbl);
+            break;
+        case 4:
+            channel3.SetCurrentChannelValue(dbl);
+            break;
+        case 6:
+            channel4.SetCurrentChannelValue(dbl);
+            break;
+        case 32799:
+            emit setReleToOptionsForm((0 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 32801:
+            emit setReleToOptionsForm((1 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 32927:
+            emit setReleToOptionsForm((2 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 32929:
+            emit setReleToOptionsForm((3 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 33055:
+            emit setReleToOptionsForm((4 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 33057:
+            emit setReleToOptionsForm((5 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 33183:
+            emit setReleToOptionsForm((6 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        case 33185:
+            emit setReleToOptionsForm((7 << 4) | (((int)trLocal.volFlo) & 0xF));
+            break;
+        default:
+            break;
+        }
+    }
+}
+

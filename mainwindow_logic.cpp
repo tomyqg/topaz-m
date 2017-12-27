@@ -33,9 +33,6 @@
 #include <QMetaType>
 #include "defines.h"
 
-//регистрация transaction как метатип
-Q_DECLARE_METATYPE(transaction)
-
 extern MainWindow * globalMainWin;
 
 extern QColor Channel1Color;
@@ -142,30 +139,6 @@ void MainWindow::MainWindowInitialization()
     InitTimers();
     LabelsInit();
 
-    device1.dir = DIR_R;
-    device1.param = device.channel0.Data;
-    device1.id = 0;
-
-    device2.dir = DIR_R;
-    device2.param = device.channel1.Data;
-    device2.id = 1;
-
-    device3.dir = DIR_R;
-    device3.param = device.channel2.Data;
-    device3.id = 2;
-
-    device4.dir = DIR_R;
-    device4.param = device.channel3.Data;
-    device4.id = 3;
-
-    //Регистрирует тип transaction в МЕТА
-    qRegisterMetaType<transaction>("transaction");
-
-    channel1.chIndex = 0;
-    channel2.chIndex = 1;
-    channel3.chIndex = 2;
-    channel4.chIndex = 3;
-
     channel1.ReadSingleChannelOptionFromFile(1);
     channel2.ReadSingleChannelOptionFromFile(2);
     channel3.ReadSingleChannelOptionFromFile(3);
@@ -202,15 +175,10 @@ void MainWindow::MainWindowInitialization()
     //connect(myWorker, SIGNAL(finished()), WorkerThread, SLOT(terminate()));
     connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
 //    connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )), Qt::DirectConnection );
-    connect(this, SIGNAL(sendTransToWorker(transaction*)), myWorker, SLOT(getTransSlot(transaction*)), Qt::DirectConnection);
-    connect(myWorker, SIGNAL(sendTrans(transaction*)), this, SLOT(getTransFromWorkerSlot(transaction*)));
+    connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
 
-    //    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(deleteLater()));
-//    connect(WorkerThread, SIGNAL(finished()), WorkerThread, SLOT(deleteLater()));
-//    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
-    //myWorker->thread()->start(QThread::LowPriority);
-
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
@@ -222,8 +190,14 @@ void MainWindow::MainWindowInitialization()
 
     // включаем эко режим
     SetEcoMode(true);
-//    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
     ClearPolarCoords();
+
+    //тени для виджетов
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    effect->setBlurRadius(20.0);
+    effect->setOffset(2);
+    ui->bWriteTypeSignal->setGraphicsEffect(effect);
+
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -298,6 +272,11 @@ void MainWindow::OpenOptionsWindow( int index )
     //здесь запускаем меню обновленное как в эндресе
 
     StackedOptions *sw= new StackedOptions(index,0);
+
+    connect(sw, SIGNAL(ChangeSignalType(uint8_t)), this, SLOT(UpdSignalTypeSlot(uint8_t)));
+//    connect(sw, SIGNAL(comReleOut(uint8_t)), this, SLOT(releOutSlot(uint8_t)));
+//    connect(sw, SIGNAL(readReleOut(uint8_t)), this, SLOT(readReleSlot(uint8_t)));
+//    connect(this, SIGNAL(setReleToOptionsForm(int)), sw, SLOT(getReleOutSlot(int)));
 
     sw->exec();
 
@@ -519,9 +498,9 @@ void MainWindow::CheckAndLogginStates(ChannelOptions&  channel)
 {
     //    channel.GetCurrentChannelValue();
     double channelcurrentvalue = channel.GetCurrentChannelValue();
-    double channelstate1value = channel.GetState1Value();
-    double channelstate2value = channel.GetState2Value();
-    QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName();
+    double channelstate1value = channel.ustavka1.getStateValue();
+    double channelstate2value = channel.ustavka2.getStateValue();
+    QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName() + "\r\n";
 
     //    превысили верхнюю уставку
     if ( (channelcurrentvalue>channelstate1value) && ( channel.HighState1Setted == false ) )
@@ -810,27 +789,3 @@ void MainWindow::changeTranslator(int langindex)
     QApplication::installTranslator(translator);
 }
 
-//void MainWindow::OpenSerialPort( int )
-//{
-//    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
-//    if( !ports.isEmpty() )
-//    {
-//        //подключаемси.
-//        m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
-
-//        if( modbus_connect( m_modbus ) == -1 )
-//        {
-//            QMessageBox::critical( this, tr( "Connection failed" ),
-//                                   tr( "Could not connect serial port!" ) );
-//        }
-//        else
-//        {
-//        }
-//    }
-//    else
-//    {
-//        QMessageBox::critical( this, tr( "No serial port found" ),
-//                               tr( "Could not find any serial port "
-//                                   "on this computer!" ) );
-//    }
-//}

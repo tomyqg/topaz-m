@@ -6,11 +6,11 @@
 #include "channelOptions.h"
 #include "device.h"
 #include "src/modbus.h"
+#include "transaction.h"
 
 class worker : public QObject
 {
     Q_OBJECT
-    //Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
 
 public:
     explicit worker(QObject *parent = 0);
@@ -26,36 +26,33 @@ signals:
     void stopped();
     void finished();
     void ModbusConnectionError();
-    void sendTrans(transaction * tr);
+    void sendTrans(Transaction tr);
 
 public slots:
-    void StopWorkSlot();
-    void StartWorkSlot();
-    void GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
     void run();
-    void getTransSlot(transaction * tr);
+    void getTransSlot(Transaction tr);
 
 private slots:
-    void do_Work();
-    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float);
-    void sendModbusRequest(const deviceparametrs* dp);
-    void ReadModbusData(const deviceparametrs* dp, float *data_dest);
-    void WriteModbusData(const deviceparametrs* dp, float value);
+//    void do_Work();
+    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest);
+    void ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest);
+    void WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32);
     void OpenSerialPort( int );
 
 
 private:
     bool isrunning,isstopped;
     bool m_running;
+    bool fQueueOver1000;    //признак переполнения очереди
     modbus_t * m_modbus;
     QList<ChannelOptions *> ChannelsObjectsList;
-    QMutex mChList;
+    QMutex mQueue;
     QList<QVector<double> *> arrayarray;
     QList< Device * > Devices;
     Device device;
     QMutex ReadModbusDataMutex;
     QMutex TestMutex;
-    QQueue<transaction *> trans;
+    QQueue<Transaction> trans;
 };
 
 #endif // WORKER_H

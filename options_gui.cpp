@@ -252,8 +252,8 @@ void Options::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_1->setValue(options_channel1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options_channel1.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_1->setValue(options_channel1.GetMeasurePeriod());
-    ui->State1ValueChannel_1->setValue(options_channel1.GetState1Value());
-    ui->State2ValueChannel_1->setValue(options_channel1.GetState2Value());
+    ui->State1ValueChannel_1->setValue(options_channel1.ustavka1.getStateValue());
+    ui->State2ValueChannel_1->setValue(options_channel1.ustavka2.getStateValue());
     ui->State1HighMessageChannel_1->setText(options_channel1.GetState1HighMessage());
     ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
     ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
@@ -268,8 +268,8 @@ void Options::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_2->setValue(options_channel2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options_channel2.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_2->setValue(options_channel2.GetMeasurePeriod());
-    ui->State1ValueChannel_2->setValue(options_channel2.GetState1Value());
-    ui->State2ValueChannel_2->setValue(options_channel2.GetState2Value());
+    ui->State1ValueChannel_2->setValue(options_channel2.ustavka1.getStateValue());
+    ui->State2ValueChannel_2->setValue(options_channel2.ustavka2.getStateValue());
     ui->State1HighMessageChannel_2->setText(options_channel2.GetState1HighMessage());
     ui->State1LowMessageChannel_2->setText(options_channel2.GetState1LowMessage());
     ui->State2HighMessageChannel_2->setText(options_channel2.GetState2HighMessage());
@@ -284,8 +284,8 @@ void Options::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_3->setValue(options_channel3.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_3->setValue(options_channel3.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_3->setValue(options_channel3.GetMeasurePeriod());
-    ui->State1ValueChannel_3->setValue(options_channel3.GetState1Value());
-    ui->State2ValueChannel_3->setValue(options_channel3.GetState2Value());
+    ui->State1ValueChannel_3->setValue(options_channel3.ustavka1.getStateValue());
+    ui->State2ValueChannel_3->setValue(options_channel3.ustavka2.getStateValue());
     ui->State1HighMessageChannel_3->setText(options_channel3.GetState1HighMessage());
     ui->State1LowMessageChannel_3->setText(options_channel3.GetState1LowMessage());
     ui->State2HighMessageChannel_3->setText(options_channel3.GetState2HighMessage());
@@ -300,8 +300,8 @@ void Options::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_4->setValue(options_channel4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options_channel4.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_4->setValue(options_channel4.GetMeasurePeriod());
-    ui->State1ValueChannel_4->setValue(options_channel4.GetState1Value());
-    ui->State2ValueChannel_4->setValue(options_channel4.GetState2Value());
+    ui->State1ValueChannel_4->setValue(options_channel4.ustavka1.getStateValue());
+    ui->State2ValueChannel_4->setValue(options_channel4.ustavka2.getStateValue());
     ui->State1HighMessageChannel_4->setText(options_channel4.GetState1HighMessage());
     ui->State1LowMessageChannel_4->setText(options_channel4.GetState1LowMessage());
     ui->State2HighMessageChannel_4->setText(options_channel4.GetState2HighMessage());

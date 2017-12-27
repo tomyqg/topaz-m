@@ -13,6 +13,7 @@
 #include "uartdriver.h"
 #include "src/modbus.h"
 #include "device.h"
+#include "transaction.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,11 +45,12 @@ public:
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
 
     Device device;
-    QQueue<transaction *> queueTransaction;
-    transaction device1;
-    transaction device2;
-    transaction device3;
-    transaction device4;
+    QQueue<Transaction> queueTransaction;
+//    transaction device1;
+//    transaction device2;
+//    transaction device3;
+//    transaction device4;
+//    transaction typeSign1;
 
 
 public slots:
@@ -70,9 +72,11 @@ public slots:
     void UpdateChannel2Slot();
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
+    void UpdSignalTypeSlot(uint8_t ch);
     bool GetEcoMode();
-    void getTransFromWorkerSlot(transaction * tr);
-
+    void getTransFromWorkerSlot(Transaction tr);
+    void releOutSlot(uint8_t code);
+    void readReleSlot(uint8_t code);
 
 
 private:
@@ -151,6 +155,7 @@ private slots:
     void on_ArchiveButton_clicked();
     void on_EcoCheckBox_toggled(bool checked);
     void on_timeButton_clicked();
+    void on_bWriteTypeSignal_clicked();
 
 signals:
     void error(const QString &s);
@@ -158,7 +163,8 @@ signals:
     void startWorkSignal();
     void stopWorkSignal();
 //    void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
-    void sendTransToWorker(transaction * tr);
+    void sendTransToWorker(Transaction tr);
+    void setReleToOptionsForm(int code);
 
 private:
     Ui::MainWindow *ui;

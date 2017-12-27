@@ -235,6 +235,7 @@ public:
     enum DeviceAdress {
         MainDeviceAddress = 0x01 ,
         Board4AIAddress = 0x01 ,
+        Board8ROAddress = 0x02 ,
         UniversalChannel1 = 0x01 ,
         UniversalChannel2 = 0x02 ,
         UniversalChannel3 = 0x04 ,

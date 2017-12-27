@@ -6,6 +6,7 @@
 #include <QMutex>
 #include <QVector>
 #include "mathresolver.h"
+#include "ustavka.h"
 
 class ChannelOptions: public QObject
 {
@@ -16,8 +17,8 @@ public:
     explicit ChannelOptions();
 public:
 
-    int chIndex;
     uint16_t GetSignalType();
+    uint16_t GetCurSignalType();
     int GetDiapason();
     int GetRegistrationType();
     double GetLowerLimit();
@@ -27,7 +28,7 @@ public:
     double GetMeasurePeriod();
     double GetState1Value();
     double GetState2Value();
-    double GetDempherValue();
+    int GetDempherValue();
 
     double GetCurrentChannelValue();
     double GetMaximumChannelValue();
@@ -57,6 +58,7 @@ public:
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
+    void SetCurSignalType(uint16_t newsignaltype);
     void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
     void SetLowerLimit(double newsignaltype);
@@ -74,7 +76,7 @@ public:
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
-    void SetDempher(double newdempher);
+    void SetDempher(int newdempher);
     void SetDiapason(int newdiapason);
     void SetRegistrationType(int newdregistrationtype);
     void SetNormalColor(QColor newcolor);
@@ -87,6 +89,8 @@ public:
     bool IsLowState2Setted();
     bool IsChannelMathematical();
 
+    Ustavka ustavka1;
+    Ustavka ustavka2;
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;
@@ -102,6 +106,7 @@ public:
 private:
 
     uint16_t signaltype;
+    uint16_t cursignaltype;
     double lowerlimit;
     double higherlimit;
     double lowermeasurelimit;
@@ -110,7 +115,7 @@ private:
     double state1value;
     double state2value;
     double currentvalue;
-    double demphervalue;
+    int demphervalue;
 
     QString unitsname;
     QString state1highmessage;

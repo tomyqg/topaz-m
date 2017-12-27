@@ -46,7 +46,9 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
     stackedoptions.cpp \
-    channelOptions.cpp
+    channelOptions.cpp \
+    device.cpp \
+    ustavka.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -74,15 +76,20 @@ HEADERS  += mainwindow.h \
     3rdparty/qextserialport/qextserialport.h \
     device.h \
     stackedoptions.h \
-    channelOptions.h
+    channelOptions.h \
+    registermap.h \
+    transaction.h \
+    ustavka.h
 
 FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
     messages.ui \
     stackedoptions.ui
+
 target.path  = /opt
 INSTALLS    += target
+
 DISTFILES += \
     ../build-untitled2-MYD-Release/Makefile \
     translator_en.ts \
@@ -92,7 +99,7 @@ DISTFILES += \
     untitled2_de.ts \
     untitled2_en.ts \
     untitled2_ru.ts \
-    ../build-TopazM_MB-MYD1-Debug/Makefile
+    ../build-TopazM_MB-MYD1-Debug/Makefile \
 
 
 TRANSLATIONS +=  untitled2_en.ts \

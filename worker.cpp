@@ -4,16 +4,15 @@
 #include "uartdriver.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
+#include "registermap.h"
 #include <QDebug>
 #include <QList>
 #include <QQueue>
-
-
-uint32_t total =0;
+#include <QTime>
+#include <QMutex>
 
 // constructor
-worker::worker(QObject *parent) :
-    QObject(parent)/*, isstopped(false), isrunning(false)*/
+worker::worker(QObject *parent) : QObject(parent)
 
 {
     // активируем сериал порт для модбаса
@@ -49,19 +48,15 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-void worker::sendModbusRequest(const deviceparametrs* dp)
-{
-    //    qDebug() << dp->name;
-    //    sendModbusRequest(ModBus::Board4AIAddress, ModBus::ReadInputRegisters, ModBus::ElmetroChannelAB1Address+4, 2, 0, 0, destfloat);
-}
-
-void worker::WriteModbusData(const deviceparametrs* dp, float value)
+void worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32)
 {
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
         return;
 
     int num;
-    uint16_t * data;
+    //int slave = ModBus::Board4AIAddress;
+    int slave = sl;
+    uint16_t * data = (uint16_t*) &data32;
 
     switch (dp->ParamType) {
     case Device::A12:
@@ -69,60 +64,51 @@ void worker::WriteModbusData(const deviceparametrs* dp, float value)
         break;
     case Device::U16:
         num = 1;
-        data = new uint16_t[num];
-        data[0] = value;
-        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
+        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
         break;
     case Device::U32:
         num = 2;
-
     {
-        uint32_t a = (uint32_t)(value);
-        data = new uint16_t[num];
-        data[0] = ( a & 0xFFFF);
-        data[1] = ( a >> 16 );
-        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
+        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
     }
-
         break;
     case Device::F32:
-    {
         num = 2;
-        QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
-        data = new uint16_t[num];
-        data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
-        data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
-        sendModbusRequest(ModBus::Board4AIAddress, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0,data,0);
-    }
+//    {
+//        QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
+//        data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
+//        data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
+        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num , 0, data,0);
+//    }
         break;
     default:
         break;
     }
 }
 
-void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
+void worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest)
 {
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
-    if ( ( dp->WorkLevelAccess!= Device::R ) && ( dp->WorkLevelAccess!= Device::RW ))
+    if ( ( dp->WorkLevelAccess != RegisterMap::R ) && ( dp->WorkLevelAccess != RegisterMap::RW ))
         return;
 
+    int slave = sl;
     int num;
     int comm;
     int add;
 
     // количество блоков в зависимости от типа параметра
-
     switch (dp->ParamType) {
-    case Device::A12:
+    case RegisterMap::A12:
         num = 12;
         break;
-    case Device::U16:
+    case RegisterMap::U16:
         num = 1;
         break;
-    case Device::U32:
+    case RegisterMap::U32:
         num = 2;
         break;
-    case Device::F32:
+    case RegisterMap::F32:
         num = 2;
         break;
     default:
@@ -131,10 +117,10 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     }
 
     switch (dp->RegisterType) {
-    case Device::HoldingReg:
+    case RegisterMap::HoldingReg:
         comm = _FC_READ_HOLDING_REGISTERS;
         break;
-    case Device::InputReg:
+    case RegisterMap::InputReg:
         comm = _FC_READ_INPUT_REGISTERS;
         break;
     default:
@@ -144,17 +130,16 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
 
     add = dp->Offset;
 
-    sendModbusRequest(ModBus::Board4AIAddress, comm, add, num, 0, 0,data_dest);
-
+    sendModbusRequest(slave, comm, add, num, 0, 0, data_dest);
 
     switch (dp->ParamType) {
-    case Device::A12:
+    case RegisterMap::A12:
         num = 12;
         break;
-    case Device::U16:
+    case RegisterMap::U16:
         num = 1;
         break;
-    case Device::U32:
+    case RegisterMap::U32:
         num = 2;
     {
         //        qDebug() << data_dest[0] << data_dest[1] << "U32";
@@ -179,16 +164,10 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
         data_dest[ 2 ] = arraytofloat.at( 2 );
         data_dest[ 3 ] = arraytofloat.at( 3 );
 
-        //qDebug() << data_dest[ 0 ] <<data_dest[ 1 ] << data_dest[ 2 ] << data_dest[ 3 ] << "U32";
-        //convert hex to double
-        //QDataStream stream(arraytofloat);
-        //stream.setFloatingPointPrecision(QDataStream::SinglePrecision); // convert bytearray to float
-        //stream >> val;
-
         data_dest[0] = val;
     }
         break;
-    case Device::F32:
+    case RegisterMap::F32:
         num = 2;
 
     {
@@ -201,22 +180,19 @@ void worker::ReadModbusData(const deviceparametrs* dp, float *data_dest)
     }
 }
 
-void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float)
+void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest)
 {
-
-    this->thread()->msleep(100); // 100 мксек ждем между запросами чтобы плата не зависала
 
     if( m_modbus == NULL )
     {
         return;
     }
 
-    total ++;
-
     uint8_t dest[1024];
     uint16_t * dest16 = (uint16_t *) dest;
+    uint32_t * dest32 = (uint32_t *) dest;
 
-    memset( dest, 0, 1024 );
+    memset(dest, 0, sizeof(dest));
 
     int ret = -1;
     bool is16Bit = false;
@@ -290,10 +266,20 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         else
         {
             // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
-            if(is16Bit) {
-                float *var = (float *) dest16;
+//            if(is16Bit)
+//            {
+//                for( int i = num/2-1; i >=0; --i ) {
+//                    data_dest_float[i] = (uint32_t)dest16[i];
+//                }
+//            } else {
+//                for( int i = num/2-1; i >=0; --i ) {
+//                    data_dest_float[i] = (uint32_t)dest[i];
+//                }
+//            }
+            if(is16Bit)
+            {
                 for( int i = num/2-1; i >=0; --i ) {
-                    data_dest_float[i] = var[i];
+                    data_dest[i] = dest32[i];
                 }
             }
         }
@@ -326,100 +312,6 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     }
 }
 
-void worker::do_Work()
-{
-    double currentdata;
-
-    float destfloat[1024];
-    memset( destfloat, 0, 1024 );//заполняем нулями массив
-
-    emit SignalToObj_mainThreadGUI();
-
-    if ( !isrunning || isstopped ) // если воркер остановлен
-    {
-        this->thread()->usleep(1000); // 100 мксек ждем прост. чтобы проц не перегружался и не перегревался
-    }
-
-    if ( isrunning || !isstopped ) // если воркер запущен
-    {
-        this->thread()->setPriority(QThread::LowPriority);
-
-        // пихаем все каналы в один массив
-        // тут опрашиваем каждый канал
-
-        int chanelindex = 0;
-
-        if ( (++globalindex2)%6 == 0)
-            globalindex++;
-
-        if (globalindex > 100)
-            globalindex = 40;
-
-        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
-        {
-            if ( (Chanel->GetSignalType() != ModBus::MeasureOff) && (DataBuffer::readupdatestatus(chanelindex)) )
-            {
-                QCoreApplication::applicationDirPath();
-                DataBuffer::writeupdatestatus(chanelindex,false);
-
-                currentdata = destfloat[0];
-                float fl;
-                uint16_t dest16[4];
-
-                switch (chanelindex) {
-                case 0:
-                    ReadModbusData(&device.channel0.Data, &fl);
-                    qDebug() << "channel0: " << fl;
-                    currentdata = fl;//0.110*globalindex;
-                    break;
-                case 1:
-                    ReadModbusData(&device.channel1.Data, &fl);
-                    qDebug() << "channel1: " << fl;
-                    currentdata =  fl;//0.120*globalindex;
-                    break;
-                case 2:
-                    ReadModbusData(&device.channel2.Data, &fl);
-                    qDebug() << "channel2: " << fl;
-                    currentdata =  fl;//0.095*globalindex;
-                    break;
-                case 3:
-                    ReadModbusData(&device.channel3.Data, &fl);
-                    qDebug() << "channel3: " << fl;
-                    currentdata =  fl;//0.105*globalindex;
-                    break;
-                default:
-                    break;
-                }
-
-                Chanel->SetCurrentChannelValue(currentdata );
-            }
-            ++chanelindex;
-        }
-    }
-
-    emit finished(); // вызываем сигнал что обработка канала завершилась. ждем следующего запуска канала
-    // do important work here
-    // allow the thread's event loop to process other events before doing more "work"
-    // for instance, your start/stop signals from the MainWindow
-    QMetaObject::invokeMethod(this, "do_Work", Qt::QueuedConnection );
-}
-
-void worker::StopWorkSlot()
-{
-    isstopped = true;
-    isrunning = false;
-    emit stopped();
-    this->thread()->usleep(50000);
-}
-
-void worker::StartWorkSlot()
-{
-    isstopped = false;
-    isrunning = true;
-//    emit running();
-    do_Work();
-}
-
 void worker::OpenSerialPort( int )
 {
     QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
@@ -438,6 +330,9 @@ void worker::OpenSerialPort( int )
 
         // инициализируем  объект модбаса...
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+        //задание таймаута ожидания ответа от платы
+        const timeval tv = {0, 200000};
+        modbus_set_timeout_begin(m_modbus, &tv);
         //Включение отладки MODBAS
         //modbus_set_debug(m_modbus, true);
         if( modbus_connect( m_modbus ) == -1 )
@@ -457,47 +352,60 @@ void worker::OpenSerialPort( int )
 }
 
 
-void worker::GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4)
-{
-    mChList.lock();
-    ThreadChannelOptions1 = c1;
-    ThreadChannelOptions2 = c2;
-    ThreadChannelOptions3 = c3;
-    ThreadChannelOptions4 = c4;
-    ChannelsObjectsList.append(ThreadChannelOptions1);
-    ChannelsObjectsList.append(ThreadChannelOptions2);
-    ChannelsObjectsList.append(ThreadChannelOptions3);
-    ChannelsObjectsList.append(ThreadChannelOptions4);
-    mChList.unlock();
-}
-
-
 void worker::run()
 {
-//    static int i;
-    float fl;
-//    double currentdata;
+    QTime time;
+    bool emptyTrans;
     while(1)
     {
-//        qDebug() << "worker::run()";
-        if(!trans.isEmpty()) {
-            transaction * tr = trans.dequeue();
-            transaction trLocal = *tr;
-//            qDebug() << "tr" << trLocal.param.Offset;
-            ReadModbusData(&trLocal.param, &fl);
-            uint32_t *data32 = (uint32_t*) &fl;
-//            qDebug() << "data32" << data32[0];
-            trLocal.vol = data32[0];
-//            qDebug() << "worker:" << tr.id;
-            qDebug() << "worker SIGNAL" << trLocal.id << "=" << fl;
-            emit sendTrans(&trLocal);
+        mQueue.lock();
+        emptyTrans = trans.isEmpty();
+        mQueue.unlock();
+
+        if(!emptyTrans) {
+
+            mQueue.lock();
+            Transaction tr = trans.dequeue();
+            mQueue.unlock();
+
+            time.restart();
+            deviceparametrs dp = device.getDevParam(tr.offset);
+            if(tr.dir == Transaction::R)
+            {
+                ReadModbusData(tr.slave, &dp, &tr.volInt);
+                if(tr.slave == 2)
+                {
+                    qDebug() << "worker SIGNAL" << tr.offset << "=" << tr.volFlo << "Time: " << time.elapsed();
+                }
+                emit sendTrans(tr);
+            } else {    //(tr.dir == Transaction::W)
+                WriteModbusData(tr.slave, &dp, tr.volFlo, tr.volInt);
+                tr.dir = Transaction::R;
+
+                mQueue.lock();
+                trans.enqueue(tr);
+                mQueue.unlock();
+            }
         }
-        this->thread()->usleep(10000);
+
+        this->thread()->usleep(1000);
     }
 }
 
-void worker::getTransSlot(transaction * tr)
+void worker::getTransSlot(Transaction tr)
 {
-    qDebug() << "worker SLOT" << tr->id;
+    mQueue.lock();
+    if(trans.size() >= 1000)
+    {
+        if(!fQueueOver1000) qDebug() << "Warning: Queue is over 1000 elements!!!";
+        fQueueOver1000 = true;
+    } else {
+        fQueueOver1000 = false;
+    }
+    if(tr.slave == 2)
+    {
+        qDebug() << "worker SLOT" << tr.offset;
+    }
     trans.enqueue(tr);
+    mQueue.unlock();
 }

@@ -412,6 +412,15 @@ static int _modbus_rtu_connect(modbus_t *ctx)
     case 115200:
         dcb.BaudRate = CBR_115200;
         break;
+    case 256000:
+        dcb.BaudRate = CBR_256000;
+        break;
+    case 512000:
+        dcb.BaudRate = CBR_512000;
+        break;
+    case 1024000:
+        dcb.BaudRate = CBR_1024000;
+        break;
     default:
         dcb.BaudRate = CBR_9600;
         printf("WARNING Unknown baud rate %d for %s (B9600 used)\n",
