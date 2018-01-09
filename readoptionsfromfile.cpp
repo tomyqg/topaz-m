@@ -53,7 +53,7 @@ void Options::ReadChannelsOptionsFromFile()
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
         Channel->SetSignalType(jsonobj.value("Type").toDouble());
-	        Channel->SetCurSignalType(Channel->GetSignalType());
+        Channel->SetCurSignalType(Channel->GetSignalType());
         Channel->SetUnitsName(jsonobj.value("Units").toString());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
         Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
@@ -83,6 +83,7 @@ void Options::ReadChannelsOptionsFromFile()
 QJsonArray MessageWrite::LogMessageRead()
 {
     QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
     file.open(QIODevice::ReadOnly);
     QTextStream in(&file);
     QString sss = in.readLine();
@@ -119,16 +120,14 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetState2LowMessage(ch.value("State2LowMessage").toString());
 //    this->SetState1Value(ch.value("State1Value").toDouble());
 //    this->SetState2Value(ch.value("State2Value").toDouble());
-    double v = ch.value("State1Value").toDouble();
-    double hist = ch.value("State1Histeresis").toDouble();
-    int relayUp = ch.value("State1RelayUp").toInt();
-    int relayDown = ch.value("State1RelayDown").toInt();
-    this->ustavka1.setUstavka(v, hist, relayUp, relayDown);
-    v = ch.value("State2Value").toDouble();
-    hist = ch.value("State2Histeresis").toDouble();
-    relayUp = ch.value("State2RelayUp").toInt();
-    relayDown = ch.value("State2RelayDown").toInt();
-    this->ustavka2.setUstavka(v, hist, relayUp, relayDown);
+    this->ustavka1.setUstavka(ch.value("State1Value").toDouble(), \
+                              ch.value("State1Histeresis").toDouble(), \
+                              ch.value("State1RelayUp").toInt(), \
+                              ch.value("State1RelayDown").toInt());
+    this->ustavka2.setUstavka(ch.value("State2Value").toDouble(), \
+                              ch.value("State2Histeresis").toDouble(), \
+                              ch.value("State2RelayUp").toInt(), \
+                              ch.value("State2RelayDown").toInt());
     this->SetChannelName(ch.value("Name").toString());
     this->SetMathematical(ch.value("MathWork").toBool());
     this->SetMathEquation(ch.value("MathString").toString());

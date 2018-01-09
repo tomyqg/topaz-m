@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-12-26T16:30:34. -->
+<!-- Written by QtCreator 4.1.0, 2017-12-28T15:50:54. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -272,9 +272,9 @@
        <value type="QString">F:/Work/Projects-Qt/build-TopazM_MB-MYD1-Debug/TopazM_MB</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
-       <value type="QString">10.12.13.4</value>
-       <value type="QString">10.12.13.4</value>
        <value type="QString">10.12.13.3</value>
+       <value type="QString">10.12.13.4</value>
+       <value type="QString">10.12.13.4</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
        <value type="QString">/opt</value>
@@ -287,9 +287,9 @@
        <value type="QString">C:/SysGCC/MYD/arm-linux-gnueabihf/sysroot</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-12-25T16:24:15</value>
-       <value type="QDateTime">2017-12-08T14:56:39</value>
        <value type="QDateTime">2017-12-26T12:39:44</value>
+       <value type="QDateTime">2017-12-08T14:56:39</value>
+       <value type="QDateTime">2017-12-25T16:24:15</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -372,7 +372,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.8.0 MinGW 32bit2</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.8.0 MinGW 32bit2</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{9b10514d-4bba-4528-a4a1-812591b886f8}</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">

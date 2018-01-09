@@ -57,9 +57,9 @@ Options::~Options()
 
 void Options::on_pushButton_clicked()
 {
-    ApplyNewSettingstoAllChannels();
-    WriteSystemOptionsToFile();
-    WriteAllChannelsOptionsToFile();
+//    ApplyNewSettingstoAllChannels();
+//    WriteSystemOptionsToFile();
+//    WriteAllChannelsOptionsToFile();
     this->close();
 }
 
@@ -298,15 +298,15 @@ void Options::ApplyNewSettingstoAllChannels()
     options_channel1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
     options_channel1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
 //    options_channel1.SetState1Value(ui->State1ValueChannel_1->value());
-//    options_channel1.ustavka1.setUstavka(ui->State1ValueChannel_1->value(), \
-//                                         ui->State1HisteresisChannel_1->value(), \
-//                                         ui->State1_actionHigh_Channel_1->currentIndex(), \
-//                                         ui->State1_actionLow_Channel_1->currentIndex());
+    options_channel1.ustavka1.setUstavka(ui->State1ValueChannel_1->value(), \
+                                         0, /*ui->State1HisteresisChannel_1->value(),*/ \
+                                         ui->State1_actionHigh_Channel_1->currentIndex(), \
+                                         ui->State1_actionLow_Channel_1->currentIndex());
 //    options_channel1.SetState2Value(ui->State2ValueChannel_1->value());
-//    options_channel1.ustavka2.setUstavka(ui->State2ValueChannel_1->value(), \
-//                                         ui->State2HisteresisChannel_1->value(), \
-//                                         ui->State2_actionHigh_Channel_1->currentIndex(), \
-//                                         ui->State2_actionLow_Channel_1->currentIndex());
+    options_channel1.ustavka2.setUstavka(ui->State2ValueChannel_1->value(), \
+                                         0, /*ui->State2HisteresisChannel_1->value(), */\
+                                         ui->State2_actionHigh_Channel_1->currentIndex(), \
+                                         ui->State2_actionLow_Channel_1->currentIndex());
     options_channel1.SetChannelName(ui->Name_Channel_1->text());
     options_channel1.SetMathEquation(ui->math_text_ch_1->text());
     options_channel1.SetMathematical(ui->checkBox->isChecked());
@@ -322,15 +322,15 @@ void Options::ApplyNewSettingstoAllChannels()
     options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
     options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
 //    options_channel2.SetState1Value(ui->State1ValueChannel_2->value());
-//    options_channel2.ustavka1.setUstavka(ui->State1ValueChannel_2->value(), \
-//                                         ui->State1HisteresisChannel_2->value(), \
-//                                         ui->State1_actionHigh_Channel_2->currentIndex(), \
-//                                         ui->State1_actionLow_Channel_2->currentIndex());
-////    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
-//    options_channel2.ustavka2.setUstavka(ui->State2ValueChannel_2->value(), \
-//                                         ui->State2HisteresisChannel_2->value(), \
-//                                         ui->State2_actionHigh_Channel_2->currentIndex(), \
-//                                         ui->State2_actionLow_Channel_2->currentIndex());
+    options_channel2.ustavka1.setUstavka(ui->State1ValueChannel_2->value(), \
+                                         0, /*//ui->State1HisteresisChannel_2->value(),*/ \
+                                         ui->State1_actionHigh_Channel_2->currentIndex(), \
+                                         ui->State1_actionLow_Channel_2->currentIndex());
+//    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
+    options_channel2.ustavka2.setUstavka(ui->State2ValueChannel_2->value(), \
+                                         0, /*//ui->State2HisteresisChannel_2->value(),*/ \
+                                         ui->State2_actionHigh_Channel_2->currentIndex(), \
+                                         ui->State2_actionLow_Channel_2->currentIndex());
     options_channel2.SetChannelName(ui->Name_Channel_2->text());
     options_channel2.SetMathEquation(ui->math_text_ch_2->text());
     options_channel2.SetMathematical(ui->checkBox_2->isChecked());
@@ -346,15 +346,15 @@ void Options::ApplyNewSettingstoAllChannels()
     options_channel3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
     options_channel3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
 //    options_channel3.SetState1Value(ui->State1ValueChannel_3->value());
-//    options_channel3.ustavka1.setUstavka(ui->State1ValueChannel_3->value(), \
-//                                         ui->State1HisteresisChannel_3->value(), \
-//                                         ui->State1_actionHigh_Channel_3->currentIndex(), \
-//                                         ui->State1_actionLow_Channel_3->currentIndex());
-////    options_channel3.SetState2Value(ui->State2ValueChannel_3->value());
-//    options_channel3.ustavka2.setUstavka(ui->State2ValueChannel_3->value(), \
-//                                         ui->State2HisteresisChannel_3->value(), \
-//                                         ui->State2_actionHigh_Channel_3->currentIndex(), \
-//                                         ui->State2_actionLow_Channel_3->currentIndex());
+    options_channel3.ustavka1.setUstavka(ui->State1ValueChannel_3->value(), \
+                                         0, /*//ui->State1HisteresisChannel_3->value(),*/ \
+                                         ui->State1_actionHigh_Channel_3->currentIndex(), \
+                                         ui->State1_actionLow_Channel_3->currentIndex());
+//    options_channel3.SetState2Value(ui->State2ValueChannel_3->value());
+    options_channel3.ustavka2.setUstavka(ui->State2ValueChannel_3->value(), \
+                                         0, /*//ui->State2HisteresisChannel_3->value(),*/ \
+                                         ui->State2_actionHigh_Channel_3->currentIndex(), \
+                                         ui->State2_actionLow_Channel_3->currentIndex());
     options_channel3.SetChannelName(ui->Name_Channel_3->text());
     options_channel3.SetMathEquation(ui->math_text_ch_3->text());
     options_channel3.SetMathematical(ui->checkBox_3->isChecked());
@@ -370,15 +370,15 @@ void Options::ApplyNewSettingstoAllChannels()
     options_channel4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
     options_channel4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
 //    options_channel4.SetState1Value(ui->State1ValueChannel_4->value());
-//    options_channel4.ustavka1.setUstavka(ui->State1ValueChannel_4->value(), \
-//                                         ui->State1HisteresisChannel_4->value(), \
-//                                         ui->State1_actionHigh_Channel_4->currentIndex(), \
-//                                         ui->State1_actionLow_Channel_4->currentIndex());
-////    options_channel4.SetState2Value(ui->State2ValueChannel_4->value());
-//    options_channel4.ustavka2.setUstavka(ui->State2ValueChannel_4->value(), \
-//                                         ui->State2HisteresisChannel_4->value(), \
-//                                         ui->State2_actionHigh_Channel_4->currentIndex(), \
-//                                         ui->State2_actionLow_Channel_4->currentIndex());
+    options_channel4.ustavka1.setUstavka(ui->State1ValueChannel_4->value(), \
+                                         0, /*//ui->State1HisteresisChannel_4->value(),*/ \
+                                         ui->State1_actionHigh_Channel_4->currentIndex(), \
+                                         ui->State1_actionLow_Channel_4->currentIndex());
+//    options_channel4.SetState2Value(ui->State2ValueChannel_4->value());
+    options_channel4.ustavka2.setUstavka(ui->State2ValueChannel_4->value(), \
+                                         0, /*//ui->State2HisteresisChannel_4->value(),*/ \
+                                         ui->State2_actionHigh_Channel_4->currentIndex(), \
+                                         ui->State2_actionLow_Channel_4->currentIndex());
     options_channel4.SetChannelName(ui->Name_Channel_4->text());
     options_channel4.SetMathEquation(ui->math_text_ch_4->text());
     options_channel4.SetMathematical(ui->checkBox_4->isChecked());

@@ -8,7 +8,9 @@ double MetrologicalCalc::ConvertSignalToValue(double current, double signallow, 
 {
     double tmp = current-signallow;
     tmp *= (valuehigh-valuelow);
-    tmp /= (signalhigh-signallow);
+    double tmp1 = signalhigh-signallow;
+    if(tmp1 == 0) tmp = 0;
+    tmp /= tmp1;
     tmp += valuelow;
     //return ( ( (current-signallow)*(valuehigh-valuelow)/(signalhigh-signallow) ) + valuelow );
     return tmp;

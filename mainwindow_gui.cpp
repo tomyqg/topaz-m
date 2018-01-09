@@ -44,8 +44,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 MainWindow::~MainWindow()
 {
-    MessageWrite mr1 ("Programm Closed");
-    mr1.WriteAllLogToFile();
+//    MessageWrite mr1 ("Programm Closed");
+    messwrite.LogAddMessage("Programm Closed");
+//    mr1.WriteAllLogToFile();
+    messwrite.WriteAllLogToFile();
     delete ui;
 }
 

@@ -267,6 +267,7 @@ ChannelOptions::ChannelOptions()
     this->HighState2Setted= false;
     this->LowState2Setted= false;
     SetConfirmationNeed(true);
+    currentvalue = 0;
 
     buffermutex = new QMutex();
 }
@@ -325,7 +326,7 @@ double ChannelOptions::GetCurrentChannelValue()
     //    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
     switch (regtype) {
     case 0: // мгновенное значение
-        currentvalue;
+//        currentvalue;
         if (GetDempherValue()>1)
             currentvalue = GetDempheredChannelValue();
         break;
@@ -351,9 +352,10 @@ double ChannelOptions::GetCurrentChannelValue()
     }
     default:
     {
-        currentvalue;
-    }
+//        currentvalue;
         break;
+    }
+
     }
 
     return currentvalue;
@@ -392,6 +394,7 @@ double ChannelOptions::GetDempheredChannelValue()
 double ChannelOptions::GetValuePercent()
 {
     float razmah = GetHigherMeasureLimit() - GetLowerMeasureLimit();
+    if(razmah == 0) return 0;
     float x = 100 * (GetCurrentChannelValue() - GetLowerMeasureLimit())/razmah;
     return x;
 }

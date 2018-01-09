@@ -444,7 +444,8 @@ void StackedOptions::ReadSystemOptionsFromFile()
     infile.close();
 }
 
-
+//чтение настроек каналов из файла при открытие окна настроек
+//и сохранение их в !локальных! переменных options_channel
 void StackedOptions::ReadChannelsOptionsFromFile()
 {
     QFile infile(pathtooptions);
@@ -486,16 +487,14 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
 //        Channel->SetState1Value(jsonobj.value("State1Value").toDouble());
 //        Channel->SetState2Value(jsonobj.value("State2Value").toDouble());
-        double v = jsonobj.value("State1Value").toDouble();
-        double hist = jsonobj.value("State1Histeresis").toDouble();
-        int relayUp = jsonobj.value("State1RelayUp").toInt();
-        int relayDown = jsonobj.value("State1RelayDown").toInt();
-        Channel->ustavka1.setUstavka(v, hist, relayUp, relayDown);
-        v = jsonobj.value("State2Value").toDouble();
-        hist = jsonobj.value("State2Histeresis").toDouble();
-        relayUp = jsonobj.value("State2RelayUp").toInt();
-        relayDown = jsonobj.value("State2RelayDown").toInt();
-        Channel->ustavka2.setUstavka(v, hist, relayUp, relayDown);
+        Channel->ustavka1.setUstavka(jsonobj.value("State1Value").toDouble(), \
+                                     jsonobj.value("State1Histeresis").toDouble(), \
+                                     jsonobj.value("State1RelayUp").toInt(), \
+                                     jsonobj.value("State1RelayDown").toInt());
+        Channel->ustavka2.setUstavka(jsonobj.value("State2Value").toDouble(), \
+                                     jsonobj.value("State2Histeresis").toDouble(), \
+                                     jsonobj.value("State2RelayUp").toInt(), \
+                                     jsonobj.value("State2RelayDown").toInt());
         Channel->SetChannelName(jsonobj.value("Name").toString());
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
@@ -507,6 +506,7 @@ void StackedOptions::ReadChannelsOptionsFromFile()
     }
 }
 
+//вывод настроек каналов в элементах формы окна настроек сразу после чтения из файла
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
     ui->PriborIdentifier->setText(CURRENT_VER);
@@ -886,6 +886,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->RegType_Channel_4->setCurrentIndex(options_channel4.GetRegistrationType());
 }
 
+//Закрытие окна с сохранением настроек в !локальных! переменных options_channel1
 void StackedOptions::on_pushButton_51_clicked()
 {
     ApplyNewSettingstoAllChannels();
@@ -894,6 +895,7 @@ void StackedOptions::on_pushButton_51_clicked()
     this->close();
 }
 
+//сохранение настроек в файл после нажатием кнопки "сохранить и выйти" и выход
 void StackedOptions::WriteAllChannelsOptionsToFile()
 {
     QList<ChannelOptions *> ChannelsObjectsList;
@@ -977,6 +979,7 @@ QString StackedOptions::GetNewDateString() {return ui->timeEdit->time().toString
 QString StackedOptions::GetNewTimeString() {return ui->timeEdit->time().toString();}
 QString StackedOptions::GetNewDisplayResolution() {return ui->comboBox->itemText(ui->comboBox->currentIndex());}
 
+//копирование информации из форм окна настроек каналов в локальные переменные options_channel
 void StackedOptions::ApplyNewSettingstoAllChannels()
 {
 //    ChannelOptions * opt = &options_channel1;
@@ -1025,12 +1028,12 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
     options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
 //    options_channel2.SetState1Value(ui->State1ValueChannel_2->value());
-    options_channel1.ustavka1.setUstavka(ui->State1ValueChannel_2->value(), \
+    options_channel2.ustavka1.setUstavka(ui->State1ValueChannel_2->value(), \
                                          ui->State1HisteresisChannel_2->value(), \
                                          ui->State1_actionHigh_Channel_2->currentIndex(), \
                                          ui->State1_actionLow_Channel_2->currentIndex());
 //    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
-    options_channel1.ustavka2.setUstavka(ui->State2ValueChannel_2->value(), \
+    options_channel2.ustavka2.setUstavka(ui->State2ValueChannel_2->value(), \
                                          ui->State2HisteresisChannel_2->value(), \
                                          ui->State2_actionHigh_Channel_2->currentIndex(), \
                                          ui->State2_actionLow_Channel_2->currentIndex());

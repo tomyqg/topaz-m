@@ -132,6 +132,7 @@ void MessageWrite::WriteAllLogToFile()
     archive["totalmsg"] = messagesqueue.count();
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
     QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     QTextStream out(&file);
@@ -148,12 +149,15 @@ void MessageWrite::LogAddMessage(QString nm)
     themessage["T"] = local.time().toString();
     themessage["D"] = local.date().toString("dd/MM/yy");
     themessage["M"] = nm;
+    mMessQueue.lock();
     messagesqueue.append(themessage);
+    mMessQueue.unlock();
 }
 
 void MessageWrite::LogClear()
 {
     QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     file.close();

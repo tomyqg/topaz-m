@@ -32,6 +32,8 @@ private:
     int numRelayDown;   //номер переключаемого реле при принижении
     bool setUp;         //превышение
     bool setDown;       //принижение
+    bool fNewState;     //признак изменения состояния
+    bool fConfirm;      //признак подтверждения установки состояния реле
 //    bool isSetted;      //признак срабатывания уставки
     //    QTimer timeFilter;  //фильтр по времени
     //    int interval;       //время устоявшегося значения

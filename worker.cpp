@@ -17,6 +17,15 @@ worker::worker(QObject *parent) : QObject(parent)
 {
     // активируем сериал порт для модбаса
     OpenSerialPort( 1 );
+
+    //сброс счётчиков
+    for(int i = 0; i < (sizeof(slaves)/sizeof(typeStateSlave)); i++)
+    {
+        slaves[i].cntBad = 0;
+        slaves[i].cntBadCurr = 0;
+        slaves[i].cntGood = 0;
+        slaves[i].state = 0;
+    }
 }
 
 
@@ -258,6 +267,12 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
 
     if( ret == num  )
     {
+        if((slave > 0) && (slave <= (sizeof(slaves)/sizeof(typeStateSlave))))
+        {
+            slaves[slave-1].cntBadCurr = 0;
+            slaves[slave-1].state = 0;
+            slaves[slave-1].cntGood++;
+        }
         if( writeAccess )
         {
             //qDebug() << "Values successfully sent" ;
@@ -265,17 +280,6 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         }
         else
         {
-            // перешли сюда значит нужно преобразовать считанные значения из массива HEX во float
-//            if(is16Bit)
-//            {
-//                for( int i = num/2-1; i >=0; --i ) {
-//                    data_dest_float[i] = (uint32_t)dest16[i];
-//                }
-//            } else {
-//                for( int i = num/2-1; i >=0; --i ) {
-//                    data_dest_float[i] = (uint32_t)dest[i];
-//                }
-//            }
             if(is16Bit)
             {
                 for( int i = num/2-1; i >=0; --i ) {
@@ -295,7 +299,27 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                     errno == EIO
                     )
             {
-                                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                //фиксировать потерю связи при многократном повторении
+                if((slave > 0) && (slave <= (sizeof(slaves)/sizeof(typeStateSlave))))
+                {
+                    slaves[slave-1].cntBad++;
+                    int tmp = slaves[slave-1].cntBad;
+                    if(slaves[slave-1].cntBadCurr >= TOTAL_BAD_TR_MODBAS)
+                    {
+                        slaves[slave-1].cntBadCurr = 0;
+                        tmp = slaves[slave-1].state;
+                        if(slaves[slave-1].state == 0)
+                        {
+                            emit sendMessToLog("Did not receive any data from slave " + QString::number(slave));
+                        }
+                        slaves[slave-1].state = 1;
+                    }
+                    else
+                    {
+                        slaves[slave-1].cntBadCurr++;
+                    }
+                }
             }
             else
             {
@@ -307,7 +331,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         }
         else
         {
-                        qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+            qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
 }

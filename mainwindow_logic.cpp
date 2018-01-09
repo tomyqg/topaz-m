@@ -177,6 +177,7 @@ void MainWindow::MainWindowInitialization()
 //    connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )), Qt::DirectConnection );
     connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
 
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
 
@@ -273,7 +274,7 @@ void MainWindow::OpenOptionsWindow( int index )
 
     StackedOptions *sw= new StackedOptions(index,0);
 
-    connect(sw, SIGNAL(ChangeSignalType(uint8_t)), this, SLOT(UpdSignalTypeSlot(uint8_t)));
+//    connect(sw, SIGNAL(ChangeSignalType(uint8_t)), this, SLOT(UpdSignalTypeSlot(uint8_t)));
 //    connect(sw, SIGNAL(comReleOut(uint8_t)), this, SLOT(releOutSlot(uint8_t)));
 //    connect(sw, SIGNAL(readReleOut(uint8_t)), this, SLOT(readReleSlot(uint8_t)));
 //    connect(this, SIGNAL(setReleToOptionsForm(int)), sw, SLOT(getReleOutSlot(int)));
@@ -497,39 +498,99 @@ void MainWindow::GetAllUartPorts()
 void MainWindow::CheckAndLogginStates(ChannelOptions&  channel)
 {
     //    channel.GetCurrentChannelValue();
-    double channelcurrentvalue = channel.GetCurrentChannelValue();
-    double channelstate1value = channel.ustavka1.getStateValue();
-    double channelstate2value = channel.ustavka2.getStateValue();
-    QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName() + "\r\n";
+    double cur = channel.GetCurrentChannelValue();
+    double state1value = channel.ustavka1.getStateValue();
+    double state1hist = channel.ustavka1.getHisteresis();
+    double state2value = channel.ustavka2.getStateValue();
+    double state2hist = channel.ustavka2.getHisteresis();
+    int relay1 = channel.ustavka1.getnumRelayUp();
+    int relay2 = channel.ustavka2.getnumRelayUp();
+    QString channelstringvalue = (QString::number( cur, 'f', 3)) + " " + channel.GetUnitsName();
+    Transaction tr(Transaction::W, 2, 32799, 0);
+    uint16_t offset;
+
+    //корректировка уставок
+    if((state1hist - state1hist) < (state2hist + state2hist))
+    {
+        state1hist = state2hist + state2hist + state1hist;
+    }
 
     //    превысили верхнюю уставку
-    if ( (channelcurrentvalue>channelstate1value) && ( channel.HighState1Setted == false ) )
+    if (cur > (state1value + state1hist))
     {
+        if(channel.HighState1Setted == false)
+        {
+            messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+//            num = channel.ustavka1.getnumRelayUp();
+//            offset = getOffsetFromNumRelay(num);
+            tr.offset = getOffsetFromNumRelay(relay1);
+            tr.volFlo = 1;
+            emit sendTransToWorker(tr);
+            tr.offset = getOffsetFromNumRelay(relay2);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+        }
         channel.LowState1Setted = false;
         channel.HighState1Setted = true;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+
     }
 
-    // было превышение а стало норма
-    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.HighState1Setted == true ) )
+    // значение в гистерезисе - ничего не делать
+    else if (cur > (state1value - state1hist))
     {
+
+    }
+
+    // ниже верхней уставки и выше нижней - норма
+    else if (cur > (state2value + state2hist))
+    {
+        if(channel.HighState1Setted == true)
+        {
+            messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+            tr.offset = getOffsetFromNumRelay(relay1);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+            tr.offset = getOffsetFromNumRelay(relay2);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+        }
         channel.HighState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
+        if(channel.LowState1Setted == true)
+        {
+            messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
+            tr.offset = getOffsetFromNumRelay(relay1);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+            tr.offset = getOffsetFromNumRelay(relay2);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+        }
+        channel.LowState1Setted = false;
     }
 
-    // было уменьшение а стало норма
-    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.LowState1Setted == true ) )
+    // значение в гистерезисе - ничего не делать
+    else if (cur > (state2value - state2hist))
     {
-        channel.LowState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
+//        channel.LowState1Setted = false;
+//        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
     }
 
     //стало ниже нижней уставки
-    else if ( (channelcurrentvalue<channelstate2value) && ( channel.LowState1Setted == false ) )
+    else
     {
+        if(channel.LowState1Setted == false)
+        {
+            messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
+            tr.offset = getOffsetFromNumRelay(relay1);
+            tr.volFlo = 0;
+            emit sendTransToWorker(tr);
+            tr.offset = getOffsetFromNumRelay(relay2);
+            tr.volFlo = 1;
+            emit sendTransToWorker(tr);
+        }
         channel.LowState1Setted = true;
         channel.HighState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
+
     }
 }
 
@@ -789,3 +850,42 @@ void MainWindow::changeTranslator(int langindex)
     QApplication::installTranslator(translator);
 }
 
+uint16_t MainWindow::getOffsetFromNumRelay(int num)
+{
+    uint16_t offset = 32799;
+    switch(num)
+    {
+    case 0:
+        offset = 32799;
+        break;
+    case 1:
+        offset = 32801;
+        break;
+    case 2:
+        offset = 32927;
+        break;
+    case 3:
+        offset = 32929;
+        break;
+    case 4:
+        offset = 33055;
+        break;
+    case 5:
+        offset = 33057;
+        break;
+    case 6:
+        offset = 33183;
+        break;
+    case 7:
+        offset = 33185;
+        break;
+    default:
+        break;
+    }
+    return offset;
+}
+
+void MainWindow::WorkerMessSlot(QString mess)
+{
+    messwrite.LogAddMessage(mess);
+}

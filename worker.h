@@ -8,6 +8,17 @@
 #include "src/modbus.h"
 #include "transaction.h"
 
+#define TOTAL_BAD_TR_MODBAS 5   //количество ошибок до фиксации в журнале
+
+typedef struct
+{
+    int state;      //0-нома, 1-нет ответа от устройства
+    int cntBad;     //счётчик ошибок
+    int cntBadCurr; //текущий счётчик ошибок до фиксации
+    int cntGood;    //счётчик удачных посылок
+}
+typeStateSlave;
+
 class worker : public QObject
 {
     Q_OBJECT
@@ -27,6 +38,7 @@ signals:
     void finished();
     void ModbusConnectionError();
     void sendTrans(Transaction tr);
+    void sendMessToLog(QString mess);
 
 public slots:
     void run();
@@ -53,6 +65,8 @@ private:
     QMutex ReadModbusDataMutex;
     QMutex TestMutex;
     QQueue<Transaction> trans;
+    typeStateSlave slaves[6];
+
 };
 
 #endif // WORKER_H

@@ -1043,7 +1043,7 @@ void MainWindow::UpdateChannel1Slot()
 {
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
-    Transaction tr(Transaction::R, 1, 0, 0);
+    Transaction tr(Transaction::R, 2, 0, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
@@ -1055,7 +1055,7 @@ void MainWindow::UpdateChannel2Slot()
 {
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
-    Transaction tr(Transaction::R, 1, 2, 0);
+    Transaction tr(Transaction::R, 2, 2, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
@@ -1067,7 +1067,7 @@ void MainWindow::UpdateChannel3Slot()
 {
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
-    Transaction tr(Transaction::R, 1, 4, 0);
+    Transaction tr(Transaction::R, 2, 4, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
@@ -1079,7 +1079,7 @@ void MainWindow::UpdateChannel4Slot()
 {
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
-    Transaction tr(Transaction::R, 1, 6, 0);
+    Transaction tr(Transaction::R, 2, 6, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
@@ -1087,29 +1087,29 @@ void MainWindow::UpdateChannel4Slot()
     channeltimer4->setInterval(period);
 }
 
-void MainWindow::UpdSignalTypeSlot(uint8_t ch)
-{
-    qDebug() << "Upd" << ch;
-//    Transaction tr(Transaction::W,);
-//    tr.dir = Transaction::W;
-    switch(ch)
-    {
-    case 1:
-//        tr.param = device.channel0.SignalType;
-        break;
-    case 2:
-//        tr.param = device.channel1.SignalType;
-        break;
-    case 3:
-//        tr.param = device.channel2.SignalType;
-        break;
-    case 4:
-//        tr.param = device.channel3.SignalType;
-        break;
-    }
-//    tr.id = ch-1;
-//    emit sendTransToWorker(tr);
-}
+//void MainWindow::UpdSignalTypeSlot(uint8_t ch)
+//{
+//    qDebug() << "Upd" << ch;
+////    Transaction tr(Transaction::W,);
+////    tr.dir = Transaction::W;
+//    switch(ch)
+//    {
+//    case 1:
+////        tr.param = device.channel0.SignalType;
+//        break;
+//    case 2:
+////        tr.param = device.channel1.SignalType;
+//        break;
+//    case 3:
+////        tr.param = device.channel2.SignalType;
+//        break;
+//    case 4:
+////        tr.param = device.channel3.SignalType;
+//        break;
+//    }
+////    tr.id = ch-1;
+////    emit sendTransToWorker(tr);
+//}
 
 void MainWindow::releOutSlot(uint8_t code)
 {

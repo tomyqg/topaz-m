@@ -72,11 +72,12 @@ public slots:
     void UpdateChannel2Slot();
     void UpdateChannel3Slot();
     void UpdateChannel4Slot();
-    void UpdSignalTypeSlot(uint8_t ch);
+//    void UpdSignalTypeSlot(uint8_t ch);
     bool GetEcoMode();
     void getTransFromWorkerSlot(Transaction tr);
     void releOutSlot(uint8_t code);
     void readReleSlot(uint8_t code);
+    void WorkerMessSlot(QString mess);
 
 
 private:
@@ -129,6 +130,7 @@ private:
     int GetGraphWidthInPixels() {return 600;}
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
+    uint16_t getOffsetFromNumRelay(int num);
     int dateindex;
     bool EcoMode;
     int polar_angle;

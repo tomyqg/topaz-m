@@ -37,57 +37,7 @@ public:
     QList <deviceparametrs> parametrs;
     int BaseAddress;
     int AddressOffset;
-//    deviceparametrs Data;
-//    deviceparametrs DataFlags;
-//    deviceparametrs Status;
-//    deviceparametrs Error;
-//    deviceparametrs Quantity;
-//    deviceparametrs Uptime;
-//    deviceparametrs RawData;
-//    deviceparametrs RawDataFlags;
-//    deviceparametrs SupportedSignals;
-//    deviceparametrs SignalType;
-//    deviceparametrs AdditionalParameter1;
-//    deviceparametrs AdditionalParameter2;
-//    deviceparametrs FilterType;
-//    deviceparametrs FilterLength;
-//    deviceparametrs TransferFunction;
-//    deviceparametrs TransferSignalLowLim;
-//    deviceparametrs TransferSignalHighLim;
-//    deviceparametrs TransferScaleLowLim;
-//    deviceparametrs TransferScaleHighLim;
-//    deviceparametrs BadGoodComm;
-//    deviceparametrs UserCalibGain1;
-//    deviceparametrs UserCalibOffset1;
-//    deviceparametrs UserCalibDate1;
-//    deviceparametrs UserCalibGain2;
-//    deviceparametrs UserCalibOffset2;
-//    deviceparametrs UserCalibDate2;
-//    deviceparametrs UserCalibGain3;
-//    deviceparametrs UserCalibOffset3;
-//    deviceparametrs UserCalibDate3;
-//    deviceparametrs UserCalibGain4;
-//    deviceparametrs UserCalibOffset4;
-//    deviceparametrs UserCalibDate4;
-//    deviceparametrs FactoryCalibGain1;
-//    deviceparametrs FactoryCalibOffset1;
-//    deviceparametrs FactoryCalibDate1;
-//    deviceparametrs FactoryCalibGain2;
-//    deviceparametrs FactoryCalibOffset2;
-//    deviceparametrs FactoryCalibDate2;
-//    deviceparametrs FactoryCalibGain3;
-//    deviceparametrs FactoryCalibOffset3;
-//    deviceparametrs FactoryCalibDate3;
-//    deviceparametrs FactoryCalibGain4;
-//    deviceparametrs FactoryCalibOffset4;
-//    deviceparametrs FactoryCalibDate4;
-//    deviceparametrs CjValue;
-//    deviceparametrs ResultCjValue;
 };
-
-
-
-
 
 class Device
 {
@@ -133,6 +83,7 @@ public:
 
     QList <channelparametrs> channels;
     QList <deviceparametrs> parametrs;
+
     deviceparametrs getDevParam(uint16_t addr);
 
     enum StorageType { D  = 0,
