@@ -8,6 +8,8 @@
 #include "mathresolver.h"
 #include "ustavka.h"
 
+#define BASE_CHANNELS_OFFSET 32768
+
 class ChannelOptions: public QObject
 {
     Q_OBJECT
@@ -89,8 +91,8 @@ public:
     bool IsLowState2Setted();
     bool IsChannelMathematical();
 
-    Ustavka ustavka1;
-    Ustavka ustavka2;
+//    Ustavka ustavka1;
+//    Ustavka ustavka2;
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;
@@ -375,8 +377,33 @@ public:
         Voltage0_1V_sqrt ,
         Voltage0_10V_sqrt ,
         Voltage1_5V_sqrt
-    };
+    };    
     Q_ENUM(VoltageDiapason)
+
+    enum ParamOffset{
+        chanData = 0,
+        chanDataFlags = 2,
+        chanStatus = 3,
+        chanError = 4,
+        chanQuantity = 5,
+        chanUptime = 7,
+        chanRawData = 9,
+        chanRawDataFlags = 11,
+        chanSupportedSignals = 12,
+        chanSignalType = 13,
+
+        chanTransferSignalLowLim = 31,
+        chanTransferSignalHighLim = 33,
+        chanTransferScaleLowLim = 35,
+        chanTransferScaleHighLim = 37,
+        chanBadGoodComm = 39,
+
+        chanCjValue = 90,
+        chanResultCjValue = 92,
+
+    };
+    Q_ENUM(ParamOffset)
+
     void SetRectPosition();
     void SetChannelCoords(int width, int xpos, int ypos, int height);
 };

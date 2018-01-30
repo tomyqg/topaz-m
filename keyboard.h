@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <mainwindow.h>
 
-#include <channelOptions.h>
+#include <Channels/channelOptions.h>
 namespace Ui {
 class keyboard;
 }
@@ -41,7 +41,7 @@ private:
     Ui::keyboard *ui;
 
 private:
-    void ChangeLanguage(char eng);
+    void ChangeLanguage(int eng);
 };
 
 #endif // KEYBOARD_H

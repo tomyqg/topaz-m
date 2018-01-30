@@ -9,7 +9,7 @@ unix:QT += script
 QT += serialport
 QT += testlib
 
-VERSION = 0.5.5
+VERSION = 1.0.0
 
 Q_OS_LINUX = 1
 
@@ -46,9 +46,16 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
     stackedoptions.cpp \
-    channelOptions.cpp \
     device.cpp \
-    ustavka.cpp
+    ustavka.cpp \
+    Slots/slot.cpp \
+    Channels/channelOptions.cpp \
+    Channels/channelslotconnector.cpp \
+    Channels/channelslotcontroller.cpp \
+    Relais/relayslotcontroller.cpp \
+    Relais/relayslotconnector.cpp \
+    Slots/slotsconfig.cpp \
+    registermap.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -76,10 +83,16 @@ HEADERS  += mainwindow.h \
     3rdparty/qextserialport/qextserialport.h \
     device.h \
     stackedoptions.h \
-    channelOptions.h \
     registermap.h \
     transaction.h \
-    ustavka.h
+    ustavka.h \
+    Slots/slot.h \
+    Channels/channelOptions.h \
+    Channels/channelslotconnector.h \
+    Channels/channelslotcontroller.h \
+    Relais/relayslotcontroller.h \
+    Relais/relayslotconnector.h \
+    Slots/slotsconfig.h
 
 FORMS    += mainwindow.ui \
     options.ui \
@@ -100,6 +113,7 @@ DISTFILES += \
     untitled2_en.ts \
     untitled2_ru.ts \
     ../build-TopazM_MB-MYD1-Debug/Makefile \
+    ../build-TopazM_MB-MYD1-Release/Makefile
 
 
 TRANSLATIONS +=  untitled2_en.ts \

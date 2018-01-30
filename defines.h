@@ -4,7 +4,7 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "uartdriver.h"
 #include "worker.h"
 #include "src/modbus-private.h"
@@ -32,6 +32,8 @@
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
+
+#define ETOUT 110   /* Connection timed out */
 
 #else
 #define comportname "COM3"
@@ -83,13 +85,16 @@
 #define MultiThread
 #define ValuesUpdateTimer 200        // время в мсек для обновления значений отрисовываемых на графике
 #define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
-#define ArchiveUpdateTimer 30000     // время архивации на флешку в секундах
+#define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
+#define LogUpdTimer 2000             // время обновления журнала сообщений (Log.txt)
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 20                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
+#define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
+#define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
 
-#endif // DEFINES_H
+#endif
 
 //#define stylesheetclicked "background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
 #define stylesheetUnclicked " color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); "
@@ -99,3 +104,8 @@
 
 #define EcoColor QColor(0x00,0x00,0x4d)
 #define NotEcoColor QColor(0xff,0xff,0xff)
+
+#define TOTAL_NUM_USTAVKI   4
+
+
+// DEFINES_H

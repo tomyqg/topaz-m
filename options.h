@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <mainwindow.h>
-#include <channelOptions.h>
+#include <Channels/channelOptions.h>
 
 namespace Ui {
 class Options;
@@ -33,6 +33,7 @@ public:
     void TouchScreenCalibrate();
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void OpenKeyboard();
+    int GetCurrentDisplayParametr() { return DisplayParametr;}
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,
@@ -72,7 +73,6 @@ private:
     QString GetNewDateString();
     QString GetNewTimeString();
     QString GetNewDisplayResolution();
-    int GetCurrentDisplayParametr() { return DisplayParametr;}
     void SetCurrentDisplayParametr(DisplayParametrEnum newparametr) { DisplayParametr = newparametr;}
     void UpdateCurrentDisplayParametr() ;
 

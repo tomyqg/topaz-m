@@ -529,55 +529,6 @@ color : white;</string>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="getTypeSignal">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>710</y>
-      <width>41</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bWriteTypeSignal">
-    <property name="geometry">
-     <rect>
-      <x>349</x>
-      <y>710</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Отправить</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>710</y>
-      <width>61</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sig Type:</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="setTypeSignal">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>710</y>
-      <width>43</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
    <zorder>customPlot</zorder>
    <zorder>frame</zorder>
    <zorder>pushButton_4</zorder>
@@ -596,10 +547,6 @@ color : white;</string>
    <zorder>showdots</zorder>
    <zorder>showcenterdots</zorder>
    <zorder>graphicsView</zorder>
-   <zorder>getTypeSignal</zorder>
-   <zorder>bWriteTypeSignal</zorder>
-   <zorder>label_4</zorder>
-   <zorder>setTypeSignal</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

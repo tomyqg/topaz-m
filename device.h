@@ -18,7 +18,6 @@ public:
         RegisterType = reg.RegisterType;
     }
 
-
 public:
     QString name;
     uint16_t Offset;

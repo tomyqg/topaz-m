@@ -3,12 +3,13 @@
 
 #include <QQueue>
 #include "uartdriver.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "device.h"
 #include "src/modbus.h"
 #include "transaction.h"
 
 #define TOTAL_BAD_TR_MODBAS 5   //количество ошибок до фиксации в журнале
+#define DEBUG_WORKER
 
 typedef struct
 {

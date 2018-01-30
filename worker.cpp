@@ -295,6 +295,8 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
             if(
         #ifdef WIN32
                     errno == WSAETIMEDOUT ||
+        #else
+                    errno == ETOUT ||
         #endif
                     errno == EIO
                     )
@@ -311,7 +313,10 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
                         tmp = slaves[slave-1].state;
                         if(slaves[slave-1].state == 0)
                         {
-                            emit sendMessToLog("Did not receive any data from slave " + QString::number(slave));
+                            emit sendMessToLog("Slave " + QString::number(slave) + " is out: "\
+                                               + " Good " + QString::number(slaves[slave-1].cntGood) \
+                                               + " Bad " + QString::number(slaves[slave-1].cntBad));
+
                         }
                         slaves[slave-1].state = 1;
                     }
@@ -325,7 +330,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
             {
 
                 qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
-                qDebug() << modbus_strerror( errno ) ;
+                qDebug() << modbus_strerror( errno ) << "(errno:" << errno << ")";
                 qDebug() << stderr;
             }
         }
@@ -397,10 +402,11 @@ void worker::run()
             if(tr.dir == Transaction::R)
             {
                 ReadModbusData(tr.slave, &dp, &tr.volInt);
-                if(tr.slave == 2)
-                {
-                    qDebug() << "worker SIGNAL" << tr.offset << "=" << tr.volFlo << "Time: " << time.elapsed();
-                }
+#ifdef DEBUG_WORKER
+                qDebug() << "worker SIGNAL: slave =" << tr.slave \
+                         << tr.offset << "=" << tr.volFlo \
+                         << "Time: " << time.elapsed();
+#endif
                 emit sendTrans(tr);
             } else {    //(tr.dir == Transaction::W)
                 WriteModbusData(tr.slave, &dp, tr.volFlo, tr.volInt);
@@ -426,10 +432,11 @@ void worker::getTransSlot(Transaction tr)
     } else {
         fQueueOver1000 = false;
     }
-    if(tr.slave == 2)
-    {
-        qDebug() << "worker SLOT" << tr.offset;
-    }
+
+#ifdef DEBUG_WORKER
+    qDebug() << "worker SLOT slave =" << tr.slave << "offset =" << tr.offset;
+#endif
+
     trans.enqueue(tr);
     mQueue.unlock();
 }

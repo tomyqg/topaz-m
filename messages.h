@@ -44,13 +44,6 @@ public:
 
 private:
 
-//    double signaltype;
-//    double lowerlimit;
-//    double higherlimit;
-//    double lowermeasurelimit;
-//    double highermeasurelimit;
-//    double measureperiodsecond;
-//    QString unitsname;
 };
 
 #endif // MESSAGES_H

@@ -1,6 +1,7 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
+#include <QMetaType>
 
 class Transaction
 {
@@ -12,7 +13,7 @@ public:
         W = 1
     } dir_t;
 
-    explicit Transaction(dir_t d, uint8_t sl, uint16_t addr, uint32_t vol = 0)
+    explicit Transaction(dir_t d = R, uint8_t sl = 1, uint16_t addr = 0, uint32_t vol = 0)
     {
         dir = d;
         slave = sl;
@@ -35,5 +36,8 @@ signals:
 public slots:
 
 };
+
+//Q_DECLARE_METATYPE(Transaction)
+
 
 #endif // TRANSACTION_H

@@ -141,11 +141,11 @@ QColor ChannelOptions::GetStateDependentColor()
 {
     QColor color;
 
-    if (this->GetCurrentChannelValue() > this->ustavka1.getStateValue())
-        color = this->GetMaximumColor();
-    else if (this->GetCurrentChannelValue() < this->ustavka2.getStateValue())
-        color = this->GetMinimumColor();
-    else
+//    if (this->GetCurrentChannelValue() > this->ustavka1.getStateValue())
+//        color = this->GetMaximumColor();
+//    else if (this->GetCurrentChannelValue() < this->ustavka2.getStateValue())
+//        color = this->GetMinimumColor();
+//    else
         color = this->GetNormalColor();
 
     return color;
@@ -279,14 +279,16 @@ bool ChannelOptions::GetConfirmationNeed()
 
 bool ChannelOptions::MaximumNow()
 {
-    bool result = (this->GetCurrentChannelValue() > this->ustavka1.getStateValue() ? true : false);
-    return result;
+//    bool result = (this->GetCurrentChannelValue() > this->ustavka1.getStateValue() ? true : false);
+//    return result;
+    return 0;
 }
 
 bool ChannelOptions::MinimumNow()
 {
-    bool result = (this->GetCurrentChannelValue() < this->ustavka2.getStateValue() ? true : false);
-    return result;
+//    bool result = (this->GetCurrentChannelValue() < this->ustavka2.getStateValue() ? true : false);
+//    return result;
+    return 0;
 }
 
 QVector<double> ChannelOptions::GetChannelValuesBuffer()
@@ -318,6 +320,8 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 {
     needConfirmationchannel = confirmationstate;
 }
+
+
 
 double ChannelOptions::GetCurrentChannelValue()
 {
@@ -384,8 +388,9 @@ double ChannelOptions::GetMaxplusMinChannelValue()
 double ChannelOptions::GetDempheredChannelValue()
 {
     double res;
-    if (GetDempherValue()>1)
-        res = mathresolver::dGetDempheredValue(channelvaluesbuffer,GetDempherValue());
+    int count = GetDempherValue();
+    if (count>1)
+        res = mathresolver::dGetDempheredValue(channelvaluesbuffer,count);
     else
         res = currentvalue;
     return res;

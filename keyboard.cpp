@@ -82,7 +82,7 @@ void keyboard::on_comboBox_currentIndexChanged()
     ChangeLanguage(ui->comboBox->currentIndex() );
 }
 
-void keyboard::ChangeLanguage(char eng)
+void keyboard::ChangeLanguage(int eng)
 {
     if (eng == 1) //если русский язык
     {

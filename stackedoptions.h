@@ -3,7 +3,8 @@
 
 #include <QDialog>
 #include <QtGui>
-#include <channelOptions.h>
+#include <Channels/channelOptions.h>
+#include "ustavka.h"
 
 namespace Ui {
 class StackedOptions;
@@ -17,6 +18,8 @@ class StackedOptions : public QDialog
     ChannelOptions options_channel2;
     ChannelOptions options_channel3;
     ChannelOptions options_channel4;
+
+    QList<Ustavka *> listUstavok;
 
 public:
     explicit StackedOptions(int pageindex, QWidget *parent);
@@ -48,7 +51,7 @@ public:
 
 signals:
     void ChangeSignalType(uint8_t ch);
-    void comReleOut(uint8_t index);
+//    void comReleOut(uint8_t index);
     void readReleOut(uint8_t index);
 
 public slots:
@@ -120,24 +123,17 @@ private slots:
     void on_pushButton_109_clicked();
     void on_gamebutton_clicked();
     void on_horizontalScrollBar_2_sliderReleased();
-    void on_WorkTypeRelay_1_currentIndexChanged(int index);
-    void on_WorkTypeRelay_2_currentIndexChanged(int index);
-    void on_WorkTypeRelay_3_currentIndexChanged(int index);
-    void on_WorkTypeRelay_4_currentIndexChanged(int index);
-    void on_WorkTypeRelay_5_currentIndexChanged(int index);
-    void on_WorkTypeRelay_6_currentIndexChanged(int index);
-    void on_WorkTypeRelay_7_currentIndexChanged(int index);
-    void on_WorkTypeRelay_8_currentIndexChanged(int index);
 
 private:
 
     Ui::StackedOptions *ui;
+    void ReadUstavkiFromFile();
     void ReadChannelsOptionsFromFile();
     void ReadSystemOptionsFromFile();
     void ApplyNewSettingstoOptionsUI();
     void ApplyNewSettingstoAllChannels();
     void WriteSystemOptionsToFile();
-    void WriteAllChannelsOptionsToFile();
+    void WriteOptionsToFile();
     void UpdateCurrentDisplayParametr() ;
     void InitiateArchive() ;
     void ResetToDefaults();

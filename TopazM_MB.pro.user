@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-12-28T15:50:54. -->
+<!-- Written by QtCreator 4.1.0, 2018-01-30T09:03:08. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">1</value>
+  <value type="int">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -62,7 +62,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">MYD1</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">MYD1</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{0712a6e6-816d-4e2c-8b16-d4d71b2ef122}</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
@@ -268,8 +268,8 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">F:/Work/Projects-Qt/build-TopazM_MB-MYD1-Debug/TopazM_MB</value>
-       <value type="QString">F:/Work/Projects-Qt/build-TopazM_MB-MYD1-Release/TopazM_MB</value>
        <value type="QString">F:/Work/Projects-Qt/build-TopazM_MB-MYD1-Debug/TopazM_MB</value>
+       <value type="QString">F:/Work/Projects-Qt/build-TopazM_MB-MYD1-Release/TopazM_MB</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">10.12.13.3</value>
@@ -288,8 +288,8 @@
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
        <value type="QDateTime">2017-12-26T12:39:44</value>
-       <value type="QDateTime">2017-12-08T14:56:39</value>
-       <value type="QDateTime">2017-12-25T16:24:15</value>
+       <value type="QDateTime">2018-01-09T13:50:50</value>
+       <value type="QDateTime">2018-01-29T15:06:24</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -476,7 +476,9 @@
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">2</value>
     <value type="bool" key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment">false</value>
-    <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges"/>
+    <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges">
+     <value type="QString">PATH=C:\Qt\5.8\mingw53_32\bin;C:\Qt\Tools\mingw530_32\bin;C:\ora9\bin;C:\Program Files (x86)\Oracle\jre\1.3.1\bin;C:\Program Files (x86)\Oracle\jre\1.1.8\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Qt_opensource\5.7\mingw53_32\bin\;C:\Qt_opensource\Tools\QtCreator\bin\plugins\platforms;C:\Users\vfabduli\AppData\Local\Microsoft\WindowsApps;C:\SysGCC\Beaglebone\arm-linux-gnueabihf\sysroot\usr\local\qt5\bin;C:\Qt_opensource\5.7\mingw53_32\bin;C:\Qt_opensource\Tools\QtCreator\bin;C:\Qt_opensource\Tools\QtCreator\bin\plugins;C:\SysGCC\Beaglebone\bin;C:\Qt_opensource\Tools\mingw530_32\bin;C:\Qt\5.8\mingw53_32\bin;C:\Qt\Tools\mingw530_32\bin;C:\Qt_opensource\Tools\QtCreator\bin\plugins\platforms;c:\Qt\Tools\QtCreator\bin\plugins\platforms\</value>
+    </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Выпуск</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>

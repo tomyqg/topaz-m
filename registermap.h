@@ -43,7 +43,10 @@ public:
         uint8_t RegisterType;
     } registr_t;
 
-    enum {SIZE_RM = 33};
+    enum {SIZE_RM = 45};
+
+    static uint16_t getOffsetByName(QString name);
+    static QString getNameByOffset(uint16_t offset);
 };
 
 const RegisterMap::registr_t rm[] =
@@ -67,7 +70,8 @@ const RegisterMap::registr_t rm[] =
 
     //--------------------- Channel 0 -----------------------
 
-    {"chan0Data",               0,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"DataChan0",               0,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"chan0Data",               32768, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     {"chan0Status",             32771, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
 
@@ -83,7 +87,8 @@ const RegisterMap::registr_t rm[] =
 
     //--------------------- Channel 1 -----------------------
 
-    {"chan1Data",               2,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"DataChan1",               2,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"chan1Data",               32896, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     {"chan1Status",             32899, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
 
@@ -99,7 +104,8 @@ const RegisterMap::registr_t rm[] =
 
     //--------------------- Channel 2 -----------------------
 
-    {"chan2Data",               4,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"DataChan2",               4,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"chan2Data",               33024, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     {"chan2Status",             33027, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
 
@@ -115,7 +121,8 @@ const RegisterMap::registr_t rm[] =
 
     //--------------------- Channel 3 -----------------------
 
-    {"chan3Data",               6,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"DataChan3",               6,     RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::InputReg},
+    {"chan3Data",               33152, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     {"chan3Status",             33155, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
 
@@ -130,6 +137,7 @@ const RegisterMap::registr_t rm[] =
     {"chan3CjValue",            33242, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg}
 
 };
+
 
 
 
