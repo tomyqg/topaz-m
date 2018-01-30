@@ -6,7 +6,7 @@
 QString StackedOptions::calibrationprm = "3383 3962 234 599";
 QString StackedOptions::displayResolution = "1280x800";
 QString StackedOptions::MonitorResolution = "35";
-int StackedOptions::DisplayParametr = DisplayParametrEnum::Polar;
+int StackedOptions::DisplayParametr = StackedOptions::Polar;
 
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 extern QColor Channel1Color;
@@ -174,8 +174,15 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     connect(ui->buttonGroup_3,SIGNAL(buttonClicked( int )), this, SLOT(Channel3TypeChange(  )) );
     connect(ui->buttonGroup_4,SIGNAL(buttonClicked( int )), this, SLOT(Channel4TypeChange(  )) );
 
+    for(int i = 0; i < TOTAL_NUM_USTAVKI; i++)
+    {
+        Ustavka * ust = new Ustavka();
+        listUstavok.append(ust);
+    }
+
     ReadSystemOptionsFromFile();
     ReadChannelsOptionsFromFile();
+    ReadUstavkiFromFile();
     ApplyNewSettingstoOptionsUI();
 }
 
@@ -435,7 +442,40 @@ void StackedOptions::ReadSystemOptionsFromFile()
     infile.close();
 }
 
+void StackedOptions::ReadUstavkiFromFile()
+{
+    QFile infile(pathtooptions);
+    infile.open(QIODevice::ReadOnly);
+    QTextStream in(&infile);
+    QString sss = in.readLine();
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QJsonObject json = doc.object();
+    QJsonArray array = json["ustavki"].toArray();
+    infile.close();
+    QJsonObject jsonobj;
 
+    int index = 0;
+    foreach (Ustavka * ust, listUstavok)
+    {
+        jsonobj = array.at(index).toObject();
+        ust->setUstavka(jsonobj.value("UstavkaChannel").toInt(), \
+                        jsonobj.value("StateHiValue").toDouble(), \
+                        jsonobj.value("StateLowValue").toDouble(), \
+                        jsonobj.value("lowHisteresis").toDouble(), \
+                        jsonobj.value("lowLowsteresis").toDouble(), \
+                        jsonobj.value("numRelayUp").toInt(), \
+                        jsonobj.value("numRelayDown").toInt() \
+                        );
+        ust->setMessInHigh(jsonobj.value("MessInHigh").toString());
+        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString());
+        ust->setMessInLow(jsonobj.value("MessInLow").toString());
+        ust->setMessNormLow(jsonobj.value("MessNormLow").toString());
+        index++;
+    }
+}
+
+//чтение настроек каналов из файла при открытие окна настроек
+//и сохранение их в !локальных! переменных options_channel
 void StackedOptions::ReadChannelsOptionsFromFile()
 {
     QFile infile(pathtooptions);
@@ -459,36 +499,30 @@ void StackedOptions::ReadChannelsOptionsFromFile()
     QJsonObject jsonobj;
 
     int index = 0;
-
-
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
         jsonobj = array.at(index).toObject();
-
         Channel->SetHigherLimit(jsonobj.value("HigherLimit").toDouble());
         Channel->SetLowerLimit(jsonobj.value("LowerLimit").toDouble());
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
         Channel->SetSignalType(jsonobj.value("Type").toInt());
-        //        Channel->SetSignalType(index);
         Channel->SetUnitsName(jsonobj.value("Units").toString());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
         Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
         Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
         Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
         Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
-        Channel->SetState1Value(jsonobj.value("State1Value").toDouble());
-        Channel->SetState2Value(jsonobj.value("State2Value").toDouble());
         Channel->SetChannelName(jsonobj.value("Name").toString());
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
         Channel->SetDiapason(jsonobj.value("Diapason").toInt());
-        Channel->SetDempher(jsonobj.value("Dempher").toDouble());
+        Channel->SetDempher(jsonobj.value("Dempher").toInt());
         Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
-
         index ++ ;
     }
 }
 
+//вывод настроек каналов в элементах формы окна настроек сразу после чтения из файла
 void StackedOptions::ApplyNewSettingstoOptionsUI()
 {
     ui->PriborIdentifier->setText(CURRENT_VER);
@@ -586,7 +620,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         }
 
 
-        ui->DiapasonChannel_1->setCurrentIndex(options_channel1.GetDempherValue());
+        ui->DiapasonChannel_1->setCurrentIndex(options_channel1.GetDiapason());
     }
 
     // channel 2
@@ -642,7 +676,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
             ui->ButonImpulseChannel_2->setChecked(true);
         }
 
-        ui->DiapasonChannel_2->setCurrentIndex(options_channel2.GetDempherValue());
+        ui->DiapasonChannel_2->setCurrentIndex(options_channel2.GetDiapason());
     }
 
     // channel 3
@@ -699,7 +733,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
             ui->ButonImpulseChannel_3->setChecked(true);
         }
 
-        ui->DiapasonChannel_3->setCurrentIndex(options_channel3.GetDempherValue());
+        ui->DiapasonChannel_3->setCurrentIndex(options_channel3.GetDiapason());
     }
 
     // channel 4
@@ -756,7 +790,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
             ui->ButonImpulseChannel_4->setChecked(true);
         }
 
-        ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDempherValue());
+        ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDiapason());
     }
 
     ui->UnitsChannel_1->setText(options_channel1.GetUnitsName());
@@ -765,12 +799,10 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_1->setValue(options_channel1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options_channel1.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_1->setValue(options_channel1.GetMeasurePeriod());
-    ui->State1ValueChannel_1->setValue(options_channel1.GetState1Value());
-    ui->State2ValueChannel_1->setValue(options_channel1.GetState2Value());
-    ui->State1HighMessageChannel_1->setText(options_channel1.GetState1HighMessage());
-    ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
-    ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
-    ui->State2LowMessageChannel_1->setText(options_channel1.GetState2LowMessage());
+//    ui->State1HighMessageChannel_1->setText(options_channel1.GetState1HighMessage());
+//    ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
+//    ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
+//    ui->State2LowMessageChannel_1->setText(options_channel1.GetState2LowMessage());
     ui->Name_Channel_1->setText(options_channel1.GetChannelName());
     ui->math_text_channel_1->setText(options_channel1.GetMathString());
     ui->math_checkbox_channel_1->setChecked(options_channel1.IsChannelMathematical());
@@ -784,12 +816,10 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_2->setValue(options_channel2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options_channel2.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_2->setValue(options_channel2.GetMeasurePeriod());
-    ui->State1ValueChannel_2->setValue(options_channel2.GetState1Value());
-    ui->State2ValueChannel_2->setValue(options_channel2.GetState2Value());
-    ui->State1HighMessageChannel_2->setText(options_channel2.GetState1HighMessage());
-    ui->State1LowMessageChannel_2->setText(options_channel2.GetState1LowMessage());
-    ui->State2HighMessageChannel_2->setText(options_channel2.GetState2HighMessage());
-    ui->State2LowMessageChannel_2->setText(options_channel2.GetState2LowMessage());
+//    ui->State1HighMessageChannel_2->setText(options_channel2.GetState1HighMessage());
+//    ui->State1LowMessageChannel_2->setText(options_channel2.GetState1LowMessage());
+//    ui->State2HighMessageChannel_2->setText(options_channel2.GetState2HighMessage());
+//    ui->State2LowMessageChannel_2->setText(options_channel2.GetState2LowMessage());
     ui->Name_Channel_2->setText(options_channel2.GetChannelName());
     ui->math_text_channel_2->setText(options_channel2.GetMathString());
     ui->math_checkbox_channel_2->setChecked(options_channel2.IsChannelMathematical());
@@ -803,12 +833,10 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_3->setValue(options_channel3.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_3->setValue(options_channel3.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_3->setValue(options_channel3.GetMeasurePeriod());
-    ui->State1ValueChannel_3->setValue(options_channel3.GetState1Value());
-    ui->State2ValueChannel_3->setValue(options_channel3.GetState2Value());
-    ui->State1HighMessageChannel_3->setText(options_channel3.GetState1HighMessage());
-    ui->State1LowMessageChannel_3->setText(options_channel3.GetState1LowMessage());
-    ui->State2HighMessageChannel_3->setText(options_channel3.GetState2HighMessage());
-    ui->State2LowMessageChannel_3->setText(options_channel3.GetState2LowMessage());
+//    ui->State1HighMessageChannel_3->setText(options_channel3.GetState1HighMessage());
+//    ui->State1LowMessageChannel_3->setText(options_channel3.GetState1LowMessage());
+//    ui->State2HighMessageChannel_3->setText(options_channel3.GetState2HighMessage());
+//    ui->State2LowMessageChannel_3->setText(options_channel3.GetState2LowMessage());
     ui->Name_Channel_3->setText(options_channel3.GetChannelName());
     ui->math_text_channel_3->setText(options_channel3.GetMathString());
     ui->math_checkbox_channel_3->setChecked(options_channel3.IsChannelMathematical());
@@ -822,43 +850,106 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_4->setValue(options_channel4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options_channel4.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_4->setValue(options_channel4.GetMeasurePeriod());
-    ui->State1ValueChannel_4->setValue(options_channel4.GetState1Value());
-    ui->State2ValueChannel_4->setValue(options_channel4.GetState2Value());
-    ui->State1HighMessageChannel_4->setText(options_channel4.GetState1HighMessage());
-    ui->State1LowMessageChannel_4->setText(options_channel4.GetState1LowMessage());
-    ui->State2HighMessageChannel_4->setText(options_channel4.GetState2HighMessage());
-    ui->State2LowMessageChannel_4->setText(options_channel4.GetState2LowMessage());
+//    ui->State1HighMessageChannel_4->setText(options_channel4.GetState1HighMessage());
+//    ui->State1LowMessageChannel_4->setText(options_channel4.GetState1LowMessage());
+//    ui->State2HighMessageChannel_4->setText(options_channel4.GetState2HighMessage());
+//    ui->State2LowMessageChannel_4->setText(options_channel4.GetState2LowMessage());
     ui->Name_Channel_4->setText(options_channel4.GetChannelName());
     ui->math_text_channel_4->setText(options_channel4.GetMathString());
     ui->math_checkbox_channel_4->setChecked(options_channel4.IsChannelMathematical());
     ui->DemphirChannel_4->setValue(options_channel4.GetDempherValue());
     ui->DiapasonChannel_4->setCurrentIndex(options_channel4.GetDiapason());
     ui->RegType_Channel_4->setCurrentIndex(options_channel4.GetRegistrationType());
+
+    // применение настроект уставок для элементов окна
+    Ustavka * ust;
+    ust = listUstavok.at(0);
+    ui->comboBox->setCurrentIndex(ust->getChannel());
+    ui->comboBox_2->setCurrentIndex(ust->getChannel());
+    ui->State1ValueChannel_1->setValue(ust->getHiStateValue());
+    ui->State1HisteresisChannel_1->setValue(ust->getHiHisteresis());
+    ui->State1_actionHigh_Channel_1->setCurrentIndex(ust->getnumRelayUp());
+    ui->State1_actionLow_Channel_1->setCurrentIndex(0);
+    ui->State2ValueChannel_1->setValue(ust->getLowStateValue());
+    ui->State2HisteresisChannel_1->setValue(ust->getLowHisteresis());
+    ui->State2_actionHigh_Channel_1->setCurrentIndex(0);
+    ui->State2_actionLow_Channel_1->setCurrentIndex(ust->getnumRelayDown());
+    ui->State1HighMessageChannel_1->setText(ust->getMessInHigh());
+    ui->State1LowMessageChannel_1->setText(ust->getMessNormHigh());
+    ui->State2HighMessageChannel_1->setText(ust->getMessNormLow());
+    ui->State2LowMessageChannel_1->setText(ust->getMessInLow());
+    ust = listUstavok.at(1);
+    ui->comboBox_3->setCurrentIndex(ust->getChannel());
+    ui->comboBox_4->setCurrentIndex(ust->getChannel());
+    ui->State1ValueChannel_2->setValue(ust->getHiStateValue());
+    ui->State1HisteresisChannel_2->setValue(ust->getHiHisteresis());
+    ui->State1_actionHigh_Channel_2->setCurrentIndex(ust->getnumRelayUp());
+    ui->State1_actionLow_Channel_2->setCurrentIndex(0);
+    ui->State2ValueChannel_2->setValue(ust->getLowStateValue());
+    ui->State2HisteresisChannel_2->setValue(ust->getLowHisteresis());
+    ui->State2_actionHigh_Channel_2->setCurrentIndex(0);
+    ui->State2_actionLow_Channel_2->setCurrentIndex(ust->getnumRelayDown());
+    ui->State1HighMessageChannel_2->setText(ust->getMessInHigh());
+    ui->State1LowMessageChannel_2->setText(ust->getMessNormHigh());
+    ui->State2HighMessageChannel_2->setText(ust->getMessNormLow());
+    ui->State2LowMessageChannel_2->setText(ust->getMessInLow());
+    ust = listUstavok.at(2);
+    ui->comboBox_5->setCurrentIndex(ust->getChannel());
+    ui->comboBox_6->setCurrentIndex(ust->getChannel());
+    ui->State1ValueChannel_3->setValue(ust->getHiStateValue());
+    ui->State1HisteresisChannel_3->setValue(ust->getHiHisteresis());
+    ui->State1_actionHigh_Channel_3->setCurrentIndex(ust->getnumRelayUp());
+    ui->State1_actionLow_Channel_3->setCurrentIndex(0);
+    ui->State2ValueChannel_3->setValue(ust->getLowStateValue());
+    ui->State2HisteresisChannel_3->setValue(ust->getLowHisteresis());
+    ui->State2_actionHigh_Channel_3->setCurrentIndex(0);
+    ui->State2_actionLow_Channel_3->setCurrentIndex(ust->getnumRelayDown());
+    ui->State1HighMessageChannel_3->setText(ust->getMessInHigh());
+    ui->State1LowMessageChannel_3->setText(ust->getMessNormHigh());
+    ui->State2HighMessageChannel_3->setText(ust->getMessNormLow());
+    ui->State2LowMessageChannel_3->setText(ust->getMessInLow());
+    ust = listUstavok.at(3);
+    ui->comboBox_7->setCurrentIndex(ust->getChannel());
+    ui->comboBox_8->setCurrentIndex(ust->getChannel());
+    ui->State1ValueChannel_4->setValue(ust->getHiStateValue());
+    ui->State1HisteresisChannel_4->setValue(ust->getHiHisteresis());
+    ui->State1_actionHigh_Channel_4->setCurrentIndex(ust->getnumRelayUp());
+    ui->State1_actionLow_Channel_4->setCurrentIndex(0);
+    ui->State2ValueChannel_4->setValue(ust->getLowStateValue());
+    ui->State2HisteresisChannel_4->setValue(ust->getLowHisteresis());
+    ui->State2_actionHigh_Channel_4->setCurrentIndex(0);
+    ui->State2_actionLow_Channel_4->setCurrentIndex(ust->getnumRelayDown());
+    ui->State1HighMessageChannel_4->setText(ust->getMessInHigh());
+    ui->State1LowMessageChannel_4->setText(ust->getMessNormHigh());
+    ui->State2HighMessageChannel_4->setText(ust->getMessNormLow());
+    ui->State2LowMessageChannel_4->setText(ust->getMessInLow());
 }
 
+//Закрытие окна с сохранением настроек в !локальных! переменных options_channel1
 void StackedOptions::on_pushButton_51_clicked()
 {
     ApplyNewSettingstoAllChannels();
     WriteSystemOptionsToFile();
-    WriteAllChannelsOptionsToFile();
+    WriteOptionsToFile();
     this->close();
 }
 
-void StackedOptions::WriteAllChannelsOptionsToFile()
+//сохранение настроек в файл после нажатием кнопки "сохранить и выйти" и выход
+void StackedOptions::WriteOptionsToFile()
 {
     QList<ChannelOptions *> ChannelsObjectsList;
-
     ChannelsObjectsList.append(&options_channel1);
     ChannelsObjectsList.append(&options_channel2);
     ChannelsObjectsList.append(&options_channel3);
     ChannelsObjectsList.append(&options_channel4);
 
-    QJsonObject channeljsonobj,channels;
-    QJsonArray settings;
+    QJsonObject channeljsonobj, options;
+    QJsonObject ustavkijsonobj;
+    QJsonArray settings, settingsUst;
+//    QJsonArray options;
 
-    int m = 0 ;
+//    int m = 0 ;
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
-
         channeljsonobj["Type"] = Channel->GetSignalType();
         channeljsonobj["Name"] = Channel->GetChannelName();
         channeljsonobj["Units"] = Channel->GetUnitsName();
@@ -871,23 +962,40 @@ void StackedOptions::WriteAllChannelsOptionsToFile()
         channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
         channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
         channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
-        channeljsonobj["State1Value"] = Channel->GetState1Value();
-        channeljsonobj["State2Value"] = Channel->GetState2Value();
         channeljsonobj["MathString"] = Channel->GetMathString();
         channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
         channeljsonobj["Diapason"] = Channel->GetDiapason();
         channeljsonobj["Dempher"] = Channel->GetDempherValue();
         channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
-
         //qDebug() <<  m << ":" << Channel->GetSignalType()  <<  "yyy  Channel->GetSignalType() ";
         settings.append(channeljsonobj);
-        ++m;
+//        ++m;
     }
 
-    channels["count"] = ChannelsObjectsList.length();
-    channels["channels"] = settings;
+    options["count"] = ChannelsObjectsList.length();
+    options["channels"] = settings;
 
-    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
+    foreach (Ustavka * ust, listUstavok)
+    {
+        ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
+        ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
+        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
+        ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
+        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
+        ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
+        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
+        ustavkijsonobj["MessInHigh"] = ust->getMessInHigh();
+        ustavkijsonobj["MessNormHigh"] = ust->getMessNormHigh();
+        ustavkijsonobj["MessInLow"] = ust->getMessInLow();
+        ustavkijsonobj["MessNormLow"] = ust->getMessNormLow();
+
+        settingsUst.append(ustavkijsonobj);
+    }
+
+    options["countUst"] = listUstavok.length();
+    options["ustavki"] = settingsUst;
+
+    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(pathtooptions);
     QTextStream out(&file);
     file.open(QIODevice::ReadWrite);
@@ -919,20 +1027,27 @@ QString StackedOptions::GetNewDateString() {return ui->timeEdit->time().toString
 QString StackedOptions::GetNewTimeString() {return ui->timeEdit->time().toString();}
 QString StackedOptions::GetNewDisplayResolution() {return ui->comboBox->itemText(ui->comboBox->currentIndex());}
 
+//копирование информации из форм окна настроек каналов в локальные переменные options_channel
 void StackedOptions::ApplyNewSettingstoAllChannels()
 {
+//    ChannelOptions * opt = &options_channel1;
+//    uint16_t cur = opt->GetCurSignalType();
+//    uint16_t newt = opt->GetSignalType();
+//    if(opt->GetCurSignalType() != opt->GetSignalType())
+//    {
+//        opt->SetCurSignalType(opt->GetSignalType());
+//        emit ChangeSignalType(1);   //изменить типа измеряемого сигнала на канале 1
+//    }
     options_channel1.SetUnitsName(ui->UnitsChannel_1->text());
     options_channel1.SetHigherLimit(ui->VerhnPredelChannel_1->value());
     options_channel1.SetLowerLimit(ui->NignPredelChannel_1->value());
     options_channel1.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_1->value());
     options_channel1.SetLowerMeasureLimit(ui->NignPredIzmerChannel_1->value());
     options_channel1.SetMeasurePeriod(ui->PeriodIzmerChannel_1->value());
-    options_channel1.SetState1HighMessage(ui->State1HighMessageChannel_1->text());
-    options_channel1.SetState1LowMessage(ui->State1LowMessageChannel_1->text());
-    options_channel1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
-    options_channel1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
-    options_channel1.SetState1Value(ui->State1ValueChannel_1->value());
-    options_channel1.SetState2Value(ui->State2ValueChannel_1->value());
+//    options_channel1.SetState1HighMessage(ui->State1HighMessageChannel_1->text());
+//    options_channel1.SetState1LowMessage(ui->State1LowMessageChannel_1->text());
+//    options_channel1.SetState2HighMessage(ui->State2HighMessageChannel_1->text());
+//    options_channel1.SetState2LowMessage(ui->State2LowMessageChannel_1->text());
     options_channel1.SetChannelName(ui->Name_Channel_1->text());
     options_channel1.SetMathEquation(ui->math_text_channel_1->text());
     options_channel1.SetMathematical(ui->math_checkbox_channel_1->isChecked());
@@ -946,12 +1061,10 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel2.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_2->value());
     options_channel2.SetLowerMeasureLimit(ui->NignPredIzmerChannel_2->value());
     options_channel2.SetMeasurePeriod(ui->PeriodIzmerChannel_2->value());
-    options_channel2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
-    options_channel2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
-    options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
-    options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
-    options_channel2.SetState1Value(ui->State1ValueChannel_2->value());
-    options_channel2.SetState2Value(ui->State2ValueChannel_2->value());
+//    options_channel2.SetState1HighMessage(ui->State1HighMessageChannel_2->text());
+//    options_channel2.SetState1LowMessage(ui->State1LowMessageChannel_2->text());
+//    options_channel2.SetState2HighMessage(ui->State2HighMessageChannel_2->text());
+//    options_channel2.SetState2LowMessage(ui->State2LowMessageChannel_2->text());
     options_channel2.SetChannelName(ui->Name_Channel_2->text());
     options_channel2.SetMathEquation(ui->math_text_channel_2->text());
     options_channel2.SetMathematical(ui->math_checkbox_channel_2->isChecked());
@@ -965,12 +1078,10 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel3.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_3->value());
     options_channel3.SetLowerMeasureLimit(ui->NignPredIzmerChannel_3->value());
     options_channel3.SetMeasurePeriod(ui->PeriodIzmerChannel_3->value());
-    options_channel3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
-    options_channel3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
-    options_channel3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
-    options_channel3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
-    options_channel3.SetState1Value(ui->State1ValueChannel_3->value());
-    options_channel3.SetState2Value(ui->State2ValueChannel_3->value());
+//    options_channel3.SetState1HighMessage(ui->State1HighMessageChannel_3->text());
+//    options_channel3.SetState1LowMessage(ui->State1LowMessageChannel_3->text());
+//    options_channel3.SetState2HighMessage(ui->State2HighMessageChannel_3->text());
+//    options_channel3.SetState2LowMessage(ui->State2LowMessageChannel_3->text());
     options_channel3.SetChannelName(ui->Name_Channel_3->text());
     options_channel3.SetMathEquation(ui->math_text_channel_3->text());
     options_channel3.SetMathematical(ui->math_checkbox_channel_3->isChecked());
@@ -984,18 +1095,75 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     options_channel4.SetHigherMeasureLimit(ui->VerhnPredIzmerChannel_4->value());
     options_channel4.SetLowerMeasureLimit(ui->NignPredIzmerChannel_4->value());
     options_channel4.SetMeasurePeriod(ui->PeriodIzmerChannel_4->value());
-    options_channel4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
-    options_channel4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
-    options_channel4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
-    options_channel4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
-    options_channel4.SetState1Value(ui->State1ValueChannel_4->value());
-    options_channel4.SetState2Value(ui->State2ValueChannel_4->value());
+//    options_channel4.SetState1HighMessage(ui->State1HighMessageChannel_4->text());
+//    options_channel4.SetState1LowMessage(ui->State1LowMessageChannel_4->text());
+//    options_channel4.SetState2HighMessage(ui->State2HighMessageChannel_4->text());
+//    options_channel4.SetState2LowMessage(ui->State2LowMessageChannel_4->text());
     options_channel4.SetChannelName(ui->Name_Channel_4->text());
     options_channel4.SetMathEquation(ui->math_text_channel_4->text());
     options_channel4.SetMathematical(ui->math_checkbox_channel_4->isChecked());
     options_channel4.SetDempher(ui->DemphirChannel_4->value());
     options_channel4.SetDiapason(ui->DiapasonChannel_4->currentIndex());
     options_channel4.SetRegistrationType(ui->RegType_Channel_4->currentIndex());
+
+    // сохранение настроек уставок из формы
+    Ustavka * ust;
+
+    ust = listUstavok.at(0);
+    ust->setUstavka(ui->comboBox->currentIndex(),       \
+                    ui->State1ValueChannel_1->value(),         \
+                    ui->State2ValueChannel_1->value(),         \
+                    ui->State1HisteresisChannel_1->value(),    \
+                    ui->State2HisteresisChannel_1->value(),    \
+                    ui->State1_actionHigh_Channel_1->currentIndex(),  \
+                    ui->State2_actionLow_Channel_1->currentIndex()   \
+                    );
+    ust->setMessInHigh(ui->State1HighMessageChannel_1->text());
+    ust->setMessNormHigh(ui->State1LowMessageChannel_1->text());
+    ust->setMessNormLow(ui->State2HighMessageChannel_1->text());
+    ust->setMessInLow(ui->State2LowMessageChannel_1->text());
+
+    ust = listUstavok.at(1);
+    ust->setUstavka(ui->comboBox_3->currentIndex(),       \
+                    ui->State1ValueChannel_2->value(),         \
+                    ui->State2ValueChannel_2->value(),         \
+                    ui->State1HisteresisChannel_2->value(),    \
+                    ui->State2HisteresisChannel_2->value(),    \
+                    ui->State1_actionHigh_Channel_2->currentIndex(),  \
+                    ui->State2_actionLow_Channel_2->currentIndex()   \
+                    );
+    ust->setMessInHigh(ui->State1HighMessageChannel_2->text());
+    ust->setMessNormHigh(ui->State1LowMessageChannel_2->text());
+    ust->setMessNormLow(ui->State2HighMessageChannel_2->text());
+    ust->setMessInLow(ui->State2LowMessageChannel_2->text());
+
+    ust = listUstavok.at(2);
+    ust->setUstavka(ui->comboBox_5->currentIndex(),       \
+                    ui->State1ValueChannel_3->value(),         \
+                    ui->State2ValueChannel_3->value(),         \
+                    ui->State1HisteresisChannel_3->value(),    \
+                    ui->State2HisteresisChannel_3->value(),    \
+                    ui->State1_actionHigh_Channel_3->currentIndex(),  \
+                    ui->State2_actionLow_Channel_3->currentIndex()   \
+                    );
+    ust->setMessInHigh(ui->State1HighMessageChannel_3->text());
+    ust->setMessNormHigh(ui->State1LowMessageChannel_3->text());
+    ust->setMessNormLow(ui->State2HighMessageChannel_3->text());
+    ust->setMessInLow(ui->State2LowMessageChannel_3->text());
+
+    ust = listUstavok.at(3);
+    ust->setUstavka(ui->comboBox_7->currentIndex(),       \
+                    ui->State1ValueChannel_4->value(),         \
+                    ui->State2ValueChannel_4->value(),         \
+                    ui->State1HisteresisChannel_4->value(),    \
+                    ui->State2HisteresisChannel_4->value(),    \
+                    ui->State1_actionHigh_Channel_4->currentIndex(),  \
+                    ui->State2_actionLow_Channel_4->currentIndex()   \
+                    );
+    ust->setMessInHigh(ui->State1HighMessageChannel_4->text());
+    ust->setMessNormHigh(ui->State1LowMessageChannel_4->text());
+    ust->setMessNormLow(ui->State2HighMessageChannel_4->text());
+    ust->setMessInLow(ui->State2LowMessageChannel_4->text());
 }
 
 void StackedOptions::InitiateArchive()
@@ -1577,4 +1745,94 @@ void StackedOptions::on_horizontalScrollBar_2_sliderReleased()
         ui->math_checkbox_channel_4->setEnabled(1);
     }
     ui->horizontalScrollBar_2->setValue(0);
+}
+
+//void StackedOptions::on_WorkTypeRelay_1_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (0 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_2_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (1 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_3_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (2 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_4_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (3 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_5_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (4 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_6_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (5 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_7_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (6 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+//void StackedOptions::on_WorkTypeRelay_8_currentIndexChanged(int index)
+//{
+//    uint8_t code = index & 0xF;
+//    code |= (7 << 4);    //временно для определения номера реле
+//    emit comReleOut(code);
+//}
+
+void StackedOptions::getReleOutSlot(int code)
+{
+    int rele = code >> 4;
+    int state = ((code & 0xF) == 0) ? 1 : 0;
+
+    switch(rele)
+    {
+    case 0:
+        ui->WorkTypeRelay_1->setCurrentIndex(state);
+        break;
+    case 1:
+        ui->WorkTypeRelay_2->setCurrentIndex(state);
+        break;
+    case 2:
+        ui->WorkTypeRelay_3->setCurrentIndex(state);
+        break;
+    case 3:
+        ui->WorkTypeRelay_4->setCurrentIndex(state);
+        break;
+    case 4:
+        ui->WorkTypeRelay_5->setCurrentIndex(state);
+        break;
+    case 5:
+        ui->WorkTypeRelay_6->setCurrentIndex(state);
+        break;
+    case 6:
+        ui->WorkTypeRelay_7->setCurrentIndex(state);
+        break;
+    case 7:
+        ui->WorkTypeRelay_8->setCurrentIndex(state);
+        break;
+    }
 }

@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "keyboard.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "uartdriver.h"
 
 #include <QFile>
@@ -592,7 +592,7 @@ QByteArray DataBuffer::UartWriteData(QByteArray data)
         uint16_t crc = CalculateCRC16RTU(InputDataByteArrayNoCRC);
 
         //        qDebug() << data << "data";
-        //        qDebug() << InputDataByteArray << "InputDataByteArray";
+        //qDebug() << InputDataByteArray << "InputDataByteArray";
 
         if (inpcrc == crc) // если срс совпало то возвращаем  байт массив
         {

@@ -1,7 +1,9 @@
 #include "mathresolver.h"
 
 #include <QtMath>
+#ifndef Q_OS_WIN32
 #include <QtScript/QScriptEngine>
+#endif
 #include "defines.h"
 
 mathresolver::mathresolver()
@@ -10,7 +12,9 @@ mathresolver::mathresolver()
 
 double mathresolver::SolveEquation(QString eqstring, double x)
 {
+#ifndef Q_OS_WIN32
     QScriptEngine myEngine;
+#endif
     QString replaced=eqstring;
     replaced.replace(QString("sin"), QString("Math.sin"));
     replaced.replace(QString("cos"), QString("Math.cos"));
@@ -18,7 +22,11 @@ double mathresolver::SolveEquation(QString eqstring, double x)
     replaced.replace(QString("pow"), QString("Math.pow"));
     replaced.replace(QString("abs"), QString("Math.abs"));
     replaced.replace(QString("x"), QString::number(x));
+#ifndef Q_OS_WIN32
     double Result = myEngine.evaluate(replaced).toNumber();
+#else
+    double Result = x;
+#endif
 
 
 
@@ -97,7 +105,7 @@ double mathresolver::dGetDempheredValue(QVector<double> &qvect, int count)
     QVector<double> qvecttemp = qvect;
     double dempheredvalue = 0;
 
-    Q_ASSERT(count <= 0);
+    Q_ASSERT(count > 0);
 
     if (count <= 0)
         return 0 ;

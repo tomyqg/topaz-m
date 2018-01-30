@@ -26,6 +26,7 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
     painter.begin(ui->MessagesWidget);
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+    int ch = 0;
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
@@ -33,11 +34,11 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
             // рисуем прямоугольник  с заполненным цветом
 
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (Chanel->MaximumNow())
+            if (isChannelInMaxNow(ch))
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
             }
-            else if (Chanel->MinimumNow())
+            else if (isChannelInMinNow(ch))
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
             }
@@ -63,7 +64,7 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
                     ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
-            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)) )
                 painter.setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
             else
                 painter.setPen(QPen(Qt::black, 2)); // иначе черный цвет
@@ -89,6 +90,7 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
             if (Chanel->IsChannelMathematical())
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
             ////
+            ch++;
         }
     }
     painter.end();
@@ -201,6 +203,7 @@ void MainWindow::PaintCyfrasBottomSeparate()
 //    newpainter->begin(ui->MessagesWidget);
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+    int ch = 0;
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
@@ -208,11 +211,11 @@ void MainWindow::PaintCyfrasBottomSeparate()
             // рисуем прямоугольник  с заполненным цветом
 
             newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (Chanel->MaximumNow())
+            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
             {
                 newpainter->setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
             }
-            else if (Chanel->MinimumNow())
+            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
             {
                 newpainter->setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
             }
@@ -238,7 +241,7 @@ void MainWindow::PaintCyfrasBottomSeparate()
                     ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
-            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch) /*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
                 newpainter->setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
             else
                 newpainter->setPen(QPen(Qt::black, 2)); // иначе черный цвет
@@ -264,6 +267,7 @@ void MainWindow::PaintCyfrasBottomSeparate()
             if (Chanel->IsChannelMathematical())
                 newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
             ////
+            ch++;
         }
     }
     newpainter->end();
@@ -384,6 +388,7 @@ void MainWindow::PaintCyfrasNew()
     painter.begin(ui->MessagesWidget);
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+    int ch = 0;
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
             double channelcurrentvalue =Chanel->GetCurrentChannelValue();
@@ -392,11 +397,11 @@ void MainWindow::PaintCyfrasNew()
 
             painter.setPen(QPen(Qt::white, 2)); //, Qt::DashDotLine, Qt::RoundCap));
 
-            if (Chanel->MaximumNow())
+            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
             }
-            else if (Chanel->MinimumNow())
+            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
             }
@@ -441,7 +446,7 @@ void MainWindow::PaintCyfrasNew()
             else
                 painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
-            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)/*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
             {
                 painter.setPen(QPen(Qt::red, 1)); //, Qt::DashDotLine, Qt::RoundCap));
             }
@@ -468,15 +473,15 @@ void MainWindow::PaintCyfrasNew()
             statemessage = "" ;
 
 
-            if (( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)/*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
             {
                 painter.setPen(QPen(Qt::red, 1)); //, Qt::DashDotLine, Qt::RoundCap));
-                if (Chanel->MaximumNow())
+                if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
                 {
                     statemessage = Chanel->GetState1HighMessage();
                 }
                 // уменьшение уставки  Channel 1
-                else if (Chanel->MinimumNow())
+                else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
                 {
                     statemessage = Chanel->GetState2LowMessage();
                 }
@@ -507,6 +512,7 @@ void MainWindow::PaintCyfrasNew()
                 painter.setFont(QFont(Font, 20, QFont::ExtraBold));
 
             painter.drawText(Chanel->xposition + smallrectinglewidth/2, Chanel->yposition+35, smallrectinglewidth/2, smallrectingleheight-35, Qt::AlignCenter, statemessage);
+            ch++;
         }
     }
     painter.end();
@@ -572,18 +578,19 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
     painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
     // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+    int ch = 0;
     foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
         {
 
             // рисуем прямоугольник  с заполненным цветом
 
             painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (Chanel->MaximumNow())
+            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
             {
                 painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
             }
-            else if (Chanel->MinimumNow())
+            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
             {
                 painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
                 painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
@@ -600,17 +607,17 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
             painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop, Chanel->GetChannelName());
             painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
 
-            if ( ( Chanel->MinimumNow() || Chanel->MaximumNow()) )
+            if ( ( isChannelInMaxNow(ch) || isChannelInMinNow(ch)/*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
             {
                 painter.setPen(QPen(Qt::red, 1)); //, Qt::DashDotLine, Qt::RoundCap));
             }
 
-            if (Chanel->MaximumNow())
+            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
             {
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState1HighMessage());
             }
             // уменьшение уставки  Channel 1
-            else if (Chanel->MinimumNow())
+            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
             {
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, Chanel->GetState2LowMessage());
             }
@@ -619,6 +626,7 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
                 painter.setPen(QPen(Qt::white, 1)); //, Qt::DashDotLine, Qt::RoundCap));
                 painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom, tr(OKMessage));
             }
+            ch++;
        }
     }
     painter.end();

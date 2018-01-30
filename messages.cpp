@@ -49,7 +49,7 @@ MessageWrite::MessageWrite()
 MessageWrite::MessageWrite( QString nm)
 {
     LogMessageRead();
-//    LogAddMessage(nm);
+    LogAddMessage(nm);
 }
 
 MessageWrite::~MessageWrite()

@@ -16,14 +16,14 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>10</y>
      <width>1151</width>
      <height>621</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>21</number>
+    <number>16</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -2379,7 +2379,7 @@
       <string>Демпфирование</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="DemphirChannel_1">
+    <widget class="QSpinBox" name="DemphirChannel_1">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -2407,18 +2407,6 @@
      </property>
      <property name="accelerated">
       <bool>true</bool>
-     </property>
-     <property name="decimals">
-      <number>0</number>
-     </property>
-     <property name="minimum">
-      <double>0.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999.000000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>1.000000000000000</double>
      </property>
     </widget>
    </widget>
@@ -3120,7 +3108,7 @@
       <string>Назад</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="DemphirChannel_2">
+    <widget class="QSpinBox" name="DemphirChannel_2">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -3148,18 +3136,6 @@
      </property>
      <property name="accelerated">
       <bool>true</bool>
-     </property>
-     <property name="decimals">
-      <number>0</number>
-     </property>
-     <property name="minimum">
-      <double>0.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999.000000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_69">
@@ -3888,7 +3864,7 @@
       <string>Назад</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="DemphirChannel_3">
+    <widget class="QSpinBox" name="DemphirChannel_3">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -3916,18 +3892,6 @@
      </property>
      <property name="accelerated">
       <bool>true</bool>
-     </property>
-     <property name="decimals">
-      <number>0</number>
-     </property>
-     <property name="minimum">
-      <double>0.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999.000000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_70">
@@ -4656,7 +4620,7 @@
       <string>Назад</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="DemphirChannel_4">
+    <widget class="QSpinBox" name="DemphirChannel_4">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -4684,18 +4648,6 @@
      </property>
      <property name="accelerated">
       <bool>true</bool>
-     </property>
-     <property name="decimals">
-      <number>0</number>
-     </property>
-     <property name="minimum">
-      <double>0.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999.000000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_71">
@@ -5129,7 +5081,7 @@
      </widget>
      <widget class="QLineEdit" name="math_text_channel_1">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5151,7 +5103,7 @@
      </widget>
      <widget class="QLineEdit" name="math_text_channel_2">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5173,7 +5125,7 @@
      </widget>
      <widget class="QLineEdit" name="math_text_channel_3">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5195,7 +5147,7 @@
      </widget>
      <widget class="QLineEdit" name="math_text_channel_4">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5217,7 +5169,7 @@
      </widget>
      <widget class="QCheckBox" name="math_checkbox_channel_1">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5240,7 +5192,7 @@
      </widget>
      <widget class="QCheckBox" name="math_checkbox_channel_2">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5263,7 +5215,7 @@
      </widget>
      <widget class="QCheckBox" name="math_checkbox_channel_3">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5286,7 +5238,7 @@
      </widget>
      <widget class="QCheckBox" name="math_checkbox_channel_4">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -5752,9 +5704,32 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -5813,6 +5788,9 @@
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -6143,14 +6121,61 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QComboBox" name="comboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="editable">
+          <bool>false</bool>
+         </property>
+         <property name="currentText">
+          <string>Не исп.</string>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtBottom</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -6209,6 +6234,9 @@
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -6329,6 +6357,9 @@
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -6606,9 +6637,32 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -7002,9 +7056,32 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -7441,9 +7518,32 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -7837,9 +7937,32 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 4</string>
           </property>
          </item>
         </widget>
@@ -8254,6 +8377,29 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 4</string>
@@ -8315,6 +8461,9 @@
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -8650,6 +8799,29 @@
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Не исп.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Канал 3</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Канал 4</string>
@@ -8711,6 +8883,9 @@
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -8990,6 +9165,12 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <item>
       <property name="text">
        <string>Замыкание</string>
@@ -9118,7 +9299,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>200</y>
+       <y>160</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -9219,7 +9400,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>160</y>
+       <y>200</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -9365,7 +9546,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>280</y>
+       <y>240</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -9433,7 +9614,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>240</y>
+       <y>280</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -9546,7 +9727,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>360</y>
+       <y>320</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -9572,7 +9753,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>320</y>
+       <y>360</y>
        <width>151</width>
        <height>30</height>
       </rect>
@@ -10604,8 +10785,8 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

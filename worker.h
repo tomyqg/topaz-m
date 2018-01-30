@@ -1,14 +1,29 @@
 #ifndef WORKER_H
 #define WORKER_H
 
+#include <QQueue>
 #include "uartdriver.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "device.h"
 #include "src/modbus.h"
+#include "transaction.h"
+
+#define TOTAL_BAD_TR_MODBAS 5   //количество ошибок до фиксации в журнале
+#define DEBUG_WORKER
+
+typedef struct
+{
+    int state;      //0-нома, 1-нет ответа от устройства
+    int cntBad;     //счётчик ошибок
+    int cntBadCurr; //текущий счётчик ошибок до фиксации
+    int cntGood;    //счётчик удачных посылок
+}
+typeStateSlave;
 
 class worker : public QObject
 {
     Q_OBJECT
+
 public:
     explicit worker(QObject *parent = 0);
 
@@ -21,34 +36,38 @@ signals:
     void SignalToObj_mainThreadGUI();
     void running();
     void stopped();
-    void Finished();
+    void finished();
     void ModbusConnectionError();
+    void sendTrans(Transaction tr);
+    void sendMessToLog(QString mess);
 
 public slots:
-    void StopWorkSlot();
-    void StartWorkSlot();
-    void GetObectsSlot(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
-
+    void run();
+    void getTransSlot(Transaction tr);
 
 private slots:
-    void do_Work();
-    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, float *data_dest_float);
-    void sendModbusRequest(const deviceparametrs* dp);
-    void ReadModbusData(const deviceparametrs* dp, float *data_dest);
-    void WriteModbusData(const deviceparametrs* dp, float value);
+//    void do_Work();
+    void sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest);
+    void ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest);
+    void WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32);
     void OpenSerialPort( int );
 
 
 private:
-    //    ChannelOptions* ThreadChannelOptions1,ThreadChannelOptions2,ThreadChannelOptions3,ThreadChannelOptions4;
     bool isrunning,isstopped;
+    bool m_running;
+    bool fQueueOver1000;    //признак переполнения очереди
     modbus_t * m_modbus;
     QList<ChannelOptions *> ChannelsObjectsList;
+    QMutex mQueue;
     QList<QVector<double> *> arrayarray;
     QList< Device * > Devices;
     Device device;
     QMutex ReadModbusDataMutex;
     QMutex TestMutex;
+    QQueue<Transaction> trans;
+    typeStateSlave slaves[6];
+
 };
 
 #endif // WORKER_H

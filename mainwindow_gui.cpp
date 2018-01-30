@@ -4,7 +4,7 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "uartdriver.h"
 
 #include <QPixmap>
@@ -44,8 +44,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 MainWindow::~MainWindow()
 {
-    MessageWrite mr1 ("Programm Closed");
-    mr1.WriteAllLogToFile();
+    messwrite.LogAddMessage("Programm Closed");
+    messwrite.WriteAllLogToFile();
     delete ui;
 }
 
@@ -84,11 +84,6 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
     ChangePalette(checked);
 
 
-}
-
-void MainWindow::on_smoothCheckBox_toggled(bool checked)
-{
-    //    qDebug()  <<  ui->customPlot->antialiasedElements();
 }
 
 void MainWindow::on_timeButton_clicked()
@@ -318,3 +313,16 @@ void MainWindow::SetWindowHeightPixels(int newh)
 {
     windowheight = newh;
 }
+
+//void MainWindow::on_bWriteTypeSignal_clicked()
+//{
+//    uint32_t tmp = ui->setTypeSignal->text().toInt();
+////    typeSign1.dir = DIR_W;
+////    typeSign1.param = device.channel0.SignalType;
+////    typeSign1.id = 0;
+////    typeSign1.volInt = tmp;
+//    Transaction trans(Transaction::W, 1, 32781, tmp);
+//    emit sendTransToWorker(trans);
+//}
+
+

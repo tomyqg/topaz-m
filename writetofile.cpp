@@ -4,7 +4,7 @@
 #include "ui_options.h"
 #include "messages.h"
 #include "keyboard.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "defines.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
@@ -87,8 +87,14 @@ void Options::WriteAllChannelsOptionsToFile()
             channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
             channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
             channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
-            channeljsonobj["State1Value"] = Channel->GetState1Value();
-            channeljsonobj["State2Value"] = Channel->GetState2Value();
+//            channeljsonobj["State1Value"] = Channel->ustavka1.getStateValue();
+//            channeljsonobj["State1Histeresis"] = Channel->ustavka1.getHisteresis();
+//            channeljsonobj["State1RelayUp"] = Channel->ustavka1.getnumRelayUp();
+//            channeljsonobj["State1RelayDown"] = Channel->ustavka1.getnumRelayDown();
+//            channeljsonobj["State2Value"] = Channel->ustavka2.getStateValue();
+//            channeljsonobj["State2Histeresis"] = Channel->ustavka2.getHisteresis();
+//            channeljsonobj["State2RelayUp"] = Channel->ustavka2.getnumRelayUp();
+//            channeljsonobj["State2RelayDown"] = Channel->ustavka2.getnumRelayDown();
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
@@ -116,19 +122,34 @@ void MessageWrite::WriteAllLogToFile()
     Options opt;
     double maxmes  = opt.GetLogMessagesLimit();
 
+    mMessQueue.lock();
     while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
     {
         messagesqueue.removeFirst();
     }
     archive["messages"] = messagesqueue;
     archive["totalmsg"] = messagesqueue.count();
+    mMessQueue.unlock();
+
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
     QFile file(pathtomessages);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    QTextStream out(&file);
-    out << setstr;
-    file.close();
+    while(file.isOpen());   //подождать пока файл не закроется другим потоком
+
+    if(file.open(QIODevice::ReadWrite))
+    {
+        file.resize(0); // clear file
+        QTextStream out(&file);
+        out << setstr;
+        file.close();
+    }
+    else
+    {
+//        if (file.error() != QFile::NoError) {
+//                qDebug() << "Error open Log.txt file!" << file.errorString() << file.error();
+//        }
+    }
+
+
 
     opt.deleteLater();
 }
@@ -140,12 +161,15 @@ void MessageWrite::LogAddMessage(QString nm)
     themessage["T"] = local.time().toString();
     themessage["D"] = local.date().toString("dd/MM/yy");
     themessage["M"] = nm;
+    mMessQueue.lock();
     messagesqueue.append(themessage);
+    mMessQueue.unlock();
 }
 
 void MessageWrite::LogClear()
 {
     QFile file(pathtomessages);
+    while(file.isOpen());   //подождать пока файл не закроется другим потоком
     file.open(QIODevice::ReadWrite);
     file.resize(0); // clear file
     file.close();

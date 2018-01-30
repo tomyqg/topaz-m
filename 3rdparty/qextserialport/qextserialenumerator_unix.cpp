@@ -24,7 +24,7 @@ QList<QextPortInfo> QextSerialEnumerator::getPorts()
     QList<QextPortInfo> infoList;
 #ifdef Q_OS_LINUX
     QStringList portNamePrefixes, portNameList;
-    portNamePrefixes << "tty*"; // list normal serial ports first
+    portNamePrefixes << "ttyO*"; // list normal serial ports first
 
     QDir dir("/dev");
     portNameList = dir.entryList(portNamePrefixes, (QDir::System | QDir::Files), QDir::Name);
@@ -34,7 +34,7 @@ QList<QextPortInfo> QextSerialEnumerator::getPorts()
         bool ok;
         QString current = portNameList.at(i);
         // remove the ttyS part, and check, if the other part is a number
-        current.remove(0,3).toInt(&ok, 10);
+        current.remove(0,4).toInt(&ok, 10);
         if (!ok) {
             portNameList.removeAt(i);
             i--;

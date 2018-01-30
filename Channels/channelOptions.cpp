@@ -1,7 +1,7 @@
 #include "channelOptions.h"
 #include "uartdriver.h"
 #include "metrologicalcalc.h"
-#include "QDebug"
+#include <QDebug>
 
 extern QVector<double> X_Coordinates;
 
@@ -37,6 +37,11 @@ uint16_t ChannelOptions::GetSignalType()
     return signaltype;
 }
 
+uint16_t ChannelOptions::GetCurSignalType()
+{
+    return cursignaltype;
+}
+
 int ChannelOptions::GetDiapason()
 {
     return diapason;
@@ -50,6 +55,11 @@ int ChannelOptions::GetRegistrationType()
 void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
+}
+
+void ChannelOptions::SetCurSignalType(uint16_t newsignaltype)
+{
+    this->cursignaltype = newsignaltype;
 }
 
 void ChannelOptions::SetDiapason(int newdiapason)
@@ -131,11 +141,11 @@ QColor ChannelOptions::GetStateDependentColor()
 {
     QColor color;
 
-    if (this->GetCurrentChannelValue() > this->GetState1Value())
-        color = this->GetMaximumColor();
-    else if (this->GetCurrentChannelValue() < this->GetState2Value())
-        color = this->GetMinimumColor();
-    else
+//    if (this->GetCurrentChannelValue() > this->ustavka1.getStateValue())
+//        color = this->GetMaximumColor();
+//    else if (this->GetCurrentChannelValue() < this->ustavka2.getStateValue())
+//        color = this->GetMinimumColor();
+//    else
         color = this->GetNormalColor();
 
     return color;
@@ -219,7 +229,7 @@ double ChannelOptions::GetState2Value()
     return this->state2value;
 }
 
-double ChannelOptions::GetDempherValue()
+int ChannelOptions::GetDempherValue()
 {
     return demphervalue;
 }
@@ -257,6 +267,7 @@ ChannelOptions::ChannelOptions()
     this->HighState2Setted= false;
     this->LowState2Setted= false;
     SetConfirmationNeed(true);
+    currentvalue = 0;
 
     buffermutex = new QMutex();
 }
@@ -268,14 +279,16 @@ bool ChannelOptions::GetConfirmationNeed()
 
 bool ChannelOptions::MaximumNow()
 {
-    bool result = (this->GetCurrentChannelValue() > this->GetState1Value() ? true : false);
-    return result;
+//    bool result = (this->GetCurrentChannelValue() > this->ustavka1.getStateValue() ? true : false);
+//    return result;
+    return 0;
 }
 
 bool ChannelOptions::MinimumNow()
 {
-    bool result = (this->GetCurrentChannelValue() < this->GetState2Value() ? true : false);
-    return result;
+//    bool result = (this->GetCurrentChannelValue() < this->ustavka2.getStateValue() ? true : false);
+//    return result;
+    return 0;
 }
 
 QVector<double> ChannelOptions::GetChannelValuesBuffer()
@@ -308,6 +321,8 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
     needConfirmationchannel = confirmationstate;
 }
 
+
+
 double ChannelOptions::GetCurrentChannelValue()
 {
     int regtype = GetRegistrationType();
@@ -315,7 +330,7 @@ double ChannelOptions::GetCurrentChannelValue()
     //    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
     switch (regtype) {
     case 0: // мгновенное значение
-        currentvalue;
+//        currentvalue;
         if (GetDempherValue()>1)
             currentvalue = GetDempheredChannelValue();
         break;
@@ -341,9 +356,10 @@ double ChannelOptions::GetCurrentChannelValue()
     }
     default:
     {
-        currentvalue;
-    }
+//        currentvalue;
         break;
+    }
+
     }
 
     return currentvalue;
@@ -372,8 +388,9 @@ double ChannelOptions::GetMaxplusMinChannelValue()
 double ChannelOptions::GetDempheredChannelValue()
 {
     double res;
-    if (GetDempherValue()>1)
-        res = mathresolver::dGetDempheredValue(channelvaluesbuffer,GetDempherValue());
+    int count = GetDempherValue();
+    if (count>1)
+        res = mathresolver::dGetDempheredValue(channelvaluesbuffer,count);
     else
         res = currentvalue;
     return res;
@@ -382,6 +399,7 @@ double ChannelOptions::GetDempheredChannelValue()
 double ChannelOptions::GetValuePercent()
 {
     float razmah = GetHigherMeasureLimit() - GetLowerMeasureLimit();
+    if(razmah == 0) return 0;
     float x = 100 * (GetCurrentChannelValue() - GetLowerMeasureLimit())/razmah;
     return x;
 }
@@ -543,7 +561,6 @@ void ChannelOptions::SetCurrentChannelValue(double value)
 
     if (this->IsChannelMathematical())
     {
-        //qDebug() << this->GetMathString();
         double mathresult = mathresolver::SolveEquation(this->GetMathString(),currentvalue);
         currentvalue = mathresult;
     }
@@ -555,15 +572,18 @@ void ChannelOptions::SetCurrentChannelValue(double value)
         channelvaluesbuffer.removeFirst();
     while (dempheredvaluesbuffer.length()>300)
         dempheredvaluesbuffer.removeFirst();
-    //qDebug() << ++cnt;
-    channelvaluesbuffer.append(currentvalue);
-    dempheredvaluesbuffer.append(GetDempheredChannelValue());
-    channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+
+    if(!X_Coordinates.isEmpty())
+    {
+        channelvaluesbuffer.append(currentvalue);
+        dempheredvaluesbuffer.append(GetDempheredChannelValue());
+        channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+    }
 
     buffermutex->unlock();
 }
 
-void ChannelOptions::SetDempher(double newdempher)
+void ChannelOptions::SetDempher(int newdempher)
 {
     demphervalue = newdempher;
 }

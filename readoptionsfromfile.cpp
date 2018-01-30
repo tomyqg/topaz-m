@@ -53,18 +53,18 @@ void Options::ReadChannelsOptionsFromFile()
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
         Channel->SetSignalType(jsonobj.value("Type").toDouble());
+        Channel->SetCurSignalType(Channel->GetSignalType());
         Channel->SetUnitsName(jsonobj.value("Units").toString());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
         Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
         Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
         Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
         Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
-        Channel->SetState1Value(jsonobj.value("State1Value").toDouble());
-        Channel->SetState2Value(jsonobj.value("State2Value").toDouble());
         Channel->SetChannelName(jsonobj.value("Name").toString());
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
         Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
+        Channel->SetDempher(jsonobj.value("Dempher").toInt());
         Channel->SetDiapason(jsonobj.value("Diapason").toInt());
         index ++ ;
     }
@@ -73,13 +73,18 @@ void Options::ReadChannelsOptionsFromFile()
 QJsonArray MessageWrite::LogMessageRead()
 {
     QFile file(pathtomessages);
+    while(file.isOpen());   //подождать пока файл не закроется другим потоком
     file.open(QIODevice::ReadOnly);
     QTextStream in(&file);
     QString sss = in.readLine();
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
     QJsonArray array = json["messages"].toArray();
+
+    mMessQueue.lock();
     MessageWrite::messagesqueue = array;
+    mMessQueue.unlock();
+
     file.close();
     return MessageWrite::messagesqueue;
 }
@@ -100,20 +105,51 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
     this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
     this->SetSignalType(ch.value("Type").toInt());
+    this->SetCurSignalType(this->GetSignalType());
     this->SetUnitsName(ch.value("Units").toString());
     this->SetMeasurePeriod(ch.value("Period").toDouble());
     this->SetState1HighMessage(ch.value("State1HighMessage").toString());
     this->SetState1LowMessage(ch.value("State1LowMessage").toString());
     this->SetState2HighMessage(ch.value("State2HighMessage").toString());
     this->SetState2LowMessage(ch.value("State2LowMessage").toString());
-    this->SetState1Value(ch.value("State1Value").toDouble());
-    this->SetState2Value(ch.value("State2Value").toDouble());
     this->SetChannelName(ch.value("Name").toString());
     this->SetMathematical(ch.value("MathWork").toBool());
     this->SetMathEquation(ch.value("MathString").toString());
-    this->SetDempher(ch.value("Dempher").toDouble());
+    this->SetDempher(ch.value("Dempher").toInt());
     this->SetDiapason(ch.value("Diapason").toInt());
     this->SetRegistrationType(ch.value("RegistrationType").toInt());
 
     infile.close();
+}
+
+void MainWindow::ReadUstavkiFromFile()
+{
+    QFile infile(pathtooptions);
+    infile.open(QIODevice::ReadOnly);
+    QTextStream in(&infile);
+    QString sss = in.readLine();
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QJsonObject json = doc.object();
+    QJsonArray array = json["ustavki"].toArray();
+    infile.close();
+    QJsonObject jsonobj;
+
+    int index = 0;
+    foreach (Ustavka * ust, ustavkaObjectsList)
+    {
+        jsonobj = array.at(index).toObject();
+        ust->setUstavka(jsonobj.value("UstavkaChannel").toInt(), \
+                        jsonobj.value("StateHiValue").toDouble(), \
+                        jsonobj.value("StateLowValue").toDouble(), \
+                        jsonobj.value("lowHisteresis").toDouble(), \
+                        jsonobj.value("lowLowsteresis").toDouble(), \
+                        jsonobj.value("numRelayUp").toInt(), \
+                        jsonobj.value("numRelayDown").toInt() \
+                        );
+        ust->setMessInHigh(jsonobj.value("MessInHigh").toString());
+        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString());
+        ust->setMessInLow(jsonobj.value("MessInLow").toString());
+        ust->setMessNormLow(jsonobj.value("MessNormLow").toString());
+        index++;
+    }
 }

@@ -4,7 +4,9 @@
 #include <QTime>
 #include <QtMath>
 #include <QFile>
+#ifndef Q_OS_WIN32
 #include <QtScript/QScriptEngine>
+#endif
 
 class mathresolver : public QObject
 {

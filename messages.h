@@ -2,6 +2,7 @@
 #define MESSAGES_H
 
 #include <QDialog>
+#include <QMutex>
 
 namespace Ui {
 class Messages;
@@ -36,19 +37,13 @@ public:
     ~MessageWrite(); // деструктор
 
     static QJsonArray messagesqueue;
+    QMutex mMessQueue;
     static QString strstr;
 
     void LogClear();
 
 private:
 
-//    double signaltype;
-//    double lowerlimit;
-//    double higherlimit;
-//    double lowermeasurelimit;
-//    double highermeasurelimit;
-//    double measureperiodsecond;
-//    QString unitsname;
 };
 
 #endif // MESSAGES_H

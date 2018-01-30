@@ -6,6 +6,9 @@
 #include <QMutex>
 #include <QVector>
 #include "mathresolver.h"
+#include "ustavka.h"
+
+#define BASE_CHANNELS_OFFSET 32768
 
 class ChannelOptions: public QObject
 {
@@ -17,6 +20,7 @@ public:
 public:
 
     uint16_t GetSignalType();
+    uint16_t GetCurSignalType();
     int GetDiapason();
     int GetRegistrationType();
     double GetLowerLimit();
@@ -26,7 +30,7 @@ public:
     double GetMeasurePeriod();
     double GetState1Value();
     double GetState2Value();
-    double GetDempherValue();
+    int GetDempherValue();
 
     double GetCurrentChannelValue();
     double GetMaximumChannelValue();
@@ -56,6 +60,7 @@ public:
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
+    void SetCurSignalType(uint16_t newsignaltype);
     void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
     void SetLowerLimit(double newsignaltype);
@@ -73,7 +78,7 @@ public:
     void SetMathEquation(QString newmathstring);
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
-    void SetDempher(double newdempher);
+    void SetDempher(int newdempher);
     void SetDiapason(int newdiapason);
     void SetRegistrationType(int newdregistrationtype);
     void SetNormalColor(QColor newcolor);
@@ -86,6 +91,8 @@ public:
     bool IsLowState2Setted();
     bool IsChannelMathematical();
 
+//    Ustavka ustavka1;
+//    Ustavka ustavka2;
     bool HighState1Setted ;
     bool LowState1Setted ;
     bool HighState2Setted;
@@ -101,6 +108,7 @@ public:
 private:
 
     uint16_t signaltype;
+    uint16_t cursignaltype;
     double lowerlimit;
     double higherlimit;
     double lowermeasurelimit;
@@ -109,7 +117,7 @@ private:
     double state1value;
     double state2value;
     double currentvalue;
-    double demphervalue;
+    int demphervalue;
 
     QString unitsname;
     QString state1highmessage;
@@ -369,8 +377,33 @@ public:
         Voltage0_1V_sqrt ,
         Voltage0_10V_sqrt ,
         Voltage1_5V_sqrt
-    };
+    };    
     Q_ENUM(VoltageDiapason)
+
+    enum ParamOffset{
+        chanData = 0,
+        chanDataFlags = 2,
+        chanStatus = 3,
+        chanError = 4,
+        chanQuantity = 5,
+        chanUptime = 7,
+        chanRawData = 9,
+        chanRawDataFlags = 11,
+        chanSupportedSignals = 12,
+        chanSignalType = 13,
+
+        chanTransferSignalLowLim = 31,
+        chanTransferSignalHighLim = 33,
+        chanTransferScaleLowLim = 35,
+        chanTransferScaleHighLim = 37,
+        chanBadGoodComm = 39,
+
+        chanCjValue = 90,
+        chanResultCjValue = 92,
+
+    };
+    Q_ENUM(ParamOffset)
+
     void SetRectPosition();
     void SetChannelCoords(int width, int xpos, int ypos, int height);
 };

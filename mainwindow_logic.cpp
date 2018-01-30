@@ -4,12 +4,13 @@
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
-#include "channelOptions.h"
+#include "Channels/channelOptions.h"
 #include "uartdriver.h"
 #include "stackedoptions.h"
 #include "worker.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
+#include "registermap.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -18,7 +19,9 @@
 #include <QVector>
 #include <QFile>
 #include <QDataStream>
+#ifndef Q_OS_WIN32
 #include <QtScript/QScriptEngine>
+#endif
 #include <QtSerialPort/QtSerialPort>
 #include <QPainterPath>
 #include <QPainter>
@@ -50,6 +53,8 @@ extern QColor ChannelColorLowState;
 
 void MainWindow::MainWindowInitialization()
 {
+    //qRegisterMetaType<Transaction>("Transaction");
+
     datestrings.append("dd.MM.yyyy ");
     datestrings.append("MM-dd-yyyy ");
     datestrings.append("dd-MM-yyyy ");
@@ -70,20 +75,21 @@ void MainWindow::MainWindowInitialization()
 
     QPixmap pix(pathtologotip);
 
+    scene = new QGraphicsScene();   // Init graphic scene
 
     // находим все com - порты
-    int portIndex = 0;
-    int i = 0;
-    QSettings s;
-    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
-    {
-        //        qDebug() << port.portName;
-        if( port.friendName == s.value( "serialinterface" ) )
-        {
-            portIndex = i;
-        }
-        ++i;
-    }
+//    int portIndex = 0;
+//    int i = 0;
+//    QSettings s;
+//    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
+//    {
+//        //        qDebug() << port.portName;
+//        if( port.friendName == s.value( "serialinterface" ) )
+//        {
+//            portIndex = i;
+//        }
+//        ++i;
+//    }
 
     ui->label->setPixmap(pix);
     ui->label->setScaledContents(true);
@@ -110,11 +116,7 @@ void MainWindow::MainWindowInitialization()
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
 
     UpdateGraficsTimer = new QTimer(this);
-
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
-
-    QTimer *timetouch = new QTimer(this);
-    connect(timetouch, SIGNAL(timeout()), this, SLOT(NewTouchscreenCalibration()));
 
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
@@ -128,16 +130,31 @@ void MainWindow::MainWindowInitialization()
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
-    connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
 
+    connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
     tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
+
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
     timer->start(DateLabelUpdateTimer);
-    timetouch->start(ArchiveUpdateTimer);
+
+//    updLogTimer = new QTimer(this);
+//    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
+//    updLogTimer->start(LogUpdTimer);
 
     InitTimers();
     LabelsInit();
+
+    // инициализация таблицы канал-слот
+    InitChannelSlotTable();
+
+    // инициализация таблицы реле-слот
+    InitRelaySlotTable();
+
+    // инициализация объектов уставок
+    InitUstavka();
+    // получение значений уставок из файла
+    ReadUstavkiFromFile();
 
     channel1.ReadSingleChannelOptionFromFile(1);
     channel2.ReadSingleChannelOptionFromFile(2);
@@ -162,21 +179,34 @@ void MainWindow::MainWindowInitialization()
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
 
+//    // создание конфигуратора слотов
+//    sc = new cSlotsConfig(this);
+//    connect(this, SIGNAL(retransToSlotConfig(Transaction)), sc, SLOT(receiveConf(Transaction)));
+
+    //
+    mQTr = new QMutex();
+    timerQueueTrans = new QTimer();
+    connect(timerQueueTrans, SIGNAL(timeout()), this, SLOT(parseWorkerReceive()));
+    timerQueueTrans->start(ParsingReceiveTrans);
+
+
+    // Инициализация потока Worker ---------------------
     WorkerThread = new QThread;
     worker* myWorker = new worker;
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
     myWorker->moveToThread(WorkerThread);
-
-    connect(this, SIGNAL(startWorkSignal()), myWorker, SLOT(StartWorkSlot()) );
-    connect(this, SIGNAL(stopWorkSignal()), myWorker, SLOT(StopWorkSlot()));
-    connect(myWorker, SIGNAL(Finished()), myWorker, SLOT(StopWorkSlot()));
-    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(int)) );
-    connect(this, SIGNAL(SendObjectsToWorker(ChannelOptions*,ChannelOptions*,ChannelOptions* ,ChannelOptions*)), myWorker, SLOT(GetObectsSlot(ChannelOptions* ,ChannelOptions* ,ChannelOptions*  ,ChannelOptions* )) );
-    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
-    WorkerThread->start(); // запускаем сам поток
+    connect(WorkerThread, SIGNAL(started()), myWorker, SLOT(run()));
+    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
+    connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
+//    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    WorkerThread->start(QThread::LowPriority); // запускаем сам поток
+    // /Инициализация потока Worker ---------------------
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
+//    StackedOptions::SetCurrentDisplayParametr((StackedOptions::DisplayParametrEnum)op.GetCurrentDisplayParametr());
     op.deleteLater();
 
     // сразу активируем отладку по USB
@@ -185,10 +215,12 @@ void MainWindow::MainWindowInitialization()
 
     // включаем эко режим
     SetEcoMode(true);
-    startWorkSignal(); // сигнал который запускает воркер . без него воркер не запустится
-
-
     ClearPolarCoords();
+
+    //тени для виджетов
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    effect->setBlurRadius(20.0);
+    effect->setOffset(2);
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -231,6 +263,104 @@ void MainWindow::LabelsInit()
     }
 }
 
+/*
+ * Создание уставок и упаковка в список
+ * */
+void MainWindow::InitUstavka()
+{
+    for(int i = 0; i < TOTAL_NUM_USTAVKI; i ++)
+    {
+        Ustavka *ust = new Ustavka(this);
+        connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
+        connect(ust, SIGNAL(messToLogSignal(int,QString)), this, SLOT(logginStates(int,QString)));
+        ustavkaObjectsList.append(ust);
+    }
+
+    // запуск обновления уставок по таймеру
+    timeUpdUst = new QTimer();
+    connect(timeUpdUst, SIGNAL(timeout()), this, SLOT(UpdUst()));
+    timeUpdUst->start(UstavkiUpdateTimer);
+}
+
+void MainWindow::UpdUst()
+{
+    QList<ChannelOptions *> ChannelsObjectsList;
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
+
+    foreach (Ustavka * ust, ustavkaObjectsList) {
+        int ch = ust->getChannel();
+        if(ch)
+        {
+            ChannelOptions * channel = ChannelsObjectsList.at(ch-1);
+            ust->update(channel->GetCurrentChannelValue());
+        }
+    }
+}
+
+#define CONST_SLAVE_ADC     1
+#define CONST_SLAVE_RELAY   2
+
+void MainWindow::InitChannelSlotTable()
+{
+    csc.addChannelSlot(0, 0, CONST_SLAVE_ADC);
+    csc.addChannelSlot(1, 1, CONST_SLAVE_ADC);
+    csc.addChannelSlot(2, 2, CONST_SLAVE_ADC);
+    csc.addChannelSlot(3, 3, CONST_SLAVE_ADC);
+}
+
+void MainWindow::InitRelaySlotTable()
+{
+    //временный механизм создания связей
+    rsc.addRelaySlot(0, 0, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(1, 1, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(2, 2, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(3, 3, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(4, 7, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
+    rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
+}
+
+/*
+ * слот передачи сигнала о состоянии реле в Worker
+*/
+void MainWindow::sendRelayStateToWorker(int relay, bool state)
+{
+
+    // номер реле -> индекс реле
+    relay -= 1;
+
+    // получить номер слота платы реле
+    int slot = rsc.getSlotByRelay(relay);
+
+    // получить индекс реле на плате (канал)
+    int devRelay = rsc.getDevRelay(relay);
+
+    // определение адреса параметра в соответствии с интексом реле
+    // это пока временная реализация --------------
+    uint32_t relayOffset;
+    if(devRelay%2)
+    {
+        relayOffset = ChannelOptions::chanTransferSignalHighLim;
+    } else {
+        relayOffset = ChannelOptions::chanTransferSignalLowLim;
+    }
+    //---------------------------------------------
+
+    uint16_t offset = getDevOffsetByChannel(devRelay>>2, relayOffset);//getOffsetFromNumRelay(relay);
+
+    Transaction tr(Transaction::W, slot, offset, 0);
+    // значение 1.0f в регистре замыкает реле
+    // тут нужно вставить инверсию, если выход нормально замкнут
+    if(state) tr.volFlo = 1;
+    else tr.volFlo = 0;
+    qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
+    emit sendTransToWorker(tr);
+}
+
 void MainWindow::InitPins()
 {
 #ifdef MYD // если плата MYD то ничего нам с пинами инициализировать не нужно.
@@ -262,9 +392,12 @@ void MainWindow::OpenOptionsWindow( int index )
 {
     //здесь запускаем меню обновленное как в эндресе
 
-    StackedOptions *sw= new StackedOptions(index,0);
+    StackedOptions *sw= new StackedOptions(index, 0);
 
     sw->exec();
+
+    // получение значений уставок из файла
+    ReadUstavkiFromFile();
 
     //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
     channel1.ReadSingleChannelOptionFromFile(1);
@@ -272,7 +405,7 @@ void MainWindow::OpenOptionsWindow( int index )
     channel3.ReadSingleChannelOptionFromFile(3);
     channel4.ReadSingleChannelOptionFromFile(4);
     // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
-    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
+//    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
     //если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
@@ -340,10 +473,10 @@ void MainWindow::InitTimers()
     connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
-    channeltimer1->start(100);
-    channeltimer2->start(100);
-    channeltimer3->start(100);
-    channeltimer4->start(100);
+    channeltimer1->start(1000);
+    channeltimer2->start(1000);
+    channeltimer3->start(1000);
+    channeltimer4->start(1000);
     halfSecondTimer->start(500);
     archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
 }
@@ -400,36 +533,30 @@ void MainWindow::ModbusConnectionErrorSlot()
                            tr( "Could not connect serial port!" ) );
 }
 
-void MainWindow::SetEcoMode(bool seteco)
+void MainWindow::SetEcoMode(bool EcoMode)
 {
-    EcoMode = seteco;
-    switch (seteco) {
-    case 0:
+    this->EcoMode = EcoMode;
+    QColor newlabelscolor;
+    if (!this->EcoMode)
     {
         ui->customPlot->setBackground(QBrush(NotEcoColor));
-        ui->customPlot->xAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::black));
-        ui->customPlot->yAxis->setTickLabelFont (QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::black));
+        newlabelscolor = QColor(Qt::black);
     }
-        break;
-    case 1:
+    else
     {
         ui->customPlot->setBackground(QBrush(EcoColor));
-        ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->xAxis->setTickLabelColor(QColor( Qt::white));
-        ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
-        ui->customPlot->yAxis->setTickLabelColor(QColor( Qt::white));
+        newlabelscolor = QColor(Qt::white);
     }
-        break;
-    default:
-        break;
-    }
+
+    ui->customPlot->xAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+    ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
+    ui->customPlot->xAxis->setTickLabelColor(newlabelscolor);
+    ui->customPlot->yAxis->setTickLabelColor(newlabelscolor);
 }
 
 bool MainWindow::GetEcoMode()
 {
-    return EcoMode;
+    return this->EcoMode;
 }
 
 void MainWindow::HalfSecondGone()
@@ -447,8 +574,6 @@ uint8_t MainWindow::GetHalfSecFlag()
 
 int MainWindow::GetPolarAngle()
 {
-//    if ( polar_angle>180 )
-//            polar_angle =  0;
     return polar_angle;
 }
 
@@ -464,7 +589,6 @@ void MainWindow::ClearPolarCoords()
 void MainWindow::SetPolarAngle(int newangle)
 {
     polar_angle = newangle;
-//    qDebug() << polar_angle << "polar_angle";
 }
 
 void MainWindow::NewTouchscreenCalibration()
@@ -489,43 +613,31 @@ void MainWindow::GetAllUartPorts()
     }
 }
 
-void MainWindow::CheckAndLogginStates(ChannelOptions&  channel)
+void MainWindow::logginStates(int channel, QString mess)
 {
-    //    channel.GetCurrentChannelValue();
-    double channelcurrentvalue = channel.GetCurrentChannelValue();
-    double channelstate1value = channel.GetState1Value();
-    double channelstate2value = channel.GetState2Value();
-    QString channelstringvalue = (QString::number( channelcurrentvalue, 'f', 3)) + " " + channel.GetUnitsName();
-
-    //    превысили верхнюю уставку
-    if ( (channelcurrentvalue>channelstate1value) && ( channel.HighState1Setted == false ) )
+    ChannelOptions * ch;
+    switch(channel)
     {
-        channel.LowState1Setted = false;
-        channel.HighState1Setted = true;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1HighMessage() + ":" + channelstringvalue);
+    case 1:
+        ch = &channel1;
+        break;
+    case 2:
+        ch = &channel2;
+        break;
+    case 3:
+        ch = &channel3;
+        break;
+    case 4:
+        ch = &channel4;
+        break;
+    default:
+        break;
     }
 
-    // было превышение а стало норма
-    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.HighState1Setted == true ) )
-    {
-        channel.HighState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState1LowMessage() + ":" + channelstringvalue);
-    }
+    double cur = ch->GetCurrentChannelValue();
+    QString channelstringvalue = (QString::number( cur, 'f', 3)) + " " + ch->GetUnitsName();
+    messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
 
-    // было уменьшение а стало норма
-    else if ( (channelcurrentvalue>=channelstate2value) && (channelcurrentvalue<=channelstate1value) && ( channel.LowState1Setted == true ) )
-    {
-        channel.LowState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2HighMessage() + ":" + channelstringvalue);
-    }
-
-    //стало ниже нижней уставки
-    else if ( (channelcurrentvalue<channelstate2value) && ( channel.LowState1Setted == false ) )
-    {
-        channel.LowState1Setted = true;
-        channel.HighState1Setted = false;
-        messwrite.LogAddMessage (channel.GetChannelName() + ":" + channel.GetState2LowMessage() + ":" + channelstringvalue);
-    }
 }
 
 extern "C" {
@@ -540,7 +652,7 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 }
 }
 
-void MainWindow::ChangePalette(int i)
+void MainWindow::ChangePalette(bool i)
 {
 
     if (ui->EcoCheckBox->checkState())
@@ -596,172 +708,172 @@ void MainWindow::ChangePalette(int i)
     ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }
 
-void MainWindow::sendModbusRequest( void )
-{
-    if( m_modbus == NULL )
-    {
-        return;
-    }
+//void MainWindow::sendModbusRequest( void )
+//{
+//    if( m_modbus == NULL )
+//    {
+//        return;
+//    }
 
-    const int slave = 0x01;
-    const int func = 0x04;
-    const int addr = 0x00;
-    int num = 0x02;
-    int state = 0x02;
-    uint8_t dest[1024];
-    uint16_t * dest16 = (uint16_t *) dest;
+//    const int slave = 0x01;
+//    const int func = 0x04;
+//    const int addr = 0x00;
+//    int num = 0x02;
+//    int state = 0x02;
+//    uint8_t dest[1024];
+//    uint16_t * dest16 = (uint16_t *) dest;
 
-    memset( dest, 0, 1024 );
+//    memset( dest, 0, 1024 );
 
-    int ret = -1;
-    bool is16Bit = false;
-    bool writeAccess = false;
-    const QString dataType = descriptiveDataTypeName( func );
+//    int ret = -1;
+//    bool is16Bit = false;
+//    bool writeAccess = false;
+//    const QString dataType = descriptiveDataTypeName( func );
 
-    modbus_set_slave( m_modbus, slave );
+//    modbus_set_slave( m_modbus, slave );
 
-    switch( func )
-    {
-    case _FC_READ_COILS:
-        ret = modbus_read_bits( m_modbus, addr, num, dest );
-        break;
-    case _FC_READ_DISCRETE_INPUTS:
-        ret = modbus_read_input_bits( m_modbus, addr, num, dest );
-        break;
-    case _FC_READ_HOLDING_REGISTERS:
-        ret = modbus_read_registers( m_modbus, addr, num, dest16 );
-        is16Bit = true;
-        break;
-    case _FC_READ_INPUT_REGISTERS:
-        ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
-        is16Bit = true;
-        break;
-    case _FC_WRITE_SINGLE_COIL:
-        //        ret = modbus_write_bit( m_modbus, addr,
-        //                                ui->regTable->item( 0, DataColumn )->
-        //                                text().toInt(0, 0) ? 1 : 0 );
-        writeAccess = true;
-        num = 1;
-        break;
-    case _FC_WRITE_SINGLE_REGISTER:
-        ret = modbus_write_register( m_modbus, addr,state);
-        writeAccess = true;
-        num = 1;
-        break;
+//    switch( func )
+//    {
+//    case _FC_READ_COILS:
+//        ret = modbus_read_bits( m_modbus, addr, num, dest );
+//        break;
+//    case _FC_READ_DISCRETE_INPUTS:
+//        ret = modbus_read_input_bits( m_modbus, addr, num, dest );
+//        break;
+//    case _FC_READ_HOLDING_REGISTERS:
+//        ret = modbus_read_registers( m_modbus, addr, num, dest16 );
+//        is16Bit = true;
+//        break;
+//    case _FC_READ_INPUT_REGISTERS:
+//        ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
+//        is16Bit = true;
+//        break;
+//    case _FC_WRITE_SINGLE_COIL:
+//        //        ret = modbus_write_bit( m_modbus, addr,
+//        //                                ui->regTable->item( 0, DataColumn )->
+//        //                                text().toInt(0, 0) ? 1 : 0 );
+//        writeAccess = true;
+//        num = 1;
+//        break;
+//    case _FC_WRITE_SINGLE_REGISTER:
+//        ret = modbus_write_register( m_modbus, addr,state);
+//        writeAccess = true;
+//        num = 1;
+//        break;
 
-    case _FC_WRITE_MULTIPLE_COILS:
-    {
-        uint8_t * data = new uint8_t[num];
-        //        for( int i = 0; i < num; ++i )
-        //        {
-        //            data[i] = ui->regTable->item( i, DataColumn )->
-        //                    text().toInt(0, 0);
-        //        }
-        ret = modbus_write_bits( m_modbus, addr, num, data );
-        delete[] data;
-        writeAccess = true;
-        break;
-    }
-    case _FC_WRITE_MULTIPLE_REGISTERS:
-    {
-        uint16_t * data = new uint16_t[num];
-        //        for( int i = 0; i < num; ++i )
-        //        {
-        //            data[i] = ui->regTable->item( i, DataColumn )->
-        //                    text().toInt(0, 0);
-        //        }
-        ret = modbus_write_registers( m_modbus, addr, num, data );
-        delete[] data;
-        writeAccess = true;
-        break;
-    }
+//    case _FC_WRITE_MULTIPLE_COILS:
+//    {
+//        uint8_t * data = new uint8_t[num];
+//        //        for( int i = 0; i < num; ++i )
+//        //        {
+//        //            data[i] = ui->regTable->item( i, DataColumn )->
+//        //                    text().toInt(0, 0);
+//        //        }
+//        ret = modbus_write_bits( m_modbus, addr, num, data );
+//        delete[] data;
+//        writeAccess = true;
+//        break;
+//    }
+//    case _FC_WRITE_MULTIPLE_REGISTERS:
+//    {
+//        uint16_t * data = new uint16_t[num];
+//        //        for( int i = 0; i < num; ++i )
+//        //        {
+//        //            data[i] = ui->regTable->item( i, DataColumn )->
+//        //                    text().toInt(0, 0);
+//        //        }
+//        ret = modbus_write_registers( m_modbus, addr, num, data );
+//        delete[] data;
+//        writeAccess = true;
+//        break;
+//    }
 
-    default:
-        break;
-    }
+//    default:
+//        break;
+//    }
 
-    if( ret == num  )
-    {
-        if( writeAccess )
-        {
-            //            m_statusText->setText(
-            //                        tr( "Values successfully sent" ) );
-            //            m_statusInd->setStyleSheet( "background: #0b0;" );
-            QTimer::singleShot( 200, this, SLOT( resetStatus() ) );
-        }
-        else
-        {
+//    if( ret == num  )
+//    {
+//        if( writeAccess )
+//        {
+//            //            m_statusText->setText(
+//            //                        tr( "Values successfully sent" ) );
+//            //            m_statusInd->setStyleSheet( "background: #0b0;" );
+//            QTimer::singleShot( 200, this, SLOT( resetStatus() ) );
+//        }
+//        else
+//        {
 
-            //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
+//            //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
 
-            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
-            QString qs_num;
+//            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
+//            QString qs_num;
 
-            //            ui->regTable->setRowCount( num );
-            for( int i = 0; i < num; ++i )
-            {
-                int data = is16Bit ? dest16[i] : dest[i];
+//            //            ui->regTable->setRowCount( num );
+//            for( int i = 0; i < num; ++i )
+//            {
+//                int data = is16Bit ? dest16[i] : dest[i];
 
-                QTableWidgetItem * dtItem =
-                        new QTableWidgetItem( dataType );
-                QTableWidgetItem * addrItem =
-                        new QTableWidgetItem(
-                            QString::number( addr+i ) );
-                //                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
-                QTableWidgetItem * dataItem =
-                        new QTableWidgetItem( qs_num );
-                dtItem->setFlags( dtItem->flags() &
-                                  ~Qt::ItemIsEditable );
-                addrItem->setFlags( addrItem->flags() &
-                                    ~Qt::ItemIsEditable );
-                dataItem->setFlags( dataItem->flags() &
-                                    ~Qt::ItemIsEditable );
+//                QTableWidgetItem * dtItem =
+//                        new QTableWidgetItem( dataType );
+//                QTableWidgetItem * addrItem =
+//                        new QTableWidgetItem(
+//                            QString::number( addr+i ) );
+//                //                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
+//                QTableWidgetItem * dataItem =
+//                        new QTableWidgetItem( qs_num );
+//                dtItem->setFlags( dtItem->flags() &
+//                                  ~Qt::ItemIsEditable );
+//                addrItem->setFlags( addrItem->flags() &
+//                                    ~Qt::ItemIsEditable );
+//                dataItem->setFlags( dataItem->flags() &
+//                                    ~Qt::ItemIsEditable );
 
-                //                ui->regTable->setItem( i, DataTypeColumn,
-                //                                       dtItem );
-                //                ui->regTable->setItem( i, AddrColumn,
-                //                                       addrItem );
-                //                ui->regTable->setItem( i, DataColumn,
-                //                                       dataItem );
-            }
-        }
-    }
-    else
-    {
-        if( ret < 0 )
-        {
-            if(
-        #ifdef WIN32
-                    errno == WSAETIMEDOUT ||
-        #endif
-                    errno == EIO
-                    )
-            {
-                QMessageBox::critical( this, tr( "I/O error" ),
-                                       tr( "I/O error: did not receive any data from slave." ) );
-            }
-            else
-            {
-                QMessageBox::critical( this, tr( "Protocol error" ),
-                                       tr( "Slave threw exception \"%1\" or "
-                                           "function not implemented." ).
-                                       arg( modbus_strerror( errno ) ) );
-            }
-        }
-        else
-        {
-            QMessageBox::critical( this, tr( "Protocol error" ),
-                                   tr( "Number of registers returned does not "
-                                       "match number of registers "
-                                       "requested!" ) );
-        }
-    }
-}
+//                //                ui->regTable->setItem( i, DataTypeColumn,
+//                //                                       dtItem );
+//                //                ui->regTable->setItem( i, AddrColumn,
+//                //                                       addrItem );
+//                //                ui->regTable->setItem( i, DataColumn,
+//                //                                       dataItem );
+//            }
+//        }
+//    }
+//    else
+//    {
+//        if( ret < 0 )
+//        {
+//            if(
+//        #ifdef WIN32
+//                    errno == WSAETIMEDOUT ||
+//        #endif
+//                    errno == EIO
+//                    )
+//            {
+//                QMessageBox::critical( this, tr( "I/O error" ),
+//                                       tr( "I/O error: did not receive any data from slave." ) );
+//            }
+//            else
+//            {
+//                QMessageBox::critical( this, tr( "Protocol error" ),
+//                                       tr( "Slave threw exception \"%1\" or "
+//                                           "function not implemented." ).
+//                                       arg( modbus_strerror( errno ) ) );
+//            }
+//        }
+//        else
+//        {
+//            QMessageBox::critical( this, tr( "Protocol error" ),
+//                                   tr( "Number of registers returned does not "
+//                                       "match number of registers "
+//                                       "requested!" ) );
+//        }
+//    }
+//}
 
-void MainWindow::resetStatus( void )
-{
-    ;
-}
+//void MainWindow::resetStatus( void )
+//{
+//    ;
+//}
 
 void MainWindow::changeTranslator(int langindex)
 {
@@ -784,27 +896,244 @@ void MainWindow::changeTranslator(int langindex)
     QApplication::installTranslator(translator);
 }
 
-void MainWindow::OpenSerialPort( int )
+uint16_t MainWindow::getOffsetFromNumRelay(int num)
 {
-    QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
-    if( !ports.isEmpty() )
+    uint16_t offset = 32799;
+    switch(num)
     {
-        //подключаемси.
-        m_modbus = modbus_new_rtu(comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
+    case 0:
+        offset = 32799;
+        break;
+    case 1:
+        offset = 32801;
+        break;
+    case 2:
+        offset = 32927;
+        break;
+    case 3:
+        offset = 32929;
+        break;
+    case 4:
+        offset = 33055;
+        break;
+    case 5:
+        offset = 33057;
+        break;
+    case 6:
+        offset = 33183;
+        break;
+    case 7:
+        offset = 33185;
+        break;
+    default:
+        break;
+    }
+    return offset;
+}
 
-        if( modbus_connect( m_modbus ) == -1 )
+void MainWindow::WorkerMessSlot(QString mess)
+{
+    messwrite.LogAddMessage(mess);
+}
+
+/*
+ * Преобразование адреса параметра в канале в адрес
+ * параметра в девайсе с учётом карты регистров
+ */
+uint32_t MainWindow::getDevOffsetByChannel(int ch, uint32_t offset)
+{
+    return offset + 128 * ch + BASE_CHANNELS_OFFSET;
+}
+
+void MainWindow::retransToWorker(Transaction tr)
+{
+    emit sendTransToWorker(tr);
+}
+
+void MainWindow::getTransFromWorkerSlot(Transaction tr)
+{
+    mQTr->lock();
+    queueTransaction.enqueue(tr);
+    mQTr->unlock();
+
+
+//    Transaction trLocal = tr;
+
+//    if((trLocal.offset >= 16384) && (trLocal.offset < 32768))
+//    {
+//        // получен параметр конфигурации платы
+//        emit retransToSlotConfig(trLocal);
+//    }
+//    else if(trLocal.offset == 32781)
+//    {
+////        uint32_t tmp = (uint32_t)trLocal.vol;
+////        QString str;
+////        str.setNum(trLocal.volInt);
+////        ui->getTypeSignal->setText(str);
+//    } else {
+////        float *value = (float*)&trLocal.vol;
+//        double dbl = (double)trLocal.volFlo;
+
+////        if(trLocal.slave == 2)
+////        {
+////            qDebug() << "MainWindow SLOT" << trLocal.offset << "=" << (float)dbl;
+////        }
+
+//        switch(trLocal.offset)
+//        {
+//        case 0:
+//            channel1.SetCurrentChannelValue(dbl);
+//            break;
+//        case 2:
+//            channel2.SetCurrentChannelValue(dbl);
+//            break;
+//        case 4:
+//            channel3.SetCurrentChannelValue(dbl);
+//            break;
+//        case 6:
+//            channel4.SetCurrentChannelValue(dbl);
+//            break;
+//        case 32799:
+//            emit setReleToOptionsForm((0 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 32801:
+//            emit setReleToOptionsForm((1 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 32927:
+//            emit setReleToOptionsForm((2 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 32929:
+//            emit setReleToOptionsForm((3 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 33055:
+//            emit setReleToOptionsForm((4 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 33057:
+//            emit setReleToOptionsForm((5 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 33183:
+//            emit setReleToOptionsForm((6 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        case 33185:
+//            emit setReleToOptionsForm((7 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            break;
+//        default:
+//            break;
+//        }
+//    }
+}
+
+void MainWindow::parseWorkerReceive()
+{
+    timerQueueTrans->stop();
+    Transaction tr;
+    QString paramName;
+    mQTr->lock();
+    while(!queueTransaction.isEmpty())
+    {
+        tr = queueTransaction.dequeue();
+        paramName = RegisterMap::getNameByOffset(tr.offset);
+        if(tr.offset < 16384)
         {
-            QMessageBox::critical( this, tr( "Connection failed" ),
-                                   tr( "Could not connect serial port!" ) );
+//            qDebug() << "MainWindow SLOT" << "slave" << tr.slave \
+//                     << "Offset" << tr.offset \
+//                     << "=" << (double)tr.volFlo;
+            // получены данные Imput ругистров
+            if(paramName == "DataChan0")
+            {
+                //измереное значение канала 1
+                channel1.SetCurrentChannelValue((double)tr.volFlo);
+            }
+            else if(paramName == "DataChan1")
+            {
+                //измереное значение канала 2
+                channel2.SetCurrentChannelValue((double)tr.volFlo);
+            }
+            else if(paramName == "DataChan2")
+            {
+                //измереное значение канала 3
+                channel3.SetCurrentChannelValue((double)tr.volFlo);
+            }
+            else if(paramName == "DataChan3")
+            {
+                //измереное значение канала 4
+                channel4.SetCurrentChannelValue((double)tr.volFlo);
+            }
+        }
+        else if((tr.offset >= 16384) && (tr.offset < 32768))
+        {
+
+            // получены параметры платы - конфигурация слота
+            // отправляем сразу в конфигуратор - пусть разбирается сам
+#ifdef DEBAG_SLOT_CONFIG
+            qDebug() << "MainWindow SLOT" << tr.offset << "=" << tr.volInt;
+#endif
+//            emit retransToSlotConfig(tr);
         }
         else
         {
+//            if(tr.offset == 32799)
+//            {
+//                emit setReleToOptionsForm((0 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 32801)
+//            {
+//                emit setReleToOptionsForm((1 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 32927)
+//            {
+//                emit setReleToOptionsForm((2 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 32929)
+//            {
+//                emit setReleToOptionsForm((3 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 33055)
+//            {
+//                emit setReleToOptionsForm((4 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 33057)
+//            {
+//                emit setReleToOptionsForm((5 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 33183)
+//            {
+//                emit setReleToOptionsForm((6 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
+//            else if(tr.offset == 33185)
+//            {
+//                emit setReleToOptionsForm((7 << 4) | (((int)trLocal.volFlo) & 0xF));
+//            }
         }
     }
-    else
-    {
-        QMessageBox::critical( this, tr( "No serial port found" ),
-                               tr( "Could not find any serial port "
-                                   "on this computer!" ) );
+    mQTr->unlock();
+    timerQueueTrans->start(ParsingReceiveTrans);
+}
+
+bool MainWindow::isChannelInMaxNow(int ch)
+{
+    //индекс -> номер канала [1...]
+    ch = ch + 1;
+
+    foreach (Ustavka * u, ustavkaObjectsList) {
+        if(u->getChannel() == ch)
+        {
+            if(u->isUp()) return true;
+        }
     }
+    return false;
+}
+
+bool MainWindow::isChannelInMinNow(int ch)
+{
+    //индекс -> номер канала [1...]
+    ch = ch + 1;
+
+    foreach (Ustavka * u, ustavkaObjectsList) {
+        if(u->getChannel() == ch)
+        {
+            if(u->isDown()) return true;
+        }
+    }
+    return false;
 }
