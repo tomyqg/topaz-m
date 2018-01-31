@@ -138,9 +138,9 @@ void MainWindow::MainWindowInitialization()
 
     timer->start(DateLabelUpdateTimer);
 
-//    updLogTimer = new QTimer(this);
-//    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
-//    updLogTimer->start(LogUpdTimer);
+    updLogTimer = new QTimer(this);
+    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
+    updLogTimer->start(LogUpdTimer);
 
     InitTimers();
     LabelsInit();
@@ -635,7 +635,7 @@ void MainWindow::logginStates(int channel, QString mess)
     }
 
     double cur = ch->GetCurrentChannelValue();
-    QString channelstringvalue = (QString::number( cur, 'f', 3)) + " " + ch->GetUnitsName();
+    QString channelstringvalue = (QString::number( cur, 'f', 3)) + ch->GetUnitsName();
     messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
 
 }

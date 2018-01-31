@@ -6,6 +6,7 @@
 #include "keyboard.h"
 #include "Channels/channelOptions.h"
 #include "defines.h"
+#include "processwritetofile.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 
@@ -132,24 +133,24 @@ void MessageWrite::WriteAllLogToFile()
     mMessQueue.unlock();
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtomessages);
-    while(file.isOpen());   //подождать пока файл не закроется другим потоком
 
-    if(file.open(QIODevice::ReadWrite))
-    {
-        file.resize(0); // clear file
-        QTextStream out(&file);
-        out << setstr;
-        file.close();
-    }
-    else
-    {
-//        if (file.error() != QFile::NoError) {
-//                qDebug() << "Error open Log.txt file!" << file.errorString() << file.error();
-//        }
-    }
+    QThread * threadWriteFile = new QThread;
+    cProcessWriteToFile * wtf = new cProcessWriteToFile;
+    wtf->writeToFile(pathtomessages, setstr);
+    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
+    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
+    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
+    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
+    wtf->moveToThread(threadWriteFile);
+    threadWriteFile->start();
 
-
+//    QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
+//    file.open(QIODevice::ReadWrite);
+//    file.resize(0); // clear file
+//    QTextStream out(&file);
+//    out << setstr;
+//    file.close();
 
     opt.deleteLater();
 }

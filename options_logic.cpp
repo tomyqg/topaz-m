@@ -436,16 +436,6 @@ void Options::on_pushButton_6_clicked()
     ResetToDefaults();
 }
 
-<<<<<<< HEAD
-=======
-void Options::on_pushButton_7_clicked()
-{
-    ui->toolBox->setCurrentIndex(0);
-    ui->toolBox->setWindowTitle("");
-}
->>>>>>> MYD_and_Endress_Menu
-
-
 
 void Options::TouchScreenCalibrate()
 {

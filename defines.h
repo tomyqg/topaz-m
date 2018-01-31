@@ -87,7 +87,7 @@
 #define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
-#define LogUpdTimer 2000             // время обновления журнала сообщений (Log.txt)
+#define LogUpdTimer 10000             // время обновления журнала сообщений (Log.txt)
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 20                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
