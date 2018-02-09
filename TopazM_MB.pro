@@ -56,7 +56,8 @@ SOURCES += main.cpp \
     Relais/relayslotconnector.cpp \
     Slots/slotsconfig.cpp \
     registermap.cpp \
-    processwritetofile.cpp
+    processwritetofile.cpp \
+    Slots/devicechannel.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -94,7 +95,8 @@ HEADERS  += mainwindow.h \
     Relais/relayslotcontroller.h \
     Relais/relayslotconnector.h \
     Slots/slotsconfig.h \
-    processwritetofile.h
+    processwritetofile.h \
+    Slots/devicechannel.h
 
 FORMS    += mainwindow.ui \
     options.ui \

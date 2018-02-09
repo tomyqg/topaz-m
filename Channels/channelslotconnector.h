@@ -12,6 +12,7 @@ public:
     int userChannel;
     int deviceChannel;
     int numSlot;
+
 signals:
 
 public slots:

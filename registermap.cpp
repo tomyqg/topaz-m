@@ -2,7 +2,7 @@
 
 uint16_t RegisterMap::getOffsetByName(QString name)
 {
-    for(int i = 0; i < SIZE_RM; i++)
+    for(int i = 0; i < registerMapSize; i++)
     {
         if(rm[i].name == name)
         {
@@ -14,7 +14,7 @@ uint16_t RegisterMap::getOffsetByName(QString name)
 
 QString RegisterMap::getNameByOffset(uint16_t offset)
 {
-    for(int i = 0; i < SIZE_RM; i++)
+    for(int i = 0; i < registerMapSize; i++)
     {
         if(rm[i].Offset == offset)
         {

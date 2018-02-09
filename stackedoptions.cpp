@@ -65,6 +65,7 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListNone.append("Нет");
 
     StringListTok.clear();
+//    StringListTok.append("Нет");
     StringListTok.append("4-20 мA");
     StringListTok.append("0-20 мA");
     StringListTok.append("0-5  мA");
