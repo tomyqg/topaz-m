@@ -10,9 +10,11 @@
 #include <QList>
 #include <QTimer>
 #include "slot.h"
-#include "transaction.h"
+#include "../transaction.h"
 
-#define UpdateConfigTimer 1000    // период мсек перебора плат
+#define UpdateConfigTimer   1000    // период мсек перебора плат
+#define PeriodReconfig      10000   // Перриод повторного опроса плат (слотов)
+#define TimeReadChannelConf 1000    // Время выделяемое для загрузки конфигурации канала
 #define DEBAG_SLOT_CONFIG
 #define TOTAL_NUM_SLOTS 6
 
@@ -46,6 +48,7 @@ private:
     int addSlot(int num, int type);
     void setStatusDev(int sl, int st);
     void updOnlineStatus(int sl, bool st);
+    void endConfSlot(int sl);
 };
 
 #endif // CSLOTSCONFIG_H

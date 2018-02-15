@@ -70,7 +70,7 @@ int worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, 
 
     switch (dp->ParamType) {
     case Device::A12:
-        num = 12;
+        num = 6;
         break;
     case Device::U16:
         num = 1;
@@ -112,7 +112,7 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
     // количество блоков в зависимости от типа параметра
     switch (dp->ParamType) {
     case RegisterMap::A12:
-        num = 12;
+        num = 6;
         break;
     case RegisterMap::U16:
         num = 1;
@@ -146,7 +146,7 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
 
     switch (dp->ParamType) {
     case RegisterMap::A12:
-        num = 12;
+        num = 6;
         break;
     case RegisterMap::U16:
         num = 1;

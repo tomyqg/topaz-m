@@ -49,7 +49,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>4</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideLeft</enum>
@@ -84,7 +84,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_13">
       <attribute name="title">
@@ -1925,6 +1925,9 @@
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
         <item>
          <property name="text">
@@ -5704,7 +5707,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <property name="geometry">
@@ -6047,7 +6050,6 @@ p, li { white-space: pre-wrap; }
      </property>
      <widget class="QWidget" name="page_3"/>
      <widget class="QWidget" name="page_4"/>
->>>>>>> MYD_and_Endress_Menu
     </widget>
    </widget>
   </widget>
@@ -6112,8 +6114,8 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

@@ -1,7 +1,7 @@
 #ifndef CDEVICECHANNEL_H
 #define CDEVICECHANNEL_H
 
-#include <QtCore>
+#include <QObject>
 
 typedef struct {
     uint16_t measureType;   // 14

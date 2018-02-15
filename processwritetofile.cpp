@@ -9,7 +9,7 @@ cProcessWriteToFile::cProcessWriteToFile(QObject *parent) : QObject(parent)
 
 }
 
-int cProcessWriteToFile::writeToFile(QString namefile, QString content)
+void cProcessWriteToFile::writeToFile(QString namefile, QString &content)
 {
     pathToFile = namefile;
     textToFile = content;

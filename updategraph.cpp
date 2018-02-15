@@ -72,7 +72,7 @@ QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],col
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
-
+QVector<QDateTime> X_Date_Coordinates;
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
 {
@@ -220,6 +220,8 @@ void MainWindow::AddValuesToBuffer()
 {
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
+    X_Date_Coordinates.append(QDateTime::currentDateTime());
+
     Y_coordinates_Chanel_1.append(channel1.GetCurrentChannelValue());
     Y_coordinates_Chanel_2.append(channel2.GetCurrentChannelValue());
     Y_coordinates_Chanel_3.append(channel3.GetCurrentChannelValue());
@@ -232,12 +234,28 @@ void MainWindow::AddValuesToBuffer()
 
     while (X_Coordinates.length()>150)
     {
-        X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
+        X_Coordinates.removeFirst();
+        X_Date_Coordinates.removeFirst();
+        Y_coordinates_Chanel_1.removeFirst();
+        Y_coordinates_Chanel_2.removeFirst();
+        Y_coordinates_Chanel_3.removeFirst();
+        Y_coordinates_Chanel_4.removeFirst();
     }
+
+    //пока нет ограничений на объём хранения
+//    while (X_Coordinates_archive.length()>15000)
+//    {
+//        X_Coordinates_archive.removeFirst();
+//        Y_coordinates_Chanel_1_archive.removeFirst();
+//        Y_coordinates_Chanel_2_archive.removeFirst();
+//        Y_coordinates_Chanel_3_archive.removeFirst();
+//        Y_coordinates_Chanel_4_archive.removeFirst();
+//    }
 
     int tickstep = GetTickStep();
 
-    if (xoffset%tickstep==0) // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
+    // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
+    if (xoffset%tickstep==0)
     {
         LabelsCorrect();
     }

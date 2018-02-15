@@ -10,6 +10,7 @@
 #include "processwritetofile.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
+extern QVector<QDateTime> X_Date_Coordinates;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -236,6 +237,8 @@ void MessageWrite::WriteAllLogToFile()
     opt.deleteLater();
 }
 
+
+
 void MessageWrite::LogAddMessage(QString nm)
 {
     QJsonObject themessage;
@@ -257,19 +260,20 @@ void MessageWrite::LogClear()
     file.close();
 }
 
-void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
+// пишет архив в файл каждые (ArchiveUpdateTimer) сек...
+void MainWindow::WriteArchiveToFile()
 {
     // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
     QJsonObject archivechannel3;
     QJsonObject archivechannel4;
-    QJsonObject archive;
-    QJsonArray archives;
     QJsonArray valuesarray1;
     QJsonArray valuesarray2;
     QJsonArray valuesarray3;
     QJsonArray valuesarray4;
+    QJsonObject archive;
+    QJsonArray archives;
 
     for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
         valuesarray1.append(QString::number( Y_coordinates_Chanel_1.at(y), 'f', 3)); // округляем до 3 знаков после запятой
@@ -290,18 +294,15 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     archivechannel1["name"] = "AI4ch1";
     archivechannel1["T"] = channel1period;
 
-
     archivechannel2["size"] = valuesarray2.size();
     archivechannel2["values"] = valuesarray2;
     archivechannel2["name"] = "AI4ch2";
     archivechannel2["T"] = channel2period;
 
-
     archivechannel3["size"] = valuesarray3.size();
     archivechannel3["values"] = valuesarray3;
     archivechannel3["name"] = "AI4ch3";
     archivechannel3["T"] = channel3period;
-
 
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;

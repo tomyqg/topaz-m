@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2018-02-09T10:14:52. -->
+<!-- Written by QtCreator 4.1.0, 2018-02-15T15:25:37. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -287,7 +287,7 @@
        <value type="QString">C:/SysGCC/MYD/arm-linux-gnueabihf/sysroot</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2018-02-08T14:19:19</value>
+       <value type="QDateTime">2018-02-13T09:21:53</value>
        <value type="QDateTime">2017-12-26T12:39:44</value>
        <value type="QDateTime">2018-01-09T13:50:50</value>
       </valuelist>

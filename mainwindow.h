@@ -17,6 +17,7 @@
 #include "Channels/channelslotcontroller.h"
 #include "Relais/relayslotcontroller.h"
 #include "Slots/slotsconfig.h"
+#include "archivator.h"
 
 //#define DEBUG_RELAY
 
@@ -254,6 +255,8 @@ private:
     QTimer * timerQueueTrans;
 
     void sendConfigChannelsToSlave();
+
+    cArchivator * arch;
 
 protected:
     void paintEvent(QPaintEvent *event) ;

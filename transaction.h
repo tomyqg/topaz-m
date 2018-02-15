@@ -29,7 +29,7 @@ public:
     {
         uint32_t volInt;
         float volFlo;
-//        uint16_t paramA12[6];
+        uint16_t paramA12[6];
     };
 
 signals:

@@ -29,6 +29,7 @@ public:
     }
     int getNum() { return num; }
     bool getNeedConfig() { return needConfig; }
+    void resetNeedConfig() { needConfig = false; }
     int getState() { return state; }
     int getType() { return deviceType; }
     void setType(int type) { deviceType = type; }

@@ -222,6 +222,15 @@ void MainWindow::MainWindowInitialization()
     effect->setBlurRadius(20.0);
     effect->setOffset(2);
 
+    //инициализация архиватора
+    QList<ChannelOptions*> listCh;
+    listCh.append(&channel1);
+    listCh.append(&channel2);
+    listCh.append(&channel3);
+    listCh.append(&channel4);
+    QListIterator<ChannelOptions*> li(listCh);
+    arch = new cArchivator(pathtoarchivedata, li);
+
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -858,7 +867,12 @@ void MainWindow::parseWorkerReceive()
 //            emit retransToSlotConfig(tr);
             if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
             {
-                channel->SetSignalType(tr.volInt);
+                if(tr.slave == 1)   //контроллировать источник нужно во всех "else if"
+                {
+                    channel->SetSignalType(tr.volInt);
+                    channel->SetCurSignalType(tr.volInt);
+                    emit retransToSlotConfig(tr);
+                }
             }
             else if(paramName == "DataChan0")
             {
@@ -878,31 +892,19 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Data"))
             {
-                channel->SetCurrentChannelValue((double)tr.volFlo);
+                // Vag: времено или совсем не использовать этот параметр для построения графика
+                //channel->SetCurrentChannelValue((double)tr.volFlo);
             }
             else
             {
-#ifdef DEBAG_SLOT_CONFIG
-                qDebug() << "MainWindow SLOT: slave" << tr.slave \
-                         << "," << paramName << tr.offset \
-                         << "=" << tr.volInt << tr.volFlo;
-#endif
+                emit retransToSlotConfig(tr);
             }
         }
         else
         {
-#ifdef DEBAG_SLOT_CONFIG
-                qDebug() << "MainWindow SLOT: slave" << tr.slave \
-                         << "," << paramName << tr.offset \
-                         << "=" << tr.volInt << tr.volFlo;
-#endif
+            emit retransToSlotConfig(tr);
         }
-        emit retransToSlotConfig(tr);
-//#ifdef DEBAG_SLOT_CONFIG
-//        qDebug() << "MainWindow SLOT: slave" << tr.slave \
-//                 << "," << paramName << tr.offset \
-//                 << "=" << tr.volInt << tr.volFlo;
-//#endif
+
     }
     mQTr->unlock();
     timerQueueTrans->start(ParsingReceiveTrans);

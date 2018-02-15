@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>13</number>
+    <number>23</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -10786,7 +10786,7 @@
  <buttongroups>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

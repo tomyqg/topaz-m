@@ -8,7 +8,7 @@ class cProcessWriteToFile : public QObject
     Q_OBJECT
 public:
     explicit cProcessWriteToFile(QObject *parent = 0);
-    int writeToFile(QString namefile, QString content);
+    void writeToFile(QString namefile, QString &content);
 
 signals:
     void finished();

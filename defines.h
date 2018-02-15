@@ -23,6 +23,7 @@
 #define pathtofiles  "/opt/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
 #define pathtoarchive  "/opt/archive.txt"
+#define pathtoarchivedata  "/opt/archive.bin"
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
@@ -48,6 +49,7 @@
 #define pathtomodbusconfigfile  "C:/Work/MODBusConfigFile.txt"
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
+#define pathtoarchivedata  "C:/Work/archive.bin"
 #define pathtologotip  "C:/Work/logo.jpg"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #else
@@ -59,6 +61,7 @@
 #define pathtomodbusconfigfile  QCoreApplication::applicationDirPath() + "/MODBusConfigFile.txt"
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
+#define pathtoarchivedata  QCoreApplication::applicationDirPath() + "C:/Work/archive.bin"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
 #define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
 #endif
