@@ -1,5 +1,5 @@
 #include "channelslotconnector.h"
-#include "assert.h"
+//#include "assert.h"
 
 cChannelSlotConnector::cChannelSlotConnector(int userCh, int devCh, int slot, QObject *parent)
     : QObject(parent)

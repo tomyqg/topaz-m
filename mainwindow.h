@@ -17,6 +17,9 @@
 #include "Channels/channelslotcontroller.h"
 #include "Relais/relayslotcontroller.h"
 #include "Slots/slotsconfig.h"
+#include "archivator.h"
+
+//#define DEBUG_RELAY
 
 namespace Ui {
 class MainWindow;
@@ -153,6 +156,7 @@ private:
     void DateUpdate();
     void PowerOff();
     void CloseApplication();
+    void WriteAllChannelsOptionsToFile();
 
     void SetXRange(int newxrange) {Xrange = newxrange;}
     void SetYRange(int newyrange) {Yrange = newyrange;}
@@ -249,6 +253,10 @@ private:
     QQueue<Transaction> queueTransaction;
     QMutex * mQTr;
     QTimer * timerQueueTrans;
+
+    void sendConfigChannelsToSlave();
+
+    cArchivator * arch;
 
 protected:
     void paintEvent(QPaintEvent *event) ;

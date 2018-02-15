@@ -57,10 +57,11 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-void worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32)
+int worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32)
 {
+    int ret = -1;
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
-        return;
+        return -1;
 
     int num;
     //int slave = ModBus::Board4AIAddress;
@@ -69,16 +70,16 @@ void worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value,
 
     switch (dp->ParamType) {
     case Device::A12:
-        num = 12;
+        num = 6;
         break;
     case Device::U16:
         num = 1;
-        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
         break;
     case Device::U32:
         num = 2;
     {
-        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
     }
         break;
     case Device::F32:
@@ -87,19 +88,21 @@ void worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value,
 //        QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
 //        data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
 //        data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
-        sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num , 0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num , 0, data,0);
 //    }
         break;
     default:
         break;
     }
+    return ret;
 }
 
-void worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest)
+int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest)
 {
+    int ret = -1;
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
     if ( ( dp->WorkLevelAccess != RegisterMap::R ) && ( dp->WorkLevelAccess != RegisterMap::RW ))
-        return;
+        return -1;
 
     int slave = sl;
     int num;
@@ -109,7 +112,7 @@ void worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *dat
     // количество блоков в зависимости от типа параметра
     switch (dp->ParamType) {
     case RegisterMap::A12:
-        num = 12;
+        num = 6;
         break;
     case RegisterMap::U16:
         num = 1;
@@ -139,11 +142,11 @@ void worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *dat
 
     add = dp->Offset;
 
-    sendModbusRequest(slave, comm, add, num, 0, 0, data_dest);
+    ret = sendModbusRequest(slave, comm, add, num, 0, 0, data_dest);
 
     switch (dp->ParamType) {
     case RegisterMap::A12:
-        num = 12;
+        num = 6;
         break;
     case RegisterMap::U16:
         num = 1;
@@ -187,14 +190,15 @@ void worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *dat
         num = 0; // просто так решил что ноль, мб другое число.
         break;
     }
+    return ret;
 }
 
-void worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest)
+int worker::sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest)
 {
 
     if( m_modbus == NULL )
     {
-        return;
+        return -1;
     }
 
     uint8_t dest[1024];
@@ -269,6 +273,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
     {
         if((slave > 0) && (slave <= (sizeof(slaves)/sizeof(typeStateSlave))))
         {
+            //статистика
             slaves[slave-1].cntBadCurr = 0;
             slaves[slave-1].state = 0;
             slaves[slave-1].cntGood++;
@@ -282,9 +287,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
         {
             if(is16Bit)
             {
-                for( int i = num/2-1; i >=0; --i ) {
-                    data_dest[i] = dest32[i];
-                }
+                data_dest[0] = dest32[0];
             }
         }
     }
@@ -339,6 +342,7 @@ void worker::sendModbusRequest( int slave, int func, int addr, int num, int stat
             qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
         }
     }
+    return ret;
 }
 
 void worker::OpenSerialPort( int )
@@ -391,6 +395,8 @@ void worker::run()
         emptyTrans = trans.isEmpty();
         mQueue.unlock();
 
+        int res = 0;
+
         if(!emptyTrans) {
 
             mQueue.lock();
@@ -401,15 +407,18 @@ void worker::run()
             deviceparametrs dp = device.getDevParam(tr.offset);
             if(tr.dir == Transaction::R)
             {
-                ReadModbusData(tr.slave, &dp, &tr.volInt);
+                res = ReadModbusData(tr.slave, &dp, &tr.volInt);
+                if(res > 0)
+                {
 #ifdef DEBUG_WORKER
-                qDebug() << "worker SIGNAL: slave =" << tr.slave \
-                         << tr.offset << "=" << tr.volFlo \
-                         << "Time: " << time.elapsed();
+                    qDebug() << "worker SIGNAL: slave =" << tr.slave \
+                             << tr.offset << "=" << tr.volInt << tr.volFlo \
+                             << "Time: " << time.elapsed();
 #endif
-                emit sendTrans(tr);
+                    emit sendTrans(tr);
+                }
             } else {    //(tr.dir == Transaction::W)
-                WriteModbusData(tr.slave, &dp, tr.volFlo, tr.volInt);
+                res = WriteModbusData(tr.slave, &dp, tr.volFlo, tr.volInt);
                 tr.dir = Transaction::R;
 
                 mQueue.lock();
@@ -418,7 +427,7 @@ void worker::run()
             }
         }
 
-        this->thread()->usleep(1000);
+        this->thread()->usleep(10000);   //Vag: привязать время задержки к скорости порта
     }
 }
 

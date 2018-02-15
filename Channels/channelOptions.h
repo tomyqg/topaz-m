@@ -5,8 +5,8 @@
 #include <QColor>
 #include <QMutex>
 #include <QVector>
-#include "mathresolver.h"
-#include "ustavka.h"
+#include "../mathresolver.h"
+#include "../ustavka.h"
 
 #define BASE_CHANNELS_OFFSET 32768
 

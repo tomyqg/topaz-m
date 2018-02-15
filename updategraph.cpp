@@ -72,7 +72,7 @@ QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],col
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
-
+QVector<QDateTime> X_Date_Coordinates;
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
 {
@@ -220,6 +220,8 @@ void MainWindow::AddValuesToBuffer()
 {
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
+    X_Date_Coordinates.append(QDateTime::currentDateTime());
+
     Y_coordinates_Chanel_1.append(channel1.GetCurrentChannelValue());
     Y_coordinates_Chanel_2.append(channel2.GetCurrentChannelValue());
     Y_coordinates_Chanel_3.append(channel3.GetCurrentChannelValue());
@@ -232,12 +234,28 @@ void MainWindow::AddValuesToBuffer()
 
     while (X_Coordinates.length()>150)
     {
-        X_Coordinates.removeFirst();Y_coordinates_Chanel_1.removeFirst();Y_coordinates_Chanel_2.removeFirst();Y_coordinates_Chanel_3.removeFirst();Y_coordinates_Chanel_4.removeFirst();
+        X_Coordinates.removeFirst();
+        X_Date_Coordinates.removeFirst();
+        Y_coordinates_Chanel_1.removeFirst();
+        Y_coordinates_Chanel_2.removeFirst();
+        Y_coordinates_Chanel_3.removeFirst();
+        Y_coordinates_Chanel_4.removeFirst();
     }
+
+    //пока нет ограничений на объём хранения
+//    while (X_Coordinates_archive.length()>15000)
+//    {
+//        X_Coordinates_archive.removeFirst();
+//        Y_coordinates_Chanel_1_archive.removeFirst();
+//        Y_coordinates_Chanel_2_archive.removeFirst();
+//        Y_coordinates_Chanel_3_archive.removeFirst();
+//        Y_coordinates_Chanel_4_archive.removeFirst();
+//    }
 
     int tickstep = GetTickStep();
 
-    if (xoffset%tickstep==0) // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
+    // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
+    if (xoffset%tickstep==0)
     {
         LabelsCorrect();
     }
@@ -251,7 +269,6 @@ void MainWindow::UpdateGraphics()
 
     needupdatePainter = 1;
     //     StackedOptions::SetCurrentDisplayParametr( Options::TrendsCyfraBars);
-
 
     switch( StackedOptions::GetCurrentDisplayParametr() )
     {
@@ -1038,9 +1055,10 @@ void MainWindow::UpdateChannel1Slot()
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(0);
-    int slot = csc.getSlotByChannel(0);
-    uint32_t offset = getDevOffsetByChannel(0, ChannelOptions::chanData);
-    Transaction tr(Transaction::R, slot, devCh*2, 0);
+    int slot = csc.getSlotByChannel(devCh);
+//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = RegisterMap::getOffsetByName("DataChan0"/*"chan0Data"*/);
+    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
@@ -1053,9 +1071,10 @@ void MainWindow::UpdateChannel2Slot()
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(1);
-    int slot = csc.getSlotByChannel(1);
-    uint32_t offset = getDevOffsetByChannel(1, ChannelOptions::chanData);
-    Transaction tr(Transaction::R, slot, devCh*2, 0);
+    int slot = csc.getSlotByChannel(devCh);
+    //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = RegisterMap::getOffsetByName("DataChan1"/*"chan1Data"*/);
+    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
@@ -1068,9 +1087,10 @@ void MainWindow::UpdateChannel3Slot()
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(2);
-    int slot = csc.getSlotByChannel(2);
-    uint32_t offset = getDevOffsetByChannel(2, ChannelOptions::chanData);
-    Transaction tr(Transaction::R, slot, devCh*2, 0);
+    int slot = csc.getSlotByChannel(devCh);
+//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = RegisterMap::getOffsetByName("DataChan2"/*"chan2Data"*/);
+    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
@@ -1083,87 +1103,16 @@ void MainWindow::UpdateChannel4Slot()
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(3);
-    int slot = csc.getSlotByChannel(3);
-    uint32_t offset = getDevOffsetByChannel(3, ChannelOptions::chanData);
-    Transaction tr(Transaction::R, slot, devCh*2, 0);
+    int slot = csc.getSlotByChannel(devCh);
+//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = RegisterMap::getOffsetByName("DataChan3"/*"chan3Data"*/);
+    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
 //    CheckAndLogginStates(channel4);
     channeltimer4->setInterval(period);
 }
-
-//void MainWindow::UpdSignalTypeSlot(uint8_t ch)
-//{
-//    qDebug() << "Upd" << ch;
-////    Transaction tr(Transaction::W,);
-////    tr.dir = Transaction::W;
-//    switch(ch)
-//    {
-//    case 1:
-////        tr.param = device.channel0.SignalType;
-//        break;
-//    case 2:
-////        tr.param = device.channel1.SignalType;
-//        break;
-//    case 3:
-////        tr.param = device.channel2.SignalType;
-//        break;
-//    case 4:
-////        tr.param = device.channel3.SignalType;
-//        break;
-//    }
-////    tr.id = ch-1;
-////    emit sendTransToWorker(tr);
-//}
-
-//void MainWindow::releOutSlot(uint8_t code)
-//{
-//    Transaction tr(Transaction::W, 1, 32799, 0);
-
-//    int rele = code >> 4;
-//    int state = code & 0xF;
-
-//    if(state == 0) {
-//        tr.volFlo = 1;
-//    } else {
-//        tr.volFlo = 0;
-//    }
-
-//    uint16_t offset = 32799;
-//    switch(rele)
-//    {
-//    case 0:
-//        offset = 32799;
-//        break;
-//    case 1:
-//        offset = 32801;
-//        break;
-//    case 2:
-//        offset = 32927;
-//        break;
-//    case 3:
-//        offset = 32929;
-//        break;
-//    case 4:
-//        offset = 33055;
-//        break;
-//    case 5:
-//        offset = 33057;
-//        break;
-//    case 6:
-//        offset = 33183;
-//        break;
-//    case 7:
-//        offset = 33185;
-//        break;
-//    default:
-//        break;
-//    }
-//    tr.offset = offset;
-//    emit sendTransToWorker(tr);
-//}
-
 
 void MainWindow::readReleSlot(uint8_t code)
 {

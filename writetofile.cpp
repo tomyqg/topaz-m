@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "ustavka.h"
 #include "ui_mainwindow.h"
 #include "options.h"
 #include "ui_options.h"
@@ -6,8 +7,10 @@
 #include "keyboard.h"
 #include "Channels/channelOptions.h"
 #include "defines.h"
+#include "processwritetofile.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
+extern QVector<QDateTime> X_Date_Coordinates;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -64,15 +67,83 @@ void Options::WriteSystemOptionsToFile()
 
 void Options::WriteAllChannelsOptionsToFile()
 {
+//    QList<ChannelOptions *> ChannelsObjectsList;
+
+//    ChannelsObjectsList.append(&options_channel1);
+//    ChannelsObjectsList.append(&options_channel2);
+//    ChannelsObjectsList.append(&options_channel3);
+//    ChannelsObjectsList.append(&options_channel4);
+
+//    QJsonObject channeljsonobj,options;
+//    QJsonObject ustavkijsonobj;
+//    QJsonArray settings, settingsUst;
+
+//    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
+//            channeljsonobj["Type"] = Channel->GetSignalType();
+//            channeljsonobj["Name"] = Channel->GetChannelName();
+//            channeljsonobj["Units"] = Channel->GetUnitsName();
+//            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+//            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+//            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+//            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+//            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+//            channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
+//            channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
+//            channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
+//            channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
+//            channeljsonobj["MathString"] = Channel->GetMathString();
+//            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+//            channeljsonobj["Diapason"] = Channel->GetDiapason();
+//            channeljsonobj["Dempher"] = Channel->GetDempherValue();
+//            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+//            settings.append(channeljsonobj);
+//        }
+
+
+//    options["count"] = ChannelsObjectsList.length();
+//    options["channels"] = settings;
+
+//    foreach (Ustavka * ust, listUstavok)
+//    {
+//        ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
+//        ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
+//        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
+//        ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
+//        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
+//        ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
+//        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
+//        ustavkijsonobj["MessInHigh"] = ust->getMessInHigh();
+//        ustavkijsonobj["MessNormHigh"] = ust->getMessNormHigh();
+//        ustavkijsonobj["MessInLow"] = ust->getMessInLow();
+//        ustavkijsonobj["MessNormLow"] = ust->getMessNormLow();
+
+//        settingsUst.append(ustavkijsonobj);
+//    }
+
+//    options["countUst"] = listUstavok.length();
+//    options["ustavki"] = settingsUst;
+
+//    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
+//    QFile file(pathtooptions);
+//    QTextStream out(&file);
+//    file.open(QIODevice::ReadWrite);
+//    file.resize(0); // clear file
+//    out << setstr;
+//    file.close();
+}
+
+void MainWindow::WriteAllChannelsOptionsToFile()
+{
     QList<ChannelOptions *> ChannelsObjectsList;
 
-    ChannelsObjectsList.append(&options_channel1);
-    ChannelsObjectsList.append(&options_channel2);
-    ChannelsObjectsList.append(&options_channel3);
-    ChannelsObjectsList.append(&options_channel4);
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
 
-    QJsonObject channeljsonobj,channels;
-    QJsonArray settings;
+    QJsonObject channeljsonobj,options;
+    QJsonObject ustavkijsonobj;
+    QJsonArray settings, settingsUst;
 
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
             channeljsonobj["Type"] = Channel->GetSignalType();
@@ -87,14 +158,6 @@ void Options::WriteAllChannelsOptionsToFile()
             channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
             channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
             channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
-//            channeljsonobj["State1Value"] = Channel->ustavka1.getStateValue();
-//            channeljsonobj["State1Histeresis"] = Channel->ustavka1.getHisteresis();
-//            channeljsonobj["State1RelayUp"] = Channel->ustavka1.getnumRelayUp();
-//            channeljsonobj["State1RelayDown"] = Channel->ustavka1.getnumRelayDown();
-//            channeljsonobj["State2Value"] = Channel->ustavka2.getStateValue();
-//            channeljsonobj["State2Histeresis"] = Channel->ustavka2.getHisteresis();
-//            channeljsonobj["State2RelayUp"] = Channel->ustavka2.getnumRelayUp();
-//            channeljsonobj["State2RelayDown"] = Channel->ustavka2.getnumRelayDown();
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
@@ -104,10 +167,30 @@ void Options::WriteAllChannelsOptionsToFile()
         }
 
 
-    channels["count"] = ChannelsObjectsList.length();
-    channels["channels"] = settings;
+    options["count"] = ChannelsObjectsList.length();
+    options["channels"] = settings;
 
-    QString setstr = QJsonDocument(channels).toJson(QJsonDocument::Compact);
+    foreach (Ustavka * ust, ustavkaObjectsList)
+    {
+        ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
+        ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
+        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
+        ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
+        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
+        ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
+        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
+        ustavkijsonobj["MessInHigh"] = ust->getMessInHigh();
+        ustavkijsonobj["MessNormHigh"] = ust->getMessNormHigh();
+        ustavkijsonobj["MessInLow"] = ust->getMessInLow();
+        ustavkijsonobj["MessNormLow"] = ust->getMessNormLow();
+
+        settingsUst.append(ustavkijsonobj);
+    }
+
+    options["countUst"] = ustavkaObjectsList.length();
+    options["ustavki"] = settingsUst;
+
+    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(pathtooptions);
     QTextStream out(&file);
     file.open(QIODevice::ReadWrite);
@@ -132,27 +215,29 @@ void MessageWrite::WriteAllLogToFile()
     mMessQueue.unlock();
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
-    QFile file(pathtomessages);
-    while(file.isOpen());   //подождать пока файл не закроется другим потоком
 
-    if(file.open(QIODevice::ReadWrite))
-    {
-        file.resize(0); // clear file
-        QTextStream out(&file);
-        out << setstr;
-        file.close();
-    }
-    else
-    {
-//        if (file.error() != QFile::NoError) {
-//                qDebug() << "Error open Log.txt file!" << file.errorString() << file.error();
-//        }
-    }
+    QThread * threadWriteFile = new QThread;
+    cProcessWriteToFile * wtf = new cProcessWriteToFile;
+    wtf->writeToFile(pathtomessages, setstr);
+    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
+    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
+    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
+    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
+    wtf->moveToThread(threadWriteFile);
+    threadWriteFile->start();
 
-
+//    QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
+//    file.open(QIODevice::ReadWrite);
+//    file.resize(0); // clear file
+//    QTextStream out(&file);
+//    out << setstr;
+//    file.close();
 
     opt.deleteLater();
 }
+
+
 
 void MessageWrite::LogAddMessage(QString nm)
 {
@@ -175,19 +260,20 @@ void MessageWrite::LogClear()
     file.close();
 }
 
-void MainWindow::WriteArchiveToFile() // пишет архив в файл каждые пять сек... вроде...
+// пишет архив в файл каждые (ArchiveUpdateTimer) сек...
+void MainWindow::WriteArchiveToFile()
 {
     // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
     QJsonObject archivechannel3;
     QJsonObject archivechannel4;
-    QJsonObject archive;
-    QJsonArray archives;
     QJsonArray valuesarray1;
     QJsonArray valuesarray2;
     QJsonArray valuesarray3;
     QJsonArray valuesarray4;
+    QJsonObject archive;
+    QJsonArray archives;
 
     for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
         valuesarray1.append(QString::number( Y_coordinates_Chanel_1.at(y), 'f', 3)); // округляем до 3 знаков после запятой
@@ -208,18 +294,15 @@ void MainWindow::WriteArchiveToFile() // пишет архив в файл ка�
     archivechannel1["name"] = "AI4ch1";
     archivechannel1["T"] = channel1period;
 
-
     archivechannel2["size"] = valuesarray2.size();
     archivechannel2["values"] = valuesarray2;
     archivechannel2["name"] = "AI4ch2";
     archivechannel2["T"] = channel2period;
 
-
     archivechannel3["size"] = valuesarray3.size();
     archivechannel3["values"] = valuesarray3;
     archivechannel3["name"] = "AI4ch3";
     archivechannel3["T"] = channel3period;
-
 
     archivechannel4["size"] = valuesarray4.size();
     archivechannel4["values"] = valuesarray4;

@@ -21,7 +21,7 @@ int cChannelSlotController::addChannelSlot(int userCh, int devCh, int slot)
         if(c->userChannel == userCh)
         {
             c->deviceChannel = devCh;
-            c->numSlot;
+            c->numSlot = slot;
             findCh = true;
         }
     }

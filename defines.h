@@ -23,6 +23,7 @@
 #define pathtofiles  "/opt/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
 #define pathtoarchive  "/opt/archive.txt"
+#define pathtoarchivedata  "/opt/archive.bin"
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
@@ -48,6 +49,7 @@
 #define pathtomodbusconfigfile  "C:/Work/MODBusConfigFile.txt"
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
+#define pathtoarchivedata  "C:/Work/archive.bin"
 #define pathtologotip  "C:/Work/logo.jpg"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #else
@@ -59,6 +61,7 @@
 #define pathtomodbusconfigfile  QCoreApplication::applicationDirPath() + "/MODBusConfigFile.txt"
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
+#define pathtoarchivedata  QCoreApplication::applicationDirPath() + "C:/Work/archive.bin"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
 #define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
 #endif
@@ -87,7 +90,7 @@
 #define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 1000    // время обновления времени
-#define LogUpdTimer 2000             // время обновления журнала сообщений (Log.txt)
+#define LogUpdTimer 10000             // время обновления журнала сообщений (Log.txt)
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 20                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
@@ -107,5 +110,10 @@
 
 #define TOTAL_NUM_USTAVKI   4
 
+#define BASE_OFFSET_DEVICE      0x4000
+#define BASE_OFFSET_CHANNEL_1   0x8000
+#define BASE_OFFSET_CHANNEL_2   0x8080
+#define BASE_OFFSET_CHANNEL_3   0x8100
+#define BASE_OFFSET_CHANNEL_4   0x8180
 
 // DEFINES_H

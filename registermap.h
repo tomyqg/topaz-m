@@ -43,7 +43,7 @@ public:
         uint8_t RegisterType;
     } registr_t;
 
-    enum {SIZE_RM = 45};
+    enum {SIZE_RM = 53};
 
     static uint16_t getOffsetByName(QString name);
     static QString getNameByOffset(uint16_t offset);
@@ -79,6 +79,8 @@ const RegisterMap::registr_t rm[] =
 
     {"chan0SupportedSignals",   32780, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
     {"chan0SignalType",         32781, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan0AdditionalParameter1",    32782, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan0AdditionalParameter2",    32788, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan0TransferSignalLowLim",    32799, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan0TransferSignalHighLim",   32801, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
@@ -96,6 +98,8 @@ const RegisterMap::registr_t rm[] =
 
     {"chan1SupportedSignals",   32908, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
     {"chan1SignalType",         32909, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan1AdditionalParameter1",    32910, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan1AdditionalParameter2",    32916, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan1TransferSignalLowLim",    32927, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan1TransferSignalHighLim",   32929, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
@@ -113,6 +117,8 @@ const RegisterMap::registr_t rm[] =
 
     {"chan2SupportedSignals",   33036, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
     {"chan2SignalType",         33037, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan2AdditionalParameter1",    33038, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan2AdditionalParameter2",    33044, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan2TransferSignalLowLim",    33055, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan2TransferSignalHighLim",   33057, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
@@ -130,15 +136,17 @@ const RegisterMap::registr_t rm[] =
 
     {"chan3SupportedSignals",   33164, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
     {"chan3SignalType",         33165, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan3AdditionalParameter1",    33166, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan3AdditionalParameter2",    33172, RegisterMap::NV, RegisterMap::A12, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan3TransferSignalLowLim",    33183, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan3TransferSignalHighLim",   33185, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
 
-    {"chan3CjValue",            33242, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg}
+    {"chan3CjValue",            33242, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
 };
 
-
+const uint16_t registerMapSize = (sizeof(rm)/sizeof(RegisterMap::registr_t));
 
 
 #endif // REGISTERMAP_H

@@ -6,6 +6,7 @@
 #define SLOT_H
 
 #include <QObject>
+#include "devicechannel.h"
 
 #define MAX_NUM_SLOTS 6
 
@@ -28,6 +29,7 @@ public:
     }
     int getNum() { return num; }
     bool getNeedConfig() { return needConfig; }
+    void resetNeedConfig() { needConfig = false; }
     int getState() { return state; }
     int getType() { return deviceType; }
     void setType(int type) { deviceType = type; }
@@ -36,6 +38,8 @@ public:
     void updOnline(bool online) { fOnline = online; }
     void setStatus(int st) { deviceStatus = st; }
     int getStatus() { return deviceStatus; }
+    cDeviceChannel channel[4];
+
 
 signals:
 
@@ -48,6 +52,7 @@ private:
     int state;
     int deviceType;
     int deviceStatus;
+
 
 };
 

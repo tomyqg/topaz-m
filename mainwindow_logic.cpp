@@ -138,9 +138,9 @@ void MainWindow::MainWindowInitialization()
 
     timer->start(DateLabelUpdateTimer);
 
-//    updLogTimer = new QTimer(this);
-//    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
-//    updLogTimer->start(LogUpdTimer);
+    updLogTimer = new QTimer(this);
+    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
+    updLogTimer->start(LogUpdTimer);
 
     InitTimers();
     LabelsInit();
@@ -179,9 +179,9 @@ void MainWindow::MainWindowInitialization()
     SetWindowWidthPixels(1280);
     SetWindowHeightPixels(720);
 
-//    // создание конфигуратора слотов
-//    sc = new cSlotsConfig(this);
-//    connect(this, SIGNAL(retransToSlotConfig(Transaction)), sc, SLOT(receiveConf(Transaction)));
+    // создание конфигуратора слотов
+    sc = new cSlotsConfig(this);
+    connect(this, SIGNAL(retransToSlotConfig(Transaction)), sc, SLOT(receiveConf(Transaction)));
 
     //
     mQTr = new QMutex();
@@ -200,7 +200,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
-//    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
     // /Инициализация потока Worker ---------------------
 
@@ -221,6 +221,16 @@ void MainWindow::MainWindowInitialization()
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
     effect->setBlurRadius(20.0);
     effect->setOffset(2);
+
+    //инициализация архиватора
+    QList<ChannelOptions*> listCh;
+    listCh.append(&channel1);
+    listCh.append(&channel2);
+    listCh.append(&channel3);
+    listCh.append(&channel4);
+    QListIterator<ChannelOptions*> li(listCh);
+    arch = new cArchivator(pathtoarchivedata, li);
+
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -300,8 +310,13 @@ void MainWindow::UpdUst()
     }
 }
 
+//-----Временная реализация соединения слотов----
 #define CONST_SLAVE_ADC     1
+#ifdef Q_OS_WIN32
+#define CONST_SLAVE_RELAY   1
+#else
 #define CONST_SLAVE_RELAY   2
+#endif
 
 void MainWindow::InitChannelSlotTable()
 {
@@ -323,6 +338,8 @@ void MainWindow::InitRelaySlotTable()
     rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
     rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
 }
+//-----/Временная реализация соединения слотов----
+
 
 /*
  * слот передачи сигнала о состоянии реле в Worker
@@ -357,7 +374,9 @@ void MainWindow::sendRelayStateToWorker(int relay, bool state)
     // тут нужно вставить инверсию, если выход нормально замкнут
     if(state) tr.volFlo = 1;
     else tr.volFlo = 0;
+#ifdef DEBUG_RELAY
     qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
+#endif
     emit sendTransToWorker(tr);
 }
 
@@ -390,8 +409,10 @@ void MainWindow::DelaySec(int n)
 
 void MainWindow::OpenOptionsWindow( int index )
 {
-    //здесь запускаем меню обновленное как в эндресе
+    // Vag: сохранить все настройки девайсов и каналов в файл перед открытием окна настроек
+    WriteAllChannelsOptionsToFile();
 
+    //здесь запускаем меню обновленное как в эндресе
     StackedOptions *sw= new StackedOptions(index, 0);
 
     sw->exec();
@@ -405,7 +426,8 @@ void MainWindow::OpenOptionsWindow( int index )
     channel3.ReadSingleChannelOptionFromFile(3);
     channel4.ReadSingleChannelOptionFromFile(4);
     // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
-//    SendObjectsToWorker(&channel1,&channel2,&channel3,&channel4);
+    sendConfigChannelsToSlave();
+
     //если вдруг поменялось время то нужно обновить лейблы
     LabelsInit();
     LabelsCorrect();
@@ -635,7 +657,7 @@ void MainWindow::logginStates(int channel, QString mess)
     }
 
     double cur = ch->GetCurrentChannelValue();
-    QString channelstringvalue = (QString::number( cur, 'f', 3)) + " " + ch->GetUnitsName();
+    QString channelstringvalue = (QString::number( cur, 'f', 3)) + ch->GetUnitsName();
     messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
 
 }
@@ -708,172 +730,6 @@ void MainWindow::ChangePalette(bool i)
     ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }
 
-//void MainWindow::sendModbusRequest( void )
-//{
-//    if( m_modbus == NULL )
-//    {
-//        return;
-//    }
-
-//    const int slave = 0x01;
-//    const int func = 0x04;
-//    const int addr = 0x00;
-//    int num = 0x02;
-//    int state = 0x02;
-//    uint8_t dest[1024];
-//    uint16_t * dest16 = (uint16_t *) dest;
-
-//    memset( dest, 0, 1024 );
-
-//    int ret = -1;
-//    bool is16Bit = false;
-//    bool writeAccess = false;
-//    const QString dataType = descriptiveDataTypeName( func );
-
-//    modbus_set_slave( m_modbus, slave );
-
-//    switch( func )
-//    {
-//    case _FC_READ_COILS:
-//        ret = modbus_read_bits( m_modbus, addr, num, dest );
-//        break;
-//    case _FC_READ_DISCRETE_INPUTS:
-//        ret = modbus_read_input_bits( m_modbus, addr, num, dest );
-//        break;
-//    case _FC_READ_HOLDING_REGISTERS:
-//        ret = modbus_read_registers( m_modbus, addr, num, dest16 );
-//        is16Bit = true;
-//        break;
-//    case _FC_READ_INPUT_REGISTERS:
-//        ret = modbus_read_input_registers( m_modbus, addr, num, dest16 );
-//        is16Bit = true;
-//        break;
-//    case _FC_WRITE_SINGLE_COIL:
-//        //        ret = modbus_write_bit( m_modbus, addr,
-//        //                                ui->regTable->item( 0, DataColumn )->
-//        //                                text().toInt(0, 0) ? 1 : 0 );
-//        writeAccess = true;
-//        num = 1;
-//        break;
-//    case _FC_WRITE_SINGLE_REGISTER:
-//        ret = modbus_write_register( m_modbus, addr,state);
-//        writeAccess = true;
-//        num = 1;
-//        break;
-
-//    case _FC_WRITE_MULTIPLE_COILS:
-//    {
-//        uint8_t * data = new uint8_t[num];
-//        //        for( int i = 0; i < num; ++i )
-//        //        {
-//        //            data[i] = ui->regTable->item( i, DataColumn )->
-//        //                    text().toInt(0, 0);
-//        //        }
-//        ret = modbus_write_bits( m_modbus, addr, num, data );
-//        delete[] data;
-//        writeAccess = true;
-//        break;
-//    }
-//    case _FC_WRITE_MULTIPLE_REGISTERS:
-//    {
-//        uint16_t * data = new uint16_t[num];
-//        //        for( int i = 0; i < num; ++i )
-//        //        {
-//        //            data[i] = ui->regTable->item( i, DataColumn )->
-//        //                    text().toInt(0, 0);
-//        //        }
-//        ret = modbus_write_registers( m_modbus, addr, num, data );
-//        delete[] data;
-//        writeAccess = true;
-//        break;
-//    }
-
-//    default:
-//        break;
-//    }
-
-//    if( ret == num  )
-//    {
-//        if( writeAccess )
-//        {
-//            //            m_statusText->setText(
-//            //                        tr( "Values successfully sent" ) );
-//            //            m_statusInd->setStyleSheet( "background: #0b0;" );
-//            QTimer::singleShot( 200, this, SLOT( resetStatus() ) );
-//        }
-//        else
-//        {
-
-//            //            qDebug() << dest16[0]<< dest16[1]<< dest16[2] <<  "dest16";
-
-//            //            bool b_hex = is16Bit && ui->checkBoxHexData->checkState() == Qt::Checked;
-//            QString qs_num;
-
-//            //            ui->regTable->setRowCount( num );
-//            for( int i = 0; i < num; ++i )
-//            {
-//                int data = is16Bit ? dest16[i] : dest[i];
-
-//                QTableWidgetItem * dtItem =
-//                        new QTableWidgetItem( dataType );
-//                QTableWidgetItem * addrItem =
-//                        new QTableWidgetItem(
-//                            QString::number( addr+i ) );
-//                //                qs_num.sprintf( b_hex ? "0x%04x" : "%d", data);
-//                QTableWidgetItem * dataItem =
-//                        new QTableWidgetItem( qs_num );
-//                dtItem->setFlags( dtItem->flags() &
-//                                  ~Qt::ItemIsEditable );
-//                addrItem->setFlags( addrItem->flags() &
-//                                    ~Qt::ItemIsEditable );
-//                dataItem->setFlags( dataItem->flags() &
-//                                    ~Qt::ItemIsEditable );
-
-//                //                ui->regTable->setItem( i, DataTypeColumn,
-//                //                                       dtItem );
-//                //                ui->regTable->setItem( i, AddrColumn,
-//                //                                       addrItem );
-//                //                ui->regTable->setItem( i, DataColumn,
-//                //                                       dataItem );
-//            }
-//        }
-//    }
-//    else
-//    {
-//        if( ret < 0 )
-//        {
-//            if(
-//        #ifdef WIN32
-//                    errno == WSAETIMEDOUT ||
-//        #endif
-//                    errno == EIO
-//                    )
-//            {
-//                QMessageBox::critical( this, tr( "I/O error" ),
-//                                       tr( "I/O error: did not receive any data from slave." ) );
-//            }
-//            else
-//            {
-//                QMessageBox::critical( this, tr( "Protocol error" ),
-//                                       tr( "Slave threw exception \"%1\" or "
-//                                           "function not implemented." ).
-//                                       arg( modbus_strerror( errno ) ) );
-//            }
-//        }
-//        else
-//        {
-//            QMessageBox::critical( this, tr( "Protocol error" ),
-//                                   tr( "Number of registers returned does not "
-//                                       "match number of registers "
-//                                       "requested!" ) );
-//        }
-//    }
-//}
-
-//void MainWindow::resetStatus( void )
-//{
-//    ;
-//}
 
 void MainWindow::changeTranslator(int langindex)
 {
@@ -955,72 +811,6 @@ void MainWindow::getTransFromWorkerSlot(Transaction tr)
     mQTr->lock();
     queueTransaction.enqueue(tr);
     mQTr->unlock();
-
-
-//    Transaction trLocal = tr;
-
-//    if((trLocal.offset >= 16384) && (trLocal.offset < 32768))
-//    {
-//        // получен параметр конфигурации платы
-//        emit retransToSlotConfig(trLocal);
-//    }
-//    else if(trLocal.offset == 32781)
-//    {
-////        uint32_t tmp = (uint32_t)trLocal.vol;
-////        QString str;
-////        str.setNum(trLocal.volInt);
-////        ui->getTypeSignal->setText(str);
-//    } else {
-////        float *value = (float*)&trLocal.vol;
-//        double dbl = (double)trLocal.volFlo;
-
-////        if(trLocal.slave == 2)
-////        {
-////            qDebug() << "MainWindow SLOT" << trLocal.offset << "=" << (float)dbl;
-////        }
-
-//        switch(trLocal.offset)
-//        {
-//        case 0:
-//            channel1.SetCurrentChannelValue(dbl);
-//            break;
-//        case 2:
-//            channel2.SetCurrentChannelValue(dbl);
-//            break;
-//        case 4:
-//            channel3.SetCurrentChannelValue(dbl);
-//            break;
-//        case 6:
-//            channel4.SetCurrentChannelValue(dbl);
-//            break;
-//        case 32799:
-//            emit setReleToOptionsForm((0 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 32801:
-//            emit setReleToOptionsForm((1 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 32927:
-//            emit setReleToOptionsForm((2 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 32929:
-//            emit setReleToOptionsForm((3 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 33055:
-//            emit setReleToOptionsForm((4 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 33057:
-//            emit setReleToOptionsForm((5 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 33183:
-//            emit setReleToOptionsForm((6 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        case 33185:
-//            emit setReleToOptionsForm((7 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            break;
-//        default:
-//            break;
-//        }
-//    }
 }
 
 void MainWindow::parseWorkerReceive()
@@ -1028,83 +818,93 @@ void MainWindow::parseWorkerReceive()
     timerQueueTrans->stop();
     Transaction tr;
     QString paramName;
+    ChannelOptions * channel;
+    int ch;
+    bool isDeviceParam = false;
+
     mQTr->lock();
-    while(!queueTransaction.isEmpty())
+    int counter = 0;
+    while(!queueTransaction.isEmpty() && (counter++ < 4))
     {
         tr = queueTransaction.dequeue();
         paramName = RegisterMap::getNameByOffset(tr.offset);
-        if(tr.offset < 16384)
+        isDeviceParam = false;
+        if(tr.offset < BASE_OFFSET_DEVICE)
         {
-//            qDebug() << "MainWindow SLOT" << "slave" << tr.slave \
-//                     << "Offset" << tr.offset \
-//                     << "=" << (double)tr.volFlo;
-            // получены данные Imput ругистров
-            if(paramName == "DataChan0")
+            //пока ничего не делать
+        }
+        else if((tr.offset >= BASE_OFFSET_DEVICE) && (tr.offset < BASE_OFFSET_CHANNEL_1))
+        {
+            isDeviceParam = true;
+        }
+        else if((tr.offset >= BASE_OFFSET_CHANNEL_1) && (tr.offset < BASE_OFFSET_CHANNEL_2))
+            // канал 1
+        {
+            channel = &channel1;
+            ch = 0;
+        }
+        else if((tr.offset >= BASE_OFFSET_CHANNEL_2) && (tr.offset < BASE_OFFSET_CHANNEL_3))
+            // канал 2
+        {
+            channel = &channel2;
+            ch = 1;
+        }
+        else if((tr.offset >= BASE_OFFSET_CHANNEL_3) && (tr.offset < BASE_OFFSET_CHANNEL_4))
+            // канал 3
+        {
+            channel = &channel3;
+            ch = 2;
+        }
+        else if((tr.offset >= BASE_OFFSET_CHANNEL_4) && (tr.offset < (BASE_OFFSET_CHANNEL_4 + 128)))
+            // канал 4
+        {
+            channel = &channel4;
+            ch = 3;
+        }
+
+        if(!isDeviceParam)
+        {
+//            emit retransToSlotConfig(tr);
+            if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
             {
-                //измереное значение канала 1
+                if(tr.slave == 1)   //контроллировать источник нужно во всех "else if"
+                {
+                    channel->SetSignalType(tr.volInt);
+                    channel->SetCurSignalType(tr.volInt);
+                    emit retransToSlotConfig(tr);
+                }
+            }
+            else if(paramName == "DataChan0")
+            {
                 channel1.SetCurrentChannelValue((double)tr.volFlo);
             }
             else if(paramName == "DataChan1")
             {
-                //измереное значение канала 2
                 channel2.SetCurrentChannelValue((double)tr.volFlo);
             }
             else if(paramName == "DataChan2")
             {
-                //измереное значение канала 3
                 channel3.SetCurrentChannelValue((double)tr.volFlo);
             }
             else if(paramName == "DataChan3")
             {
-                //измереное значение канала 4
                 channel4.SetCurrentChannelValue((double)tr.volFlo);
             }
-        }
-        else if((tr.offset >= 16384) && (tr.offset < 32768))
-        {
-
-            // получены параметры платы - конфигурация слота
-            // отправляем сразу в конфигуратор - пусть разбирается сам
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "MainWindow SLOT" << tr.offset << "=" << tr.volInt;
-#endif
-//            emit retransToSlotConfig(tr);
+            else if(paramName == QString("chan" + QString::number(ch) + "Data"))
+            {
+                // Vag: времено или совсем не использовать этот параметр для построения графика
+                //channel->SetCurrentChannelValue((double)tr.volFlo);
+            }
+            else
+            {
+                emit retransToSlotConfig(tr);
+            }
         }
         else
         {
-//            if(tr.offset == 32799)
-//            {
-//                emit setReleToOptionsForm((0 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 32801)
-//            {
-//                emit setReleToOptionsForm((1 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 32927)
-//            {
-//                emit setReleToOptionsForm((2 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 32929)
-//            {
-//                emit setReleToOptionsForm((3 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 33055)
-//            {
-//                emit setReleToOptionsForm((4 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 33057)
-//            {
-//                emit setReleToOptionsForm((5 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 33183)
-//            {
-//                emit setReleToOptionsForm((6 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
-//            else if(tr.offset == 33185)
-//            {
-//                emit setReleToOptionsForm((7 << 4) | (((int)trLocal.volFlo) & 0xF));
-//            }
+            emit retransToSlotConfig(tr);
         }
+
     }
     mQTr->unlock();
     timerQueueTrans->start(ParsingReceiveTrans);
@@ -1136,4 +936,32 @@ bool MainWindow::isChannelInMinNow(int ch)
         }
     }
     return false;
+}
+
+
+void MainWindow::sendConfigChannelsToSlave()
+{
+    QList<ChannelOptions *> ChannelsObjectsList;
+    ChannelsObjectsList.append(&channel1);
+    ChannelsObjectsList.append(&channel2);
+    ChannelsObjectsList.append(&channel3);
+    ChannelsObjectsList.append(&channel4);
+
+    Transaction tr;
+    tr.dir = Transaction::W;
+    QString str;
+    int devCh;
+
+    for(int i = 0; i < ChannelsObjectsList.size(); i++)
+    {
+        devCh = csc.getDevChannel(i);
+        str = "chan" + QString::number(devCh) + "SignalType";
+//        str =
+        tr.offset = RegisterMap::getOffsetByName(str);
+        tr.slave = csc.getSlotByChannel(devCh);
+        tr.volInt = ChannelsObjectsList.at(i)->GetSignalType();
+        emit sendTransToWorker(tr);
+    }
+
+
 }
