@@ -15,14 +15,17 @@ keyboard::keyboard(QWidget *parent) :
     ui(new Ui::keyboard)
 {
     ui->setupUi(this);
-    connect(ui->buttonGroup, SIGNAL(buttonPressed(int)), this, SLOT(textinput()) );
+    connect(ui->buttonGroup, SIGNAL(buttonPressed(int)), this, SLOT(textinput(int)) );
 
     ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
     ui->textEdit->installEventFilter(this);
 
-    MessageWrite mr ("Keyboard Open");
-    mr.deleteLater();
+//    MessageWrite mr ("Keyboard Open");
+//    mr.deleteLater();
+    cLogger mk(pathtomessages);
+    mk.addMess("Keyboard Open");
+    mk.deleteLater();
 
     QList<QPushButton*> ButtonList = keyboard::findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
@@ -38,8 +41,11 @@ keyboard::keyboard(QWidget *parent) :
 
 keyboard::~keyboard()
 {
-    MessageWrite mr ("Keyboard Close");
-    mr.deleteLater();
+//    MessageWrite mr ("Keyboard Close");
+//    mr.deleteLater();
+    cLogger mk(pathtomessages);
+    mk.addMess("Keyboard Close");
+    mk.deleteLater();
     delete ui;
 }
 
@@ -48,14 +54,18 @@ QString keyboard::getcustomstring()
     return ui->textEdit->toPlainText();
 }
 
-void keyboard::textinput()
+void keyboard::textinput(int b)
 {
     QWidget *widget = QApplication::focusWidget();
     QString textwas = ui->textEdit->toPlainText();
+    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = cursor.position();
+//    qDebug() << "cursor" << pos;
     QPushButton *button = static_cast<QPushButton*>(widget);
-
-    QString textnew = textwas  + button->text();
+    QString textnew = textwas.insert(pos, button->text());
     ui->textEdit->setText(textnew);
+    cursor.setPosition(pos+1);
+    ui->textEdit->setTextCursor(cursor);
 }
 
 void keyboard::on_pushButton_13_clicked()
@@ -66,15 +76,42 @@ void keyboard::on_pushButton_13_clicked()
 void keyboard::on_pushButton_27_clicked()
 {
     QString textwas = ui->textEdit->toPlainText();
-    QString textnew = textwas.remove(textwas.length()-1,1);
-    ui->textEdit->setText(textnew);
+    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = cursor.position();
+    if(pos>0)
+    {
+        QString textnew = textwas.remove(pos-1,1);
+        ui->textEdit->setText(textnew);
+        cursor.setPosition(pos-1);
+        ui->textEdit->setTextCursor(cursor);
+    }
 }
+
+
+void keyboard::on_pushButton_28_clicked()
+{
+    QString textwas = ui->textEdit->toPlainText();
+    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = cursor.position();
+    if(pos>0)
+    {
+        QString textnew = textwas.remove(pos-1,1);
+        ui->textEdit->setText(textnew);
+        cursor.setPosition(pos-1);
+        ui->textEdit->setTextCursor(cursor);
+    }
+}
+
 
 void keyboard::on_pushButton_44_clicked()
 {
     QString textwas = ui->textEdit->toPlainText();
-    QString textnew = textwas.append(' ');
+    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = cursor.position();
+    QString textnew = textwas.insert(pos, ' ');
     ui->textEdit->setText(textnew);
+    cursor.setPosition(pos+1);
+    ui->textEdit->setTextCursor(cursor);
 }
 
 void keyboard::on_comboBox_currentIndexChanged()
@@ -179,6 +216,9 @@ void keyboard::ChangeLanguage(int eng)
 
             if (widget->property("text").toString() == ">")
                 widget->setProperty("text", "ю");
+
+            if (widget->property("text").toString() == "х")
+                widget->setVisible(true);
         }
     }
 
@@ -277,13 +317,13 @@ void keyboard::ChangeLanguage(int eng)
 
             if (widget->property("text").toString() == "ю")
                 widget->setProperty("text", ">");
+
+            if (widget->property("text").toString() == "х")
+            {
+//                widget->setProperty("text", "ha");
+                widget->setVisible(false);
+            }
         }
     }
 }
 
-void keyboard::on_pushButton_28_clicked()
-{
-    QString textwas = ui->textEdit->toPlainText();
-    QString textnew = textwas.remove(textwas.length()-1,1);
-    ui->textEdit->setText(textnew);
-}

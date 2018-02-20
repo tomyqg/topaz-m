@@ -2,7 +2,8 @@
 #define KEYBOARD_H
 
 #include <QDialog>
-#include <mainwindow.h>
+#include "mainwindow.h"
+#include "log.h"
 
 #include <Channels/channelOptions.h>
 namespace Ui {
@@ -24,7 +25,7 @@ public:
 
 private slots:
 //    void on_buttonBox_accepted();
-    void textinput();
+    void textinput(int b);
     void on_pushButton_13_clicked();
     void on_pushButton_27_clicked();
     void on_pushButton_44_clicked();

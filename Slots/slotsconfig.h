@@ -15,7 +15,7 @@
 #define UpdateConfigTimer   1000    // период мсек перебора плат
 #define PeriodReconfig      10000   // Перриод повторного опроса плат (слотов)
 #define TimeReadChannelConf 1000    // Время выделяемое для загрузки конфигурации канала
-#define DEBAG_SLOT_CONFIG
+//#define DEBAG_SLOT_CONFIG
 #define TOTAL_NUM_SLOTS 6
 
 class cSlotsConfig : public QObject

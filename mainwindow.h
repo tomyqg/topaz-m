@@ -18,6 +18,13 @@
 #include "Relais/relayslotcontroller.h"
 #include "Slots/slotsconfig.h"
 #include "archivator.h"
+#include "log.h"
+#ifndef Q_OS_WIN32
+#include <linux/i2c-dev.h>
+#include <fcntl.h>
+#endif
+
+
 
 //#define DEBUG_RELAY
 
@@ -257,6 +264,7 @@ private:
     void sendConfigChannelsToSlave();
 
     cArchivator * arch;
+    cLogger * logger;
 
 protected:
     void paintEvent(QPaintEvent *event) ;

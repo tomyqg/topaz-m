@@ -1231,15 +1231,17 @@ void StackedOptions::on_pushButton_52_clicked()
 
 bool StackedOptions::eventFilter(QObject *object, QEvent *event)
 {
-    if ( (event->type() == event->MouseButtonRelease)&&(object->property("enabled").toString() == "true") && ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
+    if ( (event->type() == QEvent::MouseButtonRelease/*event->MouseButtonRelease*/) && \
+         (object->property("enabled").toString() == "true") && \
+         ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
     {
 
 //        qDebug()<< QString::fromLatin1(object->metaObject()->className()) << "className()";
-//        qDebug()<<  object->property("objectName") << " object->property(objectName)";
+//        qDebug()<<  object->property("objectName").toString() << " object->property(objectName)";
 
 
         Options::olderprop = object->property("text").toString();
-        keyboard kb;
+        keyboard kb(this);
         kb.setModal(true);
         kb.exec();
         object->setProperty("value", kb.getcustomstring() );

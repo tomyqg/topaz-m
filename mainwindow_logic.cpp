@@ -110,7 +110,11 @@ void MainWindow::MainWindowInitialization()
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setAntialiasedElements(QCP::aeNone);
-    messwrite.LogAddMessage("Programm Started");
+
+    //инициализация журнала событий
+    logger = new cLogger(pathtomessages);
+    logger->addMess("Programm Started");
+    //    messwrite.LogAddMessage("Programm Started");
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
@@ -230,6 +234,7 @@ void MainWindow::MainWindowInitialization()
     listCh.append(&channel4);
     QListIterator<ChannelOptions*> li(listCh);
     arch = new cArchivator(pathtoarchivedata, li);
+
 
 }
 
@@ -658,7 +663,8 @@ void MainWindow::logginStates(int channel, QString mess)
 
     double cur = ch->GetCurrentChannelValue();
     QString channelstringvalue = (QString::number( cur, 'f', 3)) + ch->GetUnitsName();
-    messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
+    //messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
+    logger->addMess(ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
 
 }
 
@@ -789,7 +795,8 @@ uint16_t MainWindow::getOffsetFromNumRelay(int num)
 
 void MainWindow::WorkerMessSlot(QString mess)
 {
-    messwrite.LogAddMessage(mess);
+//    messwrite.LogAddMessage(mess);
+    logger->addMess(mess);
 }
 
 /*

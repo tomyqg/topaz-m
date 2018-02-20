@@ -14,7 +14,7 @@ class Slot : public QObject
 {
     Q_OBJECT
 public:
-    explicit Slot(QObject *parent = 0)
+    explicit Slot(QObject *parent = 0) : QObject(parent)
     {
         needConfig = true;
         fOnline = false;

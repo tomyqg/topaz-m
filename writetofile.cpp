@@ -218,13 +218,13 @@ void MessageWrite::WriteAllLogToFile()
 
     QThread * threadWriteFile = new QThread;
     cProcessWriteToFile * wtf = new cProcessWriteToFile;
-    wtf->writeToFile(pathtomessages, setstr);
-    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
-    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
-    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
-    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
-    wtf->moveToThread(threadWriteFile);
-    threadWriteFile->start();
+//    wtf->writeToFile(pathtomessages, setstr);
+//    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
+//    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
+//    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
+//    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
+//    wtf->moveToThread(threadWriteFile);
+//    threadWriteFile->start();
 
 //    QFile file(pathtomessages);
 //    while(file.isOpen());   //подождать пока файл не закроется другим потоком

@@ -1,9 +1,17 @@
 #include "archivator.h"
 #include <QDateTime>
+#include <QDebug>
+#include <assert.h>
 
 cArchivator::cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObject *parent) : QObject(parent)
 {
-    fileName = file;
+    QStringList sl = file.split(".");
+    int n = sl.size();
+    assert(n>1);
+    if(n <= 1) return;
+    fileName_l = sl.at(n-2) + "_l." + sl.at(n-1);
+    fileName_r = sl.at(n-2) + "_r." + sl.at(n-1);
+    currBank = BANK_R;
     while(ch.hasNext())
         channels.append(ch.next());
     timerAddTick = new QTimer();
@@ -27,7 +35,30 @@ void cArchivator::addTick()
             tick.channel[i] = 0.0;
         }
     }
-    QFile out(fileName);
+
+    QString file;
+    QFile file_l(fileName_l);
+    QFile file_r(fileName_r);
+
+    // --- Смена банка, если переполнение --------------------------------
+    if((currBank==BANK_L) && ((file_l.size() + sizeof(tick)) >= MAX_SIZE_BANK))
+    {
+        currBank = BANK_R;
+        file = fileName_r;
+        file_r.resize(0);
+    }
+    else if((currBank==BANK_R) && ((file_r.size() + sizeof(tick)) >= MAX_SIZE_BANK))
+    {
+        currBank = BANK_L;
+        file = fileName_l;
+        file_l.resize(0);
+    }
+    if(currBank==BANK_L) file = fileName_l;
+    else file = fileName_r;
+    // ---------------------------------------------------------------------
+
+    //
+    QFile out(file);
     if(out.open(QIODevice::Append))
     {
         QDataStream stream(&out);
