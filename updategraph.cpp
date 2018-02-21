@@ -203,7 +203,12 @@ void MainWindow::DrawScene()
 
 void MainWindow::DrawSceneBottom()
 {
-    if ( (StackedOptions::GetCurrentDisplayParametr() != Options::Polar)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Cyfra) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsBars)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Bars) &&(StackedOptions::GetCurrentDisplayParametr() != Options::TrendsCyfra)&&(StackedOptions::GetCurrentDisplayParametr() != Options::Trends) )
+    if ( (Options::GetCurrentDisplayParametr() != Options::Polar) && \
+         (Options::GetCurrentDisplayParametr() != Options::Cyfra) && \
+         (Options::GetCurrentDisplayParametr() != Options::TrendsBars) && \
+         (Options::GetCurrentDisplayParametr() != Options::Bars) && \
+         (Options::GetCurrentDisplayParametr() != Options::TrendsCyfra) && \
+         (Options::GetCurrentDisplayParametr() != Options::Trends) )
     {
         ui->customPlot->resize(1024,527);
         ui->graphicsView->show();
@@ -270,7 +275,7 @@ void MainWindow::UpdateGraphics()
     needupdatePainter = 1;
     //     StackedOptions::SetCurrentDisplayParametr( Options::TrendsCyfraBars);
 
-    switch( StackedOptions::GetCurrentDisplayParametr() )
+    switch( Options::GetCurrentDisplayParametr() )
     {
     case Options::Trends:
         GrafsUpdateTrends();break;
@@ -295,11 +300,11 @@ void MainWindow::UpdateGraphics()
     DrawSceneBottom();
 }
 
-void MainWindow::UpdateLog()
-{
-    messwrite.WriteAllLogToFile();
-    updLogTimer->setInterval(LogUpdTimer);
-}
+//void MainWindow::UpdateLog()
+//{
+////    messwrite.WriteAllLogToFile();
+//    updLogTimer->setInterval(LogUpdTimer);
+//}
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
@@ -362,7 +367,9 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     QVector<double> y1max,y2max,y3max,y4max;
     QVector<double> y1min,y2min,y3min,y4min;
 
-    int lastindex = X_Coordinates.last();
+    int lastindex = 0;
+    if(!X_Coordinates.isEmpty())
+        lastindex = X_Coordinates.last();
 
     // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
 

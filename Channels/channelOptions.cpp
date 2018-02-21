@@ -367,21 +367,25 @@ double ChannelOptions::GetCurrentChannelValue()
 
 double ChannelOptions::GetMaximumChannelValue()
 {
+    if(channelvaluesbuffer.isEmpty()) return 0;
     return mathresolver::dGetMaximumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMinimumChannelValue()
 {
+    if(channelvaluesbuffer.isEmpty()) return 0;
     return mathresolver::dGetMinimumValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetAverageChannelValue()
 {
+    if(channelvaluesbuffer.isEmpty()) return 0;
     return mathresolver::dGetAverageValue(channelvaluesbuffer);
 }
 
 double ChannelOptions::GetMaxplusMinChannelValue()
 {
+    if(channelvaluesbuffer.isEmpty()) return 0;
     return mathresolver::dGetMaximumValue(channelvaluesbuffer) + mathresolver::dGetMinimumValue(channelvaluesbuffer);
 }
 

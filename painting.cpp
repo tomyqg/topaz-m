@@ -883,7 +883,7 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
-    switch( StackedOptions::GetCurrentDisplayParametr())
+    switch( Options::GetCurrentDisplayParametr())
     {
     case Options::Cyfra:
         PaintCyfrasFullScreen();
@@ -898,8 +898,6 @@ void MainWindow::PaintOnWidget()
         break;
     case Options::TrendsCyfraBars:
         PaintStatesAndAlertsAtTop();
-
-
         break;
     case Options::BarsCyfra:
         PaintStatesAndAlertsAtTop();

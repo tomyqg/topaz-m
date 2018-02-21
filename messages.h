@@ -25,26 +25,26 @@ private:
     Ui::Messages *ui;
 };
 
-class MessageWrite : public QObject
-{
-public:
+//class MessageWrite : public QObject
+//{
+//public:
 
-    QJsonArray LogMessageRead();
-    void LogAddMessage(QString nm);
-    void WriteAllLogToFile();
-    explicit  MessageWrite(); // конструктор
-    explicit MessageWrite(QString nm); // конструктор
-    ~MessageWrite(); // деструктор
+//    QJsonArray LogMessageRead();
+//    void LogAddMessage(QString nm);
+//    void WriteAllLogToFile();
+//    explicit  MessageWrite(); // конструктор
+//    explicit MessageWrite(QString nm); // конструктор
+//    ~MessageWrite(); // деструктор
 
-    static QJsonArray messagesqueue;
-    QMutex mMessQueue;
-    static QString strstr;
+//    static QJsonArray messagesqueue;
+//    QMutex mMessQueue;
+//    static QString strstr;
 
-    void LogClear();
+//    void LogClear();
 
-private:
+//private:
 
 
-};
+//};
 
 #endif // MESSAGES_H

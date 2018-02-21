@@ -59,7 +59,8 @@ SOURCES += main.cpp \
     processwritetofile.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
-    log.cpp
+    log.cpp \
+    kvitirovanie.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp
@@ -100,13 +101,15 @@ HEADERS  += mainwindow.h \
     processwritetofile.h \
     Slots/devicechannel.h \
     archivator.h \
-    log.h
+    log.h \
+    kvitirovanie.h
 
 FORMS    += mainwindow.ui \
     options.ui \
     keyboard.ui \
     messages.ui \
-    stackedoptions.ui
+    stackedoptions.ui \
+    kvitirovanie.ui
 
 target.path  = /opt
 INSTALLS    += target

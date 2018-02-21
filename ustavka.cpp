@@ -1,9 +1,9 @@
 #include "ustavka.h"
+#include <QMessageBox>
+#include "kvitirovanie.h"
 
 Ustavka::Ustavka(QWidget *parent)
 {
-//    ResID++;            //увеличение счётчика на единицу
-//    ustavkaID = ResID;  //присвоение номера уставке
     numChannel = 0;
     stateHiValue = 0;
     stateLowValue = 0;
@@ -13,6 +13,8 @@ Ustavka::Ustavka(QWidget *parent)
     numRelayDown = 0;
     setUp = false;
     setDown = false;
+    kvitirEnUp = false;
+    kvitirEnDown = false;
     timeFilter = new QTimer();
     timeFilter->stop();
     connect(timeFilter, SIGNAL(timeout()), this, SLOT(timeoutToWorkRelay()));
@@ -23,17 +25,6 @@ Ustavka::~Ustavka()
 
 }
 
-/* Метод для возврата значения номера уставки
- * */
-//int Ustavka::getID()
-//{
-//    return ustavkaID;
-//}
-
-/* Инициализация статической переменной класса.
- * Статическая переменная класса должна инициализироваться в обязательном порядке
- * */
-//int Ustavka::ResID = 0;
 
 void Ustavka::setUstavka(int ch, double hi, double low, double hiHist, double lowHist, int relayUp, int relayDown)
 {
@@ -48,8 +39,6 @@ void Ustavka::setUstavka(int ch, double hi, double low, double hiHist, double lo
     setDown = false;
     timeFilter->stop();
 }
-
-
 
 int Ustavka::getUstavka()
 {
@@ -105,6 +94,21 @@ void Ustavka::timeoutToWorkRelay()
     // формирование сигнала на реле
     if(numRelayUp != 0) emit workReleSignal(numRelayUp, setUp);
     if(numRelayDown != 0) emit workReleSignal(numRelayDown, setDown);
-
+//    QMessageBox kw(QMessageBox::Warning,\
+//                   "Квитирование",\
+//                   "Сработала уставка. Требуется подтверждение",\
+//                   QMessageBox::Ok);
+//    kw.exec();
+    kvitirovanie kv;
+    if(setUp && kvitirEnUp)
+    {
+        kv.showInfo(stateInHighMess);
+        kv.exec();
+    }
+    else if(setDown && kvitirEnUp)
+    {
+        kv.showInfo(stateInLowMess);
+        kv.exec();
+    }
 
 }

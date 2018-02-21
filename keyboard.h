@@ -4,11 +4,20 @@
 #include <QDialog>
 #include "mainwindow.h"
 #include "log.h"
+#include <QString>
 
 #include <Channels/channelOptions.h>
 namespace Ui {
 class keyboard;
 }
+
+typedef struct
+{
+    QString eng;
+    QString ENG;
+    QString rus;
+    QString RUS;
+}langSimbols;
 
 class keyboard : public QDialog
 {
@@ -20,7 +29,6 @@ public:
     ~keyboard();
 
     QString olderproperty;
-
     bool onlydigits;
 
 private slots:
@@ -33,6 +41,8 @@ private slots:
 
     void on_pushButton_28_clicked();
 
+    void on_pushButton_27_clicked(bool checked);
+
 public slots:
     QString getcustomstring();
     void setolderproperty(QString str);
@@ -40,9 +50,11 @@ public slots:
 
 private:
     Ui::keyboard *ui;
-
-private:
     void ChangeLanguage(int eng);
+    bool shift;
+    static langSimbols simbols[32];
 };
+
+
 
 #endif // KEYBOARD_H

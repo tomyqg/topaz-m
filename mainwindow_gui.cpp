@@ -122,8 +122,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
 
         if (needupdatePainter ==1)
-        {PaintOnWidget();
-            needupdatePainter = 0;}
+        {
+            PaintOnWidget();
+            needupdatePainter = 0;
+        }
     }
 
 

@@ -6,7 +6,7 @@
 #include "defines.h"
 
 QString Options::calibrationprm = "3383 3962 234 599";
-int Options::DisplayParametr = DisplayParametrEnum::Polar;
+int Options::DisplayParametr = Options::Polar;
 QString Options::olderprop = "";
 QString Options::displayResolution = "1280x800";
 QString Options::MonitorResolution = "35";
@@ -385,9 +385,9 @@ void Options::on_pushButton_3_clicked()
 
 void Options::on_pushButton_4_clicked()
 {
-    MessageWrite ms;
-    ms.LogClear();
-    ms.deleteLater();
+//    MessageWrite ms;
+//    ms.LogClear();
+//    ms.deleteLater();
 
 }
 

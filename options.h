@@ -33,7 +33,7 @@ public:
     void TouchScreenCalibrate();
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void OpenKeyboard();
-    int GetCurrentDisplayParametr() { return DisplayParametr;}
+    static int GetCurrentDisplayParametr() { return DisplayParametr;}
 
     enum DisplayParametrEnum {
         Trends = 0x01 ,

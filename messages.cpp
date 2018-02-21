@@ -10,7 +10,7 @@
 #include "messages.h"
 #include "ui_messages.h"
 
-QJsonArray MessageWrite::messagesqueue;
+//QJsonArray MessageWrite::messagesqueue;
 
 Messages::Messages(QDialog *parent) :
     QDialog(parent),
@@ -46,22 +46,22 @@ void Messages::on_pushButton_clicked()
     this->close();
 }
 
-MessageWrite::MessageWrite()
-{
-    LogMessageRead();
-//    LogAddMessage("message");
-}
+//MessageWrite::MessageWrite()
+//{
+//    LogMessageRead();
+////    LogAddMessage("message");
+//}
 
-MessageWrite::MessageWrite( QString nm)
-{
-    LogMessageRead();
-    LogAddMessage(nm);
-}
+//MessageWrite::MessageWrite( QString nm)
+//{
+//    LogMessageRead();
+//    LogAddMessage(nm);
+//}
 
-MessageWrite::~MessageWrite()
-{
-//    qDebug() << "MessageWrite Destructor";
-}
+//MessageWrite::~MessageWrite()
+//{
+////    qDebug() << "MessageWrite Destructor";
+//}
 
 void Messages::on_dial_valueChanged()
 {

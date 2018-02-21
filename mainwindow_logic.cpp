@@ -108,6 +108,12 @@ void MainWindow::MainWindowInitialization()
     SetXRange(XRange);
     SetYRange(YRange);
 
+    //перед рисованием графиков записать нули в первый элемент вектора
+    channel1.SetCurrentChannelValue(0);
+    channel2.SetCurrentChannelValue(0);
+    channel3.SetCurrentChannelValue(0);
+    channel4.SetCurrentChannelValue(0);
+
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setAntialiasedElements(QCP::aeNone);
 
@@ -142,9 +148,9 @@ void MainWindow::MainWindowInitialization()
 
     timer->start(DateLabelUpdateTimer);
 
-    updLogTimer = new QTimer(this);
-    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
-    updLogTimer->start(LogUpdTimer);
+//    updLogTimer = new QTimer(this);
+//    connect(updLogTimer, SIGNAL(timeout()), this, SLOT(UpdateLog()));
+//    updLogTimer->start(LogUpdTimer);
 
     InitTimers();
     LabelsInit();
@@ -210,7 +216,6 @@ void MainWindow::MainWindowInitialization()
 
     Options op;
     op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
-//    StackedOptions::SetCurrentDisplayParametr((StackedOptions::DisplayParametrEnum)op.GetCurrentDisplayParametr());
     op.deleteLater();
 
     // сразу активируем отладку по USB
@@ -394,7 +399,7 @@ void MainWindow::InitPins()
 
 void MainWindow::OpenMessagesWindow()
 {
-    messwrite.WriteAllLogToFile();
+//    messwrite.WriteAllLogToFile();
     Messages *messages = new Messages;
     connect( messages, SIGNAL(destroyed(QObject*)), this, SLOT( destroyedslot(QObject*)) ); //
     this->resizeWindow(*messages,this->GetWindowWidthPixels(),this->GetWindowHeightPixels());
@@ -421,6 +426,11 @@ void MainWindow::OpenOptionsWindow( int index )
     StackedOptions *sw= new StackedOptions(index, 0);
 
     sw->exec();
+
+    //читаем системные настройки из файла и применяем тут же
+    Options op;
+    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
+    op.deleteLater();
 
     // получение значений уставок из файла
     ReadUstavkiFromFile();

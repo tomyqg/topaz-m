@@ -70,24 +70,24 @@ void Options::ReadChannelsOptionsFromFile()
     }
 }
 
-QJsonArray MessageWrite::LogMessageRead()
-{
-    QFile file(pathtomessages);
-    while(file.isOpen());   //подождать пока файл не закроется другим потоком
-    file.open(QIODevice::ReadOnly);
-    QTextStream in(&file);
-    QString sss = in.readLine();
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-    QJsonObject json = doc.object();
-    QJsonArray array = json["messages"].toArray();
+//QJsonArray MessageWrite::LogMessageRead()
+//{
+//    QFile file(pathtomessages);
+//    while(file.isOpen());   //подождать пока файл не закроется другим потоком
+//    file.open(QIODevice::ReadOnly);
+//    QTextStream in(&file);
+//    QString sss = in.readLine();
+//    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+//    QJsonObject json = doc.object();
+//    QJsonArray array = json["messages"].toArray();
 
-    mMessQueue.lock();
-    MessageWrite::messagesqueue = array;
-    mMessQueue.unlock();
+//    mMessQueue.lock();
+//    MessageWrite::messagesqueue = array;
+//    mMessQueue.unlock();
 
-    file.close();
-    return MessageWrite::messagesqueue;
-}
+//    file.close();
+//    return MessageWrite::messagesqueue;
+//}
 
 void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
 {

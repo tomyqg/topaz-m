@@ -98,7 +98,7 @@ private slots:
 //    void OpenSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
-    void UpdateLog();
+//    void UpdateLog();
     void GrafsUpdateBars();
     void GrafsUpdateTrends();
     void GrafsUpdateTrendsAndBars();
@@ -133,8 +133,6 @@ private:
     ChannelOptions channel2;
     ChannelOptions channel3;
     ChannelOptions channel4;
-
-    MessageWrite messwrite;
 
     bool eventFilter(QObject* watched, QEvent* event);
     bool needupdatePainter;
@@ -215,7 +213,7 @@ private:
     QTimer *channeltimer4;
     QTimer *archivetimer;
     QTimer *UpdateGraficsTimer;
-    QTimer *updLogTimer;
+//    QTimer *updLogTimer;
     QTimer *halfSecondTimer;
     QTimer *displayrefreshtimer;
     QTimer *tmr;

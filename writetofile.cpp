@@ -199,66 +199,66 @@ void MainWindow::WriteAllChannelsOptionsToFile()
     file.close();
 }
 
-void MessageWrite::WriteAllLogToFile()
-{
-    QJsonObject archive;
-    Options opt;
-    double maxmes  = opt.GetLogMessagesLimit();
+//void MessageWrite::WriteAllLogToFile()
+//{
+//    QJsonObject archive;
+//    Options opt;
+//    double maxmes  = opt.GetLogMessagesLimit();
 
-    mMessQueue.lock();
-    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
-    {
-        messagesqueue.removeFirst();
-    }
-    archive["messages"] = messagesqueue;
-    archive["totalmsg"] = messagesqueue.count();
-    mMessQueue.unlock();
+//    mMessQueue.lock();
+//    while (messagesqueue.count()>maxmes) // удаляем все значения что были раньше чем нужно
+//    {
+//        messagesqueue.removeFirst();
+//    }
+//    archive["messages"] = messagesqueue;
+//    archive["totalmsg"] = messagesqueue.count();
+//    mMessQueue.unlock();
 
-    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
+//    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
 
-    QThread * threadWriteFile = new QThread;
-    cProcessWriteToFile * wtf = new cProcessWriteToFile;
-//    wtf->writeToFile(pathtomessages, setstr);
-//    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
-//    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
-//    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
-//    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
-//    wtf->moveToThread(threadWriteFile);
-//    threadWriteFile->start();
+//    QThread * threadWriteFile = new QThread;
+//    cProcessWriteToFile * wtf = new cProcessWriteToFile;
+////    wtf->writeToFile(pathtomessages, setstr);
+////    connect(threadWriteFile, SIGNAL(started()), wtf, SLOT(process()));
+////    connect(wtf, SIGNAL(finished()), threadWriteFile, SLOT(quit()));
+////    connect(wtf, SIGNAL(finished()), wtf, SLOT(deleteLater()));
+////    connect(threadWriteFile, SIGNAL(finished()), threadWriteFile, SLOT(deleteLater()));
+////    wtf->moveToThread(threadWriteFile);
+////    threadWriteFile->start();
 
+////    QFile file(pathtomessages);
+////    while(file.isOpen());   //подождать пока файл не закроется другим потоком
+////    file.open(QIODevice::ReadWrite);
+////    file.resize(0); // clear file
+////    QTextStream out(&file);
+////    out << setstr;
+////    file.close();
+
+//    opt.deleteLater();
+//}
+
+
+
+//void MessageWrite::LogAddMessage(QString nm)
+//{
+//    QJsonObject themessage;
+//    QDateTime local (QDateTime::currentDateTime());
+//    themessage["T"] = local.time().toString();
+//    themessage["D"] = local.date().toString("dd/MM/yy");
+//    themessage["M"] = nm;
+//    mMessQueue.lock();
+//    messagesqueue.append(themessage);
+//    mMessQueue.unlock();
+//}
+
+//void MessageWrite::LogClear()
+//{
 //    QFile file(pathtomessages);
 //    while(file.isOpen());   //подождать пока файл не закроется другим потоком
 //    file.open(QIODevice::ReadWrite);
 //    file.resize(0); // clear file
-//    QTextStream out(&file);
-//    out << setstr;
 //    file.close();
-
-    opt.deleteLater();
-}
-
-
-
-void MessageWrite::LogAddMessage(QString nm)
-{
-    QJsonObject themessage;
-    QDateTime local (QDateTime::currentDateTime());
-    themessage["T"] = local.time().toString();
-    themessage["D"] = local.date().toString("dd/MM/yy");
-    themessage["M"] = nm;
-    mMessQueue.lock();
-    messagesqueue.append(themessage);
-    mMessQueue.unlock();
-}
-
-void MessageWrite::LogClear()
-{
-    QFile file(pathtomessages);
-    while(file.isOpen());   //подождать пока файл не закроется другим потоком
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    file.close();
-}
+//}
 
 // пишет архив в файл каждые (ArchiveUpdateTimer) сек...
 void MainWindow::WriteArchiveToFile()

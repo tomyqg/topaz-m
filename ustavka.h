@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QString>
+#include <QDialog>
 
 #define DELAY_RELAY 100
 
@@ -43,8 +44,6 @@ signals:
     void messToLogSignal(int channel, QString mess);
 
 private:
-//    int ustavkaID = 0;  // номер уставки
-//    double (*getCurVal)();  // ссылка на функцию получения текущего значения из канала
     int numChannel;         // номер выбранного канала
     double stateHiValue;    // верхний уровень для переключения реле
     double stateLowValue;   // нижний уровень для переключения реле
@@ -56,13 +55,13 @@ private:
     bool setDown;       //принижение
     bool fNewState;     //признак изменения состояния
     bool fConfirm;      //признак подтверждения установки состояния реле
-//    bool isSetted;      //признак срабатывания уставки
     QTimer *timeFilter;  //фильтр по времени
-    //    int interval;       //время устоявшегося значения
     QString stateInHighMess;
     QString stateNormHighMess;
     QString stateInLowMess;
     QString stateNormLowMess;
+    bool kvitirEnUp;      //включение квитирования превышения
+    bool kvitirEnDown;      //включение квитирования принижения
 
 private slots:
     void timeoutToWorkRelay();    //время отработать реле
