@@ -1,6 +1,5 @@
 #include "kvitirovanie.h"
 #include "ui_kvitirovanie.h"
-#include <QtCore>
 #include <QtWidgets>
 
 kvitirovanie::kvitirovanie(QWidget *parent) :
@@ -15,7 +14,8 @@ kvitirovanie::~kvitirovanie()
     delete ui;
 }
 
-void kvitirovanie::showInfo(QString mess)
+void kvitirovanie::showInfo(QString mess, QString title)
 {
     ui->messUstavka->setText(mess);
+    ui->title->setText(title);
 }

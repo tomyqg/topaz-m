@@ -23,8 +23,7 @@
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
 #endif
-
-
+#include "Drivers/driverI2C.h"
 
 //#define DEBUG_RELAY
 
@@ -115,6 +114,9 @@ private slots:
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
+
+//    void on_sendI2C_clicked();
+//    void on_readI2C_clicked();
 
 signals:
     void error(const QString &s);
@@ -263,6 +265,8 @@ private:
 
     cArchivator * arch;
     cLogger * logger;
+
+    QJsonObject ObjectFromString(const QString& in);
 
 protected:
     void paintEvent(QPaintEvent *event) ;

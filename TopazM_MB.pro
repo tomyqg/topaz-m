@@ -20,7 +20,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
 TARGET = TopazM_MB
-INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport
+INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
+        Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
+        Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
+        Drivers/
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -62,8 +65,42 @@ SOURCES += main.cpp \
     log.cpp \
     kvitirovanie.cpp
 
+
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
-                3rdparty/qextserialport/qextserialenumerator_unix.cpp
+                3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
+                Drivers/driveri2c.cpp \
+                Drivers/driverspi.c \
+                Anybus/abcc_adapt/abcc_sw_port.c \
+                Anybus/abcc_drv/src/spi/abcc_crc32.c \
+                Anybus/abcc_drv/src/spi/abcc_handler_spi.c \
+                Anybus/abcc_drv/src/spi/abcc_spi_drv.c \
+                Anybus/abcc_drv/src/abcc_cmd_seq.c \
+                Anybus/abcc_drv/src/abcc_debug_err.c \
+                Anybus/abcc_drv/src/abcc_handler.c \
+                Anybus/abcc_drv/src/abcc_link.c \
+                Anybus/abcc_drv/src/abcc_mem.c \
+                Anybus/abcc_drv/src/abcc_remap.c \
+                Anybus/abcc_drv/src/abcc_setup.c \
+                Anybus/abcc_drv/src/abcc_timer.c \
+                Anybus/abcc_obj/nw_obj/ccl.c \
+                Anybus/abcc_obj/nw_obj/cfn.c \
+                Anybus/abcc_obj/nw_obj/cop.c \
+                Anybus/abcc_obj/nw_obj/dev.c \
+                Anybus/abcc_obj/nw_obj/dpv1.c \
+                Anybus/abcc_obj/nw_obj/ect.c \
+                Anybus/abcc_obj/nw_obj/eip.c \
+                Anybus/abcc_obj/nw_obj/epl.c \
+                Anybus/abcc_obj/nw_obj/mod.c \
+                Anybus/abcc_obj/nw_obj/prt.c \
+                Anybus/abcc_obj/ad_obj.c \
+                Anybus/abcc_obj/app_obj.c \
+                Anybus/abcc_obj/etn_obj.c \
+                Anybus/abcc_obj/opcua_obj.c \
+                Anybus/abcc_obj/safe_obj.c \
+                Anybus/abcc_obj/sync_obj.c \
+                Anybus/abcc_cbf.c \
+                Anybus/abcc_obj.c \
+                Anybus/abcc_adapt/abcc_sys_adapt.c
 
 unix:DEFINES += _TTY_POSIX_
 
@@ -103,6 +140,87 @@ HEADERS  += mainwindow.h \
     archivator.h \
     log.h \
     kvitirovanie.h
+
+unix:HEADERS += Drivers/driveri2c.h \
+            Drivers/driverspi.h \
+            Anybus/abcc_abp/abp.h \
+            Anybus/abcc_abp/abp_add.h \
+            Anybus/abcc_abp/abp_asm.h \
+            Anybus/abcc_abp/abp_bac.h \
+            Anybus/abcc_abp/abp_ccl.h \
+            Anybus/abcc_abp/abp_cfn.h \
+            Anybus/abcc_abp/abp_cipid.h \
+            Anybus/abcc_abp/abp_cnt.h \
+            Anybus/abcc_abp/abp_cop.h \
+            Anybus/abcc_abp/abp_cpc.h \
+            Anybus/abcc_abp/abp_cpn.h \
+            Anybus/abcc_abp/abp_dev.h \
+            Anybus/abcc_abp/abp_dpv0di.h \
+            Anybus/abcc_abp/abp_dpv1.h \
+            Anybus/abcc_abp/abp_eco.h \
+            Anybus/abcc_abp/abp_ect.h \
+            Anybus/abcc_abp/abp_eip.h \
+            Anybus/abcc_abp/abp_eme.h \
+            Anybus/abcc_abp/abp_epl.h \
+            Anybus/abcc_abp/abp_er.h \
+            Anybus/abcc_abp/abp_etn.h \
+            Anybus/abcc_abp/abp_fsi.h \
+            Anybus/abcc_abp/abp_fusm.h \
+            Anybus/abcc_abp/abp_mdd.h \
+            Anybus/abcc_abp/abp_mod.h \
+            Anybus/abcc_abp/abp_nwccl.h \
+            Anybus/abcc_abp/abp_nwcfn.h \
+            Anybus/abcc_abp/abp_nwdpv1.h \
+            Anybus/abcc_abp/abp_nwetn.h \
+            Anybus/abcc_abp/abp_nwpnio.h \
+            Anybus/abcc_abp/abp_opcua.h \
+            Anybus/abcc_abp/abp_pnam.h \
+            Anybus/abcc_abp/abp_pnio.h \
+            Anybus/abcc_abp/abp_safe.h \
+            Anybus/abcc_abp/abp_smtp.h \
+            Anybus/abcc_abp/abp_soc.h \
+            Anybus/abcc_abp/abp_src3.h \
+            Anybus/abcc_abp/abp_sync.h \
+            Anybus/abcc_adapt/abcc_drv_cfg.h \
+            Anybus/abcc_adapt/abcc_identification.h \
+            Anybus/abcc_adapt/abcc_obj_cfg.h \
+            Anybus/abcc_adapt/abcc_platform_cfg.h \
+            Anybus/abcc_adapt/abcc_sw_port.h \
+            Anybus/abcc_adapt/abcc_td.h \
+            Anybus/abcc_drv/inc/abcc.h \
+            Anybus/abcc_drv/inc/abcc_ad_if.h \
+            Anybus/abcc_drv/inc/abcc_cfg.h \
+            Anybus/abcc_drv/inc/abcc_cmd_seq_if.h \
+            Anybus/abcc_drv/inc/abcc_port.h \
+            Anybus/abcc_drv/inc/abcc_sys_adapt.h \
+            Anybus/abcc_drv/inc/abcc_sys_adapt_spi.h \
+            Anybus/abcc_drv/src/spi/abcc_crc32.h \
+            Anybus/abcc_drv/src/spi/abcc_drv_spi_if.h \
+            Anybus/abcc_drv/src/abcc_cmd_seq.h \
+            Anybus/abcc_drv/src/abcc_debug_err.h \
+            Anybus/abcc_drv/src/abcc_drv_if.h \
+            Anybus/abcc_drv/src/abcc_handler.h \
+            Anybus/abcc_drv/src/abcc_link.h \
+            Anybus/abcc_drv/src/abcc_mem.h \
+            Anybus/abcc_drv/src/abcc_setup.h \
+            Anybus/abcc_drv/src/abcc_timer.h \
+            Anybus/abcc_obj/nw_obj/ccl.h \
+            Anybus/abcc_obj/nw_obj/cfn.h \
+            Anybus/abcc_obj/nw_obj/cop.h \
+            Anybus/abcc_obj/nw_obj/dev.h \
+            Anybus/abcc_obj/nw_obj/dpv1.h \
+            Anybus/abcc_obj/nw_obj/ect.h \
+            Anybus/abcc_obj/nw_obj/eip.h \
+            Anybus/abcc_obj/nw_obj/epl.h \
+            Anybus/abcc_obj/nw_obj/mod.h \
+            Anybus/abcc_obj/nw_obj/prt.h \
+            Anybus/abcc_obj/ad_obj.h \
+            Anybus/abcc_obj/app_obj.h \
+            Anybus/abcc_obj/etn_obj.h \
+            Anybus/abcc_obj/opcua_obj.h \
+            Anybus/abcc_obj/safe_obj.h \
+            Anybus/abcc_obj/sync_obj.h \
+            Anybus/abcc_versions.h
 
 FORMS    += mainwindow.ui \
     options.ui \

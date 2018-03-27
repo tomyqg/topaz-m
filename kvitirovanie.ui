@@ -47,7 +47,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Подтвердите, что ознакомились с сообщением -&gt;</string>
+    <string>Подтвердите</string>
    </property>
   </widget>
   <widget class="QLabel" name="title">

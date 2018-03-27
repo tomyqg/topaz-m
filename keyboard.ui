@@ -1056,10 +1056,16 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>Caps</string>
+    <string>caps</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
    </property>
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_42">

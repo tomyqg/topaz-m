@@ -328,4 +328,17 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //    emit sendTransToWorker(trans);
 //}
 
+//void MainWindow::on_sendI2C_clicked()
+//{
 
+//}
+
+//void MainWindow::on_readI2C_clicked()
+//{
+//    cDriverI2C i2c_1;
+//    i2c_1.init(1);
+//    i2c_1.detect();
+//    cDriverI2C i2c_2;
+//    i2c_2.init(2);
+//    i2c_2.detect();
+//}

@@ -2,6 +2,7 @@
 #include "ui_stackedoptions.h"
 #include "defines.h"
 #include "mathresolver.h"
+//#include "extern.h"
 
 QString StackedOptions::calibrationprm = "3383 3962 234 599";
 QString StackedOptions::displayResolution = "1280x800";
@@ -46,7 +47,6 @@ extern QColor ChannelColorLowState;
 #define Vyhody 22
 #define ArchiveIndex 23
 #define AnalizeIndex 24
-
 
 
 StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
@@ -467,10 +467,12 @@ void StackedOptions::ReadUstavkiFromFile()
                         jsonobj.value("numRelayUp").toInt(), \
                         jsonobj.value("numRelayDown").toInt() \
                         );
-        ust->setMessInHigh(jsonobj.value("MessInHigh").toString());
-        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString());
-        ust->setMessInLow(jsonobj.value("MessInLow").toString());
-        ust->setMessNormLow(jsonobj.value("MessNormLow").toString());
+        ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
+        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
+        ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
+        ust->setMessNormLow(jsonobj.value("MessNormLow").toString().toUtf8());
+        ust->setKvitirUp(jsonobj.value("KvitirUp").toBool());
+        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
         index++;
     }
 }
@@ -507,13 +509,13 @@ void StackedOptions::ReadChannelsOptionsFromFile()
         Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
         Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
         Channel->SetSignalType(jsonobj.value("Type").toInt());
-        Channel->SetUnitsName(jsonobj.value("Units").toString());
+        Channel->SetUnitsName(jsonobj.value("Units").toString().toUtf8());
         Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
-        Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
-        Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
-        Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
-        Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
-        Channel->SetChannelName(jsonobj.value("Name").toString());
+        Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString().toUtf8());
+        Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString().toUtf8());
+        Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString().toUtf8());
+        Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString().toUtf8());
+        Channel->SetChannelName(jsonobj.value("Name").toString().toUtf8());
         Channel->SetMathEquation(jsonobj.value("MathString").toString());
         Channel->SetMathematical(jsonobj.value("MathWork").toBool());
         Channel->SetDiapason(jsonobj.value("Diapason").toInt());
@@ -804,7 +806,7 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
 //    ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
 //    ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
 //    ui->State2LowMessageChannel_1->setText(options_channel1.GetState2LowMessage());
-    ui->Name_Channel_1->setText(options_channel1.GetChannelName());
+    ui->Name_Channel_1->setText(options_channel1.GetChannelName().toUtf8());
     ui->math_text_channel_1->setText(options_channel1.GetMathString());
     ui->math_checkbox_channel_1->setChecked(options_channel1.IsChannelMathematical());
     ui->DemphirChannel_1->setValue(options_channel1.GetDempherValue());
@@ -879,6 +881,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->State1LowMessageChannel_1->setText(ust->getMessNormHigh());
     ui->State2HighMessageChannel_1->setText(ust->getMessNormLow());
     ui->State2LowMessageChannel_1->setText(ust->getMessInLow());
+    ui->State1_Kvitir_Channel_1->setCurrentIndex(ust->getKvitirUp());
+    ui->State2_Kvitir_Channel_1->setCurrentIndex(ust->getKvitirDown());
     ust = listUstavok.at(1);
     ui->comboBox_3->setCurrentIndex(ust->getChannel());
     ui->comboBox_4->setCurrentIndex(ust->getChannel());
@@ -894,6 +898,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->State1LowMessageChannel_2->setText(ust->getMessNormHigh());
     ui->State2HighMessageChannel_2->setText(ust->getMessNormLow());
     ui->State2LowMessageChannel_2->setText(ust->getMessInLow());
+    ui->State1_Kvitir_Channel_2->setCurrentIndex(ust->getKvitirUp());
+    ui->State2_Kvitir_Channel_2->setCurrentIndex(ust->getKvitirDown());
     ust = listUstavok.at(2);
     ui->comboBox_5->setCurrentIndex(ust->getChannel());
     ui->comboBox_6->setCurrentIndex(ust->getChannel());
@@ -909,6 +915,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->State1LowMessageChannel_3->setText(ust->getMessNormHigh());
     ui->State2HighMessageChannel_3->setText(ust->getMessNormLow());
     ui->State2LowMessageChannel_3->setText(ust->getMessInLow());
+    ui->State1_Kvitir_Channel_3->setCurrentIndex(ust->getKvitirUp());
+    ui->State2_Kvitir_Channel_3->setCurrentIndex(ust->getKvitirDown());
     ust = listUstavok.at(3);
     ui->comboBox_7->setCurrentIndex(ust->getChannel());
     ui->comboBox_8->setCurrentIndex(ust->getChannel());
@@ -924,6 +932,8 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->State1LowMessageChannel_4->setText(ust->getMessNormHigh());
     ui->State2HighMessageChannel_4->setText(ust->getMessNormLow());
     ui->State2LowMessageChannel_4->setText(ust->getMessInLow());
+    ui->State1_Kvitir_Channel_4->setCurrentIndex(ust->getKvitirUp());
+    ui->State2_Kvitir_Channel_4->setCurrentIndex(ust->getKvitirDown());
 }
 
 //Закрытие окна с сохранением настроек в !локальных! переменных options_channel1
@@ -952,17 +962,17 @@ void StackedOptions::WriteOptionsToFile()
 //    int m = 0 ;
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
         channeljsonobj["Type"] = Channel->GetSignalType();
-        channeljsonobj["Name"] = Channel->GetChannelName();
-        channeljsonobj["Units"] = Channel->GetUnitsName();
+        channeljsonobj["Name"] = (Channel->GetChannelName());
+        channeljsonobj["Units"] = (Channel->GetUnitsName());
         channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
         channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
         channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
         channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
         channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-        channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
-        channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
-        channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
-        channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
+        channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
+        channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
+        channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
+        channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
         channeljsonobj["MathString"] = Channel->GetMathString();
         channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
         channeljsonobj["Diapason"] = Channel->GetDiapason();
@@ -985,10 +995,12 @@ void StackedOptions::WriteOptionsToFile()
         ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
         ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
         ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
-        ustavkijsonobj["MessInHigh"] = ust->getMessInHigh();
-        ustavkijsonobj["MessNormHigh"] = ust->getMessNormHigh();
-        ustavkijsonobj["MessInLow"] = ust->getMessInLow();
-        ustavkijsonobj["MessNormLow"] = ust->getMessNormLow();
+        ustavkijsonobj["MessInHigh"] = (ust->getMessInHigh());
+        ustavkijsonobj["MessNormHigh"] = (ust->getMessNormHigh());
+        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
+        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
+        ustavkijsonobj["KvitirUp"] = ust->getKvitirUp();
+        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
 
         settingsUst.append(ustavkijsonobj);
     }
@@ -1123,6 +1135,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setMessNormHigh(ui->State1LowMessageChannel_1->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_1->text());
     ust->setMessInLow(ui->State2LowMessageChannel_1->text());
+    ust->setKvitirUp(ui->State1_Kvitir_Channel_1->currentIndex() & 0x1);
+    ust->setKvitirDown(ui->State2_Kvitir_Channel_1->currentIndex() & 0x1);
 
     ust = listUstavok.at(1);
     ust->setUstavka(ui->comboBox_3->currentIndex(),       \
@@ -1137,6 +1151,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setMessNormHigh(ui->State1LowMessageChannel_2->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_2->text());
     ust->setMessInLow(ui->State2LowMessageChannel_2->text());
+    ust->setKvitirUp(ui->State1_Kvitir_Channel_2->currentIndex() & 0x1);
+    ust->setKvitirDown(ui->State2_Kvitir_Channel_2->currentIndex() & 0x1);
 
     ust = listUstavok.at(2);
     ust->setUstavka(ui->comboBox_5->currentIndex(),       \
@@ -1151,6 +1167,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setMessNormHigh(ui->State1LowMessageChannel_3->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_3->text());
     ust->setMessInLow(ui->State2LowMessageChannel_3->text());
+    ust->setKvitirUp(ui->State1_Kvitir_Channel_3->currentIndex() & 0x1);
+    ust->setKvitirDown(ui->State2_Kvitir_Channel_3->currentIndex() & 0x1);
 
     ust = listUstavok.at(3);
     ust->setUstavka(ui->comboBox_7->currentIndex(),       \
@@ -1165,6 +1183,8 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setMessNormHigh(ui->State1LowMessageChannel_4->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_4->text());
     ust->setMessInLow(ui->State2LowMessageChannel_4->text());
+    ust->setKvitirUp(ui->State1_Kvitir_Channel_4->currentIndex() & 0x1);
+    ust->setKvitirDown(ui->State2_Kvitir_Channel_4->currentIndex() & 0x1);
 }
 
 void StackedOptions::InitiateArchive()
@@ -1839,3 +1859,11 @@ void StackedOptions::getReleOutSlot(int code)
         break;
     }
 }
+
+// Vag: врменно---------------------
+QJsonObject StackedOptions::ObjectFromString(const QString& in)
+{
+    QJsonValue val(in);
+    return val.toObject();
+}
+//----------------------------------------

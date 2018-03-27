@@ -23,51 +23,51 @@ void Options::ReadSystemOptionsFromFile()
 
 void Options::ReadChannelsOptionsFromFile()
 {
-    QFile infile(pathtooptions);
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-    QJsonObject json = doc.object();
-    QJsonArray array = json["channels"].toArray();
-    infile.close();
+//    QFile infile(pathtooptions);
+//    infile.open(QIODevice::ReadOnly);
+//    QTextStream in(&infile);
+//    QString sss = in.readLine();
+//    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+//    QJsonObject json = doc.object();
+//    QJsonArray array = json["channels"].toArray();
+//    infile.close();
 
 
-    QJsonArray settings;
+//    QJsonArray settings;
 
-    QList<ChannelOptions *> ChannelsObjectsList;
+//    QList<ChannelOptions *> ChannelsObjectsList;
 
-    ChannelsObjectsList.append(&options_channel1);
-    ChannelsObjectsList.append(&options_channel2);
-    ChannelsObjectsList.append(&options_channel3);
-    ChannelsObjectsList.append(&options_channel4);
-    QJsonObject jsonobj;
+//    ChannelsObjectsList.append(&options_channel1);
+//    ChannelsObjectsList.append(&options_channel2);
+//    ChannelsObjectsList.append(&options_channel3);
+//    ChannelsObjectsList.append(&options_channel4);
+//    QJsonObject jsonobj;
 
-    int index = 0;
+//    int index = 0;
 
-    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
-        jsonobj = array.at(index).toObject();
+//    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
+//        jsonobj = array.at(index).toObject();
 
-        Channel->SetHigherLimit(jsonobj.value("HigherLimit").toDouble());
-        Channel->SetLowerLimit(jsonobj.value("LowerLimit").toDouble());
-        Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
-        Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
-        Channel->SetSignalType(jsonobj.value("Type").toDouble());
-        Channel->SetCurSignalType(Channel->GetSignalType());
-        Channel->SetUnitsName(jsonobj.value("Units").toString());
-        Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
-        Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
-        Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
-        Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
-        Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
-        Channel->SetChannelName(jsonobj.value("Name").toString());
-        Channel->SetMathEquation(jsonobj.value("MathString").toString());
-        Channel->SetMathematical(jsonobj.value("MathWork").toBool());
-        Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
-        Channel->SetDempher(jsonobj.value("Dempher").toInt());
-        Channel->SetDiapason(jsonobj.value("Diapason").toInt());
-        index ++ ;
-    }
+//        Channel->SetHigherLimit(jsonobj.value("HigherLimit").toDouble());
+//        Channel->SetLowerLimit(jsonobj.value("LowerLimit").toDouble());
+//        Channel->SetHigherMeasureLimit(jsonobj.value("HigherMeasLimit").toDouble());
+//        Channel->SetLowerMeasureLimit(jsonobj.value("LowerMeasLimit").toDouble());
+//        Channel->SetSignalType(jsonobj.value("Type").toDouble());
+//        Channel->SetCurSignalType(Channel->GetSignalType());
+//        Channel->SetUnitsName(jsonobj.value("Units").toString());
+//        Channel->SetMeasurePeriod(jsonobj.value("Period").toDouble());
+//        Channel->SetState1HighMessage(jsonobj.value("State1HighMessage").toString());
+//        Channel->SetState1LowMessage(jsonobj.value("State1LowMessage").toString());
+//        Channel->SetState2HighMessage(jsonobj.value("State2HighMessage").toString());
+//        Channel->SetState2LowMessage(jsonobj.value("State2LowMessage").toString());
+//        Channel->SetChannelName(jsonobj.value("Name").toString());
+//        Channel->SetMathEquation(jsonobj.value("MathString").toString());
+//        Channel->SetMathematical(jsonobj.value("MathWork").toBool());
+//        Channel->SetRegistrationType(jsonobj.value("RegistrationType").toInt());
+//        Channel->SetDempher(jsonobj.value("Dempher").toInt());
+//        Channel->SetDiapason(jsonobj.value("Diapason").toInt());
+//        index ++ ;
+//    }
 }
 
 //QJsonArray MessageWrite::LogMessageRead()
@@ -106,13 +106,13 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
     this->SetSignalType(ch.value("Type").toInt());
     this->SetCurSignalType(this->GetSignalType());
-    this->SetUnitsName(ch.value("Units").toString());
+    this->SetUnitsName(ch.value("Units").toString().toUtf8());
     this->SetMeasurePeriod(ch.value("Period").toDouble());
-    this->SetState1HighMessage(ch.value("State1HighMessage").toString());
-    this->SetState1LowMessage(ch.value("State1LowMessage").toString());
-    this->SetState2HighMessage(ch.value("State2HighMessage").toString());
-    this->SetState2LowMessage(ch.value("State2LowMessage").toString());
-    this->SetChannelName(ch.value("Name").toString());
+    this->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
+    this->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());
+    this->SetState2HighMessage(ch.value("State2HighMessage").toString().toUtf8());
+    this->SetState2LowMessage(ch.value("State2LowMessage").toString().toUtf8());
+    this->SetChannelName(ch.value("Name").toString().toUtf8());
     this->SetMathematical(ch.value("MathWork").toBool());
     this->SetMathEquation(ch.value("MathString").toString());
     this->SetDempher(ch.value("Dempher").toInt());
@@ -146,10 +146,12 @@ void MainWindow::ReadUstavkiFromFile()
                         jsonobj.value("numRelayUp").toInt(), \
                         jsonobj.value("numRelayDown").toInt() \
                         );
-        ust->setMessInHigh(jsonobj.value("MessInHigh").toString());
-        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString());
-        ust->setMessInLow(jsonobj.value("MessInLow").toString());
-        ust->setMessNormLow(jsonobj.value("MessNormLow").toString());
+        ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
+        ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
+        ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
+        ust->setMessNormLow(jsonobj.value("MessNormLow").toString().toUtf8());
+        ust->setKvitirUp(jsonobj.value("KvitirUp").toBool());
+        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
         index++;
     }
 }

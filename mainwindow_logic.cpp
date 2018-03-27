@@ -300,6 +300,12 @@ void MainWindow::InitUstavka()
     timeUpdUst = new QTimer();
     connect(timeUpdUst, SIGNAL(timeout()), this, SLOT(UpdUst()));
     timeUpdUst->start(UstavkiUpdateTimer);
+
+    //Vag:тест
+    Ustavka * u = ustavkaObjectsList.at(1);
+    u->setKvitirUp(true);
+    u->setKvitirDown(true);
+    //----
 }
 
 void MainWindow::UpdUst()
@@ -315,7 +321,9 @@ void MainWindow::UpdUst()
         if(ch)
         {
             ChannelOptions * channel = ChannelsObjectsList.at(ch-1);
+            ust->setNameCh(channel->GetChannelName());
             ust->update(channel->GetCurrentChannelValue());
+
         }
     }
 }
@@ -423,7 +431,7 @@ void MainWindow::OpenOptionsWindow( int index )
     WriteAllChannelsOptionsToFile();
 
     //здесь запускаем меню обновленное как в эндресе
-    StackedOptions *sw= new StackedOptions(index, 0);
+    StackedOptions * sw= new StackedOptions(index, 0);
 
     sw->exec();
 
@@ -743,9 +751,7 @@ void MainWindow::ChangePalette(bool i)
     channel3.SetMinimumColor(Channel3ColorMinimum);
     channel4.SetMinimumColor(Channel4ColorMinimum);
 
-    ui->label_3->setText("#" + QString::number( ui->horizontalScrollBar->value() ) );
 }
-
 
 void MainWindow::changeTranslator(int langindex)
 {

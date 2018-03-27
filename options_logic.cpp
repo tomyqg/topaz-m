@@ -27,10 +27,10 @@ Options::Options(QWidget *parent) :
     connect(ui->buttonGroup_3, SIGNAL(buttonClicked(int)), this, SLOT(Channel3TypeChange()) );
     connect(ui->buttonGroup_4, SIGNAL(buttonClicked(int)), this, SLOT(Channel4TypeChange()) );
 
-    ReadSystemOptionsFromFile();
-    ReadChannelsOptionsFromFile();
-    ApplyNewSettingstoOptionsUI();
-    CustomizeOptionsUI();
+//    ReadSystemOptionsFromFile();
+//    ReadChannelsOptionsFromFile();
+//    ApplyNewSettingstoOptionsUI();
+//    CustomizeOptionsUI();
 
     QList<QSpinBox*> spinList = Options::findChildren<QSpinBox*> ();
 

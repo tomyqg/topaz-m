@@ -8,7 +8,8 @@
 #include "src/modbus.h"
 #include "transaction.h"
 
-#define TOTAL_BAD_TR_MODBAS 5   //количество ошибок до фиксации в журнале
+#define TOTAL_BAD_TR_MODBAS 5       //количество ошибок до фиксации в журнале
+#define MODBUS_TIMEVAL_MKS  200000  //время ожидания огтвета от слэйва
 //#define DEBUG_WORKER
 
 typedef struct

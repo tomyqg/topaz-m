@@ -364,7 +364,7 @@ void worker::OpenSerialPort( int )
         // инициализируем  объект модбаса...
         m_modbus = modbus_new_rtu( comportname,comportbaud,comportparity,comportdatabit,comportstopbit);
         //задание таймаута ожидания ответа от платы
-        const timeval tv = {0, 200000};
+        const timeval tv = {0, MODBUS_TIMEVAL_MKS};
         modbus_set_timeout_begin(m_modbus, &tv);
         //Включение отладки MODBAS
         //modbus_set_debug(m_modbus, true);

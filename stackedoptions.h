@@ -151,7 +151,8 @@ private:
     QStringList StringListNone, StringListTok, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
     QStringList datestrings, timestrings;
 
-
+    // Vag: врменно---------------------
+    QJsonObject ObjectFromString(const QString& in);
 
 
 };

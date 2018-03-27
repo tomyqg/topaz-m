@@ -8,9 +8,12 @@
 #include "Channels/channelOptions.h"
 #include "defines.h"
 #include "processwritetofile.h"
+//#include "extern.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 extern QVector<QDateTime> X_Date_Coordinates;
+
+
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -147,17 +150,17 @@ void MainWindow::WriteAllChannelsOptionsToFile()
 
     foreach (ChannelOptions * Channel, ChannelsObjectsList) {
             channeljsonobj["Type"] = Channel->GetSignalType();
-            channeljsonobj["Name"] = Channel->GetChannelName();
+            channeljsonobj["Name"] = (Channel->GetChannelName());
             channeljsonobj["Units"] = Channel->GetUnitsName();
             channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
             channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
             channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
             channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
             channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-            channeljsonobj["State1HighMessage"] = Channel->GetState1HighMessage();
-            channeljsonobj["State1LowMessage"] = Channel->GetState1LowMessage();
-            channeljsonobj["State2HighMessage"] = Channel->GetState2HighMessage();
-            channeljsonobj["State2LowMessage"] = Channel->GetState2LowMessage();
+            channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
+            channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
+            channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
+            channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
@@ -179,10 +182,12 @@ void MainWindow::WriteAllChannelsOptionsToFile()
         ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
         ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
         ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
-        ustavkijsonobj["MessInHigh"] = ust->getMessInHigh();
-        ustavkijsonobj["MessNormHigh"] = ust->getMessNormHigh();
-        ustavkijsonobj["MessInLow"] = ust->getMessInLow();
-        ustavkijsonobj["MessNormLow"] = ust->getMessNormLow();
+        ustavkijsonobj["MessInHigh"] = (ust->getMessInHigh());
+        ustavkijsonobj["MessNormHigh"] = (ust->getMessNormHigh());
+        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
+        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
+        ustavkijsonobj["KvitirUp"] = ust->getKvitirUp();
+        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
 
         settingsUst.append(ustavkijsonobj);
     }
@@ -400,3 +405,11 @@ void MainWindow::CreateMODBusConfigFile() // создает файл дескр�
     out << setstr;
     file.close();
 }
+
+// Vag: врменно---------------------
+QJsonObject MainWindow::ObjectFromString(const QString& in)
+{
+    QJsonValue val(in);
+    return val.toObject();
+}
+//----------------------------------------

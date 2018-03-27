@@ -38,6 +38,12 @@ public:
     void setMessNormHigh(QString s) { stateNormHighMess = s; }
     void setMessInLow(QString s) { stateInLowMess = s; }
     void setMessNormLow(QString s) { stateNormLowMess = s; }
+    void setKvitirUp(bool f) { kvitirEnUp = f; }
+    void setKvitirDown(bool f) { kvitirEnDown = f; }
+    bool getKvitirUp() { return kvitirEnUp; }
+    bool getKvitirDown() { return kvitirEnDown; }
+    void setNameCh(QString name) { nameChannel = name; }
+    QString getNameCh() { return nameChannel; }
 
 signals:
     void workReleSignal(int relay, bool state);
@@ -45,6 +51,7 @@ signals:
 
 private:
     int numChannel;         // номер выбранного канала
+    QString nameChannel;    // имя канала
     double stateHiValue;    // верхний уровень для переключения реле
     double stateLowValue;   // нижний уровень для переключения реле
     double hiHisteresis;    // гистерезис верхнего уровня
@@ -60,8 +67,10 @@ private:
     QString stateNormHighMess;
     QString stateInLowMess;
     QString stateNormLowMess;
-    bool kvitirEnUp;      //включение квитирования превышения
+    bool kvitirEnUp;        //включение квитирования превышения
     bool kvitirEnDown;      //включение квитирования принижения
+    bool waitKvitirUp;      //ожидания подтверждения от оператора
+    bool waitKvitirDown;    //ожидания подтверждения от оператора
 
 private slots:
     void timeoutToWorkRelay();    //время отработать реле

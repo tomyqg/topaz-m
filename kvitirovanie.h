@@ -15,7 +15,7 @@ class kvitirovanie : public QDialog
 public:
     explicit kvitirovanie(QWidget *parent = 0);
     ~kvitirovanie();
-    void showInfo(QString mess);
+    void showInfo(QString mess, QString title = "Сигнал уставки");
 
 private:
     Ui::kvitirovanie *ui;

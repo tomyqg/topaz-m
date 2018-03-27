@@ -25,7 +25,7 @@ void cLogger::addMess(QString mess)
     QString strMess = QJsonDocument(message).toJson(QJsonDocument::Compact);
     // --------------------------------------------------------
 
-    qLog.enqueue(strMess);      //запись сообщения в очередь - использовать когда файл будет доступен
+    qLog.enqueue(strMess.toUtf8());      //запись сообщения в очередь - использовать когда файл будет доступен
 
     QFile file(logFile);
 
@@ -47,12 +47,6 @@ void cLogger::addMess(QString mess)
             {
                 line = stream.readLine();
                 if(!line.isNull()) ll.append(line);
-                //                    {
-                //                        countLine++;
-                //                        doc = QJsonDocument::fromJson(line.toUtf8());
-                //                        jobj = doc.object();
-                //                        jarr.append(jobj);
-                //                    }
             } while(!line.isNull());
             // --------------------------------------------------------
 
@@ -62,8 +56,6 @@ void cLogger::addMess(QString mess)
             //----------- Перезапись укороченного списка строк в файл -----
             for(int i = countLine/2; i < countLine; i++)
             {
-                //                    jobj = jarr.at(i).toObject();
-                //                    line = QJsonDocument(jobj).toJson(QJsonDocument::Compact);
                 line = ll.at(i);
                 stream << line << endl;
             }

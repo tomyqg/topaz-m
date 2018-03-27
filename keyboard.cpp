@@ -22,8 +22,8 @@ langSimbols keyboard::simbols [] = {
     { "i", "I", "ш", "Ш" },     //7
     { "o", "O", "щ", "Щ" },     //8
     { "p", "P", "з", "З" },     //9
-    { "[", "{", "х", "Х" },     //10
-    { "]", "}", "ъ", "Ъ" },     //11
+    { "[", "]", "х", "Х" },     //10
+    { "{", "}", "ъ", "Ъ" },     //11
     { "a", "A", "ф", "Ф" },     //12
     { "s", "S", "ы", "Ы" },     //13
     { "d", "D", "в", "В" },     //14
@@ -34,7 +34,7 @@ langSimbols keyboard::simbols [] = {
     { "k", "K", "л", "Л" },     //19
     { "l", "L", "д", "Д" },     //20
     { ";", ";", "ж", "Ж" },     //21
-    { "'", "'", "э", "Э" },     //22
+    { "'", "\"", "э", "Э" },     //22
     { "z", "Z", "я", "Я" },     //23
     { "x", "X", "ч", "Ч" },     //24
     { "c", "C", "с", "С" },     //25
@@ -43,7 +43,7 @@ langSimbols keyboard::simbols [] = {
     { "n", "N", "т", "Т" },     //28
     { "m", "M", "ь", "Ь" },     //29
     { "<", "<", "б", "Б" },     //30
-    { "<", ">", "ю", "Ю" }      //31
+    { ">", ">", "ю", "Ю" }      //31
 };
 
 keyboard::keyboard(QWidget *parent) :
@@ -56,10 +56,15 @@ keyboard::keyboard(QWidget *parent) :
 
     ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
+
+    //курсор сразу в конец строки
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    ui->textEdit->setTextCursor(cursor);
+
     ui->textEdit->installEventFilter(this);
 
-//    MessageWrite mr ("Keyboard Open");
-//    mr.deleteLater();
+    //запись в журнал об использовании клавиатуры
     cLogger mk(pathtomessages);
     mk.addMess("Keyboard Open");
     mk.deleteLater();
@@ -112,16 +117,17 @@ void keyboard::on_pushButton_13_clicked()
 
 void keyboard::on_pushButton_27_clicked()
 {
-
-}
-
-void keyboard::on_pushButton_27_clicked(bool checked)
-{
-    shift = checked;
+    shift = !shift;
     if(shift)
+    {
         ui->pushButton_27->setStyleSheet(stylesheetclicked);
+        ui->pushButton_27->setText(ui->pushButton_27->text().toUpper());
+    }
     else
+    {
         ui->pushButton_27->setStyleSheet(stylesheetUnclicked);
+        ui->pushButton_27->setText(ui->pushButton_27->text().toLower());
+    }
 
     QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
 
@@ -150,6 +156,17 @@ void keyboard::on_pushButton_27_clicked(bool checked)
             }
         }
     }
+}
+
+
+void keyboard::on_pushButton_27_toggled(bool checked)
+{
+
+}
+
+void keyboard::on_pushButton_27_clicked(bool checked)
+{
+
 }
 
 
@@ -222,6 +239,7 @@ void keyboard::ChangeLanguage(int eng)
         }
     }
 }
+
 
 
 
