@@ -7,6 +7,13 @@ cChannelSlotController::cChannelSlotController(QObject *parent) : QObject(parent
 
 }
 
+cChannelSlotController::~cChannelSlotController()
+{
+    foreach (cChannelSlotConnector * cs, listCS) {
+        delete cs;
+    }
+}
+
 /*
  * Функция добавляет новую связку канал-слот или,
  *  если связка ранее устанвлена, обновляет параметры

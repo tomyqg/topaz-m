@@ -47,6 +47,7 @@ MainWindow::~MainWindow()
 //    messwrite.LogAddMessage("Programm Closed");
 //    messwrite.WriteAllLogToFile();
     logger->addMess("Programm Closed");
+    delete timeUpdUst;
     delete ui;
 }
 

@@ -19,7 +19,9 @@ cSlotsConfig::cSlotsConfig(QObject *parent) : QObject(parent)
 
 cSlotsConfig::~cSlotsConfig()
 {
-
+    foreach (Slot * s, listSlots) {
+        delete s;
+    }
 }
 
 int cSlotsConfig::addSlot(int num, int type)

@@ -24,7 +24,7 @@ Ustavka::Ustavka(QWidget *parent)
 
 Ustavka::~Ustavka()
 {
-
+    delete timeFilter;
 }
 
 

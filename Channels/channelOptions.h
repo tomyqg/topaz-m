@@ -17,6 +17,7 @@ public:
 
     // constructor
     explicit ChannelOptions();
+    ~ChannelOptions();
 public:
 
     uint16_t GetSignalType();
@@ -85,18 +86,10 @@ public:
     void SetMaximumColor(QColor newmaxcolor);
     void SetMinimumColor(QColor newmincolor);
 
-    bool IsHighState1Setted();
-    bool IsLowState1Setted();
-    bool IsHighState2Setted();
-    bool IsLowState2Setted();
     bool IsChannelMathematical();
 
 //    Ustavka ustavka1;
 //    Ustavka ustavka2;
-    bool HighState1Setted ;
-    bool LowState1Setted ;
-    bool HighState2Setted;
-    bool LowState2Setted ;
     bool MathematicalState;
     int xposition;
     int yposition;
@@ -366,7 +359,7 @@ public:
 
 
     enum VoltageDiapason{
-        Voltage0_1V ,
+        Voltage0_100mV ,
         Voltage0_10V ,
         Voltage0_5V ,
         Voltage1_5V ,

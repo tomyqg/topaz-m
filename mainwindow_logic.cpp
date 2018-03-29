@@ -329,10 +329,12 @@ void MainWindow::UpdUst()
 }
 
 //-----Временная реализация соединения слотов----
-#define CONST_SLAVE_ADC     1
+
 #ifdef Q_OS_WIN32
-#define CONST_SLAVE_RELAY   1
+#define CONST_SLAVE_ADC     7
+#define CONST_SLAVE_RELAY   7
 #else
+#define CONST_SLAVE_ADC     1
 #define CONST_SLAVE_RELAY   2
 #endif
 
@@ -897,6 +899,24 @@ void MainWindow::parseWorkerReceive()
                     emit retransToSlotConfig(tr);
                 }
             }
+            else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter1"))
+            {
+                if(tr.slave == 1)
+                {
+                    if((channel->GetSignalType() == ChannelOptions::MeasureTermoResistance) ||
+                            (channel->GetSignalType() == ChannelOptions::MeasureTC))
+                    {
+                        channel->SetDiapason(tr.paramA12[1]);
+                        emit retransToSlotConfig(tr);
+                    }
+                    else if(channel->GetSignalType() == ChannelOptions::MeasureVoltage)
+                    {
+                        channel->SetDiapason(tr.paramA12[0]);
+                        emit retransToSlotConfig(tr);
+                    }
+
+                }
+            }
             else if(paramName == "DataChan0")
             {
                 channel1.SetCurrentChannelValue((double)tr.volFlo);
@@ -978,13 +998,35 @@ void MainWindow::sendConfigChannelsToSlave()
     for(int i = 0; i < ChannelsObjectsList.size(); i++)
     {
         devCh = csc.getDevChannel(i);
-        str = "chan" + QString::number(devCh) + "SignalType";
-//        str =
-        tr.offset = RegisterMap::getOffsetByName(str);
         tr.slave = csc.getSlotByChannel(devCh);
+
+        // запись актуального значения SignalType
+        str = "chan" + QString::number(devCh) + "SignalType";
+        tr.offset = RegisterMap::getOffsetByName(str);
         tr.volInt = ChannelsObjectsList.at(i)->GetSignalType();
         emit sendTransToWorker(tr);
+
+        // запись актуального Additional parameter1
+        str = "chan" + QString::number(devCh) + "AdditionalParameter1";
+        tr.offset = RegisterMap::getOffsetByName(str);
+//        tr.volInt = 0;
+        int size = sizeof(tr.paramA12);
+        memset(tr.paramA12, 0, size);
+        if(ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::VoltageMeasure)
+        {
+            tr.paramA12[0] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+        }
+        else if(ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::TermoResistanceMeasure)
+        {
+            tr.paramA12[0] = 3;
+            tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+        }
+        else if((ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::TermoCoupleMeasure))
+        {
+            tr.paramA12[0] = 1;
+            tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+            tr.paramA12[2] = 2;
+        }
+        emit sendTransToWorker(tr);
     }
-
-
 }

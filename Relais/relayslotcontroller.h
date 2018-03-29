@@ -9,6 +9,7 @@ class cRelaySlotController : public QObject
     Q_OBJECT
 public:
     explicit cRelaySlotController(QObject *parent = 0);
+    ~cRelaySlotController();
     int addRelaySlot(int userR, int devR, int slot);
     int getDevRelay(int userR);
     int getSlotByRelay(int userR);

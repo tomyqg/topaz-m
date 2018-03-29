@@ -9,6 +9,7 @@ class cChannelSlotController : public QObject
     Q_OBJECT
 public:
     explicit cChannelSlotController(QObject *parent = 0);
+    ~cChannelSlotController();
     int addChannelSlot(int userCh, int devCh, int slot);
     int getDevChannel(int userCh);
     int getSlotByChannel(int userCh);

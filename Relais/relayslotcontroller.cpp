@@ -5,6 +5,13 @@ cRelaySlotController::cRelaySlotController(QObject *parent) : QObject(parent)
 
 }
 
+cRelaySlotController::~cRelaySlotController()
+{
+    foreach (cRelaySlotConnector * rs, listRS) {
+        delete rs;
+    }
+}
+
 int cRelaySlotController::addRelaySlot(int userR, int devR, int slot)
 {
     bool findR = false;

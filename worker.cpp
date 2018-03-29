@@ -57,7 +57,7 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-int worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, uint32_t data32)
+int worker::WriteModbusData(uint8_t sl, const deviceparametrs * dp, uint32_t * data32)
 {
     int ret = -1;
     if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
@@ -66,11 +66,12 @@ int worker::WriteModbusData(uint8_t sl, const deviceparametrs* dp, float value, 
     int num;
     //int slave = ModBus::Board4AIAddress;
     int slave = sl;
-    uint16_t * data = (uint16_t*) &data32;
+    uint16_t * data = (uint16_t *) &data32;
 
     switch (dp->ParamType) {
     case Device::A12:
         num = 6;
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
         break;
     case Device::U16:
         num = 1;
@@ -418,7 +419,7 @@ void worker::run()
                     emit sendTrans(tr);
                 }
             } else {    //(tr.dir == Transaction::W)
-                res = WriteModbusData(tr.slave, &dp, tr.volFlo, tr.volInt);
+                res = WriteModbusData(tr.slave, &dp, (uint32_t *)(tr.volInt));
                 tr.dir = Transaction::R;
 
                 mQueue.lock();

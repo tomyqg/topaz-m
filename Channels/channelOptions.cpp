@@ -234,25 +234,6 @@ int ChannelOptions::GetDempherValue()
     return demphervalue;
 }
 
-bool ChannelOptions::IsHighState1Setted()
-{
-    return this->HighState1Setted;
-}
-
-bool ChannelOptions::IsLowState1Setted()
-{
-    return this->LowState1Setted;
-}
-
-bool ChannelOptions::IsHighState2Setted()
-{
-    return this->HighState2Setted;
-}
-
-bool ChannelOptions::IsLowState2Setted()
-{
-    return this->LowState2Setted;
-}
 
 bool ChannelOptions::IsChannelMathematical()
 {
@@ -262,14 +243,15 @@ bool ChannelOptions::IsChannelMathematical()
 // constructor
 ChannelOptions::ChannelOptions()
 {
-    this->HighState1Setted = false;
-    this->LowState1Setted= false;
-    this->HighState2Setted= false;
-    this->LowState2Setted= false;
     SetConfirmationNeed(true);
     currentvalue = 0;
 
     buffermutex = new QMutex();
+}
+
+ChannelOptions::~ChannelOptions()
+{
+    delete buffermutex;
 }
 
 bool ChannelOptions::GetConfirmationNeed()
@@ -471,9 +453,9 @@ double ChannelOptions::ConvertSignalToValue(double signal)
     if (GetSignalType() == MeasureVoltage)
     {
         switch (GetDiapason()) {
-        case Voltage0_1V:
+        case Voltage0_100mV:
         {
-            hisignal = 1;
+            hisignal = 0.1;
             lowsignal = 0;
             break;
         }
@@ -561,7 +543,8 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
-    currentvalue = ConvertSignalToValue(value);
+//    currentvalue = ConvertSignalToValue(value);
+    currentvalue = value;
 
     if (this->IsChannelMathematical())
     {

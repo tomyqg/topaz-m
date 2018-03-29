@@ -67,53 +67,71 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListTok.clear();
 //    StringListTok.append("Нет");
     StringListTok.append("4-20 мA");
-    StringListTok.append("0-20 мA");
-    StringListTok.append("0-5  мA");
-    StringListTok.append("0-20 мA с корнеизвлеч.");
-    StringListTok.append("4-20 мA с корнеизвлеч.");
-    StringListTok.append("± 20 мA");
+//    StringListTok.append("0-20 мA");
+//    StringListTok.append("0-5  мA");
+//    StringListTok.append("0-20 мA с корнеизвлеч.");
+//    StringListTok.append("4-20 мA с корнеизвлеч.");
+//    StringListTok.append("± 20 мA");
 
     StringListNapryagenie.clear();
-    StringListNapryagenie.append("0-1  В");
-    StringListNapryagenie.append("0-10 В");
-    StringListNapryagenie.append("0-5  В");
-    StringListNapryagenie.append("1-5  В");
-    StringListNapryagenie.append("±150 мВ");
-    StringListNapryagenie.append("±1   В");
-    StringListNapryagenie.append("±10  В");
-    StringListNapryagenie.append("±30  В");
-    StringListNapryagenie.append("0-1  В с корнеизвлеч.");
-    StringListNapryagenie.append("0-10 В с корнеизвлеч.");
-    StringListNapryagenie.append("1-5  В с корнеизвлеч.");
+    StringListNapryagenie.append("Нет");
+    StringListNapryagenie.append("0-100 мВ");
+
+    //vag: удалить
+//    StringListNapryagenie.append("±150 мВ");
+//    StringListNapryagenie.append("±300 мВ");
+    //--------------------
+
+    StringListNapryagenie.append("0-1   В");
+    StringListNapryagenie.append("0-5   В");
+    StringListNapryagenie.append("±10   В");
+    StringListNapryagenie.append("±30   В");
+//    StringListNapryagenie.append("0-1  В");
+//    StringListNapryagenie.append("0-10 В");
+//    StringListNapryagenie.append("0-5  В");
+//    StringListNapryagenie.append("1-5  В");
+//    StringListNapryagenie.append("±150 мВ");
+//    StringListNapryagenie.append("±1   В");
+//    StringListNapryagenie.append("±10  В");
+//    StringListNapryagenie.append("±30  В");
+//    StringListNapryagenie.append("0-1  В с корнеизвлеч.");
+//    StringListNapryagenie.append("0-10 В с корнеизвлеч.");
+//    StringListNapryagenie.append("1-5  В с корнеизвлеч.");
 
     StringListTC.clear();
-    StringListTC.append("Pt100  (IEC)");
-    StringListTC.append("Pt100  (JIS)");
-    StringListTC.append("Pt100  (GOST)");
-    StringListTC.append("Pt500  (IEC)");
-    StringListTC.append("Pt500  (JIS)");
-    StringListTC.append("Pt1000 (IEC)");
-    StringListTC.append("Pt1000 (JIS)");
-    StringListTC.append("Pt45   (GOST)");
-    StringListTC.append("Pt50   (GOST)");
-    StringListTC.append("Cu50   (GOST, a=4260)");
-    StringListTC.append("Cu50   (GOST, a=4280)");
-    StringListTC.append("Cu53   (GOST, a=4280)");
-    StringListTC.append("Cu100  (GOST, a=4280)");
+    StringListTC.append("Тип S (Pt10Rh-Pt)");
+    StringListTC.append("Тип K (NiCr-Ni)");
+    StringListTC.append("Тип L (Fe-CuNi)");
+    StringListTC.append("Тип B (Pt30Rh-Pt60Rh)");
+    StringListTC.append("Тип А1(W5Re-W20Re)");
+    StringListTC.append("Тип J (Fe-CuNi)");
+    StringListTC.append("Тип N (NiCrSi-NiSi)");
+//    StringListTC.append("Тип C (W50Re-W26Re)");
+//    StringListTC.append("Тип D (W30Re-W25Re)");
+//    StringListTC.append("Тип L (NiCr-CuNi, GOST)");
+//    StringListTC.append("Тип R (Pt13Rh-Pt)");
+//    StringListTC.append("Тип T (Cu-CuNi)");
 
     StringListRTD.clear();
-    StringListRTD.append("Тип А (W5Re-W20Re)");
-    StringListRTD.append("Тип B (Pt30Rh-Pt60Rh)");
-    StringListRTD.append("Тип C (W50Re-W26Re)");
-    StringListRTD.append("Тип D (W30Re-W25Re)");
-    StringListRTD.append("Тип J (Fe-CuNi)");
-    StringListRTD.append("Тип K (NiCr-Ni)");
-    StringListRTD.append("Тип L (Fe-CuNi)");
-    StringListRTD.append("Тип L (NiCr-CuNi, GOST)");
-    StringListRTD.append("Тип N (NiCrSi-NiSi)");
-    StringListRTD.append("Тип R (Pt13Rh-Pt)");
-    StringListRTD.append("Тип S (Pt10Rh-Pt)");
-    StringListRTD.append("Тип T (Cu-CuNi)");
+    StringListRTD.append("Pt50   (GOST, a=3910)");
+    StringListRTD.append("Pt100  (GOST, a=3910)");
+    StringListRTD.append("Cu50   (GOST, a=4260)");
+    StringListRTD.append("Cu100  (GOST, a=4260)");
+    StringListRTD.append("Pt50   (GOST, a=3850)");
+    StringListRTD.append("Pt100  (GOST, a=3850)");
+    StringListRTD.append("Cu50   (GOST, a=4280)");
+    StringListRTD.append("Cu100  (GOST, a=4280)");
+    StringListRTD.append("Pt21   (ТСП21)");
+    StringListRTD.append("Cu23   (ТСМ23)");
+//    StringListRTD.append("Pt100  (IEC)");
+//    StringListRTD.append("Pt100  (JIS)");
+//    StringListRTD.append("Pt100  (GOST)");
+//    StringListRTD.append("Pt500  (IEC)");
+//    StringListRTD.append("Pt500  (JIS)");
+//    StringListRTD.append("Pt1000 (IEC)");
+//    StringListRTD.append("Pt1000 (JIS)");
+//    StringListRTD.append("Pt45   (GOST)");
+//    StringListRTD.append("Cu53   (GOST, a=4280)");
 
     datestrings.append("dd.MM.yyyy ");
     datestrings.append("MM-dd-yyyy ");
@@ -189,6 +207,9 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
 
 StackedOptions::~StackedOptions()
 {
+    foreach (Ustavka * ust, listUstavok) {
+        delete ust;
+    }
     delete ui;
 }
 
@@ -602,7 +623,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
         {
             ui->ButonNapryagenieChannel_1->setChecked(true);
             ui->DiapasonChannel_1->addItems(StringListNapryagenie);
-
         }
 
         if (sigtype == ModBus::TermoResistanceMeasure)
@@ -802,10 +822,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_1->setValue(options_channel1.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_1->setValue(options_channel1.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_1->setValue(options_channel1.GetMeasurePeriod());
-//    ui->State1HighMessageChannel_1->setText(options_channel1.GetState1HighMessage());
-//    ui->State1LowMessageChannel_1->setText(options_channel1.GetState1LowMessage());
-//    ui->State2HighMessageChannel_1->setText(options_channel1.GetState2HighMessage());
-//    ui->State2LowMessageChannel_1->setText(options_channel1.GetState2LowMessage());
     ui->Name_Channel_1->setText(options_channel1.GetChannelName().toUtf8());
     ui->math_text_channel_1->setText(options_channel1.GetMathString());
     ui->math_checkbox_channel_1->setChecked(options_channel1.IsChannelMathematical());
@@ -819,10 +835,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_2->setValue(options_channel2.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_2->setValue(options_channel2.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_2->setValue(options_channel2.GetMeasurePeriod());
-//    ui->State1HighMessageChannel_2->setText(options_channel2.GetState1HighMessage());
-//    ui->State1LowMessageChannel_2->setText(options_channel2.GetState1LowMessage());
-//    ui->State2HighMessageChannel_2->setText(options_channel2.GetState2HighMessage());
-//    ui->State2LowMessageChannel_2->setText(options_channel2.GetState2LowMessage());
     ui->Name_Channel_2->setText(options_channel2.GetChannelName());
     ui->math_text_channel_2->setText(options_channel2.GetMathString());
     ui->math_checkbox_channel_2->setChecked(options_channel2.IsChannelMathematical());
@@ -836,10 +848,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_3->setValue(options_channel3.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_3->setValue(options_channel3.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_3->setValue(options_channel3.GetMeasurePeriod());
-//    ui->State1HighMessageChannel_3->setText(options_channel3.GetState1HighMessage());
-//    ui->State1LowMessageChannel_3->setText(options_channel3.GetState1LowMessage());
-//    ui->State2HighMessageChannel_3->setText(options_channel3.GetState2HighMessage());
-//    ui->State2LowMessageChannel_3->setText(options_channel3.GetState2LowMessage());
     ui->Name_Channel_3->setText(options_channel3.GetChannelName());
     ui->math_text_channel_3->setText(options_channel3.GetMathString());
     ui->math_checkbox_channel_3->setChecked(options_channel3.IsChannelMathematical());
@@ -853,10 +861,6 @@ void StackedOptions::ApplyNewSettingstoOptionsUI()
     ui->VerhnPredIzmerChannel_4->setValue(options_channel4.GetHigherMeasureLimit());
     ui->NignPredIzmerChannel_4->setValue(options_channel4.GetLowerMeasureLimit());
     ui->PeriodIzmerChannel_4->setValue(options_channel4.GetMeasurePeriod());
-//    ui->State1HighMessageChannel_4->setText(options_channel4.GetState1HighMessage());
-//    ui->State1LowMessageChannel_4->setText(options_channel4.GetState1LowMessage());
-//    ui->State2HighMessageChannel_4->setText(options_channel4.GetState2HighMessage());
-//    ui->State2LowMessageChannel_4->setText(options_channel4.GetState2LowMessage());
     ui->Name_Channel_4->setText(options_channel4.GetChannelName());
     ui->math_text_channel_4->setText(options_channel4.GetMathString());
     ui->math_checkbox_channel_4->setChecked(options_channel4.IsChannelMathematical());
