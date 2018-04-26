@@ -67,6 +67,7 @@ ABCC_ErrorCodeType ABCC_SpiRunDriver( void )
    ABCC_MainStateType eMainState;
 
    eMainState = ABCC_GetMainState();
+//   fprintf(stderr, "ABCC_SpiRunDriver: eMainState = %d\n", eMainState);
 
    if ( eMainState < ABCC_DRV_SETUP )
    {

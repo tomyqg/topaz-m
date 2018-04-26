@@ -373,6 +373,9 @@ void ABCC_DrvSpiRunDriverTx( void )
       /*
       ** Send the MOSI frame.
       */
+//      fprintf(stderr, "iSpiControl 0x%x\n", spi_drv_sMosiFrame.iSpiControl);
+//      fprintf(stderr, "iPdLen %d\n", spi_drv_sMosiFrame.iPdLen);
+//      fprintf(stderr, "iMsgLen %d\n", spi_drv_sMosiFrame.iMsgLen);
       ABCC_SYS_SpiSendReceive( &spi_drv_sMosiFrame, &spi_drv_sMisoFrame, spi_drv_iSpiFrameSize << 1 );
    }
    else if ( spi_drv_eState == SM_SPI_INIT )

@@ -23,7 +23,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers/
+        Drivers/ Communicator/
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -63,7 +63,11 @@ SOURCES += main.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
     log.cpp \
-    kvitirovanie.cpp
+    kvitirovanie.cpp \
+    Communicator/communicator.cpp \
+    Anybus/appl_abcc_handler.c \
+    Anybus/appl_adi_config.c
+    
 
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
@@ -98,8 +102,6 @@ unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 Anybus/abcc_obj/opcua_obj.c \
                 Anybus/abcc_obj/safe_obj.c \
                 Anybus/abcc_obj/sync_obj.c \
-                Anybus/abcc_cbf.c \
-                Anybus/abcc_obj.c \
                 Anybus/abcc_adapt/abcc_sys_adapt.c
 
 unix:DEFINES += _TTY_POSIX_
@@ -139,7 +141,10 @@ HEADERS  += mainwindow.h \
     Slots/devicechannel.h \
     archivator.h \
     log.h \
-    kvitirovanie.h
+    kvitirovanie.h \
+    Communicator/communicator.h \
+    Anybus/appl_abcc_handler.h \
+    Anybus/appl_adi_config.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -242,7 +247,8 @@ DISTFILES += \
     untitled2_en.ts \
     untitled2_ru.ts \
     ../build-TopazM_MB-MYD1-Debug/Makefile \
-    ../build-TopazM_MB-MYD1-Release/Makefile
+    ../build-TopazM_MB-MYD1-Release/Makefile \
+    ../build-TopazM_MB-MYD1-Debug/Makefile
 
 
 TRANSLATIONS +=  untitled2_en.ts \

@@ -9,8 +9,12 @@ cChannelSlotController::cChannelSlotController(QObject *parent) : QObject(parent
 
 cChannelSlotController::~cChannelSlotController()
 {
-    foreach (cChannelSlotConnector * cs, listCS) {
-        delete cs;
+//    foreach (cChannelSlotConnector * cs, listCS) {
+//        delete cs;
+//    }
+    for(int i = 0; i < listCS.size(); i++)
+    {
+        listCS.at(i)->deleteLater();
     }
 }
 

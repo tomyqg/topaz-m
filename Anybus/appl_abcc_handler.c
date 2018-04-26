@@ -37,33 +37,33 @@
 
 #include <stdio.h>
 #include "abcc_td.h"
-#include "abp.h"
+//#include "abp.h"
 #include "abcc.h"
 #include "abcc_cmd_seq_if.h"
-#include "ad_obj.h"
-#include "abcc_port.h"
+//#include "ad_obj.h"
+//#include "abcc_port.h"
 
 #include "ad_obj.h"         /* Application data object:   254                 */
 #include "app_obj.h"        /* Application object:        255                 */
 #include "appl_abcc_handler.h"
-#include "abcc_port.h"
-#include "etn_obj.h"
-#include "opcua_obj.h"
-#include "sync_obj.h"
-#include "safe_obj.h"
+//#include "abcc_port.h"
+//#include "etn_obj.h"
+//#include "opcua_obj.h"
+//#include "sync_obj.h"
+//#include "safe_obj.h"
 
-#include "eip.h"
-#include "prt.h"
-#include "epl.h"
-#include "dpv1.h"
-#include "ect.h"
-#include "dev.h"
-#include "mod.h"
-#include "cop.h"
-#include "ccl.h"
-#include "cfn.h"
+//#include "eip.h"
+//#include "prt.h"
+//#include "epl.h"
+//#include "dpv1.h"
+//#include "ect.h"
+//#include "dev.h"
+//#include "mod.h"
+//#include "cop.h"
+//#include "ccl.h"
+//#include "cfn.h"
 
-#include "abcc_obj_cfg.h"
+//#include "abcc_obj_cfg.h"
 #include "appl_adi_config.h"
 
 /*******************************************************************************
@@ -82,7 +82,7 @@
 **------------------------------------------------------------------------------
 */
 #ifndef APPL_DEFAULT_IP_NETWORK_ADDRESS
-#define APPL_DEFAULT_IP_NETWORK_ADDRESS         { 192, 168, 0, 0 }
+#define APPL_DEFAULT_IP_NETWORK_ADDRESS         { 10, 12, 13, 3 }
 #endif
 
 #ifndef APPL_DEFAULT_NETMASK
@@ -90,7 +90,7 @@
 #endif
 
 #ifndef APPL_DEFAULT_GATEWAY
-#define APPL_DEFAULT_GATEWAY                    { 0, 0, 0, 0 }
+#define APPL_DEFAULT_GATEWAY                    { 10, 12, 13, 1 }
 #endif
 
 #ifndef APPL_DEFAULT_DHCP_ENABLE
@@ -584,6 +584,8 @@ APPL_AbccHandlerStatusType APPL_HandleAbcc( void )
    UINT32 lStartupTimeMs;
    ABCC_CommunicationStateType eAbccComState;
 
+//   fprintf(stderr, "APPL_HandleAbcc: appl_eAbccHandlerState = %d\n", appl_eAbccHandlerState);
+
    switch( appl_eAbccHandlerState )
    {
    case APPL_INIT:
@@ -600,6 +602,7 @@ APPL_AbccHandlerStatusType APPL_HandleAbcc( void )
          eModuleStatus = APPL_MODULE_NOT_DETECTED;
       }
 
+//      fprintf(stderr, "eModuleStatus = %d\n", eModuleStatus);
       if( eModuleStatus == APPL_MODULE_NO_ERROR )
       {
          /*
@@ -607,10 +610,11 @@ APPL_AbccHandlerStatusType APPL_HandleAbcc( void )
          */
          if( AD_Init( APPL_asAdiEntryList,
                       APPL_GetNumAdi(),
-                      APPL_asAdObjDefaultMap ) != APPL_NO_ERROR )
+                      NULL ) != APPL_NO_ERROR )
          {
             eModuleStatus = APPL_MODULE_UNEXPECTED_ERROR ;
          }
+//         fprintf(stderr, "AD_Init: eModuleStatus = %d\n", eModuleStatus);
       }
 
       if( eModuleStatus == APPL_MODULE_NO_ERROR )
@@ -651,6 +655,8 @@ APPL_AbccHandlerStatusType APPL_HandleAbcc( void )
 
       eAbccComState = ABCC_isReadyForCommunication();
 
+//      fprintf(stderr, "eAbccComState = %d\n", eAbccComState);
+
       if( eAbccComState == ABCC_READY_FOR_COMMUNICATION )
       {
          appl_eAbccHandlerState = APPL_RUN;
@@ -669,29 +675,31 @@ APPL_AbccHandlerStatusType APPL_HandleAbcc( void )
       ** in this application it is done from main loop context.
       **------------------------------------------------------------------------
       */
-      if( appl_fRdPdReceivedEvent )
-      {
-         appl_fRdPdReceivedEvent = FALSE;
-         ABCC_TriggerRdPdUpdate();
-      }
+       //-----------без прерывания пока нет смысла в нижеприведённом коде------------------------
+//      if( appl_fRdPdReceivedEvent )
+//      {
+//         appl_fRdPdReceivedEvent = FALSE;
+//         ABCC_TriggerRdPdUpdate();
+//      }
 
-      if( appl_fMsgReceivedEvent )
-      {
-         appl_fMsgReceivedEvent = FALSE;
-         ABCC_TriggerReceiveMessage();
-      }
+//      if( appl_fMsgReceivedEvent )
+//      {
+//         appl_fMsgReceivedEvent = FALSE;
+//         ABCC_TriggerReceiveMessage();
+//      }
 
-      if( appl_fTransmitMsgEvent )
-      {
-         appl_fTransmitMsgEvent = FALSE;
-         ABCC_TriggerTransmitMessage();
-      }
+//      if( appl_fTransmitMsgEvent )
+//      {
+//         appl_fTransmitMsgEvent = FALSE;
+//         ABCC_TriggerTransmitMessage();
+//      }
 
-      if( appl_fAbccStatusEvent )
-      {
-         appl_fAbccStatusEvent = FALSE;
-         ABCC_TriggerAnbStatusUpdate();
-      }
+//      if( appl_fAbccStatusEvent )
+//      {
+//         appl_fAbccStatusEvent = FALSE;
+//         ABCC_TriggerAnbStatusUpdate();
+//      }
+       //-------------------------------------------------------
       /*
       ** End event handling.
       */
@@ -1157,4 +1165,9 @@ void ABCC_CbfUserInitReq( void )
    */
    ABCC_AddCmdSeq( appl_asUserInitCmdSeq, UserInitDone );
 
+}
+
+void ABCC_Tick(const int ms)
+{
+    ABCC_RunTimerSystem( ms );
 }

@@ -29,6 +29,7 @@
 #define ABCC_SW_PORT_H_
 
 #include "string.h"
+#include "stdio.h"
 #include "abcc_td.h"
 
 /*******************************************************************************
@@ -51,7 +52,8 @@
 ********************************************************************************
 */
 
-#define ABCC_PORT_DebugPrint( args ) printf args
+#define ABCC_PORT_DebugPrint( args ) printf args//debug_printf args //
+//EXTFUNC void debug_printf( __const char *__restrict __format, ... );
 
 #define ABCC_PORT_UseCritical() ABCC_PORT_UseCriticalImpl()
 EXTFUNC void ABCC_PORT_UseCriticalImpl( void );

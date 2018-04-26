@@ -19,9 +19,16 @@
 #include <QVector>
 #include <QFile>
 #include <QDataStream>
+
 #ifndef Q_OS_WIN32
 #include <QtScript/QScriptEngine>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <linux/input.h>
 #endif
+
 #include <QtSerialPort/QtSerialPort>
 #include <QPainterPath>
 #include <QPainter>
@@ -33,6 +40,7 @@
 #include <QPoint>
 #include <QMetaType>
 #include "defines.h"
+//#include <QKeyEvent>
 
 extern MainWindow * globalMainWin;
 
@@ -50,6 +58,11 @@ extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Cha
 
 extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
+
+extern "C"
+{
+    void init_pins_gpio(void);
+}
 
 void MainWindow::MainWindowInitialization()
 {
@@ -240,6 +253,17 @@ void MainWindow::MainWindowInitialization()
     QListIterator<ChannelOptions*> li(listCh);
     arch = new cArchivator(pathtoarchivedata, li);
 
+    //инициализация Anybus
+    //вероятно придётся вынести в отдельный поток
+    timerAnybusEv = new QTimer();
+    connect(timerAnybusEv, SIGNAL(timeout()), this, SLOT(askAnybusIRQ()));
+    timerAnybusEv->start(1000);  //проверка IRQ каждые 100 мс
+
+    //запуск Хост приложения Anybus
+    comm = new cCommunicator();
+    commRun = new QTimer();
+    connect(commRun, SIGNAL(timeout()), comm, SLOT(run()));
+    commRun->start(TIMEOUT_COMMUNICATOR_MS);
 
 }
 
@@ -774,6 +798,7 @@ void MainWindow::changeTranslator(int langindex)
         return;
     }
     QApplication::installTranslator(translator);
+
 }
 
 uint16_t MainWindow::getOffsetFromNumRelay(int num)
@@ -1028,5 +1053,70 @@ void MainWindow::sendConfigChannelsToSlave()
             tr.paramA12[2] = 2;
         }
         emit sendTransToWorker(tr);
+    }
+}
+
+void MainWindow::askAnybusIRQ()
+{
+    input_event ev;
+    unsigned int key_code;
+    size_t size;
+    int tmp;
+
+
+
+    tmp = open("/dev/input/event0", O_RDONLY);
+    if (tmp < 0) {
+        qDebug() << "\nOpen /dev/input/event0 failed!\n";
+        return;
+    }
+    if (read(tmp, &ev, size) < size) {
+        qDebug() << "\nReading from /dev/input/event0 failed!\n";
+        return;
+    }
+
+//    qDebug() << "askAnybusIRQ: size =" << ev.code
+//             << "value =" << ev.value
+//             << "type =" << ev.type;
+
+    if (ev.value == 1 && ev.type == 1) {    /* Down press only */
+        key_code = ev.code;
+        if (key_code == KEY_HOME) {    /* lower speed */
+            qDebug() << "KEY_HOME";
+        } else if (key_code == KEY_ESC) {    /* raise speed */
+            qDebug() << "KEY_ESC";
+        } else {
+            qDebug() << QString::number(key_code);
+        }
+    }
+
+//    QFile eventIRQ("/dev/input/event0");
+//    if(!eventIRQ.open(QIODevice::ReadOnly))
+//    {
+//        qDebug() << "Error open file /dev/input/event0";
+//    }
+
+//    QTextStream event(&eventIRQ);
+//    QString str = event.readAll();
+
+//    if(str != "")
+//    {
+//        qDebug() << str;
+//    }
+
+//    eventIRQ.close();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    qDebug() << QString::number(event->key());
+    switch(event->key())
+    {
+    case Qt::Key_Escape:
+        qDebug() << "Key_Escape";
+        break;
+    case Qt::Key_Home:
+        qDebug() << "Key_Home";
+        break;
     }
 }

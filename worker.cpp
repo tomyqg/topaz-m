@@ -333,9 +333,9 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
             else
             {
 
-                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
-                qDebug() << modbus_strerror( errno ) << "(errno:" << errno << ")";
-                qDebug() << stderr;
+//                qDebug() << "Protocol error"  << "Slave threw exception \"%1\" or function not implemented. " ;
+//                qDebug() << modbus_strerror( errno ) << "(errno:" << errno << ")";
+//                qDebug() << stderr;
             }
         }
         else

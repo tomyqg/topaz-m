@@ -119,4 +119,6 @@
 #define BASE_OFFSET_CHANNEL_3   0x8100
 #define BASE_OFFSET_CHANNEL_4   0x8180
 
+//#define new new(/* _NORMAL_BLOCK, */__FILE__, __LINE__)
+
 // DEFINES_H

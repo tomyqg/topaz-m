@@ -59,7 +59,7 @@ QString QextSerialEnumerator::getRegKeyValue(HKEY key, LPCTSTR property)
     if( RegQueryValueEx(key, property, NULL, &type, buff, & size) == ERROR_SUCCESS )
         result = TCHARToQString((const char *)buff);
     RegCloseKey(key);
-    delete [] buff;
+    delete[] buff;
     return result;
 }
 
@@ -71,7 +71,7 @@ QString QextSerialEnumerator::getDeviceProperty(HDEVINFO devInfo, PSP_DEVINFO_DA
     BYTE* buff = new BYTE[buffSize];
     SetupDiGetDeviceRegistryProperty(devInfo, devData, property, NULL, buff, buffSize, NULL);
     QString result = TCHARToQString((const char *)buff);
-    delete [] buff;
+    delete[] buff;
     return result;
 }
 

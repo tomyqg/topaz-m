@@ -149,129 +149,129 @@ void MainWindow::PaintCyfrasBottom() // пока не используем
 }
 
 
-void MainWindow::PaintCyfrasBottomSeparate()
-{
-    // задается вручную
-    int smallrectingleheight = 80; // высота прямоугольничка в пикселях задается вручную
-    //высчитываются
-    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
-    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-    int otstupsnizu = smallrectingleheight + 28;
-    int otstupsverhu = widgheight - otstupsnizu;
-    int alerttextsize = smallrectingleheight/2;
-    int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
+//void MainWindow::PaintCyfrasBottomSeparate()
+//{
+//    // задается вручную
+//    int smallrectingleheight = 80; // высота прямоугольничка в пикселях задается вручную
+//    //высчитываются
+//    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
+//    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
+//    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
+//    int otstupsnizu = smallrectingleheight + 28;
+//    int otstupsverhu = widgheight - otstupsnizu;
+//    int alerttextsize = smallrectingleheight/2;
+//    int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
-#ifdef Q_OS_WIN32
-    alerttextsize/=1.5;
-    smalltextsize/=1.2;
-#endif
-
-
-    // задаем координаты отображения квадратов
-    channel1.xposition = 0;
-    channel1.yposition = otstupsverhu;
-    channel1.w = smallrectinglewidth;
-    channel1.h = smallrectingleheight;
-
-    channel2.xposition = smallrectinglewidth;
-    channel2.yposition = otstupsverhu;
-    channel2.w = smallrectinglewidth;
-    channel2.h = smallrectingleheight;
-
-    channel3.xposition = smallrectinglewidth*2;
-    channel3.yposition = otstupsverhu;
-    channel3.w = smallrectinglewidth;
-    channel3.h = smallrectingleheight;
-
-    channel4.xposition = smallrectinglewidth*3;
-    channel4.yposition = otstupsverhu;
-    channel4.w = smallrectinglewidth;
-    channel4.h = smallrectingleheight;
-
-    // создаем лист объектов для его отображения на графике
-
-    QList<ChannelOptions *> ChannelsObjectsList;
-
-    ChannelsObjectsList.append(&channel1);
-    ChannelsObjectsList.append(&channel2);
-    ChannelsObjectsList.append(&channel3);
-    ChannelsObjectsList.append(&channel4);
-
-    QPainter* newpainter = new QPainter(ui->MessagesWidget);
-
-//    newpainter->begin(ui->MessagesWidget);
-
-    // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
-    int ch = 0;
-    foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
-        {
-            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
-
-            // рисуем прямоугольник  с заполненным цветом
-
-            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
-            {
-                newpainter->setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
-            }
-            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
-            {
-                newpainter->setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
-            }
-            else
-            {
-                newpainter->setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
-            }
-
-            newpainter->setBrush(QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
-            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            newpainter->drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
+//#ifdef Q_OS_WIN32
+//    alerttextsize/=1.5;
+//    smalltextsize/=1.2;
+//#endif
 
 
-            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
+//    // задаем координаты отображения квадратов
+//    channel1.xposition = 0;
+//    channel1.yposition = otstupsverhu;
+//    channel1.w = smallrectinglewidth;
+//    channel1.h = smallrectingleheight;
 
-            if (ChannelValueString == NaNMessage)
-                ChannelValueString = ObryvErrorMessage;
-            else
-            {
-                if (!ui->percentCheckBox->checkState())
-                    ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-                else
-                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
-            }
+//    channel2.xposition = smallrectinglewidth;
+//    channel2.yposition = otstupsverhu;
+//    channel2.w = smallrectinglewidth;
+//    channel2.h = smallrectingleheight;
 
-            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch) /*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
-                newpainter->setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
-            else
-                newpainter->setPen(QPen(Qt::black, 2)); // иначе черный цвет
+//    channel3.xposition = smallrectinglewidth*2;
+//    channel3.yposition = otstupsverhu;
+//    channel3.w = smallrectinglewidth;
+//    channel3.h = smallrectingleheight;
 
-            // выводим значения каналов большими цифрами
-            newpainter->setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+//    channel4.xposition = smallrectinglewidth*3;
+//    channel4.yposition = otstupsverhu;
+//    channel4.w = smallrectinglewidth;
+//    channel4.h = smallrectingleheight;
+
+//    // создаем лист объектов для его отображения на графике
+
+//    QList<ChannelOptions *> ChannelsObjectsList;
+
+//    ChannelsObjectsList.append(&channel1);
+//    ChannelsObjectsList.append(&channel2);
+//    ChannelsObjectsList.append(&channel3);
+//    ChannelsObjectsList.append(&channel4);
+
+//    QPainter* newpainter = new QPainter(ui->MessagesWidget);
+
+////    newpainter->begin(ui->MessagesWidget);
+
+//    // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+//    int ch = 0;
+//    foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
+//        {
+//            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
+
+//            // рисуем прямоугольник  с заполненным цветом
+
+//            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            if (isChannelInMaxNow(ch)/*Chanel->MaximumNow()*/)
+//            {
+//                newpainter->setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
+//            }
+//            else if (isChannelInMinNow(ch)/*Chanel->MinimumNow()*/)
+//            {
+//                newpainter->setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
+//            }
+//            else
+//            {
+//                newpainter->setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
+//            }
+
+//            newpainter->setBrush(QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
+//            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            newpainter->drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
 
 
-            // подписываем названия каналов
-            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
+//            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
 
-            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            // подписываем единицы измерения
-            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
+//            if (ChannelValueString == NaNMessage)
+//                ChannelValueString = ObryvErrorMessage;
+//            else
+//            {
+//                if (!ui->percentCheckBox->checkState())
+//                    ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
+//                else
+//                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//            }
 
-            // подписываем math, если канал математически обрабатывается
-            newpainter->setPen(Qt::white);
-            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch) /*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
+//                newpainter->setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
+//            else
+//                newpainter->setPen(QPen(Qt::black, 2)); // иначе черный цвет
 
-            if (Chanel->IsChannelMathematical())
-                newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-            ////
-            ch++;
-        }
-    }
-    newpainter->end();
-}
+//            // выводим значения каналов большими цифрами
+//            newpainter->setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
+//            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+
+
+//            // подписываем названия каналов
+//            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
+
+//            newpainter->setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            // подписываем единицы измерения
+//            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
+
+//            // подписываем math, если канал математически обрабатывается
+//            newpainter->setPen(Qt::white);
+//            newpainter->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+
+//            if (Chanel->IsChannelMathematical())
+//                newpainter->drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
+//            ////
+//            ch++;
+//        }
+//    }
+//    newpainter->end();
+//}
 
 void MainWindow::PaintCyfrasRight()
 {

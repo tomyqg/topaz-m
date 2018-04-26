@@ -64,6 +64,15 @@
 
 #define DPV1_OBJ_ENABLE                         TRUE
 #define MOD_OBJ_ENABLE                          TRUE
+#define ABCC_CFG_POLL_ABCC_IRQ_PIN              FALSE
+
+/* Anybus CompactCom Setup */
+#define ABCC_CFG_MAX_NUM_APPL_CMDS                  ( 2 )
+#define ABCC_CFG_MAX_NUM_ABCC_CMDS                  ( 2 )
+#define ABCC_CFG_MAX_MSG_SIZE                       ( 1524 )
+#define ABCC_CFG_MAX_PROCESS_DATA_SIZE              ( 512 )
+#define ABCC_CFG_CMD_SEQ_MAX_NUM_RETRIES            ( 1 )
+
 
 //cDriverSPI spi;
 ABCC_SYS_SpiDataReceivedCbfType pndr;

@@ -398,6 +398,7 @@ ABCC_ErrorCodeType ABCC_LinkWriteMessage( ABP_MsgType* psWriteMsg )
    */
    if( !ABCC_IsCmdMsg( psWriteMsg ) )
    {
+
       if( !link_fDrvWriteMsgLock && ( link_sRespQueue.bNumInQueue == 0 ) && pnABCC_DrvISReadyForWriteMessage() )
       {
          /*
@@ -410,6 +411,7 @@ ABCC_ErrorCodeType ABCC_LinkWriteMessage( ABP_MsgType* psWriteMsg )
       }
       else if( link_EnQueue( &link_sRespQueue, psWriteMsg ) )
       {
+
          ABCC_DEBUG_MSG_EVENT("Response msg queued ", psWriteMsg );
          ABCC_DEBUG_MSG_GENERAL( ( "RespQ status: %d(%d)\n", link_sRespQueue.bNumInQueue, link_sRespQueue.bQueueSize ) );
       }

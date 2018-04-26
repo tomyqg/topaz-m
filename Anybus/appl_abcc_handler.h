@@ -143,7 +143,7 @@ EXTFUNC APPL_AbccHandlerStatusType APPL_HandleAbcc( void );
 **    None
 **------------------------------------------------------------------------------
 */
-EXTFUNC void APPL_RestartAbcc( void );
+//EXTFUNC void APPL_RestartAbcc( void );
 
 /*------------------------------------------------------------------------------
 ** This function will force the ABCC handler to shutdown the ABCC module
@@ -155,7 +155,7 @@ EXTFUNC void APPL_RestartAbcc( void );
 **    None
 **------------------------------------------------------------------------------
 */
-EXTFUNC void APPL_Shutdown( void );
+//EXTFUNC void APPL_Shutdown( void );
 
 /*------------------------------------------------------------------------------
 ** This function will force the ABCC handler to reset the ABCC
@@ -167,7 +167,7 @@ EXTFUNC void APPL_Shutdown( void );
 **    None
 **------------------------------------------------------------------------------
 */
-EXTFUNC void APPL_Reset( void );
+//EXTFUNC void APPL_Reset( void );
 
 /*------------------------------------------------------------------------------
 ** Application has encountered an unexpected error.
@@ -193,7 +193,7 @@ EXTFUNC void APPL_UnexpectedError( void );
 **                           FALSE: Reset request NOT allowed.
 **------------------------------------------------------------------------------
 */
-EXTFUNC BOOL IsResetRequestAllowed( UINT8 bResetType );
+//EXTFUNC BOOL IsResetRequestAllowed( UINT8 bResetType );
 
 /*------------------------------------------------------------------------------
 ** Set HW switch 1 value to the application. The value is used to generate the
@@ -209,7 +209,7 @@ EXTFUNC BOOL IsResetRequestAllowed( UINT8 bResetType );
 **    None
 **------------------------------------------------------------------------------
 */
-EXTFUNC void APPL_SetAddress( UINT8 bSwitchValue );
+//EXTFUNC void APPL_SetAddress( UINT8 bSwitchValue );
 
 /*------------------------------------------------------------------------------
 ** Set HW switch 2 value to the application. The value is used to generate the
@@ -224,5 +224,7 @@ EXTFUNC void APPL_SetAddress( UINT8 bSwitchValue );
 **------------------------------------------------------------------------------
 */
 EXTFUNC void APPL_SetBaudrate( UINT8 bSwitchValue );
+
+EXTFUNC void ABCC_Tick(const int ms);
 
 #endif  /* inclusion lock */

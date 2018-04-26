@@ -343,7 +343,7 @@ static ABCC_CmdSeqRespStatusType DataFormatResp( ABP_MsgType* psMsg )
       break;
    }
    ABCC_ASSERT( abcc_eNetFormat < NET_UNKNOWN );
-   DEBUG_EVENT( ( "RSP MSG_DATA_FORMAT: %d\n", abcc_eNetFormat ) );
+   DEBUG_EVENT( ( "RSP MSG_DATA_FORMAT: %d\n", (int)abcc_eNetFormat ) );
    return( ABCC_EXEC_NEXT_COMMAND );
 }
 
@@ -382,7 +382,7 @@ static ABCC_CmdSeqRespStatusType ParamSupportResp( ABP_MsgType* psMsg )
    {
       abcc_eParameterSupport = PARAMETER_SUPPORT;
    }
-   DEBUG_EVENT( ( "RSP MSG_GET_PARAM_SUPPORT: %d\n", abcc_eParameterSupport ) );
+   DEBUG_EVENT( ( "RSP MSG_GET_PARAM_SUPPORT: %d\n", (int)abcc_eParameterSupport ) );
    return( ABCC_EXEC_NEXT_COMMAND );
 }
 

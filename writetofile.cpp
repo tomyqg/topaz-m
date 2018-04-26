@@ -17,6 +17,11 @@ extern QVector<QDateTime> X_Date_Coordinates;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
+    QFile gpio("/sys/class/gpio/export");
+    gpio.open(QIODevice::WriteOnly);
+    QTextStream outgpio(&gpio);
+    outgpio << num;
+    gpio.close();
     QFile filedir("/sys/class/gpio/gpio" + QString::number(num) + "/direction");
     filedir.open(QIODevice::WriteOnly);
     QTextStream outdir(&filedir);

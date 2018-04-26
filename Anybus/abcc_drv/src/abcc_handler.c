@@ -388,6 +388,8 @@ ABCC_ErrorCodeType ABCC_StartDriver( UINT32 lMaxStartupTimeMs )
 
    abcc_bOpmode = ABCC_GetOpmode();
 
+//   fprintf(stderr, "abcc_bOpmode = %d\n", abcc_bOpmode);
+
    switch( abcc_bOpmode )
    {
 #if( ABCC_CFG_DRV_SERIAL )
@@ -575,6 +577,8 @@ ABCC_ErrorCodeType ABCC_StartDriver( UINT32 lMaxStartupTimeMs )
       return( ABCC_EC_INCORRECT_OPERATING_MODE );
    }
 
+//   fprintf(stderr, "abcc_eMainState = %d\n", abcc_eMainState);
+
    if ( !( ( abcc_eMainState == ABCC_DRV_INIT )  ||
            ( abcc_eMainState == ABCC_DRV_SHUTDOWN ) ) )
    {
@@ -588,6 +592,8 @@ ABCC_ErrorCodeType ABCC_StartDriver( UINT32 lMaxStartupTimeMs )
    {
       return( ABCC_EC_INTERNAL_ERROR );
    }
+
+//   fprintf(stderr, "before ABCC_TimerInit()\n");
 
    ABCC_TimerInit();
    pnABCC_DrvInit( abcc_bOpmode );
@@ -638,6 +644,7 @@ ABCC_ErrorCodeType ABCC_StartDriver( UINT32 lMaxStartupTimeMs )
 
 ABCC_CommunicationStateType ABCC_isReadyForCommunication( void )
 {
+//    fprintf(stderr, "ABCC_isReadyForCommunication: abcc_eMainState = %d\n", abcc_eMainState);
    if( abcc_eMainState > ABCC_DRV_WAIT_COMMUNICATION_RDY )
    {
       return( ABCC_READY_FOR_COMMUNICATION );
@@ -648,6 +655,9 @@ ABCC_CommunicationStateType ABCC_isReadyForCommunication( void )
       return( ABCC_NOT_READY_FOR_COMMUNICATION );
    }
 
+//   fprintf(stderr, \
+//           "ABCC_isReadyForCommunication: abcc_fReadyForCommunicationTmo = %d\n", \
+//           abcc_fReadyForCommunicationTmo);
    if( abcc_fReadyForCommunicationTmo == TRUE )
    {
       if( IsInterruptInUse() || IsPolledInterruptInUse() )
@@ -666,7 +676,9 @@ ABCC_CommunicationStateType ABCC_isReadyForCommunication( void )
       abcc_fReadyForCommunication = ABCC_SYS_IsAbccInterruptActive();
    }
 #endif
-
+//      fprintf(stderr, \
+//              "ABCC_isReadyForCommunication: abcc_fReadyForCommunication = %d\n", \
+//              abcc_fReadyForCommunication);
    if( abcc_fReadyForCommunication == TRUE )
    {
       pnABCC_DrvSetIntMask( ABCC_iInterruptEnableMask );
@@ -842,7 +854,9 @@ ABCC_ErrorCodeType ABCC_SendCmdMsg( ABP_MsgType*  psCmdMsg, ABCC_MsgHandlerFuncT
    if( ABCC_LinkMapMsgHandler( ABCC_GetLowAddrOct( sMsg.psMsg16->sHeader.iSourceIdDestObj ),
                                pnMsgHandler ) == ABCC_EC_NO_ERROR )
    {
+
       eResult = ABCC_LinkWriteMessage( sMsg.psMsg );
+
       if( eResult != ABCC_EC_NO_ERROR )
       {
          /*

@@ -22,8 +22,9 @@
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
-#endif
 #include "Drivers/driverI2C.h"
+#endif
+#include "Communicator/communicator.h"
 
 //#define DEBUG_RELAY
 
@@ -114,6 +115,7 @@ private slots:
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
+    void askAnybusIRQ();
 
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
@@ -137,6 +139,7 @@ private:
     ChannelOptions channel4;
 
     bool eventFilter(QObject* watched, QEvent* event);
+    void keyPressEvent(QKeyEvent *event);
     bool needupdatePainter;
     bool needConfirmationchannel1;
     bool needConfirmationchannel2;
@@ -235,7 +238,7 @@ private:
     void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, QPainter painter, int alerttextsize, int smalltextsize);
     void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, int smalltextsize, int alerttextsize);
     void SetChannelRectPosition(int alertwindowwidth, int alertwindowheight);
-    void PaintCyfrasBottomSeparate();
+//    void PaintCyfrasBottomSeparate();
     void CheckState(ChannelOptions &channel);
     void DrawScene();
     void DrawSceneBottom();
@@ -267,6 +270,12 @@ private:
     cLogger * logger;
 
     QJsonObject ObjectFromString(const QString& in);
+
+    //таймер для слежения IRQ от модуля Anybus
+    QTimer * timerAnybusEv;
+
+    cCommunicator * comm;
+    QTimer * commRun;
 
 protected:
     void paintEvent(QPaintEvent *event) ;

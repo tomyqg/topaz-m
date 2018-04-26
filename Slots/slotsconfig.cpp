@@ -19,8 +19,13 @@ cSlotsConfig::cSlotsConfig(QObject *parent) : QObject(parent)
 
 cSlotsConfig::~cSlotsConfig()
 {
-    foreach (Slot * s, listSlots) {
-        delete s;
+//    foreach (Slot * s, listSlots) {
+//        delete s;
+//    }
+    for(int i = 0; i < listSlots.size(); i++)
+    {
+        listSlots.at(i)->deleteLater();
+//        listSlots.erase();
     }
 }
 

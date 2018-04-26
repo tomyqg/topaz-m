@@ -487,14 +487,18 @@ static BOOL ExecCmdSequence( CmdSeqHandlerType* psCmdSeqHandler, ABP_MsgType* ps
 #if ABCC_CFG_DEBUG_CMD_SEQ_ENABLED
             ABCC_PORT_DebugPrint( ( "CmdSeq(%x)->%s()\n", (UINT32)psCmdSeqHandler->pasCmdSeq,
                                                psCmdSeqHandler->pasCmdSeq[ psCmdSeqHandler->bCurrSeqIndex ].pcCmdName ) );
-
+//            fprintf(stderr, "CmdSeq(%x)->%s()\n", (UINT32)psCmdSeqHandler->pasCmdSeq,
+//                    psCmdSeqHandler->pasCmdSeq[ psCmdSeqHandler->bCurrSeqIndex ].pcCmdName);
 #endif
          eStatus = psCmdSeq->pnCmdHandler( psMsg );
+//         fprintf(stderr, "ExecCmdSequence: eStatus = %d\n", eStatus);
          if( eStatus == ABCC_SKIP_COMMAND )
          {
 #if ABCC_CFG_DEBUG_CMD_SEQ_ENABLED
             ABCC_PORT_DebugPrint( ( "CmdSeq(%x)->Command not sent, jump to next sequence step\n",
                                     (UINT32)psCmdSeqHandler->pasCmdSeq ) );
+//            fprintf(stderr, "CmdSeq(%x)->Command not sent, jump to next sequence step\n",
+//                    (UINT32)psCmdSeqHandler->pasCmdSeq);
 #endif
             /*
             ** User has chosen not to execute this command. Move to next.
@@ -504,10 +508,14 @@ static BOOL ExecCmdSequence( CmdSeqHandlerType* psCmdSeqHandler, ABP_MsgType* ps
          }
          else if( eStatus == ABCC_SEND_COMMAND )
          {
+
             psCmdSeqHandler->bSourceId = ABCC_GetMsgSourceId( psMsg );
             SetState( psCmdSeqHandler, CMD_SEQ_WAITING_FOR_RESP );
+
             (void)ABCC_SendCmdMsg( psMsg, HandleResponse );
+//            fprintf(stderr, "ExecCmdSequence: ABCC_SEND_COMMAND\n", eStatus);
             fCmdBufferConsumed = TRUE;
+
          }
          else
          {
@@ -582,12 +590,14 @@ void ABCC_AddCmdSeq( const ABCC_CmdSeqType* pasCmdSeq,
       ** Allocate and init handler.
       */
       psCmdSeqHandler = AllocCmdSeqHandler( pasCmdSeq );
+//      fprintf(stderr, "ABCC_AddCmdSeq: psCmdSeqHandler = %d\n", psCmdSeqHandler);
       if( psCmdSeqHandler != NULL )
       {
          psCmdSeqHandler->pnSeqDone = pnCmdSeqDone;
 
 #if ABCC_CFG_CMD_SEQ_IMMEDIATE_SEND
          psMsg = ABCC_GetCmdMsgBuffer();
+//         fprintf(stderr, "ABCC_AddCmdSeq: psMsg = %d\n", psMsg);
          (void)ExecCmdSequence( psCmdSeqHandler, psMsg );
 #else
          SetState( psCmdSeqHandler, CMD_SEQ_RETRIGGER );

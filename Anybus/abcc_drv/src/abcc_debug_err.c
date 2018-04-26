@@ -183,9 +183,13 @@ void ABCC_DebugPrintMsg( char* pcInfo, ABP_MsgType* psMsg )
 
 void ABCC_DebugPrintMsgEvent( char* pcInfo, ABP_MsgType* psMsg )
 {
+//    fprintf(stderr, "%s: MsgBuf:0x%08x SrcId:0x%02x\n",
+//            pcInfo,(UINT32)psMsg,
+//            ABCC_GetMsgSourceId( psMsg ));
    ABCC_PORT_DebugPrint( ( "%s: MsgBuf:0x%08x SrcId:0x%02x\n",
                           pcInfo,(UINT32)psMsg,
                           ABCC_GetMsgSourceId( psMsg ) ) );
+
 }
 #endif
 
@@ -198,6 +202,12 @@ UINT8 ABCC_GetDriverError( ABCC_ErrInfoType** ppacErrInfo )
    }
    return( abcc_bErrCount );
 }
+
+//void debug_printf(__const char *__restrict __format, ...)
+//{
+//    fprintf(stderr, &(__format));
+//}
+
 
 #if ABCC_CFG_DEBUG_ERR_ENABLED
 void ABCC_ErrorHandler( ABCC_SeverityType eSeverity,
@@ -220,6 +230,10 @@ void ABCC_ErrorHandler( ABCC_SeverityType eSeverity,
    ABCC_PORT_DebugPrint( ( "Severity  : %s\nError code: %s(ErrNo: %d)\nAdd info  : %s(0x%x)\n%s\n",
                         pacSeverity, pacErrorCode, eErrorCode,
                         pacAddInfo, lAddInfo, pacLocation ) );
+   fprintf(stderr,  "Severity  : %s\nError code: %s(ErrNo: %d)\nAdd info  : %s(0x%x)\n%s\n",
+           pacSeverity, pacErrorCode, eErrorCode,
+           pacAddInfo, lAddInfo, pacLocation);
+
 #else
    LogError( eSeverity, eErrorCode, lAddInfo );
 #endif

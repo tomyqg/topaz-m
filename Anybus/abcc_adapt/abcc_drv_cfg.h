@@ -84,7 +84,7 @@
       #define ABCC_CFG_ABCC_OP_MODE_30       ABP_OP_MODE_8_BIT_PARALLEL
    #endif
    #ifndef ABCC_CFG_ABCC_OP_MODE_40
-      #define ABCC_CFG_ABCC_OP_MODE_40       ABP_OP_MODE_8_BIT_PARALLEL
+      #define ABCC_CFG_ABCC_OP_MODE_40       ABP_OP_MODE_SPI
    #endif
 #endif
 
@@ -196,7 +196,7 @@
 **------------------------------------------------------------------------------
 */
 #ifndef ABCC_CFG_POLL_ABCC_IRQ_PIN
-   #define ABCC_CFG_POLL_ABCC_IRQ_PIN                 ( TRUE )
+   #define ABCC_CFG_POLL_ABCC_IRQ_PIN                 ( FALSE )
 #endif
 #ifndef ABCC_CFG_INT_ENABLED
    #define ABCC_CFG_INT_ENABLED                       ( FALSE )
@@ -287,7 +287,7 @@
    #define ABCC_CFG_DEBUG_MESSAGING                   ( TRUE )
 #endif
 #ifndef ABCC_CFG_DEBUG_CMD_SEQ_ENABLED
-   #define ABCC_CFG_DEBUG_CMD_SEQ_ENABLED             ( FALSE )
+   #define ABCC_CFG_DEBUG_CMD_SEQ_ENABLED             ( TRUE )
 #endif
 
 #endif  /* inclusion lock */

@@ -309,9 +309,10 @@ int _modbus_rtu_check_integrity(modbus_t *ctx, uint8_t *msg,
 
         int z;
 
-        fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
-                crc_received, crc_calculated, msg[0]);
-
+        if (ctx->debug) {
+            fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
+                    crc_received, crc_calculated, msg[0]);
+        }
         //        fprintf(stderr, "CRC received %0X != CRC calculated %0X First symbol = %0X \n",
         //                crc_received, crc_calculated, msg[0]);
 

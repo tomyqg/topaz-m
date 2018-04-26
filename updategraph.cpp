@@ -578,6 +578,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 //        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
         arrow->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow);
+        arrow->deleteLater();
 
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 1, Qt::SolidLine));
@@ -585,6 +586,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 //        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->ustavka2.getStateValue() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
+        arrow2->deleteLater();
 
 
         QPointF Label1PixPoint = arrow->start->pixelPoint();
@@ -609,6 +611,9 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 //        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
+
+        textLabelHi->deleteLater();
+        textLabelLo->deleteLater();
     }
 
 
@@ -662,6 +667,9 @@ void MainWindow::GrafsUpdateTrendsAndBars()
             NameLabel->setColor(Chanel->GetNormalColor());
 
             ++index;
+
+            arrow->deleteLater();
+            NameLabel->deleteLater();
         }
     }
 
@@ -731,6 +739,9 @@ void MainWindow::GrafsUpdateTrends()
             NameLabel->setColor(Chanel->GetNormalColor());
 
             ++index;
+
+            arrow->deleteLater();
+            NameLabel->deleteLater();
         }
     }
 
@@ -1044,7 +1055,13 @@ void MainWindow::GrafsUpdateBars()
 //        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
+
         ++barindex;
+
+        arrow->deleteLater();
+        arrow2->deleteLater();
+        textLabelHi->deleteLater();
+        textLabelLo->deleteLater();
     }
 
     if (ui->autoscalecheckbox->checkState())
@@ -1059,6 +1076,7 @@ void MainWindow::GrafsUpdateBars()
 
 void MainWindow::UpdateChannel1Slot()
 {
+    if(channel1.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(0);
@@ -1075,6 +1093,7 @@ void MainWindow::UpdateChannel1Slot()
 
 void MainWindow::UpdateChannel2Slot()
 {
+    if(channel2.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(1);
@@ -1091,6 +1110,7 @@ void MainWindow::UpdateChannel2Slot()
 
 void MainWindow::UpdateChannel3Slot()
 {
+    if(channel3.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(2);
@@ -1107,6 +1127,7 @@ void MainWindow::UpdateChannel3Slot()
 
 void MainWindow::UpdateChannel4Slot()
 {
+    if(channel4.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(3);

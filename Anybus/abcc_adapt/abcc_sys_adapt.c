@@ -26,6 +26,7 @@
 #include "abcc_sys_adapt_spi.h"
 #include "abcc.h"
 #include "Drivers/driverspi.h"
+#include "stdio.h"
 
 
 
@@ -34,23 +35,25 @@
 ********************************************************************************
 */
 
-
+//функция управления ~RESET для AnybusCC
 void ABCC_SYS_HWReset( void )
 {
-//   *(volatile UINT32*)(pMemSys + 0x240) |= 0x00000001;
+    // реализация не требуется, так как RESET реализован аппаратно - работает при включении
 }
 
+//Функция сброса
 void ABCC_SYS_HWReleaseReset( void )
 {
-//   *(volatile UINT32*)(pMemSys + 0x240) &= ~0x00000001;
+    //управление RESET не доступно через софт
 }
 
 BOOL ABCC_SYS_HwInit( void )
 {
 
     //init of spi interface
-    spi_init(SPI_CS0, /*SPI_MODE_2*/2, 0, 200000);
-//    ABCC_SYS_HWReset();
+    fprintf(stderr, "spi_init\n");
+    spi_init(SPI_CS0, SPI_MODE_3, 0, 10000); //100кГц
+    ABCC_SYS_HWReset();
    return TRUE;
 }
 
@@ -61,7 +64,7 @@ BOOL ABCC_SYS_Init( void )
 
 void ABCC_SYS_Close( void )
 {
-
+    printf("ABCC_SYS_Close");
 }
 
 //- Check if interrupt is active.
@@ -74,7 +77,8 @@ BOOL ABCC_SYS_IsAbccInterruptActive( void )
 void ABCC_SYS_SpiSendReceive( void* pxSendDataBuffer, void* pxReceiveDataBuffer, UINT16 iLength )
 {
     // apply SPI driver to transfer data
-    spi_trans(pxSendDataBuffer, pxReceiveDataBuffer, iLength >> 1);
+//    fprintf(stderr, "spi_trans\n");
+    spi_trans(pxSendDataBuffer, pxReceiveDataBuffer, iLength);
     pndr();
 }
 

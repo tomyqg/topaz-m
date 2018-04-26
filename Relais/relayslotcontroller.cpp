@@ -7,8 +7,12 @@ cRelaySlotController::cRelaySlotController(QObject *parent) : QObject(parent)
 
 cRelaySlotController::~cRelaySlotController()
 {
-    foreach (cRelaySlotConnector * rs, listRS) {
-        delete rs;
+//    foreach (cRelaySlotConnector * rs, listRS) {
+//        delete rs;
+//    }
+    for(int i = 0; i < listRS.size(); i++)
+    {
+        listRS.at(i)->deleteLater();
     }
 }
 

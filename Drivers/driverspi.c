@@ -19,6 +19,7 @@ struct spi_ioc_transfer transfer;
 static void pabort(const char *s)
 {
     perror(s);
+    fprintf(stderr, s);
     assert(0);
 }
 
@@ -78,8 +79,31 @@ int spi_trans(unsigned char * tx, unsigned char * rx, unsigned short len)
 
     close(fd);
 
+    char s[len*3+4+10];
+    char s1[len*3+4+10];
+
+
+    sprintf(s1, "Tx: ");
+    for (ret = 0; ret < len; ret++) {
+        sprintf(s, "%.2X ", tx[ret]);
+        strcat(s1, s);
+    }
+    strcat(s1, "\n");
+    fprintf(stderr, s1);
+
+    sprintf(s1, "Rx: ");
+    for (ret = 0; ret < len; ret++) {
+        sprintf(s, "%.2X ", rx[ret]);
+        strcat(s1, s);
+    }
+    strcat(s1, "\n");
+    fprintf(stderr, s1);
+
+
+
     return ret;
 
 }
 
 #endif
+
