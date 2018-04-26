@@ -66,6 +66,7 @@
 #define MOD_OBJ_ENABLE                          TRUE
 #define ABCC_CFG_DRV_CMD_SEQ_ENABLE             TRUE
 #define ABCC_CFG_POLL_ABCC_IRQ_PIN              FALSE
+#define ABCC_CFG_WD_TIMEOUT_MS                  1500
 
 /* Anybus CompactCom Setup */
 #define ABCC_CFG_MAX_NUM_APPL_CMDS                  ( 2 )

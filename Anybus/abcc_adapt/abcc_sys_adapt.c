@@ -68,7 +68,7 @@ BOOL ABCC_SYS_HwInit( void )
 
     //init of spi interface
     fprintf(stderr, "spi_init\n");
-    spi_init(SPI_CS0, SPI_MODE_3, 0, 10000); //100кГц
+    spi_init(SPI_CS0, SPI_MODE_3, 0, 10000000); //100МГц
     ABCC_SYS_HWReset();
    return TRUE;
 }

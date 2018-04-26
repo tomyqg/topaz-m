@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#define TIMEOUT_COMMUNICATOR_MS 1000
+#define TIMEOUT_COMMUNICATOR_MS 10
 
 class cCommunicator : public QObject
 {
