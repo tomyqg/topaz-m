@@ -363,7 +363,6 @@ ABCC_ErrorCodeType ABCC_HwInit( void )
    return( ABCC_EC_NO_ERROR );
 }
 
-
 ABCC_ErrorCodeType ABCC_StartDriver( UINT32 lMaxStartupTimeMs )
 {
    UINT8 bModuleId;

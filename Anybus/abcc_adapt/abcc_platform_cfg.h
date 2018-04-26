@@ -64,6 +64,7 @@
 
 #define DPV1_OBJ_ENABLE                         TRUE
 #define MOD_OBJ_ENABLE                          TRUE
+#define ABCC_CFG_DRV_CMD_SEQ_ENABLE             TRUE
 #define ABCC_CFG_POLL_ABCC_IRQ_PIN              FALSE
 
 /* Anybus CompactCom Setup */

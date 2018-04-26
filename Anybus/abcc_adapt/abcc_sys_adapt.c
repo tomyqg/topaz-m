@@ -27,6 +27,7 @@
 #include "abcc.h"
 #include "Drivers/driverspi.h"
 #include "stdio.h"
+#include "fcntl.h"
 
 
 
@@ -35,16 +36,31 @@
 ********************************************************************************
 */
 
-//функция управления ~RESET для AnybusCC
+//функция установки RESET для AnybusCC
 void ABCC_SYS_HWReset( void )
 {
-    // реализация не требуется, так как RESET реализован аппаратно - работает при включении
+
+    FILE *fgpio = fopen( "/sys/class/gpio/gpio96/value", "w" );
+    if(fgpio == NULL)
+        fprintf(stderr, "Error file /sys/class/gpio/gpio96/value open\n");
+    else
+        fprintf(fgpio, "0");
+
+    fclose(fgpio);
+
+
 }
 
-//Функция сброса
+//Функция сброса RESET - включение anybus
 void ABCC_SYS_HWReleaseReset( void )
 {
-    //управление RESET не доступно через софт
+    FILE *fgpio = fopen( "/sys/class/gpio/gpio96/value", "w" );
+    if(fgpio == NULL)
+        fprintf(stderr, "Error file /sys/class/gpio/gpio96/value open\n");
+    else
+        fprintf(fgpio, "1");
+
+    fclose(fgpio);
 }
 
 BOOL ABCC_SYS_HwInit( void )

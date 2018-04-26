@@ -255,12 +255,12 @@ static void UpdateBaudRateDone( void );
 */
 static const ABCC_CmdSeqType appl_asUserInitCmdSeq[] =
 {
-   ABCC_CMD_SEQ( UpdateIpAddress, NULL ),
-   ABCC_CMD_SEQ( UpdateNetmask, NULL ),
-   ABCC_CMD_SEQ( UpdateGateway, NULL ),
-   ABCC_CMD_SEQ( UpdateDhcp, NULL ),
-   ABCC_CMD_SEQ( UpdateNodeAddress, NULL ),
-   ABCC_CMD_SEQ( UpdateBaudRate, NULL ),
+//   ABCC_CMD_SEQ( UpdateIpAddress, NULL ),
+//   ABCC_CMD_SEQ( UpdateNetmask, NULL ),
+//   ABCC_CMD_SEQ( UpdateGateway, NULL ),
+//   ABCC_CMD_SEQ( UpdateDhcp, NULL ),
+//   ABCC_CMD_SEQ( UpdateNodeAddress, NULL ),
+//   ABCC_CMD_SEQ( UpdateBaudRate, NULL ),
    ABCC_CMD_SEQ_END()
 };
 
@@ -1016,12 +1016,12 @@ void ABCC_CbfReceiveMsg( ABP_MsgType* psReceivedMsg )
 
 void ABCC_CbfWdTimeout( void )
 {
-   ABCC_PORT_DebugPrint( ( "ABCC watchdog timeout" ) );
+   ABCC_PORT_DebugPrint( ( "ABCC watchdog timeout\n" ) );
 }
 
 void ABCC_CbfWdTimeoutRecovered( void )
 {
-   ABCC_PORT_DebugPrint( ( "ABCC watchdog recovered" ) );
+   ABCC_PORT_DebugPrint( ( "ABCC watchdog recovered\n" ) );
 }
 
 #if ABCC_CFG_SYNC_ENABLE
