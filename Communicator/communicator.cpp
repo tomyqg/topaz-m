@@ -4,7 +4,7 @@
 #include "appl_abcc_handler.h"
 #include "QProcess"
 
-#
+#include "pin.h"
 
 cCommunicator::cCommunicator(QObject * parent) : QObject(parent)
 {
@@ -24,13 +24,15 @@ int cCommunicator::init()
 //    qDebug() << "cCommunicator::init() - 2";
 
     //инициализация gpio3_0 на управление RESET
-    QProcess process;
-    process.start("sh", QStringList() << "-c" << "echo 96 > /sys/class/gpio/export");
-    process.waitForFinished();
-    process.start("sh", QStringList() << "-c" << "echo out > /sys/class/gpio/gpio96/direction");
-    process.waitForFinished();
-    process.start("sh", QStringList() << "-c" << "echo 0 > /sys/class/gpio/gpio96/value");
-    process.waitForFinished();
+//    QProcess process;
+//    process.start("sh", QStringList() << "-c" << "echo 96 > /sys/class/gpio/export");
+//    process.waitForFinished();
+//    process.start("sh", QStringList() << "-c" << "echo out > /sys/class/gpio/gpio96/direction");
+//    process.waitForFinished();
+//    process.start("sh", QStringList() << "-c" << "echo 0 > /sys/class/gpio/gpio96/value");
+//    process.waitForFinished();
+
+
 
     res = ABCC_HwInit();
     if( res != ABCC_EC_NO_ERROR )

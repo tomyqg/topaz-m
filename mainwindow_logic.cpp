@@ -256,8 +256,8 @@ void MainWindow::MainWindowInitialization()
     //инициализация Anybus
     //вероятно придётся вынести в отдельный поток
     timerAnybusEv = new QTimer();
-    connect(timerAnybusEv, SIGNAL(timeout()), this, SLOT(askAnybusIRQ()));
-    timerAnybusEv->start(1000);  //проверка IRQ каждые 100 мс
+//    connect(timerAnybusEv, SIGNAL(timeout()), this, SLOT(askAnybusIRQ()));
+//    timerAnybusEv->start(1000);  //проверка IRQ каждые 100 мс
 
     //запуск Хост приложения Anybus
     comm = new cCommunicator();

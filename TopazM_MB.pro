@@ -67,13 +67,12 @@ SOURCES += main.cpp \
     Communicator/communicator.cpp \
     Anybus/appl_abcc_handler.c \
     Anybus/appl_adi_config.c
-    
-
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
                 Drivers/driveri2c.cpp \
                 Drivers/driverspi.c \
+                Drivers/pin.c \
                 Anybus/abcc_adapt/abcc_sw_port.c \
                 Anybus/abcc_drv/src/spi/abcc_crc32.c \
                 Anybus/abcc_drv/src/spi/abcc_handler_spi.c \
@@ -148,6 +147,7 @@ HEADERS  += mainwindow.h \
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
+            Drivers/pin.h \
             Anybus/abcc_abp/abp.h \
             Anybus/abcc_abp/abp_add.h \
             Anybus/abcc_abp/abp_asm.h \

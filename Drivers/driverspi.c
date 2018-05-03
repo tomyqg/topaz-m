@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 
+//#define DEBUG_SPI
 
 char dev[100];     // name device
 unsigned char spimode;    // spi mode
@@ -79,9 +80,10 @@ int spi_trans(unsigned char * tx, unsigned char * rx, unsigned short len)
 
     close(fd);
 
+#ifdef DEBUG_SPI
+
     char s[len*3+4+10];
     char s1[len*3+4+10];
-
 
     sprintf(s1, "Tx: ");
     for (ret = 0; ret < len; ret++) {
@@ -99,7 +101,7 @@ int spi_trans(unsigned char * tx, unsigned char * rx, unsigned short len)
     strcat(s1, "\n");
     fprintf(stderr, s1);
 
-
+#endif
 
     return ret;
 
