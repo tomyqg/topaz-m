@@ -12,6 +12,7 @@
 
 int main(int argc, char *argv[])
 {
+
 #ifndef Q_OS_WIN32
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     //    QTextCodec::setCodecForTr(codec);
