@@ -23,8 +23,9 @@
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
 #include "Drivers/driverI2C.h"
-#endif
 #include "Communicator/communicator.h"
+#endif
+
 
 
 //#define DEBUG_RELAY
@@ -116,7 +117,7 @@ private slots:
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
-    void askAnybusIRQ();
+//    void askAnybusIRQ();
 
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
@@ -140,7 +141,7 @@ private:
     ChannelOptions channel4;
 
     bool eventFilter(QObject* watched, QEvent* event);
-    void keyPressEvent(QKeyEvent *event);
+//    void keyPressEvent(QKeyEvent *event);
     bool needupdatePainter;
     bool needConfirmationchannel1;
     bool needConfirmationchannel2;
@@ -275,8 +276,10 @@ private:
     //таймер для слежения IRQ от модуля Anybus
     QTimer * timerAnybusEv;
 
+#ifndef Q_OS_WIN
     cCommunicator * comm;
     QTimer * commRun;
+#endif
 
 protected:
     void paintEvent(QPaintEvent *event) ;

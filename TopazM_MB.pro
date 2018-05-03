@@ -63,16 +63,14 @@ SOURCES += main.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
     log.cpp \
-    kvitirovanie.cpp \
-    Communicator/communicator.cpp \
-    Anybus/appl_abcc_handler.c \
-    Anybus/appl_adi_config.c
+    kvitirovanie.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
                 Drivers/driveri2c.cpp \
                 Drivers/driverspi.c \
                 Drivers/pin.c \
+                Communicator/communicator.cpp \
                 Anybus/abcc_adapt/abcc_sw_port.c \
                 Anybus/abcc_drv/src/spi/abcc_crc32.c \
                 Anybus/abcc_drv/src/spi/abcc_handler_spi.c \
@@ -101,7 +99,9 @@ unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 Anybus/abcc_obj/opcua_obj.c \
                 Anybus/abcc_obj/safe_obj.c \
                 Anybus/abcc_obj/sync_obj.c \
-                Anybus/abcc_adapt/abcc_sys_adapt.c
+                Anybus/abcc_adapt/abcc_sys_adapt.c \
+                Anybus/appl_abcc_handler.c \
+                Anybus/appl_adi_config.c
 
 unix:DEFINES += _TTY_POSIX_
 
@@ -140,14 +140,12 @@ HEADERS  += mainwindow.h \
     Slots/devicechannel.h \
     archivator.h \
     log.h \
-    kvitirovanie.h \
-    Communicator/communicator.h \
-    Anybus/appl_abcc_handler.h \
-    Anybus/appl_adi_config.h
+    kvitirovanie.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
             Drivers/pin.h \
+            Communicator/communicator.h \
             Anybus/abcc_abp/abp.h \
             Anybus/abcc_abp/abp_add.h \
             Anybus/abcc_abp/abp_asm.h \
@@ -225,7 +223,9 @@ unix:HEADERS += Drivers/driveri2c.h \
             Anybus/abcc_obj/opcua_obj.h \
             Anybus/abcc_obj/safe_obj.h \
             Anybus/abcc_obj/sync_obj.h \
-            Anybus/abcc_versions.h
+            Anybus/abcc_versions.h \
+            Anybus/appl_abcc_handler.h \
+            Anybus/appl_adi_config.h
 
 FORMS    += mainwindow.ui \
     options.ui \
