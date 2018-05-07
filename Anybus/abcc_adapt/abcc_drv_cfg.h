@@ -275,19 +275,19 @@
 **------------------------------------------------------------------------------
 */
 #ifndef ABCC_CFG_ERR_REPORTING_ENABLED
-   #define ABCC_CFG_ERR_REPORTING_ENABLED             ( FALSE )
+   #define ABCC_CFG_ERR_REPORTING_ENABLED             ( TRUE )
 #endif
 #ifndef ABCC_CFG_DEBUG_EVENT_ENABLED
-   #define ABCC_CFG_DEBUG_EVENT_ENABLED               ( FALSE )
+   #define ABCC_CFG_DEBUG_EVENT_ENABLED               ( TRUE )
 #endif
 #ifndef ABCC_CFG_DEBUG_ERR_ENABLED
-   #define ABCC_CFG_DEBUG_ERR_ENABLED                 ( FALSE )
+   #define ABCC_CFG_DEBUG_ERR_ENABLED                 ( TRUE )
 #endif
 #ifndef ABCC_CFG_DEBUG_MESSAGING
-   #define ABCC_CFG_DEBUG_MESSAGING                   ( FALSE )
+   #define ABCC_CFG_DEBUG_MESSAGING                   ( TRUE )
 #endif
 #ifndef ABCC_CFG_DEBUG_CMD_SEQ_ENABLED
-   #define ABCC_CFG_DEBUG_CMD_SEQ_ENABLED             ( FALSE )
+   #define ABCC_CFG_DEBUG_CMD_SEQ_ENABLED             ( TRUE )
 #endif
 
 #endif  /* inclusion lock */
