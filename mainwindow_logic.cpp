@@ -59,11 +59,6 @@ extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Cha
 extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 
-extern "C"
-{
-    void init_pins_gpio(void);
-}
-
 void MainWindow::MainWindowInitialization()
 {
     //qRegisterMetaType<Transaction>("Transaction");
@@ -243,6 +238,11 @@ void MainWindow::MainWindowInitialization()
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
     effect->setBlurRadius(20.0);
     effect->setOffset(2);
+    ui->bar_1->setGraphicsEffect(effect);
+    QGraphicsDropShadowEffect *effect1 = new QGraphicsDropShadowEffect();
+    effect1->setBlurRadius(20.0);
+    effect1->setOffset(2);
+    ui->bar_2->setGraphicsEffect(effect1);
 
     //инициализация архиватора
     QList<ChannelOptions*> listCh;
@@ -261,10 +261,10 @@ void MainWindow::MainWindowInitialization()
 
 #ifndef Q_OS_WIN
     //запуск Хост приложения Anybus
-    comm = new cCommunicator();
-    commRun = new QTimer();
-    connect(commRun, SIGNAL(timeout()), comm, SLOT(run()));
-    commRun->start(TIMEOUT_COMMUNICATOR_MS);
+//    comm = new cCommunicator();
+//    commRun = new QTimer();
+//    connect(commRun, SIGNAL(timeout()), comm, SLOT(run()));
+//    commRun->start(TIMEOUT_COMMUNICATOR_MS);
 #endif
 }
 
