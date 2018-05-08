@@ -113,7 +113,7 @@ private slots:
     void on_WorkButton_clicked();
     void on_ArchiveButton_clicked();
     void on_EcoCheckBox_toggled(bool checked);
-    void on_timeButton_clicked();
+//    void on_timeButton_clicked();
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);

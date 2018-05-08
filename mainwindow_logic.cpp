@@ -231,18 +231,18 @@ void MainWindow::MainWindowInitialization()
     process.startDetached("ifconfig usb0 192.168.1.115");
 
     // включаем эко режим
-    SetEcoMode(true);
+    SetEcoMode(false);
     ClearPolarCoords();
 
-    //тени для виджетов
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
-    effect->setBlurRadius(20.0);
-    effect->setOffset(2);
-    ui->bar_1->setGraphicsEffect(effect);
-    QGraphicsDropShadowEffect *effect1 = new QGraphicsDropShadowEffect();
-    effect1->setBlurRadius(20.0);
-    effect1->setOffset(2);
-    ui->bar_2->setGraphicsEffect(effect1);
+    //тени для виджетов (Vag: работают корректно только в Windows)
+//    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+//    effect->setBlurRadius(20.0);
+//    effect->setOffset(2);
+//    ui->bar_1->setGraphicsEffect(effect);
+//    QGraphicsDropShadowEffect *effect1 = new QGraphicsDropShadowEffect();
+//    effect1->setBlurRadius(20.0);
+//    effect1->setOffset(2);
+//    ui->bar_2->setGraphicsEffect(effect1);
 
     //инициализация архиватора
     QList<ChannelOptions*> listCh;

@@ -88,17 +88,17 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
 
 }
 
-void MainWindow::on_timeButton_clicked()
-{
-    ++dateindex;
-    if (dateindex>=datestrings.length())
-        dateindex = 0 ;
+//void MainWindow::on_timeButton_clicked()
+//{
+//    ++dateindex;
+//    if (dateindex>=datestrings.length())
+//        dateindex = 0 ;
 
-    QDateTime local(QDateTime::currentDateTime());
+//    QDateTime local(QDateTime::currentDateTime());
 
-    ui->timeButton->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
-    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
-}
+//    ui->timeButton->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+//    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
+//}
 
 void MainWindow::on_pushButton_2_clicked()
 {
