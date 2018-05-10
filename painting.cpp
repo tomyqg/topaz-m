@@ -21,6 +21,7 @@ extern QColor ChannelColorHighState;
 extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
+
 void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
 {
     painter.begin(ui->MessagesWidget);
@@ -95,6 +96,8 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
     }
     painter.end();
 }
+
+
 
 void MainWindow::PaintCyfrasBottom() // пока не используем
 {
@@ -330,6 +333,8 @@ void MainWindow::PaintCyfrasRight()
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
 
+
+
 void MainWindow::PaintCyfrasNew()
 {
     //задается вручную
@@ -518,6 +523,8 @@ void MainWindow::PaintCyfrasNew()
     painter.end();
 }
 
+
+
 void MainWindow::PaintCyfrasFullScreen()
 {
     // задаётся параметры вручную
@@ -568,6 +575,7 @@ void MainWindow::PaintCyfrasFullScreen()
 
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
+
 
 void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, int smalltextsize, int alerttextsize)
 {
@@ -631,6 +639,7 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
     }
     painter.end();
 }
+
 
 void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает события на уставки
 {

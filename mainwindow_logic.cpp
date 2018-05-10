@@ -194,8 +194,8 @@ void MainWindow::MainWindowInitialization()
     channel3.SetMinimumColor(Channel3ColorMinimum);
     channel4.SetMinimumColor(Channel4ColorMinimum);
 
-    SetWindowWidthPixels(1280);
-    SetWindowHeightPixels(720);
+    SetWindowWidthPixels(1024);
+    SetWindowHeightPixels(768);
 
     // создание конфигуратора слотов
     sc = new cSlotsConfig(this);

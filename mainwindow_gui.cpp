@@ -242,8 +242,8 @@ void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
 
 void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution)
 {
-    qreal xratio = xresolution / 1280;
-    qreal yratio = yresolution / 800;
+    qreal xratio = xresolution / 1024;
+    qreal yratio = yresolution / 768;
 
     QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
 

@@ -94,10 +94,10 @@ int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelVa
 void MainWindow::DrawScene()
 {
     scene->clear(); // очищаем чтобы не было утечек памяти
-    ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
+//    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+//    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // задается вручную
     int smallrectingleheight = 90; // высота прямоугольничка в пикселях задается вручную
@@ -211,13 +211,13 @@ void MainWindow::DrawSceneBottom()
          (Options::GetCurrentDisplayParametr() != Options::Trends) )
     {
         ui->customPlot->resize(1024,527);
-        ui->graphicsView->show();
+//        ui->graphicsView->show();
         DrawScene();   // Add vertical line via center
     }
     else
     {
         ui->customPlot->resize(1024,604);
-        ui->graphicsView->hide();
+//        ui->graphicsView->hide();
     }
 }
 
