@@ -75,6 +75,9 @@
 #define ABCC_CFG_MAX_PROCESS_DATA_SIZE              ( 512 )
 #define ABCC_CFG_CMD_SEQ_MAX_NUM_RETRIES            ( 1 )
 
+/* PROFIBUS Setup */
+#define ABCC_CFC_PDPV1_NODE_ADDR                    ( 2 )
+
 
 //cDriverSPI spi;
 ABCC_SYS_SpiDataReceivedCbfType pndr;

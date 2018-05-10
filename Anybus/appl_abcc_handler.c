@@ -259,7 +259,7 @@ static const ABCC_CmdSeqType appl_asUserInitCmdSeq[] =
 //   ABCC_CMD_SEQ( UpdateNetmask, NULL ),
 //   ABCC_CMD_SEQ( UpdateGateway, NULL ),
 //   ABCC_CMD_SEQ( UpdateDhcp, NULL ),
-//   ABCC_CMD_SEQ( UpdateNodeAddress, NULL ),
+   ABCC_CMD_SEQ( UpdateNodeAddress, NULL ),
 //   ABCC_CMD_SEQ( UpdateBaudRate, NULL ),
    ABCC_CMD_SEQ_END()
 };
@@ -515,7 +515,7 @@ static ABCC_CmdSeqCmdStatusType UpdateNodeAddress( ABP_MsgType* psMsg )
       ABCC_SetByteAttribute( psMsg, ABP_OBJ_NUM_NC,
                              ABP_NC_INST_NUM_SW1,
                              ABP_NC_VAR_IA_VALUE,
-                             appl_bNwNodeAddress,
+                             ABCC_CFC_PDPV1_NODE_ADDR,
                              ABCC_GetNewSourceId() );
 
       return( ABCC_SEND_COMMAND );
