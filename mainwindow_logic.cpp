@@ -49,9 +49,9 @@ extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
 extern QColor Channel1ColorNormal;
-extern QColor Channel2ColorNormal ;
+extern QColor Channel2ColorNormal;
 extern QColor Channel3ColorNormal;
-extern QColor Channel4ColorNormal ;
+extern QColor Channel4ColorNormal;
 
 extern QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
 extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;

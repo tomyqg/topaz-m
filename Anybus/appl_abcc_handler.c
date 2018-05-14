@@ -509,8 +509,8 @@ static ABCC_CmdSeqCmdStatusType UpdateDhcp( ABP_MsgType* psMsg )
 */
 static ABCC_CmdSeqCmdStatusType UpdateNodeAddress( ABP_MsgType* psMsg )
 {
-   if( ( appl_fNwSupportsNodeId ) &&
-            ( appl_fSetAddr ) )
+   if( ( appl_fNwSupportsNodeId )/* &&
+            ( appl_fSetAddr )*/ )
    {
       ABCC_SetByteAttribute( psMsg, ABP_OBJ_NUM_NC,
                              ABP_NC_INST_NUM_SW1,
@@ -1154,6 +1154,10 @@ void ABCC_CbfUserInitReq( void )
       appl_sIpSettings.sGateway.iInstance = 8;
       appl_sIpSettings.sDhcp.iInstance = 9;
    }
+//   else if( ( iNetworkType == ABP_NW_TYPE_PDPV1 ) && ( iModuleType == ABP_MODULE_TYPE_ABCC_40 ) )
+//   {
+//      appl_sIpSettings.sAddress.iInstance = ABCC_CFC_PDPV1_NODE_ADDR;
+//   }
    else
    {
       /*

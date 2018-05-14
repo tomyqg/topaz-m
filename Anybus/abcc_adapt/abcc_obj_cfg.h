@@ -1043,7 +1043,7 @@
 ** Attribute 2: Parameterization data (Array of UINT8)
 */
 #ifndef DPV1_IA_PRM_DATA_ENABLE
-   #define DPV1_IA_PRM_DATA_ENABLE                 FALSE
+   #define DPV1_IA_PRM_DATA_ENABLE                 TRUE
    #define DPV1_IA_PRM_DATA_VALUE                  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
    #define DPV1_IA_PRM_DATA_ARRAY_SIZE             10
 #endif
@@ -1052,7 +1052,7 @@
 ** Attribute 3: Expected configuration (Array of UINT8)
 */
 #ifndef DPV1_IA_EXPECTED_CFG_DATA_ENABLE
-   #define DPV1_IA_EXPECTED_CFG_DATA_ENABLE        FALSE
+   #define DPV1_IA_EXPECTED_CFG_DATA_ENABLE        TRUE
    #define DPV1_IA_EXPECTED_CFG_DATA_VALUE         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
    #define DPV1_IA_EXPECTED_CFG_DATA_ARRAY_SIZE    10
 #endif
@@ -1061,7 +1061,7 @@
 ** Attribute 4: SSA enabled (BOOL - TRUE/FALSE)
 */
 #ifndef DPV1_IA_SSA_ENABLED_ENABLE
-   #define DPV1_IA_SSA_ENABLED_ENABLE              FALSE
+   #define DPV1_IA_SSA_ENABLED_ENABLE              TRUE
    #define DPV1_IA_SSA_ENABLED_VALUE               FALSE
 #endif
 
@@ -1069,15 +1069,15 @@
 ** Attribute 13: Revision counter (UINT16 - 0x0000-0xFFFF)
 */
 #ifndef DPV1_IA_REV_COUNTER_ENABLE
-   #define DPV1_IA_REV_COUNTER_ENABLE              FALSE
-   #define DPV1_IA_REV_COUNTER_VALUE               0xFFFF
+   #define DPV1_IA_REV_COUNTER_ENABLE              TRUE
+   #define DPV1_IA_REV_COUNTER_VALUE               0x0000
 #endif
 
 /*
 ** Attribute 14: Profile ID (UINT16 - 0x0000-0xFFFF)
 */
 #ifndef DPV1_IA_PROFILE_ID_ENABLE
-   #define DPV1_IA_PROFILE_ID_ENABLE               FALSE
+   #define DPV1_IA_PROFILE_ID_ENABLE               TRUE
    #define DPV1_IA_PROFILE_ID_VALUE                0xFFFF
 #endif
 
@@ -1085,7 +1085,7 @@
 ** Attribute 15: Profile specific type (UINT16 - 1-6)
 */
 #ifndef DPV1_IA_PROFILE_SPEC_TYPE_ENABLE
-   #define DPV1_IA_PROFILE_SPEC_TYPE_ENABLE        FALSE
+   #define DPV1_IA_PROFILE_SPEC_TYPE_ENABLE        TRUE
    #define DPV1_IA_PROFILE_SPEC_TYPE_VALUE         0x0004
 #endif
 
@@ -1093,7 +1093,7 @@
 ** Attribute 18: IM header (Array of UINT8)
 */
 #ifndef DPV1_IA_IM_HEADER_ENABLE
-   #define DPV1_IA_IM_HEADER_ENABLE                FALSE
+   #define DPV1_IA_IM_HEADER_ENABLE                TRUE
    #define DPV1_IA_IM_HEADER_VALUE                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
    #define DPV1_IA_IM_HEADER_ARRAY_SIZE            10
 #endif
