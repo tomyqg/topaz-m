@@ -9,6 +9,7 @@
 #include "stackedoptions.h"
 #include "qglobal.h"
 #include "defines.h"
+#include <stdlib.h>
 
 int xoffset=0;
 
@@ -29,6 +30,7 @@ int color2rgbminimum[]={97,153,59};     // RAL 6018
 int color3rgbminimum[]={142,146,145};   // RAL 7042
 int color4rgbminimum[]={157,98,43};    // RAL 8001
 
+double randVal[4] = {0.0, 0.0, 0.0, 0.0};
 
 // пара 2
 
@@ -1088,6 +1090,12 @@ void MainWindow::UpdateChannel1Slot()
     emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
 //    CheckAndLogginStates(channel1);
+
+    /* Test */
+    randVal[0] += ((double)((rand()%101) - 50) / 100);
+    channel1.SetCurrentChannelValue(randVal[0]);
+    ui->wBar_1->setVolue(randVal[0]);
+
     channeltimer1->setInterval(period);
 }
 
@@ -1105,6 +1113,12 @@ void MainWindow::UpdateChannel2Slot()
     emit sendTransToWorker(tr);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
 //    CheckAndLogginStates(channel2);
+
+        /* Test */
+    randVal[1] += ((double)((rand()%101) - 50) / 100);
+    channel2.SetCurrentChannelValue(randVal[1]);
+    ui->wBar_2->setVolue(randVal[1]);
+
     channeltimer2->setInterval(period);
 }
 
@@ -1122,6 +1136,12 @@ void MainWindow::UpdateChannel3Slot()
     emit sendTransToWorker(tr);
     //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
 //    CheckAndLogginStates(channel3);
+
+    /* Test */
+    randVal[2] += ((double)((rand()%101) - 50) / 100);
+    channel3.SetCurrentChannelValue(randVal[2]);
+    ui->wBar_3->setVolue(randVal[2]);
+
     channeltimer3->setInterval(period);
 }
 
@@ -1139,6 +1159,12 @@ void MainWindow::UpdateChannel4Slot()
     emit sendTransToWorker(tr);
     //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
 //    CheckAndLogginStates(channel4);
+
+    /* Test */
+    randVal[3] += ((double)((rand()%101) - 50) / 100);
+    channel4.SetCurrentChannelValue(randVal[3]);
+    ui->wBar_4->setVolue(randVal[3]);
+
     channeltimer4->setInterval(period);
 }
 

@@ -23,7 +23,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers/ Communicator/
+        Drivers/ Communicator/ Grafika/
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -63,7 +63,8 @@ SOURCES += main.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
     log.cpp \
-    kvitirovanie.cpp
+    kvitirovanie.cpp \
+    Grafika/voluebar.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -140,7 +141,8 @@ HEADERS  += mainwindow.h \
     Slots/devicechannel.h \
     archivator.h \
     log.h \
-    kvitirovanie.h
+    kvitirovanie.h \
+    Grafika/voluebar.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -232,7 +234,8 @@ FORMS    += mainwindow.ui \
     keyboard.ui \
     messages.ui \
     stackedoptions.ui \
-    kvitirovanie.ui
+    kvitirovanie.ui \
+    Grafika/voluebar.ui
 
 target.path  = /opt
 INSTALLS    += target

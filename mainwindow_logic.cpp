@@ -104,6 +104,7 @@ void MainWindow::MainWindowInitialization()
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
+    ui->MessagesWidget->setVisible(false);
 
 
     QList<QPushButton*> ButtonList = MainWindow::findChildren<QPushButton*> ();
@@ -140,9 +141,8 @@ void MainWindow::MainWindowInitialization()
     tmr->setInterval(ValuesUpdateTimer);
 
     displayrefreshtimer = new QTimer();
-    displayrefreshtimer->setInterval(30000);
-    displayrefreshtimer->start(30000);
-
+//    displayrefreshtimer->setInterval(3000);
+    displayrefreshtimer->start(3000);
     connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
 
     QTimer *tmrarchive = new QTimer(this);

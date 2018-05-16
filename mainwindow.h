@@ -122,6 +122,8 @@ private slots:
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
 
+    void on_testValBar_sliderMoved(int position);
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);

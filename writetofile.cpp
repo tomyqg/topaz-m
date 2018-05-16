@@ -36,20 +36,24 @@ void MainWindow::WriteGpio(int num, bool val)
 
 void MainWindow::RefreshScreen()
 {
-    QProcess process;
+//    QProcess process;
 
     //запрещаем бланк экрана
-    process.start("bash", QStringList() << "-c" << "echo 0 > /sys/class/graphics/fb0/blank");
-    process.waitForFinished();
-
-    //qDebug() << "QProcess process;";
-    QStringList args;
-    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
-
-    //qDebug() << "QProcess args: " << args;
-
-    process.start("sh", args);
-    process.waitForFinished();
+//    QStringList args;
+//    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
+//    process.start("sh", args);
+//    process.waitForFinished();
+    QFile file("/sys/class/graphics/fb0/blank");
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out << 0;
+    file.close();
+    //убираем курсор (хз как это происходит - получено методом тыка)
+    file.setFileName("/sys/class/graphics/fb0/state");
+    file.open(QIODevice::WriteOnly);
+    out.setDevice(&file);
+    out << 1;
+    file.close();
 
     this->update(); // мы апдейтим нашу главную форму
 }
