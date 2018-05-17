@@ -345,30 +345,3 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //}
 
 
-void MainWindow::on_testValBar_sliderMoved(int position)
-{
-    double vol = ((double) position / 100) - 50;
-
-//    int maxHeightBar = ui->placeBar->height();
-
-//    if(vol >= 0)
-//    {
-//        ui->curHBar->setGeometry(0, \
-//                                 maxHeightBar/2 * (1 - (vol / 50)), \
-//                                 ui->curHBar->width(), \
-//                                 vol * maxHeightBar/2 / 50 + 1);
-//    }
-//    else if(vol < 0)
-//    {
-//        ui->curHBar->setGeometry(0, \
-//                                 maxHeightBar/2 - 1, \
-//                                 ui->curHBar->width(), \
-//                                 vol * maxHeightBar/2 * (-1) / 50 );
-//    }
-
-//    ui->volBar->setText(QString::number(vol));
-
-    ui->wBar_1->setVolue(-vol);
-    ui->wBar_2->setVolue(vol);
-    ui->wBar_3->setVolue(vol/2);
-}

@@ -108,6 +108,25 @@
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
+#define StyleSheetCh1 "color: rgb(255, 255, 255); background-color: #008040;" // #33cccc;"
+#define StyleSheetCh2 "color: rgb(255, 255, 255); background-color: #6666ff;"
+#define StyleSheetCh3 "color: rgb(255, 255, 255); background-color: #cc3333;"
+#define StyleSheetCh4 "color: rgb(255, 255, 255); background-color: #9900cc;"
+#define StyleSheetCh1Light "background-color: #00c080;" //#00ffaa;"
+#define StyleSheetCh2Light "background-color: #9999ff;"
+#define StyleSheetCh3Light "background-color: #ff6655;"
+#define StyleSheetCh4Light "background-color: #ff33ff;"
+
+#define ColorCh1 QColor(0x00,0x80,0x40) //QColor(0x33,0xcc,0xcc)
+#define ColorCh2 QColor(0x66,0x66,0xff)
+#define ColorCh3 QColor(0xcc,0x33,0x33)
+#define ColorCh4 QColor(0x99,0x00,0xcc)
+#define ColorCh1Light QColor(0x00,0xc0,0x40)    //QColor(0x00,0xff,0xaa)
+#define ColorCh2Light QColor(0x99,0x99,0xff)
+#define ColorCh3Light QColor(0xff,0x66,0x55)
+#define ColorCh4Light QColor(0xff,0x33,0xff)
+
+
 #define EcoColor QColor(0x00,0x00,0x4d)
 #define NotEcoColor QColor(0xff,0xff,0xff)
 

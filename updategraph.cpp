@@ -52,15 +52,15 @@ double randVal[4] = {0.0, 0.0, 0.0, 0.0};
 QColor ChannelColorHighState = QColor(0xFF,0x00,0x00);
 QColor ChannelColorLowState  = QColor(0xFF,0xCA,0x00);
 
-QColor Channel1Color = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
-QColor Channel2Color = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
-QColor Channel3Color = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
-QColor Channel4Color = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
+QColor Channel1Color = ColorCh1; //QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
+QColor Channel2Color = ColorCh2; //QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
+QColor Channel3Color = ColorCh3; //QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
+QColor Channel4Color = ColorCh4; //QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
 
-QColor Channel1ColorNormal = QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
-QColor Channel2ColorNormal = QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
-QColor Channel3ColorNormal = QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
-QColor Channel4ColorNormal = QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
+QColor Channel1ColorNormal = ColorCh1; //QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
+QColor Channel2ColorNormal = ColorCh2; //QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
+QColor Channel3ColorNormal = ColorCh3; //QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
+QColor Channel4ColorNormal = ColorCh4; //QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
 
 QColor Channel1ColorMaximum = QColor(color1rgbmaximum[0],color1rgbmaximum[1],color1rgbmaximum[2]);
 QColor Channel2ColorMaximum = QColor(color2rgbmaximum[0],color2rgbmaximum[1],color2rgbmaximum[2]);
@@ -384,6 +384,22 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     double chan2lowerstate = channel2.GetMinimumChannelValue();
     double chan3lowerstate = channel3.GetMinimumChannelValue();
     double chan4lowerstate = channel4.GetMinimumChannelValue();
+
+    ui->wBar_1->setExtr(chan1lowerstate, chan1higherstate);
+    ui->wBar_2->setExtr(chan2lowerstate, chan2higherstate);
+    ui->wBar_3->setExtr(chan3lowerstate, chan3higherstate);
+    ui->wBar_4->setExtr(chan4lowerstate, chan4higherstate);
+
+    ui->wBar_1->setColor(StyleSheetCh1, StyleSheetCh1Light);
+    ui->wBar_2->setColor(StyleSheetCh2, StyleSheetCh2Light);
+    ui->wBar_3->setColor(StyleSheetCh3, StyleSheetCh3Light);
+    ui->wBar_4->setColor(StyleSheetCh4, StyleSheetCh4Light);
+
+    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -840,6 +856,11 @@ void MainWindow::GrafsUpdateBars()
     double chan3lowerstate = channel3.GetMinimumChannelValue();
     double chan4lowerstate = channel4.GetMinimumChannelValue();
 
+    ui->wBar_1 ->setExtr(chan1lowerstate, chan1higherstate);
+    ui->wBar_2 ->setExtr(chan2lowerstate, chan2higherstate);
+    ui->wBar_3 ->setExtr(chan3lowerstate, chan3higherstate);
+    ui->wBar_4 ->setExtr(chan4lowerstate, chan4higherstate);
+
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
     y1max.append(0);
@@ -1134,7 +1155,7 @@ void MainWindow::UpdateChannel3Slot()
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
-    //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
+//    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
 //    CheckAndLogginStates(channel3);
 
     /* Test */
@@ -1157,7 +1178,7 @@ void MainWindow::UpdateChannel4Slot()
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
-    //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
+//    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
 //    CheckAndLogginStates(channel4);
 
     /* Test */

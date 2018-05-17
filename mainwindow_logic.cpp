@@ -63,6 +63,8 @@ void MainWindow::MainWindowInitialization()
 {
     //qRegisterMetaType<Transaction>("Transaction");
 
+    ui->unvisible_block->setHidden(true);
+
     datestrings.append("dd.MM.yyyy ");
     datestrings.append("MM-dd-yyyy ");
     datestrings.append("dd-MM-yyyy ");
@@ -258,6 +260,12 @@ void MainWindow::MainWindowInitialization()
     timerAnybusEv = new QTimer();
 //    connect(timerAnybusEv, SIGNAL(timeout()), this, SLOT(askAnybusIRQ()));
 //    timerAnybusEv->start(1000);  //проверка IRQ каждые 100 мс
+
+    //инициализация баров
+    ui->wBar_1->changeNum(1);
+    ui->wBar_2->changeNum(2);
+    ui->wBar_3->changeNum(3);
+    ui->wBar_4->changeNum(4);
 
 #ifndef Q_OS_WIN
     //запуск Хост приложения Anybus
@@ -730,10 +738,10 @@ void MainWindow::ChangePalette(bool i)
 
     if (ui->EcoCheckBox->checkState())
     {
-        Channel1Color = Channel1ColorNormal = QColor(8,124,205);
-        Channel2Color = Channel2ColorNormal = QColor(2,115,72);
-        Channel3Color = Channel3ColorNormal = QColor(99,98,102);
-        Channel4Color = Channel4ColorNormal = QColor(125,70,46);
+        Channel1Color = Channel1ColorNormal = ColorCh1Light;//QColor(8,124,205);
+        Channel2Color = Channel2ColorNormal = ColorCh2Light;//QColor(2,115,72);
+        Channel3Color = Channel3ColorNormal = ColorCh3Light;//QColor(99,98,102);
+        Channel4Color = Channel4ColorNormal = ColorCh4Light;//QColor(125,70,46);
 
         Channel1ColorMaximum = QColor(43,40,59);
         Channel2ColorMaximum = QColor(0,56,40);
@@ -747,10 +755,10 @@ void MainWindow::ChangePalette(bool i)
     }
     else
     {
-        Channel1Color = Channel1ColorNormal = QColor(0, 137, 182);// RAL 5012 colour
-        Channel2Color = Channel2ColorNormal = QColor(0, 131, 81); // RAL 6024 colour
-        Channel3Color = Channel3ColorNormal = QColor(91, 104, 109);// RAL 7031 colour
-        Channel4Color = Channel4ColorNormal = QColor(126, 75, 38);// RAL 8003 colour
+        Channel1Color = Channel1ColorNormal = ColorCh1;//QColor(0, 137, 182);// RAL 5012 colour
+        Channel2Color = Channel2ColorNormal = ColorCh2;//QColor(0, 131, 81); // RAL 6024 colour
+        Channel3Color = Channel3ColorNormal = ColorCh3;//QColor(91, 104, 109);// RAL 7031 colour
+        Channel4Color = Channel4ColorNormal = ColorCh4;//QColor(126, 75, 38);// RAL 8003 colour
 
         Channel1ColorMaximum = QColor(61, 56, 85);
         Channel2ColorMaximum = QColor(0, 105, 76);
@@ -945,19 +953,23 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == "DataChan0")
             {
-                channel1.SetCurrentChannelValue((double)tr.volFlo);
+//                channel1.SetCurrentChannelValue((double)tr.volFlo);
+//                ui->wBar_1->setVolue((double)tr.volFlo);
             }
             else if(paramName == "DataChan1")
             {
-                channel2.SetCurrentChannelValue((double)tr.volFlo);
+//                channel2.SetCurrentChannelValue((double)tr.volFlo);
+//                ui->wBar_2->setVolue((double)tr.volFlo);
             }
             else if(paramName == "DataChan2")
             {
-                channel3.SetCurrentChannelValue((double)tr.volFlo);
+//                channel3.SetCurrentChannelValue((double)tr.volFlo);
+//                ui->wBar_3->setVolue((double)tr.volFlo);
             }
             else if(paramName == "DataChan3")
             {
-                channel4.SetCurrentChannelValue((double)tr.volFlo);
+//                channel4.SetCurrentChannelValue((double)tr.volFlo);
+//                ui->wBar_4->setVolue((double)tr.volFlo);
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Data"))
             {

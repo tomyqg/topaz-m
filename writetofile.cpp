@@ -39,15 +39,12 @@ void MainWindow::RefreshScreen()
 //    QProcess process;
 
     //запрещаем бланк экрана
-//    QStringList args;
-//    args << "-c" << "echo 0 > /sys/class/graphics/fb0/blank";
-//    process.start("sh", args);
-//    process.waitForFinished();
     QFile file("/sys/class/graphics/fb0/blank");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
     out << 0;
     file.close();
+
     //убираем курсор (хз как это происходит - получено методом тыка)
     file.setFileName("/sys/class/graphics/fb0/state");
     file.open(QIODevice::WriteOnly);
