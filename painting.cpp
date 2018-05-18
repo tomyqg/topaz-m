@@ -895,26 +895,39 @@ void MainWindow::PaintOnWidget()
     switch( Options::GetCurrentDisplayParametr())
     {
     case Options::Cyfra:
-        PaintCyfrasFullScreen();
+//        ui->customPlot->show();
+//        ui->MessagesWidget->hide();
+//        PaintCyfrasFullScreen();
         break;
     case Options::TrendsCyfra:
+//        ui->customPlot->show();
+//        ui->MessagesWidget->hide();
         //PaintStatesAndAlertsAtTop();
-        PaintCyfrasNew();
+//        PaintCyfrasNew();
         //PaintCyfrasRight();
         break;
     case Options::Trends:
-        PaintStatesAndAlertsAtTop();
+//        ui->customPlot->show();
+//        ui->MessagesWidget->hide();
+//        PaintStatesAndAlertsAtTop();
         break;
     case Options::TrendsCyfraBars:
-        PaintStatesAndAlertsAtTop();
+//        ui->customPlot->show();
+//        ui->MessagesWidget->hide();
+//        PaintStatesAndAlertsAtTop();
         break;
     case Options::BarsCyfra:
-        PaintStatesAndAlertsAtTop();
+//        ui->customPlot->show();
+//        ui->MessagesWidget->hide();
+//        PaintStatesAndAlertsAtTop();
         break;
     case Options::Polar:
         //        PaintStatesAndAlertsAtTop();
-        PaintPolarDiagramm();
-        PaintCyfrasNew();
+//        ui->MessagesWidget->update();
+//        ui->customPlot->hide();
+//        ui->MessagesWidget->show();
+//        PaintPolarDiagramm();
+//        PaintCyfrasNew();
         break;
     default:
         break;

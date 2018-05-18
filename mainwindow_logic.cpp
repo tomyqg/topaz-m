@@ -101,8 +101,8 @@ void MainWindow::MainWindowInitialization()
 //        ++i;
 //    }
 
-    ui->label->setPixmap(pix);
-    ui->label->setScaledContents(true);
+    ui->logo->setPixmap(pix);
+    ui->logo->setScaledContents(true);
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
@@ -572,7 +572,8 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString(timestrings.at(0)));
+    ui->date_label->setText(local.date().toString(datestrings.at(dateindex)));
+    ui->time_label->setText(local.time().toString(timestrings.at(0)));
     resizeSelf(1024,768);
 }
 

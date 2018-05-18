@@ -19,6 +19,7 @@
 #include "Slots/slotsconfig.h"
 #include "archivator.h"
 #include "log.h"
+#include "defines.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -122,6 +123,8 @@ private slots:
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
 
+//    void on_doubleSpinBox_valueChanged(double arg1);
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);
@@ -169,6 +172,8 @@ private:
     void PowerOff();
     void CloseApplication();
     void WriteAllChannelsOptionsToFile();
+    void updateBars(void);
+
 
     void SetXRange(int newxrange) {Xrange = newxrange;}
     void SetYRange(int newyrange) {Yrange = newyrange;}

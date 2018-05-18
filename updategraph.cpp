@@ -212,14 +212,16 @@ void MainWindow::DrawSceneBottom()
          (Options::GetCurrentDisplayParametr() != Options::TrendsCyfra) && \
          (Options::GetCurrentDisplayParametr() != Options::Trends) )
     {
-        ui->customPlot->resize(1024,527);
+        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
 //        ui->graphicsView->show();
         DrawScene();   // Add vertical line via center
+
     }
     else
     {
-        ui->customPlot->resize(1024,604);
+        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
 //        ui->graphicsView->hide();
+
     }
 }
 
@@ -292,9 +294,11 @@ void MainWindow::UpdateGraphics()
     case Options::TrendsCyfraBars:
         GrafsUpdateTrendsAndBars();break;
     case Options::Polar:
+        updateBars();
         GrafsUpdateNone();break;
     case Options::Cyfra:
-        GrafsUpdateNone();break;
+        updateBars();
+//        GrafsUpdateNone();break;
     default:
         break;
     }
@@ -385,20 +389,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     double chan3lowerstate = channel3.GetMinimumChannelValue();
     double chan4lowerstate = channel4.GetMinimumChannelValue();
 
-    ui->wBar_1->setExtr(chan1lowerstate, chan1higherstate);
-    ui->wBar_2->setExtr(chan2lowerstate, chan2higherstate);
-    ui->wBar_3->setExtr(chan3lowerstate, chan3higherstate);
-    ui->wBar_4->setExtr(chan4lowerstate, chan4higherstate);
-
-    ui->wBar_1->setColor(StyleSheetCh1, StyleSheetCh1Light);
-    ui->wBar_2->setColor(StyleSheetCh2, StyleSheetCh2Light);
-    ui->wBar_3->setColor(StyleSheetCh3, StyleSheetCh3Light);
-    ui->wBar_4->setColor(StyleSheetCh4, StyleSheetCh4Light);
-
-    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
-    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
-    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
-    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+    updateBars();
 
 
     y1max.append(chan1higherstate);
@@ -763,6 +754,8 @@ void MainWindow::GrafsUpdateTrends()
         }
     }
 
+    updateBars();
+
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(Channel1Color);
 
@@ -807,6 +800,7 @@ void MainWindow::GrafsUpdateTrends()
 
 void MainWindow::GrafsUpdateNone()
 {
+
     ui->MessagesWidget->update();
 
     ui->customPlot->clearGraphs();
@@ -856,10 +850,7 @@ void MainWindow::GrafsUpdateBars()
     double chan3lowerstate = channel3.GetMinimumChannelValue();
     double chan4lowerstate = channel4.GetMinimumChannelValue();
 
-    ui->wBar_1 ->setExtr(chan1lowerstate, chan1higherstate);
-    ui->wBar_2 ->setExtr(chan2lowerstate, chan2higherstate);
-    ui->wBar_3 ->setExtr(chan3lowerstate, chan3higherstate);
-    ui->wBar_4 ->setExtr(chan4lowerstate, chan4higherstate);
+    updateBars();
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -1226,5 +1217,20 @@ void MainWindow::readReleSlot(uint8_t code)
     emit sendTransToWorker(tr);
 }
 
+void MainWindow::updateBars(void)
+{
+    ui->wBar_1->setExtr(channel1.GetMinimumChannelValue(), channel1.GetMaximumChannelValue());
+    ui->wBar_2->setExtr(channel2.GetMinimumChannelValue(), channel2.GetMaximumChannelValue());
+    ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
+    ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
 
+    ui->wBar_1->setColor(StyleSheetCh1, StyleSheetCh1Light);
+    ui->wBar_2->setColor(StyleSheetCh2, StyleSheetCh2Light);
+    ui->wBar_3->setColor(StyleSheetCh3, StyleSheetCh3Light);
+    ui->wBar_4->setColor(StyleSheetCh4, StyleSheetCh4Light);
 
+    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+}

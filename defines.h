@@ -27,7 +27,7 @@
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
-#define pathtologotip  "/opt/logo.jpg"
+#define pathtologotip  "/opt/logotpchel.png"
 #define pathtoqrcodetip "/opt/qr-code.jpg"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define uartsleep DelayMsec(80);
@@ -52,7 +52,7 @@
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
 #define pathtoarchivedata  "C:/Work/archive.dat"
-#define pathtologotip  "C:/Work/logo.jpg"
+#define pathtologotip  "C:/Work/logotpchel.png"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #else
 
@@ -64,7 +64,7 @@
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
 #define pathtoarchivedata  QCoreApplication::applicationDirPath() + "C:/Work/archive.dat"
-#define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
+#define pathtologotip  QCoreApplication::applicationDirPath() + "/logotpchel.png"
 #define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
 #endif
 #endif
@@ -108,23 +108,26 @@
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
-#define StyleSheetCh1 "color: rgb(255, 255, 255); background-color: #008040;" // #33cccc;"
+#define StyleSheetCh1 "color: rgb(255, 255, 255); background-color: #1cb99a;" // #33cccc;"
 #define StyleSheetCh2 "color: rgb(255, 255, 255); background-color: #6666ff;"
-#define StyleSheetCh3 "color: rgb(255, 255, 255); background-color: #cc3333;"
-#define StyleSheetCh4 "color: rgb(255, 255, 255); background-color: #9900cc;"
-#define StyleSheetCh1Light "background-color: #00c080;" //#00ffaa;"
+#define StyleSheetCh3 "color: rgb(255, 255, 255); background-color: #e84c3d;"    //#cc3333;"
+#define StyleSheetCh4 "color: rgb(255, 255, 255); background-color: #2b3e4c;"   //#9900cc;"
+#define StyleSheetCh1Light "background-color: #57e9c5;" //#00ffaa;"
 #define StyleSheetCh2Light "background-color: #9999ff;"
-#define StyleSheetCh3Light "background-color: #ff6655;"
-#define StyleSheetCh4Light "background-color: #ff33ff;"
+#define StyleSheetCh3Light "background-color: #eb9f85;" //#ff6655;"
+#define StyleSheetCh4Light "background-color: #809fbc;"
 
-#define ColorCh1 QColor(0x00,0x80,0x40) //QColor(0x33,0xcc,0xcc)
+#define ButtonStyleNormal "color: #FFFFFF; background-color: #2c3d4d; border: 0px;"
+#define ButtonStyleDown "color: #FFFFFF; background-color: #1c2d3d; border: 0px;"
+
+#define ColorCh1 QColor(0x1c,0xb9,0x9a) //QColor(0x33,0xcc,0xcc)
 #define ColorCh2 QColor(0x66,0x66,0xff)
-#define ColorCh3 QColor(0xcc,0x33,0x33)
-#define ColorCh4 QColor(0x99,0x00,0xcc)
-#define ColorCh1Light QColor(0x00,0xc0,0x40)    //QColor(0x00,0xff,0xaa)
+#define ColorCh3 QColor(0xe8,0x4c,0x3d)
+#define ColorCh4 QColor(0x2b,0x3e,0x4c)
+#define ColorCh1Light QColor(0x57,0xe9,0xc5)    //QColor(0x00,0xff,0xaa)
 #define ColorCh2Light QColor(0x99,0x99,0xff)
-#define ColorCh3Light QColor(0xff,0x66,0x55)
-#define ColorCh4Light QColor(0xff,0x33,0xff)
+#define ColorCh3Light QColor(0xeb,0x9f,0x85)
+#define ColorCh4Light QColor(0x80,0x9f,0xbc)
 
 
 #define EcoColor QColor(0x00,0x00,0x4d)

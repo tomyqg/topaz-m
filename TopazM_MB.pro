@@ -64,7 +64,8 @@ SOURCES += main.cpp \
     archivator.cpp \
     log.cpp \
     kvitirovanie.cpp \
-    Grafika/voluebar.cpp
+    Grafika/voluebar.cpp \
+    Grafika/buttonstyled.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -142,7 +143,8 @@ HEADERS  += mainwindow.h \
     archivator.h \
     log.h \
     kvitirovanie.h \
-    Grafika/voluebar.h
+    Grafika/voluebar.h \
+    Grafika/buttonstyled.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -235,7 +237,8 @@ FORMS    += mainwindow.ui \
     messages.ui \
     stackedoptions.ui \
     kvitirovanie.ui \
-    Grafika/voluebar.ui
+    Grafika/voluebar.ui \
+    Grafika/buttonstyled.ui
 
 target.path  = /opt
 INSTALLS    += target

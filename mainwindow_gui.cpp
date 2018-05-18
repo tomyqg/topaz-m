@@ -150,7 +150,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+                widget->setStyleSheet(ButtonStyleDown);
             }
         }
     }
@@ -167,7 +167,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+                widget->setStyleSheet(ButtonStyleNormal);
             }
         }
     }
@@ -345,3 +345,9 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //}
 
 
+//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+//{
+////        randVal[0] = arg1;
+//        channel1.SetCurrentChannelValue(arg1);
+//        ui->wBar_1->setVolue(arg1);
+//}
