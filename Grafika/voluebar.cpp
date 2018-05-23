@@ -1,10 +1,12 @@
 #include "voluebar.h"
 #include "ui_voluebar.h"
+#include "defines.h"
 
 #define VOL_TEXT_MIN_HEIGHT 20
 #define VOL_TEXT_PADDING_BOTTOM 5
 #define BAR_WIDTH 90
 #define BAR_PADDING_BOTTOM 12
+#define METKA_HEIGHT    16
 
 wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
 //    numBar(num),
@@ -12,8 +14,9 @@ wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
     ui(new Ui::wVolueBar)
 {
     ui->setupUi(this);
-
-
+    ui->metkaLow->setPixmap(QPixmap(pathtolowlimico));
+    ui->metkaHi->setPixmap(QPixmap(pathtohilimico));
+    razmah = 50;
 }
 
 wVolueBar::~wVolueBar()
@@ -21,6 +24,9 @@ wVolueBar::~wVolueBar()
     delete ui;
 }
 
+/*
+ * Задание текущей величины
+ */
 void wVolueBar::setVolue(double vol)
 {
 
@@ -28,17 +34,17 @@ void wVolueBar::setVolue(double vol)
     if(vol >= 0)
     {
         ui->curHBar->setGeometry(0, \
-                                 ui->placeBar->height() / 2 * (1 - (vol / 50)), \
-                                 ui->curHBar->width(), \
-                                 vol * ui->placeBar->height() /2 / 50 + 1 \
+                                 (ui->placeBar->height() / 2) * (1 - (vol / razmah)), \
+                                 ui->placeBar->width(), \
+                                 (vol / razmah) * (ui->placeBar->height() / 2) \
                                  );
     }
     else if(vol < 0)
     {
         ui->curHBar->setGeometry(0, \
-                                 ui->placeBar->height() / 2 - 1, \
-                                 ui->curHBar->width(), \
-                                 vol * ui->placeBar->height() /2 * (-1) / 50 \
+                                 ui->placeBar->height() / 2, \
+                                 ui->placeBar->width(), \
+                                 vol * ui->placeBar->height() / 2 * (-1) / razmah \
                                  );
     }
 
@@ -49,31 +55,39 @@ void wVolueBar::setVolue(double vol)
     if(ui->curHBar->height() <= VOL_TEXT_MIN_HEIGHT)
     {
         //если поле в теле бара слишком узкое для текста
-        ui->volBar->setGeometry( \
-                    0,  \
-                    ui->placeBar->height() / 2 - ui->volBar->height() - VOL_TEXT_PADDING_BOTTOM, \
-                    ui->placeBar->width(), \
-                    VOL_TEXT_MIN_HEIGHT \
-                    );
+        if(vol >= 0)
+            ui->volBar->setGeometry( \
+                        0, ui->placeBar->height() / 2 - ui->volBar->height() - VOL_TEXT_PADDING_BOTTOM, \
+                        ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
+                        );
+        else
+            ui->volBar->setGeometry( \
+                        0, ui->placeBar->height() / 2, \
+                                    ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
+                        );
+
     }
     else
     {
         // если места достаточно для размещения текста и выравнивания по середине
         ui->volBar->setGeometry(ui->curHBar->geometry());
 
-//        //коррекция положения текста измеренной величины
-//        if(ui->volBar->y() < VOL_TEXT_MIN_HEIGHT / 2 - ui->placeBar->height())
-//            ui->volBar->setGeometry(ui->volBar->x(), 0, ui->volBar->width(), VOL_TEXT_MIN_HEIGHT );
-//        if(ui->volBar->height() + VOL_TEXT_MIN_HEIGHT / 2 > ui->placeBar->height())
-//            ui->volBar->setGeometry(ui->volBar->x(), \
-//                                    ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
-//                                    ui->volBar->width(), \
-//                                    VOL_TEXT_MIN_HEIGHT );
+        //коррекция положения текста измеренной величины
+        if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + ui->placeBar->height() / 2 < 0)
+            ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
+        else if(ui->curHBar->height() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
+            ui->volBar->setGeometry(ui->placeBar->x(), \
+                                    ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
+                                    ui->placeBar->width(), \
+                                    VOL_TEXT_MIN_HEIGHT );
     }
 
 
 }
 
+/*
+ * Перерисовка бара
+ */
 void wVolueBar::resizeEvent(QResizeEvent * s)
 {
     ui->placeBar->setGeometry(      \
@@ -94,19 +108,35 @@ void wVolueBar::resizeEvent(QResizeEvent * s)
                 ui->placeBar->width(),      \
                 2 );
 
-
 }
 
+/*
+ * Задание экстремумов - минимальное и максимальное значения в буфере измерения
+ */
 
 void wVolueBar::setExtr(double min, double max)
 {
     ui->amplBar->setGeometry(0, \
-                             ui->placeBar->height() / 2 * (1 - (max / 50)), \
-                             ui->amplBar->width(), \
-                             ui->placeBar->height() / 2 * (max - min) / 50 + 1 \
+                             (ui->placeBar->height() / 2) * (1 - (max / razmah)), \
+                             ui->placeBar->width(), \
+                             (ui->placeBar->height() / 2) * (max - min) / razmah + 1 \
                              );
 }
 
+/*
+ * Установка меток уставок, предельные значения
+ */
+void wVolueBar::setLim(double low, double hi)
+{
+    ui->metkaLow->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (low / razmah)) - METKA_HEIGHT / 2, \
+                              ui->placeBar->width(), METKA_HEIGHT);
+    ui->metkaHi->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (hi / razmah)) - METKA_HEIGHT / 2, \
+                              ui->placeBar->width(), METKA_HEIGHT);
+}
+
+/*
+ * Установка стилей тветового оформления бара
+ */
 void wVolueBar::setColor(QString cssColor, QString cssColorLight)
 {
     ui->curHBar->setStyleSheet(cssColor);
@@ -114,6 +144,10 @@ void wVolueBar::setColor(QString cssColor, QString cssColorLight)
     ui->typeBar->setStyleSheet(cssColor);
     ui->mesBar->setStyleSheet(cssColor);
 }
+
+/*
+ * Задание названия измеряемой велчины и единиц измерения в сокращении 2 символа
+ */
 
 void wVolueBar::setText(QString type, QString mes)
 {
@@ -138,8 +172,19 @@ void wVolueBar::setText(QString type, QString mes)
     ui->mesBar->setText(mes);
 }
 
+/*
+ * Задание номера канала, индекс
+ */
 void wVolueBar::changeNum(int num)
 {
     if(num < 10)
         numBar = num;
+}
+
+/*
+ * Задание размаха значений, видимых в баре
+ */
+void wVolueBar::setBarDiapazon(double diap)
+{
+    razmah = diap;
 }

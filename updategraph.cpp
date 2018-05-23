@@ -1104,9 +1104,9 @@ void MainWindow::UpdateChannel1Slot()
 //    CheckAndLogginStates(channel1);
 
     /* Test */
-    randVal[0] += ((double)((rand()%101) - 50) / 100);
-    channel1.SetCurrentChannelValue(randVal[0]);
-    ui->wBar_1->setVolue(randVal[0]);
+//    randVal[0] += ((double)((rand()%101) - 50) / 100);
+//    channel1.SetCurrentChannelValue(randVal[0]);
+//    ui->wBar_1->setVolue(randVal[0]);
 
     channeltimer1->setInterval(period);
 }
@@ -1224,6 +1224,11 @@ void MainWindow::updateBars(void)
     ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
     ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
 
+    ui->wBar_1->setLim(-40, 35);
+    ui->wBar_2->setLim(4, 30);
+    ui->wBar_3->setLim(-10, 25);
+    ui->wBar_4->setLim(-49, 13);
+
     ui->wBar_1->setColor(StyleSheetCh1, StyleSheetCh1Light);
     ui->wBar_2->setColor(StyleSheetCh2, StyleSheetCh2Light);
     ui->wBar_3->setColor(StyleSheetCh3, StyleSheetCh3Light);
@@ -1233,4 +1238,18 @@ void MainWindow::updateBars(void)
     ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
     ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
     ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+
+    ui->wBar_1->setBarDiapazon(max(abs(channel1.GetHigherMeasureLimit()), \
+                                   abs(channel1.GetLowerMeasureLimit())));
+    ui->wBar_2->setBarDiapazon(max(abs(channel2.GetHigherMeasureLimit()), \
+                                   abs(channel2.GetLowerMeasureLimit())));
+    ui->wBar_3->setBarDiapazon(max(abs(channel3.GetHigherMeasureLimit()), \
+                                   abs(channel3.GetLowerMeasureLimit())));
+    ui->wBar_4->setBarDiapazon(max(abs(channel4.GetHigherMeasureLimit()), \
+                                   abs(channel4.GetLowerMeasureLimit())));
+
+    ui->wBar_1->setLim(channel1.GetLowerLimit(), channel1.GetHigherLimit());
+    ui->wBar_2->setLim(channel2.GetLowerLimit(), channel2.GetHigherLimit());
+    ui->wBar_3->setLim(channel3.GetLowerLimit(), channel3.GetHigherLimit());
+    ui->wBar_4->setLim(channel4.GetLowerLimit(), channel4.GetHigherLimit());
 }

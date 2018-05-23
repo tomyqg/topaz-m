@@ -20,6 +20,7 @@
 #include "archivator.h"
 #include "log.h"
 #include "defines.h"
+#include "menu.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -123,7 +124,8 @@ private slots:
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
 
-//    void on_doubleSpinBox_valueChanged(double arg1);
+    void on_doubleSpinBox_valueChanged(double arg1);
+
 
 signals:
     void error(const QString &s);

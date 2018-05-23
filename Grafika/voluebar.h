@@ -14,8 +14,10 @@ class wVolueBar : public QFrame
 public:
     explicit wVolueBar(/*int num = 0, */QWidget *parent = 0);
     ~wVolueBar();
+    void setBarDiapazon(double diap);
     void setVolue(double vol);
     void setExtr(double min, double max);
+    void setLim(double low, double hi);
     void setText(QString type, QString mes);
     void changeNum(int num);
 
@@ -26,6 +28,7 @@ public slots:
 
 private:
     Ui::wVolueBar *ui;
+    double razmah;  //размах, значение бара в крайних точках виджета
     int numBar;
 };
 

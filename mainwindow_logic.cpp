@@ -267,6 +267,9 @@ void MainWindow::MainWindowInitialization()
     ui->wBar_3->changeNum(3);
     ui->wBar_4->changeNum(4);
 
+//    ui->wBar_1->setBarDiapazon(1000);
+//    ui->wBar_2->setBarDiapazon(200);
+
 #ifndef Q_OS_WIN
     //запуск Хост приложения Anybus
 //    comm = new cCommunicator();

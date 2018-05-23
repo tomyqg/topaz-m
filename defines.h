@@ -29,6 +29,8 @@
 #define pathtomessages  "/opt/Log.txt"
 #define pathtologotip  "/opt/logotpchel.png"
 #define pathtoqrcodetip "/opt/qr-code.jpg"
+#define pathtohilimico  "/opt/hilim.png"
+#define pathtolowlimico  "/opt/lowlim.png"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
@@ -54,6 +56,8 @@
 #define pathtoarchivedata  "C:/Work/archive.dat"
 #define pathtologotip  "C:/Work/logotpchel.png"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
+#define pathtohilimico  "C:/Work/hilim.png"
+#define pathtolowlimico  "C:/Work/lowlim.png"
 #else
 
 #define pathtofiles  QCoreApplication::applicationDirPath()
@@ -129,6 +133,10 @@
 #define ColorCh3Light QColor(0xeb,0x9f,0x85)
 #define ColorCh4Light QColor(0x80,0x9f,0xbc)
 
+#define ColorButtonNormal   QColor(0x2b,0x3e,0x4c)
+#define ColorButtonDown     QColor(0x1b,0x2e,0x3c)
+#define ColorBlue           QColor(14,210,226)
+
 
 #define EcoColor QColor(0x00,0x00,0x4d)
 #define NotEcoColor QColor(0xff,0xff,0xff)
@@ -140,6 +148,8 @@
 #define BASE_OFFSET_CHANNEL_2   0x8080
 #define BASE_OFFSET_CHANNEL_3   0x8100
 #define BASE_OFFSET_CHANNEL_4   0x8180
+
+#define max( x1, x2) ( ( x1 ) > ( x2 ) ? ( x1 ) : ( x2 ) )
 
 //#define new new(/* _NORMAL_BLOCK, */__FILE__, __LINE__)
 

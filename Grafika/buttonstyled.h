@@ -14,12 +14,31 @@ class wButtonStyled : public QWidget
 public:
     explicit wButtonStyled(QWidget *parent = 0);
     ~wButtonStyled();
+    void setText(QString text);
+    void setColorText(QColor color);
+    void setColorBg(QColor color);
+    void setAlignLeft();
+    void setAlignCenter();
+    void setAlignRight();
+
 
 private slots:
     void on_button_clicked(bool checked);
 
+    void on_button_pressed();
+
+    void on_button_released();
+
 private:
     Ui::wButtonStyled *ui;
+    QColor colorText;
+    QColor colorBg;
+    QColor colorBgDown;
+    QString strColorText;
+    QString strColorBg;
+    QString strAlign;
+//    bool eventFilter(QObject *watched, QEvent *event);
+    void resizeEvent(QResizeEvent * s);
 };
 
 #endif // BUTTONSTYLED_H

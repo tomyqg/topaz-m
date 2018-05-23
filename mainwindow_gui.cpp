@@ -102,7 +102,10 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    OpenOptionsWindow(0);
+//    OpenOptionsWindow(0);
+    dMenu * menu = new dMenu();
+    menu->exec();
+    menu->deleteLater();
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -345,9 +348,9 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //}
 
 
-//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
-//{
-////        randVal[0] = arg1;
-//        channel1.SetCurrentChannelValue(arg1);
-//        ui->wBar_1->setVolue(arg1);
-//}
+void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+{
+//        randVal[0] = arg1;
+        channel1.SetCurrentChannelValue(arg1);
+        ui->wBar_1->setVolue(arg1);
+}
