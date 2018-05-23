@@ -348,9 +348,9 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //}
 
 
-void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
-{
-//        randVal[0] = arg1;
-        channel1.SetCurrentChannelValue(arg1);
-        ui->wBar_1->setVolue(arg1);
-}
+//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+//{
+////        randVal[0] = arg1;
+//        channel1.SetCurrentChannelValue(arg1);
+//        ui->wBar_1->setVolue(arg1);
+//}

@@ -23,11 +23,12 @@ public:
 
 
 private slots:
-    void on_button_clicked(bool checked);
-
+    void on_button_clicked();
     void on_button_pressed();
-
     void on_button_released();
+
+signals:
+    void clicked();
 
 private:
     Ui::wButtonStyled *ui;

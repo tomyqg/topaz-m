@@ -83,7 +83,6 @@ void MainWindow::MainWindowInitialization()
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
 
-    QPixmap pix(pathtologotip);
 
     scene = new QGraphicsScene();   // Init graphic scene
 
@@ -101,6 +100,7 @@ void MainWindow::MainWindowInitialization()
 //        ++i;
 //    }
 
+    QPixmap pix(pathtologotip);
     ui->logo->setPixmap(pix);
     ui->logo->setScaledContents(true);
 
@@ -144,7 +144,7 @@ void MainWindow::MainWindowInitialization()
 
     displayrefreshtimer = new QTimer();
 //    displayrefreshtimer->setInterval(3000);
-    displayrefreshtimer->start(3000);
+    displayrefreshtimer->start(30000);
     connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
 
     QTimer *tmrarchive = new QTimer(this);

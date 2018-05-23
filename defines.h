@@ -58,6 +58,7 @@
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #define pathtohilimico  "C:/Work/hilim.png"
 #define pathtolowlimico  "C:/Work/lowlim.png"
+#define pathtoloadgif   "C:/Work/load.gif"
 #else
 
 #define pathtofiles  QCoreApplication::applicationDirPath()

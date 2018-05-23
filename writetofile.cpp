@@ -38,6 +38,7 @@ void MainWindow::RefreshScreen()
 {
 //    QProcess process;
 
+#ifndef Q_OS_WIN32
     //запрещаем бланк экрана
     QFile file("/sys/class/graphics/fb0/blank");
     file.open(QIODevice::WriteOnly);
@@ -51,6 +52,7 @@ void MainWindow::RefreshScreen()
     out.setDevice(&file);
     out << 1;
     file.close();
+#endif
 
     this->update(); // мы апдейтим нашу главную форму
 }

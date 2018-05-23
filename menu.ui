@@ -58,7 +58,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(14, 210, 226, 255), stop:0.885000 rgba(14, 210, 226, 255), stop:0.885001 rgba(0, 0, 0, 40), stop:0.980000 rgba(255, 255, 255, 0), stop:1 rgba(255, 255, 255, 0))</string>
+      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(14, 210, 226, 255), stop:0.885000 rgba(14, 210, 226, 255), stop:0.885001 rgba(0, 0, 0, 40), stop:0.980000 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 0, 0))</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -98,6 +98,7 @@
         </property>
         <property name="font">
          <font>
+          <family>Open Sans</family>
           <pointsize>18</pointsize>
           <kerning>true</kerning>
          </font>
@@ -214,6 +215,7 @@ background-clip:padding;</string>
         </property>
         <property name="font">
          <font>
+          <family>Open Sans</family>
           <pointsize>16</pointsize>
          </font>
         </property>
@@ -317,7 +319,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
                <property name="minimumSize">
                 <size>
                  <width>736</width>
-                 <height>70</height>
+                 <height>83</height>
                 </size>
                </property>
                <property name="focusPolicy">
@@ -339,7 +341,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
                <property name="minimumSize">
                 <size>
                  <width>736</width>
-                 <height>70</height>
+                 <height>83</height>
                 </size>
                </property>
                <property name="text">
@@ -358,7 +360,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
                <property name="minimumSize">
                 <size>
                  <width>736</width>
-                 <height>70</height>
+                 <height>83</height>
                 </size>
                </property>
                <property name="text">
@@ -377,7 +379,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
                <property name="minimumSize">
                 <size>
                  <width>736</width>
-                 <height>70</height>
+                 <height>83</height>
                 </size>
                </property>
                <property name="text">

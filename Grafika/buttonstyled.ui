@@ -10,6 +10,11 @@
     <height>64</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Open Sans</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -81,11 +86,12 @@ background-clip:padding;</string>
       </property>
       <property name="font">
        <font>
+        <family>Open Sans</family>
         <pointsize>21</pointsize>
        </font>
       </property>
       <property name="mouseTracking">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 255, 255);

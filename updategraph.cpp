@@ -1104,9 +1104,9 @@ void MainWindow::UpdateChannel1Slot()
 //    CheckAndLogginStates(channel1);
 
     /* Test */
-//    randVal[0] += ((double)((rand()%101) - 50) / 100);
-//    channel1.SetCurrentChannelValue(randVal[0]);
-//    ui->wBar_1->setVolue(randVal[0]);
+    randVal[0] += ((double)((rand()%101) - 50) / 100);
+    channel1.SetCurrentChannelValue(randVal[0]);
+    ui->wBar_1->setVolue(randVal[0]);
 
     channeltimer1->setInterval(period);
 }

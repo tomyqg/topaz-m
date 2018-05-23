@@ -124,7 +124,7 @@ private slots:
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
 
-    void on_doubleSpinBox_valueChanged(double arg1);
+//    void on_doubleSpinBox_valueChanged(double arg1);
 
 
 signals:
