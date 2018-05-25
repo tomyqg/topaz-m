@@ -3,8 +3,8 @@
 
 #define AlignLeftStyle "text-align: left;\n padding-left: 40px;\n"
 #define AlignRightStyle "text-align: right;\n padding-right: 40px;\n"
-#define AlignCenterStyle "text-align: center;\n padding-left: 20px;\n padding-right: 20px;\n"
-#define BorderStyle "border: 0px solid rgba(255, 255, 255, 0);\n"
+#define AlignCenterStyle "text-align: center;\n"
+#define BorderStyle "border: 0px solid;\n"
 
 wButtonStyled::wButtonStyled(QWidget *parent) :
     QWidget(parent),

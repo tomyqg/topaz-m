@@ -899,8 +899,14 @@ color : white;</string>
    <extends>QWidget</extends>
    <header>voluebar.h</header>
    <container>1</container>
+   <slots>
+    <signal>clicked()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
+ <slots>
+  <slot>openSettingsChannel(int)</slot>
+ </slots>
 </ui>

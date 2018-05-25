@@ -266,6 +266,10 @@ void MainWindow::MainWindowInitialization()
     ui->wBar_2->changeNum(2);
     ui->wBar_3->changeNum(3);
     ui->wBar_4->changeNum(4);
+    connect(ui->wBar_1, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_2, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_3, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_4, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
 
 //    ui->wBar_1->setBarDiapazon(1000);
 //    ui->wBar_2->setBarDiapazon(200);
@@ -624,7 +628,7 @@ void MainWindow::SetEcoMode(bool EcoMode)
     if (!this->EcoMode)
     {
         ui->customPlot->setBackground(QBrush(NotEcoColor));
-        newlabelscolor = QColor(Qt::black);
+        newlabelscolor = ColorButtonNormal; //QColor(Qt::black);
     }
     else
     {
@@ -1137,3 +1141,4 @@ void MainWindow::sendConfigChannelsToSlave()
 //        break;
 //    }
 //}
+

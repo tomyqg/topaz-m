@@ -21,9 +21,13 @@ public:
     void setText(QString type, QString mes);
     void changeNum(int num);
 
+signals:
+    void clickedLabel(int);
+
 public slots:
     void setColor(QString cssColor, QString cssColorLight);
     void resizeEvent(QResizeEvent * s);
+    bool eventFilter(QObject* watched, QEvent* event);
 
 
 private:

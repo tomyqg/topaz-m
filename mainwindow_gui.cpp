@@ -132,7 +132,6 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         }
     }
 
-
     if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
         ReactOnTouch();
     }
@@ -354,3 +353,10 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //        channel1.SetCurrentChannelValue(arg1);
 //        ui->wBar_1->setVolue(arg1);
 //}
+
+void MainWindow::openSettingsChannel(int num)
+{
+    dialogSetingsChannel = new dSettings();
+    dialogSetingsChannel->exec();
+
+}

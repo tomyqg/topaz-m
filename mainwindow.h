@@ -21,6 +21,7 @@
 #include "log.h"
 #include "defines.h"
 #include "menu.h"
+#include "settings.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -97,6 +98,7 @@ public slots:
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
     void retransToWorker(Transaction tr);
+    void openSettingsChannel(int num);
 
 private slots:
 //    void OpenSerialPort( int );
@@ -287,6 +289,8 @@ private:
     cCommunicator * comm;
     QTimer * commRun;
 #endif
+    dSettings * dialogSetingsChannel;
+
 
 protected:
     void paintEvent(QPaintEvent *event) ;

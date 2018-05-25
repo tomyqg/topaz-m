@@ -17,6 +17,12 @@ wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
     ui->metkaLow->setPixmap(QPixmap(pathtolowlimico));
     ui->metkaHi->setPixmap(QPixmap(pathtohilimico));
     razmah = 50;
+
+    //установка фильтра событий на лэйблы виджет-бара
+    QList<QLabel*> labelList = findChildren<QLabel*>();
+    foreach (QLabel * label, labelList) {
+        label->installEventFilter(this);
+    }
 }
 
 wVolueBar::~wVolueBar()
@@ -187,4 +193,18 @@ void wVolueBar::changeNum(int num)
 void wVolueBar::setBarDiapazon(double diap)
 {
     razmah = diap;
+}
+
+bool wVolueBar::eventFilter(QObject* watched, QEvent* event)
+{
+    if(watched == ui->typeBar && event->type() == QEvent::HoverEnter) {
+        emit clickedLabel(numBar);
+    }
+
+    if(watched == ui->typeBar && event->type() == QEvent::MouseButtonRelease) {
+        emit clickedLabel(numBar);
+    } else if(watched == ui->mesBar && event->type() == QEvent::MouseButtonRelease) {
+        emit clickedLabel(numBar);
+    }
+    return QObject::eventFilter(watched, event);
 }
