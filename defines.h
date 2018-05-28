@@ -140,7 +140,7 @@
 #define ColorBlue           QColor(14,210,226)
 
 
-#define EcoColor QColor(0x00,0x00,0x4d)
+#define EcoColor QColor(0x2b,0x3e,0x4c) //QColor(0x00,0x00,0x4d)
 #define NotEcoColor QColor(0xff,0xff,0xff)
 
 #define TOTAL_NUM_USTAVKI   4

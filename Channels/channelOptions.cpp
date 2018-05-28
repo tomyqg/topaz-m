@@ -386,7 +386,7 @@ double ChannelOptions::GetValuePercent()
 {
     float razmah = GetHigherMeasureLimit() - GetLowerMeasureLimit();
     if(razmah == 0) return 0;
-    float x = 100 * (GetCurrentChannelValue() - GetLowerMeasureLimit())/razmah;
+    float x = (100 * (GetCurrentChannelValue() - GetLowerMeasureLimit()))/razmah;
     return x;
 }
 

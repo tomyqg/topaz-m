@@ -185,55 +185,90 @@ color : white;</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QCustomPlot" name="customPlot" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+           <widget class="QStackedWidget" name="stackedWidgetDiagram">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>550</height>
              </size>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>570</height>
-             </size>
+            <property name="currentIndex">
+             <number>1</number>
             </property>
-            <property name="font">
-             <font>
-              <family>Open Sans</family>
-              <pointsize>14</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-              <stylestrategy>NoAntialias</stylestrategy>
-             </font>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="MessagesWidget" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>550</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Open Sans</family>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>BlankCursor</cursorShape>
-            </property>
+            <widget class="QWidget" name="wGrafics">
+             <widget class="QCustomPlot" name="customPlot" native="true">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>515</width>
+                <height>550</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>550</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>570</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Open Sans</family>
+                <pointsize>14</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+                <stylestrategy>NoAntialias</stylestrategy>
+               </font>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="wKrug">
+             <widget class="QWidget" name="MessagesWidget" native="true">
+              <property name="geometry">
+               <rect>
+                <x>15</x>
+                <y>15</y>
+                <width>500</width>
+                <height>500</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Open Sans</family>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>BlankCursor</cursorShape>
+              </property>
+             </widget>
+            </widget>
            </widget>
           </item>
           <item>
@@ -254,6 +289,12 @@ color : white;</string>
        </item>
        <item>
         <widget class="QFrame" name="right">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
          </property>
@@ -278,6 +319,12 @@ color : white;</string>
           </property>
           <item>
            <widget class="QFrame" name="areaBars">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
             </property>
@@ -310,6 +357,12 @@ color : white;</string>
              </item>
              <item>
               <spacer name="horizontalSpacer">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>100</height>
+                </size>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -333,6 +386,12 @@ color : white;</string>
              </item>
              <item>
               <spacer name="horizontalSpacer_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>100</height>
+                </size>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -379,6 +438,12 @@ color : white;</string>
              </item>
              <item>
               <spacer name="horizontalSpacer_3">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>100</height>
+                </size>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>

@@ -177,6 +177,7 @@ private:
     void CloseApplication();
     void WriteAllChannelsOptionsToFile();
     void updateBars(void);
+    void selectWidgetDiagram(void);
 
 
     void SetXRange(int newxrange) {Xrange = newxrange;}

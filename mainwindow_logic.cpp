@@ -106,10 +106,8 @@ void MainWindow::MainWindowInitialization()
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
-    ui->MessagesWidget->setVisible(false);
 
-
-    QList<QPushButton*> ButtonList = MainWindow::findChildren<QPushButton*> ();
+    QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
     for (int i = 0; i < ButtonList.count(); ++i) {
         QPushButton *but = ButtonList.at(i);
@@ -136,9 +134,6 @@ void MainWindow::MainWindowInitialization()
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
 
-    UpdateGraficsTimer = new QTimer(this);
-    connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
-
     tmr = new QTimer();
     tmr->setInterval(ValuesUpdateTimer);
 
@@ -154,6 +149,8 @@ void MainWindow::MainWindowInitialization()
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
     tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
 
+    UpdateGraficsTimer = new QTimer(this);
+    connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
     timer->start(DateLabelUpdateTimer);
@@ -499,7 +496,7 @@ void MainWindow::OpenOptionsWindow( int index )
     sw->deleteLater();
     resizeSelf(1024,768);
 
-    SetPolarAngle(0);
+//    SetPolarAngle(0);
 
     return;
 }

@@ -219,7 +219,7 @@ void MainWindow::DrawSceneBottom()
     }
     else
     {
-        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
+//        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
 //        ui->graphicsView->hide();
 
     }
@@ -277,7 +277,6 @@ void MainWindow::UpdateGraphics()
 {
 
     needupdatePainter = 1;
-    //     StackedOptions::SetCurrentDisplayParametr( Options::TrendsCyfraBars);
 
     switch( Options::GetCurrentDisplayParametr() )
     {
@@ -298,12 +297,13 @@ void MainWindow::UpdateGraphics()
         GrafsUpdateNone();break;
     case Options::Cyfra:
         updateBars();
-//        GrafsUpdateNone();break;
+        GrafsUpdateNone();break;
     default:
         break;
     }
 
-    DrawSceneBottom();
+    selectWidgetDiagram();
+//    DrawSceneBottom();
 }
 
 //void MainWindow::UpdateLog()
@@ -1252,4 +1252,22 @@ void MainWindow::updateBars(void)
     ui->wBar_2->setLim(channel2.GetLowerLimit(), channel2.GetHigherLimit());
     ui->wBar_3->setLim(channel3.GetLowerLimit(), channel3.GetHigherLimit());
     ui->wBar_4->setLim(channel4.GetLowerLimit(), channel4.GetHigherLimit());
+}
+
+void MainWindow::selectWidgetDiagram(void)
+{
+    if ( (Options::GetCurrentDisplayParametr() == Options::BarsCyfra) || \
+         (Options::GetCurrentDisplayParametr() == Options::TrendsCyfraBars) || \
+         (Options::GetCurrentDisplayParametr() == Options::Cyfra) || \
+         (Options::GetCurrentDisplayParametr() == Options::TrendsBars) || \
+         (Options::GetCurrentDisplayParametr() == Options::Bars) || \
+         (Options::GetCurrentDisplayParametr() == Options::TrendsCyfra) || \
+         (Options::GetCurrentDisplayParametr() == Options::Trends) )
+    {
+        ui->stackedWidgetDiagram->setCurrentIndex(0);
+    }
+    else if(Options::GetCurrentDisplayParametr() == Options::Polar)
+    {
+        ui->stackedWidgetDiagram->setCurrentIndex(1);
+    }
 }
