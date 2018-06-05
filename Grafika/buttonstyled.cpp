@@ -1,5 +1,6 @@
 #include "buttonstyled.h"
 #include "ui_buttonstyled.h"
+#include "defines.h"
 
 #define AlignLeftStyle "text-align: left;\n padding-left: 40px;\n"
 #define AlignRightStyle "text-align: right;\n padding-right: 40px;\n"
@@ -12,7 +13,10 @@ wButtonStyled::wButtonStyled(QWidget *parent) :
 {
     ui->setupUi(this);
     strColorText = "color: rgb(255, 255, 255);\n";
-    strColorBg = "background-color: #2c3d4d;\n";
+    strColorBg = "background-color:rgb(" \
+            + QString::number(ColorButtonNormal.red()) + "," \
+            + QString::number(ColorButtonNormal.green()) + "," \
+            + QString::number(ColorButtonNormal.blue()) + ");\n";
     strAlign = AlignCenterStyle;
 }
 
@@ -41,12 +45,10 @@ void wButtonStyled::setColorText(QColor color)
     int r = color.red();
     int g = color.green();
     int b = color.blue();
-    int a = color.alpha();
-    strColorText = "color: rgba(" + \
+    strColorText = "color: rgb(" + \
             QString::number(r) + ", " + \
             QString::number(g) + ", " + \
-            QString::number(b) + ", " + \
-            QString::number(a) + ");\n";
+            QString::number(b) + ");\n";
     QString stringStyleSheet = strColorText + strColorBg + BorderStyle + strAlign;
     ui->button->setStyleSheet(stringStyleSheet);
 }
@@ -57,14 +59,12 @@ void wButtonStyled::setColorBg(QColor color)
     int r = color.red();
     int g = color.green();
     int b = color.blue();
-    int a = color.alpha();
-    colorBgDown = QColor(r - 20, g - 20, b - 20, a);
+    colorBgDown = QColor(r - 20, g - 20, b - 20);
 
-    strColorBg = "background-color: rgba(" + \
+    strColorBg = "background-color: rgb(" + \
             QString::number(r) + ", " + \
             QString::number(g) + ", " + \
-            QString::number(b) + ", " + \
-            QString::number(a) + ");\n";
+            QString::number(b) + ");\n";
     QString stringStyleSheet = strColorText + strColorBg + BorderStyle + strAlign;
     ui->button->setStyleSheet(stringStyleSheet);
 }
@@ -75,12 +75,11 @@ void wButtonStyled::on_button_pressed()
     int r = colorBgDown.red() - 20;
     int g = colorBgDown.green() - 20;
     int b = colorBgDown.blue() - 20;
-    int a = colorBgDown.alpha();
-    strColorBg = "background-color: rgba(" + \
+
+    strColorBg = "background-color: rgb(" + \
             QString::number(r) + ", " + \
             QString::number(g) + ", " + \
-            QString::number(b) + ", " + \
-            QString::number(a) + ");\n";
+            QString::number(b) + ");\n";
     QString stringStyleSheet = strColorText + strColorBg + BorderStyle + strAlign;
     ui->button->setStyleSheet(stringStyleSheet);
     ui->shadow->setGeometry(3, 3, ui->shadow->width(), ui->shadow->height());
@@ -91,12 +90,10 @@ void wButtonStyled::on_button_released()
     int r = colorBg.red();
     int g = colorBg.green();
     int b = colorBg.blue();
-    int a = colorBg.alpha();
-    strColorBg = "background-color: rgba(" + \
+    strColorBg = "background-color: rgb(" + \
             QString::number(r) + ", " + \
             QString::number(g) + ", " + \
-            QString::number(b) + ", " + \
-            QString::number(a) + ");\n";
+            QString::number(b) + ");\n";
     QString stringStyleSheet = strColorText + strColorBg + BorderStyle + strAlign;
     ui->button->setStyleSheet(stringStyleSheet);
     ui->shadow->setGeometry(7, 7, ui->shadow->width(), ui->shadow->height());

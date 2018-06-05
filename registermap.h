@@ -85,6 +85,11 @@ const RegisterMap::registr_t rm[] =
     {"chan0TransferSignalLowLim",    32799, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan0TransferSignalHighLim",   32801, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
 
+    {"chan0ReleyHi",            32810, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan0ReleyLo",            32811, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+
+    {"chan0SupportedSignals",   32780, RegisterMap::D,  RegisterMap::U16, RegisterMap::R,  RegisterMap::HoldingReg},
+
     {"chan0CjValue",            32858, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     //--------------------- Channel 1 -----------------------
@@ -103,6 +108,9 @@ const RegisterMap::registr_t rm[] =
 
     {"chan1TransferSignalLowLim",    32927, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan1TransferSignalHighLim",   32929, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
+
+    {"chan1ReleyHi",            32938, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan1ReleyLo",            32939, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan1CjValue",            32986, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
@@ -123,6 +131,9 @@ const RegisterMap::registr_t rm[] =
     {"chan2TransferSignalLowLim",    33055, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan2TransferSignalHighLim",   33057, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
 
+    {"chan2ReleyHi",            33066, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan2ReleyLo",            33067, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+
     {"chan2CjValue",            33114, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 
     //--------------------- Channel 3 -----------------------
@@ -141,6 +152,9 @@ const RegisterMap::registr_t rm[] =
 
     {"chan3TransferSignalLowLim",    33183, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
     {"chan3TransferSignalHighLim",   33185, RegisterMap::NV, RegisterMap::F32, RegisterMap::RW, RegisterMap::HoldingReg},
+
+    {"chan3ReleyHi",            33194, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
+    {"chan3ReleyLo",            33195, RegisterMap::NV, RegisterMap::U16, RegisterMap::RW, RegisterMap::HoldingReg},
 
     {"chan3CjValue",            33242, RegisterMap::D,  RegisterMap::F32, RegisterMap::R,  RegisterMap::HoldingReg},
 

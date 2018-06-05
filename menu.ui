@@ -361,7 +361,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>8</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1019,6 +1019,530 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="QWidget" name="channels">
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <property name="leftMargin">
+              <number>29</number>
+             </property>
+             <property name="topMargin">
+              <number>30</number>
+             </property>
+             <property name="rightMargin">
+              <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="wButtonStyled" name="bChannel1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Канал 1</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bChannel2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Канал 2</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bChannel3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Канал 3</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bChannel4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Канал 4</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>165</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bBackChannels">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="applications">
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <property name="leftMargin">
+              <number>29</number>
+             </property>
+             <property name="topMargin">
+              <number>30</number>
+             </property>
+             <property name="rightMargin">
+              <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="wButtonStyled" name="bMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>МАТЕМАТИКА</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bAnaliz_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>АНАЛИЗ СИГНАЛА</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ПРЕДЕЛЬНЫЕ ЗНАЧЕНИЯ / УСТАВКИ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>243</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bBackApplications">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="wButtonStyled" name="bMath_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УСТАВКИ КАНАЛА 1</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bAnaliz_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УСТАВКИ КАНАЛА 2</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УСТАВКИ КАНАЛА 3</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УСТАВКИ КАНАЛА 4</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>187</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bBackApplications_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_2">
+            <widget class="wButtonStyled" name="bMath_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>38</y>
+               <width>813</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>СПИСОК ДИАГНОСТИК</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bBackDiagnostika">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>520</y>
+               <width>813</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>НАЗАД</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bAnaliz_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>114</y>
+               <width>813</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>ЖУРНАЛ СОБЫТИЙ</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bUstavki_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>266</y>
+               <width>811</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>ИЗМЕР. ЗНАЧЕНИЯ</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bUstavki_5">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>190</y>
+               <width>811</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>СВЕДЕНИЯ О ПРИБОРЕ</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bUstavki_6">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>340</y>
+               <width>811</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>ВЫХОДЫ</string>
+             </property>
+            </widget>
+            <widget class="wButtonStyled" name="bUstavki_7">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>416</y>
+               <width>811</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>МОДЕЛИРОВАНИЕ</string>
+             </property>
+            </widget>
            </widget>
           </widget>
          </item>

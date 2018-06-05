@@ -111,6 +111,7 @@ private:
     double state2value;
     double currentvalue;
     int demphervalue;
+    int numChannel;
 
     QString unitsname;
     QString state1highmessage;
@@ -390,6 +391,8 @@ public:
         chanTransferScaleLowLim = 35,
         chanTransferScaleHighLim = 37,
         chanBadGoodComm = 39,
+        chanReleyHi = 42,
+        chanReleyLow = 43,
 
         chanCjValue = 90,
         chanResultCjValue = 92,

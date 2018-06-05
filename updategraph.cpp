@@ -13,64 +13,8 @@
 
 int xoffset=0;
 
-// пара 1
-
-int color1rgbnormal[]={0, 137, 182};    // RAL 5012 colour
-int color2rgbnormal[]={0, 131, 81};     // RAL 6024 colour
-int color3rgbnormal[]={91, 104, 109};   // RAL 7031 colour
-int color4rgbnormal[]={126, 75, 38};   // RAL 8003 colour
-
-int color1rgbmaximum[]={61, 56, 85};       // RAL  5003
-int color2rgbmaximum[]={0, 105, 76};       // RAL  6016
-int color3rgbmaximum[]={56,62,66};         // 7016
-int color4rgbmaximum[]={121,80,56};        // ral 8024
-
-int color1rgbminimum[]={96,147,172};    // RAL 5024
-int color2rgbminimum[]={97,153,59};     // RAL 6018
-int color3rgbminimum[]={142,146,145};   // RAL 7042
-int color4rgbminimum[]={157,98,43};    // RAL 8001
-
 double randVal[4] = {0.0, 0.0, 0.0, 0.0};
 
-// пара 2
-
-//int color1rgbnormal[]={144,51,115};    // RAL 4006 colour
-//int color2rgbnormal[]={203,115,117};     // RAL 3014 colour
-//int color3rgbnormal[]={218,110,0};   // RAL 2000 colour
-//int color4rgbnormal[]={108,124,89};   // RAL 6011 colour
-
-//int color1rgbmaximum[]={132,76,130};       // RAL  4008
-//int color2rgbmaximum[]={134,26,34};        // RAL  3003
-//int color3rgbmaximum[]={208,93,40};         // RAL  2010
-//int color4rgbmaximum[]={94,110,59};        // RAL  6025
-
-//int color1rgbminimum[]={129,97,131};    // RAL 4001
-//int color2rgbminimum[]={216,160,166};   // RAL 3015
-//int color3rgbminimum[]={255,155,0};   // RAL 1028
-//int color4rgbminimum[]={138,153,119};    // RAL 6021
-
-QColor ChannelColorHighState = QColor(0xFF,0x00,0x00);
-QColor ChannelColorLowState  = QColor(0xFF,0xCA,0x00);
-
-QColor Channel1Color = ColorCh1; //QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
-QColor Channel2Color = ColorCh2; //QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
-QColor Channel3Color = ColorCh3; //QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
-QColor Channel4Color = ColorCh4; //QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
-
-QColor Channel1ColorNormal = ColorCh1; //QColor(color1rgbnormal[0],color1rgbnormal[1],color1rgbnormal[2]);
-QColor Channel2ColorNormal = ColorCh2; //QColor(color2rgbnormal[0],color2rgbnormal[1],color2rgbnormal[2]);
-QColor Channel3ColorNormal = ColorCh3; //QColor(color3rgbnormal[0],color3rgbnormal[1],color3rgbnormal[2]);
-QColor Channel4ColorNormal = ColorCh4; //QColor(color4rgbnormal[0],color4rgbnormal[1],color4rgbnormal[2]);
-
-QColor Channel1ColorMaximum = QColor(color1rgbmaximum[0],color1rgbmaximum[1],color1rgbmaximum[2]);
-QColor Channel2ColorMaximum = QColor(color2rgbmaximum[0],color2rgbmaximum[1],color2rgbmaximum[2]);
-QColor Channel3ColorMaximum = QColor(color3rgbmaximum[0],color3rgbmaximum[1],color3rgbmaximum[2]);
-QColor Channel4ColorMaximum = QColor(color4rgbmaximum[0],color4rgbmaximum[1],color4rgbmaximum[2]);
-
-QColor Channel1ColorMinimum = QColor(color1rgbminimum[0],color1rgbminimum[1],color1rgbminimum[2]);
-QColor Channel2ColorMinimum = QColor(color2rgbminimum[0],color2rgbminimum[1],color2rgbminimum[2]);
-QColor Channel3ColorMinimum = QColor(color3rgbminimum[0],color3rgbminimum[1],color3rgbminimum[2]);
-QColor Channel4ColorMinimum = QColor(color4rgbminimum[0],color4rgbminimum[1],color4rgbminimum[2]);
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
@@ -293,7 +237,8 @@ void MainWindow::UpdateGraphics()
     case Options::TrendsCyfraBars:
         GrafsUpdateTrendsAndBars();break;
     case Options::Polar:
-        updateBars();
+//        updateBars();
+        updateWidgetsVols();
         GrafsUpdateNone();break;
     case Options::Cyfra:
         updateBars();
@@ -757,26 +702,26 @@ void MainWindow::GrafsUpdateTrends()
     updateBars();
 
     graphPen.setWidth(GraphWidthinPixels);
-    graphPen.setColor(Channel1Color);
+    graphPen.setColor(ColorCh1);
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     ui->customPlot->graph()->setData(channel2.GetChannelXBuffer(), channel2.GetChannelValuesBuffer());
     //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
-    graphPen.setColor(Channel2Color);
+    graphPen.setColor(ColorCh2);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(channel3.GetChannelXBuffer(), channel3.GetChannelValuesBuffer());
     //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
-    graphPen.setColor(Channel3Color);
+    graphPen.setColor(ColorCh3);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(channel4.GetChannelXBuffer(), channel4.GetChannelValuesBuffer());
     //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
-    graphPen.setColor(Channel4Color);
+    graphPen.setColor(ColorCh4);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
@@ -946,26 +891,26 @@ void MainWindow::GrafsUpdateBars()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(Bar1_X_Coord, Bar1_Y_Coord);
-    ui->customPlot->graph()->setBrush(QBrush(Channel1Color)); // first graph will be filled with translucent blue
-    graphPen.setColor(Channel1Color );
+    ui->customPlot->graph()->setBrush(QBrush(ColorCh1)); // first graph will be filled with translucent blue
+    graphPen.setColor(ColorCh1 );
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(Bar2_X_Coord, Bar2_Y_Coord);
-    ui->customPlot->graph()->setBrush(QBrush(Channel2Color)); // first graph will be filled with translucent blue
-    graphPen.setColor(Channel2Color);
+    ui->customPlot->graph()->setBrush(QBrush(ColorCh2)); // first graph will be filled with translucent blue
+    graphPen.setColor(ColorCh2);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(Bar3_X_Coord, Bar3_Y_Coord);
-    ui->customPlot->graph()->setBrush(QBrush(Channel3Color)); // first graph will be filled with translucent blue
-    graphPen.setColor(Channel3Color);
+    ui->customPlot->graph()->setBrush(QBrush(ColorCh3)); // first graph will be filled with translucent blue
+    graphPen.setColor(ColorCh3);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(Bar4_X_Coord, Bar4_Y_Coord);
-    ui->customPlot->graph()->setBrush(QBrush(Channel4Color)); // first graph will be filled with translucent blue
-    graphPen.setColor(Channel4Color);
+    ui->customPlot->graph()->setBrush(QBrush(ColorCh4)); // first graph will be filled with translucent blue
+    graphPen.setColor(ColorCh4);
     ui->customPlot->graph()->setPen(graphPen);
 
     LabelsBar.clear();
@@ -1104,9 +1049,10 @@ void MainWindow::UpdateChannel1Slot()
 //    CheckAndLogginStates(channel1);
 
     /* Test */
-    randVal[0] += ((double)((rand()%101) - 50) / 100);
-    channel1.SetCurrentChannelValue(randVal[0]);
-    ui->wBar_1->setVolue(randVal[0]);
+//    randVal[0] += ((double)((rand()%101) - 50) / 100);
+//    channel1.SetCurrentChannelValue(randVal[0]);
+//    ui->wBar_1->setVolue(randVal[0]);
+//    ui->widgetVol1->setVol(randVal[0]);
 
     channeltimer1->setInterval(period);
 }
@@ -1127,9 +1073,10 @@ void MainWindow::UpdateChannel2Slot()
 //    CheckAndLogginStates(channel2);
 
         /* Test */
-    randVal[1] += ((double)((rand()%101) - 50) / 100);
-    channel2.SetCurrentChannelValue(randVal[1]);
-    ui->wBar_2->setVolue(randVal[1]);
+//    randVal[1] += ((double)((rand()%101) - 50) / 100);
+//    channel2.SetCurrentChannelValue(randVal[1]);
+//    ui->wBar_2->setVolue(randVal[1]);
+//    ui->widgetVol2->setVol(randVal[1]);
 
     channeltimer2->setInterval(period);
 }
@@ -1150,9 +1097,10 @@ void MainWindow::UpdateChannel3Slot()
 //    CheckAndLogginStates(channel3);
 
     /* Test */
-    randVal[2] += ((double)((rand()%101) - 50) / 100);
-    channel3.SetCurrentChannelValue(randVal[2]);
-    ui->wBar_3->setVolue(randVal[2]);
+//    randVal[2] += ((double)((rand()%101) - 50) / 100);
+//    channel3.SetCurrentChannelValue(randVal[2]);
+//    ui->wBar_3->setVolue(randVal[2]);
+//    ui->widgetVol3->setVol(randVal[2]);
 
     channeltimer3->setInterval(period);
 }
@@ -1173,9 +1121,10 @@ void MainWindow::UpdateChannel4Slot()
 //    CheckAndLogginStates(channel4);
 
     /* Test */
-    randVal[3] += ((double)((rand()%101) - 50) / 100);
-    channel4.SetCurrentChannelValue(randVal[3]);
-    ui->wBar_4->setVolue(randVal[3]);
+//    randVal[3] += ((double)((rand()%101) - 50) / 100);
+//    channel4.SetCurrentChannelValue(randVal[3]);
+//    ui->wBar_4->setVolue(randVal[3]);
+//    ui->widgetVol4->setVol(randVal[3]);
 
     channeltimer4->setInterval(period);
 }
@@ -1183,32 +1132,32 @@ void MainWindow::UpdateChannel4Slot()
 void MainWindow::readReleSlot(uint8_t code)
 {
     Transaction tr(Transaction::R, 2, 32799, 0);
-    uint16_t offset = 32799;
+    uint16_t offset = 32810;
     switch(code)
     {
     case 0:
-        offset = 32799;
+        offset = 32810;
         break;
     case 1:
-        offset = 32801;
+        offset = 32811;
         break;
     case 2:
-        offset = 32927;
+        offset = 32938;
         break;
     case 3:
-        offset = 32929;
+        offset = 32939;
         break;
     case 4:
         offset = 33055;
         break;
     case 5:
-        offset = 33057;
+        offset = 33056;
         break;
     case 6:
         offset = 33183;
         break;
     case 7:
-        offset = 33185;
+        offset = 33184;
         break;
     default:
         break;
@@ -1224,15 +1173,10 @@ void MainWindow::updateBars(void)
     ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
     ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
 
-    ui->wBar_1->setLim(-40, 35);
-    ui->wBar_2->setLim(4, 30);
-    ui->wBar_3->setLim(-10, 25);
-    ui->wBar_4->setLim(-49, 13);
-
-    ui->wBar_1->setColor(StyleSheetCh1, StyleSheetCh1Light);
-    ui->wBar_2->setColor(StyleSheetCh2, StyleSheetCh2Light);
-    ui->wBar_3->setColor(StyleSheetCh3, StyleSheetCh3Light);
-    ui->wBar_4->setColor(StyleSheetCh4, StyleSheetCh4Light);
+    ui->wBar_1->setColor(ColorCh1, ColorCh1Light);
+    ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
+    ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
+    ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
 
     ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
     ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
@@ -1252,6 +1196,14 @@ void MainWindow::updateBars(void)
     ui->wBar_2->setLim(channel2.GetLowerLimit(), channel2.GetHigherLimit());
     ui->wBar_3->setLim(channel3.GetLowerLimit(), channel3.GetHigherLimit());
     ui->wBar_4->setLim(channel4.GetLowerLimit(), channel4.GetHigherLimit());
+}
+
+void MainWindow::updateWidgetsVols(void)
+{
+    ui->widgetVol1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->widgetVol2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->widgetVol3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->widgetVol4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
 }
 
 void MainWindow::selectWidgetDiagram(void)

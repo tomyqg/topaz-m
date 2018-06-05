@@ -306,7 +306,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
      </property>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
       <property name="spacing">
-       <number>0</number>
+       <number>32</number>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -345,1109 +345,3009 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
           <number>0</number>
          </property>
          <item>
-          <widget class="QFrame" name="channel">
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
+          <widget class="QStackedWidget" name="stackedWidget">
+           <property name="currentIndex">
+            <number>3</number>
            </property>
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <property name="leftMargin">
-             <number>28</number>
+           <widget class="QWidget" name="channel">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
-            <property name="topMargin">
-             <number>22</number>
-            </property>
-            <property name="rightMargin">
-             <number>15</number>
-            </property>
-            <item>
-             <widget class="QFrame" name="frameNameParam">
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <property name="spacing">
-                <number>0</number>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <widget class="QFrame" name="frameParametrs">
+               <property name="minimumSize">
+                <size>
+                 <width>583</width>
+                 <height>0</height>
+                </size>
                </property>
-               <property name="leftMargin">
-                <number>0</number>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="topMargin">
-                <number>0</number>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-               <property name="rightMargin">
-                <number>0</number>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <widget class="QFrame" name="frame_3">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                   <item>
+                    <widget class="QLabel" name="labelNumChannel">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>44</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>44</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>29</pointsize>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(0, 0, 0);</string>
+                     </property>
+                     <property name="text">
+                      <string>КАНАЛ #1</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_3">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>44</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>44</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(0, 0, 0);</string>
+                     </property>
+                     <property name="text">
+                      <string>ПАРАМЕТР</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="scrollArea">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QScrollBar:vertical {              
+        background:rgb(179, 179, 179);
+        margin: 0px 0px 0px 0px;
+		border-radius: 5px;
+		width:10px; 
+    }
+QScrollBar::handle:vertical {
+       background:rgb(77, 77, 77);
+        min-height: 50px;
+		border-radius: 5px;
+    }
+QScrollBar::add-line:vertical {
+       background:rgb(179, 179, 179);
+        height: 10px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+
+QScrollBar::sub-line:vertical {
+        background:rgb(77, 77, 77);
+        height: 10 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
+        background:rgb(77, 77, 77);
+        height: 10px;
+		border-radius: 5px;
+    }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOn</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QAbstractScrollArea::AdjustToContents</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>564</width>
+                     <height>669</height>
+                    </rect>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout">
+                    <property name="rightMargin">
+                     <number>25</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>9</number>
+                    </property>
+                    <property name="horizontalSpacing">
+                     <number>10</number>
+                    </property>
+                    <property name="verticalSpacing">
+                     <number>20</number>
+                    </property>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_5">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ТИП</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QComboBox" name="typeSignal">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox{
+	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+	text-align: center;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                      </property>
+                      <property name="currentText">
+                       <string>НАПРЯЖЕНИЕ</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>2</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>ОТКЛ.</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>ТОК</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>НАПРЯЖЕНИЕ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Т/П</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Т/С</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_6">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НАИМЕНОВАНИЕ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QLineEdit" name="nameChannel">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(21, 159, 133);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>I</string>
+                      </property>
+                      <property name="maxLength">
+                       <number>2</number>
+                      </property>
+                      <property name="cursorPosition">
+                       <number>1</number>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_7">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРХНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QDoubleSpinBox" name="scaleUp">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="decimals">
+                       <number>2</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-1000000000000.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>40.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_8">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ВПИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="QDoubleSpinBox" name="limitUp">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="sizeIncrement">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="baseSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(232, 76, 61);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="decimals">
+                       <number>2</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-1000000000000.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>20.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_9">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НПИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QDoubleSpinBox" name="limitDown">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="decimals">
+                       <number>2</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-1000000000000.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>-4.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="label_10">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НИЖНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QDoubleSpinBox" name="scaleDown">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="minimum">
+                       <double>-1000000000000.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>-12.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="label_11">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="1">
+                     <widget class="QLineEdit" name="unit">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(21, 159, 133);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>mA</string>
+                      </property>
+                      <property name="maxLength">
+                       <number>2</number>
+                      </property>
+                      <property name="cursorPosition">
+                       <number>2</number>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="label_12">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ПЕРИОД ОБНОВЛЕНИЯ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="1">
+                     <widget class="QDoubleSpinBox" name="periodCh">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(91, 119, 143);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="suffix">
+                       <string> сек</string>
+                      </property>
+                      <property name="decimals">
+                       <number>1</number>
+                      </property>
+                      <property name="minimum">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>10.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>1.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="label_16">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ДЕМПФИРОВАНИЕ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="1">
+                     <widget class="QSpinBox" name="dempfer">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="9" column="0">
+                     <widget class="QLabel" name="label_17">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ТИП РЕГИСТРАЦИИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="9" column="1">
+                     <widget class="QComboBox" name="typeReg">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox{
+	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                      </property>
+                      <property name="currentText">
+                       <string>МГНОВЕН.</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>МГНОВЕН.</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>СРЕДНЕЕ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>МИНИМУМ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>МАКСИМУМ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>РАЗМАХ</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QLabel" name="label_18">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ДИАПАЗОН ДАТЧИКА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="1">
+                     <widget class="QComboBox" name="sensorDiapazon">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox::drop-down {
+	width:30px;
+ }
+QComboBox{
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}</string>
+                      </property>
+                      <property name="currentText">
+                       <string>0-100 мВ</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>1</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>НЕТ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0-100 мВ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0-1 В</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0-5 В</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>±10 В</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>±30 В</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frameButUstavk">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>68</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>68</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Sunken</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <spacer name="horizontalSpacer_3">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>157</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="wButtonStyled" name="buttonUstavk">
+                     <property name="minimumSize">
+                      <size>
+                       <width>321</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>21</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(14, 210, 226);</string>
+                     </property>
+                     <property name="text">
+                      <string>НАСТРОЙКА УСТАВОК</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_4">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>157</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>157</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
-               <property name="bottomMargin">
-                <number>0</number>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
                </property>
-               <item>
-                <widget class="QLabel" name="label_4">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>29</pointsize>
-                   <weight>50</weight>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>КАНАЛ #1</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignJustify|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_5">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ТИП</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_6">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>НАИМЕНОВАНИЕ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_13">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_7">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ВЕРХНИЙ ПРЕДЕЛ ШКАЛЫ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_14">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_8">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ВПИ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_15">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_9">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>НПИ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_16">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_10">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>НИЖНИЙ ПРЕДЕЛ ШКАЛЫ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_17">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_11">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_18">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_12">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ПЕРИОД ОБНОВЛЕНИЯ</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_19">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QFrame" name="frameButUstavk">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>50</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <widget class="wButtonStyled" name="buttonUstavk">
-                  <property name="geometry">
-                   <rect>
-                    <x>-1</x>
-                    <y>0</y>
-                    <width>351</width>
-                    <height>51</height>
-                   </rect>
+              </spacer>
+             </item>
+             <item>
+              <widget class="Line" name="line_2">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>500</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QFrame" name="frameBar">
+               <property name="minimumSize">
+                <size>
+                 <width>160</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_3">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>20</number>
+                </property>
+                <property name="topMargin">
+                 <number>19</number>
+                </property>
+                <property name="rightMargin">
+                 <number>20</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>42</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>44</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>44</height>
+                   </size>
                   </property>
                   <property name="font">
                    <font>
                     <family>Open Sans</family>
-                    <pointsize>21</pointsize>
+                    <pointsize>16</pointsize>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">color: rgb(14, 210, 226);</string>
+                   <string notr="true">color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
-                   <string>НАСТРОЙКА УСТАВОК</string>
+                   <string>ЗНАЧЕНИЕ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="Line" name="line">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>500</height>
-               </size>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QFrame" name="frameVol">
-              <property name="minimumSize">
-               <size>
-                <width>150</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
+                </item>
+                <item alignment="Qt::AlignHCenter">
+                 <widget class="wVolueBar" name="bar" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="messages">
+            <property name="font">
+             <font>
+              <family>Open Sans</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="leftMargin">
+              <number>17</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>18</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string> №№        ВРЕМЯ                                 ЗНАЧЕНИЕ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QListWidget" name="listWidget">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>16</pointsize>
+                </font>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QScrollBar:vertical {              
+        background:rgb(179, 179, 179);
+        margin: 0px 0px 0px 0px;
+		border-radius: 5px;
+		width:10px; 
+    }
+QScrollBar::handle:vertical {
+       background:rgb(77, 77, 77);
+        min-height: 50px;
+		border-radius: 5px;
+    }
+QScrollBar::add-line:vertical {
+       background:rgb(179, 179, 179);
+        height: 10px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+
+QScrollBar::sub-line:vertical {
+        background:rgb(77, 77, 77);
+        height: 10 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
+        background:rgb(77, 77, 77);
+        height: 10px;
+		border-radius: 5px;
+    }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QListWidget::item:selected {
+	background:rgb(179, 179, 179);
+}
+QListWidget::item {
+	border-bottom: 1px solid rgb(179, 179, 179);
+	margin-right: 40px;
+	color:#000;
+}
+
+</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <property name="lineWidth">
+                <number>14</number>
+               </property>
+               <property name="midLineWidth">
+                <number>9</number>
+               </property>
+               <property name="verticalScrollBarPolicy">
+                <enum>Qt::ScrollBarAlwaysOn</enum>
+               </property>
+               <property name="horizontalScrollBarPolicy">
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+               <property name="sizeAdjustPolicy">
+                <enum>QAbstractScrollArea::AdjustToContents</enum>
+               </property>
+               <property name="autoScrollMargin">
+                <number>16</number>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="tabKeyNavigation">
+                <bool>false</bool>
+               </property>
+               <property name="showDropIndicator" stdset="0">
+                <bool>false</bool>
+               </property>
+               <property name="dragEnabled">
+                <bool>false</bool>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::DragOnly</enum>
+               </property>
+               <property name="defaultDropAction">
+                <enum>Qt::IgnoreAction</enum>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>false</bool>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::NoSelection</enum>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="movement">
+                <enum>QListView::Snap</enum>
+               </property>
+               <property name="flow">
+                <enum>QListView::TopToBottom</enum>
+               </property>
+               <property name="isWrapping" stdset="0">
+                <bool>false</bool>
+               </property>
+               <property name="resizeMode">
+                <enum>QListView::Fixed</enum>
+               </property>
+               <property name="layoutMode">
+                <enum>QListView::Batched</enum>
+               </property>
                <property name="spacing">
+                <number>1</number>
+               </property>
+               <property name="gridSize">
+                <size>
+                 <width>0</width>
+                 <height>31</height>
+                </size>
+               </property>
+               <property name="viewMode">
+                <enum>QListView::ListMode</enum>
+               </property>
+               <property name="modelColumn">
                 <number>0</number>
                </property>
-               <property name="leftMargin">
-                <number>10</number>
+               <property name="uniformItemSizes">
+                <bool>false</bool>
                </property>
-               <property name="topMargin">
-                <number>0</number>
+               <property name="batchSize">
+                <number>1000000</number>
                </property>
-               <property name="rightMargin">
-                <number>10</number>
+               <property name="selectionRectVisible">
+                <bool>true</bool>
                </property>
-               <property name="bottomMargin">
-                <number>50</number>
+               <property name="currentRow">
+                <number>-1</number>
                </property>
-               <item>
-                <widget class="QLabel" name="label_3">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>16</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ПАРАМЕТР</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>41</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>16</pointsize>
-                  </font>
-                 </property>
-                 <property name="layoutDirection">
-                  <enum>Qt::LeftToRight</enum>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(91, 119, 143);
+               <property name="sortingEnabled">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="archive">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QCustomPlot" name="customPlot" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                 <stylestrategy>NoAntialias</stylestrategy>
+                </font>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_8">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_14">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>18</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ЛЕГЕНДА</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="margin">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frameCh1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <property name="spacing">
+                    <number>9</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="colorCh1" native="true">
+                     <property name="minimumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(26, 188, 156);
+border-color: rgb(0, 0, 0);
+border: 1px solid;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="channel1">
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>SL1:CH1</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frameCh1_3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <property name="spacing">
+                    <number>9</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="colorCh1_3" native="true">
+                     <property name="minimumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: #6666ff;
+border-color: rgb(0, 0, 0);
+border: 1px solid;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="channel1_3">
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>SL1:CH2</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frameCh1_2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <property name="spacing">
+                    <number>9</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="colorCh1_2" native="true">
+                     <property name="minimumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(230, 77, 59);
+border-color: rgb(0, 0, 0);
+border: 1px solid;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="channel1_2">
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>SL1:CH3</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frameCh1_4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <property name="spacing">
+                    <number>9</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>2</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="colorCh1_4" native="true">
+                     <property name="minimumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>25</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(44, 61, 77);
+border-color: rgb(0, 0, 0);
+border: 1px solid;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="channel1_4">
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>SL1:CH4</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_20">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>145</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_15">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>18</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ПЕРИОД</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="margin">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="period">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>16</pointsize>
+                   </font>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(91, 119, 143);
 color: rgb(255, 255, 255);
 border-radius: 0px;
 text-align: center;</string>
-                 </property>
-                 <property name="currentText">
-                  <string>ОТКЛ.</string>
-                 </property>
-                 <property name="currentIndex">
-                  <number>0</number>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="modelColumn">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>ОТКЛ.</string>
                   </property>
+                  <property name="currentText">
+                   <string>МИНУТА</string>
+                  </property>
+                  <property name="currentIndex">
+                   <number>0</number>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="modelColumn">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>МИНУТА</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>10 МИНУТ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>ЧАС</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>10 ЧАСОВ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>СУТКИ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>НЕДЕЛЯ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>МЕСЯЦ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>3 МЕСЯЦА</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>ГОД</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_21">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>168</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="ustavka">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <widget class="QFrame" name="frameParametrs_2">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>20</y>
+               <width>791</width>
+               <height>511</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>583</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QFrame" name="frame_4">
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <widget class="QLabel" name="labelNumChannel_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>44</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>44</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Open Sans</family>
+                     <pointsize>29</pointsize>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 0);</string>
+                   </property>
+                   <property name="text">
+                    <string>УСТАВКА #1</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>ТОК</string>
-                  </property>
+                  <widget class="QLabel" name="label_4">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>44</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>44</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Open Sans</family>
+                     <pointsize>16</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 0);</string>
+                   </property>
+                   <property name="text">
+                    <string>ПАРАМЕТР</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
                  </item>
-                 <item>
-                  <property name="text">
-                   <string>НАПРЯЖЕНИЕ</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Т/П</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Т/С</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QScrollArea" name="scrollArea_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QScrollBar:vertical {              
+        background:rgb(179, 179, 179);
+        margin: 0px 0px 0px 0px;
+		border-radius: 5px;
+		width:10px; 
+    }
+QScrollBar::handle:vertical {
+       background:rgb(77, 77, 77);
+        min-height: 50px;
+		border-radius: 5px;
+    }
+QScrollBar::add-line:vertical {
+       background:rgb(179, 179, 179);
+        height: 10px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+
+QScrollBar::sub-line:vertical {
+        background:rgb(77, 77, 77);
+        height: 10 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
+        background:rgb(77, 77, 77);
+        height: 10px;
+		border-radius: 5px;
+    }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOn</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContents</enum>
+                </property>
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>-183</y>
+                   <width>759</width>
+                   <height>608</height>
+                  </rect>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(21, 159, 133);
+                 <layout class="QGridLayout" name="gridLayout_2">
+                  <property name="rightMargin">
+                   <number>25</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>9</number>
+                  </property>
+                  <property name="horizontalSpacing">
+                   <number>10</number>
+                  </property>
+                  <property name="verticalSpacing">
+                   <number>20</number>
+                  </property>
+                  <item row="9" column="1">
+                   <widget class="QComboBox" name="reley_2">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>16</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QComboBox {
+	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                    </property>
+                    <property name="currentText">
+                     <string>НЕТ</string>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="modelColumn">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>НЕТ</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>ВКЛЮЧЕНО</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_19">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>КАНАЛ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="ustavkaChannel">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>16</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QComboBox{
+	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+	text-align: center;
+}
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                    </property>
+                    <property name="currentText">
+                     <string>ОТКЛЮЧЕН</string>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="modelColumn">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>ОТКЛЮЧЕН</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>КАНАЛ 1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>КАНАЛ 2</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>КАНАЛ 3</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>КАНАЛ 4</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="identifikator">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(21, 159, 133);
 color: rgb(255, 255, 255);
 border-radius: 0px;</string>
-                 </property>
-                 <property name="inputMask">
-                  <string/>
-                 </property>
-                 <property name="text">
-                  <string>I</string>
-                 </property>
-                 <property name="maxLength">
-                  <number>2</number>
-                 </property>
-                 <property name="cursorPosition">
-                  <number>1</number>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="minimum">
-                  <double>-1000000000000.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>1000000000000000000000.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>40.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-                 <property name="sizeIncrement">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="baseSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(232, 76, 61);
-color: rgb(255, 255, 255);
-border-radius: 0px;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="minimum">
-                  <double>-1000000000000.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>1000000000000000000000.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>20.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color:rgb(44, 61, 77);
+                    </property>
+                    <property name="inputMask">
+                     <string/>
+                    </property>
+                    <property name="text">
+                     <string>Alarm 1</string>
+                    </property>
+                    <property name="maxLength">
+                     <number>16</number>
+                    </property>
+                    <property name="cursorPosition">
+                     <number>7</number>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_21">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ТИП ФИКСАЦИИ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_22">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ЗНАЧЕНИЕ УСТАВКИ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_20">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ИДЕНТИФИКАТОР</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QDoubleSpinBox" name="gisterezis">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color:rgb(44, 61, 77);
 color: rgb(255 , 255, 255);
 border-radius: 0px;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="minimum">
-                  <double>-1000000000000.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>1000000000000000000000.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>-4.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(230, 230, 230);
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-1000000000000.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>1000000000000000000000.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>-4.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QDoubleSpinBox" name="ustavkaVol">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="sizeIncrement">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(232, 76, 61);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-1000000000000.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>1000000000000000000000.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>20.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_23">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ГИСТЕРЕЗИС</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_24">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ВРЕМЯ ЗАДЕРЖКИ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QDoubleSpinBox" name="ustavkaTimer">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="minimum">
+                     <double>0.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>10.000000000000000</double>
+                    </property>
+                    <property name="singleStep">
+                     <double>0.100000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>0.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="12" column="0">
+                   <widget class="QLabel" name="label_27">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>СООБЩЕНИЕ ВКЛЮЧЕНИЯ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QLabel" name="label_26">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>КВИТИРОВАНИЕ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="label_25">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>ПЕРЕКЛЮЧАТЕЛЬ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="14" column="0">
+                   <widget class="QLabel" name="label_28">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>СООБЩЕНИЕ ВЫКЛЮЧЕНИЯ</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="typeFix">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>16</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QComboBox {
+	background-color: rgb(230, 230, 230);
+	color: rgb(0, 0, 0);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                    </property>
+                    <property name="currentText">
+                     <string>ВЕРХНЯЯ ТОЧКА</string>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="modelColumn">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>ВЕРХНЯЯ ТОЧКА</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>НИЖНЯЯ ТОЧКА</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QComboBox" name="reley">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>41</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>16</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QComboBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                    </property>
+                    <property name="currentText">
+                     <string>НЕТ</string>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="modelColumn">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>НЕТ</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 2</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 3</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 4</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 5</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 6</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 7</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>РЕЛЕ 8</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="12" column="1">
+                   <widget class="QLineEdit" name="messageOn">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <double>-1000000000000.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>1000000000000000000000.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>-12.000000000000000</double>
-                 </property>
+                    </property>
+                    <property name="inputMask">
+                     <string/>
+                    </property>
+                    <property name="text">
+                     <string>Авария отопителя</string>
+                    </property>
+                    <property name="maxLength">
+                     <number>80</number>
+                    </property>
+                    <property name="cursorPosition">
+                     <number>16</number>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="14" column="1">
+                   <widget class="QLineEdit" name="messageOff">
+                    <property name="maximumSize">
+                     <size>
+                      <width>270</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Open Sans</family>
+                      <pointsize>20</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;</string>
+                    </property>
+                    <property name="inputMask">
+                     <string/>
+                    </property>
+                    <property name="text">
+                     <string>Авария отопителя</string>
+                    </property>
+                    <property name="maxLength">
+                     <number>80</number>
+                    </property>
+                    <property name="cursorPosition">
+                     <number>16</number>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit_2">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(21, 159, 133);
-color: rgb(255, 255, 255);
-border-radius: 0px;</string>
-                 </property>
-                 <property name="inputMask">
-                  <string/>
-                 </property>
-                 <property name="text">
-                  <string>mA</string>
-                 </property>
-                 <property name="maxLength">
-                  <number>2</number>
-                 </property>
-                 <property name="cursorPosition">
-                  <number>2</number>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>20</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(91, 119, 143);
-color: rgb(255, 255, 255);
-border-radius: 0px;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="suffix">
-                  <string> сек</string>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="Line" name="line_2">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>500</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QFrame" name="frameBar">
-              <property name="minimumSize">
-               <size>
-                <width>160</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_3">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <property name="leftMargin">
-                <number>20</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>20</number>
-               </property>
-               <property name="bottomMargin">
-                <number>27</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>44</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Open Sans</family>
-                   <pointsize>16</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string>ЗНАЧЕНИЕ</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item alignment="Qt::AlignHCenter">
-                <widget class="wVolueBar" name="bar" native="true">
-                 <property name="minimumSize">
-                  <size>
-                   <width>100</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QFrame" name="frameButUstavk_2">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>550</y>
+               <width>781</width>
+               <height>68</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>68</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>68</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>157</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="wButtonStyled" name="buttonBackUstavki">
+                <property name="minimumSize">
+                 <size>
+                  <width>151</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Open Sans</family>
+                  <pointsize>21</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(14, 210, 226);</string>
+                </property>
+                <property name="text">
+                 <string>НАЗАД</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>157</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>157</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -1458,13 +3358,13 @@ border-radius: 0px;</string>
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>120</height>
+          <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>120</height>
+          <height>16777215</height>
          </size>
         </property>
         <property name="frameShape">
@@ -1607,11 +3507,6 @@ border: 0px solid rgba(0,0,0,0);</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>wButtonStyled</class>
-   <extends>QPushButton</extends>
-   <header location="global">buttonstyled.h</header>
-  </customwidget>
-  <customwidget>
    <class>wVolueBar</class>
    <extends>QWidget</extends>
    <header>voluebar.h</header>
@@ -1619,6 +3514,17 @@ border: 0px solid rgba(0,0,0,0);</string>
    <slots>
     <signal>clicked()</signal>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>wButtonStyled</class>
+   <extends>QPushButton</extends>
+   <header location="global">buttonstyled.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

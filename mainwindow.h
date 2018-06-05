@@ -177,6 +177,7 @@ private:
     void CloseApplication();
     void WriteAllChannelsOptionsToFile();
     void updateBars(void);
+    void updateWidgetsVols(void);
     void selectWidgetDiagram(void);
 
 
@@ -193,7 +194,6 @@ private:
     int GetGraphWidthInPixels() {return 600;}
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
-    uint16_t getOffsetFromNumRelay(int num);
     int dateindex;
     bool EcoMode;
     int polar_angle;

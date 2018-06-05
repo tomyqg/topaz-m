@@ -44,21 +44,6 @@
 
 extern MainWindow * globalMainWin;
 
-extern QColor Channel1Color;
-extern QColor Channel2Color;
-extern QColor Channel3Color;
-extern QColor Channel4Color;
-extern QColor Channel1ColorNormal;
-extern QColor Channel2ColorNormal ;
-extern QColor Channel3ColorNormal;
-extern QColor Channel4ColorNormal ;
-
-extern QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
-extern QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;
-
-extern QColor ChannelColorHighState;
-extern QColor ChannelColorLowState;
-
 void MainWindow::MainWindowInitialization()
 {
     //qRegisterMetaType<Transaction>("Transaction");
@@ -134,8 +119,6 @@ void MainWindow::MainWindowInitialization()
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
 
-    tmr = new QTimer();
-    tmr->setInterval(ValuesUpdateTimer);
 
     displayrefreshtimer = new QTimer();
 //    displayrefreshtimer->setInterval(3000);
@@ -146,6 +129,7 @@ void MainWindow::MainWindowInitialization()
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
     tmrarchive->start(ArchiveUpdateTimer);
 
+    tmr = new QTimer();
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
     tmr->start(ValuesUpdateTimer);// этот таймер тоже за обновление значений (частота запихивания значений в буфер, оставить пока так должно быть сто
 
@@ -178,20 +162,20 @@ void MainWindow::MainWindowInitialization()
     channel3.ReadSingleChannelOptionFromFile(3);
     channel4.ReadSingleChannelOptionFromFile(4);
 
-    channel1.SetNormalColor(Channel1ColorNormal);
-    channel2.SetNormalColor(Channel2ColorNormal);
-    channel3.SetNormalColor(Channel3ColorNormal);
-    channel4.SetNormalColor(Channel4ColorNormal);
+    channel1.SetNormalColor(ColorCh1);
+    channel2.SetNormalColor(ColorCh2);
+    channel3.SetNormalColor(ColorCh3);
+    channel4.SetNormalColor(ColorCh4);
 
-    channel1.SetMaximumColor(Channel1ColorMaximum);
-    channel2.SetMaximumColor(Channel2ColorMaximum);
-    channel3.SetMaximumColor(Channel3ColorMaximum);
-    channel4.SetMaximumColor(Channel4ColorMaximum);
+    channel1.SetMaximumColor(QColor(ColorCh1.red() - 20, ColorCh1.green() - 20, ColorCh1.blue() - 20));
+    channel2.SetMaximumColor(QColor(ColorCh2.red() - 20, ColorCh2.green() - 20, ColorCh2.blue() - 20));
+    channel3.SetMaximumColor(QColor(ColorCh3.red() - 20, ColorCh3.green() - 20, ColorCh3.blue() - 20));
+    channel4.SetMaximumColor(QColor(ColorCh4.red() - 20, ColorCh4.green() - 20, ColorCh4.blue() - 20));
 
-    channel1.SetMinimumColor(Channel1ColorMinimum);
-    channel2.SetMinimumColor(Channel2ColorMinimum);
-    channel3.SetMinimumColor(Channel3ColorMinimum);
-    channel4.SetMinimumColor(Channel4ColorMinimum);
+    channel1.SetMinimumColor(QColor(ColorCh1.red() + 20, ColorCh1.green() + 20, ColorCh1.blue() + 20));
+    channel2.SetMinimumColor(QColor(ColorCh2.red() + 20, ColorCh2.green() + 20, ColorCh2.blue() + 20));
+    channel3.SetMinimumColor(QColor(ColorCh3.red() + 20, ColorCh3.green() + 20, ColorCh3.blue() + 20));
+    channel4.SetMinimumColor(QColor(ColorCh4.red() + 20, ColorCh4.green() + 20, ColorCh4.blue() + 20));
 
     SetWindowWidthPixels(1024);
     SetWindowHeightPixels(768);
@@ -233,15 +217,6 @@ void MainWindow::MainWindowInitialization()
     SetEcoMode(false);
     ClearPolarCoords();
 
-    //тени для виджетов (Vag: работают корректно только в Windows)
-//    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
-//    effect->setBlurRadius(20.0);
-//    effect->setOffset(2);
-//    ui->bar_1->setGraphicsEffect(effect);
-//    QGraphicsDropShadowEffect *effect1 = new QGraphicsDropShadowEffect();
-//    effect1->setBlurRadius(20.0);
-//    effect1->setOffset(2);
-//    ui->bar_2->setGraphicsEffect(effect1);
 
     //инициализация архиватора
     QList<ChannelOptions*> listCh;
@@ -268,6 +243,12 @@ void MainWindow::MainWindowInitialization()
     connect(ui->wBar_3, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_4, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
 
+    //инициализация виджетов значений
+    ui->widgetVol1->changeNum(1);
+    ui->widgetVol2->changeNum(2);
+    ui->widgetVol3->changeNum(3);
+    ui->widgetVol4->changeNum(4);
+
 //    ui->wBar_1->setBarDiapazon(1000);
 //    ui->wBar_2->setBarDiapazon(200);
 
@@ -278,6 +259,8 @@ void MainWindow::MainWindowInitialization()
 //    connect(commRun, SIGNAL(timeout()), comm, SLOT(run()));
 //    commRun->start(TIMEOUT_COMMUNICATOR_MS);
 #endif
+
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -371,8 +354,8 @@ void MainWindow::UpdUst()
 #define CONST_SLAVE_ADC     7
 #define CONST_SLAVE_RELAY   7
 #else
-#define CONST_SLAVE_ADC     1
-#define CONST_SLAVE_RELAY   2
+#define CONST_SLAVE_ADC     5
+#define CONST_SLAVE_RELAY   6
 #endif
 
 void MainWindow::InitChannelSlotTable()
@@ -418,13 +401,13 @@ void MainWindow::sendRelayStateToWorker(int relay, bool state)
     uint32_t relayOffset;
     if(devRelay%2)
     {
-        relayOffset = ChannelOptions::chanTransferSignalHighLim;
+        relayOffset = ChannelOptions::chanReleyHi;
     } else {
-        relayOffset = ChannelOptions::chanTransferSignalLowLim;
+        relayOffset = ChannelOptions::chanReleyLow;
     }
     //---------------------------------------------
 
-    uint16_t offset = getDevOffsetByChannel(devRelay>>2, relayOffset);//getOffsetFromNumRelay(relay);
+    uint16_t offset = getDevOffsetByChannel(devRelay>>2, relayOffset);
 
     Transaction tr(Transaction::W, slot, offset, 0);
     // значение 1.0f в регистре замыкает реле
@@ -741,40 +724,42 @@ void busMonitorRawData( uint8_t * data, uint8_t dataLen, uint8_t addNewline )
 void MainWindow::ChangePalette(bool i)
 {
 
+    QColor Channel1Color;
+    QColor Channel2Color;
+    QColor Channel3Color;
+    QColor Channel4Color;
+    QColor Channel1ColorNormal;
+    QColor Channel2ColorNormal ;
+    QColor Channel3ColorNormal;
+    QColor Channel4ColorNormal ;
+
+    QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
+    QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;
+
     if (ui->EcoCheckBox->checkState())
     {
-        Channel1Color = Channel1ColorNormal = ColorCh1Light;//QColor(8,124,205);
-        Channel2Color = Channel2ColorNormal = ColorCh2Light;//QColor(2,115,72);
-        Channel3Color = Channel3ColorNormal = ColorCh3Light;//QColor(99,98,102);
-        Channel4Color = Channel4ColorNormal = ColorCh4Light;//QColor(125,70,46);
-
-        Channel1ColorMaximum = QColor(43,40,59);
-        Channel2ColorMaximum = QColor(0,56,40);
-        Channel3ColorMaximum = QColor(44,48,51);
-        Channel4ColorMaximum = QColor(87,58,42);
-
-        Channel1ColorMinimum = QColor(73,111,130);
-        Channel2ColorMinimum = QColor(79,125,49);
-        Channel3ColorMinimum = QColor(106,107,107);
-        Channel4ColorMinimum = QColor(130,79,31);
+        Channel1Color = Channel1ColorNormal = ColorCh1Light;
+        Channel2Color = Channel2ColorNormal = ColorCh2Light;
+        Channel3Color = Channel3ColorNormal = ColorCh3Light;
+        Channel4Color = Channel4ColorNormal = ColorCh4Light;
     }
     else
     {
-        Channel1Color = Channel1ColorNormal = ColorCh1;//QColor(0, 137, 182);// RAL 5012 colour
-        Channel2Color = Channel2ColorNormal = ColorCh2;//QColor(0, 131, 81); // RAL 6024 colour
-        Channel3Color = Channel3ColorNormal = ColorCh3;//QColor(91, 104, 109);// RAL 7031 colour
-        Channel4Color = Channel4ColorNormal = ColorCh4;//QColor(126, 75, 38);// RAL 8003 colour
-
-        Channel1ColorMaximum = QColor(61, 56, 85);
-        Channel2ColorMaximum = QColor(0, 105, 76);
-        Channel3ColorMaximum = QColor(56,62,66);
-        Channel4ColorMaximum = QColor(121,80,56);
-
-        Channel1ColorMinimum = QColor(96,147,172);
-        Channel2ColorMinimum = QColor(97,153,59);
-        Channel3ColorMinimum = QColor(142,146,145);
-        Channel4ColorMinimum = QColor(157,98,43);
+        Channel1Color = Channel1ColorNormal = ColorCh1;
+        Channel2Color = Channel2ColorNormal = ColorCh2;
+        Channel3Color = Channel3ColorNormal = ColorCh3;
+        Channel4Color = Channel4ColorNormal = ColorCh4;
     }
+
+    Channel1ColorMaximum = QColor(Channel1Color.red() - 20,Channel1Color.green() - 20,Channel1Color.blue() - 20);
+    Channel2ColorMaximum = QColor(Channel2Color.red() - 20,Channel2Color.green() - 20,Channel2Color.blue() - 20);
+    Channel3ColorMaximum = QColor(Channel3Color.red() - 20,Channel3Color.green() - 20,Channel3Color.blue() - 20);
+    Channel4ColorMaximum = QColor(Channel4Color.red() - 20,Channel4Color.green() - 20,Channel4Color.blue() - 20);
+
+    Channel1ColorMinimum = QColor(Channel1Color.red() + 20,Channel1Color.green() + 20,Channel1Color.blue() + 20);
+    Channel2ColorMinimum = QColor(Channel2Color.red() + 20,Channel2Color.green() + 20,Channel2Color.blue() + 20);
+    Channel3ColorMinimum = QColor(Channel3Color.red() + 20,Channel3Color.green() + 20,Channel3Color.blue() + 20);
+    Channel4ColorMinimum = QColor(Channel4Color.red() + 20,Channel4Color.green() + 20,Channel4Color.blue() + 20);
 
     channel1.SetNormalColor(Channel1ColorNormal);
     channel2.SetNormalColor(Channel2ColorNormal);
@@ -813,41 +798,6 @@ void MainWindow::changeTranslator(int langindex)
     }
     QApplication::installTranslator(translator);
 
-}
-
-uint16_t MainWindow::getOffsetFromNumRelay(int num)
-{
-    uint16_t offset = 32799;
-    switch(num)
-    {
-    case 0:
-        offset = 32799;
-        break;
-    case 1:
-        offset = 32801;
-        break;
-    case 2:
-        offset = 32927;
-        break;
-    case 3:
-        offset = 32929;
-        break;
-    case 4:
-        offset = 33055;
-        break;
-    case 5:
-        offset = 33057;
-        break;
-    case 6:
-        offset = 33183;
-        break;
-    case 7:
-        offset = 33185;
-        break;
-    default:
-        break;
-    }
-    return offset;
 }
 
 void MainWindow::WorkerMessSlot(QString mess)
@@ -958,28 +908,32 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == "DataChan0")
             {
-//                channel1.SetCurrentChannelValue((double)tr.volFlo);
-//                ui->wBar_1->setVolue((double)tr.volFlo);
+                channel1.SetCurrentChannelValue((double)tr.volFlo);
+                ui->wBar_1->setVolue((double)tr.volFlo);
+                ui->widgetVol1->setVol((double)tr.volFlo);
             }
             else if(paramName == "DataChan1")
             {
-//                channel2.SetCurrentChannelValue((double)tr.volFlo);
-//                ui->wBar_2->setVolue((double)tr.volFlo);
+                channel2.SetCurrentChannelValue((double)tr.volFlo);
+                ui->wBar_2->setVolue((double)tr.volFlo);
+                ui->widgetVol2->setVol((double)tr.volFlo);
             }
             else if(paramName == "DataChan2")
             {
-//                channel3.SetCurrentChannelValue((double)tr.volFlo);
-//                ui->wBar_3->setVolue((double)tr.volFlo);
+                channel3.SetCurrentChannelValue((double)tr.volFlo);
+                ui->wBar_3->setVolue((double)tr.volFlo);
+                ui->widgetVol3->setVol((double)tr.volFlo);
             }
             else if(paramName == "DataChan3")
             {
-//                channel4.SetCurrentChannelValue((double)tr.volFlo);
-//                ui->wBar_4->setVolue((double)tr.volFlo);
+                channel4.SetCurrentChannelValue((double)tr.volFlo);
+                ui->wBar_4->setVolue((double)tr.volFlo);
+                ui->widgetVol4->setVol((double)tr.volFlo);
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Data"))
             {
-                // Vag: времено или совсем не использовать этот параметр для построения графика
-                //channel->SetCurrentChannelValue((double)tr.volFlo);
+//                 Vag: времено или совсем не использовать этот параметр для построения графика
+//                channel->SetCurrentChannelValue((double)tr.volFlo);
             }
             else
             {

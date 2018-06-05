@@ -16,7 +16,15 @@ wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
     ui->setupUi(this);
     ui->metkaLow->setPixmap(QPixmap(pathtolowlimico));
     ui->metkaHi->setPixmap(QPixmap(pathtohilimico));
+    ui->curHBar->setGeometry(ui->curHBar->x(), ui->curHBar->y(),\
+                             ui->curHBar->width(), 0);
+    ui->volBar->setText("0.00");
+    ui->volBar->setGeometry( \
+                0, ui->placeBar->height() / 2 - ui->volBar->height() - VOL_TEXT_PADDING_BOTTOM, \
+                ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
+                );
     razmah = 50;
+    numBar = 0;
 
     //установка фильтра событий на лэйблы виджет-бара
     QList<QLabel*> labelList = findChildren<QLabel*>();
@@ -141,14 +149,26 @@ void wVolueBar::setLim(double low, double hi)
 }
 
 /*
- * Установка стилей тветового оформления бара
+ * Установка стилей цветового оформления бара
  */
-void wVolueBar::setColor(QString cssColor, QString cssColorLight)
+void wVolueBar::setColor(QColor color, QColor colorL)
 {
-    ui->curHBar->setStyleSheet(cssColor);
-    ui->amplBar->setStyleSheet(cssColorLight);
-    ui->typeBar->setStyleSheet(cssColor);
-    ui->mesBar->setStyleSheet(cssColor);
+    colorBar = color;
+    colorLight = colorL;
+
+    QString strCSS = QString("color: #FFFFFF; background-color: rgb(" \
+                             + QString::number(color.red()) + "," \
+                             + QString::number(color.green()) + ","\
+                             + QString::number(color.blue()) + ");");
+    ui->curHBar->setStyleSheet(strCSS);
+    ui->typeBar->setStyleSheet(strCSS);
+    ui->mesBar->setStyleSheet(strCSS);
+
+    strCSS = QString("color: #FFFFFF; background-color: rgb(" \
+                             + QString::number(colorL.red()) + "," \
+                             + QString::number(colorL.green()) + ","\
+                             + QString::number(colorL.blue()) + ");");
+    ui->amplBar->setStyleSheet(strCSS);
 }
 
 /*

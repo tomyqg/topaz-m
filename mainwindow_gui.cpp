@@ -64,7 +64,10 @@ void MainWindow::on_WorkButton_clicked()
 
 void MainWindow::on_ArchiveButton_clicked()
 {
-    OpenArchiveWindow();
+//    OpenArchiveWindow();
+    dialogSetingsChannel = new dSettings(2);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
 }
 
 
@@ -103,14 +106,25 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
 void MainWindow::on_pushButton_2_clicked()
 {
 //    OpenOptionsWindow(0);
+
+    QList<ChannelOptions *> listCh;
+    listCh.append(&channel1);
+    listCh.append(&channel2);
+    listCh.append(&channel3);
+    listCh.append(&channel4);
+
     dMenu * menu = new dMenu();
+    menu->addChannels(listCh);
     menu->exec();
     menu->deleteLater();
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    OpenMessagesWindow();
+//    OpenMessagesWindow();
+    dialogSetingsChannel = new dSettings(1);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
 }
 
 
@@ -152,7 +166,11 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet(ButtonStyleDown);
+                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
+                                      + QString::number(ColorButtonNormal.red() - 20) + "," \
+                                      + QString::number(ColorButtonNormal.green() - 20) + "," \
+                                      + QString::number(ColorButtonNormal.blue() - 20) + ");" \
+                                      + "border: 0px;");
             }
         }
     }
@@ -169,7 +187,11 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet(ButtonStyleNormal);
+                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
+                                      + QString::number(ColorButtonNormal.red()) + "," \
+                                      + QString::number(ColorButtonNormal.green()) + "," \
+                                      + QString::number(ColorButtonNormal.blue()) + ");" \
+                                      + "border: 0px;");
             }
         }
     }
@@ -356,7 +378,17 @@ void MainWindow::SetWindowHeightPixels(int newh)
 
 void MainWindow::openSettingsChannel(int num)
 {
-    dialogSetingsChannel = new dSettings();
+    QList<ChannelOptions *> listCh;
+    listCh.append(&channel1);
+    listCh.append(&channel2);
+    listCh.append(&channel3);
+    listCh.append(&channel4);
+
+    //проверка на наличие такого номера канала
+    if((num <= 0) || (num > listCh.size())) return;
+
+    dialogSetingsChannel = new dSettings(0);
+    dialogSetingsChannel->addChannel(listCh.at(num-1), num);
     dialogSetingsChannel->exec();
 
 }

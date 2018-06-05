@@ -9,16 +9,6 @@
 #include "defines.h"
 #include "stackedoptions.h"
 
-extern QColor Channel1Color;
-extern QColor Channel2Color;
-extern QColor Channel3Color;
-extern QColor Channel4Color;
-extern QColor Channel1ColorNormal;
-extern QColor Channel2ColorNormal ;
-extern QColor Channel3ColorNormal;
-extern QColor Channel4ColorNormal ;
-extern QColor ChannelColorHighState;
-extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 
 
@@ -775,6 +765,18 @@ void MainWindow::PaintPolarDiagramm()
     painter.drawArc(-diagramSize*2/5, -diagramSize*2/5, 2*diagramSize*2/5, 2*diagramSize*2/5, 0, 90 * 16);// 40%
     painter.drawArc(-diagramSize/5, -diagramSize/5, 2*diagramSize/5, 2*diagramSize/5, 0, 90 * 16);// 20%
 
+    //ещё 5 дуг дополнительно
+    painter.drawArc(-diagramSize*9/10, -diagramSize*9/10, \
+                    2*diagramSize*9/10, 2*diagramSize*9/10, 0, 90 * 16); // 100%
+    painter.drawArc(-diagramSize*7/10, -diagramSize*7/10, \
+                    2*diagramSize*7/10, 2*diagramSize*7/10, 0, 90 * 16);// 80%
+    painter.drawArc(-diagramSize*5/10, -diagramSize*5/10, \
+                    2*diagramSize*5/10, 2*diagramSize*5/10, 0, 90 * 16);// 60%
+    painter.drawArc(-diagramSize*3/10, -diagramSize*3/10, \
+                    2*diagramSize*3/10, 2*diagramSize*3/10, 0, 90 * 16);// 40%
+    painter.drawArc(-diagramSize*1/10, -diagramSize*1/10, \
+                    2*diagramSize*1/10, 2*diagramSize*1/10, 0, 90 * 16);// 20%
+
     QLineF Channel1Line;
     
     if (GetPolarAngle()>=90) // если больше 90 градусов то поворачиваем диск
@@ -790,28 +792,11 @@ void MainWindow::PaintPolarDiagramm()
         }
     }
     
-    QLineF Line1,Line2,Line3,Line4,Line5,Line6,Line7,Line8,Line9,Line10,Line11,Line12;
-    
-    QList<QLineF> LineList;
-    
-    LineList.append(Line1);
-    LineList.append(Line2);
-    LineList.append(Line3);
-    LineList.append(Line4);
-    LineList.append(Line5);
-    LineList.append(Line6);
-    LineList.append(Line7);
-    LineList.append(Line8);
-    LineList.append(Line9);
-    LineList.append(Line10);
-    LineList.append(Line11);
-    LineList.append(Line12);
-    
-    int ind = 0;
-
-    foreach (QLineF Line, LineList) {
+    for(int i=0; i < 36; i++)
+    {
+        QLineF Line;
         Line.setP1(QPointF(centerx1, centery1));
-        Line.setAngle(30*(ind++));
+        Line.setAngle(10*(i));
         Line.setLength(diagramSize);
         painter.drawLine(Line);
     }

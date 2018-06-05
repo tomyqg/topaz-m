@@ -25,7 +25,7 @@ signals:
     void clickedLabel(int);
 
 public slots:
-    void setColor(QString cssColor, QString cssColorLight);
+    void setColor(QColor color, QColor colorL);
     void resizeEvent(QResizeEvent * s);
     bool eventFilter(QObject* watched, QEvent* event);
 
@@ -34,6 +34,8 @@ private:
     Ui::wVolueBar *ui;
     double razmah;  //размах, значение бара в крайних точках виджета
     int numBar;
+    QColor colorBar;    //цвет бара
+    QColor colorLight;  //цвет светлой части бара
 };
 
 #endif // VOLUEBAR_H

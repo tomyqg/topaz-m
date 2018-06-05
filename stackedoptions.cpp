@@ -10,17 +10,6 @@ QString StackedOptions::MonitorResolution = "35";
 int StackedOptions::DisplayParametr = StackedOptions::Polar;
 
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
-extern QColor Channel1Color;
-extern QColor Channel2Color;
-extern QColor Channel3Color;
-extern QColor Channel4Color;
-extern QColor Channel1ColorNormal;
-extern QColor Channel2ColorNormal ;
-extern QColor Channel3ColorNormal;
-extern QColor Channel4ColorNormal ;
-extern QColor ChannelColorHighState;
-extern QColor ChannelColorLowState;
-
 
 #define MainMenuIndex 0
 #define OptionsIndex 1
@@ -67,36 +56,15 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListTok.clear();
 //    StringListTok.append("Нет");
     StringListTok.append("4-20 мA");
-//    StringListTok.append("0-20 мA");
-//    StringListTok.append("0-5  мA");
-//    StringListTok.append("0-20 мA с корнеизвлеч.");
-//    StringListTok.append("4-20 мA с корнеизвлеч.");
-//    StringListTok.append("± 20 мA");
 
     StringListNapryagenie.clear();
     StringListNapryagenie.append("Нет");
     StringListNapryagenie.append("0-100 мВ");
 
-    //vag: удалить
-//    StringListNapryagenie.append("±150 мВ");
-//    StringListNapryagenie.append("±300 мВ");
-    //--------------------
-
     StringListNapryagenie.append("0-1   В");
     StringListNapryagenie.append("0-5   В");
     StringListNapryagenie.append("±10   В");
     StringListNapryagenie.append("±30   В");
-//    StringListNapryagenie.append("0-1  В");
-//    StringListNapryagenie.append("0-10 В");
-//    StringListNapryagenie.append("0-5  В");
-//    StringListNapryagenie.append("1-5  В");
-//    StringListNapryagenie.append("±150 мВ");
-//    StringListNapryagenie.append("±1   В");
-//    StringListNapryagenie.append("±10  В");
-//    StringListNapryagenie.append("±30  В");
-//    StringListNapryagenie.append("0-1  В с корнеизвлеч.");
-//    StringListNapryagenie.append("0-10 В с корнеизвлеч.");
-//    StringListNapryagenie.append("1-5  В с корнеизвлеч.");
 
     StringListTC.clear();
     StringListTC.append("Тип S (Pt10Rh-Pt)");
@@ -106,11 +74,6 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListTC.append("Тип А1(W5Re-W20Re)");
     StringListTC.append("Тип J (Fe-CuNi)");
     StringListTC.append("Тип N (NiCrSi-NiSi)");
-//    StringListTC.append("Тип C (W50Re-W26Re)");
-//    StringListTC.append("Тип D (W30Re-W25Re)");
-//    StringListTC.append("Тип L (NiCr-CuNi, GOST)");
-//    StringListTC.append("Тип R (Pt13Rh-Pt)");
-//    StringListTC.append("Тип T (Cu-CuNi)");
 
     StringListRTD.clear();
     StringListRTD.append("Pt50   (GOST, a=3910)");
@@ -123,15 +86,6 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListRTD.append("Cu100  (GOST, a=4280)");
     StringListRTD.append("Pt21   (ТСП21)");
     StringListRTD.append("Cu23   (ТСМ23)");
-//    StringListRTD.append("Pt100  (IEC)");
-//    StringListRTD.append("Pt100  (JIS)");
-//    StringListRTD.append("Pt100  (GOST)");
-//    StringListRTD.append("Pt500  (IEC)");
-//    StringListRTD.append("Pt500  (JIS)");
-//    StringListRTD.append("Pt1000 (IEC)");
-//    StringListRTD.append("Pt1000 (JIS)");
-//    StringListRTD.append("Pt45   (GOST)");
-//    StringListRTD.append("Cu53   (GOST, a=4280)");
 
     datestrings.append("dd.MM.yyyy ");
     datestrings.append("MM-dd-yyyy ");
@@ -1689,28 +1643,28 @@ void StackedOptions::UpdateArchiveData()
 
     graphPen.setWidth(GraphWidthinPixels);
     //    graphPen.set
-    graphPen.setColor(Channel1Color);
+    graphPen.setColor(ColorCh1);
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
 
     {
         ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_2_archive);
-        graphPen.setColor(Channel2Color);
+        graphPen.setColor(ColorCh2);
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_3_archive);
-        graphPen.setColor(Channel3Color);
+        graphPen.setColor(ColorCh3);
         ui->customPlot->graph()->setPen(graphPen);
     }
 
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_4_archive);
-        graphPen.setColor(Channel4Color);
+        graphPen.setColor(ColorCh4);
         ui->customPlot->graph()->setPen(graphPen);
     }
 

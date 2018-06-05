@@ -94,7 +94,7 @@
 #define MathString "math "
 
 #define MultiThread
-#define ValuesUpdateTimer 200        // время в мсек для обновления значений отрисовываемых на графике
+#define ValuesUpdateTimer 200        // период чтения данных в архив
 #define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 500    // время обновления времени
@@ -107,41 +107,40 @@
 
 #endif
 
-//#define stylesheetclicked "background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
+
+/* Цветовая палитра */
+// Базовые цвета. Только их использовать во всей программе. Чёрный и белый само собой
+#define COLOR_1 QColor(0x1c,0xb9,0x9a)
+#define COLOR_2 QColor(0x66,0x66,0xff)
+#define COLOR_3 QColor(0xe8,0x4c,0x3d)
+#define COLOR_4 QColor(0x2b,0x3e,0x4c)
+#define COLOR_LIGHT_1 QColor(0x57,0xe9,0xc5)
+#define COLOR_LIGHT_2 QColor(0x99,0x99,0xff)
+#define COLOR_LIGHT_3 QColor(0xeb,0x9f,0x85)
+#define COLOR_LIGHT_4 QColor(0x80,0x9f,0xbc)
+#define COLOR_DARK  QColor(0x2b,0x3e,0x4c)
+#define COLOR_LIGHT QColor(0x0e,0xd2,0xe2)
+
+// Цвета элементов
+#define ColorCh1 COLOR_1
+#define ColorCh2 COLOR_2
+#define ColorCh3 COLOR_3
+#define ColorCh4 COLOR_4
+#define ColorCh1Light COLOR_LIGHT_1
+#define ColorCh2Light COLOR_LIGHT_2
+#define ColorCh3Light COLOR_LIGHT_3
+#define ColorCh4Light COLOR_LIGHT_4
+#define ColorButtonNormal   COLOR_DARK
+#define ColorBlue           COLOR_LIGHT
+#define EcoColor COLOR_DARK
+#define NotEcoColor QColor(0xff,0xff,0xff)
+
+// Нужно избавить от этих дефайнов
 #define stylesheetUnclicked " color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); "
-//#define stylesheetclicked "background-color: rgb(135,210,240);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(207,232,252, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
 #define stylesheetclicked "color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(80, 80, 80, 255), stop:1 rgba(0, 0, 0, 255)); "
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
-#define StyleSheetCh1 "color: rgb(255, 255, 255); background-color: #1cb99a;" // #33cccc;"
-#define StyleSheetCh2 "color: rgb(255, 255, 255); background-color: #6666ff;"
-#define StyleSheetCh3 "color: rgb(255, 255, 255); background-color: #e84c3d;"    //#cc3333;"
-#define StyleSheetCh4 "color: rgb(255, 255, 255); background-color: #2b3e4c;"   //#9900cc;"
-#define StyleSheetCh1Light "background-color: #57e9c5;" //#00ffaa;"
-#define StyleSheetCh2Light "background-color: #9999ff;"
-#define StyleSheetCh3Light "background-color: #eb9f85;" //#ff6655;"
-#define StyleSheetCh4Light "background-color: #809fbc;"
-
-#define ButtonStyleNormal "color: #FFFFFF; background-color: #2c3d4d; border: 0px;"
-#define ButtonStyleDown "color: #FFFFFF; background-color: #1c2d3d; border: 0px;"
-
-#define ColorCh1 QColor(0x1c,0xb9,0x9a) //QColor(0x33,0xcc,0xcc)
-#define ColorCh2 QColor(0x66,0x66,0xff)
-#define ColorCh3 QColor(0xe8,0x4c,0x3d)
-#define ColorCh4 QColor(0x2b,0x3e,0x4c)
-#define ColorCh1Light QColor(0x57,0xe9,0xc5)    //QColor(0x00,0xff,0xaa)
-#define ColorCh2Light QColor(0x99,0x99,0xff)
-#define ColorCh3Light QColor(0xeb,0x9f,0x85)
-#define ColorCh4Light QColor(0x80,0x9f,0xbc)
-
-#define ColorButtonNormal   QColor(0x2b,0x3e,0x4c)
-#define ColorButtonDown     QColor(0x1b,0x2e,0x3c)
-#define ColorBlue           QColor(14,210,226)
-
-
-#define EcoColor QColor(0x2b,0x3e,0x4c) //QColor(0x00,0x00,0x4d)
-#define NotEcoColor QColor(0xff,0xff,0xff)
 
 #define TOTAL_NUM_USTAVKI   4
 
@@ -151,6 +150,7 @@
 #define BASE_OFFSET_CHANNEL_3   0x8100
 #define BASE_OFFSET_CHANNEL_4   0x8180
 
+//макрос определения максимального из двух чисел
 #define max( x1, x2) ( ( x1 ) > ( x2 ) ? ( x1 ) : ( x2 ) )
 
 //#define new new(/* _NORMAL_BLOCK, */__FILE__, __LINE__)
