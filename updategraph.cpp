@@ -237,7 +237,7 @@ void MainWindow::UpdateGraphics()
     case Options::TrendsCyfraBars:
         GrafsUpdateTrendsAndBars();break;
     case Options::Polar:
-//        updateBars();
+        updateBars();
         updateWidgetsVols();
         GrafsUpdateNone();break;
     case Options::Cyfra:
@@ -1192,10 +1192,15 @@ void MainWindow::updateBars(void)
     ui->wBar_4->setBarDiapazon(max(abs(channel4.GetHigherMeasureLimit()), \
                                    abs(channel4.GetLowerMeasureLimit())));
 
-    ui->wBar_1->setLim(channel1.GetLowerLimit(), channel1.GetHigherLimit());
-    ui->wBar_2->setLim(channel2.GetLowerLimit(), channel2.GetHigherLimit());
-    ui->wBar_3->setLim(channel3.GetLowerLimit(), channel3.GetHigherLimit());
-    ui->wBar_4->setLim(channel4.GetLowerLimit(), channel4.GetHigherLimit());
+    ui->wBar_1->setLim(ustavkaObjectsList.at(0)->getLowStateValue(), \
+                       ustavkaObjectsList.at(0)->getHiStateValue());
+    ui->wBar_2->setLim(ustavkaObjectsList.at(1)->getLowStateValue(), \
+                       ustavkaObjectsList.at(1)->getHiStateValue());
+    ui->wBar_3->setLim(ustavkaObjectsList.at(2)->getLowStateValue(), \
+                       ustavkaObjectsList.at(2)->getHiStateValue());
+    ui->wBar_4->setLim(ustavkaObjectsList.at(3)->getLowStateValue(), \
+                       ustavkaObjectsList.at(3)->getHiStateValue());
+
 }
 
 void MainWindow::updateWidgetsVols(void)

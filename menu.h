@@ -19,10 +19,10 @@ public:
     explicit dMenu(QWidget *parent = 0);
     ~dMenu();
     QTimer timerLoad;
-    void addChannels(QList<ChannelOptions *> channels);
+    void addChannels(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki);
 
 public slots:
-    void openSettingsChannel(int num);
+    void openSettingsChannel(int num, int page = 0);
 
 private slots:
     void on_exitButton_clicked();
@@ -50,6 +50,11 @@ private slots:
     void on_bDiagnost_clicked();
     void on_bBackDiagnostika_clicked();
 
+    void on_bUstavka_1_clicked();
+    void on_bUstavka_2_clicked();
+    void on_bUstavka_3_clicked();
+    void on_bUstavka_4_clicked();
+
 private:
     Ui::dMenu *ui;
     QMovie mo;
@@ -57,6 +62,7 @@ private:
     QTimer tUpdateBar;
     dSettings * dialogSetingsChannel;
     QList<ChannelOptions *> listChannels;
+    QList<Ustavka *> listUstavok;
 };
 
 #endif // MENU_H

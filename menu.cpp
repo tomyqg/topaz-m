@@ -155,13 +155,12 @@ void dMenu::on_bUniversal_clicked()
     ui->nameSubMenu->setText("УНИВ. ВХОДЫ");
 }
 
-void dMenu::openSettingsChannel(int num)
+void dMenu::openSettingsChannel(int num, int page)
 {
     //проверка на наличие такого номера канала
     if((num <= 0) || (num > listChannels.size())) return;
 
-    dialogSetingsChannel = new dSettings(0);
-    dialogSetingsChannel->addChannel(listChannels.at(num-1), num);
+    dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 
@@ -224,9 +223,32 @@ void dMenu::on_bBackDiagnostika_clicked()
     ui->nameSubMenu->setText("НАСТРОЙКИ");
 }
 
-void dMenu::addChannels(QList<ChannelOptions *> channels)
+void dMenu::addChannels(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki)
 {
     foreach (ChannelOptions * ch, channels) {
         listChannels.append(ch);
     }
+    foreach (Ustavka * ust, ustavki) {
+        listUstavok.append(ust);
+    }
+}
+
+void dMenu::on_bUstavka_1_clicked()
+{
+    openSettingsChannel(1, 3);
+}
+
+void dMenu::on_bUstavka_2_clicked()
+{
+    openSettingsChannel(2, 3);
+}
+
+void dMenu::on_bUstavka_3_clicked()
+{
+    openSettingsChannel(3, 3);
+}
+
+void dMenu::on_bUstavka_4_clicked()
+{
+    openSettingsChannel(4, 3);
 }

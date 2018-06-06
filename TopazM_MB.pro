@@ -68,7 +68,9 @@ SOURCES += main.cpp \
     Grafika/buttonstyled.cpp \
     menu.cpp \
     settings.cpp \
-    Grafika/vol.cpp
+    Grafika/vol.cpp \
+    Alarms/alarm.cpp \
+    filemanager.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -150,7 +152,9 @@ HEADERS  += mainwindow.h \
     Grafika/buttonstyled.h \
     menu.h \
     settings.h \
-    Grafika/vol.h
+    Grafika/vol.h \
+    Alarms/alarm.h \
+    filemanager.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

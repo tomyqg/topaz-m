@@ -65,7 +65,7 @@ void MainWindow::on_WorkButton_clicked()
 void MainWindow::on_ArchiveButton_clicked()
 {
 //    OpenArchiveWindow();
-    dialogSetingsChannel = new dSettings(2);
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }
@@ -107,14 +107,8 @@ void MainWindow::on_pushButton_2_clicked()
 {
 //    OpenOptionsWindow(0);
 
-    QList<ChannelOptions *> listCh;
-    listCh.append(&channel1);
-    listCh.append(&channel2);
-    listCh.append(&channel3);
-    listCh.append(&channel4);
-
     dMenu * menu = new dMenu();
-    menu->addChannels(listCh);
+    menu->addChannels(listCh, ustavkaObjectsList);
     menu->exec();
     menu->deleteLater();
 }
@@ -122,7 +116,7 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
 //    OpenMessagesWindow();
-    dialogSetingsChannel = new dSettings(1);
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 1);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }
@@ -378,17 +372,12 @@ void MainWindow::SetWindowHeightPixels(int newh)
 
 void MainWindow::openSettingsChannel(int num)
 {
-    QList<ChannelOptions *> listCh;
-    listCh.append(&channel1);
-    listCh.append(&channel2);
-    listCh.append(&channel3);
-    listCh.append(&channel4);
 
     //проверка на наличие такого номера канала
     if((num <= 0) || (num > listCh.size())) return;
 
-    dialogSetingsChannel = new dSettings(0);
-    dialogSetingsChannel->addChannel(listCh.at(num-1), num);
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, num);
     dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
 
 }

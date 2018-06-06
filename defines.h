@@ -95,7 +95,7 @@
 
 #define MultiThread
 #define ValuesUpdateTimer 200        // период чтения данных в архив
-#define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
+#define GraphicsUpdateTimer 100      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 500    // время обновления времени
 //#define LogUpdTimer 10000             // время обновления журнала сообщений (Log.txt)

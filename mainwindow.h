@@ -64,6 +64,8 @@ public:
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
 
 
+
+
 //    transaction device1;
 //    transaction device2;
 //    transaction device3;
@@ -72,7 +74,6 @@ public:
 
 
 public slots:
-
     void destroyedslot(QObject *);
     void NewTouchscreenCalibration();
     void LabelsInit();
@@ -146,6 +147,7 @@ private:
     ChannelOptions channel2;
     ChannelOptions channel3;
     ChannelOptions channel4;
+    QList<ChannelOptions *> listCh;
 
     bool eventFilter(QObject* watched, QEvent* event);
 //    void keyPressEvent(QKeyEvent *event);

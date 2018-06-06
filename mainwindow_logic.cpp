@@ -11,6 +11,7 @@
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
 #include "registermap.h"
+#include <filemanager.h>
 
 #include <QPixmap>
 #include <QTimer>
@@ -102,6 +103,12 @@ void MainWindow::MainWindowInitialization()
     SetXRange(XRange);
     SetYRange(YRange);
 
+    listCh.append(&channel1);
+    listCh.append(&channel2);
+    listCh.append(&channel3);
+    listCh.append(&channel4);
+
+
     //перед рисованием графиков записать нули в первый элемент вектора
     channel1.SetCurrentChannelValue(0);
     channel2.SetCurrentChannelValue(0);
@@ -155,12 +162,14 @@ void MainWindow::MainWindowInitialization()
     // инициализация объектов уставок
     InitUstavka();
     // получение значений уставок из файла
-    ReadUstavkiFromFile();
+//    ReadUstavkiFromFile();
 
-    channel1.ReadSingleChannelOptionFromFile(1);
-    channel2.ReadSingleChannelOptionFromFile(2);
-    channel3.ReadSingleChannelOptionFromFile(3);
-    channel4.ReadSingleChannelOptionFromFile(4);
+//    channel1.ReadSingleChannelOptionFromFile(1);
+//    channel2.ReadSingleChannelOptionFromFile(2);
+//    channel3.ReadSingleChannelOptionFromFile(3);
+//    channel4.ReadSingleChannelOptionFromFile(4);
+
+    int i = cFileManager::readChannelsSettings(pathtooptions, listCh, ustavkaObjectsList);
 
     channel1.SetNormalColor(ColorCh1);
     channel2.SetNormalColor(ColorCh2);
@@ -219,11 +228,7 @@ void MainWindow::MainWindowInitialization()
 
 
     //инициализация архиватора
-    QList<ChannelOptions*> listCh;
-    listCh.append(&channel1);
-    listCh.append(&channel2);
-    listCh.append(&channel3);
-    listCh.append(&channel4);
+
     QListIterator<ChannelOptions*> li(listCh);
     arch = new cArchivator(pathtoarchivedata, li);
 
