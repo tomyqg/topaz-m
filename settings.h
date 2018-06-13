@@ -50,6 +50,7 @@ private slots:
     void on_period_currentIndexChanged(int index);
     void on_buttonBackUstavki_clicked();
     void saveParam();
+    bool eventFilter(QObject* watched, QEvent* event);
 };
 
 #endif // SETTINGS_H

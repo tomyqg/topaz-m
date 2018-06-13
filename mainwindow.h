@@ -196,13 +196,12 @@ private:
     int GetGraphWidthInPixels() {return 600;}
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
-    int dateindex;
     bool EcoMode;
     int polar_angle;
 
     QGraphicsScene  *scene;
 
-    QStringList datestrings, timestrings;
+
 
     QTranslator* translator;
     void changeTranslator(int langindex) ;

@@ -55,6 +55,12 @@ private slots:
     void on_bUstavka_3_clicked();
     void on_bUstavka_4_clicked();
 
+    void on_bBackDateTime_clicked();
+
+    void on_bEditDataTime_clicked();
+
+    void on_bBackDateTimeSet_clicked();
+
 private:
     Ui::dMenu *ui;
     QMovie mo;

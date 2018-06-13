@@ -283,6 +283,8 @@ background-clip:padding;</string>
          <font>
           <family>Open Sans</family>
           <pointsize>16</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -361,7 +363,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>7</number>
+            <number>9</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1257,6 +1259,18 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
            </widget>
            <widget class="QWidget" name="page">
             <layout class="QVBoxLayout" name="verticalLayout_11">
+             <property name="leftMargin">
+              <number>29</number>
+             </property>
+             <property name="topMargin">
+              <number>30</number>
+             </property>
+             <property name="rightMargin">
+              <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="wButtonStyled" name="bUstavka_1">
                <property name="sizePolicy">
@@ -1368,181 +1382,536 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             </layout>
            </widget>
            <widget class="QWidget" name="page_2">
-            <widget class="wButtonStyled" name="bMath_3">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>38</y>
-               <width>813</width>
-               <height>70</height>
-              </rect>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <property name="leftMargin">
+              <number>29</number>
              </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+             <property name="topMargin">
+              <number>30</number>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
+             <property name="rightMargin">
+              <number>53</number>
              </property>
-             <property name="text">
-              <string>СПИСОК ДИАГНОСТИК</string>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-            </widget>
-            <widget class="wButtonStyled" name="bBackDiagnostika">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>520</y>
-               <width>813</width>
-               <height>70</height>
-              </rect>
+             <item>
+              <widget class="wButtonStyled" name="bMath_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>СПИСОК ДИАГНОСТИК</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bAnaliz_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ЖУРНАЛ СОБЫТИЙ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>СВЕДЕНИЯ О ПРИБОРЕ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ИЗМЕР. ЗНАЧЕНИЯ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_6">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ВЫХОДЫ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bUstavki_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>МОДЕЛИРОВАНИЕ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bBackDiagnostika">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="pageDateTime">
+            <layout class="QGridLayout" name="gridLayout">
+             <property name="leftMargin">
+              <number>29</number>
              </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+             <property name="topMargin">
+              <number>30</number>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
+             <property name="rightMargin">
+              <number>53</number>
              </property>
-             <property name="text">
-              <string>НАЗАД</string>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-            </widget>
-            <widget class="wButtonStyled" name="bAnaliz_4">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>114</y>
-               <width>813</width>
-               <height>70</height>
-              </rect>
+             <property name="spacing">
+              <number>20</number>
              </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>ЖУРНАЛ СОБЫТИЙ</string>
-             </property>
-            </widget>
-            <widget class="wButtonStyled" name="bUstavki_4">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>266</y>
-               <width>811</width>
-               <height>70</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>ИЗМЕР. ЗНАЧЕНИЯ</string>
-             </property>
-            </widget>
-            <widget class="wButtonStyled" name="bUstavki_5">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>190</y>
-               <width>811</width>
-               <height>70</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>СВЕДЕНИЯ О ПРИБОРЕ</string>
-             </property>
-            </widget>
-            <widget class="wButtonStyled" name="bUstavki_6">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>340</y>
-               <width>811</width>
-               <height>70</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>ВЫХОДЫ</string>
-             </property>
-            </widget>
-            <widget class="wButtonStyled" name="bUstavki_7">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>416</y>
-               <width>811</width>
-               <height>70</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>70</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>МОДЕЛИРОВАНИЕ</string>
-             </property>
-            </widget>
+             <item row="6" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackDateTime">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDateEdit" name="dateEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>300</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>false</bool>
+               </property>
+               <property name="showGroupSeparator" stdset="0">
+                <bool>true</bool>
+               </property>
+               <property name="maximumDate">
+                <date>
+                 <year>2027</year>
+                 <month>12</month>
+                 <day>31</day>
+                </date>
+               </property>
+               <property name="minimumDate">
+                <date>
+                 <year>2016</year>
+                 <month>12</month>
+                 <day>31</day>
+                </date>
+               </property>
+               <property name="displayFormat">
+                <string>dd.MM.yy</string>
+               </property>
+               <property name="date">
+                <date>
+                 <year>2017</year>
+                 <month>2</month>
+                 <day>8</day>
+                </date>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="DateFormat">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>300</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+}
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>dd.MM.yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MM-dd-yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>dd-MM-yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>dd/MM/yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MM/dd/yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>dd.MM.yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MM.dd.yyyy</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>yyyy-MM-dd</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_72">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ФОРМАТ ДАТЫ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="2">
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_74">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ВРЕМЯ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QTimeEdit" name="timeEdit">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>300</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QTimeEdit {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+QTimeEdit::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>false</bool>
+               </property>
+               <property name="showGroupSeparator" stdset="0">
+                <bool>true</bool>
+               </property>
+               <property name="maximumDate">
+                <date>
+                 <year>2017</year>
+                 <month>1</month>
+                 <day>1</day>
+                </date>
+               </property>
+               <property name="minimumDate">
+                <date>
+                 <year>2017</year>
+                 <month>1</month>
+                 <day>1</day>
+                </date>
+               </property>
+               <property name="displayFormat">
+                <string>H:mm:ss</string>
+               </property>
+               <property name="time">
+                <time>
+                 <hour>15</hour>
+                 <minute>0</minute>
+                 <second>0</second>
+                </time>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_73">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ФОРМАТ ВРЕМЕНИ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QComboBox" name="timeformat">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>300</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+background-color: rgb(232, 76, 61);
+color: rgb(255, 255, 255);
+border-radius: 0px;
+}
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>hh:mm:ss</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>hh.mm.ss</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>hh,mm,ss</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_75">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ДАТА</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackDateTimeSet">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УСТАНОВИТЬ</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>

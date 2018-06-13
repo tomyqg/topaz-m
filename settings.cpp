@@ -5,6 +5,8 @@
 #include <ui_settings.h>
 #include <defines.h>
 #include <filemanager.h>
+#include <options.h>
+#include <keyboard.h>
 
 #define TIME_UPDATE DateLabelUpdateTimer
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
@@ -385,4 +387,25 @@ void dSettings::on_buttonUstavk_clicked()
 void dSettings::resizeEvent(QResizeEvent * s)
 {
     updateBar();
+}
+
+bool dSettings::eventFilter(QObject *object, QEvent *event)
+{
+    if ( (event->type() == QEvent::MouseButtonRelease) && \
+         (object->property("enabled").toString() == "true") && \
+         ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
+    {
+        Options::olderprop = object->property("text").toString();
+        //Vag: нужно переделать и передавать строку напрямую в конструктор клавиатуры
+        keyboard kb(this);
+        kb.setModal(true);
+        kb.exec();
+        object->setProperty("value", kb.getcustomstring() );
+        object->setProperty("text",kb.getcustomstring() );
+//        ui->pushButton->setFocus();
+        kb.close();
+        kb.deleteLater();
+    }
+
+    return QObject::eventFilter(object, event);
 }

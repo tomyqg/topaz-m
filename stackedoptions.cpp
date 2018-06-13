@@ -60,7 +60,6 @@ StackedOptions::StackedOptions(int pageindex, QWidget *parent) :
     StringListNapryagenie.clear();
     StringListNapryagenie.append("Нет");
     StringListNapryagenie.append("0-100 мВ");
-
     StringListNapryagenie.append("0-1   В");
     StringListNapryagenie.append("0-5   В");
     StringListNapryagenie.append("±10   В");

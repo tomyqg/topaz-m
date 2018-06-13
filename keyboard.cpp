@@ -52,7 +52,7 @@ keyboard::keyboard(QWidget *parent) :
 {
     shift = false;
     ui->setupUi(this);
-    connect(ui->buttonGroup, SIGNAL(buttonPressed(int)), this, SLOT(textinput(int)) );
+    connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(textinput(int)) );
 
     ui->textEdit->setText(Options::olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
@@ -69,14 +69,21 @@ keyboard::keyboard(QWidget *parent) :
     mk.addMess("Keyboard Open");
     mk.deleteLater();
 
+    styleUnclicked = "color: rgb(255, 255, 255);"\
+                    "background-color: #2c3d4d;"\
+                    "border: 1px solid #1c2d3d;";
+
+    styleClicked = "color: rgb(255, 255, 255);"\
+                    "background-color: #1c2d3d;"\
+                    "border: 1px solid #0c1d2d;";
+
     QList<QPushButton*> ButtonList = keyboard::findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
     for (int i = 0; i < ButtonList.count(); ++i) {
         QPushButton *but = ButtonList.at(i);
         but->installEventFilter(this);
         // ставим везде стайлшит
-
-        but->setStyleSheet(stylesheetUnclicked);
+        but->setStyleSheet(styleUnclicked);
     }
 
 }
@@ -120,12 +127,12 @@ void keyboard::on_pushButton_27_clicked()
     shift = !shift;
     if(shift)
     {
-        ui->pushButton_27->setStyleSheet(stylesheetclicked);
+        ui->pushButton_27->setStyleSheet(styleClicked);
         ui->pushButton_27->setText(ui->pushButton_27->text().toUpper());
     }
     else
     {
-        ui->pushButton_27->setStyleSheet(stylesheetUnclicked);
+        ui->pushButton_27->setStyleSheet(styleUnclicked);
         ui->pushButton_27->setText(ui->pushButton_27->text().toLower());
     }
 
@@ -241,5 +248,50 @@ void keyboard::ChangeLanguage(int eng)
 }
 
 
+bool keyboard::eventFilter(QObject *object, QEvent *event)
+{
+    QKeyEvent* key = static_cast<QKeyEvent*>(event); // what key pressed
+    if  (key->key()==Qt::Key_Enter) // if key == enter, then close
+    {
+        this->close();
+    }
 
+    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
 
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(styleClicked);
+            }
+        }
+    }
+
+    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    {
+
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+
+            if (widget->objectName() == object->property("objectName"))
+            {
+                widget->setStyleSheet(styleUnclicked);
+            }
+        }
+    }
+
+    return QObject::eventFilter(object, event);
+}
+
+void keyboard::setolderproperty(QString str)
+{
+    this->olderproperty = str;
+}

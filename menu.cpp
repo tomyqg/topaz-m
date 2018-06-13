@@ -7,7 +7,9 @@
 #define WIDTH 1024
 #define TIME_UPDATE DateLabelUpdateTimer
 
-
+extern int dateindex;
+extern int timeindex;
+extern QStringList datestrings, timestrings;
 
 dMenu::dMenu(QWidget *parent) :
     QDialog(parent),
@@ -134,10 +136,10 @@ void dMenu::DateUpdate() // каждую секунду обновляем зн�
 {
     QDateTime local(QDateTime::currentDateTime());
     QString str = "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; color:#ffffff;\">" \
-                  + local.time().toString("hh:mm:ss") + \
+                  + local.time().toString(timestrings.at(timeindex)) + \
                   "</span><span style=\" color:#ffffff;\"><br/></span>" \
                   "<span style=\" font-size:17pt; color:#ffffff;\">" \
-                  + local.date().toString("dd.MM.yyyy") + \
+                  + local.date().toString(datestrings.at(dateindex)) + \
                   "</span></p></body></html>";
     ui->date_time->setText(str);
 }
@@ -251,4 +253,49 @@ void dMenu::on_bUstavka_3_clicked()
 void dMenu::on_bUstavka_4_clicked()
 {
     openSettingsChannel(4, 3);
+}
+
+void dMenu::on_bBackDateTime_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    ui->nameSubMenu->setText("СИСТЕМА");
+}
+
+void dMenu::on_bEditDataTime_clicked()
+{
+    QDateTime local(QDateTime::currentDateTime());
+    ui->timeEdit->setTime(local.time());
+    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
+    ui->dateEdit->setDate(local.date());
+    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
+    ui->DateFormat->clear();
+    ui->DateFormat->addItems(datestrings);
+    ui->DateFormat->setCurrentIndex(dateindex);
+    ui->timeformat->clear();
+    ui->timeformat->addItems(timestrings);
+    ui->timeformat->setCurrentIndex(timeindex);
+    ui->stackedWidget->setCurrentIndex(9);
+    ui->nameSubMenu->setText("ДАТА/ВРЕМЯ");
+}
+
+void dMenu::on_bBackDateTimeSet_clicked()
+{
+
+#ifndef WIN32
+    QProcess process;
+    QDateTime newuidate = ui->dateEdit->dateTime();
+    QTime newuitime = ui->timeEdit->time();
+
+    QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
+    QString newtime = newuitime.toString();
+
+    process.startDetached("date --set " + newdate);
+    process.startDetached("date --set " + newtime); // max freq on
+
+#endif
+    dateindex = ui->DateFormat->currentIndex();
+    timeindex = ui->timeformat->currentIndex();
+    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
+    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
+
 }

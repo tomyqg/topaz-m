@@ -43,6 +43,10 @@
 #include "defines.h"
 //#include <QKeyEvent>
 
+int dateindex;
+int timeindex;
+QStringList datestrings, timestrings;
+
 extern MainWindow * globalMainWin;
 
 void MainWindow::MainWindowInitialization()
@@ -52,12 +56,11 @@ void MainWindow::MainWindowInitialization()
     ui->unvisible_block->setHidden(true);
 
     datestrings.append("dd.MM.yyyy ");
+    datestrings.append("MM.dd.yyyy ");
     datestrings.append("MM-dd-yyyy ");
     datestrings.append("dd-MM-yyyy ");
     datestrings.append("dd/MM/yyyy ");
     datestrings.append("MM/dd/yyyy ");
-    datestrings.append("dd.MM.yyyy ");
-    datestrings.append("MM.dd.yyyy ");
     datestrings.append("yyyy-MM-dd ");
 
     timestrings.append("hh:mm:ss ");
@@ -1014,16 +1017,16 @@ void MainWindow::sendConfigChannelsToSlave()
 //        tr.volInt = 0;
         int size = sizeof(tr.paramA12);
         memset(tr.paramA12, 0, size);
-        if(ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::VoltageMeasure)
+        if(ChannelsObjectsList.at(i)->GetSignalType() == ModBus::VoltageMeasure)
         {
             tr.paramA12[0] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
         }
-        else if(ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::TermoResistanceMeasure)
+        else if(ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
         {
             tr.paramA12[0] = 3;
             tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
         }
-        else if((ChannelsObjectsList.at(i)->GetSignalType() == ChannelOptions::TermoCoupleMeasure))
+        else if((ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
         {
             tr.paramA12[0] = 1;
             tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();

@@ -141,9 +141,9 @@ public:
         NoMeasure= 0,
         CurrentMeasure= 1,
         VoltageMeasure= 2,
-        ResistanceMeasure= 3,
-        TermoCoupleMeasure= 4,
-        TermoResistanceMeasure= 5,
+//        ResistanceMeasure= 3,
+        TermoCoupleMeasure= 3,
+        TermoResistanceMeasure= 4,
         DiscretMeasure= 6,
         ImpulseCounterMeasure= 7,
         FrequencyMeasure= 8
