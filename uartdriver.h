@@ -175,9 +175,9 @@ public:
     //    0 – канал выключен
     //    1 – измерение тока
     //    2 – измерение напряжения
-    //    3 – измерение сопротивления
-    //    4 – измерение термопары
-    //    5 – измерение термосопротивления
+    //    3 – измерение термопары
+    //    4 – измерение термосопротивления
+    //    5 - резерв
     //    6 – дискретный вход
     //    7 – счет импульсов
     //    8 – частота
@@ -186,9 +186,9 @@ public:
         NoMeasure= 0,
         CurrentMeasure= 1,
         VoltageMeasure= 2,
-        ResistanceMeasure= 3,
-        TermoCoupleMeasure= 4,
-        TermoResistanceMeasure= 5,
+//        ResistanceMeasure= 3,
+        TermoCoupleMeasure= 3,
+        TermoResistanceMeasure= 4,
         DiscretMeasure= 6,
         ImpulseCounterMeasure= 7,
         FrequencyMeasure= 8

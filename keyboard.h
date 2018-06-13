@@ -55,6 +55,8 @@ private:
     void ChangeLanguage(int eng);
     bool shift;
     static langSimbols simbols[32];
+    QString styleUnclicked;
+    QString styleClicked;
 };
 
 

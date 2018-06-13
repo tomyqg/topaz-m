@@ -64,7 +64,10 @@ void MainWindow::on_WorkButton_clicked()
 
 void MainWindow::on_ArchiveButton_clicked()
 {
-    OpenArchiveWindow();
+//    OpenArchiveWindow();
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
 }
 
 
@@ -88,26 +91,34 @@ void MainWindow::on_EcoCheckBox_toggled(bool checked)
 
 }
 
-void MainWindow::on_timeButton_clicked()
-{
-    ++dateindex;
-    if (dateindex>=datestrings.length())
-        dateindex = 0 ;
+//void MainWindow::on_timeButton_clicked()
+//{
+//    ++dateindex;
+//    if (dateindex>=datestrings.length())
+//        dateindex = 0 ;
 
-    QDateTime local(QDateTime::currentDateTime());
+//    QDateTime local(QDateTime::currentDateTime());
 
-    ui->timeButton->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
-    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
-}
+//    ui->timeButton->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+//    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
+//}
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    OpenOptionsWindow(0);
+//    OpenOptionsWindow(0);
+
+    dMenu * menu = new dMenu();
+    menu->addChannels(listCh, ustavkaObjectsList);
+    menu->exec();
+    menu->deleteLater();
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    OpenMessagesWindow();
+//    OpenMessagesWindow();
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 1);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
 }
 
 
@@ -120,15 +131,14 @@ void  MainWindow::destroyedslot(QObject *)
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
-    if (watched == ui->MessagesWidget && event->type() == QEvent::Paint) {
-
-        if (needupdatePainter ==1)
+    if (watched == ui->MessagesWidget && event->type() == QEvent::Paint)
+    {
+        if (needupdatePainter == 1)
         {
             PaintOnWidget();
             needupdatePainter = 0;
         }
     }
-
 
     if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
         ReactOnTouch();
@@ -150,7 +160,11 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
+                                      + QString::number(ColorButtonNormal.red() - 20) + "," \
+                                      + QString::number(ColorButtonNormal.green() - 20) + "," \
+                                      + QString::number(ColorButtonNormal.blue() - 20) + ");" \
+                                      + "border: 0px;");
             }
         }
     }
@@ -167,7 +181,11 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
+                                      + QString::number(ColorButtonNormal.red()) + "," \
+                                      + QString::number(ColorButtonNormal.green()) + "," \
+                                      + QString::number(ColorButtonNormal.blue()) + ");" \
+                                      + "border: 0px;");
             }
         }
     }
@@ -242,8 +260,8 @@ void MainWindow::resizeWindow(QWidget & qw, qreal mratio)
 
 void MainWindow::resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution)
 {
-    qreal xratio = xresolution / 1280;
-    qreal yratio = yresolution / 800;
+    qreal xratio = xresolution / 1024;
+    qreal yratio = yresolution / 768;
 
     QList<QWidget *> widgets = qobj.findChildren<QWidget *>(); // ищем в объекте все виджеты и делаем их ресайз
 
@@ -343,3 +361,23 @@ void MainWindow::SetWindowHeightPixels(int newh)
 //    i2c_2.init(2);
 //    i2c_2.detect();
 //}
+
+
+//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+//{
+////        randVal[0] = arg1;
+//        channel1.SetCurrentChannelValue(arg1);
+//        ui->wBar_1->setVolue(arg1);
+//}
+
+void MainWindow::openSettingsChannel(int num)
+{
+
+    //проверка на наличие такого номера канала
+    if((num <= 0) || (num > listCh.size())) return;
+
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, num);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
+
+}

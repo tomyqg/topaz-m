@@ -19,6 +19,9 @@
 #include "Slots/slotsconfig.h"
 #include "archivator.h"
 #include "log.h"
+#include "defines.h"
+#include "menu.h"
+#include "settings.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -61,6 +64,8 @@ public:
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
 
 
+
+
 //    transaction device1;
 //    transaction device2;
 //    transaction device3;
@@ -69,7 +74,6 @@ public:
 
 
 public slots:
-
     void destroyedslot(QObject *);
     void NewTouchscreenCalibration();
     void LabelsInit();
@@ -95,6 +99,7 @@ public slots:
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
     void retransToWorker(Transaction tr);
+    void openSettingsChannel(int num);
 
 private slots:
 //    void OpenSerialPort( int );
@@ -113,7 +118,7 @@ private slots:
     void on_WorkButton_clicked();
     void on_ArchiveButton_clicked();
     void on_EcoCheckBox_toggled(bool checked);
-    void on_timeButton_clicked();
+//    void on_timeButton_clicked();
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
@@ -121,6 +126,9 @@ private slots:
 
 //    void on_sendI2C_clicked();
 //    void on_readI2C_clicked();
+
+//    void on_doubleSpinBox_valueChanged(double arg1);
+
 
 signals:
     void error(const QString &s);
@@ -139,6 +147,7 @@ private:
     ChannelOptions channel2;
     ChannelOptions channel3;
     ChannelOptions channel4;
+    QList<ChannelOptions *> listCh;
 
     bool eventFilter(QObject* watched, QEvent* event);
 //    void keyPressEvent(QKeyEvent *event);
@@ -169,6 +178,10 @@ private:
     void PowerOff();
     void CloseApplication();
     void WriteAllChannelsOptionsToFile();
+    void updateBars(void);
+    void updateWidgetsVols(void);
+    void selectWidgetDiagram(void);
+
 
     void SetXRange(int newxrange) {Xrange = newxrange;}
     void SetYRange(int newyrange) {Yrange = newyrange;}
@@ -183,14 +196,12 @@ private:
     int GetGraphWidthInPixels() {return 600;}
     int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
     int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
-    uint16_t getOffsetFromNumRelay(int num);
-    int dateindex;
     bool EcoMode;
     int polar_angle;
 
     QGraphicsScene  *scene;
 
-    QStringList datestrings, timestrings;
+
 
     QTranslator* translator;
     void changeTranslator(int langindex) ;
@@ -280,6 +291,8 @@ private:
     cCommunicator * comm;
     QTimer * commRun;
 #endif
+    dSettings * dialogSetingsChannel;
+
 
 protected:
     void paintEvent(QPaintEvent *event) ;

@@ -9,17 +9,8 @@
 #include "defines.h"
 #include "stackedoptions.h"
 
-extern QColor Channel1Color;
-extern QColor Channel2Color;
-extern QColor Channel3Color;
-extern QColor Channel4Color;
-extern QColor Channel1ColorNormal;
-extern QColor Channel2ColorNormal ;
-extern QColor Channel3ColorNormal;
-extern QColor Channel4ColorNormal ;
-extern QColor ChannelColorHighState;
-extern QColor ChannelColorLowState;
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
+
 
 void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
 {
@@ -95,6 +86,8 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
     }
     painter.end();
 }
+
+
 
 void MainWindow::PaintCyfrasBottom() // пока не используем
 {
@@ -330,6 +323,8 @@ void MainWindow::PaintCyfrasRight()
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
 
+
+
 void MainWindow::PaintCyfrasNew()
 {
     //задается вручную
@@ -518,6 +513,8 @@ void MainWindow::PaintCyfrasNew()
     painter.end();
 }
 
+
+
 void MainWindow::PaintCyfrasFullScreen()
 {
     // задаётся параметры вручную
@@ -568,6 +565,7 @@ void MainWindow::PaintCyfrasFullScreen()
 
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
+
 
 void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, int smalltextsize, int alerttextsize)
 {
@@ -632,6 +630,7 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
     painter.end();
 }
 
+
 void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает события на уставки
 {
     //высчитываются
@@ -688,9 +687,13 @@ void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает соб�
 // полярные координаты
 void MainWindow::PaintPolarDiagramm()
 {
-    QPainter painter;
+//    QPainter painter;
     
     painter.begin(ui->MessagesWidget);
+    int widgetHeight = ui->MessagesWidget->height();
+    int widgetWidth = ui->MessagesWidget->width();
+    int widgetSize = max(widgetHeight, widgetWidth);
+    int diagramSize = widgetSize - 50;
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
@@ -699,10 +702,27 @@ void MainWindow::PaintPolarDiagramm()
     int channel3value = GetPolarAngle();
     int channel4value = GetPolarAngle();
 
-    float channel1length = channel1.GetValuePercent() * 5;
-    float channel2length = channel2.GetValuePercent() * 5;
-    float channel3length = channel3.GetValuePercent() * 5;
-    float channel4length = channel4.GetValuePercent() * 5;
+    //получение текущих значений в процентах
+    float channel1length = channel1.GetValuePercent();
+    float channel2length = channel2.GetValuePercent();
+    float channel3length = channel3.GetValuePercent();
+    float channel4length = channel4.GetValuePercent();
+
+    //корректировка данных для диаграммы
+    if(channel1length < 0) channel1length = 0;
+    if(channel2length < 0) channel2length = 0;
+    if(channel3length < 0) channel3length = 0;
+    if(channel4length < 0) channel4length = 0;
+    if(channel1length > 100) channel1length = 100;
+    if(channel2length > 100) channel2length = 100;
+    if(channel3length > 100) channel3length = 100;
+    if(channel4length > 100) channel4length = 100;
+
+    //перевод процентов в координатную размерность
+    channel1length = channel1length * diagramSize / 100;
+    channel2length = channel2length * diagramSize / 100;
+    channel3length = channel3length * diagramSize / 100;
+    channel4length = channel4length * diagramSize / 100;
 
     QColor color1,color2,color3,color4;
 
@@ -711,43 +731,58 @@ void MainWindow::PaintPolarDiagramm()
     color3 = channel3.GetStateDependentColor();
     color4 = channel4.GetStateDependentColor();
     
+#define SHIFT_DIAGRAM_X 5
+#define SHIFT_DIAGRAM_Y (-5)
+
     int centerx1,centerx2,centerx3,centerx4;
     int centery1,centery2,centery3,centery4;
-    int newxcenter = 0, newycenter = 500;
+    int newxcenter = SHIFT_DIAGRAM_X, newycenter = widgetHeight + SHIFT_DIAGRAM_Y;
     
     centerx1 = centerx2 = centerx3 = centerx4 = 1;
     centery1 = centery2 = centery3 = centery4 = 1;
     
     painter.translate(newxcenter, newycenter);
     /* Create the line object: */
-    painter.setPen(QPen(Qt::black, 1));
+//    painter.setPen(QPen(Qt::black, 1));
 
     if (GetEcoMode()){
         painter.setBrush(QBrush(EcoColor, Qt::SolidPattern));
-        painter.setPen(QPen(NotEcoColor,1,  Qt::DashLine));
+        painter.setPen(QPen(NotEcoColor,1,  Qt::DotLine));
     }
     else
     {
         painter.setBrush(QBrush(NotEcoColor, Qt::SolidPattern));
-        painter.setPen(QPen(EcoColor,1,  Qt::DashLine));
+        painter.setPen(QPen(EcoColor,1,  Qt::DotLine));
     }
-    painter.drawRect(0, -newycenter,ui->MessagesWidget->width()-1,ui->MessagesWidget->height());
+//    painter.drawRect(0, -newycenter,ui->MessagesWidget->width()-1,ui->MessagesWidget->height());
+    painter.drawLine(0, -diagramSize - 20, 0, 0);
+    painter.drawLine(0, 0, diagramSize + 40, 0);
     
-    // Рисуем пять гругов разметочки
-    
-    painter.drawEllipse(QPointF(centerx1,centery1), 500, 500); // 100%
-    painter.drawEllipse(QPointF(centerx1,centery1), 400, 400);// 80%
-    painter.drawEllipse(QPointF(centerx1,centery1), 300, 300);// 60%
-    painter.drawEllipse(QPointF(centerx1,centery1), 200, 200);// 40%
-    painter.drawEllipse(QPointF(centerx1,centery1), 100, 100);// 20%
+    // Рисуем пять дуг разметочки
+    painter.drawArc(-diagramSize, -diagramSize, 2*diagramSize, 2*diagramSize, 0, 90 * 16); // 100%
+    painter.drawArc(-diagramSize*4/5, -diagramSize*4/5, 2*diagramSize*4/5, 2*diagramSize*4/5, 0, 90 * 16);// 80%
+    painter.drawArc(-diagramSize*3/5, -diagramSize*3/5, 2*diagramSize*3/5, 2*diagramSize*3/5, 0, 90 * 16);// 60%
+    painter.drawArc(-diagramSize*2/5, -diagramSize*2/5, 2*diagramSize*2/5, 2*diagramSize*2/5, 0, 90 * 16);// 40%
+    painter.drawArc(-diagramSize/5, -diagramSize/5, 2*diagramSize/5, 2*diagramSize/5, 0, 90 * 16);// 20%
+
+    //ещё 5 дуг дополнительно
+    painter.drawArc(-diagramSize*9/10, -diagramSize*9/10, \
+                    2*diagramSize*9/10, 2*diagramSize*9/10, 0, 90 * 16); // 100%
+    painter.drawArc(-diagramSize*7/10, -diagramSize*7/10, \
+                    2*diagramSize*7/10, 2*diagramSize*7/10, 0, 90 * 16);// 80%
+    painter.drawArc(-diagramSize*5/10, -diagramSize*5/10, \
+                    2*diagramSize*5/10, 2*diagramSize*5/10, 0, 90 * 16);// 60%
+    painter.drawArc(-diagramSize*3/10, -diagramSize*3/10, \
+                    2*diagramSize*3/10, 2*diagramSize*3/10, 0, 90 * 16);// 40%
+    painter.drawArc(-diagramSize*1/10, -diagramSize*1/10, \
+                    2*diagramSize*1/10, 2*diagramSize*1/10, 0, 90 * 16);// 20%
 
     QLineF Channel1Line;
     
     if (GetPolarAngle()>=90) // если больше 90 градусов то поворачиваем диск
     {
         painter.rotate(GetPolarAngle()-90);
-        // оставляем только 180 точек (на 180 градусов)
-        if (GetPolarAngle()>=180) // если больше 90 градусов то поворачиваем диск
+        if (GetPolarAngle()>=179)   // оставляем только 180 точек (на 180 градусов)
         {
             PolarChartPointsChannel1.removeFirst();
             PolarChartPointsChannel2.removeFirst();
@@ -757,34 +792,17 @@ void MainWindow::PaintPolarDiagramm()
         }
     }
     
-    QLineF Line1,Line2,Line3,Line4,Line5,Line6,Line7,Line8,Line9,Line10,Line11,Line12;
-    
-    QList<QLineF> LineList;
-    
-    LineList.append(Line1);
-    LineList.append(Line2);
-    LineList.append(Line3);
-    LineList.append(Line4);
-    LineList.append(Line5);
-    LineList.append(Line6);
-    LineList.append(Line7);
-    LineList.append(Line8);
-    LineList.append(Line9);
-    LineList.append(Line10);
-    LineList.append(Line11);
-    LineList.append(Line12);
-    
-    int ind = 0;
-
-    foreach (QLineF Line, LineList) {
+    for(int i=0; i < 36; i++)
+    {
+        QLineF Line;
         Line.setP1(QPointF(centerx1, centery1));
-        Line.setAngle(30*(ind++));
-        Line.setLength(500);
+        Line.setAngle(10*(i));
+        Line.setLength(diagramSize);
         painter.drawLine(Line);
     }
     
     // отсюда начинаем рисовать значения на круговой диаграмме
-    painter.setPen(QPen(Qt::green, 1));
+//    painter.setPen(QPen(Qt::green, 1));
     /* Set the origin: */
     Channel1Line.setP1(QPointF(centerx1, centery1));
     Channel1Line.setAngle(channel1value);
@@ -795,7 +813,7 @@ void MainWindow::PaintPolarDiagramm()
     
     /* Create the line object: */
     QLineF Channel2Line;
-    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+//    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
     Channel2Line.setP1(QPointF(centerx2, centery2));
     Channel2Line.setAngle(channel2value);
@@ -806,7 +824,7 @@ void MainWindow::PaintPolarDiagramm()
     
     /* Create the line object: */
     QLineF Channel3Line;
-    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+//    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
     Channel3Line.setP1(QPointF(centerx3, centery3));
     Channel3Line.setAngle(channel3value);
@@ -816,7 +834,7 @@ void MainWindow::PaintPolarDiagramm()
     
     /* Create the line object: */
     QLineF Channel4Line;
-    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
+//    painter.setPen(QPen(Qt::green, 1)); //, Qt::DashDotLine, Qt::RoundCap));
     /* Set the origin: */
     Channel4Line.setP1(QPointF(centerx4, centery4) );
     Channel4Line.setAngle(channel4value);
@@ -825,12 +843,6 @@ void MainWindow::PaintPolarDiagramm()
     int x4 = Channel4Line.x2(); // мы берем координаты `1 точки
     int y4 = Channel4Line.y2(); // мы берем координаты второй точки
     
-    painter.setPen(QPen(Qt::green,2,  Qt::DashLine)); //, Qt::DashDotLine, Qt::RoundCap));
-    painter.drawLine(Channel1Line);
-
-    //painter.drawLine(Channel2Line);
-    //painter.drawLine(Channel3Line);
-    //painter.drawLine(Channel4Line);
 
     QPoint NewPolarPointChannel1,NewPolarPointChannel2,NewPolarPointChannel3,NewPolarPointChannel4;
     
@@ -863,20 +875,58 @@ void MainWindow::PaintPolarDiagramm()
     painter.resetTransform(); // все что дальше - не поворачивается динамически
 
     painter.setFont(QFont(Font, 10, QFont::Bold));
-
     painter.translate(newxcenter, newycenter);
-    painter.drawText(5, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,    "0%");
-    painter.drawText(105, -40, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "20%");
-    painter.drawText(205, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "40%");
-    painter.drawText(305, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "60%");
-    painter.drawText(405, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "80%");
-    painter.drawText(505, -40,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "100%");
 
-    painter.drawText(5, -40-100, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "20%");
-    painter.drawText(5, -40-200,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "40%");
-    painter.drawText(5, -40-300,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "60%");
-    painter.drawText(5, -40-400,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "80%");
-    painter.drawText(5, -40-500,40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "100%");
+    painter.drawText(0,               -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "0%");
+    painter.drawText(diagramSize/5,   -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "20%");
+    painter.drawText(diagramSize*2/5, -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "40%");
+    painter.drawText(diagramSize*3/5, -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "60%");
+    painter.drawText(diagramSize*4/5, -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "80%");
+    painter.drawText(diagramSize,     -30, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "100%");
+
+    painter.drawText(0, -30-diagramSize/5,   40, 40, Qt::AlignHCenter | Qt::AlignVCenter, "20%");
+    painter.drawText(0, -30-diagramSize*2/5, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "40%");
+    painter.drawText(0, -30-diagramSize*3/5, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "60%");
+    painter.drawText(0, -30-diagramSize*4/5, 40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "80%");
+    painter.drawText(0, -30-diagramSize,     40, 40, Qt::AlignHCenter | Qt::AlignVCenter,  "100%");
+
+    //стилизация круговой диаграммы (короче понты всякие)
+    //вертикальные понты
+    painter.setPen(ColorBlue);
+    painter.setBrush(QBrush(ColorBlue, Qt::SolidPattern));
+    painter.drawRect(0, 0, -SHIFT_DIAGRAM_X, -diagramSize/5);
+    painter.setPen(ColorCh1);
+    painter.setBrush(QBrush(ColorCh1, Qt::SolidPattern));
+    painter.drawRect(0, -diagramSize/5, -SHIFT_DIAGRAM_X, -diagramSize/5);
+    painter.setPen(ColorCh1Light);
+    painter.setBrush(QBrush(ColorCh1Light, Qt::SolidPattern));
+    painter.drawRect(0, -diagramSize*2/5, -SHIFT_DIAGRAM_X, -diagramSize/5);
+    painter.setPen(ColorCh3);
+    painter.setBrush(QBrush(ColorCh3, Qt::SolidPattern));
+    painter.drawRect(0, -diagramSize*3/5, -SHIFT_DIAGRAM_X, -diagramSize/5);
+    painter.setPen(ColorCh3Light);
+    painter.setBrush(QBrush(ColorCh3Light, Qt::SolidPattern));
+    painter.drawRect(0, -diagramSize*4/5, -SHIFT_DIAGRAM_X, -diagramSize/5);
+    //горизонтальные понты
+    painter.setPen(ColorBlue);
+    painter.setBrush(QBrush(ColorBlue, Qt::SolidPattern));
+    painter.drawRect(0, 0, diagramSize/5, -SHIFT_DIAGRAM_Y);
+    painter.setPen(ColorCh1);
+    painter.setBrush(QBrush(ColorCh1, Qt::SolidPattern));
+    painter.drawRect(diagramSize/5, 0, diagramSize/5, -SHIFT_DIAGRAM_Y);
+    painter.setPen(ColorCh1Light);
+    painter.setBrush(QBrush(ColorCh1Light, Qt::SolidPattern));
+    painter.drawRect(diagramSize*2/5, 0, diagramSize/5, -SHIFT_DIAGRAM_Y);
+    painter.setPen(ColorCh3);
+    painter.setBrush(QBrush(ColorCh3, Qt::SolidPattern));
+    painter.drawRect(diagramSize*3/5, 0, diagramSize/5, -SHIFT_DIAGRAM_Y);
+    painter.setPen(ColorCh3Light);
+    painter.setBrush(QBrush(ColorCh3Light, Qt::SolidPattern));
+    painter.drawRect(diagramSize*4/5, 0, diagramSize/5, -SHIFT_DIAGRAM_Y);
+    //специальный белый квадратик в начале осей координат
+    painter.setPen(Qt::white);
+    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+    painter.drawRect(0, 0, -SHIFT_DIAGRAM_X, -SHIFT_DIAGRAM_Y);
 
     painter.end();
 }
@@ -889,9 +939,7 @@ void MainWindow::PaintOnWidget()
         PaintCyfrasFullScreen();
         break;
     case Options::TrendsCyfra:
-        //PaintStatesAndAlertsAtTop();
-        PaintCyfrasNew();
-        //PaintCyfrasRight();
+        PaintCyfrasRight();
         break;
     case Options::Trends:
         PaintStatesAndAlertsAtTop();
@@ -903,9 +951,8 @@ void MainWindow::PaintOnWidget()
         PaintStatesAndAlertsAtTop();
         break;
     case Options::Polar:
-        //        PaintStatesAndAlertsAtTop();
+//        PaintStatesAndAlertsAtTop();
         PaintPolarDiagramm();
-        PaintCyfrasNew();
         break;
     default:
         break;

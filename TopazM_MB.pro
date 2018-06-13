@@ -23,7 +23,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers/ Communicator/
+        Drivers/ Communicator/ Grafika/
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -63,7 +63,14 @@ SOURCES += main.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
     log.cpp \
-    kvitirovanie.cpp
+    kvitirovanie.cpp \
+    Grafika/voluebar.cpp \
+    Grafika/buttonstyled.cpp \
+    menu.cpp \
+    settings.cpp \
+    Grafika/vol.cpp \
+    Alarms/alarm.cpp \
+    filemanager.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -140,7 +147,14 @@ HEADERS  += mainwindow.h \
     Slots/devicechannel.h \
     archivator.h \
     log.h \
-    kvitirovanie.h
+    kvitirovanie.h \
+    Grafika/voluebar.h \
+    Grafika/buttonstyled.h \
+    menu.h \
+    settings.h \
+    Grafika/vol.h \
+    Alarms/alarm.h \
+    filemanager.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -232,7 +246,12 @@ FORMS    += mainwindow.ui \
     keyboard.ui \
     messages.ui \
     stackedoptions.ui \
-    kvitirovanie.ui
+    kvitirovanie.ui \
+    Grafika/voluebar.ui \
+    Grafika/buttonstyled.ui \
+    menu.ui \
+    settings.ui \
+    Grafika/vol.ui
 
 target.path  = /opt
 INSTALLS    += target
@@ -254,3 +273,5 @@ DISTFILES += \
 TRANSLATIONS +=  untitled2_en.ts \
                  untitled2_ru.ts \
                  untitled2_de.ts
+
+RESOURCES +=

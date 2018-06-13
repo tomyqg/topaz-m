@@ -6,14 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1237</width>
-    <height>673</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>МЕНЮ</string>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -23,7 +26,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>10</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -1657,7 +1660,7 @@
         <x>10</x>
         <y>44</y>
         <width>296</width>
-        <height>225</height>
+        <height>201</height>
        </rect>
       </property>
       <property name="font">
@@ -4854,6 +4857,9 @@
       </item>
       <item>
        <widget class="QRadioButton" name="SetPolarBtn">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="font">
          <font>
           <family>Open Sans</family>
@@ -10784,9 +10790,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>

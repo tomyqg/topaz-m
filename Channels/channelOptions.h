@@ -111,6 +111,7 @@ private:
     double state2value;
     double currentvalue;
     int demphervalue;
+    int numChannel;
 
     QString unitsname;
     QString state1highmessage;
@@ -140,9 +141,9 @@ public:
         NoMeasure= 0,
         CurrentMeasure= 1,
         VoltageMeasure= 2,
-        ResistanceMeasure= 3,
-        TermoCoupleMeasure= 4,
-        TermoResistanceMeasure= 5,
+//        ResistanceMeasure= 3,
+        TermoCoupleMeasure= 3,
+        TermoResistanceMeasure= 4,
         DiscretMeasure= 6,
         ImpulseCounterMeasure= 7,
         FrequencyMeasure= 8
@@ -390,6 +391,8 @@ public:
         chanTransferScaleLowLim = 35,
         chanTransferScaleHighLim = 37,
         chanBadGoodComm = 39,
+        chanReleyHi = 42,
+        chanReleyLow = 43,
 
         chanCjValue = 90,
         chanResultCjValue = 92,

@@ -27,8 +27,11 @@
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
-#define pathtologotip  "/opt/logo.jpg"
+#define pathtologotip  "/opt/logotpchel.png"
 #define pathtoqrcodetip "/opt/qr-code.jpg"
+#define pathtohilimico  "/opt/hilim.png"
+#define pathtolowlimico  "/opt/lowlim.png"
+#define pathtoloadgif   "/opt/load.gif"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
@@ -52,8 +55,11 @@
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
 #define pathtoarchivedata  "C:/Work/archive.dat"
-#define pathtologotip  "C:/Work/logo.jpg"
+#define pathtologotip  "C:/Work/logotpchel.png"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
+#define pathtohilimico  "C:/Work/hilim.png"
+#define pathtolowlimico  "C:/Work/lowlim.png"
+#define pathtoloadgif   "C:/Work/load.gif"
 #else
 
 #define pathtofiles  QCoreApplication::applicationDirPath()
@@ -64,7 +70,7 @@
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
 #define pathtoarchivedata  QCoreApplication::applicationDirPath() + "C:/Work/archive.dat"
-#define pathtologotip  QCoreApplication::applicationDirPath() + "/logo.jpg"
+#define pathtologotip  QCoreApplication::applicationDirPath() + "/logotpchel.png"
 #define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
 #endif
 #endif
@@ -88,10 +94,10 @@
 #define MathString "math "
 
 #define MultiThread
-#define ValuesUpdateTimer 200        // время в мсек для обновления значений отрисовываемых на графике
-#define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
+#define ValuesUpdateTimer 200        // период чтения данных в архив
+#define GraphicsUpdateTimer 100      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
-#define DateLabelUpdateTimer 1000    // время обновления времени
+#define DateLabelUpdateTimer 500    // время обновления времени
 //#define LogUpdTimer 10000             // время обновления журнала сообщений (Log.txt)
 #define XRange 300                   // изначальный размер графика по иксу в 1 сторону
 #define YRange 20                   // изначальный размер графика по игреку в 1 сторону
@@ -101,15 +107,40 @@
 
 #endif
 
-//#define stylesheetclicked "background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
+
+/* Цветовая палитра */
+// Базовые цвета. Только их использовать во всей программе. Чёрный и белый само собой
+#define COLOR_1 QColor(0x1c,0xb9,0x9a)
+#define COLOR_2 QColor(0x66,0x66,0xff)
+#define COLOR_3 QColor(0xe8,0x4c,0x3d)
+#define COLOR_4 QColor(0x2b,0x3e,0x4c)
+#define COLOR_LIGHT_1 QColor(0x57,0xe9,0xc5)
+#define COLOR_LIGHT_2 QColor(0x99,0x99,0xff)
+#define COLOR_LIGHT_3 QColor(0xeb,0x9f,0x85)
+#define COLOR_LIGHT_4 QColor(0x80,0x9f,0xbc)
+#define COLOR_DARK  QColor(0x2b,0x3e,0x4c)
+#define COLOR_LIGHT QColor(0x0e,0xd2,0xe2)
+
+// Цвета элементов
+#define ColorCh1 COLOR_1
+#define ColorCh2 COLOR_2
+#define ColorCh3 COLOR_3
+#define ColorCh4 COLOR_4
+#define ColorCh1Light COLOR_LIGHT_1
+#define ColorCh2Light COLOR_LIGHT_2
+#define ColorCh3Light COLOR_LIGHT_3
+#define ColorCh4Light COLOR_LIGHT_4
+#define ColorButtonNormal   COLOR_DARK
+#define ColorBlue           COLOR_LIGHT
+#define EcoColor COLOR_DARK
+#define NotEcoColor QColor(0xff,0xff,0xff)
+
+// Нужно избавить от этих дефайнов
 #define stylesheetUnclicked " color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); "
-//#define stylesheetclicked "background-color: rgb(135,210,240);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(207,232,252, 255), stop:1 rgba(0, 170, 255, 255));color : white;"
 #define stylesheetclicked "color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(80, 80, 80, 255), stop:1 rgba(0, 0, 0, 255)); "
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
-#define EcoColor QColor(0x00,0x00,0x4d)
-#define NotEcoColor QColor(0xff,0xff,0xff)
 
 #define TOTAL_NUM_USTAVKI   4
 
@@ -118,6 +149,9 @@
 #define BASE_OFFSET_CHANNEL_2   0x8080
 #define BASE_OFFSET_CHANNEL_3   0x8100
 #define BASE_OFFSET_CHANNEL_4   0x8180
+
+//макрос определения максимального из двух чисел
+#define max( x1, x2) ( ( x1 ) > ( x2 ) ? ( x1 ) : ( x2 ) )
 
 //#define new new(/* _NORMAL_BLOCK, */__FILE__, __LINE__)
 
