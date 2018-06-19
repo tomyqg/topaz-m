@@ -22,6 +22,7 @@
 #include "defines.h"
 #include "menu.h"
 #include "settings.h"
+#include "systemoptions.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -100,6 +101,7 @@ public slots:
     void sendRelayStateToWorker(int relay, bool state);
     void retransToWorker(Transaction tr);
     void openSettingsChannel(int num);
+    void updateSystemOptions();
 
 private slots:
 //    void OpenSerialPort( int );
@@ -293,6 +295,7 @@ private:
 #endif
     dSettings * dialogSetingsChannel;
 
+    cSystemOptions systemOptions;  //класс хранения состемных опций
 
 protected:
     void paintEvent(QPaintEvent *event) ;

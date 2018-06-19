@@ -6,6 +6,7 @@
 #include <QFile>
 #include <Channels/channelOptions.h>
 #include <ustavka.h>
+#include <systemoptions.h>
 
 
 class cFileManager : public QObject
@@ -15,6 +16,8 @@ public:
     explicit cFileManager(QObject *parent = 0);
     static int writeChannelsSettings(QString path, QList<ChannelOptions*> listChannels, QList<Ustavka*> listUstavok);
     static int readChannelsSettings(QString path, QList<ChannelOptions*> listChannels, QList<Ustavka *> listUstavok);
+    static int writeSystemOptionsToFile(QString path, cSystemOptions * opt);
+    static int readSystemOptionsFromFile(QString path, cSystemOptions *opt);
 signals:
 
 public slots:

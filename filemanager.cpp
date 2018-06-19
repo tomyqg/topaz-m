@@ -148,3 +148,41 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
     return ret;
 
 }
+
+
+int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
+{
+    QJsonObject systemoptions;
+//    systemoptions["Time"] = GetNewTimeString();
+//    systemoptions["Date"] = GetNewDateString();
+//    systemoptions["Display"] = GetCurrentDisplayParametr();
+//    systemoptions["Calibration"] = GetCalibration();
+//    systemoptions["Resolution"] = GetNewDisplayResolution();
+    systemoptions["Arrows"] = opt->arrows;
+    systemoptions["Display"] = opt->display;
+    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+    QFile file(path);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+    return 0;
+}
+
+int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
+{
+    QFile infile(path);
+    infile.open(QIODevice::ReadOnly);
+    QTextStream in(&infile);
+    QString sss = in.readLine();
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QJsonObject json = doc.object();
+//    StackedOptions::calibrationprm = json["Calibration"].toString();
+//    StackedOptions::DisplayParametr = json["Display"].toInt();
+//    StackedOptions::displayResolution = json["Resolution"].toString();
+    opt->arrows = json["Arrows"].toBool();
+    opt->display = json["Display"].toInt();
+    infile.close();
+}
+

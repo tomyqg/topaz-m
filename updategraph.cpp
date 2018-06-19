@@ -222,25 +222,22 @@ void MainWindow::UpdateGraphics()
 
     needupdatePainter = 1;
 
-    switch( Options::GetCurrentDisplayParametr() )
+    switch(systemOptions.display)
     {
-    case Options::Trends:
+    case cSystemOptions::Trends:
         GrafsUpdateTrends();break;
-    case Options::TrendsCyfra:
+    case cSystemOptions::TrendsCyfra:
         GrafsUpdateTrends();break;
-    case Options::Bars :
+    case cSystemOptions::Bars :
         GrafsUpdateBars();break;
-    case Options::BarsCyfra :
+    case cSystemOptions::BarsCyfra :
         GrafsUpdateBars();break;
-    case Options::TrendsBars:
-        GrafsUpdateTrendsAndBars();break;
-    case Options::TrendsCyfraBars:
-        GrafsUpdateTrendsAndBars();break;
-    case Options::Polar:
-        updateBars();
-        updateWidgetsVols();
-        GrafsUpdateNone();break;
-    case Options::Cyfra:
+    case cSystemOptions::TrendsBars:
+        GrafsUpdateTrends();break;
+//        GrafsUpdateTrendsAndBars();break;
+    case cSystemOptions::PolarBars:
+    case cSystemOptions::PolarCyfra:
+    case cSystemOptions::Cyfra:
         updateBars();
         GrafsUpdateNone();break;
     default:
@@ -578,7 +575,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
     // add the helper arrows:
 
-    if (ui->arrowscheckBox->checkState()) // if it s needed
+    if (systemOptions.arrows) // if it s needed
     {
         // add the arrows:
 
@@ -604,10 +601,10 @@ void MainWindow::GrafsUpdateTrendsAndBars()
             QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
             //    arrow->start->setCoords(400,200);
 
-            int ystart = 150;
-            int xstart = 600;
+            int ystart = ui->customPlot->height() / 5;
+            int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
 
-            arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
+            arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
             arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
@@ -615,9 +612,9 @@ void MainWindow::GrafsUpdateTrendsAndBars()
 
             QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
             ui->customPlot->addItem(NameLabel);
-            NameLabel->position->setPixelPoint(arrow->start->pixelPoint());
+            NameLabel->position->setPixelPoint(QPointF(xstart+20, ystart + ui->customPlot->height() * index / 5));
             NameLabel->setText(Chanel->GetChannelName() );
-            NameLabel->setFont(QFont(Font, 8, QFont::Bold));
+            NameLabel->setFont(QFont(Font, 14, QFont::Bold));
             NameLabel->setColor(Chanel->GetNormalColor());
 
             ++index;
@@ -627,15 +624,14 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         }
     }
 
-    int start = clock();
+//    int start = clock();
 
     ui->customPlot->replot();
 
-    int endd = clock();
+//    int endd = clock();
     //    qDebug() << endd - start ;
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
-
 
 
 }
@@ -651,53 +647,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
     //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
-    // add the helper arrow:
 
-    if (ui->arrowscheckBox->checkState())
-    {
-        // add the arrows:
-
-        QList<ChannelOptions *> ChannelsObjectsList;
-
-        ChannelsObjectsList.append(&channel1);
-        ChannelsObjectsList.append(&channel2);
-        ChannelsObjectsList.append(&channel3);
-        ChannelsObjectsList.append(&channel4);
-
-        // рисуем стрелки для каждой уставки
-
-        int index = 0;
-        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
-        {
-            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-
-            int ystart = 150;
-            int xstart = 600;
-
-            arrow->start->setPixelPoint(QPointF(xstart, ystart+100*index));
-            arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
-            arrow->setHead(QCPLineEnding::esSpikeArrow);
-            arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
-            arrow->setAntialiased(true);
-            ui->customPlot->setAntialiasedElements(QCP::aeAll);
-            ui->customPlot->addItem(arrow);
-
-            arrow->setAntialiased(true);
-            ui->customPlot->setAntialiasedElements(QCP::aeAll);
-
-            QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
-            ui->customPlot->addItem(NameLabel);
-            NameLabel->position->setPixelPoint(arrow->start->pixelPoint());
-            NameLabel->setText(Chanel->GetChannelName() );
-            NameLabel->setFont(QFont(Font, 8, QFont::Bold));
-            NameLabel->setColor(Chanel->GetNormalColor());
-
-            ++index;
-
-            arrow->deleteLater();
-            NameLabel->deleteLater();
-        }
-    }
 
     updateBars();
 
@@ -734,6 +684,54 @@ void MainWindow::GrafsUpdateTrends()
     if (ui->autoscalecheckbox->checkState())
     {
         ui->customPlot->yAxis->rescale();
+    }
+
+    // add the helper arrow:
+
+    if (systemOptions.arrows)
+    {
+        // add the arrows:
+
+        QList<ChannelOptions *> ChannelsObjectsList;
+
+        ChannelsObjectsList.append(&channel1);
+        ChannelsObjectsList.append(&channel2);
+        ChannelsObjectsList.append(&channel3);
+        ChannelsObjectsList.append(&channel4);
+
+        // рисуем стрелки для каждого канала
+
+        int index = 0;
+        foreach (ChannelOptions * Chanel, ChannelsObjectsList)
+        {
+            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+
+            int ystart = ui->customPlot->height() / 5;
+            int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
+
+            arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
+            arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->setHead(QCPLineEnding::esSpikeArrow);
+            arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
+            arrow->setAntialiased(true);
+            ui->customPlot->setAntialiasedElements(QCP::aeAll);
+            ui->customPlot->addItem(arrow);
+
+            arrow->setAntialiased(true);
+            ui->customPlot->setAntialiasedElements(QCP::aeAll);
+
+            QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
+            ui->customPlot->addItem(NameLabel);
+            NameLabel->position->setPixelPoint(QPointF(xstart+20, ystart + ui->customPlot->height() * index / 5));
+            NameLabel->setText(Chanel->GetChannelName() );
+            NameLabel->setFont(QFont(Font, 14, QFont::Bold));
+            NameLabel->setColor(Chanel->GetNormalColor());
+
+            ++index;
+
+            arrow->deleteLater();
+            NameLabel->deleteLater();
+        }
     }
 
     ui->customPlot->setAntialiasedElements(QCP::aeAll);
@@ -1049,10 +1047,12 @@ void MainWindow::UpdateChannel1Slot()
 //    CheckAndLogginStates(channel1);
 
     /* Test */
-//    randVal[0] += ((double)((rand()%101) - 50) / 100);
-//    channel1.SetCurrentChannelValue(randVal[0]);
-//    ui->wBar_1->setVolue(randVal[0]);
-//    ui->widgetVol1->setVol(randVal[0]);
+#ifdef Q_OS_WIN
+    randVal[0] += ((double)((rand()%101) - 50) / 100);
+    channel1.SetCurrentChannelValue(randVal[0]);
+    ui->wBar_1->setVolue(randVal[0]);
+    ui->widgetVol1->setVol(randVal[0]);
+#endif
 
     channeltimer1->setInterval(period);
 }
@@ -1073,10 +1073,12 @@ void MainWindow::UpdateChannel2Slot()
 //    CheckAndLogginStates(channel2);
 
         /* Test */
-//    randVal[1] += ((double)((rand()%101) - 50) / 100);
-//    channel2.SetCurrentChannelValue(randVal[1]);
-//    ui->wBar_2->setVolue(randVal[1]);
-//    ui->widgetVol2->setVol(randVal[1]);
+#ifdef Q_OS_WIN
+    randVal[1] += ((double)((rand()%101) - 50) / 100);
+    channel2.SetCurrentChannelValue(randVal[1]);
+    ui->wBar_2->setVolue(randVal[1]);
+    ui->widgetVol2->setVol(randVal[1]);
+#endif
 
     channeltimer2->setInterval(period);
 }
@@ -1097,10 +1099,12 @@ void MainWindow::UpdateChannel3Slot()
 //    CheckAndLogginStates(channel3);
 
     /* Test */
-//    randVal[2] += ((double)((rand()%101) - 50) / 100);
-//    channel3.SetCurrentChannelValue(randVal[2]);
-//    ui->wBar_3->setVolue(randVal[2]);
-//    ui->widgetVol3->setVol(randVal[2]);
+#ifdef Q_OS_WIN
+    randVal[2] += ((double)((rand()%101) - 50) / 100);
+    channel3.SetCurrentChannelValue(randVal[2]);
+    ui->wBar_3->setVolue(randVal[2]);
+    ui->widgetVol3->setVol(randVal[2]);
+#endif
 
     channeltimer3->setInterval(period);
 }
@@ -1121,10 +1125,12 @@ void MainWindow::UpdateChannel4Slot()
 //    CheckAndLogginStates(channel4);
 
     /* Test */
-//    randVal[3] += ((double)((rand()%101) - 50) / 100);
-//    channel4.SetCurrentChannelValue(randVal[3]);
-//    ui->wBar_4->setVolue(randVal[3]);
-//    ui->widgetVol4->setVol(randVal[3]);
+#ifdef Q_OS_WIN
+    randVal[3] += ((double)((rand()%101) - 50) / 100);
+    channel4.SetCurrentChannelValue(randVal[3]);
+    ui->wBar_4->setVolue(randVal[3]);
+    ui->widgetVol4->setVol(randVal[3]);
+#endif
 
     channeltimer4->setInterval(period);
 }
@@ -1213,17 +1219,19 @@ void MainWindow::updateWidgetsVols(void)
 
 void MainWindow::selectWidgetDiagram(void)
 {
-    if ( (Options::GetCurrentDisplayParametr() == Options::BarsCyfra) || \
-         (Options::GetCurrentDisplayParametr() == Options::TrendsCyfraBars) || \
-         (Options::GetCurrentDisplayParametr() == Options::Cyfra) || \
-         (Options::GetCurrentDisplayParametr() == Options::TrendsBars) || \
-         (Options::GetCurrentDisplayParametr() == Options::Bars) || \
-         (Options::GetCurrentDisplayParametr() == Options::TrendsCyfra) || \
-         (Options::GetCurrentDisplayParametr() == Options::Trends) )
+    if ( (systemOptions.display == cSystemOptions::BarsCyfra) || \
+         (systemOptions.display == cSystemOptions::TrendsCyfraBars) || \
+         (systemOptions.display == cSystemOptions::Cyfra) || \
+         (systemOptions.display == cSystemOptions::TrendsBars) || \
+         (systemOptions.display == cSystemOptions::Bars) || \
+         (systemOptions.display == cSystemOptions::TrendsCyfra) || \
+         (systemOptions.display == cSystemOptions::Trends) )
     {
         ui->stackedWidgetDiagram->setCurrentIndex(0);
     }
-    else if(Options::GetCurrentDisplayParametr() == Options::Polar)
+    else if(systemOptions.display == cSystemOptions::Polar ||\
+            systemOptions.display == cSystemOptions::PolarBars ||\
+            systemOptions.display == cSystemOptions::PolarCyfra)
     {
         ui->stackedWidgetDiagram->setCurrentIndex(1);
     }

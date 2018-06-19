@@ -85,6 +85,9 @@ public:
     void SetNormalColor(QColor newcolor);
     void SetMaximumColor(QColor newmaxcolor);
     void SetMinimumColor(QColor newmincolor);
+    int getShema() {return shema;}
+    void setShema(int sh) {shema = sh;}
+
 
     bool IsChannelMathematical();
 
@@ -125,7 +128,8 @@ private:
     QColor maximumcolor; // цвет канала на графике макс
     QColor minimumcolor; // цвет канала на графике мин
     bool needConfirmationchannel;
-    int diapason;
+    int diapason;           //диапазон - тип датчика
+    int shema;              //схема подключения датчика
     int registrationtype;
 
     QVector<double> channelvaluesbuffer;

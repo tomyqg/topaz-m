@@ -7,6 +7,31 @@
 #include <filemanager.h>
 #include <options.h>
 #include <keyboard.h>
+#include <uartdriver.h>
+
+enum numItems{
+    NoSignal = 0,
+    Current = 1,
+    Voltage = 2,
+    TermoCouple = 3,
+    TermoResistance =4
+};
+
+typedef struct {
+    numItems numItem;
+    ModBus::SignalType st;
+    QString nameItem;
+} typeTableSignalTypes;
+
+const typeTableSignalTypes tableSignalTypes[] = {
+    {NoSignal, ModBus::NoMeasure, "ОТКЛ."},     //0
+    {Current, ModBus::CurrentMeasure, "ТОК"},       //1
+    {Voltage, ModBus::VoltageMeasure, "НАРЯЖЕНИЕ"},     //2
+    {TermoCouple, ModBus::TermoCoupleMeasure, "Т/П"},       //3
+    {TermoResistance, ModBus::TermoResistanceMeasure, "Т/С"},   //4
+};
+
+
 
 #define TIME_UPDATE DateLabelUpdateTimer
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
@@ -18,6 +43,34 @@ dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, i
     ui(new Ui::dSettings)
 {
     ui->setupUi(this);
+
+    //списки типов датчиков
+    StringListNapryagenie.clear();
+    StringListNapryagenie.append("Нет");
+    StringListNapryagenie.append("0-100 мВ");
+    StringListNapryagenie.append("0-1   В");
+    StringListNapryagenie.append("0-5   В");
+    StringListNapryagenie.append("±10   В");
+    StringListNapryagenie.append("±30   В");
+    StringListTC.clear();
+    StringListTC.append("Тип S (Pt10Rh-Pt)");
+    StringListTC.append("Тип K (NiCr-Ni)");
+    StringListTC.append("Тип L (Fe-CuNi)");
+    StringListTC.append("Тип B (Pt30Rh-Pt60Rh)");
+    StringListTC.append("Тип А1(W5Re-W20Re)");
+    StringListTC.append("Тип J (Fe-CuNi)");
+    StringListTC.append("Тип N (NiCrSi-NiSi)");
+    StringListRTD.clear();
+    StringListRTD.append("Pt50   (GOST, a=3910)");
+    StringListRTD.append("Pt100  (GOST, a=3910)");
+    StringListRTD.append("Cu50   (GOST, a=4260)");
+    StringListRTD.append("Cu100  (GOST, a=4260)");
+    StringListRTD.append("Pt50   (GOST, a=3850)");
+    StringListRTD.append("Pt100  (GOST, a=3850)");
+    StringListRTD.append("Cu50   (GOST, a=4280)");
+    StringListRTD.append("Cu100  (GOST, a=4280)");
+    StringListRTD.append("Pt21   (ТСП21)");
+    StringListRTD.append("Cu23   (ТСМ23)");
 
     // <---- временно скрыть некоторые пункты настроек уставок
     ui->ustavkaChannel->hide();
@@ -68,6 +121,9 @@ dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, i
     }
     //обновим параметры виджетов, чтобы всё на своих местах стояло
     updateWidgets();
+
+    //обновление параметров: тип сигнала, тип датчика, схема включения
+    updateUiSignalTypeParam(getIndexSignalTypeTable(channel->GetSignalType()));
 
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
@@ -151,7 +207,6 @@ void dSettings::updateWidgets()
         ui->saveButton->show();
         ui->nameSubMenu->setText("<html><head/><body><p>НАСТРОЙКА<br>УСТАВОК</p></body></html>");
         h = 72;
-
     }
     else
     {
@@ -227,10 +282,16 @@ void dSettings::updateGraf(int period)
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-    // авто масшабирование
-    ui->customPlot->rescaleAxes();
-    ui->customPlot->replot();
-    ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
+    if((!Y_coordinates_Chanel_1_archive.isEmpty()) &&\
+            !Y_coordinates_Chanel_2_archive.isEmpty() &&\
+            !Y_coordinates_Chanel_3_archive.isEmpty() &&\
+            !Y_coordinates_Chanel_4_archive.isEmpty())
+    {
+        // авто масшабирование
+        ui->customPlot->rescaleAxes();
+        ui->customPlot->replot();
+        ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
+    }
 }
 
 void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki, int num)
@@ -244,7 +305,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     channel = listChannels.at(num-1);
     ustavka = listUstavok.at(num-1);
 
-    ui->typeSignal->setCurrentIndex(channel->GetSignalType());
+    ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(channel->GetSignalType()));
     ui->nameChannel->setText(channel->GetChannelName().toUtf8());
     ui->scaleUp->setValue(channel->GetHigherMeasureLimit());
     ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
@@ -255,6 +316,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->dempfer->setValue(channel->GetDempherValue());
     ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
     ui->sensorDiapazon->setCurrentIndex(channel->GetDiapason());
+    ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
 
     //параметры уставок
     ui->ustavkaVol->setValue(ustavka->getHiStateValue());
@@ -325,7 +387,7 @@ void dSettings::updateBar()
 void dSettings::saveParam()
 {
     channel->SetChannelName(ui->nameChannel->text().toUtf8());
-    channel->SetSignalType(ui->typeSignal->currentIndex());
+    channel->SetSignalType(tableSignalTypes[ui->typeSignal->currentIndex()].st);
     channel->SetHigherMeasureLimit(ui->scaleUp->value());
     channel->SetLowerMeasureLimit(ui->scaleDown->value());
     channel->SetUnitsName(ui->unit->text().toUtf8());
@@ -333,6 +395,7 @@ void dSettings::saveParam()
     channel->SetDempher(ui->dempfer->value());
     channel->SetRegistrationType(ui->typeReg->currentIndex());
     channel->SetDiapason(ui->sensorDiapazon->currentIndex());
+    channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
 
     ustavka->setUstavka(numChannel, \
                         ui->ustavkaVol->value(), \
@@ -408,4 +471,96 @@ bool dSettings::eventFilter(QObject *object, QEvent *event)
     }
 
     return QObject::eventFilter(object, event);
+}
+
+void dSettings::on_typeSignal_currentIndexChanged(int index)
+{
+    updateUiSignalTypeParam(index);
+}
+
+/*
+ * Обновление элементов UI по
+ */
+void dSettings::updateUiSignalTypeParam(int index)
+{
+    if(index == NoSignal)
+    {
+        ui->sensorDiapazon->hide();
+        ui->sensorShema->hide();
+        ui->labelDiapazon->hide();
+        ui->labelShema->hide();
+    }
+    else if(index == Current)
+    {
+        ui->sensorDiapazon->hide();
+        ui->sensorShema->hide();
+        ui->labelDiapazon->hide();
+        ui->labelShema->hide();
+    }
+    else  if(index == Voltage)
+    {
+        ui->sensorDiapazon->clear();
+        ui->sensorDiapazon->addItems(StringListNapryagenie);
+        ui->sensorDiapazon->show();
+        ui->labelDiapazon->show();
+        ui->sensorShema->hide();
+        ui->labelShema->hide();
+    }
+    else  if(index == TermoCouple)
+    {
+        ui->sensorDiapazon->clear();
+        ui->sensorDiapazon->addItems(StringListTC);
+        ui->sensorDiapazon->show();
+        ui->labelDiapazon->show();
+        ui->sensorShema->hide();
+        ui->labelShema->hide();
+    }
+    else  if(index == TermoResistance)
+    {
+        ui->sensorDiapazon->clear();
+        ui->sensorDiapazon->addItems(StringListRTD);
+        ui->sensorDiapazon->show();
+        ui->labelDiapazon->show();
+        ui->sensorShema->show();
+        ui->labelShema->show();
+    }
+}
+
+/*
+ * Получение индекса в таблице по типу сигнала
+ */
+int dSettings::getIndexSignalTypeTable(int st)
+{
+    for(int i = 0; i < sizeof(tableSignalTypes)/sizeof(typeTableSignalTypes); i++)
+    {
+        if(tableSignalTypes[i].st == st)
+            return i;
+    }
+    return 0;
+}
+
+int dSettings::sensorShemaFromUiShemaIndex(int index)
+{
+    if(index == 0)          //3-х проводная схема подключения
+    {
+        return 1;
+    }
+    else if(index == 1)     //4-х проводная схема подключения
+    {
+        return 2;
+    }
+    return 3;
+}
+
+int dSettings::indexUiShemaFromSensorShema(int sh)
+{
+    if(sh == 1)          //3-х проводная схема подключения
+    {
+        return 0;
+    }
+    else if(sh == 2)     //4-х проводная схема подключения
+    {
+        return 1;
+    }
+    return 0;
 }

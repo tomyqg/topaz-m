@@ -864,13 +864,17 @@ void MainWindow::PaintPolarDiagramm()
     PolarChartPointsChannel4.append(NewPolarPointChannel4);
     
     painter.setPen(QPen(color1, 2));
-    painter.drawPolyline(PolarChartPointsChannel1);
+    if(PolarChartPointsChannel1.size() > 1)
+        painter.drawPolyline(PolarChartPointsChannel1);
     painter.setPen(QPen(color2, 2));
-    painter.drawPolyline(PolarChartPointsChannel2);
+    if(PolarChartPointsChannel2.size() > 1)
+        painter.drawPolyline(PolarChartPointsChannel2);
     painter.setPen(QPen(color3, 2));
-    painter.drawPolyline(PolarChartPointsChannel3);
+    if(PolarChartPointsChannel3.size() > 1)
+        painter.drawPolyline(PolarChartPointsChannel3);
     painter.setPen(QPen(color4, 2));
-    painter.drawPolyline(PolarChartPointsChannel4);
+    if(PolarChartPointsChannel4.size() > 1)
+        painter.drawPolyline(PolarChartPointsChannel4);
 
     painter.resetTransform(); // все что дальше - не поворачивается динамически
 
@@ -933,24 +937,25 @@ void MainWindow::PaintPolarDiagramm()
 
 void MainWindow::PaintOnWidget()
 {
-    switch( Options::GetCurrentDisplayParametr())
+    switch(systemOptions.display)
     {
-    case Options::Cyfra:
+    case cSystemOptions::Cyfra:
         PaintCyfrasFullScreen();
         break;
-    case Options::TrendsCyfra:
+    case cSystemOptions::TrendsCyfra:
         PaintCyfrasRight();
         break;
-    case Options::Trends:
+    case cSystemOptions::Trends:
         PaintStatesAndAlertsAtTop();
         break;
-    case Options::TrendsCyfraBars:
+    case cSystemOptions::TrendsCyfraBars:
         PaintStatesAndAlertsAtTop();
         break;
-    case Options::BarsCyfra:
+    case cSystemOptions::BarsCyfra:
         PaintStatesAndAlertsAtTop();
         break;
-    case Options::Polar:
+    case cSystemOptions::PolarBars:
+    case cSystemOptions::PolarCyfra:
 //        PaintStatesAndAlertsAtTop();
         PaintPolarDiagramm();
         break;

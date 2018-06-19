@@ -217,9 +217,12 @@ void MainWindow::MainWindowInitialization()
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
     // /Инициализация потока Worker ---------------------
 
-    Options op;
-    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
-    op.deleteLater();
+//    Options op;
+//    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
+//    op.deleteLater();
+
+    //Получение системных настроек из файла
+    updateSystemOptions();
 
     // сразу активируем отладку по USB
     QProcess process;
@@ -1023,7 +1026,7 @@ void MainWindow::sendConfigChannelsToSlave()
         }
         else if(ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
         {
-            tr.paramA12[0] = 3;
+            tr.paramA12[0] = (uint16_t)ChannelsObjectsList.at(i)->getShema();
             tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
         }
         else if((ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))

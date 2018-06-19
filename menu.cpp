@@ -1,7 +1,9 @@
 #include "menu.h"
 #include "ui_menu.h"
 #include "defines.h"
-
+#include "filemanager.h"
+#include "keyboard.h"
+#include <options.h>
 
 #define HEIGHT 768
 #define WIDTH 1024
@@ -10,11 +12,15 @@
 extern int dateindex;
 extern int timeindex;
 extern QStringList datestrings, timestrings;
+extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+
 
 dMenu::dMenu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dMenu)
 {
+
+
     ui->setupUi(this);
 
     ui->saveButton->setColorText(ColorBlue);
@@ -29,6 +35,9 @@ dMenu::dMenu(QWidget *parent) :
         button->setColorBg(ColorButtonNormal);
         button->setAlignLeft();
     }
+
+    //фильтр для поля редактирования даты
+    ui->dateEdit->installEventFilter(this);
 
     ui->load->setHidden(true);
     mo.setFileName(pathtoloadgif);
@@ -48,8 +57,24 @@ dMenu::dMenu(QWidget *parent) :
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
 
+    updateSystemOptions();
 
+}
 
+bool dMenu::eventFilter(QObject *object, QEvent *event)
+{
+    if ( (event->type() == QEvent::MouseButtonRelease) && \
+         (object->property("enabled").toString() == "true") && \
+         (QString::fromLatin1(object->metaObject()->className()) == "QDateTime") )
+    {
+//        QCalendarWidget cw;
+//        cw.show();
+        Options::olderprop = object->property("date").toString();
+        keyboard kb(this);
+        kb.setModal(true);
+        kb.exec();
+    }
+    return QObject::eventFilter(object, event);
 }
 
 dMenu::~dMenu()
@@ -67,8 +92,21 @@ void dMenu::on_saveButton_clicked()
     ui->load->setHidden(false);
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
     timerLoad.start(1000);
-    // ... тут вставить запись файла в потоке ... //
+    //  запись файла //
+    sysOptions.arrows = ui->arrowscheckBox->checkState();
+    sysOptions.display = ui->modeGraf->currentIndex();
+    sysOptions.display += (ui->modeBar->currentIndex() << 2);
+    cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
+    emit saveButtonSignal();
     //Окно закроется по сигналу таймаута
+}
+
+void dMenu::updateSystemOptions()
+{
+    cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &sysOptions);
+    ui->arrowscheckBox->setChecked(sysOptions.arrows);
+    ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
+    ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
 }
 
 void dMenu::timeoutLoad()
@@ -165,6 +203,7 @@ void dMenu::openSettingsChannel(int num, int page)
     dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
+    //sendConfigChannelsToSlave();
 
 }
 
@@ -235,6 +274,13 @@ void dMenu::addChannels(QList<ChannelOptions *> channels, QList<Ustavka*> ustavk
     }
 }
 
+void dMenu::selectPageWork()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->nameSubMenu->setText("РАБОТА");
+    ui->frameNameSubMenu->setHidden(false);
+}
+
 void dMenu::on_bUstavka_1_clicked()
 {
     openSettingsChannel(1, 3);
@@ -259,6 +305,56 @@ void dMenu::on_bBackDateTime_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
     ui->nameSubMenu->setText("СИСТЕМА");
+}
+
+void dMenu::on_bExpert_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(10);
+    ui->nameSubMenu->setText("ЭКСПЕРТ");
+    ui->frameNameSubMenu->setHidden(false);
+}
+
+void dMenu::on_bBackExpert_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->frameNameSubMenu->setHidden(true);
+}
+
+void dMenu::on_bAnaliz_clicked()
+{
+    UpdateAnalyze();
+    ui->stackedWidget->setCurrentIndex(11);
+    ui->nameSubMenu->setText("АНАЛИЗ");
+}
+
+void dMenu::on_bBackExpert_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->nameSubMenu->setText("РАБОТА");
+}
+
+void dMenu::on_bOptions_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(12);
+    ui->nameSubMenu->setText("ОПЦИИ");
+}
+
+void dMenu::on_bBackSystemOptions_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    ui->nameSubMenu->setText("СИСТЕМА");
+}
+
+void dMenu::on_bModeDiagram_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(13);
+    ui->nameSubMenu->setText("ОТОБРАЖЕНИЕ");
+}
+
+void dMenu::on_bBackOtobrazhenie_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->nameSubMenu->setText("РАБОТА");
 }
 
 void dMenu::on_bEditDataTime_clicked()
@@ -299,3 +395,68 @@ void dMenu::on_bBackDateTimeSet_clicked()
     ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
 
 }
+
+
+
+void dMenu::on_bResetToDefault_clicked()
+{
+    QProcess process;
+    //копируем файлы настроек каналов в рабочий каталог
+    process.startDetached("cp -a /opt/Defaults/. /opt/");
+}
+
+
+
+
+
+void dMenu::UpdateAnalyze()
+{
+    double averagechannel_1 , averagechannel_2 , averagechannel_3,averagechannel_4 , sum;
+
+    averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
+
+    averagechannel_1 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_1_archive);
+    averagechannel_2 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_2_archive);
+    averagechannel_3 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_3_archive);
+    averagechannel_4 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_4_archive);
+
+    double minimumchannel_1 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1_archive);
+    double maximumchannel_1 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1_archive);
+
+    double minimumchannel_2 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2_archive);
+    double maximumchannel_2 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2_archive);
+
+    double minimumchannel_3 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3_archive);
+    double maximumchannel_3 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3_archive);
+
+    double minimumchannel_4 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4_archive);
+    double maximumchannel_4 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4_archive);
+
+    ui->analizenameChannel_1->setText( listChannels.at(0)->GetChannelName() \
+                                        + " [" + listChannels.at(0)->GetUnitsName() + "]" );
+    ui->analizenameChannel_2->setText( listChannels.at(1)->GetChannelName() \
+                                       + " [" + listChannels.at(1)->GetUnitsName() + "]" );
+    ui->analizenameChannel_3->setText( listChannels.at(2)->GetChannelName() \
+                                       + " [" + listChannels.at(2)->GetUnitsName() + "]" );
+    ui->analizenameChannel_4->setText( listChannels.at(3)->GetChannelName() \
+                                       + " [" + listChannels.at(3)->GetUnitsName() + "]" );
+
+    ui->analizeavgvaluechannel_1->setText(QString::number(averagechannel_1, 'f', 2));
+    ui->analizeavgvaluechannel_2->setText(QString::number(averagechannel_2, 'f', 2));
+    ui->analizeavgvaluechannel_3->setText(QString::number(averagechannel_3, 'f', 2));
+    ui->analizeavgvaluechannel_4->setText(QString::number(averagechannel_4, 'f', 2));
+
+    ui->analizeminvaluechannel_1->setText(QString::number(minimumchannel_1));
+    ui->analizeminvaluechannel_2->setText(QString::number(minimumchannel_2));
+    ui->analizeminvaluechannel_3->setText(QString::number(minimumchannel_3));
+    ui->analizeminvaluechannel_4->setText(QString::number(minimumchannel_4));
+
+    ui->analizemaxvaluechannel_1->setText(QString::number(maximumchannel_1));
+    ui->analizemaxvaluechannel_2->setText(QString::number(maximumchannel_2));
+    ui->analizemaxvaluechannel_3->setText(QString::number(maximumchannel_3));
+    ui->analizemaxvaluechannel_4->setText(QString::number(maximumchannel_4));
+}
+
+
+
+

@@ -30,6 +30,7 @@ private:
     QMovie mo;
     QTimer tUpdateTime;
     QTimer tUpdateBar;
+    QStringList StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
     void updateGraf(int period);
     QList<ChannelOptions *> listChannels;
     QList<Ustavka *> listUstavok;
@@ -38,6 +39,11 @@ private:
     ChannelOptions * channel;   //канал с которым сейчас работаем
     Ustavka * ustavka;          //уставка канала с которым работаем
     void addChannel(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki, int num);
+    int getIndexSignalTypeTable(int st);
+    void updateUiSignalTypeParam(int index);
+    int sensorShemaFromUiShemaIndex(int index);
+    int indexUiShemaFromSensorShema(int sh);
+
 
 private slots:
     void on_exitButton_clicked();
@@ -51,6 +57,7 @@ private slots:
     void on_buttonBackUstavki_clicked();
     void saveParam();
     bool eventFilter(QObject* watched, QEvent* event);
+    void on_typeSignal_currentIndexChanged(int index);
 };
 
 #endif // SETTINGS_H

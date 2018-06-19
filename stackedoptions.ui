@@ -21,12 +21,12 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>1151</width>
+     <width>981</width>
      <height>621</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>24</number>
    </property>
    <widget class="QWidget" name="Menu">
     <widget class="QPushButton" name="pushButton">
@@ -10790,9 +10790,9 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

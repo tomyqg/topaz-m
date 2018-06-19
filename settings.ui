@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>3</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -512,9 +512,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-95</y>
+                     <y>-156</y>
                      <width>564</width>
-                     <height>547</height>
+                     <height>608</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout">
@@ -549,6 +549,64 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                       </property>
                       <property name="text">
                        <string>ТИП</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_6">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НАИМЕНОВАНИЕ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QLineEdit" name="nameChannel">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(21, 159, 133);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>I</string>
+                      </property>
+                      <property name="maxLength">
+                       <number>2</number>
+                      </property>
+                      <property name="cursorPosition">
+                       <number>1</number>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -638,44 +696,8 @@ QComboBox::drop-down {
                       </item>
                      </widget>
                     </item>
-                    <item row="1" column="1">
-                     <widget class="QLineEdit" name="nameChannel">
-                      <property name="maximumSize">
-                       <size>
-                        <width>169</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(21, 159, 133);
-color: rgb(255, 255, 255);
-border-radius: 0px;</string>
-                      </property>
-                      <property name="inputMask">
-                       <string/>
-                      </property>
-                      <property name="text">
-                       <string>I</string>
-                      </property>
-                      <property name="maxLength">
-                       <number>2</number>
-                      </property>
-                      <property name="cursorPosition">
-                       <number>1</number>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_6">
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_10">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -692,29 +714,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>НАИМЕНОВАНИЕ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="label_7">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ВЕРХНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>НИЖНИЙ ПРЕДЕЛ ШКАЛЫ</string>
                       </property>
                      </widget>
                     </item>
@@ -754,8 +754,8 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="3" column="0">
-                     <widget class="QLabel" name="label_10">
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_7">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -772,7 +772,62 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>НИЖНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>ВЕРХНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="QDoubleSpinBox" name="scaleDown">
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="minimum">
+                       <double>-1000000000000.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>-12.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_11">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
                       </property>
                      </widget>
                     </item>
@@ -809,61 +864,6 @@ border-radius: 0px;</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="4" column="0">
-                     <widget class="QLabel" name="label_11">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="1">
-                     <widget class="QDoubleSpinBox" name="scaleDown">
-                      <property name="maximumSize">
-                       <size>
-                        <width>169</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                      <property name="minimum">
-                       <double>-1000000000000.000000000000000</double>
-                      </property>
-                      <property name="maximum">
-                       <double>1000000000000000000000.000000000000000</double>
-                      </property>
-                      <property name="value">
-                       <double>-12.000000000000000</double>
                       </property>
                      </widget>
                     </item>
@@ -953,28 +953,6 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="7" column="0">
-                     <widget class="QLabel" name="label_17">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ТИП РЕГИСТРАЦИИ</string>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="6" column="1">
                      <widget class="QSpinBox" name="dempfer">
                       <property name="maximumSize">
@@ -996,6 +974,28 @@ border-radius: 0px;</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="label_17">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ТИП РЕГИСТРАЦИИ</string>
                       </property>
                      </widget>
                     </item>
@@ -1085,7 +1085,7 @@ QComboBox::drop-down {
                      </widget>
                     </item>
                     <item row="8" column="0">
-                     <widget class="QLabel" name="label_18">
+                     <widget class="QLabel" name="labelDiapazon">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1193,6 +1193,97 @@ QComboBox{
                         <string>±30 В</string>
                        </property>
                       </item>
+                     </widget>
+                    </item>
+                    <item row="9" column="1">
+                     <widget class="QComboBox" name="sensorShema">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox::drop-down {
+	width:30px;
+ }
+QComboBox{
+background-color: rgb(91, 119, 143);
+color: rgb(255, 255, 255);
+border-radius: 0px;
+}</string>
+                      </property>
+                      <property name="currentText">
+                       <string>3 ПРОВОДА</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>3 ПРОВОДА</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>4 ПРОВОДА</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="9" column="0">
+                     <widget class="QLabel" name="labelShema">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>СХЕМА ИЗМЕРЕНИЯ</string>
+                      </property>
                      </widget>
                     </item>
                    </layout>
@@ -2313,8 +2404,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-400</y>
-                     <width>761</width>
+                     <y>0</y>
+                     <width>757</width>
                      <height>852</height>
                     </rect>
                    </property>

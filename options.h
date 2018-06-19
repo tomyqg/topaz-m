@@ -36,14 +36,17 @@ public:
     static int GetCurrentDisplayParametr() { return DisplayParametr;}
 
     enum DisplayParametrEnum {
-        Trends = 0x01 ,
-        Polar = 0x02 ,
-        Bars = 0x03 ,
-        TrendsBars = 0x04,
-        Cyfra = 0x05,
-        TrendsCyfra = 0x06,
-        BarsCyfra = 0x07,
-        TrendsCyfraBars = 0x08
+        Cyfra = 0x00,
+        TrendsCyfra = 0x01,
+        PolarCyfra = 0x02,
+        Bars = 0x04,
+        TrendsBars = 0x05,
+        PolarBars = 0x06,
+        //исключить
+        Trends = 0xF1,
+        Polar = 0xF2,
+        BarsCyfra = 0xF7,
+        TrendsCyfraBars = 0xF8
     };
 
 private slots:

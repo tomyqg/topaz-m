@@ -6,6 +6,7 @@
 #include "mathresolver.h"
 #include "Channels/channelOptions.h"
 #include "uartdriver.h"
+#include "filemanager.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -59,7 +60,15 @@ void MainWindow::updateDateLabel()
 
 void MainWindow::on_WorkButton_clicked()
 {
-    OpenWorkWindow();
+//    OpenWorkWindow();
+    dMenu * menu = new dMenu();
+    menu->addChannels(listCh, ustavkaObjectsList);
+    connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    menu->selectPageWork();
+    menu->exec();
+    disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    menu->deleteLater();
+    sendConfigChannelsToSlave();
 }
 
 void MainWindow::on_ArchiveButton_clicked()
@@ -109,8 +118,16 @@ void MainWindow::on_pushButton_2_clicked()
 
     dMenu * menu = new dMenu();
     menu->addChannels(listCh, ustavkaObjectsList);
+    connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->exec();
+    disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->deleteLater();
+    sendConfigChannelsToSlave();
+}
+
+void MainWindow::updateSystemOptions()
+{
+    cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &systemOptions);
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -379,5 +396,6 @@ void MainWindow::openSettingsChannel(int num)
     dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, num);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
-
+    sendConfigChannelsToSlave();
 }
+

@@ -5,7 +5,8 @@
 #include <QWidget>
 #include <QMovie>
 #include <QTimer>
-#include "settings.h"
+#include <settings.h>
+#include <systemoptions.h>
 
 namespace Ui {
 class dMenu;
@@ -20,6 +21,8 @@ public:
     ~dMenu();
     QTimer timerLoad;
     void addChannels(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki);
+    void selectPageWork();
+    bool eventFilter(QObject* watched, QEvent* event);
 
 public slots:
     void openSettingsChannel(int num, int page = 0);
@@ -69,6 +72,27 @@ private:
     dSettings * dialogSetingsChannel;
     QList<ChannelOptions *> listChannels;
     QList<Ustavka *> listUstavok;
+    void UpdateAnalyze();
+    void updateSystemOptions();
+    cSystemOptions sysOptions;
+
+private slots:
+    void on_bResetToDefault_clicked();
+    void on_bExpert_clicked();
+    void on_bBackExpert_clicked();
+    void on_bAnaliz_clicked();
+    void on_bBackExpert_2_clicked();
+
+    void on_bOptions_clicked();
+
+    void on_bBackSystemOptions_clicked();
+
+    void on_bModeDiagram_clicked();
+
+    void on_bBackOtobrazhenie_clicked();
+
+signals:
+    void saveButtonSignal();
 };
 
 #endif // MENU_H
