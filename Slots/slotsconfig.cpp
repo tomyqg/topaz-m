@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QTimer>
 #include "slotsconfig.h"
-#include "../registermap.h"
+#include "registersmap.h"
 
 
 cSlotsConfig::cSlotsConfig(QObject *parent) : QObject(parent)
@@ -61,7 +61,7 @@ void cSlotsConfig::updConfig()
     int updateInterval = UpdateConfigTimer;
     Transaction tr(Transaction::R);
     tr.dir = Transaction::R;
-    tr.offset = RegisterMap::getOffsetByName("deviceType");
+    tr.offset = cRegistersMap::getOffsetByName("deviceType");
     if(stateUpdConf != 0)
     {
         // конфигурация слота не была завершена за выделеное время
@@ -89,11 +89,11 @@ void cSlotsConfig::updConfig()
 void cSlotsConfig::receiveConf(Transaction tr)
 {
     Transaction trans = tr;
-    QString paramName = RegisterMap::getNameByOffset(trans.offset);
+    QString paramName = cRegistersMap::getNameByOffset(trans.offset);
     if((paramName == "deviceType") && (curSlot == trans.slave))
     {
         int count = addSlot(trans.slave, trans.volInt);
-        trans.offset = RegisterMap::getOffsetByName("deviceStatus");
+        trans.offset = cRegistersMap::getOffsetByName("deviceStatus");
 #ifdef DEBAG_SLOT_CONFIG
         qDebug() << "SlotConfig SLOT: slave" << trans.slave \
                  << "deviceType" << trans.offset << trans.volInt;
@@ -112,21 +112,21 @@ void cSlotsConfig::receiveConf(Transaction tr)
             qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 1 configs" ;
 #endif
             // статусы каналов
-            trans.offset = RegisterMap::getOffsetByName("chan0Status");
+            trans.offset = cRegistersMap::getOffsetByName("chan0Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             // поддерживаемые типы сигналов
-            trans.offset = RegisterMap::getOffsetByName("chan0SupportedSignals");
+            trans.offset = cRegistersMap::getOffsetByName("chan0SupportedSignals");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             // установленный тип сигнала
-            trans.offset = RegisterMap::getOffsetByName("chan0SignalType");
+            trans.offset = cRegistersMap::getOffsetByName("chan0SignalType");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             // конфигурация измерительного канала
-            trans.offset = RegisterMap::getOffsetByName("chan0AdditionalParameter1");
+            trans.offset = cRegistersMap::getOffsetByName("chan0AdditionalParameter1");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan0AdditionalParameter2");
+            trans.offset = cRegistersMap::getOffsetByName("chan0AdditionalParameter2");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             // Измеренная температура холодного спая
-            trans.offset = RegisterMap::getOffsetByName("chan0CjValue");
+            trans.offset = cRegistersMap::getOffsetByName("chan0CjValue");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
 
             // берём больший запас времени для получения настроек каналов
@@ -144,17 +144,17 @@ void cSlotsConfig::receiveConf(Transaction tr)
 #ifdef DEBAG_SLOT_CONFIG
             qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 2 configs" ;
 #endif
-            trans.offset = RegisterMap::getOffsetByName("chan1Status");
+            trans.offset = cRegistersMap::getOffsetByName("chan1Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan1SupportedSignals");
+            trans.offset = cRegistersMap::getOffsetByName("chan1SupportedSignals");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan1SignalType");
+            trans.offset = cRegistersMap::getOffsetByName("chan1SignalType");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan1AdditionalParameter1");
+            trans.offset = cRegistersMap::getOffsetByName("chan1AdditionalParameter1");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan1AdditionalParameter2");
+            trans.offset = cRegistersMap::getOffsetByName("chan1AdditionalParameter2");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan1CjValue");
+            trans.offset = cRegistersMap::getOffsetByName("chan1CjValue");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             timerUpdConfig->setInterval(TimeReadChannelConf);
         }
@@ -170,17 +170,17 @@ void cSlotsConfig::receiveConf(Transaction tr)
 #ifdef DEBAG_SLOT_CONFIG
             qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 3 configs" ;
 #endif
-            trans.offset = RegisterMap::getOffsetByName("chan2Status");
+            trans.offset = cRegistersMap::getOffsetByName("chan2Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan2SupportedSignals");
+            trans.offset = cRegistersMap::getOffsetByName("chan2SupportedSignals");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan2SignalType");
+            trans.offset = cRegistersMap::getOffsetByName("chan2SignalType");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan2AdditionalParameter1");
+            trans.offset = cRegistersMap::getOffsetByName("chan2AdditionalParameter1");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan2AdditionalParameter2");
+            trans.offset = cRegistersMap::getOffsetByName("chan2AdditionalParameter2");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan2CjValue");
+            trans.offset = cRegistersMap::getOffsetByName("chan2CjValue");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             timerUpdConfig->setInterval(TimeReadChannelConf);
         }
@@ -196,17 +196,17 @@ void cSlotsConfig::receiveConf(Transaction tr)
 #ifdef DEBAG_SLOT_CONFIG
             qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 4 configs" ;
 #endif
-            trans.offset = RegisterMap::getOffsetByName("chan3Status");
+            trans.offset = cRegistersMap::getOffsetByName("chan3Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan3SupportedSignals");
+            trans.offset = cRegistersMap::getOffsetByName("chan3SupportedSignals");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan3SignalType");
+            trans.offset = cRegistersMap::getOffsetByName("chan3SignalType");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan3AdditionalParameter1");
+            trans.offset = cRegistersMap::getOffsetByName("chan3AdditionalParameter1");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan3AdditionalParameter2");
+            trans.offset = cRegistersMap::getOffsetByName("chan3AdditionalParameter2");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("chan3CjValue");
+            trans.offset = cRegistersMap::getOffsetByName("chan3CjValue");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             timerUpdConfig->setInterval(TimeReadChannelConf);
         }
@@ -220,9 +220,9 @@ void cSlotsConfig::receiveConf(Transaction tr)
                      << trans.offset << trans.volInt << trans.volFlo;
 #endif
             // запрос температуры и напряжения на плате на последок
-            trans.offset = RegisterMap::getOffsetByName("onBoardTemp");
+            trans.offset = cRegistersMap::getOffsetByName("onBoardTemp");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
-            trans.offset = RegisterMap::getOffsetByName("onBoardVoltage");
+            trans.offset = cRegistersMap::getOffsetByName("onBoardVoltage");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             timerUpdConfig->setInterval(TimeReadChannelConf);
         }

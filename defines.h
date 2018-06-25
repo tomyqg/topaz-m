@@ -21,9 +21,10 @@
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
 #define pathtofiles  "/opt/"
+#define pathtodirarchive "/opt/archive/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
 #define pathtoarchive  "/opt/archive.txt"
-#define pathtoarchivedata  "/opt/archive.dat"
+#define pathtoarchivedata  "/opt/archive/archive.dat"
 #define pathtooptions  "/opt/options.txt"
 #define pathtolog  "/opt/Log/"
 #define pathtomessages  "/opt/Log.txt"
@@ -48,13 +49,14 @@
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"
+#define pathtodirarchive "C:/Work/archive/"
 #define pathtosystemoptions  "C:/Work/systemoptions.txt"
 #define pathtooptions  "C:/Work/options.txt"
 #define pathtolog  "C:/Work/txtes/"
 #define pathtomodbusconfigfile  "C:/Work/MODBusConfigFile.txt"
 #define pathtomessages  "C:/Work/Log.txt"
 #define pathtoarchive  "C:/Work/archive.txt"
-#define pathtoarchivedata  "C:/Work/archive.dat"
+#define pathtoarchivedata  "C:/Work/archive/archive.dat"
 #define pathtologotip  "C:/Work/logotpchel.png"
 #define pathtoqrcodetip "C:/Work/qr-code.jpg"
 #define pathtohilimico  "C:/Work/hilim.png"

@@ -38,11 +38,14 @@ const typeTableSignalTypes tableSignalTypes[] = {
 
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
+
 dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, int num, int page, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dSettings)
 {
     ui->setupUi(this);
+
+    arch = NULL;
 
     //списки типов датчиков
     StringListNapryagenie.clear();
@@ -142,6 +145,12 @@ dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, i
         QDoubleSpinBox *spbox = SpinBox.at(i);
         spbox->installEventFilter(this);
     }
+
+    X_Coordinates = X_Coordinates_archive;
+    Y_coordinates_Chanel_1 = Y_coordinates_Chanel_1_archive;
+    Y_coordinates_Chanel_2 = Y_coordinates_Chanel_2_archive;
+    Y_coordinates_Chanel_3 = Y_coordinates_Chanel_3_archive;
+    Y_coordinates_Chanel_4 = Y_coordinates_Chanel_4_archive;
 }
 
 dSettings::~dSettings()
@@ -231,7 +240,39 @@ void dSettings::on_period_currentIndexChanged(int index)
     //                 1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
     int periods[10] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
     assert((sizeof(periods) / sizeof(int)) >= ui->period->count());
-    int archivePeriod = ValuesUpdateTimer * periods[index];
+    int archivePeriod = periods[index]; //число секундных точек отсчёта
+
+//    QVector<QDateTime> Dates;
+//    QVector<QString> Labels;
+    QDateTime curTime = QDateTime::currentDateTime();
+    QDateTime firstTime = curTime.addSecs(-archivePeriod);
+
+    if(archivePeriod < 86400) // до 10 часов можно отображать посекундно
+    {
+        X_Coordinates.resize(0);
+        for(int i = 0; i < archivePeriod; i++)
+        {
+            //            Dates.append(firstTime.addSecs(i));
+            //            Labels.append(Dates.at(i).toString("hh:mm:ss"));
+            X_Coordinates.append(i);
+        }
+        Y_coordinates_Chanel_1 = arch->getVector(1, archivePeriod);
+
+    }
+    else //более 10 часов показыват в 10 минутных точках
+    {
+
+    }
+
+    updateGraf(archivePeriod);
+
+//    ui->customPlot->yAxis->setRange(-XRange, XRange);
+//    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
+//    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
+//    ui->customPlot->xAxis->setAutoTickLabels(false);
+//    ui->customPlot->xAxis->setTickVectorLabels(Labels);
+
+//    ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_1);
 }
 
 void dSettings::updateGraf(int period)
@@ -246,7 +287,7 @@ void dSettings::updateGraf(int period)
     ui->customPlot->graph()->setName("graph #1");
 
     if(!Y_coordinates_Chanel_1_archive.isEmpty())
-    ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_1_archive);
+    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
 
     // add the arrow:

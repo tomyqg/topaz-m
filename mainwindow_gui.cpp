@@ -75,6 +75,7 @@ void MainWindow::on_ArchiveButton_clicked()
 {
 //    OpenArchiveWindow();
     dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2);
+    dialogSetingsChannel->addArch(arch);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }
@@ -399,3 +400,10 @@ void MainWindow::openSettingsChannel(int num)
     sendConfigChannelsToSlave();
 }
 
+
+void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+{
+    channel1.SetCurrentChannelValue(arg1);
+    ui->wBar_1->setVolue(arg1);
+    ui->widgetVol1->setVol(arg1);
+}

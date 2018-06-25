@@ -23,7 +23,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers/ Communicator/ Grafika/
+        Drivers/ Communicator/ Grafika/ LookupTable
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -45,7 +45,6 @@ SOURCES += main.cpp \
     worker.cpp \
     3rdparty/libmodbus/src/modbus-data.c \
     3rdparty/libmodbus/src/modbus-rtu.c \
-    3rdparty/libmodbus/src/modbus-tcp.c \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
     stackedoptions.cpp \
@@ -71,7 +70,9 @@ SOURCES += main.cpp \
     Grafika/vol.cpp \
     Alarms/alarm.cpp \
     filemanager.cpp \
-    systemoptions.cpp
+    systemoptions.cpp \
+    LookupTable/lookupTables.c \
+    LookupTable/registersmap.cpp \
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -156,7 +157,9 @@ HEADERS  += mainwindow.h \
     Grafika/vol.h \
     Alarms/alarm.h \
     filemanager.h \
-    systemoptions.h
+    systemoptions.h \
+    LookupTable/lookupTables.h \
+    LookupTable/registersmap.h
 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

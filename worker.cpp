@@ -5,6 +5,7 @@
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
 #include "registermap.h"
+//#include "registersmap.h"
 #include <QDebug>
 #include <QList>
 #include <QQueue>

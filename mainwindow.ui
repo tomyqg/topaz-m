@@ -193,7 +193,7 @@ color : white;</string>
              </size>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="wGrafics">
              <widget class="QCustomPlot" name="customPlot" native="true">
@@ -324,6 +324,9 @@ color : white;</string>
               <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="currentIndex">
+             <number>1</number>
             </property>
             <widget class="QWidget" name="pageBars">
              <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -527,7 +530,7 @@ color : white;</string>
              <property name="spacing">
               <number>0</number>
              </property>
-             <item row="1" column="2">
+             <item row="1" column="3">
               <spacer name="horizontalSpacer_7">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -540,7 +543,7 @@ color : white;</string>
                </property>
               </spacer>
              </item>
-             <item row="0" column="1">
+             <item row="0" column="2">
               <spacer name="verticalSpacer">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -553,7 +556,7 @@ color : white;</string>
                </property>
               </spacer>
              </item>
-             <item row="1" column="0">
+             <item row="1" column="1">
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -566,7 +569,7 @@ color : white;</string>
                </property>
               </spacer>
              </item>
-             <item row="1" column="1">
+             <item row="1" column="2">
               <widget class="QFrame" name="frame_2">
                <property name="minimumSize">
                 <size>
@@ -664,6 +667,34 @@ background-clip:padding;</string>
                <zorder>logo</zorder>
               </widget>
              </item>
+             <item row="1" column="0">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QSpinBox::up-button{
+    width: 37px;
+}
+
+QSpinBox::down-button {
+    width: 37px;
+}</string>
+               </property>
+               <property name="minimum">
+                <double>-100.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>100.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -751,7 +782,8 @@ border: 0px;</string>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
 background-color: #2c3d4d;
-border: 0px;</string>
+border: 0px;
+</string>
          </property>
          <property name="text">
           <string>АРХИВ</string>
@@ -987,12 +1019,6 @@ color : white;</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>wVolueBar</class>
    <extends>QWidget</extends>
    <header>voluebar.h</header>
@@ -1000,6 +1026,12 @@ color : white;</string>
    <slots>
     <signal>clicked()</signal>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>wVol</class>

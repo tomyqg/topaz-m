@@ -72,9 +72,9 @@ void wVol::changeNum(int num)
 void wVol::setVol(double vol)
 {
     int prec;
-    if(vol >= 1000) prec = 0;
-    else if(vol >= 100) prec = 1;
-    else if(vol >= 10) prec = 2;
-    else prec = 3;
+    if(vol >= 1000) prec = 2;
+    else if(vol >= 100) prec = 3;
+    else if(vol >= 10) prec = 4;
+    else prec = 5;
     ui->labelVol->setText(QString::number(vol, 'f', prec));
 }

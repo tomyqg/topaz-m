@@ -10,7 +10,7 @@
 #include "worker.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
-#include "registermap.h"
+#include "registersmap.h"
 #include <filemanager.h>
 
 #include <QPixmap>
@@ -48,6 +48,7 @@ int timeindex;
 QStringList datestrings, timestrings;
 
 extern MainWindow * globalMainWin;
+//extern tDeviceBasicParams g_deviceDataStorage;
 
 void MainWindow::MainWindowInitialization()
 {
@@ -271,7 +272,7 @@ void MainWindow::MainWindowInitialization()
 //    commRun->start(TIMEOUT_COMMUNICATOR_MS);
 #endif
 
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -418,13 +419,13 @@ void MainWindow::sendRelayStateToWorker(int relay, bool state)
     }
     //---------------------------------------------
 
-    uint16_t offset = getDevOffsetByChannel(devRelay>>2, relayOffset);
+    uint16_t offset = getDevOffsetByChannel(devRelay>>1, relayOffset);
 
     Transaction tr(Transaction::W, slot, offset, 0);
-    // значение 1.0f в регистре замыкает реле
+    // значение 1 в регистре замыкает реле
     // тут нужно вставить инверсию, если выход нормально замкнут
-    if(state) tr.volFlo = 1;
-    else tr.volFlo = 0;
+    if(state) tr.volInt = 1;
+    else tr.volInt = 0;
 #ifdef DEBUG_RELAY
     qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
 #endif
@@ -852,7 +853,7 @@ void MainWindow::parseWorkerReceive()
     while(!queueTransaction.isEmpty() && (counter++ < 4))
     {
         tr = queueTransaction.dequeue();
-        paramName = RegisterMap::getNameByOffset(tr.offset);
+        paramName = cRegistersMap::getNameByOffset(tr.offset);
         isDeviceParam = false;
         if(tr.offset < BASE_OFFSET_DEVICE)
         {
@@ -1010,13 +1011,13 @@ void MainWindow::sendConfigChannelsToSlave()
 
         // запись актуального значения SignalType
         str = "chan" + QString::number(devCh) + "SignalType";
-        tr.offset = RegisterMap::getOffsetByName(str);
+        tr.offset = cRegistersMap::getOffsetByName(str);
         tr.volInt = ChannelsObjectsList.at(i)->GetSignalType();
         emit sendTransToWorker(tr);
 
         // запись актуального Additional parameter1
         str = "chan" + QString::number(devCh) + "AdditionalParameter1";
-        tr.offset = RegisterMap::getOffsetByName(str);
+        tr.offset = cRegistersMap::getOffsetByName(str);
 //        tr.volInt = 0;
         int size = sizeof(tr.paramA12);
         memset(tr.paramA12, 0, size);

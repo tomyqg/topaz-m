@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <Channels/channelOptions.h>
 #include <ustavka.h>
+#include <archivator.h>
 
 namespace Ui {
 class dSettings;
@@ -17,9 +18,14 @@ class dSettings : public QDialog
     Q_OBJECT
 
 public:
-    explicit dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, int num, int page = 0, QWidget *parent = 0);
+    explicit dSettings(QList<ChannelOptions*> channels, \
+                       QList<Ustavka*> ustavki, \
+                       int num, \
+                       int page = 0, \
+                       QWidget *parent = 0);
     ~dSettings();
     QTimer timerLoad;
+    void addArch(cArchivator * archiv) {arch = archiv;}
 
 public slots:
     void resizeEvent(QResizeEvent * s);
@@ -43,7 +49,8 @@ private:
     void updateUiSignalTypeParam(int index);
     int sensorShemaFromUiShemaIndex(int index);
     int indexUiShemaFromSensorShema(int sh);
-
+    QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
+    cArchivator * arch;
 
 private slots:
     void on_exitButton_clicked();

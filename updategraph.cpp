@@ -10,6 +10,7 @@
 #include "qglobal.h"
 #include "defines.h"
 #include <stdlib.h>
+#include "registersmap.h"
 
 int xoffset=0;
 
@@ -222,24 +223,14 @@ void MainWindow::UpdateGraphics()
 
     needupdatePainter = 1;
 
-    switch(systemOptions.display)
-    {
-    case cSystemOptions::Trends:
-        GrafsUpdateTrends();break;
-    case cSystemOptions::TrendsCyfra:
-        GrafsUpdateTrends();break;
-    case cSystemOptions::Bars :
-        GrafsUpdateBars();break;
-    case cSystemOptions::BarsCyfra :
-        GrafsUpdateBars();break;
-    case cSystemOptions::TrendsBars:
-        GrafsUpdateTrends();break;
-//        GrafsUpdateTrendsAndBars();break;
-    case cSystemOptions::PolarBars:
-    case cSystemOptions::PolarCyfra:
-    case cSystemOptions::Cyfra:
-        updateBars();
-        GrafsUpdateNone();break;
+    int x = 5;
+    switch (x) {
+    case 1:
+        x = 4;//ui->stackedWidget->setCurrentIndex(0);
+        break;
+    case 5:
+        x = 2;//ui->stackedWidget->setCurrentIndex(1);
+        break;
     default:
         break;
     }
@@ -649,7 +640,7 @@ void MainWindow::GrafsUpdateTrends()
 
 
 
-    updateBars();
+//    updateBars();
 
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(ColorCh1);
@@ -792,8 +783,6 @@ void MainWindow::GrafsUpdateBars()
     double chan2lowerstate = channel2.GetMinimumChannelValue();
     double chan3lowerstate = channel3.GetMinimumChannelValue();
     double chan4lowerstate = channel4.GetMinimumChannelValue();
-
-    updateBars();
 
     y1max.append(chan1higherstate);
     y1max.append(chan1higherstate);
@@ -1039,10 +1028,10 @@ void MainWindow::UpdateChannel1Slot()
     int devCh = csc.getDevChannel(0);
     int slot = csc.getSlotByChannel(devCh);
 //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = RegisterMap::getOffsetByName("DataChan0"/*"chan0Data"*/);
+    uint16_t offset = cRegistersMap::getOffsetByName("DataChan0"/*"chan0Data"*/);
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
-    emit sendTransToWorker(tr);
+//    emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
 //    CheckAndLogginStates(channel1);
 
@@ -1065,7 +1054,7 @@ void MainWindow::UpdateChannel2Slot()
     int devCh = csc.getDevChannel(1);
     int slot = csc.getSlotByChannel(devCh);
     //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = RegisterMap::getOffsetByName("DataChan1"/*"chan1Data"*/);
+    uint16_t offset = cRegistersMap::getOffsetByName("DataChan1"/*"chan1Data"*/);
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
@@ -1091,7 +1080,7 @@ void MainWindow::UpdateChannel3Slot()
     int devCh = csc.getDevChannel(2);
     int slot = csc.getSlotByChannel(devCh);
 //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = RegisterMap::getOffsetByName("DataChan2"/*"chan2Data"*/);
+    uint16_t offset = cRegistersMap::getOffsetByName("DataChan2"/*"chan2Data"*/);
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
@@ -1117,7 +1106,7 @@ void MainWindow::UpdateChannel4Slot()
     int devCh = csc.getDevChannel(3);
     int slot = csc.getSlotByChannel(devCh);
 //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = RegisterMap::getOffsetByName("DataChan3"/*"chan3Data"*/);
+    uint16_t offset = cRegistersMap::getOffsetByName("DataChan3"/*"chan3Data"*/);
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);

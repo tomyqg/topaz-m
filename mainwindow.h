@@ -32,7 +32,7 @@
 
 
 
-//#define DEBUG_RELAY
+#define DEBUG_RELAY
 
 namespace Ui {
 class MainWindow;
@@ -131,6 +131,7 @@ private slots:
 
 //    void on_doubleSpinBox_valueChanged(double arg1);
 
+    void on_doubleSpinBox_valueChanged(double arg1);
 
 signals:
     void error(const QString &s);
