@@ -74,8 +74,8 @@ void MainWindow::on_WorkButton_clicked()
 void MainWindow::on_ArchiveButton_clicked()
 {
 //    OpenArchiveWindow();
-    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2);
-    dialogSetingsChannel->addArch(arch);
+    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2, arch);
+//    dialogSetingsChannel->addArch(arch);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }

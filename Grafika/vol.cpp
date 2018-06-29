@@ -72,9 +72,22 @@ void wVol::changeNum(int num)
 void wVol::setVol(double vol)
 {
     int prec;
-    if(vol >= 1000) prec = 2;
-    else if(vol >= 100) prec = 3;
-    else if(vol >= 10) prec = 4;
+    if(abs(vol) >= 1000) prec = 2;
+    else if(abs(vol) >= 100) prec = 3;
+    else if(abs(vol) >= 10) prec = 4;
     else prec = 5;
     ui->labelVol->setText(QString::number(vol, 'f', prec));
+}
+
+void wVol::setColor(QColor color)
+{
+    QColor colorBar = color;
+
+    QString strCSS = QString("color: #FFFFFF; background-color: rgb(" \
+                             + QString::number(color.red()) + "," \
+                             + QString::number(color.green()) + ","\
+                             + QString::number(color.blue()) + ");");
+    ui->labelName->setStyleSheet(strCSS);
+    ui->labelVol->setStyleSheet(strCSS);
+    ui->labelMes->setStyleSheet(strCSS);
 }

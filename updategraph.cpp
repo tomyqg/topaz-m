@@ -14,7 +14,10 @@
 
 int xoffset=0;
 
-double randVal[4] = {0.0, 0.0, 0.0, 0.0};
+double randVal[4] = {((double)((rand()%101) - 50) / 10),\
+                     ((double)((rand()%101) - 50) / 10),\
+                     ((double)((rand()%101) - 50) / 10),\
+                     ((double)((rand()%101) - 50) / 10)};
 
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
@@ -223,17 +226,49 @@ void MainWindow::UpdateGraphics()
 
     needupdatePainter = 1;
 
-    int x = 5;
-    switch (x) {
-    case 1:
-        x = 4;//ui->stackedWidget->setCurrentIndex(0);
+
+    switch(systemOptions.display)
+    {
+    //    case cSystemOptions::Trends:
+    //        GrafsUpdateTrends();
+    //        break;
+    case cSystemOptions::TrendsCyfra:
+        ui->stackedWidget->setCurrentIndex(1);
+        GrafsUpdateTrends();
+        updateWidgetsVols();
         break;
-    case 5:
-        x = 2;//ui->stackedWidget->setCurrentIndex(1);
+    case cSystemOptions::Bars :
+        ui->stackedWidget->setCurrentIndex(0);
+        GrafsUpdateBars();
+        updateBars();
+        break;
+//    case cSystemOptions::BarsCyfra :
+//        ui->stackedWidget->setCurrentIndex(0);
+//        GrafsUpdateBars();
+//        break;
+    case cSystemOptions::TrendsBars:
+        ui->stackedWidget->setCurrentIndex(0);
+        GrafsUpdateTrends();
+        updateBars();
+        break;
+        //        GrafsUpdateTrendsAndBars();break;
+    case cSystemOptions::PolarBars:
+        ui->stackedWidget->setCurrentIndex(0);
+        updateBars();
+        break;
+    case cSystemOptions::PolarCyfra:
+        ui->stackedWidget->setCurrentIndex(1);
+        updateWidgetsVols();
+        break;
+    case cSystemOptions::Cyfra:
+        ui->stackedWidget->setCurrentIndex(1);
+        GrafsUpdateNone();
+        updateWidgetsVols();
         break;
     default:
         break;
     }
+
 
     selectWidgetDiagram();
 //    DrawSceneBottom();
@@ -1031,7 +1066,7 @@ void MainWindow::UpdateChannel1Slot()
     uint16_t offset = cRegistersMap::getOffsetByName("DataChan0"/*"chan0Data"*/);
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
 //    qDebug() << "MainWindow SIGNAL" << tr.offset;
-//    emit sendTransToWorker(tr);
+    emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
 //    CheckAndLogginStates(channel1);
 
@@ -1204,6 +1239,10 @@ void MainWindow::updateWidgetsVols(void)
     ui->widgetVol2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
     ui->widgetVol3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
     ui->widgetVol4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+    ui->widgetVol1->setColor(channel1.GetNormalColor());
+    ui->widgetVol2->setColor(channel2.GetNormalColor());
+    ui->widgetVol3->setColor(channel3.GetNormalColor());
+    ui->widgetVol4->setColor(channel4.GetNormalColor());
 }
 
 void MainWindow::selectWidgetDiagram(void)

@@ -18,10 +18,11 @@ class dSettings : public QDialog
     Q_OBJECT
 
 public:
-    explicit dSettings(QList<ChannelOptions*> channels, \
-                       QList<Ustavka*> ustavki, \
-                       int num, \
-                       int page = 0, \
+    explicit dSettings(QList<ChannelOptions*> channels,
+                       QList<Ustavka*> ustavki,
+                       int num,
+                       int page = 0,
+                       cArchivator * ar = NULL,
                        QWidget *parent = 0);
     ~dSettings();
     QTimer timerLoad;
@@ -51,6 +52,7 @@ private:
     int indexUiShemaFromSensorShema(int sh);
     QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
     cArchivator * arch;
+    QVector<QString> Labels;
 
 private slots:
     void on_exitButton_clicked();

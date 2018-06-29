@@ -39,13 +39,17 @@ const typeTableSignalTypes tableSignalTypes[] = {
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
 
-dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, int num, int page, QWidget *parent) :
+dSettings::dSettings(QList<ChannelOptions*> channels,
+                     QList<Ustavka*> ustavki,
+                     int num,
+                     int page,
+                     cArchivator *ar,
+                     QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::dSettings)
+    ui(new Ui::dSettings),
+    arch(ar)
 {
     ui->setupUi(this);
-
-    arch = NULL;
 
     //списки типов датчиков
     StringListNapryagenie.clear();
@@ -82,7 +86,6 @@ dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, i
     ui->label_21->hide();
     ui->ustavkaTimer->hide();
     ui->label_24->hide();
-
     // ----->
 
     ui->saveButton->setColorText(ColorBlue);
@@ -146,11 +149,6 @@ dSettings::dSettings(QList<ChannelOptions*> channels, QList<Ustavka*> ustavki, i
         spbox->installEventFilter(this);
     }
 
-    X_Coordinates = X_Coordinates_archive;
-    Y_coordinates_Chanel_1 = Y_coordinates_Chanel_1_archive;
-    Y_coordinates_Chanel_2 = Y_coordinates_Chanel_2_archive;
-    Y_coordinates_Chanel_3 = Y_coordinates_Chanel_3_archive;
-    Y_coordinates_Chanel_4 = Y_coordinates_Chanel_4_archive;
 }
 
 dSettings::~dSettings()
@@ -198,6 +196,7 @@ void dSettings::updateWidgets()
     else if(ui->stackedWidget->currentIndex() == 2)
     {
         h = 44;
+
         //страница архива
         ui->saveButton->hide();
         ui->nameSubMenu->setText("АРХИВ");
@@ -208,8 +207,8 @@ void dSettings::updateWidgets()
         ui->customPlot->yAxis->setRange(-300, 500);
         ui->customPlot->xAxis->setRange(-300, 300);
         ui->customPlot->replot();
-        // по умолчанию отобразим архив за период 1 минута
-        updateGraf(60 * ValuesUpdateTimer);
+
+        updateGraf(60);
     }
     if(ui->stackedWidget->currentIndex() == 3)
     {
@@ -247,47 +246,85 @@ void dSettings::on_period_currentIndexChanged(int index)
     QDateTime curTime = QDateTime::currentDateTime();
     QDateTime firstTime = curTime.addSecs(-archivePeriod);
 
-    if(archivePeriod < 86400) // до 10 часов можно отображать посекундно
-    {
-        X_Coordinates.resize(0);
-        for(int i = 0; i < archivePeriod; i++)
-        {
-            //            Dates.append(firstTime.addSecs(i));
-            //            Labels.append(Dates.at(i).toString("hh:mm:ss"));
-            X_Coordinates.append(i);
-        }
-        Y_coordinates_Chanel_1 = arch->getVector(1, archivePeriod);
-
-    }
-    else //более 10 часов показыват в 10 минутных точках
-    {
-
-    }
-
     updateGraf(archivePeriod);
-
-//    ui->customPlot->yAxis->setRange(-XRange, XRange);
-//    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-//    ui->customPlot->xAxis->setTickStep(60); // 60 secs btw timestamp
-//    ui->customPlot->xAxis->setAutoTickLabels(false);
-//    ui->customPlot->xAxis->setTickVectorLabels(Labels);
-
-//    ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_1);
 }
 
 void dSettings::updateGraf(int period)
 {
-    if(X_Coordinates_archive.isEmpty())
-        return;
 
-    ui->customPlot->xAxis->setRange(-1000, 2000);
+    assert(arch != NULL);
+    if(arch == NULL) return;
+
+    QDateTime firstTime = QDateTime::currentDateTime().addSecs(-period);
+    bool tick10min = false;
+    int multiplier = 1;
+    QString strLabel = "hh:mm:ss";
+//    if(period > 10000)  //период более 10000 секунд показывать уже в 10-минутках
+//    {
+//        tick10min = true;
+//        multiplier = 600;
+//        strLabel = "hh:mm";
+//        if(period > 86000)
+//        {
+//            strLabel = "hhч";
+//            if(period > 2590000)
+//                strLabel = "dd.MM.yy";
+//        }
+
+
+//        period /= 600;  //выражение периода в 10минутных отсчётах
+//    }
+
+    Y_coordinates_Chanel_1 = arch->getVector(0, period, tick10min);
+    Y_coordinates_Chanel_2 = arch->getVector(1, period, tick10min);
+    Y_coordinates_Chanel_3 = arch->getVector(2, period, tick10min);
+    Y_coordinates_Chanel_4 = arch->getVector(3, period, tick10min);
+
+    //вставить сюда усреднитель данных,
+    //чтобы большие периоды свести числу точек от 1000 до 10000
+
+    X_Coordinates.resize(0);
+    Labels.resize(0);
+    int firstLabel = 0;
+
+    //Поиск начала отсчётов
+    for(int i = 0; i < period; i++)
+    {
+        if((Y_coordinates_Chanel_1.at(i) == Y_coordinates_Chanel_1.at(i)) \
+                || (Y_coordinates_Chanel_2.at(i) == Y_coordinates_Chanel_2.at(i)) \
+                || (Y_coordinates_Chanel_3.at(i) == Y_coordinates_Chanel_3.at(i)) \
+                || (Y_coordinates_Chanel_4.at(i) == Y_coordinates_Chanel_4.at(i)))
+        {
+            firstLabel = i;
+            break;
+        }
+    }
+
+    //Генерация шкалы Х
+    for(int i = 0; i < period; i++)
+    {
+        X_Coordinates.append(i);
+
+        //создание массива подписей, начиная с того отсчёта, где есть данные
+        if((i%(period/5) == 0)/* && (i >= firstLabel)*/) //
+            Labels.append(firstTime.addSecs(i*multiplier).toString(strLabel));
+    }
+
+    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
+    ui->customPlot->xAxis->setTickStep(period/5); //
+
+    ui->customPlot->xAxis->setAutoTickLabels(false);
+    ui->customPlot->xAxis->setTickVectorLabels(Labels);
+
+//    ui->customPlot->xAxis->setRange(-1000, 2000);
+//    ui->customPlot->xAxis->setRange(0, period);
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
 
     if(!Y_coordinates_Chanel_1_archive.isEmpty())
-    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
 
     // add the arrow:
@@ -302,7 +339,7 @@ void dSettings::updateGraf(int period)
     if(!Y_coordinates_Chanel_2_archive.isEmpty())
     {
         ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_2_archive);
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
         graphPen.setColor(ColorCh2);
         ui->customPlot->graph()->setPen(graphPen);
     }
@@ -310,7 +347,7 @@ void dSettings::updateGraf(int period)
     if(!Y_coordinates_Chanel_3_archive.isEmpty())
     {
         ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_3_archive);
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
         graphPen.setColor(ColorCh3);
         ui->customPlot->graph()->setPen(graphPen);
     }
@@ -318,10 +355,15 @@ void dSettings::updateGraf(int period)
     if(!Y_coordinates_Chanel_4_archive.isEmpty())
     {
         ui->customPlot->addGraph();
-        ui->customPlot->graph()->setData(X_Coordinates_archive, Y_coordinates_Chanel_4_archive);
+        ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
         graphPen.setColor(ColorCh4);
         ui->customPlot->graph()->setPen(graphPen);
     }
+
+
+//    ui->customPlot->rescaleAxes();
+//    ui->customPlot->replot();
+//    ui->customPlot->clearItems();
 
     if((!Y_coordinates_Chanel_1_archive.isEmpty()) &&\
             !Y_coordinates_Chanel_2_archive.isEmpty() &&\
@@ -330,9 +372,11 @@ void dSettings::updateGraf(int period)
     {
         // авто масшабирование
         ui->customPlot->rescaleAxes();
+        ui->customPlot->xAxis->setRange(0, period);
         ui->customPlot->replot();
         ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
     }
+
 }
 
 void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki, int num)
