@@ -316,8 +316,6 @@ void dSettings::updateGraf(int period)
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-//    ui->customPlot->xAxis->setRange(-1000, 2000);
-//    ui->customPlot->xAxis->setRange(0, period);
     ui->customPlot->clearGraphs();
 
     ui->customPlot->addGraph();
