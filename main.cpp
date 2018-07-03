@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     MainWindow w;
+    w.desktopSize(a.desktop()->height(), a.desktop()->width());
 
     //    qApp->closeAllWindows();
     //делаем ресайз

@@ -129,6 +129,7 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::updateSystemOptions()
 {
     cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &systemOptions);
+    ClearPolarCoords();
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -158,13 +159,21 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         }
     }
 
-    if (watched == ui->MessagesWidget && event->type() == QEvent::MouseButtonPress) {
-        ReactOnTouch();
+    if (watched == ui->MessagesWidget && event->type() == QEvent::Resize)
+    {
+        ClearPolarCoords();
     }
 
-    if (watched == ui->MessagesWidget && event->type() == QEvent::MouseMove) {
+    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
+//        reactOnMousePress();
+    }
 
-        ReactOnMouseSlide();
+    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
+//        reactOnMouseRelease();
+    }
+
+    if (watched == ui->customPlot && event->type() == QEvent::MouseMove) {
+//        ReactOnMouseSlide();
     }
 
     if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
@@ -406,4 +415,53 @@ void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
     channel1.SetCurrentChannelValue(arg1);
     ui->wBar_1->setVolue(arg1);
     ui->widgetVol1->setVol(arg1);
+}
+
+void MainWindow::plotPress(QMouseEvent * pe)
+{
+    if(pe->pos().x() > (ui->customPlot->width() / 10))
+    {
+        mouseOnMove = true;
+    }
+    xPos = QCursor::pos().x();
+    yPos = QCursor::pos().y();
+    sizePlot = ui->customPlot->yAxis->range().size();
+    posPlot = ui->customPlot->yAxis->range().center();
+    mouseOnScalede = true;
+    waitAutoScale = true;
+}
+
+void MainWindow::plotReleas(QMouseEvent * pe)
+{
+    mouseOnScalede = false;
+    mouseOnMove = false;
+    timerScale.start(3000);
+}
+
+void MainWindow::plotMove(QMouseEvent * pe)
+{
+    if(mouseOnScalede && !mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        double scale = 1 + (((double)y - (double)yPos) / (double)desktopHeight);
+        double pos = ui->customPlot->yAxis->range().center();
+        double size = sizePlot * scale * scale ;
+        ui->customPlot->yAxis->setRange(pos, size, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    else if(mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        double move = ((double)y - (double)yPos) / (double)ui->customPlot->height();
+        double pos = posPlot + move * sizePlot;
+        ui->customPlot->yAxis->setRange(pos, sizePlot, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    timerScale.start(3000);
+}
+
+void MainWindow::updateAutoScale()
+{
+    waitAutoScale = false;
+    timerScale.stop();
 }

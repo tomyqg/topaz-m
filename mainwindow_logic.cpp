@@ -95,7 +95,23 @@ void MainWindow::MainWindowInitialization()
     ui->logo->setScaledContents(true);
 
     // нужно установить евент филтер чтобы отрисовывалась графика
-    ui->MessagesWidget->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
+    ui->MessagesWidget->installEventFilter(this);
+    ui->customPlot->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
+    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
+            this, SLOT(plotPress(QMouseEvent*)));
+    connect(ui->customPlot, SIGNAL(mouseRelease(QMouseEvent*)),\
+            this, SLOT(plotReleas(QMouseEvent*)));
+    connect(ui->customPlot, SIGNAL(mouseMove(QMouseEvent*)),\
+            this, SLOT(plotMove(QMouseEvent*)));
+    connect(&timerScale, SIGNAL(timeout()), this, SLOT(updateAutoScale()));
+//    timerScale.setInterval(1);
+
+    SetXRange(XRange);
+    SetYRange(YRange);
+    mouseOnScalede = false;
+    mouseOnMove = false;
+    waitAutoScale = false;
+
 
     QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
@@ -103,9 +119,6 @@ void MainWindow::MainWindowInitialization()
         QPushButton *but = ButtonList.at(i);
         but->installEventFilter(this);
     }
-
-    SetXRange(XRange);
-    SetYRange(YRange);
 
     listCh.append(&channel1);
     listCh.append(&channel2);

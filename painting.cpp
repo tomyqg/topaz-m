@@ -692,7 +692,7 @@ void MainWindow::PaintPolarDiagramm()
     painter.begin(ui->MessagesWidget);
     int widgetHeight = ui->MessagesWidget->height();
     int widgetWidth = ui->MessagesWidget->width();
-    int widgetSize = max(widgetHeight, widgetWidth);
+    int widgetSize = min(widgetHeight, widgetWidth);
     int diagramSize = widgetSize - 50;
 
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -779,6 +779,7 @@ void MainWindow::PaintPolarDiagramm()
 
     QLineF Channel1Line;
     
+    //очистка хвостов
     if (GetPolarAngle()>=90) // если больше 90 градусов то поворачиваем диск
     {
         painter.rotate(GetPolarAngle()-90);
@@ -792,6 +793,8 @@ void MainWindow::PaintPolarDiagramm()
         }
     }
     
+
+    // радиальные линии
     for(int i=0; i < 36; i++)
     {
         QLineF Line;
@@ -964,13 +967,6 @@ void MainWindow::PaintOnWidget()
     }
 }
 
-void MainWindow::ReactOnMouseSlide()
-{
-    int  y   =  QCursor::pos().y() ;
-    int ky = 20 + y*3;
-    
-    ui->customPlot->yAxis->setRange(-ky, ky);
-}
 
 void MainWindow::ReactOnTouch()
 {

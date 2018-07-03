@@ -255,10 +255,12 @@ void MainWindow::UpdateGraphics()
     case cSystemOptions::PolarBars:
         ui->stackedWidget->setCurrentIndex(0);
         updateBars();
+        GrafsUpdateNone();
         break;
     case cSystemOptions::PolarCyfra:
         ui->stackedWidget->setCurrentIndex(1);
         updateWidgetsVols();
+        GrafsUpdateNone();
         break;
     case cSystemOptions::Cyfra:
         ui->stackedWidget->setCurrentIndex(1);
@@ -594,7 +596,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     }
 
 
-    if (ui->autoscalecheckbox->checkState())
+    if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
     {
         ui->customPlot->yAxis->rescale();
     }
@@ -707,7 +709,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
     // авто масшабирование
-    if (ui->autoscalecheckbox->checkState())
+    if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
     {
         ui->customPlot->yAxis->rescale();
     }
@@ -1045,7 +1047,7 @@ void MainWindow::GrafsUpdateBars()
         textLabelLo->deleteLater();
     }
 
-    if (ui->autoscalecheckbox->checkState())
+    if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
     {
         ui->customPlot->yAxis->rescale();
     }

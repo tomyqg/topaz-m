@@ -51,6 +51,11 @@ public:
     void resizeWindow(QWidget & qw, qreal mratio);
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
     void resizeSelf(qreal xresolution, qreal yresolution);
+    void desktopSize(int h, int w)
+    {
+        desktopHeight = h;
+        desktopWidth = w;
+    }
 
     int GetWindowWidthPixels();
     int GetWindowHeightPixels();
@@ -132,6 +137,10 @@ private slots:
 //    void on_doubleSpinBox_valueChanged(double arg1);
 
     void on_doubleSpinBox_valueChanged(double arg1);
+    void plotPress(QMouseEvent * pe);
+    void plotReleas(QMouseEvent * pe);
+    void plotMove(QMouseEvent * pe);
+    void updateAutoScale();
 
 signals:
     void error(const QString &s);
@@ -145,6 +154,9 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+
+    int desktopHeight;
+    int desktopWidth;
 
     ChannelOptions channel1;
     ChannelOptions channel2;
@@ -166,7 +178,6 @@ private:
     void InitTouchScreen();
     void PaintOnWidget();
     void ReactOnTouch();
-    void ReactOnMouseSlide();
     void PaintCyfrasBottom();
     void PaintCyfrasRight();
     void PaintCyfrasNew();
@@ -203,8 +214,6 @@ private:
     int polar_angle;
 
     QGraphicsScene  *scene;
-
-
 
     QTranslator* translator;
     void changeTranslator(int langindex) ;
@@ -249,6 +258,14 @@ private:
     int Yrange;
     int windowwidth;
     int windowheight;
+    int xPos;
+    int yPos;
+    double sizePlot;
+    double posPlot;
+    bool mouseOnScalede;
+    bool mouseOnMove;
+    bool waitAutoScale;
+    QTimer timerScale;
 
     void DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize);
     void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, QPainter painter, int alerttextsize, int smalltextsize);

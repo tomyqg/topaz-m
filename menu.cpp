@@ -96,6 +96,7 @@ void dMenu::on_saveButton_clicked()
     sysOptions.arrows = ui->arrowscheckBox->checkState();
     sysOptions.display = ui->modeGraf->currentIndex();
     sysOptions.display += (ui->modeBar->currentIndex() << 2);
+    sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
     emit saveButtonSignal();
     //Окно закроется по сигналу таймаута
@@ -107,6 +108,7 @@ void dMenu::updateSystemOptions()
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
     ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
+    ui->autoscalecheckbox->setChecked(sysOptions.autoscale);
 }
 
 void dMenu::timeoutLoad()

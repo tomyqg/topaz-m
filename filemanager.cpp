@@ -160,6 +160,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 //    systemoptions["Resolution"] = GetNewDisplayResolution();
     systemoptions["Arrows"] = opt->arrows;
     systemoptions["Display"] = opt->display;
+    systemoptions["Autoscale"] = opt->autoscale;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(path);
     file.open(QIODevice::ReadWrite);
@@ -183,6 +184,7 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 //    StackedOptions::displayResolution = json["Resolution"].toString();
     opt->arrows = json["Arrows"].toBool();
     opt->display = json["Display"].toInt();
+    opt->autoscale = json["Autoscale"].toBool();
     infile.close();
 }
 

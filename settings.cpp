@@ -56,7 +56,6 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     StringListNapryagenie.append("Нет");
     StringListNapryagenie.append("0-100 мВ");
     StringListNapryagenie.append("0-1   В");
-    StringListNapryagenie.append("0-5   В");
     StringListNapryagenie.append("±10   В");
     StringListNapryagenie.append("±30   В");
     StringListTC.clear();
@@ -121,10 +120,19 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
 
     //адаптация окна под отображение сообщений
     ui->stackedWidget->setCurrentIndex(page);
-    if(page == 0)
-    {
 
-    }
+    mouseOnScalede = false;
+    mouseOnScaledeX = false;
+    mouseOnMove = false;
+    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
+            this, SLOT(plotPress(QMouseEvent*)));
+    connect(ui->customPlot, SIGNAL(mouseRelease(QMouseEvent*)),\
+            this, SLOT(plotReleas(QMouseEvent*)));
+    connect(ui->customPlot, SIGNAL(mouseMove(QMouseEvent*)),\
+            this, SLOT(plotMove(QMouseEvent*)));
+    connect(&timerUpdateGraf, SIGNAL(timeout()), this, SLOT(replotGraf()));
+    timerUpdateGraf.start(200);
+
     //обновим параметры виджетов, чтобы всё на своих местах стояло
     updateWidgets();
 
@@ -197,6 +205,7 @@ void dSettings::updateWidgets()
     {
         h = 44;
 
+
         //страница архива
         ui->saveButton->hide();
         ui->nameSubMenu->setText("АРХИВ");
@@ -204,8 +213,8 @@ void dSettings::updateWidgets()
         InitiateArchive();
         UpdateArchiveData();
         */
-        ui->customPlot->yAxis->setRange(-300, 500);
-        ui->customPlot->xAxis->setRange(-300, 300);
+//        ui->customPlot->yAxis->setRange(-300, 500);
+//        ui->customPlot->xAxis->setRange(-300, 300);
         ui->customPlot->replot();
 
         updateGraf(60);
@@ -646,4 +655,80 @@ int dSettings::indexUiShemaFromSensorShema(int sh)
         return 1;
     }
     return 0;
+}
+
+
+void dSettings::plotPress(QMouseEvent * pe)
+{
+    int x = pe->pos().x();
+    int y = pe->pos().y();
+    int width = ui->customPlot->width();
+    int height = ui->customPlot->height();
+    if((x > (width / 10)) && (y < (height * 0.9)))
+    {
+        mouseOnMove = true;
+    }
+    else if((x < (width / 10)) && (y < (height * 0.9)))
+    {
+        mouseOnScalede = true;
+    }
+    else if((x > (width / 10)) && (y > (height * 0.9)))
+    {
+        mouseOnScaledeX = true;
+    }
+
+    xPos = QCursor::pos().x();
+    yPos = QCursor::pos().y();
+    sizePlot = ui->customPlot->yAxis->range().size();
+    posPlot = ui->customPlot->yAxis->range().center();
+    sizePlotX = ui->customPlot->xAxis->range().size();
+    posPlotX = ui->customPlot->xAxis->range().center();
+//    waitAutoScale = true;
+}
+
+void dSettings::plotReleas(QMouseEvent * pe)
+{
+    mouseOnScalede = false;
+    mouseOnMove = false;
+    mouseOnScaledeX= false;
+//    timerScale.start(3000);
+}
+
+void dSettings::plotMove(QMouseEvent * pe)
+{
+    if(mouseOnScalede && !mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        double scale = 1 + (((double)y - (double)yPos) / 2000);
+        double pos = ui->customPlot->yAxis->range().center();
+        double size = sizePlot * scale * scale ;
+        ui->customPlot->yAxis->setRange(pos, size, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    else if(mouseOnScaledeX && !mouseOnMove)
+    {
+        int x = QCursor::pos().x();
+        double scale = 1 + (((double)xPos - (double)x) / 2000);
+        double pos = ui->customPlot->xAxis->range().center();
+        double size = sizePlotX * scale * scale ;
+        ui->customPlot->xAxis->setRange(pos, size, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    else if(mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        int x = QCursor::pos().x();
+        double move = ((double)y - (double)yPos) / (double)ui->customPlot->height();
+        double moveX = ((double)xPos - (double)x) / (double)ui->customPlot->width();
+        double pos = posPlot + move * sizePlot;
+        double posX = posPlotX + moveX * sizePlotX;
+        ui->customPlot->yAxis->setRange(pos, sizePlot, Qt::AlignCenter);
+        ui->customPlot->xAxis->setRange(posX, sizePlotX, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+}
+
+void dSettings::replotGraf()
+{
+    ui->customPlot->replot();
 }

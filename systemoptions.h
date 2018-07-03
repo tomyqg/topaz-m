@@ -11,6 +11,7 @@ public:
     explicit cSystemOptions(QObject *parent = 0);
     int display;
     bool arrows;
+    bool autoscale;
     enum DisplayParametrEnum {
         Bars = 0x00,
         TrendsBars = 0x01,
