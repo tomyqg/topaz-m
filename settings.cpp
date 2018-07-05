@@ -59,24 +59,24 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     StringListNapryagenie.append("±10   В");
     StringListNapryagenie.append("±30   В");
     StringListTC.clear();
-    StringListTC.append("Тип S (Pt10Rh-Pt)");
-    StringListTC.append("Тип K (NiCr-Ni)");
-    StringListTC.append("Тип L (Fe-CuNi)");
-    StringListTC.append("Тип B (Pt30Rh-Pt60Rh)");
-    StringListTC.append("Тип А1(W5Re-W20Re)");
-    StringListTC.append("Тип J (Fe-CuNi)");
-    StringListTC.append("Тип N (NiCrSi-NiSi)");
+    StringListTC.append("Тип S");           // (Pt10Rh-Pt)
+    StringListTC.append("Тип K");           // (NiCr-Ni)
+    StringListTC.append("Тип L");           // (Fe-CuNi)
+    StringListTC.append("Тип B");           // (Pt30Rh-Pt60Rh)
+    StringListTC.append("Тип А1");          // (W5Re-W20Re)
+    StringListTC.append("Тип J");           // (Fe-CuNi)
+    StringListTC.append("Тип N");           // (NiCrSi-NiSi)
     StringListRTD.clear();
-    StringListRTD.append("Pt50   (GOST, a=3910)");
-    StringListRTD.append("Pt100  (GOST, a=3910)");
-    StringListRTD.append("Cu50   (GOST, a=4260)");
-    StringListRTD.append("Cu100  (GOST, a=4260)");
-    StringListRTD.append("Pt50   (GOST, a=3850)");
-    StringListRTD.append("Pt100  (GOST, a=3850)");
-    StringListRTD.append("Cu50   (GOST, a=4280)");
-    StringListRTD.append("Cu100  (GOST, a=4280)");
-    StringListRTD.append("Pt21   (ТСП21)");
-    StringListRTD.append("Cu23   (ТСМ23)");
+    StringListRTD.append("Pt50 (3910)");
+    StringListRTD.append("Pt100 (3910)");
+    StringListRTD.append("Cu50 (4260)");
+    StringListRTD.append("Cu100 (4260)");
+    StringListRTD.append("Pt50 (3850)");
+    StringListRTD.append("Pt100 (3850)");
+    StringListRTD.append("Cu50 (4280)");
+    StringListRTD.append("Cu100 (4280)");
+    StringListRTD.append("Pt21 (ТСП21)");
+    StringListRTD.append("Cu23 (ТСМ23)");
 
     // <---- временно скрыть некоторые пункты настроек уставок
     ui->ustavkaChannel->hide();
@@ -121,6 +121,7 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     //адаптация окна под отображение сообщений
     ui->stackedWidget->setCurrentIndex(page);
 
+    //Настройки для масштабирования архива
     mouseOnScalede = false;
     mouseOnScaledeX = false;
     mouseOnMove = false;
@@ -133,11 +134,17 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     connect(&timerUpdateGraf, SIGNAL(timeout()), this, SLOT(replotGraf()));
     timerUpdateGraf.start(200);
 
+    //настройки для скролинга списка сообщений
+    ui->listWidget->viewport()->installEventFilter(this);
+    mouseScroll = false;
+
     //обновим параметры виджетов, чтобы всё на своих местах стояло
     updateWidgets();
 
     //обновление параметров: тип сигнала, тип датчика, схема включения
     updateUiSignalTypeParam(getIndexSignalTypeTable(channel->GetSignalType()));
+
+
 
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
@@ -407,8 +414,6 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->bar->changeNum(num);
     ui->dempfer->setValue(channel->GetDempherValue());
     ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
-    ui->sensorDiapazon->setCurrentIndex(channel->GetDiapason());
-    ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
 
     //параметры уставок
     ui->ustavkaVol->setValue(ustavka->getHiStateValue());
@@ -544,25 +549,65 @@ void dSettings::resizeEvent(QResizeEvent * s)
     updateBar();
 }
 
-bool dSettings::eventFilter(QObject *object, QEvent *event)
+bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
     if ( (event->type() == QEvent::MouseButtonRelease) && \
-         (object->property("enabled").toString() == "true") && \
-         ( QString::fromLatin1(object->metaObject()->className()) != "QPushButton" ) )
+         (watched->property("enabled").toString() == "true") && \
+         (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
+          (QString::fromLatin1(watched->metaObject()->className()) == "QLineEdit") || \
+          (QString::fromLatin1(watched->metaObject()->className()) == "QDoubleSpinBox")))
     {
-        Options::olderprop = object->property("text").toString();
+        Options::olderprop = watched->property("text").toString();
         //Vag: нужно переделать и передавать строку напрямую в конструктор клавиатуры
         keyboard kb(this);
         kb.setModal(true);
         kb.exec();
-        object->setProperty("value", kb.getcustomstring() );
-        object->setProperty("text",kb.getcustomstring() );
+        watched->setProperty("value", kb.getcustomstring() );
+        watched->setProperty("text",kb.getcustomstring() );
 //        ui->pushButton->setFocus();
         kb.close();
         kb.deleteLater();
     }
 
-    return QObject::eventFilter(object, event);
+    QListWidget *lw = (QListWidget*)(watched);
+    if(lw)
+    {
+        if(event->type() == QEvent::MouseButtonPress)
+        {
+            yPosList = QCursor::pos().y();
+            curRow = ui->listWidget->currentRow();
+            mouseScroll = true;
+        }
+        if(event->type() == QEvent::MouseMove)
+        {
+            if(mouseScroll)
+            {
+                int y = QCursor::pos().y();
+                int h = ui->listWidget->height();
+                double move = ((double)y - (double)yPosList) / (double)h;
+                int count = ui->listWidget->count() * 15 / h;
+                int row;
+                if (count > 0)
+                    row = curRow - (count*move) + 9;
+                else if(count < 0)
+                    row = curRow - (count*move) - 9;
+                else
+                    curRow - (count*move);
+
+                ui->listWidget->setCurrentRow(row);
+            }
+        }
+
+        if(event->type() == QEvent::MouseButtonRelease)
+        {
+            mouseScroll = false;
+        }
+    }
+
+
+
+
+    return QObject::eventFilter(watched, event);
 }
 
 void dSettings::on_typeSignal_currentIndexChanged(int index)
@@ -616,6 +661,8 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->sensorShema->show();
         ui->labelShema->show();
     }
+    ui->sensorDiapazon->setCurrentIndex(channel->GetDiapason());
+    ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
 }
 
 /*
@@ -732,3 +779,4 @@ void dSettings::replotGraf()
 {
     ui->customPlot->replot();
 }
+

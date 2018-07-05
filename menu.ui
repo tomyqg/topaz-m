@@ -363,7 +363,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>13</number>
+            <number>10</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">

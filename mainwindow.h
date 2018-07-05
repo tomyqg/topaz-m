@@ -80,6 +80,7 @@ public:
 
 
 public slots:
+    void tickLoadWidget();
     void destroyedslot(QObject *);
     void NewTouchscreenCalibration();
     void LabelsInit();
@@ -109,6 +110,7 @@ public slots:
     void updateSystemOptions();
 
 private slots:
+
 //    void OpenSerialPort( int );
     void updateDateLabel();
     void UpdateGraphics();
@@ -154,6 +156,9 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+
+    QTimer timerLoad;
+    int countLoader;
 
     int desktopHeight;
     int desktopWidth;

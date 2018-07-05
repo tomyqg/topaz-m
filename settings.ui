@@ -1641,8 +1641,11 @@ QListWidget::item {
                <property name="sizeAdjustPolicy">
                 <enum>QAbstractScrollArea::AdjustToContents</enum>
                </property>
+               <property name="autoScroll">
+                <bool>true</bool>
+               </property>
                <property name="autoScrollMargin">
-                <number>16</number>
+                <number>26</number>
                </property>
                <property name="editTriggers">
                 <set>QAbstractItemView::NoEditTriggers</set>
@@ -1695,7 +1698,7 @@ QListWidget::item {
                <property name="gridSize">
                 <size>
                  <width>0</width>
-                 <height>31</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="viewMode">
@@ -3792,15 +3795,15 @@ border: 0px solid rgba(0,0,0,0);</string>
    </slots>
   </customwidget>
   <customwidget>
-   <class>wButtonStyled</class>
-   <extends>QPushButton</extends>
-   <header location="global">buttonstyled.h</header>
-  </customwidget>
-  <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>wButtonStyled</class>
+   <extends>QPushButton</extends>
+   <header location="global">buttonstyled.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

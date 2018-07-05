@@ -465,3 +465,24 @@ void MainWindow::updateAutoScale()
     waitAutoScale = false;
     timerScale.stop();
 }
+
+void MainWindow::tickLoadWidget()
+{
+    if(countLoader <= 100)
+    {
+        ui->progressBar->setValue(countLoader);
+        countLoader++;
+    }
+    else
+    {
+        ui->left->setMaximumWidth(1000000);
+        ui->right->setMaximumWidth(1000000);
+        ui->splash->hide();
+        ui->left->show();
+        ui->right->show();
+        ui->header->show();
+        ui->footer->show();
+        timerLoad.stop();
+
+    }
+}

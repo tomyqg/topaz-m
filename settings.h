@@ -30,6 +30,7 @@ public:
 
 public slots:
     void resizeEvent(QResizeEvent * s);
+//    bool eventFilter(QObject *watched, QEvent *event);
 
 
 private:
@@ -63,6 +64,9 @@ private:
     bool mouseOnScaledeX;
     bool mouseOnMove;
     QTimer timerUpdateGraf;
+    int yPosList;
+    int curRow;
+    bool mouseScroll;
 
 private slots:
     void on_exitButton_clicked();

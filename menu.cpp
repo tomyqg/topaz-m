@@ -4,6 +4,8 @@
 #include "filemanager.h"
 #include "keyboard.h"
 #include <options.h>
+#include <QFile>
+#include <QString>
 
 #define HEIGHT 768
 #define WIDTH 1024
@@ -402,9 +404,20 @@ void dMenu::on_bBackDateTimeSet_clicked()
 
 void dMenu::on_bResetToDefault_clicked()
 {
-    QProcess process;
-    //копируем файлы настроек каналов в рабочий каталог
-    process.startDetached("cp -a /opt/Defaults/. /opt/");
+    //замена файлов настроек
+    //настройки каналов
+    QFile::remove(pathtooptions + QString(".backup"));
+    QFile::rename(pathtooptions, pathtooptions + QString(".backup"));
+    QFile::copy(pathtooptionsdef, pathtooptions);
+    //системные настройки
+    QFile::remove(pathtosystemoptions + QString(".backup"));
+    QFile::rename(pathtosystemoptions, pathtosystemoptions + QString(".backup"));
+    QFile::copy(pathtosystemoptionsdef, pathtosystemoptions);
+    //чтение и применение настроек из новых файлов
+    cFileManager::readChannelsSettings(pathtooptions, listChannels, listUstavok);
+    updateSystemOptions();
+    emit saveButtonSignal();
+
 }
 
 

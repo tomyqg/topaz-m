@@ -53,6 +53,17 @@ extern MainWindow * globalMainWin;
 void MainWindow::MainWindowInitialization()
 {
     //qRegisterMetaType<Transaction>("Transaction");
+    countLoader = 0;
+    ui->right->hide();
+    ui->left->hide();
+    ui->header->hide();
+    ui->footer->hide();
+    ui->splash->show();
+    connect(&timerLoad, SIGNAL(timeout()), this, SLOT(tickLoadWidget()));
+    timerLoad.start(50);
+    QPixmap pixLoad(pathtologotip);
+    ui->logoOnLoad->setPixmap(pixLoad);
+
 
     ui->unvisible_block->setHidden(true);
 
