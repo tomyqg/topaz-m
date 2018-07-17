@@ -23,7 +23,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers/ Communicator/ Grafika/ LookupTable
+        Drivers Communicator Grafika LookupTable Steel
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -71,8 +71,12 @@ SOURCES += main.cpp \
     Alarms/alarm.cpp \
     filemanager.cpp \
     systemoptions.cpp \
-    LookupTable/lookupTables.c \
+    LookupTable/lookup_tables.c \
     LookupTable/registersmap.cpp \
+    archworker.cpp \
+    Steel/steel.cpp \
+    Steel/steel_connect.cpp \
+    Steel/steel_controller.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -158,9 +162,16 @@ HEADERS  += mainwindow.h \
     Alarms/alarm.h \
     filemanager.h \
     systemoptions.h \
-    LookupTable/lookupTables.h \
-    LookupTable/registersmap.h
-
+    LookupTable/registersmap.h \
+    LookupTable/lookup_tables.h \
+    LookupTable/deviceparams.h \
+    archworker.h \
+    archticks.h \
+    Steel/steel.h \
+    Steel/steel_technology.h \
+    Steel/steel_connect.h \
+    Steel/steel_controller.h
+ 
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
             Drivers/pin.h \

@@ -23,6 +23,9 @@
 #include "menu.h"
 #include "settings.h"
 #include "systemoptions.h"
+#include "steel.h"
+#include "steel_technology.h"
+#include "steel_controller.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -108,6 +111,7 @@ public slots:
     void retransToWorker(Transaction tr);
     void openSettingsChannel(int num);
     void updateSystemOptions();
+    void updateSteel();
 
 private slots:
 
@@ -279,14 +283,14 @@ private:
 //    void PaintCyfrasBottomSeparate();
     void CheckState(ChannelOptions &channel);
     void DrawScene();
-    void DrawSceneBottom();
+//    void DrawSceneBottom();
 
     QList<Ustavka *> ustavkaObjectsList;
     void InitUstavka();
     bool isChannelInMaxNow(int ch);
     bool isChannelInMinNow(int ch);
 
-    cChannelSlotController csc;
+//    cChannelSlotController csc;
     void InitChannelSlotTable();
 
     cRelaySlotController rsc;
@@ -319,6 +323,15 @@ private:
     dSettings * dialogSetingsChannel;
 
     cSystemOptions systemOptions;  //класс хранения состемных опций
+
+    void initSteel();
+    void InitSteelSlotTable();
+    bool slotSteelOnline;       //признак наличия платы STEEL в слоте
+    bool steelReady;            //признак готовности данных по площадке
+    int steelReadyNum;          //номер входной группы площадки, где найдена площадка
+    QTimer * timerUpdateSteel;  //таймер одновления данных с платы STEEL
+    int indexSteel;             //индекс массива температур и эдс
+    void updateSteelWidget();   //обновление виджета с данными и графиком стали
 
 protected:
     void paintEvent(QPaintEvent *event) ;

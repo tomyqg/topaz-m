@@ -31,6 +31,9 @@ QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
 QVector<QDateTime> MainWindow::Dates;
 
+QList<cSteel*> listSteel;
+typeSteelTech steelTech[NUM_TECHNOLOGIES];
+
 
 extern QColor Channel1Color;
 extern QColor Channel2Color;
@@ -475,14 +478,36 @@ void MainWindow::tickLoadWidget()
     }
     else
     {
+        ui->splash->hide();
+
+        /* для аналоговых сигналов */
         ui->left->setMaximumWidth(1000000);
         ui->right->setMaximumWidth(1000000);
-        ui->splash->hide();
         ui->left->show();
         ui->right->show();
+
+        /* для анализа стали */
+        ui->frameSteel->setMaximumWidth(10000000);
+        ui->frameSteel->hide();
+
         ui->header->show();
         ui->footer->show();
         timerLoad.stop();
 
+    }
+}
+
+void MainWindow::initSteel()
+{
+    for(int i = 0; i < NUM_TECHNOLOGIES; i++)
+    {
+        steelTech[i] = defTech[i];
+    }
+
+    for(int i = 0; i < NUM_STEEL; i++)
+    {
+        cSteel * steel = new cSteel(this);
+        steel->technology = &steelTech[i];
+        listSteel.append(steel);
     }
 }

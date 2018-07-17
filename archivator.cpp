@@ -6,6 +6,7 @@
 #include <QDir>
 #include <defines.h>
 
+
 cArchivator::cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObject *parent) : QObject(parent)
 {
     time2000 = QDateTime::fromString(STR_DATE_2000, FORMAT_STR_DATE_2000);
@@ -27,8 +28,17 @@ cArchivator::cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObje
     connect(timerSek, SIGNAL(timeout()), this, SLOT(addTickSek()));
     timerSek->start(TIME_SEK);
     timer10Min = new QTimer();
-    connect(timer10Min, SIGNAL(timeout()), this, SLOT(addTick10Min()));
+//    connect(timer10Min, SIGNAL(timeout()), this, SLOT(addTick10Min()));
     timer10Min->start(TIME_10MIN);
+}
+
+cArchivator::~cArchivator()
+{
+//    worker->deleteLater();
+//    threadReadFile->deleteLater();
+//    timerAddTick->deleteLater();
+//    timerSek->deleteLater();
+//    timer10Min->deleteLater();
 }
 
 void cArchivator::addTick()
@@ -125,12 +135,15 @@ void cArchivator::addTickSek()
     }
 
     // --- Посекундный накопительный архив в файле -----------------------------------------
-    if(out.open(QIODevice::Append))
+    if(!out.isOpen())
     {
-        QDataStream stream(&out);
-        stream << tick.time;
-        stream.writeRawData((const char *) tick.channel, sizeof(tick.channel));
-        out.close();
+        if(out.open(QIODevice::Append))
+        {
+            QDataStream stream(&out);
+            stream << tick.time;
+            stream.writeRawData((const char *) tick.channel, sizeof(tick.channel));
+            out.close();
+        }
     }
     // ---------------------------------------------
 }
@@ -212,95 +225,56 @@ void cArchivator::addTick10Min()
 
 }
 
-QVector<double> cArchivator::getVector(int ch, int period, bool timing10min)
+void cArchivator::load(int per)
+{
+    assert(period<40000000);//период не больше года с хвостиком
+    if(per > 2592000) return;
+    period = per;
+    arrTicks.resize(0); //сброс предыдущего буффера
+    worker = new cArchWorker(fileName_sek);
+    threadReadFile = new QThread;
+    worker->setPeriod(period);
+    worker->moveToThread(threadReadFile);
+    connect(threadReadFile, SIGNAL(started()), worker, SLOT(run()));
+    connect(worker, SIGNAL(finished()), this, SLOT(endLoad()), Qt::DirectConnection);
+    connect(worker, SIGNAL(finished()), threadReadFile, SLOT(quit()));
+    connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
+    connect(threadReadFile, SIGNAL(finished()), threadReadFile, SLOT(deleteLater()));
+    connect(worker, SIGNAL(newTick(sTickCh)), this, SLOT(addLoadTickFromFile(sTickCh)), Qt::DirectConnection);
+    threadReadFile->start(QThread::LowestPriority);
+    //запомнить время запроса архива
+    askTime = QDateTime::currentDateTime();
+}
+
+QVector<double> cArchivator::getVector(int ch)
 {
     assert(ch<TOTAL_NUM_CHANNELS);//запрашиваемый канал не превышает максимальный по счёту
-    assert(period<40000000);//период не больше года с хвостиком
-
-    int periodSec = period; //период в секундах
-    if(timing10min) periodSec *= 600;   //пересчёт, если задан 10-минутный тайминг
 
     QVector<double> ret(period, NAN);
-    QDateTime curTime = QDateTime::currentDateTime();
-    QDateTime firstTime = curTime.addSecs(-periodSec);
-    QVector<sTickCh> arrTicks;
 
-    if(!timing10min)
-    {
-        int daysPeriod = firstTime.daysTo(curTime);
-        for(int i = 0; i <= daysPeriod; i++)
-        {
-            QString strDay = firstTime.addDays(i).toString("yyMMdd.");
-            QString fileName;
+    //возврат пустого вектора, если канал задан неверно
+    if(ch >= TOTAL_NUM_CHANNELS) return ret;
 
-            if(i == daysPeriod)
-                fileName = fileName_sek;
-            else
-            {
-                QStringList sl = fileName_sek.split(".");
-                int n = sl.size();
-                fileName = sl.at(n-2) + "_" + strDay + sl.at(n-1);
-            }
-
-            QFile arch_sek(fileName);
-            if(arch_sek.open(QIODevice::ReadOnly))
-            {
-                QDataStream stream(&arch_sek);
-                sTickCh tick;
-                while(!stream.atEnd())
-                {
-                    stream >> tick.time;
-                    stream.readRawData((char *) tick.channel, sizeof(tick.channel));
-                    arrTicks.append(tick);
-                }
-                arch_sek.close();
-            }
-        }
-    }
-    else
-    {   //
-        int firstYear = firstTime.toString("yy").toInt();
-        int yearsPeriod = curTime.toString("yy").toInt() - firstYear;
-        for(int i = 0; i <= yearsPeriod; i++)
-        {
-            QString strYear = firstTime.addYears(i).toString("yyyy.");
-            QString fileName;
-
-            if(i == yearsPeriod)
-                fileName = fileName_10min;
-            else
-            {
-                QStringList sl = fileName_10min.split(".");
-                int n = sl.size();
-                fileName = sl.at(n-2) + "_" + strYear + sl.at(n-1);
-            }
-
-            QFile arch_year(fileName);
-            if(arch_year.open(QIODevice::ReadOnly))
-            {
-                QDataStream stream(&arch_year);
-                sTickCh tick;
-                while(!stream.atEnd())
-                {
-                    stream >> tick.time;
-                    stream.readRawData((char *) tick.channel, sizeof(tick.channel));
-                    arrTicks.append(tick);
-                }
-                arch_year.close();
-            }
-        }
-    }
+    QDateTime firstTime = askTime.addSecs(-period);
 
     foreach(sTickCh tick, arrTicks)
     {
         QDateTime timeArch(time2000.addSecs(tick.time));
         int vectorIndex = firstTime.secsTo(timeArch);
-        if(timing10min) vectorIndex /= 600; //пересчёт индекса с учётом тайминга
         if((vectorIndex >= 0) && (vectorIndex < period))
         {
             ret.replace(vectorIndex, tick.channel[ch]);
         }
     }
-
     return ret;
+}
+
+void cArchivator::addLoadTickFromFile(sTickCh tick)
+{
+    arrTicks.append(tick);
+}
+
+void cArchivator::endLoad()
+{
+    emit loadFinished();
 }

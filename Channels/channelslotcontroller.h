@@ -13,6 +13,7 @@ public:
     int addChannelSlot(int userCh, int devCh, int slot);
     int getDevChannel(int userCh);
     int getSlotByChannel(int userCh);
+    bool isConnect();
 signals:
 
 public slots:

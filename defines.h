@@ -45,7 +45,7 @@
 #define IS_LINUX
 
 #else
-#define comportname "COM3"
+#define comportname "COM6"
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 
@@ -110,6 +110,7 @@
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
 #define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
+#define UpdateSteelTime 3000
 
 #endif
 
@@ -149,6 +150,8 @@
 
 
 #define TOTAL_NUM_USTAVKI   4
+#define NUM_STEEL           4
+#define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
 
 #define BASE_OFFSET_DEVICE      0x4000
 #define BASE_OFFSET_CHANNEL_1   0x8000

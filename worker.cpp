@@ -1,11 +1,10 @@
 #include "worker.h"
 #include "defines.h"
-#include "device.h"
+//#include "device.h"
 #include "uartdriver.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
-#include "registermap.h"
-//#include "registersmap.h"
+//#include "registermap.h"
 #include <QDebug>
 #include <QList>
 #include <QQueue>
@@ -58,10 +57,11 @@ static QString descriptiveDataTypeName( int funcCode )
     return "Unknown";
 }
 
-int worker::WriteModbusData(uint8_t sl, const deviceparametrs * dp, uint32_t * data32)
+int worker::WriteModbusData(uint8_t sl, const tLookupRegisters * dp, uint32_t * data32)
 {
     int ret = -1;
-    if ( ( dp->WorkLevelAccess!= Device::W ) && ( dp->WorkLevelAccess!= Device::RW ))
+    if (((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_W ) \
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ))
         return -1;
 
     int num;
@@ -69,29 +69,24 @@ int worker::WriteModbusData(uint8_t sl, const deviceparametrs * dp, uint32_t * d
     int slave = sl;
     uint16_t * data = (uint16_t *) &data32;
 
-    switch (dp->ParamType) {
-    case Device::A12:
+    switch (dp->type) {
+    case LKUP_TYPE_ASCII:
         num = 6;
-        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->offset, num ,0, data,0);
         break;
-    case Device::U16:
+    case LKUP_TYPE_U16:
         num = 1;
-        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->offset, num ,0, data,0);
         break;
-    case Device::U32:
+    case LKUP_TYPE_U32:
         num = 2;
     {
-        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num ,0, data,0);
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->offset, num ,0, data,0);
     }
         break;
-    case Device::F32:
+    case LKUP_TYPE_FLOAT:
         num = 2;
-//    {
-//        QByteArray floatarray(reinterpret_cast<const char*>(&value), sizeof(value));
-//        data[0] = ( floatarray.at(1)<<8 ) | (floatarray.at(0)&0xFF) ;
-//        data[1] = ( floatarray.at(3)<<8 ) | (floatarray.at(2)&0xFF);
-        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->Offset, num , 0, data,0);
-//    }
+        ret = sendModbusRequest(slave, _FC_WRITE_MULTIPLE_REGISTERS, dp->offset, num , 0, data,0);
         break;
     default:
         break;
@@ -99,11 +94,12 @@ int worker::WriteModbusData(uint8_t sl, const deviceparametrs * dp, uint32_t * d
     return ret;
 }
 
-int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest)
+int worker::ReadModbusData(uint8_t sl, const tLookupRegisters* dp, uint32_t *data_dest)
 {
     int ret = -1;
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
-    if ( ( dp->WorkLevelAccess != RegisterMap::R ) && ( dp->WorkLevelAccess != RegisterMap::RW ))
+    if (((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_R ) \
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ))
         return -1;
 
     int slave = sl;
@@ -112,17 +108,17 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
     int add;
 
     // количество блоков в зависимости от типа параметра
-    switch (dp->ParamType) {
-    case RegisterMap::A12:
+    switch (dp->type) {
+    case LKUP_TYPE_ASCII:
         num = 6;
         break;
-    case RegisterMap::U16:
+    case LKUP_TYPE_U16:
         num = 1;
         break;
-    case RegisterMap::U32:
+    case LKUP_TYPE_U32:
         num = 2;
         break;
-    case RegisterMap::F32:
+    case LKUP_TYPE_FLOAT:
         num = 2;
         break;
     default:
@@ -130,6 +126,9 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
         break;
     }
 
+    comm = _FC_READ_HOLDING_REGISTERS;
+    /* Пока тип регистра в карте не содержится
+     * работаем только с HOLDING_REGISTERS
     switch (dp->RegisterType) {
     case RegisterMap::HoldingReg:
         comm = _FC_READ_HOLDING_REGISTERS;
@@ -141,19 +140,20 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
         comm = _FC_READ_INPUT_REGISTERS;
         break;
     }
+    */
 
-    add = dp->Offset;
+    add = dp->offset;
 
     ret = sendModbusRequest(slave, comm, add, num, 0, 0, data_dest);
 
-    switch (dp->ParamType) {
-    case RegisterMap::A12:
+    switch (dp->type) {
+    case LKUP_TYPE_ASCII:
         num = 6;
         break;
-    case RegisterMap::U16:
+    case LKUP_TYPE_U16:
         num = 1;
         break;
-    case RegisterMap::U32:
+    case LKUP_TYPE_U32:
         num = 2;
     {
         //        qDebug() << data_dest[0] << data_dest[1] << "U32";
@@ -181,7 +181,7 @@ int worker::ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data
         data_dest[0] = val;
     }
         break;
-    case RegisterMap::F32:
+    case LKUP_TYPE_FLOAT:
         num = 2;
 
     {
@@ -406,15 +406,17 @@ void worker::run()
             mQueue.unlock();
 
             time.restart();
-            deviceparametrs dp = device.getDevParam(tr.offset);
+            tLookupRegisters dp = cRegistersMap::getDpByOffset(tr.offset);
             if(tr.dir == Transaction::R)
             {
                 res = ReadModbusData(tr.slave, &dp, &tr.volInt);
                 if(res > 0)
                 {
 #ifdef DEBUG_WORKER
-                    qDebug() << "worker SIGNAL: slave =" << tr.slave \
-                             << tr.offset << "=" << tr.volInt << tr.volFlo \
+                    qDebug() << "Modbus In  slave:" << tr.slave \
+                             << "name:" << cRegistersMap::getNameByOffset(tr.offset) \
+                             << " offset:" << tr.offset \
+                             << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                              << "Time: " << time.elapsed();
 #endif
                     emit sendTrans(tr);
@@ -422,6 +424,14 @@ void worker::run()
             } else {    //(tr.dir == Transaction::W)
                 res = WriteModbusData(tr.slave, &dp, (uint32_t *)(tr.volInt));
                 tr.dir = Transaction::R;
+
+#ifdef DEBUG_WORKER
+                    qDebug() << "Modbus Out  slave:" << tr.slave \
+                             << "name:" << cRegistersMap::getNameByOffset(tr.offset) \
+                             << " offset:" << tr.offset \
+                             << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
+                             << "Time: " << time.elapsed();
+#endif
 
                 mQueue.lock();
                 trans.enqueue(tr);
@@ -444,9 +454,9 @@ void worker::getTransSlot(Transaction tr)
         fQueueOver1000 = false;
     }
 
-#ifdef DEBUG_WORKER
-    qDebug() << "worker SLOT slave =" << tr.slave << "offset =" << tr.offset;
-#endif
+//#ifdef DEBUG_WORKER
+//    qDebug() << "worker SLOT slave =" << tr.slave << "offset =" << tr.offset;
+//#endif
 
     trans.enqueue(tr);
     mQueue.unlock();

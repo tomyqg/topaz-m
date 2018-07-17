@@ -19,6 +19,7 @@ public:
         Cyfra = 0x04,
         TrendsCyfra = 0x05,
         PolarCyfra = 0x06,
+        Steel = 0x08,
         //исключить
         Trends = 0xF1,
         Polar = 0xF2,

@@ -5,10 +5,11 @@
 #include <QDataStream>
 #include <Channels/channelOptions.h>
 #include <QListIterator>
+#include <archticks.h>
+#include <archworker.h>
 //#include <QtSql/QSqlDatabase>
 //#include <QDateTime>
 
-#define TOTAL_NUM_CHANNELS 24
 #define TIME_TICK 200 //период записи в архив
 #define TIME_SEK 1000 //период записи в посекундный архив
 #define TIME_10MIN 600000 //период записи в 10минутный архив
@@ -16,16 +17,7 @@
 #define STR_DATE_2000           "2000/01/01 00:00:00"
 #define FORMAT_STR_DATE_2000    "yyyy/MM/dd hh:mm:ss"
 
-// время в 32битном формате
-typedef  uint32_t timeStamp2000;
 
-#pragma pack(push, 1)
-typedef struct
-{
-    timeStamp2000 time;
-    float channel[TOTAL_NUM_CHANNELS];
-} sTickCh;
-#pragma pack(pop)
 
 enum
 {
@@ -38,13 +30,19 @@ class cArchivator : public QObject
     Q_OBJECT
 public:
     explicit cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObject *parent = 0);
-    QVector<double> getVector(int ch, int period, bool timing10min = false);
+    ~cArchivator();
+    void load(int per);
+    QVector<double> getVector(int ch);
+
 signals:
+    void loadFinished();
 
 private slots:
     void addTick();
     void addTickSek();
     void addTick10Min();
+    void addLoadTickFromFile(sTickCh tick);
+    void endLoad();
 
 private:
     QString fileName_l;
@@ -58,6 +56,11 @@ private:
     QTimer * timer10Min;
     uint8_t currBank;
     QDateTime time2000;
+    QDateTime askTime;
+    cArchWorker * worker;
+    QThread * threadReadFile;
+    QVector<sTickCh> arrTicks;
+    int period;
 };
 
 #endif // CARCHIVATOR_H

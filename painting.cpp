@@ -87,8 +87,6 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
     painter.end();
 }
 
-
-
 void MainWindow::PaintCyfrasBottom() // пока не используем
 {
     // задается вручную
@@ -323,8 +321,6 @@ void MainWindow::PaintCyfrasRight()
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
 
-
-
 void MainWindow::PaintCyfrasNew()
 {
     //задается вручную
@@ -513,8 +509,6 @@ void MainWindow::PaintCyfrasNew()
     painter.end();
 }
 
-
-
 void MainWindow::PaintCyfrasFullScreen()
 {
     // задаётся параметры вручную
@@ -565,7 +559,6 @@ void MainWindow::PaintCyfrasFullScreen()
 
     DrawRectangles(ChannelsObjectsList, alerttextsize, smalltextsize);
 }
-
 
 void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, int smalltextsize, int alerttextsize)
 {
@@ -629,7 +622,6 @@ void MainWindow::DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsO
     }
     painter.end();
 }
-
 
 void MainWindow::PaintStatesAndAlertsAtTop() // отрисовывает события на уставки
 {
@@ -966,7 +958,6 @@ void MainWindow::PaintOnWidget()
         break;
     }
 }
-
 
 void MainWindow::ReactOnTouch()
 {

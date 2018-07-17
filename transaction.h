@@ -30,6 +30,7 @@ public:
         uint32_t volInt;
         float volFlo;
         uint16_t paramA12[6];
+        int16_t paramInt16[6];  //для работы со знаковыми данными
     };
 
 signals:

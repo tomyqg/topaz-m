@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <settings.h>
 #include <systemoptions.h>
+#include <defines.h>
 
 namespace Ui {
 class dMenu;
@@ -21,6 +22,7 @@ public:
     ~dMenu();
     QTimer timerLoad;
     void addChannels(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki);
+    void addSteels(QList<cSteel*> st, typeSteelTech tech);
     void selectPageWork();
     bool eventFilter(QObject* watched, QEvent* event);
 
@@ -41,7 +43,7 @@ private slots:
     void on_bSystem_clicked();
     void DateUpdate();
     void on_bBackChannels_clicked();
-    void on_bUniversal_clicked();
+    void on_bAnalog_clicked();
     void on_bChannel1_clicked();
     void on_bChannel2_clicked();
     void on_bChannel3_clicked();
@@ -75,6 +77,8 @@ private:
     void UpdateAnalyze();
     void updateSystemOptions();
     cSystemOptions sysOptions;
+//    QList<cSteel*> listSteels;
+//    typeSteelTech steelTech[NUM_TECHNOLOGIES];
 
 private slots:
     void on_bResetToDefault_clicked();
@@ -90,6 +94,22 @@ private slots:
     void on_bModeDiagram_clicked();
 
     void on_bBackOtobrazhenie_clicked();
+
+    void on_bBackSteel_clicked();
+
+    void on_bSteel_clicked();
+
+    void on_bSteel1_clicked();
+
+    void on_bSteel2_clicked();
+
+    void on_bSteel3_clicked();
+
+    void on_bSteel4_clicked();
+
+    void on_radioButSteelModes_clicked();
+
+    void on_radioButAnalogModes_clicked();
 
 signals:
     void saveButtonSignal();

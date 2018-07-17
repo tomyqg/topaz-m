@@ -68,9 +68,6 @@ void cSlotsConfig::updConfig()
         // - проблемы с платой.
         // Принимаем, что она оффлайн, если она вообще есть
         if(isSlotSet(curSlot)) updOnlineStatus(curSlot, false);
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "Slot" << curSlot << "is offline";
-#endif
         if(curSlot >= MAX_NUM_SLOTS)
         {
             curSlot = 1;
@@ -94,23 +91,12 @@ void cSlotsConfig::receiveConf(Transaction tr)
     {
         int count = addSlot(trans.slave, trans.volInt);
         trans.offset = cRegistersMap::getOffsetByName("deviceStatus");
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT: slave" << trans.slave \
-                 << "deviceType" << trans.offset << trans.volInt;
-#endif
         emit sendRequest(trans);
         timerUpdConfig->setInterval(UpdateConfigTimer);
     } else if((paramName == "deviceStatus") && (curSlot == trans.slave)) {
         setStatusDev(trans.slave, trans.volInt);
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT:" \
-                 << trans.offset << trans.volInt << trans.volFlo;
-#endif
-        if(getTypeDevice(curSlot) == 1) // 4AI - плата аналоговых входов
+        if(getTypeDevice(curSlot) == Device_4AI) // 4AI - плата аналоговых входов
         {
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 1 configs" ;
-#endif
             // статусы каналов
             trans.offset = cRegistersMap::getOffsetByName("chan0Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
@@ -137,13 +123,6 @@ void cSlotsConfig::receiveConf(Transaction tr)
     {
         if(getTypeDevice(curSlot) == 1) // 4AI - плата аналоговых входов
         {
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT:" \
-                 << trans.offset << trans.volInt << trans.volFlo;
-#endif
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 2 configs" ;
-#endif
             trans.offset = cRegistersMap::getOffsetByName("chan1Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             trans.offset = cRegistersMap::getOffsetByName("chan1SupportedSignals");
@@ -163,13 +142,6 @@ void cSlotsConfig::receiveConf(Transaction tr)
     {
         if(getTypeDevice(curSlot) == 1) // 4AI - плата аналоговых входов
         {
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT:" \
-                 << trans.offset << trans.volInt << trans.volFlo;
-#endif
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 3 configs" ;
-#endif
             trans.offset = cRegistersMap::getOffsetByName("chan2Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             trans.offset = cRegistersMap::getOffsetByName("chan2SupportedSignals");
@@ -189,13 +161,6 @@ void cSlotsConfig::receiveConf(Transaction tr)
     {
         if(getTypeDevice(curSlot) == 1) // 4AI - плата аналоговых входов
         {
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SLOT:" \
-                     << trans.offset << trans.volInt << trans.volFlo;
-#endif
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SIGNAL: slave" << trans.slave << " get channel 4 configs" ;
-#endif
             trans.offset = cRegistersMap::getOffsetByName("chan3Status");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
             trans.offset = cRegistersMap::getOffsetByName("chan3SupportedSignals");
@@ -215,10 +180,7 @@ void cSlotsConfig::receiveConf(Transaction tr)
     {
         if(getTypeDevice(curSlot) == 1) // 4AI - плата аналоговых входов
         {
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig SLOT:" \
-                     << trans.offset << trans.volInt << trans.volFlo;
-#endif
+
             // запрос температуры и напряжения на плате на последок
             trans.offset = cRegistersMap::getOffsetByName("onBoardTemp");
             if(trans.offset != 0xFFFF) emit sendRequest(trans);
@@ -229,10 +191,7 @@ void cSlotsConfig::receiveConf(Transaction tr)
     }
     else if((paramName == "onBoardVoltage") && (curSlot == trans.slave))
     {
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT:" \
-                 << trans.offset << trans.volInt << trans.volFlo;
-#endif
+
         // конфигурация слота завершена, переходим на следующий
         stateUpdConf = 0;
         endConfSlot(curSlot);
@@ -244,15 +203,10 @@ void cSlotsConfig::receiveConf(Transaction tr)
             timerUpdConfig->setInterval(PeriodReconfig);
         }
         else curSlot++;
-#ifdef DEBAG_SLOT_CONFIG
-            qDebug() << "SlotConfig Next slot" << curSlot;
-#endif
+
     } else if((curSlot == trans.slave) && (stateUpdConf == 1))
     {
-#ifdef DEBAG_SLOT_CONFIG
-        qDebug() << "SlotConfig SLOT:" \
-                 << trans.offset << trans.volInt << trans.volFlo;
-#endif
+
     }
 }
 

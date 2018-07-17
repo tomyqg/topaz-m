@@ -8,6 +8,7 @@
 #include <Channels/channelOptions.h>
 #include <ustavka.h>
 #include <archivator.h>
+#include <steel.h>
 
 namespace Ui {
 class dSettings;
@@ -27,6 +28,7 @@ public:
     ~dSettings();
     QTimer timerLoad;
     void addArch(cArchivator * archiv) {arch = archiv;}
+    void addSteel(cSteel * st, typeSteelTech * tech);
 
 public slots:
     void resizeEvent(QResizeEvent * s);
@@ -36,6 +38,7 @@ public slots:
 private:
     Ui::dSettings *ui;
     QMovie mo;
+    QMovie moArch;
     QTimer tUpdateTime;
     QTimer tUpdateBar;
     QStringList StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
@@ -67,6 +70,10 @@ private:
     int yPosList;
     int curRow;
     bool mouseScroll;
+    int archivePeriod;
+    void updateUIfromSteel();
+    cSteel * curSteel;
+    void UpdateSteelUI(typeSteelTech * tech);
 
 private slots:
     void on_exitButton_clicked();
@@ -85,6 +92,9 @@ private slots:
     void plotReleas(QMouseEvent * pe);
     void plotMove(QMouseEvent * pe);
     void replotGraf();
+    void drowGraf();
+    void on_groupTech_currentIndexChanged(int index);
+    void on_buttonResetSteel_clicked();
 };
 
 #endif // SETTINGS_H

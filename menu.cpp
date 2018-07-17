@@ -15,6 +15,10 @@ extern int dateindex;
 extern int timeindex;
 extern QStringList datestrings, timestrings;
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+extern QList<cSteel*> listSteel;
+extern typeSteelTech steelTech[];
+extern cChannelSlotController csc;
+extern cSteelController ssc;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -61,10 +65,47 @@ dMenu::dMenu(QWidget *parent) :
 
     updateSystemOptions();
 
+//    //в зависимости от подключенных плат определям, что показывать или не показывать в меню
+//    if(csc.isConnect())
+//    {
+//        ui->frameAnalogModes->show();
+//        ui->radioButAnalogModes->setEnabled(true);
+//        ui->radioButAnalogModes->setChecked(true);
+//        ui->bAnalog->show();
+//    }
+//    else
+//    {
+//        ui->frameAnalogModes->hide();
+//        ui->radioButAnalogModes->setEnabled(false);
+//        ui->bAnalog->hide();
+//    }
+//    if(ssc.isConnect())
+//    {
+//        ui->radioButSteelModes->setEnabled(true);
+//        ui->bSteel->show();
+//        if(!csc.isConnect())
+//        {
+//            ui->frameSteelMode->show();
+//            ui->radioButSteelModes->setChecked(true);
+//        }
+//        else
+//        {
+//           ui->frameSteelMode->hide();
+//        }
+//    }
+//    else
+//    {
+//        ui->radioButSteelModes->setEnabled(false);
+//        ui->frameSteelMode->hide();
+//        ui->bSteel->hide();
+//    }
+
+
 }
 
 bool dMenu::eventFilter(QObject *object, QEvent *event)
 {
+#ifndef Q_OS_WIN
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (object->property("enabled").toString() == "true") && \
          (QString::fromLatin1(object->metaObject()->className()) == "QDateTime") )
@@ -76,6 +117,7 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         kb.setModal(true);
         kb.exec();
     }
+#endif
     return QObject::eventFilter(object, event);
 }
 
@@ -98,6 +140,10 @@ void dMenu::on_saveButton_clicked()
     sysOptions.arrows = ui->arrowscheckBox->checkState();
     sysOptions.display = ui->modeGraf->currentIndex();
     sysOptions.display += (ui->modeBar->currentIndex() << 2);
+    if(ui->radioButSteelModes->isChecked())
+    {
+        sysOptions.display = cSystemOptions::Steel;
+    }
     sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
     emit saveButtonSignal();
@@ -108,8 +154,26 @@ void dMenu::updateSystemOptions()
 {
     cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &sysOptions);
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
-    ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
+    ui->modeBar->setCurrentIndex((sysOptions.display >> 2) & 4);
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
+    if(ssc.isConnect() && csc.isConnect())
+    {
+        ui->groupBoxTypePribor->show();
+        if(sysOptions.display == cSystemOptions::Steel)
+        {
+            ui->radioButAnalogModes->setChecked(false);
+            ui->radioButSteelModes->setChecked(true);
+            ui->frameAnalogModes->hide();
+            ui->frameSteelMode->show();
+        } else {
+            ui->radioButSteelModes->setChecked(false);
+            ui->radioButAnalogModes->setChecked(true);
+        }
+    }
+    else
+    {
+        ui->groupBoxTypePribor->hide();
+    }
     ui->autoscalecheckbox->setChecked(sysOptions.autoscale);
 }
 
@@ -193,21 +257,35 @@ void dMenu::on_bBackChannels_clicked()
     ui->nameSubMenu->setText("ВХОДЫ");
 }
 
-void dMenu::on_bUniversal_clicked()
+void dMenu::on_bAnalog_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
-    ui->nameSubMenu->setText("УНИВ. ВХОДЫ");
+    ui->nameSubMenu->setText("АНАЛОГ. ВХОДЫ");
 }
 
 void dMenu::openSettingsChannel(int num, int page)
 {
-    //проверка на наличие такого номера канала
-    if((num <= 0) || (num > listChannels.size())) return;
 
-    dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
-    dialogSetingsChannel->exec();
-    dialogSetingsChannel->deleteLater();
-    //sendConfigChannelsToSlave();
+    if(page == 0)
+    {
+        //проверка на наличие такого номера канала
+        if((num <= 0) || (num > listChannels.size())) return;
+
+        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+        dialogSetingsChannel->exec();
+        dialogSetingsChannel->deleteLater();
+        //sendConfigChannelsToSlave();
+    }
+    else if(page == 4)
+    {
+        //проверка на наличие такого номера входной группы
+        if((num <= 0) || (num > listSteel.size())) return;
+        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+//        dialogSetingsChannel->addSteel(listSteel.at(num), steelTech);
+        dialogSetingsChannel->exec();
+        dialogSetingsChannel->deleteLater();
+
+    }
 
 }
 
@@ -305,6 +383,26 @@ void dMenu::on_bUstavka_4_clicked()
     openSettingsChannel(4, 3);
 }
 
+void dMenu::on_bSteel1_clicked()
+{
+    openSettingsChannel(1, 4);
+}
+
+void dMenu::on_bSteel2_clicked()
+{
+    openSettingsChannel(2, 4);
+}
+
+void dMenu::on_bSteel3_clicked()
+{
+    openSettingsChannel(3, 4);
+}
+
+void dMenu::on_bSteel4_clicked()
+{
+    openSettingsChannel(4, 4);
+}
+
 void dMenu::on_bBackDateTime_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
@@ -359,6 +457,13 @@ void dMenu::on_bBackOtobrazhenie_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
     ui->nameSubMenu->setText("РАБОТА");
+}
+
+
+void dMenu::on_bBackSteel_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->nameSubMenu->setText("ВХОДЫ");
 }
 
 void dMenu::on_bEditDataTime_clicked()
@@ -475,3 +580,26 @@ void dMenu::UpdateAnalyze()
 
 
 
+
+
+void dMenu::on_bSteel_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(14);
+    ui->nameSubMenu->setText("СТАЛЬ");
+}
+
+
+
+
+
+void dMenu::on_radioButAnalogModes_clicked()
+{
+    ui->frameAnalogModes->show();
+    ui->frameSteelMode->hide();
+}
+
+void dMenu::on_radioButSteelModes_clicked()
+{
+    ui->frameAnalogModes->hide();
+    ui->frameSteelMode->show();
+}

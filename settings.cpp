@@ -37,7 +37,8 @@ const typeTableSignalTypes tableSignalTypes[] = {
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
 
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
-
+extern QList<cSteel*> listSteel;
+extern typeSteelTech steelTech[];
 
 dSettings::dSettings(QList<ChannelOptions*> channels,
                      QList<Ustavka*> ustavki,
@@ -115,6 +116,8 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->buttonUstavk->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->buttonBackUstavki->setColorText(ColorBlue);
     ui->buttonBackUstavki->setColorBg(QColor(0xf0,0xf0,0xf0));
+    ui->buttonResetSteel->setColorText(ColorBlue);
+    ui->buttonResetSteel->setColorBg(QColor(0xf0,0xf0,0xf0));
 
     addChannel(channels, ustavki, num);
 
@@ -138,14 +141,15 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->listWidget->viewport()->installEventFilter(this);
     mouseScroll = false;
 
-    //обновим параметры виджетов, чтобы всё на своих местах стояло
+    //обновим параметры виджетов, чтобы всё на своих местах стояло и написано, что надо
     updateWidgets();
 
     //обновление параметров: тип сигнала, тип датчика, схема включения
     updateUiSignalTypeParam(getIndexSignalTypeTable(channel->GetSignalType()));
 
-
-
+    //настройки для архива
+    if(arch != NULL)
+        connect(arch, SIGNAL(loadFinished()), this, SLOT(drowGraf()));
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
     QList<QSpinBox*> spinList = findChildren<QSpinBox*> ();
@@ -162,6 +166,16 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     for (int i = 0; i < SpinBox.count(); ++i) {
         QDoubleSpinBox *spbox = SpinBox.at(i);
         spbox->installEventFilter(this);
+    }
+
+    if(page == 4)
+    {
+        ui->labelNumSteel->setText("СТАЛЬ #" + QString::number(num));
+        assert(num <= listSteel.size());
+        if(num > listSteel.size()) return;
+        curSteel = listSteel.at(num-1);
+        updateUIfromSteel();
+
     }
 
 }
@@ -213,6 +227,7 @@ void dSettings::updateWidgets()
         h = 44;
 
 
+
         //страница архива
         ui->saveButton->hide();
         ui->nameSubMenu->setText("АРХИВ");
@@ -222,14 +237,29 @@ void dSettings::updateWidgets()
         */
 //        ui->customPlot->yAxis->setRange(-300, 500);
 //        ui->customPlot->xAxis->setRange(-300, 300);
-        ui->customPlot->replot();
+//        ui->customPlot->replot();
+        //        updateGraf(60);
 
-        updateGraf(60);
+        //иконка анимации загрузки архива
+        ui->loadArchive->setVisible(true);
+        moArch.setFileName(pathtoloadgif);
+        ui->loadArchive->setMovie(&moArch);
+        moArch.start();
+        archivePeriod = 60;
+        ui->period->setEnabled(false);
+        arch->load(archivePeriod);
+
     }
     if(ui->stackedWidget->currentIndex() == 3)
     {
         ui->saveButton->show();
         ui->nameSubMenu->setText("<html><head/><body><p>НАСТРОЙКА<br>УСТАВОК</p></body></html>");
+        h = 72;
+    }
+    else if(ui->stackedWidget->currentIndex() == 4)
+    {
+        ui->saveButton->show();
+        ui->nameSubMenu->setText("<html><head/><body><p>АНАЛИЗ<br>СТАЛИ</p></body></html>");
         h = 72;
     }
     else
@@ -255,14 +285,24 @@ void dSettings::on_period_currentIndexChanged(int index)
     //                 1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
     int periods[10] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
     assert((sizeof(periods) / sizeof(int)) >= ui->period->count());
-    int archivePeriod = periods[index]; //число секундных точек отсчёта
+    archivePeriod = periods[index]; //число секундных точек отсчёта
 
 //    QVector<QDateTime> Dates;
 //    QVector<QString> Labels;
-    QDateTime curTime = QDateTime::currentDateTime();
-    QDateTime firstTime = curTime.addSecs(-archivePeriod);
+//    QDateTime curTime = QDateTime::currentDateTime();
+//    QDateTime firstTime = curTime.addSecs(-archivePeriod);
+    ui->loadArchive->setVisible(true);
+    moArch.start();
+    ui->period->setEnabled(false);
+    //Сброс буфера перед новым запросом
+    Y_coordinates_Chanel_1.reserve(0);
+    Y_coordinates_Chanel_2.reserve(0);
+    Y_coordinates_Chanel_3.reserve(0);
+    Y_coordinates_Chanel_4.reserve(0);
+    // Запрос данных из файлов архива
+    arch->load(archivePeriod);
 
-    updateGraf(archivePeriod);
+//    updateGraf(archivePeriod);
 }
 
 void dSettings::updateGraf(int period)
@@ -272,29 +312,13 @@ void dSettings::updateGraf(int period)
     if(arch == NULL) return;
 
     QDateTime firstTime = QDateTime::currentDateTime().addSecs(-period);
-    bool tick10min = false;
     int multiplier = 1;
     QString strLabel = "hh:mm:ss";
-//    if(period > 10000)  //период более 10000 секунд показывать уже в 10-минутках
-//    {
-//        tick10min = true;
-//        multiplier = 600;
-//        strLabel = "hh:mm";
-//        if(period > 86000)
-//        {
-//            strLabel = "hhч";
-//            if(period > 2590000)
-//                strLabel = "dd.MM.yy";
-//        }
 
-
-//        period /= 600;  //выражение периода в 10минутных отсчётах
-//    }
-
-    Y_coordinates_Chanel_1 = arch->getVector(0, period, tick10min);
-    Y_coordinates_Chanel_2 = arch->getVector(1, period, tick10min);
-    Y_coordinates_Chanel_3 = arch->getVector(2, period, tick10min);
-    Y_coordinates_Chanel_4 = arch->getVector(3, period, tick10min);
+    Y_coordinates_Chanel_1 = arch->getVector(0);
+    Y_coordinates_Chanel_2 = arch->getVector(1);
+    Y_coordinates_Chanel_3 = arch->getVector(2);
+    Y_coordinates_Chanel_4 = arch->getVector(3);
 
     //вставить сюда усреднитель данных,
     //чтобы большие периоды свести числу точек от 1000 до 10000
@@ -429,6 +453,8 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->messageOnDown->setText(ustavka->getMessInLow());
     ui->messageOffDown->setText(ustavka->getMessNormHigh());
 
+    if(0)
+    {
 
     //стилизация элементов
     /*
@@ -464,6 +490,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->ustavkaVolDown->setStyleSheet(ui->typeReg->styleSheet());
     ui->releyDown->setStyleSheet(ui->ustavkaVolDown->styleSheet());
     */
+    }
     connect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     tUpdateBar.start(TIME_UPDATE_BAR);
 
@@ -506,6 +533,28 @@ void dSettings::saveParam()
     ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
     ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
     ustavka->setMessNormHigh(ui->messageOffDown->text().toUtf8());
+
+    if(ui->stackedWidget->currentIndex() == 4)
+    {
+        typeSteelTech * tech = &steelTech[ui->groupTech->currentIndex()];
+        curSteel->technology = tech;
+        int typeTC[] ={TC_Type_S, TC_Type_B, TC_Type_A1};
+        tech->nSt = typeTC[ui->typeTermoCouple->currentIndex()];
+        tech->dSt = ui->steel_dSt->value();
+        tech->dt = ui->steel_dt->value();
+        tech->tPt = ui->steel_tPt->value();
+        tech->LPtl = ui->steel_LPtl->value();
+        tech->COH = ui->steel_COH->currentIndex();
+        tech->dSE = ui->steel_dSE->value();
+        tech->dE = ui->steel_dE->value();
+        tech->tPE = ui->steel_tPE->value();
+        tech->b1 = ui->steel_b1->value();
+        tech->b2 = ui->steel_b2->value();
+        tech->O = ui->steel_O->value();
+        tech->Y = ui->steel_Y->value();
+        tech->G = ui->steel_G->value();
+    }
+
 }
 
 void dSettings::on_buttonBackUstavki_clicked()
@@ -551,6 +600,7 @@ void dSettings::resizeEvent(QResizeEvent * s)
 
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
+#ifndef Q_OS_WIN
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
          (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
@@ -568,6 +618,8 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
+#endif
+
 
     QListWidget *lw = (QListWidget*)(watched);
     if(lw)
@@ -780,3 +832,55 @@ void dSettings::replotGraf()
     ui->customPlot->replot();
 }
 
+void dSettings::drowGraf()
+{
+    ui->loadArchive->setVisible(false);
+    ui->period->setEnabled(true);
+    updateGraf(archivePeriod);
+}
+
+//void dSettings::addSteel(cSteel * st, typeSteelTech * tech)
+//{
+
+//}
+
+void dSettings::updateUIfromSteel()
+{
+    typeSteelTech * tech = curSteel->technology;
+    UpdateSteelUI(tech);
+}
+
+void dSettings::on_groupTech_currentIndexChanged(int index)
+{
+    typeSteelTech * tech = &steelTech[index];
+    UpdateSteelUI(tech);
+}
+
+void dSettings::on_buttonResetSteel_clicked()
+{
+    int i = ui->groupTech->currentIndex();
+    typeSteelTech tech = defTech[i];
+    UpdateSteelUI(&tech);
+}
+
+void dSettings::UpdateSteelUI(typeSteelTech * tech)
+{
+    ui->groupTech->setCurrentIndex(tech->num);
+    ui->groupName->setText(tech->name);
+    int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
+    ui->typeTermoCouple->setCurrentIndex(indexTC[tech->nSt]);
+    ui->steel_dSt->setValue(tech->dSt);
+    ui->steel_dt->setValue(tech->dt);
+    ui->steel_tPt->setValue(tech->tPt);
+    ui->steel_LPtl->setValue(tech->LPtl);
+    ui->steel_LPth->setValue(tech->LPth);
+    ui->steel_COH->setCurrentIndex(tech->COH);
+    ui->steel_dSE->setValue(tech->dSE);
+    ui->steel_dE->setValue(tech->dE);
+    ui->steel_tPE->setValue(tech->tPE);
+    ui->steel_b1->setValue(tech->b1);
+    ui->steel_b2->setValue(tech->b2);
+    ui->steel_O->setValue(tech->O);
+    ui->steel_Y->setValue(tech->Y);
+    ui->steel_G->setValue(tech->G);
+}

@@ -12,6 +12,10 @@
 #include <stdlib.h>
 #include "registersmap.h"
 
+#ifdef Q_OS_WIN32
+//    #define RANDOM_CHAN
+#endif
+
 int xoffset=0;
 
 double randVal[4] = {((double)((rand()%101) - 50) / 10),\
@@ -23,6 +27,12 @@ double randVal[4] = {((double)((rand()%101) - 50) / 10),\
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 QVector<QDateTime> X_Date_Coordinates;
+QVector<double> X_Coord_Steel, Y_Coord_SteelTemp, Y_Coord_SteelEds;
+
+extern cChannelSlotController csc;
+extern QList<cSteel*> listSteel;
+extern cSteelController ssc;
+
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
 {
@@ -44,10 +54,10 @@ int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelVa
 void MainWindow::DrawScene()
 {
     scene->clear(); // очищаем чтобы не было утечек памяти
-//    ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
-//    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-//    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //    ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
+    //    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    //    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // задается вручную
     int smallrectingleheight = 90; // высота прямоугольничка в пикселях задается вручную
@@ -58,9 +68,7 @@ void MainWindow::DrawScene()
     int alerttextsize = smallrectingleheight/2;
     int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
 
-#ifdef Q_OS_WIN32
 
-#endif
     //redice size anyway
     alerttextsize/=1.5;
     smalltextsize/=1.2;
@@ -141,36 +149,14 @@ void MainWindow::DrawScene()
                 ChannelValueText->setDefaultTextColor(Qt::black);
                 ChannelNameText->setDefaultTextColor(Qt::black);
             }
-            if (Chanel->IsChannelMathematical()) // учесть позже матем.канал.
-                ;//painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
+            //if (Chanel->IsChannelMathematical()) // учесть позже матем.канал.
+            //painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
 
             ch++;
         }
     }
 
 
-}
-
-void MainWindow::DrawSceneBottom()
-{
-    if ( (Options::GetCurrentDisplayParametr() != Options::Polar) && \
-         (Options::GetCurrentDisplayParametr() != Options::Cyfra) && \
-         (Options::GetCurrentDisplayParametr() != Options::TrendsBars) && \
-         (Options::GetCurrentDisplayParametr() != Options::Bars) && \
-         (Options::GetCurrentDisplayParametr() != Options::TrendsCyfra) && \
-         (Options::GetCurrentDisplayParametr() != Options::Trends) )
-    {
-        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
-//        ui->graphicsView->show();
-        DrawScene();   // Add vertical line via center
-
-    }
-    else
-    {
-//        ui->customPlot->resize(ui->left->width()/*1024*//*533*/,ui->left->height() * 0.9/*550*/);
-//        ui->graphicsView->hide();
-
-    }
 }
 
 void MainWindow::AddValuesToBuffer()
@@ -200,14 +186,14 @@ void MainWindow::AddValuesToBuffer()
     }
 
     //пока нет ограничений на объём хранения
-//    while (X_Coordinates_archive.length()>15000)
-//    {
-//        X_Coordinates_archive.removeFirst();
-//        Y_coordinates_Chanel_1_archive.removeFirst();
-//        Y_coordinates_Chanel_2_archive.removeFirst();
-//        Y_coordinates_Chanel_3_archive.removeFirst();
-//        Y_coordinates_Chanel_4_archive.removeFirst();
-//    }
+    while (X_Coordinates_archive.length()>15000)
+    {
+        X_Coordinates_archive.removeFirst();
+        Y_coordinates_Chanel_1_archive.removeFirst();
+        Y_coordinates_Chanel_2_archive.removeFirst();
+        Y_coordinates_Chanel_3_archive.removeFirst();
+        Y_coordinates_Chanel_4_archive.removeFirst();
+    }
 
     int tickstep = GetTickStep();
 
@@ -242,10 +228,10 @@ void MainWindow::UpdateGraphics()
         GrafsUpdateBars();
         updateBars();
         break;
-//    case cSystemOptions::BarsCyfra :
-//        ui->stackedWidget->setCurrentIndex(0);
-//        GrafsUpdateBars();
-//        break;
+        //    case cSystemOptions::BarsCyfra :
+        //        ui->stackedWidget->setCurrentIndex(0);
+        //        GrafsUpdateBars();
+        //        break;
     case cSystemOptions::TrendsBars:
         ui->stackedWidget->setCurrentIndex(0);
         GrafsUpdateTrends();
@@ -267,20 +253,19 @@ void MainWindow::UpdateGraphics()
         GrafsUpdateNone();
         updateWidgetsVols();
         break;
+    case cSystemOptions::Steel:
+        //обновление графика площадки по стали
+//        ui->plotSteel->replot();
+        updateSteelWidget();
+        break;
     default:
         break;
     }
 
 
     selectWidgetDiagram();
-//    DrawSceneBottom();
+    //    DrawSceneBottom();
 }
-
-//void MainWindow::UpdateLog()
-//{
-////    messwrite.WriteAllLogToFile();
-//    updLogTimer->setInterval(LogUpdTimer);
-//}
 
 void MainWindow::GrafsUpdateTrendsAndBars()
 {
@@ -553,16 +538,16 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     {
         QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
         arrow->setPen(QPen(Qt::red, 1, Qt::SolidLine));
-//        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
-//        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
+        //        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
+        //        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
         arrow->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow);
         arrow->deleteLater();
 
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 1, Qt::SolidLine));
-//        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
-//        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->ustavka2.getStateValue() );
+        //        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
+        //        arrow2->end->setCoords(arrowsendcoords.at(barindex++)-1,Chanel->ustavka2.getStateValue() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
         arrow2->deleteLater();
@@ -578,7 +563,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelHi);
         textLabelHi->position->setPixelPoint(Label1PixPoint);
-//        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
+        //        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
         textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
         textLabelHi->setColor(QColor(Qt::red));
 
@@ -587,7 +572,7 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelLo);
         textLabelLo->position->setPixelPoint(Label2PixPoint);
-//        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
+        //        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
 
@@ -652,11 +637,11 @@ void MainWindow::GrafsUpdateTrendsAndBars()
         }
     }
 
-//    int start = clock();
+    //    int start = clock();
 
     ui->customPlot->replot();
 
-//    int endd = clock();
+    //    int endd = clock();
     //    qDebug() << endd - start ;
     ui->customPlot->clearGraphs();
     ui->customPlot->clearItems(); // если не сделать то стрелки будут дублироваться
@@ -677,7 +662,7 @@ void MainWindow::GrafsUpdateTrends()
 
 
 
-//    updateBars();
+    //    updateBars();
 
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(ColorCh1);
@@ -1005,15 +990,15 @@ void MainWindow::GrafsUpdateBars()
     {
         QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
         arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
-//        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
-//        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
+        //        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
+        //        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
         arrow->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow);
 
         QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
         arrow2->setPen(QPen(Qt::green, 3, Qt::SolidLine));
-//        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
-//        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka2.getStateValue() );
+        //        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
+        //        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka2.getStateValue() );
         arrow2->setHead(QCPLineEnding::esSpikeArrow);
         ui->customPlot->addItem(arrow2);
 
@@ -1027,7 +1012,7 @@ void MainWindow::GrafsUpdateBars()
         QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelHi);
         textLabelHi->position->setPixelPoint(Label1PixPoint);
-//        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
+        //        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
         textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
         textLabelHi->setColor(QColor(Qt::red));
 
@@ -1035,7 +1020,7 @@ void MainWindow::GrafsUpdateBars()
         QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
         ui->customPlot->addItem(textLabelLo);
         textLabelLo->position->setPixelPoint(Label2PixPoint);
-//        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
+        //        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
         textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
         textLabelLo->setColor(QColor(Qt::green));
 
@@ -1064,16 +1049,16 @@ void MainWindow::UpdateChannel1Slot()
     int period = channel1.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(0);
     int slot = csc.getSlotByChannel(devCh);
-//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName("DataChan0"/*"chan0Data"*/);
+    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan0"*/"chan0Data");
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
-//    CheckAndLogginStates(channel1);
+    //    CheckAndLogginStates(channel1);
 
     /* Test */
-#ifdef Q_OS_WIN
+#ifdef RANDOM_CHAN
     randVal[0] += ((double)((rand()%101) - 50) / 100);
     channel1.SetCurrentChannelValue(randVal[0]);
     ui->wBar_1->setVolue(randVal[0]);
@@ -1091,15 +1076,15 @@ void MainWindow::UpdateChannel2Slot()
     int devCh = csc.getDevChannel(1);
     int slot = csc.getSlotByChannel(devCh);
     //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName("DataChan1"/*"chan1Data"*/);
+    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan1"*/"chan1Data");
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
-//    CheckAndLogginStates(channel2);
+    //    CheckAndLogginStates(channel2);
 
-        /* Test */
-#ifdef Q_OS_WIN
+    /* Test */
+#ifdef RANDOM_CHAN
     randVal[1] += ((double)((rand()%101) - 50) / 100);
     channel2.SetCurrentChannelValue(randVal[1]);
     ui->wBar_2->setVolue(randVal[1]);
@@ -1116,16 +1101,16 @@ void MainWindow::UpdateChannel3Slot()
     int period = channel3.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(2);
     int slot = csc.getSlotByChannel(devCh);
-//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName("DataChan2"/*"chan2Data"*/);
+    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan2"*/"chan2Data");
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
-//    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
-//    CheckAndLogginStates(channel3);
+    //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
+    //    CheckAndLogginStates(channel3);
 
     /* Test */
-#ifdef Q_OS_WIN
+#ifdef RANDOM_CHAN
     randVal[2] += ((double)((rand()%101) - 50) / 100);
     channel3.SetCurrentChannelValue(randVal[2]);
     ui->wBar_3->setVolue(randVal[2]);
@@ -1142,16 +1127,16 @@ void MainWindow::UpdateChannel4Slot()
     int period = channel4.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(3);
     int slot = csc.getSlotByChannel(devCh);
-//    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName("DataChan3"/*"chan3Data"*/);
+    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan3"*/"chan3Data");
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-//    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
-//    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
-//    CheckAndLogginStates(channel4);
+    //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
+    //    CheckAndLogginStates(channel4);
 
     /* Test */
-#ifdef Q_OS_WIN
+#ifdef RANDOM_CHAN
     randVal[3] += ((double)((rand()%101) - 50) / 100);
     channel4.SetCurrentChannelValue(randVal[3]);
     ui->wBar_4->setVolue(randVal[3]);
@@ -1159,6 +1144,71 @@ void MainWindow::UpdateChannel4Slot()
 #endif
 
     channeltimer4->setInterval(period);
+}
+
+void MainWindow::updateSteel()
+{
+    if(!slotSteelOnline) return;
+
+    if(steelReady)
+    {   //в плате STEEL имеются данные дял получения
+        int i = steelReadyNum;
+        cSteel * steel = listSteel.at(i);
+        if(!steel->allVectorsReceived)
+        {   //скачивам все точки для графика
+            int slot = ssc.getSlotBySteel(i);
+            int devCh = ssc.getDevSteel(i);
+            Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
+            tr.paramA12[0] = indexSteel;
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "AdditionalParameter2");
+            emit sendTransToWorker(tr);
+        }
+        else
+        {   //все точки пролучены - меняем режим работы с платой STEEL
+            steelReady = false;
+            timerUpdateSteel->setInterval(UpdateSteelTime);
+        }
+        return;
+    }
+
+    for(int i = 0; i<listSteel.size(); i++)
+    {   // поочерёдный опрос статуса всех входных групп
+        cSteel * steel = listSteel.at(i);
+        int slot = ssc.getSlotBySteel(i);
+        int devCh = ssc.getDevSteel(i);
+        Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
+
+        if(steel->status == StatusCh_DataReady)
+        {   // i-тая входная группа нашла площадку и имеются готовые данные
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
+            emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "OxActivity");
+            emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "MassAl");
+            emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "MassAl");
+            emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "PrimaryActivity");
+            emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "AdditionalParameter2");
+            emit sendTransToWorker(tr);
+            //очистка векторов для новых данных
+            steel->vectorTemp.resize(0);
+            steel->vectorEds.resize(0);
+            //очистка признаков завершения получения векторов (только всё начинается)
+            steel->allVectorsReceived = false;
+            steel->vectorEdsReceived = false;
+            steel->vectorEdsReceived = false;
+            //данные на стороне платы STEEL готовы - запомним
+            steelReady = true;  //данные готовы
+            steelReadyNum = i;  //запоминаем номер входной группы
+            //меням период запросов к плате STEEL, чтобы выкачать массивы данных
+            timerUpdateSteel->setInterval(10);
+        }
+        //постоянно спрашиваем статус у всех входных групп
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Status");
+        emit sendTransToWorker(tr);
+    }
 }
 
 void MainWindow::readReleSlot(uint8_t code)
@@ -1258,11 +1308,70 @@ void MainWindow::selectWidgetDiagram(void)
          (systemOptions.display == cSystemOptions::Trends) )
     {
         ui->stackedWidgetDiagram->setCurrentIndex(0);
+        ui->right->show();
+        ui->left->show();
+        ui->frameSteel->hide();
     }
     else if(systemOptions.display == cSystemOptions::Polar ||\
             systemOptions.display == cSystemOptions::PolarBars ||\
             systemOptions.display == cSystemOptions::PolarCyfra)
     {
         ui->stackedWidgetDiagram->setCurrentIndex(1);
+        ui->right->show();
+        ui->left->show();
+        ui->frameSteel->hide();
+    }
+    else if(systemOptions.display == cSystemOptions::Steel)
+    {
+        ui->right->hide();
+        ui->left->hide();
+        ui->frameSteel->show();
+    }
+}
+
+void MainWindow::updateSteelWidget(void)
+{
+    if(steelReady)
+    {   //найдена площадка
+        //steelReadyNum
+        cSteel * steel = listSteel.at(steelReadyNum);
+        ui->nameSteelTech->setText(steel->technology->name);
+        ui->labelTimeSteel->setText(steel->timeUpdateData.toString("dd.MM.yy hh:mm:ss"));
+        ui->steelTemp->setText(QString::number(steel->temp));
+        ui->steelEmf->setText(QString::number(steel->eds));
+        ui->steelAO->setText(QString::number(steel->ao));
+        ui->steelAl->setText(QString::number(steel->alg));
+        ui->steelC->setText(QString::number(steel->cl));
+        X_Coord_Steel.resize(0);
+        Y_Coord_SteelTemp.resize(0);
+        Y_Coord_SteelEds.resize(0);
+    }
+    else if(listSteel.at(steelReadyNum)->allVectorsReceived)
+    {
+        Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
+        Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
+        for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
+        {
+            X_Coord_Steel = i;
+        }
+        ui->plotSteel->clearGraphs();
+        ui->plotSteel->addGraph();
+        ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
+        ui->plotSteel->rescaleAxes();
+        ui->plotSteel->replot();
+        ui->plotSteel->clearItems();
+    }
+    else
+    {
+        QString str = "Нет данных";
+        ui->nameSteelTech->setText(str);
+        ui->labelTimeSteel->setText(str);
+        ui->steelTemp->setText(str);
+        ui->steelEmf->setText(str);
+        ui->steelAO->setText(str);
+        ui->steelAl->setText(str);
+        ui->steelC->setText(str);
+        ui->plotSteel->clearGraphs();
+
     }
 }

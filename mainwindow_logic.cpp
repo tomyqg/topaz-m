@@ -46,8 +46,12 @@
 int dateindex;
 int timeindex;
 QStringList datestrings, timestrings;
+cChannelSlotController csc;
+cSteelController ssc;
+
 
 extern MainWindow * globalMainWin;
+extern QList<cSteel*> listSteel;
 //extern tDeviceBasicParams g_deviceDataStorage;
 
 void MainWindow::MainWindowInitialization()
@@ -58,7 +62,10 @@ void MainWindow::MainWindowInitialization()
     ui->left->hide();
     ui->header->hide();
     ui->footer->hide();
+    ui->splash->setMaximumWidth(1000000);
     ui->splash->show();
+    ui->frameSteel->setMaximumWidth(0);
+    ui->frameSteel->hide();
     connect(&timerLoad, SIGNAL(timeout()), this, SLOT(tickLoadWidget()));
     timerLoad.start(50);
     QPixmap pixLoad(pathtologotip);
@@ -136,7 +143,6 @@ void MainWindow::MainWindowInitialization()
     listCh.append(&channel3);
     listCh.append(&channel4);
 
-
     //перед рисованием графиков записать нули в первый элемент вектора
     channel1.SetCurrentChannelValue(0);
     channel2.SetCurrentChannelValue(0);
@@ -187,10 +193,24 @@ void MainWindow::MainWindowInitialization()
     // инициализация таблицы реле-слот
     InitRelaySlotTable();
 
+    //инициализация таблицы сталь-слот
+    InitSteelSlotTable();
+
     // инициализация объектов уставок
     InitUstavka();
     // получение значений уставок из файла
 //    ReadUstavkiFromFile();
+
+    //инициализация параметров измерения стали
+    initSteel();
+    slotSteelOnline = false;
+    steelReady = false;
+    steelReadyNum = 0;
+    indexSteel = 0;
+    timerUpdateSteel = new QTimer(this);
+    timerUpdateSteel->start(UpdateSteelTime);
+    connect(timerUpdateSteel, SIGNAL(timeout()), this, SLOT(updateSteel()));
+
 
 //    channel1.ReadSingleChannelOptionFromFile(1);
 //    channel2.ReadSingleChannelOptionFromFile(2);
@@ -387,9 +407,11 @@ void MainWindow::UpdUst()
 //-----Временная реализация соединения слотов----
 
 #ifdef Q_OS_WIN32
-#define CONST_SLAVE_ADC     7
-#define CONST_SLAVE_RELAY   7
+#define CONST_SLAVE_STEEL   4
+#define CONST_SLAVE_ADC     5
+#define CONST_SLAVE_RELAY   6
 #else
+#define CONST_SLAVE_STEEL   4
 #define CONST_SLAVE_ADC     5
 #define CONST_SLAVE_RELAY   6
 #endif
@@ -414,6 +436,15 @@ void MainWindow::InitRelaySlotTable()
     rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
     rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
 }
+
+void MainWindow::InitSteelSlotTable()
+{
+    ssc.addSteelSlot(0, 0, CONST_SLAVE_STEEL);
+    ssc.addSteelSlot(1, 1, CONST_SLAVE_STEEL);
+    ssc.addSteelSlot(2, 2, CONST_SLAVE_STEEL);
+    ssc.addSteelSlot(3, 3, CONST_SLAVE_STEEL);
+}
+
 //-----/Временная реализация соединения слотов----
 
 
@@ -877,6 +908,7 @@ void MainWindow::parseWorkerReceive()
     while(!queueTransaction.isEmpty() && (counter++ < 4))
     {
         tr = queueTransaction.dequeue();
+        int typeDevice = sc->getTypeDevice(tr.slave);
         paramName = cRegistersMap::getNameByOffset(tr.offset);
         isDeviceParam = false;
         if(tr.offset < BASE_OFFSET_DEVICE)
@@ -917,7 +949,7 @@ void MainWindow::parseWorkerReceive()
 //            emit retransToSlotConfig(tr);
             if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
             {
-                if(tr.slave == 1)   //контроллировать источник нужно во всех "else if"
+                if(typeDevice == Device_4AI)   //контроллировать источник нужно во всех "else if"
                 {
                     channel->SetSignalType(tr.volInt);
                     channel->SetCurSignalType(tr.volInt);
@@ -926,7 +958,7 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter1"))
             {
-                if(tr.slave == 1)
+                if(typeDevice == Device_4AI)
                 {
                     if((channel->GetSignalType() == ChannelOptions::MeasureTermoResistance) ||
                             (channel->GetSignalType() == ChannelOptions::MeasureTC))
@@ -942,42 +974,152 @@ void MainWindow::parseWorkerReceive()
 
                 }
             }
-            else if(paramName == "DataChan0")
+            else if((paramName == "DataChan0") || (paramName == "chan0Data"))
             {
-                channel1.SetCurrentChannelValue((double)tr.volFlo);
-                ui->wBar_1->setVolue((double)tr.volFlo);
-                ui->widgetVol1->setVol((double)tr.volFlo);
+                if(typeDevice == Device_4AI)
+                {
+                    channel1.SetCurrentChannelValue((double)tr.volFlo);
+                    ui->wBar_1->setVolue((double)tr.volFlo);
+                    ui->widgetVol1->setVol((double)tr.volFlo);
+                }
+                else if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(0)->temp = tr.volFlo;
+                }
             }
-            else if(paramName == "DataChan1")
+            else if((paramName == "DataChan1") || (paramName == "chan1Data"))
             {
-                channel2.SetCurrentChannelValue((double)tr.volFlo);
-                ui->wBar_2->setVolue((double)tr.volFlo);
-                ui->widgetVol2->setVol((double)tr.volFlo);
+                if(typeDevice == Device_4AI)
+                {
+                    channel2.SetCurrentChannelValue((double)tr.volFlo);
+                    ui->wBar_2->setVolue((double)tr.volFlo);
+                    ui->widgetVol2->setVol((double)tr.volFlo);
+                }
+                else if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(1)->temp = tr.volFlo;
+                }
             }
-            else if(paramName == "DataChan2")
+            else if((paramName == "DataChan2") || (paramName == "chan2Data"))
             {
-                channel3.SetCurrentChannelValue((double)tr.volFlo);
-                ui->wBar_3->setVolue((double)tr.volFlo);
-                ui->widgetVol3->setVol((double)tr.volFlo);
+                if(typeDevice == Device_4AI)
+                {
+                    channel3.SetCurrentChannelValue((double)tr.volFlo);
+                    ui->wBar_3->setVolue((double)tr.volFlo);
+                    ui->widgetVol3->setVol((double)tr.volFlo);
+                }
+                else if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(2)->temp = tr.volFlo;
+                }
             }
-            else if(paramName == "DataChan3")
+            else if((paramName == "DataChan3") || (paramName == "chan3Data"))
             {
-                channel4.SetCurrentChannelValue((double)tr.volFlo);
-                ui->wBar_4->setVolue((double)tr.volFlo);
-                ui->widgetVol4->setVol((double)tr.volFlo);
+                if(typeDevice == Device_4AI)
+                {
+                    channel4.SetCurrentChannelValue((double)tr.volFlo);
+                    ui->wBar_4->setVolue((double)tr.volFlo);
+                    ui->widgetVol4->setVol((double)tr.volFlo);
+                }
+                else if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(3)->temp = tr.volFlo;
+                }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Data"))
             {
 //                 Vag: времено или совсем не использовать этот параметр для построения графика
 //                channel->SetCurrentChannelValue((double)tr.volFlo);
             }
+            else if(paramName == QString("chan" + QString::number(ch) + "OxActivity"))
+            {
+                listSteel.at(ch)->ao = tr.volInt;
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "MassAl"))
+            {
+                listSteel.at(ch)->alg = tr.volInt;
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "Carbon"))
+            {
+                listSteel.at(ch)->cup = tr.volInt;
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "PrimaryActivity"))
+            {
+                listSteel.at(ch)->eds = tr.volFlo;
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter2"))
+            {
+                if(typeDevice == Device_STEEL)
+                {
+                    if(tr.paramA12[0] & 0x8000) //проверка флага готовности данных
+                    {
+                        uint16_t indexIn = tr.paramA12[0] & 0x7FFF;
+                        int selectVector = tr.paramA12[0] & 0x0001;
+
+                        if(indexIn == indexSteel)
+                        {
+
+                            if(selectVector == 1)
+                            {
+                                if(listSteel.at(ch)->vectorTemp.size() <= ((indexIn >> 1) * 5))
+                                {   //проверка на корректное заполнение массива
+                                    for(int i = 1; i <= 5; i++)
+                                    {
+                                        if(tr.paramA12[i] == 0xFFFF)
+                                        {
+                                            listSteel.at(ch)->vectorTempReceived = true;
+                                            break;
+                                        }
+                                        listSteel.at(ch)->vectorTemp.append(((double)tr.paramInt16[i])/10.0);
+                                    }
+                                }
+                            }
+                            else //selectVector = 0
+                            {
+                                if(listSteel.at(ch)->vectorEds.size() <= ((indexIn >> 1) * 5))
+                                {   //проверка на корректное заполнение массива
+                                    for(int i = 1; i <= 5; i++)
+                                    {
+                                        if(tr.paramA12[i] == 0xFFFF)
+                                        {
+                                            listSteel.at(ch)->vectorEdsReceived = true;
+                                            break;
+                                        }
+                                        listSteel.at(ch)->vectorTemp.append(((double)tr.paramInt16[i])/10.0);
+                                    }
+                                }
+                            }
+                            if(listSteel.at(ch)->vectorTempReceived && \
+                                    listSteel.at(ch)->vectorEdsReceived)
+                            {
+                                listSteel.at(ch)->allVectorsReceived = true;
+                            }
+                            else
+                            {
+                                indexSteel++;
+                            }
+                        }
+                    }
+                }
+            }
             else
             {
                 emit retransToSlotConfig(tr);
             }
         }
-        else
+        else    //isDeviceParam
         {
+            if(paramName == "deviceType")
+            {
+                if(tr.volInt == Device_STEEL)
+                {
+                    if(!slotSteelOnline)
+                    {
+                        //Vag: тут вставить инициализацию списка входных групп
+                    }
+                    slotSteelOnline = true;
+                }
+            }
             emit retransToSlotConfig(tr);
         }
 
@@ -1017,26 +1159,25 @@ bool MainWindow::isChannelInMinNow(int ch)
 
 void MainWindow::sendConfigChannelsToSlave()
 {
-    QList<ChannelOptions *> ChannelsObjectsList;
-    ChannelsObjectsList.append(&channel1);
-    ChannelsObjectsList.append(&channel2);
-    ChannelsObjectsList.append(&channel3);
-    ChannelsObjectsList.append(&channel4);
+//    QList<ChannelOptions *> ChannelsObjectsList;
+//    ChannelsObjectsList.append(&channel1);
+//    ChannelsObjectsList.append(&channel2);
+//    ChannelsObjectsList.append(&channel3);
+//    ChannelsObjectsList.append(&channel4);
 
     Transaction tr;
     tr.dir = Transaction::W;
     QString str;
-    int devCh;
 
-    for(int i = 0; i < ChannelsObjectsList.size(); i++)
+    for(int i = 0; i < listCh.size(); i++)
     {
-        devCh = csc.getDevChannel(i);
+        int devCh = csc.getDevChannel(i);
         tr.slave = csc.getSlotByChannel(devCh);
 
         // запись актуального значения SignalType
         str = "chan" + QString::number(devCh) + "SignalType";
         tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = ChannelsObjectsList.at(i)->GetSignalType();
+        tr.volInt = listCh.at(i)->GetSignalType();
         emit sendTransToWorker(tr);
 
         // запись актуального Additional parameter1
@@ -1045,24 +1186,122 @@ void MainWindow::sendConfigChannelsToSlave()
 //        tr.volInt = 0;
         int size = sizeof(tr.paramA12);
         memset(tr.paramA12, 0, size);
-        if(ChannelsObjectsList.at(i)->GetSignalType() == ModBus::VoltageMeasure)
+        if(listCh.at(i)->GetSignalType() == ModBus::VoltageMeasure)
         {
-            tr.paramA12[0] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+            tr.paramA12[0] = (uint16_t)listCh.at(i)->GetDiapason();
         }
-        else if(ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
+        else if(listCh.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
         {
-            tr.paramA12[0] = (uint16_t)ChannelsObjectsList.at(i)->getShema();
-            tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+            tr.paramA12[0] = (uint16_t)listCh.at(i)->getShema();
+            tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
         }
-        else if((ChannelsObjectsList.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
+        else if((listCh.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
         {
             tr.paramA12[0] = 1;
-            tr.paramA12[1] = (uint16_t)ChannelsObjectsList.at(i)->GetDiapason();
+            tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
             tr.paramA12[2] = 2;
         }
         emit sendTransToWorker(tr);
     }
+
+    for(int i = 0; i < listSteel.size(); i++)
+    {
+        cSteel * st = listSteel.at(i);
+        int devS = ssc.getDevSteel(i);
+        tr.slave = ssc.getSlotBySteel(devS);
+
+        // запись Time_square_temperature
+        str = "chan" + QString::number(devS) + "TimeSquareTemp";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->dSt;
+        emit sendTransToWorker(tr);
+
+        // запись Range_temperature
+        str = "chan" + QString::number(devS) + "RangeTemp";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->dt;
+        emit sendTransToWorker(tr);
+
+        // запись Time_measure_temperature
+        str = "chan" + QString::number(devS) + "TimeMeasureTemp";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->tPt;
+        emit sendTransToWorker(tr);
+
+        // запись Low_lim_temp
+        str = "chan" + QString::number(devS) + "LowTemp";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->LPtl;
+        emit sendTransToWorker(tr);
+
+        // запись Hi_lim_temp
+        str = "chan" + QString::number(devS) + "HiTemp";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->LPth;
+        emit sendTransToWorker(tr);
+
+        // запись Sensor_Type_Activty
+        str = "chan" + QString::number(devS) + "SensorType";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->COH;
+        emit sendTransToWorker(tr);
+
+        // запись Time_square_EDS
+        str = "chan" + QString::number(devS) + "TimeSquareEDS";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->dSE;
+        emit sendTransToWorker(tr);
+
+        // запись Range_EDS
+        str = "chan" + QString::number(devS) + "RangeEDS";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->dE;
+        emit sendTransToWorker(tr);
+
+        // запись Time_measure_EDS
+        str = "chan" + QString::number(devS) + "TimeMeasureEDS";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volFlo = st->technology->tPE;
+        emit sendTransToWorker(tr);
+
+        // запись Сrystallization_temperature
+        str = "chan" + QString::number(devS) + "Crystallization";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->b1;
+        emit sendTransToWorker(tr);
+
+        // запись Mass_coefficient
+        str = "chan" + QString::number(devS) + "MassCoeff";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->b2;
+        emit sendTransToWorker(tr);
+
+        // запись Final_oxidation
+        str = "chan" + QString::number(devS) + "FinalOx";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->O;
+        emit sendTransToWorker(tr);
+
+        // запись Assimilation of aluminum
+        str = "chan" + QString::number(devS) + "Assimilation";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->Y;
+        emit sendTransToWorker(tr);
+
+        // запись Mass_melting
+        str = "chan" + QString::number(devS) + "MassMelting";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.volInt = st->technology->G;
+        emit sendTransToWorker(tr);
+
+        // запись Mass_melting
+        str = "chan" + QString::number(devS) + "AdditionalParameter1";
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        tr.paramA12[1] = st->technology->nSt;
+        emit sendTransToWorker(tr);
+    }
 }
+
 
 //void MainWindow::askAnybusIRQ()
 //{
@@ -1128,4 +1367,3 @@ void MainWindow::sendConfigChannelsToSlave()
 //        break;
 //    }
 //}
-

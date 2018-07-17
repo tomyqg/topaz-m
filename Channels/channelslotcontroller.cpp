@@ -68,3 +68,8 @@ int cChannelSlotController::getSlotByChannel(int userCh)
     }
     return res;
 }
+
+bool cChannelSlotController::isConnect()
+{
+    return (listCS.size() > 0);
+}

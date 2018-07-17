@@ -7,6 +7,7 @@
 #include "device.h"
 #include "src/modbus.h"
 #include "transaction.h"
+#include "registersmap.h"
 
 #define TOTAL_BAD_TR_MODBAS 5       //количество ошибок до фиксации в журнале
 #define MODBUS_TIMEVAL_MKS  200000  //время ожидания огтвета от слэйва
@@ -49,8 +50,8 @@ public slots:
 private slots:
 //    void do_Work();
     int sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest);
-    int ReadModbusData(uint8_t sl, const deviceparametrs* dp, uint32_t *data_dest);
-    int WriteModbusData(uint8_t sl, const deviceparametrs * dp, uint32_t * data32);
+    int ReadModbusData(uint8_t sl, const tLookupRegisters *dp, uint32_t *data_dest);
+    int WriteModbusData(uint8_t sl, const tLookupRegisters *dp, uint32_t * data32);
     void OpenSerialPort( int );
 
 
