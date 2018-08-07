@@ -20,6 +20,7 @@ public:
     void setAlignLeft();
     void setAlignCenter();
     void setAlignRight();
+    void setFontSize(int s);
 
 
 private slots:
@@ -38,6 +39,7 @@ private:
     QString strColorText;
     QString strColorBg;
     QString strAlign;
+
 //    bool eventFilter(QObject *watched, QEvent *event);
     void resizeEvent(QResizeEvent * s);
 };

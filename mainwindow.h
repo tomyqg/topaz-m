@@ -26,6 +26,7 @@
 #include "steel.h"
 #include "steel_technology.h"
 #include "steel_controller.h"
+#include "relay.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -105,13 +106,13 @@ public slots:
     void getTransFromWorkerSlot(Transaction tr);
     void parseWorkerReceive();
 //    void releOutSlot(uint8_t code);
-    void readReleSlot(uint8_t code);
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
     void retransToWorker(Transaction tr);
     void openSettingsChannel(int num);
     void updateSystemOptions();
     void updateSteel();
+    void writeArchiveSteel(int steelNum);
 
 private slots:
 
@@ -130,11 +131,12 @@ private slots:
     void ChangePalette(bool i);
     void on_WorkButton_clicked();
     void on_ArchiveButton_clicked();
-    void on_EcoCheckBox_toggled(bool checked);
+//    void on_EcoCheckBox_toggled(bool checked);
 //    void on_timeButton_clicked();
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
+
 //    void askAnybusIRQ();
 
 //    void on_sendI2C_clicked();
@@ -147,6 +149,14 @@ private slots:
     void plotReleas(QMouseEvent * pe);
     void plotMove(QMouseEvent * pe);
     void updateAutoScale();
+
+    void on_pushButton_clicked();
+
+    void on_buttonInputsGraphs_clicked();
+
+//    void on_buttonInputsGraphs_pressed();
+
+//    void on_buttonInputsGraphs_released();
 
 signals:
     void error(const QString &s);
@@ -295,6 +305,7 @@ private:
 
     cRelaySlotController rsc;
     void InitRelaySlotTable();
+    QList<cRelay*> listRelais;
 
     uint32_t getDevOffsetByChannel(int ch, uint32_t offset);
 
@@ -332,6 +343,9 @@ private:
     QTimer * timerUpdateSteel;  //таймер одновления данных с платы STEEL
     int indexSteel;             //индекс массива температур и эдс
     void updateSteelWidget();   //обновление виджета с данными и графиком стали
+    void simulatorSteel();      //Vag: симуляция данных по стали
+    bool steelSelectFrame;
+    void logginSteel(int numSteel);
 
 protected:
     void paintEvent(QPaintEvent *event) ;

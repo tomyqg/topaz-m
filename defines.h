@@ -14,7 +14,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "0.6" //версия ПО
+#define CURRENT_VER "1.6" //версия ПО
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС
 
@@ -110,7 +110,7 @@
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
 #define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
-#define UpdateSteelTime 3000
+#define UpdateSteelTime 1000
 
 #endif
 

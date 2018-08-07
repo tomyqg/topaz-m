@@ -12,7 +12,7 @@
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 extern QVector<QDateTime> X_Date_Coordinates;
-
+extern QList<cSteel*> listSteel;
 
 
 void MainWindow::WriteGpio(int num, bool val)
@@ -421,3 +421,60 @@ QJsonObject MainWindow::ObjectFromString(const QString& in)
     return val.toObject();
 }
 //----------------------------------------
+
+void MainWindow::writeArchiveSteel(int steelNum)
+{
+    QJsonObject archive;
+    QJsonArray archives;
+    QJsonObject eds;
+    QJsonObject temp;
+    QJsonArray valEds;
+    QJsonArray valTemp;
+    cSteel * steel = listSteel.at(steelNum);
+
+    for(int i = 0; i < steel->vectorEds.size(); i++)
+    {
+        valEds.append(QString::number(steel->vectorEds.at(i), 'f', 0));
+    }
+    for(int i = 0; i < steel->vectorTemp.size(); i++)
+    {
+        valTemp.append(QString::number(steel->vectorTemp.at(i), 'f', 0));
+    }
+
+    eds["name"] = "Eds";
+    eds["size"] = steel->vectorEds.size();
+    eds["values"] = valEds;
+
+    temp["name"] = "Temp";
+    temp["size"] = steel->vectorTemp.size();
+    temp["values"] = valTemp;
+
+    archives.append(eds);
+    archives.append(temp);
+
+//    QDateTime CurrentDateTime(QDateTime::currentDateTime());
+    archive["Archives"] = archives;
+    archive["Date"] = steel->timeUpdateData.toString("dd/MM/yy");
+    archive["Time"] = steel->timeUpdateData.toString("hh:mm:ss");
+    archive["Input"] = steelNum;
+    archive["Technology"] = steel->technology->name;
+    archive["Temp"] = QString::number(steel->temp, 'f', 2);
+    archive["Eds"] = QString::number(steel->eds, 'f', 2);
+    archive["OxActivity"] = QString::number(steel->ao);
+    archive["Carbon"] = QString::number(steel->cl, 'f', 2);
+    archive["MassAl"] = QString::number(steel->alg);
+
+
+    QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
+    QString pathtologs = pathtolog;
+    pathtologs.append("steel_");
+    pathtologs.append(steel->timeUpdateData.toString("ddMMyy"));
+    pathtologs.append(steel->timeUpdateData.toString("hhmmss"));
+    pathtologs.append(".txt");
+    QFile file(pathtologs);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    QTextStream out(&file);
+    out << setstr;
+    file.close();
+}

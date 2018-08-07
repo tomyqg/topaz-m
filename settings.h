@@ -74,6 +74,7 @@ private:
     void updateUIfromSteel();
     cSteel * curSteel;
     void UpdateSteelUI(typeSteelTech * tech);
+    QVector<double> X_Steel, Y_SteelTemp, Y_SteelEds;
 
 private slots:
     void on_exitButton_clicked();
@@ -95,6 +96,11 @@ private slots:
     void drowGraf();
     void on_groupTech_currentIndexChanged(int index);
     void on_buttonResetSteel_clicked();
+    void on_timeSteel_currentIndexChanged(const QString &arg1);
+    void on_steelRelayBreak_activated(int index);
+    void on_steelRelayReady_activated(int index);
+    void on_steelRelayMeasure_activated(int index);
+    void on_steelRelayTimeOut_activated(int index);
 };
 
 #endif // SETTINGS_H

@@ -16,6 +16,8 @@
 //    #define RANDOM_CHAN
 #endif
 
+#define PERIOD_MEASURE_STEEL 250    //msec период точек на графике анализа стали
+
 int xoffset=0;
 
 double randVal[4] = {((double)((rand()%101) - 50) / 10),\
@@ -117,10 +119,10 @@ void MainWindow::DrawScene()
                 ChannelValueString = ObryvErrorMessage;
             else
             {
-                if (!ui->percentCheckBox->checkState())
+//                if (!ui->percentCheckBox->checkState())
                     ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-                else
-                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//                else
+//                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
             QGraphicsTextItem *ChannelValueText = scene->addText(ChannelValueString); //ChannelValueString
@@ -298,20 +300,20 @@ void MainWindow::GrafsUpdateTrendsAndBars()
     ui->customPlot->graph(3)->setPen(graphPen);
 
 
-    if (ui->showdots->checkState()) {
-        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
-        ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
-        ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
-        ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
-    }
+//    if (ui->showdots->checkState()) {
+//        ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel1.GetStateDependentColor(),Qt::red, 3));
+//        ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel2.GetStateDependentColor(),Qt::red, 3));
+//        ui->customPlot->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel3.GetStateDependentColor(),Qt::red, 3));
+//        ui->customPlot->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, channel4.GetStateDependentColor(),Qt::red, 3));
+//    }
 
 
-    if (ui->showcenterdots->checkState()) {
-        ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
-        ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
-        ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
-        ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
-    }
+//    if (ui->showcenterdots->checkState()) {
+//        ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(2)->setLineStyle(QCPGraph::lsStepCenter);
+//        ui->customPlot->graph(3)->setLineStyle(QCPGraph::lsStepCenter);
+//    }
 
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
@@ -1044,6 +1046,7 @@ void MainWindow::GrafsUpdateBars()
 
 void MainWindow::UpdateChannel1Slot()
 {
+//    qDebug() << "1Slot" << "in";
     if(channel1.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
@@ -1066,10 +1069,12 @@ void MainWindow::UpdateChannel1Slot()
 #endif
 
     channeltimer1->setInterval(period);
+//    qDebug() << "1Slot" << "out";
 }
 
 void MainWindow::UpdateChannel2Slot()
 {
+//    qDebug() << "2Slot" << "in";
     if(channel2.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
@@ -1078,8 +1083,9 @@ void MainWindow::UpdateChannel2Slot()
     //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
     uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan1"*/"chan1Data");
     Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
+//        qDebug() << "MainWindow SIGNAL" << tr.offset;
     emit sendTransToWorker(tr);
+//        qDebug() << "sendTransToWorker";
     //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
     //    CheckAndLogginStates(channel2);
 
@@ -1092,10 +1098,12 @@ void MainWindow::UpdateChannel2Slot()
 #endif
 
     channeltimer2->setInterval(period);
+//    qDebug() << "2Slot" << "out";
 }
 
 void MainWindow::UpdateChannel3Slot()
 {
+//    qDebug() << "3Slot" << "in";
     if(channel3.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
@@ -1118,10 +1126,12 @@ void MainWindow::UpdateChannel3Slot()
 #endif
 
     channeltimer3->setInterval(period);
+//    qDebug() << "3Slot" << "out";
 }
 
 void MainWindow::UpdateChannel4Slot()
 {
+//    qDebug() << "4Slot" << "in";
     if(channel4.GetSignalType() == 0) return;
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
@@ -1144,30 +1154,100 @@ void MainWindow::UpdateChannel4Slot()
 #endif
 
     channeltimer4->setInterval(period);
+//    qDebug() << "4Slot" << "out";
 }
 
 void MainWindow::updateSteel()
 {
     if(!slotSteelOnline) return;
 
-    if(steelReady)
-    {   //в плате STEEL имеются данные дял получения
-        int i = steelReadyNum;
+    /*
+     * Управление реле
+     */
+    for(int i = 0; i<listSteel.size(); i++)
+    {
         cSteel * steel = listSteel.at(i);
-        if(!steel->allVectorsReceived)
-        {   //скачивам все точки для графика
-            int slot = ssc.getSlotBySteel(i);
-            int devCh = ssc.getDevSteel(i);
-            Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
-            tr.paramA12[0] = indexSteel;
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "AdditionalParameter2");
-            emit sendTransToWorker(tr);
+        int countRele = SUM_RELAYS;
+        uint8_t relayStates[countRele];
+        memset(relayStates, 0, countRele * sizeof(relayStates[0]));
+        if(steel->status == StatusCh_SteelWaitData)
+        {
+            relayStates[1] = 1;
+        }
+        else if(steel->status == StatusCh_SteelUpdateData)
+        {
+            relayStates[2] = 1;
+        }
+        else if((steel->status == StatusCh_SteelNotFoundSquareTemp)\
+                || (steel->status == StatusCh_SteelNotFoundSquareEds)\
+                || (steel->status == StatusCh_SteelNotFoundSquares)\
+                || (steel->status == StatusCh_SteelSquaresOK))
+        {
+            relayStates[3] = 1;
+        }
+        else if(steel->status == StatusCh_WaitConf) //обрыв датчика
+        {
+            relayStates[0] = 1;
+        }
+
+        for(int i = 0; i < countRele; i++)
+        {
+            int8_t relay = steel->relais[i];
+            if(relay != -1)
+            {
+                if(listRelais.at(relay)->newState != relayStates[i])
+                {
+                    listRelais.at(relay)->newState = relayStates[i];
+                    Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
+                    uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
+                    if(relay%2)
+                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
+                    else
+                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
+                    tr.volInt = relayStates[i];
+                    emit sendTransToWorker(tr);
+                }
+            }
+
+        }
+    }
+
+    if(steelReady)
+    {   //в плате STEEL имеются данные для получения
+        if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
+                (listSteel.at(steelReadyNum)->vectorTempReceived))
+        {
+            if(!listSteel.at(steelReadyNum)->allVectorsReceived)
+            {
+                //запись в журнал
+                logginSteel(steelReadyNum);
+                writeArchiveSteel(steelReadyNum);
+            }
+            listSteel.at(steelReadyNum)->allVectorsReceived = true;
+
+
         }
         else
-        {   //все точки пролучены - меняем режим работы с платой STEEL
-            steelReady = false;
-            timerUpdateSteel->setInterval(UpdateSteelTime);
+        {
+            listSteel.at(steelReadyNum)->allVectorsReceived = false;
         }
+
+        if(/*(listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData) || */\
+                (listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData))
+        {
+            steelReady = false;
+        }
+
+        Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
+        emit sendTransToWorker(tr);
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
+        emit sendTransToWorker(tr);
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
+        emit sendTransToWorker(tr);
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
+        emit sendTransToWorker(tr);
+
         return;
     }
 
@@ -1178,74 +1258,47 @@ void MainWindow::updateSteel()
         int devCh = ssc.getDevSteel(i);
         Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
 
-        if(steel->status == StatusCh_DataReady)
+        if((steel->status == StatusCh_SteelSquaresOK) ||\
+                (steel->status == StatusCh_SteelNotFoundSquareTemp) || \
+                (steel->status == StatusCh_SteelNotFoundSquareEds) || \
+                (steel->status == StatusCh_SteelNotFoundSquares))
         {   // i-тая входная группа нашла площадку и имеются готовые данные
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
-            emit sendTransToWorker(tr);
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "OxActivity");
-            emit sendTransToWorker(tr);
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "MassAl");
-            emit sendTransToWorker(tr);
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "MassAl");
-            emit sendTransToWorker(tr);
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "PrimaryActivity");
-            emit sendTransToWorker(tr);
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "AdditionalParameter2");
-            emit sendTransToWorker(tr);
+            QList<QString> str;
+            str << "Data" << "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
+            foreach (QString s, str) {
+                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
+                emit sendTransToWorker(tr);
+            }
+            for(int i = 1; i <= 10; i ++)
+            {
+                tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(i));
+                emit sendTransToWorker(tr);
+            }
             //очистка векторов для новых данных
-            steel->vectorTemp.resize(0);
-            steel->vectorEds.resize(0);
+//            QVector<double> vec = QVector(SIZE_ARRAY, NAN);
+            steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
+            steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
             //очистка признаков завершения получения векторов (только всё начинается)
+//            steel->allVectorsReceived = false;
+            steel->vectorTempReceived = false;
+            steel->vectorEdsReceived = false;
             steel->allVectorsReceived = false;
-            steel->vectorEdsReceived = false;
-            steel->vectorEdsReceived = false;
+            steel->alg = 0x7FFF;
+            steel->ao = 0x7FFF;
+            steel->temp = NAN;
+            steel->eds = NAN;
+            steel->cl = NAN;
             //данные на стороне платы STEEL готовы - запомним
             steelReady = true;  //данные готовы
             steelReadyNum = i;  //запоминаем номер входной группы
-            //меням период запросов к плате STEEL, чтобы выкачать массивы данных
-            timerUpdateSteel->setInterval(10);
+            steelSelectFrame = false;   //разрешаем показывать график
+            steel->timeUpdateData = QDateTime::currentDateTime();
+               break;  //выход из цикла, на первой же входной группе с площадкой
         }
         //постоянно спрашиваем статус у всех входных групп
         tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Status");
         emit sendTransToWorker(tr);
     }
-}
-
-void MainWindow::readReleSlot(uint8_t code)
-{
-    Transaction tr(Transaction::R, 2, 32799, 0);
-    uint16_t offset = 32810;
-    switch(code)
-    {
-    case 0:
-        offset = 32810;
-        break;
-    case 1:
-        offset = 32811;
-        break;
-    case 2:
-        offset = 32938;
-        break;
-    case 3:
-        offset = 32939;
-        break;
-    case 4:
-        offset = 33055;
-        break;
-    case 5:
-        offset = 33056;
-        break;
-    case 6:
-        offset = 33183;
-        break;
-    case 7:
-        offset = 33184;
-        break;
-    default:
-        break;
-    }
-    tr.offset = offset;
-    emit sendTransToWorker(tr);
 }
 
 void MainWindow::updateBars(void)
@@ -1331,41 +1384,76 @@ void MainWindow::selectWidgetDiagram(void)
 
 void MainWindow::updateSteelWidget(void)
 {
+//    simulatorSteel();
+
+    QList<QString> strings;
+    strings << "ОТКЛЮЧЕНО" << " " << "ОБРЫВ" \
+            << " " << " " << "ГОТОВ" \
+            << "ИЗМЕРЕНИЕ" << " " << " " \
+            << " " << "ВРЕМЯ" << "ВРЕМЯ" \
+            << "ВРЕМЯ" << "ВРЕМЯ";
+    ui->steelStatus1->setText(strings.at(listSteel.at(0)->status));
+    ui->steelStatus2->setText(strings.at(listSteel.at(1)->status));
+    ui->steelStatus3->setText(strings.at(listSteel.at(2)->status));
+    ui->steelStatus4->setText(strings.at(listSteel.at(3)->status));
+
     if(steelReady)
     {   //найдена площадка
         //steelReadyNum
         cSteel * steel = listSteel.at(steelReadyNum);
         ui->nameSteelTech->setText(steel->technology->name);
         ui->labelTimeSteel->setText(steel->timeUpdateData.toString("dd.MM.yy hh:mm:ss"));
-        ui->steelTemp->setText(QString::number(steel->temp));
-        ui->steelEmf->setText(QString::number(steel->eds));
-        ui->steelAO->setText(QString::number(steel->ao));
-        ui->steelAl->setText(QString::number(steel->alg));
-        ui->steelC->setText(QString::number(steel->cl));
-        X_Coord_Steel.resize(0);
-        Y_Coord_SteelTemp.resize(0);
-        Y_Coord_SteelEds.resize(0);
-    }
-    else if(listSteel.at(steelReadyNum)->allVectorsReceived)
-    {
-        Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
-        Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
-        for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
+        if(!std::isnan(steel->temp))
+            ui->steelTemp->setText(QString::number(steel->temp));
+        if(!std::isnan(steel->eds))
+            ui->steelEmf->setText(QString::number(steel->eds));
+        if(steel->ao != 0x7FFF)
+            ui->steelAO->setText(QString::number(steel->ao));
+        if(steel->alg != 0x7FFF)
+            ui->steelAl->setText(QString::number(steel->alg));
+        if(!std::isnan(steel->cl))
+            ui->steelC->setText(QString::number(steel->cl));
+
+        if(!steelSelectFrame)
         {
-            X_Coord_Steel = i;
+            ui->framePlotSteel->show();
+            ui->frameSteelStatus->hide();
         }
-        ui->plotSteel->clearGraphs();
-        ui->plotSteel->addGraph();
-        ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
-        ui->plotSteel->rescaleAxes();
-        ui->plotSteel->replot();
-        ui->plotSteel->clearItems();
+        else
+        {
+            ui->framePlotSteel->hide();
+            ui->frameSteelStatus->show();
+        }
+
+        if(listSteel.at(steelReadyNum)->allVectorsReceived)
+        {
+            Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
+            Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
+            for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
+            {
+                X_Coord_Steel.append((i * PERIOD_MEASURE_STEEL) / 1000.0);
+            }
+            ui->plotSteel->clearGraphs();
+            ui->plotSteel->addGraph();
+            ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
+            ui->plotSteel->xAxis->setLabel("t,sec");
+            ui->plotSteel->yAxis2->setLabel("Emf, mV");
+            ui->plotSteel->yAxis->setLabel("Temp, °C");
+            ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
+
+            ui->plotSteel->addGraph(ui->plotSteel->xAxis, ui->plotSteel->yAxis2);
+            ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelEds);
+            ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
+            ui->plotSteel->rescaleAxes();
+            ui->plotSteel->replot();
+            ui->plotSteel->clearItems();
+        }
     }
     else
     {
         QString str = "Нет данных";
         ui->nameSteelTech->setText(str);
-        ui->labelTimeSteel->setText(str);
+        ui->labelTimeSteel->setText(" ");
         ui->steelTemp->setText(str);
         ui->steelEmf->setText(str);
         ui->steelAO->setText(str);
@@ -1373,5 +1461,63 @@ void MainWindow::updateSteelWidget(void)
         ui->steelC->setText(str);
         ui->plotSteel->clearGraphs();
 
+        ui->framePlotSteel->hide();
+        ui->frameSteelStatus->show();
+
+        ui->steelTech1->setText(listSteel.at(0)->technology->name);
+        ui->steelTech2->setText(listSteel.at(1)->technology->name);
+        ui->steelTech3->setText(listSteel.at(2)->technology->name);
+        ui->steelTech4->setText(listSteel.at(3)->technology->name);
     }
 }
+
+void MainWindow::simulatorSteel()
+{
+
+    steelReadyNum++;
+    if(steelReadyNum == listSteel.size())
+    {
+        steelReadyNum = 0;
+    }
+    listSteel.at(steelReadyNum)->temp = ((float)((rand()%100) * (2500-1700)) / 100) + 1700;
+    listSteel.at(steelReadyNum)->eds = ((float)((rand()%100) * (250-17)) / 100) - 17;
+    listSteel.at(steelReadyNum)->ao = ((float)((rand()%100) * (1000-100)) / 100) + 100;
+    listSteel.at(steelReadyNum)->alg = ((float)((rand()%100) * (100-10)) / 100) + 10;
+    listSteel.at(steelReadyNum)->cl = ((float)(rand()%100) / 1000);
+    steelReady = false;
+    listSteel.at(steelReadyNum)->allVectorsReceived = true;
+    listSteel.at(steelReadyNum)->vectorTemp.resize(0);
+    listSteel.at(steelReadyNum)->vectorEds.resize(0);
+    for(double i = 0; i < 1; i += 0.01)
+    {
+
+        double y;
+        if(i <= 0.2)
+        {
+            y = -2000000*i*i*i*i + 628636*i*i*i - 32698*i*i + 107.63*i + 4.5268;
+        }
+        else if(i <= 0.8)
+        {
+            y = -54779*i*i*i*i + 130991*i*i*i - 114698*i*i + 43556*i - 4277.8;
+        }
+        else
+        {
+            y = -30830*i*i + 49742*i - 18247;
+        }
+        y = y + ((double)(rand()%1000) - 500)/10;
+        listSteel.at(steelReadyNum)->vectorTemp.append(y);
+        double z = (y / (i+0.01)) / 10;
+        listSteel.at(steelReadyNum)->vectorEds.append(z);
+    }
+    ui->nameSteelTech->setText(listSteel.at(steelReadyNum)->technology->name);
+    ui->labelTimeSteel->setText(QDateTime::currentDateTime().toString("dd.MM.yy hh:mm:ss"));
+    ui->steelTemp->setText(QString::number(listSteel.at(steelReadyNum)->temp));
+    ui->steelEmf->setText(QString::number(listSteel.at(steelReadyNum)->eds));
+    ui->steelAO->setText(QString::number(listSteel.at(steelReadyNum)->ao));
+    ui->steelAl->setText(QString::number(listSteel.at(steelReadyNum)->alg));
+    ui->steelC->setText(QString::number(listSteel.at(steelReadyNum)->cl));
+
+
+//    time = curTime;
+}
+

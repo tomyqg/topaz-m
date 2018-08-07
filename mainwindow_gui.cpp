@@ -77,32 +77,39 @@ void MainWindow::on_WorkButton_clicked()
 void MainWindow::on_ArchiveButton_clicked()
 {
 //    OpenArchiveWindow();
-    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2, arch);
+    if(systemOptions.display == cSystemOptions::Steel)
+    {
+        dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 5, arch);
+    }
+    else
+    {
+        dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2, arch);
+    }
 //    dialogSetingsChannel->addArch(arch);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }
 
 
-void MainWindow::on_EcoCheckBox_toggled(bool checked)
-{
-    SetEcoMode(checked);
+//void MainWindow::on_EcoCheckBox_toggled(bool checked)
+//{
+//    SetEcoMode(checked);
 
-    switch (checked) {
-    case 0:
-        ui->EcoCheckBox->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
-        break;
-    case 1:
-        ui->EcoCheckBox->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
-        break;
-    default:
-        break;
-    }
+//    switch (checked) {
+//    case 0:
+//        ui->EcoCheckBox->setStyleSheet(" color: rgb(255, 255, 255);background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0123, 123, 123, 255), stop:1 rgba(0, 0, 0, 255)); ");
+//        break;
+//    case 1:
+//        ui->EcoCheckBox->setStyleSheet("background-color: rgb(0, 108, 217);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 108, 217, 255), stop:1 rgba(0, 170, 255, 255));color : white;");
+//        break;
+//    default:
+//        break;
+//    }
 
-    ChangePalette(checked);
+//    ChangePalette(checked);
 
 
-}
+//}
 
 //void MainWindow::on_timeButton_clicked()
 //{
@@ -511,3 +518,25 @@ void MainWindow::initSteel()
         listSteel.append(steel);
     }
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    simulatorSteel();
+}
+
+
+void MainWindow::on_buttonInputsGraphs_clicked()
+{
+    steelSelectFrame = !steelSelectFrame;
+}
+
+
+//void MainWindow::on_buttonInputsGraphs_pressed()
+//{
+//    ui->buttonInputsGraphs->setStyleSheet("");
+//}
+
+//void MainWindow::on_buttonInputsGraphs_released()
+//{
+
+//}

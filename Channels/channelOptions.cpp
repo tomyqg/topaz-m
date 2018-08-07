@@ -309,7 +309,7 @@ double ChannelOptions::GetCurrentChannelValue()
 {
     int regtype = GetRegistrationType();
 
-    //    qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
+//        qDebug() << GetChannelName()<< " " << GetRegistrationType() ;
     switch (regtype) {
     case 0: // мгновенное значение
 //        currentvalue;

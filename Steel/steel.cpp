@@ -6,6 +6,10 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     allVectorsReceived = false;
     vectorTempReceived = false;
     vectorEdsReceived = false;
+    status = 0;
+    vectorEds = QVector<double>(SIZE_ARRAY, NAN);
+    vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
+    memset(relais, -1, SUM_RELAYS);
 }
 
 //void cSteel::resetDefault(int group)

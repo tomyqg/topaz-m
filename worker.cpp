@@ -103,30 +103,29 @@ int worker::ReadModbusData(uint8_t sl, const tLookupRegisters* dp, uint32_t *dat
         return -1;
 
     int slave = sl;
-    int num;
-    int comm;
-    int add;
+    int num = (dp->size >> 1);
+    int comm = _FC_READ_HOLDING_REGISTERS;
+    int add = dp->offset;
 
-    // количество блоков в зависимости от типа параметра
-    switch (dp->type) {
-    case LKUP_TYPE_ASCII:
-        num = 6;
-        break;
-    case LKUP_TYPE_U16:
-        num = 1;
-        break;
-    case LKUP_TYPE_U32:
-        num = 2;
-        break;
-    case LKUP_TYPE_FLOAT:
-        num = 2;
-        break;
-    default:
-        num = 0; // просто так решил что ноль, мб другое число.
-        break;
-    }
+//    // количество блоков в зависимости от типа параметра
+//    switch (dp->type) {
+//    case LKUP_TYPE_ASCII:
+//        num = 6;
+//        break;
+//    case LKUP_TYPE_U16:
+//        num = 1;
+//        break;
+//    case LKUP_TYPE_U32:
+//        num = 2;
+//        break;
+//    case LKUP_TYPE_FLOAT:
+//        num = 2;
+//        break;
+//    default:
+//        num = 0; // просто так решил что ноль, мб другое число.
+//        break;
+//    }
 
-    comm = _FC_READ_HOLDING_REGISTERS;
     /* Пока тип регистра в карте не содержится
      * работаем только с HOLDING_REGISTERS
     switch (dp->RegisterType) {
@@ -141,8 +140,6 @@ int worker::ReadModbusData(uint8_t sl, const tLookupRegisters* dp, uint32_t *dat
         break;
     }
     */
-
-    add = dp->offset;
 
     ret = sendModbusRequest(slave, comm, add, num, 0, 0, data_dest);
 
@@ -289,7 +286,10 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
         {
             if(is16Bit)
             {
-                data_dest[0] = dest32[0];
+                for(int i = 0; i < ((num>>1)+1); i++)
+                {
+                    data_dest[i] = dest32[i];
+                }
             }
         }
     }
@@ -306,7 +306,7 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
                     errno == EIO
                     )
             {
-                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" ;
+                qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" << slave ;
                 //фиксировать потерю связи при многократном повторении
                 if((slave > 0) && (slave <= (sizeof(slaves)/sizeof(typeStateSlave))))
                 {
@@ -400,7 +400,6 @@ void worker::run()
         int res = 0;
 
         if(!emptyTrans) {
-
             mQueue.lock();
             Transaction tr = trans.dequeue();
             mQueue.unlock();
@@ -413,8 +412,8 @@ void worker::run()
                 if(res > 0)
                 {
 #ifdef DEBUG_WORKER
-                    qDebug() << "Modbus In  slave:" << tr.slave \
-                             << "name:" << cRegistersMap::getNameByOffset(tr.offset) \
+                    qDebug() << "Modbus Read  slave:" << tr.slave \
+                             << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                              << " offset:" << tr.offset \
                              << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                              << "Time: " << time.elapsed();
@@ -423,16 +422,16 @@ void worker::run()
                 }
             } else {    //(tr.dir == Transaction::W)
                 res = WriteModbusData(tr.slave, &dp, (uint32_t *)(tr.volInt));
-                tr.dir = Transaction::R;
+
 
 #ifdef DEBUG_WORKER
-                    qDebug() << "Modbus Out  slave:" << tr.slave \
-                             << "name:" << cRegistersMap::getNameByOffset(tr.offset) \
+                    qDebug() << "Modbus Write  slave:" << tr.slave \
+                             << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                              << " offset:" << tr.offset \
                              << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                              << "Time: " << time.elapsed();
 #endif
-
+                tr.dir = Transaction::R;
                 mQueue.lock();
                 trans.enqueue(tr);
                 mQueue.unlock();
@@ -446,6 +445,7 @@ void worker::run()
 void worker::getTransSlot(Transaction tr)
 {
     mQueue.lock();
+//    qDebug() << "worker::getTransSlot" << tr.slave << tr.offset;
     if(trans.size() >= 1000)
     {
         if(!fQueueOver1000) qDebug() << "Warning: Queue is over 1000 elements!!!";
@@ -453,11 +453,18 @@ void worker::getTransSlot(Transaction tr)
     } else {
         fQueueOver1000 = false;
     }
-
-//#ifdef DEBUG_WORKER
-//    qDebug() << "worker SLOT slave =" << tr.slave << "offset =" << tr.offset;
-//#endif
-
+//    qDebug() << "before DEBUG_WORKER";
+#ifdef DEBUG_WORKER
+//    std::string utf8_text = cRegistersMap::getNameByOffset(tr.offset).toUtf8().constData();
+    if(tr.dir == Transaction::R)
+    {
+        qDebug() << "Modbus Ask  slave:" << tr.slave \
+                 << "name:"  << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
+                 << " offset:" << tr.offset;
+    }
+#endif
+//    qDebug() << "after DEBUG_WORKER";
     trans.enqueue(tr);
     mQueue.unlock();
+
 }

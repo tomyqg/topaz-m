@@ -175,6 +175,19 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         if(num > listSteel.size()) return;
         curSteel = listSteel.at(num-1);
         updateUIfromSteel();
+    }
+    if(page == 5)
+    {
+        ui->timeSteel->clear();
+        ui->timeSteel->addItem("Выбрать");
+        QDir dirArchSteel(pathtolog);
+        QFileInfoList dirContent = dirArchSteel.entryInfoList(QStringList() \
+                  << "steel_*.txt", QDir::Files, QDir::Time);
+        foreach (QFileInfo file, dirContent) {
+            QString str = file.baseName().split("_").at(1);
+            QDateTime time = QDateTime::fromString(str, "ddMMyyhhmmss");
+            ui->timeSteel->addItem(time.toString("dd.MM.yy hh:mm:ss"));
+        }
 
     }
 
@@ -261,6 +274,13 @@ void dSettings::updateWidgets()
         ui->saveButton->show();
         ui->nameSubMenu->setText("<html><head/><body><p>АНАЛИЗ<br>СТАЛИ</p></body></html>");
         h = 72;
+    }
+    else if(ui->stackedWidget->currentIndex() == 5)
+    {
+        ui->saveButton->hide();
+        ui->nameSubMenu->setText("<html><head/><body><p>АРХИВ<br>СТАЛИ</p></body></html>");
+        h = 72;
+
     }
     else
     {
@@ -544,6 +564,7 @@ void dSettings::saveParam()
         tech->dt = ui->steel_dt->value();
         tech->tPt = ui->steel_tPt->value();
         tech->LPtl = ui->steel_LPtl->value();
+        tech->LPth = ui->steel_LPth->value();
         tech->COH = ui->steel_COH->currentIndex();
         tech->dSE = ui->steel_dSE->value();
         tech->dE = ui->steel_dE->value();
@@ -883,4 +904,98 @@ void dSettings::UpdateSteelUI(typeSteelTech * tech)
     ui->steel_O->setValue(tech->O);
     ui->steel_Y->setValue(tech->Y);
     ui->steel_G->setValue(tech->G);
+}
+
+void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
+{
+    //открыть файл архива анализа стали
+    ui->customPlotSteel->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+    ui->customPlotSteel->yAxis2->setVisible(true);
+    ui->customPlotSteel->yAxis2->setTickLabels(true);
+//    ui->customPlotSteel->
+    //QCPAxisRect::setRangeDrag, \ref QCPAxisRect::setRangeZoom, \ref QCPAxisRect::setRangeDragAxes,
+    //\ref QCPAxisRect::setRangeZoomAxes
+    QDateTime timeSteel;
+    timeSteel = QDateTime::fromString(arg1, "dd.MM.yy hh:mm:ss");
+    QString pathtologs = pathtolog;
+    pathtologs.append("steel_");
+    pathtologs.append(timeSteel.toString("ddMMyy"));
+    pathtologs.append(timeSteel.toString("hhmmss"));
+    pathtologs.append(".txt");
+    QFile fileArchSteel(pathtologs);
+    if(fileArchSteel.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&fileArchSteel);
+        QString sss = in.readLine();
+        QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+        QJsonObject json = doc.object();
+        QJsonArray archives = json["Archives"].toArray();
+
+        QJsonObject eds = archives.at(0).toObject();
+        QJsonArray valEds = eds["values"].toArray();
+        Y_SteelEds = QVector<double>(SIZE_ARRAY, NAN);
+        for(int i = 0; i < valEds.size(); i++)
+        {
+            Y_SteelEds.replace(i, valEds.at(i).toString().toDouble());
+        }
+
+        Y_SteelTemp = QVector<double>(SIZE_ARRAY, NAN);
+        QJsonObject temp = archives.at(1).toObject();
+        QJsonArray valTemp = temp["values"].toArray();
+        for(int i = 0; i < valTemp.size(); i++)
+        {
+            Y_SteelTemp.replace(i, valTemp.at(i).toString().toDouble());
+        }
+
+        for(int i = 0; i < max(valTemp.size(), valEds.size()); i++)
+        {
+            X_Steel.append(i);
+        }
+
+        ui->customPlotSteel->clearGraphs();
+        ui->customPlotSteel->addGraph();
+        ui->customPlotSteel->graph()->setData(X_Steel, Y_SteelTemp);
+        ui->customPlotSteel->xAxis->setLabel("t,sec");
+        ui->customPlotSteel->yAxis2->setLabel("Emf, mV");
+        ui->customPlotSteel->yAxis->setLabel("Temp, °C");
+        ui->customPlotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
+
+        ui->customPlotSteel->addGraph(ui->customPlotSteel->xAxis, ui->customPlotSteel->yAxis2);
+        ui->customPlotSteel->graph()->setData(X_Steel, Y_SteelEds);
+        ui->customPlotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
+        ui->customPlotSteel->rescaleAxes();
+        ui->customPlotSteel->replot();
+        ui->customPlotSteel->clearItems();
+
+        QString string = json["Technology"].toString();
+        ui->nameSteelTech->setText(string);
+        ui->steelTemp->setText(json["Temp"].toString());
+        ui->steelEmf->setText(json["Eds"].toString());
+        ui->steelAO->setText(json["OxActivity"].toString());
+        ui->steelAl->setText(json["MassAl"].toString());
+        ui->steelC->setText(json["Carbon"].toString());
+
+        fileArchSteel.close();
+    }
+
+}
+
+void dSettings::on_steelRelayBreak_activated(int index)
+{
+    curSteel->relais[0] = index - 1;
+}
+
+void dSettings::on_steelRelayReady_activated(int index)
+{
+    curSteel->relais[1] = index - 1;
+}
+
+void dSettings::on_steelRelayMeasure_activated(int index)
+{
+    curSteel->relais[2] = index - 1;
+}
+
+void dSettings::on_steelRelayTimeOut_activated(int index)
+{
+    curSteel->relais[3] = index - 1;
 }

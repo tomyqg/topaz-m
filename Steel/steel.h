@@ -6,6 +6,9 @@
 #include <QVector>
 #include "steel_technology.h"
 
+#define SIZE_ARRAY  160
+#define SUM_RELAYS   4
+
 
 class cSteel : public QObject
 {
@@ -21,7 +24,7 @@ public:
     float temp;     //измеряемая температура, град.
     float eds;      //ЭДС датчика активности кислорода, мВ
     uint16_t ao;    //активность кислорода, ppm
-    uint16_t cl;    //массовая доля содержания углерода, %
+    float cl;    //массовая доля содержания углерода, %
     uint16_t alg;   //расчётное значение массы алюминия для раскисления, кг
     uint16_t cup;   //прогнозируемое содержание углерода на основе замеров температуры ликвидуса
     QVector<double> vectorTemp;    //массив измеренных температур для графика
@@ -29,7 +32,8 @@ public:
     QDateTime timeUpdateData;       //время получения готовых данных по площадке
     bool vectorTempReceived;
     bool vectorEdsReceived;
-    bool allVectorsReceived;        //массивы дял графиков получены полностью
+    bool allVectorsReceived;        //массивы для графиков получены полностью
+    int8_t relais[SUM_RELAYS];
 
 signals:
 

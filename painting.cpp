@@ -49,10 +49,10 @@ void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int
                 ChannelValueString = ObryvErrorMessage;
             else
             {
-                if (!ui->percentCheckBox->checkState())
+//                if (!ui->percentCheckBox->checkState())
                     ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-                else
-                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//                else
+//                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
             if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)) )
@@ -405,19 +405,19 @@ void MainWindow::PaintCyfrasNew()
 
             QString ChannelValueString ;
 
-            if (!ui->percentCheckBox->checkState())
+//            if (!ui->percentCheckBox->checkState())
                 ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-            else
-                ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//            else
+//                ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
 
             if (ChannelValueString == NaNMessage)
                 ChannelValueString = ObryvErrorMessage;
             else
             {
-                if (!ui->percentCheckBox->checkState())
+//                if (!ui->percentCheckBox->checkState())
                     ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-                else
-                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//                else
+//                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
             }
 
             painter.setPen(QPen(Qt::black, 3)); //, Qt::DashDotLine, Qt::RoundCap));

@@ -19,6 +19,7 @@ public:
         slave = sl;
         offset = addr;
         volInt = vol;
+//        memset(paramInt16, vol, sizeof(paramInt16));
     }
 
     dir_t dir;
@@ -30,7 +31,7 @@ public:
         uint32_t volInt;
         float volFlo;
         uint16_t paramA12[6];
-        int16_t paramInt16[6];  //для работы со знаковыми данными
+        int16_t paramInt16[32];  //для работы со знаковыми данными / буффером
     };
 
 signals:

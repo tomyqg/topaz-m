@@ -68,6 +68,11 @@ typedef struct
     uint8_t             access;           // Access permissions based on mode
 } tLookupRegisters;
 
+
+
+
+
+
 // Work Access
 #define LKUP_ACCESS_WORK_NA         0x00
 #define LKUP_ACCESS_WORK_R          0x01

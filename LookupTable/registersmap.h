@@ -4,6 +4,8 @@
 #include <QObject>
 #include "lookup_tables.h"
 
+#define MAGIC_BUFFER_END    0x7FFF
+
 enum termoCoupleType{
     TC_Type_S = 0,
     TC_Type_K = 1,
@@ -34,6 +36,8 @@ enum statusChannelEnum{
     StatusCh_SteelNotFoundSquares = 12,     //площадки не найдены(STEEL)
     StatusCh_SteelSquaresOK = 13,           //площадки найдены(STEEL)
 };
+
+
 
 class cRegistersMap : public QObject
 {

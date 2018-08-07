@@ -26,9 +26,7 @@
 //
 #ifndef _DEVICE_PARAMS
 #define _DEVICE_PARAMS
-
 #include <stdint.h>
-
 #define GET_PARAMETER_ADDRESS(parInfo) ( (uint8_t*)((uint8_t*)&g_deviceDataStorage + parInfo->paramOffset)  )
 
 #define A12_ARR_SIZE 12
@@ -70,10 +68,10 @@ typedef enum
   EMS_CH_DATA_UPDATED = 0x07,    // Х 7 Ц значение параметра Data обновлено
   EMS_CH_ERR_TEMP = 0x08,        // Х 8 - ошибка термопары
   EMS_CH_ERR_EDS = 0x09,        // Х 9 - ошибка датчика окисленности
-  EMS_CH_NOFIND_TEMP = 0x10,        // Х 10 - площадка по температуре не найдена
-  EMS_CH_NOFIND_EDS = 0x11,      //   Х 11 - площадка по окисленности не найдена
-  EMS_CH_NOFIND = 0x12,      //   Х 12 - площадки не найдены
-  EMS_CH_FIND = 0x13,      //   Х 13 - площадки найдены
+  EMS_CH_NOFIND_TEMP = 0xA,        // Х 10 - площадка по температуре не найдена
+  EMS_CH_NOFIND_EDS = 0xB,      //   Х 11 - площадка по окисленности не найдена
+  EMS_CH_NOFIND = 0xC,      //   Х 12 - площадки не найдены
+  EMS_CH_FIND = 0xD,      //   Х 13 - площадки найдены
 } eMeasStatus;
 
 // deviceStatus parameter values - device Status
@@ -145,14 +143,32 @@ typedef struct
     float DataChan2;
     // Parameter: Data channel 3 : DataChan3 : NV Address: 0
     float DataChan3;
+    // Parameter: DataArray1 : DataArray1 : NV Address: 0
+    uint8_t DataArray1[64];
+    // Parameter: DataArray2 : DataArray2 : NV Address: 0
+    uint8_t DataArray2[64];
+    // Parameter: DataArray3 : DataArray3 : NV Address: 0
+    uint8_t DataArray3[64];
+    // Parameter: DataArray4 : DataArray4 : NV Address: 0
+    uint8_t DataArray4[64];
+    // Parameter: DataArray5 : DataArray5 : NV Address: 0
+    uint8_t DataArray5[64];
+    // Parameter: DataArray6 : DataArray6 : NV Address: 0
+    uint8_t DataArray6[64];
+    // Parameter: DataArray7 : DataArray7 : NV Address: 0
+    uint8_t DataArray7[64];
+    // Parameter: DataArray8 : DataArray8 : NV Address: 0
+    uint8_t DataArray8[64];
+    // Parameter: DataArray9 : DataArray9 : NV Address: 0
+    uint8_t DataArray9[64];
+    // Parameter: DataArray10 : DataArray10 : NV Address: 0
+    uint8_t DataArray10[64];
     // Parameter: Protocol version  : protocolVersion : NV Address: 0
     uint16_t protocolVersion;
     // Parameter: Hardware version  : hardwareVersion : NV Address: 2
     uint16_t hardwareVersion;
     // Parameter: Software Version : softwareVersion : NV Address: 4
     uint16_t softwareVersion;
-    // Parameter: Software Revision : softwareRevision : NV Address: 6
-    uint16_t softwareRevision;
     // Parameter: Device Type : deviceType : NV Address: 8
     uint16_t deviceType;
     // Parameter: Serial number  : serialNumber : NV Address: 12
@@ -175,7 +191,7 @@ typedef struct
     uint32_t factoryDate;
     // Parameter: Software CRC32  : softwareCrc32 : NV Address: 22
     uint32_t softwareCrc32;
-    // Parameter: Unique ID  : uniqueId : NV Address: 22
+    // Parameter: Unique ID  : uniqueId : NV Address: 26
     uint8_t uniqueId[12];
     // Parameter: Root Access : root_Access : NV Address: 26
     uint16_t root_Access;
@@ -185,6 +201,8 @@ typedef struct
     uint16_t chan0DataFlags;
     // Parameter: Status : chan0Status : NV Address: 28
     uint16_t chan0Status;
+    // Parameter: ќшибки канала.  : chan0Error : NV Address: 28
+    uint16_t chan0Error;
     // Parameter: Quantity  : chan0Quantity : NV Address: 28
     uint32_t chan0Quantity;
     // Parameter: Uptime  : chan0Uptime : NV Address: 28
@@ -237,6 +255,8 @@ typedef struct
     uint16_t chan0Carbon;
     // Parameter: Senson_activity_oxygen : chan0PrimaryActivity : NV Address: 118
     float chan0PrimaryActivity;
+    // Parameter: Service_Buffer : chan0Buff : NV Address: 118
+    float chan0Buff;
     // Parameter: Result CJ Value : chan0ResultCjValue : NV Address: 134
     float chan0ResultCjValue;
     // Parameter: Data (Measure/Generate)  : chan1Data : NV Address: 134
@@ -245,6 +265,8 @@ typedef struct
     uint16_t chan1DataFlags;
     // Parameter: Status : chan1Status : NV Address: 134
     uint16_t chan1Status;
+    // Parameter: ќшибки канала.  : chan1Error : NV Address: 134
+    uint16_t chan1Error;
     // Parameter: Quantity  : chan1Quantity : NV Address: 134
     uint32_t chan1Quantity;
     // Parameter: Uptime  : chan1Uptime : NV Address: 134
@@ -297,6 +319,8 @@ typedef struct
     uint16_t chan1Carbon;
     // Parameter: Senson_activity_oxygen : chan1PrimaryActivity : NV Address: 224
     float chan1PrimaryActivity;
+    // Parameter: Service_Buffer : chan1Buff : NV Address: 224
+    float chan1Buff;
     // Parameter: Result CJ Value : chan1ResultCjValue : NV Address: 240
     float chan1ResultCjValue;
     // Parameter: Data (Measure/Generate)  : chan2Data : NV Address: 240
@@ -305,6 +329,8 @@ typedef struct
     uint16_t chan2DataFlags;
     // Parameter: Status : chan2Status : NV Address: 240
     uint16_t chan2Status;
+    // Parameter: ќшибки канала.  : chan2Error : NV Address: 240
+    uint16_t chan2Error;
     // Parameter: Quantity  : chan2Quantity : NV Address: 240
     uint32_t chan2Quantity;
     // Parameter: Uptime  : chan2Uptime : NV Address: 240
@@ -357,6 +383,8 @@ typedef struct
     uint16_t chan2Carbon;
     // Parameter: Senson_activity_oxygen : chan2PrimaryActivity : NV Address: 330
     float chan2PrimaryActivity;
+    // Parameter: Service_Buffer : chan2Buff : NV Address: 330
+    float chan2Buff;
     // Parameter: Result CJ Value : chan2ResultCjValue : NV Address: 346
     float chan2ResultCjValue;
     // Parameter: Data (Measure/Generate)  : chan3Data : NV Address: 346
@@ -365,6 +393,8 @@ typedef struct
     uint16_t chan3DataFlags;
     // Parameter: Status : chan3Status : NV Address: 346
     uint16_t chan3Status;
+    // Parameter: ќшибки канала.  : chan3Error : NV Address: 346
+    uint16_t chan3Error;
     // Parameter: Quantity  : chan3Quantity : NV Address: 346
     uint32_t chan3Quantity;
     // Parameter: Uptime  : chan3Uptime : NV Address: 346
@@ -417,223 +447,225 @@ typedef struct
     float chan3Carbon;
     // Parameter: Senson_activity_oxygen : chan3PrimaryActivity : NV Address: 432
     float chan3PrimaryActivity;
+    // Parameter: Service_Buffer : chan3Buff : NV Address: 436
+    float chan3Buff;
     // Parameter: Result CJ Value : chan3ResultCjValue : NV Address: 452
     float chan3ResultCjValue;
-    // Parameter: CalibOCR20mV : chan0OCR20mV : NV Address: 452
+    // Parameter: CalibOCR20mV : chan0OCR20mV : NV Address: 7000
     float chan0OCR20mV;
-    // Parameter: CalibFCR20mV : chan0FSR20mV : NV Address: 456
+    // Parameter: CalibFCR20mV : chan0FSR20mV : NV Address: 7004
     float chan0FSR20mV;
-    // Parameter: CalibFDate20mV : chan0Date20mV : NV Address: 460
+    // Parameter: CalibFDate20mV : chan0Date20mV : NV Address: 7008
     uint32_t chan0Date20mV;
-    // Parameter: CalibOCR100mV : chan0OCR100mV : NV Address: 464
+    // Parameter: CalibOCR100mV : chan0OCR100mV : NV Address: 7012
     float chan0OCR100mV;
-    // Parameter: CalibFCR100mV : chan0FSR100mV : NV Address: 468
+    // Parameter: CalibFCR100mV : chan0FSR100mV : NV Address: 7016
     float chan0FSR100mV;
-    // Parameter: CalibFDate100mV : chan0Date100mV : NV Address: 472
+    // Parameter: CalibFDate100mV : chan0Date100mV : NV Address: 7020
     uint32_t chan0Date100mV;
-    // Parameter: CalibOCR1V : chan0OCR1V : NV Address: 476
+    // Parameter: CalibOCR1V : chan0OCR1V : NV Address: 7024
     float chan0OCR1V;
-    // Parameter: CalibFCR1V : chan0FSR1V : NV Address: 480
+    // Parameter: CalibFCR1V : chan0FSR1V : NV Address: 7028
     float chan0FSR1V;
-    // Parameter: CalibFDate1V : chan0Date1V : NV Address: 484
+    // Parameter: CalibFDate1V : chan0Date1V : NV Address: 7032
     uint32_t chan0Date1V;
-    // Parameter: CalibOCR10V : chan0OCR10V : NV Address: 488
+    // Parameter: CalibOCR10V : chan0OCR10V : NV Address: 7036
     float chan0OCR10V;
-    // Parameter: CalibFCR10V : chan0FSR10V : NV Address: 492
+    // Parameter: CalibFCR10V : chan0FSR10V : NV Address: 7040
     float chan0FSR10V;
-    // Parameter: CalibFDate10V : chan0Date10V : NV Address: 496
+    // Parameter: CalibFDate10V : chan0Date10V : NV Address: 7044
     uint32_t chan0Date10V;
-    // Parameter: CalibOCR30V : chan0OCR30V : NV Address: 500
+    // Parameter: CalibOCR30V : chan0OCR30V : NV Address: 7048
     float chan0OCR30V;
-    // Parameter: CalibFCR30V : chan0FSR30V : NV Address: 504
+    // Parameter: CalibFCR30V : chan0FSR30V : NV Address: 7052
     float chan0FSR30V;
-    // Parameter: CalibFDate30V : chan0Date30V : NV Address: 508
+    // Parameter: CalibFDate30V : chan0Date30V : NV Address: 7056
     uint32_t chan0Date30V;
-    // Parameter: CalibOCR20mA : chan0OCR20mA : NV Address: 512
+    // Parameter: CalibOCR20mA : chan0OCR20mA : NV Address: 7060
     float chan0OCR20mA;
-    // Parameter: CalibFCR20mA : chan0FSR20mA : NV Address: 516
+    // Parameter: CalibFCR20mA : chan0FSR20mA : NV Address: 7064
     float chan0FSR20mA;
-    // Parameter: CalibFDate20mA : chan0Date20mA : NV Address: 520
+    // Parameter: CalibFDate20mA : chan0Date20mA : NV Address: 7068
     uint32_t chan0Date20mA;
-    // Parameter: CalibOCR4x : chan0OCR4x : NV Address: 524
+    // Parameter: CalibOCR4x : chan0OCR4x : NV Address: 7072
     float chan0OCR4x;
-    // Parameter: CalibFSR4x : chan0FSR4x : NV Address: 528
+    // Parameter: CalibFSR4x : chan0FSR4x : NV Address: 7076
     float chan0FSR4x;
-    // Parameter: CalibDate4x : chan0Date4x : NV Address: 532
+    // Parameter: CalibDate4x : chan0Date4x : NV Address: 7080
     uint32_t chan0Date4x;
-    // Parameter: CalibOCR3x : chan0OCR3x : NV Address: 536
+    // Parameter: CalibOCR3x : chan0OCR3x : NV Address: 7084
     float chan0OCR3x;
-    // Parameter: CalibFSR3x : chan0FSR3x : NV Address: 540
+    // Parameter: CalibFSR3x : chan0FSR3x : NV Address: 7088
     float chan0FSR3x;
-    // Parameter: CalibDate3x : chan0Date3x : NV Address: 544
+    // Parameter: CalibDate3x : chan0Date3x : NV Address: 7092
     uint32_t chan0Date3x;
-    // Parameter: CalibOCRinternal : chan0OCRinternal : NV Address: 548
+    // Parameter: CalibOCRinternal : chan0OCRinternal : NV Address: 7096
     float chan0OCRinternal;
-    // Parameter: CalibFSRinternal : chan0FSRinternal : NV Address: 552
+    // Parameter: CalibFSRinternal : chan0FSRinternal : NV Address: 7100
     float chan0FSRinternal;
-    // Parameter: CalibDateinternal : chan0DateRinternal : NV Address: 556
+    // Parameter: CalibDateinternal : chan0DateRinternal : NV Address: 7104
     uint32_t chan0DateRinternal;
-    // Parameter: CalibOCR20mV : chan1OCR20mV : NV Address: 560
+    // Parameter: CalibOCR20mV : chan1OCR20mV : NV Address: 7108
     float chan1OCR20mV;
-    // Parameter: CalibFCR20mV : chan1FSR20mV : NV Address: 564
+    // Parameter: CalibFCR20mV : chan1FSR20mV : NV Address: 7112
     float chan1FSR20mV;
-    // Parameter: CalibFDate20mV : chan1Date20mV : NV Address: 568
+    // Parameter: CalibFDate20mV : chan1Date20mV : NV Address: 7116
     uint32_t chan1Date20mV;
-    // Parameter: CalibOCR100mV : chan1OCR100mV : NV Address: 572
+    // Parameter: CalibOCR100mV : chan1OCR100mV : NV Address: 7120
     float chan1OCR100mV;
-    // Parameter: CalibFCR100mV : chan1FSR100mV : NV Address: 576
+    // Parameter: CalibFCR100mV : chan1FSR100mV : NV Address: 7124
     float chan1FSR100mV;
-    // Parameter: CalibFDate100mV : chan1Date100mV : NV Address: 580
+    // Parameter: CalibFDate100mV : chan1Date100mV : NV Address: 7128
     uint32_t chan1Date100mV;
-    // Parameter: CalibOCR1V : chan1OCR1V : NV Address: 584
+    // Parameter: CalibOCR1V : chan1OCR1V : NV Address: 7132
     float chan1OCR1V;
-    // Parameter: CalibFCR1V : chan1FSR1V : NV Address: 588
+    // Parameter: CalibFCR1V : chan1FSR1V : NV Address: 7136
     float chan1FSR1V;
-    // Parameter: CalibFDate1V : chan1Date1V : NV Address: 592
+    // Parameter: CalibFDate1V : chan1Date1V : NV Address: 7140
     uint32_t chan1Date1V;
-    // Parameter: CalibOCR10V : chan1OCR10V : NV Address: 596
+    // Parameter: CalibOCR10V : chan1OCR10V : NV Address: 7144
     float chan1OCR10V;
-    // Parameter: CalibFCR10V : chan1FSR10V : NV Address: 600
+    // Parameter: CalibFCR10V : chan1FSR10V : NV Address: 7148
     float chan1FSR10V;
-    // Parameter: CalibFDate10V : chan1Date10V : NV Address: 604
+    // Parameter: CalibFDate10V : chan1Date10V : NV Address: 7152
     uint32_t chan1Date10V;
-    // Parameter: CalibOCR30V : chan1OCR30V : NV Address: 608
+    // Parameter: CalibOCR30V : chan1OCR30V : NV Address: 7156
     float chan1OCR30V;
-    // Parameter: CalibFCR30V : chan1FSR30V : NV Address: 612
+    // Parameter: CalibFCR30V : chan1FSR30V : NV Address: 7160
     float chan1FSR30V;
-    // Parameter: CalibFDate30V : chan1Date30V : NV Address: 616
+    // Parameter: CalibFDate30V : chan1Date30V : NV Address: 7164
     uint32_t chan1Date30V;
-    // Parameter: CalibOCR20mA : chan1OCR20mA : NV Address: 620
+    // Parameter: CalibOCR20mA : chan1OCR20mA : NV Address: 7168
     float chan1OCR20mA;
-    // Parameter: CalibFCR20mA : chan1FSR20mA : NV Address: 624
+    // Parameter: CalibFCR20mA : chan1FSR20mA : NV Address: 7172
     float chan1FSR20mA;
-    // Parameter: CalibFDate20mA : chan1Date20mA : NV Address: 628
+    // Parameter: CalibFDate20mA : chan1Date20mA : NV Address: 7176
     uint32_t chan1Date20mA;
-    // Parameter: CalibOCR4x : chan1OCR4x : NV Address: 632
+    // Parameter: CalibOCR4x : chan1OCR4x : NV Address: 7180
     float chan1OCR4x;
-    // Parameter: CalibFSR4x : chan1FSR4x : NV Address: 636
+    // Parameter: CalibFSR4x : chan1FSR4x : NV Address: 7184
     float chan1FSR4x;
-    // Parameter: CalibDate4x : chan1Date4x : NV Address: 640
+    // Parameter: CalibDate4x : chan1Date4x : NV Address: 7188
     uint32_t chan1Date4x;
-    // Parameter: CalibOCR3x : chan1OCR3x : NV Address: 644
+    // Parameter: CalibOCR3x : chan1OCR3x : NV Address: 7192
     float chan1OCR3x;
-    // Parameter: CalibFSR3x : chan1FSR3x : NV Address: 648
+    // Parameter: CalibFSR3x : chan1FSR3x : NV Address: 7196
     float chan1FSR3x;
-    // Parameter: CalibDate3x : chan1Date3x : NV Address: 652
+    // Parameter: CalibDate3x : chan1Date3x : NV Address: 7200
     uint32_t chan1Date3x;
-    // Parameter: CalibOCRinternal : chan1OCRinternal : NV Address: 656
+    // Parameter: CalibOCRinternal : chan1OCRinternal : NV Address: 7204
     float chan1OCRinternal;
-    // Parameter: CalibFSRinternal : chan1FSRinternal : NV Address: 660
+    // Parameter: CalibFSRinternal : chan1FSRinternal : NV Address: 7208
     float chan1FSRinternal;
-    // Parameter: CalibDateinternal : chan1DateRinternal : NV Address: 664
+    // Parameter: CalibDateinternal : chan1DateRinternal : NV Address: 7212
     uint32_t chan1DateRinternal;
-    // Parameter: CalibOCR20mV : chan2OCR20mV : NV Address: 668
+    // Parameter: CalibOCR20mV : chan2OCR20mV : NV Address: 7216
     float chan2OCR20mV;
-    // Parameter: CalibFCR20mV : chan2FSR20mV : NV Address: 672
+    // Parameter: CalibFCR20mV : chan2FSR20mV : NV Address: 7220
     float chan2FSR20mV;
-    // Parameter: CalibFDate20mV : chan2Date20mV : NV Address: 676
+    // Parameter: CalibFDate20mV : chan2Date20mV : NV Address: 7224
     uint32_t chan2Date20mV;
-    // Parameter: CalibOCR100mV : chan2OCR100mV : NV Address: 680
+    // Parameter: CalibOCR100mV : chan2OCR100mV : NV Address: 7228
     float chan2OCR100mV;
-    // Parameter: CalibFCR100mV : chan2FSR100mV : NV Address: 684
+    // Parameter: CalibFCR100mV : chan2FSR100mV : NV Address: 7232
     float chan2FSR100mV;
-    // Parameter: CalibFDate100mV : chan2Date100mV : NV Address: 688
+    // Parameter: CalibFDate100mV : chan2Date100mV : NV Address: 7236
     uint32_t chan2Date100mV;
-    // Parameter: CalibOCR1V : chan2OCR1V : NV Address: 692
+    // Parameter: CalibOCR1V : chan2OCR1V : NV Address: 7240
     float chan2OCR1V;
-    // Parameter: CalibFCR1V : chan2FSR1V : NV Address: 696
+    // Parameter: CalibFCR1V : chan2FSR1V : NV Address: 7244
     float chan2FSR1V;
-    // Parameter: CalibFDate1V : chan2Date1V : NV Address: 700
+    // Parameter: CalibFDate1V : chan2Date1V : NV Address: 7248
     uint32_t chan2Date1V;
-    // Parameter: CalibOCR10V : chan2OCR10V : NV Address: 704
+    // Parameter: CalibOCR10V : chan2OCR10V : NV Address: 7252
     float chan2OCR10V;
-    // Parameter: CalibFCR10V : chan2FSR10V : NV Address: 708
+    // Parameter: CalibFCR10V : chan2FSR10V : NV Address: 7256
     float chan2FSR10V;
-    // Parameter: CalibFDate10V : chan2Date10V : NV Address: 712
+    // Parameter: CalibFDate10V : chan2Date10V : NV Address: 7260
     uint32_t chan2Date10V;
-    // Parameter: CalibOCR30V : chan2OCR30V : NV Address: 716
+    // Parameter: CalibOCR30V : chan2OCR30V : NV Address: 7264
     float chan2OCR30V;
-    // Parameter: CalibFCR30V : chan2FSR30V : NV Address: 720
+    // Parameter: CalibFCR30V : chan2FSR30V : NV Address: 7268
     float chan2FSR30V;
-    // Parameter: CalibFDate30V : chan2Date30V : NV Address: 724
+    // Parameter: CalibFDate30V : chan2Date30V : NV Address: 7272
     uint32_t chan2Date30V;
-    // Parameter: CalibOCR20mA : chan2OCR20mA : NV Address: 728
+    // Parameter: CalibOCR20mA : chan2OCR20mA : NV Address: 7276
     float chan2OCR20mA;
-    // Parameter: CalibFCR20mA : chan2FSR20mA : NV Address: 732
+    // Parameter: CalibFCR20mA : chan2FSR20mA : NV Address: 7280
     float chan2FSR20mA;
-    // Parameter: CalibFDate20mA : chan2Date20mA : NV Address: 736
+    // Parameter: CalibFDate20mA : chan2Date20mA : NV Address: 7284
     uint32_t chan2Date20mA;
-    // Parameter: CalibOCR4x : chan2OCR4x : NV Address: 740
+    // Parameter: CalibOCR4x : chan2OCR4x : NV Address: 7288
     float chan2OCR4x;
-    // Parameter: CalibFSR4x : chan2FSR4x : NV Address: 744
+    // Parameter: CalibFSR4x : chan2FSR4x : NV Address: 7292
     float chan2FSR4x;
-    // Parameter: CalibDate4x : chan2Date4x : NV Address: 748
+    // Parameter: CalibDate4x : chan2Date4x : NV Address: 7296
     uint32_t chan2Date4x;
-    // Parameter: CalibOCR3x : chan2OCR3x : NV Address: 752
+    // Parameter: CalibOCR3x : chan2OCR3x : NV Address: 7300
     float chan2OCR3x;
-    // Parameter: CalibFSR3x : chan2FSR3x : NV Address: 756
+    // Parameter: CalibFSR3x : chan2FSR3x : NV Address: 7304
     float chan2FSR3x;
-    // Parameter: CalibDate3x : chan2Date3x : NV Address: 760
+    // Parameter: CalibDate3x : chan2Date3x : NV Address: 7308
     uint32_t chan2Date3x;
-    // Parameter: CalibOCRinternal : chan2OCRinternal : NV Address: 764
+    // Parameter: CalibOCRinternal : chan2OCRinternal : NV Address: 7312
     float chan2OCRinternal;
-    // Parameter: CalibFSRinternal : chan2FSRinternal : NV Address: 768
+    // Parameter: CalibFSRinternal : chan2FSRinternal : NV Address: 7316
     float chan2FSRinternal;
-    // Parameter: CalibDateinternal : chan2DateRinternal : NV Address: 772
+    // Parameter: CalibDateinternal : chan2DateRinternal : NV Address: 7320
     uint32_t chan2DateRinternal;
-    // Parameter: CalibOCR20mV : chan3OCR20mV : NV Address: 776
+    // Parameter: CalibOCR20mV : chan3OCR20mV : NV Address: 7324
     float chan3OCR20mV;
-    // Parameter: CalibFCR20mV : chan3FSR20mV : NV Address: 780
+    // Parameter: CalibFCR20mV : chan3FSR20mV : NV Address: 7328
     float chan3FSR20mV;
-    // Parameter: CalibFDate20mV : chan3Date20mV : NV Address: 784
+    // Parameter: CalibFDate20mV : chan3Date20mV : NV Address: 7332
     uint32_t chan3Date20mV;
-    // Parameter: CalibOCR100mV : chan3OCR100mV : NV Address: 788
+    // Parameter: CalibOCR100mV : chan3OCR100mV : NV Address: 7336
     float chan3OCR100mV;
-    // Parameter: CalibFCR100mV : chan3FSR100mV : NV Address: 792
+    // Parameter: CalibFCR100mV : chan3FSR100mV : NV Address: 7340
     float chan3FSR100mV;
-    // Parameter: CalibFDate100mV : chan3Date100mV : NV Address: 796
+    // Parameter: CalibFDate100mV : chan3Date100mV : NV Address: 7344
     uint32_t chan3Date100mV;
-    // Parameter: CalibOCR1V : chan3OCR1V : NV Address: 800
+    // Parameter: CalibOCR1V : chan3OCR1V : NV Address: 7348
     float chan3OCR1V;
-    // Parameter: CalibFCR1V : chan3FSR1V : NV Address: 804
+    // Parameter: CalibFCR1V : chan3FSR1V : NV Address: 7352
     float chan3FSR1V;
-    // Parameter: CalibFDate1V : chan3Date1V : NV Address: 808
+    // Parameter: CalibFDate1V : chan3Date1V : NV Address: 7356
     uint32_t chan3Date1V;
-    // Parameter: CalibOCR10V : chan3OCR10V : NV Address: 812
+    // Parameter: CalibOCR10V : chan3OCR10V : NV Address: 7360
     float chan3OCR10V;
-    // Parameter: CalibFCR10V : chan3FSR10V : NV Address: 816
+    // Parameter: CalibFCR10V : chan3FSR10V : NV Address: 7364
     float chan3FSR10V;
-    // Parameter: CalibFDate10V : chan3Date10V : NV Address: 820
+    // Parameter: CalibFDate10V : chan3Date10V : NV Address: 7368
     uint32_t chan3Date10V;
-    // Parameter: CalibOCR30V : chan3OCR30V : NV Address: 824
+    // Parameter: CalibOCR30V : chan3OCR30V : NV Address: 7372
     float chan3OCR30V;
-    // Parameter: CalibFCR30V : chan3FSR30V : NV Address: 828
+    // Parameter: CalibFCR30V : chan3FSR30V : NV Address: 7376
     float chan3FSR30V;
-    // Parameter: CalibFDate30V : chan3Date30V : NV Address: 832
+    // Parameter: CalibFDate30V : chan3Date30V : NV Address: 7380
     uint32_t chan3Date30V;
-    // Parameter: CalibOCR20mA : chan3OCR20mA : NV Address: 836
+    // Parameter: CalibOCR20mA : chan3OCR20mA : NV Address: 7384
     float chan3OCR20mA;
-    // Parameter: CalibFCR20mA : chan3FSR20mA : NV Address: 840
+    // Parameter: CalibFCR20mA : chan3FSR20mA : NV Address: 7388
     float chan3FSR20mA;
-    // Parameter: CalibFDate20mA : chan3Date20mA : NV Address: 844
+    // Parameter: CalibFDate20mA : chan3Date20mA : NV Address: 7392
     uint32_t chan3Date20mA;
-    // Parameter: CalibOCR4x : chan3OCR4x : NV Address: 848
+    // Parameter: CalibOCR4x : chan3OCR4x : NV Address: 7396
     float chan3OCR4x;
-    // Parameter: CalibFSR4x : chan3FSR4x : NV Address: 852
+    // Parameter: CalibFSR4x : chan3FSR4x : NV Address: 7400
     float chan3FSR4x;
-    // Parameter: CalibDate4x : chan3Date4x : NV Address: 856
+    // Parameter: CalibDate4x : chan3Date4x : NV Address: 7404
     uint32_t chan3Date4x;
-    // Parameter: CalibOCR3x : chan3OCR3x : NV Address: 860
+    // Parameter: CalibOCR3x : chan3OCR3x : NV Address: 7408
     float chan3OCR3x;
-    // Parameter: CalibFSR3x : chan3FSR3x : NV Address: 864
+    // Parameter: CalibFSR3x : chan3FSR3x : NV Address: 7412
     float chan3FSR3x;
-    // Parameter: CalibDate3x : chan3Date3x : NV Address: 868
+    // Parameter: CalibDate3x : chan3Date3x : NV Address: 7416
     uint32_t chan3Date3x;
-    // Parameter: CalibOCRinternal : chan3OCRinternal : NV Address: 872
+    // Parameter: CalibOCRinternal : chan3OCRinternal : NV Address: 7420
     float chan3OCRinternal;
-    // Parameter: CalibFSRinternal : chan3FSRinternal : NV Address: 876
+    // Parameter: CalibFSRinternal : chan3FSRinternal : NV Address: 7424
     float chan3FSRinternal;
-    // Parameter: CalibDateinternal : chan3DateRinternal : NV Address: 880
+    // Parameter: CalibDateinternal : chan3DateRinternal : NV Address: 7428
     uint32_t chan3DateRinternal;
 } tDeviceBasicParams;
 #pragma pack(pop)

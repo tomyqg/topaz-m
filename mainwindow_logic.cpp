@@ -48,6 +48,7 @@ int timeindex;
 QStringList datestrings, timestrings;
 cChannelSlotController csc;
 cSteelController ssc;
+QDateTime timeOutBuff;
 
 
 extern MainWindow * globalMainWin;
@@ -67,12 +68,12 @@ void MainWindow::MainWindowInitialization()
     ui->frameSteel->setMaximumWidth(0);
     ui->frameSteel->hide();
     connect(&timerLoad, SIGNAL(timeout()), this, SLOT(tickLoadWidget()));
-    timerLoad.start(50);
+    timerLoad.start(20);
     QPixmap pixLoad(pathtologotip);
     ui->logoOnLoad->setPixmap(pixLoad);
 
 
-    ui->unvisible_block->setHidden(true);
+//    ui->unvisible_block->setHidden(true);
 
     datestrings.append("dd.MM.yyyy ");
     datestrings.append("MM.dd.yyyy ");
@@ -100,7 +101,7 @@ void MainWindow::MainWindowInitialization()
 //    QSettings s;
 //    foreach( QextPortInfo port, QextSerialEnumerator::getPorts() )
 //    {
-//        //        qDebug() << port.portName;
+//                qDebug() << port.portName;
 //        if( port.friendName == s.value( "serialinterface" ) )
 //        {
 //            portIndex = i;
@@ -135,7 +136,10 @@ void MainWindow::MainWindowInitialization()
     // добавляем все кнопошки в евентфильтр
     for (int i = 0; i < ButtonList.count(); ++i) {
         QPushButton *but = ButtonList.at(i);
-        but->installEventFilter(this);
+        if(but->objectName() != "buttonInputsGraphs")
+        {
+            but->installEventFilter(this);
+        }
     }
 
     listCh.append(&channel1);
@@ -210,6 +214,16 @@ void MainWindow::MainWindowInitialization()
     timerUpdateSteel = new QTimer(this);
     timerUpdateSteel->start(UpdateSteelTime);
     connect(timerUpdateSteel, SIGNAL(timeout()), this, SLOT(updateSteel()));
+    ui->plotSteel->yAxis2->setVisible(true);
+    ui->plotSteel->yAxis2->setTickLabels(true);
+    ui->frameSteelStatus->setMaximumWidth(1000000000);
+    ui->framePlotSteel->setMaximumWidth(100000000);
+    steelSelectFrame = false;
+    ui->buttonInputsGraphs->setColorText(ColorBlue);
+    ui->buttonInputsGraphs->setColorBg(QColor(0xf0,0xf0,0xf0));
+    ui->buttonInputsGraphs->setFontSize(16);
+//    ui->plotSteel->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+
 
 
 //    channel1.ReadSingleChannelOptionFromFile(1);
@@ -254,7 +268,7 @@ void MainWindow::MainWindowInitialization()
     connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
     myWorker->moveToThread(WorkerThread);
     connect(WorkerThread, SIGNAL(started()), myWorker, SLOT(run()));
-    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
+//    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
     connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
@@ -435,6 +449,11 @@ void MainWindow::InitRelaySlotTable()
     rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
     rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
     rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
+    for(int i = 0; i < 8; i++)
+    {
+        cRelay * relay = new cRelay(i, CONST_SLAVE_RELAY);
+        listRelais.append(relay);
+    }
 }
 
 void MainWindow::InitSteelSlotTable()
@@ -750,30 +769,24 @@ void MainWindow::GetAllUartPorts()
 
 void MainWindow::logginStates(int channel, QString mess)
 {
-    ChannelOptions * ch;
-    switch(channel)
-    {
-    case 1:
-        ch = &channel1;
-        break;
-    case 2:
-        ch = &channel2;
-        break;
-    case 3:
-        ch = &channel3;
-        break;
-    case 4:
-        ch = &channel4;
-        break;
-    default:
-        break;
-    }
-
+    ChannelOptions * ch = listCh.at(channel);
     double cur = ch->GetCurrentChannelValue();
     QString channelstringvalue = (QString::number( cur, 'f', 3)) + ch->GetUnitsName();
     //messwrite.LogAddMessage (ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
     logger->addMess(ch->GetChannelName() + ":" + mess + ":" + channelstringvalue);
 
+}
+
+void MainWindow::logginSteel(int numSteel)
+{
+    cSteel * steel = listSteel.at(numSteel);
+    QString string;
+    string = string + steel->technology->name + \
+            " " + QString::number(steel->temp, 'f', 0) + "°C" + \
+            " " + QString::number(steel->eds, 'f', 0) + "mV" + \
+            " " + QString::number(steel->ao, 'f', 0) + "ppm" +\
+            steel->timeUpdateData.toString(" hh:mm:ss");
+    logger->addMess(string);
 }
 
 extern "C" {
@@ -803,20 +816,20 @@ void MainWindow::ChangePalette(bool i)
     QColor Channel1ColorMaximum,Channel2ColorMaximum,Channel3ColorMaximum,Channel4ColorMaximum;
     QColor Channel1ColorMinimum,Channel2ColorMinimum,Channel3ColorMinimum,Channel4ColorMinimum;
 
-    if (ui->EcoCheckBox->checkState())
-    {
-        Channel1Color = Channel1ColorNormal = ColorCh1Light;
-        Channel2Color = Channel2ColorNormal = ColorCh2Light;
-        Channel3Color = Channel3ColorNormal = ColorCh3Light;
-        Channel4Color = Channel4ColorNormal = ColorCh4Light;
-    }
-    else
-    {
-        Channel1Color = Channel1ColorNormal = ColorCh1;
-        Channel2Color = Channel2ColorNormal = ColorCh2;
-        Channel3Color = Channel3ColorNormal = ColorCh3;
-        Channel4Color = Channel4ColorNormal = ColorCh4;
-    }
+//    if (ui->EcoCheckBox->checkState())
+//    {
+//        Channel1Color = Channel1ColorNormal = ColorCh1Light;
+//        Channel2Color = Channel2ColorNormal = ColorCh2Light;
+//        Channel3Color = Channel3ColorNormal = ColorCh3Light;
+//        Channel4Color = Channel4ColorNormal = ColorCh4Light;
+//    }
+//    else
+//    {
+//        Channel1Color = Channel1ColorNormal = ColorCh1;
+//        Channel2Color = Channel2ColorNormal = ColorCh2;
+//        Channel3Color = Channel3ColorNormal = ColorCh3;
+//        Channel4Color = Channel4ColorNormal = ColorCh4;
+//    }
 
     Channel1ColorMaximum = QColor(Channel1Color.red() - 20,Channel1Color.green() - 20,Channel1Color.blue() - 20);
     Channel2ColorMaximum = QColor(Channel2Color.red() - 20,Channel2Color.green() - 20,Channel2Color.blue() - 20);
@@ -899,7 +912,7 @@ void MainWindow::parseWorkerReceive()
     timerQueueTrans->stop();
     Transaction tr;
     QString paramName;
-    ChannelOptions * channel;
+    ChannelOptions * channel = &channel1;;
     int ch;
     bool isDeviceParam = false;
 
@@ -913,7 +926,7 @@ void MainWindow::parseWorkerReceive()
         isDeviceParam = false;
         if(tr.offset < BASE_OFFSET_DEVICE)
         {
-            //пока ничего не делать
+            isDeviceParam = true;
         }
         else if((tr.offset >= BASE_OFFSET_DEVICE) && (tr.offset < BASE_OFFSET_CHANNEL_1))
         {
@@ -954,6 +967,13 @@ void MainWindow::parseWorkerReceive()
                     channel->SetSignalType(tr.volInt);
                     channel->SetCurSignalType(tr.volInt);
                     emit retransToSlotConfig(tr);
+                }
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "Status"))
+            {
+                if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(ch)->status = tr.volInt;
                 }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter1"))
@@ -1033,73 +1053,33 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "OxActivity"))
             {
-                listSteel.at(ch)->ao = tr.volInt;
+                if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(ch)->ao = tr.volInt & 0xFFFF;
+                }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "MassAl"))
             {
-                listSteel.at(ch)->alg = tr.volInt;
+                if(typeDevice == Device_STEEL)
+                {
+                    listSteel.at(ch)->alg = tr.volInt & 0xFFFF;
+                }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Carbon"))
             {
-                listSteel.at(ch)->cup = tr.volInt;
+                if(typeDevice == Device_STEEL)
+                {
+                    if(tr.paramA12[0] != 0x7FFF)
+                        listSteel.at(ch)->cl = (float)tr.paramA12[0] / 1000;
+                    else
+                        listSteel.at(ch)->cl = NAN;
+                }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "PrimaryActivity"))
             {
-                listSteel.at(ch)->eds = tr.volFlo;
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter2"))
-            {
                 if(typeDevice == Device_STEEL)
                 {
-                    if(tr.paramA12[0] & 0x8000) //проверка флага готовности данных
-                    {
-                        uint16_t indexIn = tr.paramA12[0] & 0x7FFF;
-                        int selectVector = tr.paramA12[0] & 0x0001;
-
-                        if(indexIn == indexSteel)
-                        {
-
-                            if(selectVector == 1)
-                            {
-                                if(listSteel.at(ch)->vectorTemp.size() <= ((indexIn >> 1) * 5))
-                                {   //проверка на корректное заполнение массива
-                                    for(int i = 1; i <= 5; i++)
-                                    {
-                                        if(tr.paramA12[i] == 0xFFFF)
-                                        {
-                                            listSteel.at(ch)->vectorTempReceived = true;
-                                            break;
-                                        }
-                                        listSteel.at(ch)->vectorTemp.append(((double)tr.paramInt16[i])/10.0);
-                                    }
-                                }
-                            }
-                            else //selectVector = 0
-                            {
-                                if(listSteel.at(ch)->vectorEds.size() <= ((indexIn >> 1) * 5))
-                                {   //проверка на корректное заполнение массива
-                                    for(int i = 1; i <= 5; i++)
-                                    {
-                                        if(tr.paramA12[i] == 0xFFFF)
-                                        {
-                                            listSteel.at(ch)->vectorEdsReceived = true;
-                                            break;
-                                        }
-                                        listSteel.at(ch)->vectorTemp.append(((double)tr.paramInt16[i])/10.0);
-                                    }
-                                }
-                            }
-                            if(listSteel.at(ch)->vectorTempReceived && \
-                                    listSteel.at(ch)->vectorEdsReceived)
-                            {
-                                listSteel.at(ch)->allVectorsReceived = true;
-                            }
-                            else
-                            {
-                                indexSteel++;
-                            }
-                        }
-                    }
+                    listSteel.at(ch)->eds = tr.volFlo;
                 }
             }
             else
@@ -1118,6 +1098,56 @@ void MainWindow::parseWorkerReceive()
                         //Vag: тут вставить инициализацию списка входных групп
                     }
                     slotSteelOnline = true;
+                }
+            }
+            else if(paramName.contains("DataArray"))
+            {
+                if(typeDevice == Device_STEEL)
+                {
+                    for(int i = 1; i <= 5; i++)
+                    {   //перебор массивов по номерам в карте регистров
+                        if(paramName == QString("DataArray" + QString::number(i)) && \
+                                !listSteel.at(steelReadyNum)->vectorEdsReceived)
+                        {   //подобран номер массива
+                            for(int j = 0; j < 32; j++)
+                            {   //поэлементное копирование полученного массива в соответствующий объект стали
+                                int indexVec = j + (i - 1) * 32;
+                                if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
+                                {
+                                    if(tr.paramInt16[j] != 0x7FFF)
+                                    {
+                                        listSteel.at(steelReadyNum)->vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
+                                    }
+                                    else
+                                    {
+                                        listSteel.at(steelReadyNum)->vectorEdsReceived = true;
+                                    }
+
+                                }
+                            }
+                            break;
+                        }
+                        else if(paramName == QString("DataArray" + QString::number(i+5)) && \
+                                !listSteel.at(steelReadyNum)->vectorTempReceived)
+                        {
+                            for(int j = 0; j < 32; j++)
+                            {   //поэлементное копирование полученного массива в соответствующий объект стали
+                                int indexVec = j + (i - 1) * 32;
+                                if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
+                                {
+                                    if(tr.paramInt16[j] != 0x7FFF)
+                                    {
+                                        listSteel.at(steelReadyNum)->vectorTemp.replace(indexVec, (double)tr.paramInt16[j]);
+                                    }
+                                    else
+                                    {
+                                        listSteel.at(steelReadyNum)->vectorTempReceived = true;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
                 }
             }
             emit retransToSlotConfig(tr);

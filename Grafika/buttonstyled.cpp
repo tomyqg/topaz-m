@@ -99,38 +99,6 @@ void wButtonStyled::on_button_released()
     ui->shadow->setGeometry(7, 7, ui->shadow->width(), ui->shadow->height());
 }
 
-//bool wButtonStyled::eventFilter(QObject *watched, QEvent *event)
-//{
-//    if(watched == ui->button && event->type() == QEvent::HoverMove)
-//    {
-//        int r = colorBg.red() - 10;
-//        int g = colorBg.green() - 10;
-//        int b = colorBg.blue() - 10;
-//        int a = colorBg.alpha();
-//        strColorBg = "background-color: rgba(" + \
-//                QString::number(r) + ", " + \
-//                QString::number(g) + ", " + \
-//                QString::number(b) + ", " + \
-//                QString::number(a) + ");\n";
-//        QString stringStyleSheet = strColorText + strColorBg + "border: 0px solid rgba(255, 255, 255, 0);";
-//        ui->button->setStyleSheet(stringStyleSheet);
-//    } else if(watched == ui->button && event->type() == QEvent::HoverLeave)
-//    {
-//        int r = colorBg.red();
-//        int g = colorBg.green();
-//        int b = colorBg.blue();
-//        int a = colorBg.alpha();
-//        strColorBg = "background-color: rgba(" + \
-//                QString::number(r) + ", " + \
-//                QString::number(g) + ", " + \
-//                QString::number(b) + ", " + \
-//                QString::number(a) + ");\n";
-//        QString stringStyleSheet = strColorText + strColorBg + "border: 0px solid rgba(255, 255, 255, 0);";
-//        ui->button->setStyleSheet(stringStyleSheet);
-//    }
-//    return wButtonStyled::eventFilter(watched, event);
-//}
-
 void wButtonStyled::setAlignLeft()
 {
     strAlign = AlignLeftStyle;
@@ -155,4 +123,9 @@ void wButtonStyled::setAlignRight()
 void wButtonStyled::on_button_clicked()
 {
     emit clicked();
+}
+
+void wButtonStyled::setFontSize(int s)
+{
+    ui->button->setFont(QFont(Font,s));
 }
