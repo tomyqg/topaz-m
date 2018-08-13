@@ -33,6 +33,7 @@ QVector<QDateTime> MainWindow::Dates;
 
 QList<cSteel*> listSteel;
 typeSteelTech steelTech[NUM_TECHNOLOGIES];
+cSystemOptions systemOptions;  //класс хранения состемных опций
 
 
 extern QColor Channel1Color;

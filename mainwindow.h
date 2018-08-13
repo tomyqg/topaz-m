@@ -333,8 +333,6 @@ private:
 #endif
     dSettings * dialogSetingsChannel;
 
-    cSystemOptions systemOptions;  //класс хранения состемных опций
-
     void initSteel();
     void InitSteelSlotTable();
     bool slotSteelOnline;       //признак наличия платы STEEL в слоте

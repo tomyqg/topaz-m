@@ -19,6 +19,7 @@ extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 extern cChannelSlotController csc;
 extern cSteelController ssc;
+extern cSystemOptions systemOptions;  //класс хранения состемных опций
 
 
 dMenu::dMenu(QWidget *parent) :

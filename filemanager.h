@@ -15,7 +15,9 @@ class cFileManager : public QObject
 public:
     explicit cFileManager(QObject *parent = 0);
     static int writeChannelsSettings(QString path, QList<ChannelOptions*> listChannels, QList<Ustavka*> listUstavok);
+    static int writeSteelsSettings(QString path);
     static int readChannelsSettings(QString path, QList<ChannelOptions*> listChannels, QList<Ustavka *> listUstavok);
+    static int readSteelsSettings(QString path);
     static int writeSystemOptionsToFile(QString path, cSystemOptions * opt);
     static int readSystemOptionsFromFile(QString path, cSystemOptions *opt);
 signals:

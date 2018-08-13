@@ -3,6 +3,11 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTextStream>
+#include <steel.h>
+#include <defines.h>
+
+extern QList<cSteel*> listSteel;
+extern typeSteelTech steelTech[];
 
 cFileManager::cFileManager(QObject *parent) : QObject(parent)
 {
@@ -69,6 +74,8 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
     file.resize(0); // clear file
     out << setstr;
     file.close();
+
+
     return 0;
 }
 
@@ -149,6 +156,69 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
 
 }
 
+int cFileManager::readSteelsSettings(QString path)
+{
+    int ret = 0;
+
+    QFile infile(path);
+    infile.open(QIODevice::ReadOnly);
+    QTextStream in(&infile);
+    QString sss = in.readLine();
+    infile.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+    QJsonObject json = doc.object();
+    QJsonArray steelsArray = json["Steels"].toArray();
+
+    int count = json["CountSteel"].toInt();
+    if(count < listSteel.size())
+    {
+        ret = -1;
+    }
+
+    int index = 0;
+    foreach (cSteel * steel, listSteel) {
+        QJsonObject steelObj = steelsArray.at(index++).toObject();
+        steel->technology = &steelTech[steelObj.value("NumTech").toInt()];
+        QJsonArray relais = steelObj["Relais"].toArray();
+        for(int i = 0; (i < SUM_RELAYS) && (i < relais.size()); i++)
+        {
+            steel->relais[i] = relais.at(i).toInt();
+        }
+    }
+
+    count = json["CountTech"].toInt();
+    if(count < NUM_TECHNOLOGIES)
+    {
+        ret -= 2;
+    }
+
+    QJsonArray arrayTech = json["Technologies"].toArray();
+    for(int i = 0; (i < count) && (i < NUM_TECHNOLOGIES); i++)
+    {
+        QJsonObject techObj = arrayTech.at(i).toObject();
+//        int size = min(techObj.value("Name").toString().size(), SIZE_TECH_NAME_STR);
+        strcpy(steelTech[i].name, techObj.value("Name").toString().toUtf8().data());
+//        steelTech[i].name = techObj.value("Name").toString().toLatin1().data();
+        steelTech[i].nSt = techObj.value("TermoCouple").toInt();
+        steelTech[i].COH = techObj.value("SensorActivity").toInt();
+        steelTech[i].b1 = techObj.value("Crystallization").toInt();
+        steelTech[i].dSt = techObj.value("TimeSquareTemp").toDouble();
+        steelTech[i].dt = techObj.value("RangeTemp").toDouble();
+        steelTech[i].tPt = techObj.value("TimeMeasureTemp").toDouble();
+        steelTech[i].LPtl = techObj.value("LowTemp").toInt();
+        steelTech[i].LPth = techObj.value("HiTemp").toInt();
+        steelTech[i].dSE = techObj.value("TimeSquareEDS").toDouble();
+        steelTech[i].dE = techObj.value("RangeEDS").toDouble();
+        steelTech[i].tPE = techObj.value("TimeMeasureEDS").toDouble();
+        steelTech[i].b2 = techObj.value("MassCoeff").toInt();
+        steelTech[i].O = techObj.value("FinalOx").toInt();
+        steelTech[i].Y = techObj.value("Assimilation").toInt();
+        steelTech[i].G = techObj.value("MassMelting").toInt();
+    }
+
+    return ret;
+}
 
 int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 {
@@ -188,3 +258,57 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     infile.close();
 }
 
+int cFileManager::writeSteelsSettings(QString path)
+{
+    QJsonObject steeljsonobj, options, techjsobj;
+    QJsonArray settingssteel, settingstech;
+
+    foreach (cSteel * steel, listSteel) {
+        steeljsonobj["NumSteel"] = steel->num;
+        QJsonArray relais;
+        for(int i = 0; i < SUM_RELAYS; i++)
+        {
+            relais.append(steel->relais[i]);
+        }
+        steeljsonobj["Relais"] = relais;
+        steeljsonobj["NumTech"] = steel->technology->num;
+        settingssteel.append(steeljsonobj);
+    }
+    options["CountSteel"] = listSteel.length();
+    options["Steels"] = settingssteel;
+
+    for(int i = 0; i < NUM_TECHNOLOGIES; i++)
+    {
+        techjsobj["NumTech"] = steelTech[i].num;
+        techjsobj["Name"] = QString(steelTech[i].name);
+        techjsobj["TermoCouple"] = steelTech[i].nSt;
+        techjsobj["SensorActivity"] = steelTech[i].COH;
+        techjsobj["Crystallization"] = steelTech[i].b1;
+        techjsobj["TimeSquareTemp"] = steelTech[i].dSt;
+        techjsobj["RangeTemp"] = steelTech[i].dt;
+        techjsobj["TimeMeasureTemp"] = steelTech[i].tPt;
+        techjsobj["LowTemp"] = steelTech[i].LPtl;
+        techjsobj["HiTemp"] = steelTech[i].LPth;
+        techjsobj["TimeSquareEDS"] = steelTech[i].dSE;
+        techjsobj["RangeEDS"] = steelTech[i].dE;
+        techjsobj["TimeMeasureEDS"] = steelTech[i].tPE;
+        techjsobj["MassCoeff"] = steelTech[i].b2;
+        techjsobj["FinalOx"] = steelTech[i].O;
+        techjsobj["Assimilation"] = steelTech[i].Y;
+        techjsobj["MassMelting"] = steelTech[i].G;
+        settingstech.append(techjsobj);
+    }
+
+    options["CountTech"] = NUM_TECHNOLOGIES;
+    options["Technologies"] = settingstech;
+
+    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
+    QFile file(path);
+    QTextStream out(&file);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0); // clear file
+    out << setstr;
+    file.close();
+
+    return 0;
+}

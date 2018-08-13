@@ -1,6 +1,8 @@
 #include "steel.h"
 #include <assert.h>
 
+int cSteel::countSteel = 0;
+
 cSteel::cSteel(QObject *parent) : QObject(parent)
 {
     allVectorsReceived = false;
@@ -10,6 +12,8 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     vectorEds = QVector<double>(SIZE_ARRAY, NAN);
     vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
     memset(relais, -1, SUM_RELAYS);
+    num = countSteel;
+    countSteel++;
 }
 
 //void cSteel::resetDefault(int group)

@@ -75,6 +75,7 @@ private:
     cSteel * curSteel;
     void UpdateSteelUI(typeSteelTech * tech);
     QVector<double> X_Steel, Y_SteelTemp, Y_SteelEds;
+    void saveParam();
 
 private slots:
     void on_exitButton_clicked();
@@ -86,7 +87,6 @@ private slots:
     void on_verticalScrollBar_sliderMoved(int position);
     void on_period_currentIndexChanged(int index);
     void on_buttonBackUstavki_clicked();
-    void saveParam();
     bool eventFilter(QObject* watched, QEvent* event);
     void on_typeSignal_currentIndexChanged(int index);
     void plotPress(QMouseEvent * pe);

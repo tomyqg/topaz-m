@@ -36,6 +36,7 @@
 #define pathtolowlimico  "/opt/lowlim.png"
 #define pathtoloadgif   "/opt/load.gif"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
+#define pathtosteeloptions "/opt/steeloptions.txt"
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
@@ -66,6 +67,8 @@
 #define pathtohilimico  "C:/Work/hilim.png"
 #define pathtolowlimico  "C:/Work/lowlim.png"
 #define pathtoloadgif   "C:/Work/load.gif"
+//#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
+#define pathtosteeloptions "C:/Work/steeloptions.txt"
 #else
 
 #define pathtofiles  QCoreApplication::applicationDirPath()

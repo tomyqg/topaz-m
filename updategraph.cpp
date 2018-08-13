@@ -34,6 +34,7 @@ QVector<double> X_Coord_Steel, Y_Coord_SteelTemp, Y_Coord_SteelEds;
 extern cChannelSlotController csc;
 extern QList<cSteel*> listSteel;
 extern cSteelController ssc;
+extern cSystemOptions systemOptions;  //класс хранения состемных опций
 
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
@@ -1048,6 +1049,7 @@ void MainWindow::UpdateChannel1Slot()
 {
 //    qDebug() << "1Slot" << "in";
     if(channel1.GetSignalType() == 0) return;
+    if(systemOptions.display == cSystemOptions::Steel) return;
     DataBuffer::writeupdatestatus(0,true);
     int period = channel1.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(0);
@@ -1076,6 +1078,7 @@ void MainWindow::UpdateChannel2Slot()
 {
 //    qDebug() << "2Slot" << "in";
     if(channel2.GetSignalType() == 0) return;
+    if(systemOptions.display == cSystemOptions::Steel) return;
     DataBuffer::writeupdatestatus(1,true);
     int period = channel2.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(1);
@@ -1105,6 +1108,7 @@ void MainWindow::UpdateChannel3Slot()
 {
 //    qDebug() << "3Slot" << "in";
     if(channel3.GetSignalType() == 0) return;
+    if(systemOptions.display == cSystemOptions::Steel) return;
     DataBuffer::writeupdatestatus(2,true);
     int period = channel3.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(2);
@@ -1133,6 +1137,7 @@ void MainWindow::UpdateChannel4Slot()
 {
 //    qDebug() << "4Slot" << "in";
     if(channel4.GetSignalType() == 0) return;
+    if(systemOptions.display == cSystemOptions::Steel) return;
     DataBuffer::writeupdatestatus(3,true);
     int period = channel4.GetMeasurePeriod()*1000;
     int devCh = csc.getDevChannel(3);

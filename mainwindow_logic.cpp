@@ -222,6 +222,7 @@ void MainWindow::MainWindowInitialization()
     ui->buttonInputsGraphs->setColorText(ColorBlue);
     ui->buttonInputsGraphs->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->buttonInputsGraphs->setFontSize(16);
+    cFileManager::readSteelsSettings(pathtosteeloptions);
 //    ui->plotSteel->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 
 
@@ -425,8 +426,8 @@ void MainWindow::UpdUst()
 #define CONST_SLAVE_ADC     5
 #define CONST_SLAVE_RELAY   6
 #else
-#define CONST_SLAVE_STEEL   4
-#define CONST_SLAVE_ADC     5
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_ADC     4
 #define CONST_SLAVE_RELAY   6
 #endif
 

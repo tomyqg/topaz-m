@@ -39,6 +39,7 @@ const typeTableSignalTypes tableSignalTypes[] = {
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
+extern cSystemOptions systemOptions;  //класс хранения состемных опций
 
 dSettings::dSettings(QList<ChannelOptions*> channels,
                      QList<Ustavka*> ustavki,
@@ -530,34 +531,12 @@ void dSettings::updateBar()
 
 void dSettings::saveParam()
 {
-    channel->SetChannelName(ui->nameChannel->text().toUtf8());
-    channel->SetSignalType(tableSignalTypes[ui->typeSignal->currentIndex()].st);
-    channel->SetHigherMeasureLimit(ui->scaleUp->value());
-    channel->SetLowerMeasureLimit(ui->scaleDown->value());
-    channel->SetUnitsName(ui->unit->text().toUtf8());
-    channel->SetMeasurePeriod(ui->periodCh->value());
-    channel->SetDempher(ui->dempfer->value());
-    channel->SetRegistrationType(ui->typeReg->currentIndex());
-    channel->SetDiapason(ui->sensorDiapazon->currentIndex());
-    channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
-
-    ustavka->setUstavka(numChannel, \
-                        ui->ustavkaVol->value(), \
-                        ui->ustavkaVolDown->value(), \
-                        ui->gisterezis->value(), \
-                        ui->gisterezis->value(), \
-                        ui->reley->currentIndex(), \
-                        ui->releyDown->currentIndex() \
-                        );
-    ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
-    ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
-    ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
-    ustavka->setMessNormHigh(ui->messageOffDown->text().toUtf8());
-
     if(ui->stackedWidget->currentIndex() == 4)
     {
         typeSteelTech * tech = &steelTech[ui->groupTech->currentIndex()];
         curSteel->technology = tech;
+//        int size = min(ui->nameSteelTech->text().size(), SIZE_TECH_NAME_STR);
+        strcpy(tech->name, ui->groupName->text().toUtf8().data());
         int typeTC[] ={TC_Type_S, TC_Type_B, TC_Type_A1};
         tech->nSt = typeTC[ui->typeTermoCouple->currentIndex()];
         tech->dSt = ui->steel_dSt->value();
@@ -574,7 +553,42 @@ void dSettings::saveParam()
         tech->O = ui->steel_O->value();
         tech->Y = ui->steel_Y->value();
         tech->G = ui->steel_G->value();
+
+        curSteel->relais[0] = ui->steelRelayBreak->currentIndex() - 1;
+        curSteel->relais[1] = ui->steelRelayReady->currentIndex() - 1;
+        curSteel->relais[2] = ui->steelRelayMeasure->currentIndex() - 1;
+        curSteel->relais[3] = ui->steelRelayTimeOut->currentIndex() - 1;
     }
+    else
+    {
+        channel->SetChannelName(ui->nameChannel->text().toUtf8());
+        channel->SetSignalType(tableSignalTypes[ui->typeSignal->currentIndex()].st);
+        channel->SetHigherMeasureLimit(ui->scaleUp->value());
+        channel->SetLowerMeasureLimit(ui->scaleDown->value());
+        channel->SetUnitsName(ui->unit->text().toUtf8());
+        channel->SetMeasurePeriod(ui->periodCh->value());
+        channel->SetDempher(ui->dempfer->value());
+        channel->SetRegistrationType(ui->typeReg->currentIndex());
+        channel->SetDiapason(ui->sensorDiapazon->currentIndex());
+        channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+
+        ustavka->setUstavka(numChannel, \
+                            ui->ustavkaVol->value(), \
+                            ui->ustavkaVolDown->value(), \
+                            ui->gisterezis->value(), \
+                            ui->gisterezis->value(), \
+                            ui->reley->currentIndex(), \
+                            ui->releyDown->currentIndex() \
+                            );
+        ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
+        ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
+        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
+        ustavka->setMessNormHigh(ui->messageOffDown->text().toUtf8());
+    }
+
+
+
+
 
 }
 
@@ -592,7 +606,15 @@ void dSettings::on_saveButton_clicked()
 
     //сохраняемся
     saveParam();
-    cFileManager::writeChannelsSettings(pathtooptions, listChannels, listUstavok);
+    if(systemOptions.display == cSystemOptions::Steel)
+    {
+       cFileManager::writeSteelsSettings(pathtosteeloptions);
+    }
+    else
+    {
+        cFileManager::writeChannelsSettings(pathtooptions, listChannels, listUstavok);
+    }
+
 
 }
 
@@ -868,6 +890,10 @@ void dSettings::drowGraf()
 void dSettings::updateUIfromSteel()
 {
     typeSteelTech * tech = curSteel->technology;
+    ui->steelRelayBreak->setCurrentIndex(curSteel->relais[0] + 1);
+    ui->steelRelayReady->setCurrentIndex(curSteel->relais[1] + 1);
+    ui->steelRelayMeasure->setCurrentIndex(curSteel->relais[2] + 1);
+    ui->steelRelayTimeOut->setCurrentIndex(curSteel->relais[3] + 1);
     UpdateSteelUI(tech);
 }
 
@@ -982,20 +1008,20 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
 
 void dSettings::on_steelRelayBreak_activated(int index)
 {
-    curSteel->relais[0] = index - 1;
+//    curSteel->relais[0] = index - 1;
 }
 
 void dSettings::on_steelRelayReady_activated(int index)
 {
-    curSteel->relais[1] = index - 1;
+//    curSteel->relais[1] = index - 1;
 }
 
 void dSettings::on_steelRelayMeasure_activated(int index)
 {
-    curSteel->relais[2] = index - 1;
+//    curSteel->relais[2] = index - 1;
 }
 
 void dSettings::on_steelRelayTimeOut_activated(int index)
 {
-    curSteel->relais[3] = index - 1;
+//    curSteel->relais[3] = index - 1;
 }
