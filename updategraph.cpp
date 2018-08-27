@@ -12,9 +12,7 @@
 #include <stdlib.h>
 #include "registersmap.h"
 
-#ifdef Q_OS_WIN32
-//    #define RANDOM_CHAN
-#endif
+
 
 #define PERIOD_MEASURE_STEEL 250    //msec период точек на графике анализа стали
 
@@ -1206,18 +1204,47 @@ void MainWindow::updateSteel()
                     Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
                     uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
                     if(relay%2)
-                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
-                    else
                         tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
+                    else
+                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
                     tr.volInt = relayStates[i];
                     emit sendTransToWorker(tr);
+                    steel->countRelayTime = 4000 / UpdateSteelTime;
                 }
+                if((listRelais.at(relay)->newState == 1) && (i == 3))
+                {
+                    if(steel->countRelayTime > 0)
+                        steel->countRelayTime--;
+                    else
+                    {
+                        Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
+                        uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
+                        if(relay%2)
+                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
+                        else
+                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
+                        tr.volInt = 0;
+                        emit sendTransToWorker(tr);
+                    }
+                }
+
             }
 
         }
     }
 
-    if(steelReady)
+    //Запрос статусов входных групп внезависимости от текущего состояния виджетов
+    Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
+    emit sendTransToWorker(tr);
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
+    emit sendTransToWorker(tr);
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
+    emit sendTransToWorker(tr);
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
+    emit sendTransToWorker(tr);
+
+    if(stateWidgetSteel == STEEL_READY)
     {   //в плате STEEL имеются данные для получения
         if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
                 (listSteel.at(steelReadyNum)->vectorTempReceived))
@@ -1237,23 +1264,29 @@ void MainWindow::updateSteel()
             listSteel.at(steelReadyNum)->allVectorsReceived = false;
         }
 
-        if(/*(listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData) || */\
-                (listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData))
+        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorTC)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorEds))
         {
-            steelReady = false;
+//            steelReady = false;
+//            steelMeasure = false;
+            stateWidgetSteel = STEEL_WAIT;
         }
 
-        Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
-        emit sendTransToWorker(tr);
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
-        emit sendTransToWorker(tr);
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
-        emit sendTransToWorker(tr);
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
-        emit sendTransToWorker(tr);
-
         return;
+    }
+    else if(stateWidgetSteel == STEEL_MEASURE)
+    {   //началось измерение температуры и поиск площадки
+        Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Data");
+        emit sendTransToWorker(tr);
+        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorTC)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorEds)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData))
+        {
+            stateWidgetSteel = STEEL_WAIT;
+        }
     }
 
     for(int i = 0; i<listSteel.size(); i++)
@@ -1294,11 +1327,17 @@ void MainWindow::updateSteel()
             steel->eds = NAN;
             steel->cl = NAN;
             //данные на стороне платы STEEL готовы - запомним
-            steelReady = true;  //данные готовы
+//            steelReady = true;  //данные готовы
+            stateWidgetSteel = STEEL_READY;
             steelReadyNum = i;  //запоминаем номер входной группы
             steelSelectFrame = false;   //разрешаем показывать график
             steel->timeUpdateData = QDateTime::currentDateTime();
                break;  //выход из цикла, на первой же входной группе с площадкой
+        }
+        else if(steel->status == StatusCh_SteelUpdateData)
+        {
+            stateWidgetSteel = STEEL_MEASURE;
+            steelReadyNum = i;
         }
         //постоянно спрашиваем статус у всех входных групп
         tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Status");
@@ -1394,15 +1433,40 @@ void MainWindow::updateSteelWidget(void)
     QList<QString> strings;
     strings << "ОТКЛЮЧЕНО" << " " << "ОБРЫВ" \
             << " " << " " << "ГОТОВ" \
-            << "ИЗМЕРЕНИЕ" << " " << " " \
-            << " " << "ВРЕМЯ" << "ВРЕМЯ" \
+            << "ИЗМЕРЕНИЕ" << " " << "ОШИБКА ТС" \
+            << "ОШИБКА ЭДС" << "ВРЕМЯ" << "ВРЕМЯ" \
             << "ВРЕМЯ" << "ВРЕМЯ";
+    QList<QString> colorStyles;
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_4.red()) + ", " + QString::number(COLOR_4.green()) + ", " + QString::number(COLOR_4.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_2.red()) + ", " + QString::number(COLOR_2.green()) + ", " + QString::number(COLOR_2.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
     ui->steelStatus1->setText(strings.at(listSteel.at(0)->status));
     ui->steelStatus2->setText(strings.at(listSteel.at(1)->status));
     ui->steelStatus3->setText(strings.at(listSteel.at(2)->status));
     ui->steelStatus4->setText(strings.at(listSteel.at(3)->status));
 
-    if(steelReady)
+    ui->steelStatus1->setStyleSheet(colorStyles.at(listSteel.at(0)->status));
+    ui->steelStatus2->setStyleSheet(colorStyles.at(listSteel.at(1)->status));
+    ui->steelStatus3->setStyleSheet(colorStyles.at(listSteel.at(2)->status));
+    ui->steelStatus4->setStyleSheet(colorStyles.at(listSteel.at(3)->status));
+
+    ui->PlavkaNum->setText(QString::number(listSteel.at(0)->numSmelt));
+    ui->PlavkaNum_2->setText(QString::number(listSteel.at(1)->numSmelt));
+    ui->PlavkaNum_3->setText(QString::number(listSteel.at(2)->numSmelt));
+    ui->PlavkaNum_4->setText(QString::number(listSteel.at(3)->numSmelt));
+
+    if(stateWidgetSteel == STEEL_READY)
     {   //найдена площадка
         //steelReadyNum
         cSteel * steel = listSteel.at(steelReadyNum);
@@ -1423,11 +1487,13 @@ void MainWindow::updateSteelWidget(void)
         {
             ui->framePlotSteel->show();
             ui->frameSteelStatus->hide();
+            ui->frameTemperature->hide();
         }
         else
         {
             ui->framePlotSteel->hide();
             ui->frameSteelStatus->show();
+            ui->frameTemperature->hide();
         }
 
         if(listSteel.at(steelReadyNum)->allVectorsReceived)
@@ -1454,6 +1520,16 @@ void MainWindow::updateSteelWidget(void)
             ui->plotSteel->clearItems();
         }
     }
+    else if(stateWidgetSteel == STEEL_MEASURE)
+    {
+        ui->framePlotSteel->hide();
+        ui->frameSteelStatus->hide();
+        ui->frameTemperature->show();
+        cSteel * steel = listSteel.at(steelReadyNum);
+        if(!std::isnan(steel->temp))
+            ui->labelTemperature->setText(QString::number(steel->temp, 'f', 0) + " °C");
+        ui->labelNameSteelInout->setText(steel->technology->name);
+    }
     else
     {
         QString str = "Нет данных";
@@ -1468,61 +1544,12 @@ void MainWindow::updateSteelWidget(void)
 
         ui->framePlotSteel->hide();
         ui->frameSteelStatus->show();
+        ui->frameTemperature->hide();
 
         ui->steelTech1->setText(listSteel.at(0)->technology->name);
         ui->steelTech2->setText(listSteel.at(1)->technology->name);
         ui->steelTech3->setText(listSteel.at(2)->technology->name);
         ui->steelTech4->setText(listSteel.at(3)->technology->name);
     }
-}
-
-void MainWindow::simulatorSteel()
-{
-
-    steelReadyNum++;
-    if(steelReadyNum == listSteel.size())
-    {
-        steelReadyNum = 0;
-    }
-    listSteel.at(steelReadyNum)->temp = ((float)((rand()%100) * (2500-1700)) / 100) + 1700;
-    listSteel.at(steelReadyNum)->eds = ((float)((rand()%100) * (250-17)) / 100) - 17;
-    listSteel.at(steelReadyNum)->ao = ((float)((rand()%100) * (1000-100)) / 100) + 100;
-    listSteel.at(steelReadyNum)->alg = ((float)((rand()%100) * (100-10)) / 100) + 10;
-    listSteel.at(steelReadyNum)->cl = ((float)(rand()%100) / 1000);
-    steelReady = false;
-    listSteel.at(steelReadyNum)->allVectorsReceived = true;
-    listSteel.at(steelReadyNum)->vectorTemp.resize(0);
-    listSteel.at(steelReadyNum)->vectorEds.resize(0);
-    for(double i = 0; i < 1; i += 0.01)
-    {
-
-        double y;
-        if(i <= 0.2)
-        {
-            y = -2000000*i*i*i*i + 628636*i*i*i - 32698*i*i + 107.63*i + 4.5268;
-        }
-        else if(i <= 0.8)
-        {
-            y = -54779*i*i*i*i + 130991*i*i*i - 114698*i*i + 43556*i - 4277.8;
-        }
-        else
-        {
-            y = -30830*i*i + 49742*i - 18247;
-        }
-        y = y + ((double)(rand()%1000) - 500)/10;
-        listSteel.at(steelReadyNum)->vectorTemp.append(y);
-        double z = (y / (i+0.01)) / 10;
-        listSteel.at(steelReadyNum)->vectorEds.append(z);
-    }
-    ui->nameSteelTech->setText(listSteel.at(steelReadyNum)->technology->name);
-    ui->labelTimeSteel->setText(QDateTime::currentDateTime().toString("dd.MM.yy hh:mm:ss"));
-    ui->steelTemp->setText(QString::number(listSteel.at(steelReadyNum)->temp));
-    ui->steelEmf->setText(QString::number(listSteel.at(steelReadyNum)->eds));
-    ui->steelAO->setText(QString::number(listSteel.at(steelReadyNum)->ao));
-    ui->steelAl->setText(QString::number(listSteel.at(steelReadyNum)->alg));
-    ui->steelC->setText(QString::number(listSteel.at(steelReadyNum)->cl));
-
-
-//    time = curTime;
 }
 

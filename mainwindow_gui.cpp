@@ -124,7 +124,7 @@ void MainWindow::on_ArchiveButton_clicked()
 //    ui->time_label->setText(local.date().toString(datestrings.at(dateindex) ) + local.time().toString());
 //}
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_MenuButton_clicked()
 {
 //    OpenOptionsWindow(0);
 
@@ -143,7 +143,7 @@ void MainWindow::updateSystemOptions()
     ClearPolarCoords();
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_MessButton_clicked()
 {
 //    OpenMessagesWindow();
     dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 1);
@@ -187,7 +187,12 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 //        ReactOnMouseSlide();
     }
 
-    if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    if ((event->type() == QEvent::MouseButtonPress)\
+         && (QString::fromLatin1(watched->metaObject()->className()) == "QPushButton")\
+         && ((watched == ui->MessButton)\
+             || (watched == ui->ArchiveButton)\
+             || (watched == ui->WorkButton)\
+             || (watched == ui->MenuButton)))
     {
 
         QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
@@ -208,7 +213,12 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     }
 
 
-    if ( (event->type() == QEvent::MouseButtonRelease)&& ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))
+    if ((event->type() == QEvent::MouseButtonRelease)\
+         && ( QString::fromLatin1(watched->metaObject()->className()) == "QPushButton" )\
+         && ((watched == ui->MessButton)\
+             || (watched == ui->ArchiveButton)\
+             || (watched == ui->WorkButton)\
+             || (watched == ui->MenuButton)))
     {
 
         QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
@@ -223,6 +233,46 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
                                       + QString::number(ColorButtonNormal.red()) + "," \
                                       + QString::number(ColorButtonNormal.green()) + "," \
                                       + QString::number(ColorButtonNormal.blue()) + ");" \
+                                      + "border: 0px;");
+            }
+        }
+    }
+
+    if ((event->type() == QEvent::MouseButtonPress)\
+         && (QString::fromLatin1(watched->metaObject()->className()) == "QPushButton")\
+         && ((watched->objectName().contains("PlavkaButtonUp"))\
+             || (watched->objectName().contains("PlavkaButtonDown"))))
+    {
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+            if (widget->objectName() == watched->property("objectName"))
+            {
+                widget->setStyleSheet("color:#000000;background-color:rgb(" \
+                                      + QString::number(COLOR_GRAY.red() - 20) + "," \
+                                      + QString::number(COLOR_GRAY.green() - 20) + "," \
+                                      + QString::number(COLOR_GRAY.blue() - 20) + ");" \
+                                      + "border: 0px;");
+            }
+        }
+    }
+
+    if ((event->type() == QEvent::MouseButtonRelease)\
+         && (QString::fromLatin1(watched->metaObject()->className()) == "QPushButton")\
+         && ((watched->objectName().contains("PlavkaButtonUp"))\
+             || (watched->objectName().contains("PlavkaButtonDown"))))
+    {
+        QList<QPushButton *> widgets = findChildren<QPushButton *>(); // ищем в объекте все виджеты и делаем их ресайз
+        foreach(QPushButton * widget, widgets)
+        {
+            // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
+            if (widget->objectName() == watched->property("objectName"))
+            {
+                widget->setStyleSheet("color:#000000;background-color:rgb(" \
+                                      + QString::number(COLOR_GRAY.red()) + "," \
+                                      + QString::number(COLOR_GRAY.green()) + "," \
+                                      + QString::number(COLOR_GRAY.blue()) + ");" \
                                       + "border: 0px;");
             }
         }
@@ -522,7 +572,7 @@ void MainWindow::initSteel()
 
 void MainWindow::on_pushButton_clicked()
 {
-    simulatorSteel();
+//    simulatorSteel();
 }
 
 
@@ -541,3 +591,41 @@ void MainWindow::on_buttonInputsGraphs_clicked()
 //{
 
 //}
+
+void MainWindow::on_PlavkaButtonUp_clicked()
+{
+    listSteel.at(0)->numSmelt++;
+}
+
+void MainWindow::on_PlavkaButtonDown_clicked()
+{
+    if(listSteel.at(0)->numSmelt != 1)
+        listSteel.at(0)->numSmelt--;
+}
+void MainWindow::on_PlavkaButtonUp_2_clicked()
+{
+    listSteel.at(1)->numSmelt++;
+}
+void MainWindow::on_PlavkaButtonDown_2_clicked()
+{
+    if(listSteel.at(1)->numSmelt != 1)
+        listSteel.at(1)->numSmelt--;
+}
+void MainWindow::on_PlavkaButtonUp_3_clicked()
+{
+    listSteel.at(2)->numSmelt++;
+}
+void MainWindow::on_PlavkaButtonDown_3_clicked()
+{
+    if(listSteel.at(2)->numSmelt != 1)
+        listSteel.at(2)->numSmelt--;
+}
+void MainWindow::on_PlavkaButtonUp_4_clicked()
+{
+    listSteel.at(3)->numSmelt++;
+}
+void MainWindow::on_PlavkaButtonDown_4_clicked()
+{
+    if(listSteel.at(3)->numSmelt != 1)
+        listSteel.at(3)->numSmelt--;
+}

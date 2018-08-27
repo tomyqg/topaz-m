@@ -17,8 +17,8 @@ enum termoCoupleType{
 };
 enum deviceTypeEnum{
     Device_4AI = 1,
+    Device_8RP = 2,
     Device_STEEL = 3,
-    Device_8RP = 5,
 };
 enum statusChannelEnum{
     StatusCh_Off = 0,                       //выключен

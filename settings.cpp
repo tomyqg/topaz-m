@@ -583,7 +583,7 @@ void dSettings::saveParam()
         ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
         ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
         ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
-        ustavka->setMessNormHigh(ui->messageOffDown->text().toUtf8());
+        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
     }
 
 
@@ -995,6 +995,7 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
 
         QString string = json["Technology"].toString();
         ui->nameSteelTech->setText(string);
+        ui->nameSteelSmelt->setText(json["Smelt"].toString());
         ui->steelTemp->setText(json["Temp"].toString());
         ui->steelEmf->setText(json["Eds"].toString());
         ui->steelAO->setText(json["OxActivity"].toString());

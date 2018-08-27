@@ -458,6 +458,7 @@ void MainWindow::writeArchiveSteel(int steelNum)
     archive["Time"] = steel->timeUpdateData.toString("hh:mm:ss");
     archive["Input"] = steelNum;
     archive["Technology"] = steel->technology->name;
+    archive["Smelt"] = QString::number(steel->numSmelt);
     archive["Temp"] = QString::number(steel->temp, 'f', 2);
     archive["Eds"] = QString::number(steel->eds, 'f', 2);
     archive["OxActivity"] = QString::number(steel->ao);

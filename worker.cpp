@@ -318,9 +318,9 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
                         tmp = slaves[slave-1].state;
                         if(slaves[slave-1].state == 0)
                         {
-                            emit sendMessToLog("Slave " + QString::number(slave) + " is out: "\
-                                               + " Good " + QString::number(slaves[slave-1].cntGood) \
-                                               + " Bad " + QString::number(slaves[slave-1].cntBad));
+                            //emit sendMessToLog("Slave " + QString::number(slave) + " is out: "\
+                            //                   + " Good " + QString::number(slaves[slave-1].cntGood) \
+                            //                   + " Bad " + QString::number(slaves[slave-1].cntBad));
 
                         }
                         slaves[slave-1].state = 1;

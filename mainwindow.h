@@ -34,7 +34,11 @@
 #include "Communicator/communicator.h"
 #endif
 
+#ifdef Q_OS_WIN32
+    //#define RANDOM_CHAN
+#endif
 
+//#define RANDOM_CHAN
 
 #define DEBUG_RELAY
 
@@ -126,8 +130,8 @@ private slots:
     void GrafsUpdateNone();
     void AddValuesToBuffer();
     void DelaySec(int n);
-    void on_pushButton_2_clicked();
-    void on_pushButton_4_clicked();
+    void on_MenuButton_clicked();
+    void on_MessButton_clicked();
     void ChangePalette(bool i);
     void on_WorkButton_clicked();
     void on_ArchiveButton_clicked();
@@ -157,6 +161,15 @@ private slots:
 //    void on_buttonInputsGraphs_pressed();
 
 //    void on_buttonInputsGraphs_released();
+
+    void on_PlavkaButtonUp_clicked();
+    void on_PlavkaButtonDown_clicked();
+    void on_PlavkaButtonUp_2_clicked();
+    void on_PlavkaButtonDown_2_clicked();
+    void on_PlavkaButtonUp_3_clicked();
+    void on_PlavkaButtonDown_3_clicked();
+    void on_PlavkaButtonUp_4_clicked();
+    void on_PlavkaButtonDown_4_clicked();
 
 signals:
     void error(const QString &s);
@@ -336,12 +349,19 @@ private:
     void initSteel();
     void InitSteelSlotTable();
     bool slotSteelOnline;       //признак наличия платы STEEL в слоте
+    bool slotAnalogOnline;       //признак наличия платы 4AI
+    bool steelMeasure;          //признак начала измерения температуры
     bool steelReady;            //признак готовности данных по площадке
+    int stateWidgetSteel;       //состояние главного экрана виджетов по стали
+    enum {
+        STEEL_WAIT,             //ожидание измерения на одной из входных групп
+        STEEL_MEASURE,          //измерение температуры
+        STEEL_READY,            //измерения выполнены
+    };
     int steelReadyNum;          //номер входной группы площадки, где найдена площадка
     QTimer * timerUpdateSteel;  //таймер одновления данных с платы STEEL
     int indexSteel;             //индекс массива температур и эдс
     void updateSteelWidget();   //обновление виджета с данными и графиком стали
-    void simulatorSteel();      //Vag: симуляция данных по стали
     bool steelSelectFrame;
     void logginSteel(int numSteel);
 

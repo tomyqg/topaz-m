@@ -113,7 +113,7 @@
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
 #define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
-#define UpdateSteelTime 1000
+#define UpdateSteelTime 500
 
 #endif
 
@@ -130,6 +130,7 @@
 #define COLOR_LIGHT_4 QColor(0x80,0x9f,0xbc)
 #define COLOR_DARK  QColor(0x2b,0x3e,0x4c)
 #define COLOR_LIGHT QColor(0x0e,0xd2,0xe2)
+#define COLOR_GRAY  QColor(0xe6,0xe6,0xe6)
 
 // Цвета элементов
 #define ColorCh1 COLOR_1

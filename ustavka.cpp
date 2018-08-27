@@ -84,9 +84,9 @@ void Ustavka::update(double cur)
         timeFilter->start(DELAY_RELAY);
         // запись события в лог
         if(setUp != up)
-            emit messToLogSignal(numChannel, (setUp ? stateInHighMess : stateNormHighMess));
+            emit messToLogSignal(numChannel-1, (setUp ? stateInHighMess : stateNormHighMess));
         if(setDown != down)
-            emit messToLogSignal(numChannel, (setDown ? stateInLowMess : stateNormLowMess));
+            emit messToLogSignal(numChannel-1, (setDown ? stateInLowMess : stateNormLowMess));
     }
 }
 

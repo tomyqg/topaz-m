@@ -285,7 +285,8 @@ DISTFILES += \
     untitled2_ru.ts \
     ../build-TopazM_MB-MYD1-Debug/Makefile \
     ../build-TopazM_MB-MYD1-Release/Makefile \
-    ../build-TopazM_MB-MYD1-Debug/Makefile
+    ../build-TopazM_MB-MYD1-Debug/Makefile \
+    ../build-TopazM_MB-MYD3-Release/Makefile
 
 
 TRANSLATIONS +=  untitled2_en.ts \

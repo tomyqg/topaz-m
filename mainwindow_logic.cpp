@@ -168,7 +168,8 @@ void MainWindow::MainWindowInitialization()
     displayrefreshtimer = new QTimer();
 //    displayrefreshtimer->setInterval(3000);
     displayrefreshtimer->start(30000);
-    connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()) );
+    connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()));
+    RefreshScreen();
 
     QTimer *tmrarchive = new QTimer(this);
     connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
@@ -208,7 +209,10 @@ void MainWindow::MainWindowInitialization()
     //инициализация параметров измерения стали
     initSteel();
     slotSteelOnline = false;
-    steelReady = false;
+    slotAnalogOnline = false;
+//    steelReady = false;
+//    steelMeasure = false;
+    stateWidgetSteel = STEEL_WAIT;
     steelReadyNum = 0;
     indexSteel = 0;
     timerUpdateSteel = new QTimer(this);
@@ -218,6 +222,8 @@ void MainWindow::MainWindowInitialization()
     ui->plotSteel->yAxis2->setTickLabels(true);
     ui->frameSteelStatus->setMaximumWidth(1000000000);
     ui->framePlotSteel->setMaximumWidth(100000000);
+    ui->frameTemperature->setMaximumWidth(100000000);
+
     steelSelectFrame = false;
     ui->buttonInputsGraphs->setColorText(ColorBlue);
     ui->buttonInputsGraphs->setColorBg(QColor(0xf0,0xf0,0xf0));
@@ -422,8 +428,8 @@ void MainWindow::UpdUst()
 //-----Временная реализация соединения слотов----
 
 #ifdef Q_OS_WIN32
-#define CONST_SLAVE_STEEL   4
-#define CONST_SLAVE_ADC     5
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_ADC     4
 #define CONST_SLAVE_RELAY   6
 #else
 #define CONST_SLAVE_STEEL   5
@@ -999,9 +1005,11 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_4AI)
                 {
+#ifndef RANDOM_CHAN
                     channel1.SetCurrentChannelValue((double)tr.volFlo);
                     ui->wBar_1->setVolue((double)tr.volFlo);
                     ui->widgetVol1->setVol((double)tr.volFlo);
+#endif
                 }
                 else if(typeDevice == Device_STEEL)
                 {
@@ -1012,9 +1020,11 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_4AI)
                 {
+#ifndef RANDOM_CHAN
                     channel2.SetCurrentChannelValue((double)tr.volFlo);
                     ui->wBar_2->setVolue((double)tr.volFlo);
                     ui->widgetVol2->setVol((double)tr.volFlo);
+#endif
                 }
                 else if(typeDevice == Device_STEEL)
                 {
@@ -1025,9 +1035,11 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_4AI)
                 {
+#ifndef RANDOM_CHAN
                     channel3.SetCurrentChannelValue((double)tr.volFlo);
                     ui->wBar_3->setVolue((double)tr.volFlo);
                     ui->widgetVol3->setVol((double)tr.volFlo);
+#endif
                 }
                 else if(typeDevice == Device_STEEL)
                 {
@@ -1038,9 +1050,11 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_4AI)
                 {
+#ifndef RANDOM_CHAN
                     channel4.SetCurrentChannelValue((double)tr.volFlo);
                     ui->wBar_4->setVolue((double)tr.volFlo);
                     ui->widgetVol4->setVol((double)tr.volFlo);
+#endif
                 }
                 else if(typeDevice == Device_STEEL)
                 {
@@ -1099,6 +1113,14 @@ void MainWindow::parseWorkerReceive()
                         //Vag: тут вставить инициализацию списка входных групп
                     }
                     slotSteelOnline = true;
+                }
+                else if(tr.volInt == Device_4AI)
+                {
+                    if(!slotAnalogOnline)
+                    {
+                        //Vag: тут вставить инициализацию списка входных групп
+                    }
+                    slotAnalogOnline = true;
                 }
             }
             else if(paramName.contains("DataArray"))
@@ -1200,136 +1222,142 @@ void MainWindow::sendConfigChannelsToSlave()
     tr.dir = Transaction::W;
     QString str;
 
-    for(int i = 0; i < listCh.size(); i++)
+    if(slotAnalogOnline)
     {
-        int devCh = csc.getDevChannel(i);
-        tr.slave = csc.getSlotByChannel(devCh);
+        for(int i = 0; i < listCh.size(); i++)
+        {
+            int devCh = csc.getDevChannel(i);
+            tr.slave = csc.getSlotByChannel(devCh);
 
-        // запись актуального значения SignalType
-        str = "chan" + QString::number(devCh) + "SignalType";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = listCh.at(i)->GetSignalType();
-        emit sendTransToWorker(tr);
+            // запись актуального значения SignalType
+            str = "chan" + QString::number(devCh) + "SignalType";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = listCh.at(i)->GetSignalType();
+            emit sendTransToWorker(tr);
 
-        // запись актуального Additional parameter1
-        str = "chan" + QString::number(devCh) + "AdditionalParameter1";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-//        tr.volInt = 0;
-        int size = sizeof(tr.paramA12);
-        memset(tr.paramA12, 0, size);
-        if(listCh.at(i)->GetSignalType() == ModBus::VoltageMeasure)
-        {
-            tr.paramA12[0] = (uint16_t)listCh.at(i)->GetDiapason();
+            // запись актуального Additional parameter1
+            str = "chan" + QString::number(devCh) + "AdditionalParameter1";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            //        tr.volInt = 0;
+            int size = sizeof(tr.paramA12);
+            memset(tr.paramA12, 0, size);
+            if(listCh.at(i)->GetSignalType() == ModBus::VoltageMeasure)
+            {
+                tr.paramA12[0] = (uint16_t)listCh.at(i)->GetDiapason();
+            }
+            else if(listCh.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
+            {
+                tr.paramA12[0] = (uint16_t)listCh.at(i)->getShema();
+                tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
+            }
+            else if((listCh.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
+            {
+                tr.paramA12[0] = 1;
+                tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
+                tr.paramA12[2] = 2;
+            }
+            emit sendTransToWorker(tr);
         }
-        else if(listCh.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
-        {
-            tr.paramA12[0] = (uint16_t)listCh.at(i)->getShema();
-            tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
-        }
-        else if((listCh.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
-        {
-            tr.paramA12[0] = 1;
-            tr.paramA12[1] = (uint16_t)listCh.at(i)->GetDiapason();
-            tr.paramA12[2] = 2;
-        }
-        emit sendTransToWorker(tr);
     }
 
-    for(int i = 0; i < listSteel.size(); i++)
+    if(slotSteelOnline)
     {
-        cSteel * st = listSteel.at(i);
-        int devS = ssc.getDevSteel(i);
-        tr.slave = ssc.getSlotBySteel(devS);
+        for(int i = 0; i < listSteel.size(); i++)
+        {
+            cSteel * st = listSteel.at(i);
+            int devS = ssc.getDevSteel(i);
+            tr.slave = ssc.getSlotBySteel(devS);
 
-        // запись Time_square_temperature
-        str = "chan" + QString::number(devS) + "TimeSquareTemp";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->dSt;
-        emit sendTransToWorker(tr);
+            // запись Time_square_temperature
+            str = "chan" + QString::number(devS) + "TimeSquareTemp";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->dSt;
+            emit sendTransToWorker(tr);
 
-        // запись Range_temperature
-        str = "chan" + QString::number(devS) + "RangeTemp";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->dt;
-        emit sendTransToWorker(tr);
+            // запись Range_temperature
+            str = "chan" + QString::number(devS) + "RangeTemp";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->dt;
+            emit sendTransToWorker(tr);
 
-        // запись Time_measure_temperature
-        str = "chan" + QString::number(devS) + "TimeMeasureTemp";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->tPt;
-        emit sendTransToWorker(tr);
+            // запись Time_measure_temperature
+            str = "chan" + QString::number(devS) + "TimeMeasureTemp";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->tPt;
+            emit sendTransToWorker(tr);
 
-        // запись Low_lim_temp
-        str = "chan" + QString::number(devS) + "LowTemp";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->LPtl;
-        emit sendTransToWorker(tr);
+            // запись Low_lim_temp
+            str = "chan" + QString::number(devS) + "LowTemp";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->LPtl;
+            emit sendTransToWorker(tr);
 
-        // запись Hi_lim_temp
-        str = "chan" + QString::number(devS) + "HiTemp";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->LPth;
-        emit sendTransToWorker(tr);
+            // запись Hi_lim_temp
+            str = "chan" + QString::number(devS) + "HiTemp";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->LPth;
+            emit sendTransToWorker(tr);
 
-        // запись Sensor_Type_Activty
-        str = "chan" + QString::number(devS) + "SensorType";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->COH;
-        emit sendTransToWorker(tr);
+            // запись Sensor_Type_Activty
+            str = "chan" + QString::number(devS) + "SensorType";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->COH;
+            emit sendTransToWorker(tr);
 
-        // запись Time_square_EDS
-        str = "chan" + QString::number(devS) + "TimeSquareEDS";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->dSE;
-        emit sendTransToWorker(tr);
+            // запись Time_square_EDS
+            str = "chan" + QString::number(devS) + "TimeSquareEDS";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->dSE;
+            emit sendTransToWorker(tr);
 
-        // запись Range_EDS
-        str = "chan" + QString::number(devS) + "RangeEDS";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->dE;
-        emit sendTransToWorker(tr);
+            // запись Range_EDS
+            str = "chan" + QString::number(devS) + "RangeEDS";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->dE;
+            emit sendTransToWorker(tr);
 
-        // запись Time_measure_EDS
-        str = "chan" + QString::number(devS) + "TimeMeasureEDS";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volFlo = st->technology->tPE;
-        emit sendTransToWorker(tr);
+            // запись Time_measure_EDS
+            str = "chan" + QString::number(devS) + "TimeMeasureEDS";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volFlo = st->technology->tPE;
+            emit sendTransToWorker(tr);
 
-        // запись Сrystallization_temperature
-        str = "chan" + QString::number(devS) + "Crystallization";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->b1;
-        emit sendTransToWorker(tr);
+            // запись Сrystallization_temperature
+            str = "chan" + QString::number(devS) + "Crystallization";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->b1;
+            emit sendTransToWorker(tr);
 
-        // запись Mass_coefficient
-        str = "chan" + QString::number(devS) + "MassCoeff";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->b2;
-        emit sendTransToWorker(tr);
+            // запись Mass_coefficient
+            str = "chan" + QString::number(devS) + "MassCoeff";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->b2;
+            emit sendTransToWorker(tr);
 
-        // запись Final_oxidation
-        str = "chan" + QString::number(devS) + "FinalOx";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->O;
-        emit sendTransToWorker(tr);
+            // запись Final_oxidation
+            str = "chan" + QString::number(devS) + "FinalOx";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->O;
+            emit sendTransToWorker(tr);
 
-        // запись Assimilation of aluminum
-        str = "chan" + QString::number(devS) + "Assimilation";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->Y;
-        emit sendTransToWorker(tr);
+            // запись Assimilation of aluminum
+            str = "chan" + QString::number(devS) + "Assimilation";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->Y;
+            emit sendTransToWorker(tr);
 
-        // запись Mass_melting
-        str = "chan" + QString::number(devS) + "MassMelting";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.volInt = st->technology->G;
-        emit sendTransToWorker(tr);
+            // запись Mass_melting
+            str = "chan" + QString::number(devS) + "MassMelting";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.volInt = st->technology->G;
+            emit sendTransToWorker(tr);
 
-        // запись Mass_melting
-        str = "chan" + QString::number(devS) + "AdditionalParameter1";
-        tr.offset = cRegistersMap::getOffsetByName(str);
-        tr.paramA12[1] = st->technology->nSt;
-        emit sendTransToWorker(tr);
+            // запись Mass_melting
+            str = "chan" + QString::number(devS) + "AdditionalParameter1";
+            tr.offset = cRegistersMap::getOffsetByName(str);
+            tr.paramA12[1] = st->technology->nSt;
+            emit sendTransToWorker(tr);
+        }
     }
 }
 

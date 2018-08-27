@@ -34,6 +34,8 @@ public:
     bool vectorEdsReceived;
     bool allVectorsReceived;        //массивы для графиков получены полностью
     int8_t relais[SUM_RELAYS];
+    uint8_t countRelayTime;         //обратнфый счётчик реле "ВРЕМЯ"
+    uint8_t numSmelt;           // номер плавки
 
 signals:
 

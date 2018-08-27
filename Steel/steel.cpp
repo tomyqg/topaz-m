@@ -14,6 +14,7 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     memset(relais, -1, SUM_RELAYS);
     num = countSteel;
     countSteel++;
+    numSmelt = 1;
 }
 
 //void cSteel::resetDefault(int group)
