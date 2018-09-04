@@ -27,6 +27,8 @@
 #include "steel_technology.h"
 #include "steel_controller.h"
 #include "relay.h"
+#include "serverhttp.h"
+#include <QNetworkProxyFactory>
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -359,11 +361,14 @@ private:
         STEEL_READY,            //измерения выполнены
     };
     int steelReadyNum;          //номер входной группы площадки, где найдена площадка
+    uint8_t numArraySteel;      //номер массива с измерениями для текущего обновления графика
     QTimer * timerUpdateSteel;  //таймер одновления данных с платы STEEL
     int indexSteel;             //индекс массива температур и эдс
     void updateSteelWidget();   //обновление виджета с данными и графиком стали
     bool steelSelectFrame;
     void logginSteel(int numSteel);
+
+    cServerHttp * server;
 
 protected:
     void paintEvent(QPaintEvent *event) ;

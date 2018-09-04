@@ -12,6 +12,7 @@
 #include "qextserialenumerator.h"
 #include "registersmap.h"
 #include <filemanager.h>
+#include <assert.h>
 
 #include <QPixmap>
 #include <QTimer>
@@ -338,6 +339,11 @@ void MainWindow::MainWindowInitialization()
 #endif
 
     ui->stackedWidget->setCurrentIndex(1);
+
+    //инициализация сервера HTTP
+    QNetworkProxyFactory::setUseSystemConfiguration(false); //не использовать системный прокси
+//    server = new cServerHttp(this);   //создание сервера
+
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -1084,6 +1090,8 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_STEEL)
                 {
+                    //получены все данные по площадке - это последний параметр
+                    listSteel.at(ch)->allVectorsReceived = true;
                     if(tr.paramA12[0] != 0x7FFF)
                         listSteel.at(ch)->cl = (float)tr.paramA12[0] / 1000;
                     else
@@ -1132,6 +1140,7 @@ void MainWindow::parseWorkerReceive()
                         if(paramName == QString("DataArray" + QString::number(i)) && \
                                 !listSteel.at(steelReadyNum)->vectorEdsReceived)
                         {   //подобран номер массива
+
                             for(int j = 0; j < 32; j++)
                             {   //поэлементное копирование полученного массива в соответствующий объект стали
                                 int indexVec = j + (i - 1) * 32;
@@ -1143,9 +1152,10 @@ void MainWindow::parseWorkerReceive()
                                     }
                                     else
                                     {
-                                        listSteel.at(steelReadyNum)->vectorEdsReceived = true;
+//                                        listSteel.at(steelReadyNum)->vectorEdsReceived = true;
+//                                        needNextArray = false;
+                                        break;
                                     }
-
                                 }
                             }
                             break;
@@ -1153,6 +1163,7 @@ void MainWindow::parseWorkerReceive()
                         else if(paramName == QString("DataArray" + QString::number(i+5)) && \
                                 !listSteel.at(steelReadyNum)->vectorTempReceived)
                         {
+                            bool needNextArray = true;  //признак необходимости запроса следующего массива
                             for(int j = 0; j < 32; j++)
                             {   //поэлементное копирование полученного массива в соответствующий объект стали
                                 int indexVec = j + (i - 1) * 32;
@@ -1164,9 +1175,17 @@ void MainWindow::parseWorkerReceive()
                                     }
                                     else
                                     {
-                                        listSteel.at(steelReadyNum)->vectorTempReceived = true;
+//                                        listSteel.at(steelReadyNum)->vectorTempReceived = true;
+                                        needNextArray = false;
+                                        break;
                                     }
                                 }
+                            }
+                            if(needNextArray)
+                            {   //если массив заполнен, то переход на следующий
+                                if(numArraySteel != i)
+                                    numArraySteel = i;
+//                                assert(numArraySteel < 5);  //номер массива не может быть равен 5 или больше
                             }
                             break;
                         }

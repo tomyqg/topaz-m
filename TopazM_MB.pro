@@ -8,6 +8,7 @@ QT += core gui #script
 unix:QT += script
 QT += serialport
 QT += testlib
+QT += network
 
 VERSION = 1.0.0
 
@@ -23,7 +24,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers Communicator Grafika LookupTable Steel Relais
+        Drivers Communicator Grafika LookupTable Steel Relais Server
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -77,7 +78,9 @@ SOURCES += main.cpp \
     Steel/steel.cpp \
     Steel/steel_connect.cpp \
     Steel/steel_controller.cpp \
-    Relais/relay.cpp
+    Relais/relay.cpp \
+    Server/serverhttp.cpp \
+    Server/socket_thread.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -172,7 +175,9 @@ HEADERS  += mainwindow.h \
     Steel/steel_technology.h \
     Steel/steel_connect.h \
     Steel/steel_controller.h \
-    Relais/relay.h
+    Relais/relay.h \
+    Server/serverhttp.h \
+    Server/socket_thread.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -293,4 +298,29 @@ TRANSLATIONS +=  untitled2_en.ts \
                  untitled2_ru.ts \
                  untitled2_de.ts
 
-RESOURCES +=
+###### WevServer #############################
+HEADERS += \
+           Server/src/requestmapper.h \
+           Server/src/controller/dumpcontroller.h \
+           Server/src/controller/templatecontroller.h \
+           Server/src/controller/formcontroller.h \
+           Server/src/controller/fileuploadcontroller.h \
+           Server/src/controller/sessioncontroller.h
+
+SOURCES += \
+           Server/src/requestmapper.cpp \
+           Server/src/controller/dumpcontroller.cpp \
+           Server/src/controller/templatecontroller.cpp \
+           Server/src/controller/formcontroller.cpp \
+           Server/src/controller/fileuploadcontroller.cpp \
+           Server/src/controller/sessioncontroller.cpp
+
+OTHER_FILES += Server/etc/* Server/etc/docroot/*
+OTHER_FILES += Server/etc/templates/* Server/etc/ssl/*
+OTHER_FILES += Server/logs/*
+
+include(Server/QtWebApp/logging/logging.pri)
+include(Server/QtWebApp/httpserver/httpserver.pri)
+include(Server/QtWebApp/templateengine/templateengine.pri)
+###### /WevServer #############################
+

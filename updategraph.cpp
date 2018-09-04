@@ -11,10 +11,11 @@
 #include "defines.h"
 #include <stdlib.h>
 #include "registersmap.h"
+#include "assert.h"
 
 
 
-#define PERIOD_MEASURE_STEEL 250    //msec период точек на графике анализа стали
+#define PERIOD_MEASURE_STEEL 100    //msec период точек на графике анализа стали
 
 int xoffset=0;
 
@@ -1160,6 +1161,89 @@ void MainWindow::UpdateChannel4Slot()
 //    qDebug() << "4Slot" << "out";
 }
 
+
+
+void MainWindow::updateBars(void)
+{
+    ui->wBar_1->setExtr(channel1.GetMinimumChannelValue(), channel1.GetMaximumChannelValue());
+    ui->wBar_2->setExtr(channel2.GetMinimumChannelValue(), channel2.GetMaximumChannelValue());
+    ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
+    ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
+
+    ui->wBar_1->setColor(ColorCh1, ColorCh1Light);
+    ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
+    ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
+    ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
+
+    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+
+    ui->wBar_1->setBarDiapazon(max(abs(channel1.GetHigherMeasureLimit()), \
+                                   abs(channel1.GetLowerMeasureLimit())));
+    ui->wBar_2->setBarDiapazon(max(abs(channel2.GetHigherMeasureLimit()), \
+                                   abs(channel2.GetLowerMeasureLimit())));
+    ui->wBar_3->setBarDiapazon(max(abs(channel3.GetHigherMeasureLimit()), \
+                                   abs(channel3.GetLowerMeasureLimit())));
+    ui->wBar_4->setBarDiapazon(max(abs(channel4.GetHigherMeasureLimit()), \
+                                   abs(channel4.GetLowerMeasureLimit())));
+
+    ui->wBar_1->setLim(ustavkaObjectsList.at(0)->getLowStateValue(), \
+                       ustavkaObjectsList.at(0)->getHiStateValue());
+    ui->wBar_2->setLim(ustavkaObjectsList.at(1)->getLowStateValue(), \
+                       ustavkaObjectsList.at(1)->getHiStateValue());
+    ui->wBar_3->setLim(ustavkaObjectsList.at(2)->getLowStateValue(), \
+                       ustavkaObjectsList.at(2)->getHiStateValue());
+    ui->wBar_4->setLim(ustavkaObjectsList.at(3)->getLowStateValue(), \
+                       ustavkaObjectsList.at(3)->getHiStateValue());
+
+}
+
+void MainWindow::updateWidgetsVols(void)
+{
+    ui->widgetVol1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->widgetVol2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->widgetVol3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->widgetVol4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+    ui->widgetVol1->setColor(channel1.GetNormalColor());
+    ui->widgetVol2->setColor(channel2.GetNormalColor());
+    ui->widgetVol3->setColor(channel3.GetNormalColor());
+    ui->widgetVol4->setColor(channel4.GetNormalColor());
+}
+
+void MainWindow::selectWidgetDiagram(void)
+{
+    if ( (systemOptions.display == cSystemOptions::BarsCyfra) || \
+         (systemOptions.display == cSystemOptions::TrendsCyfraBars) || \
+         (systemOptions.display == cSystemOptions::Cyfra) || \
+         (systemOptions.display == cSystemOptions::TrendsBars) || \
+         (systemOptions.display == cSystemOptions::Bars) || \
+         (systemOptions.display == cSystemOptions::TrendsCyfra) || \
+         (systemOptions.display == cSystemOptions::Trends) )
+    {
+        ui->stackedWidgetDiagram->setCurrentIndex(0);
+        ui->right->show();
+        ui->left->show();
+        ui->frameSteel->hide();
+    }
+    else if(systemOptions.display == cSystemOptions::Polar ||\
+            systemOptions.display == cSystemOptions::PolarBars ||\
+            systemOptions.display == cSystemOptions::PolarCyfra)
+    {
+        ui->stackedWidgetDiagram->setCurrentIndex(1);
+        ui->right->show();
+        ui->left->show();
+        ui->frameSteel->hide();
+    }
+    else if(systemOptions.display == cSystemOptions::Steel)
+    {
+        ui->right->hide();
+        ui->left->hide();
+        ui->frameSteel->show();
+    }
+}
+
 void MainWindow::updateSteel()
 {
     if(!slotSteelOnline) return;
@@ -1246,21 +1330,28 @@ void MainWindow::updateSteel()
 
     if(stateWidgetSteel == STEEL_READY)
     {   //в плате STEEL имеются данные для получения
-        if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
-                (listSteel.at(steelReadyNum)->vectorTempReceived))
-        {
-            if(!listSteel.at(steelReadyNum)->allVectorsReceived)
-            {
-                //запись в журнал
-                logginSteel(steelReadyNum);
-                writeArchiveSteel(steelReadyNum);
-            }
-            listSteel.at(steelReadyNum)->allVectorsReceived = true;
 
+//        if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
+//                (listSteel.at(steelReadyNum)->vectorTempReceived))
+//        {
+//            if(!listSteel.at(steelReadyNum)->allVectorsReceived)
+//            {
+//                //запись в журнал
+//                logginSteel(steelReadyNum);
+//                writeArchiveSteel(steelReadyNum);
+//            }
+//            listSteel.at(steelReadyNum)->allVectorsReceived = true;
+//        }
+//        else
+//        {
+//            listSteel.at(steelReadyNum)->allVectorsReceived = false;
+//        }
 
-        }
-        else
+        if(listSteel.at(steelReadyNum)->allVectorsReceived)
         {
+            //запись в журнал
+            logginSteel(steelReadyNum);
+            writeArchiveSteel(steelReadyNum);
             listSteel.at(steelReadyNum)->allVectorsReceived = false;
         }
 
@@ -1280,10 +1371,19 @@ void MainWindow::updateSteel()
         Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
         tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Data");
         emit sendTransToWorker(tr);
-        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorTC)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorEds)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData))
+//        for(int i = 1; i <= 10; i ++)
+//        {
+        if(numArraySteel < 5)
+        {
+            //запрос текущего участка графика ЭДС
+            tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+1));
+            emit sendTransToWorker(tr);
+            //запрос текущего участка графика температуры
+            tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+6));
+            emit sendTransToWorker(tr);
+        }
+//        }
+        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData))
         {
             stateWidgetSteel = STEEL_WAIT;
         }
@@ -1307,15 +1407,15 @@ void MainWindow::updateSteel()
                 tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
                 emit sendTransToWorker(tr);
             }
-            for(int i = 1; i <= 10; i ++)
-            {
-                tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(i));
-                emit sendTransToWorker(tr);
-            }
+//            for(int i = 1; i <= 10; i ++)
+//            {
+//                tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(i));
+//                emit sendTransToWorker(tr);
+//            }
             //очистка векторов для новых данных
 //            QVector<double> vec = QVector(SIZE_ARRAY, NAN);
-            steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
-            steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
+//            steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
+//            steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
             //очистка признаков завершения получения векторов (только всё начинается)
 //            steel->allVectorsReceived = false;
             steel->vectorTempReceived = false;
@@ -1336,93 +1436,15 @@ void MainWindow::updateSteel()
         }
         else if(steel->status == StatusCh_SteelUpdateData)
         {
-            stateWidgetSteel = STEEL_MEASURE;
-            steelReadyNum = i;
+            if(stateWidgetSteel != STEEL_MEASURE)
+            {
+                stateWidgetSteel = STEEL_MEASURE;
+                steelReadyNum = i;
+                numArraySteel = 0;
+                steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
+                steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
+            }
         }
-        //постоянно спрашиваем статус у всех входных групп
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Status");
-        emit sendTransToWorker(tr);
-    }
-}
-
-void MainWindow::updateBars(void)
-{
-    ui->wBar_1->setExtr(channel1.GetMinimumChannelValue(), channel1.GetMaximumChannelValue());
-    ui->wBar_2->setExtr(channel2.GetMinimumChannelValue(), channel2.GetMaximumChannelValue());
-    ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
-    ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
-
-    ui->wBar_1->setColor(ColorCh1, ColorCh1Light);
-    ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
-    ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
-    ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
-
-    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
-    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
-    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
-    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
-
-    ui->wBar_1->setBarDiapazon(max(abs(channel1.GetHigherMeasureLimit()), \
-                                   abs(channel1.GetLowerMeasureLimit())));
-    ui->wBar_2->setBarDiapazon(max(abs(channel2.GetHigherMeasureLimit()), \
-                                   abs(channel2.GetLowerMeasureLimit())));
-    ui->wBar_3->setBarDiapazon(max(abs(channel3.GetHigherMeasureLimit()), \
-                                   abs(channel3.GetLowerMeasureLimit())));
-    ui->wBar_4->setBarDiapazon(max(abs(channel4.GetHigherMeasureLimit()), \
-                                   abs(channel4.GetLowerMeasureLimit())));
-
-    ui->wBar_1->setLim(ustavkaObjectsList.at(0)->getLowStateValue(), \
-                       ustavkaObjectsList.at(0)->getHiStateValue());
-    ui->wBar_2->setLim(ustavkaObjectsList.at(1)->getLowStateValue(), \
-                       ustavkaObjectsList.at(1)->getHiStateValue());
-    ui->wBar_3->setLim(ustavkaObjectsList.at(2)->getLowStateValue(), \
-                       ustavkaObjectsList.at(2)->getHiStateValue());
-    ui->wBar_4->setLim(ustavkaObjectsList.at(3)->getLowStateValue(), \
-                       ustavkaObjectsList.at(3)->getHiStateValue());
-
-}
-
-void MainWindow::updateWidgetsVols(void)
-{
-    ui->widgetVol1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
-    ui->widgetVol2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
-    ui->widgetVol3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
-    ui->widgetVol4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
-    ui->widgetVol1->setColor(channel1.GetNormalColor());
-    ui->widgetVol2->setColor(channel2.GetNormalColor());
-    ui->widgetVol3->setColor(channel3.GetNormalColor());
-    ui->widgetVol4->setColor(channel4.GetNormalColor());
-}
-
-void MainWindow::selectWidgetDiagram(void)
-{
-    if ( (systemOptions.display == cSystemOptions::BarsCyfra) || \
-         (systemOptions.display == cSystemOptions::TrendsCyfraBars) || \
-         (systemOptions.display == cSystemOptions::Cyfra) || \
-         (systemOptions.display == cSystemOptions::TrendsBars) || \
-         (systemOptions.display == cSystemOptions::Bars) || \
-         (systemOptions.display == cSystemOptions::TrendsCyfra) || \
-         (systemOptions.display == cSystemOptions::Trends) )
-    {
-        ui->stackedWidgetDiagram->setCurrentIndex(0);
-        ui->right->show();
-        ui->left->show();
-        ui->frameSteel->hide();
-    }
-    else if(systemOptions.display == cSystemOptions::Polar ||\
-            systemOptions.display == cSystemOptions::PolarBars ||\
-            systemOptions.display == cSystemOptions::PolarCyfra)
-    {
-        ui->stackedWidgetDiagram->setCurrentIndex(1);
-        ui->right->show();
-        ui->left->show();
-        ui->frameSteel->hide();
-    }
-    else if(systemOptions.display == cSystemOptions::Steel)
-    {
-        ui->right->hide();
-        ui->left->hide();
-        ui->frameSteel->show();
     }
 }
 
@@ -1466,22 +1488,26 @@ void MainWindow::updateSteelWidget(void)
     ui->PlavkaNum_3->setText(QString::number(listSteel.at(2)->numSmelt));
     ui->PlavkaNum_4->setText(QString::number(listSteel.at(3)->numSmelt));
 
-    if(stateWidgetSteel == STEEL_READY)
+    if((stateWidgetSteel == STEEL_READY) || (stateWidgetSteel == STEEL_MEASURE))
     {   //найдена площадка
         //steelReadyNum
         cSteel * steel = listSteel.at(steelReadyNum);
         ui->nameSteelTech->setText(steel->technology->name);
-        ui->labelTimeSteel->setText(steel->timeUpdateData.toString("dd.MM.yy hh:mm:ss"));
-        if(!std::isnan(steel->temp))
-            ui->steelTemp->setText(QString::number(steel->temp));
-        if(!std::isnan(steel->eds))
-            ui->steelEmf->setText(QString::number(steel->eds));
-        if(steel->ao != 0x7FFF)
-            ui->steelAO->setText(QString::number(steel->ao));
-        if(steel->alg != 0x7FFF)
-            ui->steelAl->setText(QString::number(steel->alg));
-        if(!std::isnan(steel->cl))
-            ui->steelC->setText(QString::number(steel->cl));
+
+        if(stateWidgetSteel == STEEL_READY)
+        {
+            ui->labelTimeSteel->setText(steel->timeUpdateData.toString("dd.MM.yy hh:mm:ss"));
+            if(!std::isnan(steel->temp))
+                ui->steelTemp->setText(QString::number(steel->temp));
+            if(!std::isnan(steel->eds))
+                ui->steelEmf->setText(QString::number(steel->eds));
+            if(steel->ao != 0x7FFF)
+                ui->steelAO->setText(QString::number(steel->ao));
+            if(steel->alg != 0x7FFF)
+                ui->steelAl->setText(QString::number(steel->alg));
+            if(!std::isnan(steel->cl))
+                ui->steelC->setText(QString::number(steel->cl));
+        }
 
         if(!steelSelectFrame)
         {
@@ -1496,10 +1522,11 @@ void MainWindow::updateSteelWidget(void)
             ui->frameTemperature->hide();
         }
 
-        if(listSteel.at(steelReadyNum)->allVectorsReceived)
-        {
+//        if(listSteel.at(steelReadyNum)->allVectorsReceived)
+//        {
             Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
             Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
+            X_Coord_Steel.resize(0);
             for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
             {
                 X_Coord_Steel.append((i * PERIOD_MEASURE_STEEL) / 1000.0);
@@ -1515,20 +1542,27 @@ void MainWindow::updateSteelWidget(void)
             ui->plotSteel->addGraph(ui->plotSteel->xAxis, ui->plotSteel->yAxis2);
             ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelEds);
             ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
-            ui->plotSteel->rescaleAxes();
+//            ui->plotSteel->rescaleAxes();
+            double size = steel->technology->dt;
+            double position = size / 2;
+            ui->plotSteel->xAxis->setRange(position, size, Qt::AlignCenter);
+            size = (steel->technology->LPth - steel->technology->LPtl) * 1.1;
+            position = (steel->technology->LPth + steel->technology->LPtl) / 2;
+            ui->plotSteel->yAxis->setRange(position, size, Qt::AlignCenter);
             ui->plotSteel->replot();
             ui->plotSteel->clearItems();
-        }
+//        }
     }
     else if(stateWidgetSteel == STEEL_MEASURE)
     {
-        ui->framePlotSteel->hide();
-        ui->frameSteelStatus->hide();
-        ui->frameTemperature->show();
-        cSteel * steel = listSteel.at(steelReadyNum);
-        if(!std::isnan(steel->temp))
-            ui->labelTemperature->setText(QString::number(steel->temp, 'f', 0) + " °C");
-        ui->labelNameSteelInout->setText(steel->technology->name);
+        assert(0); //Сюда не должны попадать
+//        ui->framePlotSteel->show();
+//        ui->frameSteelStatus->hide();
+////        ui->frameTemperature->show();
+//        cSteel * steel = listSteel.at(steelReadyNum);
+//        if(!std::isnan(steel->temp))
+//            ui->labelTemperature->setText(QString::number(steel->temp, 'f', 0) + " °C");
+//        ui->labelNameSteelInout->setText(steel->technology->name);
     }
     else
     {
