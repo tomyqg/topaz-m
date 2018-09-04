@@ -8,6 +8,7 @@
 #include <options.h>
 #include <keyboard.h>
 #include <uartdriver.h>
+#include <QScroller>
 
 enum numItems{
     NoSignal = 0,
@@ -139,8 +140,17 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     timerUpdateGraf.start(200);
 
     //настройки для скролинга списка сообщений
-    ui->listWidget->viewport()->installEventFilter(this);
+//    ui->listWidget->viewport()->installEventFilter(this);
+    QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
     mouseScroll = false;
+    //скролинг виджетов настроек каналов
+//    ui->scrollArea->installEventFilter(this);
+    QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
+//    ui->scrollArea->verticalScrollBar()->setSingleStep(1);
+    QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
+//    ui->scrollArea_2->installEventFilter(this);
+//    ui->scrollArea_3->installEventFilter(this);
 
     //обновим параметры виджетов, чтобы всё на своих местах стояло и написано, что надо
     updateWidgets();
@@ -664,42 +674,62 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
 #endif
 
 
-    QListWidget *lw = (QListWidget*)(watched);
-    if(lw)
-    {
-        if(event->type() == QEvent::MouseButtonPress)
-        {
-            yPosList = QCursor::pos().y();
-            curRow = ui->listWidget->currentRow();
-            mouseScroll = true;
-        }
-        if(event->type() == QEvent::MouseMove)
-        {
-            if(mouseScroll)
-            {
-                int y = QCursor::pos().y();
-                int h = ui->listWidget->height();
-                double move = ((double)y - (double)yPosList) / (double)h;
-                int count = ui->listWidget->count() * 15 / h;
-                int row;
-                if (count > 0)
-                    row = curRow - (count*move) + 9;
-                else if(count < 0)
-                    row = curRow - (count*move) - 9;
-                else
-                    curRow - (count*move);
+//    QListWidget *lw = (QListWidget*)(watched);
+//    if(lw/* && (watched == ui->listWidget)*/)
+//    {
+//        if(event->type() == QEvent::MouseButtonPress)
+//        {
+//            yPosList = QCursor::pos().y();
+//            curRow = ui->listWidget->currentRow();
+//            mouseScroll = true;
+//        }
+//        if(event->type() == QEvent::MouseMove)
+//        {
+//            if(mouseScroll)
+//            {
+//                int y = QCursor::pos().y();
+//                int h = ui->listWidget->height();
+//                double move = ((double)y - (double)yPosList) / (double)h;
+//                int count = ui->listWidget->count() * 15 / h;
+//                int row;
+//                if (count > 0)
+//                    row = curRow - (count*move) + 9;
+//                else if(count < 0)
+//                    row = curRow - (count*move) - 9;
+//                else
+//                    curRow - (count*move);
 
-                ui->listWidget->setCurrentRow(row);
-            }
-        }
+//                ui->listWidget->setCurrentRow(row);
+//            }
+//        }
+//        if(event->type() == QEvent::MouseButtonRelease)
+//        {
+//            mouseScroll = false;
+//        }
+//        return QObject::eventFilter(watched, event);
+//    }
 
-        if(event->type() == QEvent::MouseButtonRelease)
-        {
-            mouseScroll = false;
-        }
-    }
-
-
+//    QScrollArea *sa = (QScrollArea*)(watched);
+//    if(sa)
+//    {
+//        if(event->type() == QEvent::MouseButtonPress)
+//        {
+//            yPos = QCursor::pos().y();
+//            yPosArea = sa->verticalScrollBar()->value();
+//            mouseScroll = true;
+//        }
+//        if(event->type() == QEvent::MouseMove)
+//        {
+//            if(mouseScroll)
+//            {
+//                sa->verticalScrollBar()->setValue(yPosArea + yPos - QCursor::pos().y());
+//            }
+//        }
+//        if(event->type() == QEvent::MouseButtonRelease)
+//        {
+//            mouseScroll = false;
+//        }
+//    }
 
 
     return QObject::eventFilter(watched, event);

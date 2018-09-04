@@ -59,6 +59,7 @@ private:
     QVector<QString> Labels;
     int xPos;
     int yPos;
+    int yPosArea;
     double sizePlot;
     double posPlot;
     double sizePlotX;
