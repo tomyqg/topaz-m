@@ -61,10 +61,8 @@ private slots:
     void on_bUstavka_4_clicked();
 
     void on_bBackDateTime_clicked();
-
     void on_bEditDataTime_clicked();
-
-    void on_bBackDateTimeSet_clicked();
+    void on_bDateTimeSet_clicked();
 
 private:
     Ui::dMenu *ui;
@@ -77,6 +75,8 @@ private:
     void UpdateAnalyze();
     void updateSystemOptions();
     cSystemOptions sysOptions;
+    QDateTime dateTime;
+
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
 
@@ -110,6 +110,21 @@ private slots:
     void on_radioButSteelModes_clicked();
 
     void on_radioButAnalogModes_clicked();
+
+    void on_dateEdit_d_up_clicked();
+    void on_dateEdit_m_up_clicked();
+    void on_dateEdit_y_up_clicked();
+    void on_dateEdit_d_down_clicked();
+    void on_dateEdit_m_down_clicked();
+    void on_dateEdit_y_down_clicked();
+    void on_timeEdit_h_up_clicked();
+    void on_timeEdit_m_up_clicked();
+    void on_timeEdit_s_up_clicked();
+    void on_timeEdit_h_down_clicked();
+    void on_timeEdit_m_down_clicked();
+    void on_timeEdit_s_down_clicked();
+
+    void updUiTimeDate(QDateTime td);
 
 signals:
     void saveButtonSignal();

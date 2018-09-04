@@ -44,7 +44,7 @@ dMenu::dMenu(QWidget *parent) :
     }
 
     //фильтр для поля редактирования даты
-    ui->dateEdit->installEventFilter(this);
+//    ui->dateEdit->installEventFilter(this);
 
     ui->load->setHidden(true);
     mo.setFileName(pathtoloadgif);
@@ -65,6 +65,8 @@ dMenu::dMenu(QWidget *parent) :
     DateUpdate();
 
     updateSystemOptions();
+
+
 
 //    //в зависимости от подключенных плат определям, что показывать или не показывать в меню
 //    if(csc.isConnect())
@@ -469,11 +471,20 @@ void dMenu::on_bBackSteel_clicked()
 
 void dMenu::on_bEditDataTime_clicked()
 {
-    QDateTime local(QDateTime::currentDateTime());
-    ui->timeEdit->setTime(local.time());
-    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
-    ui->dateEdit->setDate(local.date());
-    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
+    dateTime = QDateTime::currentDateTime();
+    QDateTime local = dateTime;
+    ui->timeEdit_h->setTime(local.time());
+    ui->timeEdit_h->setDisplayFormat("hh");
+    ui->timeEdit_m->setTime(local.time());
+    ui->timeEdit_m->setDisplayFormat("mm");
+    ui->timeEdit_s->setTime(local.time());
+    ui->timeEdit_s->setDisplayFormat("ss");
+    ui->dateEdit_d->setDate(local.date());
+    ui->dateEdit_d->setDisplayFormat("dd");
+    ui->dateEdit_m->setDate(local.date());
+    ui->dateEdit_m->setDisplayFormat("MM");
+    ui->dateEdit_y->setDate(local.date());
+    ui->dateEdit_y->setDisplayFormat("yyyy");
     ui->DateFormat->clear();
     ui->DateFormat->addItems(datestrings);
     ui->DateFormat->setCurrentIndex(dateindex);
@@ -484,25 +495,26 @@ void dMenu::on_bEditDataTime_clicked()
     ui->nameSubMenu->setText("ДАТА/ВРЕМЯ");
 }
 
-void dMenu::on_bBackDateTimeSet_clicked()
+void dMenu::on_bDateTimeSet_clicked()
 {
 
 #ifndef WIN32
     QProcess process;
-    QDateTime newuidate = ui->dateEdit->dateTime();
-    QTime newuitime = ui->timeEdit->time();
+//    QDateTime newuidate = ui->dateEdit->dateTime();
+//    QTime newuitime = ui->timeEdit->time();
 
-    QString newdate = QString::number(newuidate.date().year()) + "-" + QString::number(newuidate.date().month()) + "-" + QString::number(newuidate.date().day()) ;
-    QString newtime = newuitime.toString();
+    QString newdate = QString::number(dateTime.date().year()) + "-" + QString::number(dateTime.date().month()) + "-" + QString::number(dateTime.date().day()) ;
+    QString newtime = dateTime.time().toString();
 
     process.startDetached("date --set " + newdate);
     process.startDetached("date --set " + newtime); // max freq on
+    process.startDetached("hwclock -w");
 
 #endif
     dateindex = ui->DateFormat->currentIndex();
     timeindex = ui->timeformat->currentIndex();
-    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
-    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
+//    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
+//    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
 
 }
 
@@ -604,3 +616,93 @@ void dMenu::on_radioButSteelModes_clicked()
     ui->frameAnalogModes->hide();
     ui->frameSteelMode->show();
 }
+
+void dMenu::on_dateEdit_d_up_clicked()
+{
+    dateTime = dateTime.addDays(1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_dateEdit_m_up_clicked()
+{
+    dateTime = dateTime.addMonths(1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_dateEdit_y_up_clicked()
+{
+    dateTime = dateTime.addYears(1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_dateEdit_d_down_clicked()
+{
+    dateTime = dateTime.addDays(-1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_dateEdit_m_down_clicked()
+{
+    dateTime = dateTime.addMonths(-1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_dateEdit_y_down_clicked()
+{
+    dateTime = dateTime.addYears(-1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_h_up_clicked()
+{
+    dateTime = dateTime.addSecs(3600);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_m_up_clicked()
+{
+    dateTime = dateTime.addSecs(60);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_s_up_clicked()
+{
+    dateTime = dateTime.addSecs(1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_h_down_clicked()
+{
+    dateTime = dateTime.addSecs(-3600);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_m_down_clicked()
+{
+    dateTime = dateTime.addSecs(-60);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::on_timeEdit_s_down_clicked()
+{
+    dateTime = dateTime.addSecs(-1);
+    updUiTimeDate(dateTime);
+}
+
+void dMenu::updUiTimeDate(QDateTime td)
+{
+    QDateTime local(td);
+    ui->timeEdit_h->setTime(local.time());
+    ui->timeEdit_h->setDisplayFormat("hh");
+    ui->timeEdit_m->setTime(local.time());
+    ui->timeEdit_m->setDisplayFormat("mm");
+    ui->timeEdit_s->setTime(local.time());
+    ui->timeEdit_s->setDisplayFormat("ss");
+    ui->dateEdit_d->setDate(local.date());
+    ui->dateEdit_d->setDisplayFormat("dd");
+    ui->dateEdit_m->setDate(local.date());
+    ui->dateEdit_m->setDisplayFormat("MM");
+    ui->dateEdit_y->setDate(local.date());
+    ui->dateEdit_y->setDisplayFormat("yyyy");
+}
+

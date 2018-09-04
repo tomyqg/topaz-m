@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>5</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -513,7 +513,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>560</width>
+                     <width>564</width>
                      <height>608</height>
                     </rect>
                    </property>
@@ -3838,7 +3838,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-561</y>
+                     <y>0</y>
                      <width>757</width>
                      <height>1363</height>
                     </rect>
@@ -4040,7 +4040,7 @@ QComboBox::drop-down {
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ТЕМПЕРАТУРА НАЧАЛА ЗАМЕРА</string>
+                       <string>ТЕМПЕРАТУРА НИЖНЕГО ПРЕДЕЛА</string>
                       </property>
                      </widget>
                     </item>

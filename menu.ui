@@ -27,10 +27,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(238, 243, 250);</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout_8">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -43,7 +40,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
+   <item row="0" column="0">
     <widget class="QFrame" name="left">
      <property name="minimumSize">
       <size>
@@ -300,7 +297,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="0" column="1">
     <widget class="QFrame" name="right">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -363,7 +360,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>13</number>
+            <number>9</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1579,7 +1576,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
              <property name="spacing">
               <number>20</number>
              </property>
-             <item row="2" column="1">
+             <item row="6" column="0">
               <widget class="QComboBox" name="DateFormat">
                <property name="minimumSize">
                 <size>
@@ -1589,7 +1586,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>300</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -1651,7 +1648,7 @@ QComboBox::drop-down {
                </item>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="label_72">
                <property name="font">
                 <font>
@@ -1664,162 +1661,7 @@ QComboBox::drop-down {
                </property>
               </widget>
              </item>
-             <item row="5" column="0" colspan="2">
-              <spacer name="verticalSpacer_11">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_73">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>ФОРМАТ ВРЕМЕНИ</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_74">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>ВРЕМЯ</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QTimeEdit" name="timeEdit">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>41</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QAbstractSpinBox {
-	background-color: rgb(21, 159, 133);
-	color: rgb(255, 255, 255);
-	border-radius: 0px;
-}
-QAbstractSpinBox::drop-down {
-	width:30px;
- }
-QWidget{
-	background-color: rgb(21, 159, 133);
-	color: rgb(255, 255, 255);
-	border-radius: 0px;
-}</string>
-               </property>
-               <property name="frame">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-               <property name="readOnly">
-                <bool>false</bool>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-               <property name="showGroupSeparator" stdset="0">
-                <bool>true</bool>
-               </property>
-               <property name="maximumDate">
-                <date>
-                 <year>2017</year>
-                 <month>1</month>
-                 <day>1</day>
-                </date>
-               </property>
-               <property name="minimumDate">
-                <date>
-                 <year>2017</year>
-                 <month>1</month>
-                 <day>1</day>
-                </date>
-               </property>
-               <property name="displayFormat">
-                <string>H:mm:ss</string>
-               </property>
-               <property name="calendarPopup">
-                <bool>true</bool>
-               </property>
-               <property name="currentSectionIndex">
-                <number>0</number>
-               </property>
-               <property name="time">
-                <time>
-                 <hour>15</hour>
-                 <minute>0</minute>
-                 <second>0</second>
-                </time>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_75">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>ДАТА</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="wButtonStyled" name="bBackDateTimeSet">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>УСТАНОВИТЬ</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
+             <item row="6" column="1">
               <widget class="QComboBox" name="timeformat">
                <property name="minimumSize">
                 <size>
@@ -1829,7 +1671,7 @@ QWidget{
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>300</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -1866,30 +1708,55 @@ QComboBox::drop-down {
                </item>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QDateEdit" name="dateEdit">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>41</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+             <item row="5" column="1">
+              <widget class="QLabel" name="label_73">
                <property name="font">
                 <font>
                  <family>Open Sans</family>
                  <pointsize>14</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
                 </font>
                </property>
-               <property name="styleSheet">
-                <string notr="true">QAbstractSpinBox{
+               <property name="text">
+                <string>ФОРМАТ ВРЕМЕНИ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" rowspan="2">
+              <widget class="QFrame" name="frame_7">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="5" column="0">
+                 <widget class="QDateEdit" name="dateEdit_d">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox{
 background-color:rgb(44, 61, 77);
 color: rgb(255 , 255, 255);
 border-radius: 0px;
@@ -1904,55 +1771,954 @@ background-color:rgb(44, 61, 77);
 color: rgb(255 , 255, 255);
 border-radius: 0px;
 }</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="accelerated">
+                   <bool>true</bool>
+                  </property>
+                  <property name="keyboardTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2027</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="currentSection">
+                   <enum>QDateTimeEdit::DaySection</enum>
+                  </property>
+                  <property name="displayFormat">
+                   <string>dd</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>false</bool>
+                  </property>
+                  <property name="date">
+                   <date>
+                    <year>2017</year>
+                    <month>2</month>
+                    <day>8</day>
+                   </date>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="label_75">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>16</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ДАТА</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QPushButton" name="dateEdit_y_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="2">
+                 <widget class="QPushButton" name="dateEdit_y_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QPushButton" name="dateEdit_d_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="1">
+                 <widget class="QPushButton" name="dateEdit_m_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QPushButton" name="dateEdit_d_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QDateEdit" name="dateEdit_m">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox{
+background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;
+}
+
+QAbstractSpinBox::drop-down {
+	width:30px;
+ }
+
+QWidget{
+background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;
+}</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="accelerated">
+                   <bool>true</bool>
+                  </property>
+                  <property name="keyboardTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2027</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="currentSection">
+                   <enum>QDateTimeEdit::MonthSection</enum>
+                  </property>
+                  <property name="displayFormat">
+                   <string>MM</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>false</bool>
+                  </property>
+                  <property name="date">
+                   <date>
+                    <year>2017</year>
+                    <month>2</month>
+                    <day>8</day>
+                   </date>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QPushButton" name="dateEdit_m_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="2">
+                 <widget class="QDateEdit" name="dateEdit_y">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox{
+background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;
+}
+
+QAbstractSpinBox::drop-down {
+	width:30px;
+ }
+
+QWidget{
+background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;
+}</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="accelerated">
+                   <bool>true</bool>
+                  </property>
+                  <property name="keyboardTracking">
+                   <bool>true</bool>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2027</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>12</month>
+                    <day>31</day>
+                   </date>
+                  </property>
+                  <property name="currentSection">
+                   <enum>QDateTimeEdit::YearSection</enum>
+                  </property>
+                  <property name="displayFormat">
+                   <string>yyyy</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>false</bool>
+                  </property>
+                  <property name="date">
+                   <date>
+                    <year>2017</year>
+                    <month>2</month>
+                    <day>8</day>
+                   </date>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_77">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ДЕНЬ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="label_78">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>МЕСЯЦ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QLabel" name="label_79">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ГОД</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="1" rowspan="2">
+              <widget class="QFrame" name="frame_6">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-               <property name="readOnly">
-                <bool>false</bool>
+               <layout class="QGridLayout" name="gridLayout_7">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="9" column="0">
+                 <widget class="QPushButton" name="timeEdit_h_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QPushButton" name="timeEdit_m_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="2">
+                 <widget class="QPushButton" name="timeEdit_s_down">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QTimeEdit" name="timeEdit_m">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+QAbstractSpinBox::drop-down {
+	width:30px;
+ }
+QWidget{
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}</string>
+                  </property>
+                  <property name="frame">
+                   <bool>true</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2017</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="displayFormat">
+                   <string>mm</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>true</bool>
+                  </property>
+                  <property name="currentSectionIndex">
+                   <number>0</number>
+                  </property>
+                  <property name="time">
+                   <time>
+                    <hour>15</hour>
+                    <minute>0</minute>
+                    <second>0</second>
+                   </time>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QTimeEdit" name="timeEdit_h">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+QAbstractSpinBox::drop-down {
+	width:30px;
+ }
+QWidget{
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}</string>
+                  </property>
+                  <property name="frame">
+                   <bool>true</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2017</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="displayFormat">
+                   <string>H</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>true</bool>
+                  </property>
+                  <property name="currentSectionIndex">
+                   <number>0</number>
+                  </property>
+                  <property name="time">
+                   <time>
+                    <hour>15</hour>
+                    <minute>0</minute>
+                    <second>0</second>
+                   </time>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QPushButton" name="timeEdit_m_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QPushButton" name="timeEdit_s_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="2">
+                 <widget class="QTimeEdit" name="timeEdit_s">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QAbstractSpinBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+QAbstractSpinBox::drop-down {
+	width:30px;
+ }
+QWidget{
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}</string>
+                  </property>
+                  <property name="frame">
+                   <bool>true</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::NoButtons</enum>
+                  </property>
+                  <property name="showGroupSeparator" stdset="0">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumDate">
+                   <date>
+                    <year>2017</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="minimumDate">
+                   <date>
+                    <year>2000</year>
+                    <month>1</month>
+                    <day>1</day>
+                   </date>
+                  </property>
+                  <property name="displayFormat">
+                   <string>ss</string>
+                  </property>
+                  <property name="calendarPopup">
+                   <bool>true</bool>
+                  </property>
+                  <property name="currentSectionIndex">
+                   <number>0</number>
+                  </property>
+                  <property name="time">
+                   <time>
+                    <hour>15</hour>
+                    <minute>0</minute>
+                    <second>0</second>
+                   </time>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QPushButton" name="timeEdit_h_up">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="label_76">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>16</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ВРЕМЯ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="2">
+                 <widget class="QLabel" name="label_80">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>СЕКУНДЫ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLabel" name="label_81">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>МИНУТЫ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_82">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ЧАСЫ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="8" column="0" colspan="2">
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
                </property>
-               <property name="accelerated">
-                <bool>true</bool>
+              </spacer>
+             </item>
+             <item row="9" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bDateTimeSet">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-               <property name="showGroupSeparator" stdset="0">
-                <bool>true</bool>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
                </property>
-               <property name="maximumDate">
-                <date>
-                 <year>2027</year>
-                 <month>12</month>
-                 <day>31</day>
-                </date>
-               </property>
-               <property name="minimumDate">
-                <date>
-                 <year>2016</year>
-                 <month>12</month>
-                 <day>31</day>
-                </date>
-               </property>
-               <property name="currentSection">
-                <enum>QDateTimeEdit::DaySection</enum>
-               </property>
-               <property name="displayFormat">
-                <string>dd.MM.yy</string>
-               </property>
-               <property name="calendarPopup">
-                <bool>true</bool>
-               </property>
-               <property name="date">
-                <date>
-                 <year>2017</year>
-                 <month>2</month>
-                 <day>8</day>
-                </date>
+               <property name="text">
+                <string>УСТАНОВИТЬ</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0" colspan="2">
+             <item row="10" column="0" colspan="2">
               <widget class="wButtonStyled" name="bBackDateTime">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">

@@ -1543,7 +1543,7 @@ void MainWindow::updateSteelWidget(void)
             ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelEds);
             ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
 //            ui->plotSteel->rescaleAxes();
-            double size = steel->technology->dt;
+            double size = steel->technology->tPt;
             double position = size / 2;
             ui->plotSteel->xAxis->setRange(position, size, Qt::AlignCenter);
             size = (steel->technology->LPth - steel->technology->LPtl) * 1.1;
