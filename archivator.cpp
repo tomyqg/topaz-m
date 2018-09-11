@@ -6,7 +6,6 @@
 #include <QDir>
 #include <defines.h>
 
-
 cArchivator::cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObject *parent) : QObject(parent)
 {
     time2000 = QDateTime::fromString(STR_DATE_2000, FORMAT_STR_DATE_2000);
@@ -225,15 +224,19 @@ void cArchivator::addTick10Min()
 
 }
 
+/*
+ * Запуск чтения файлов в потоке
+ * Файлов может быть много, за большой период
+ * */
 void cArchivator::load(int per)
 {
-    assert(period<40000000);//период не больше года с хвостиком
-    if(per > 2592000) return;
+    assert(per<40000000);//период не больше года с хвостиком
+    if(per > 40000000) return;
     period = per;
     arrTicks.resize(0); //сброс предыдущего буффера
     worker = new cArchWorker(fileName_sek);
     threadReadFile = new QThread;
-    worker->setPeriod(period);
+    worker->setPeriod(period);  //сообщение воркеру нужного периода в сек
     worker->moveToThread(threadReadFile);
     connect(threadReadFile, SIGNAL(started()), worker, SLOT(run()));
     connect(worker, SIGNAL(finished()), this, SLOT(endLoad()), Qt::DirectConnection);
@@ -250,25 +253,44 @@ QVector<double> cArchivator::getVector(int ch)
 {
     assert(ch<TOTAL_NUM_CHANNELS);//запрашиваемый канал не превышает максимальный по счёту
 
-    QVector<double> ret(period, NAN);
-
+    // период усреднения
+    int numAvg = 1;
+    if(period >= 604800)
+        numAvg = 600;
+    double avg = 0;     // буффер усреднения
+    int countAvg = 0;   // счётчик усредняемых тиков
+    int lastIndexBig = 0;   // предыдущий индекс большого периода
+    QVector<double> ret(period / numAvg, NAN);
     //возврат пустого вектора, если канал задан неверно
     if(ch >= TOTAL_NUM_CHANNELS) return ret;
 
     QDateTime firstTime = askTime.addSecs(-period);
+//    ret.resize(period / numAvg);
 
     foreach(sTickCh tick, arrTicks)
     {
         QDateTime timeArch(time2000.addSecs(tick.time));
         int vectorIndex = firstTime.secsTo(timeArch);
-        if((vectorIndex >= 0) && (vectorIndex < period))
+        int vectorIndexBigPeriod = vectorIndex / numAvg;
+        if((vectorIndexBigPeriod >= 0) && (vectorIndexBigPeriod < (period / numAvg)))
         {
-            ret.replace(vectorIndex, tick.channel[ch]);
+            if(vectorIndexBigPeriod > lastIndexBig)
+            {
+                if(countAvg != 0) ret.replace(lastIndexBig, avg / countAvg);
+                lastIndexBig = vectorIndexBigPeriod;
+                countAvg = 0;
+                avg = 0;
+            }
+            avg += tick.channel[ch];
+            countAvg ++;
         }
     }
     return ret;
 }
 
+/*
+ * Накопление данных в буфере по мере чтения файлов архива
+ * */
 void cArchivator::addLoadTickFromFile(sTickCh tick)
 {
     arrTicks.append(tick);

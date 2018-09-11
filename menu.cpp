@@ -5,11 +5,15 @@
 #include "keyboard.h"
 #include <options.h>
 #include <QFile>
+#include <QDir>
 #include <QString>
+#include "usb_flash.h"
+
 
 #define HEIGHT 768
 #define WIDTH 1024
 #define TIME_UPDATE DateLabelUpdateTimer
+#define DRIVE_UPDATE 500
 
 extern int dateindex;
 extern int timeindex;
@@ -20,6 +24,7 @@ extern typeSteelTech steelTech[];
 extern cChannelSlotController csc;
 extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
+extern cUsbFlash * flash;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -29,6 +34,10 @@ dMenu::dMenu(QWidget *parent) :
 
 
     ui->setupUi(this);
+    setWindowFlags(Qt::CustomizeWindowHint);
+
+    QString ver = CURRENT_VER;
+    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">MULTIGRAPH<br/>Ver. " + ver + "</span></p></body></html>"));
 
     ui->saveButton->setColorText(ColorBlue);
     ui->saveButton->setColorBg(QColor(0xff,0xff,0xff));
@@ -64,9 +73,23 @@ dMenu::dMenu(QWidget *parent) :
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
 
+    connect(flash, SIGNAL(newFlash(int)), this, SLOT(updateDriversWidgets()));
+
+//    connect(&tUpdateTime, SIGNAL(timeout()), this, SLOT(DateUpdate()));
+//    tUpdateTime.start(DRIVE_UPDATE);
+//    DateUpdate();
+
+
     updateSystemOptions();
 
-
+//    ui->bReadChanFromDrive->setFontSize(14);
+//    ui->bReadChanFromDrive->setAlignCenter();
+//    ui->bReadSysFromDrive->setFontSize(14);
+//    ui->bReadSysFromDrive->setAlignCenter();
+//    ui->bSaveChanToDrive->setFontSize(14);
+//    ui->bSaveChanToDrive->setAlignCenter();
+//    ui->bSaveSysToDrive->setFontSize(14);
+//    ui->bSaveSysToDrive->setAlignCenter();
 
 //    //в зависимости от подключенных плат определям, что показывать или не показывать в меню
 //    if(csc.isConnect())
@@ -153,9 +176,9 @@ void dMenu::on_saveButton_clicked()
     //Окно закроется по сигналу таймаута
 }
 
-void dMenu::updateSystemOptions()
+void dMenu::updateSystemOptions(QString path)
 {
-    cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &sysOptions);
+    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
     ui->modeBar->setCurrentIndex((sysOptions.display >> 2) & 4);
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
@@ -345,8 +368,9 @@ void dMenu::on_bDiagnost_clicked()
 
 void dMenu::on_bBackDiagnostika_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
-    ui->nameSubMenu->setText("НАСТРОЙКИ");
+    ui->stackedWidget->setCurrentIndex(0);
+    //    ui->nameSubMenu->setText("");
+        ui->frameNameSubMenu->setHidden(true);
 }
 
 void dMenu::addChannels(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki)
@@ -467,6 +491,42 @@ void dMenu::on_bBackSteel_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
     ui->nameSubMenu->setText("ВХОДЫ");
+}
+
+void dMenu::on_bExtMemory_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(15);
+    ui->nameSubMenu->setText("НАКОПИТЕЛИ");
+    updateDriversWidgets();
+}
+
+void dMenu::on_bBackExternalDrive_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    ui->nameSubMenu->setText("СИСТЕМА");
+}
+
+void dMenu::on_bSteel_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(14);
+    ui->nameSubMenu->setText("СТАЛЬ");
+}
+
+void dMenu::updateDriversWidgets()
+{
+    listDrives.clear();
+    int size = flash->getNumDisk();
+    for(int i = 0; i < size; i++)
+    {
+        QString name = flash->getNameDisk(i);
+#ifdef Q_OS_WIN
+        name.resize(name.size()-1);
+#endif
+        listDrives.append(name);
+    }
+    ui->comboDrives->clear();
+    ui->comboDrives->addItems(listDrives);
+    ui->comboDrives->setCurrentIndex(ui->comboDrives->count() - 1);
 }
 
 void dMenu::on_bEditDataTime_clicked()
@@ -591,20 +651,6 @@ void dMenu::UpdateAnalyze()
 }
 
 
-
-
-
-
-void dMenu::on_bSteel_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(14);
-    ui->nameSubMenu->setText("СТАЛЬ");
-}
-
-
-
-
-
 void dMenu::on_radioButAnalogModes_clicked()
 {
     ui->frameAnalogModes->show();
@@ -706,3 +752,181 @@ void dMenu::updUiTimeDate(QDateTime td)
     ui->dateEdit_y->setDisplayFormat("yyyy");
 }
 
+
+
+
+void dMenu::on_bReadSysFromDrive_clicked()
+{
+//    QProcess process;
+    QString src, dest, path;
+    path = ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/";
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    src = QString(path + "systemoptions.txt");
+    if(QFile::exists(src))
+    {
+        updateSystemOptions(src);
+        qDebug() << "System settings successfully read from the media";
+        QString mess = QString("Системные настройки успешно прочитаны с указаного носителя\r\n");
+        mess == QString("Нажмите СОХРАНИТЬ, чтобы применить новые настройки");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    else
+    {
+        qDebug() << "Error reading the system settings file on the media" << strerror(errno);
+        QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя и файлов настроек\r\n");
+        mess += QString("Убедитесь, что формат файловой системы носителя соответствует FAT32");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+}
+
+void dMenu::on_bSaveSysToDrive_clicked()
+{
+    QString src, dest, path;
+    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    src = pathtosystemoptions;
+    dest = QString(path + "systemoptions.txt");
+    QDir dir;
+    if(!dir.exists(path))
+    {
+        dir.mkpath(path);
+    }
+    QFile::remove(dest + QString(".backup"));
+    QFile::rename(dest, dest + QString(".backup"));
+    if(QFile::copy(src, dest))
+    {
+        qDebug() << "The system settings were recorded successfully";
+        qDebug() << "Path" << dest.toStdString().c_str();
+        path = QString("/" + ui->nameDirOnDrive->text() + "/" + "systemoptions.txt");
+        QString mess = QString("Системные настройки успешно сохранены на указаном носителе\r\n");
+        mess += QString("Путь к файлу: %1").arg(path);
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    else
+    {
+        qDebug() << "Error writing system settings" << strerror(errno);
+        QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+}
+
+void dMenu::on_bSaveMesToDrive_clicked()
+{
+    QString src, dest, path;
+    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    src = pathtomessages;
+    dest = QString(path + "Log.txt");
+    QDir dir;
+    if(!dir.exists(path))
+    {
+        dir.mkpath(path);
+    }
+    QFile::remove(dest + QString(".backup"));
+    QFile::rename(dest, dest + QString(".backup"));
+    if(QFile::copy(src, dest))
+    {
+        qDebug() << "The event log was successfully saved on the media";
+        qDebug() << "Path" << dest.toStdString().c_str();
+        path = QString("/" + ui->nameDirOnDrive->text() + "/" + "Log.txt");
+        QString mess = QString("Журнал событий успешно сохранён на указаном носителе\r\n");
+        mess += QString("Путь к файлу: %1").arg(path);
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    else
+    {
+        qDebug() << "Error writing event log" << strerror(errno);
+        QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+}
+
+void dMenu::on_bSaveChanToDrive_clicked()
+{
+    QString src, src2, dest, dest2, path;
+    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    src = pathtooptions;
+    src2 = pathtosteeloptions;
+    dest = QString(path + "options.txt");
+    dest2 = QString(path + "steeloptions.txt");
+    QDir dir;
+    if(!dir.exists(path))
+    {
+        dir.mkpath(path);
+    }
+    QFile::remove(dest + QString(".backup"));
+    QFile::rename(dest, dest + QString(".backup"));
+    QFile::remove(dest2 + QString(".backup"));
+    QFile::rename(dest2, dest2 + QString(".backup"));
+    if(QFile::copy(src, dest) && QFile::copy(src2, dest2))
+    {
+        qDebug() << "The settings for the inputs and outputs were successfully saved on the media";
+        qDebug() << "Path" << dest.toStdString().c_str();
+        qDebug() << "Path" << dest2.toStdString().c_str();
+        path = QString("/" + ui->nameDirOnDrive->text() + "/");
+        QString mess = QString("Настройки входов и выходов успешно сохранены на носителе\r\n");
+        mess += QString("Директория файлов: %1").arg(path);
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    else
+    {
+        qDebug() << "Error writing settings" << strerror(errno);
+        QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+}
+
+void dMenu::on_bReadChanFromDrive_clicked()
+{
+    QString src, src2, dest, dest2, path;
+    path = ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/";
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    src = QString(path + "options.txt");
+    src2 = QString(path + "steeloptions.txt");
+    if(QFile::exists(src) && QFile::exists(src2))
+    {
+        updateSystemOptions(src);
+        qDebug() << "I / O settings were successfully read from the specified media";
+        QString mess = QString("Настройки входов и выходов успешно прочитаны с указаного носителя\r\n");
+        mess == QString("Нажмите СОХРАНИТЬ, чтобы применить новые настройки");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    else
+    {
+        qDebug() << "Error reading input and output settings" << strerror(errno);
+        QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя и файлов настроек\r\n");
+        mess += QString("Убедитесь, что формат файловой системы носителя соответствует FAT32");
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+}

@@ -1553,17 +1553,6 @@ void MainWindow::updateSteelWidget(void)
             ui->plotSteel->clearItems();
 //        }
     }
-    else if(stateWidgetSteel == STEEL_MEASURE)
-    {
-        assert(0); //Сюда не должны попадать
-//        ui->framePlotSteel->show();
-//        ui->frameSteelStatus->hide();
-////        ui->frameTemperature->show();
-//        cSteel * steel = listSteel.at(steelReadyNum);
-//        if(!std::isnan(steel->temp))
-//            ui->labelTemperature->setText(QString::number(steel->temp, 'f', 0) + " °C");
-//        ui->labelNameSteelInout->setText(steel->technology->name);
-    }
     else
     {
         QString str = "Нет данных";

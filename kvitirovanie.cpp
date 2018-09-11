@@ -7,7 +7,8 @@ kvitirovanie::kvitirovanie(QWidget *parent) :
     ui(new Ui::kvitirovanie)
 {
     ui->setupUi(this);
-}
+    setWindowFlags(Qt::CustomizeWindowHint);
+    }
 
 kvitirovanie::~kvitirovanie()
 {

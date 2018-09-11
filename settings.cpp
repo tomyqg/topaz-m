@@ -53,6 +53,8 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     arch(ar)
 {
     ui->setupUi(this);
+    QString ver = CURRENT_VER;
+    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">MULTIGRAPH<br/>Ver. " + ver + "</span></p></body></html>"));
 
     //списки типов датчиков
     StringListNapryagenie.clear();
@@ -343,9 +345,16 @@ void dSettings::updateGraf(int period)
     if(arch == NULL) return;
 
     QDateTime firstTime = QDateTime::currentDateTime().addSecs(-period);
-    int multiplier = 1;
     QString strLabel = "hh:mm:ss";
 
+    int multiplier = 1;
+    if(period >= 604800)
+    {
+        multiplier = 600;
+    }
+    int periodToGraf = period / multiplier;
+
+    // копирование уже считанных с файлов данных
     Y_coordinates_Chanel_1 = arch->getVector(0);
     Y_coordinates_Chanel_2 = arch->getVector(1);
     Y_coordinates_Chanel_3 = arch->getVector(2);
@@ -359,8 +368,9 @@ void dSettings::updateGraf(int period)
     int firstLabel = 0;
 
     //Поиск начала отсчётов
-    for(int i = 0; i < period; i++)
+    for(int i = 0; i < periodToGraf; i++)
     {
+        // проверка на NaN
         if((Y_coordinates_Chanel_1.at(i) == Y_coordinates_Chanel_1.at(i)) \
                 || (Y_coordinates_Chanel_2.at(i) == Y_coordinates_Chanel_2.at(i)) \
                 || (Y_coordinates_Chanel_3.at(i) == Y_coordinates_Chanel_3.at(i)) \
@@ -372,17 +382,17 @@ void dSettings::updateGraf(int period)
     }
 
     //Генерация шкалы Х
-    for(int i = 0; i < period; i++)
+    for(int i = 0; i < periodToGraf; i ++)
     {
         X_Coordinates.append(i);
 
-        //создание массива подписей, начиная с того отсчёта, где есть данные
-        if((i%(period/5) == 0)/* && (i >= firstLabel)*/) //
+        //создание массива подписей
+        if((i%(periodToGraf/5) == 0)/* && (i >= firstLabel)*/) //
             Labels.append(firstTime.addSecs(i*multiplier).toString(strLabel));
     }
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickStep(period/5); //
+    ui->customPlot->xAxis->setTickStep(periodToGraf/5); //
 
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
@@ -441,7 +451,7 @@ void dSettings::updateGraf(int period)
     {
         // авто масшабирование
         ui->customPlot->rescaleAxes();
-        ui->customPlot->xAxis->setRange(0, period);
+        ui->customPlot->xAxis->setRange(0, periodToGraf);
         ui->customPlot->replot();
         ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
     }

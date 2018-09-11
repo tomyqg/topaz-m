@@ -42,6 +42,7 @@
 #include <QPoint>
 #include <QMetaType>
 #include "defines.h"
+
 //#include <QKeyEvent>
 
 int dateindex;
@@ -50,7 +51,7 @@ QStringList datestrings, timestrings;
 cChannelSlotController csc;
 cSteelController ssc;
 QDateTime timeOutBuff;
-
+cUsbFlash * flash;
 
 extern MainWindow * globalMainWin;
 extern QList<cSteel*> listSteel;
@@ -59,12 +60,17 @@ extern QList<cSteel*> listSteel;
 void MainWindow::MainWindowInitialization()
 {
     //qRegisterMetaType<Transaction>("Transaction");
+    // подготовка окна загрузки программы
     countLoader = 0;
     ui->right->hide();
     ui->left->hide();
     ui->header->hide();
     ui->footer->hide();
     ui->splash->setMaximumWidth(1000000);
+    QString ver = CURRENT_VER;
+    ui->labelNameVersion->setText(QString("MULTIGRAPH " + ver));
+    QString revision = SOFTWARE_REVISION;
+    ui->labelRevision->setText(QString("SOFTWARE REVISION: " + revision));
     ui->splash->show();
     ui->frameSteel->setMaximumWidth(0);
     ui->frameSteel->hide();
@@ -343,6 +349,8 @@ void MainWindow::MainWindowInitialization()
     //инициализация сервера HTTP
     QNetworkProxyFactory::setUseSystemConfiguration(false); //не использовать системный прокси
 //    server = new cServerHttp(this);   //создание сервера
+
+    flash = new cUsbFlash(this);
 
 }
 

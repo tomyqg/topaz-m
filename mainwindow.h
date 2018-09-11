@@ -29,6 +29,7 @@
 #include "relay.h"
 #include "serverhttp.h"
 #include <QNetworkProxyFactory>
+#include "usb_flash.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -37,7 +38,7 @@
 #endif
 
 #ifdef Q_OS_WIN32
-    //#define RANDOM_CHAN
+    #define RANDOM_CHAN
 #endif
 
 //#define RANDOM_CHAN

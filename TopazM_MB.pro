@@ -80,7 +80,8 @@ SOURCES += main.cpp \
     Steel/steel_controller.cpp \
     Relais/relay.cpp \
     Server/serverhttp.cpp \
-    Server/socket_thread.cpp
+    Server/socket_thread.cpp \
+    Drivers/usb_flash.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -177,7 +178,8 @@ HEADERS  += mainwindow.h \
     Steel/steel_controller.h \
     Relais/relay.h \
     Server/serverhttp.h \
-    Server/socket_thread.h
+    Server/socket_thread.h \
+    Drivers/usb_flash.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

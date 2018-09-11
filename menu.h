@@ -8,6 +8,7 @@
 #include <settings.h>
 #include <systemoptions.h>
 #include <defines.h>
+#include "kvitirovanie.h"
 
 namespace Ui {
 class dMenu;
@@ -73,9 +74,11 @@ private:
     QList<ChannelOptions *> listChannels;
     QList<Ustavka *> listUstavok;
     void UpdateAnalyze();
-    void updateSystemOptions();
+    void updateSystemOptions(QString path = pathtosystemoptions);
     cSystemOptions sysOptions;
     QDateTime dateTime;
+    QStringList listDrives;
+    kvitirovanie mesDialog;
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
@@ -86,31 +89,18 @@ private slots:
     void on_bBackExpert_clicked();
     void on_bAnaliz_clicked();
     void on_bBackExpert_2_clicked();
-
     void on_bOptions_clicked();
-
     void on_bBackSystemOptions_clicked();
-
     void on_bModeDiagram_clicked();
-
     void on_bBackOtobrazhenie_clicked();
-
     void on_bBackSteel_clicked();
-
     void on_bSteel_clicked();
-
     void on_bSteel1_clicked();
-
     void on_bSteel2_clicked();
-
     void on_bSteel3_clicked();
-
     void on_bSteel4_clicked();
-
     void on_radioButSteelModes_clicked();
-
     void on_radioButAnalogModes_clicked();
-
     void on_dateEdit_d_up_clicked();
     void on_dateEdit_m_up_clicked();
     void on_dateEdit_y_up_clicked();
@@ -123,8 +113,20 @@ private slots:
     void on_timeEdit_h_down_clicked();
     void on_timeEdit_m_down_clicked();
     void on_timeEdit_s_down_clicked();
-
     void updUiTimeDate(QDateTime td);
+    void on_bExtMemory_clicked();
+    void on_bBackExternalDrive_clicked();
+    void updateDriversWidgets();
+
+    void on_bReadSysFromDrive_clicked();
+
+    void on_bSaveSysToDrive_clicked();
+
+    void on_bSaveMesToDrive_clicked();
+
+    void on_bSaveChanToDrive_clicked();
+
+    void on_bReadChanFromDrive_clicked();
 
 signals:
     void saveButtonSignal();
