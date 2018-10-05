@@ -8,6 +8,8 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     allVectorsReceived = false;
     vectorTempReceived = false;
     vectorEdsReceived = false;
+    lastItemEds = false;
+    lastItemTemp = false;
     status = 0;
     vectorEds = QVector<double>(SIZE_ARRAY, NAN);
     vectorTemp = QVector<double>(SIZE_ARRAY, NAN);

@@ -1764,46 +1764,45 @@ border-radius: 0px;
              <number>0</number>
             </property>
             <widget class="QWidget" name="wGrafics">
-             <widget class="QCustomPlot" name="customPlot" native="true">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>515</width>
-                <height>550</height>
-               </rect>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <property name="bottomMargin">
+               <number>50</number>
               </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>550</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>570</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Open Sans</family>
-                <pointsize>14</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-                <stylestrategy>NoAntialias</stylestrategy>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::ClickFocus</enum>
-              </property>
-             </widget>
+              <item row="0" column="0">
+               <widget class="QCustomPlot" name="customPlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>550</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Open Sans</family>
+                  <pointsize>14</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <stylestrategy>NoAntialias</stylestrategy>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::ClickFocus</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="wKrug">
              <layout class="QGridLayout" name="gridLayout_2">
@@ -1843,6 +1842,9 @@ border-radius: 0px;
        </item>
        <item>
         <widget class="QWidget" name="splash" native="true">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>

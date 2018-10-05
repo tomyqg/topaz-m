@@ -29,8 +29,6 @@ public:
 
 public slots:
     void openSettingsChannel(int num, int page = 0);
-
-private slots:
     void on_exitButton_clicked();
     void on_saveButton_clicked();
     void timeoutLoad();
@@ -55,12 +53,10 @@ private slots:
     void on_bBackApplications_2_clicked();
     void on_bDiagnost_clicked();
     void on_bBackDiagnostika_clicked();
-
     void on_bUstavka_1_clicked();
     void on_bUstavka_2_clicked();
     void on_bUstavka_3_clicked();
     void on_bUstavka_4_clicked();
-
     void on_bBackDateTime_clicked();
     void on_bEditDataTime_clicked();
     void on_bDateTimeSet_clicked();
@@ -79,6 +75,7 @@ private:
     QDateTime dateTime;
     QStringList listDrives;
     kvitirovanie mesDialog;
+    int countArchFiles;
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
@@ -128,8 +125,13 @@ private slots:
 
     void on_bReadChanFromDrive_clicked();
 
+    void on_bSaveArchiveToDrive_clicked();
+    void copyArchiveFile();
+    void copyLastArchFile();
+
 signals:
     void saveButtonSignal();
+    void finishCopyArchive();
 };
 
 #endif // MENU_H

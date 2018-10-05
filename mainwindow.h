@@ -201,7 +201,7 @@ private:
 
     bool eventFilter(QObject* watched, QEvent* event);
 //    void keyPressEvent(QKeyEvent *event);
-    bool needupdatePainter;
+    bool needUpdatePainter;
     bool needConfirmationchannel1;
     bool needConfirmationchannel2;
     bool needConfirmationchannel3;
@@ -228,6 +228,7 @@ private:
     void CloseApplication();
     void WriteAllChannelsOptionsToFile();
     void updateBars(void);
+    void setStyleBars(void);
     void updateWidgetsVols(void);
     void selectWidgetDiagram(void);
 
@@ -363,6 +364,7 @@ private:
     };
     int steelReadyNum;          //номер входной группы площадки, где найдена площадка
     uint8_t numArraySteel;      //номер массива с измерениями для текущего обновления графика
+    bool askNewArray;           //необходимость запроса массива
     QTimer * timerUpdateSteel;  //таймер одновления данных с платы STEEL
     int indexSteel;             //индекс массива температур и эдс
     void updateSteelWidget();   //обновление виджета с данными и графиком стали

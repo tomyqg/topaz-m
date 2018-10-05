@@ -14,8 +14,8 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "1.61" //версия ПО
-#define SOFTWARE_REVISION "0002"  //ревизия ПО
+#define CURRENT_VER VERSION//"1.62" //версия ПО
+#define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС

@@ -211,35 +211,23 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
-
-    needupdatePainter = 1;
-
-
+    needUpdatePainter = true;
     switch(systemOptions.display)
     {
-    //    case cSystemOptions::Trends:
-    //        GrafsUpdateTrends();
-    //        break;
     case cSystemOptions::TrendsCyfra:
         ui->stackedWidget->setCurrentIndex(1);
         GrafsUpdateTrends();
-        updateWidgetsVols();
         break;
     case cSystemOptions::Bars :
         ui->stackedWidget->setCurrentIndex(0);
         GrafsUpdateBars();
         updateBars();
         break;
-        //    case cSystemOptions::BarsCyfra :
-        //        ui->stackedWidget->setCurrentIndex(0);
-        //        GrafsUpdateBars();
-        //        break;
     case cSystemOptions::TrendsBars:
         ui->stackedWidget->setCurrentIndex(0);
         GrafsUpdateTrends();
         updateBars();
         break;
-        //        GrafsUpdateTrendsAndBars();break;
     case cSystemOptions::PolarBars:
         ui->stackedWidget->setCurrentIndex(0);
         updateBars();
@@ -247,26 +235,19 @@ void MainWindow::UpdateGraphics()
         break;
     case cSystemOptions::PolarCyfra:
         ui->stackedWidget->setCurrentIndex(1);
-        updateWidgetsVols();
         GrafsUpdateNone();
         break;
     case cSystemOptions::Cyfra:
         ui->stackedWidget->setCurrentIndex(1);
-        GrafsUpdateNone();
-        updateWidgetsVols();
+//        GrafsUpdateNone();
         break;
     case cSystemOptions::Steel:
-        //обновление графика площадки по стали
-//        ui->plotSteel->replot();
         updateSteelWidget();
         break;
     default:
         break;
     }
-
-
     selectWidgetDiagram();
-    //    DrawSceneBottom();
 }
 
 void MainWindow::GrafsUpdateTrendsAndBars()
@@ -662,8 +643,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->graph()->setData(channel1.GetChannelXBuffer(), channel1.GetChannelValuesBuffer());
     //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
-
-
     //    updateBars();
 
     graphPen.setWidth(GraphWidthinPixels);
@@ -761,12 +740,12 @@ void MainWindow::GrafsUpdateNone()
 
     ui->MessagesWidget->update();
 
-    ui->customPlot->clearGraphs();
-    ui->customPlot->clearItems();
+//    ui->customPlot->clearGraphs();
+//    ui->customPlot->clearItems();
 
-    ui->customPlot->replot();
-    ui->customPlot->clearGraphs();
-    ui->customPlot->clearItems();
+//    ui->customPlot->replot();
+//    ui->customPlot->clearGraphs();
+//    ui->customPlot->clearItems();
 }
 
 void MainWindow::GrafsUpdateBars()
@@ -1170,16 +1149,6 @@ void MainWindow::updateBars(void)
     ui->wBar_3->setExtr(channel3.GetMinimumChannelValue(), channel3.GetMaximumChannelValue());
     ui->wBar_4->setExtr(channel4.GetMinimumChannelValue(), channel4.GetMaximumChannelValue());
 
-    ui->wBar_1->setColor(ColorCh1, ColorCh1Light);
-    ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
-    ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
-    ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
-
-    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
-    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
-    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
-    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
-
     ui->wBar_1->setBarDiapazon(max(abs(channel1.GetHigherMeasureLimit()), \
                                    abs(channel1.GetLowerMeasureLimit())));
     ui->wBar_2->setBarDiapazon(max(abs(channel2.GetHigherMeasureLimit()), \
@@ -1200,6 +1169,19 @@ void MainWindow::updateBars(void)
 
 }
 
+void MainWindow::setStyleBars()
+{
+    ui->wBar_1->setColor(ColorCh1, ColorCh1Light);
+    ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
+    ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
+    ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
+
+    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
+    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
+    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
+    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
+}
+
 void MainWindow::updateWidgetsVols(void)
 {
     ui->widgetVol1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
@@ -1216,9 +1198,7 @@ void MainWindow::selectWidgetDiagram(void)
 {
     if ( (systemOptions.display == cSystemOptions::BarsCyfra) || \
          (systemOptions.display == cSystemOptions::TrendsCyfraBars) || \
-         (systemOptions.display == cSystemOptions::Cyfra) || \
          (systemOptions.display == cSystemOptions::TrendsBars) || \
-         (systemOptions.display == cSystemOptions::Bars) || \
          (systemOptions.display == cSystemOptions::TrendsCyfra) || \
          (systemOptions.display == cSystemOptions::Trends) )
     {
@@ -1226,6 +1206,11 @@ void MainWindow::selectWidgetDiagram(void)
         ui->right->show();
         ui->left->show();
         ui->frameSteel->hide();
+    }
+    else if((systemOptions.display == cSystemOptions::Cyfra) || \
+            (systemOptions.display == cSystemOptions::Bars))
+    {
+        ui->left->hide();
     }
     else if(systemOptions.display == cSystemOptions::Polar ||\
             systemOptions.display == cSystemOptions::PolarBars ||\
@@ -1323,10 +1308,10 @@ void MainWindow::updateSteel()
     emit sendTransToWorker(tr);
     tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
     emit sendTransToWorker(tr);
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
-    emit sendTransToWorker(tr);
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
-    emit sendTransToWorker(tr);
+//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
+//    emit sendTransToWorker(tr);
+//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
+//    emit sendTransToWorker(tr);
 
     if(stateWidgetSteel == STEEL_READY)
     {   //в плате STEEL имеются данные для получения
@@ -1373,7 +1358,7 @@ void MainWindow::updateSteel()
         emit sendTransToWorker(tr);
 //        for(int i = 1; i <= 10; i ++)
 //        {
-        if(numArraySteel < 5)
+        if((numArraySteel < 5) && askNewArray)
         {
             //запрос текущего участка графика ЭДС
             tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+1));
@@ -1381,9 +1366,13 @@ void MainWindow::updateSteel()
             //запрос текущего участка графика температуры
             tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+6));
             emit sendTransToWorker(tr);
+            askNewArray = false;
+            listSteel.at(steelReadyNum)->lastItemEds = false;
+            listSteel.at(steelReadyNum)->lastItemTemp = false;
         }
 //        }
-        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData))
+        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData)\
+                || (listSteel.at(steelReadyNum)->status == StatusCh_WaitConf))
         {
             stateWidgetSteel = STEEL_WAIT;
         }
@@ -1403,8 +1392,16 @@ void MainWindow::updateSteel()
         {   // i-тая входная группа нашла площадку и имеются готовые данные
             QList<QString> str;
             str << "Data" << "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
-            foreach (QString s, str) {
-                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
+            if(listSteel.at(steelReadyNum)->technology->COH != 0)
+            {
+                foreach (QString s, str) {
+                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
+                    emit sendTransToWorker(tr);
+                }
+            }
+            else
+            {
+                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
                 emit sendTransToWorker(tr);
             }
 //            for(int i = 1; i <= 10; i ++)
@@ -1430,7 +1427,7 @@ void MainWindow::updateSteel()
 //            steelReady = true;  //данные готовы
             stateWidgetSteel = STEEL_READY;
             steelReadyNum = i;  //запоминаем номер входной группы
-            steelSelectFrame = false;   //разрешаем показывать график
+//            steelSelectFrame = false;   //разрешаем показывать график
             steel->timeUpdateData = QDateTime::currentDateTime();
                break;  //выход из цикла, на первой же входной группе с площадкой
         }
@@ -1439,8 +1436,10 @@ void MainWindow::updateSteel()
             if(stateWidgetSteel != STEEL_MEASURE)
             {
                 stateWidgetSteel = STEEL_MEASURE;
+                steelSelectFrame = false;
                 steelReadyNum = i;
                 numArraySteel = 0;
+                askNewArray = true;
                 steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
                 steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
             }
@@ -1525,7 +1524,14 @@ void MainWindow::updateSteelWidget(void)
 //        if(listSteel.at(steelReadyNum)->allVectorsReceived)
 //        {
             Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
-            Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
+//            if(listSteel.at(steelReadyNum)->technology->COH != 0)
+//            {
+                Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
+//            }
+//            else
+//            {
+//                Y_Coord_SteelEds = QVector<double>(Y_Coord_SteelTemp.size(), NAN);
+//            }
             X_Coord_Steel.resize(0);
             for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
             {
@@ -1549,6 +1555,7 @@ void MainWindow::updateSteelWidget(void)
             size = (steel->technology->LPth - steel->technology->LPtl) * 1.1;
             position = (steel->technology->LPth + steel->technology->LPtl) / 2;
             ui->plotSteel->yAxis->setRange(position, size, Qt::AlignCenter);
+            ui->plotSteel->yAxis2->setRange(100, 800, Qt::AlignCenter);
             ui->plotSteel->replot();
             ui->plotSteel->clearItems();
 //        }

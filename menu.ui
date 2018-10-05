@@ -360,7 +360,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>15</number>
+            <number>13</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -4260,93 +4260,8 @@ border: 1px dashed  rgb(130, 130, 130);</string>
                 <property name="spacing">
                  <number>10</number>
                 </property>
-                <item row="13" column="2">
-                 <widget class="QPushButton" name="bSaveMesToDrive">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>70</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(255, 255, 255);
-background-color: #2c3d4d;
-border: 0px solid rgba(255, 255, 255, 0);</string>
-                  </property>
-                  <property name="text">
-                   <string>ЗАПИСАТЬ</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1" colspan="2">
-                 <widget class="QComboBox" name="comboDrives">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>41</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QComboBox {
-background-color:rgb(44, 61, 77);
-color: rgb(255 , 255, 255);
-border-radius: 0px;
-}
-QComboBox::drop-down {
-	width:30px;
- }</string>
-                  </property>
-                  <property name="currentIndex">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string>SDA1</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>SDA2</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>SDB1</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
-                <item row="11" column="0">
-                 <widget class="QLabel" name="label_14">
+                <item row="5" column="0">
+                 <widget class="QLabel" name="label_11">
                   <property name="font">
                    <font>
                     <family>Open Sans</family>
@@ -4354,45 +4269,10 @@ QComboBox::drop-down {
                    </font>
                   </property>
                   <property name="text">
-                   <string>АРХИВЫ ИЗМЕРЕНИЙ</string>
+                   <string>ДИРЕКТОРИЯ НА НАКОПИТЕЛЕ</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="2">
-                 <widget class="QPushButton" name="bSaveArchiveToDrive">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>70</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(255, 255, 255);
-background-color: #2c3d4d;
-border: 0px solid rgba(255, 255, 255, 0);</string>
-                  </property>
-                  <property name="text">
-                   <string>ЗАПИСАТЬ</string>
                   </property>
                  </widget>
                 </item>
@@ -4484,8 +4364,8 @@ QComboBox::drop-down {
                   </property>
                  </widget>
                 </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="label_11">
+                <item row="13" column="0">
+                 <widget class="QLabel" name="label_15">
                   <property name="font">
                    <font>
                     <family>Open Sans</family>
@@ -4493,7 +4373,7 @@ QComboBox::drop-down {
                    </font>
                   </property>
                   <property name="text">
-                   <string>ДИРЕКТОРИЯ НА НАКОПИТЕЛЕ</string>
+                   <string>ЖУРНАЛ СОБЫТИЙ</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4510,22 +4390,6 @@ QComboBox::drop-down {
                   </property>
                   <property name="text">
                    <string>НАСТРОЙКИ ВХОДОВ И ВЫХОДОВ</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="13" column="0">
-                 <widget class="QLabel" name="label_15">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>ЖУРНАЛ СОБЫТИЙ</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4561,6 +4425,142 @@ QComboBox::drop-down {
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="13" column="2">
+                 <widget class="QPushButton" name="bSaveMesToDrive">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>70</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: #2c3d4d;
+border: 0px solid rgba(255, 255, 255, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string>ЗАПИСАТЬ</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="0">
+                 <widget class="QLabel" name="label_14">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>АРХИВЫ ИЗМЕРЕНИЙ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1" colspan="2">
+                 <widget class="QComboBox" name="comboDrives">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>41</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QComboBox {
+background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;
+}
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                  </property>
+                  <property name="currentIndex">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>SDA1</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>SDA2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>SDB1</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="11" column="2">
+                 <widget class="QPushButton" name="bSaveArchiveToDrive">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>70</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: #2c3d4d;
+border: 0px solid rgba(255, 255, 255, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string>ЗАПИСАТЬ</string>
                   </property>
                  </widget>
                 </item>
@@ -4696,6 +4696,51 @@ border: 0px solid rgba(255, 255, 255, 0);</string>
               </widget>
              </item>
              <item>
+              <widget class="QProgressBar" name="progressBarLoadFiles">
+               <property name="minimumSize">
+                <size>
+                 <width>34</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QProgressBar {
+background-color: rgb(166, 166, 166);
+text-align: center;
+color:rgb(255, 255, 255);
+border-radius:0px;
+}
+
+QProgressBar::chunk {
+background-color: #2c3d4d;
+     width: 20px;
+ }</string>
+               </property>
+               <property name="value">
+                <number>24</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_18">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>108</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <spacer name="verticalSpacer_17">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -4781,13 +4826,13 @@ border: 0px solid rgba(255, 255, 255, 0);</string>
           <widget class="QLabel" name="load">
            <property name="minimumSize">
             <size>
-             <width>123</width>
+             <width>73</width>
              <height>73</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>123</width>
+             <width>73</width>
              <height>73</height>
             </size>
            </property>
@@ -4799,6 +4844,9 @@ border: 0px solid rgba(255, 255, 255, 0);</string>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>

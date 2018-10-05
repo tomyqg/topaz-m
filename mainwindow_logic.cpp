@@ -326,12 +326,14 @@ void MainWindow::MainWindowInitialization()
     connect(ui->wBar_2, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_3, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_4, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    setStyleBars();
 
     //инициализация виджетов значений
     ui->widgetVol1->changeNum(1);
     ui->widgetVol2->changeNum(2);
     ui->widgetVol3->changeNum(3);
     ui->widgetVol4->changeNum(4);
+    updateWidgetsVols();
 
 //    ui->wBar_1->setBarDiapazon(1000);
 //    ui->wBar_2->setBarDiapazon(200);
@@ -1143,37 +1145,42 @@ void MainWindow::parseWorkerReceive()
             {
                 if(typeDevice == Device_STEEL)
                 {
+                    bool needNextArray = true;  //признак необходимости запроса следующего массива
+                    int curArray = 0;
                     for(int i = 1; i <= 5; i++)
                     {   //перебор массивов по номерам в карте регистров
-                        if(paramName == QString("DataArray" + QString::number(i)) && \
-                                !listSteel.at(steelReadyNum)->vectorEdsReceived)
+                        if(paramName == QString("DataArray" + QString::number(i)))
                         {   //подобран номер массива
-
+                            listSteel.at(steelReadyNum)->vectorEdsReceived = true;
+                            listSteel.at(steelReadyNum)->lastItemEds = true;
                             for(int j = 0; j < 32; j++)
                             {   //поэлементное копирование полученного массива в соответствующий объект стали
+                                curArray = i;
                                 int indexVec = j + (i - 1) * 32;
                                 if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
                                 {
                                     if(tr.paramInt16[j] != 0x7FFF)
                                     {
-                                        listSteel.at(steelReadyNum)->vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
-                                    }
-                                    else
-                                    {
-//                                        listSteel.at(steelReadyNum)->vectorEdsReceived = true;
-//                                        needNextArray = false;
-                                        break;
+                                        if(listSteel.at(steelReadyNum)->technology->COH != 0)
+                                        {
+                                            listSteel.at(steelReadyNum)->vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
+                                        }
                                     }
                                 }
                             }
+                            if(tr.paramInt16[31] == 0x7FFF)
+                            {
+                                listSteel.at(steelReadyNum)->lastItemEds = false;
+                            }
                             break;
                         }
-                        else if(paramName == QString("DataArray" + QString::number(i+5)) && \
-                                !listSteel.at(steelReadyNum)->vectorTempReceived)
+                        else if(paramName == QString("DataArray" + QString::number(i+5)))
                         {
-                            bool needNextArray = true;  //признак необходимости запроса следующего массива
+                            listSteel.at(steelReadyNum)->vectorTempReceived = true;
+                            listSteel.at(steelReadyNum)->lastItemTemp = true;
                             for(int j = 0; j < 32; j++)
                             {   //поэлементное копирование полученного массива в соответствующий объект стали
+                                curArray = i;
                                 int indexVec = j + (i - 1) * 32;
                                 if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
                                 {
@@ -1181,23 +1188,40 @@ void MainWindow::parseWorkerReceive()
                                     {
                                         listSteel.at(steelReadyNum)->vectorTemp.replace(indexVec, (double)tr.paramInt16[j]);
                                     }
-                                    else
-                                    {
-//                                        listSteel.at(steelReadyNum)->vectorTempReceived = true;
-                                        needNextArray = false;
-                                        break;
-                                    }
                                 }
                             }
-                            if(needNextArray)
-                            {   //если массив заполнен, то переход на следующий
-                                if(numArraySteel != i)
-                                    numArraySteel = i;
-//                                assert(numArraySteel < 5);  //номер массива не может быть равен 5 или больше
+                            if(tr.paramInt16[31] == 0x7FFF)
+                            {
+                                listSteel.at(steelReadyNum)->lastItemTemp = false;
                             }
                             break;
                         }
                     }
+
+                    //оба масива после запроса
+                    if(((listSteel.at(steelReadyNum)->vectorEdsReceived) || \
+                        (listSteel.at(steelReadyNum)->technology->COH == 0)) && \
+                            (listSteel.at(steelReadyNum)->vectorTempReceived))
+                    {
+                        askNewArray = true;
+                        listSteel.at(steelReadyNum)->vectorTempReceived = false;
+                        listSteel.at(steelReadyNum)->vectorEdsReceived = false;
+                    }
+
+                    //если оба массива полные значениями,
+                    // или только температуры при отключенной окисленности
+                    //массив получен, можно запросить ещё
+                    if((listSteel.at(steelReadyNum)->lastItemEds || \
+                        (listSteel.at(steelReadyNum)->technology->COH == 0)) && \
+                            listSteel.at(steelReadyNum)->lastItemTemp)
+                    {
+                        numArraySteel = curArray;
+                    }
+//                    if(needNextArray)
+//                    {   //если массив заполнен, то переход на следующий
+//                            numArraySteel = curArray;
+////                                assert(numArraySteel < 5);  //номер массива не может быть равен 5 или больше
+//                    }
                 }
             }
             emit retransToSlotConfig(tr);

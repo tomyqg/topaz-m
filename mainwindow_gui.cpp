@@ -73,6 +73,8 @@ void MainWindow::on_WorkButton_clicked()
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->deleteLater();
     sendConfigChannelsToSlave();
+    setStyleBars();
+    updateWidgetsVols();
 }
 
 void MainWindow::on_ArchiveButton_clicked()
@@ -135,6 +137,8 @@ void MainWindow::on_MenuButton_clicked()
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->deleteLater();
     sendConfigChannelsToSlave();
+    setStyleBars();
+    updateWidgetsVols();
 }
 
 void MainWindow::updateSystemOptions()
@@ -163,10 +167,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint)
     {
-        if (needupdatePainter == 1)
+        if (needUpdatePainter == true)
         {
             PaintOnWidget();
-            needupdatePainter = 0;
+            needUpdatePainter = false;
         }
     }
 
@@ -468,6 +472,8 @@ void MainWindow::openSettingsChannel(int num)
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
     sendConfigChannelsToSlave();
+    setStyleBars();
+    updateWidgetsVols();
 }
 
 

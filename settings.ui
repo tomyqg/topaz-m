@@ -2255,40 +2255,36 @@ text-align: center;</string>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <widget class="QLabel" name="loadArchive">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>182</width>
-                     <height>108</height>
-                    </rect>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>182</width>
-                     <height>108</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>123</width>
-                     <height>73</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                   <property name="pixmap">
-                    <pixmap>C:/Work/load.gif</pixmap>
-                   </property>
-                   <property name="scaledContents">
-                    <bool>true</bool>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_15">
+                   <item>
+                    <widget class="QLabel" name="loadArchive">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap>C:/Work/load.gif</pixmap>
+                     </property>
+                     <property name="scaledContents">
+                      <bool>true</bool>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -2458,7 +2454,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>650</width>
+                     <width>757</width>
                      <height>852</height>
                     </rect>
                    </property>
@@ -6459,13 +6455,13 @@ border-radius: 0px;</string>
           <widget class="QLabel" name="load">
            <property name="minimumSize">
             <size>
-             <width>123</width>
+             <width>73</width>
              <height>73</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>123</width>
+             <width>73</width>
              <height>73</height>
             </size>
            </property>

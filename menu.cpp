@@ -31,8 +31,8 @@ dMenu::dMenu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dMenu)
 {
-
-
+//    QTime time;
+//    time.start();
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
 
@@ -52,13 +52,11 @@ dMenu::dMenu(QWidget *parent) :
         button->setAlignLeft();
     }
 
-    //фильтр для поля редактирования даты
-//    ui->dateEdit->installEventFilter(this);
-
     ui->load->setHidden(true);
     mo.setFileName(pathtoloadgif);
     ui->load->setMovie(&mo);
-    mo.start();
+    ui->progressBarLoadFiles->setHidden(true);
+//    mo.start();       //замедляет скорость открытия окна на 250 мсек
 
     connect(&timerLoad, SIGNAL(timeout()), this, SLOT(timeoutLoad()));
 
@@ -75,58 +73,9 @@ dMenu::dMenu(QWidget *parent) :
 
     connect(flash, SIGNAL(newFlash(int)), this, SLOT(updateDriversWidgets()));
 
-//    connect(&tUpdateTime, SIGNAL(timeout()), this, SLOT(DateUpdate()));
-//    tUpdateTime.start(DRIVE_UPDATE);
-//    DateUpdate();
-
-
     updateSystemOptions();
 
-//    ui->bReadChanFromDrive->setFontSize(14);
-//    ui->bReadChanFromDrive->setAlignCenter();
-//    ui->bReadSysFromDrive->setFontSize(14);
-//    ui->bReadSysFromDrive->setAlignCenter();
-//    ui->bSaveChanToDrive->setFontSize(14);
-//    ui->bSaveChanToDrive->setAlignCenter();
-//    ui->bSaveSysToDrive->setFontSize(14);
-//    ui->bSaveSysToDrive->setAlignCenter();
-
-//    //в зависимости от подключенных плат определям, что показывать или не показывать в меню
-//    if(csc.isConnect())
-//    {
-//        ui->frameAnalogModes->show();
-//        ui->radioButAnalogModes->setEnabled(true);
-//        ui->radioButAnalogModes->setChecked(true);
-//        ui->bAnalog->show();
-//    }
-//    else
-//    {
-//        ui->frameAnalogModes->hide();
-//        ui->radioButAnalogModes->setEnabled(false);
-//        ui->bAnalog->hide();
-//    }
-//    if(ssc.isConnect())
-//    {
-//        ui->radioButSteelModes->setEnabled(true);
-//        ui->bSteel->show();
-//        if(!csc.isConnect())
-//        {
-//            ui->frameSteelMode->show();
-//            ui->radioButSteelModes->setChecked(true);
-//        }
-//        else
-//        {
-//           ui->frameSteelMode->hide();
-//        }
-//    }
-//    else
-//    {
-//        ui->radioButSteelModes->setEnabled(false);
-//        ui->frameSteelMode->hide();
-//        ui->bSteel->hide();
-//    }
-
-
+//    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
 bool dMenu::eventFilter(QObject *object, QEvent *event)
@@ -159,6 +108,7 @@ void dMenu::on_exitButton_clicked()
 
 void dMenu::on_saveButton_clicked()
 {
+    mo.start();
     ui->load->setHidden(false);
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
     timerLoad.start(1000);
@@ -180,7 +130,7 @@ void dMenu::updateSystemOptions(QString path)
 {
     cFileManager::readSystemOptionsFromFile(path, &sysOptions);
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
-    ui->modeBar->setCurrentIndex((sysOptions.display >> 2) & 4);
+    ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
     if(ssc.isConnect() && csc.isConnect())
     {
@@ -929,4 +879,149 @@ void dMenu::on_bReadChanFromDrive_clicked()
         mesDialog.setWindowModality(Qt::WindowModal);
         mesDialog.show();
     }
+}
+
+void dMenu::on_bSaveArchiveToDrive_clicked()
+{
+    ui->progressBarLoadFiles->setValue(0);
+    ui->progressBarLoadFiles->setHidden(false);
+    QString src, dest, path;
+    QDateTime currTime = QDateTime::currentDateTime();
+    int daysArray[4] = {1, 7, 30, 365};
+    int days = daysArray[ui->periodArchiveToDrive->currentIndex()];
+    QDateTime firstTime = currTime.addDays(-days);
+    QString pathArch = QString(pathtoarchivedata);
+    QStringList sl = pathArch.split(".");
+    int n = sl.size();
+    QStringList strlist = pathArch.split("/");
+    path = QString(ui->comboDrives->currentText() + "/" \
+                   + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    QDir dir;
+    if(!dir.exists(path))
+    {
+        dir.mkpath(path);
+    }
+    countArchFiles = 0;
+    QTimer * copyTimer = new QTimer;
+    connect(copyTimer, SIGNAL(timeout()), this, SLOT(copyArchiveFile()));
+    connect(this, SIGNAL(finishCopyArchive()), this, SLOT(copyLastArchFile()));
+    connect(this, SIGNAL(finishCopyArchive()), copyTimer, SLOT(deleteLater()));
+    copyTimer->start(100);
+//    for(int i = 0; i < days; i++)
+//    {
+//        QString strDay = firstTime.addDays(i).toString("yyMMdd");
+//        src = sl.at(n-2) + "_sek_" + strDay + "." + sl.at(n-1);
+//        dest = QString(path + "archive_sek_" + strDay + ".dat");    //Vag: изменить
+//        QFile::remove(dest);    //удалить с носителя (устарел)
+//        QFile arch_sek(src);
+//        if(arch_sek.exists())   //проверка наличия такого файла
+//        {
+//            QFile::copy(src, dest);
+//        }
+//        int progress = (i*100)/days;
+//        ui->progressBarLoadFiles->setValue(progress);
+//    }
+//    src = sl.at(n-2) + "_sek." + sl.at(n-1);;
+//    dest = QString(path + "archive_sek.dat");
+//    QFile::remove(dest);    //удалить с носителя (устарел)
+//    QFile arch_sek(src);
+//    if(arch_sek.exists())   //проверка наличия такого файла
+//    {
+//        ui->progressBarLoadFiles->setValue(100);
+//        QString mess;
+//        if(QFile::copy(src, dest))
+//        {
+//            qDebug() << "The measurement archive was copied to the specified medium";
+//            qDebug() << "Path" << dest.toStdString().c_str();
+//            mess = QString("Архив измерений "\
+//                                   + ui->periodArchiveToDrive->currentText() \
+//                                   + " успешно скопирован на указанный носитель\r\n");
+//        }
+//        else
+//        {
+//            qDebug() << "Error writing measurement archive" << strerror(errno);
+//            mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
+//        }
+//        mesDialog.showInfo(mess, "Сообщение");
+//        mesDialog.setWindowModality(Qt::WindowModal);
+//        mesDialog.show();
+//    }
+//    ui->progressBarLoadFiles->setHidden(true);
+}
+
+void dMenu::copyArchiveFile()
+{
+    QString src, dest, path;
+    QDateTime currTime = QDateTime::currentDateTime();
+    int daysArray[4] = {1, 7, 30, 365};
+    int days = daysArray[ui->periodArchiveToDrive->currentIndex()];
+    if(countArchFiles == days)
+        emit finishCopyArchive();
+    else
+    {
+        QDateTime firstTime = currTime.addDays(-days);
+        QString pathArch = QString(pathtoarchivedata);
+        QStringList sl = pathArch.split(".");
+        int n = sl.size();
+        QStringList strlist = pathArch.split("/");
+        path = QString(ui->comboDrives->currentText() + "/" \
+                       + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+        path = QString("/media/" + path);
+#endif
+        QString strDay = firstTime.addDays(countArchFiles).toString("yyMMdd");
+        src = sl.at(n-2) + "_sek_" + strDay + "." + sl.at(n-1);
+        dest = QString(path + "archive_sek_" + strDay + ".dat");    //Vag: изменить
+        QFile::remove(dest);    //удалить с носителя (устарел)
+        QFile arch_sek(src);
+        if(arch_sek.exists())   //проверка наличия такого файла
+        {
+            QFile::copy(src, dest);
+        }
+        //        int progress = (countArchFiles*100)/days;
+        ui->progressBarLoadFiles->setValue((countArchFiles*100)/days);
+        countArchFiles++;
+    }
+}
+
+void dMenu::copyLastArchFile()
+{
+    QString src, dest, path;
+    path = QString(ui->comboDrives->currentText() + "/" \
+                   + ui->nameDirOnDrive->text() + "/");
+#ifdef Q_OS_LINUX
+    path = QString("/media/" + path);
+#endif
+    QString pathArch = QString(pathtoarchivedata);
+    QStringList sl = pathArch.split(".");
+    int n = sl.size();
+    src = sl.at(n-2) + "_sek." + sl.at(n-1);;
+    dest = QString(path + "archive_sek.dat");
+    QFile::remove(dest);    //удалить с носителя (устарел)
+    QFile arch_sek(src);
+    if(arch_sek.exists())   //проверка наличия такого файла
+    {
+        ui->progressBarLoadFiles->setValue(100);
+        QString mess;
+        if(QFile::copy(src, dest))
+        {
+            qDebug() << "The measurement archive was copied to the specified medium";
+            qDebug() << "Path" << dest.toStdString().c_str();
+            mess = QString("Архив измерений "\
+                                   + ui->periodArchiveToDrive->currentText() \
+                                   + " успешно скопирован на указанный носитель\r\n");
+        }
+        else
+        {
+            qDebug() << "Error writing measurement archive" << strerror(errno);
+            mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
+        }
+        mesDialog.showInfo(mess, "Сообщение");
+        mesDialog.setWindowModality(Qt::WindowModal);
+        mesDialog.show();
+    }
+    ui->progressBarLoadFiles->setHidden(true);
 }

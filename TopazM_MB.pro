@@ -10,7 +10,11 @@ QT += serialport
 QT += testlib
 QT += network
 
-VERSION = 1.0.0
+VERSION = 1.0.0.2
+QMAKE_TARGET_COMPANY = Teplopribor-Sensor
+QMAKE_TARGET_PRODUCT = Multigraph
+QMAKE_TARGET_DESCRIPTION = Рaperless video recorder
+QMAKE_TARGET_COPYRIGHT = Vagiz Abdulin
 
 Q_OS_LINUX = 1
 
@@ -26,6 +30,8 @@ INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
         Drivers Communicator Grafika LookupTable Steel Relais Server
 TEMPLATE = app
+
+RC_ICONS = icon.ico
 
 SOURCES += main.cpp \
     qcustomplot.cpp \
