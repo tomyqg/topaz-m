@@ -28,7 +28,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers Communicator Grafika LookupTable Steel Relais Server
+        Drivers Communicator Grafika LookupTable Steel Relais Server Digital
 TEMPLATE = app
 
 RC_ICONS = icon.ico
@@ -87,7 +87,9 @@ SOURCES += main.cpp \
     Relais/relay.cpp \
     Server/serverhttp.cpp \
     Server/socket_thread.cpp \
-    Drivers/usb_flash.cpp
+    Drivers/usb_flash.cpp \
+    Digital/digital_input.cpp \
+    smartconnect.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -185,7 +187,9 @@ HEADERS  += mainwindow.h \
     Relais/relay.h \
     Server/serverhttp.h \
     Server/socket_thread.h \
-    Drivers/usb_flash.h
+    Drivers/usb_flash.h \
+    Digital/digital_input.h \
+    smartconnect.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -273,7 +277,6 @@ unix:HEADERS += Drivers/driveri2c.h \
             Anybus/appl_adi_config.h
 
 FORMS    += mainwindow.ui \
-    options.ui \
     keyboard.ui \
     messages.ui \
     stackedoptions.ui \
@@ -282,7 +285,8 @@ FORMS    += mainwindow.ui \
     Grafika/buttonstyled.ui \
     menu.ui \
     settings.ui \
-    Grafika/vol.ui
+    Grafika/vol.ui \
+    _options.ui
 
 target.path  = /opt
 INSTALLS    += target

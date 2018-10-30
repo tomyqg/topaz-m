@@ -44,14 +44,6 @@ dMenu::dMenu(QWidget *parent) :
     ui->exitButton->setColorText(ColorBlue);
     ui->exitButton->setColorBg(QColor(0xff,0xff,0xff));
 
-    QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();
-    foreach(wButtonStyled * button, buttons)
-    {
-        button->setColorText(QColor(0xff,0xff,0xff));
-        button->setColorBg(ColorButtonNormal);
-        button->setAlignLeft();
-    }
-
     ui->load->setHidden(true);
     mo.setFileName(pathtoloadgif);
     ui->load->setMovie(&mo);
@@ -67,6 +59,8 @@ dMenu::dMenu(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
     ui->frameNameSubMenu->setHidden(true);
 
+    ui->stackedWidgetDIFunc->setCurrentIndex(0);
+
     connect(&tUpdateTime, SIGNAL(timeout()), this, SLOT(DateUpdate()));
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
@@ -74,6 +68,15 @@ dMenu::dMenu(QWidget *parent) :
     connect(flash, SIGNAL(newFlash(int)), this, SLOT(updateDriversWidgets()));
 
     updateSystemOptions();
+
+
+    QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();
+    foreach(wButtonStyled * button, buttons)
+    {
+        button->setColorText(QColor(0xff,0xff,0xff));
+        button->setColorBg(ColorButtonNormal);
+        button->setAlignLeft();
+    }
 
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
@@ -262,8 +265,16 @@ void dMenu::openSettingsChannel(int num, int page)
         dialogSetingsChannel->deleteLater();
 
     }
+    else if(page == 3)
+    {
+        if((num <= 0) || (num > listUstavok.size())) return;
+        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+        dialogSetingsChannel->exec();
+        dialogSetingsChannel->deleteLater();
+    }
 
 }
+
 
 void dMenu::on_bChannel1_clicked()
 {
@@ -331,6 +342,28 @@ void dMenu::addChannels(QList<ChannelOptions *> channels, QList<Ustavka*> ustavk
     foreach (Ustavka * ust, ustavki) {
         listUstavok.append(ust);
     }
+
+    int i = 0;
+    foreach (Ustavka * u, listUstavok) {
+        wButtonStyled * bUstavka = new wButtonStyled(ui->widgetScrollAreaUstavki);
+        bUstavka->index = i+1;
+        bUstavka->setText("УСТАВКА " + QString::number(bUstavka->index));
+        bUstavka->setMinimumSize(QSize(0, 70));
+        bUstavka->setColorText(QColor(0xff,0xff,0xff));
+        bUstavka->setColorBg(ColorButtonNormal);
+        bUstavka->setAlignLeft();
+        connect(bUstavka, SIGNAL(clicked(int)), this, SLOT(slotOpenSettings(int)));
+        ui->verticalLayoutUstavki->addWidget(bUstavka);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutUstavki->addItem(verticalSpacer);
+
+}
+
+void dMenu::slotOpenSettings(int num)
+{
+    openSettingsChannel(num, 3);
 }
 
 void dMenu::selectPageWork()
@@ -338,26 +371,6 @@ void dMenu::selectPageWork()
     ui->stackedWidget->setCurrentIndex(1);
     ui->nameSubMenu->setText("РАБОТА");
     ui->frameNameSubMenu->setHidden(false);
-}
-
-void dMenu::on_bUstavka_1_clicked()
-{
-    openSettingsChannel(1, 3);
-}
-
-void dMenu::on_bUstavka_2_clicked()
-{
-    openSettingsChannel(2, 3);
-}
-
-void dMenu::on_bUstavka_3_clicked()
-{
-    openSettingsChannel(3, 3);
-}
-
-void dMenu::on_bUstavka_4_clicked()
-{
-    openSettingsChannel(4, 3);
 }
 
 void dMenu::on_bSteel1_clicked()
@@ -460,6 +473,150 @@ void dMenu::on_bSteel_clicked()
 {
     ui->stackedWidget->setCurrentIndex(14);
     ui->nameSubMenu->setText("СТАЛЬ");
+}
+
+void dMenu::on_bBackDigitInputSettings_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(16);
+    ui->nameSubMenu->setText("ЦИФР. ВХОДА");
+}
+
+void dMenu::on_bBackDigitInputs_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->nameSubMenu->setText("ВХОДЫ");
+}
+
+void dMenu::on_bAddDigitInput_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitals_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(16);
+    ui->nameSubMenu->setText("ЦИФР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput1_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput4_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput7_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bDigitInput8_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(17);
+    ui->nameSubMenu->setText("НАСТР. ВХОДА");
+}
+
+void dMenu::on_bOutputs_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(18);
+    ui->nameSubMenu->setText("ВЫХОДЫ");
+}
+
+void dMenu::on_bBackDigitOutputs_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->nameSubMenu->setText("НАСТРОЙКИ");
+}
+
+void dMenu::on_bAddDigitOutput_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_1_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_4_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_7_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bDigitOutput_8_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+}
+
+void dMenu::on_bBackDigitOutputSettings_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(18);
+    ui->nameSubMenu->setText("ВЫХОДЫ");
 }
 
 void dMenu::updateDriversWidgets()
@@ -684,6 +841,8 @@ void dMenu::on_timeEdit_s_down_clicked()
     dateTime = dateTime.addSecs(-1);
     updUiTimeDate(dateTime);
 }
+
+
 
 void dMenu::updUiTimeDate(QDateTime td)
 {
@@ -1025,3 +1184,15 @@ void dMenu::copyLastArchFile()
     }
     ui->progressBarLoadFiles->setHidden(true);
 }
+
+
+void dMenu::on_comboDigitInputsFunc_currentIndexChanged(int index)
+{
+    ui->stackedWidgetDIFunc->setCurrentIndex(index);
+}
+
+void dMenu::on_digitInoutToOutput_currentIndexChanged(int index)
+{
+    ui->stackedObjectsMenage->setCurrentIndex(index);
+}
+

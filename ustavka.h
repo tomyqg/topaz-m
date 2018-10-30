@@ -18,7 +18,7 @@ public:
     ~Ustavka();
 //    static int ResID;   // Счётчик номеров уставок
 //    int getID();        // Функция возврата номера уставки
-    void setUstavka(int ch, double hi, double low, double hiHist, double lowHist, int relayUp, int relayDown);
+    void setUstavka(int i, QString name, int ch, double hi, double low, double hiHist, double lowHist, int relayUp, int relayDown);
     int getUstavka(); // при сработке возвращает номер реле, 0 - нет сработки уставки
     void update(double cur);    // обновление состояний уставки. вызывать периодически из главного потока
     double getHiStateValue() {return stateHiValue; }
@@ -42,16 +42,21 @@ public:
     void setKvitirDown(bool f) { kvitirEnDown = f; }
     bool getKvitirUp() { return kvitirEnUp; }
     bool getKvitirDown() { return kvitirEnDown; }
-    void setNameCh(QString name) { nameChannel = name; }
-    QString getNameCh() { return nameChannel; }
+//    void setNameCh(QString name) { nameChannel = name; }
+//    QString getNameCh() { return nameChannel; }
+    QString getIdentifikator() { return identifikator; }
+    void setIdentifikator(QString ident) { identifikator = ident; }
+    void setNum(int i) { num = i; }
+    int getNum() { return num; }
 
 signals:
     void workReleSignal(int relay, bool state);
     void messToLogSignal(int channel, QString mess);
 
 private:
+    int num;                // номер ustavki
+    QString identifikator;  // идентификатор уставки
     int numChannel;         // номер выбранного канала
-    QString nameChannel;    // имя канала
     double stateHiValue;    // верхний уровень для переключения реле
     double stateLowValue;   // нижний уровень для переключения реле
     double hiHisteresis;    // гистерезис верхнего уровня

@@ -406,6 +406,8 @@ void MainWindow::InitUstavka()
         Ustavka *ust = new Ustavka(this);
         connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
         connect(ust, SIGNAL(messToLogSignal(int,QString)), this, SLOT(logginStates(int,QString)));
+//        ust->setNum(i+1);
+        ust->setIdentifikator("Limit" + QString::number(i+1));
         ustavkaObjectsList.append(ust);
     }
 
@@ -415,9 +417,9 @@ void MainWindow::InitUstavka()
     timeUpdUst->start(UstavkiUpdateTimer);
 
     //Vag:тест
-    Ustavka * u = ustavkaObjectsList.at(1);
-    u->setKvitirUp(true);
-    u->setKvitirDown(true);
+//    Ustavka * u = ustavkaObjectsList.at(1);
+//    u->setKvitirUp(true);
+//    u->setKvitirDown(true);
     //----
 }
 
@@ -431,13 +433,16 @@ void MainWindow::UpdUst()
 
     foreach (Ustavka * ust, ustavkaObjectsList) {
         int ch = ust->getChannel();
+        int i = 0;
         if(ch)
         {
             ChannelOptions * channel = ChannelsObjectsList.at(ch-1);
-            ust->setNameCh(channel->GetChannelName());
+//            ust->setNameCh(channel->GetChannelName());
+//            ust->setNum(i+1);
+//            ust->setIdentifikator("Limit" + QString::number(i+1));
             ust->update(channel->GetCurrentChannelValue());
-
         }
+        i++;
     }
 }
 
@@ -450,6 +455,7 @@ void MainWindow::UpdUst()
 #else
 #define CONST_SLAVE_STEEL   5
 #define CONST_SLAVE_ADC     4
+#define CONST_SLAVE_ADC_2   3
 #define CONST_SLAVE_RELAY   6
 #endif
 
@@ -459,6 +465,10 @@ void MainWindow::InitChannelSlotTable()
     csc.addChannelSlot(1, 1, CONST_SLAVE_ADC);
     csc.addChannelSlot(2, 2, CONST_SLAVE_ADC);
     csc.addChannelSlot(3, 3, CONST_SLAVE_ADC);
+//    csc.addChannelSlot(4, 0, CONST_SLAVE_ADC_2);
+//    csc.addChannelSlot(5, 1, CONST_SLAVE_ADC_2);
+//    csc.addChannelSlot(2, 2, CONST_SLAVE_ADC_2);
+//    csc.addChannelSlot(3, 3, CONST_SLAVE_ADC_2);
 }
 
 void MainWindow::InitRelaySlotTable()

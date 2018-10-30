@@ -1349,7 +1349,7 @@ void MainWindow::updateSteel()
             stateWidgetSteel = STEEL_WAIT;
         }
 
-        return;
+//        return;
     }
     else if(stateWidgetSteel == STEEL_MEASURE)
     {   //началось измерение температуры и поиск площадки

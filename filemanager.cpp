@@ -47,6 +47,8 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
 
     foreach (Ustavka * ust, listUstavok)
     {
+        ustavkijsonobj["Num"] = ust->getNum();
+        ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
         ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
         ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
         ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
@@ -136,14 +138,17 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
     foreach (Ustavka * ust, listUstavok)
     {
         jsonobj = array.at(index++).toObject();
-        ust->setUstavka(jsonobj.value("UstavkaChannel").toInt(), \
-                        jsonobj.value("StateHiValue").toDouble(), \
-                        jsonobj.value("StateLowValue").toDouble(), \
-                        jsonobj.value("lowHisteresis").toDouble(), \
-                        jsonobj.value("lowLowsteresis").toDouble(), \
-                        jsonobj.value("numRelayUp").toInt(), \
-                        jsonobj.value("numRelayDown").toInt() \
-                        );
+        ust->setUstavka(
+                    jsonobj.value("Num").toInt(), \
+                    jsonobj.value("Identifikator").toString().toUtf8(), \
+                    jsonobj.value("UstavkaChannel").toInt(), \
+                    jsonobj.value("StateHiValue").toDouble(), \
+                    jsonobj.value("StateLowValue").toDouble(), \
+                    jsonobj.value("lowHisteresis").toDouble(), \
+                    jsonobj.value("lowLowsteresis").toDouble(), \
+                    jsonobj.value("numRelayUp").toInt(), \
+                    jsonobj.value("numRelayDown").toInt() \
+                    );
         ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
         ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
         ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());

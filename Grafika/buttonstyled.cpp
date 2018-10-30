@@ -122,7 +122,7 @@ void wButtonStyled::setAlignRight()
 
 void wButtonStyled::on_button_clicked()
 {
-    emit clicked();
+    emit clicked(index);
 }
 
 void wButtonStyled::setFontSize(int s)

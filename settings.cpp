@@ -84,12 +84,14 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     StringListRTD.append("Cu23 (ТСМ23)");
 
     // <---- временно скрыть некоторые пункты настроек уставок
-    ui->ustavkaChannel->hide();
-    ui->label_19->hide();
-    ui->typeFix->hide();
-    ui->label_21->hide();
-    ui->ustavkaTimer->hide();
-    ui->label_24->hide();
+//    ui->ustavkaChannel->hide();
+//    ui->label_19->hide();
+//    ui->typeFix->hide();
+//    ui->label_21->hide();
+//    ui->ustavkaTimer->hide();
+//    ui->label_24->hide();
+    ui->frameButUstavk_2->hide();
+    ui->frameButUstavk->hide();
     // ----->
 
     ui->saveButton->setColorText(ColorBlue);
@@ -463,11 +465,14 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     //запоминаем канал, чтобы потом в него сохранить изменения
     listChannels = channels;
     listUstavok = ustavki;
-    if(num == 0) num = 1;
-    if(num > channels.size()) num = channels.size();
-    numChannel = num;
-    channel = listChannels.at(num-1);
-    ustavka = listUstavok.at(num-1);
+    int ch_num = num;
+    int ust_num = num;
+    if(ch_num == 0) ch_num = 1;
+    if(ch_num > channels.size()) ch_num = channels.size();
+    if(ust_num > ustavki.size()) ust_num = ustavki.size();
+    numChannel = ch_num;
+    channel = listChannels.at(ch_num-1);
+    ustavka = listUstavok.at(ust_num-1);
 
     ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(channel->GetSignalType()));
     ui->nameChannel->setText(channel->GetChannelName().toUtf8());
@@ -475,8 +480,8 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
     ui->unit->setText(channel->GetUnitsName().toUtf8());
     ui->periodCh->setValue(channel->GetMeasurePeriod());
-    ui->labelNumChannel->setText("КАНАЛ #" + QString::number(num));
-    ui->bar->changeNum(num);
+    ui->labelNumChannel->setText("КАНАЛ #" + QString::number(ch_num));
+    ui->bar->changeNum(ch_num);
     ui->dempfer->setValue(channel->GetDempherValue());
     ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
 
@@ -484,9 +489,9 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->ustavkaVol->setValue(ustavka->getHiStateValue());
     ui->ustavkaVolDown->setValue(ustavka->getLowStateValue());
     ui->gisterezis->setValue(ustavka->getHiHisteresis());
-    ui->ustavkaChannel->setCurrentIndex(num);
-    ui->identifikator->setText("Channel " + QString::number(num));
-    ui->labelNumUsatvka->setText("УСТАВКИ #" + QString::number(num));
+    ui->ustavkaChannel->setCurrentIndex(ustavka->getChannel());
+    ui->identifikator->setText(ustavka->getIdentifikator());
+    ui->labelNumUsatvka->setText("УСТАВКИ #" + QString::number(ust_num));
     ui->reley->setCurrentIndex(ustavka->getnumRelayUp());
     ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
     ui->messageOn->setText(ustavka->getMessInHigh());
@@ -494,44 +499,6 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
     ui->messageOnDown->setText(ustavka->getMessInLow());
     ui->messageOffDown->setText(ustavka->getMessNormHigh());
 
-    if(0)
-    {
-
-    //стилизация элементов
-    /*
-    ui->nameChannel->setStyleSheet("background-color: rgb(" \
-                                   + QString::number(channel->GetNormalColor().red()) +"," \
-                                   + QString::number(channel->GetNormalColor().green()) +"," \
-                                   + QString::number(channel->GetNormalColor().blue()) +");" \
-                                                                                        "color: rgb(255, 255, 255);" \
-                                                                                        "border-radius: 0px;}");
-    ui->unit->setStyleSheet(ui->nameChannel->styleSheet());
-    ui->sensorDiapazon->setStyleSheet("QComboBox {" \
-                + ui->nameChannel->styleSheet() \
-                + "}QComboBox::drop-down {width:30px;}");
-    ui->identifikator->setStyleSheet(ui->nameChannel->styleSheet());
-    ui->kvitir->setStyleSheet(ui->sensorDiapazon->styleSheet());
-    ui->ustavkaVol->setStyleSheet("background-color: rgb(" \
-                               + QString::number(COLOR_3.red()) + "," \
-                               + QString::number(COLOR_3.green()) + "," \
-                               + QString::number(COLOR_3.blue()) + ");" \
-                                                                   "color: rgb(255, 255, 255);" \
-                                                                   "border-radius: 0px;");
-    ui->messageOn->setStyleSheet(ui->ustavkaVol->styleSheet());
-    ui->reley->setStyleSheet(ui->ustavkaVol->styleSheet());
-    ui->messageOnDown->setStyleSheet("background-color: rgb(" \
-                                 + QString::number(COLOR_DARK.red()) + "," \
-                                 + QString::number(COLOR_DARK.green()) + "," \
-                                 + QString::number(COLOR_DARK.blue()) + ");" \
-                                                                        "color: rgb(255, 255, 255);" \
-                                                                        "border-radius: 0px;");
-    ui->typeReg->setStyleSheet("QComboBox {" \
-                               + ui->messageOnDown->styleSheet() \
-                               + "}QComboBox::drop-down {width:30px;}");
-    ui->ustavkaVolDown->setStyleSheet(ui->typeReg->styleSheet());
-    ui->releyDown->setStyleSheet(ui->ustavkaVolDown->styleSheet());
-    */
-    }
     connect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     tUpdateBar.start(TIME_UPDATE_BAR);
 
@@ -592,14 +559,17 @@ void dSettings::saveParam()
         channel->SetDiapason(ui->sensorDiapazon->currentIndex());
         channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
 
-        ustavka->setUstavka(numChannel, \
-                            ui->ustavkaVol->value(), \
-                            ui->ustavkaVolDown->value(), \
-                            ui->gisterezis->value(), \
-                            ui->gisterezis->value(), \
-                            ui->reley->currentIndex(), \
-                            ui->releyDown->currentIndex() \
-                            );
+        ustavka->setUstavka(
+                    ustavka->getNum(), \
+                    ustavka->getIdentifikator(), \
+                    numChannel, \
+                    ui->ustavkaVol->value(), \
+                    ui->ustavkaVolDown->value(), \
+                    ui->gisterezis->value(), \
+                    ui->gisterezis->value(), \
+                    ui->reley->currentIndex(), \
+                    ui->releyDown->currentIndex() \
+                    );
         ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
         ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
         ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());

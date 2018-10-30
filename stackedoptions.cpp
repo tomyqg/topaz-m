@@ -433,14 +433,14 @@ void StackedOptions::ReadUstavkiFromFile()
     foreach (Ustavka * ust, listUstavok)
     {
         jsonobj = array.at(index).toObject();
-        ust->setUstavka(jsonobj.value("UstavkaChannel").toInt(), \
-                        jsonobj.value("StateHiValue").toDouble(), \
-                        jsonobj.value("StateLowValue").toDouble(), \
-                        jsonobj.value("lowHisteresis").toDouble(), \
-                        jsonobj.value("lowLowsteresis").toDouble(), \
-                        jsonobj.value("numRelayUp").toInt(), \
-                        jsonobj.value("numRelayDown").toInt() \
-                        );
+//        ust->setUstavka(jsonobj.value("UstavkaChannel").toInt(), \
+//                        jsonobj.value("StateHiValue").toDouble(), \
+//                        jsonobj.value("StateLowValue").toDouble(), \
+//                        jsonobj.value("lowHisteresis").toDouble(), \
+//                        jsonobj.value("lowLowsteresis").toDouble(), \
+//                        jsonobj.value("numRelayUp").toInt(), \
+//                        jsonobj.value("numRelayDown").toInt() \
+//                        );
         ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
         ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
         ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
@@ -1080,14 +1080,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     Ustavka * ust;
 
     ust = listUstavok.at(0);
-    ust->setUstavka(ui->comboBox->currentIndex(),       \
-                    ui->State1ValueChannel_1->value(),         \
-                    ui->State2ValueChannel_1->value(),         \
-                    ui->State1HisteresisChannel_1->value(),    \
-                    ui->State2HisteresisChannel_1->value(),    \
-                    ui->State1_actionHigh_Channel_1->currentIndex(),  \
-                    ui->State2_actionLow_Channel_1->currentIndex()   \
-                    );
+//    ust->setUstavka(ui->comboBox->currentIndex(),       \
+//                    ui->State1ValueChannel_1->value(),         \
+//                    ui->State2ValueChannel_1->value(),         \
+//                    ui->State1HisteresisChannel_1->value(),    \
+//                    ui->State2HisteresisChannel_1->value(),    \
+//                    ui->State1_actionHigh_Channel_1->currentIndex(),  \
+//                    ui->State2_actionLow_Channel_1->currentIndex()   \
+//                    );
     ust->setMessInHigh(ui->State1HighMessageChannel_1->text());
     ust->setMessNormHigh(ui->State1LowMessageChannel_1->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_1->text());
@@ -1096,14 +1096,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setKvitirDown(ui->State2_Kvitir_Channel_1->currentIndex() & 0x1);
 
     ust = listUstavok.at(1);
-    ust->setUstavka(ui->comboBox_3->currentIndex(),       \
-                    ui->State1ValueChannel_2->value(),         \
-                    ui->State2ValueChannel_2->value(),         \
-                    ui->State1HisteresisChannel_2->value(),    \
-                    ui->State2HisteresisChannel_2->value(),    \
-                    ui->State1_actionHigh_Channel_2->currentIndex(),  \
-                    ui->State2_actionLow_Channel_2->currentIndex()   \
-                    );
+//    ust->setUstavka(ui->comboBox_3->currentIndex(),       \
+//                    ui->State1ValueChannel_2->value(),         \
+//                    ui->State2ValueChannel_2->value(),         \
+//                    ui->State1HisteresisChannel_2->value(),    \
+//                    ui->State2HisteresisChannel_2->value(),    \
+//                    ui->State1_actionHigh_Channel_2->currentIndex(),  \
+//                    ui->State2_actionLow_Channel_2->currentIndex()   \
+//                    );
     ust->setMessInHigh(ui->State1HighMessageChannel_2->text());
     ust->setMessNormHigh(ui->State1LowMessageChannel_2->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_2->text());
@@ -1112,14 +1112,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setKvitirDown(ui->State2_Kvitir_Channel_2->currentIndex() & 0x1);
 
     ust = listUstavok.at(2);
-    ust->setUstavka(ui->comboBox_5->currentIndex(),       \
-                    ui->State1ValueChannel_3->value(),         \
-                    ui->State2ValueChannel_3->value(),         \
-                    ui->State1HisteresisChannel_3->value(),    \
-                    ui->State2HisteresisChannel_3->value(),    \
-                    ui->State1_actionHigh_Channel_3->currentIndex(),  \
-                    ui->State2_actionLow_Channel_3->currentIndex()   \
-                    );
+//    ust->setUstavka(ui->comboBox_5->currentIndex(),       \
+//                    ui->State1ValueChannel_3->value(),         \
+//                    ui->State2ValueChannel_3->value(),         \
+//                    ui->State1HisteresisChannel_3->value(),    \
+//                    ui->State2HisteresisChannel_3->value(),    \
+//                    ui->State1_actionHigh_Channel_3->currentIndex(),  \
+//                    ui->State2_actionLow_Channel_3->currentIndex()   \
+//                    );
     ust->setMessInHigh(ui->State1HighMessageChannel_3->text());
     ust->setMessNormHigh(ui->State1LowMessageChannel_3->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_3->text());
@@ -1128,14 +1128,14 @@ void StackedOptions::ApplyNewSettingstoAllChannels()
     ust->setKvitirDown(ui->State2_Kvitir_Channel_3->currentIndex() & 0x1);
 
     ust = listUstavok.at(3);
-    ust->setUstavka(ui->comboBox_7->currentIndex(),       \
-                    ui->State1ValueChannel_4->value(),         \
-                    ui->State2ValueChannel_4->value(),         \
-                    ui->State1HisteresisChannel_4->value(),    \
-                    ui->State2HisteresisChannel_4->value(),    \
-                    ui->State1_actionHigh_Channel_4->currentIndex(),  \
-                    ui->State2_actionLow_Channel_4->currentIndex()   \
-                    );
+//    ust->setUstavka(ui->comboBox_7->currentIndex(),       \
+//                    ui->State1ValueChannel_4->value(),         \
+//                    ui->State2ValueChannel_4->value(),         \
+//                    ui->State1HisteresisChannel_4->value(),    \
+//                    ui->State2HisteresisChannel_4->value(),    \
+//                    ui->State1_actionHigh_Channel_4->currentIndex(),  \
+//                    ui->State2_actionLow_Channel_4->currentIndex()   \
+//                    );
     ust->setMessInHigh(ui->State1HighMessageChannel_4->text());
     ust->setMessNormHigh(ui->State1LowMessageChannel_4->text());
     ust->setMessNormLow(ui->State2HighMessageChannel_4->text());

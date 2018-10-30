@@ -183,6 +183,8 @@ void MainWindow::WriteAllChannelsOptionsToFile()
 
     foreach (Ustavka * ust, ustavkaObjectsList)
     {
+        ustavkijsonobj["Num"] = ust->getNum();
+        ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
         ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
         ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
         ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();

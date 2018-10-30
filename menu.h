@@ -53,13 +53,10 @@ public slots:
     void on_bBackApplications_2_clicked();
     void on_bDiagnost_clicked();
     void on_bBackDiagnostika_clicked();
-    void on_bUstavka_1_clicked();
-    void on_bUstavka_2_clicked();
-    void on_bUstavka_3_clicked();
-    void on_bUstavka_4_clicked();
     void on_bBackDateTime_clicked();
     void on_bEditDataTime_clicked();
     void on_bDateTimeSet_clicked();
+    void slotOpenSettings(int num);
 
 private:
     Ui::dMenu *ui;
@@ -81,6 +78,7 @@ private:
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
 
 private slots:
+
     void on_bResetToDefault_clicked();
     void on_bExpert_clicked();
     void on_bBackExpert_clicked();
@@ -128,6 +126,40 @@ private slots:
     void on_bSaveArchiveToDrive_clicked();
     void copyArchiveFile();
     void copyLastArchFile();
+
+    void on_bBackDigitInputSettings_clicked();
+
+    void on_bBackDigitInputs_clicked();
+
+    void on_bAddDigitInput_clicked();
+
+    void on_bDigitals_clicked();
+
+    void on_comboDigitInputsFunc_currentIndexChanged(int index);
+
+    void on_digitInoutToOutput_currentIndexChanged(int index);
+
+    void on_bDigitInput1_clicked();
+    void on_bDigitInput2_clicked();
+    void on_bDigitInput3_clicked();
+    void on_bDigitInput4_clicked();
+    void on_bDigitInput5_clicked();
+    void on_bDigitInput6_clicked();
+    void on_bDigitInput7_clicked();
+    void on_bDigitInput8_clicked();
+    void on_bOutputs_clicked();
+    void on_bBackDigitOutputs_clicked();
+    void on_bAddDigitOutput_clicked();
+    void on_bDigitOutput_1_clicked();
+    void on_bDigitOutput_2_clicked();
+    void on_bDigitOutput_3_clicked();
+    void on_bDigitOutput_4_clicked();
+    void on_bDigitOutput_5_clicked();
+    void on_bDigitOutput_6_clicked();
+    void on_bDigitOutput_7_clicked();
+    void on_bDigitOutput_8_clicked();
+
+    void on_bBackDigitOutputSettings_clicked();
 
 signals:
     void saveButtonSignal();

@@ -155,7 +155,7 @@
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
 
-#define TOTAL_NUM_USTAVKI   4
+#define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
 

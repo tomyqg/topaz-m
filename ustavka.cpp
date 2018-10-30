@@ -20,6 +20,7 @@ Ustavka::Ustavka(QWidget *parent)
     timeFilter = new QTimer();
     timeFilter->stop();
     connect(timeFilter, SIGNAL(timeout()), this, SLOT(timeoutToWorkRelay()));
+
 }
 
 Ustavka::~Ustavka()
@@ -28,8 +29,20 @@ Ustavka::~Ustavka()
 }
 
 
-void Ustavka::setUstavka(int ch, double hi, double low, double hiHist, double lowHist, int relayUp, int relayDown)
+void Ustavka::setUstavka(
+        int i,
+        QString name,
+        int ch,
+        double hi,
+        double low,
+        double hiHist,
+        double lowHist,
+        int relayUp,
+        int relayDown
+        )
 {
+    num = i;
+    identifikator = name;
     numChannel = ch;
     stateLowValue = low;
     stateHiValue = hi;
@@ -104,7 +117,7 @@ void Ustavka::timeoutToWorkRelay()
     kvitirovanie kv;
     if(setUp && kvitirEnUp && !waitKvitirUp)
     {
-        kv.showInfo(stateInHighMess, nameChannel);
+        kv.showInfo(stateInHighMess, identifikator);
         waitKvitirUp = true;
         kv.exec();
         emit messToLogSignal(numChannel, "(ОК)" + stateInHighMess);
@@ -112,7 +125,7 @@ void Ustavka::timeoutToWorkRelay()
     }
     else if(setDown && kvitirEnDown && !waitKvitirDown)
     {
-        kv.showInfo(stateInLowMess, nameChannel);
+        kv.showInfo(stateInLowMess, identifikator);
         waitKvitirDown = true;
         kv.exec();
         emit messToLogSignal(numChannel, "(ОК)" + stateInLowMess);
