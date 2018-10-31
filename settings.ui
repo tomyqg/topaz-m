@@ -512,8 +512,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
-                     <width>582</width>
+                     <y>-74</y>
+                     <width>564</width>
                      <height>608</height>
                     </rect>
                    </property>
@@ -1001,7 +1001,7 @@ QComboBox::drop-down {
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>НИЖНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>НИЖН. ПРЕДЕЛ ШКАЛЫ</string>
                       </property>
                      </widget>
                     </item>
@@ -1059,7 +1059,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ВЕРХНИЙ ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>ВЕРХН. ПРЕДЕЛ ШКАЛЫ</string>
                       </property>
                      </widget>
                     </item>
@@ -1236,7 +1236,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ПЕРИОД ОБНОВЛЕНИЯ, СЕК</string>
+                       <string>ПЕРИОД ОБНОВЛ., СЕК</string>
                       </property>
                      </widget>
                     </item>
@@ -3098,7 +3098,7 @@ QComboBox::drop-down {
  }</string>
                       </property>
                       <property name="currentText">
-                       <string>ВЕРХНЯЯ ТОЧКА</string>
+                       <string>НИЖНЯЯ ТОЧКА</string>
                       </property>
                       <property name="currentIndex">
                        <number>0</number>
@@ -3117,12 +3117,12 @@ QComboBox::drop-down {
                       </property>
                       <item>
                        <property name="text">
-                        <string>ВЕРХНЯЯ ТОЧКА</string>
+                        <string>НИЖНЯЯ ТОЧКА</string>
                        </property>
                       </item>
                       <item>
                        <property name="text">
-                        <string>НИЖНЯЯ ТОЧКА</string>
+                        <string>ВЕРХНЯЯ ТОЧКА</string>
                        </property>
                       </item>
                      </widget>

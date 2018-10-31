@@ -1172,29 +1172,29 @@ void MainWindow::updateBars(void)
         {
 //            ui->wBar_1->setLim(ust->getLowStateValue(), \
 //                               ust->getHiStateValue());
-            ui->wBar_1->addMarker(ust->getHiStateValue(), true);
-            ui->wBar_1->addMarker(ust->getLowStateValue(), false);
+            ui->wBar_1->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+//            ui->wBar_1->addMarker(ust->getLowStateValue(), false);
         }
         if(ust->getChannel() == 2)
         {
 //            ui->wBar_2->setLim(ust->getLowStateValue(), \
 //                               ust->getHiStateValue());
-            ui->wBar_2->addMarker(ust->getHiStateValue(), true);
-            ui->wBar_2->addMarker(ust->getLowStateValue(), false);
+            ui->wBar_2->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+//            ui->wBar_2->addMarker(ust->getLowStateValue(), false);
         }
         if(ust->getChannel() == 3)
         {
 //            ui->wBar_3->setLim(ust->getLowStateValue(), \
 //                               ust->getHiStateValue());
-            ui->wBar_3->addMarker(ust->getHiStateValue(), true);
-            ui->wBar_3->addMarker(ust->getLowStateValue(), false);
+            ui->wBar_3->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+//            ui->wBar_3->addMarker(ust->getLowStateValue(), false);
         }
         if(ust->getChannel() == 4)
         {
 //            ui->wBar_4->setLim(ust->getLowStateValue(), \
 //                               ust->getHiStateValue());
-            ui->wBar_4->addMarker(ust->getHiStateValue(), true);
-            ui->wBar_4->addMarker(ust->getLowStateValue(), false);
+            ui->wBar_4->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+//            ui->wBar_4->addMarker(ust->getLowStateValue(), false);
         }
     }
 }

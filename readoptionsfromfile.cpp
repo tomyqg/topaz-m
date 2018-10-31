@@ -142,19 +142,20 @@ void MainWindow::ReadUstavkiFromFile()
                     jsonobj.value("Num").toInt(), \
                     jsonobj.value("Identifikator").toString().toUtf8(), \
                     jsonobj.value("UstavkaChannel").toInt(), \
+                    jsonobj.value("TypeFix").toBool(), \
                     jsonobj.value("StateHiValue").toDouble(), \
-                    jsonobj.value("StateLowValue").toDouble(), \
+                    /*jsonobj.value("StateLowValue").toDouble(),*/ \
                     jsonobj.value("lowHisteresis").toDouble(), \
-                    jsonobj.value("lowLowsteresis").toDouble(), \
-                    jsonobj.value("numRelayUp").toInt(), \
-                    jsonobj.value("numRelayDown").toInt() \
+                    /*jsonobj.value("lowLowsteresis").toDouble(),*/ \
+                    jsonobj.value("numRelayUp").toInt() \
+                    /*jsonobj.value("numRelayDown").toInt()*/ \
                     );
         ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
         ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
-        ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
-        ust->setMessNormLow(jsonobj.value("MessNormLow").toString().toUtf8());
+//        ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
+//        ust->setMessNormLow(jsonobj.value("MessNormLow").toString().toUtf8());
         ust->setKvitirUp(jsonobj.value("KvitirUp").toBool());
-        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
+//        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
         index++;
     }
 }

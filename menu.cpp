@@ -78,6 +78,10 @@ dMenu::dMenu(QWidget *parent) :
         button->setAlignLeft();
     }
 
+    QScroller::grabGesture(ui->scrollAreaUstavki, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
+
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 

@@ -86,7 +86,7 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     // <---- временно скрыть некоторые пункты настроек уставок
 //    ui->ustavkaChannel->hide();
 //    ui->label_19->hide();
-//    ui->typeFix->hide();
+//    ui->typeFix->hide();U
 //    ui->label_21->hide();
 //    ui->ustavkaTimer->hide();
 //    ui->label_24->hide();
@@ -487,17 +487,18 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
 
     //параметры уставок
     ui->ustavkaVol->setValue(ustavka->getHiStateValue());
-    ui->ustavkaVolDown->setValue(ustavka->getLowStateValue());
+//    ui->ustavkaVolDown->setValue(ustavka->getLowStateValue());
     ui->gisterezis->setValue(ustavka->getHiHisteresis());
     ui->ustavkaChannel->setCurrentIndex(ustavka->getChannel());
+    ui->typeFix->setCurrentIndex(ustavka->getTypeFix());
     ui->identifikator->setText(ustavka->getIdentifikator());
     ui->labelNumUsatvka->setText("УСТАВКИ #" + QString::number(ust_num));
     ui->reley->setCurrentIndex(ustavka->getnumRelayUp());
-    ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
+//    ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
     ui->messageOn->setText(ustavka->getMessInHigh());
     ui->messageOff->setText(ustavka->getMessNormHigh());
-    ui->messageOnDown->setText(ustavka->getMessInLow());
-    ui->messageOffDown->setText(ustavka->getMessNormHigh());
+//    ui->messageOnDown->setText(ustavka->getMessInLow());
+//    ui->messageOffDown->setText(ustavka->getMessNormHigh());
 
     connect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     tUpdateBar.start(TIME_UPDATE_BAR);
@@ -514,8 +515,8 @@ void dSettings::updateBar()
             if(ustavka->getChannel() == channel->getNum())
             {
 //                ui->bar->setLim(ustavka->getLowStateValue(), ustavka->getHiStateValue());
-                ui->bar->addMarker(ustavka->getHiStateValue(), true);
-                ui->bar->addMarker(ustavka->getLowStateValue(), false);
+                ui->bar->addMarker(ustavka->getHiStateValue(), ustavka->getTypeFix());
+//                ui->bar->addMarker(ustavka->getLowStateValue(), false);
 //                break;
             }
         }
@@ -573,17 +574,18 @@ void dSettings::saveParam()
                     ustavka->getNum(), \
                     ui->identifikator->text().toUtf8(), \
                     ui->ustavkaChannel->currentIndex(), \
+                    ui->typeFix->currentIndex(), \
                     ui->ustavkaVol->value(), \
-                    ui->ustavkaVolDown->value(), \
+                    /*ui->ustavkaVolDown->value(),*/ \
                     ui->gisterezis->value(), \
-                    ui->gisterezis->value(), \
-                    ui->reley->currentIndex(), \
-                    ui->releyDown->currentIndex() \
+                    /*ui->gisterezis->value(),*/ \
+                    ui->reley->currentIndex() \
+                    /*ui->releyDown->currentIndex()*/ \
                     );
         ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
         ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
-        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
-        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
+//        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
+//        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
     }
 
 

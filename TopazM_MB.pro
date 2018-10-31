@@ -54,7 +54,7 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus-rtu.c \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
-    stackedoptions.cpp \
+#    stackedoptions.cpp \
     device.cpp \
     ustavka.cpp \
     Slots/slot.cpp \
@@ -151,7 +151,7 @@ HEADERS  += mainwindow.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
     device.h \
-    stackedoptions.h \
+#    stackedoptions.h \
     registermap.h \
     transaction.h \
     ustavka.h \
@@ -279,7 +279,7 @@ unix:HEADERS += Drivers/driveri2c.h \
 FORMS    += mainwindow.ui \
     keyboard.ui \
     messages.ui \
-    stackedoptions.ui \
+#    stackedoptions.ui \
     kvitirovanie.ui \
     Grafika/voluebar.ui \
     Grafika/buttonstyled.ui \

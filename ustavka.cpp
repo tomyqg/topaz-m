@@ -6,17 +6,17 @@ Ustavka::Ustavka(QWidget *parent)
 {
     numChannel = 0;
     stateHiValue = 0;
-    stateLowValue = 0;
+//    stateLowValue = 0;
     hiHisteresis = 0;
-    lowHisteresis = 0;
+//    lowHisteresis = 0;
     numRelayUp = 0;
-    numRelayDown = 0;
+//    numRelayDown = 0;
     setUp = false;
-    setDown = false;
+//    setDown = false;
     kvitirEnUp = false;
-    kvitirEnDown = false;
+//    kvitirEnDown = false;
     waitKvitirUp = false;
-    waitKvitirDown = false;
+//    waitKvitirDown = false;
     timeFilter = new QTimer();
     timeFilter->stop();
     connect(timeFilter, SIGNAL(timeout()), this, SLOT(timeoutToWorkRelay()));
@@ -33,25 +33,27 @@ void Ustavka::setUstavka(
         int i,
         QString name,
         int ch,
+        bool type,
         double hi,
-        double low,
+//        double low,
         double hiHist,
-        double lowHist,
-        int relayUp,
-        int relayDown
+//        double lowHist,
+        int relayUp
+//        int relayDown
         )
 {
     num = i;
     identifikator = name;
     numChannel = ch;
-    stateLowValue = low;
+    typeFix = type;
+//    stateLowValue = low;
     stateHiValue = hi;
-    lowHisteresis = lowHist;
+//    lowHisteresis = lowHist;
     hiHisteresis = hiHist;
     numRelayUp = relayUp;
-    numRelayDown = relayDown;
+//    numRelayDown = relayDown;
     setUp = false;
-    setDown = false;
+//    setDown = false;
     timeFilter->stop();
 }
 
@@ -77,29 +79,29 @@ void Ustavka::update(double cur)
     if(!numChannel) return;
 
     // если уровни заданы неверно, то тоже ничего не делать
-    if((stateHiValue - hiHisteresis) <= (stateLowValue + lowHisteresis)) return;
+//    if((stateHiValue - hiHisteresis) <= (stateLowValue + lowHisteresis)) return;
 
     // запомнить текущее состояние
     bool up = setUp;
-    bool down = setDown;
+//    bool down = setDown;
 
     // проверка превышения верхнего уровня
     if(cur > (stateHiValue + hiHisteresis)) setUp = true;
     else if(cur < (stateHiValue - hiHisteresis)) setUp = false;
 
     // проверка принижения нижнего уровня
-    if(cur > (stateLowValue + lowHisteresis)) setDown = false;
-    else if(cur < (stateLowValue - lowHisteresis)) setDown = true;
+//    if(cur > (stateLowValue + lowHisteresis)) setDown = false;
+//    else if(cur < (stateLowValue - lowHisteresis)) setDown = true;
 
     // изменилось ли состояние
-    if((setUp != up) || (setDown != down))
+    if((setUp != up)/* || (setDown != down)*/)
     {
         timeFilter->start(DELAY_RELAY);
         // запись события в лог
         if(setUp != up)
             emit messToLogSignal(numChannel-1, (setUp ? stateInHighMess : stateNormHighMess));
-        if(setDown != down)
-            emit messToLogSignal(numChannel-1, (setDown ? stateInLowMess : stateNormLowMess));
+//        if(setDown != down)
+//            emit messToLogSignal(numChannel-1, (setDown ? stateInLowMess : stateNormLowMess));
     }
 }
 
@@ -108,7 +110,7 @@ void Ustavka::timeoutToWorkRelay()
     timeFilter->stop();
     // формирование сигнала на реле
     if(numRelayUp != 0) emit workReleSignal(numRelayUp, setUp);
-    if(numRelayDown != 0) emit workReleSignal(numRelayDown, setDown);
+//    if(numRelayDown != 0) emit workReleSignal(numRelayDown, setDown);
 //    QMessageBox kw(QMessageBox::Warning,\
 //                   "Квитирование",\
 //                   "Сработала уставка. Требуется подтверждение",\
@@ -123,13 +125,13 @@ void Ustavka::timeoutToWorkRelay()
         emit messToLogSignal(numChannel, "(ОК)" + stateInHighMess);
         waitKvitirUp = false;
     }
-    else if(setDown && kvitirEnDown && !waitKvitirDown)
-    {
-        kv.showInfo(stateInLowMess, identifikator);
-        waitKvitirDown = true;
-        kv.exec();
-        emit messToLogSignal(numChannel, "(ОК)" + stateInLowMess);
-        waitKvitirDown = false;
-    }
+//    else if(setDown && kvitirEnDown && !waitKvitirDown)
+//    {
+//        kv.showInfo(stateInLowMess, identifikator);
+//        waitKvitirDown = true;
+//        kv.exec();
+//        emit messToLogSignal(numChannel, "(ОК)" + stateInLowMess);
+//        waitKvitirDown = false;
+//    }
 
 }

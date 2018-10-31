@@ -186,18 +186,19 @@ void MainWindow::WriteAllChannelsOptionsToFile()
         ustavkijsonobj["Num"] = ust->getNum();
         ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
         ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
+        ustavkijsonobj["TypeFix"] = ust->getTypeFix();
         ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
-        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
+//        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
         ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
-        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
+//        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
         ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
-        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
+//        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
         ustavkijsonobj["MessInHigh"] = (ust->getMessInHigh());
         ustavkijsonobj["MessNormHigh"] = (ust->getMessNormHigh());
-        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
-        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
+//        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
+//        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
         ustavkijsonobj["KvitirUp"] = ust->getKvitirUp();
-        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
+//        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
 
         settingsUst.append(ustavkijsonobj);
     }

@@ -463,6 +463,7 @@ void MainWindow::UpdUst()
 #define CONST_SLAVE_ADC     4
 #define CONST_SLAVE_ADC_2   3
 #define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
 #endif
 
 void MainWindow::InitChannelSlotTable()
@@ -576,39 +577,39 @@ void MainWindow::DelaySec(int n)
 
 void MainWindow::OpenOptionsWindow( int index )
 {
-    // Vag: сохранить все настройки девайсов и каналов в файл перед открытием окна настроек
-    WriteAllChannelsOptionsToFile();
+//    // Vag: сохранить все настройки девайсов и каналов в файл перед открытием окна настроек
+//    WriteAllChannelsOptionsToFile();
 
-    //здесь запускаем меню обновленное как в эндресе
-    StackedOptions * sw= new StackedOptions(index, 0);
+//    //здесь запускаем меню обновленное как в эндресе
+//    StackedOptions * sw= new StackedOptions(index, 0);
 
-    sw->exec();
+//    sw->exec();
 
-    //читаем системные настройки из файла и применяем тут же
-    Options op;
-    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
-    op.deleteLater();
+//    //читаем системные настройки из файла и применяем тут же
+//    Options op;
+//    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
+//    op.deleteLater();
 
-    // получение значений уставок из файла
-    ReadUstavkiFromFile();
+//    // получение значений уставок из файла
+//    ReadUstavkiFromFile();
 
-    //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
-    channel1.ReadSingleChannelOptionFromFile(1);
-    channel2.ReadSingleChannelOptionFromFile(2);
-    channel3.ReadSingleChannelOptionFromFile(3);
-    channel4.ReadSingleChannelOptionFromFile(4);
-    // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
-    sendConfigChannelsToSlave();
+//    //читаем параметры каналов прямо после закрытия окна настроек и перехода в меню режима работы
+//    channel1.ReadSingleChannelOptionFromFile(1);
+//    channel2.ReadSingleChannelOptionFromFile(2);
+//    channel3.ReadSingleChannelOptionFromFile(3);
+//    channel4.ReadSingleChannelOptionFromFile(4);
+//    // после чтения параметров сразу запихиваем их в сигнал для воркера (передаем воркеру значения каждого канала )
+//    sendConfigChannelsToSlave();
 
-    //если вдруг поменялось время то нужно обновить лейблы
-    LabelsInit();
-    LabelsCorrect();
-    sw->deleteLater();
-    resizeSelf(1024,768);
+//    //если вдруг поменялось время то нужно обновить лейблы
+//    LabelsInit();
+//    LabelsCorrect();
+//    sw->deleteLater();
+//    resizeSelf(1024,768);
 
-//    SetPolarAngle(0);
+////    SetPolarAngle(0);
 
-    return;
+//    return;
 }
 
 void MainWindow::OpenArchiveWindow()
@@ -1272,7 +1273,7 @@ bool MainWindow::isChannelInMinNow(int ch)
     foreach (Ustavka * u, ustavkaObjectsList) {
         if(u->getChannel() == ch)
         {
-            if(u->isDown()) return true;
+//            if(u->isDown()) return true;
         }
     }
     return false;
