@@ -55,21 +55,21 @@ void Ustavka::setUstavka(
     timeFilter->stop();
 }
 
-int Ustavka::getUstavka()
-{
-    if(setUp)
-    {
-        return numRelayUp;
-    }
-    else if(setDown)
-    {
-        return numRelayDown;
-    }
-    else
-    {
-        return 0;
-    }
-}
+//int Ustavka::getUstavka()
+//{
+//    if(setUp)
+//    {
+//        return numRelayUp;
+//    }
+//    else if(setDown)
+//    {
+//        return numRelayDown;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+//}
 
 void Ustavka::update(double cur)
 {

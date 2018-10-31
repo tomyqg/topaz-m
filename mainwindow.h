@@ -320,7 +320,7 @@ private:
 //    cChannelSlotController csc;
     void InitChannelSlotTable();
 
-    cRelaySlotController rsc;
+//    cRelaySlotController rsc;
     void InitRelaySlotTable();
     QList<cRelay*> listRelais;
 

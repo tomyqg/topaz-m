@@ -20,6 +20,8 @@ public:
     ~ChannelOptions();
 public:
 
+    int getNum() { return numChannel; }
+    void setNum(int i) { numChannel = i; }
     uint16_t GetSignalType();
     uint16_t GetCurSignalType();
     int GetDiapason();

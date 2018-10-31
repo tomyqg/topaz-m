@@ -7,6 +7,15 @@ namespace Ui {
 class wVolueBar;
 }
 
+class cMarker : public QObject
+{
+    Q_OBJECT
+
+public:
+    double vol;
+    bool dir;   // направление уставки: 0 - вниз, 1 - вверх
+};
+
 class wVolueBar : public QFrame
 {
     Q_OBJECT
@@ -18,8 +27,11 @@ public:
     void setVolue(double vol);
     void setExtr(double min, double max);
     void setLim(double low, double hi);
+    void resetLim();
     void setText(QString type, QString mes);
     void changeNum(int num);
+    void cleanMarker();
+    void addMarker(int vol, bool dir);
 
 signals:
     void clickedLabel(int);
@@ -36,6 +48,13 @@ private:
     int numBar;
     QColor colorBar;    //цвет бара
     QColor colorLight;  //цвет светлой части бара
+//    typedef struct {
+//        double vol;
+//        bool dir;   // направление уставки: 0 - вниз, 1 - вверх
+//    } typeMarker;
+    QList <cMarker*> listMarker;
 };
+
+
 
 #endif // VOLUEBAR_H

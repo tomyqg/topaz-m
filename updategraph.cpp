@@ -1158,15 +1158,45 @@ void MainWindow::updateBars(void)
     ui->wBar_4->setBarDiapazon(max(abs(channel4.GetHigherMeasureLimit()), \
                                    abs(channel4.GetLowerMeasureLimit())));
 
-    ui->wBar_1->setLim(ustavkaObjectsList.at(0)->getLowStateValue(), \
-                       ustavkaObjectsList.at(0)->getHiStateValue());
-    ui->wBar_2->setLim(ustavkaObjectsList.at(1)->getLowStateValue(), \
-                       ustavkaObjectsList.at(1)->getHiStateValue());
-    ui->wBar_3->setLim(ustavkaObjectsList.at(2)->getLowStateValue(), \
-                       ustavkaObjectsList.at(2)->getHiStateValue());
-    ui->wBar_4->setLim(ustavkaObjectsList.at(3)->getLowStateValue(), \
-                       ustavkaObjectsList.at(3)->getHiStateValue());
-
+//    ui->wBar_1->resetLim();
+//    ui->wBar_2->resetLim();
+//    ui->wBar_3->resetLim();
+//    ui->wBar_4->resetLim();
+    ui->wBar_1->cleanMarker();
+    ui->wBar_2->cleanMarker();
+    ui->wBar_3->cleanMarker();
+    ui->wBar_4->cleanMarker();
+    foreach(Ustavka * ust, ustavkaObjectsList)
+    {
+        if(ust->getChannel() == 1)
+        {
+//            ui->wBar_1->setLim(ust->getLowStateValue(), \
+//                               ust->getHiStateValue());
+            ui->wBar_1->addMarker(ust->getHiStateValue(), true);
+            ui->wBar_1->addMarker(ust->getLowStateValue(), false);
+        }
+        if(ust->getChannel() == 2)
+        {
+//            ui->wBar_2->setLim(ust->getLowStateValue(), \
+//                               ust->getHiStateValue());
+            ui->wBar_2->addMarker(ust->getHiStateValue(), true);
+            ui->wBar_2->addMarker(ust->getLowStateValue(), false);
+        }
+        if(ust->getChannel() == 3)
+        {
+//            ui->wBar_3->setLim(ust->getLowStateValue(), \
+//                               ust->getHiStateValue());
+            ui->wBar_3->addMarker(ust->getHiStateValue(), true);
+            ui->wBar_3->addMarker(ust->getLowStateValue(), false);
+        }
+        if(ust->getChannel() == 4)
+        {
+//            ui->wBar_4->setLim(ust->getLowStateValue(), \
+//                               ust->getHiStateValue());
+            ui->wBar_4->addMarker(ust->getHiStateValue(), true);
+            ui->wBar_4->addMarker(ust->getLowStateValue(), false);
+        }
+    }
 }
 
 void MainWindow::setStyleBars()

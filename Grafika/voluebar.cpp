@@ -96,6 +96,31 @@ void wVolueBar::setVolue(double vol)
                                     VOL_TEXT_MIN_HEIGHT );
     }
 
+    QList<QLabel *> metki = ui->placeBar->findChildren<QLabel *>();
+    foreach(QLabel * metka, metki)
+    {
+        if(metka->objectName().contains("metka"))
+        {
+            metka->deleteLater();
+        }
+    }
+
+    int i = 0;
+    foreach (cMarker * mark, listMarker) {
+        QLabel * metka = new QLabel(ui->placeBar);
+        metka->setObjectName(QStringLiteral("metka") + QString::number(i++));
+        metka->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (mark->vol / razmah)) - METKA_HEIGHT / 2, \
+                                  ui->placeBar->width(), METKA_HEIGHT);
+        metka->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
+        if(mark->dir)
+        {
+            metka->setPixmap(QPixmap(QString::fromUtf8(pathtohilimico)));
+        } else {
+            metka->setPixmap(QPixmap(QString::fromUtf8(pathtolowlimico)));
+        }
+        metka->show();
+        metka->raise();
+    }
 
 }
 
@@ -121,7 +146,6 @@ void wVolueBar::resizeEvent(QResizeEvent * s)
                 ui->placeBar->height()/2 - 1,  \
                 ui->placeBar->width(),      \
                 2 );
-
 }
 
 /*
@@ -142,10 +166,18 @@ void wVolueBar::setExtr(double min, double max)
  */
 void wVolueBar::setLim(double low, double hi)
 {
-    ui->metkaLow->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (low / razmah)) - METKA_HEIGHT / 2, \
-                              ui->placeBar->width(), METKA_HEIGHT);
-    ui->metkaHi->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (hi / razmah)) - METKA_HEIGHT / 2, \
-                              ui->placeBar->width(), METKA_HEIGHT);
+//    ui->metkaLow->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (low / razmah)) - METKA_HEIGHT / 2, \
+//                              ui->placeBar->width(), METKA_HEIGHT);
+//    ui->metkaHi->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (hi / razmah)) - METKA_HEIGHT / 2, \
+//                             ui->placeBar->width(), METKA_HEIGHT);
+//    ui->metkaLow->show();
+//    ui->metkaHi->show();
+}
+
+void wVolueBar::resetLim()
+{
+//    ui->metkaLow->hide();
+//    ui->metkaHi->hide();
 }
 
 /*
@@ -174,7 +206,6 @@ void wVolueBar::setColor(QColor color, QColor colorL)
 /*
  * Задание названия измеряемой велчины и единиц измерения в сокращении 2 символа
  */
-
 void wVolueBar::setText(QString type, QString mes)
 {
     //реализовать тут контроль переданных строк
@@ -206,6 +237,25 @@ void wVolueBar::changeNum(int num)
     if(num < 10)
         numBar = num;
 }
+
+void wVolueBar::cleanMarker()
+{
+    int size = listMarker.size();
+    for(int i = size; i > 0; i--)
+    {
+        listMarker.at(i-1)->deleteLater();
+    }
+    listMarker.clear();
+}
+
+void wVolueBar::addMarker(int vol, bool dir)
+{
+    cMarker * marker = new cMarker;
+    marker->vol = vol;
+    marker->dir = dir;
+    listMarker.append(marker);
+}
+
 
 /*
  * Задание размаха значений, видимых в баре

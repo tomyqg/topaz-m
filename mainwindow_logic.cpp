@@ -247,6 +247,11 @@ void MainWindow::MainWindowInitialization()
 
     int i = cFileManager::readChannelsSettings(pathtooptions, listCh, ustavkaObjectsList);
 
+    channel1.setNum(1);
+    channel2.setNum(2);
+    channel3.setNum(3);
+    channel4.setNum(4);
+
     channel1.SetNormalColor(ColorCh1);
     channel2.SetNormalColor(ColorCh2);
     channel3.SetNormalColor(ColorCh3);
@@ -407,7 +412,7 @@ void MainWindow::InitUstavka()
         connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
         connect(ust, SIGNAL(messToLogSignal(int,QString)), this, SLOT(logginStates(int,QString)));
 //        ust->setNum(i+1);
-        ust->setIdentifikator("Limit" + QString::number(i+1));
+        ust->setIdentifikator("Limit " + QString::number(i+1));
         ustavkaObjectsList.append(ust);
     }
 
@@ -437,10 +442,10 @@ void MainWindow::UpdUst()
         if(ch)
         {
             ChannelOptions * channel = ChannelsObjectsList.at(ch-1);
+            ust->update(channel->GetCurrentChannelValue());
 //            ust->setNameCh(channel->GetChannelName());
 //            ust->setNum(i+1);
 //            ust->setIdentifikator("Limit" + QString::number(i+1));
-            ust->update(channel->GetCurrentChannelValue());
         }
         i++;
     }
@@ -452,6 +457,7 @@ void MainWindow::UpdUst()
 #define CONST_SLAVE_STEEL   5
 #define CONST_SLAVE_ADC     4
 #define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
 #else
 #define CONST_SLAVE_STEEL   5
 #define CONST_SLAVE_ADC     4
@@ -473,16 +479,16 @@ void MainWindow::InitChannelSlotTable()
 
 void MainWindow::InitRelaySlotTable()
 {
-    //временный механизм создания связей
-    rsc.addRelaySlot(0, 0, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(1, 1, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(2, 2, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(3, 3, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(4, 7, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
-    rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
-    for(int i = 0; i < 8; i++)
+//    //временный механизм создания связей
+//    rsc.addRelaySlot(0, 0, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(1, 1, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(2, 2, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(3, 3, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(4, 7, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
+//    rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
+    for(int i = 0; i < TOTAL_NUM_RELAIS; i++)
     {
         cRelay * relay = new cRelay(i, CONST_SLAVE_RELAY);
         listRelais.append(relay);
@@ -510,10 +516,12 @@ void MainWindow::sendRelayStateToWorker(int relay, bool state)
     relay -= 1;
 
     // получить номер слота платы реле
-    int slot = rsc.getSlotByRelay(relay);
+//    int slot = rsc.getSlotByRelay(relay);
+    int slot = listRelais.at(relay)->mySlot;
 
     // получить индекс реле на плате (канал)
-    int devRelay = rsc.getDevRelay(relay);
+//    int devRelay = rsc.getDevRelay(relay);
+    int devRelay = listRelais.at(relay)->myPhysicalNum;
 
     // определение адреса параметра в соответствии с интексом реле
     // это пока временная реализация --------------

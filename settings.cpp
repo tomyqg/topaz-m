@@ -127,7 +127,7 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
 
     addChannel(channels, ustavki, num);
 
-    //адаптация окна под отображение сообщений
+    //адаптация окна под отображение сообщений (по-умолчанию)
     ui->stackedWidget->setCurrentIndex(page);
 
     //Настройки для масштабирования архива
@@ -508,7 +508,17 @@ void dSettings::updateBar()
 {
     if(channel != NULL) {
         ui->bar->setExtr(channel->GetMinimumChannelValue(), channel->GetMaximumChannelValue());
-        ui->bar->setLim(ui->ustavkaVolDown->value(), ui->ustavkaVol->value());
+//        ui->bar->resetLim();
+        ui->bar->cleanMarker();
+        foreach (Ustavka * ustavka, listUstavok) {
+            if(ustavka->getChannel() == channel->getNum())
+            {
+//                ui->bar->setLim(ustavka->getLowStateValue(), ustavka->getHiStateValue());
+                ui->bar->addMarker(ustavka->getHiStateValue(), true);
+                ui->bar->addMarker(ustavka->getLowStateValue(), false);
+//                break;
+            }
+        }
         ui->bar->setColor(channel->GetNormalColor(), channel->GetMinimumColor()); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
         ui->bar->setBarDiapazon(max(abs(ui->scaleUp->value()), abs(ui->scaleDown->value())));
@@ -561,8 +571,8 @@ void dSettings::saveParam()
 
         ustavka->setUstavka(
                     ustavka->getNum(), \
-                    ustavka->getIdentifikator(), \
-                    numChannel, \
+                    ui->identifikator->text().toUtf8(), \
+                    ui->ustavkaChannel->currentIndex(), \
                     ui->ustavkaVol->value(), \
                     ui->ustavkaVolDown->value(), \
                     ui->gisterezis->value(), \
@@ -628,7 +638,7 @@ void dSettings::on_buttonUstavk_clicked()
 
 void dSettings::resizeEvent(QResizeEvent * s)
 {
-    updateBar();
+//    updateBar();
 }
 
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
