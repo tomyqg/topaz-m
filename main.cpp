@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "options.h"
+//#include "options.h"
 #include "keyboard.h"
 #include "stackedoptions.h"
 #include <QApplication>

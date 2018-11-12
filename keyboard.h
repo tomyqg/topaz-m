@@ -28,6 +28,7 @@ public:
 
     ~keyboard();
 
+    static QString olderprop;
     QString olderproperty;
     bool onlydigits;
 

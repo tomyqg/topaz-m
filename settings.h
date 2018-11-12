@@ -20,7 +20,6 @@ class dSettings : public QDialog
 
 public:
     explicit dSettings(QList<ChannelOptions*> channels,
-                       QList<Ustavka*> ustavki,
                        int num,
                        int page = 0,
                        cArchivator * ar = NULL,
@@ -43,13 +42,12 @@ private:
     QTimer tUpdateBar;
     QStringList StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
     void updateGraf(int period);
-    QList<ChannelOptions *> listChannels;
-    QList<Ustavka *> listUstavok;
+//    QList<ChannelOptions *> listChannels;
     void updateWidgets();
     int numChannel;
     ChannelOptions * channel;   //канал с которым сейчас работаем
     Ustavka * ustavka;          //уставка канала с которым работаем
-    void addChannel(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki, int num);
+    void addChannel(QList<ChannelOptions *> channels, int num);
     int getIndexSignalTypeTable(int st);
     void updateUiSignalTypeParam(int index);
     int sensorShemaFromUiShemaIndex(int index);
@@ -77,6 +75,7 @@ private:
     void UpdateSteelUI(typeSteelTech * tech);
     QVector<double> X_Steel, Y_SteelTemp, Y_SteelEds;
     void saveParam();
+    void saveParamToFile();
 
 private slots:
     void on_exitButton_clicked();
@@ -102,6 +101,7 @@ private slots:
     void on_steelRelayReady_activated(int index);
     void on_steelRelayMeasure_activated(int index);
     void on_steelRelayTimeOut_activated(int index);
+    void on_bDeleteUstavka_clicked();
 };
 
 #endif // SETTINGS_H

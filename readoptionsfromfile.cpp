@@ -1,28 +1,30 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "options.h"
+//#include "options.h"
 #include "keyboard.h"
 #include "defines.h"
 
 QString pathtofile2 = "";
 
-void Options::ReadSystemOptionsFromFile()
-{
-    QFile infile(pathtosystemoptions);
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-    QJsonObject json = doc.object();
-    Options::calibrationprm = json["Calibration"].toString();
-    Options::DisplayParametr = json["Display"].toInt();
-    Options::displayResolution = json["Resolution"].toString();
+extern QList<Ustavka *> listUstavok;
 
-    infile.close();
-}
+//void Options::ReadSystemOptionsFromFile()
+//{
+//    QFile infile(pathtosystemoptions);
+//    infile.open(QIODevice::ReadOnly);
+//    QTextStream in(&infile);
+//    QString sss = in.readLine();
+//    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+//    QJsonObject json = doc.object();
+//    Options::calibrationprm = json["Calibration"].toString();
+//    Options::DisplayParametr = json["Display"].toInt();
+//    Options::displayResolution = json["Resolution"].toString();
 
-void Options::ReadChannelsOptionsFromFile()
-{
+//    infile.close();
+//}
+
+//void Options::ReadChannelsOptionsFromFile()
+//{
 //    QFile infile(pathtooptions);
 //    infile.open(QIODevice::ReadOnly);
 //    QTextStream in(&infile);
@@ -68,7 +70,7 @@ void Options::ReadChannelsOptionsFromFile()
 //        Channel->SetDiapason(jsonobj.value("Diapason").toInt());
 //        index ++ ;
 //    }
-}
+//}
 
 //QJsonArray MessageWrite::LogMessageRead()
 //{
@@ -135,11 +137,12 @@ void MainWindow::ReadUstavkiFromFile()
     QJsonObject jsonobj;
 
     int index = 0;
-    foreach (Ustavka * ust, ustavkaObjectsList)
+    foreach (Ustavka * ust, listUstavok)
     {
         jsonobj = array.at(index).toObject();
+        ust->setNum(index);
         ust->setUstavka(
-                    jsonobj.value("Num").toInt(), \
+                    /*jsonobj.value("Num").toInt(),*/ \
                     jsonobj.value("Identifikator").toString().toUtf8(), \
                     jsonobj.value("UstavkaChannel").toInt(), \
                     jsonobj.value("TypeFix").toBool(), \

@@ -1,12 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "options.h"
+//#include "options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
 #include "Channels/channelOptions.h"
 #include "uartdriver.h"
 #include "filemanager.h"
+#include "Channels/group_channels.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -31,6 +32,9 @@ QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
 QVector<QDateTime> MainWindow::Dates;
 
+QList<ChannelOptions *> listChannels;
+QList<Ustavka *> listUstavok;
+QList<cGroupChannels*> listGroup;
 QList<cSteel*> listSteel;
 typeSteelTech steelTech[NUM_TECHNOLOGIES];
 cSystemOptions systemOptions;  //класс хранения состемных опций
@@ -51,7 +55,7 @@ MainWindow::~MainWindow()
 {
 //    messwrite.LogAddMessage("Programm Closed");
 //    messwrite.WriteAllLogToFile();
-    logger->addMess("Programm Closed");
+    logger->addMess("Programm Closed", cLogger::STATISTIC);
     delete timeUpdUst;
     delete ui;
 }
@@ -66,13 +70,17 @@ void MainWindow::on_WorkButton_clicked()
 {
 //    OpenWorkWindow();
     dMenu * menu = new dMenu();
-    menu->addChannels(listCh, ustavkaObjectsList);
+//    menu->addChannels(listCh);
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    //сигнал из меню о создании новой суставки
+    connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
     menu->selectPageWork();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    disconnect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
     menu->deleteLater();
     sendConfigChannelsToSlave();
+    setTextBars();
     setStyleBars();
     updateWidgetsVols();
 }
@@ -82,11 +90,11 @@ void MainWindow::on_ArchiveButton_clicked()
 //    OpenArchiveWindow();
     if(systemOptions.display == cSystemOptions::Steel)
     {
-        dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 5, arch);
+        dialogSetingsChannel = new dSettings(listChannels, 1, 5, arch);
     }
     else
     {
-        dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 2, arch);
+        dialogSetingsChannel = new dSettings(listChannels, 1, 2, arch);
     }
 //    dialogSetingsChannel->addArch(arch);
     dialogSetingsChannel->exec();
@@ -131,12 +139,13 @@ void MainWindow::on_MenuButton_clicked()
 //    OpenOptionsWindow(0);
 
     dMenu * menu = new dMenu();
-    menu->addChannels(listCh, ustavkaObjectsList);
+//    menu->addChannels(listCh);
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->deleteLater();
     sendConfigChannelsToSlave();
+    setTextBars();
     setStyleBars();
     updateWidgetsVols();
 }
@@ -150,7 +159,7 @@ void MainWindow::updateSystemOptions()
 void MainWindow::on_MessButton_clicked()
 {
 //    OpenMessagesWindow();
-    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, 1, 1);
+    dialogSetingsChannel = new dSettings(listChannels, 1, 1);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
 }
@@ -282,6 +291,44 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         }
     }
 
+    if ((event->type() == QEvent::MouseButtonRelease)\
+            && ((watched->objectName().contains("arrowGroup"))))
+    {
+        int newCurGroupChannel = curGroupChannel;
+        if(watched->objectName().contains("Left"))
+        {
+            do {    //выполнять поиск следующей группы, пока не встретится активная
+                    // или не встретиться текущая
+                //сменить группу на группу с меньшим номером
+                if(newCurGroupChannel == 0)
+                {
+                    newCurGroupChannel = listGroup.size() - 1;
+                }
+                else
+                {
+                    newCurGroupChannel--;
+                }
+            } while(!listGroup.at(newCurGroupChannel)->enabled &&\
+                  (newCurGroupChannel != curGroupChannel));
+        }
+        if(watched->objectName().contains("Right"))
+        {
+            do {
+                //сменить группу на группу с большим номером
+                if(newCurGroupChannel == listGroup.size() - 1)
+                {
+                    newCurGroupChannel = 0;
+                }
+                else
+                {
+                    newCurGroupChannel++;
+                }
+            } while(!listGroup.at(newCurGroupChannel)->enabled &&\
+                    (newCurGroupChannel != curGroupChannel));
+        }
+        curGroupChannel = newCurGroupChannel;
+        ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
+    }
     return QWidget::eventFilter(watched, event);
 }
 
@@ -399,16 +446,16 @@ int MainWindow::GetWindowWidthPixels()
     return windowwidth;
 }
 
-int MainWindow::GetMonitorWidthPixels()
-{
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
-    int height = screenGeometry.height();
-    int width = screenGeometry.width();
+//int MainWindow::GetMonitorWidthPixels()
+//{
+//    QScreen *screen = QGuiApplication::primaryScreen();
+//    QRect  screenGeometry = screen->geometry();
+//    int height = screenGeometry.height();
+//    int width = screenGeometry.width();
 
-    Options::MonitorResolution = QString::number(width) + "x"+QString::number(height) ;
-    return width;
-}
+//    Options::MonitorResolution = QString::number(width) + "x"+QString::number(height) ;
+//    return width;
+//}
 
 int MainWindow::GetMonitorHeightPixels()
 {
@@ -466,12 +513,16 @@ void MainWindow::openSettingsChannel(int num)
 {
 
     //проверка на наличие такого номера канала
-    if((num <= 0) || (num > listCh.size())) return;
+    cGroupChannels * group = listGroup.at(curGroupChannel);
+    if(group->typeInput[num-1] != 1) return;
+    ChannelOptions * channel = group->channel[num-1];
+    int index = channel->getNum();
 
-    dialogSetingsChannel = new dSettings(listCh, ustavkaObjectsList, num);
+    dialogSetingsChannel = new dSettings(listChannels, index);
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
     sendConfigChannelsToSlave();
+    setTextBars();
     setStyleBars();
     updateWidgetsVols();
 }
@@ -479,7 +530,7 @@ void MainWindow::openSettingsChannel(int num)
 
 void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
 {
-    channel1.SetCurrentChannelValue(arg1);
+    listChannels.at(0)->SetCurrentChannelValue(arg1);
     ui->wBar_1->setVolue(arg1);
     ui->widgetVol1->setVol(arg1);
 }

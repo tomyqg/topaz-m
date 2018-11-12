@@ -17,20 +17,20 @@ Messages::Messages(QDialog *parent) :
     ui(new Ui::Messages)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint);
-    setWindowTitle(tr("LOG"));
-//    MessageWrite mr2 ;
-//    QJsonArray messagesarray = mr2.LogMessageRead();
-    QJsonArray messagesarray;
-    cLogger log(pathtomessages);
-    messagesarray = log.MessRead();
+//    setWindowFlags(Qt::CustomizeWindowHint);
+//    setWindowTitle(tr("LOG"));
+////    MessageWrite mr2 ;
+////    QJsonArray messagesarray = mr2.LogMessageRead();
+//    QJsonArray messagesarray;
+//    cLogger log(pathtomessages);
+//    messagesarray = log.MessRead();
 
-    for (int var = 0; var < messagesarray.count() ; ++var) {
-        QJsonObject mes = messagesarray.at(var).toObject();
-        ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("D").toString() +" "+  mes.value("T").toString()+" "+ mes.value("M").toString());
-    }
-    ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
-    ui->listWidget->scrollToBottom();
+//    for (int var = 0; var < messagesarray.count() ; ++var) {
+//        QJsonObject mes = messagesarray.at(var).toObject();
+//        ui->listWidget->addItem(QString::number((var+1)) + ": " + mes.value("D").toString() +" "+  mes.value("T").toString()+" "+ mes.value("M").toString());
+//    }
+//    ui->listWidget->setStyleSheet("QListWidget { background-color: #CCFFFF }" "QListWidget::item:selected {border: 1px solid #6a6ea9;}" );
+//    ui->listWidget->scrollToBottom();
 
 //    mr2.deleteLater();
 }

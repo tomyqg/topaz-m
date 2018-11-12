@@ -6,6 +6,7 @@
 #include <steel.h>
 #include <defines.h>
 
+extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 
@@ -14,7 +15,7 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 
 }
 
-int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> listChannels, QList<Ustavka*> listUstavok)
+int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> listChannels)
 {
     QJsonObject channeljsonobj,options;
     QJsonObject ustavkijsonobj;
@@ -47,7 +48,7 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
 
     foreach (Ustavka * ust, listUstavok)
     {
-        ustavkijsonobj["Num"] = ust->getNum();
+//        ustavkijsonobj["Num"] = ust->getNum();
         ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
         ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
         ustavkijsonobj["TypeFix"] = ust->getTypeFix();
@@ -67,7 +68,7 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
         settingsUst.append(ustavkijsonobj);
     }
 
-    options["countUst"] = listChannels.length();
+    options["countUst"] = listUstavok.length();
     options["ustavki"] = settingsUst;
 
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
@@ -82,7 +83,7 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
     return 0;
 }
 
-int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> listChannels, QList<Ustavka*> listUstavok)
+int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> listChannels)
 {
     int ret = 0;
 
@@ -128,9 +129,18 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
     }
 
     count = json["countUst"].toInt();
-    if(count < listUstavok.size())
+    // если уставки описаны в файле настроек, то очистить список по умолчанию
+    // и пересоздать
+    if(count != 0)
     {
-        ret -= 2;
+        listUstavok.clear();
+        for(int i = 0; i < count; i ++)
+        {
+            Ustavka *ust = new Ustavka();
+            ust->setNum(i);
+            ust->setIdentifikator("Limit " + QString::number(i+1));
+            listUstavok.append(ust);
+        }
     }
 
     array = json["ustavki"].toArray();
@@ -140,7 +150,7 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
     {
         jsonobj = array.at(index++).toObject();
         ust->setUstavka(
-                    jsonobj.value("Num").toInt(), \
+                    /*jsonobj.value("Num").toInt(),*/ \
                     jsonobj.value("Identifikator").toString().toUtf8(), \
                     jsonobj.value("UstavkaChannel").toInt(), \
                     jsonobj.value("TypeFix").toBool(), \

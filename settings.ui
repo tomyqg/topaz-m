@@ -512,7 +512,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-74</y>
+                     <y>-156</y>
                      <width>564</width>
                      <height>608</height>
                     </rect>
@@ -2454,8 +2454,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
-                     <height>852</height>
+                     <width>692</width>
+                     <height>918</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_2">
@@ -2738,6 +2738,28 @@ QComboBox::drop-down {
                       </item>
                      </widget>
                     </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_20">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ИДЕНТИФИКАТОР</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="1" column="1">
                      <widget class="QLineEdit" name="identifikator">
                       <property name="enabled">
@@ -2774,50 +2796,6 @@ border-radius: 0px;</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_20">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ИДЕНТИФИКАТОР</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="5" column="0">
-                     <widget class="QLabel" name="label_22">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ВЕРХНЯЯ УСТАВКА</string>
                       </property>
                      </widget>
                     </item>
@@ -2876,6 +2854,50 @@ border-radius: 0px;</string>
                       </property>
                       <property name="text">
                        <string>переключатель вниз</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="label_22">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>УРОВЕНЬ УСТАВКИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="label_29">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>нижняя уставка</string>
                       </property>
                      </widget>
                     </item>
@@ -2982,28 +3004,6 @@ QComboBox::drop-down {
                         <string>ВЫХОД 8</string>
                        </property>
                       </item>
-                     </widget>
-                    </item>
-                    <item row="7" column="0">
-                     <widget class="QLabel" name="label_29">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>нижняя уставка</string>
-                      </property>
                      </widget>
                     </item>
                     <item row="7" column="1">
@@ -3127,6 +3127,28 @@ QComboBox::drop-down {
                       </item>
                      </widget>
                     </item>
+                    <item row="15" column="0">
+                     <widget class="QLabel" name="label_27">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>СООБЩЕНИЕ ВКЛЮЧЕНИЯ</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="10" column="1">
                      <widget class="QComboBox" name="reley">
                       <property name="sizePolicy">
@@ -3157,10 +3179,10 @@ QComboBox::drop-down {
                        <enum>Qt::LeftToRight</enum>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QComboBox {
-background-color: rgb(232, 76, 61);
-color: rgb(255, 255, 255);
-border-radius: 0px;
+                       <string notr="true">QComboBox {	
+	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
 }
 
 QComboBox::drop-down {
@@ -3232,8 +3254,8 @@ QComboBox::drop-down {
                       </item>
                      </widget>
                     </item>
-                    <item row="15" column="0">
-                     <widget class="QLabel" name="label_27">
+                    <item row="17" column="0">
+                     <widget class="QLabel" name="label_28">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -3250,7 +3272,43 @@ QComboBox::drop-down {
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>СООБЩЕНИЕ ВКЛЮЧЕНИЯ</string>
+                       <string>СООБЩЕНИЕ ВЫКЛЮЧЕНИЯ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="17" column="1">
+                     <widget class="QLineEdit" name="messageOff">
+                      <property name="maximumSize">
+                       <size>
+                        <width>270</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string>Норма</string>
+                      </property>
+                      <property name="maxLength">
+                       <number>80</number>
+                      </property>
+                      <property name="cursorPosition">
+                       <number>0</number>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -3326,86 +3384,6 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="17" column="0">
-                     <widget class="QLabel" name="label_28">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>СООБЩЕНИЕ ВЫКЛЮЧЕНИЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="17" column="1">
-                     <widget class="QLineEdit" name="messageOff">
-                      <property name="maximumSize">
-                       <size>
-                        <width>270</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;</string>
-                      </property>
-                      <property name="inputMask">
-                       <string/>
-                      </property>
-                      <property name="text">
-                       <string>Норма</string>
-                      </property>
-                      <property name="maxLength">
-                       <number>80</number>
-                      </property>
-                      <property name="cursorPosition">
-                       <number>0</number>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="19" column="0">
-                     <widget class="QLabel" name="label_30">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>сообщение вкл. низ</string>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="20" column="0">
                      <widget class="QLabel" name="label_31">
                       <property name="minimumSize">
@@ -3468,15 +3446,12 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="9" column="1">
-                     <widget class="QDoubleSpinBox" name="ustavkaTimer">
-                      <property name="enabled">
-                       <bool>false</bool>
-                      </property>
-                      <property name="maximumSize">
+                    <item row="19" column="0">
+                     <widget class="QLabel" name="label_30">
+                      <property name="minimumSize">
                        <size>
-                        <width>270</width>
-                        <height>16777215</height>
+                        <width>0</width>
+                        <height>41</height>
                        </size>
                       </property>
                       <property name="font">
@@ -3486,25 +3461,10 @@ border-radius: 0px;</string>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;
-</string>
+                       <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                      <property name="minimum">
-                       <double>0.000000000000000</double>
-                      </property>
-                      <property name="maximum">
-                       <double>10.000000000000000</double>
-                      </property>
-                      <property name="singleStep">
-                       <double>0.100000000000000</double>
-                      </property>
-                      <property name="value">
-                       <double>0.100000000000000</double>
+                      <property name="text">
+                       <string>сообщение вкл. низ</string>
                       </property>
                      </widget>
                     </item>
@@ -3552,12 +3512,15 @@ border-radius: 0px;
                       </property>
                      </widget>
                     </item>
-                    <item row="10" column="0">
-                     <widget class="QLabel" name="label_25">
-                      <property name="minimumSize">
+                    <item row="9" column="1">
+                     <widget class="QDoubleSpinBox" name="ustavkaTimer">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="maximumSize">
                        <size>
-                        <width>0</width>
-                        <height>41</height>
+                        <width>270</width>
+                        <height>16777215</height>
                        </size>
                       </property>
                       <property name="font">
@@ -3567,10 +3530,25 @@ border-radius: 0px;
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
                       </property>
-                      <property name="text">
-                       <string>ПЕРЕКЛЮЧАТЕЛЬ ВВЕРХ</string>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="minimum">
+                       <double>0.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>10.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>0.100000000000000</double>
                       </property>
                      </widget>
                     </item>
@@ -3593,6 +3571,50 @@ border-radius: 0px;
                       </property>
                       <property name="text">
                        <string>КВИТИРОВАНИЕ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QLabel" name="label_25">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ПЕРЕКЛЮЧАТЕЛЬ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="21" column="0" colspan="2">
+                     <widget class="wButtonStyled" name="bDeleteUstavka">
+                      <property name="minimumSize">
+                       <size>
+                        <width>321</width>
+                        <height>46</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>21</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(14, 210, 226);</string>
+                      </property>
+                      <property name="text">
+                       <string>УДАЛИТЬ УСТАВКУ</string>
                       </property>
                      </widget>
                     </item>

@@ -3,11 +3,13 @@
 #include "defines.h"
 #include "filemanager.h"
 #include "keyboard.h"
-#include <options.h>
+//#include <options.h>
 #include <QFile>
 #include <QDir>
 #include <QString>
 #include "usb_flash.h"
+#include "Channels/group_channels.h"
+
 
 
 #define HEIGHT 768
@@ -19,12 +21,15 @@ extern int dateindex;
 extern int timeindex;
 extern QStringList datestrings, timestrings;
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+extern QList<ChannelOptions *> listChannels;
+extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 extern cChannelSlotController csc;
 extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern cUsbFlash * flash;
+extern QList<cGroupChannels*> listGroup;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -82,6 +87,11 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
 
+    log = new cLogger(pathtomessages, cLogger::UI);
+    log->addMess("Menu > Open ", cLogger::SERVICE);
+
+    //добавить виджеты групп каналов
+    addWidgetGroup();
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
@@ -94,8 +104,8 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
     {
 //        QCalendarWidget cw;
 //        cw.show();
-        Options::olderprop = object->property("date").toString();
         keyboard kb(this);
+        keyboard::olderprop = object->property("date").toString();
         kb.setModal(true);
         kb.exec();
     }
@@ -110,6 +120,7 @@ dMenu::~dMenu()
 
 void dMenu::on_exitButton_clicked()
 {
+    log->addMess("Menu > Cancel", cLogger::SERVICE);
     this->close();
 }
 
@@ -129,6 +140,7 @@ void dMenu::on_saveButton_clicked()
     }
     sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
+    log->addMess("Menu > Save", cLogger::SERVICE);
     emit saveButtonSignal();
     //Окно закроется по сигналу таймаута
 }
@@ -158,6 +170,68 @@ void dMenu::updateSystemOptions(QString path)
         ui->groupBoxTypePribor->hide();
     }
     ui->autoscalecheckbox->setChecked(sysOptions.autoscale);
+}
+
+void dMenu::addWidgetUstavki()
+{
+    clearLayout(ui->verticalLayoutUstavki);
+
+    // генерация виджетов (кнопок) уставок
+    int i = 0;
+    foreach (Ustavka * u, listUstavok) {
+        wButtonStyled * bUstavka = new wButtonStyled(ui->widgetScrollAreaUstavki);
+        bUstavka->index = i+1;
+        QString nameUstavka = u->getIdentifikator().size() ? (" | " + u->getIdentifikator()) : " ";
+        bUstavka->setText("УСТАВКА " + QString::number(bUstavka->index) + nameUstavka);
+        bUstavka->setMinimumSize(QSize(0, 70));
+        bUstavka->setColorText(QColor(0xff,0xff,0xff));
+        bUstavka->setColorBg(ColorButtonNormal);
+        bUstavka->setAlignLeft();
+        connect(bUstavka, SIGNAL(clicked(int)), this, SLOT(slotOpenSettings(int)));
+        ui->verticalLayoutUstavki->addWidget(bUstavka);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutUstavki->addItem(verticalSpacer);
+}
+
+void dMenu::addWidgetGroup()
+{
+
+    clearLayout(ui->verticalLayoutGroup);
+
+    // генерация виджетов (кнопок) уставок
+    int i = 0;
+    foreach (cGroupChannels * group, listGroup) {
+        wButtonStyled * bGroup = new wButtonStyled(ui->widgetScrollAreaGroup);
+        bGroup->index = i+1;
+        QString nameGroup = group->groupName.size() ? (" | " + group->groupName) : " ";
+        bGroup->setText("ГРУППА " + QString::number(bGroup->index) + nameGroup);
+        bGroup->setMinimumSize(QSize(0, 70));
+        bGroup->setColorText(QColor(0xff,0xff,0xff));
+        bGroup->setColorBg(ColorButtonNormal);
+        bGroup->setAlignLeft();
+        connect(bGroup, SIGNAL(clicked(int)), this, SLOT(slotOpenGroup(int)));
+        ui->verticalLayoutGroup->addWidget(bGroup);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutGroup->addItem(verticalSpacer);
+}
+
+void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                delete widget;
+        }
+        if (QLayout* childLayout = item->layout())
+            clearLayout(childLayout, deleteWidgets);
+        delete item;
+    }
 }
 
 void dMenu::timeoutLoad()
@@ -254,7 +328,7 @@ void dMenu::openSettingsChannel(int num, int page)
         //проверка на наличие такого номера канала
         if((num <= 0) || (num > listChannels.size())) return;
 
-        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+        dialogSetingsChannel = new dSettings(listChannels, num, page);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
         //sendConfigChannelsToSlave();
@@ -263,7 +337,7 @@ void dMenu::openSettingsChannel(int num, int page)
     {
         //проверка на наличие такого номера входной группы
         if((num <= 0) || (num > listSteel.size())) return;
-        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+        dialogSetingsChannel = new dSettings(listChannels, num, page);
 //        dialogSetingsChannel->addSteel(listSteel.at(num), steelTech);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
@@ -272,9 +346,10 @@ void dMenu::openSettingsChannel(int num, int page)
     else if(page == 3)
     {
         if((num <= 0) || (num > listUstavok.size())) return;
-        dialogSetingsChannel = new dSettings(listChannels, listUstavok, num, page);
+        dialogSetingsChannel = new dSettings(listChannels, num, page);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
+        addWidgetUstavki();
     }
 
 }
@@ -318,7 +393,7 @@ void dMenu::on_bUstavki_clicked()
     ui->nameSubMenu->setText("УСТАВКИ");
 }
 
-void dMenu::on_bBackApplications_2_clicked()
+void dMenu::on_bBackUstavki_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     ui->nameSubMenu->setText("ПРИЛОЖЕНИЯ");
@@ -338,30 +413,14 @@ void dMenu::on_bBackDiagnostika_clicked()
         ui->frameNameSubMenu->setHidden(true);
 }
 
-void dMenu::addChannels(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki)
+void dMenu::addChannels(QList<ChannelOptions *> channels)
 {
     foreach (ChannelOptions * ch, channels) {
         listChannels.append(ch);
     }
-    foreach (Ustavka * ust, ustavki) {
-        listUstavok.append(ust);
-    }
 
-    int i = 0;
-    foreach (Ustavka * u, listUstavok) {
-        wButtonStyled * bUstavka = new wButtonStyled(ui->widgetScrollAreaUstavki);
-        bUstavka->index = i+1;
-        bUstavka->setText("УСТАВКА " + QString::number(bUstavka->index));
-        bUstavka->setMinimumSize(QSize(0, 70));
-        bUstavka->setColorText(QColor(0xff,0xff,0xff));
-        bUstavka->setColorBg(ColorButtonNormal);
-        bUstavka->setAlignLeft();
-        connect(bUstavka, SIGNAL(clicked(int)), this, SLOT(slotOpenSettings(int)));
-        ui->verticalLayoutUstavki->addWidget(bUstavka);
-        i++;
-    }
-    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ui->verticalLayoutUstavki->addItem(verticalSpacer);
+    //генерация кнопок уставок
+    addWidgetUstavki();
 
 }
 
@@ -369,6 +428,69 @@ void dMenu::slotOpenSettings(int num)
 {
     openSettingsChannel(num, 3);
 }
+
+void dMenu::slotOpenGroup(int num)
+{
+    curGroupEdit = num - 1;
+    cGroupChannels * group = listGroup.at(curGroupEdit);
+    ui->comboGroupState->setCurrentIndex(group->enabled);
+    ui->nameGroup->setText(group->groupName);
+
+    //определяем существующие каналы и добавляем в комбобоксы
+    QStringList listComboChannels;
+    listComboChannels.append("ОТКЛЮЧЕН");
+    for(int i = 0; i < listChannels.size(); i++)
+    {
+        listComboChannels.append("АНАЛОГОВЫЙ ВХОД " + QString::number(i+1));
+    }
+//    foreach (ChannelOptions * ch, listChannels) {
+//        listComboChannels.append(ch->GetChannelName());
+//    }
+    /*
+     * добавить математические каналы и дискретные
+    foreach (var, container) {
+
+    }*/
+
+    QList<QComboBox*> listCombo;
+    listCombo.append(ui->comboGroupChannel1);
+    listCombo.append(ui->comboGroupChannel2);
+    listCombo.append(ui->comboGroupChannel3);
+    listCombo.append(ui->comboGroupChannel4);
+    foreach (QComboBox * combo, listCombo) {
+        combo->clear();
+        combo->addItems(listComboChannels);
+    }
+
+//    ui->comboGroupChannel1->clear();
+//    ui->comboGroupChannel1->addItems(listComboChannels);
+//    ui->comboGroupChannel2->clear();
+//    ui->comboGroupChannel2->addItems(listComboChannels);
+//    ui->comboGroupChannel3->clear();
+//    ui->comboGroupChannel3->addItems(listComboChannels);
+//    ui->comboGroupChannel4->clear();
+//    ui->comboGroupChannel4->addItems(listComboChannels);
+
+    for(int i = 0; i < listChannels.size(); i++)
+    {
+        for(int k = 0; k < listCombo.size(); k++)
+        {
+            if((group->typeInput[k] == 1)
+                    && (group->channel[k] == listChannels.at(i)))
+            {
+                listCombo.at(k)->setCurrentIndex(i+1); ;
+            }
+        }
+    }
+
+    ui->stackedWidget->setCurrentIndex(23);
+    ui->nameSubMenu->setText("ГРУППА " + QString::number(num));
+}
+
+//void dMenu::onbAddUstavkaClick()
+//{
+
+//}
 
 void dMenu::selectPageWork()
 {
@@ -623,6 +745,43 @@ void dMenu::on_bBackDigitOutputSettings_clicked()
     ui->nameSubMenu->setText("ВЫХОДЫ");
 }
 
+void dMenu::on_bMath_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(20);
+    ui->nameSubMenu->setText("МАТЕМАТИКА");
+}
+
+void dMenu::on_bBackMath_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    ui->nameSubMenu->setText("ПРИЛОЖЕНИЯ");
+}
+
+void dMenu::on_bGroups_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(22);
+    ui->nameSubMenu->setText("ГРУППЫ");
+}
+
+void dMenu::on_bBackGroup_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    ui->nameSubMenu->setText("ПРИЛОЖЕНИЯ");
+}
+
+// Vag: удалить, когда будет дейлизовано динамическое добавление
+void dMenu::on_bAddGroup_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(23);
+    ui->nameSubMenu->setText("ГРУППА 1");
+}
+
+void dMenu::on_bBackGroupSetting_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(22);
+    ui->nameSubMenu->setText("ГРУППЫ");
+}
+
 void dMenu::updateDriversWidgets()
 {
     listDrives.clear();
@@ -703,15 +862,11 @@ void dMenu::on_bResetToDefault_clicked()
     QFile::rename(pathtosystemoptions, pathtosystemoptions + QString(".backup"));
     QFile::copy(pathtosystemoptionsdef, pathtosystemoptions);
     //чтение и применение настроек из новых файлов
-    cFileManager::readChannelsSettings(pathtooptions, listChannels, listUstavok);
+    cFileManager::readChannelsSettings(pathtooptions, listChannels);
     updateSystemOptions();
+    log->addMess("Reset to default", cLogger::USER);
     emit saveButtonSignal();
-
 }
-
-
-
-
 
 void dMenu::UpdateAnalyze()
 {
@@ -880,6 +1035,7 @@ void dMenu::on_bReadSysFromDrive_clicked()
     if(QFile::exists(src))
     {
         updateSystemOptions(src);
+        log->addMess("Read system setting from media", cLogger::STATISTIC);
         qDebug() << "System settings successfully read from the media";
         QString mess = QString("Системные настройки успешно прочитаны с указаного носителя\r\n");
         mess == QString("Нажмите СОХРАНИТЬ, чтобы применить новые настройки");
@@ -889,6 +1045,7 @@ void dMenu::on_bReadSysFromDrive_clicked()
     }
     else
     {
+        log->addMess("Error read system setting from media", cLogger::ERR);
         qDebug() << "Error reading the system settings file on the media" << strerror(errno);
         QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя и файлов настроек\r\n");
         mess += QString("Убедитесь, что формат файловой системы носителя соответствует FAT32");
@@ -916,6 +1073,7 @@ void dMenu::on_bSaveSysToDrive_clicked()
     QFile::rename(dest, dest + QString(".backup"));
     if(QFile::copy(src, dest))
     {
+        log->addMess("Save system setting to media", cLogger::STATISTIC);
         qDebug() << "The system settings were recorded successfully";
         qDebug() << "Path" << dest.toStdString().c_str();
         path = QString("/" + ui->nameDirOnDrive->text() + "/" + "systemoptions.txt");
@@ -927,6 +1085,7 @@ void dMenu::on_bSaveSysToDrive_clicked()
     }
     else
     {
+        log->addMess("Error save system setting to media", cLogger::ERR);
         qDebug() << "Error writing system settings" << strerror(errno);
         QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
         mesDialog.showInfo(mess, "Сообщение");
@@ -953,6 +1112,7 @@ void dMenu::on_bSaveMesToDrive_clicked()
     QFile::rename(dest, dest + QString(".backup"));
     if(QFile::copy(src, dest))
     {
+        log->addMess("Save log to media", cLogger::STATISTIC);
         qDebug() << "The event log was successfully saved on the media";
         qDebug() << "Path" << dest.toStdString().c_str();
         path = QString("/" + ui->nameDirOnDrive->text() + "/" + "Log.txt");
@@ -964,6 +1124,7 @@ void dMenu::on_bSaveMesToDrive_clicked()
     }
     else
     {
+        log->addMess("Error save log to media", cLogger::ERR);
         qDebug() << "Error writing event log" << strerror(errno);
         QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
         mesDialog.showInfo(mess, "Сообщение");
@@ -994,6 +1155,7 @@ void dMenu::on_bSaveChanToDrive_clicked()
     QFile::rename(dest2, dest2 + QString(".backup"));
     if(QFile::copy(src, dest) && QFile::copy(src2, dest2))
     {
+        log->addMess("Save settings to media", cLogger::STATISTIC);
         qDebug() << "The settings for the inputs and outputs were successfully saved on the media";
         qDebug() << "Path" << dest.toStdString().c_str();
         qDebug() << "Path" << dest2.toStdString().c_str();
@@ -1006,6 +1168,7 @@ void dMenu::on_bSaveChanToDrive_clicked()
     }
     else
     {
+        log->addMess("Error save settings to media", cLogger::ERR);
         qDebug() << "Error writing settings" << strerror(errno);
         QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
         mesDialog.showInfo(mess, "Сообщение");
@@ -1026,6 +1189,7 @@ void dMenu::on_bReadChanFromDrive_clicked()
     if(QFile::exists(src) && QFile::exists(src2))
     {
         updateSystemOptions(src);
+        log->addMess("Read settings from media", cLogger::STATISTIC);
         qDebug() << "I / O settings were successfully read from the specified media";
         QString mess = QString("Настройки входов и выходов успешно прочитаны с указаного носителя\r\n");
         mess == QString("Нажмите СОХРАНИТЬ, чтобы применить новые настройки");
@@ -1035,6 +1199,7 @@ void dMenu::on_bReadChanFromDrive_clicked()
     }
     else
     {
+        log->addMess("Error read settings from media", cLogger::ERR);
         qDebug() << "Error reading input and output settings" << strerror(errno);
         QString mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя и файлов настроек\r\n");
         mess += QString("Убедитесь, что формат файловой системы носителя соответствует FAT32");
@@ -1171,6 +1336,9 @@ void dMenu::copyLastArchFile()
         QString mess;
         if(QFile::copy(src, dest))
         {
+            QString periods[4] = {"day", "week", "month", "year"};
+            QString period = periods[ui->periodArchiveToDrive->currentIndex()];
+            log->addMess("Save archive(" + period + ") to media", cLogger::STATISTIC);
             qDebug() << "The measurement archive was copied to the specified medium";
             qDebug() << "Path" << dest.toStdString().c_str();
             mess = QString("Архив измерений "\
@@ -1179,6 +1347,7 @@ void dMenu::copyLastArchFile()
         }
         else
         {
+            log->addMess("Error save archive to media", cLogger::ERR);
             qDebug() << "Error writing measurement archive" << strerror(errno);
             mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
         }
@@ -1200,3 +1369,75 @@ void dMenu::on_digitInoutToOutput_currentIndexChanged(int index)
     ui->stackedObjectsMenage->setCurrentIndex(index);
 }
 
+
+void dMenu::on_bAddUstavka_clicked()
+{
+    Ustavka *ust = new Ustavka(this);
+    int i = listUstavok.size();
+    ust->setIdentifikator("Limit " + QString::number(i+1));
+    listUstavok.append(ust);
+    emit newUstavka(i);
+
+    //регенерация кнопок уставок
+    addWidgetUstavki();
+}
+
+
+
+void dMenu::on_bAddGroup_clicked()
+{
+    cGroupChannels *group = new cGroupChannels();
+    int size = listGroup.size();
+    if(size >= MAX_NUM_GROUP) return;
+    group->enabled = true;
+    group->groupName = "Group " + QString::number(size+1);
+    listGroup.append(group);
+
+    //регенерация кнопок уставок
+    addWidgetGroup();
+}
+
+void dMenu::on_bDelGroup_clicked()
+{
+    if(listGroup.size() > 1)
+    {
+        listGroup.removeAt(curGroupEdit);
+    }
+    ui->stackedWidget->setCurrentIndex(22);
+    ui->nameSubMenu->setText("ГРУППЫ");
+    addWidgetGroup();
+}
+
+void dMenu::on_bApplayGroup_clicked()
+{
+    cGroupChannels * g = listGroup.at(curGroupEdit);
+    g->enabled = ui->comboGroupState->currentIndex();
+    g->groupName = ui->nameGroup->text();
+    QList<QComboBox*> listCombo;
+    listCombo.append(ui->comboGroupChannel1);
+    listCombo.append(ui->comboGroupChannel2);
+    listCombo.append(ui->comboGroupChannel3);
+    listCombo.append(ui->comboGroupChannel4);
+    for(int i = 0; i < listCombo.size(); i++)
+    {
+
+        int indexCh = listCombo.at(i)->currentIndex();
+        if(indexCh == 0)
+        {
+            g->typeInput[i] = 0;
+        }
+        else if(indexCh <= listChannels.size())
+        {
+            g->typeInput[i] = 1;
+            g->channel[i] = listChannels.at(indexCh-1);
+        }
+//    else if(index <= listMath.size())
+//    {
+
+//    }
+    }
+
+    ui->stackedWidget->setCurrentIndex(22);
+    ui->nameSubMenu->setText("ГРУППЫ");
+    addWidgetGroup();
+}

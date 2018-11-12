@@ -552,6 +552,7 @@ void ChannelOptions::SetCurrentChannelValue(double value)
         currentvalue = mathresult;
     }
 
+
     buffermutex->lock();
     while (channelxbuffer.length()>300)
         channelxbuffer.removeFirst();

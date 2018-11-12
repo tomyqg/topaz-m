@@ -2,16 +2,19 @@
 #include "ustavka.h"
 #include "ui_mainwindow.h"
 #include "options.h"
-#include "ui_options.h"
+//#include "ui_options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "Channels/channelOptions.h"
 #include "defines.h"
 #include "processwritetofile.h"
+#include "Channels/group_channels.h"
 //#include "extern.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
 extern QVector<QDateTime> X_Date_Coordinates;
+extern QList<cGroupChannels*> listGroup;
+extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 
@@ -57,27 +60,27 @@ void MainWindow::RefreshScreen()
     this->update(); // мы апдейтим нашу главную форму
 }
 
-void Options::WriteSystemOptionsToFile()
-{
-    UpdateCurrentDisplayParametr();
+//void Options::WriteSystemOptionsToFile()
+//{
+//    UpdateCurrentDisplayParametr();
 
-    QJsonObject systemoptions;
-    systemoptions["Time"] = GetNewTimeString();
-    systemoptions["Date"] = GetNewDateString();
-    systemoptions["Display"] = GetCurrentDisplayParametr();
-    systemoptions["Calibration"] = GetCalibration();
-    systemoptions["Resolution"] = GetNewDisplayResolution();
-    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-    QFile file(pathtosystemoptions);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    QTextStream out(&file);
-    out << setstr;
-    file.close();
-}
+//    QJsonObject systemoptions;
+//    systemoptions["Time"] = GetNewTimeString();
+//    systemoptions["Date"] = GetNewDateString();
+//    systemoptions["Display"] = GetCurrentDisplayParametr();
+//    systemoptions["Calibration"] = GetCalibration();
+//    systemoptions["Resolution"] = GetNewDisplayResolution();
+//    QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
+//    QFile file(pathtosystemoptions);
+//    file.open(QIODevice::ReadWrite);
+//    file.resize(0); // clear file
+//    QTextStream out(&file);
+//    out << setstr;
+//    file.close();
+//}
 
-void Options::WriteAllChannelsOptionsToFile()
-{
+//void Options::WriteAllChannelsOptionsToFile()
+//{
 //    QList<ChannelOptions *> ChannelsObjectsList;
 
 //    ChannelsObjectsList.append(&options_channel1);
@@ -141,78 +144,78 @@ void Options::WriteAllChannelsOptionsToFile()
 //    file.resize(0); // clear file
 //    out << setstr;
 //    file.close();
-}
+//}
 
 void MainWindow::WriteAllChannelsOptionsToFile()
 {
-    QList<ChannelOptions *> ChannelsObjectsList;
+//    QList<ChannelOptions *> ChannelsObjectsList;
 
-    ChannelsObjectsList.append(&channel1);
-    ChannelsObjectsList.append(&channel2);
-    ChannelsObjectsList.append(&channel3);
-    ChannelsObjectsList.append(&channel4);
+//    ChannelsObjectsList.append(&channel1);
+//    ChannelsObjectsList.append(&channel2);
+//    ChannelsObjectsList.append(&channel3);
+//    ChannelsObjectsList.append(&channel4);
 
-    QJsonObject channeljsonobj,options;
-    QJsonObject ustavkijsonobj;
-    QJsonArray settings, settingsUst;
+//    QJsonObject channeljsonobj,options;
+//    QJsonObject ustavkijsonobj;
+//    QJsonArray settings, settingsUst;
 
-    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
-            channeljsonobj["Type"] = Channel->GetSignalType();
-            channeljsonobj["Name"] = (Channel->GetChannelName());
-            channeljsonobj["Units"] = Channel->GetUnitsName();
-            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
-            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
-            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
-            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
-            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-            channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
-            channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
-            channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
-            channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
-            channeljsonobj["MathString"] = Channel->GetMathString();
-            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
-            channeljsonobj["Diapason"] = Channel->GetDiapason();
-            channeljsonobj["Dempher"] = Channel->GetDempherValue();
-            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
-            settings.append(channeljsonobj);
-        }
+//    foreach (ChannelOptions * Channel, ChannelsObjectsList) {
+//            channeljsonobj["Type"] = Channel->GetSignalType();
+//            channeljsonobj["Name"] = (Channel->GetChannelName());
+//            channeljsonobj["Units"] = Channel->GetUnitsName();
+//            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+//            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+//            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+//            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+//            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+//            channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
+//            channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
+//            channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
+//            channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
+//            channeljsonobj["MathString"] = Channel->GetMathString();
+//            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+//            channeljsonobj["Diapason"] = Channel->GetDiapason();
+//            channeljsonobj["Dempher"] = Channel->GetDempherValue();
+//            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+//            settings.append(channeljsonobj);
+//        }
 
 
-    options["count"] = ChannelsObjectsList.length();
-    options["channels"] = settings;
+//    options["count"] = ChannelsObjectsList.length();
+//    options["channels"] = settings;
 
-    foreach (Ustavka * ust, ustavkaObjectsList)
-    {
-        ustavkijsonobj["Num"] = ust->getNum();
-        ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
-        ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
-        ustavkijsonobj["TypeFix"] = ust->getTypeFix();
-        ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
-//        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
-        ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
-//        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
-        ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
-//        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
-        ustavkijsonobj["MessInHigh"] = (ust->getMessInHigh());
-        ustavkijsonobj["MessNormHigh"] = (ust->getMessNormHigh());
-//        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
-//        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
-        ustavkijsonobj["KvitirUp"] = ust->getKvitirUp();
-//        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
+//    foreach (Ustavka * ust, listUstavok)
+//    {
+////        ustavkijsonobj["Num"] = ust->getNum();
+//        ustavkijsonobj["Identifikator"] = ust->getIdentifikator();
+//        ustavkijsonobj["UstavkaChannel"] = ust->getChannel();
+//        ustavkijsonobj["TypeFix"] = ust->getTypeFix();
+//        ustavkijsonobj["StateHiValue"] = ust->getHiStateValue();
+////        ustavkijsonobj["StateLowValue"] = ust->getLowStateValue();
+//        ustavkijsonobj["lowHisteresis"] = ust->getHiHisteresis();
+////        ustavkijsonobj["lowLowsteresis"] = ust->getLowHisteresis();
+//        ustavkijsonobj["numRelayUp"] = ust->getnumRelayUp();
+////        ustavkijsonobj["numRelayDown"] = ust->getnumRelayDown();
+//        ustavkijsonobj["MessInHigh"] = (ust->getMessInHigh());
+//        ustavkijsonobj["MessNormHigh"] = (ust->getMessNormHigh());
+////        ustavkijsonobj["MessInLow"] = (ust->getMessInLow());
+////        ustavkijsonobj["MessNormLow"] = (ust->getMessNormLow());
+//        ustavkijsonobj["KvitirUp"] = ust->getKvitirUp();
+////        ustavkijsonobj["KvitirDown"] = ust->getKvitirDown();
 
-        settingsUst.append(ustavkijsonobj);
-    }
+//        settingsUst.append(ustavkijsonobj);
+//    }
 
-    options["countUst"] = ustavkaObjectsList.length();
-    options["ustavki"] = settingsUst;
+//    options["countUst"] = listUstavok.length();
+//    options["ustavki"] = settingsUst;
 
-    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
-    QFile file(pathtooptions);
-    QTextStream out(&file);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    out << setstr;
-    file.close();
+//    QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
+//    QFile file(pathtooptions);
+//    QTextStream out(&file);
+//    file.open(QIODevice::ReadWrite);
+//    file.resize(0); // clear file
+//    out << setstr;
+//    file.close();
 }
 
 //void MessageWrite::WriteAllLogToFile()
@@ -300,10 +303,27 @@ void MainWindow::WriteArchiveToFile()
     for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
         valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
-    QString channel1period = QString::number( channel1.GetMeasurePeriod(), 'f', 1);
-    QString channel2period = QString::number( channel2.GetMeasurePeriod(), 'f', 1);
-    QString channel3period = QString::number( channel3.GetMeasurePeriod(), 'f', 1);
-    QString channel4period = QString::number( channel4.GetMeasurePeriod(), 'f', 1);
+    cGroupChannels * g = listGroup.at(curGroupChannel);
+    QString channel1period = "";
+    QString channel2period = "";
+    QString channel3period = "";
+    QString channel4period = "";
+    if(g->typeInput[0] == 1)
+    {
+        channel1period = QString::number(g->channel[0]->GetMeasurePeriod(), 'f', 1);
+    }
+    if(g->typeInput[1] == 1)
+    {
+        channel2period = QString::number(g->channel[1]->GetMeasurePeriod(), 'f', 1);
+    }
+    if(g->typeInput[2] == 1)
+    {
+        channel3period = QString::number(g->channel[2]->GetMeasurePeriod(), 'f', 1);
+    }
+    if(g->typeInput[3] == 1)
+    {
+        channel4period = QString::number(g->channel[3]->GetMeasurePeriod(), 'f', 1);
+    }
 
     archivechannel1["size"] = valuesarray1.size();
     archivechannel1["values"] = valuesarray1;

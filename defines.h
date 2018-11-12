@@ -1,6 +1,7 @@
+#include <QApplication>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "options.h"
+//#include "options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
@@ -14,7 +15,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER VERSION//"1.62" //версия ПО
+#define CURRENT_VER "1.62" //версия ПО
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
@@ -72,17 +73,23 @@
 //#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #define pathtosteeloptions "C:/Work/steeloptions.txt"
 #else
-
 #define pathtofiles  QCoreApplication::applicationDirPath()
+#define pathtodirarchive QCoreApplication::applicationDirPath() + "/archive/"
 #define pathtosystemoptions  QCoreApplication::applicationDirPath() + "/systemoptions.txt"
+#define pathtosystemoptionsdef  QCoreApplication::applicationDirPath() + "/Defaults/systemoptions.txt"
 #define pathtooptions  QCoreApplication::applicationDirPath() + "/options.txt"
+#define pathtooptionsdef  QCoreApplication::applicationDirPath() + "/Defaults/options.txt"
 #define pathtolog  QCoreApplication::applicationDirPath() + "/txtes/"
 #define pathtomodbusconfigfile  QCoreApplication::applicationDirPath() + "/MODBusConfigFile.txt"
 #define pathtomessages  QCoreApplication::applicationDirPath() + "/Log.txt"
 #define pathtoarchive  QCoreApplication::applicationDirPath() + "/archive.txt"
-#define pathtoarchivedata  QCoreApplication::applicationDirPath() + "C:/Work/archive.dat"
+#define pathtoarchivedata  QCoreApplication::applicationDirPath() + "/archive.dat"
 #define pathtologotip  QCoreApplication::applicationDirPath() + "/logotpchel.png"
 #define pathtoqrcodetip QCoreApplication::applicationDirPath() + "/qr-code.jpg"
+#define pathtohilimico  QCoreApplication::applicationDirPath() + "/hilim.png"
+#define pathtolowlimico  QCoreApplication::applicationDirPath() + "/lowlim.png"
+#define pathtoloadgif   QCoreApplication::applicationDirPath() + "/load.gif"
+#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #endif
 #endif
 
@@ -154,10 +161,11 @@
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
-
+#define NUM_CHAN_DEFAULT    4
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
+#define MAX_NUM_GROUP       10      //максимальное количество группировок каналов
 
 #define BASE_OFFSET_DEVICE      0x4000
 #define BASE_OFFSET_CHANNEL_1   0x8000

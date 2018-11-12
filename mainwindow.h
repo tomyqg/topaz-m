@@ -70,7 +70,7 @@ public:
 
     int GetWindowWidthPixels();
     int GetWindowHeightPixels();
-    int GetMonitorWidthPixels();
+//    int GetMonitorWidthPixels();
     int GetMonitorHeightPixels();
     void SetWindowWidthPixels(int neww);
     void SetWindowHeightPixels(int newh);
@@ -93,7 +93,7 @@ public:
 public slots:
     void tickLoadWidget();
     void destroyedslot(QObject *);
-    void NewTouchscreenCalibration();
+//    void NewTouchscreenCalibration();
     void LabelsInit();
     void LabelsUpdate();
     void LabelsCorrect();
@@ -143,6 +143,7 @@ private slots:
 //    void on_bWriteTypeSignal_clicked();
     void UpdUst();
     void logginStates(int channel, QString mess);
+    void newUstavkaConnect(int num);
 
 //    void askAnybusIRQ();
 
@@ -193,11 +194,11 @@ private:
     int desktopHeight;
     int desktopWidth;
 
-    ChannelOptions channel1;
-    ChannelOptions channel2;
-    ChannelOptions channel3;
-    ChannelOptions channel4;
-    QList<ChannelOptions *> listCh;
+//    ChannelOptions channel1;
+//    ChannelOptions channel2;
+//    ChannelOptions channel3;
+//    ChannelOptions channel4;
+//    QList<ChannelOptions *> listCh;
 
     bool eventFilter(QObject* watched, QEvent* event);
 //    void keyPressEvent(QKeyEvent *event);
@@ -229,6 +230,7 @@ private:
     void WriteAllChannelsOptionsToFile();
     void updateBars(void);
     void setStyleBars(void);
+    void setTextBars(void);
     void updateWidgetsVols(void);
     void selectWidgetDiagram(void);
 
@@ -312,7 +314,6 @@ private:
     void DrawScene();
 //    void DrawSceneBottom();
 
-    QList<Ustavka *> ustavkaObjectsList;
     void InitUstavka();
     bool isChannelInMaxNow(int ch);
     bool isChannelInMinNow(int ch);
@@ -372,6 +373,8 @@ private:
     void logginSteel(int numSteel);
 
     cServerHttp * server;
+
+    int curGroupChannel;        //текущая группа для отображения на экране
 
 protected:
     void paintEvent(QPaintEvent *event) ;

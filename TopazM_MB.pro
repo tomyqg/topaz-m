@@ -4,13 +4,13 @@
 # By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
 #-------------------------------------------------
 
-QT += core gui #script
+QT += core gui qml #script
 unix:QT += script
 QT += serialport
 QT += testlib
 QT += network
 
-VERSION = 1.0.0.2
+VERSION = 1.62
 QMAKE_TARGET_COMPANY = Teplopribor-Sensor
 QMAKE_TARGET_PRODUCT = Multigraph
 QMAKE_TARGET_DESCRIPTION = Рaperless video recorder
@@ -37,15 +37,15 @@ SOURCES += main.cpp \
     qcustomplot.cpp \
     updategraph.cpp \
     keyboard.cpp \
-    eventfilter.cpp \
+#    eventfilter.cpp \
     uartdriver.cpp \
     readoptionsfromfile.cpp \
     messages.cpp \
     writetofile.cpp \
     metrologicalcalc.cpp \
     mathresolver.cpp \
-    options_gui.cpp \
-    options_logic.cpp \
+#    options_gui.cpp \
+#    options_logic.cpp \
     mainwindow_gui.cpp \
     mainwindow_logic.cpp \
     painting.cpp \
@@ -89,7 +89,9 @@ SOURCES += main.cpp \
     Server/socket_thread.cpp \
     Drivers/usb_flash.cpp \
     Digital/digital_input.cpp \
-    smartconnect.cpp
+    smartconnect.cpp \
+    Channels/math_channel.cpp \
+    Channels/group_channels.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -140,7 +142,7 @@ win32:LIBS += -lws2_32
 HEADERS  += mainwindow.h \
          qcustomplot.h \
     updategraph.h \
-    options.h \
+#    options.h \
     keyboard.h \
     messages.h \
     uartdriver.h \
@@ -189,7 +191,9 @@ HEADERS  += mainwindow.h \
     Server/socket_thread.h \
     Drivers/usb_flash.h \
     Digital/digital_input.h \
-    smartconnect.h
+    smartconnect.h \
+    Channels/math_channel.h \
+    Channels/group_channels.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -285,8 +289,8 @@ FORMS    += mainwindow.ui \
     Grafika/buttonstyled.ui \
     menu.ui \
     settings.ui \
-    Grafika/vol.ui \
-    _options.ui
+    Grafika/vol.ui
+#    _options.ui
 
 target.path  = /opt
 INSTALLS    += target

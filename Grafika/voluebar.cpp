@@ -1,3 +1,4 @@
+//#include <QtCore>
 #include "voluebar.h"
 #include "ui_voluebar.h"
 #include "defines.h"
@@ -114,9 +115,9 @@ void wVolueBar::setVolue(double vol)
         metka->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
         if(mark->dir)
         {
-            metka->setPixmap(QPixmap(QString::fromUtf8(pathtohilimico)));
+            metka->setPixmap(QPixmap(QString/*::fromUtf8*/(pathtohilimico)));
         } else {
-            metka->setPixmap(QPixmap(QString::fromUtf8(pathtolowlimico)));
+            metka->setPixmap(QPixmap(QString/*::fromUtf8*/(pathtolowlimico)));
         }
         metka->show();
         metka->raise();

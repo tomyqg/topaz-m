@@ -1,6 +1,8 @@
 #include "ustavka.h"
 #include <QMessageBox>
 #include "kvitirovanie.h"
+#include "log.h"
+#include "defines.h"
 
 Ustavka::Ustavka(QWidget *parent)
 {
@@ -30,7 +32,6 @@ Ustavka::~Ustavka()
 
 
 void Ustavka::setUstavka(
-        int i,
         QString name,
         int ch,
         bool type,
@@ -42,7 +43,6 @@ void Ustavka::setUstavka(
 //        int relayDown
         )
 {
-    num = i;
     identifikator = name;
     numChannel = ch;
     typeFix = type;
@@ -98,10 +98,13 @@ void Ustavka::update(double cur)
     {
         timeFilter->start(DELAY_RELAY);
         // запись события в лог
-        if(setUp != up)
-            emit messToLogSignal(numChannel-1, (setUp ? stateInHighMess : stateNormHighMess));
-//        if(setDown != down)
-//            emit messToLogSignal(numChannel-1, (setDown ? stateInLowMess : stateNormLowMess));
+        QString mess = (setUp == typeFix) ? stateInHighMess : stateNormHighMess;
+        cLogger log(pathtomessages, cLogger::USTAVKA);
+        log.addMess(identifikator + " | " + mess + " | " + QString::number(cur, 'f', 2), \
+                    cLogger::LIMIT);
+
+        //        if(setDown != down)
+        //            emit messToLogSignal(numChannel-1, (setDown ? stateInLowMess : stateNormLowMess));
     }
 }
 
@@ -117,12 +120,14 @@ void Ustavka::timeoutToWorkRelay()
 //                   QMessageBox::Ok);
 //    kw.exec();
     kvitirovanie kv;
-    if(setUp && kvitirEnUp && !waitKvitirUp)
+    if((setUp == typeFix) && kvitirEnUp && !waitKvitirUp)
     {
         kv.showInfo(stateInHighMess, identifikator);
         waitKvitirUp = true;
         kv.exec();
-        emit messToLogSignal(numChannel, "(ОК)" + stateInHighMess);
+//        emit messToLogSignal(numChannel, "(ОК)" + stateInHighMess);
+        cLogger log(pathtomessages, cLogger::USTAVKA);
+        log.addMess(identifikator + " confirmed", cLogger::LIMIT);
         waitKvitirUp = false;
     }
 //    else if(setDown && kvitirEnDown && !waitKvitirDown)

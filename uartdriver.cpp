@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "options.h"
+//#include "options.h"
 #include "keyboard.h"
 #include "Channels/channelOptions.h"
 #include "uartdriver.h"

@@ -4,12 +4,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "messages.h"
-#include "options.h"
+//#include "options.h"
 #include "defines.h"
 
 #include <QtCore>
 #include <QtWidgets>
 #include <QDebug>
+
+
+QString keyboard::olderprop = "";
 
 langSimbols keyboard::simbols [] = {
     { "q", "Q", "й", "Й" },     //0
@@ -54,7 +57,7 @@ keyboard::keyboard(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(textinput(int)) );
 
-    ui->textEdit->setText(Options::olderprop);
+    ui->textEdit->setText(olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
 
     //курсор сразу в конец строки
@@ -65,8 +68,8 @@ keyboard::keyboard(QWidget *parent) :
     ui->textEdit->installEventFilter(this);
 
     //запись в журнал об использовании клавиатуры
-    cLogger mk(pathtomessages);
-    mk.addMess("Keyboard Open");
+    cLogger mk(pathtomessages, cLogger::UI);
+    mk.addMess("Keyboard > Open", cLogger::SERVICE);
     mk.deleteLater();
 
     styleUnclicked = "color: rgb(255, 255, 255);"\
@@ -92,8 +95,8 @@ keyboard::~keyboard()
 {
 //    MessageWrite mr ("Keyboard Close");
 //    mr.deleteLater();
-    cLogger mk(pathtomessages);
-    mk.addMess("Keyboard Close");
+    cLogger mk(pathtomessages, cLogger::UI);
+    mk.addMess("Keyboard > Close", cLogger::SERVICE);
     mk.deleteLater();
     delete ui;
 }
@@ -119,6 +122,9 @@ void keyboard::textinput(int b)
 
 void keyboard::on_pushButton_13_clicked()
 {
+    cLogger mk(pathtomessages, cLogger::UI);
+    mk.addMess("Keyboard " + olderprop + " > " + ui->textEdit->toPlainText(),\
+               cLogger::SERVICE);
     this->close();
 }
 

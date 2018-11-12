@@ -9,6 +9,7 @@
 #include <systemoptions.h>
 #include <defines.h>
 #include "kvitirovanie.h"
+#include "log.h"
 
 namespace Ui {
 class dMenu;
@@ -22,7 +23,7 @@ public:
     explicit dMenu(QWidget *parent = 0);
     ~dMenu();
     QTimer timerLoad;
-    void addChannels(QList<ChannelOptions *> channels, QList<Ustavka *> ustavki);
+    void addChannels(QList<ChannelOptions *> channels);
     void addSteels(QList<cSteel*> st, typeSteelTech tech);
     void selectPageWork();
     bool eventFilter(QObject* watched, QEvent* event);
@@ -50,13 +51,15 @@ public slots:
     void on_bApplication_clicked();
     void on_bBackApplications_clicked();
     void on_bUstavki_clicked();
-    void on_bBackApplications_2_clicked();
+    void on_bBackUstavki_clicked();
     void on_bDiagnost_clicked();
     void on_bBackDiagnostika_clicked();
     void on_bBackDateTime_clicked();
     void on_bEditDataTime_clicked();
     void on_bDateTimeSet_clicked();
     void slotOpenSettings(int num);
+    void slotOpenGroup(int num);
+//    void onbAddUstavkaClick();
 
 private:
     Ui::dMenu *ui;
@@ -64,8 +67,7 @@ private:
     QTimer tUpdateTime;
     QTimer tUpdateBar;
     dSettings * dialogSetingsChannel;
-    QList<ChannelOptions *> listChannels;
-    QList<Ustavka *> listUstavok;
+//    QList<ChannelOptions *> listChannels;
     void UpdateAnalyze();
     void updateSystemOptions(QString path = pathtosystemoptions);
     cSystemOptions sysOptions;
@@ -73,10 +75,15 @@ private:
     QStringList listDrives;
     kvitirovanie mesDialog;
     int countArchFiles;
+    cLogger * log;
+    void addWidgetUstavki();
+    void addWidgetGroup();
+    int curGroupEdit;       //текущая редактируемая группа каналов
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
 
+    void clearLayout(QLayout *layout, bool deleteWidgets = true);
 private slots:
 
     void on_bResetToDefault_clicked();
@@ -161,9 +168,30 @@ private slots:
 
     void on_bBackDigitOutputSettings_clicked();
 
+    void on_bAddUstavka_clicked();
+
+    void on_bMath_clicked();
+
+    void on_bBackMath_clicked();
+
+    void on_bGroups_clicked();
+
+    void on_bBackGroup_clicked();
+
+    void on_bAddGroup_2_clicked();
+
+    void on_bBackGroupSetting_clicked();
+
+    void on_bAddGroup_clicked();
+
+    void on_bDelGroup_clicked();
+
+    void on_bApplayGroup_clicked();
+
 signals:
     void saveButtonSignal();
     void finishCopyArchive();
+    void newUstavka(int num);
 };
 
 #endif // MENU_H

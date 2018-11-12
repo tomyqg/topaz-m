@@ -38,12 +38,14 @@ const typeTableSignalTypes tableSignalTypes[] = {
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
 
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+
+extern QList<ChannelOptions *> listChannels;
+extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 
 dSettings::dSettings(QList<ChannelOptions*> channels,
-                     QList<Ustavka*> ustavki,
                      int num,
                      int page,
                      cArchivator *ar,
@@ -92,6 +94,14 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
 //    ui->label_24->hide();
     ui->frameButUstavk_2->hide();
     ui->frameButUstavk->hide();
+    ui->ustavkaVolDown->hide();
+    ui->label_29->hide();
+    ui->releyDown->hide();
+    ui->label_32->hide();
+    ui->messageOnDown->hide();
+    ui->label_30->hide();
+    ui->messageOffDown->hide();
+    ui->label_31->hide();
     // ----->
 
     ui->saveButton->setColorText(ColorBlue);
@@ -124,8 +134,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->buttonBackUstavki->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->buttonResetSteel->setColorText(ColorBlue);
     ui->buttonResetSteel->setColorBg(QColor(0xf0,0xf0,0xf0));
+    ui->bDeleteUstavka->setColorText(ColorBlue);
+    ui->bDeleteUstavka->setColorBg(QColor(0xf0,0xf0,0xf0));
 
-    addChannel(channels, ustavki, num);
+    addChannel(listChannels, num);
 
     //адаптация окна под отображение сообщений (по-умолчанию)
     ui->stackedWidget->setCurrentIndex(page);
@@ -177,10 +189,15 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         QLineEdit *le = lineeditList.at(i);
         le->installEventFilter(this);
     }
-    QList<QDoubleSpinBox*> SpinBox= findChildren<QDoubleSpinBox*> ();
+    QList<QDoubleSpinBox*> SpinBox = findChildren<QDoubleSpinBox*> ();
     for (int i = 0; i < SpinBox.count(); ++i) {
         QDoubleSpinBox *spbox = SpinBox.at(i);
         spbox->installEventFilter(this);
+    }
+    QList<QComboBox*> ComboBox = findChildren<QComboBox*> ();
+    for (int i = 0; i < ComboBox.count(); ++i) {
+        QComboBox *combox = ComboBox.at(i);
+        combox->installEventFilter(this);
     }
 
     if(page == 4)
@@ -245,8 +262,13 @@ void dSettings::updateWidgets()
 
         for (int var = 0; var < messagesarray.count() ; ++var) {
             QJsonObject mes = messagesarray.at(var).toObject();
-            QString num = QString("%1").arg(var+1, 4, 10, QChar('0'));
-            ui->listWidget->addItem(num + " | " + mes.value("D").toString() +" "+  mes.value("T").toString()+" | "+ mes.value("M").toString());
+            if(mes.value("C") != cLogger::SERVICE)
+            {
+                QString num = QString("%1").arg(var+1, 4, 10, QChar('0'));
+                ui->listWidget->addItem(num + " | " + mes.value("D").toString() \
+                                        + " " +  mes.value("T").toString() \
+                                        + " | "+ mes.value("M").toString());
+            }
         }
         ui->listWidget->scrollToBottom();
     }
@@ -293,7 +315,7 @@ void dSettings::updateWidgets()
     else if(ui->stackedWidget->currentIndex() == 5)
     {
         ui->saveButton->hide();
-        ui->nameSubMenu->setText("<html><head/><body><p>АРХИВ<br>СТАЛИ</p></body></html>");
+        ui->nameSubMenu->setText("<html><head/><body><p>АРХИВ<br>ЗАМЕРОВ</p></body></html>");
         h = 72;
 
     }
@@ -460,16 +482,15 @@ void dSettings::updateGraf(int period)
 
 }
 
-void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ustavki, int num)
+void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
 {
     //запоминаем канал, чтобы потом в него сохранить изменения
-    listChannels = channels;
-    listUstavok = ustavki;
+//    listChannels = channels;
     int ch_num = num;
     int ust_num = num;
     if(ch_num == 0) ch_num = 1;
     if(ch_num > channels.size()) ch_num = channels.size();
-    if(ust_num > ustavki.size()) ust_num = ustavki.size();
+    if(ust_num > listUstavok.size()) ust_num = listUstavok.size();
     numChannel = ch_num;
     channel = listChannels.at(ch_num-1);
     ustavka = listUstavok.at(ust_num-1);
@@ -497,6 +518,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, QList<Ustavka*> ust
 //    ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
     ui->messageOn->setText(ustavka->getMessInHigh());
     ui->messageOff->setText(ustavka->getMessNormHigh());
+    ui->kvitir->setCurrentIndex(ustavka->getKvitirUp());
 //    ui->messageOnDown->setText(ustavka->getMessInLow());
 //    ui->messageOffDown->setText(ustavka->getMessNormHigh());
 
@@ -520,7 +542,10 @@ void dSettings::updateBar()
 //                break;
             }
         }
-        ui->bar->setColor(channel->GetNormalColor(), channel->GetMinimumColor()); //Vag: переделать на QColor
+//        QColor colors[8] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4,\
+//                           ColorCh1Light, ColorCh2Light,\
+//                           ColorCh3Light, ColorCh4Light};
+        ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
         ui->bar->setBarDiapazon(max(abs(ui->scaleUp->value()), abs(ui->scaleDown->value())));
         ui->bar->setVolue(channel->GetCurrentChannelValue());
@@ -570,8 +595,7 @@ void dSettings::saveParam()
         channel->SetDiapason(ui->sensorDiapazon->currentIndex());
         channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
 
-        ustavka->setUstavka(
-                    ustavka->getNum(), \
+        ustavka->setUstavka(\
                     ui->identifikator->text().toUtf8(), \
                     ui->ustavkaChannel->currentIndex(), \
                     ui->typeFix->currentIndex(), \
@@ -584,6 +608,7 @@ void dSettings::saveParam()
                     );
         ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
         ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
+        ustavka->setKvitirUp(ui->kvitir->currentIndex());
 //        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
 //        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
     }
@@ -594,13 +619,7 @@ void dSettings::saveParam()
 
 }
 
-void dSettings::on_buttonBackUstavki_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-    updateWidgets();
-}
-
-void dSettings::on_saveButton_clicked()
+void dSettings::saveParamToFile()
 {
     ui->load->setHidden(false);
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
@@ -614,10 +633,19 @@ void dSettings::on_saveButton_clicked()
     }
     else
     {
-        cFileManager::writeChannelsSettings(pathtooptions, listChannels, listUstavok);
+        cFileManager::writeChannelsSettings(pathtooptions, listChannels);
     }
+}
 
+void dSettings::on_buttonBackUstavki_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    updateWidgets();
+}
 
+void dSettings::on_saveButton_clicked()
+{
+    saveParamToFile();
 }
 
 void dSettings::on_exitButton_clicked()
@@ -652,9 +680,9 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
           (QString::fromLatin1(watched->metaObject()->className()) == "QLineEdit") || \
           (QString::fromLatin1(watched->metaObject()->className()) == "QDoubleSpinBox")))
     {
-        Options::olderprop = watched->property("text").toString();
         //Vag: нужно переделать и передавать строку напрямую в конструктор клавиатуры
         keyboard kb(this);
+        keyboard::olderprop = watched->property("text").toString();
         kb.setModal(true);
         kb.exec();
         watched->setProperty("value", kb.getcustomstring() );
@@ -665,6 +693,11 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
     }
 #endif
 
+    if ( (event->type() == QEvent::MouseButtonRelease) && \
+         (QString::fromLatin1(watched->metaObject()->className()) == "QComboBox"))
+    {
+
+    }
 
 //    QListWidget *lw = (QListWidget*)(watched);
 //    if(lw/* && (watched == ui->listWidget)*/)
@@ -1047,4 +1080,11 @@ void dSettings::on_steelRelayMeasure_activated(int index)
 void dSettings::on_steelRelayTimeOut_activated(int index)
 {
 //    curSteel->relais[3] = index - 1;
+}
+
+void dSettings::on_bDeleteUstavka_clicked()
+{
+    listUstavok.removeAt(ustavka->getNum());
+    saveParamToFile();
+    this->close();
 }

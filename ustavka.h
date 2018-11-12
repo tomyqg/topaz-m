@@ -18,7 +18,7 @@ public:
     ~Ustavka();
 //    static int ResID;   // Счётчик номеров уставок
 //    int getID();        // Функция возврата номера уставки
-    void setUstavka(int i, QString name, int ch, bool type, double hi, double hiHist, int relayUp);
+    void setUstavka(QString name, int ch, bool type, double hi, double hiHist, int relayUp);
     int getUstavka(); // при сработке возвращает номер реле, 0 - нет сработки уставки
     void update(double cur);    // обновление состояний уставки. вызывать периодически из главного потока
     double getHiStateValue() {return stateHiValue; }

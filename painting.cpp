@@ -5,12 +5,14 @@
 #include "messages.h"
 #include "metrologicalcalc.h"
 #include "mathresolver.h"
-#include "options.h"
+//#include "options.h"
 #include "defines.h"
 #include "stackedoptions.h"
+#include "Channels/group_channels.h"
 
 extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
+extern QList<cGroupChannels*> listGroup;
 
 void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
 {
@@ -695,10 +697,27 @@ void MainWindow::PaintPolarDiagramm()
     int channel4value = GetPolarAngle();
 
     //получение текущих значений в процентах
-    float channel1length = channel1.GetValuePercent();
-    float channel2length = channel2.GetValuePercent();
-    float channel3length = channel3.GetValuePercent();
-    float channel4length = channel4.GetValuePercent();
+    cGroupChannels * group = listGroup.at(curGroupChannel);
+    float channel1length = NAN;
+    float channel2length = NAN;
+    float channel3length = NAN;
+    float channel4length = NAN;
+    if(group->typeInput[0] == 1)
+    {
+        channel1length = group->channel[0]->GetValuePercent();
+    }
+    if(group->typeInput[0] == 1)
+    {
+        channel2length = group->channel[1]->GetValuePercent();
+    }
+    if(group->typeInput[0] == 1)
+    {
+        channel3length = group->channel[2]->GetValuePercent();
+    }
+    if(group->typeInput[0] == 1)
+    {
+        channel4length = group->channel[3]->GetValuePercent();
+    }
 
     //корректировка данных для диаграммы
     if(channel1length < 0) channel1length = 0;
@@ -718,10 +737,10 @@ void MainWindow::PaintPolarDiagramm()
 
     QColor color1,color2,color3,color4;
 
-    color1 = channel1.GetStateDependentColor();
-    color2 = channel2.GetStateDependentColor();
-    color3 = channel3.GetStateDependentColor();
-    color4 = channel4.GetStateDependentColor();
+    color1 = ColorCh1;
+    color2 = ColorCh2;
+    color3 = ColorCh3;
+    color4 = ColorCh4;
     
 #define SHIFT_DIAGRAM_X 5
 #define SHIFT_DIAGRAM_Y (-5)
@@ -992,18 +1011,18 @@ void MainWindow::ReactOnTouch()
              (ypos>confirmwindowposy) &&
              (ypos<confirmwindowposy2) )
     {
-        if (channel4.GetConfirmationNeed() == true) {
-            channel4.SetConfirmationNeed(false);
-        }
-        if (channel3.GetConfirmationNeed() == true) {
-            channel3.SetConfirmationNeed(false);
-        }
-        if (channel2.GetConfirmationNeed() == true) {
-            channel2.SetConfirmationNeed(false);
-        }
-        if (channel1.GetConfirmationNeed() == true) {
-            channel1.SetConfirmationNeed(false);
-        }
+//        if (channel4.GetConfirmationNeed() == true) {
+//            channel4.SetConfirmationNeed(false);
+//        }
+//        if (channel3.GetConfirmationNeed() == true) {
+//            channel3.SetConfirmationNeed(false);
+//        }
+//        if (channel2.GetConfirmationNeed() == true) {
+//            channel2.SetConfirmationNeed(false);
+//        }
+//        if (channel1.GetConfirmationNeed() == true) {
+//            channel1.SetConfirmationNeed(false);
+//        }
     }
     
     int x1right  = 940;
