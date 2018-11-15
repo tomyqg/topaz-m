@@ -59,6 +59,7 @@ public slots:
     void on_bDateTimeSet_clicked();
     void slotOpenSettings(int num);
     void slotOpenGroup(int num);
+    void slotOpenChannel(int num);
 //    void onbAddUstavkaClick();
 
 private:
@@ -78,6 +79,7 @@ private:
     cLogger * log;
     void addWidgetUstavki();
     void addWidgetGroup();
+    void addWidgetChannels();
     int curGroupEdit;       //текущая редактируемая группа каналов
 
 //    QList<cSteel*> listSteels;

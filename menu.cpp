@@ -92,6 +92,7 @@ dMenu::dMenu(QWidget *parent) :
 
     //добавить виджеты групп каналов
     addWidgetGroup();
+    addWidgetChannels();
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
@@ -151,7 +152,7 @@ void dMenu::updateSystemOptions(QString path)
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
     ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
-    if(ssc.isConnect() && csc.isConnect())
+    if(ssc.isConnect() && (listChannels.size() > 0))
     {
         ui->groupBoxTypePribor->show();
         if(sysOptions.display == cSystemOptions::Steel)
@@ -217,6 +218,29 @@ void dMenu::addWidgetGroup()
     }
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutGroup->addItem(verticalSpacer);
+}
+
+void dMenu::addWidgetChannels()
+{
+    clearLayout(ui->verticalLayoutChannels);
+
+    // генерация виджетов (кнопок) уставок
+    int i = 0;
+    foreach (ChannelOptions * channel, listChannels) {
+        wButtonStyled * bChannel = new wButtonStyled(ui->widgetScrollAreaChannels);
+        bChannel->index = i+1;
+        QString nameChannel = channel->GetChannelName().size() ? (" | " + channel->GetChannelName()) : " ";
+        bChannel->setText("КАНАЛ " + QString::number(bChannel->index) + nameChannel);
+        bChannel->setMinimumSize(QSize(0, 70));
+        bChannel->setColorText(QColor(0xff,0xff,0xff));
+        bChannel->setColorBg(ColorButtonNormal);
+        bChannel->setAlignLeft();
+        connect(bChannel, SIGNAL(clicked(int)), this, SLOT(slotOpenChannel(int)));
+        ui->verticalLayoutChannels->addWidget(bChannel);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutChannels->addItem(verticalSpacer);
 }
 
 void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
@@ -318,6 +342,7 @@ void dMenu::on_bAnalog_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
     ui->nameSubMenu->setText("АНАЛОГ. ВХОДЫ");
+    addWidgetChannels();
 }
 
 void dMenu::openSettingsChannel(int num, int page)
@@ -462,15 +487,6 @@ void dMenu::slotOpenGroup(int num)
         combo->addItems(listComboChannels);
     }
 
-//    ui->comboGroupChannel1->clear();
-//    ui->comboGroupChannel1->addItems(listComboChannels);
-//    ui->comboGroupChannel2->clear();
-//    ui->comboGroupChannel2->addItems(listComboChannels);
-//    ui->comboGroupChannel3->clear();
-//    ui->comboGroupChannel3->addItems(listComboChannels);
-//    ui->comboGroupChannel4->clear();
-//    ui->comboGroupChannel4->addItems(listComboChannels);
-
     for(int i = 0; i < listChannels.size(); i++)
     {
         for(int k = 0; k < listCombo.size(); k++)
@@ -485,6 +501,11 @@ void dMenu::slotOpenGroup(int num)
 
     ui->stackedWidget->setCurrentIndex(23);
     ui->nameSubMenu->setText("ГРУППА " + QString::number(num));
+}
+
+void dMenu::slotOpenChannel(int num)
+{
+    openSettingsChannel(num, 0);
 }
 
 //void dMenu::onbAddUstavkaClick()

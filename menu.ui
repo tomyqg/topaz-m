@@ -360,7 +360,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>23</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1040,9 +1040,6 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
            </widget>
            <widget class="QWidget" name="channels">
             <layout class="QVBoxLayout" name="verticalLayout_9">
-             <property name="spacing">
-              <number>8</number>
-             </property>
              <property name="leftMargin">
               <number>29</number>
              </property>
@@ -1052,97 +1049,172 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
              <property name="rightMargin">
               <number>53</number>
              </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
              <item>
-              <widget class="wButtonStyled" name="bChannel1">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+              <widget class="QScrollArea" name="scrollAreaChannels">
+               <property name="styleSheet">
+                <string notr="true">QScrollBar:vertical {              
+        background:rgb(179, 179, 179);
+        margin: 0px 0px 0px 0px;
+		border-radius: 5px;
+		width:10px; 
+    }
+QScrollBar::handle:vertical {
+       background:rgb(77, 77, 77);
+        min-height: 50px;
+		border-radius: 5px;
+    }
+QScrollBar::add-line:vertical {
+       background:rgb(179, 179, 179);
+        height: 10px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+
+QScrollBar::sub-line:vertical {
+        background:rgb(77, 77, 77);
+        height: 10 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+		border-radius: 5px;
+    }
+QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
+        background:rgb(77, 77, 77);
+        height: 10px;
+		border-radius: 5px;
+    }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}</string>
                </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="text">
-                <string>КАНАЛ 1</string>
+               <property name="widgetResizable">
+                <bool>true</bool>
                </property>
+               <widget class="QWidget" name="widgetScrollAreaChannels">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>743</width>
+                  <height>473</height>
+                 </rect>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_30">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayoutChannels">
+                   <item>
+                    <widget class="wButtonStyled" name="bChannel1">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>70</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>КАНАЛ 1</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="wButtonStyled" name="bChannel2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>70</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>КАНАЛ 2</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="wButtonStyled" name="bChannel3">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>70</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>КАНАЛ 3</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="wButtonStyled" name="bChannel4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>70</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>КАНАЛ 4</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_7">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>165</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
               </widget>
-             </item>
-             <item>
-              <widget class="wButtonStyled" name="bChannel2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>КАНАЛ 2</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="wButtonStyled" name="bChannel3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>КАНАЛ 3</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="wButtonStyled" name="bChannel4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>КАНАЛ 4</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="verticalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>165</height>
-                </size>
-               </property>
-              </spacer>
              </item>
              <item>
               <widget class="wButtonStyled" name="bBackChannels">
@@ -4864,7 +4936,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>729</width>
+                  <width>111</width>
                   <height>778</height>
                  </rect>
                 </property>
@@ -5914,7 +5986,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>729</width>
+                  <width>538</width>
                   <height>690</height>
                  </rect>
                 </property>
@@ -6487,8 +6559,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>397</height>
+                  <width>16</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -6745,8 +6817,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>397</height>
+                  <width>108</width>
+                  <height>78</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_29">

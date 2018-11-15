@@ -270,19 +270,27 @@ QVector<double> cArchivator::getVector(int ch)
     foreach(sTickCh tick, arrTicks)
     {
         QDateTime timeArch(time2000.addSecs(tick.time));
+        //индекс точки в массиве (в секундах)
         int vectorIndex = firstTime.secsTo(timeArch);
+        //индекс точки для графика с большим периодом
         int vectorIndexBigPeriod = vectorIndex / numAvg;
+        //если индекс не вышел за пределы периода
         if((vectorIndexBigPeriod >= 0) && (vectorIndexBigPeriod < (period / numAvg)))
         {
+            //если индекс следующий, то снова усреднять точки в одном индексе
             if(vectorIndexBigPeriod > lastIndexBig)
             {
+                //получается, что обновляет выходной массив \
+                сразу при переходе на новый индекс
                 if(countAvg != 0) ret.replace(lastIndexBig, avg / countAvg);
                 lastIndexBig = vectorIndexBigPeriod;
                 countAvg = 0;
                 avg = 0;
             }
             avg += tick.channel[ch];
-            countAvg ++;
+            if(tick.channel[ch] == tick.channel[ch]){
+                countAvg ++;
+            }
         }
     }
     return ret;

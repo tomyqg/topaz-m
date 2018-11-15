@@ -59,109 +59,6 @@ int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelVa
 
 void MainWindow::DrawScene()
 {
-//    scene->clear(); // очищаем чтобы не было утечек памяти
-//    //    ui->graphicsView->setScene(scene);  // Set graphics scene into graphicsView
-//    //    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-//    //    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    //    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-//    // задается вручную
-//    int smallrectingleheight = 90; // высота прямоугольничка в пикселях задается вручную
-//    //высчитываются
-//    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
-//    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-//    int smallrectinglewidth = widgwidth / 4; // ширина прямоугольничка в пикселях высчитывается
-//    int alerttextsize = smallrectingleheight/2;
-//    int smalltextsize = (smallrectingleheight - alerttextsize ) / 4;
-
-
-//    //redice size anyway
-//    alerttextsize/=1.5;
-//    smalltextsize/=1.2;
-//    // задаем координаты отображения квадратов
-//    channel1.xposition = 0;
-//    channel1.yposition = 0;
-//    channel1.w = smallrectinglewidth;
-//    channel1.h = smallrectingleheight;
-
-//    channel2.xposition = smallrectinglewidth;
-//    channel2.yposition = 0;
-//    channel2.w = smallrectinglewidth;
-//    channel2.h = smallrectingleheight;
-
-//    channel3.xposition = smallrectinglewidth*2;
-//    channel3.yposition = 0;
-//    channel3.w = smallrectinglewidth;
-//    channel3.h = smallrectingleheight;
-
-//    channel4.xposition = smallrectinglewidth*3;
-//    channel4.yposition = 0;
-//    channel4.w = smallrectinglewidth;
-//    channel4.h = smallrectingleheight;
-
-//    // создаем лист объектов для его отображения на графике
-
-
-//    QList<ChannelOptions *> ChannelsObjectsList;
-
-//    ChannelsObjectsList.append(&channel1);
-//    ChannelsObjectsList.append(&channel2);
-//    ChannelsObjectsList.append(&channel3);
-//    ChannelsObjectsList.append(&channel4);
-
-//    // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
-//    int ch = 0;
-//    foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
-//        {
-//            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
-
-//            // рисуем прямоугольник  с заполненным цветом
-//            scene->addRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h,QPen(Qt::black),QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
-//            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-
-//            if (ChannelValueString == NaNMessage)
-//                ChannelValueString = ObryvErrorMessage;
-//            else
-//            {
-////                if (!ui->percentCheckBox->checkState())
-//                    ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-////                else
-////                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
-//            }
-
-//            QGraphicsTextItem *ChannelValueText = scene->addText(ChannelValueString); //ChannelValueString
-//            ChannelValueText->setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-
-//            int xoffset = GetXOffset(smallrectinglewidth, ChannelValueText);
-//            ChannelValueText->setPos(Chanel->xposition + xoffset, 5);
-
-//            QGraphicsTextItem *ChannelNameText = scene->addText(Chanel->GetChannelName());
-//            ChannelNameText->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-//            xoffset = GetXOffset(smallrectinglewidth, ChannelNameText);
-//            ChannelNameText->setPos(Chanel->xposition + xoffset, -5);
-
-//            QGraphicsTextItem *UnitsNameText = scene->addText(Chanel->GetUnitsName());
-//            UnitsNameText->setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-//            xoffset = GetXOffset(smallrectinglewidth, UnitsNameText);
-//            UnitsNameText->setPos(Chanel->xposition + xoffset, 55);
-
-//            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)/*Chanel->MinimumNow() || Chanel->MaximumNow()*/) )
-//            {
-//                ChannelValueText->setDefaultTextColor(Qt::red);
-//                ChannelNameText->setDefaultTextColor(Qt::red);
-//            }
-//            else
-//            {
-//                ChannelValueText->setDefaultTextColor(Qt::black);
-//                ChannelNameText->setDefaultTextColor(Qt::black);
-//            }
-//            //if (Chanel->IsChannelMathematical()) // учесть позже матем.канал.
-//            //painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-
-//            ch++;
-//        }
-//    }
-
 
 }
 
@@ -171,34 +68,58 @@ void MainWindow::AddValuesToBuffer()
     X_Coordinates_archive.append(xoffset);
     X_Date_Coordinates.append(QDateTime::currentDateTime());
 
-    Y_coordinates_Chanel_1.append(listChannels.at(0)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_2.append(listChannels.at(1)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_3.append(listChannels.at(2)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_4.append(listChannels.at(3)->GetCurrentChannelValue());
+    QVector<double> * vectors[] = {&Y_coordinates_Chanel_1,\
+                                &Y_coordinates_Chanel_2,\
+                                &Y_coordinates_Chanel_3,\
+                                &Y_coordinates_Chanel_4};
+    QVector<double> * vectorsArch[] = {&Y_coordinates_Chanel_1_archive,\
+                                &Y_coordinates_Chanel_2_archive,\
+                                &Y_coordinates_Chanel_3_archive,\
+                                &Y_coordinates_Chanel_4_archive};
 
-    Y_coordinates_Chanel_1_archive.append(listChannels.at(0)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_2_archive.append(listChannels.at(1)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_3_archive.append(listChannels.at(2)->GetCurrentChannelValue());
-    Y_coordinates_Chanel_4_archive.append(listChannels.at(3)->GetCurrentChannelValue());
+    int i = 0;
+    foreach (ChannelOptions * channel, listChannels) {
+        vectors[i]->append(channel->GetCurrentChannelValue());
+        vectorsArch[i]->append(channel->GetCurrentChannelValue());
+        while (vectors[i]->length()>150)
+        {
+            vectors[i]->removeFirst();
+        }
+        while (vectorsArch[i]->length()>15000)
+        {
+            vectorsArch[i]->removeFirst();
+        }
+        i++;
+    }
+
+//    Y_coordinates_Chanel_1.append(listChannels.at(0)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_2.append(listChannels.at(1)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_3.append(listChannels.at(2)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_4.append(listChannels.at(3)->GetCurrentChannelValue());
+
+//    Y_coordinates_Chanel_1_archive.append(listChannels.at(0)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_2_archive.append(listChannels.at(1)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_3_archive.append(listChannels.at(2)->GetCurrentChannelValue());
+//    Y_coordinates_Chanel_4_archive.append(listChannels.at(3)->GetCurrentChannelValue());
 
     while (X_Coordinates.length()>150)
     {
         X_Coordinates.removeFirst();
         X_Date_Coordinates.removeFirst();
-        Y_coordinates_Chanel_1.removeFirst();
-        Y_coordinates_Chanel_2.removeFirst();
-        Y_coordinates_Chanel_3.removeFirst();
-        Y_coordinates_Chanel_4.removeFirst();
+//        Y_coordinates_Chanel_1.removeFirst();
+//        Y_coordinates_Chanel_2.removeFirst();
+//        Y_coordinates_Chanel_3.removeFirst();
+//        Y_coordinates_Chanel_4.removeFirst();
     }
 
     //пока нет ограничений на объём хранения
     while (X_Coordinates_archive.length()>15000)
     {
         X_Coordinates_archive.removeFirst();
-        Y_coordinates_Chanel_1_archive.removeFirst();
-        Y_coordinates_Chanel_2_archive.removeFirst();
-        Y_coordinates_Chanel_3_archive.removeFirst();
-        Y_coordinates_Chanel_4_archive.removeFirst();
+//        Y_coordinates_Chanel_1_archive.removeFirst();
+//        Y_coordinates_Chanel_2_archive.removeFirst();
+//        Y_coordinates_Chanel_3_archive.removeFirst();
+//        Y_coordinates_Chanel_4_archive.removeFirst();
     }
 
     int tickstep = GetTickStep();
@@ -742,416 +663,159 @@ void MainWindow::GrafsUpdateTrends()
 
 void MainWindow::GrafsUpdateNone()
 {
-
     ui->MessagesWidget->update();
-
-//    ui->customPlot->clearGraphs();
-//    ui->customPlot->clearItems();
-
-//    ui->customPlot->replot();
-//    ui->customPlot->clearGraphs();
-//    ui->customPlot->clearItems();
 }
 
-void MainWindow::GrafsUpdateBars()
+void MainWindow::updateChannelSlot(int ch)
 {
-//    QVector<double> Bar1_X_Coord,Bar2_X_Coord,Bar3_X_Coord,Bar4_X_Coord;
-//    QVector<double> Bar1_Y_Coord,Bar2_Y_Coord,Bar3_Y_Coord,Bar4_Y_Coord;
-
-//    Bar1_X_Coord.append(15);
-//    Bar1_X_Coord.append(25);
-//    Bar2_X_Coord.append(35);
-//    Bar2_X_Coord.append(45);
-//    Bar3_X_Coord.append(55);
-//    Bar3_X_Coord.append(65);
-//    Bar4_X_Coord.append(75);
-//    Bar4_X_Coord.append(85);
-
-//    Bar1_Y_Coord.append(channel1.GetCurrentChannelValue());
-//    Bar1_Y_Coord.append(channel1.GetCurrentChannelValue());
-//    Bar2_Y_Coord.append(channel2.GetCurrentChannelValue());
-//    Bar2_Y_Coord.append(channel2.GetCurrentChannelValue());
-//    Bar3_Y_Coord.append(channel3.GetCurrentChannelValue());
-//    Bar3_Y_Coord.append(channel3.GetCurrentChannelValue());
-//    Bar4_Y_Coord.append(channel4.GetCurrentChannelValue());
-//    Bar4_Y_Coord.append(channel4.GetCurrentChannelValue());
-
-//    QVector<double> x1lim,x2lim,x3lim,x4lim;
-//    QVector<double> y1max,y2max,y3max,y4max;
-//    QVector<double> y1min,y2min,y3min,y4min;
-
-//    // делаем чтоб штрихпунктиром отображалась верхняя и нижняя величина на графике за  период
-
-//    double chan1higherstate = channel1.GetMaximumChannelValue();
-//    double chan2higherstate = channel2.GetMaximumChannelValue();
-//    double chan3higherstate = channel3.GetMaximumChannelValue();
-//    double chan4higherstate = channel4.GetMaximumChannelValue();
-
-//    double chan1lowerstate = channel1.GetMinimumChannelValue();
-//    double chan2lowerstate = channel2.GetMinimumChannelValue();
-//    double chan3lowerstate = channel3.GetMinimumChannelValue();
-//    double chan4lowerstate = channel4.GetMinimumChannelValue();
-
-//    y1max.append(chan1higherstate);
-//    y1max.append(chan1higherstate);
-//    y1max.append(0);
-//    y1max.append(chan1higherstate);
-//    y1max.append(0);
-//    y1max.append(chan1higherstate);
-
-//    y2max.append(chan2higherstate);
-//    y2max.append(chan2higherstate);
-//    y2max.append(0);
-//    y2max.append(chan2higherstate);
-//    y2max.append(0);
-//    y2max.append(chan2higherstate);
-
-//    y3max.append(chan3higherstate);
-//    y3max.append(chan3higherstate);
-//    y3max.append(0);
-//    y3max.append(chan3higherstate);
-//    y3max.append(0);
-//    y3max.append(chan3higherstate);
-
-//    y4max.append(chan4higherstate);
-//    y4max.append(chan4higherstate);
-//    y4max.append(0);
-//    y4max.append(chan4higherstate);
-//    y4max.append(0);
-//    y4max.append(chan4higherstate);
-
-//    y1min.append(chan1lowerstate);
-//    y1min.append(chan1lowerstate);
-//    y1min.append(0);
-//    y1min.append(chan1lowerstate);
-//    y1min.append(0);
-//    y1min.append(chan1lowerstate);
-
-//    y2min.append(chan2lowerstate);
-//    y2min.append(chan2lowerstate);
-//    y2min.append(0);
-//    y2min.append(chan2lowerstate);
-//    y2min.append(0);
-//    y2min.append(chan2lowerstate);
-
-//    y3min.append(chan3lowerstate);
-//    y3min.append(chan3lowerstate);
-//    y3min.append(0);
-//    y3min.append(chan3lowerstate);
-//    y3min.append(0);
-//    y3min.append(chan3lowerstate);
-
-//    y4min.append(chan4lowerstate);
-//    y4min.append(chan4lowerstate);
-//    y4min.append(0);
-//    y4min.append(chan4lowerstate);
-//    y4min.append(0);
-//    y4min.append(chan4lowerstate);
-
-//    x1lim.append(Bar1_X_Coord.at(0));
-//    x1lim.append(Bar1_X_Coord.at(1));
-//    x1lim.append(Bar1_X_Coord.at(0));
-//    x1lim.append(Bar1_X_Coord.at(0));
-//    x1lim.append(Bar1_X_Coord.at(1));
-//    x1lim.append(Bar1_X_Coord.at(1));
-
-//    x2lim.append(Bar2_X_Coord.at(0));
-//    x2lim.append(Bar2_X_Coord.at(1));
-//    x2lim.append(Bar2_X_Coord.at(0));
-//    x2lim.append(Bar2_X_Coord.at(0));
-//    x2lim.append(Bar2_X_Coord.at(1));
-//    x2lim.append(Bar2_X_Coord.at(1));
-
-//    x3lim.append(Bar3_X_Coord.at(0));
-//    x3lim.append(Bar3_X_Coord.at(1));
-//    x3lim.append(Bar3_X_Coord.at(0));
-//    x3lim.append(Bar3_X_Coord.at(0));
-//    x3lim.append(Bar3_X_Coord.at(1));
-//    x3lim.append(Bar3_X_Coord.at(1));
-
-//    x4lim.append(Bar4_X_Coord.at(0));
-//    x4lim.append(Bar4_X_Coord.at(1));
-//    x4lim.append(Bar4_X_Coord.at(0));
-//    x4lim.append(Bar4_X_Coord.at(0));
-//    x4lim.append(Bar4_X_Coord.at(1));
-//    x4lim.append(Bar4_X_Coord.at(1));
-
-//    ui->customPlot->clearGraphs();
-//    ui->customPlot->clearItems();
-
-//    ui->customPlot->xAxis->setRange(0, 100);
-//    graphPen.setWidth(GraphWidthinPixels);
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setName("Bargraf");
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(Bar1_X_Coord, Bar1_Y_Coord);
-//    ui->customPlot->graph()->setBrush(QBrush(ColorCh1)); // first graph will be filled with translucent blue
-//    graphPen.setColor(ColorCh1 );
-//    ui->customPlot->graph()->setPen(graphPen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(Bar2_X_Coord, Bar2_Y_Coord);
-//    ui->customPlot->graph()->setBrush(QBrush(ColorCh2)); // first graph will be filled with translucent blue
-//    graphPen.setColor(ColorCh2);
-//    ui->customPlot->graph()->setPen(graphPen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(Bar3_X_Coord, Bar3_Y_Coord);
-//    ui->customPlot->graph()->setBrush(QBrush(ColorCh3)); // first graph will be filled with translucent blue
-//    graphPen.setColor(ColorCh3);
-//    ui->customPlot->graph()->setPen(graphPen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(Bar4_X_Coord, Bar4_Y_Coord);
-//    ui->customPlot->graph()->setBrush(QBrush(ColorCh4)); // first graph will be filled with translucent blue
-//    graphPen.setColor(ColorCh4);
-//    ui->customPlot->graph()->setPen(graphPen);
-
-//    LabelsBar.clear();
-//    LabelsBar.append("0");LabelsBar.append(channel1.GetChannelName());LabelsBar.append(channel2.GetChannelName());LabelsBar.append(channel3.GetChannelName());LabelsBar.append(channel4.GetChannelName());
-
-//    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-//    ui->customPlot->xAxis->setTickStep(20); // 60 secs btw timestamp
-//    ui->customPlot->xAxis->setAutoTickLabels(false);
-//    ui->customPlot->xAxis->setTickVectorLabels(LabelsBar);
-
-//    // рисуем границы каналов каждого барграфа
-
-//    QPen dottedpen = QPen(Qt::red, 1, Qt::DashLine);
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x1lim, y1max);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x2lim, y2max);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x3lim, y3max);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x4lim, y4max);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    dottedpen = QPen(Qt::green, 1, Qt::DashLine);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x1lim, y1min);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x2lim, y2min);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x3lim, y3min);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setData(x4lim, y4min);
-//    ui->customPlot->graph()->setPen(dottedpen);
-
-//    // add the arrows:
-
-//    QList<ChannelOptions *> ChannelsObjectsList;
-
-//    ChannelsObjectsList.append(&channel1);
-//    ChannelsObjectsList.append(&channel2);
-//    ChannelsObjectsList.append(&channel3);
-//    ChannelsObjectsList.append(&channel4);
-
-//    QList<int> arrowsendcoords;
-
-//    arrowsendcoords.append(Bar1_X_Coord.at(0) - 1);
-//    arrowsendcoords.append(Bar2_X_Coord.at(0) - 1);
-//    arrowsendcoords.append(Bar3_X_Coord.at(0) - 1);
-//    arrowsendcoords.append(Bar4_X_Coord.at(0) - 1);
-
-//    // рисуем стрелки для каждой уставки
-
-//    int barindex = 0 ;
-//    foreach (ChannelOptions * Chanel, ChannelsObjectsList)
-//    {
-//        QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
-//        arrow->setPen(QPen(Qt::red, 3, Qt::SolidLine));
-//        //        arrow->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka1.getStateValue() );
-//        //        arrow->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka1.getStateValue() );
-//        arrow->setHead(QCPLineEnding::esSpikeArrow);
-//        ui->customPlot->addItem(arrow);
-
-//        QCPItemLine *arrow2 = new QCPItemLine(ui->customPlot);
-//        arrow2->setPen(QPen(Qt::green, 3, Qt::SolidLine));
-//        //        arrow2->start->setCoords(arrowsendcoords.at(barindex)-4,Chanel->ustavka2.getStateValue() );
-//        //        arrow2->end->setCoords(arrowsendcoords.at(barindex)-1,Chanel->ustavka2.getStateValue() );
-//        arrow2->setHead(QCPLineEnding::esSpikeArrow);
-//        ui->customPlot->addItem(arrow2);
-
-//        QPointF Label1PixPoint = arrow->start->pixelPoint();
-//        QPointF Label2PixPoint = arrow2->start->pixelPoint();
-
-//        Label1PixPoint.setY(Label1PixPoint.y() - 20);
-//        Label2PixPoint.setY(Label2PixPoint.y() - 20);
-
-//        // add the text label at the top limit:
-//        QCPItemText *textLabelHi = new QCPItemText(ui->customPlot);
-//        ui->customPlot->addItem(textLabelHi);
-//        textLabelHi->position->setPixelPoint(Label1PixPoint);
-//        //        textLabelHi->setText(QString::number(Chanel->ustavka1.getStateValue() ));
-//        textLabelHi->setFont(QFont(Font, 8, QFont::Bold));
-//        textLabelHi->setColor(QColor(Qt::red));
-
-//        // add the text label at the bottom limit
-//        QCPItemText *textLabelLo = new QCPItemText(ui->customPlot);
-//        ui->customPlot->addItem(textLabelLo);
-//        textLabelLo->position->setPixelPoint(Label2PixPoint);
-//        //        textLabelLo->setText(QString::number(Chanel->ustavka2.getStateValue() ));
-//        textLabelLo->setFont(QFont(Font, 8, QFont::Bold));
-//        textLabelLo->setColor(QColor(Qt::green));
-
-//        ++barindex;
-
-//        arrow->deleteLater();
-//        arrow2->deleteLater();
-//        textLabelHi->deleteLater();
-//        textLabelLo->deleteLater();
-//    }
-
-//    if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
-//    {
-//        ui->customPlot->yAxis->rescale();
-//    }
-
-//    ui->customPlot->replot();
-//    ui->customPlot->clearGraphs();
-//    ui->customPlot->clearItems();
-}
-
-void MainWindow::UpdateChannel1Slot()
-{
-//    qDebug() << "1Slot" << "in";
-    if(listGroup.at(curGroupChannel)->typeInput[0] != 1) return;
-    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[0];
+    ChannelOptions * channel = listChannels.at(ch);
     if(channel->GetSignalType() == 0) return;
     if(systemOptions.display == cSystemOptions::Steel) return;
+    int slot = channel->getSlot();
+    int slChannel = channel->getSlotChannel();
+//    int period = channel->GetMeasurePeriod()*1000;
     DataBuffer::writeupdatestatus(0,true);
-    int period = channel->GetMeasurePeriod()*1000;
-    int devCh = csc.getDevChannel(0);
-    int slot = csc.getSlotByChannel(devCh);
-    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan0"*/"chan0Data");
-    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
+    QString nameParam = "chan" + QString::number(slChannel) + "Data";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
     emit sendTransToWorker(tr);
-    //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
-    //    CheckAndLogginStates(channel1);
-
     /* Test */
 #ifdef RANDOM_CHAN
-    randVal[0] += ((double)((rand()%101) - 50) / 100);
-    channel->SetCurrentChannelValue(randVal[0]);
-    ui->wBar_1->setVolue(randVal[0]);
-    ui->widgetVol1->setVol(randVal[0]);
+    randVal[ch] += ((double)((rand()%101) - 50) / 100);
+    channel->SetCurrentChannelValue(randVal[ch]);
+    wVolueBar * bars[] = {ui->wBar_1 , ui->wBar_2, ui->wBar_3, ui->wBar_4};
+    bars[ch]->setVolue(randVal[ch]);
+    wVol * vol[] = {ui->widgetVol1, ui->widgetVol2, ui->widgetVol3, ui->widgetVol4};
+    vol[ch]->setVol(randVal[ch]);
 #endif
-
-    channeltimer1->setInterval(period);
-//    qDebug() << "1Slot" << "out";
+//    QTimer * timers[] = {channeltimer1, channeltimer2, channeltimer3, channeltimer4};
+//    timers[ch]->setInterval(period);
 }
 
-void MainWindow::UpdateChannel2Slot()
-{
-//    qDebug() << "2Slot" << "in";
-    if(listGroup.at(curGroupChannel)->typeInput[1] != 1) return;
-    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[1];
-    if(channel->GetSignalType() == 0) return;
-    if(systemOptions.display == cSystemOptions::Steel) return;
-    DataBuffer::writeupdatestatus(1,true);
-    int period = channel->GetMeasurePeriod()*1000;
-    int devCh = csc.getDevChannel(1);
-    int slot = csc.getSlotByChannel(devCh);
-    //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan1"*/"chan1Data");
-    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-//        qDebug() << "MainWindow SIGNAL" << tr.offset;
-    emit sendTransToWorker(tr);
-//        qDebug() << "sendTransToWorker";
-    //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
-    //    CheckAndLogginStates(channel2);
+//void MainWindow::UpdateChannel1Slot()
+//{
+////    qDebug() << "1Slot" << "in";
+//    if(listGroup.at(curGroupChannel)->typeInput[0] != 1) return;
+//    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[0];
+//    if(channel->GetSignalType() == 0) return;
+//    if(systemOptions.display == cSystemOptions::Steel) return;
+//    DataBuffer::writeupdatestatus(0,true);
+//    int period = channel->GetMeasurePeriod()*1000;
+//    int devCh = csc.getDevChannel(0);
+//    int slot = csc.getSlotByChannel(devCh);
+//    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+//    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan0"*/"chan0Data");
+//    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
+//    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
+//    emit sendTransToWorker(tr);
+//    //    channel1.SetCurrentChannelValue(DataBuffer::readchannelvalue(0));
+//    //    CheckAndLogginStates(channel1);
 
-    /* Test */
-#ifdef RANDOM_CHAN
-    randVal[1] += ((double)((rand()%101) - 50) / 100);
-    channel->SetCurrentChannelValue(randVal[1]);
-    ui->wBar_2->setVolue(randVal[1]);
-    ui->widgetVol2->setVol(randVal[1]);
-#endif
+//    /* Test */
+//#ifdef RANDOM_CHAN
+//    randVal[0] += ((double)((rand()%101) - 50) / 100);
+//    channel->SetCurrentChannelValue(randVal[0]);
+//    ui->wBar_1->setVolue(randVal[0]);
+//    ui->widgetVol1->setVol(randVal[0]);
+//#endif
 
-    channeltimer2->setInterval(period);
-//    qDebug() << "2Slot" << "out";
-}
+//    channeltimer1->setInterval(period);
+////    qDebug() << "1Slot" << "out";
+//}
 
-void MainWindow::UpdateChannel3Slot()
-{
-//    qDebug() << "3Slot" << "in";
-    if(listGroup.at(curGroupChannel)->typeInput[2] != 1) return;
-    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[2];
-    if(channel->GetSignalType() == 0) return;
-    if(systemOptions.display == cSystemOptions::Steel) return;
-    DataBuffer::writeupdatestatus(2,true);
-    int period = channel->GetMeasurePeriod()*1000;
-    int devCh = csc.getDevChannel(2);
-    int slot = csc.getSlotByChannel(devCh);
-    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan2"*/"chan2Data");
-    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
-    emit sendTransToWorker(tr);
-    //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
-    //    CheckAndLogginStates(channel3);
+//void MainWindow::UpdateChannel2Slot()
+//{
+////    qDebug() << "2Slot" << "in";
+//    if(listGroup.at(curGroupChannel)->typeInput[1] != 1) return;
+//    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[1];
+//    if(channel->GetSignalType() == 0) return;
+//    if(systemOptions.display == cSystemOptions::Steel) return;
+//    DataBuffer::writeupdatestatus(1,true);
+//    int period = channel->GetMeasurePeriod()*1000;
+//    int devCh = csc.getDevChannel(1);
+//    int slot = csc.getSlotByChannel(devCh);
+//    //uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+//    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan1"*/"chan1Data");
+//    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
+////        qDebug() << "MainWindow SIGNAL" << tr.offset;
+//    emit sendTransToWorker(tr);
+////        qDebug() << "sendTransToWorker";
+//    //    channel2.SetCurrentChannelValue(DataBuffer::readchannelvalue(1));
+//    //    CheckAndLogginStates(channel2);
 
-    /* Test */
-#ifdef RANDOM_CHAN
-    randVal[2] += ((double)((rand()%101) - 50) / 100);
-    channel->SetCurrentChannelValue(randVal[2]);
-    ui->wBar_3->setVolue(randVal[2]);
-    ui->widgetVol3->setVol(randVal[2]);
-#endif
+//    /* Test */
+//#ifdef RANDOM_CHAN
+//    randVal[1] += ((double)((rand()%101) - 50) / 100);
+//    channel->SetCurrentChannelValue(randVal[1]);
+//    ui->wBar_2->setVolue(randVal[1]);
+//    ui->widgetVol2->setVol(randVal[1]);
+//#endif
 
-    channeltimer3->setInterval(period);
-//    qDebug() << "3Slot" << "out";
-}
+//    channeltimer2->setInterval(period);
+////    qDebug() << "2Slot" << "out";
+//}
 
-void MainWindow::UpdateChannel4Slot()
-{
-//    qDebug() << "4Slot" << "in";
-    if(listGroup.at(curGroupChannel)->typeInput[3] != 1) return;
-    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[3];
-    if(channel->GetSignalType() == 0) return;
-    if(systemOptions.display == cSystemOptions::Steel) return;
-    DataBuffer::writeupdatestatus(3,true);
-    int period = channel->GetMeasurePeriod()*1000;
-    int devCh = csc.getDevChannel(3);
-    int slot = csc.getSlotByChannel(devCh);
-    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
-    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan3"*/"chan3Data");
-    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
-    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
-    emit sendTransToWorker(tr);
-    //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
-    //    CheckAndLogginStates(channel4);
+//void MainWindow::UpdateChannel3Slot()
+//{
+////    qDebug() << "3Slot" << "in";
+//    if(listGroup.at(curGroupChannel)->typeInput[2] != 1) return;
+//    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[2];
+//    if(channel->GetSignalType() == 0) return;
+//    if(systemOptions.display == cSystemOptions::Steel) return;
+//    DataBuffer::writeupdatestatus(2,true);
+//    int period = channel->GetMeasurePeriod()*1000;
+//    int devCh = csc.getDevChannel(2);
+//    int slot = csc.getSlotByChannel(devCh);
+//    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+//    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan2"*/"chan2Data");
+//    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
+//    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
+//    emit sendTransToWorker(tr);
+//    //    channel3.SetCurrentChannelValue(DataBuffer::readchannelvalue(2));
+//    //    CheckAndLogginStates(channel3);
 
-    /* Test */
-#ifdef RANDOM_CHAN
-    randVal[3] += ((double)((rand()%101) - 50) / 100);
-    channel->SetCurrentChannelValue(randVal[3]);
-    ui->wBar_4->setVolue(randVal[3]);
-    ui->widgetVol4->setVol(randVal[3]);
-#endif
+//    /* Test */
+//#ifdef RANDOM_CHAN
+//    randVal[2] += ((double)((rand()%101) - 50) / 100);
+//    channel->SetCurrentChannelValue(randVal[2]);
+//    ui->wBar_3->setVolue(randVal[2]);
+//    ui->widgetVol3->setVol(randVal[2]);
+//#endif
 
-    channeltimer4->setInterval(period);
-//    qDebug() << "4Slot" << "out";
-}
+//    channeltimer3->setInterval(period);
+////    qDebug() << "3Slot" << "out";
+//}
+
+//void MainWindow::UpdateChannel4Slot()
+//{
+////    qDebug() << "4Slot" << "in";
+//    if(listGroup.at(curGroupChannel)->typeInput[3] != 1) return;
+//    ChannelOptions * channel = listGroup.at(curGroupChannel)->channel[3];
+//    if(channel->GetSignalType() == 0) return;
+//    if(systemOptions.display == cSystemOptions::Steel) return;
+//    DataBuffer::writeupdatestatus(3,true);
+//    int period = channel->GetMeasurePeriod()*1000;
+//    int devCh = csc.getDevChannel(3);
+//    int slot = csc.getSlotByChannel(devCh);
+//    //    uint32_t offset = getDevOffsetByChannel(devCh, ChannelOptions::chanData);
+//    uint16_t offset = cRegistersMap::getOffsetByName(/*"DataChan3"*/"chan3Data");
+//    Transaction tr(Transaction::R, (uint8_t)slot, offset/*devCh*2*/, 0);
+//    //    qDebug() << "MainWindow SIGNAL" << tr.offset;
+//    emit sendTransToWorker(tr);
+//    //    channel4.SetCurrentChannelValue(DataBuffer::readchannelvalue(3));
+//    //    CheckAndLogginStates(channel4);
+
+//    /* Test */
+//#ifdef RANDOM_CHAN
+//    randVal[3] += ((double)((rand()%101) - 50) / 100);
+//    channel->SetCurrentChannelValue(randVal[3]);
+//    ui->wBar_4->setVolue(randVal[3]);
+//    ui->widgetVol4->setVol(randVal[3]);
+//#endif
+
+//    channeltimer4->setInterval(period);
+////    qDebug() << "4Slot" << "out";
+//}
 
 
 

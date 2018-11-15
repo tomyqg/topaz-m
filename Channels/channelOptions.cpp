@@ -7,6 +7,24 @@ extern QVector<double> X_Coordinates;
 
 double cnt;
 
+// constructor
+ChannelOptions::ChannelOptions()
+{
+    SetConfirmationNeed(true);
+    currentvalue = 0;
+    measureperiod = 1000;
+    timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    timer->setInterval(measureperiod);
+    timer->stop();
+    buffermutex = new QMutex();
+}
+
+ChannelOptions::~ChannelOptions()
+{
+    delete buffermutex;
+}
+
 double ChannelOptions::GetHigherLimit()
 {
     return this->higherlimit;
@@ -80,6 +98,14 @@ void ChannelOptions::SetUnitsName(QString unitsname)
 void ChannelOptions::SetMeasurePeriod(double np)
 {
     this->measureperiod = np;
+    if(measureperiod != 0)
+    {
+        timer->start(measureperiod);
+    }
+    else
+    {
+        timer->stop();
+    }
 }
 
 QString ChannelOptions::GetUnitsName()
@@ -240,18 +266,10 @@ bool ChannelOptions::IsChannelMathematical()
     return this->MathematicalState;
 }
 
-// constructor
-ChannelOptions::ChannelOptions()
+void ChannelOptions::timerSlot()
 {
-    SetConfirmationNeed(true);
-    currentvalue = 0;
-
-    buffermutex = new QMutex();
-}
-
-ChannelOptions::~ChannelOptions()
-{
-    delete buffermutex;
+    timer->setInterval((int)(measureperiod*1000));
+    emit updateSignal(numChannel-1);
 }
 
 bool ChannelOptions::GetConfirmationNeed()

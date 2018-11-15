@@ -45,6 +45,20 @@
 #include <QMetaType>
 #include "defines.h"
 
+
+#ifdef Q_OS_WIN32
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_ADC     4
+#define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
+#else
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_ADC     4
+#define CONST_SLAVE_ADC_2   3
+#define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
+#endif
+
 //#include <QKeyEvent>
 
 int dateindex;
@@ -161,13 +175,12 @@ void MainWindow::MainWindowInitialization()
         ChannelOptions * ch = new ChannelOptions();
         ch->SetCurrentChannelValue(0);
         ch->setNum(i+1);
+        ch->setSlot(CONST_SLAVE_ADC);     //
+        ch->setSlotChannel(i);
+        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//        ch->SetMeasurePeriod(1000);
         listChannels.append(ch);
     }
-
-//    listChannels.append(&channel1);
-//    listChannels.append(&channel2);
-//    listChannels.append(&channel3);
-//    listChannels.append(&channel4);
 
     //перед рисованием графиков записать нули в первый элемент вектора
 //    channel1.SetCurrentChannelValue(0);
@@ -211,7 +224,7 @@ void MainWindow::MainWindowInitialization()
     LabelsInit();
 
     // инициализация таблицы канал-слот
-    InitChannelSlotTable();
+//    InitChannelSlotTable();
 
     // инициализация таблицы реле-слот
     InitRelaySlotTable();
@@ -232,8 +245,12 @@ void MainWindow::MainWindowInitialization()
     group->groupName = "Group 1";
     group->channel[0] = listChannels.at(0);
     group->typeInput[0] = 1;
-    group->channel[1] = listChannels.at(2);
+    group->channel[1] = listChannels.at(1);
     group->typeInput[1] = 1;
+    group->channel[2] = listChannels.at(2);
+    group->typeInput[2] = 1;
+//    group->channel[3] = listChannels.at(3);
+//    group->typeInput[3] = 1;
     group->enabled = true;
     listGroup.append(group);
     curGroupChannel = 0;        //по-умолчанию активная группа - первая
@@ -481,20 +498,6 @@ void MainWindow::UpdUst()
 }
 
 //-----Временная реализация соединения слотов----
-
-#ifdef Q_OS_WIN32
-#define CONST_SLAVE_STEEL   5
-#define CONST_SLAVE_ADC     4
-#define CONST_SLAVE_RELAY   6
-#define TOTAL_NUM_RELAIS    8
-#else
-#define CONST_SLAVE_STEEL   5
-#define CONST_SLAVE_ADC     4
-#define CONST_SLAVE_ADC_2   3
-#define CONST_SLAVE_RELAY   6
-#define TOTAL_NUM_RELAIS    8
-#endif
-
 void MainWindow::InitChannelSlotTable()
 {
     csc.addChannelSlot(0, 0, CONST_SLAVE_ADC);
@@ -684,23 +687,23 @@ void MainWindow::InitProcessorMinFreq()
 
 void MainWindow::InitTimers()
 {
-    channeltimer1 = new QTimer();
-    channeltimer2 = new QTimer();
-    channeltimer3 = new QTimer();
-    channeltimer4 = new QTimer();
+//    channeltimer1 = new QTimer();
+//    channeltimer2 = new QTimer();
+//    channeltimer3 = new QTimer();
+//    channeltimer4 = new QTimer();
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
 
-    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
-    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
-    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
-    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
+//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
+//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
+//    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
+//    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
-    channeltimer1->start(1000);
-    channeltimer2->start(1000);
-    channeltimer3->start(1000);
-    channeltimer4->start(1000);
+//    channeltimer1->start(1000);
+//    channeltimer2->start(1000);
+//    channeltimer3->start(1000);
+//    channeltimer4->start(1000);
     halfSecondTimer->start(500);
     archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
 }
@@ -778,6 +781,8 @@ void MainWindow::SetEcoMode(bool EcoMode)
     ui->customPlot->xAxis->setTickLabelColor(newlabelscolor);
     ui->customPlot->yAxis->setTickLabelColor(newlabelscolor);
 }
+
+
 
 bool MainWindow::GetEcoMode()
 {
@@ -1333,13 +1338,14 @@ void MainWindow::sendConfigChannelsToSlave()
     {
         for(int i = 0; i < listChannels.size(); i++)
         {
-            int devCh = csc.getDevChannel(i);
-            tr.slave = csc.getSlotByChannel(devCh);
+            ChannelOptions * channel = listChannels.at(i);
+            int devCh = channel->getSlotChannel();// csc.getDevChannel(i);
+            tr.slave = channel->getSlot(); //csc.getSlotByChannel(devCh);
 
             // запись актуального значения SignalType
             str = "chan" + QString::number(devCh) + "SignalType";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = listChannels.at(i)->GetSignalType();
+            tr.volInt = channel->GetSignalType();
             emit sendTransToWorker(tr);
 
             // запись актуального Additional parameter1
@@ -1348,19 +1354,19 @@ void MainWindow::sendConfigChannelsToSlave()
             //        tr.volInt = 0;
             int size = sizeof(tr.paramA12);
             memset(tr.paramA12, 0, size);
-            if(listChannels.at(i)->GetSignalType() == ModBus::VoltageMeasure)
+            if(channel->GetSignalType() == ModBus::VoltageMeasure)
             {
-                tr.paramA12[0] = (uint16_t)listChannels.at(i)->GetDiapason();
+                tr.paramA12[0] = (uint16_t)channel->GetDiapason();
             }
-            else if(listChannels.at(i)->GetSignalType() == ModBus::TermoResistanceMeasure)
+            else if(channel->GetSignalType() == ModBus::TermoResistanceMeasure)
             {
-                tr.paramA12[0] = (uint16_t)listChannels.at(i)->getShema();
-                tr.paramA12[1] = (uint16_t)listChannels.at(i)->GetDiapason();
+                tr.paramA12[0] = (uint16_t)channel->getShema();
+                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
             }
-            else if((listChannels.at(i)->GetSignalType() == ModBus::TermoCoupleMeasure))
+            else if((channel->GetSignalType() == ModBus::TermoCoupleMeasure))
             {
                 tr.paramA12[0] = 1;
-                tr.paramA12[1] = (uint16_t)listChannels.at(i)->GetDiapason();
+                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
                 tr.paramA12[2] = 2;
             }
             emit sendTransToWorker(tr);

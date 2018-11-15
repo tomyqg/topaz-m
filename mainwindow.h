@@ -104,10 +104,11 @@ public slots:
     void HalfSecondGone();
     void ModbusConnectionErrorSlot();
     void SetEcoMode(bool EcoMode);
-    void UpdateChannel1Slot();
-    void UpdateChannel2Slot();
-    void UpdateChannel3Slot();
-    void UpdateChannel4Slot();
+    void updateChannelSlot(int ch);
+//    void UpdateChannel1Slot();
+//    void UpdateChannel2Slot();
+//    void UpdateChannel3Slot();
+//    void UpdateChannel4Slot();
 //    void UpdSignalTypeSlot(uint8_t ch);
     bool GetEcoMode();
     void getTransFromWorkerSlot(Transaction tr);
@@ -127,7 +128,7 @@ private slots:
     void updateDateLabel();
     void UpdateGraphics();
 //    void UpdateLog();
-    void GrafsUpdateBars();
+//    void GrafsUpdateBars();
     void GrafsUpdateTrends();
     void GrafsUpdateTrendsAndBars();
     void GrafsUpdateNone();

@@ -340,8 +340,13 @@ void dSettings::on_period_currentIndexChanged(int index)
     // Реализовать тут смену периода отображаемых данных из архива
     // Тут же обновить график
     //                 1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
-    int periods[10] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
-    assert((sizeof(periods) / sizeof(int)) >= ui->period->count());
+    int periods[] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
+    if((sizeof(periods) / sizeof(int)) >= index)
+    {
+        //Vag: сделать видимыми элементы выбора дат и кнопку ОК
+        return;
+    }
+//    assert((sizeof(periods) / sizeof(int)) >= ui->period->count());
     archivePeriod = periods[index]; //число секундных точек отсчёта
 
 //    QVector<QDateTime> Dates;
@@ -464,9 +469,9 @@ void dSettings::updateGraf(int period)
     }
 
 
-//    ui->customPlot->rescaleAxes();
-//    ui->customPlot->replot();
-//    ui->customPlot->clearItems();
+    ui->customPlot->rescaleAxes();
+    ui->customPlot->replot();
+    ui->customPlot->clearItems();
 
     if((!Y_coordinates_Chanel_1_archive.isEmpty()) &&\
             !Y_coordinates_Chanel_2_archive.isEmpty() &&\

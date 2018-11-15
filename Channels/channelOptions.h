@@ -22,6 +22,10 @@ public:
 
     int getNum() { return numChannel; }
     void setNum(int i) { numChannel = i; }
+    void setSlot(int sl) { slot = sl; }
+    int getSlot() { return slot; }
+    void setSlotChannel(int ch) { slotChannel = ch; }
+    int getSlotChannel() { return slotChannel; }
     uint16_t GetSignalType();
     uint16_t GetCurSignalType();
     int GetDiapason();
@@ -101,8 +105,14 @@ public:
     int w;
     int h;
 
-    // приватные переменные настроек канала
+signals:
+    void updateSignal(int index);
 
+private slots:
+    void timerSlot();
+
+
+    // приватные переменные настроек канала
 private:
 
     uint16_t signaltype;
@@ -117,6 +127,8 @@ private:
     double currentvalue;
     int demphervalue;
     int numChannel;
+    int slot;
+    int slotChannel;
 
     QString unitsname;
     QString state1highmessage;
@@ -140,6 +152,7 @@ private:
     QVector<double> channelpercentbuffer;
 
     QMutex *buffermutex;
+    QTimer * timer;
 
 public:
 
