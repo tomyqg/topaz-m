@@ -67,6 +67,7 @@ private:
     QMovie mo;
     QTimer tUpdateTime;
     QTimer tUpdateBar;
+    QTimer tUpdateDeviceUI;
     dSettings * dialogSetingsChannel;
 //    QList<ChannelOptions *> listChannels;
     void UpdateAnalyze();
@@ -87,7 +88,8 @@ private:
 
     void clearLayout(QLayout *layout, bool deleteWidgets = true);
 private slots:
-
+    void updateDevicesUI();
+    void updateDeviceInfo(uint8_t index);
     void on_bResetToDefault_clicked();
     void on_bExpert_clicked();
     void on_bBackExpert_clicked();
@@ -121,33 +123,20 @@ private slots:
     void on_bExtMemory_clicked();
     void on_bBackExternalDrive_clicked();
     void updateDriversWidgets();
-
     void on_bReadSysFromDrive_clicked();
-
     void on_bSaveSysToDrive_clicked();
-
     void on_bSaveMesToDrive_clicked();
-
     void on_bSaveChanToDrive_clicked();
-
     void on_bReadChanFromDrive_clicked();
-
     void on_bSaveArchiveToDrive_clicked();
     void copyArchiveFile();
     void copyLastArchFile();
-
     void on_bBackDigitInputSettings_clicked();
-
     void on_bBackDigitInputs_clicked();
-
     void on_bAddDigitInput_clicked();
-
     void on_bDigitals_clicked();
-
     void on_comboDigitInputsFunc_currentIndexChanged(int index);
-
     void on_digitInoutToOutput_currentIndexChanged(int index);
-
     void on_bDigitInput1_clicked();
     void on_bDigitInput2_clicked();
     void on_bDigitInput3_clicked();
@@ -167,28 +156,26 @@ private slots:
     void on_bDigitOutput_6_clicked();
     void on_bDigitOutput_7_clicked();
     void on_bDigitOutput_8_clicked();
-
     void on_bBackDigitOutputSettings_clicked();
-
     void on_bAddUstavka_clicked();
-
     void on_bMath_clicked();
-
     void on_bBackMath_clicked();
-
     void on_bGroups_clicked();
-
     void on_bBackGroup_clicked();
-
     void on_bAddGroup_2_clicked();
-
     void on_bBackGroupSetting_clicked();
-
     void on_bAddGroup_clicked();
-
     void on_bDelGroup_clicked();
-
     void on_bApplayGroup_clicked();
+    void on_bBackDevices_clicked();
+    void on_bDevices_clicked();
+    void on_bDevice1_clicked();
+    void on_bBackDevice_clicked();
+    void on_bDevice2_clicked();
+    void on_bDevice3_clicked();
+    void on_bDevice4_clicked();
+    void on_bDevice5_clicked();
+    void on_bDevice6_clicked();
 
 signals:
     void saveButtonSignal();

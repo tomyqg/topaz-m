@@ -7,20 +7,24 @@
 #include <QFile>
 #include <QDir>
 #include <QString>
+#include "assert.h"
 #include "usb_flash.h"
 #include "Channels/group_channels.h"
+#include "device_slot.h"
 
 
 
 #define HEIGHT 768
 #define WIDTH 1024
 #define TIME_UPDATE DateLabelUpdateTimer
+#define TIME_UPDATE_DEVICE_UI   500
 #define DRIVE_UPDATE 500
 
 extern int dateindex;
 extern int timeindex;
 extern QStringList datestrings, timestrings;
 extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+extern QList<cDevice*> listDevice;
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
@@ -69,6 +73,10 @@ dMenu::dMenu(QWidget *parent) :
     connect(&tUpdateTime, SIGNAL(timeout()), this, SLOT(DateUpdate()));
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
+
+    //периодические обновления виджетов информации о платах
+    connect(&tUpdateDeviceUI, SIGNAL(timeout()), this, SLOT(updateDevicesUI()));
+    tUpdateDeviceUI.start(TIME_UPDATE_DEVICE_UI);
 
     connect(flash, SIGNAL(newFlash(int)), this, SLOT(updateDriversWidgets()));
 
@@ -150,7 +158,7 @@ void dMenu::updateSystemOptions(QString path)
 {
     cFileManager::readSystemOptionsFromFile(path, &sysOptions);
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
-    ui->modeBar->setCurrentIndex((sysOptions.display >> 2));
+    ui->modeBar->setCurrentIndex((sysOptions.display >> 2) % ui->modeBar->count());
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
     if(ssc.isConnect() && (listChannels.size() > 0))
     {
@@ -164,6 +172,7 @@ void dMenu::updateSystemOptions(QString path)
         } else {
             ui->radioButSteelModes->setChecked(false);
             ui->radioButAnalogModes->setChecked(true);
+            ui->frameSteelMode->hide();
         }
     }
     else
@@ -255,6 +264,63 @@ void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
         if (QLayout* childLayout = item->layout())
             clearLayout(childLayout, deleteWidgets);
         delete item;
+    }
+}
+
+void dMenu::updateDevicesUI()
+{
+    QList<wButtonStyled*> listButtonDevices;
+    listButtonDevices << ui->bDevice1 << ui->bDevice2 << ui->bDevice3 \
+                      << ui->bDevice4 << ui->bDevice5 << ui->bDevice6;
+    assert(listDevice.size() == listButtonDevices.size());
+    int i = 0;
+    foreach(wButtonStyled * bDev, listButtonDevices)
+    {
+        cDevice * device = listDevice.at(i);
+        QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
+        QStringList strType;
+        strType << "" << "4AI" << "8RP" << "STEEL";
+        QStringList strOnline;
+        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
+        str += strOnline.at(device->getOnline());
+
+        if(device->getOnline())
+        {
+            if(strType.at((int)(device->deviceType) % strType.size()).size())
+            {
+                str +=  " | " + strType.at(device->deviceType % strType.size());
+            }
+        }
+
+        bDev->setText(str);
+        i++;
+    }
+}
+
+void dMenu::updateDeviceInfo(uint8_t index)
+{
+    assert(listDevice.size() >= index);
+    cDevice * device = listDevice.at(index);
+    if(!device->getOnline()){
+        ui->frameDeviceInfo1->hide();
+        ui->frameDeviceInfo2->hide();
+    }
+    else
+    {
+        QStringList strType;
+        strType << "" << "4AI" << "8RP" << "STEEL";
+        ui->deviceType->setText(strType.at(device->deviceType % strType.size()));
+        ui->deviceState->setText(QString::number(device->deviceState));
+        ui->deviceStatus->setText(QString::number(device->deviceStatus));
+        int countErr = 0;
+        QList<int> listErrors;
+//        for(int i = 0; i < 8; i++)
+//        {
+//            if(device->)
+//        }
+//        ui->devErrors->setText();
+        ui->frameDeviceInfo1->show();
+        ui->frameDeviceInfo2->show();
     }
 }
 
@@ -429,13 +495,14 @@ void dMenu::on_bDiagnost_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
     ui->nameSubMenu->setText("ДИАГНОСТИКА");
+    ui->frameNameSubMenu->setHidden(false);
 }
 
 void dMenu::on_bBackDiagnostika_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    //    ui->nameSubMenu->setText("");
-        ui->frameNameSubMenu->setHidden(true);
+//        ui->nameSubMenu->setText("");
+    ui->frameNameSubMenu->setHidden(true);
 }
 
 void dMenu::addChannels(QList<ChannelOptions *> channels)
@@ -803,6 +870,61 @@ void dMenu::on_bBackGroupSetting_clicked()
     ui->nameSubMenu->setText("ГРУППЫ");
 }
 
+void dMenu::on_bBackDevices_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    ui->nameSubMenu->setText("ДИАГНОСТИКА");
+    ui->frameNameSubMenu->setHidden(false);
+}
+
+void dMenu::on_bDevices_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(24);
+    ui->nameSubMenu->setText("О ПРИБОРЕ");
+}
+
+void dMenu::on_bBackDevice_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(24);
+    ui->nameSubMenu->setText("О ПРИБОРЕ");
+}
+
+void dMenu::on_bDevice1_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 1");
+}
+
+void dMenu::on_bDevice2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 2");
+}
+
+void dMenu::on_bDevice3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 3");
+}
+
+void dMenu::on_bDevice4_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 4");
+}
+
+void dMenu::on_bDevice5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 5");
+}
+
+void dMenu::on_bDevice6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(25);
+    ui->nameSubMenu->setText("МОДУЛЬ 6");
+}
+
 void dMenu::updateDriversWidgets()
 {
     listDrives.clear();
@@ -883,7 +1005,13 @@ void dMenu::on_bResetToDefault_clicked()
     QFile::rename(pathtosystemoptions, pathtosystemoptions + QString(".backup"));
     QFile::copy(pathtosystemoptionsdef, pathtosystemoptions);
     //чтение и применение настроек из новых файлов
-    cFileManager::readChannelsSettings(pathtooptions, listChannels);
+    int countChannels = listChannels.size();
+    cFileManager::readChannelsSettings(pathtooptions);
+    int newCountChannels = listChannels.size();
+    for(int i = countChannels; i < newCountChannels; i++)
+    {
+        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+    }
     updateSystemOptions();
     log->addMess("Reset to default", cLogger::USER);
     emit saveButtonSignal();
@@ -1462,3 +1590,5 @@ void dMenu::on_bApplayGroup_clicked()
     ui->nameSubMenu->setText("ГРУППЫ");
     addWidgetGroup();
 }
+
+

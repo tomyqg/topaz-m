@@ -20,6 +20,25 @@ enum deviceTypeEnum{
     Device_8RP = 2,
     Device_STEEL = 3,
 };
+enum deviceStateEnum{
+    Device_State_OK = 0,
+    Device_State_ErrModbus = 1,
+    Device_State_ErrChannel = 4,
+    Device_State_ErrCallibr = 5
+};
+enum accessTypeEnum{
+    Access_User = 2,
+    Access_Root = 3
+};
+enum deviceStatusEnum{
+    Device_Status_NOINIT = 0,   //запуск, самодиагностика
+    Device_Status_CONFIG = 1,   //конфигурирование каналов
+    Device_Status_EXECUTE = 2,  //рабочий режим
+    Device_Status_IDLE = 3,     //простаивание
+    Device_Status_ERROR = 4     //ошибка устройства на этапе запуска
+};
+
+
 enum statusChannelEnum{
     StatusCh_Off = 0,                       //выключен
     StatusCh_On = 1,                        //включен

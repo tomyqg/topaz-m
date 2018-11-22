@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -512,7 +512,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-156</y>
+                     <y>0</y>
                      <width>564</width>
                      <height>608</height>
                     </rect>
@@ -1768,9 +1768,6 @@ QListWidget::item {
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_8">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
                 <item>
                  <widget class="QLabel" name="label_14">
                   <property name="font">
@@ -2229,6 +2226,28 @@ text-align: center;</string>
                  </widget>
                 </item>
                 <item>
+                 <widget class="wButtonStyled" name="bUserPeriod">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>16</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(14, 210, 226);</string>
+                  </property>
+                  <property name="text">
+                   <string>ДРУГОЙ</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="verticalSpacer_21">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -2454,7 +2473,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>692</width>
+                     <width>757</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -3877,7 +3896,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>671</width>
+                     <width>757</width>
                      <height>1363</height>
                     </rect>
                    </property>

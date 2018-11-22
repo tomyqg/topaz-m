@@ -11,6 +11,7 @@ double cnt;
 ChannelOptions::ChannelOptions()
 {
     SetConfirmationNeed(true);
+    enable = true;
     currentvalue = 0;
     measureperiod = 1000;
     timer = new QTimer();

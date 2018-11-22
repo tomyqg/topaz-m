@@ -10,10 +10,12 @@ class cArchWorker : public QObject
 public:
     explicit cArchWorker(QString file, QObject *parent = 0);
     void setPeriod(int p) {period = p;}
-    int period;
+    void setShift(int s) { shift = s; }
 
 private:
     QString fileArch;
+    int period;
+    int shift;
 
 signals:
     void finished();

@@ -38,10 +38,10 @@
 #endif
 
 #ifdef Q_OS_WIN32
-    #define RANDOM_CHAN
+//    #define RANDOM_CHAN
 #endif
 
-#define RANDOM_CHAN
+//#define RANDOM_CHAN
 
 #define DEBUG_RELAY
 
@@ -104,6 +104,7 @@ public slots:
     void HalfSecondGone();
     void ModbusConnectionErrorSlot();
     void SetEcoMode(bool EcoMode);
+    void updateDevicesComplect();
     void updateChannelSlot(int ch);
 //    void UpdateChannel1Slot();
 //    void UpdateChannel2Slot();
@@ -211,6 +212,9 @@ private:
     void InitPins();
     void InitProcessorMaxFreq();
     void InitProcessorMinFreq();
+    void InitDevices();
+    void InitChannels();
+    void InitUstavka();
     void InitTimers();
     void InitTouchScreen();
     void PaintOnWidget();
@@ -287,6 +291,7 @@ private:
     QTimer *displayrefreshtimer;
     QTimer *tmr;
     QTimer *timeUpdUst;         //  таймер обновления состояния уставок
+    QTimer *timerUpdateDevices;
     //QTimer *timerUpdConfig;
 
     QThread *WorkerThread;
@@ -315,7 +320,7 @@ private:
     void DrawScene();
 //    void DrawSceneBottom();
 
-    void InitUstavka();
+
     bool isChannelInMaxNow(int ch);
     bool isChannelInMinNow(int ch);
 
@@ -329,8 +334,6 @@ private:
     uint32_t getDevOffsetByChannel(int ch, uint32_t offset);
 
     cSlotsConfig * sc;
-
-    Device device;
 
     QQueue<Transaction> queueTransaction;
     QMutex * mQTr;

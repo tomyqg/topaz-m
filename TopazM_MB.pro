@@ -91,7 +91,9 @@ SOURCES += main.cpp \
     Digital/digital_input.cpp \
     smartconnect.cpp \
     Channels/math_channel.cpp \
-    Channels/group_channels.cpp
+    Channels/group_channels.cpp \
+    customperiod.cpp \
+    device_slot.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -193,7 +195,9 @@ HEADERS  += mainwindow.h \
     Digital/digital_input.h \
     smartconnect.h \
     Channels/math_channel.h \
-    Channels/group_channels.h
+    Channels/group_channels.h \
+    customperiod.h \
+    device_slot.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \
@@ -289,7 +293,8 @@ FORMS    += mainwindow.ui \
     Grafika/buttonstyled.ui \
     menu.ui \
     settings.ui \
-    Grafika/vol.ui
+    Grafika/vol.ui \
+    custom_period.ui
 #    _options.ui
 
 target.path  = /opt

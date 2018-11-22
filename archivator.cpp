@@ -228,7 +228,7 @@ void cArchivator::addTick10Min()
  * Запуск чтения файлов в потоке
  * Файлов может быть много, за большой период
  * */
-void cArchivator::load(int per)
+void cArchivator::load(int per, int shift)
 {
     assert(per<40000000);//период не больше года с хвостиком
     if(per > 40000000) return;
@@ -237,6 +237,7 @@ void cArchivator::load(int per)
     worker = new cArchWorker(fileName_sek);
     threadReadFile = new QThread;
     worker->setPeriod(period);  //сообщение воркеру нужного периода в сек
+    worker->setShift(shift);
     worker->moveToThread(threadReadFile);
     connect(threadReadFile, SIGNAL(started()), worker, SLOT(run()));
     connect(worker, SIGNAL(finished()), this, SLOT(endLoad()), Qt::DirectConnection);

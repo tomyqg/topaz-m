@@ -3,9 +3,11 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTextStream>
+#include <assert.h>
 #include <steel.h>
 #include <defines.h>
 
+extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
@@ -22,25 +24,26 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
     QJsonArray settings, settingsUst;
 
     foreach (ChannelOptions * Channel, listChannels) {
-            channeljsonobj["Type"] = Channel->GetSignalType();
-            channeljsonobj["Name"] = (Channel->GetChannelName());
-            channeljsonobj["Units"] = Channel->GetUnitsName();
-            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
-            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
-            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
-            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
-            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-            channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
-            channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
-            channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
-            channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
-            channeljsonobj["MathString"] = Channel->GetMathString();
-            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
-            channeljsonobj["Diapason"] = Channel->GetDiapason();
-            channeljsonobj["Dempher"] = Channel->GetDempherValue();
-            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
-            settings.append(channeljsonobj);
-        }
+        channeljsonobj["Slot"] = Channel->getSlot();
+        channeljsonobj["Type"] = Channel->GetSignalType();
+        channeljsonobj["Name"] = (Channel->GetChannelName());
+        channeljsonobj["Units"] = Channel->GetUnitsName();
+        channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+        channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+        channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+        channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+        channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+        channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
+        channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
+        channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
+        channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
+        channeljsonobj["MathString"] = Channel->GetMathString();
+        channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+        channeljsonobj["Diapason"] = Channel->GetDiapason();
+        channeljsonobj["Dempher"] = Channel->GetDempherValue();
+        channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+        settings.append(channeljsonobj);
+    }
 
 
     options["count"] = listChannels.length();
@@ -83,11 +86,12 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
     return 0;
 }
 
-int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> listChannels)
+int cFileManager::readChannelsSettings(QString path)
 {
     int ret = 0;
 
     QFile infile(path);
+    if(!infile.exists()) return 2;
     infile.open(QIODevice::ReadOnly);
     QTextStream in(&infile);
     QString sss = in.readLine();
@@ -99,33 +103,52 @@ int cFileManager::readChannelsSettings(QString path, QList<ChannelOptions *> lis
     QJsonObject ch;
 
     int count = json["count"].toInt();
-    if(count < listChannels.size())
+    assert(count = array.size());
+    if(count > listChannels.size())
     {
-        ret = -1;
+        int size = listChannels.size();
+        for(int i = size; i < count; i++)
+        {
+            ChannelOptions * ch = new ChannelOptions();
+            ch->SetCurrentChannelValue(0);
+            ch->setNum(i+1);
+//            connect(ch, SIGNAL(updateSignal(int)), parent, SLOT(&MainWindow::updateChannelSlot(int)));
+            listChannels.append(ch);
+        }
     }
 
     int index = 0;
     foreach (ChannelOptions * channel, listChannels) {
-        ch = array.at(index++).toObject();
-        channel->SetHigherLimit(ch.value("HigherLimit").toDouble());
-        channel->SetLowerLimit(ch.value("LowerLimit").toDouble());
-        channel->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
-        channel->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
-        channel->SetSignalType(ch.value("Type").toInt());
-        channel->SetCurSignalType(channel->GetSignalType());
-        channel->SetUnitsName(ch.value("Units").toString().toUtf8());
-        channel->SetMeasurePeriod(ch.value("Period").toDouble());
-        channel->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
-        channel->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());
-        channel->SetState2HighMessage(ch.value("State2HighMessage").toString().toUtf8());
-        channel->SetState2LowMessage(ch.value("State2LowMessage").toString().toUtf8());
-        channel->SetChannelName(ch.value("Name").toString().toUtf8());
-        channel->SetMathematical(ch.value("MathWork").toBool());
-        channel->SetMathEquation(ch.value("MathString").toString());
-        channel->SetDempher(ch.value("Dempher").toInt());
-        channel->SetDiapason(ch.value("Diapason").toInt());
-        channel->SetRegistrationType(ch.value("RegistrationType").toInt());
-
+        if(index < count)
+        {
+            ch = array.at(index).toObject();
+            channel->enable = true;
+            channel->setSlot(ch.value("Slot").toInt());
+            channel->setSlotChannel(index%4);
+            channel->SetHigherLimit(ch.value("HigherLimit").toDouble());
+            channel->SetLowerLimit(ch.value("LowerLimit").toDouble());
+            channel->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
+            channel->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
+            channel->SetSignalType(ch.value("Type").toInt());
+            channel->SetCurSignalType(channel->GetSignalType());
+            channel->SetUnitsName(ch.value("Units").toString().toUtf8());
+            channel->SetMeasurePeriod(ch.value("Period").toDouble());
+            channel->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
+            channel->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());
+            channel->SetState2HighMessage(ch.value("State2HighMessage").toString().toUtf8());
+            channel->SetState2LowMessage(ch.value("State2LowMessage").toString().toUtf8());
+            channel->SetChannelName(ch.value("Name").toString().toUtf8());
+            channel->SetMathematical(ch.value("MathWork").toBool());
+            channel->SetMathEquation(ch.value("MathString").toString());
+            channel->SetDempher(ch.value("Dempher").toInt());
+            channel->SetDiapason(ch.value("Diapason").toInt());
+            channel->SetRegistrationType(ch.value("RegistrationType").toInt());
+        }
+        else
+        {
+            channel->enable = false;
+        }
+        index++;
     }
 
     count = json["countUst"].toInt();

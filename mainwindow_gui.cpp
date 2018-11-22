@@ -8,6 +8,7 @@
 #include "uartdriver.h"
 #include "filemanager.h"
 #include "Channels/group_channels.h"
+#include "device_slot.h"
 
 #include <QPixmap>
 #include <QTimer>
@@ -32,6 +33,7 @@ QString MainWindow::starttime = start.toString("hh:mm:ss");
 QString MainWindow::endtime = "";
 QVector<QDateTime> MainWindow::Dates;
 
+QList<cDevice*> listDevice;
 QList<ChannelOptions *> listChannels;
 QList<Ustavka *> listUstavok;
 QList<cGroupChannels*> listGroup;
@@ -64,6 +66,10 @@ MainWindow::~MainWindow()
 void MainWindow::updateDateLabel()
 {
     DateUpdate();
+
+    // между делом обновляем лэйбл и стрелки переключения групп
+    if(listGroup.size() > 1) ui->frameGroup->show();
+    else ui->frameGroup->hide();
 }
 
 void MainWindow::on_WorkButton_clicked()

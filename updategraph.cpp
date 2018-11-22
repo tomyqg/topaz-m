@@ -669,6 +669,7 @@ void MainWindow::GrafsUpdateNone()
 void MainWindow::updateChannelSlot(int ch)
 {
     ChannelOptions * channel = listChannels.at(ch);
+    if(!channel->enable) return;
     if(channel->GetSignalType() == 0) return;
     if(systemOptions.display == cSystemOptions::Steel) return;
     int slot = channel->getSlot();
@@ -681,12 +682,15 @@ void MainWindow::updateChannelSlot(int ch)
     emit sendTransToWorker(tr);
     /* Test */
 #ifdef RANDOM_CHAN
-    randVal[ch] += ((double)((rand()%101) - 50) / 100);
-    channel->SetCurrentChannelValue(randVal[ch]);
-    wVolueBar * bars[] = {ui->wBar_1 , ui->wBar_2, ui->wBar_3, ui->wBar_4};
-    bars[ch]->setVolue(randVal[ch]);
-    wVol * vol[] = {ui->widgetVol1, ui->widgetVol2, ui->widgetVol3, ui->widgetVol4};
-    vol[ch]->setVol(randVal[ch]);
+    if(ch < 4)
+    {
+        randVal[ch] += ((double)((rand()%101) - 50) / 100);
+        channel->SetCurrentChannelValue(randVal[ch]);
+        wVolueBar * bars[] = {ui->wBar_1 , ui->wBar_2, ui->wBar_3, ui->wBar_4};
+        bars[ch]->setVolue(randVal[ch]);
+        wVol * vol[] = {ui->widgetVol1, ui->widgetVol2, ui->widgetVol3, ui->widgetVol4};
+        vol[ch]->setVol(randVal[ch]);
+    }
 #endif
 //    QTimer * timers[] = {channeltimer1, channeltimer2, channeltimer3, channeltimer4};
 //    timers[ch]->setInterval(period);
@@ -986,6 +990,8 @@ void MainWindow::selectWidgetDiagram(void)
             (systemOptions.display == cSystemOptions::Bars))
     {
         ui->left->hide();
+        ui->right->show();
+        ui->frameSteel->hide();
     }
     else if(systemOptions.display == cSystemOptions::Polar ||\
             systemOptions.display == cSystemOptions::PolarBars ||\

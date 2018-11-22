@@ -9,6 +9,7 @@
 #include <keyboard.h>
 #include <uartdriver.h>
 #include <QScroller>
+#include <customperiod.h>
 
 enum numItems{
     NoSignal = 0,
@@ -137,10 +138,16 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->bDeleteUstavka->setColorText(ColorBlue);
     ui->bDeleteUstavka->setColorBg(QColor(0xf0,0xf0,0xf0));
 
+    ui->bUserPeriod->setColorText(ColorBlue);
+    ui->bUserPeriod->setColorBg(QColor(0xf0,0xf0,0xf0));
+    ui->bUserPeriod->setFontSize(16);
+
     addChannel(listChannels, num);
 
     //адаптация окна под отображение сообщений (по-умолчанию)
     ui->stackedWidget->setCurrentIndex(page);
+
+    multiplier = 1;
 
     //Настройки для масштабирования архива
     mouseOnScalede = false;
@@ -296,8 +303,9 @@ void dSettings::updateWidgets()
         ui->loadArchive->setMovie(&moArch);
         moArch.start();
         archivePeriod = 60;
+        periodShift = 0;
         ui->period->setEnabled(false);
-        arch->load(archivePeriod);
+        arch->load(archivePeriod, periodShift);
 
     }
     if(ui->stackedWidget->currentIndex() == 3)
@@ -337,34 +345,12 @@ void dSettings::on_verticalScrollBar_sliderMoved(int position)
 
 void dSettings::on_period_currentIndexChanged(int index)
 {
-    // Реализовать тут смену периода отображаемых данных из архива
-    // Тут же обновить график
-    //                 1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
+    //               1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
     int periods[] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
-    if((sizeof(periods) / sizeof(int)) >= index)
-    {
-        //Vag: сделать видимыми элементы выбора дат и кнопку ОК
-        return;
-    }
-//    assert((sizeof(periods) / sizeof(int)) >= ui->period->count());
-    archivePeriod = periods[index]; //число секундных точек отсчёта
-
-//    QVector<QDateTime> Dates;
-//    QVector<QString> Labels;
-//    QDateTime curTime = QDateTime::currentDateTime();
-//    QDateTime firstTime = curTime.addSecs(-archivePeriod);
-    ui->loadArchive->setVisible(true);
-    moArch.start();
-    ui->period->setEnabled(false);
-    //Сброс буфера перед новым запросом
-    Y_coordinates_Chanel_1.reserve(0);
-    Y_coordinates_Chanel_2.reserve(0);
-    Y_coordinates_Chanel_3.reserve(0);
-    Y_coordinates_Chanel_4.reserve(0);
-    // Запрос данных из файлов архива
-    arch->load(archivePeriod);
-
-//    updateGraf(archivePeriod);
+    if((sizeof(periods) / sizeof(int)) <= index) return;
+    periodShift = 0;
+    archivePeriod = periods[index];
+    loadArchFromFile();
 }
 
 void dSettings::updateGraf(int period)
@@ -373,10 +359,10 @@ void dSettings::updateGraf(int period)
     assert(arch != NULL);
     if(arch == NULL) return;
 
-    QDateTime firstTime = QDateTime::currentDateTime().addSecs(-period);
-    QString strLabel = "hh:mm:ss";
+    /*QDateTime */firstTime = QDateTime::currentDateTime().addSecs(-period-periodShift);
+    /*QString */strLabel = "hh:mm:ss";
 
-    int multiplier = 1;
+    /*int */multiplier = 1;
     if(period >= 604800)
     {
         multiplier = 600;
@@ -640,6 +626,20 @@ void dSettings::saveParamToFile()
     {
         cFileManager::writeChannelsSettings(pathtooptions, listChannels);
     }
+}
+
+void dSettings::loadArchFromFile()
+{
+    ui->loadArchive->setVisible(true);
+    moArch.start();
+    ui->period->setEnabled(false);
+    //Сброс буфера перед новым запросом
+    Y_coordinates_Chanel_1.reserve(0);
+    Y_coordinates_Chanel_2.reserve(0);
+    Y_coordinates_Chanel_3.reserve(0);
+    Y_coordinates_Chanel_4.reserve(0);
+    // Запрос данных из файлов архива
+    arch->load(archivePeriod, periodShift);
 }
 
 void dSettings::on_buttonBackUstavki_clicked()
@@ -1092,4 +1092,16 @@ void dSettings::on_bDeleteUstavka_clicked()
     listUstavok.removeAt(ustavka->getNum());
     saveParamToFile();
     this->close();
+}
+
+void dSettings::on_bUserPeriod_clicked()
+{
+    QDateTime start = QDateTime::currentDateTime().addSecs(-archivePeriod);
+    QDateTime finish = QDateTime::currentDateTime();
+    cCustomPeriod dialogPeriod(start, finish);
+    dialogPeriod.setModal(true);
+    dialogPeriod.exec();
+    archivePeriod = cCustomPeriod::startDT.secsTo(cCustomPeriod::finishDT);
+    periodShift = cCustomPeriod::finishDT.secsTo(QDateTime::currentDateTime());
+    loadArchFromFile();
 }

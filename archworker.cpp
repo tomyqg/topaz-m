@@ -9,6 +9,7 @@
 cArchWorker::cArchWorker(QString file, QObject *parent) : QObject(parent)
 {
     fileArch = file;
+    shift = 0;
 }
 
 /*
@@ -17,7 +18,7 @@ cArchWorker::cArchWorker(QString file, QObject *parent) : QObject(parent)
 void cArchWorker::run()
 {
     int periodSec = period; //период в секундах
-    QDateTime curTime = QDateTime::currentDateTime();
+    QDateTime curTime = QDateTime::currentDateTime().addSecs(-shift);
     QDateTime firstTime = curTime.addSecs(-periodSec);
 
     int daysPeriod = firstTime.daysTo(curTime);

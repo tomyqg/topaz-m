@@ -70,12 +70,17 @@ private:
     int curRow;
     bool mouseScroll;
     int archivePeriod;
+    int periodShift;
+    int multiplier;
+    QDateTime firstTime;
+    QString strLabel;
     void updateUIfromSteel();
     cSteel * curSteel;
     void UpdateSteelUI(typeSteelTech * tech);
     QVector<double> X_Steel, Y_SteelTemp, Y_SteelEds;
     void saveParam();
     void saveParamToFile();
+    void loadArchFromFile();
 
 private slots:
     void on_exitButton_clicked();
@@ -102,6 +107,7 @@ private slots:
     void on_steelRelayMeasure_activated(int index);
     void on_steelRelayTimeOut_activated(int index);
     void on_bDeleteUstavka_clicked();
+    void on_bUserPeriod_clicked();
 };
 
 #endif // SETTINGS_H

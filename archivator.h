@@ -31,7 +31,7 @@ class cArchivator : public QObject
 public:
     explicit cArchivator(QString file, QListIterator<ChannelOptions*>& ch, QObject *parent = 0);
     ~cArchivator();
-    void load(int per);
+    void load(int per, int shift = 0);
     QVector<double> getVector(int ch);
 
 signals:

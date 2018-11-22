@@ -123,6 +123,7 @@
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
 #define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
 #define UpdateSteelTime 500
+#define timeUpdateDevices 1000       // время обновления комплекта плат
 
 #endif
 
@@ -161,7 +162,8 @@
 #define SpinboxstylesheetUnclicked "background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255)); "
 #define Spinboxstylesheetclicked "background-color: rgb(255, 128, 179);background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 128, 179, 255), stop:1 rgba(153, 0, 61, 255));color : white;"
 
-#define NUM_CHAN_DEFAULT    3
+#define TOTAL_NUM_DEVICES   6       //максимальное количество плат
+#define NUM_CHAN_DEFAULT    4
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали

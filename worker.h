@@ -63,8 +63,6 @@ private:
     QList<ChannelOptions *> ChannelsObjectsList;
     QMutex mQueue;
     QList<QVector<double> *> arrayarray;
-    QList< Device * > Devices;
-    Device device;
     QMutex ReadModbusDataMutex;
     QMutex TestMutex;
     QQueue<Transaction> trans;

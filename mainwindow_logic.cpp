@@ -12,6 +12,7 @@
 #include "qextserialenumerator.h"
 #include "registersmap.h"
 #include "Channels/group_channels.h"
+#include "device_slot.h"
 
 #include <filemanager.h>
 #include <assert.h>
@@ -70,6 +71,7 @@ QDateTime timeOutBuff;
 cUsbFlash * flash;
 
 extern MainWindow * globalMainWin;
+extern QList<cDevice*> listDevice;
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
@@ -170,23 +172,11 @@ void MainWindow::MainWindowInitialization()
         }
     }
 
-    for(int i = 0; i < NUM_CHAN_DEFAULT; i++)
-    {
-        ChannelOptions * ch = new ChannelOptions();
-        ch->SetCurrentChannelValue(0);
-        ch->setNum(i+1);
-        ch->setSlot(CONST_SLAVE_ADC);     //
-        ch->setSlotChannel(i);
-        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-//        ch->SetMeasurePeriod(1000);
-        listChannels.append(ch);
-    }
+    // инициализация каналов (входов)
+    InitChannels();
 
-    //перед рисованием графиков записать нули в первый элемент вектора
-//    channel1.SetCurrentChannelValue(0);
-//    channel2.SetCurrentChannelValue(0);
-//    channel3.SetCurrentChannelValue(0);
-//    channel4.SetCurrentChannelValue(0);
+    // инициализация уставок
+    InitUstavka();
 
     ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
     ui->customPlot->setAntialiasedElements(QCP::aeNone);
@@ -198,7 +188,7 @@ void MainWindow::MainWindowInitialization()
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateDateLabel()));
-
+    timer->start(DateLabelUpdateTimer);
 
     displayrefreshtimer = new QTimer();
 //    displayrefreshtimer->setInterval(3000);
@@ -218,13 +208,15 @@ void MainWindow::MainWindowInitialization()
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
-    timer->start(DateLabelUpdateTimer);
 
+    //инициализация виртуальных копий устройств
+    InitDevices();
+
+    //инициализация системных таймеров
     InitTimers();
-    LabelsInit();
 
-    // инициализация таблицы канал-слот
-//    InitChannelSlotTable();
+    //
+    LabelsInit();
 
     // инициализация таблицы реле-слот
     InitRelaySlotTable();
@@ -232,8 +224,7 @@ void MainWindow::MainWindowInitialization()
     //инициализация таблицы сталь-слот
     InitSteelSlotTable();
 
-    // инициализация объектов уставок
-    InitUstavka();
+
     // получение значений уставок из файла
 //    ReadUstavkiFromFile();
 
@@ -249,6 +240,8 @@ void MainWindow::MainWindowInitialization()
     group->typeInput[1] = 1;
     group->channel[2] = listChannels.at(2);
     group->typeInput[2] = 1;
+    group->channel[3] = listChannels.at(3);
+    group->typeInput[3] = 1;
 //    group->channel[3] = listChannels.at(3);
 //    group->typeInput[3] = 1;
     group->enabled = true;
@@ -279,43 +272,9 @@ void MainWindow::MainWindowInitialization()
     ui->buttonInputsGraphs->setFontSize(16);
     cFileManager::readSteelsSettings(pathtosteeloptions);
 
-    //чтение настроек каналов и уставок
-    int i = cFileManager::readChannelsSettings(pathtooptions, listChannels);
-    // установки сигнал/слотов для новых уставок
-    for(int i = 0; i < listUstavok.size(); i ++)
-    {
-        Ustavka * ust = listUstavok.at(i);
-        connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
-    }
-
-//    channel1.setNum(1);
-//    channel2.setNum(2);
-//    channel3.setNum(3);
-//    channel4.setNum(4);
-
-//    channel1.SetNormalColor(ColorCh1);
-//    channel2.SetNormalColor(ColorCh2);
-//    channel3.SetNormalColor(ColorCh3);
-//    channel4.SetNormalColor(ColorCh4);
-
-//    channel1.SetMaximumColor(QColor(ColorCh1.red() - 20, ColorCh1.green() - 20, ColorCh1.blue() - 20));
-//    channel2.SetMaximumColor(QColor(ColorCh2.red() - 20, ColorCh2.green() - 20, ColorCh2.blue() - 20));
-//    channel3.SetMaximumColor(QColor(ColorCh3.red() - 20, ColorCh3.green() - 20, ColorCh3.blue() - 20));
-//    channel4.SetMaximumColor(QColor(ColorCh4.red() - 20, ColorCh4.green() - 20, ColorCh4.blue() - 20));
-
-//    channel1.SetMinimumColor(QColor(ColorCh1.red() + 20, ColorCh1.green() + 20, ColorCh1.blue() + 20));
-//    channel2.SetMinimumColor(QColor(ColorCh2.red() + 20, ColorCh2.green() + 20, ColorCh2.blue() + 20));
-//    channel3.SetMinimumColor(QColor(ColorCh3.red() + 20, ColorCh3.green() + 20, ColorCh3.blue() + 20));
-//    channel4.SetMinimumColor(QColor(ColorCh4.red() + 20, ColorCh4.green() + 20, ColorCh4.blue() + 20));
-
     SetWindowWidthPixels(1024);
     SetWindowHeightPixels(768);
 
-    // создание конфигуратора слотов
-    sc = new cSlotsConfig(this);
-    connect(this, SIGNAL(retransToSlotConfig(Transaction)), sc, SLOT(receiveConf(Transaction)));
-
-    //
     mQTr = new QMutex();
     timerQueueTrans = new QTimer();
     connect(timerQueueTrans, SIGNAL(timeout()), this, SLOT(parseWorkerReceive()));
@@ -332,7 +291,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
-    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+//    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
     // /Инициализация потока Worker ---------------------
 
@@ -450,28 +409,17 @@ void MainWindow::LabelsInit()
  * */
 void MainWindow::InitUstavka()
 {
-//    for(int i = 0; i < TOTAL_NUM_USTAVKI; i ++)
-//    {
-//        Ustavka *ust = new Ustavka(this);
-//        connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
-////        connect(ust, SIGNAL(messToLogSignal(int,QString)), this, SLOT(logginStates(int,QString)));
-//        ust->setNum(i+1);
-//        ust->setIdentifikator("Limit " + QString::number(i+1));
-//        listUstavok.append(ust);
-//    }
+    // установки сигнал/слотов для новых уставок
+    for(int i = 0; i < listUstavok.size(); i ++)
+    {
+        Ustavka * ust = listUstavok.at(i);
+        connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
+    }
 
     // запуск обновления уставок по таймеру
     timeUpdUst = new QTimer();
     connect(timeUpdUst, SIGNAL(timeout()), this, SLOT(UpdUst()));
     timeUpdUst->start(UstavkiUpdateTimer);
-
-
-
-    //Vag:тест
-//    Ustavka * u = ustavkaObjectsList.at(1);
-//    u->setKvitirUp(true);
-//    u->setKvitirDown(true);
-    //----
 }
 
 void MainWindow::UpdUst()
@@ -685,6 +633,40 @@ void MainWindow::InitProcessorMinFreq()
     process.startDetached("sudo cpufreq-set --governor powersave"); // min perfomance on
 }
 
+void MainWindow::InitDevices()
+{
+    for(int i = 0; i < TOTAL_NUM_DEVICES; i++)
+    {
+        cDevice * device = new cDevice();
+        connect(device, SIGNAL(updateParam(Transaction)), this, SLOT(retransToWorker(Transaction)));
+        listDevice.append(device);
+    }
+}
+
+void MainWindow::InitChannels()
+{
+    for(int i = 0; i < NUM_CHAN_DEFAULT; i++)
+    {
+        ChannelOptions * ch = new ChannelOptions();
+        ch->SetCurrentChannelValue(0);
+        ch->setNum(i+1);
+        ch->setSlot(CONST_SLAVE_ADC);     //
+        ch->setSlotChannel(i);
+        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//        ch->SetMeasurePeriod(1000);
+        listChannels.append(ch);
+    }
+
+    //чтение настроек каналов и уставок
+    int countChannels = listChannels.size();
+    cFileManager::readChannelsSettings(pathtooptions);
+    int newCountChannels = listChannels.size();
+    for(int i = countChannels; i < newCountChannels; i++)
+    {
+        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+    }
+}
+
 void MainWindow::InitTimers()
 {
 //    channeltimer1 = new QTimer();
@@ -693,6 +675,7 @@ void MainWindow::InitTimers()
 //    channeltimer4 = new QTimer();
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
+    timerUpdateDevices = new QTimer();
 
 //    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
 //    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
@@ -700,12 +683,14 @@ void MainWindow::InitTimers()
 //    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
 
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
+    connect(timerUpdateDevices, SIGNAL(timeout()), this, SLOT(updateDevicesComplect()));
 //    channeltimer1->start(1000);
 //    channeltimer2->start(1000);
 //    channeltimer3->start(1000);
 //    channeltimer4->start(1000);
     halfSecondTimer->start(500);
     archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
+    timerUpdateDevices->start(timeUpdateDevices);
 }
 
 void MainWindow::InitTouchScreen()
@@ -780,6 +765,78 @@ void MainWindow::SetEcoMode(bool EcoMode)
     ui->customPlot->yAxis->setTickLabelFont(QFont(Font, 12, QFont::ExtraBold));
     ui->customPlot->xAxis->setTickLabelColor(newlabelscolor);
     ui->customPlot->yAxis->setTickLabelColor(newlabelscolor);
+}
+
+void MainWindow::updateDevicesComplect()
+{
+    QList<uint8_t> list4AI;
+    QList<uint8_t> list8RP;
+    QList<uint8_t> listSTEEL;
+    foreach (cDevice * device, listDevice) {
+        if(device->getOnline()){
+            switch(device->deviceType)
+            {
+            case Device_4AI:
+                list4AI.append(device->getSlot());
+                list4AI.append(device->getSlot());
+                list4AI.append(device->getSlot());
+                list4AI.append(device->getSlot());
+                break;
+            case Device_8RP:
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                list8RP.append(device->getSlot());
+                break;
+            case Device_STEEL:
+                listSTEEL.append(device->getSlot());
+                listSTEEL.append(device->getSlot());
+                break;
+            default:
+                cLogger mk(pathtomessages, cLogger::DEVICE);
+                QString strSlot = QString::number(device->getSlot());
+                QString strtype = QString::number(device->deviceType);
+                mk.addMess("Slot " + strSlot + " | Device unidentified | type "\
+                           + strtype, cLogger::WARNING);
+                break;
+            }
+        }
+    }
+    // обновление списка каналов
+    int i = 0;
+    foreach (uint8_t slot, list4AI) {
+        if(i < listChannels.size())
+        {
+            //обновление параметров каналов
+            ChannelOptions * ch = listChannels.at(i);
+            ch->setSlot(slot);     //
+            ch->setSlotChannel(i%4);
+            ch->enable = true;
+        }
+        else
+        {   // добавить каналы, если плат стало больше
+            ChannelOptions * ch = new ChannelOptions();
+            ch->SetCurrentChannelValue(0);
+            ch->setNum(i+1);
+            ch->setSlot(slot);     //
+            ch->setSlotChannel(i%4);
+            connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+            listChannels.append(ch);
+        }
+        i++;
+    }
+    if(listChannels.size() > list4AI.size())
+    {
+        // плат стало меньше, тогда временно отключем каналы, но не удаляем
+        for(int i = list4AI.size(); i < listChannels.size(); i++)
+        {
+            listChannels.at(i)->enable = false;
+        }
+    }
 }
 
 
@@ -1004,7 +1061,10 @@ void MainWindow::parseWorkerReceive()
     while(!queueTransaction.isEmpty() && (counter++ < 4))
     {
         tr = queueTransaction.dequeue();
-        int typeDevice = sc->getTypeDevice(tr.slave);
+//        int typeDevice = sc->getTypeDevice(tr.slave);
+        if((tr.slave == 0) || (tr.slave > TOTAL_NUM_DEVICES)) return;
+        int indexDev = tr.slave - 1;
+        cDevice * device = listDevice.at(indexDev);
         paramName = cRegistersMap::getNameByOffset(tr.offset);
         isDeviceParam = false;
         if(tr.offset < BASE_OFFSET_DEVICE)
@@ -1014,6 +1074,7 @@ void MainWindow::parseWorkerReceive()
         else if((tr.offset >= BASE_OFFSET_DEVICE) && (tr.offset < BASE_OFFSET_CHANNEL_1))
         {
             isDeviceParam = true;
+            device->parseDeviceParam(tr);
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_1) && (tr.offset < BASE_OFFSET_CHANNEL_2))
             // канал 1
@@ -1045,7 +1106,7 @@ void MainWindow::parseWorkerReceive()
 //            emit retransToSlotConfig(tr);
             if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
             {
-                if(typeDevice == Device_4AI)   //контроллировать источник нужно во всех "else if"
+                if(device->deviceType == Device_4AI)   //контроллировать источник нужно во всех "else if"
                 {
                     channel->SetSignalType(tr.volInt);
                     channel->SetCurSignalType(tr.volInt);
@@ -1054,14 +1115,14 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Status"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(ch)->status = tr.volInt;
                 }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter1"))
             {
-                if(typeDevice == Device_4AI)
+                if(device->deviceType == Device_4AI)
                 {
                     if((channel->GetSignalType() == ChannelOptions::MeasureTermoResistance) ||
                             (channel->GetSignalType() == ChannelOptions::MeasureTC))
@@ -1079,7 +1140,7 @@ void MainWindow::parseWorkerReceive()
             }
             else if((paramName == "DataChan0") || (paramName == "chan0Data"))
             {
-                if(typeDevice == Device_4AI)
+                if(device->deviceType == Device_4AI)
                 {
 
 #ifndef RANDOM_CHAN
@@ -1088,14 +1149,14 @@ void MainWindow::parseWorkerReceive()
                     ui->widgetVol1->setVol((double)tr.volFlo);
 #endif
                 }
-                else if(typeDevice == Device_STEEL)
+                else if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(0)->temp = tr.volFlo;
                 }
             }
             else if((paramName == "DataChan1") || (paramName == "chan1Data"))
             {
-                if(typeDevice == Device_4AI)
+                if(device->deviceType == Device_4AI)
                 {
 #ifndef RANDOM_CHAN
                     listChannels.at(1)->SetCurrentChannelValue((double)tr.volFlo);
@@ -1103,14 +1164,14 @@ void MainWindow::parseWorkerReceive()
                     ui->widgetVol2->setVol((double)tr.volFlo);
 #endif
                 }
-                else if(typeDevice == Device_STEEL)
+                else if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(1)->temp = tr.volFlo;
                 }
             }
             else if((paramName == "DataChan2") || (paramName == "chan2Data"))
             {
-                if(typeDevice == Device_4AI)
+                if(device->deviceType == Device_4AI)
                 {
 #ifndef RANDOM_CHAN
                     listChannels.at(2)->SetCurrentChannelValue((double)tr.volFlo);
@@ -1118,14 +1179,14 @@ void MainWindow::parseWorkerReceive()
                     ui->widgetVol3->setVol((double)tr.volFlo);
 #endif
                 }
-                else if(typeDevice == Device_STEEL)
+                else if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(2)->temp = tr.volFlo;
                 }
             }
             else if((paramName == "DataChan3") || (paramName == "chan3Data"))
             {
-                if(typeDevice == Device_4AI)
+                if(device->deviceType == Device_4AI)
                 {
 #ifndef RANDOM_CHAN
                     listChannels.at(3)->SetCurrentChannelValue((double)tr.volFlo);
@@ -1133,7 +1194,7 @@ void MainWindow::parseWorkerReceive()
                     ui->widgetVol4->setVol((double)tr.volFlo);
 #endif
                 }
-                else if(typeDevice == Device_STEEL)
+                else if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(3)->temp = tr.volFlo;
                 }
@@ -1145,21 +1206,21 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "OxActivity"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(ch)->ao = tr.volInt & 0xFFFF;
                 }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "MassAl"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(ch)->alg = tr.volInt & 0xFFFF;
                 }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Carbon"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     //получены все данные по площадке - это последний параметр
                     listSteel.at(ch)->allVectorsReceived = true;
@@ -1171,7 +1232,7 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName == QString("chan" + QString::number(ch) + "PrimaryActivity"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(ch)->eds = tr.volFlo;
                 }
@@ -1183,6 +1244,8 @@ void MainWindow::parseWorkerReceive()
         }
         else    //isDeviceParam
         {
+
+            // Vag: уместить всё внутри обработчика устройства cDevice (вверху)
             if(paramName == "deviceType")
             {
                 if(tr.volInt == Device_STEEL)
@@ -1204,7 +1267,7 @@ void MainWindow::parseWorkerReceive()
             }
             else if(paramName.contains("DataArray"))
             {
-                if(typeDevice == Device_STEEL)
+                if(device->deviceType == Device_STEEL)
                 {
                     bool needNextArray = true;  //признак необходимости запроса следующего массива
                     int curArray = 0;

@@ -19,7 +19,7 @@ public:
     explicit ChannelOptions();
     ~ChannelOptions();
 public:
-
+    bool enable;        // флаг включения и отключения канала (для сохранения настроек)
     int getNum() { return numChannel; }
     void setNum(int i) { numChannel = i; }
     void setSlot(int sl) { slot = sl; }
