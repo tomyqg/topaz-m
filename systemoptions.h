@@ -12,6 +12,7 @@ public:
     int display;
     bool arrows;
     bool autoscale;
+    int brightness;
     enum DisplayParametrEnum {
         Bars = 0x00,
         TrendsBars = 0x01,

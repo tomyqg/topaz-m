@@ -8,15 +8,26 @@ class cRelay : public QObject
     Q_OBJECT
 public:
     explicit cRelay(uint8_t numDev, uint8_t slot, QObject *parent = 0);
-    bool newState;
-    bool oldState;
+    void setState(bool f);
+    bool getState();
     bool confirmedState;
+    bool getCurState() {
+        return curState;
+    }
+
     uint8_t mySlot;
     uint8_t myPhysicalNum;
 
 signals:
+    void signalSwitch(uint8_t sl, uint8_t num, bool state);
 
 public slots:
+    void setCurState(bool state);
+
+private:
+    bool oldState;
+    bool newState;
+    bool curState;      //текщее состояние из Modbus
 };
 
 #endif // CRELAY_H

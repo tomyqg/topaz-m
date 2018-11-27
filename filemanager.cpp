@@ -271,6 +271,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     systemoptions["Arrows"] = opt->arrows;
     systemoptions["Display"] = opt->display;
     systemoptions["Autoscale"] = opt->autoscale;
+    systemoptions["Brightness"] = opt->brightness;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(path);
     file.open(QIODevice::ReadWrite);
@@ -295,6 +296,8 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     opt->arrows = json["Arrows"].toBool();
     opt->display = json["Display"].toInt();
     opt->autoscale = json["Autoscale"].toBool();
+    opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
+    opt->brightness = json["Brightness"].toInt();
     infile.close();
 }
 

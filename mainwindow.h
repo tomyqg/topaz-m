@@ -146,6 +146,7 @@ private slots:
     void UpdUst();
     void logginStates(int channel, QString mess);
     void newUstavkaConnect(int num);
+    void slotRelay(uint8_t sl, uint8_t num, bool state);
 
 //    void askAnybusIRQ();
 
@@ -329,7 +330,6 @@ private:
 
 //    cRelaySlotController rsc;
     void InitRelaySlotTable();
-    QList<cRelay*> listRelais;
 
     uint32_t getDevOffsetByChannel(int ch, uint32_t offset);
 

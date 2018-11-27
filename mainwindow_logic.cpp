@@ -74,6 +74,7 @@ extern MainWindow * globalMainWin;
 extern QList<cDevice*> listDevice;
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
+extern QList<cRelay*> listRelais;
 extern QList<cSteel*> listSteel;
 extern QList<cGroupChannels*> listGroup;
 //extern tDeviceBasicParams g_deviceDataStorage;
@@ -472,6 +473,8 @@ void MainWindow::InitRelaySlotTable()
     for(int i = 0; i < TOTAL_NUM_RELAIS; i++)
     {
         cRelay * relay = new cRelay(i, CONST_SLAVE_RELAY);
+        connect(relay, SIGNAL(signalSwitch(uint8_t, uint8_t, bool)), this, SLOT(slotRelay(uint8_t, uint8_t, bool)));
+
         listRelais.append(relay);
     }
 }
@@ -493,39 +496,41 @@ void MainWindow::InitSteelSlotTable()
 void MainWindow::sendRelayStateToWorker(int relay, bool state)
 {
 
-    // номер реле -> индекс реле
-    relay -= 1;
+    listRelais.at(relay)->setState(state);
 
-    // получить номер слота платы реле
-//    int slot = rsc.getSlotByRelay(relay);
-    int slot = listRelais.at(relay)->mySlot;
+//    // номер реле -> индекс реле
+//    relay -= 1;
 
-    // получить индекс реле на плате (канал)
-//    int devRelay = rsc.getDevRelay(relay);
-    int devRelay = listRelais.at(relay)->myPhysicalNum;
+//    // получить номер слота платы реле
+////    int slot = rsc.getSlotByRelay(relay);
+//    int slot = listRelais.at(relay)->mySlot;
 
-    // определение адреса параметра в соответствии с интексом реле
-    // это пока временная реализация --------------
-    uint32_t relayOffset;
-    if(devRelay%2)
-    {
-        relayOffset = ChannelOptions::chanReleyHi;
-    } else {
-        relayOffset = ChannelOptions::chanReleyLow;
-    }
-    //---------------------------------------------
+//    // получить индекс реле на плате (канал)
+////    int devRelay = rsc.getDevRelay(relay);
+//    int devRelay = listRelais.at(relay)->myPhysicalNum;
 
-    uint16_t offset = getDevOffsetByChannel(devRelay>>1, relayOffset);
+//    // определение адреса параметра в соответствии с интексом реле
+//    // это пока временная реализация --------------
+//    uint32_t relayOffset;
+//    if(devRelay%2)
+//    {
+//        relayOffset = ChannelOptions::chanReleyHi;
+//    } else {
+//        relayOffset = ChannelOptions::chanReleyLow;
+//    }
+//    //---------------------------------------------
 
-    Transaction tr(Transaction::W, slot, offset, 0);
-    // значение 1 в регистре замыкает реле
-    // тут нужно вставить инверсию, если выход нормально замкнут
-    if(state) tr.volInt = 1;
-    else tr.volInt = 0;
-#ifdef DEBUG_RELAY
-    qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
-#endif
-    emit sendTransToWorker(tr);
+//    uint16_t offset = getDevOffsetByChannel(devRelay>>1, relayOffset);
+
+//    Transaction tr(Transaction::W, slot, offset, 0);
+//    // значение 1 в регистре замыкает реле
+//    // тут нужно вставить инверсию, если выход нормально замкнут
+//    if(state) tr.volInt = 1;
+//    else tr.volInt = 0;
+//#ifdef DEBUG_RELAY
+//    qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
+//#endif
+//    emit sendTransToWorker(tr);
 }
 
 void MainWindow::InitPins()
@@ -837,6 +842,35 @@ void MainWindow::updateDevicesComplect()
             listChannels.at(i)->enable = false;
         }
     }
+
+    // обновление списка реле
+    i = 0;
+    foreach (uint8_t slot, list8RP) {
+        if(i < listRelais.size())
+        {
+            //обновление параметров реле
+            cRelay * r = listRelais.at(i);
+            r->mySlot = slot;     //
+            r->myPhysicalNum = i%8;
+        }
+        else
+        {   // добавить каналы, если соответствующих плат стало больше
+            cRelay * r = new cRelay(i%8, slot);
+//            r->mySlot = slot;     //
+//            r->myPhysicalNum = i%8;
+            connect(r, SIGNAL(signalSwitch(uint8_t,uint8_t,bool)), this, SLOT(slotRelay(uint8_t,uint8_t,bool)));
+            listRelais.append(r);
+        }
+        i++;
+    }
+    if(listRelais.size() > list8RP.size())
+    {
+        // плат стало меньше, тогда удаляем объекты
+        for(int i = list8RP.size(); i < listRelais.size(); i++)
+        {
+            listRelais.removeAt(i);
+        }
+    }
 }
 
 
@@ -915,6 +949,22 @@ void MainWindow::newUstavkaConnect(int num)
 {
     Ustavka * ust = listUstavok.at(num);
     connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
+}
+
+void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
+{
+
+    Transaction tr(Transaction::W);
+    int index = num >> 1;
+    int level = num & 1;
+    QString strLevel = (level ? "ReleyLo" : "ReleyHi");
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(index) + strLevel);
+    tr.slave = sl;
+    tr.volInt = state;
+#ifdef DEBUG_RELAY
+    qDebug() << "Relay:" << num << "=" << state;
+#endif
+    emit sendTransToWorker(tr);
 }
 
 void MainWindow::logginSteel(int numSteel)
@@ -1235,6 +1285,32 @@ void MainWindow::parseWorkerReceive()
                 if(device->deviceType == Device_STEEL)
                 {
                     listSteel.at(ch)->eds = tr.volFlo;
+                }
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "ReleyHi"))
+            {
+                if(device->deviceType == Device_8RP)
+                {
+                    int num = ch << 1;
+                    foreach (cRelay * r, listRelais) {
+                        if((tr.slave == r->mySlot) && (r->myPhysicalNum == num) )
+                        {
+                            r->setCurState(tr.volInt);
+                        }
+                    }
+                }
+            }
+            else if(paramName == QString("chan" + QString::number(ch) + "ReleyLo"))
+            {
+                if(device->deviceType == Device_8RP)
+                {
+                    int num = (ch << 1) + 1;
+                    foreach (cRelay * r, listRelais) {
+                        if((tr.slave == r->mySlot) && (r->myPhysicalNum == num) )
+                        {
+                            r->setCurState(tr.volInt);
+                        }
+                    }
                 }
             }
             else

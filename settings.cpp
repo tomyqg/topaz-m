@@ -269,7 +269,8 @@ void dSettings::updateWidgets()
 
         for (int var = 0; var < messagesarray.count() ; ++var) {
             QJsonObject mes = messagesarray.at(var).toObject();
-            if(mes.value("C") != cLogger::SERVICE)
+            if(mes.value("C") != cLogger::SERVICE &&\
+                    (mes.value("C") != cLogger::ERR))
             {
                 QString num = QString("%1").arg(var+1, 4, 10, QChar('0'));
                 ui->listWidget->addItem(num + " | " + mes.value("D").toString() \
@@ -542,6 +543,8 @@ void dSettings::updateBar()
         ui->bar->setVolue(channel->GetCurrentChannelValue());
     }
 }
+
+
 
 void dSettings::saveParam()
 {

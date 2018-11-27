@@ -19,6 +19,7 @@
 #define TIME_UPDATE DateLabelUpdateTimer
 #define TIME_UPDATE_DEVICE_UI   500
 #define DRIVE_UPDATE 500
+#define TIME_UPD_DIAGNOSTIC     500
 
 extern int dateindex;
 extern int timeindex;
@@ -28,6 +29,7 @@ extern QList<cDevice*> listDevice;
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
+extern QList<cRelay*> listRelais;
 extern typeSteelTech steelTech[];
 extern cChannelSlotController csc;
 extern cSteelController ssc;
@@ -74,9 +76,14 @@ dMenu::dMenu(QWidget *parent) :
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
 
+    connect(&tUpdateDiagnostic, SIGNAL(timeout()), this, SLOT(updateLabelDiagnostic()));
+    connect(&tUpdateDiagnostic, SIGNAL(timeout()), this, SLOT(updateLabelModeling()));
+    tUpdateDiagnostic.start(TIME_UPD_DIAGNOSTIC);
+
     //периодические обновления виджетов информации о платах
     connect(&tUpdateDeviceUI, SIGNAL(timeout()), this, SLOT(updateDevicesUI()));
     tUpdateDeviceUI.start(TIME_UPDATE_DEVICE_UI);
+    curDiagnostDevice = 0;
 
     connect(flash, SIGNAL(newFlash(int)), this, SLOT(updateDriversWidgets()));
 
@@ -101,6 +108,14 @@ dMenu::dMenu(QWidget *parent) :
     //добавить виджеты групп каналов
     addWidgetGroup();
     addWidgetChannels();
+
+    light = systemOptions.brightness;
+    ui->volLight->setText(QString::number(light));
+    ui->progressLight->setValue(light);
+
+    QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->listDeviceErrors->viewport(), QScroller::LeftMouseButtonGesture);
+
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
@@ -119,6 +134,37 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         kb.exec();
     }
 #endif
+
+    if ( (event->type() == QEvent::MouseButtonRelease) && \
+         (object->objectName().contains("bModeling")))
+    {
+        if(object->metaObject()->className() == "QPushButton")
+        {
+            QPushButton * widget = (QPushButton*)object;
+            widget->setProperty("styleSheet", QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                            "color: rgb(0, 0, 0);\n"
+                                                            "border-radius: 0px;"));
+        }
+        QStringList listParam = object->objectName().split('_');
+        int num = listParam.at(2).toInt();
+        if(listParam.at(1) == "On") listRelais.at(num)->setState(true);
+        else if(listParam.at(1) == "Off") listRelais.at(num)->setState(false);
+        //возвращать цвет кнопки
+
+    }
+    if ( (event->type() == QEvent::MouseButtonPress) && \
+         (object->objectName().contains("bModeling")))
+    {
+        if(object->metaObject()->className() == "QPushButton")
+        {
+            QPushButton * widget = (QPushButton*)object;
+            //менять цвет кнопки
+            widget->setProperty("styleSheet", QLatin1String("background-color: rgb(180, 180, 180);\n"
+                                                            "color: rgb(0, 0, 0);\n"
+                                                            "border-radius: 0px;"));
+        }
+    }
+
     return QObject::eventFilter(object, event);
 }
 
@@ -148,6 +194,8 @@ void dMenu::on_saveButton_clicked()
         sysOptions.display = cSystemOptions::Steel;
     }
     sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
+    sysOptions.brightness = light;
+//    setBrightness(light);
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
     emit saveButtonSignal();
@@ -252,6 +300,138 @@ void dMenu::addWidgetChannels()
     ui->verticalLayoutChannels->addItem(verticalSpacer);
 }
 
+void dMenu::addWidgetMeasures()
+{
+    clearLayout(ui->verticalLayoutMeasures);
+    listLabelDiagnostic.clear();
+    // генерация виджетов
+    int i = 0;
+    foreach (ChannelOptions * channel, listChannels) {
+        QFont font2;
+        font2.setFamily(QStringLiteral("Open Sans"));
+        font2.setPointSize(20);
+
+
+        QFrame * frameMeasure1 = new QFrame(ui->widgetScrollAreaMeasures);
+        frameMeasure1->setFrameShape(QFrame::NoFrame);
+        frameMeasure1->setFrameShadow(QFrame::Raised);
+
+        QHBoxLayout * horizontalLayout_3 = new QHBoxLayout(frameMeasure1);
+
+        QLabel * labelMeasure1 = new QLabel(frameMeasure1);
+        labelMeasure1->setFont(font2);
+        labelMeasure1->setText("КАНАЛ " + QString::number(channel->getNum()));
+        horizontalLayout_3->addWidget(labelMeasure1);
+
+        QLabel * labelNameMeasure1 = new QLabel(frameMeasure1);
+        labelNameMeasure1->setFont(font2);
+        labelNameMeasure1->setAlignment(Qt::AlignCenter);
+        labelNameMeasure1->setText(channel->GetChannelName());
+        horizontalLayout_3->addWidget(labelNameMeasure1);
+        ui->verticalLayoutMeasures->addWidget(frameMeasure1);
+
+        QLabel * volMeasure1 = new QLabel(frameMeasure1);
+        volMeasure1->setMinimumSize(QSize(131, 31));
+        volMeasure1->setMaximumSize(QSize(185, 45));
+        volMeasure1->setFont(font2);
+        volMeasure1->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                                 "	color: rgb(255, 255, 255);\n"
+                                                 "	border-radius: 0px;"));
+        volMeasure1->setAlignment(Qt::AlignCenter);
+        volMeasure1->setText(QString::number(channel->GetCurrentChannelValue()));
+        listLabelDiagnostic.append(volMeasure1);
+        horizontalLayout_3->addWidget(volMeasure1);
+
+        QLabel * labelMesMeasure1 = new QLabel(frameMeasure1);
+        labelMesMeasure1->setFont(font2);
+        labelMesMeasure1->setAlignment(Qt::AlignCenter);
+        labelMesMeasure1->setText(channel->GetUnitsName());
+        horizontalLayout_3->addWidget(labelMesMeasure1);
+
+        i++;
+    }
+
+        QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        ui->verticalLayoutMeasures->addItem(verticalSpacer);
+}
+
+void dMenu::addWidgetModeling()
+{
+
+    clearLayout(ui->verticalLayouModeling);
+    listLabelModeling.clear();
+
+    QFont font6;
+    font6.setFamily(QStringLiteral("Open Sans"));
+    font6.setPointSize(20);
+
+    int i = 0;
+    foreach(cRelay * relay, listRelais)
+    {
+
+        QFrame * frameModeling = new QFrame(ui->widgetScrollAreaModeling);
+        frameModeling->setFrameShape(QFrame::NoFrame);
+        frameModeling->setFrameShadow(QFrame::Raised);
+
+        QHBoxLayout * horizontalLayout_8 = new QHBoxLayout(frameModeling);
+
+        QLabel * labelModeling = new QLabel(frameModeling);
+        labelModeling->setFont(font6);
+        horizontalLayout_8->addWidget(labelModeling);
+
+        QSpacerItem * horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalLayout_8->addItem(horizontalSpacer_5);
+
+        QPushButton * modelingOn = new QPushButton(frameModeling);
+        modelingOn->setObjectName(QStringLiteral("bModeling_On_") + QString::number(i));
+        modelingOn->setMinimumSize(QSize(100, 41));
+        modelingOn->setMaximumSize(QSize(100, 41));
+        modelingOn->setFont(font6);
+        modelingOn->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                "color: rgb(0, 0, 0);\n"
+                                                "border-radius: 0px;"));
+        modelingOn->installEventFilter(this);
+        horizontalLayout_8->addWidget(modelingOn);
+//        listButtonModeling.append(modelingOn);
+
+
+        QLabel * modelingVol = new QLabel(frameModeling);
+        modelingVol->setMinimumSize(QSize(131, 31));
+        modelingVol->setMaximumSize(QSize(185, 45));
+        modelingVol->setFont(font6);
+        modelingVol->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                                 "	color: rgb(255, 255, 255);\n"
+                                                 "	border-radius: 0px;"));
+        modelingVol->setAlignment(Qt::AlignCenter);
+        horizontalLayout_8->addWidget(modelingVol);
+        listLabelModeling.append(modelingVol);
+
+        QPushButton * modelingOff = new QPushButton(frameModeling);
+        modelingOff->setObjectName(QStringLiteral("bModeling_Off_") + QString::number(i));
+        modelingOff->setMinimumSize(QSize(100, 41));
+        modelingOff->setMaximumSize(QSize(100, 41));
+        modelingOff->setFont(font6);
+        modelingOff->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                 "color: rgb(0, 0, 0);\n"
+                                                 "border-radius: 0px;"));
+        modelingOff->installEventFilter(this);
+        horizontalLayout_8->addWidget(modelingOff);
+        ui->verticalLayouModeling->addWidget(frameModeling);
+//        listButtonModeling.append(modelingOff);
+
+        QString strOut = "ВЫХОД " + QString::number(i+1);
+        labelModeling->setText(strOut);
+        modelingOn->setText(QApplication::translate("dMenu", "ВКЛ", Q_NULLPTR));
+        modelingVol->setText(relay->getCurState() ? "ON" : "OFF");
+        modelingOff->setText(QApplication::translate("dMenu", "ОТКЛ", Q_NULLPTR));
+
+        i++;
+    }
+
+    QSpacerItem * verticalSpacer_36 = new QSpacerItem(20, 165, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayouModeling->addItem(verticalSpacer_36);
+}
+
 void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
 {
     while (QLayoutItem* item = layout->takeAt(0))
@@ -273,13 +453,13 @@ void dMenu::updateDevicesUI()
     listButtonDevices << ui->bDevice1 << ui->bDevice2 << ui->bDevice3 \
                       << ui->bDevice4 << ui->bDevice5 << ui->bDevice6;
     assert(listDevice.size() == listButtonDevices.size());
+    QStringList strType;
+    strType << "" << "4AI" << "8RP" << "STEEL";
     int i = 0;
     foreach(wButtonStyled * bDev, listButtonDevices)
     {
         cDevice * device = listDevice.at(i);
         QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
-        QStringList strType;
-        strType << "" << "4AI" << "8RP" << "STEEL";
         QStringList strOnline;
         strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
         str += strOnline.at(device->getOnline());
@@ -294,6 +474,45 @@ void dMenu::updateDevicesUI()
 
         bDev->setText(str);
         i++;
+    }
+    if(curDiagnostDevice != 0)
+    {
+        cDevice * curDev = listDevice.at(curDiagnostDevice - 1);
+        ui->deviceType->setText(strType.at(curDev->deviceType));
+        ui->deviceState->setText(QString::number(curDev->deviceState));
+        QStringList strStatus;
+        strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
+        ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
+        int numErr = 0;
+        QStringList devErrors;
+        devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS"\
+                  << "SPEED" << "MODEL_CHECK" << "REZERV" << "RESERVE" << "RESERVE"
+                  << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE";
+        QStringList activeErrors;
+        for(int i = 0; i < 16; i++)
+        {
+//            numErr += ((curDev->devErrors >> i) & 1);
+            if((curDev->devErrors >> i) & 1)
+            {
+                numErr++;
+                activeErrors << devErrors.at(i);
+            }
+        }
+        ui->devErrors->setText(QString::number(numErr));
+        ui->listDeviceErrors->clear();
+        ui->listDeviceErrors->addItems(activeErrors);
+        ui->protocolVersion->setText(QString::number(curDev->protocolVersion));
+        ui->hardwareVersion->setText(QString::number(curDev->hardwareVersion));
+        ui->softwareVersion->setText(QString::number(curDev->softwareVersion));
+        ui->serialNumber->setText(QString::number(curDev->serialNumber));
+        ui->uptime->setText(QString::number(curDev->uptime));
+        int year = (curDev->factoryDate >> 24) & 0xFF;
+        int month = (curDev->factoryDate >> 16) & 0xFF;
+        int day = (curDev->factoryDate >> 8) & 0xFF;
+        QString strDate = QString::number(day) + "."\
+                + QString::number(month) + "."\
+                + QString::number(year);
+        ui->dataOrder->setText(strDate);
     }
 }
 
@@ -322,6 +541,17 @@ void dMenu::updateDeviceInfo(uint8_t index)
         ui->frameDeviceInfo1->show();
         ui->frameDeviceInfo2->show();
     }
+}
+
+void dMenu::setBrightness(int l)
+{
+#ifndef Q_OS_WIN32
+    QFile fileBright("/sys/class/backlight/pwm-backlight/brightness");
+    fileBright.open(QIODevice::WriteOnly);
+    QTextStream out(&fileBright);
+    out << l;
+    fileBright.close();
+#endif
 }
 
 void dMenu::timeoutLoad()
@@ -422,6 +652,7 @@ void dMenu::openSettingsChannel(int num, int page)
         dialogSetingsChannel = new dSettings(listChannels, num, page);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
+        addWidgetChannels();
         //sendConfigChannelsToSlave();
     }
     else if(page == 4)
@@ -429,10 +660,8 @@ void dMenu::openSettingsChannel(int num, int page)
         //проверка на наличие такого номера входной группы
         if((num <= 0) || (num > listSteel.size())) return;
         dialogSetingsChannel = new dSettings(listChannels, num, page);
-//        dialogSetingsChannel->addSteel(listSteel.at(num), steelTech);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
-
     }
     else if(page == 3)
     {
@@ -891,38 +1120,101 @@ void dMenu::on_bBackDevice_clicked()
 
 void dMenu::on_bDevice1_clicked()
 {
+    if(!listDevice.at(0)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 1");
+    curDiagnostDevice = 1;
 }
 
 void dMenu::on_bDevice2_clicked()
 {
+    if(!listDevice.at(1)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 2");
+    curDiagnostDevice = 2;
 }
 
 void dMenu::on_bDevice3_clicked()
 {
+    if(!listDevice.at(2)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 3");
+    curDiagnostDevice = 3;
 }
 
 void dMenu::on_bDevice4_clicked()
 {
+    if(!listDevice.at(3)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 4");
+    curDiagnostDevice = 4;
 }
 
 void dMenu::on_bDevice5_clicked()
 {
+    if(!listDevice.at(4)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 5");
+    curDiagnostDevice = 5;
 }
 
 void dMenu::on_bDevice6_clicked()
 {
+    if(!listDevice.at(5)->getOnline()) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 6");
+    curDiagnostDevice = 6;
+}
+
+void dMenu::on_bBackLight_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->nameSubMenu->setText("РАБОТА");
+}
+
+void dMenu::on_bSetLight_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(26);
+    ui->nameSubMenu->setText("ЯРКОСТЬ");
+}
+
+void dMenu::on_bListDiagnostics_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(27);
+    ui->nameSubMenu->setText("ОШИБКИ");
+    updateDiagnosticMess();
+}
+
+void dMenu::on_bBackListDiagnostics_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    ui->nameSubMenu->setText("ДИАГНОСТИКА");
+}
+
+void dMenu::on_bBackMeasure_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    ui->nameSubMenu->setText("ДИАГНОСТИКА");
+}
+
+void dMenu::on_bMeasuredValue_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(28);
+    ui->nameSubMenu->setText("ИЗМЕРЕНИЯ");
+    addWidgetMeasures();
+}
+
+void dMenu::on_bModeling_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(29);
+    ui->nameSubMenu->setText("МОДЕЛИРОВАНИЕ");
+    addWidgetModeling();
+}
+
+void dMenu::on_bBackModeling_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    ui->nameSubMenu->setText("ДИАГНОСТИКА");
 }
 
 void dMenu::updateDriversWidgets()
@@ -1063,6 +1355,31 @@ void dMenu::UpdateAnalyze()
     ui->analizemaxvaluechannel_2->setText(QString::number(maximumchannel_2));
     ui->analizemaxvaluechannel_3->setText(QString::number(maximumchannel_3));
     ui->analizemaxvaluechannel_4->setText(QString::number(maximumchannel_4));
+}
+
+void dMenu::updateDiagnosticMess()
+{
+    QJsonArray messagesarray;
+    cLogger log(pathtomessages);
+    messagesarray = log.MessRead();
+
+    for (int var = 0; var < messagesarray.count() ; ++var) {
+        QJsonObject mes = messagesarray.at(var).toObject();
+        if((mes.value("C") != cLogger::SERVICE) && \
+                (mes.value("C") == cLogger::ERR))
+        {
+//            if((mes.value("S") == cLogger::CHANNEL) || \
+//                    (mes.value("S") == cLogger::DEVICE) || \
+//                    (mes.value("S") == cLogger::MODBUS))
+//            {
+                QString num = QString("%1").arg(var+1, 4, 10, QChar('0'));
+                ui->listWidget->addItem(num + " | " + mes.value("D").toString() \
+                                        + " " +  mes.value("T").toString() \
+                                        + " | "+ mes.value("M").toString());
+//            }
+        }
+    }
+    ui->listWidget->scrollToBottom();
 }
 
 
@@ -1592,3 +1909,98 @@ void dMenu::on_bApplayGroup_clicked()
 }
 
 
+
+void dMenu::on_lightUp_clicked()
+{
+    if(light < 91) light += 10;
+    ui->volLight->setText(QString::number(light));
+    ui->progressLight->setValue(light);
+    setBrightness(light);
+}
+
+void dMenu::on_lightDown_clicked()
+{
+    if(light > 10) light -= 10;
+    ui->volLight->setText(QString::number(light));
+    ui->progressLight->setValue(light);
+    setBrightness(light);
+}
+
+void dMenu::on_bLogEvents_clicked()
+{
+    dialogSetingsChannel = new dSettings(listChannels, 1, 1);
+    dialogSetingsChannel->exec();
+    dialogSetingsChannel->deleteLater();
+}
+
+
+void dMenu::updateLabelDiagnostic()
+{
+    int i = 0;
+    foreach(QLabel * volLabel, listLabelDiagnostic)
+    {
+        if(i < listChannels.size())
+        {
+            volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+        }
+        i++;
+    }
+}
+
+void dMenu::updateLabelModeling()
+{
+    int i = 0;
+    foreach(QLabel * volLabel, listLabelModeling)
+    {
+        QList<QColor> colors;
+                  //ON        //OFF            //ERR
+        colors << ColorCh1 << ColorCh4Light << ColorCh3;
+
+        QStringList strStyle;
+        strStyle << "background-color: rgb(" + \
+                    QString::number(colors.at(0).red()) + ", " + \
+                    QString::number(colors.at(0).green()) + ", " + \
+                    QString::number(colors.at(0).blue()) + ");\n"
+                    "color: rgb(255, 255, 255);\n"
+                    "border-radius: 0px;";
+        strStyle << "background-color: rgb(" + \
+                    QString::number(colors.at(1).red()) + ", " + \
+                    QString::number(colors.at(1).green()) + ", " + \
+                    QString::number(colors.at(1).blue()) + ");\n"
+                    "color: rgb(255, 255, 255);"
+                    "border-radius: 0px;";
+        strStyle << "background-color: rgb(" + \
+                    QString::number(colors.at(2).red()) + ", " + \
+                    QString::number(colors.at(2).green()) + ", " + \
+                    QString::number(colors.at(2).blue()) + ");\n"
+                    "color: rgb(255, 255, 255);"
+                    "border-radius: 0px;";
+
+        if(i < listRelais.size())
+        {
+            cRelay * r = listRelais.at(i);
+            volLabel->setText(r->getCurState() ? "ON" : "OFF");
+//            if(r->confirmedState)
+//            {
+                volLabel->setStyleSheet(r->getCurState() ? strStyle.at(0) : strStyle.at(1));
+//            }
+//            else
+//            {
+//                volLabel->setStyleSheet(strStyle.at(2));
+//            }
+        }
+        i++;
+    }
+}
+
+
+
+void dMenu::on_modelingOn_clicked()
+{
+    listRelais.at(0)->setState(true);
+}
+
+void dMenu::on_modelingOff_clicked()
+{
+    listRelais.at(0)->setState(false);
+}

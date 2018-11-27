@@ -35,6 +35,7 @@ extern cChannelSlotController csc;
 extern QList<ChannelOptions*> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
+extern QList<cRelay*> listRelais;
 extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
@@ -1048,35 +1049,35 @@ void MainWindow::updateSteel()
             int8_t relay = steel->relais[i];
             if(relay != -1)
             {
-                if(listRelais.at(relay)->newState != relayStates[i])
-                {
-                    listRelais.at(relay)->newState = relayStates[i];
-                    Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
-                    uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
-                    if(relay%2)
-                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
-                    else
-                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
-                    tr.volInt = relayStates[i];
-                    emit sendTransToWorker(tr);
-                    steel->countRelayTime = 4000 / UpdateSteelTime;
-                }
-                if((listRelais.at(relay)->newState == 1) && (i == 3))
-                {
-                    if(steel->countRelayTime > 0)
-                        steel->countRelayTime--;
-                    else
-                    {
-                        Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
-                        uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
-                        if(relay%2)
-                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
-                        else
-                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
-                        tr.volInt = 0;
-                        emit sendTransToWorker(tr);
-                    }
-                }
+//                if(listRelais.at(relay)->getState() != relayStates[i])
+//                {
+//                    listRelais.at(relay)->setState(relayStates[i]);
+//                    Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
+//                    uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
+//                    if(relay%2)
+//                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
+//                    else
+//                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
+//                    tr.volInt = relayStates[i];
+////                    emit sendTransToWorker(tr);
+//                    steel->countRelayTime = 4000 / UpdateSteelTime;
+//                }
+//                if((listRelais.at(relay)->getState() == 1) && (i == 3))
+//                {
+//                    if(steel->countRelayTime > 0)
+//                        steel->countRelayTime--;
+//                    else
+//                    {
+//                        Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
+//                        uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
+//                        if(relay%2)
+//                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
+//                        else
+//                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
+//                        tr.volInt = 0;
+//                        emit sendTransToWorker(tr);
+//                    }
+//                }
 
             }
 

@@ -38,6 +38,7 @@ QList<ChannelOptions *> listChannels;
 QList<Ustavka *> listUstavok;
 QList<cGroupChannels*> listGroup;
 QList<cSteel*> listSteel;
+QList<cRelay*> listRelais;
 typeSteelTech steelTech[NUM_TECHNOLOGIES];
 cSystemOptions systemOptions;  //класс хранения состемных опций
 

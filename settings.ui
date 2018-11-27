@@ -2473,7 +2473,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
+                     <width>692</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -4421,7 +4421,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>КОНЕЧНАЯ ОКИСЛЕННОСТЬ, СЕК</string>
+                       <string>КОНЕЧНАЯ ОКИСЛЕННОСТЬ, PPM</string>
                       </property>
                      </widget>
                     </item>
@@ -6626,6 +6626,11 @@ border: 0px solid rgba(0,0,0,0);</string>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>wButtonStyled</class>
+   <extends>QPushButton</extends>
+   <header location="global">buttonstyled.h</header>
+  </customwidget>
+  <customwidget>
    <class>wVolueBar</class>
    <extends>QWidget</extends>
    <header>voluebar.h</header>
@@ -6639,11 +6644,6 @@ border: 0px solid rgba(0,0,0,0);</string>
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>wButtonStyled</class>
-   <extends>QPushButton</extends>
-   <header location="global">buttonstyled.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
