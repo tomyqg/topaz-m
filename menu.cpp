@@ -138,12 +138,12 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (object->objectName().contains("bModeling")))
     {
-        if(object->metaObject()->className() == "QPushButton")
+        if(QString::fromLatin1(object->metaObject()->className()) == "QPushButton")
         {
             QPushButton * widget = (QPushButton*)object;
-            widget->setProperty("styleSheet", QLatin1String("background-color: rgb(230, 230, 230);\n"
-                                                            "color: rgb(0, 0, 0);\n"
-                                                            "border-radius: 0px;"));
+            widget->setStyleSheet("background-color: rgb(230, 230, 230);\n"
+                                  "color: rgb(0, 0, 0);\n"
+                                  "border-radius: 0px;");
         }
         QStringList listParam = object->objectName().split('_');
         int num = listParam.at(2).toInt();
@@ -155,13 +155,13 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
     if ( (event->type() == QEvent::MouseButtonPress) && \
          (object->objectName().contains("bModeling")))
     {
-        if(object->metaObject()->className() == "QPushButton")
+        if(QString::fromLatin1(object->metaObject()->className()) == "QPushButton")
         {
             QPushButton * widget = (QPushButton*)object;
             //менять цвет кнопки
-            widget->setProperty("styleSheet", QLatin1String("background-color: rgb(180, 180, 180);\n"
-                                                            "color: rgb(0, 0, 0);\n"
-                                                            "border-radius: 0px;"));
+            widget->setStyleSheet("background-color: rgb(180, 180, 180);\n"
+                                  "color: rgb(0, 0, 0);\n"
+                                  "border-radius: 0px;");
         }
     }
 
@@ -355,82 +355,7 @@ void dMenu::addWidgetMeasures()
         ui->verticalLayoutMeasures->addItem(verticalSpacer);
 }
 
-void dMenu::addWidgetModeling()
-{
 
-    clearLayout(ui->verticalLayouModeling);
-    listLabelModeling.clear();
-
-    QFont font6;
-    font6.setFamily(QStringLiteral("Open Sans"));
-    font6.setPointSize(20);
-
-    int i = 0;
-    foreach(cRelay * relay, listRelais)
-    {
-
-        QFrame * frameModeling = new QFrame(ui->widgetScrollAreaModeling);
-        frameModeling->setFrameShape(QFrame::NoFrame);
-        frameModeling->setFrameShadow(QFrame::Raised);
-
-        QHBoxLayout * horizontalLayout_8 = new QHBoxLayout(frameModeling);
-
-        QLabel * labelModeling = new QLabel(frameModeling);
-        labelModeling->setFont(font6);
-        horizontalLayout_8->addWidget(labelModeling);
-
-        QSpacerItem * horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        horizontalLayout_8->addItem(horizontalSpacer_5);
-
-        QPushButton * modelingOn = new QPushButton(frameModeling);
-        modelingOn->setObjectName(QStringLiteral("bModeling_On_") + QString::number(i));
-        modelingOn->setMinimumSize(QSize(100, 41));
-        modelingOn->setMaximumSize(QSize(100, 41));
-        modelingOn->setFont(font6);
-        modelingOn->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
-                                                "color: rgb(0, 0, 0);\n"
-                                                "border-radius: 0px;"));
-        modelingOn->installEventFilter(this);
-        horizontalLayout_8->addWidget(modelingOn);
-//        listButtonModeling.append(modelingOn);
-
-
-        QLabel * modelingVol = new QLabel(frameModeling);
-        modelingVol->setMinimumSize(QSize(131, 31));
-        modelingVol->setMaximumSize(QSize(185, 45));
-        modelingVol->setFont(font6);
-        modelingVol->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
-                                                 "	color: rgb(255, 255, 255);\n"
-                                                 "	border-radius: 0px;"));
-        modelingVol->setAlignment(Qt::AlignCenter);
-        horizontalLayout_8->addWidget(modelingVol);
-        listLabelModeling.append(modelingVol);
-
-        QPushButton * modelingOff = new QPushButton(frameModeling);
-        modelingOff->setObjectName(QStringLiteral("bModeling_Off_") + QString::number(i));
-        modelingOff->setMinimumSize(QSize(100, 41));
-        modelingOff->setMaximumSize(QSize(100, 41));
-        modelingOff->setFont(font6);
-        modelingOff->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
-                                                 "color: rgb(0, 0, 0);\n"
-                                                 "border-radius: 0px;"));
-        modelingOff->installEventFilter(this);
-        horizontalLayout_8->addWidget(modelingOff);
-        ui->verticalLayouModeling->addWidget(frameModeling);
-//        listButtonModeling.append(modelingOff);
-
-        QString strOut = "ВЫХОД " + QString::number(i+1);
-        labelModeling->setText(strOut);
-        modelingOn->setText(QApplication::translate("dMenu", "ВКЛ", Q_NULLPTR));
-        modelingVol->setText(relay->getCurState() ? "ON" : "OFF");
-        modelingOff->setText(QApplication::translate("dMenu", "ОТКЛ", Q_NULLPTR));
-
-        i++;
-    }
-
-    QSpacerItem * verticalSpacer_36 = new QSpacerItem(20, 165, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ui->verticalLayouModeling->addItem(verticalSpacer_36);
-}
 
 void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
 {
@@ -447,101 +372,7 @@ void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
     }
 }
 
-void dMenu::updateDevicesUI()
-{
-    QList<wButtonStyled*> listButtonDevices;
-    listButtonDevices << ui->bDevice1 << ui->bDevice2 << ui->bDevice3 \
-                      << ui->bDevice4 << ui->bDevice5 << ui->bDevice6;
-    assert(listDevice.size() == listButtonDevices.size());
-    QStringList strType;
-    strType << "" << "4AI" << "8RP" << "STEEL";
-    int i = 0;
-    foreach(wButtonStyled * bDev, listButtonDevices)
-    {
-        cDevice * device = listDevice.at(i);
-        QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
-        QStringList strOnline;
-        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
-        str += strOnline.at(device->getOnline());
 
-        if(device->getOnline())
-        {
-            if(strType.at((int)(device->deviceType) % strType.size()).size())
-            {
-                str +=  " | " + strType.at(device->deviceType % strType.size());
-            }
-        }
-
-        bDev->setText(str);
-        i++;
-    }
-    if(curDiagnostDevice != 0)
-    {
-        cDevice * curDev = listDevice.at(curDiagnostDevice - 1);
-        ui->deviceType->setText(strType.at(curDev->deviceType));
-        ui->deviceState->setText(QString::number(curDev->deviceState));
-        QStringList strStatus;
-        strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
-        ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
-        int numErr = 0;
-        QStringList devErrors;
-        devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS"\
-                  << "SPEED" << "MODEL_CHECK" << "REZERV" << "RESERVE" << "RESERVE"
-                  << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE";
-        QStringList activeErrors;
-        for(int i = 0; i < 16; i++)
-        {
-//            numErr += ((curDev->devErrors >> i) & 1);
-            if((curDev->devErrors >> i) & 1)
-            {
-                numErr++;
-                activeErrors << devErrors.at(i);
-            }
-        }
-        ui->devErrors->setText(QString::number(numErr));
-        ui->listDeviceErrors->clear();
-        ui->listDeviceErrors->addItems(activeErrors);
-        ui->protocolVersion->setText(QString::number(curDev->protocolVersion));
-        ui->hardwareVersion->setText(QString::number(curDev->hardwareVersion));
-        ui->softwareVersion->setText(QString::number(curDev->softwareVersion));
-        ui->serialNumber->setText(QString::number(curDev->serialNumber));
-        ui->uptime->setText(QString::number(curDev->uptime));
-        int year = (curDev->factoryDate >> 24) & 0xFF;
-        int month = (curDev->factoryDate >> 16) & 0xFF;
-        int day = (curDev->factoryDate >> 8) & 0xFF;
-        QString strDate = QString::number(day) + "."\
-                + QString::number(month) + "."\
-                + QString::number(year);
-        ui->dataOrder->setText(strDate);
-    }
-}
-
-void dMenu::updateDeviceInfo(uint8_t index)
-{
-    assert(listDevice.size() >= index);
-    cDevice * device = listDevice.at(index);
-    if(!device->getOnline()){
-        ui->frameDeviceInfo1->hide();
-        ui->frameDeviceInfo2->hide();
-    }
-    else
-    {
-        QStringList strType;
-        strType << "" << "4AI" << "8RP" << "STEEL";
-        ui->deviceType->setText(strType.at(device->deviceType % strType.size()));
-        ui->deviceState->setText(QString::number(device->deviceState));
-        ui->deviceStatus->setText(QString::number(device->deviceStatus));
-        int countErr = 0;
-        QList<int> listErrors;
-//        for(int i = 0; i < 8; i++)
-//        {
-//            if(device->)
-//        }
-//        ui->devErrors->setText();
-        ui->frameDeviceInfo1->show();
-        ui->frameDeviceInfo2->show();
-    }
-}
 
 void dMenu::setBrightness(int l)
 {
@@ -2003,4 +1834,177 @@ void dMenu::on_modelingOn_clicked()
 void dMenu::on_modelingOff_clicked()
 {
     listRelais.at(0)->setState(false);
+}
+
+void dMenu::addWidgetModeling()
+{
+
+    clearLayout(ui->verticalLayouModeling);
+    listLabelModeling.clear();
+
+    QFont font6;
+    font6.setFamily(QStringLiteral("Open Sans"));
+    font6.setPointSize(20);
+
+    int i = 0;
+    foreach(cRelay * relay, listRelais)
+    {
+
+        QFrame * frameModeling = new QFrame(ui->widgetScrollAreaModeling);
+        frameModeling->setFrameShape(QFrame::NoFrame);
+        frameModeling->setFrameShadow(QFrame::Raised);
+
+        QHBoxLayout * horizontalLayout_8 = new QHBoxLayout(frameModeling);
+
+        QLabel * labelModeling = new QLabel(frameModeling);
+        labelModeling->setFont(font6);
+        horizontalLayout_8->addWidget(labelModeling);
+
+        QSpacerItem * horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalLayout_8->addItem(horizontalSpacer_5);
+
+        QPushButton * modelingOn = new QPushButton(frameModeling);
+        modelingOn->setObjectName(QStringLiteral("bModeling_On_") + QString::number(i));
+        modelingOn->setMinimumSize(QSize(100, 41));
+        modelingOn->setMaximumSize(QSize(100, 41));
+        modelingOn->setFont(font6);
+        modelingOn->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                "color: rgb(0, 0, 0);\n"
+                                                "border-radius: 0px;"));
+        modelingOn->installEventFilter(this);
+        horizontalLayout_8->addWidget(modelingOn);
+//        listButtonModeling.append(modelingOn);
+
+
+        QLabel * modelingVol = new QLabel(frameModeling);
+        modelingVol->setMinimumSize(QSize(131, 31));
+        modelingVol->setMaximumSize(QSize(185, 45));
+        modelingVol->setFont(font6);
+        modelingVol->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                                 "	color: rgb(255, 255, 255);\n"
+                                                 "	border-radius: 0px;"));
+        modelingVol->setAlignment(Qt::AlignCenter);
+        horizontalLayout_8->addWidget(modelingVol);
+        listLabelModeling.append(modelingVol);
+
+        QPushButton * modelingOff = new QPushButton(frameModeling);
+        modelingOff->setObjectName(QStringLiteral("bModeling_Off_") + QString::number(i));
+        modelingOff->setMinimumSize(QSize(100, 41));
+        modelingOff->setMaximumSize(QSize(100, 41));
+        modelingOff->setFont(font6);
+        modelingOff->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                 "color: rgb(0, 0, 0);\n"
+                                                 "border-radius: 0px;"));
+        modelingOff->installEventFilter(this);
+        horizontalLayout_8->addWidget(modelingOff);
+        ui->verticalLayouModeling->addWidget(frameModeling);
+//        listButtonModeling.append(modelingOff);
+
+        QString strOut = "ВЫХОД " + QString::number(i+1);
+        labelModeling->setText(strOut);
+        modelingOn->setText(QApplication::translate("dMenu", "ВКЛ", Q_NULLPTR));
+        modelingVol->setText(relay->getCurState() ? "ON" : "OFF");
+        modelingOff->setText(QApplication::translate("dMenu", "ОТКЛ", Q_NULLPTR));
+
+        i++;
+    }
+
+    QSpacerItem * verticalSpacer_36 = new QSpacerItem(20, 165, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayouModeling->addItem(verticalSpacer_36);
+}
+
+void dMenu::updateDevicesUI()
+{
+    QList<wButtonStyled*> listButtonDevices;
+    listButtonDevices << ui->bDevice1 << ui->bDevice2 << ui->bDevice3 \
+                      << ui->bDevice4 << ui->bDevice5 << ui->bDevice6;
+    assert(listDevice.size() == listButtonDevices.size());
+    QStringList strType;
+    strType << "" << "4AI" << "8RP" << "STEEL";
+    int i = 0;
+    foreach(wButtonStyled * bDev, listButtonDevices)
+    {
+        cDevice * device = listDevice.at(i);
+        QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
+        QStringList strOnline;
+        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
+        str += strOnline.at(device->getOnline());
+
+        if(device->getOnline())
+        {
+            if(strType.at((int)(device->deviceType) % strType.size()).size())
+            {
+                str +=  " | " + strType.at(device->deviceType % strType.size());
+            }
+        }
+
+        bDev->setText(str);
+        i++;
+    }
+    if(curDiagnostDevice != 0)
+    {
+        cDevice * curDev = listDevice.at(curDiagnostDevice - 1);
+        ui->deviceType->setText(strType.at(curDev->deviceType));
+        ui->deviceState->setText(QString::number(curDev->deviceState));
+        QStringList strStatus;
+        strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
+        ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
+        int numErr = 0;
+        QStringList devErrors;
+        devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS"\
+                  << "SPEED" << "MODEL_CHECK" << "REZERV" << "RESERVE" << "RESERVE"
+                  << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE";
+        QStringList activeErrors;
+        for(int i = 0; i < 16; i++)
+        {
+//            numErr += ((curDev->devErrors >> i) & 1);
+            if((curDev->devErrors >> i) & 1)
+            {
+                numErr++;
+                activeErrors << devErrors.at(i);
+            }
+        }
+        ui->devErrors->setText(QString::number(numErr));
+        ui->listDeviceErrors->clear();
+        ui->listDeviceErrors->addItems(activeErrors);
+        ui->protocolVersion->setText(QString::number(curDev->protocolVersion));
+        ui->hardwareVersion->setText(QString::number(curDev->hardwareVersion));
+        ui->softwareVersion->setText(QString::number(curDev->softwareVersion));
+        ui->serialNumber->setText(QString::number(curDev->serialNumber));
+        ui->uptime->setText(QString::number(curDev->uptime));
+        int year = (curDev->factoryDate >> 24) & 0xFF;
+        int month = (curDev->factoryDate >> 16) & 0xFF;
+        int day = (curDev->factoryDate >> 8) & 0xFF;
+        QString strDate = QString::number(day) + "."\
+                + QString::number(month) + "."\
+                + QString::number(year);
+        ui->dataOrder->setText(strDate);
+    }
+}
+
+void dMenu::updateDeviceInfo(uint8_t index)
+{
+    assert(listDevice.size() >= index);
+    cDevice * device = listDevice.at(index);
+    if(!device->getOnline()){
+        ui->frameDeviceInfo1->hide();
+        ui->frameDeviceInfo2->hide();
+    }
+    else
+    {
+        QStringList strType;
+        strType << "" << "4AI" << "8RP" << "STEEL";
+        ui->deviceType->setText(strType.at(device->deviceType % strType.size()));
+        ui->deviceState->setText(QString::number(device->deviceState));
+        ui->deviceStatus->setText(QString::number(device->deviceStatus));
+//        int countErr = 0;
+//        QList<int> listErrors;
+//        for(int i = 0; i < 8; i++)
+//        {
+//            if(device->)
+//        }
+//        ui->devErrors->setText();
+        ui->frameDeviceInfo1->show();
+        ui->frameDeviceInfo2->show();
+    }
 }
