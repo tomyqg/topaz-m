@@ -167,7 +167,7 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
 
     }
 
-
+#ifndef Q_OS_WIN
     if ( (event->type() == QEvent::MouseButtonPress) && \
          (object->property("enabled").toString() == "true") && \
          ((object->objectName() == "ipAddr") ||\
@@ -183,6 +183,7 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
             object->setProperty("text",kb.getcustomstring() );
         }
     }
+#endif
 
     return QObject::eventFilter(object, event);
 }
