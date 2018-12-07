@@ -93,7 +93,9 @@ SOURCES += main.cpp \
     Channels/math_channel.cpp \
     Channels/group_channels.cpp \
     customperiod.cpp \
-    device_slot.cpp
+    device_slot.cpp \
+    expert_access.cpp \
+    ip_controller.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -197,7 +199,9 @@ HEADERS  += mainwindow.h \
     Channels/math_channel.h \
     Channels/group_channels.h \
     customperiod.h \
-    device_slot.h
+    device_slot.h \
+    expert_access.h \
+    ip_controller.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

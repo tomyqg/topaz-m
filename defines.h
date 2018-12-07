@@ -43,6 +43,7 @@
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
+#define ETH_NAME    "eth0"
 
 #define ETOUT 110   /* Connection timed out */
 
@@ -52,6 +53,7 @@
 #define comportname "COM6"
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
+#define ETH_NAME  "eth0"
 
 #ifndef Demo
 #define pathtofiles  "C:/Work/"

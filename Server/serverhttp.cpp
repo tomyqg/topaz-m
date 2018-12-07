@@ -19,7 +19,7 @@ cServerHttp::cServerHttp(QObject *parent) :
     }
     else
     {
-        qDebug() << "Error while starting ..." << errorString();
+        qDebug() << "Error while starting ..." << errorString().toStdString().c_str();
     }
 }
 
@@ -34,7 +34,7 @@ void cServerHttp::incomingConnection(qintptr handle)
 void cServerHttp::onReadyRead()
 {
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
-    qDebug() << socket->readAll();
+//    qDebug() << socket->readAll();
 
     QString response = "HTTP/1.1 200 OK\r\n\r\n%1";
     socket->write(response.arg(QDateTime::currentDateTime().toString()).toLocal8Bit());

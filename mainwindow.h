@@ -30,6 +30,7 @@
 #include "serverhttp.h"
 #include <QNetworkProxyFactory>
 #include "usb_flash.h"
+#include "ip_controller.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>

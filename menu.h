@@ -102,6 +102,8 @@ private slots:
     void updateLabelDiagnostic();
     void updateLabelModeling();
     void setBrightness(int l);
+    void slotUpdateEthernetStatus(bool online, bool enable);
+    void slotIpErr();
     void on_bResetToDefault_clicked();
     void on_bExpert_clicked();
     void on_bBackExpert_clicked();
@@ -188,32 +190,32 @@ private slots:
     void on_bDevice4_clicked();
     void on_bDevice5_clicked();
     void on_bDevice6_clicked();
-
     void on_lightUp_clicked();
-
     void on_lightDown_clicked();
-
     void on_bBackLight_clicked();
-
     void on_bSetLight_clicked();
-
     void on_bLogEvents_clicked();
-
     void on_bListDiagnostics_clicked();
-
     void on_bBackListDiagnostics_clicked();
-
     void on_bBackMeasure_clicked();
-
     void on_bMeasuredValue_clicked();
-
     void on_bModeling_clicked();
-
     void on_bBackModeling_clicked();
-
     void on_modelingOn_clicked();
-
     void on_modelingOff_clicked();
+    void on_bProtect_clicked();
+
+    void on_bTypeConnect_clicked();
+
+    void on_bEthernet_clicked();
+
+    void on_bBackTypeConnect_clicked();
+
+    void on_bBackEthernet_clicked();
+
+//    void on_comboDhcpEn_currentIndexChanged(int index);
+
+    void on_bToConnect_clicked();
 
 signals:
     void saveButtonSignal();

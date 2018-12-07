@@ -481,38 +481,44 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
     int ch_num = num;
     int ust_num = num;
     if(ch_num == 0) ch_num = 1;
-    if(ch_num > channels.size()) ch_num = channels.size();
+    if(ch_num > listChannels.size()) ch_num = listChannels.size();
     if(ust_num > listUstavok.size()) ust_num = listUstavok.size();
     numChannel = ch_num;
-    channel = listChannels.at(ch_num-1);
-    ustavka = listUstavok.at(ust_num-1);
 
-    ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(channel->GetSignalType()));
-    ui->nameChannel->setText(channel->GetChannelName().toUtf8());
-    ui->scaleUp->setValue(channel->GetHigherMeasureLimit());
-    ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
-    ui->unit->setText(channel->GetUnitsName().toUtf8());
-    ui->periodCh->setValue(channel->GetMeasurePeriod());
-    ui->labelNumChannel->setText("КАНАЛ #" + QString::number(ch_num));
-    ui->bar->changeNum(ch_num);
-    ui->dempfer->setValue(channel->GetDempherValue());
-    ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
+    if(listChannels.size() > 0)
+    {
+        channel = listChannels.at(ch_num-1);
+        ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(channel->GetSignalType()));
+        ui->nameChannel->setText(channel->GetChannelName().toUtf8());
+        ui->scaleUp->setValue(channel->GetHigherMeasureLimit());
+        ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
+        ui->unit->setText(channel->GetUnitsName().toUtf8());
+        ui->periodCh->setValue(channel->GetMeasurePeriod());
+        ui->labelNumChannel->setText("КАНАЛ #" + QString::number(ch_num));
+        ui->bar->changeNum(ch_num);
+        ui->dempfer->setValue(channel->GetDempherValue());
+        ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
+    }
 
     //параметры уставок
-    ui->ustavkaVol->setValue(ustavka->getHiStateValue());
-//    ui->ustavkaVolDown->setValue(ustavka->getLowStateValue());
-    ui->gisterezis->setValue(ustavka->getHiHisteresis());
-    ui->ustavkaChannel->setCurrentIndex(ustavka->getChannel());
-    ui->typeFix->setCurrentIndex(ustavka->getTypeFix());
-    ui->identifikator->setText(ustavka->getIdentifikator());
-    ui->labelNumUsatvka->setText("УСТАВКИ #" + QString::number(ust_num));
-    ui->reley->setCurrentIndex(ustavka->getnumRelayUp());
-//    ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
-    ui->messageOn->setText(ustavka->getMessInHigh());
-    ui->messageOff->setText(ustavka->getMessNormHigh());
-    ui->kvitir->setCurrentIndex(ustavka->getKvitirUp());
-//    ui->messageOnDown->setText(ustavka->getMessInLow());
-//    ui->messageOffDown->setText(ustavka->getMessNormHigh());
+    if(listUstavok.size() > 0)
+    {
+        ustavka = listUstavok.at(ust_num-1);
+        ui->ustavkaVol->setValue(ustavka->getHiStateValue());
+        //    ui->ustavkaVolDown->setValue(ustavka->getLowStateValue());
+        ui->gisterezis->setValue(ustavka->getHiHisteresis());
+        ui->ustavkaChannel->setCurrentIndex(ustavka->getChannel());
+        ui->typeFix->setCurrentIndex(ustavka->getTypeFix());
+        ui->identifikator->setText(ustavka->getIdentifikator());
+        ui->labelNumUsatvka->setText("УСТАВКИ #" + QString::number(ust_num));
+        ui->reley->setCurrentIndex(ustavka->getnumRelayUp());
+        //    ui->releyDown->setCurrentIndex(ustavka->getnumRelayDown());
+        ui->messageOn->setText(ustavka->getMessInHigh());
+        ui->messageOff->setText(ustavka->getMessNormHigh());
+        ui->kvitir->setCurrentIndex(ustavka->getKvitirUp());
+        //    ui->messageOnDown->setText(ustavka->getMessInLow());
+        //    ui->messageOffDown->setText(ustavka->getMessNormHigh());
+    }
 
     connect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     tUpdateBar.start(TIME_UPDATE_BAR);
@@ -578,33 +584,39 @@ void dSettings::saveParam()
     }
     else
     {
-        channel->SetChannelName(ui->nameChannel->text().toUtf8());
-        channel->SetSignalType(tableSignalTypes[ui->typeSignal->currentIndex()].st);
-        channel->SetHigherMeasureLimit(ui->scaleUp->value());
-        channel->SetLowerMeasureLimit(ui->scaleDown->value());
-        channel->SetUnitsName(ui->unit->text().toUtf8());
-        channel->SetMeasurePeriod(ui->periodCh->value());
-        channel->SetDempher(ui->dempfer->value());
-        channel->SetRegistrationType(ui->typeReg->currentIndex());
-        channel->SetDiapason(ui->sensorDiapazon->currentIndex());
-        channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+        if(listChannels.size() > 0)
+        {
+            channel->SetChannelName(ui->nameChannel->text().toUtf8());
+            channel->SetSignalType(tableSignalTypes[ui->typeSignal->currentIndex()].st);
+            channel->SetHigherMeasureLimit(ui->scaleUp->value());
+            channel->SetLowerMeasureLimit(ui->scaleDown->value());
+            channel->SetUnitsName(ui->unit->text().toUtf8());
+            channel->SetMeasurePeriod(ui->periodCh->value());
+            channel->SetDempher(ui->dempfer->value());
+            channel->SetRegistrationType(ui->typeReg->currentIndex());
+            channel->SetDiapason(ui->sensorDiapazon->currentIndex());
+            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+        }
 
-        ustavka->setUstavka(\
-                    ui->identifikator->text().toUtf8(), \
-                    ui->ustavkaChannel->currentIndex(), \
-                    ui->typeFix->currentIndex(), \
-                    ui->ustavkaVol->value(), \
-                    /*ui->ustavkaVolDown->value(),*/ \
-                    ui->gisterezis->value(), \
-                    /*ui->gisterezis->value(),*/ \
-                    ui->reley->currentIndex() \
-                    /*ui->releyDown->currentIndex()*/ \
-                    );
-        ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
-        ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
-        ustavka->setKvitirUp(ui->kvitir->currentIndex());
-//        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
-//        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
+        if(listUstavok.size() > 0)
+        {
+            ustavka->setUstavka(\
+                        ui->identifikator->text().toUtf8(), \
+                        ui->ustavkaChannel->currentIndex(), \
+                        ui->typeFix->currentIndex(), \
+                        ui->ustavkaVol->value(), \
+                        /*ui->ustavkaVolDown->value(),*/ \
+                        ui->gisterezis->value(), \
+                        /*ui->gisterezis->value(),*/ \
+                        ui->reley->currentIndex() \
+                        /*ui->releyDown->currentIndex()*/ \
+                        );
+            ustavka->setMessInHigh(ui->messageOn->text().toUtf8());
+            ustavka->setMessNormHigh(ui->messageOff->text().toUtf8());
+            ustavka->setKvitirUp(ui->kvitir->currentIndex());
+            //        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
+            //        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
+        }
     }
 
 
@@ -682,6 +694,7 @@ void dSettings::resizeEvent(QResizeEvent * s)
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
 #ifndef Q_OS_WIN
+    #endif
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
          (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
@@ -689,8 +702,8 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
           (QString::fromLatin1(watched->metaObject()->className()) == "QDoubleSpinBox")))
     {
         //Vag: нужно переделать и передавать строку напрямую в конструктор клавиатуры
-        keyboard kb(this);
         keyboard::olderprop = watched->property("text").toString();
+        keyboard kb(this);
         kb.setModal(true);
         kb.exec();
         watched->setProperty("value", kb.getcustomstring() );
@@ -699,7 +712,7 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
-#endif
+//#endif
 
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (QString::fromLatin1(watched->metaObject()->className()) == "QComboBox"))

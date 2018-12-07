@@ -77,6 +77,7 @@ extern QList<Ustavka *> listUstavok;
 extern QList<cRelay*> listRelais;
 extern QList<cSteel*> listSteel;
 extern QList<cGroupChannels*> listGroup;
+extern cIpController * ethernet;
 //extern tDeviceBasicParams g_deviceDataStorage;
 
 void MainWindow::MainWindowInitialization()
@@ -123,6 +124,7 @@ void MainWindow::MainWindowInitialization()
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
 
+    ethernet = new cIpController(ETH_NAME);
 
     scene = new QGraphicsScene();   // Init graphic scene
 

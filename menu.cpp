@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "filemanager.h"
 #include "keyboard.h"
+#include "expert_access.h"
 //#include <options.h>
 #include <QFile>
 #include <QDir>
@@ -11,7 +12,7 @@
 #include "usb_flash.h"
 #include "Channels/group_channels.h"
 #include "device_slot.h"
-
+#include "ip_controller.h"
 
 
 #define HEIGHT 768
@@ -20,6 +21,8 @@
 #define TIME_UPDATE_DEVICE_UI   500
 #define DRIVE_UPDATE 500
 #define TIME_UPD_DIAGNOSTIC     500
+
+//cExpertAccess access;
 
 extern int dateindex;
 extern int timeindex;
@@ -36,6 +39,8 @@ extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern cUsbFlash * flash;
 extern QList<cGroupChannels*> listGroup;
+extern cIpController * ethernet;
+
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -116,6 +121,13 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->listDeviceErrors->viewport(), QScroller::LeftMouseButtonGesture);
 
+//    connect(ethernet, SIGNAL(signalErrIp()), this, SLOT(slotIpErr()));
+//    connect(ethernet, SIGNAL(signalStatus(bool,bool)), \
+//            this, SLOT(slotUpdateEthernetStatus(bool,bool)));
+    ui->ipAddr->installEventFilter(this);
+    ui->netMask->installEventFilter(this);
+    ui->gateWay->installEventFilter(this);
+
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
@@ -128,10 +140,12 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
     {
 //        QCalendarWidget cw;
 //        cw.show();
-        keyboard kb(this);
         keyboard::olderprop = object->property("date").toString();
+        keyboard kb(this);
         kb.setModal(true);
         kb.exec();
+        object->setProperty("text",kb.getcustomstring() );
+        object->setProperty("value",kb.getcustomstring() );
     }
 #endif
 
@@ -152,16 +166,21 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         //возвращать цвет кнопки
 
     }
+
+
     if ( (event->type() == QEvent::MouseButtonPress) && \
-         (object->objectName().contains("bModeling")))
+         (object->property("enabled").toString() == "true") && \
+         ((object->objectName() == "ipAddr") ||\
+          (object->objectName() == "netMask") ||\
+          (object->objectName() == "gateWay")))
     {
-        if(QString::fromLatin1(object->metaObject()->className()) == "QPushButton")
+        if(QString::fromLatin1(object->metaObject()->className()) == "QLineEdit")
         {
-            QPushButton * widget = (QPushButton*)object;
-            //менять цвет кнопки
-            widget->setStyleSheet("background-color: rgb(180, 180, 180);\n"
-                                  "color: rgb(0, 0, 0);\n"
-                                  "border-radius: 0px;");
+            keyboard::olderprop = object->property("text").toString();
+            keyboard kb(this);
+            kb.setModal(true);
+            kb.exec();
+            object->setProperty("text",kb.getcustomstring() );
         }
     }
 
@@ -170,6 +189,9 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
 
 dMenu::~dMenu()
 {
+//    disconnect(ethernet, SIGNAL(signalErrIp()), this, SLOT(slotIpErr()));
+//    disconnect(ethernet, SIGNAL(signalStatus(bool,bool)), \
+            this, SLOT(slotUpdateEthernetStatus(bool,bool)));
     delete ui;
 }
 
@@ -385,6 +407,23 @@ void dMenu::setBrightness(int l)
 #endif
 }
 
+void dMenu::slotUpdateEthernetStatus(bool online, bool enable)
+{
+//    if(enable)
+//    {
+//       ui->bToConnect->setText("ПОДКЛЮЧИТЬСЯ");
+//    }
+//    else
+//    {
+//        ui->bToConnect->setText("ОТКЛЮЧИТЬСЯ");
+//    }
+}
+
+void dMenu::slotIpErr()
+{
+    ui->bToConnect->setText("ПОДКЛЮЧИТЬСЯ");
+}
+
 void dMenu::timeoutLoad()
 {
     this->close();
@@ -542,6 +581,7 @@ void dMenu::on_bUstavki_clicked()
 {
     ui->stackedWidget->setCurrentIndex(7);
     ui->nameSubMenu->setText("УСТАВКИ");
+    addWidgetUstavki();
 }
 
 void dMenu::on_bBackUstavki_clicked()
@@ -675,9 +715,12 @@ void dMenu::on_bBackDateTime_clicked()
 
 void dMenu::on_bExpert_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(10);
-    ui->nameSubMenu->setText("ЭКСПЕРТ");
-    ui->frameNameSubMenu->setHidden(false);
+    keyboard kb(this);\
+    keyboard::olderprop = "";\
+    kb.setModal(true);\
+    kb.setWarning("Введите пароль режима ЭКСПЕРТ", true);\
+    kb.exec();\
+    cExpertAccess::accessRequest(keyboard::newString);
 }
 
 void dMenu::on_bBackExpert_clicked()
@@ -1048,6 +1091,54 @@ void dMenu::on_bBackModeling_clicked()
     ui->nameSubMenu->setText("ДИАГНОСТИКА");
 }
 
+void dMenu::on_bProtect_clicked()
+{
+
+}
+
+void dMenu::on_bTypeConnect_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(30);
+    ui->nameSubMenu->setText("ТИП СВЯЗИ");
+}
+
+void dMenu::on_bEthernet_clicked()
+{
+//    if(ethernet->getOnline())
+//    {
+//        if(ethernet->getDhcpEn())
+//        {
+            ethernet->updateParamEternet();
+            ui->ipAddr->setText(ethernet->getIpAddr());
+            ui->netMask->setText(ethernet->getNetMask());
+            ui->gateWay->setText(ethernet->getGateWay());
+//        }
+//        ui->bToConnect->setText("ОТКЛЮЧИТЬСЯ");
+//    }
+//    else
+//    {
+//        ui->ipAddr->setText("10.12.13.5");
+//        ui->netMask->setText("255.255.255.0");
+//        ui->gateWay->setText("10.12.13.255");
+//        ui->bToConnect->setText("ПОДКЛЮЧИТЬСЯ");
+//    }
+    ui->stackedWidget->setCurrentIndex(31);
+    ui->nameSubMenu->setText("ETHERNET");
+}
+
+void dMenu::on_bBackTypeConnect_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->nameSubMenu->setText("НАСТРОЙКИ");
+}
+
+void dMenu::on_bBackEthernet_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(30);
+    ui->nameSubMenu->setText("ТИП СВЯЗИ");
+}
+
+
 void dMenu::updateDriversWidgets()
 {
     listDrives.clear();
@@ -1067,6 +1158,7 @@ void dMenu::updateDriversWidgets()
 
 void dMenu::on_bEditDataTime_clicked()
 {
+    if(cExpertAccess::getMode() == ACCESS_USER) return;
     dateTime = QDateTime::currentDateTime();
     QDateTime local = dateTime;
     ui->timeEdit_h->setTime(local.time());
@@ -2008,3 +2100,27 @@ void dMenu::updateDeviceInfo(uint8_t index)
         ui->frameDeviceInfo2->show();
     }
 }
+
+
+//void dMenu::on_comboDhcpEn_currentIndexChanged(int index)
+//{
+//    ui->ipAddr->setEnabled(index == 0);
+//    ui->netMask->setEnabled(index == 0);
+//    ui->gateWay->setEnabled(index == 0);
+//}
+
+void dMenu::on_bToConnect_clicked()
+{
+//    if(!ethernet->getEnable())
+//    {
+        ethernet->setConfig(ui->ipAddr->text(), \
+                            ui->netMask->text(), ui->gateWay->text());
+//        ui->bToConnect->setText("ОТКЛЮЧИТЬСЯ");
+//    }
+//    else
+//    {
+//        ethernet->setOff();
+//        ui->bToConnect->setText("ПОДКЛЮЧИТЬСЯ");
+//    }
+}
+

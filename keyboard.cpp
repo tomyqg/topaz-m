@@ -13,6 +13,8 @@
 
 
 QString keyboard::olderprop = "";
+QString keyboard::newString = "";
+
 
 langSimbols keyboard::simbols [] = {
     { "q", "Q", "й", "Й" },     //0
@@ -54,16 +56,21 @@ keyboard::keyboard(QWidget *parent) :
     ui(new Ui::keyboard)
 {
     shift = false;
+    secret = false;
+    newString = "";
     ui->setupUi(this);
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(textinput(int)) );
 
+    ui->labelWarning->hide();
     ui->textEdit->setText(olderprop);
     ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
 
     //курсор сразу в конец строки
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.movePosition(QTextCursor::End);
-    ui->textEdit->setTextCursor(cursor);
+//    QTextCursor cursor = ui->textEdit->cursor();
+//    cursor.movePosition(QTextCursor::End);
+//    ui->textEdit->setTextCursor(cursor);
+//    int pos = ui->textEdit->cursorPosition();
+    ui->textEdit->setCursorPosition(ui->textEdit->text().size()-1);
 
     ui->textEdit->installEventFilter(this);
 
@@ -101,30 +108,49 @@ keyboard::~keyboard()
     delete ui;
 }
 
+void keyboard::setWarning(QString warn, bool secr)
+{
+//    warning = warn;
+    ui->labelWarning->setText(warn);
+    ui->labelWarning->show();
+    secret = secr;
+}
+
 QString keyboard::getcustomstring()
 {
-    return ui->textEdit->toPlainText();
+    return ui->textEdit->text();//toPlainText();
 }
 
 void keyboard::textinput(int b)
 {
     QWidget *widget = QApplication::focusWidget();
-    QString textwas = ui->textEdit->toPlainText();
-    QTextCursor cursor = ui->textEdit->textCursor();
-    int pos = cursor.position();
+    QString textwas = ui->textEdit->text();//->toPlainText();
+//    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = ui->textEdit->cursorPosition();//cursor.position();
 //    qDebug() << "cursor" << pos;
     QPushButton *button = static_cast<QPushButton*>(widget);
-    QString textnew = textwas.insert(pos, button->text());
+    QString textnew;
+    if(secret)
+    {
+        textnew = textwas.insert(pos, "*");
+        newString = newString.insert(pos, button->text());
+    }
+    else
+    {
+        textnew = textwas.insert(pos, button->text());
+    }
     ui->textEdit->setText(textnew);
-    cursor.setPosition(pos+1);
-    ui->textEdit->setTextCursor(cursor);
+//    cursor.setPosition(pos+1);
+//    ui->textEdit->setTextCursor(cursor);
+    ui->textEdit->setCursorPosition(pos+1);
 }
 
 void keyboard::on_pushButton_13_clicked()
 {
     cLogger mk(pathtomessages, cLogger::UI);
-    mk.addMess("Keyboard " + olderprop + " > " + ui->textEdit->toPlainText(),\
+    mk.addMess("Keyboard " + olderprop + " > " + ui->textEdit->text()/*->toPlainText()*/,\
                cLogger::SERVICE);
+    ui->labelWarning->hide();
     this->close();
 }
 
@@ -185,28 +211,29 @@ void keyboard::on_pushButton_27_clicked(bool checked)
 
 void keyboard::on_pushButton_28_clicked()
 {
-    QString textwas = ui->textEdit->toPlainText();
-    QTextCursor cursor = ui->textEdit->textCursor();
-    int pos = cursor.position();
+    QString textwas = ui->textEdit->text();//->toPlainText();
+//    QTextCursor cursor = ui->textEdit->textCursor();
+    int pos = ui->textEdit->cursorPosition();//cursor.position();
     if(pos>0)
     {
         QString textnew = textwas.remove(pos-1,1);
         ui->textEdit->setText(textnew);
-        cursor.setPosition(pos-1);
-        ui->textEdit->setTextCursor(cursor);
+//        cursor.setPosition(pos-1);
+//        ui->textEdit->setTextCursor(cursor);
+        ui->textEdit->setCursorPosition(pos-1);
     }
 }
 
 
 void keyboard::on_pushButton_44_clicked()
 {
-    QString textwas = ui->textEdit->toPlainText();
-    QTextCursor cursor = ui->textEdit->textCursor();
-    int pos = cursor.position();
+    QString textwas = ui->textEdit->text();//toPlainText();
+//    QTextCursor cursor = /*ui->textEdit->*/textCursor();
+    int pos = ui->textEdit->cursorPosition();//cursor.position();
     QString textnew = textwas.insert(pos, ' ');
     ui->textEdit->setText(textnew);
-    cursor.setPosition(pos+1);
-    ui->textEdit->setTextCursor(cursor);
+//    cursor.setPosition(pos+1);
+    ui->textEdit->setCursorPosition(pos+1);//setTextCursor(cursor);
 }
 
 void keyboard::on_comboBox_currentIndexChanged()
@@ -257,9 +284,21 @@ void keyboard::ChangeLanguage(int eng)
 bool keyboard::eventFilter(QObject *object, QEvent *event)
 {
     QKeyEvent* key = static_cast<QKeyEvent*>(event); // what key pressed
-    if  (key->key()==Qt::Key_Enter) // if key == enter, then close
+    if  (key->key() == Qt::Key_Enter) // if key == enter, then close
     {
         this->close();
+    }
+
+    if  ((key->key() >= Qt::Key_Any) &&\
+         (key->key() <= Qt::Key_Z)) // if key == enter, then close
+    {
+//        if(secret)
+//        {
+
+//            QString str = ui->textEdit->toPlainText();
+//            str.replace(QRegExp("."), "*");
+//            ui->textEdit->setText(str);
+//        }
     }
 
     if ( (event->type() == QEvent::MouseButtonPress)&& ( QString::fromLatin1(object->metaObject()->className()) == "QPushButton" ))//)inherits("QPushButton")) // ("QWidgetWindow"))

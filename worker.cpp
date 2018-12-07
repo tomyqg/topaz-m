@@ -485,5 +485,4 @@ void worker::getTransSlot(Transaction tr)
 //    qDebug() << "after DEBUG_WORKER";
     trans.enqueue(tr);
     mQueue.unlock();
-
 }

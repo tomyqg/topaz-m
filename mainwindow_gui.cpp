@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QPoint>
 
+
 QString inputstr = "";
 QDateTime start(QDateTime::currentDateTime());
 QString MainWindow::startdate = start.toString("dd/MM/yy");
@@ -41,6 +42,7 @@ QList<cSteel*> listSteel;
 QList<cRelay*> listRelais;
 typeSteelTech steelTech[NUM_TECHNOLOGIES];
 cSystemOptions systemOptions;  //класс хранения состемных опций
+cIpController * ethernet;
 
 
 extern QColor Channel1Color;

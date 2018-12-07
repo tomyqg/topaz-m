@@ -29,8 +29,11 @@ public:
     ~keyboard();
 
     static QString olderprop;
+    static QString newString;
+
     QString olderproperty;
     bool onlydigits;
+    void setWarning(QString warn, bool secr = false);
 
 private slots:
 //    void on_buttonBox_accepted();
@@ -58,6 +61,8 @@ private:
     static langSimbols simbols[32];
     QString styleUnclicked;
     QString styleClicked;
+    bool secret;
+//    QString warning;        //предупреждение на клавиатуре
 };
 
 
