@@ -60,7 +60,7 @@ public slots:
     void slotOpenSettings(int num);
     void slotOpenGroup(int num);
     void slotOpenChannel(int num);
-//    void onbAddUstavkaClick();
+    void slotOpenDigitOutput(int num);
 
 private:
     Ui::dMenu *ui;
@@ -86,11 +86,13 @@ private:
     void addWidgetUstavki();
     void addWidgetGroup();
     void addWidgetChannels();
+    void addWidgetDigitOutputs();
     void addWidgetMeasures();
     void addWidgetModeling();
     int curGroupEdit;       //текущая редактируемая группа каналов
     int light;
     int curDiagnostDevice;
+    int curRelay;
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
@@ -106,7 +108,6 @@ private slots:
     void slotIpErr();
     void on_bResetToDefault_clicked();
     void on_bExpert_clicked();
-    void on_bBackExpert_clicked();
     void on_bAnaliz_clicked();
     void on_bBackExpert_2_clicked();
     void on_bOptions_clicked();
@@ -161,15 +162,6 @@ private slots:
     void on_bDigitInput8_clicked();
     void on_bOutputs_clicked();
     void on_bBackDigitOutputs_clicked();
-    void on_bAddDigitOutput_clicked();
-    void on_bDigitOutput_1_clicked();
-    void on_bDigitOutput_2_clicked();
-    void on_bDigitOutput_3_clicked();
-    void on_bDigitOutput_4_clicked();
-    void on_bDigitOutput_5_clicked();
-    void on_bDigitOutput_6_clicked();
-    void on_bDigitOutput_7_clicked();
-    void on_bDigitOutput_8_clicked();
     void on_bBackDigitOutputSettings_clicked();
     void on_bAddUstavka_clicked();
     void on_bMath_clicked();
@@ -216,6 +208,12 @@ private slots:
 //    void on_comboDhcpEn_currentIndexChanged(int index);
 
     void on_bToConnect_clicked();
+
+    void on_bBackFromOutputs_clicked();
+
+    void on_bDigitalOutputs_clicked();
+
+    void on_bDigitOutputSettingsApply_clicked();
 
 signals:
     void saveButtonSignal();

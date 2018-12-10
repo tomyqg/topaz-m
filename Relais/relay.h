@@ -17,6 +17,7 @@ public:
 
     uint8_t mySlot;
     uint8_t myPhysicalNum;
+    uint8_t type;           // 0 - нормальноразомкнутое, 1 - нормальнозамкнутое
 
 signals:
     void signalSwitch(uint8_t sl, uint8_t num, bool state);

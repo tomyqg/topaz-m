@@ -16,13 +16,15 @@ void cRelay::setState(bool f)
     if(f != newState)
     {
         newState = f;
-        emit signalSwitch(mySlot, myPhysicalNum, newState);
+        if(type) f = !f;    //инвертирование, если надо
+        emit signalSwitch(mySlot, myPhysicalNum, f);
         confirmedState = false;
     }
 }
 
 void cRelay::setCurState(bool state)
 {
+    if(type) state = !state;//инвертирование, если надо
     curState = state;
     if(curState == newState) confirmedState = true;
     else confirmedState = false;

@@ -105,7 +105,7 @@ dMenu::dMenu(QWidget *parent) :
 
     QScroller::grabGesture(ui->scrollAreaUstavki, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDigitalOutputs, QScroller::LeftMouseButtonGesture);
 
     log = new cLogger(pathtomessages, cLogger::UI);
     log->addMess("Menu > Open ", cLogger::SERVICE);
@@ -165,6 +165,19 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         else if(listParam.at(1) == "Off") listRelais.at(num)->setState(false);
         //возвращать цвет кнопки
 
+    }
+
+    if ( (event->type() == QEvent::MouseButtonPress) && \
+         (object->objectName().contains("bModeling")))
+    {
+        if(QString::fromLatin1(object->metaObject()->className()) == "QPushButton")
+        {
+            QPushButton * widget = (QPushButton*)object;
+            //менять цвет кнопки
+            widget->setStyleSheet("background-color: rgb(180, 180, 180);\n"
+                                  "color: rgb(0, 0, 0);\n"
+                                  "border-radius: 0px;");
+        }
     }
 
 #ifndef Q_OS_WIN
@@ -321,6 +334,27 @@ void dMenu::addWidgetChannels()
     }
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutChannels->addItem(verticalSpacer);
+}
+
+void dMenu::addWidgetDigitOutputs()
+{
+    clearLayout(ui->verticalLayoutDigitalOutputs);
+
+    int i = 0;
+    foreach (cRelay * relay, listRelais) {
+        wButtonStyled * bOutput = new wButtonStyled(ui->scrollAreaWidgetDigitalOutputs);
+        bOutput->index = i+1;
+        bOutput->setText("ВЫХОД " + QString::number(bOutput->index));
+        bOutput->setMinimumSize(QSize(0, 70));
+        bOutput->setColorText(QColor(0xff,0xff,0xff));
+        bOutput->setColorBg(ColorButtonNormal);
+        bOutput->setAlignLeft();
+        connect(bOutput, SIGNAL(clicked(int)), this, SLOT(slotOpenDigitOutput(int)));
+        ui->verticalLayoutDigitalOutputs->addWidget(bOutput);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutDigitalOutputs->addItem(verticalSpacer);
 }
 
 void dMenu::addWidgetMeasures()
@@ -676,10 +710,13 @@ void dMenu::slotOpenChannel(int num)
     openSettingsChannel(num, 0);
 }
 
-//void dMenu::onbAddUstavkaClick()
-//{
-
-//}
+void dMenu::slotOpenDigitOutput(int num)
+{
+    curRelay = num - 1;
+    ui->comboDigitOutputType->setCurrentIndex(listRelais.at(curRelay)->type & 1);
+    ui->stackedWidget->setCurrentIndex(19);
+    ui->nameSubMenu->setText("ВЫХОД " + QString::number(num));
+}
 
 void dMenu::selectPageWork()
 {
@@ -724,11 +761,6 @@ void dMenu::on_bExpert_clicked()
     cExpertAccess::accessRequest(keyboard::newString);
 }
 
-void dMenu::on_bBackExpert_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-    ui->frameNameSubMenu->setHidden(true);
-}
 
 void dMenu::on_bAnaliz_clicked()
 {
@@ -867,74 +899,21 @@ void dMenu::on_bDigitInput8_clicked()
 
 void dMenu::on_bOutputs_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(18);
+    ui->stackedWidget->setCurrentIndex(10);
     ui->nameSubMenu->setText("ВЫХОДЫ");
 }
 
 void dMenu::on_bBackDigitOutputs_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
-    ui->nameSubMenu->setText("НАСТРОЙКИ");
-}
-
-void dMenu::on_bAddDigitOutput_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_1_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_3_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_4_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_5_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_6_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_7_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
-}
-
-void dMenu::on_bDigitOutput_8_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(19);
-    ui->nameSubMenu->setText("НАСТР. ВЫХОДА");
+    ui->stackedWidget->setCurrentIndex(10);
+    ui->nameSubMenu->setText("ВЫХОДЫ");
 }
 
 void dMenu::on_bBackDigitOutputSettings_clicked()
 {
+    addWidgetDigitOutputs();
     ui->stackedWidget->setCurrentIndex(18);
-    ui->nameSubMenu->setText("ВЫХОДЫ");
+    ui->nameSubMenu->setText("ДИСКР. ВЫХОДЫ");
 }
 
 void dMenu::on_bMath_clicked()
@@ -1082,7 +1061,7 @@ void dMenu::on_bMeasuredValue_clicked()
 void dMenu::on_bModeling_clicked()
 {
     ui->stackedWidget->setCurrentIndex(29);
-    ui->nameSubMenu->setText("МОДЕЛИРОВАНИЕ");
+    ui->nameSubMenu->setText("МОДЕЛИР.");
     addWidgetModeling();
 }
 
@@ -1139,6 +1118,19 @@ void dMenu::on_bBackEthernet_clicked()
     ui->nameSubMenu->setText("ТИП СВЯЗИ");
 }
 
+void dMenu::on_bBackFromOutputs_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->nameSubMenu->setText("НАСТРОЙКИ");
+    ui->frameNameSubMenu->setHidden(false);
+}
+
+void dMenu::on_bDigitalOutputs_clicked()
+{
+    addWidgetDigitOutputs();
+    ui->stackedWidget->setCurrentIndex(18);
+    ui->nameSubMenu->setText("ДИСКР. ВЫХОДЫ");
+}
 
 void dMenu::updateDriversWidgets()
 {
@@ -2112,16 +2104,13 @@ void dMenu::updateDeviceInfo(uint8_t index)
 
 void dMenu::on_bToConnect_clicked()
 {
-//    if(!ethernet->getEnable())
-//    {
-        ethernet->setConfig(ui->ipAddr->text(), \
+    ethernet->setConfig(ui->ipAddr->text(), \
                             ui->netMask->text(), ui->gateWay->text());
-//        ui->bToConnect->setText("ОТКЛЮЧИТЬСЯ");
-//    }
-//    else
-//    {
-//        ethernet->setOff();
-//        ui->bToConnect->setText("ПОДКЛЮЧИТЬСЯ");
-//    }
 }
 
+
+
+void dMenu::on_bDigitOutputSettingsApply_clicked()
+{
+    listRelais.at(curRelay)->type = ui->comboDigitOutputType->currentIndex();
+}
