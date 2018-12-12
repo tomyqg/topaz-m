@@ -137,6 +137,10 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
+    if(slotSteelOnline)
+    {
+        systemOptions.display = cSystemOptions::Steel;
+    }
     needUpdatePainter = true;
     switch(systemOptions.display)
     {

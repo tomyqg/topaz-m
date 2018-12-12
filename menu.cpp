@@ -225,10 +225,10 @@ void dMenu::on_saveButton_clicked()
     sysOptions.arrows = ui->arrowscheckBox->checkState();
     sysOptions.display = ui->modeGraf->currentIndex();
     sysOptions.display += (ui->modeBar->currentIndex() << 2);
-    if(ui->radioButSteelModes->isChecked())
-    {
-        sysOptions.display = cSystemOptions::Steel;
-    }
+//    if(ui->radioButSteelModes->isChecked())
+//    {
+//        sysOptions.display = cSystemOptions::Steel;
+//    }
     sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
     sysOptions.brightness = light;
 //    setBrightness(light);
@@ -244,25 +244,25 @@ void dMenu::updateSystemOptions(QString path)
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
     ui->modeBar->setCurrentIndex((sysOptions.display >> 2) % ui->modeBar->count());
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
-    if(ssc.isConnect() && (listChannels.size() > 0))
-    {
-        ui->groupBoxTypePribor->show();
-        if(sysOptions.display == cSystemOptions::Steel)
-        {
-            ui->radioButAnalogModes->setChecked(false);
-            ui->radioButSteelModes->setChecked(true);
-            ui->frameAnalogModes->hide();
-            ui->frameSteelMode->show();
-        } else {
-            ui->radioButSteelModes->setChecked(false);
-            ui->radioButAnalogModes->setChecked(true);
-            ui->frameSteelMode->hide();
-        }
-    }
-    else
-    {
-        ui->groupBoxTypePribor->hide();
-    }
+//    if((listSteel.size() > 0) && (listChannels.size() > 0))
+//    {
+//        ui->groupBoxTypePribor->show();
+//        if(sysOptions.display == cSystemOptions::Steel)
+//        {
+//            ui->radioButAnalogModes->setChecked(false);
+//            ui->radioButSteelModes->setChecked(true);
+//            ui->frameAnalogModes->hide();
+////            ui->frameSteelMode->show();
+//        } else {
+//            ui->radioButSteelModes->setChecked(false);
+//            ui->radioButAnalogModes->setChecked(true);
+////            ui->frameSteelMode->hide();
+//        }
+//    }
+//    else
+//    {
+//        ui->groupBoxTypePribor->hide();
+//    }
     ui->autoscalecheckbox->setChecked(sysOptions.autoscale);
 }
 
@@ -466,6 +466,8 @@ void dMenu::timeoutLoad()
 
 void dMenu::on_bWork_clicked()
 {
+    if(systemOptions.display == cSystemOptions::Steel) ui->bModeDiagram->hide();
+    else ui->bModeDiagram->show();
     ui->stackedWidget->setCurrentIndex(1);
     ui->nameSubMenu->setText("РАБОТА");
     ui->frameNameSubMenu->setHidden(false);
@@ -481,6 +483,8 @@ void dMenu::on_bBack_clicked()
 
 void dMenu::on_bSettings_clicked()
 {
+    if(systemOptions.display == cSystemOptions::Steel) ui->bApplication->hide();
+    else ui->bApplication->show();
     ui->stackedWidget->setCurrentIndex(2);
     ui->nameSubMenu->setText("НАСТРОЙКИ");
     ui->frameNameSubMenu->setHidden(false);
@@ -509,8 +513,17 @@ void dMenu::on_bBackFromInputs_clicked()
 
 void dMenu::on_bInputs_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
-    ui->nameSubMenu->setText("ВХОДЫ");
+    if(systemOptions.display == cSystemOptions::Steel)
+    {
+        ui->stackedWidget->setCurrentIndex(14);
+        ui->nameSubMenu->setText("СТАЛЬ");
+    }
+    else
+    {
+        ui->bSteel->hide();
+        ui->stackedWidget->setCurrentIndex(4);
+        ui->nameSubMenu->setText("ВХОДЫ");
+    }
 //    ui->frameNameSubMenu->setHidden(false);
 }
 
@@ -628,6 +641,8 @@ void dMenu::on_bBackUstavki_clicked()
 
 void dMenu::on_bDiagnost_clicked()
 {
+    if(systemOptions.display == cSystemOptions::Steel) ui->bMeasuredValue->hide();
+    else ui->bMeasuredValue->show();
     ui->stackedWidget->setCurrentIndex(8);
     ui->nameSubMenu->setText("ДИАГНОСТИКА");
     ui->frameNameSubMenu->setHidden(false);
@@ -764,6 +779,7 @@ void dMenu::on_bExpert_clicked()
 
 void dMenu::on_bAnaliz_clicked()
 {
+    if(systemOptions.display == cSystemOptions::Steel) return;
     UpdateAnalyze();
     ui->stackedWidget->setCurrentIndex(11);
     ui->nameSubMenu->setText("АНАЛИЗ");
@@ -802,8 +818,8 @@ void dMenu::on_bBackOtobrazhenie_clicked()
 
 void dMenu::on_bBackSteel_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
-    ui->nameSubMenu->setText("ВХОДЫ");
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->nameSubMenu->setText("НАСТРОЙКИ");
 }
 
 void dMenu::on_bExtMemory_clicked()
@@ -1302,13 +1318,13 @@ void dMenu::updateDiagnosticMess()
 void dMenu::on_radioButAnalogModes_clicked()
 {
     ui->frameAnalogModes->show();
-    ui->frameSteelMode->hide();
+//    ui->frameSteelMode->hide();
 }
 
 void dMenu::on_radioButSteelModes_clicked()
 {
     ui->frameAnalogModes->hide();
-    ui->frameSteelMode->show();
+//    ui->frameSteelMode->show();
 }
 
 void dMenu::on_dateEdit_d_up_clicked()
