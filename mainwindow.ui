@@ -31,6 +31,9 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
+  <property name="documentMode">
+   <bool>true</bool>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,20,4">
     <property name="spacing">
@@ -2697,6 +2700,11 @@ border: 0px;</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>wButtonStyled</class>
+   <extends>QPushButton</extends>
+   <header location="global">buttonstyled.h</header>
+  </customwidget>
+  <customwidget>
    <class>wVolueBar</class>
    <extends>QWidget</extends>
    <header>voluebar.h</header>
@@ -2710,11 +2718,6 @@ border: 0px;</string>
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>wButtonStyled</class>
-   <extends>QPushButton</extends>
-   <header location="global">buttonstyled.h</header>
   </customwidget>
   <customwidget>
    <class>wVol</class>

@@ -12,6 +12,7 @@
 //#include "extern.h"
 
 extern QVector<double> X_Coordinates,Y_coordinates_Chanel_1,Y_coordinates_Chanel_2,Y_coordinates_Chanel_3,Y_coordinates_Chanel_4;
+extern QVector<double> vectorsChannels[24];
 extern QVector<QDateTime> X_Date_Coordinates;
 extern QList<cGroupChannels*> listGroup;
 extern QList<Ustavka *> listUstavok;
@@ -294,14 +295,14 @@ void MainWindow::WriteArchiveToFile()
     QJsonObject archive;
     QJsonArray archives;
 
-    for(int y=0; y<Y_coordinates_Chanel_1.size(); y++)
-        valuesarray1.append(QString::number( Y_coordinates_Chanel_1.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-    for(int y=0; y<Y_coordinates_Chanel_2.size(); y++)
-        valuesarray2.append(QString::number( Y_coordinates_Chanel_2.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-    for(int y=0; y<Y_coordinates_Chanel_3.size(); y++)
-        valuesarray3.append(QString::number( Y_coordinates_Chanel_3.at(y), 'f', 3)); // округляем до 3 знаков после запятой
-    for(int y=0; y<Y_coordinates_Chanel_4.size(); y++)
-        valuesarray4.append(QString::number( Y_coordinates_Chanel_4.at(y), 'f', 3)); // округляем до 3 знаков после запятой
+    for(int y=0; y<vectorsChannels[0].size(); y++)
+        valuesarray1.append(QString::number( vectorsChannels[0].at(y), 'f', 3)); // округляем до 3 знаков после запятой
+    for(int y=0; y<vectorsChannels[1].size(); y++)
+        valuesarray2.append(QString::number( vectorsChannels[1].at(y), 'f', 3)); // округляем до 3 знаков после запятой
+    for(int y=0; y<vectorsChannels[2].size(); y++)
+        valuesarray3.append(QString::number( vectorsChannels[2].at(y), 'f', 3)); // округляем до 3 знаков после запятой
+    for(int y=0; y<vectorsChannels[3].size(); y++)
+        valuesarray4.append(QString::number( vectorsChannels[3].at(y), 'f', 3)); // округляем до 3 знаков после запятой
 
     cGroupChannels * g = listGroup.at(curGroupChannel);
     QString channel1period = "";

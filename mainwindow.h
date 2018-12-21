@@ -115,6 +115,8 @@ public slots:
     bool GetEcoMode();
     void getTransFromWorkerSlot(Transaction tr);
     void parseWorkerReceive();
+    int getIndexSteelBySlotAndCh(int slot, int ch);
+    int getIndexRelayBySlotAndCh(int slot, int ch);
 //    void releOutSlot(uint8_t code);
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
@@ -376,10 +378,13 @@ private:
     void updateSteelWidget();   //обновление виджета с данными и графиком стали
     bool steelSelectFrame;
     void logginSteel(int numSteel);
+    void devicesPause(bool f);
 
     cServerHttp * server;
 
     int curGroupChannel;        //текущая группа для отображения на экране
+
+
 
 protected:
     void paintEvent(QPaintEvent *event) ;

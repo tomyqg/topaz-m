@@ -43,6 +43,7 @@ extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
+extern QList<cRelay*> listRelais;
 extern typeSteelTech steelTech[];
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 
@@ -965,11 +966,43 @@ void dSettings::drowGraf()
 
 void dSettings::updateUIfromSteel()
 {
+    QStringList listRelayNames;
+    int sizeR = listRelais.size();
+    for (int i = 0; i < sizeR; i++) {
+        listRelayNames.append("РЕЛЕ " + QString::number(i+1));
+    }
+    ui->steelRelayBreak->clear();
+    ui->steelRelayReady->clear();
+    ui->steelRelayMeasure->clear();
+    ui->steelRelayTimeOut->clear();
+    ui->steelRelayBreak->addItem("ОТКЛ.");
+    ui->steelRelayReady->addItem("ОТКЛ.");
+    ui->steelRelayMeasure->addItem("ОТКЛ.");
+    ui->steelRelayTimeOut->addItem("ОТКЛ.");
+    ui->steelRelayBreak->addItems(listRelayNames);
+    ui->steelRelayReady->addItems(listRelayNames);
+    ui->steelRelayMeasure->addItems(listRelayNames);
+    ui->steelRelayTimeOut->addItems(listRelayNames);
+    if(sizeR > 0)
+    {
+        ui->steelRelayBreak->setCurrentIndex(\
+                    (curSteel->relais[0] < sizeR) ?\
+                    (curSteel->relais[0] + 1) :\
+                    0);
+        ui->steelRelayReady->setCurrentIndex(\
+                    (curSteel->relais[1] < sizeR) ?\
+                    (curSteel->relais[1] + 1) :\
+                    0);
+        ui->steelRelayMeasure->setCurrentIndex(\
+                    (curSteel->relais[2] < sizeR) ?\
+                    (curSteel->relais[2] + 1) :\
+                    0);
+        ui->steelRelayTimeOut->setCurrentIndex(\
+                    (curSteel->relais[3] < sizeR) ?\
+                    (curSteel->relais[3] + 1) :\
+                    0);
+    }
     typeSteelTech * tech = curSteel->technology;
-    ui->steelRelayBreak->setCurrentIndex(curSteel->relais[0] + 1);
-    ui->steelRelayReady->setCurrentIndex(curSteel->relais[1] + 1);
-    ui->steelRelayMeasure->setCurrentIndex(curSteel->relais[2] + 1);
-    ui->steelRelayTimeOut->setCurrentIndex(curSteel->relais[3] + 1);
     UpdateSteelUI(tech);
 }
 

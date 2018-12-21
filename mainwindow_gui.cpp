@@ -631,7 +631,13 @@ void MainWindow::initSteel()
     for(int i = 0; i < NUM_STEEL; i++)
     {
         cSteel * steel = new cSteel(this);
-        steel->technology = &steelTech[i];
+        steel->enable = false;
+        if(i < 2)
+            steel->slot = CONST_SLAVE_STEEL;
+        else
+            steel->slot = CONST_SLAVE_STEEL_2;
+        steel->slotIndex = i % 2;
+        steel->technology = &steelTech[i%NUM_TECHNOLOGIES];
         listSteel.append(steel);
     }
 }

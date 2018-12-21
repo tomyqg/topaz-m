@@ -28,6 +28,8 @@ double randVal[4] = {((double)((rand()%101) - 50) / 10),\
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+QVector<double> vectorsChannels[24];
+QVector<double> vectorsChannelsArch[24];
 QVector<QDateTime> X_Date_Coordinates;
 QVector<double> X_Coord_Steel, Y_Coord_SteelTemp, Y_Coord_SteelEds;
 
@@ -69,26 +71,32 @@ void MainWindow::AddValuesToBuffer()
     X_Coordinates_archive.append(xoffset);
     X_Date_Coordinates.append(QDateTime::currentDateTime());
 
-    QVector<double> * vectors[] = {&Y_coordinates_Chanel_1,\
-                                &Y_coordinates_Chanel_2,\
-                                &Y_coordinates_Chanel_3,\
-                                &Y_coordinates_Chanel_4};
-    QVector<double> * vectorsArch[] = {&Y_coordinates_Chanel_1_archive,\
-                                &Y_coordinates_Chanel_2_archive,\
-                                &Y_coordinates_Chanel_3_archive,\
-                                &Y_coordinates_Chanel_4_archive};
+//    vectorsChannels.resize(listChannels.size());
+//    QVector<double> * vectors[] = {&Y_coordinates_Chanel_1,\
+//                                &Y_coordinates_Chanel_2,\
+//                                &Y_coordinates_Chanel_3,\
+//                                &Y_coordinates_Chanel_4};
+//    vectorsChannelsArch.resize(listChannels.size());
+//    QVector<double> * vectorsArch[] = {&Y_coordinates_Chanel_1_archive,\
+//                                &Y_coordinates_Chanel_2_archive,\
+//                                &Y_coordinates_Chanel_3_archive,\
+//                                &Y_coordinates_Chanel_4_archive};
 
     int i = 0;
     foreach (ChannelOptions * channel, listChannels) {
-        vectors[i]->append(channel->GetCurrentChannelValue());
-        vectorsArch[i]->append(channel->GetCurrentChannelValue());
-        while (vectors[i]->length()>150)
+//        vectors[i]->append(channel->GetCurrentChannelValue());
+//        QVector<double> * vector = &vectorsChannels.value(i);
+        vectorsChannels[i].append(channel->GetCurrentChannelValue());
+//        vectorsArch[i]->append(channel->GetCurrentChannelValue());
+//        QVector<double> * vectorArch = &vectorsChannelsArch.at(i);
+        vectorsChannelsArch[i].append(channel->GetCurrentChannelValue());
+        while (vectorsChannels[i].length()>150)
         {
-            vectors[i]->removeFirst();
+            vectorsChannels[i].removeFirst();
         }
-        while (vectorsArch[i]->length()>15000)
+        while (vectorsChannelsArch[i].length()>15000)
         {
-            vectorsArch[i]->removeFirst();
+            vectorsChannelsArch[i].removeFirst();
         }
         i++;
     }
@@ -1024,6 +1032,7 @@ void MainWindow::updateSteel()
      */
     for(int i = 0; i<listSteel.size(); i++)
     {
+        if(listRelais.size() == 0) return;
         cSteel * steel = listSteel.at(i);
         int countRele = SUM_RELAYS;
         uint8_t relayStates[countRele];
@@ -1051,11 +1060,11 @@ void MainWindow::updateSteel()
         for(int i = 0; i < countRele; i++)
         {
             int8_t relay = steel->relais[i];
-            if(relay != -1)
+            if((relay != -1) && (listRelais.size() > relay))
             {
-//                if(listRelais.at(relay)->getState() != relayStates[i])
-//                {
-//                    listRelais.at(relay)->setState(relayStates[i]);
+                if(listRelais.at(relay)->getCurState() != relayStates[i])
+                {
+                    listRelais.at(relay)->setState(relayStates[i]);
 //                    Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
 //                    uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
 //                    if(relay%2)
@@ -1063,15 +1072,15 @@ void MainWindow::updateSteel()
 //                    else
 //                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
 //                    tr.volInt = relayStates[i];
-////                    emit sendTransToWorker(tr);
-//                    steel->countRelayTime = 4000 / UpdateSteelTime;
-//                }
-//                if((listRelais.at(relay)->getState() == 1) && (i == 3))
-//                {
-//                    if(steel->countRelayTime > 0)
-//                        steel->countRelayTime--;
-//                    else
-//                    {
+//                    emit sendTransToWorker(tr);
+                    steel->countRelayTime = 4000 / UpdateSteelTime;
+                }
+                if((listRelais.at(relay)->getCurState() == true) && (i == 3))
+                {
+                    if(steel->countRelayTime > 0)
+                        steel->countRelayTime--;
+                    else
+                    {
 //                        Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
 //                        uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
 //                        if(relay%2)
@@ -1080,8 +1089,8 @@ void MainWindow::updateSteel()
 //                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
 //                        tr.volInt = 0;
 //                        emit sendTransToWorker(tr);
-//                    }
-//                }
+                    }
+                }
 
             }
 
@@ -1089,19 +1098,27 @@ void MainWindow::updateSteel()
     }
 
     //Запрос статусов входных групп внезависимости от текущего состояния виджетов
-    Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
-    emit sendTransToWorker(tr);
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
-    emit sendTransToWorker(tr);
+//    Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
+//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
+//    emit sendTransToWorker(tr);
+//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
+//    emit sendTransToWorker(tr);
 //    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
 //    emit sendTransToWorker(tr);
 //    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
 //    emit sendTransToWorker(tr);
+    Transaction tr(Transaction::R);
+    foreach (cSteel * st, listSteel) {
+        if(st->enable)
+        {
+            tr.slave = st->slot;
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(st->slotIndex) + "Status");
+            emit sendTransToWorker(tr);
+        }
+    }
 
     if(stateWidgetSteel == STEEL_READY)
     {   //в плате STEEL имеются данные для получения
-
 //        if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
 //                (listSteel.at(steelReadyNum)->vectorTempReceived))
 //        {
@@ -1133,14 +1150,15 @@ void MainWindow::updateSteel()
 //            steelReady = false;
 //            steelMeasure = false;
             stateWidgetSteel = STEEL_WAIT;
+            devicesPause(false);
         }
 
 //        return;
     }
     else if(stateWidgetSteel == STEEL_MEASURE)
     {   //началось измерение температуры и поиск площадки
-        Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Data");
+        Transaction tr(Transaction::R, listSteel.at(steelReadyNum)->slot);
+        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(listSteel.at(steelReadyNum)->slotIndex) + "Data");
         emit sendTransToWorker(tr);
 //        for(int i = 1; i <= 10; i ++)
 //        {
@@ -1161,14 +1179,15 @@ void MainWindow::updateSteel()
                 || (listSteel.at(steelReadyNum)->status == StatusCh_WaitConf))
         {
             stateWidgetSteel = STEEL_WAIT;
+            devicesPause(false);
         }
     }
 
     for(int i = 0; i<listSteel.size(); i++)
     {   // поочерёдный опрос статуса всех входных групп
         cSteel * steel = listSteel.at(i);
-        int slot = ssc.getSlotBySteel(i);
-        int devCh = ssc.getDevSteel(i);
+        int slot = steel->slot;
+        int devCh = steel->slotIndex;
         Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
 
         if((steel->status == StatusCh_SteelSquaresOK) ||\
@@ -1176,19 +1195,24 @@ void MainWindow::updateSteel()
                 (steel->status == StatusCh_SteelNotFoundSquareEds) || \
                 (steel->status == StatusCh_SteelNotFoundSquares))
         {   // i-тая входная группа нашла площадку и имеются готовые данные
-            QList<QString> str;
-            str << "Data" << "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
-            if(listSteel.at(steelReadyNum)->technology->COH != 0)
+            if(stateWidgetSteel != STEEL_READY)
             {
-                foreach (QString s, str) {
-                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
+                QList<QString> str;
+                str << "Data" << "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
+                if(listSteel.at(steelReadyNum)->technology->COH != 0)
+                {
+                    foreach (QString s, str) {
+                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
+                        emit sendTransToWorker(tr);
+                    }
+                }
+                else
+                {
+                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
+                    emit sendTransToWorker(tr);
+                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Carbon");
                     emit sendTransToWorker(tr);
                 }
-            }
-            else
-            {
-                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
-                emit sendTransToWorker(tr);
             }
 //            for(int i = 1; i <= 10; i ++)
 //            {
@@ -1212,6 +1236,7 @@ void MainWindow::updateSteel()
             //данные на стороне платы STEEL готовы - запомним
 //            steelReady = true;  //данные готовы
             stateWidgetSteel = STEEL_READY;
+            devicesPause(false);
             steelReadyNum = i;  //запоминаем номер входной группы
 //            steelSelectFrame = false;   //разрешаем показывать график
             steel->timeUpdateData = QDateTime::currentDateTime();
@@ -1222,6 +1247,7 @@ void MainWindow::updateSteel()
             if(stateWidgetSteel != STEEL_MEASURE)
             {
                 stateWidgetSteel = STEEL_MEASURE;
+                devicesPause(true);
                 steelSelectFrame = false;
                 steelReadyNum = i;
                 numArraySteel = 0;

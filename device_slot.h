@@ -16,6 +16,8 @@ public:
     explicit cDevice(QObject *parent = 0);
     static int countDev;
     bool getOnline() { return online; }
+    void setOnline() { online = true; }
+    void pause(bool f) { pauseUpdateParam = f; }
     int getSlot() { return slot; }  // номер слота, к которому относится объект устройства
     uint16_t protocolVersion;       // версия протокола
     uint16_t hardwareVersion;       // версия аппаратного обеспечения
@@ -51,6 +53,7 @@ private:
     QTimer * timerResetOnline;      // таймер принятия решения об отсутствии платы
     QTimer * timerUpdateStatus;     // таймер запросов стауса устройства
     QTimer * timerUpdateConstParam; // таймер обновления параметров, постоянных для текущей платы
+    bool pauseUpdateParam;          // пауза обновления параметров
 };
 
 #endif // CDEVICE_H

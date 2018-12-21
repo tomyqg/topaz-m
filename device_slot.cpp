@@ -10,11 +10,14 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
 {
     slot = countDev++;
     online = false;
+    pauseUpdateParam = false;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);
     timerUpdateConstParam = new QTimer(this);
     connect(timerResetOnline, SIGNAL(timeout()), this, SLOT(resetOnline()));
+    resetOnline();
     connect(timerUpdateStatus, SIGNAL(timeout()), this, SLOT(updateStatus()));
+//    updateStatus();
     connect(timerUpdateConstParam, SIGNAL(timeout()), this, SLOT(updateConstParam()));
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);
@@ -96,6 +99,7 @@ int cDevice::parseDeviceParam(Transaction tr)
 
 void cDevice::resetOnline()
 {
+    if(pauseUpdateParam) return;
     //если таймер сработал, значит плата давно не отвечала - оффлайн
     online = false;
     Transaction tr(Transaction::R, slot);
@@ -105,6 +109,7 @@ void cDevice::resetOnline()
 
 void cDevice::updateStatus()
 {
+    if(pauseUpdateParam) return;
     if(!online) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
@@ -119,6 +124,7 @@ void cDevice::updateStatus()
 
 void cDevice::updateConstParam()
 {
+    if(pauseUpdateParam) return;
     if(!online) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;

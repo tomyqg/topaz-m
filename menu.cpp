@@ -106,6 +106,7 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaUstavki, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDigitalOutputs, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
 
     log = new cLogger(pathtomessages, cLogger::UI);
     log->addMess("Menu > Open ", cLogger::SERVICE);

@@ -123,7 +123,7 @@
 #define YRange 20                   // изначальный размер графика по игреку в 1 сторону
 #define GraphWidthinPixels 2         // толщина графика линий в пикселях
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
-#define ParsingReceiveTrans 5       // период парсинга входящих транзакций от Workera в мсек
+#define ParsingReceiveTrans 1       // период парсинга входящих транзакций от Workera в мсек
 #define UpdateSteelTime 500
 #define timeUpdateDevices 1000       // время обновления комплекта плат
 
@@ -183,5 +183,22 @@
 #define min( x1, x2) ( ( x1 ) < ( x2 ) ? ( x1 ) : ( x2 ) )
 
 //#define new new(/* _NORMAL_BLOCK, */__FILE__, __LINE__)
+
+//------Временно-----------
+#ifdef Q_OS_WIN32
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_STEEL_2 3
+#define CONST_SLAVE_ADC     4
+#define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
+#else
+#define CONST_SLAVE_STEEL   5
+#define CONST_SLAVE_STEEL_2 3
+#define CONST_SLAVE_ADC     4
+#define CONST_SLAVE_ADC_2   3
+#define CONST_SLAVE_RELAY   6
+#define TOTAL_NUM_RELAIS    8
+#endif
+//-----------------------
 
 // DEFINES_H

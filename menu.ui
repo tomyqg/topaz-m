@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>30</number>
+            <number>29</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">

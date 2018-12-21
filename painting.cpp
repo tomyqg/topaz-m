@@ -10,7 +10,7 @@
 #include "stackedoptions.h"
 #include "Channels/group_channels.h"
 
-extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
+//extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
 

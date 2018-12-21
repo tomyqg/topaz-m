@@ -18,6 +18,9 @@ public:
 //    int setTechnology(typeSteelTech * tech) { technology = tech; }
 
     int num; //номер объекта
+    bool enable;    //состояние входной группы ВКЛ/ВЫКЛ
+    int slot;       //слот, в котором установлена плата
+    int slotIndex;  //номер входной группы в плате
     static int countSteel;
     typeSteelTech * technology;
     uint8_t status; //статус входной группы
