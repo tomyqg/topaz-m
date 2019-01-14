@@ -38,6 +38,8 @@
 #define pathtohilimico  "/opt/hilim.png"
 #define pathtolowlimico  "/opt/lowlim.png"
 #define pathtoloadgif   "/opt/load.gif"
+#define pathtoleftarrow   "/opt/left.png"
+#define pathtorightarrow   "/opt/right.png"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define pathtosteeloptions "/opt/steeloptions.txt"
 #define uartsleep DelayMsec(80);
@@ -72,6 +74,8 @@
 #define pathtohilimico  "C:/Work/hilim.png"
 #define pathtolowlimico  "C:/Work/lowlim.png"
 #define pathtoloadgif   "C:/Work/load.gif"
+#define pathtoleftarrow   "C:/Work/left.png"
+#define pathtorightarrow   "C:/Work/right.png"
 //#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #define pathtosteeloptions "C:/Work/steeloptions.txt"
 #else
@@ -91,6 +95,8 @@
 #define pathtohilimico  QCoreApplication::applicationDirPath() + "/hilim.png"
 #define pathtolowlimico  QCoreApplication::applicationDirPath() + "/lowlim.png"
 #define pathtoloadgif   QCoreApplication::applicationDirPath() + "/load.gif"
+#define pathtoleftarrow   QCoreApplication::applicationDirPath() + "left.png"
+#define pathtorightarrow   QCoreApplication::applicationDirPath() + "right.png"
 #define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #endif
 #endif

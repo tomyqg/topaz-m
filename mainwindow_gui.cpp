@@ -71,7 +71,12 @@ void MainWindow::updateDateLabel()
     DateUpdate();
 
     // между делом обновляем лэйбл и стрелки переключения групп
-    if(listGroup.size() > 1) ui->frameGroup->show();
+    if(listGroup.size() > 1) {
+        ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
+        ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
+        ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
+        ui->frameGroup->show();
+    }
     else ui->frameGroup->hide();
 }
 
@@ -337,6 +342,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         }
         curGroupChannel = newCurGroupChannel;
         ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
+//        ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
+//        ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
+        updateWidgetsVols();
+        setTextBars();
     }
     return QWidget::eventFilter(watched, event);
 }

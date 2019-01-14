@@ -636,11 +636,11 @@ void dSettings::saveParamToFile()
     saveParam();
     if(systemOptions.display == cSystemOptions::Steel)
     {
-       cFileManager::writeSteelsSettings(pathtosteeloptions);
+        cFileManager::writeSteelsSettings(pathtosteeloptions);
     }
     else
     {
-        cFileManager::writeChannelsSettings(pathtooptions, listChannels);
+        cFileManager::writeChannelsSettings(pathtooptions/*, listChannels*/);
     }
 }
 

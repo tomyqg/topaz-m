@@ -1159,25 +1159,33 @@ void MainWindow::parseWorkerReceive()
             // канал 1
         {
             ch = 0;
-            channel = listChannels.at(ch);
+            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+            if(index != -1)
+                channel = listChannels.at(index);
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_2) && (tr.offset < BASE_OFFSET_CHANNEL_3))
             // канал 2
         {
             ch = 1;
-            channel = listChannels.at(ch);
+            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+            if(index != -1)
+                channel = listChannels.at(index);
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_3) && (tr.offset < BASE_OFFSET_CHANNEL_4))
             // канал 3
         {
             ch = 2;
-            channel = listChannels.at(ch);
+            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+            if(index != -1)
+                channel = listChannels.at(index);
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_4) && (tr.offset < (BASE_OFFSET_CHANNEL_4 + 128)))
             // канал 4
         {
             ch = 3;
-            channel = listChannels.at(ch);
+            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+            if(index != -1)
+                channel = listChannels.at(index);
         }
 
         if(!isDeviceParam)
@@ -1218,70 +1226,74 @@ void MainWindow::parseWorkerReceive()
 
                 }
             }
-            else if((paramName == "DataChan0") || (paramName == "chan0Data"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
+//            else if((paramName == "DataChan0") || (paramName == "chan0Data"))
+//            {
+//                if(device->deviceType == Device_4AI)
+//                {
 
-#ifndef RANDOM_CHAN
-                    listChannels.at(0)->SetCurrentChannelValue((double)tr.volFlo);
-                    ui->wBar_1->setVolue((double)tr.volFlo);
-                    ui->widgetVol1->setVol((double)tr.volFlo);
-#endif
-                }
-//                else if(device->deviceType == Device_STEEL)
-//                {
-//                    listSteel.at(0)->temp = tr.volFlo;
+//#ifndef RANDOM_CHAN
+//                    channel->SetCurrentChannelValue((double)tr.volFlo);
+////                    ui->wBar_1->setVolue((double)tr.volFlo);
+////                    ui->widgetVol1->setVol((double)tr.volFlo);
+//#endif
 //                }
-            }
-            else if((paramName == "DataChan1") || (paramName == "chan1Data"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
-#ifndef RANDOM_CHAN
-                    listChannels.at(1)->SetCurrentChannelValue((double)tr.volFlo);
-                    ui->wBar_2->setVolue((double)tr.volFlo);
-                    ui->widgetVol2->setVol((double)tr.volFlo);
-#endif
-                }
-//                else if(device->deviceType == Device_STEEL)
+////                else if(device->deviceType == Device_STEEL)
+////                {
+////                    listSteel.at(0)->temp = tr.volFlo;
+////                }
+//            }
+//            else if((paramName == "DataChan1") || (paramName == "chan1Data"))
+//            {
+//                if(device->deviceType == Device_4AI)
 //                {
-//                    listSteel.at(1)->temp = tr.volFlo;
+//#ifndef RANDOM_CHAN
+//                    channel->SetCurrentChannelValue((double)tr.volFlo);
+////                    ui->wBar_2->setVolue((double)tr.volFlo);
+////                    ui->widgetVol2->setVol((double)tr.volFlo);
+//#endif
 //                }
-            }
-            else if((paramName == "DataChan2") || (paramName == "chan2Data"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
-#ifndef RANDOM_CHAN
-                    listChannels.at(2)->SetCurrentChannelValue((double)tr.volFlo);
-                    ui->wBar_3->setVolue((double)tr.volFlo);
-                    ui->widgetVol3->setVol((double)tr.volFlo);
-#endif
-                }
-//                else if(device->deviceType == Device_STEEL)
+////                else if(device->deviceType == Device_STEEL)
+////                {
+////                    listSteel.at(1)->temp = tr.volFlo;
+////                }
+//            }
+//            else if((paramName == "DataChan2") || (paramName == "chan2Data"))
+//            {
+//                if(device->deviceType == Device_4AI)
 //                {
-//                    listSteel.at(2)->temp = tr.volFlo;
+//#ifndef RANDOM_CHAN
+//                    channel->SetCurrentChannelValue((double)tr.volFlo);
+////                    ui->wBar_3->setVolue((double)tr.volFlo);
+////                    ui->widgetVol3->setVol((double)tr.volFlo);
+//#endif
 //                }
-            }
-            else if((paramName == "DataChan3") || (paramName == "chan3Data"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
-#ifndef RANDOM_CHAN
-                    listChannels.at(3)->SetCurrentChannelValue((double)tr.volFlo);
-                    ui->wBar_4->setVolue((double)tr.volFlo);
-                    ui->widgetVol4->setVol((double)tr.volFlo);
-#endif
-                }
-//                else if(device->deviceType == Device_STEEL)
+////                else if(device->deviceType == Device_STEEL)
+////                {
+////                    listSteel.at(2)->temp = tr.volFlo;
+////                }
+//            }
+//            else if((paramName == "DataChan3") || (paramName == "chan3Data"))
+//            {
+//                if(device->deviceType == Device_4AI)
 //                {
-//                    listSteel.at(3)->temp = tr.volFlo;
+//#ifndef RANDOM_CHAN
+//                    channel->SetCurrentChannelValue((double)tr.volFlo);
+////                    ui->wBar_4->setVolue((double)tr.volFlo);
+////                    ui->widgetVol4->setVol((double)tr.volFlo);
+//#endif
 //                }
-            }
+////                else if(device->deviceType == Device_STEEL)
+////                {
+////                    listSteel.at(3)->temp = tr.volFlo;
+////                }
+//            }
             else if((paramName == "DataChan" + QString("chan" + QString::number(ch))) || \
                     paramName == QString("chan" + QString::number(ch) + "Data"))
             {
+                if(device->deviceType == Device_4AI)
+                {
+                    channel->SetCurrentChannelValue((double)tr.volFlo);
+                }
                 if(device->deviceType == Device_STEEL)
                 {
                     int index = getIndexSteelBySlotAndCh(tr.slave, ch);
@@ -1480,6 +1492,21 @@ int MainWindow::getIndexSteelBySlotAndCh(int slot, int ch)
     {
         cSteel * s = listSteel.at(i);
         if((s->slot == slot) && (s->slotIndex == ch))
+        {
+            ret = i;
+            break;
+        }
+    }
+    return ret;
+}
+
+int MainWindow::getIndexAnalogBySlotAndCh(int slot, int ch)
+{
+    int ret = -1;
+    for(int i = 0; i < listChannels.size(); i++)
+    {
+        ChannelOptions * channel = listChannels.at(i);
+        if((channel->getSlot() == slot) && (channel->getSlotChannel() == ch))
         {
             ret = i;
             break;

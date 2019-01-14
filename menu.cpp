@@ -1230,13 +1230,13 @@ void dMenu::on_bResetToDefault_clicked()
     QFile::rename(pathtosystemoptions, pathtosystemoptions + QString(".backup"));
     QFile::copy(pathtosystemoptionsdef, pathtosystemoptions);
     //чтение и применение настроек из новых файлов
-    int countChannels = listChannels.size();
+//    int countChannels = listChannels.size();
     cFileManager::readChannelsSettings(pathtooptions);
-    int newCountChannels = listChannels.size();
-    for(int i = countChannels; i < newCountChannels; i++)
-    {
-        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-    }
+//    int newCountChannels = listChannels.size();
+//    for(int i = countChannels; i < newCountChannels; i++)
+//    {
+//        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//    }
     updateSystemOptions();
     log->addMess("Reset to default", cLogger::USER);
     emit saveButtonSignal();

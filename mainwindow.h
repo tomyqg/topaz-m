@@ -39,7 +39,7 @@
 #endif
 
 #ifdef Q_OS_WIN32
-//    #define RANDOM_CHAN
+    #define RANDOM_CHAN
 #endif
 
 //#define RANDOM_CHAN
@@ -117,6 +117,7 @@ public slots:
     void parseWorkerReceive();
     int getIndexSteelBySlotAndCh(int slot, int ch);
     int getIndexRelayBySlotAndCh(int slot, int ch);
+    int getIndexAnalogBySlotAndCh(int slot, int ch);
 //    void releOutSlot(uint8_t code);
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
@@ -134,7 +135,6 @@ private slots:
 //    void UpdateLog();
 //    void GrafsUpdateBars();
     void GrafsUpdateTrends();
-    void GrafsUpdateTrendsAndBars();
     void GrafsUpdateNone();
     void AddValuesToBuffer();
     void DelaySec(int n);
@@ -241,6 +241,7 @@ private:
     void setStyleBars(void);
     void setTextBars(void);
     void updateWidgetsVols(void);
+    void updateVols();
     void selectWidgetDiagram(void);
 
 
@@ -383,6 +384,7 @@ private:
     cServerHttp * server;
 
     int curGroupChannel;        //текущая группа для отображения на экране
+
 
 
 

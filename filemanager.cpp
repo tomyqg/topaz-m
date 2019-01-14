@@ -6,8 +6,10 @@
 #include <assert.h>
 #include <steel.h>
 #include <defines.h>
+#include "Channels/group_channels.h"
 
 extern QList<ChannelOptions *> listChannels;
+extern QList<cGroupChannels*> listGroup;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
@@ -17,11 +19,12 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 
 }
 
-int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> listChannels)
+int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> listChannels*/)
 {
     QJsonObject channeljsonobj,options;
     QJsonObject ustavkijsonobj;
     QJsonArray settings, settingsUst;
+
 
     foreach (ChannelOptions * Channel, listChannels) {
         channeljsonobj["Slot"] = Channel->getSlot();
@@ -44,7 +47,6 @@ int cFileManager::writeChannelsSettings(QString path, QList<ChannelOptions*> lis
         channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
         settings.append(channeljsonobj);
     }
-
 
     options["count"] = listChannels.length();
     options["channels"] = settings;
@@ -103,10 +105,17 @@ int cFileManager::readChannelsSettings(QString path)
     QJsonObject ch;
 
     int count = json["count"].toInt();
-    assert(count = array.size());
-    if(count > listChannels.size())
+//    assert(count = array.size());
+    if(count != array.size())
     {
-        int size = listChannels.size();
+        cLogger mk(pathtomessages, cLogger::UI);
+        mk.addMess("File " + QString(pathtooptions) + " incorrect", cLogger::ERR);
+        return 3;
+    }
+
+    int size = listChannels.size();
+    if(count > size)
+    {
         for(int i = size; i < count; i++)
         {
             ChannelOptions * ch = new ChannelOptions();
@@ -263,6 +272,8 @@ int cFileManager::readSteelsSettings(QString path)
 int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 {
     QJsonObject systemoptions;
+    QJsonObject options, groupsjsonobj;
+    QJsonArray settingsGroup;
 //    systemoptions["Time"] = GetNewTimeString();
 //    systemoptions["Date"] = GetNewDateString();
 //    systemoptions["Display"] = GetCurrentDisplayParametr();
@@ -272,6 +283,51 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     systemoptions["Display"] = opt->display;
     systemoptions["Autoscale"] = opt->autoscale;
     systemoptions["Brightness"] = opt->brightness;
+
+    foreach (cGroupChannels * group, listGroup) {
+        groupsjsonobj["Enabled"] = group->enabled;
+        groupsjsonobj["Name"] = group->groupName;
+        groupsjsonobj["Channel1"] = -1;
+        groupsjsonobj["Channel2"] = -1;
+        groupsjsonobj["Channel3"] = -1;
+        groupsjsonobj["Channel4"] = -1;
+        groupsjsonobj["Math1"] = -1;
+        groupsjsonobj["Math2"] = -1;
+        groupsjsonobj["Math3"] = -1;
+        groupsjsonobj["Math4"] = -1;
+        for(int i = 0; i < listChannels.size(); i++)
+        {
+            if(group->channel[0] == listChannels.at(i))
+                groupsjsonobj["Channel1"] = i;
+            if(group->channel[1] == listChannels.at(i))
+                groupsjsonobj["Channel2"] = i;
+            if(group->channel[2] == listChannels.at(i))
+                groupsjsonobj["Channel3"] = i;
+            if(group->channel[3] == listChannels.at(i))
+                groupsjsonobj["Channel4"] = i;
+        }
+//        for(int i = 0; i < listMath.size(); i++)
+//        {
+//            if(group->mathChannel[0] == listMath.at(i))
+//                groupsjsonobj["Math1"] = i;
+//            if(group->mathChannel[1] == listMath.at(i))
+//                groupsjsonobj["Math2"] = i;
+//            if(group->mathChannel[2] == listMath.at(i))
+//                groupsjsonobj["Math3"] = i;
+//            if(group->mathChannel[3] == listMath.at(i))
+//                groupsjsonobj["Math4"] = i;
+//        }
+        groupsjsonobj["Type1"] = group->typeInput[0];
+        groupsjsonobj["Type2"] = group->typeInput[1];
+        groupsjsonobj["Type3"] = group->typeInput[2];
+        groupsjsonobj["Type4"] = group->typeInput[3];
+        settingsGroup.append(groupsjsonobj);
+    }
+
+    options["countGrp"] = listGroup.length();
+    options["groups"] = settingsGroup;
+    systemoptions["Options"] = options;
+
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(path);
     file.open(QIODevice::ReadWrite);
@@ -298,6 +354,75 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     opt->autoscale = json["Autoscale"].toBool();
     opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
     opt->brightness = json["Brightness"].toInt();
+
+    QJsonObject options = json["Options"].toObject();
+    int countGroup = options["countGrp"].toInt();
+    QJsonArray array = options["groups"].toArray();
+    QJsonObject jsonobj;
+    int index = 0;
+    int sizeCh = listChannels.size();
+
+    while(countGroup > listGroup.size())
+    {
+        cGroupChannels * group = new cGroupChannels;
+        listGroup.append(group);
+    }
+
+    foreach (cGroupChannels * group, listGroup) {
+        if(countGroup <= index)
+        {
+            group->enabled = false;
+        }
+        else
+        {
+            jsonobj = array.at(index).toObject();
+            group->enabled = jsonobj.value("Enabled").toBool();
+            group->groupName = jsonobj.value("Name").toString().toUtf8();
+            group->typeInput[0] = jsonobj.value("Type1").toInt();
+            group->typeInput[1] = jsonobj.value("Type2").toInt();
+            group->typeInput[2] = jsonobj.value("Type3").toInt();
+            group->typeInput[3] = jsonobj.value("Type4").toInt();
+            int numChannel[MAX_NUM_CHAN_GROUP];
+            int numMath[MAX_NUM_CHAN_GROUP];
+            numChannel[0] = jsonobj.value("Channel1").toInt();
+            numChannel[1] = jsonobj.value("Channel2").toInt();
+            numChannel[2] = jsonobj.value("Channel3").toInt();
+            numChannel[3] = jsonobj.value("Channel4").toInt();
+            numMath[0] = jsonobj.value("Math1").toInt();
+            numMath[1] = jsonobj.value("Math2").toInt();
+            numMath[2] = jsonobj.value("Math3").toInt();
+            numMath[3] = jsonobj.value("Math4").toInt();
+            for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
+            {
+                if((group->typeInput[i] == 1) && (numChannel[i] != -1))
+                {
+                    if(sizeCh > numChannel[i])
+                    {
+                        group->channel[i] = listChannels.at(numChannel[i]);
+                    }
+                    else
+                    {
+                        group->channel[i] = nullptr;
+                        group->typeInput[i] = 0;
+                    }
+                }
+                //                if((group->typeInput[i] == 2) && (numMath[i] != -1))
+                //                {
+                //                    if(sizeMath > numMath[i])
+                //                    {
+                //                        group->mathChannel[i] = listMath.at(numMath[i]);
+                //                    }
+                //                }
+            }
+            if((group->typeInput[0] == 0) &&  (group->typeInput[1] == 0) && \
+                    (group->typeInput[2] == 0) &&  (group->typeInput[3] == 0))
+            {
+                group->enabled = false;
+            }
+        }
+        index++;
+    }
+
     infile.close();
 }
 

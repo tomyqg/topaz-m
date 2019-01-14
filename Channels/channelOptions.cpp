@@ -11,9 +11,17 @@ double cnt;
 ChannelOptions::ChannelOptions()
 {
     SetConfirmationNeed(true);
-    enable = true;
+    enable = false;
     currentvalue = 0;
-    measureperiod = 1000;
+    measureperiod = 1;
+    diapason = 1;
+    registrationtype = 0;
+    channelname = "Ch";
+    MathematicalState = false;
+    lowermeasurelimit = -100;
+    highermeasurelimit = 100;
+    signaltype = 2;
+    unitsname = "mV";
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     timer->setInterval(measureperiod);
