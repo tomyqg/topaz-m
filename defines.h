@@ -15,7 +15,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "1.62" //версия ПО
+#define CURRENT_VER "1.64" //версия ПО
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD

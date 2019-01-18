@@ -158,13 +158,13 @@ private slots:
 
 //    void on_doubleSpinBox_valueChanged(double arg1);
 
-    void on_doubleSpinBox_valueChanged(double arg1);
+//    void on_doubleSpinBox_valueChanged(double arg1);
     void plotPress(QMouseEvent * pe);
     void plotReleas(QMouseEvent * pe);
     void plotMove(QMouseEvent * pe);
     void updateAutoScale();
 
-    void on_pushButton_clicked();
+//    void on_pushButton_clicked();
 
     void on_buttonInputsGraphs_clicked();
 
@@ -385,7 +385,7 @@ private:
 
     int curGroupChannel;        //текущая группа для отображения на экране
 
-
+    bool plotReady;            // готовность CustomPlot для рисования графиков
 
 
 protected:

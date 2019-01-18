@@ -546,12 +546,12 @@ void MainWindow::openSettingsChannel(int num)
 }
 
 
-void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
-{
-    listChannels.at(0)->SetCurrentChannelValue(arg1);
-    ui->wBar_1->setVolue(arg1);
-    ui->widgetVol1->setVol(arg1);
-}
+//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
+//{
+//    listChannels.at(0)->SetCurrentChannelValue(arg1);
+//    ui->wBar_1->setVolue(arg1);
+//    ui->widgetVol1->setVol(arg1);
+//}
 
 void MainWindow::plotPress(QMouseEvent * pe)
 {
@@ -614,13 +614,14 @@ void MainWindow::tickLoadWidget()
         ui->splash->hide();
 
         /* для аналоговых сигналов */
-        ui->left->setMaximumWidth(1000000);
-        ui->right->setMaximumWidth(1000000);
+        ui->left->setMaximumWidth(16777215);
+        ui->right->setMaximumWidth(16777215);
         ui->left->show();
         ui->right->show();
+        plotReady = true;
 
         /* для анализа стали */
-        ui->frameSteel->setMaximumWidth(10000000);
+        ui->frameSteel->setMaximumWidth(16777215);
         ui->frameSteel->hide();
 
         ui->header->show();
@@ -651,10 +652,10 @@ void MainWindow::initSteel()
     }
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-//    simulatorSteel();
-}
+//void MainWindow::on_pushButton_clicked()
+//{
+////    simulatorSteel();
+//}
 
 
 void MainWindow::on_buttonInputsGraphs_clicked()

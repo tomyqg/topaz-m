@@ -17,7 +17,7 @@ public:
     ~Messages();
 
 private slots:
-    void on_pushButton_clicked();
+//    void on_pushButton_clicked();
 
     void on_dial_valueChanged();
 

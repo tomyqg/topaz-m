@@ -419,7 +419,7 @@ void dSettings::updateGraf(int period)
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
 
-    if(!Y_coordinates_Chanel_1_archive.isEmpty())
+    if(!Y_coordinates_Chanel_1.isEmpty())
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
 
@@ -432,7 +432,7 @@ void dSettings::updateGraf(int period)
 
     ui->customPlot->graph()->setPen(graphPen);
 
-    if(!Y_coordinates_Chanel_2_archive.isEmpty())
+    if(!Y_coordinates_Chanel_2.isEmpty())
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
@@ -440,7 +440,7 @@ void dSettings::updateGraf(int period)
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-    if(!Y_coordinates_Chanel_3_archive.isEmpty())
+    if(!Y_coordinates_Chanel_3.isEmpty())
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
@@ -448,7 +448,7 @@ void dSettings::updateGraf(int period)
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-    if(!Y_coordinates_Chanel_4_archive.isEmpty())
+    if(!Y_coordinates_Chanel_4.isEmpty())
     {
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
@@ -461,10 +461,10 @@ void dSettings::updateGraf(int period)
     ui->customPlot->replot();
     ui->customPlot->clearItems();
 
-    if((!Y_coordinates_Chanel_1_archive.isEmpty()) &&\
-            !Y_coordinates_Chanel_2_archive.isEmpty() &&\
-            !Y_coordinates_Chanel_3_archive.isEmpty() &&\
-            !Y_coordinates_Chanel_4_archive.isEmpty())
+    if((!Y_coordinates_Chanel_1.isEmpty()) &&\
+            !Y_coordinates_Chanel_2.isEmpty() &&\
+            !Y_coordinates_Chanel_3.isEmpty() &&\
+            !Y_coordinates_Chanel_4.isEmpty())
     {
         // авто масшабирование
         ui->customPlot->rescaleAxes();

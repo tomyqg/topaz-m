@@ -17,7 +17,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     connect(timerResetOnline, SIGNAL(timeout()), this, SLOT(resetOnline()));
     resetOnline();
     connect(timerUpdateStatus, SIGNAL(timeout()), this, SLOT(updateStatus()));
-//    updateStatus();
+    updateStatus();
     connect(timerUpdateConstParam, SIGNAL(timeout()), this, SLOT(updateConstParam()));
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);

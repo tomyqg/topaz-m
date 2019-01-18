@@ -41,10 +41,10 @@ Messages::~Messages()
     delete ui;
 }
 
-void Messages::on_pushButton_clicked()
-{
-    this->close();
-}
+//void Messages::on_pushButton_clicked()
+//{
+//    this->close();
+//}
 
 //MessageWrite::MessageWrite()
 //{

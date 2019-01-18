@@ -145,6 +145,11 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
+    // если нет данных от плат, то и строить нечего
+    if(!slotSteelOnline && !slotAnalogOnline) return;
+    // если прелоадер не завершился
+    if(!plotReady) return;
+    // если есть плата STEEL, то ставим режим Steel
     if(slotSteelOnline)
     {
         systemOptions.display = cSystemOptions::Steel;
@@ -272,9 +277,11 @@ void MainWindow::GrafsUpdateTrends()
 
         // рисуем стрелки для каждого канала
 
-        int index = 0;
-        foreach (ChannelOptions * Chanel, listChannels)
+        for(int index = 0; index < MAX_NUM_CHAN_GROUP; index++)
         {
+            if(group->typeInput[index] == 0) continue;
+            ChannelOptions * Chanel = group->channel[index];
+
             QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
 
             int ystart = ui->customPlot->height() / 5;
@@ -297,8 +304,6 @@ void MainWindow::GrafsUpdateTrends()
             NameLabel->setText(Chanel->GetChannelName() );
             NameLabel->setFont(QFont(Font, 14, QFont::Bold));
             NameLabel->setColor(Chanel->GetNormalColor());
-
-            ++index;
 
             arrow->deleteLater();
             NameLabel->deleteLater();

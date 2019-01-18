@@ -145,11 +145,6 @@ int main(int argc, char *argv[])
     listenerSettings->beginGroup("listener");
     new HttpListener(listenerSettings,new RequestMapper(&app),&app);
 
-//    splash.raise();
-//    splash.activateWindow();
-//    //функция загрузки
-//    loadModules(&splash);
-//    splash.finish(&w);
 
     return app.exec();
 }

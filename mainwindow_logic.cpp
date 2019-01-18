@@ -71,13 +71,14 @@ void MainWindow::MainWindowInitialization()
     //qRegisterMetaType<Transaction>("Transaction");
     // подготовка окна загрузки программы
     countLoader = 0;
+    plotReady = false;
     ui->right->hide();
     ui->left->hide();
     ui->right->setMaximumWidth(0);
     ui->left->setMaximumWidth(0);
     ui->header->hide();
     ui->footer->hide();
-    ui->splash->setMaximumWidth(10000000);
+    ui->splash->setMaximumWidth(16777215);
     QString ver = CURRENT_VER;
     ui->labelNameVersion->setText(QString("MULTIGRAPH " + ver));
     QString revision = SOFTWARE_REVISION;
@@ -86,10 +87,31 @@ void MainWindow::MainWindowInitialization()
     ui->frameSteel->setMaximumWidth(0);
     ui->frameSteel->hide();
     connect(&timerLoad, SIGNAL(timeout()), this, SLOT(tickLoadWidget()));
-    timerLoad.start(20);
+    timerLoad.start(80);
     QPixmap pixLoad(pathtologotip);
     ui->logoOnLoad->setPixmap(pixLoad);
 
+
+    // Инициализация потока Worker ---------------------
+    WorkerThread = new QThread;
+    worker* myWorker = new worker;
+    connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
+    myWorker->moveToThread(WorkerThread);
+    connect(WorkerThread, SIGNAL(started()), myWorker, SLOT(run()));
+//    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
+    connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
+    connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
+//    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
+    WorkerThread->start(QThread::LowPriority); // запускаем сам поток
+    // /Инициализация потока Worker ---------------------
+
+
+    //инициализация виртуальных копий устройств
+    InitDevices();
+
+    //инициализация системных таймеров
+    InitTimers();
 
 //    ui->unvisible_block->setHidden(true);
 
@@ -198,11 +220,7 @@ void MainWindow::MainWindowInitialization()
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
 
-    //инициализация виртуальных копий устройств
-    InitDevices();
 
-    //инициализация системных таймеров
-    InitTimers();
 
     //
     LabelsInit();
@@ -251,9 +269,9 @@ void MainWindow::MainWindowInitialization()
     connect(timerUpdateSteel, SIGNAL(timeout()), this, SLOT(updateSteel()));
     ui->plotSteel->yAxis2->setVisible(true);
     ui->plotSteel->yAxis2->setTickLabels(true);
-    ui->frameSteelStatus->setMaximumWidth(1000000000);
-    ui->framePlotSteel->setMaximumWidth(100000000);
-    ui->frameTemperature->setMaximumWidth(100000000);
+    ui->frameSteelStatus->setMaximumWidth(16777215);
+    ui->framePlotSteel->setMaximumWidth(16777215);
+    ui->frameTemperature->setMaximumWidth(16777215);
 
     steelSelectFrame = false;
     ui->buttonInputsGraphs->setColorText(ColorBlue);
@@ -270,19 +288,7 @@ void MainWindow::MainWindowInitialization()
     timerQueueTrans->start(ParsingReceiveTrans);
 
 
-    // Инициализация потока Worker ---------------------
-    WorkerThread = new QThread;
-    worker* myWorker = new worker;
-    connect(myWorker, SIGNAL(ModbusConnectionError()), this, SLOT(ModbusConnectionErrorSlot()) );
-    myWorker->moveToThread(WorkerThread);
-    connect(WorkerThread, SIGNAL(started()), myWorker, SLOT(run()));
-//    connect(ui->EcoCheckBox, SIGNAL(clicked(bool)), this, SLOT(ChangePalette(bool)) );
-    connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
-    connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
-    connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
-//    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
-    WorkerThread->start(QThread::LowPriority); // запускаем сам поток
-    // /Инициализация потока Worker ---------------------
+
 
 //    Options op;
 //    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
