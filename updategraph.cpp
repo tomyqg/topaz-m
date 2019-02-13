@@ -207,46 +207,43 @@ void MainWindow::GrafsUpdateTrends()
 
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setName("graph #1");
-    if(group->typeInput[0] == 1)
+    if((group->typeInput[0] == 1) && (group->channel[0] != nullptr))
     {
         ui->customPlot->graph()->setData(group->channel[0]->GetChannelXBuffer(), \
                 group->channel[0]->GetChannelValuesBuffer());
     }
-    //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_1);
 
-    //    updateBars();
 
     graphPen.setWidth(GraphWidthinPixels);
     graphPen.setColor(ColorCh1);
 
     ui->customPlot->graph()->setPen(graphPen);
     ui->customPlot->addGraph();
-    if(group->typeInput[1] == 1)
+    if((group->typeInput[1] == 1) && (group->channel[1] != nullptr))
     {
         ui->customPlot->graph()->setData(group->channel[1]->GetChannelXBuffer(), \
                 group->channel[1]->GetChannelValuesBuffer());
     }
-    //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_2);
+
     graphPen.setColor(ColorCh2);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    if(group->typeInput[2] == 1)
+    if((group->typeInput[2] == 1) && (group->channel[2] != nullptr))
     {
         ui->customPlot->graph()->setData(group->channel[2]->GetChannelXBuffer(), \
                 group->channel[2]->GetChannelValuesBuffer());
     }
-    //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_3);
+
     graphPen.setColor(ColorCh3);
     ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->addGraph();
-    if(group->typeInput[3] == 1)
+    if((group->typeInput[3] == 1) && (group->channel[3] != nullptr))
     {
         ui->customPlot->graph()->setData(group->channel[3]->GetChannelXBuffer(), \
                 group->channel[3]->GetChannelValuesBuffer());
     }
-    //    ui->customPlot->graph()->setData(X_Coordinates, Y_coordinates_Chanel_4);
     graphPen.setColor(ColorCh4);
     ui->customPlot->graph()->setPen(graphPen);
 
@@ -287,20 +284,20 @@ void MainWindow::GrafsUpdateTrends()
             int ystart = ui->customPlot->height() / 5;
             int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
 
-            arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
+//            arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
             arrow->end->setCoords(xoffset, Chanel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(Chanel->GetNormalColor(),1,  Qt::DashLine));
             arrow->setAntialiased(true);
             ui->customPlot->setAntialiasedElements(QCP::aeAll);
-            ui->customPlot->addItem(arrow);
+//            ui->customPlot->addItem(arrow);
 
             arrow->setAntialiased(true);
             ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
             QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
-            ui->customPlot->addItem(NameLabel);
-            NameLabel->position->setPixelPoint(QPointF(xstart+20, ystart + ui->customPlot->height() * index / 5));
+//            ui->customPlot->addItem(NameLabel);
+//            NameLabel->position->setPixelPoint(QPointF(xstart+20, ystart + ui->customPlot->height() * index / 5));
             NameLabel->setText(Chanel->GetChannelName() );
             NameLabel->setFont(QFont(Font, 14, QFont::Bold));
             NameLabel->setColor(Chanel->GetNormalColor());
@@ -313,8 +310,8 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
     ui->customPlot->replot();
-    ui->customPlot->clearGraphs();
-    ui->customPlot->clearItems();
+//    ui->customPlot->clearGraphs();
+//    ui->customPlot->clearItems();
 }
 
 void MainWindow::GrafsUpdateNone()
@@ -385,21 +382,24 @@ void MainWindow::updateBars(void)
         {
             if(group->channel[i] != nullptr)
             {
-                bar->setExtr(group->channel[i]->GetMinimumChannelValue(), group->channel[i]->GetMaximumChannelValue());
-                bar->setBarDiapazon(max(abs(group->channel[i]->GetHigherMeasureLimit()), \
-                                        abs(group->channel[i]->GetLowerMeasureLimit())));
-                bar->setVolue(group->channel[i]->GetCurrentChannelValue());
-                bar->cleanMarker();
-                foreach(Ustavka * ust, listUstavok)
+                if(group->channel[i]->enable)
                 {
-                    if((ust->getChannel() == group->channel[i]->getNum()) && \
-                            (group->typeInput[i] == 1))
+                    bar->setExtr(group->channel[i]->GetMinimumChannelValue(), group->channel[i]->GetMaximumChannelValue());
+                    bar->setBarDiapazon(max(abs(group->channel[i]->GetHigherMeasureLimit()), \
+                                            abs(group->channel[i]->GetLowerMeasureLimit())));
+                    bar->setVolue(group->channel[i]->GetCurrentChannelValue());
+                    bar->cleanMarker();
+                    foreach(Ustavka * ust, listUstavok)
                     {
-                        bar->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+                        if((ust->getChannel() == group->channel[i]->getNum()) && \
+                                (group->typeInput[i] == 1))
+                        {
+                            bar->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+                        }
                     }
+                    bar->show();
+                    listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Preferred);
                 }
-                bar->show();
-                listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Preferred);
             }
         }
         i++;
@@ -474,6 +474,7 @@ void MainWindow::updateWidgetsVols(void)
 
 void MainWindow::updateVols()
 {
+
     QList<wVol*> listVols;
     listVols.append(ui->widgetVol1);
     listVols.append(ui->widgetVol2);
@@ -483,11 +484,16 @@ void MainWindow::updateVols()
     int i = 0;
     foreach (wVol * vol, listVols)
     {
-        if(group->typeInput[i] == 1)
+        vol->hide();
+        if((group->typeInput[i] > 0) && (group->typeInput[i] < 4))
         {
             if(group->channel[i] != nullptr)
             {
-                vol->setVol(group->channel[i]->GetCurrentChannelValue());
+                if(group->channel[i]->enable)
+                {
+                    vol->setVol(group->channel[i]->GetCurrentChannelValue());
+                    vol->show();
+                }
             }
         }
         i++;

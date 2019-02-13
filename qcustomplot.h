@@ -701,7 +701,6 @@ protected:
   virtual void mouseReleaseEvent(QMouseEvent *event) {Q_UNUSED(event)}
   virtual void mouseDoubleClickEvent(QMouseEvent *event) {Q_UNUSED(event)}
   virtual void wheelEvent(QWheelEvent *event) {Q_UNUSED(event)}
-  
   // reimplemented virtual methods:
   virtual void applyDefaultAntialiasingHint(QCPPainter *painter) const { Q_UNUSED(painter) }
   virtual void draw(QCPPainter *painter) { Q_UNUSED(painter) }

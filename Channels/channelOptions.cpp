@@ -15,6 +15,7 @@ ChannelOptions::ChannelOptions()
     currentvalue = 0;
     measureperiod = 1;
     diapason = 1;
+    slot = 0;       //по-умолчанию присваиваем несуществующий слот
     registrationtype = 0;
     channelname = "Ch";
     MathematicalState = false;

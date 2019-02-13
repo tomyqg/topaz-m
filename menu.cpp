@@ -128,6 +128,7 @@ dMenu::dMenu(QWidget *parent) :
     ui->ipAddr->installEventFilter(this);
     ui->netMask->installEventFilter(this);
     ui->gateWay->installEventFilter(this);
+    ui->nameGroup->installEventFilter(this);
 
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
@@ -321,17 +322,20 @@ void dMenu::addWidgetChannels()
     // генерация виджетов (кнопок) уставок
     int i = 0;
     foreach (ChannelOptions * channel, listChannels) {
-        wButtonStyled * bChannel = new wButtonStyled(ui->widgetScrollAreaChannels);
-        bChannel->index = i+1;
-        QString nameChannel = channel->GetChannelName().size() ? (" | " + channel->GetChannelName()) : " ";
-        bChannel->setText("КАНАЛ " + QString::number(bChannel->index) + nameChannel);
-        bChannel->setMinimumSize(QSize(0, 70));
-        bChannel->setColorText(QColor(0xff,0xff,0xff));
-        bChannel->setColorBg(ColorButtonNormal);
-        bChannel->setAlignLeft();
-        connect(bChannel, SIGNAL(clicked(int)), this, SLOT(slotOpenChannel(int)));
-        ui->verticalLayoutChannels->addWidget(bChannel);
-        i++;
+        if(channel->enable)
+        {
+            wButtonStyled * bChannel = new wButtonStyled(ui->widgetScrollAreaChannels);
+            bChannel->index = i+1;
+            QString nameChannel = channel->GetChannelName().size() ? (" | " + channel->GetChannelName()) : " ";
+            bChannel->setText("КАНАЛ " + QString::number(bChannel->index) + nameChannel);
+            bChannel->setMinimumSize(QSize(0, 70));
+            bChannel->setColorText(QColor(0xff,0xff,0xff));
+            bChannel->setColorBg(ColorButtonNormal);
+            bChannel->setAlignLeft();
+            connect(bChannel, SIGNAL(clicked(int)), this, SLOT(slotOpenChannel(int)));
+            ui->verticalLayoutChannels->addWidget(bChannel);
+            i++;
+        }
     }
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutChannels->addItem(verticalSpacer);
@@ -343,16 +347,19 @@ void dMenu::addWidgetDigitOutputs()
 
     int i = 0;
     foreach (cRelay * relay, listRelais) {
-        wButtonStyled * bOutput = new wButtonStyled(ui->scrollAreaWidgetDigitalOutputs);
-        bOutput->index = i+1;
-        bOutput->setText("ВЫХОД " + QString::number(bOutput->index));
-        bOutput->setMinimumSize(QSize(0, 70));
-        bOutput->setColorText(QColor(0xff,0xff,0xff));
-        bOutput->setColorBg(ColorButtonNormal);
-        bOutput->setAlignLeft();
-        connect(bOutput, SIGNAL(clicked(int)), this, SLOT(slotOpenDigitOutput(int)));
-        ui->verticalLayoutDigitalOutputs->addWidget(bOutput);
-        i++;
+        if(relay->enable)
+        {
+            wButtonStyled * bOutput = new wButtonStyled(ui->scrollAreaWidgetDigitalOutputs);
+            bOutput->index = i+1;
+            bOutput->setText("ВЫХОД " + QString::number(bOutput->index));
+            bOutput->setMinimumSize(QSize(0, 70));
+            bOutput->setColorText(QColor(0xff,0xff,0xff));
+            bOutput->setColorBg(ColorButtonNormal);
+            bOutput->setAlignLeft();
+            connect(bOutput, SIGNAL(clicked(int)), this, SLOT(slotOpenDigitOutput(int)));
+            ui->verticalLayoutDigitalOutputs->addWidget(bOutput);
+            i++;
+        }
     }
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutDigitalOutputs->addItem(verticalSpacer);
@@ -1951,7 +1958,7 @@ void dMenu::addWidgetModeling()
     int i = 0;
     foreach(cRelay * relay, listRelais)
     {
-
+        if(!relay->enable) continue;
         QFrame * frameModeling = new QFrame(ui->widgetScrollAreaModeling);
         frameModeling->setFrameShape(QFrame::NoFrame);
         frameModeling->setFrameShadow(QFrame::Raised);

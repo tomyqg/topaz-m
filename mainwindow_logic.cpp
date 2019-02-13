@@ -156,6 +156,7 @@ void MainWindow::MainWindowInitialization()
 
     // нужно установить евент филтер чтобы отрисовывалась графика
     ui->MessagesWidget->installEventFilter(this);
+
     ui->customPlot->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
     connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
             this, SLOT(plotPress(QMouseEvent*)));
@@ -165,13 +166,13 @@ void MainWindow::MainWindowInitialization()
             this, SLOT(plotMove(QMouseEvent*)));
     connect(&timerScale, SIGNAL(timeout()), this, SLOT(updateAutoScale()));
 //    timerScale.setInterval(1);
-
     SetXRange(XRange);
     SetYRange(YRange);
     mouseOnScalede = false;
     mouseOnMove = false;
     waitAutoScale = false;
-
+    ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
+    ui->customPlot->setAntialiasedElements(QCP::aeNone);
 
     QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
@@ -189,8 +190,6 @@ void MainWindow::MainWindowInitialization()
     // инициализация уставок
     InitUstavka();
 
-    ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
-    ui->customPlot->setAntialiasedElements(QCP::aeNone);
 
     //инициализация журнала событий
     logger = new cLogger(pathtomessages, cLogger::DEVICE);
@@ -464,9 +463,9 @@ void MainWindow::InitRelaySlotTable()
 //    rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
 //    rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
 //    rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
-    for(int i = 0; i < TOTAL_NUM_RELAIS; i++)
+    for(int i = 0; i < TOTAL_NUM_RELAY; i++)
     {
-        cRelay * relay = new cRelay(i, CONST_SLAVE_RELAY);
+        cRelay * relay = new cRelay(i);
         connect(relay, SIGNAL(signalSwitch(uint8_t, uint8_t, bool)), this, SLOT(slotRelay(uint8_t, uint8_t, bool)));
 
         listRelais.append(relay);
@@ -490,8 +489,10 @@ void MainWindow::InitSteelSlotTable()
 */
 void MainWindow::sendRelayStateToWorker(int relay, bool state)
 {
-
-    listRelais.at(relay)->setState(state);
+    if(relay < listRelais.size())
+    {
+        listRelais.at(relay)->setState(state);
+    }
 
 //    // номер реле -> индекс реле
 //    relay -= 1;
@@ -645,26 +646,26 @@ void MainWindow::InitDevices()
 
 void MainWindow::InitChannels()
 {
-    for(int i = 0; i < NUM_CHAN_DEFAULT; i++)
+    for(int i = 0; i < TOTAL_NUM_CHAN; i++)
     {
         ChannelOptions * ch = new ChannelOptions();
         ch->SetCurrentChannelValue(0);
         ch->setNum(i+1);
-        ch->setSlot(CONST_SLAVE_ADC);     //
-        ch->setSlotChannel(i);
+//        ch->setSlot(0);     //
+        ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
         connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
 //        ch->SetMeasurePeriod(1000);
         listChannels.append(ch);
     }
 
     //чтение настроек каналов и уставок
-    int countChannels = listChannels.size();
+//    int countChannels = listChannels.size();
     cFileManager::readChannelsSettings(pathtooptions);
-    int newCountChannels = listChannels.size();
-    for(int i = countChannels; i < newCountChannels; i++)
-    {
-        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-    }
+//    int newCountChannels = listChannels.size();
+//    for(int i = countChannels; i < newCountChannels; i++)
+//    {
+//        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//    }
 }
 
 void MainWindow::InitTimers()
@@ -815,19 +816,19 @@ void MainWindow::updateDevicesComplect()
             //обновление параметров каналов
             ChannelOptions * ch = listChannels.at(i);
             ch->setSlot(slot);     //
-            ch->setSlotChannel(i%4);
+            ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
             ch->enable = true;
         }
-        else
-        {   // добавить каналы, если плат стало больше
-            ChannelOptions * ch = new ChannelOptions();
-            ch->SetCurrentChannelValue(0);
-            ch->setNum(i+1);
-            ch->setSlot(slot);     //
-            ch->setSlotChannel(i%4);
-            connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-            listChannels.append(ch);
-        }
+//        else
+//        {   // добавить каналы, если плат стало больше
+//            ChannelOptions * ch = new ChannelOptions();
+//            ch->SetCurrentChannelValue(0);
+//            ch->setNum(i+1);
+//            ch->setSlot(slot);     //
+//            ch->setSlotChannel(i%4);
+//            connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//            listChannels.append(ch);
+//        }
         i++;
     }
     if(listChannels.size() > list4AI.size())
@@ -846,17 +847,17 @@ void MainWindow::updateDevicesComplect()
         {
             //обновление параметров реле
             cRelay * r = listRelais.at(i);
+            r->enable = true;
             r->mySlot = slot;     //
-            r->myPhysicalNum = i%8;
+            r->myPhysicalNum = i%NUM_RELAY_IN_8RP;
         }
-        else
-        {   // добавить каналы, если соответствующих плат стало больше
-            cRelay * r = new cRelay(i%8, slot);
-//            r->mySlot = slot;     //
-//            r->myPhysicalNum = i%8;
-            connect(r, SIGNAL(signalSwitch(uint8_t,uint8_t,bool)), this, SLOT(slotRelay(uint8_t,uint8_t,bool)));
-            listRelais.append(r);
-        }
+//        else
+//        {   // добавить каналы, если соответствующих плат стало больше
+//            // но так не должно быть )
+//            cRelay * r = new cRelay(i%NUM_RELAY_IN_8RP, slot);
+//            connect(r, SIGNAL(signalSwitch(uint8_t,uint8_t,bool)), this, SLOT(slotRelay(uint8_t,uint8_t,bool)));
+//            listRelais.append(r);
+//        }
         i++;
     }
     if(listRelais.size() > list8RP.size())
@@ -864,7 +865,7 @@ void MainWindow::updateDevicesComplect()
         // плат стало меньше, тогда удаляем объекты
         for(int i = list8RP.size(); i < listRelais.size(); i++)
         {
-            listRelais.removeAt(i);
+            listRelais.at(i)->enable = false;
         }
     }
 
@@ -898,6 +899,14 @@ void MainWindow::updateDevicesComplect()
             listSteel.at(i)->enable = false;
         }
     }
+
+//    foreach (cGroupChannels * group, listGroup) {
+//        if(!group->channel[0]->enable && !group->channel[1]->enable &&
+//                !group->channel[2]->enable && !group->channel[3]->enable)
+//        {
+//            group->enabled = false;
+//        }
+//    }
 }
 
 
@@ -1201,9 +1210,9 @@ void MainWindow::parseWorkerReceive()
             {
                 if(device->deviceType == Device_4AI)   //контроллировать источник нужно во всех "else if"
                 {
-                    channel->SetSignalType(tr.volInt);
-                    channel->SetCurSignalType(tr.volInt);
-                    emit retransToSlotConfig(tr);
+//                    channel->SetSignalType(tr.volInt);
+//                    channel->SetCurSignalType(tr.volInt);
+//                    emit retransToSlotConfig(tr);
                 }
             }
             else if(paramName == QString("chan" + QString::number(ch) + "Status"))
@@ -1221,13 +1230,13 @@ void MainWindow::parseWorkerReceive()
                     if((channel->GetSignalType() == ChannelOptions::MeasureTermoResistance) ||
                             (channel->GetSignalType() == ChannelOptions::MeasureTC))
                     {
-                        channel->SetDiapason(tr.paramA12[1]);
-                        emit retransToSlotConfig(tr);
+//                        channel->SetDiapason(tr.paramA12[1]);
+//                        emit retransToSlotConfig(tr);
                     }
                     else if(channel->GetSignalType() == ChannelOptions::MeasureVoltage)
                     {
-                        channel->SetDiapason(tr.paramA12[0]);
-                        emit retransToSlotConfig(tr);
+//                        channel->SetDiapason(tr.paramA12[0]);
+//                        emit retransToSlotConfig(tr);
                     }
 
                 }
@@ -1582,6 +1591,8 @@ void MainWindow::sendConfigChannelsToSlave()
         for(int i = 0; i < listChannels.size(); i++)
         {
             ChannelOptions * channel = listChannels.at(i);
+            if(!channel->enable) continue;  //пропуск, если канала нет
+
             int devCh = channel->getSlotChannel();// csc.getDevChannel(i);
             tr.slave = channel->getSlot(); //csc.getSlotByChannel(devCh);
 

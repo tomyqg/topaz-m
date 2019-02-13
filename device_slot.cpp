@@ -10,6 +10,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
 {
     slot = countDev++;
     online = false;
+    deviceType = Device_None;
     pauseUpdateParam = false;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);
@@ -113,8 +114,15 @@ void cDevice::updateStatus()
     if(!online) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
-    params << "uptime" << "deviceState" << "accessType" << "mbCommCount"\
-           << "mbCommError" << "deviceStatus" << "devErrors" << "root_Access";
+    if(deviceType == Device_None)
+    {
+        params << "deviceType";
+    }
+    else
+    {
+        params << "uptime" << "deviceState" << "accessType" << "mbCommCount"\
+               << "mbCommError" << "deviceStatus" << "devErrors" << "root_Access";
+    }
     for(int i = 0; i < params.size(); i++)
     {
         tr.offset = cRegistersMap::getOffsetByName(params.at(i));

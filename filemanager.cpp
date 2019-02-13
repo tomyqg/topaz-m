@@ -25,30 +25,34 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
     QJsonObject ustavkijsonobj;
     QJsonArray settings, settingsUst;
 
-
+    int countCh = 0;
     foreach (ChannelOptions * Channel, listChannels) {
-        channeljsonobj["Slot"] = Channel->getSlot();
-        channeljsonobj["Type"] = Channel->GetSignalType();
-        channeljsonobj["Name"] = (Channel->GetChannelName());
-        channeljsonobj["Units"] = Channel->GetUnitsName();
-        channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
-        channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
-        channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
-        channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
-        channeljsonobj["Period"] = Channel->GetMeasurePeriod();
-        channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
-        channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
-        channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
-        channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
-        channeljsonobj["MathString"] = Channel->GetMathString();
-        channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
-        channeljsonobj["Diapason"] = Channel->GetDiapason();
-        channeljsonobj["Dempher"] = Channel->GetDempherValue();
-        channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
-        settings.append(channeljsonobj);
+        if(Channel->enable)
+        {
+            channeljsonobj["Slot"] = Channel->getSlot();
+            channeljsonobj["Type"] = Channel->GetSignalType();
+            channeljsonobj["Name"] = (Channel->GetChannelName());
+            channeljsonobj["Units"] = Channel->GetUnitsName();
+            channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
+            channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
+            channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
+            channeljsonobj["LowerMeasLimit"] = Channel->GetLowerMeasureLimit();
+            channeljsonobj["Period"] = Channel->GetMeasurePeriod();
+            channeljsonobj["State1HighMessage"] = (Channel->GetState1HighMessage());
+            channeljsonobj["State1LowMessage"] = (Channel->GetState1LowMessage());
+            channeljsonobj["State2HighMessage"] = (Channel->GetState2HighMessage());
+            channeljsonobj["State2LowMessage"] = (Channel->GetState2LowMessage());
+            channeljsonobj["MathString"] = Channel->GetMathString();
+            channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
+            channeljsonobj["Diapason"] = Channel->GetDiapason();
+            channeljsonobj["Dempher"] = Channel->GetDempherValue();
+            channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+            settings.append(channeljsonobj);
+            countCh++;
+        }
     }
 
-    options["count"] = listChannels.length();
+    options["count"] = countCh;
     options["channels"] = settings;
 
     foreach (Ustavka * ust, listUstavok)
@@ -113,27 +117,27 @@ int cFileManager::readChannelsSettings(QString path)
         return 3;
     }
 
-    int size = listChannels.size();
-    if(count > size)
-    {
-        for(int i = size; i < count; i++)
-        {
-            ChannelOptions * ch = new ChannelOptions();
-            ch->SetCurrentChannelValue(0);
-            ch->setNum(i+1);
-//            connect(ch, SIGNAL(updateSignal(int)), parent, SLOT(&MainWindow::updateChannelSlot(int)));
-            listChannels.append(ch);
-        }
-    }
+//    int size = listChannels.size();
+//    if(count > size)
+//    {
+//        for(int i = size; i < count; i++)
+//        {
+//            ChannelOptions * ch = new ChannelOptions();
+//            ch->SetCurrentChannelValue(0);
+//            ch->setNum(i+1);
+////            connect(ch, SIGNAL(updateSignal(int)), parent, SLOT(&MainWindow::updateChannelSlot(int)));
+//            listChannels.append(ch);
+//        }
+//    }
 
     int index = 0;
     foreach (ChannelOptions * channel, listChannels) {
         if(index < count)
         {
             ch = array.at(index).toObject();
-            channel->enable = true;
-            channel->setSlot(ch.value("Slot").toInt());
-            channel->setSlotChannel(index%4);
+//            channel->enable = true;
+//            channel->setSlot(ch.value("Slot").toInt());
+//            channel->setSlotChannel(index%NUM_CHAN_IN_4AI);
             channel->SetHigherLimit(ch.value("HigherLimit").toDouble());
             channel->SetLowerLimit(ch.value("LowerLimit").toDouble());
             channel->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
@@ -399,9 +403,14 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
                     if(sizeCh > numChannel[i])
                     {
                         group->channel[i] = listChannels.at(numChannel[i]);
+//                        if(!group->channel[i]->enable)
+//                        {
+//                            group->typeInput[i] == 0;
+//                        }
                     }
                     else
                     {
+                        //такое не может быть, но перестраховаться надо
                         group->channel[i] = nullptr;
                         group->typeInput[i] = 0;
                     }
@@ -414,11 +423,11 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
                 //                    }
                 //                }
             }
-            if((group->typeInput[0] == 0) &&  (group->typeInput[1] == 0) && \
-                    (group->typeInput[2] == 0) &&  (group->typeInput[3] == 0))
-            {
-                group->enabled = false;
-            }
+//            if((group->typeInput[0] == 0) &&  (group->typeInput[1] == 0) && \
+//                    (group->typeInput[2] == 0) &&  (group->typeInput[3] == 0))
+//            {
+//                group->enabled = false;
+//            }
         }
         index++;
     }

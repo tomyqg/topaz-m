@@ -706,15 +706,15 @@ void MainWindow::PaintPolarDiagramm()
     {
         channel1length = group->channel[0]->GetValuePercent();
     }
-    if(group->typeInput[0] == 1)
+    if(group->typeInput[1] == 1)
     {
         channel2length = group->channel[1]->GetValuePercent();
     }
-    if(group->typeInput[0] == 1)
+    if(group->typeInput[2] == 1)
     {
         channel3length = group->channel[2]->GetValuePercent();
     }
-    if(group->typeInput[0] == 1)
+    if(group->typeInput[3] == 1)
     {
         channel4length = group->channel[3]->GetValuePercent();
     }

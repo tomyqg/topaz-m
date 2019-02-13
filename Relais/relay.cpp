@@ -5,6 +5,7 @@ cRelay::cRelay(uint8_t numDev, uint8_t slot, QObject *parent):
       mySlot(slot),
       QObject(parent)
 {
+    enable = false;
     newState = false;
     oldState = false;
     confirmedState = true;
@@ -13,7 +14,7 @@ cRelay::cRelay(uint8_t numDev, uint8_t slot, QObject *parent):
 
 void cRelay::setState(bool f)
 {
-    if(f != newState)
+    if((f != newState) && enable)
     {
         newState = f;
         if(type) f = !f;    //инвертирование, если надо

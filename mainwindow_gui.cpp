@@ -188,6 +188,7 @@ void  MainWindow::destroyedslot(QObject *)
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
+
     if (watched == ui->MessagesWidget && event->type() == QEvent::Paint)
     {
         if (needUpdatePainter == true)
@@ -202,17 +203,18 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         ClearPolarCoords();
     }
 
-    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
+//    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
 //        reactOnMousePress();
-    }
+//    }
 
-    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
+//    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
 //        reactOnMouseRelease();
-    }
+//    }
 
-    if (watched == ui->customPlot && event->type() == QEvent::MouseMove) {
+//    if (watched == ui->customPlot && event->type() == QEvent::MouseMove) {
 //        ReactOnMouseSlide();
-    }
+//    }
+
 
     if ((event->type() == QEvent::MouseButtonPress)\
          && (QString::fromLatin1(watched->metaObject()->className()) == "QPushButton")\
@@ -565,6 +567,7 @@ void MainWindow::plotPress(QMouseEvent * pe)
     posPlot = ui->customPlot->yAxis->range().center();
     mouseOnScalede = true;
     waitAutoScale = true;
+    qDebug() << "plotPress";
 }
 
 void MainWindow::plotReleas(QMouseEvent * pe)
@@ -572,6 +575,7 @@ void MainWindow::plotReleas(QMouseEvent * pe)
     mouseOnScalede = false;
     mouseOnMove = false;
     timerScale.start(3000);
+    qDebug() << "plotReleas";
 }
 
 void MainWindow::plotMove(QMouseEvent * pe)
@@ -594,6 +598,7 @@ void MainWindow::plotMove(QMouseEvent * pe)
 //        ui->customPlot->replot();
     }
     timerScale.start(3000);
+    qDebug() << "plotMove";
 }
 
 void MainWindow::updateAutoScale()

@@ -1764,7 +1764,7 @@ border-radius: 0px;
              </size>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="wGrafics">
              <layout class="QGridLayout" name="gridLayout_5">
@@ -1801,7 +1801,7 @@ border-radius: 0px;
                  </font>
                 </property>
                 <property name="focusPolicy">
-                 <enum>Qt::ClickFocus</enum>
+                 <enum>Qt::NoFocus</enum>
                 </property>
                </widget>
               </item>
@@ -2066,7 +2066,7 @@ background-color: #2c3d4d;
              </size>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="pageBars">
              <layout class="QVBoxLayout" name="verticalLayout_4">

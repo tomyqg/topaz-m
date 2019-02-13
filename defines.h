@@ -172,10 +172,14 @@
 
 #define TOTAL_NUM_DEVICES   6       //максимальное количество плат
 #define NUM_CHAN_DEFAULT    4
+#define TOTAL_NUM_CHAN      24      //максимальное число подключаемых каналов
+#define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
 #define MAX_NUM_GROUP       10      //максимальное количество группировок каналов
+#define TOTAL_NUM_RELAY     24      //максимальное число подключаемых реле
+#define NUM_RELAY_IN_8RP    8       //количество реле в одной плате 8RP
 
 #define BASE_OFFSET_DEVICE      0x4000
 #define BASE_OFFSET_CHANNEL_1   0x8000

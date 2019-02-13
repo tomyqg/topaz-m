@@ -7,14 +7,14 @@ class cRelay : public QObject
 {
     Q_OBJECT
 public:
-    explicit cRelay(uint8_t numDev, uint8_t slot, QObject *parent = 0);
+    explicit cRelay(uint8_t numDev, uint8_t slot = 0, QObject *parent = 0);
     void setState(bool f);
     bool getState();
     bool confirmedState;
     bool getCurState() {
         return curState;
     }
-
+    bool enable;
     uint8_t mySlot;
     uint8_t myPhysicalNum;
     uint8_t type;           // 0 - нормальноразомкнутое, 1 - нормальнозамкнутое

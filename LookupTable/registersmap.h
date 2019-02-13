@@ -16,6 +16,7 @@ enum termoCoupleType{
     TC_Type_N = 6,
 };
 enum deviceTypeEnum{
+    Device_None = 0,
     Device_4AI = 1,
     Device_8RP = 2,
     Device_STEEL = 3,
