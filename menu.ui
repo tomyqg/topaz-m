@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>23</number>
+            <number>30</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -7078,7 +7078,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>223</width>
+                  <width>729</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -8419,8 +8419,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>316</width>
-                  <height>124</height>
+                  <width>743</width>
+                  <height>473</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -8722,8 +8722,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>494</width>
-                  <height>69</height>
+                  <width>743</width>
+                  <height>473</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -9598,6 +9598,75 @@ color: rgb(14, 210, 226);</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameModeAccess">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QWidget" name="shadowModeAccess" native="true">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>27</y>
+           <width>160</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(0, 0, 0, 100);
+border-right:15px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 100), stop:1 rgba(255, 255, 255, 0));
+border-bottom:15px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 0, 0, 100), stop:1 rgba(255, 255, 255, 0));
+border-left:15px solid qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(0, 0, 0, 100), stop:1 rgba(255, 255, 255, 0));
+border-top:15px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 0, 0, 100), stop:1 rgba(255, 255, 255, 0));
+background-clip:padding;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="modeAccess">
+         <property name="geometry">
+          <rect>
+           <x>23</x>
+           <y>20</y>
+           <width>160</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Open Sans</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(14, 210, 226);</string>
+         </property>
+         <property name="text">
+          <string>ЭКСПЕРТ</string>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <zorder>shadowModeAccess</zorder>
+        <zorder>modeAccess</zorder>
+        <zorder>verticalSpacer</zorder>
+       </widget>
       </item>
       <item>
        <widget class="QFrame" name="placeLogo">

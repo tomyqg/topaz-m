@@ -98,6 +98,10 @@ private:
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
 
     void clearLayout(QLayout *layout, bool deleteWidgets = true);
+    void changeVisibleWidgets();
+    QList<QWidget *> listWidgetsExpert;
+    QList<QWidget *> listWidgetsAdmin;
+
 private slots:
     void updateDevicesUI();
     void updateDeviceInfo(uint8_t index);

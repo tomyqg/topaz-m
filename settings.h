@@ -31,8 +31,6 @@ public:
 
 public slots:
     void resizeEvent(QResizeEvent * s);
-//    bool eventFilter(QObject *watched, QEvent *event);
-
 
 private:
     Ui::dSettings *ui;
@@ -81,6 +79,9 @@ private:
     void saveParam();
     void saveParamToFile();
     void loadArchFromFile();
+    void reactOnMousePress();
+    void reactOnMouseRelease();
+    void ReactOnMouseSlide();
 
 private slots:
     void on_exitButton_clicked();

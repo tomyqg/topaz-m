@@ -387,7 +387,9 @@ private:
 
     bool plotReady;            // готовность CustomPlot для рисования графиков
 
-
+    void reactOnMousePress();
+    void reactOnMouseRelease();
+    void ReactOnMouseSlide();
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

@@ -158,12 +158,12 @@ void MainWindow::MainWindowInitialization()
     ui->MessagesWidget->installEventFilter(this);
 
     ui->customPlot->installEventFilter(this); // если закоментить то не будет уставок и цифр внизу
-    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
-            this, SLOT(plotPress(QMouseEvent*)));
-    connect(ui->customPlot, SIGNAL(mouseRelease(QMouseEvent*)),\
-            this, SLOT(plotReleas(QMouseEvent*)));
-    connect(ui->customPlot, SIGNAL(mouseMove(QMouseEvent*)),\
-            this, SLOT(plotMove(QMouseEvent*)));
+//    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
+//            this, SLOT(plotPress(QMouseEvent*)));
+//    connect(ui->customPlot, SIGNAL(mouseRelease(QMouseEvent*)),\
+//            this, SLOT(plotReleas(QMouseEvent*)));
+//    connect(ui->customPlot, SIGNAL(mouseMove(QMouseEvent*)),\
+//            this, SLOT(plotMove(QMouseEvent*)));
     connect(&timerScale, SIGNAL(timeout()), this, SLOT(updateAutoScale()));
 //    timerScale.setInterval(1);
     SetXRange(XRange);

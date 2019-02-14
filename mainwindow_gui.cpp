@@ -203,17 +203,26 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         ClearPolarCoords();
     }
 
-//    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
-//        reactOnMousePress();
-//    }
+    if (watched == ui->customPlot && event->type() != QEvent::Paint \
+            && event->type() != QEvent::Resize) {
+        if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
+            reactOnMousePress();
+        }
 
-//    if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
-//        reactOnMouseRelease();
-//    }
+        if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
+            reactOnMouseRelease();
+        }
 
-//    if (watched == ui->customPlot && event->type() == QEvent::MouseMove) {
-//        ReactOnMouseSlide();
-//    }
+        if (watched == ui->customPlot && event->type() == QEvent::MouseMove) {
+            ReactOnMouseSlide();
+        }
+        //Vag: Крайне не рекомендуется передавать управление событием в QCustomPlot,
+        //      так как в текущей сборке Linux модуль работает некорректно,
+        //      поэтому возвращаем true и завершаем обработку события
+        return true;
+    }
+
+
 
 
     if ((event->type() == QEvent::MouseButtonPress)\
@@ -579,6 +588,52 @@ void MainWindow::plotReleas(QMouseEvent * pe)
 }
 
 void MainWindow::plotMove(QMouseEvent * pe)
+{
+    if(mouseOnScalede && !mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        double scale = 1 + (((double)y - (double)yPos) / (double)desktopHeight);
+        double pos = ui->customPlot->yAxis->range().center();
+        double size = sizePlot * scale * scale ;
+        ui->customPlot->yAxis->setRange(pos, size, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    else if(mouseOnMove)
+    {
+        int y = QCursor::pos().y();
+        double move = ((double)y - (double)yPos) / (double)ui->customPlot->height();
+        double pos = posPlot + move * sizePlot;
+        ui->customPlot->yAxis->setRange(pos, sizePlot, Qt::AlignCenter);
+//        ui->customPlot->replot();
+    }
+    timerScale.start(3000);
+    qDebug() << "plotMove";
+}
+
+void MainWindow::reactOnMousePress()
+{
+    xPos = QCursor::pos().x();
+    yPos = QCursor::pos().y();
+    if(xPos > (ui->customPlot->width() / 10))
+    {
+        mouseOnMove = true;
+    }
+    sizePlot = ui->customPlot->yAxis->range().size();
+    posPlot = ui->customPlot->yAxis->range().center();
+    mouseOnScalede = true;
+    waitAutoScale = true;
+    qDebug() << "plotPress";
+}
+
+void MainWindow::reactOnMouseRelease()
+{
+    mouseOnScalede = false;
+    mouseOnMove = false;
+    timerScale.start(3000);
+    qDebug() << "plotReleas";
+}
+
+void MainWindow::ReactOnMouseSlide()
 {
     if(mouseOnScalede && !mouseOnMove)
     {

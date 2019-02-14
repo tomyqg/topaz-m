@@ -55,6 +55,8 @@ dMenu::dMenu(QWidget *parent) :
     QString ver = CURRENT_VER;
     ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">MULTIGRAPH<br/>Ver. " + ver + "</span></p></body></html>"));
 
+    ui->frameModeAccess->hide();
+
     ui->saveButton->setColorText(ColorBlue);
     ui->saveButton->setColorBg(QColor(0xff,0xff,0xff));
     ui->exitButton->setColorText(ColorBlue);
@@ -129,6 +131,28 @@ dMenu::dMenu(QWidget *parent) :
     ui->netMask->installEventFilter(this);
     ui->gateWay->installEventFilter(this);
     ui->nameGroup->installEventFilter(this);
+
+    // список виджетов, которые нужно скрывать от лишних глаз
+    listWidgetsExpert << ui->frameModeAccess \
+                      << ui->bSystem \
+                      << ui->bTypeConnect \
+                      << ui->bEditDataTime \
+                      << ui->bProtect \
+                      << ui->bProtect \
+                      << ui->bExtMemory \
+                      << ui->bMessages \
+                      << ui->bOptions \
+                      << ui->bUstavki \
+                      << ui->bLogEvents \
+                      << ui->bModeling \
+                      << ui->bEthernet \
+                      << ui->bSeraInterface \
+                      << ui->bModbusSlave \
+                      << ui->bEthernetIP \
+                      << ui->bProfibus \
+                      << ui->bProfinet;
+    // скрыть эти выджеты(кнопки) изначально
+    changeVisibleWidgets();
 
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
@@ -776,12 +800,50 @@ void dMenu::on_bBackDateTime_clicked()
 
 void dMenu::on_bExpert_clicked()
 {
-    keyboard kb(this);\
-    keyboard::olderprop = "";\
-    kb.setModal(true);\
-    kb.setWarning("Введите пароль режима ЭКСПЕРТ", true);\
-    kb.exec();\
+    keyboard kb(this);
+    keyboard::olderprop = "";
+    kb.setModal(true);
+    kb.setWarning("Введите пароль режима ЭКСПЕРТ", true);
+    kb.exec();
     cExpertAccess::accessRequest(keyboard::newString);
+    // Изменить видимость виджетов в соответствии с режимом доступа
+    changeVisibleWidgets();
+}
+
+void dMenu::changeVisibleWidgets()
+{
+    // получить информацию об уровне доступа
+    accessModeType access = cExpertAccess::getMode();
+
+    //скрыть все, что может скрываться
+    foreach (QWidget * w, listWidgetsAdmin) { w->hide(); }
+    foreach (QWidget * w, listWidgetsExpert) { w->hide(); }
+
+    if(access == ACCESS_EXPERT)
+    {
+        ui->modeAccess->setText("ЭКСПЕРТ");
+    }
+    else if(access == ACCESS_ADMIN)
+    {
+        ui->modeAccess->setText("АДМИН");
+    }
+    else
+    {
+        ui->modeAccess->setText("ЮЗЕР");
+    }
+
+    // включить отображение виджетов, соответствующих уровню доступа
+    switch(access)
+    {
+    case  ACCESS_ADMIN:
+        foreach (QWidget * w, listWidgetsAdmin) { w->show(); }
+    case ACCESS_EXPERT:
+        foreach (QWidget * w, listWidgetsExpert) { w->show(); }
+    case ACCESS_USER:
+        // нечего больше показывать простому сметрному
+    default:
+        break;
+    }
 }
 
 

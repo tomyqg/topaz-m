@@ -6,18 +6,19 @@
 #include "expert_access.h"
 //#include "keyboard.h"
 
-
-
+//Пароль экперта. "0000" - по-умолчанию
 QString cExpertAccess::passExpert = "0000";
+// Пароль доступа админа
 QString cExpertAccess::passAdmin = "abrakadabra";
 QString cExpertAccess::configFileName = "";
 accessModeType cExpertAccess::mode = ACCESS_USER;
 
 cExpertAccess::cExpertAccess(QObject *parent) : QObject(parent)
 {
+
     QByteArray encryptedPwd;// = QCryptographicHash::hash(passExpert.toUtf8(), QCryptographicHash::Sha1).toHex();
     configFileName = searchConfigFile();
-    QSettings* cryptoHash = new QSettings(configFileName,QSettings::IniFormat);
+    QSettings* cryptoHash = new QSettings(configFileName, QSettings::IniFormat);
 //    cryptoHash->setValue("HashExpert", encryptedPwd);
     encryptedPwd = cryptoHash->value("HashExpert", QByteArray("0000")).toByteArray();
 }
