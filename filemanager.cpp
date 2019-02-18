@@ -83,10 +83,16 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(path);
     QTextStream out(&file);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    out << setstr;
-    file.close();
+    if(file.open(QIODevice::WriteOnly))
+    {
+        file.resize(0); // clear file
+        out << setstr;
+        file.close();
+    }
+    else
+    {
+        return 1; //есть проблемы в открыти файла
+    }
 
 
     return 0;
@@ -94,14 +100,23 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
 int cFileManager::readChannelsSettings(QString path)
 {
-    int ret = 0;
 
     QFile infile(path);
-    if(!infile.exists()) return 2;
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-    infile.close();
+    QString sss;
+    if(!infile.exists()) return 2;  //файл не доступен
+    if(infile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&infile);
+        sss = in.readLine();
+        infile.close();
+    }
+    else
+    {
+        return 1;   //файл не открывается
+    }
+
+    if(sss.size() == 0) return 4;    //файл пустой
+
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
@@ -205,19 +220,26 @@ int cFileManager::readChannelsSettings(QString path)
 //        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
     }
 
-    return ret;
+    return 0;
 
 }
 
 int cFileManager::readSteelsSettings(QString path)
 {
-    int ret = 0;
 
+    int ret = 0;
     QFile infile(path);
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-    infile.close();
+    QString sss;
+    if(infile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&infile);
+        sss = in.readLine();
+        infile.close();
+    }
+    else
+    {
+        return 1;
+    }
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
@@ -270,7 +292,7 @@ int cFileManager::readSteelsSettings(QString path)
         steelTech[i].G = techObj.value("MassMelting").toInt();
     }
 
-    return ret;
+    return 0;
 }
 
 int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
@@ -334,20 +356,34 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(path);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    QTextStream out(&file);
-    out << setstr;
-    file.close();
+    if(file.open(QIODevice::WriteOnly))
+    {
+        file.resize(0); // clear file
+        QTextStream out(&file);
+        out << setstr;
+        file.close();
+    }
+    else
+    {
+        return 1;   //ошибка открытия файла
+    }
     return 0;
 }
 
 int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 {
     QFile infile(path);
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
+    QString sss;
+    if(infile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&infile);
+        sss = in.readLine();
+        infile.close();
+    }
+    else
+    {
+        return 1; //есть проблемы с открытием файла
+    }
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
 //    StackedOptions::calibrationprm = json["Calibration"].toString();
@@ -431,8 +467,8 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
         }
         index++;
     }
+    return 0;
 
-    infile.close();
 }
 
 int cFileManager::writeSteelsSettings(QString path)
@@ -482,10 +518,16 @@ int cFileManager::writeSteelsSettings(QString path)
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(path);
     QTextStream out(&file);
-    file.open(QIODevice::ReadWrite);
-    file.resize(0); // clear file
-    out << setstr;
-    file.close();
+    if(file.open(QIODevice::WriteOnly))
+    {
+        file.resize(0); // clear file
+        out << setstr;
+        file.close();
+    }
+    else
+    {
+        return 1;
+    }
 
     return 0;
 }

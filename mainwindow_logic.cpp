@@ -653,14 +653,20 @@ void MainWindow::InitChannels()
         ch->setNum(i+1);
 //        ch->setSlot(0);     //
         ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
-        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+//        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
+        connect(ch, SIGNAL(sendToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
 //        ch->SetMeasurePeriod(1000);
         listChannels.append(ch);
     }
 
     //чтение настроек каналов и уставок
 //    int countChannels = listChannels.size();
-    cFileManager::readChannelsSettings(pathtooptions);
+    int res = cFileManager::readChannelsSettings(pathtooptions);
+    if(res == 4)
+    {
+        cLogger mk(pathtomessages, cLogger::CONFIG);
+        mk.addMess("File " + QString(pathtooptions) + " is empty", cLogger::ERR);
+    }
 //    int newCountChannels = listChannels.size();
 //    for(int i = countChannels; i < newCountChannels; i++)
 //    {
@@ -1205,6 +1211,11 @@ void MainWindow::parseWorkerReceive()
 
         if(!isDeviceParam)
         {
+            if(device->deviceType == Device_4AI)
+            {
+                //Это ответ от платы 4AI, значит читаем параметры канала
+                channel->parserChannel(tr);
+            }
 //            emit retransToSlotConfig(tr);
             if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
             {
@@ -1232,6 +1243,7 @@ void MainWindow::parseWorkerReceive()
                     {
 //                        channel->SetDiapason(tr.paramA12[1]);
 //                        emit retransToSlotConfig(tr);
+
                     }
                     else if(channel->GetSignalType() == ChannelOptions::MeasureVoltage)
                     {
@@ -1307,7 +1319,7 @@ void MainWindow::parseWorkerReceive()
             {
                 if(device->deviceType == Device_4AI)
                 {
-                    channel->SetCurrentChannelValue((double)tr.volFlo);
+//                    channel->SetCurrentChannelValue((double)tr.volFlo);
                 }
                 if(device->deviceType == Device_STEEL)
                 {

@@ -637,11 +637,19 @@ void dSettings::saveParamToFile()
     saveParam();
     if(systemOptions.display == cSystemOptions::Steel)
     {
-        cFileManager::writeSteelsSettings(pathtosteeloptions);
+        if(cFileManager::writeSteelsSettings(pathtosteeloptions))
+        {
+            cLogger mk(pathtomessages, cLogger::CONFIG);
+            mk.addMess("Error write to file " + QString(pathtosteeloptions), cLogger::ERR);
+        }
     }
     else
     {
-        cFileManager::writeChannelsSettings(pathtooptions/*, listChannels*/);
+        if(cFileManager::writeChannelsSettings(pathtooptions/*, listChannels*/))
+        {
+            cLogger mk(pathtomessages, cLogger::CONFIG);
+            mk.addMess("Error write to file " + QString(pathtooptions), cLogger::ERR);
+        }
     }
 }
 

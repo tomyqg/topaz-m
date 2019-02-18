@@ -22,12 +22,20 @@ ChannelOptions::ChannelOptions()
     lowermeasurelimit = -100;
     highermeasurelimit = 100;
     signaltype = 2;
+    outputData.chanSignalType = VoltageMeasure;
+    memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
+    outputData.chanAdditionalParameter1[0] = diapason;
     unitsname = "mV";
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     timer->setInterval(measureperiod);
     timer->stop();
     buffermutex = new QMutex();
+    timerUpdateParam = new QTimer();
+    connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
+    updateParam();
+    timerUpdateParam->start(5000);
+
 }
 
 ChannelOptions::~ChannelOptions()
@@ -62,17 +70,31 @@ double ChannelOptions::GetMeasurePeriod()
 
 uint16_t ChannelOptions::GetSignalType()
 {
-    return signaltype;
+    return outputData.chanSignalType;
+//    return signaltype;
 }
 
 uint16_t ChannelOptions::GetCurSignalType()
 {
-    return cursignaltype;
+    return inputData.chanSignalType;
+//    return cursignaltype;
 }
 
 int ChannelOptions::GetDiapason()
 {
-    return diapason;
+    if(outputData.chanSignalType == VoltageMeasure)
+    {
+        return outputData.chanAdditionalParameter1[0];
+    }
+    else if(outputData.chanSignalType == TermoResistanceMeasure)
+    {
+        return outputData.chanAdditionalParameter1[2];
+    }
+    else if(outputData.chanSignalType == TermoCoupleMeasure)
+    {
+        return outputData.chanAdditionalParameter1[0];
+    }
+//    return diapason;
 }
 
 int ChannelOptions::GetRegistrationType()
@@ -83,6 +105,7 @@ int ChannelOptions::GetRegistrationType()
 void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
+    outputData.chanSignalType = newsignaltype;
 }
 
 void ChannelOptions::SetCurSignalType(uint16_t newsignaltype)
@@ -93,6 +116,18 @@ void ChannelOptions::SetCurSignalType(uint16_t newsignaltype)
 void ChannelOptions::SetDiapason(int newdiapason)
 {
     this->diapason = newdiapason;
+    if(outputData.chanSignalType == VoltageMeasure)
+    {
+        outputData.chanAdditionalParameter1[0] = newdiapason;
+    }
+    else if(outputData.chanSignalType == TermoResistanceMeasure)
+    {
+        outputData.chanAdditionalParameter1[2] = newdiapason;
+    }
+    else if(outputData.chanSignalType == TermoCoupleMeasure)
+    {
+        outputData.chanAdditionalParameter1[0] = newdiapason;
+    }
 }
 
 void ChannelOptions::SetRegistrationType(int newdregistrationtype)
@@ -247,13 +282,13 @@ void ChannelOptions::SetMathematical(bool newstate)
     this->MathematicalState = newstate;
 }
 
-void ChannelOptions::SetChannelCoords(int width, int xpos, int ypos, int height)
-{
-    this->xposition = xpos;
-    this->yposition = ypos;
-    this->w = width;
-    this->h = height;
-}
+//void ChannelOptions::SetChannelCoords(int width, int xpos, int ypos, int height)
+//{
+//    this->xposition = xpos;
+//    this->yposition = ypos;
+//    this->w = width;
+//    this->h = height;
+//}
 
 double ChannelOptions::GetState1Value()
 {
@@ -276,10 +311,99 @@ bool ChannelOptions::IsChannelMathematical()
     return this->MathematicalState;
 }
 
+void ChannelOptions::parserChannel(Transaction tr)
+{
+    Transaction trans = tr;
+    trans.dir = Transaction::W;
+    QString paramName = cRegistersMap::getNameByOffset(tr.offset);
+    QString chanName = "chan" + QString::number(slotChannel);
+    if(paramName == chanName + "Data")
+    {
+        SetCurrentChannelValue((double)tr.volFlo);
+        inputData.chanData = tr.volFlo;
+    }
+    if(paramName == chanName + "DataFlags")
+    {
+        inputData.chanDataFlags = (uint16_t)tr.volInt;
+    }
+    if(paramName == chanName + "Status")
+    {
+        inputData.chanStatus = (uint16_t)tr.volInt;
+    }
+    if(paramName == chanName + "Error")
+    {
+        inputData.chanError = (uint16_t)tr.volInt;
+    }
+    if(paramName == chanName + "Quantity")
+    {
+        inputData.chanQuantity = (uint32_t)tr.volInt;
+    }
+    if(paramName == chanName + "Uptime")
+    {
+        inputData.chanUptime = (uint32_t)tr.volInt;
+    }
+    if(paramName == chanName + "RawData")
+    {
+        inputData.chanRawData = (float)tr.volFlo;
+    }
+    else if(paramName == chanName + "SignalType")
+    {
+        inputData.chanSignalType = (uint16_t)tr.volInt;
+        if(inputData.chanSignalType != outputData.chanSignalType)
+        {
+            trans.volInt = (uint32_t)outputData.chanSignalType;
+            emit sendToWorker(trans);
+        }
+    }
+    else if(paramName == chanName + "AdditionalParameter1")
+    {
+        memcpy(inputData.chanAdditionalParameter1, tr.paramA12, sizeof(tr.paramA12));
+        if(memcmp(inputData.chanAdditionalParameter1, outputData.chanAdditionalParameter1, sizeof(inputData.chanAdditionalParameter1)) != 0)
+        {
+            memcpy(trans.paramA12, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+            emit sendToWorker(trans);
+        }
+    }
+    else if(paramName == chanName + "AdditionalParameter2")
+    {
+        memcpy(inputData.chanAdditionalParameter2, tr.paramA12, sizeof(tr.paramA12));
+        if(memcmp(inputData.chanAdditionalParameter2, outputData.chanAdditionalParameter2, sizeof(inputData.chanAdditionalParameter2)) != 0)
+        {
+            memcpy(trans.paramA12, outputData.chanAdditionalParameter2, sizeof(outputData.chanAdditionalParameter2));
+            emit sendToWorker(trans);
+        }
+    }
+}
+
 void ChannelOptions::timerSlot()
 {
+
+    if(enable && (outputData.chanSignalType != NoMeasure))
+    {
+        QString nameParam = "chan" + QString::number(slotChannel) + "Data";
+        uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+        Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
+        emit sendToWorker(tr);
+    }
+
     timer->setInterval((int)(measureperiod*1000));
-    emit updateSignal(numChannel-1);
+}
+
+void ChannelOptions::updateParam()
+{
+    if (!enable) return;
+    Transaction tr;
+    tr.dir = Transaction::R;
+    tr.slave = slot;
+    int devCh = slotChannel;
+    QStringList listStr;
+    listStr << "chan" + QString::number(devCh) + "SignalType" \
+            << "chan" + QString::number(devCh) + "AdditionalParameter1";
+    foreach (QString str, listStr) {
+        tr.offset = cRegistersMap::getOffsetByName(str);
+        emit sendToWorker(tr);
+    }
+
 }
 
 bool ChannelOptions::GetConfirmationNeed()
@@ -617,4 +741,23 @@ void ChannelOptions::SetMaximumColor(QColor newmaxcolor)
 void ChannelOptions::SetMinimumColor(QColor newmincolor)
 {
     minimumcolor = newmincolor;
+}
+
+int ChannelOptions::getShema()
+{
+
+    if(outputData.chanSignalType == TermoResistanceMeasure)
+    {
+        return outputData.chanAdditionalParameter1[0];
+    }
+    return 0;
+}
+
+void ChannelOptions::setShema(int sh)
+{
+    shema = sh;
+    if(outputData.chanSignalType == TermoResistanceMeasure)
+    {
+        outputData.chanAdditionalParameter1[0];
+    }
 }

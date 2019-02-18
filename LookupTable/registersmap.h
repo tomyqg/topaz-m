@@ -57,6 +57,16 @@ enum statusChannelEnum{
     StatusCh_SteelSquaresOK = 13,           //площадки найдены(STEEL)
 };
 
+enum SignalType {
+    NoMeasure= 0,
+    CurrentMeasure= 1,
+    VoltageMeasure= 2,
+    TermoCoupleMeasure= 3,
+    TermoResistanceMeasure= 4,
+    DiscretMeasure= 6,
+    ImpulseCounterMeasure= 7,
+    FrequencyMeasure= 8
+};
 
 
 class cRegistersMap : public QObject

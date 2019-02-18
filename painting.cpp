@@ -14,80 +14,80 @@
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
 
-void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
-{
-    painter.begin(ui->MessagesWidget);
+//void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
+//{
+//    painter.begin(ui->MessagesWidget);
 
-    // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
-    int ch = 0;
-    foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
-        {
-            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
+//    // здесь собственно рисуем квадрат для каждого канала (в последствии можно будет добавить больше квадратов
+//    int ch = 0;
+//    foreach (ChannelOptions * Chanel, ChannelsObjectsList) {
+//        {
+//            double channelcurrentvalue =Chanel->GetCurrentChannelValue();
 
-            // рисуем прямоугольник  с заполненным цветом
+//            // рисуем прямоугольник  с заполненным цветом
 
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            if (isChannelInMaxNow(ch))
-            {
-                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
-            }
-            else if (isChannelInMinNow(ch))
-            {
-                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
-            }
-            else
-            {
-                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
-            }
+//            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            if (isChannelInMaxNow(ch))
+//            {
+//                painter.setBrush(QBrush(Chanel->GetMaximumColor(), Qt::SolidPattern));
+//            }
+//            else if (isChannelInMinNow(ch))
+//            {
+//                painter.setBrush(QBrush(Chanel->GetMinimumColor(), Qt::SolidPattern));
+//            }
+//            else
+//            {
+//                painter.setBrush(QBrush(Chanel->GetNormalColor(), Qt::SolidPattern));
+//            }
 
-            painter.setBrush(QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
-
-
-            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-
-            if (ChannelValueString == NaNMessage)
-                ChannelValueString = ObryvErrorMessage;
-            else
-            {
-//                if (!ui->percentCheckBox->checkState())
-                    ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
-//                else
-//                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
-            }
-
-            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)) )
-                painter.setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
-            else
-                painter.setPen(QPen(Qt::black, 2)); // иначе черный цвет
-
-            // выводим значения каналов большими цифрами
-            painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+//            painter.setBrush(QBrush(Chanel->GetStateDependentColor(), Qt::SolidPattern));
+//            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            painter.drawRect(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h);
 
 
-            // подписываем названия каналов
-            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
+//            QString ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
 
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            // подписываем единицы измерения
-            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
-            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
+//            if (ChannelValueString == NaNMessage)
+//                ChannelValueString = ObryvErrorMessage;
+//            else
+//            {
+////                if (!ui->percentCheckBox->checkState())
+//                    ChannelValueString = QString::number( channelcurrentvalue, 'f', 2);
+////                else
+////                    ChannelValueString = QString::number( Chanel->GetValuePercent(), 'f', 1) + " %";
+//            }
 
-            // подписываем math, если канал математически обрабатывается
-            painter.setPen(Qt::white);
-            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            if (( isChannelInMaxNow(ch) || isChannelInMinNow(ch)) )
+//                painter.setPen(QPen(Qt::red, 1)); // делаем чтобы при срабатывании уставки включался только красный цвет
+//            else
+//                painter.setPen(QPen(Qt::black, 2)); // иначе черный цвет
 
-            if (Chanel->IsChannelMathematical())
-                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
-            ////
-            ch++;
-        }
-    }
-    painter.end();
-}
+//            // выводим значения каналов большими цифрами
+//            painter.setFont(QFont(Font, alerttextsize, QFont::ExtraBold));
+//            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignVCenter,ChannelValueString);
+
+
+//            // подписываем названия каналов
+//            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignTop,Chanel->GetChannelName());
+
+//            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            // подписываем единицы измерения
+//            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+//            painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignHCenter | Qt::AlignBottom,Chanel->GetUnitsName());
+
+//            // подписываем math, если канал математически обрабатывается
+//            painter.setPen(Qt::white);
+//            painter.setFont(QFont(Font, smalltextsize, QFont::ExtraBold));
+
+//            if (Chanel->IsChannelMathematical())
+//                painter.drawText(Chanel->xposition, Chanel->yposition, Chanel->w, Chanel->h, Qt::AlignRight | Qt::AlignTop, MathString);
+//            ////
+//            ch++;
+//        }
+//    }
+//    painter.end();
+//}
 
 void MainWindow::PaintCyfrasBottom() // пока не используем
 {
