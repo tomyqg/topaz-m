@@ -13,6 +13,8 @@
 #include "Channels/group_channels.h"
 #include "device_slot.h"
 #include "ip_controller.h"
+#include "qtcsv-master/include/qtcsv/writer.h"
+#include "qtcsv-master/include/qtcsv/stringdata.h"
 
 
 #define HEIGHT 768
@@ -39,6 +41,7 @@ extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern cUsbFlash * flash;
 extern QList<cGroupChannels*> listGroup;
+extern QList<cMathChannel*> listMath;
 extern cIpController * ethernet;
 
 
@@ -111,7 +114,6 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
 
     log = new cLogger(pathtomessages, cLogger::UI);
-    log->addMess("Menu > Open ", cLogger::SERVICE);
 
     //добавить виджеты групп каналов
     addWidgetGroup();
@@ -238,6 +240,9 @@ dMenu::~dMenu()
 void dMenu::on_exitButton_clicked()
 {
     log->addMess("Menu > Cancel", cLogger::SERVICE);
+    cExpertAccess::resetAccess();
+    // Изменить видимость виджетов в соответствии с режимом доступа
+    changeVisibleWidgets();
     this->close();
 }
 
@@ -315,6 +320,8 @@ void dMenu::addWidgetUstavki()
     ui->verticalLayoutUstavki->addItem(verticalSpacer);
 }
 
+
+
 void dMenu::addWidgetGroup()
 {
 
@@ -338,6 +345,8 @@ void dMenu::addWidgetGroup()
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutGroup->addItem(verticalSpacer);
 }
+
+
 
 void dMenu::addWidgetChannels()
 {
@@ -493,6 +502,9 @@ void dMenu::slotIpErr()
 
 void dMenu::timeoutLoad()
 {
+    timerLoad.stop();
+    mo.stop();
+    ui->load->setHidden(true);
     this->close();
 }
 
@@ -715,38 +727,58 @@ void dMenu::slotOpenGroup(int num)
     listComboChannels.append("ОТКЛЮЧЕН");
     for(int i = 0; i < listChannels.size(); i++)
     {
-        listComboChannels.append("АНАЛОГОВЫЙ ВХОД " + QString::number(i+1));
+        QString nameCh = listChannels.at(i)->GetChannelName();
+        listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ")");
     }
-//    foreach (ChannelOptions * ch, listChannels) {
-//        listComboChannels.append(ch->GetChannelName());
-//    }
-    /*
-     * добавить математические каналы и дискретные
-    foreach (var, container) {
 
-    }*/
+    //математические каналы
+    for (int i = 0; i < listMath.size(); i++) {
+        listComboChannels.append(listMath.at(i)->getName() + " (M" + QString::number(i+1) + ")");
+    }
 
     QList<QComboBox*> listCombo;
     listCombo.append(ui->comboGroupChannel1);
     listCombo.append(ui->comboGroupChannel2);
     listCombo.append(ui->comboGroupChannel3);
     listCombo.append(ui->comboGroupChannel4);
+    int i = 0;
     foreach (QComboBox * combo, listCombo) {
         combo->clear();
         combo->addItems(listComboChannels);
+        if(group->typeInput[i] == 1)
+        {
+            combo->setCurrentIndex(group->channel[i] + 1);
+        }
+        else if(group->typeInput[i] == 2)
+        {
+            combo->setCurrentIndex(group->mathChannel[i] + listChannels.size() + 1);
+        }
+        else
+        {
+            combo->setCurrentIndex(0);
+        }
+        i++;
     }
 
-    for(int i = 0; i < listChannels.size(); i++)
-    {
-        for(int k = 0; k < listCombo.size(); k++)
-        {
-            if((group->typeInput[k] == 1)
-                    && (group->channel[k] == listChannels.at(i)))
-            {
-                listCombo.at(k)->setCurrentIndex(i+1); ;
-            }
-        }
-    }
+//    for(int k = 0; k < listCombo.size(); k++)
+//    {
+//        for(int i = 0; i < listChannels.size(); i++)
+//        {
+//            if((group->typeInput[k] == 1)
+//                    && (group->channel[k] == listChannels.at(i)))
+//            {
+//                listCombo.at(k)->setCurrentIndex(i+1); ;
+//            }
+//        }
+//        for(int i = 0; i < listMath.size(); i++)
+//        {
+//            if((group->typeInput[k] == 2)
+//                    && (group->mathChannel[k] == listMath.at(i)))
+//            {
+//                listCombo.at(k)->setCurrentIndex(i+1 + listChannels.size()); ;
+//            }
+//        }
+//    }
 
     ui->stackedWidget->setCurrentIndex(23);
     ui->nameSubMenu->setText("ГРУППА " + QString::number(num));
@@ -763,6 +795,13 @@ void dMenu::slotOpenDigitOutput(int num)
     ui->comboDigitOutputType->setCurrentIndex(listRelais.at(curRelay)->type & 1);
     ui->stackedWidget->setCurrentIndex(19);
     ui->nameSubMenu->setText("ВЫХОД " + QString::number(num));
+}
+
+void dMenu::selectPageMain()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->nameSubMenu->setText("");
+    ui->frameNameSubMenu->setHidden(true);
 }
 
 void dMenu::selectPageWork()
@@ -1216,6 +1255,12 @@ void dMenu::on_bDigitalOutputs_clicked()
     addWidgetDigitOutputs();
     ui->stackedWidget->setCurrentIndex(18);
     ui->nameSubMenu->setText("ДИСКР. ВЫХОДЫ");
+}
+
+void dMenu::on_bBackMathSetting_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(20);
+    ui->nameSubMenu->setText("МАТЕМАТИКА");
 }
 
 void dMenu::updateDriversWidgets()
@@ -1691,7 +1736,7 @@ void dMenu::on_bSaveArchiveToDrive_clicked()
     int n = sl.size();
     QStringList strlist = pathArch.split("/");
     path = QString(ui->comboDrives->currentText() + "/" \
-                   + ui->nameDirOnDrive->text() + "/");
+                   + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1750,7 +1795,7 @@ void dMenu::on_bSaveArchiveToDrive_clicked()
 
 void dMenu::copyArchiveFile()
 {
-    QString src, dest, path;
+    QString src, dest, path, csv, destCsv;
     QDateTime currTime = QDateTime::currentDateTime();
     int daysArray[4] = {1, 7, 30, 365};
     int days = daysArray[ui->periodArchiveToDrive->currentIndex()];
@@ -1762,9 +1807,9 @@ void dMenu::copyArchiveFile()
         QString pathArch = QString(pathtoarchivedata);
         QStringList sl = pathArch.split(".");
         int n = sl.size();
-        QStringList strlist = pathArch.split("/");
+//        QStringList strlist = pathArch.split("/");
         path = QString(ui->comboDrives->currentText() + "/" \
-                       + ui->nameDirOnDrive->text() + "/");
+                       + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
         path = QString("/media/" + path);
 #endif
@@ -1776,7 +1821,13 @@ void dMenu::copyArchiveFile()
         if(arch_sek.exists())   //проверка наличия такого файла
         {
             QFile::copy(src, dest);
+
+            //Создание CSV-файла
+            csv = sl.at(n-2) + "_sek_" + strDay + ".csv";
+            destCsv = QString(path + "archive_sek_" + strDay + ".csv");
+            makeCsvFileArchive(src, csv, destCsv);
         }
+
         //        int progress = (countArchFiles*100)/days;
         ui->progressBarLoadFiles->setValue((countArchFiles*100)/days);
         countArchFiles++;
@@ -1785,9 +1836,9 @@ void dMenu::copyArchiveFile()
 
 void dMenu::copyLastArchFile()
 {
-    QString src, dest, path;
+    QString src, dest, path, csv, destCsv;
     path = QString(ui->comboDrives->currentText() + "/" \
-                   + ui->nameDirOnDrive->text() + "/");
+                   + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1819,13 +1870,96 @@ void dMenu::copyLastArchFile()
             qDebug() << "Error writing measurement archive" << strerror(errno);
             mess = QString("Ошибка! Проверьте, пожалуйста, доступность носителя");
         }
+
+        // создание CSV-файла на внешнем носителе
+        csv = sl.at(n-2) + "_sek.csv";
+        destCsv = QString(path + "archive_sek.csv");
+        makeCsvFileArchive(src, csv, destCsv);
+
         mesDialog.showInfo(mess, "Сообщение");
         mesDialog.setWindowModality(Qt::WindowModal);
         mesDialog.show();
     }
+
+
+
     ui->progressBarLoadFiles->setHidden(true);
 }
 
+
+void dMenu::makeCsvFileArchive(QString src, QString csv, QString dest)
+{
+    QVector<sTickCh> vecTicks;
+    QFile arch_sek(src);
+
+    if(arch_sek.exists())   //проверка наличия такого файла
+    {
+        if(arch_sek.open(QIODevice::ReadOnly))
+        {
+            QDataStream stream(&arch_sek);
+            sTickCh tick;
+            while(!stream.atEnd())
+            {   //чтение файла до конца
+                stream >> tick.time;
+                stream.readRawData((char *) tick.channel, sizeof(tick.channel));
+                vecTicks.append(tick);
+            }
+            arch_sek.close();
+        }
+    }
+
+    if(vecTicks.size() > 0)
+    {
+        //Создание CSV-файла
+        QFile csvFile(csv);
+        // Открываем, или создаём файл, если он не существует
+        if(csvFile.open( QIODevice::WriteOnly ))
+        {
+            // Создаём текстовый поток, в который будем писать данные
+            QTextStream textStream( &csvFile );
+            QStringList stringList; // Вспомогательный объект QSqtringList, который сформирует строку
+            QDateTime time2000 = QDateTime::fromString(STR_DATE_2000, FORMAT_STR_DATE_2000);
+
+            // Строка заголовков CSV-файла
+            stringList << "Date Time";
+            for(int i = 0; i < TOTAL_NUM_CHANNELS; i++)
+            {
+                stringList << "Channel" + QString::number(i+1);
+            }
+            textStream << stringList.join( ';' )+"\n";
+
+            //Конвертация значений
+            foreach(sTickCh tick, vecTicks)
+            {
+                stringList.clear(); // ... каждый раз очищая stringList
+
+                QDateTime time(time2000.addSecs(tick.time));
+                stringList << time.toString(FORMAT_STR_DATE_2000);
+
+                for(int i = 0; i < TOTAL_NUM_CHANNELS; i++)
+                {
+                    stringList << QString::number(tick.channel[i], 'f', 8);
+                }
+
+                /* После чего отправляем весь stringList в файл через текстовый поток
+             * добавляя разделители в виде ";", а также поставив в конце символ окончания строки
+             * */
+                textStream << stringList.join( ';' )+"\n";
+            }
+
+            csvFile.close();
+        }
+
+        // перенос файла CSV на внешний носитель
+        if(csvFile.exists())   //проверка наличия такого файла
+        {
+            QFile::remove(dest);    //удалить с носителя (устарел)
+            QFile::copy(csv, dest);
+            QFile::remove(csv);
+        }
+    }
+
+}
 
 void dMenu::on_comboDigitInputsFunc_currentIndexChanged(int index)
 {
@@ -1876,6 +2010,17 @@ void dMenu::on_bDelGroup_clicked()
     addWidgetGroup();
 }
 
+void dMenu::on_bDelMath_clicked()
+{
+    if(listMath.size() > 1)
+    {
+        listMath.removeAt(curMathEdit);
+    }
+    ui->stackedWidget->setCurrentIndex(20);
+    ui->nameSubMenu->setText("МАТЕМАТИКА");
+    addWidgetGroup();
+}
+
 void dMenu::on_bApplayGroup_clicked()
 {
     cGroupChannels * g = listGroup.at(curGroupEdit);
@@ -1897,12 +2042,13 @@ void dMenu::on_bApplayGroup_clicked()
         else if(indexCh <= listChannels.size())
         {
             g->typeInput[i] = 1;
-            g->channel[i] = listChannels.at(indexCh-1);
+            g->channel[i] = indexCh-1;
         }
-//    else if(index <= listMath.size())
-//    {
-
-//    }
+        else if(indexCh <= (listChannels.size() + listMath.size()))
+        {
+            g->typeInput[i] = 2;
+            g->mathChannel[i] = indexCh-1-listChannels.size();
+        }
     }
 
     ui->stackedWidget->setCurrentIndex(22);
@@ -2199,4 +2345,100 @@ void dMenu::on_bToConnect_clicked()
 void dMenu::on_bDigitOutputSettingsApply_clicked()
 {
     listRelais.at(curRelay)->type = ui->comboDigitOutputType->currentIndex();
+}
+
+void dMenu::addWidgetMath()
+{
+    clearLayout(ui->verticalLayoutMath);
+
+    // генерация виджетов (кнопок) матканалов
+    int i = 0;
+    foreach (cMathChannel * math, listMath) {
+        wButtonStyled * bMath = new wButtonStyled(ui->widgetScrollAreaMath);
+        bMath->index = i+1;
+        QString nameMath = math->getName().size() ? (" | " + math->getName()) : " ";
+        bMath->setText("МАТКАНАЛ " + QString::number(bMath->index) + nameMath);
+        bMath->setMinimumSize(QSize(0, 70));
+        bMath->setColorText(QColor(0xff,0xff,0xff));
+        bMath->setColorBg(ColorButtonNormal);
+        bMath->setAlignLeft();
+        connect(bMath, SIGNAL(clicked(int)), this, SLOT(slotOpenMathChannel(int)));
+        ui->verticalLayoutMath->addWidget(bMath);
+        i++;
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutMath->addItem(verticalSpacer);
+}
+
+void dMenu::slotOpenMathChannel(int num)
+{
+    curMathEdit = num - 1;
+    cMathChannel * math = listMath.at(num - 1);
+
+    ui->nameMath->setText(math->getName());
+    ui->formulaMath->setText(math->GetMathString());
+
+
+    //определяем существующие каналы и добавляем в комбобоксы
+    QStringList listComboChannels;
+    listComboChannels.append("ОТКЛЮЧЕН");
+    for(int i = 0; i < listChannels.size(); i++)
+    {
+        QString nameCh = listChannels.at(i)->GetChannelName();
+        listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ")");
+    }
+//    foreach (ChannelOptions * ch, listChannels) {
+//        listComboChannels.append(ch->GetChannelName());
+//    }
+//    /*
+
+
+    QList<QComboBox*> listCombo;
+    listCombo.append(ui->comboMathArg1);
+    listCombo.append(ui->comboMathArg2);
+    listCombo.append(ui->comboMathArg3);
+    listCombo.append(ui->comboMathArg4);
+    foreach (QComboBox * combo, listCombo) {
+        combo->clear();
+        combo->addItems(listComboChannels);
+    }
+
+
+    for(int k = 0; k < listCombo.size(); k++)
+    {
+        listCombo.at(k)->setCurrentIndex(math->numChannel[k] + 1); ;
+    }
+
+    ui->stackedWidget->setCurrentIndex(32);
+    ui->nameSubMenu->setText("МАТКАНАЛ " + QString::number(num));
+}
+
+void dMenu::on_bAddMath_clicked()
+{
+    cMathChannel * math = new cMathChannel();
+    int size = listMath.size();
+    math->setNum(size+1);
+    math->setName("Math " + QString::number(size+1));
+    listMath.append(math);
+
+    addWidgetMath();
+}
+
+void dMenu::on_bApplayMath_clicked()
+{
+    cMathChannel * math = listMath.at(curMathEdit);
+    math->setName(ui->nameMath->text());
+    math->SetMathEquation(ui->formulaMath->text());
+    QList<QComboBox*> listCombo;
+    listCombo.append(ui->comboMathArg1);
+    listCombo.append(ui->comboMathArg2);
+    listCombo.append(ui->comboMathArg3);
+    listCombo.append(ui->comboMathArg4);
+    for(int i = 0; i < listCombo.size(); i++)
+    {
+        math->numChannel[i] = listCombo.at(i)->currentIndex() - 1;
+    }
+    ui->stackedWidget->setCurrentIndex(20);
+    ui->nameSubMenu->setText("МАТЕМАТИКА");
+    addWidgetMath();
 }

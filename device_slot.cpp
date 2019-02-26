@@ -1,8 +1,9 @@
 #include "device_slot.h"
 
-#define TIME_RESET_ONLINE_SEC   10
+#define TIME_RESET_ONLINE_SEC   7
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   1000
+#define COUNT_STABLE_STATUS     3
 
 int cDevice::countDev = 1;
 
@@ -10,6 +11,8 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
 {
     slot = countDev++;
     online = false;
+    counterStatus = 0;
+    stableOnline = false;
     deviceType = Device_None;
     pauseUpdateParam = false;
     timerResetOnline = new QTimer(this);
@@ -28,6 +31,13 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
 int cDevice::parseDeviceParam(Transaction tr)
 {
     if(tr.slave != slot) return -1;    //ошиблись адресом
+
+    // определение стабильности платы
+    if(online) counterStatus ++;
+    else counterStatus = 0;
+    if(counterStatus > COUNT_STABLE_STATUS) stableOnline = true;
+    else stableOnline = false;
+
     online  = true;     // устройство на связи
     timerResetOnline->start();  // перезапуск таймера сброса Онлайна
     QString nameParam = cRegistersMap::getNameByOffset(tr.offset);
@@ -101,6 +111,14 @@ int cDevice::parseDeviceParam(Transaction tr)
 void cDevice::resetOnline()
 {
     if(pauseUpdateParam) return;
+
+    // определение стабильности платы
+    if(!online) counterStatus ++;
+    else counterStatus = 0;
+    if(counterStatus > COUNT_STABLE_STATUS) stableOnline = true;
+    else stableOnline = false;
+
+
     //если таймер сработал, значит плата давно не отвечала - оффлайн
     online = false;
     Transaction tr(Transaction::R, slot);

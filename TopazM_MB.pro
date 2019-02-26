@@ -95,7 +95,12 @@ SOURCES += main.cpp \
     customperiod.cpp \
     device_slot.cpp \
     expert_access.cpp \
-    ip_controller.cpp
+    ip_controller.cpp \
+    qtcsv-master/sources/contentiterator.cpp \
+    qtcsv-master/sources/reader.cpp \
+    qtcsv-master/sources/stringdata.cpp \
+    qtcsv-master/sources/variantdata.cpp \
+    qtcsv-master/sources/writer.cpp \
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -142,6 +147,8 @@ win32:SOURCES += 3rdparty/qextserialport/win_qextserialport.cpp \
 win32:DEFINES += _TTY_WIN_  WINVER=0x0501
 win32:LIBS += -lsetupapi -lwsock32
 win32:LIBS += -lws2_32
+
+DEFINES += QTCSV_STATIC_LIB
 
 HEADERS  += mainwindow.h \
          qcustomplot.h \
@@ -201,7 +208,16 @@ HEADERS  += mainwindow.h \
     customperiod.h \
     device_slot.h \
     expert_access.h \
-    ip_controller.h
+    ip_controller.h \
+    qtcsv-master/include/qtcsv/abstractdata.h \
+    qtcsv-master/include/qtcsv/qtcsv_global.h \
+    qtcsv-master/include/qtcsv/reader.h \
+    qtcsv-master/include/qtcsv/stringdata.h \
+    qtcsv-master/include/qtcsv/variantdata.h \
+    qtcsv-master/include/qtcsv/writer.h \
+    qtcsv-master/sources/contentiterator.h \
+    qtcsv-master/sources/filechecker.h \
+    qtcsv-master/sources/symbols.h \
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

@@ -36,6 +36,8 @@ public:
     uint8_t uniqueId[12];           // уникальный идентификатор контроллера
     uint16_t root_Access;           // регистр доступа ROOT
     int parseDeviceParam(Transaction tr);
+    bool getStable() { return stableOnline; }
+
 
 signals:
     void updateParam(Transaction tr);
@@ -54,6 +56,8 @@ private:
     QTimer * timerUpdateStatus;     // таймер запросов стауса устройства
     QTimer * timerUpdateConstParam; // таймер обновления параметров, постоянных для текущей платы
     bool pauseUpdateParam;          // пауза обновления параметров
+    bool stableOnline;              // признак стабильного признакак онлайн/оффлайн
+    int counterStatus;              // счётчик статусов для определения стабильности
 };
 
 #endif // CDEVICE_H

@@ -459,6 +459,8 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 
 double ChannelOptions::GetCurrentChannelValue()
 {
+    if(!enable) return NAN;
+
     int regtype = GetRegistrationType();
 
 //        qDebug() << GetChannelName()<< " " << GetRegistrationType() ;

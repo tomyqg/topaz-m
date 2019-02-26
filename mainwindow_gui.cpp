@@ -43,6 +43,7 @@ QList<cRelay*> listRelais;
 typeSteelTech steelTech[NUM_TECHNOLOGIES];
 cSystemOptions systemOptions;  //класс хранения состемных опций
 cIpController * ethernet;
+QList<cMathChannel*> listMath;
 
 
 extern QColor Channel1Color;
@@ -82,17 +83,14 @@ void MainWindow::updateDateLabel()
 
 void MainWindow::on_WorkButton_clicked()
 {
-//    OpenWorkWindow();
-    dMenu * menu = new dMenu();
-//    menu->addChannels(listCh);
+    dMenu * menu = (dMenu*)dialogMenu;
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
-    //сигнал из меню о создании новой суставки
+    //сигнал из меню о создании новой уставки
     connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
     menu->selectPageWork();
     menu->exec();
-    disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
-    disconnect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
-    menu->deleteLater();
+//    cLogger * log = new cLogger(pathtomessages, cLogger::UI);
+    logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();
     setStyleBars();
@@ -150,14 +148,13 @@ void MainWindow::on_ArchiveButton_clicked()
 
 void MainWindow::on_MenuButton_clicked()
 {
-//    OpenOptionsWindow(0);
-
-    dMenu * menu = new dMenu();
-//    menu->addChannels(listCh);
+    dMenu * menu = (dMenu*)dialogMenu;
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    menu->selectPageMain();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
-    menu->deleteLater();
+//    cLogger * log = new cLogger(pathtomessages, cLogger::UI);
+    logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();
     setStyleBars();
@@ -544,7 +541,10 @@ void MainWindow::openSettingsChannel(int num)
     //проверка на наличие такого номера канала
     cGroupChannels * group = listGroup.at(curGroupChannel);
     if(group->typeInput[num-1] != 1) return;
-    ChannelOptions * channel = group->channel[num-1];
+    if(group->channel[num-1] > listChannels.size()) return;
+
+//    ChannelOptions * channel = group->channel[num-1];
+    ChannelOptions * channel = listChannels.at(group->channel[num-1]);
     int index = channel->getNum();
 
     dialogSetingsChannel = new dSettings(listChannels, index);
@@ -612,8 +612,8 @@ void MainWindow::plotMove(QMouseEvent * pe)
 
 void MainWindow::reactOnMousePress()
 {
-    xPos = QCursor::pos().x();
-    yPos = QCursor::pos().y();
+    xPos = ui->customPlot->mapFromGlobal(QCursor::pos()).x();
+    yPos = ui->customPlot->mapFromGlobal(QCursor::pos()).y();
     if(xPos > (ui->customPlot->width() / 10))
     {
         mouseOnMove = true;
@@ -637,7 +637,7 @@ void MainWindow::ReactOnMouseSlide()
 {
     if(mouseOnScalede && !mouseOnMove)
     {
-        int y = QCursor::pos().y();
+        int y = ui->customPlot->mapFromGlobal(QCursor::pos()).y();
         double scale = 1 + (((double)y - (double)yPos) / (double)desktopHeight);
         double pos = ui->customPlot->yAxis->range().center();
         double size = sizePlot * scale * scale ;
@@ -646,7 +646,7 @@ void MainWindow::ReactOnMouseSlide()
     }
     else if(mouseOnMove)
     {
-        int y = QCursor::pos().y();
+        int y = ui->customPlot->mapFromGlobal(QCursor::pos()).y();
         double move = ((double)y - (double)yPos) / (double)ui->customPlot->height();
         double pos = posPlot + move * sizePlot;
         ui->customPlot->yAxis->setRange(pos, sizePlot, Qt::AlignCenter);
@@ -668,6 +668,10 @@ void MainWindow::tickLoadWidget()
     {
         ui->progressBar->setValue(countLoader);
         countLoader++;
+        if(allDeviceStable && (countLoader < 98))
+        {
+            countLoader++;
+        }
     }
     else
     {

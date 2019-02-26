@@ -13,6 +13,8 @@
 //extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
+extern QList<ChannelOptions *> listChannels;
+extern QList<cMathChannel *> listMath;
 
 //void MainWindow::DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize)
 //{
@@ -698,42 +700,66 @@ void MainWindow::PaintPolarDiagramm()
 
     //получение текущих значений в процентах
     cGroupChannels * group = listGroup.at(curGroupChannel);
-    float channel1length = NAN;
-    float channel2length = NAN;
-    float channel3length = NAN;
-    float channel4length = NAN;
-    if(group->typeInput[0] == 1)
+    float channelLenght[MAX_NUM_CHAN_GROUP];
+//    float channel1length = NAN;
+//    float channel2length = NAN;
+//    float channel3length = NAN;
+//    float channel4length = NAN;
+
+    for(int i = 0; i < MAX_NUM_CHAN_GROUP; i ++)
     {
-        channel1length = group->channel[0]->GetValuePercent();
-    }
-    if(group->typeInput[1] == 1)
-    {
-        channel2length = group->channel[1]->GetValuePercent();
-    }
-    if(group->typeInput[2] == 1)
-    {
-        channel3length = group->channel[2]->GetValuePercent();
-    }
-    if(group->typeInput[3] == 1)
-    {
-        channel4length = group->channel[3]->GetValuePercent();
+        if(group->typeInput[i] == 1)
+        {
+            channelLenght[i] = listChannels.at(group->channel[i])->GetValuePercent();
+        }
+        else if(group->typeInput[i] == 2)
+        {
+            channelLenght[i] = listMath.at(group->mathChannel[i])->GetValuePercent();
+        }
+        else
+        {
+            channelLenght[i] = NAN;
+        }
+        //корректировка данных для диаграммы
+        if(channelLenght[i] < 0) channelLenght[i] = 0;
+        if(channelLenght[i] > 100) channelLenght[i] = 100;
+
+        //перевод процентов в координатную размерность
+        channelLenght[i] = channelLenght[i] * diagramSize / 100;
     }
 
-    //корректировка данных для диаграммы
-    if(channel1length < 0) channel1length = 0;
-    if(channel2length < 0) channel2length = 0;
-    if(channel3length < 0) channel3length = 0;
-    if(channel4length < 0) channel4length = 0;
-    if(channel1length > 100) channel1length = 100;
-    if(channel2length > 100) channel2length = 100;
-    if(channel3length > 100) channel3length = 100;
-    if(channel4length > 100) channel4length = 100;
+//    if(group->typeInput[0] == 1)
+//    {
+//        channel1length = listChannels.at(group->channel[0])->GetValuePercent();
+//    }
+//    if(group->typeInput[1] == 1)
+//    {
+//        channel2length = listChannels.at(group->channel[1])->GetValuePercent();
+//    }
+//    if(group->typeInput[2] == 1)
+//    {
+//        channel3length = listChannels.at(group->channel[2])->GetValuePercent();
+//    }
+//    if(group->typeInput[3] == 1)
+//    {
+//        channel4length = listChannels.at(group->channel[3])->GetValuePercent();
+//    }
 
-    //перевод процентов в координатную размерность
-    channel1length = channel1length * diagramSize / 100;
-    channel2length = channel2length * diagramSize / 100;
-    channel3length = channel3length * diagramSize / 100;
-    channel4length = channel4length * diagramSize / 100;
+//    //корректировка данных для диаграммы
+//    if(channel1length < 0) channel1length = 0;
+//    if(channel2length < 0) channel2length = 0;
+//    if(channel3length < 0) channel3length = 0;
+//    if(channel4length < 0) channel4length = 0;
+//    if(channel1length > 100) channel1length = 100;
+//    if(channel2length > 100) channel2length = 100;
+//    if(channel3length > 100) channel3length = 100;
+//    if(channel4length > 100) channel4length = 100;
+
+//    //перевод процентов в координатную размерность
+//    channel1length = channel1length * diagramSize / 100;
+//    channel2length = channel2length * diagramSize / 100;
+//    channel3length = channel3length * diagramSize / 100;
+//    channel4length = channel4length * diagramSize / 100;
 
     QColor color1,color2,color3,color4;
 
@@ -820,7 +846,7 @@ void MainWindow::PaintPolarDiagramm()
     /* Set the origin: */
     Channel1Line.setP1(QPointF(centerx1, centery1));
     Channel1Line.setAngle(channel1value);
-    Channel1Line.setLength(channel1length);
+    Channel1Line.setLength(channelLenght[0]);
     
     int x1 = Channel1Line.x2(); // мы берем координаты `1 точки
     int y1 = Channel1Line.y2(); // мы берем координаты второй точки
@@ -831,7 +857,7 @@ void MainWindow::PaintPolarDiagramm()
     /* Set the origin: */
     Channel2Line.setP1(QPointF(centerx2, centery2));
     Channel2Line.setAngle(channel2value);
-    Channel2Line.setLength(channel2length);
+    Channel2Line.setLength(channelLenght[1]);
     
     int x2 = Channel2Line.x2(); // мы берем координаты `1 точки
     int y2 = Channel2Line.y2(); // мы берем координаты второй точки
@@ -842,7 +868,7 @@ void MainWindow::PaintPolarDiagramm()
     /* Set the origin: */
     Channel3Line.setP1(QPointF(centerx3, centery3));
     Channel3Line.setAngle(channel3value);
-    Channel3Line.setLength(channel3length);
+    Channel3Line.setLength(channelLenght[2]);
     int x3 = Channel3Line.x2(); // мы берем координаты `1 точки
     int y3 = Channel3Line.y2(); // мы берем координаты второй точки
     
@@ -852,7 +878,7 @@ void MainWindow::PaintPolarDiagramm()
     /* Set the origin: */
     Channel4Line.setP1(QPointF(centerx4, centery4) );
     Channel4Line.setAngle(channel4value);
-    Channel4Line.setLength(channel4length);
+    Channel4Line.setLength(channelLenght[3]);
     
     int x4 = Channel4Line.x2(); // мы берем координаты `1 точки
     int y4 = Channel4Line.y2(); // мы берем координаты второй точки
@@ -979,72 +1005,72 @@ void MainWindow::PaintOnWidget()
     }
 }
 
-void MainWindow::ReactOnTouch()
-{
-    //пока просто возвращаем
+//void MainWindow::ReactOnTouch()
+//{
+//    //пока просто возвращаем
 
-    return;
-    // подкрашиваем квадраты куда коснулись в желтый цвет
-    // отступ  сверху и слева в пикселях
-    // высчитываются
+//    return;
+//    // подкрашиваем квадраты куда коснулись в желтый цвет
+//    // отступ  сверху и слева в пикселях
+//    // высчитываются
     
-    int xcenter  = 652;// общая точка четырех квадратов по иксу в пикселях
-    int ycenter  = 384; // ширина всей области построения в пикселях
+//    int xcenter  = 652;// общая точка четырех квадратов по иксу в пикселях
+//    int ycenter  = 384; // ширина всей области построения в пикселях
     
-    int xpos = QCursor::pos().x();
-    int ypos = QCursor::pos().y();
+//    int xpos = QCursor::pos().x();
+//    int ypos = QCursor::pos().y();
     
-    QString x = QString::number(xpos);
-    QString y = QString::number(ypos);
+//    QString x = QString::number(xpos);
+//    QString y = QString::number(ypos);
 
-    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
-    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
-    int confirmwindowwidth = widgwidth/4;
-    int confirmwindowheight  = widgheight/4;
-    int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
-    int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
-    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
-    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
+//    int widgwidth  = ui->MessagesWidget->width();// высота всей области построения в пикселях
+//    int widgheight  = ui->MessagesWidget->height(); // ширина всей области построения в пикселях
+//    int confirmwindowwidth = widgwidth/4;
+//    int confirmwindowheight  = widgheight/4;
+//    int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
+//    int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
+//    int confirmwindowposx2 = confirmwindowposx  +  confirmwindowwidth;
+//    int confirmwindowposy2 = confirmwindowposy + confirmwindowheight ;
 
-    if      ((xpos>confirmwindowposx) &&
-             (xpos<confirmwindowposx2) &&
-             (ypos>confirmwindowposy) &&
-             (ypos<confirmwindowposy2) )
-    {
-//        if (channel4.GetConfirmationNeed() == true) {
-//            channel4.SetConfirmationNeed(false);
-//        }
-//        if (channel3.GetConfirmationNeed() == true) {
-//            channel3.SetConfirmationNeed(false);
-//        }
-//        if (channel2.GetConfirmationNeed() == true) {
-//            channel2.SetConfirmationNeed(false);
-//        }
-//        if (channel1.GetConfirmationNeed() == true) {
-//            channel1.SetConfirmationNeed(false);
-//        }
-    }
+//    if      ((xpos>confirmwindowposx) &&
+//             (xpos<confirmwindowposx2) &&
+//             (ypos>confirmwindowposy) &&
+//             (ypos<confirmwindowposy2) )
+//    {
+////        if (channel4.GetConfirmationNeed() == true) {
+////            channel4.SetConfirmationNeed(false);
+////        }
+////        if (channel3.GetConfirmationNeed() == true) {
+////            channel3.SetConfirmationNeed(false);
+////        }
+////        if (channel2.GetConfirmationNeed() == true) {
+////            channel2.SetConfirmationNeed(false);
+////        }
+////        if (channel1.GetConfirmationNeed() == true) {
+////            channel1.SetConfirmationNeed(false);
+////        }
+//    }
     
-    int x1right  = 940;
-    int x2right  = 1240;
-    int y0right  = 162;
-    int y1right  = 258;
+//    int x1right  = 940;
+//    int x2right  = 1240;
+//    int y0right  = 162;
+//    int y1right  = 258;
     
-    if      ((xpos>x1right) &&
-             (xpos<x2right) &&
-             (ypos>y0right) &&
-             (ypos<y1right) )
-    {
-        {
-            QPainter painter;
-            painter.begin(ui->MessagesWidget);
-            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
-            int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
-            int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
-            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
-            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
-            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,"Allelua");
-            painter.end();
-        }
-    }
-}
+//    if      ((xpos>x1right) &&
+//             (xpos<x2right) &&
+//             (ypos>y0right) &&
+//             (ypos<y1right) )
+//    {
+//        {
+//            QPainter painter;
+//            painter.begin(ui->MessagesWidget);
+//            painter.setPen(QPen(Qt::black, 2)); //, Qt::DashDotLine, Qt::RoundCap));
+//            int confirmwindowposx = (widgwidth -  confirmwindowwidth)/2;
+//            int confirmwindowposy = (widgheight -  confirmwindowheight)/2;
+//            painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+//            painter.drawRect(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight);
+//            painter.drawText(confirmwindowposx, confirmwindowposy, confirmwindowwidth, confirmwindowheight, Qt::AlignHCenter | Qt::AlignVCenter,"Allelua");
+//            painter.end();
+//        }
+//    }
+//}

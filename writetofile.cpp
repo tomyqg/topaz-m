@@ -18,6 +18,8 @@ extern QList<cGroupChannels*> listGroup;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
+extern QList<cMathChannel *> listMath;
+extern QList<ChannelOptions*> listChannels;
 
 void MainWindow::WriteGpio(int num, bool val)
 {
@@ -283,6 +285,8 @@ void MainWindow::WriteAllChannelsOptionsToFile()
 // пишет архив в файл каждые (ArchiveUpdateTimer) сек...
 void MainWindow::WriteArchiveToFile()
 {
+
+
     // и начинаем архивацию
     QJsonObject archivechannel1;
     QJsonObject archivechannel2;
@@ -311,19 +315,19 @@ void MainWindow::WriteArchiveToFile()
     QString channel4period = "";
     if(g->typeInput[0] == 1)
     {
-        channel1period = QString::number(g->channel[0]->GetMeasurePeriod(), 'f', 1);
+        channel1period = QString::number(listChannels.at(g->channel[0])->GetMeasurePeriod(), 'f', 1);
     }
     if(g->typeInput[1] == 1)
     {
-        channel2period = QString::number(g->channel[1]->GetMeasurePeriod(), 'f', 1);
+        channel2period = QString::number(listChannels.at(g->channel[1])->GetMeasurePeriod(), 'f', 1);
     }
     if(g->typeInput[2] == 1)
     {
-        channel3period = QString::number(g->channel[2]->GetMeasurePeriod(), 'f', 1);
+        channel3period = QString::number(listChannels.at(g->channel[2])->GetMeasurePeriod(), 'f', 1);
     }
     if(g->typeInput[3] == 1)
     {
-        channel4period = QString::number(g->channel[3]->GetMeasurePeriod(), 'f', 1);
+        channel4period = QString::number(listChannels.at(g->channel[3])->GetMeasurePeriod(), 'f', 1);
     }
 
     archivechannel1["size"] = valuesarray1.size();

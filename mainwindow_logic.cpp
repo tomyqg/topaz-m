@@ -45,6 +45,7 @@
 #include <QPoint>
 #include <QMetaType>
 #include "defines.h"
+#include <QDebug>
 
 //#include <QKeyEvent>
 
@@ -71,6 +72,7 @@ void MainWindow::MainWindowInitialization()
     //qRegisterMetaType<Transaction>("Transaction");
     // подготовка окна загрузки программы
     countLoader = 0;
+    allDeviceStable = false;
     plotReady = false;
     ui->right->hide();
     ui->left->hide();
@@ -87,9 +89,12 @@ void MainWindow::MainWindowInitialization()
     ui->frameSteel->setMaximumWidth(0);
     ui->frameSteel->hide();
     connect(&timerLoad, SIGNAL(timeout()), this, SLOT(tickLoadWidget()));
-    timerLoad.start(80);
+    timerLoad.start(100);
     QPixmap pixLoad(pathtologotip);
     ui->logoOnLoad->setPixmap(pixLoad);
+
+
+
 
 
     // Инициализация потока Worker ---------------------
@@ -206,9 +211,10 @@ void MainWindow::MainWindowInitialization()
     connect( displayrefreshtimer, SIGNAL(timeout()), this, SLOT(RefreshScreen()));
     RefreshScreen();
 
-    QTimer *tmrarchive = new QTimer(this);
-    connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
-    tmrarchive->start(ArchiveUpdateTimer);
+    //Vag: Временно(или совсем) исключаем архивацию в JSON формате
+//    QTimer *tmrarchive = new QTimer(this);
+//    connect(tmrarchive, SIGNAL(timeout()), this, SLOT(WriteArchiveToFile()));
+//    tmrarchive->start(ArchiveUpdateTimer);
 
     tmr = new QTimer();
     connect(tmr, SIGNAL(timeout()), this, SLOT(AddValuesToBuffer()));
@@ -240,14 +246,12 @@ void MainWindow::MainWindowInitialization()
     // добавление 1 группы (обязательной)
     cGroupChannels * group = new cGroupChannels();
     group->groupName = "Group 1";
-    group->channel[0] = listChannels.at(0);
-    group->typeInput[0] = 1;
-    group->channel[1] = listChannels.at(1);
-    group->typeInput[1] = 1;
-    group->channel[2] = listChannels.at(2);
-    group->typeInput[2] = 1;
-    group->channel[3] = listChannels.at(3);
-    group->typeInput[3] = 1;
+//    group->channel[0] = listChannels.at(0);
+//    group->typeInput[0] = 1;
+//    group->channel[1] = listChannels.at(1);
+//    group->typeInput[1] = 1;
+//    group->channel[2] = listChannels.at(2);
+//    group->typeInput[2] = 1;
 //    group->channel[3] = listChannels.at(3);
 //    group->typeInput[3] = 1;
     group->enabled = true;
@@ -354,8 +358,13 @@ void MainWindow::MainWindowInitialization()
 
     flash = new cUsbFlash(this);
 
+    dMenu * menu = new dMenu();
+    dialogMenu = (QDialog*)menu;
+    connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+    //сигнал из меню о создании новой уставки
+    connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
 
-
+    qDebug() << "MainWindow is init";
 }
 
 static QString descriptiveDataTypeName( int funcCode )
@@ -780,7 +789,11 @@ void MainWindow::updateDevicesComplect()
     QList<uint8_t> list4AI;
     QList<uint8_t> list8RP;
     QList<uint8_t> listSTEEL;
+    int countStableDevice = 0;
     foreach (cDevice * device, listDevice) {
+
+        if(device->getStable()) countStableDevice++;
+
         if(device->getOnline()){
             switch(device->deviceType)
             {
@@ -814,6 +827,11 @@ void MainWindow::updateDevicesComplect()
             }
         }
     }
+
+    // все ли модули определились онлайн/оффлайн ?
+    if(countStableDevice == listDevice.size()) allDeviceStable = true;
+
+
     // обновление списка каналов
     int i = 0;
     foreach (uint8_t slot, list4AI) {
@@ -1182,7 +1200,10 @@ void MainWindow::parseWorkerReceive()
             ch = 0;
             int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
             if(index != -1)
+            {
                 channel = listChannels.at(index);
+                channel->parserChannel(tr);
+            }
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_2) && (tr.offset < BASE_OFFSET_CHANNEL_3))
             // канал 2
@@ -1190,7 +1211,10 @@ void MainWindow::parseWorkerReceive()
             ch = 1;
             int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
             if(index != -1)
+            {
                 channel = listChannels.at(index);
+                channel->parserChannel(tr);
+            }
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_3) && (tr.offset < BASE_OFFSET_CHANNEL_4))
             // канал 3
@@ -1198,7 +1222,10 @@ void MainWindow::parseWorkerReceive()
             ch = 2;
             int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
             if(index != -1)
+            {
                 channel = listChannels.at(index);
+                channel->parserChannel(tr);
+            }
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_4) && (tr.offset < (BASE_OFFSET_CHANNEL_4 + 128)))
             // канал 4
@@ -1206,7 +1233,10 @@ void MainWindow::parseWorkerReceive()
             ch = 3;
             int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
             if(index != -1)
+            {
                 channel = listChannels.at(index);
+                channel->parserChannel(tr);
+            }
         }
 
         if(!isDeviceParam)
@@ -1214,7 +1244,7 @@ void MainWindow::parseWorkerReceive()
             if(device->deviceType == Device_4AI)
             {
                 //Это ответ от платы 4AI, значит читаем параметры канала
-                channel->parserChannel(tr);
+//                channel->parserChannel(tr);
             }
 //            emit retransToSlotConfig(tr);
             if(paramName == QString("chan" + QString::number(ch) + "SignalType"))

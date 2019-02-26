@@ -15,8 +15,10 @@ public:
     int index;
     bool enabled;      //состояние группы: 0 - выкл, 1 - вкл.
     QString groupName;      //название группы
-    ChannelOptions * channel[MAX_NUM_CHAN_GROUP];
-    cMathChannel * mathChannel[MAX_NUM_CHAN_GROUP];
+//    ChannelOptions * channel[MAX_NUM_CHAN_GROUP];
+    int channel[MAX_NUM_CHAN_GROUP];
+//    cMathChannel * mathChannel[MAX_NUM_CHAN_GROUP];
+    int mathChannel[MAX_NUM_CHAN_GROUP];
     int typeInput[MAX_NUM_CHAN_GROUP];            //тип входа: 0 - не назначен
                                                 //1 - AI, 2 - MI, 3 - DI
     int numChannel;    //номер канала в системе для идентификации при включении

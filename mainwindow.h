@@ -59,6 +59,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QDialog * dialogMenu;
+//    dMenu * menu;
+
     void ShowMessageBox (QString title,QString message);
     void resizeWindow(QWidget & qw, qreal mratio);
     void resizeWindow(QObject & qobj, qreal xresolution, qreal yresolution);
@@ -194,6 +197,8 @@ signals:
 private:
     Ui::MainWindow *ui;
 
+//    dMenu * menu;
+
     QTimer timerLoad;
     int countLoader;
 
@@ -222,7 +227,7 @@ private:
     void InitTimers();
     void InitTouchScreen();
     void PaintOnWidget();
-    void ReactOnTouch();
+//    void ReactOnTouch();
     void PaintCyfrasBottom();
     void PaintCyfrasRight();
     void PaintCyfrasNew();
@@ -363,6 +368,7 @@ private:
     void InitSteelSlotTable();
     bool slotSteelOnline;       //признак наличия платы STEEL в слоте
     bool slotAnalogOnline;       //признак наличия платы 4AI
+    bool allDeviceStable;       // признак установившего статуса плат онлайн/оффлайн
     bool steelMeasure;          //признак начала измерения температуры
     bool steelReady;            //признак готовности данных по площадке
     int stateWidgetSteel;       //состояние главного экрана виджетов по стали
@@ -390,6 +396,9 @@ private:
     void reactOnMousePress();
     void reactOnMouseRelease();
     void ReactOnMouseSlide();
+
+
+
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

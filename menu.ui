@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>30</number>
+            <number>22</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -4250,7 +4250,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>ЗАПИСАТЬ</string>
+                   <string>ЭКСПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -4351,7 +4351,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>ЗАПИСАТЬ</string>
+                   <string>ЭКСПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -4386,7 +4386,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>СЧИТАТЬ</string>
+                   <string>ИМПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -4415,7 +4415,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>ЗАПИСАТЬ</string>
+                   <string>ЭКСПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -4444,7 +4444,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>ЗАПИСАТЬ</string>
+                   <string>ЭКСПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -4479,7 +4479,7 @@ background-color: #2c3d4d;
 border: 0px solid rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="text">
-                   <string>СЧИТАТЬ</string>
+                   <string>ИМПОРТ</string>
                   </property>
                  </widget>
                 </item>
@@ -9300,6 +9300,669 @@ border-radius: 0px;</string>
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="pageMathSetting">
+            <layout class="QGridLayout" name="gridLayout_24" columnstretch="10,10,0">
+             <property name="leftMargin">
+              <number>29</number>
+             </property>
+             <property name="topMargin">
+              <number>30</number>
+             </property>
+             <property name="rightMargin">
+              <number>53</number>
+             </property>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_35">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QComboBox" name="comboMathArg1">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>ОТКЛЮЧЕН</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 4</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QComboBox" name="comboMathArg2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+	background-color: #6666ff;
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>ОТКЛЮЧЕН</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 4</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X2</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QComboBox" name="comboMathArg3">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+	background-color: rgb(232, 76, 61);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>ОТКЛЮЧЕН</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 4</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_32">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X3</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="1">
+              <widget class="wButtonStyled" name="bDelMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>УДАЛИТЬ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QComboBox" name="comboMathArg4">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {	
+	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>ОТКЛЮЧЕН</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>АНАЛОГОВЫЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МАТЕМАТИЧЕСКИЙ ВЫХОД 4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ДИСКРЕТНЫЙ ВХОД 4</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_33">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X4</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="nameMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+               </property>
+               <property name="text">
+                <string>Math 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="20" column="0" colspan="3">
+              <spacer name="verticalSpacer_27">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>740</width>
+                 <height>49</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="21" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackMathSetting">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_36">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ИДЕНТИФИКАТОР</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="1">
+              <widget class="QLineEdit" name="formulaMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+               </property>
+               <property name="text">
+                <string>X1*X2+X3-X4</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="0">
+              <widget class="QLabel" name="label_37">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ФОРМУЛА</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="0">
+              <widget class="wButtonStyled" name="bApplayMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ПРИМЕНИТЬ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="18" column="0" colspan="3">
+              <spacer name="verticalSpacer_25">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>740</width>
+                 <height>56</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -9663,9 +10326,6 @@ color: rgb(14, 210, 226);</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <zorder>shadowModeAccess</zorder>
-        <zorder>modeAccess</zorder>
-        <zorder>verticalSpacer</zorder>
        </widget>
       </item>
       <item>

@@ -245,14 +245,48 @@ void cArchivator::load(int per, int shift)
     connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
     connect(threadReadFile, SIGNAL(finished()), threadReadFile, SLOT(deleteLater()));
     connect(worker, SIGNAL(newTick(sTickCh)), this, SLOT(addLoadTickFromFile(sTickCh)), Qt::DirectConnection);
+    connect(worker, SIGNAL(sendVectorsTicks(QVector<sTickCh>)), \
+            this, SLOT(slotVectorTicks(QVector<sTickCh>)), Qt::DirectConnection);
     threadReadFile->start(QThread::LowestPriority);
     //запомнить время запроса архива
     askTime = QDateTime::currentDateTime();
 }
 
+void cArchivator::slotVectorTicks(QVector<sTickCh> ticks)
+{
+    qDebug() << "slotVectorTicks, ticks.size() = " << ticks.size();
+    arrTicks = ticks;
+}
+
 QVector<double> cArchivator::getVector(int ch)
 {
     assert(ch<TOTAL_NUM_CHANNELS);//запрашиваемый канал не превышает максимальный по счёту
+
+//    int lastIndexBig = 0;   // предыдущий индекс большого периода
+//    QVector<double> ret(period, NAN);
+//    //возврат пустого вектора, если канал задан неверно
+//    if(ch >= TOTAL_NUM_CHANNELS) return ret;
+//    QDateTime firstTime = askTime.addSecs(-period);
+
+//    foreach(sTickCh tick, arrTicks)
+//    {
+//        QDateTime timeArch(time2000.addSecs(tick.time));
+//        //индекс точки в массиве (в секундах)
+//        int vectorIndex = firstTime.secsTo(timeArch);
+//        //индекс точки для графика с большим периодом
+//        int vectorIndexBigPeriod = vectorIndex;
+//        //если индекс не вышел за пределы периода
+//        if((vectorIndexBigPeriod >= 0) && (vectorIndexBigPeriod < (period)))
+//        {
+//            //если индекс следующий
+//            if(vectorIndexBigPeriod > lastIndexBig)
+//            {
+//                //получается, что обновляет выходной массив сразу при переходе на новый индекс
+//                ret.replace(lastIndexBig, tick.channel[ch]);
+//                lastIndexBig = vectorIndexBigPeriod;
+//            }
+//        }
+//    }
 
     // период усреднения
     int numAvg = 1;

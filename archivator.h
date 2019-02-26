@@ -43,6 +43,7 @@ private slots:
     void addTick10Min();
     void addLoadTickFromFile(sTickCh tick);
     void endLoad();
+    void slotVectorTicks(QVector<sTickCh> ticks);
 
 private:
     QString fileName_l;

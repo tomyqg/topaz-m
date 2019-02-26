@@ -13,6 +13,7 @@ class mathresolver : public QObject
 public:
     mathresolver();
     static double SolveEquation(QString eqstring, double x);
+    static double SolveEquation(QString eqstring, double x1, double x2, double x3, double x4);
     static double SolveEquation(QString eqstring);
 
     template< typename T >

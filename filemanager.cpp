@@ -313,25 +313,31 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     foreach (cGroupChannels * group, listGroup) {
         groupsjsonobj["Enabled"] = group->enabled;
         groupsjsonobj["Name"] = group->groupName;
-        groupsjsonobj["Channel1"] = -1;
-        groupsjsonobj["Channel2"] = -1;
-        groupsjsonobj["Channel3"] = -1;
-        groupsjsonobj["Channel4"] = -1;
-        groupsjsonobj["Math1"] = -1;
-        groupsjsonobj["Math2"] = -1;
-        groupsjsonobj["Math3"] = -1;
-        groupsjsonobj["Math4"] = -1;
-        for(int i = 0; i < listChannels.size(); i++)
-        {
-            if(group->channel[0] == listChannels.at(i))
-                groupsjsonobj["Channel1"] = i;
-            if(group->channel[1] == listChannels.at(i))
-                groupsjsonobj["Channel2"] = i;
-            if(group->channel[2] == listChannels.at(i))
-                groupsjsonobj["Channel3"] = i;
-            if(group->channel[3] == listChannels.at(i))
-                groupsjsonobj["Channel4"] = i;
-        }
+//        groupsjsonobj["Channel1"] = -1;
+//        groupsjsonobj["Channel2"] = -1;
+//        groupsjsonobj["Channel3"] = -1;
+//        groupsjsonobj["Channel4"] = -1;
+        groupsjsonobj["Channel1"] = group->channel[0];
+        groupsjsonobj["Channel2"] = group->channel[1];
+        groupsjsonobj["Channel3"] = group->channel[2];
+        groupsjsonobj["Channel4"] = group->channel[3];
+
+        groupsjsonobj["Math1"] = group->mathChannel[0];
+        groupsjsonobj["Math2"] = group->mathChannel[1];
+        groupsjsonobj["Math3"] = group->mathChannel[2];
+        groupsjsonobj["Math4"] = group->mathChannel[3];
+//        for(int i = 0; i < listChannels.size(); i++)
+//        {
+//            if(group->channel[0] == listChannels.at(i))
+//                groupsjsonobj["Channel1"] = i;
+//            if(group->channel[1] == listChannels.at(i))
+//                groupsjsonobj["Channel2"] = i;
+//            if(group->channel[2] == listChannels.at(i))
+//                groupsjsonobj["Channel3"] = i;
+//            if(group->channel[3] == listChannels.at(i))
+//                groupsjsonobj["Channel4"] = i;
+//        }
+
 //        for(int i = 0; i < listMath.size(); i++)
 //        {
 //            if(group->mathChannel[0] == listMath.at(i))
@@ -422,43 +428,52 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
             group->typeInput[1] = jsonobj.value("Type2").toInt();
             group->typeInput[2] = jsonobj.value("Type3").toInt();
             group->typeInput[3] = jsonobj.value("Type4").toInt();
-            int numChannel[MAX_NUM_CHAN_GROUP];
-            int numMath[MAX_NUM_CHAN_GROUP];
-            numChannel[0] = jsonobj.value("Channel1").toInt();
-            numChannel[1] = jsonobj.value("Channel2").toInt();
-            numChannel[2] = jsonobj.value("Channel3").toInt();
-            numChannel[3] = jsonobj.value("Channel4").toInt();
-            numMath[0] = jsonobj.value("Math1").toInt();
-            numMath[1] = jsonobj.value("Math2").toInt();
-            numMath[2] = jsonobj.value("Math3").toInt();
-            numMath[3] = jsonobj.value("Math4").toInt();
-            for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
-            {
-                if((group->typeInput[i] == 1) && (numChannel[i] != -1))
-                {
-                    if(sizeCh > numChannel[i])
-                    {
-                        group->channel[i] = listChannels.at(numChannel[i]);
-//                        if(!group->channel[i]->enable)
-//                        {
-//                            group->typeInput[i] == 0;
-//                        }
-                    }
-                    else
-                    {
-                        //такое не может быть, но перестраховаться надо
-                        group->channel[i] = nullptr;
-                        group->typeInput[i] = 0;
-                    }
-                }
-                //                if((group->typeInput[i] == 2) && (numMath[i] != -1))
-                //                {
-                //                    if(sizeMath > numMath[i])
-                //                    {
-                //                        group->mathChannel[i] = listMath.at(numMath[i]);
-                //                    }
-                //                }
-            }
+            group->channel[0] = jsonobj.value("Channel1").toInt();
+            group->channel[1] = jsonobj.value("Channel2").toInt();
+            group->channel[2] = jsonobj.value("Channel3").toInt();
+            group->channel[3] = jsonobj.value("Channel4").toInt();
+            group->mathChannel[0] = jsonobj.value("Math1").toInt();
+            group->mathChannel[1] = jsonobj.value("Math2").toInt();
+            group->mathChannel[2] = jsonobj.value("Math3").toInt();
+            group->mathChannel[3] = jsonobj.value("Math4").toInt();
+
+//            int numChannel[MAX_NUM_CHAN_GROUP];
+//            int numMath[MAX_NUM_CHAN_GROUP];
+//            numChannel[0] = jsonobj.value("Channel1").toInt();
+//            numChannel[1] = jsonobj.value("Channel2").toInt();
+//            numChannel[2] = jsonobj.value("Channel3").toInt();
+//            numChannel[3] = jsonobj.value("Channel4").toInt();
+//            numMath[0] = jsonobj.value("Math1").toInt();
+//            numMath[1] = jsonobj.value("Math2").toInt();
+//            numMath[2] = jsonobj.value("Math3").toInt();
+//            numMath[3] = jsonobj.value("Math4").toInt();
+//            for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
+//            {
+//                if((group->typeInput[i] == 1) && (numChannel[i] != -1))
+//                {
+//                    if(sizeCh > numChannel[i])
+//                    {
+//                        group->channel[i] = listChannels.at(numChannel[i]);
+////                        if(!group->channel[i]->enable)
+////                        {
+////                            group->typeInput[i] == 0;
+////                        }
+//                    }
+//                    else
+//                    {
+//                        //такое не может быть, но перестраховаться надо
+//                        group->channel[i] = nullptr;
+//                        group->typeInput[i] = 0;
+//                    }
+//                }
+//                //                if((group->typeInput[i] == 2) && (numMath[i] != -1))
+//                //                {
+//                //                    if(sizeMath > numMath[i])
+//                //                    {
+//                //                        group->mathChannel[i] = listMath.at(numMath[i]);
+//                //                    }
+//                //                }
+//            }
 //            if((group->typeInput[0] == 0) &&  (group->typeInput[1] == 0) && \
 //                    (group->typeInput[2] == 0) &&  (group->typeInput[3] == 0))
 //            {

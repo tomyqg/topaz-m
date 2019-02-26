@@ -30,6 +30,27 @@ double mathresolver::SolveEquation(QString eqstring, double x)
     return Result;
 }
 
+double mathresolver::SolveEquation(QString eqstring, double x1, double x2, double x3, double x4)
+{
+    QString replaced=eqstring;
+    replaced.replace(QString("sin"), QString("Math.sin"));
+    replaced.replace(QString("cos"), QString("Math.cos"));
+    replaced.replace(QString("sqrt"), QString("Math.sqrt"));
+    replaced.replace(QString("pow"), QString("Math.pow"));
+    replaced.replace(QString("abs"), QString("Math.abs"));
+    replaced.replace(QString("x1"), QString::number(x1));
+    replaced.replace(QString("x2"), QString::number(x2));
+    replaced.replace(QString("x3"), QString::number(x3));
+    replaced.replace(QString("x4"), QString::number(x4));
+#ifndef Q_OS_WIN32
+    QScriptEngine myEngine;
+#else
+    QJSEngine myEngine;
+#endif
+    double Result = myEngine.evaluate(replaced).toNumber();
+    return Result;
+}
+
 double mathresolver::SolveEquation(QString eqstring)
 {
     /*QScriptEngine myEngine;

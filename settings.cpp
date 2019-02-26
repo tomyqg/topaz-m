@@ -704,7 +704,7 @@ void dSettings::resizeEvent(QResizeEvent * s)
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
 #ifndef Q_OS_WIN
-#endif
+//#endif
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
          (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
@@ -722,7 +722,7 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
-//#endif
+#endif
 
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (QString::fromLatin1(watched->metaObject()->className()) == "QComboBox"))
@@ -979,8 +979,8 @@ void dSettings::plotMove(QMouseEvent * pe)
 
 void dSettings::reactOnMousePress()
 {
-    xPos = QCursor::pos().x();
-    yPos = QCursor::pos().y();
+    xPos = ui->customPlot->mapFromGlobal(QCursor::pos()).x();
+    yPos = ui->customPlot->mapFromGlobal(QCursor::pos()).y();
     int width = ui->customPlot->width();
     int height = ui->customPlot->height();
     if((xPos > (width / 10)) && (yPos < (height * 0.9)))
@@ -1015,7 +1015,7 @@ void dSettings::ReactOnMouseSlide()
 {
     if(mouseOnScalede && !mouseOnMove)
     {
-        int y = QCursor::pos().y();
+        int y = ui->customPlot->mapFromGlobal(QCursor::pos()).y();;
         double scale = 1 + (((double)y - (double)yPos) / 2000);
         double pos = ui->customPlot->yAxis->range().center();
         double size = sizePlot * scale * scale ;
@@ -1024,7 +1024,7 @@ void dSettings::ReactOnMouseSlide()
     }
     else if(mouseOnScaledeX && !mouseOnMove)
     {
-        int x = QCursor::pos().x();
+        int x = ui->customPlot->mapFromGlobal(QCursor::pos()).x();;
         double scale = 1 + (((double)xPos - (double)x) / 2000);
         double pos = ui->customPlot->xAxis->range().center();
         double size = sizePlotX * scale * scale ;
@@ -1033,8 +1033,8 @@ void dSettings::ReactOnMouseSlide()
     }
     else if(mouseOnMove)
     {
-        int y = QCursor::pos().y();
-        int x = QCursor::pos().x();
+        int y = ui->customPlot->mapFromGlobal(QCursor::pos()).y();
+        int x = ui->customPlot->mapFromGlobal(QCursor::pos()).x();
         double move = ((double)y - (double)yPos) / (double)ui->customPlot->height();
         double moveX = ((double)xPos - (double)x) / (double)ui->customPlot->width();
         double pos = posPlot + move * sizePlot;

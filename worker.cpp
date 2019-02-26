@@ -456,8 +456,12 @@ void worker::run()
                 mQueue.unlock();
             }
         }
-
-        this->thread()->usleep(100);   //Vag: привязать время задержки к скорости порта
+        // время тишины линии Modbus
+        //                  в мск     бит  норма    скорость порта
+        int timeSleepMcs = (1000000 * 11 * 3.5)  /  comportbaud;
+        // минимум 1,75 мс
+        if(timeSleepMcs < 1750) timeSleepMcs = 1750000;
+        this->thread()->usleep(timeSleepMcs);
     }
 }
 

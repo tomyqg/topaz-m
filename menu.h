@@ -28,6 +28,7 @@ public:
     void selectPageWork();
     bool eventFilter(QObject* watched, QEvent* event);
 
+    void selectPageMain();
 public slots:
     void openSettingsChannel(int num, int page = 0);
     void on_exitButton_clicked();
@@ -90,6 +91,7 @@ private:
     void addWidgetMeasures();
     void addWidgetModeling();
     int curGroupEdit;       //текущая редактируемая группа каналов
+    int curMathEdit;       //текущий редактируемый матканал
     int light;
     int curDiagnostDevice;
     int curRelay;
@@ -102,6 +104,8 @@ private:
     QList<QWidget *> listWidgetsExpert;
     QList<QWidget *> listWidgetsAdmin;
 
+    void makeCsvFileArchive(QString src, QString csv, QString dest);
+    void addWidgetMath();
 private slots:
     void updateDevicesUI();
     void updateDeviceInfo(uint8_t index);
@@ -218,6 +222,15 @@ private slots:
     void on_bDigitalOutputs_clicked();
 
     void on_bDigitOutputSettingsApply_clicked();
+
+    void on_bAddMath_clicked();
+
+    void slotOpenMathChannel(int num);
+    void on_bBackMathSetting_clicked();
+
+    void on_bDelMath_clicked();
+
+    void on_bApplayMath_clicked();
 
 signals:
     void saveButtonSignal();

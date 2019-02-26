@@ -43,6 +43,13 @@ bool cExpertAccess::accessRequest(QString pass)
 
 }
 
+void cExpertAccess::resetAccess()
+{
+    mode = ACCESS_USER;
+}
+
+
+
 /** Search the configuration file */
 QString cExpertAccess::searchConfigFile()
 {

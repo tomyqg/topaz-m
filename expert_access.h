@@ -16,6 +16,7 @@ class cExpertAccess : public QObject
 public:
     explicit cExpertAccess(QObject *parent = 0);
     static bool accessRequest(QString pass);
+    static void resetAccess();
     static accessModeType getMode() { return mode; }
 signals:
 
