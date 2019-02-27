@@ -513,7 +513,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>564</width>
+                     <width>551</width>
                      <height>608</height>
                     </rect>
                    </property>
@@ -1788,312 +1788,320 @@ QListWidget::item {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QFrame" name="frameCh1">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>31</height>
-                   </size>
-                  </property>
+                 <widget class="QFrame" name="frame_7">
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <property name="spacing">
-                    <number>9</number>
-                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_12">
                    <property name="leftMargin">
-                    <number>2</number>
+                    <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>2</number>
+                    <number>0</number>
                    </property>
                    <property name="rightMargin">
-                    <number>2</number>
+                    <number>0</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>2</number>
+                    <number>0</number>
                    </property>
                    <item>
-                    <widget class="QWidget" name="colorCh1" native="true">
+                    <widget class="QComboBox" name="combo1ChannelArch">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="minimumSize">
                       <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
+                       <width>0</width>
+                       <height>41</height>
                       </size>
                      </property>
                      <property name="font">
                       <font>
                        <family>Open Sans</family>
+                       <pointsize>16</pointsize>
                       </font>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background-color: rgb(26, 188, 156);
-border-color: rgb(0, 0, 0);
-border: 1px solid;</string>
+color: rgb(255, 255, 255);
+border-radius: 0px;
+text-align: center;</string>
                      </property>
+                     <property name="currentText">
+                      <string>ОТКЛ.</string>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <property name="insertPolicy">
+                      <enum>QComboBox::NoInsert</enum>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>ОТКЛ.</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 1</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 2</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 3</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 4</string>
+                      </property>
+                     </item>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="channel1">
+                    <widget class="QComboBox" name="combo2ChannelArch">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>41</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Open Sans</family>
                        <pointsize>16</pointsize>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>SL1:CH1</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                     </property>
-                     <property name="margin">
-                      <number>0</number>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QFrame" name="frameCh1_3">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>31</height>
-                   </size>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <property name="spacing">
-                    <number>9</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>2</number>
-                   </property>
-                   <item>
-                    <widget class="QWidget" name="colorCh1_3" native="true">
-                     <property name="minimumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Open Sans</family>
-                      </font>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background-color: #6666ff;
-border-color: rgb(0, 0, 0);
-border: 1px solid;</string>
+color: rgb(255, 255, 255);
+border-radius: 0px;
+text-align: center;</string>
                      </property>
+                     <property name="currentText">
+                      <string>ОТКЛ.</string>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <property name="insertPolicy">
+                      <enum>QComboBox::NoInsert</enum>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>ОТКЛ.</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 1</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 2</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 3</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 4</string>
+                      </property>
+                     </item>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="channel1_3">
+                    <widget class="QComboBox" name="combo3ChannelArch">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>41</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Open Sans</family>
                        <pointsize>16</pointsize>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>SL1:CH2</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                     </property>
-                     <property name="margin">
-                      <number>0</number>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QFrame" name="frameCh1_2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>31</height>
-                   </size>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_6">
-                   <property name="spacing">
-                    <number>9</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>2</number>
-                   </property>
-                   <item>
-                    <widget class="QWidget" name="colorCh1_2" native="true">
-                     <property name="minimumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Open Sans</family>
-                      </font>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background-color: rgb(230, 77, 59);
-border-color: rgb(0, 0, 0);
-border: 1px solid;</string>
+color: rgb(255, 255, 255);
+border-radius: 0px;
+text-align: center;</string>
                      </property>
+                     <property name="currentText">
+                      <string>ОТКЛ.</string>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <property name="insertPolicy">
+                      <enum>QComboBox::NoInsert</enum>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>ОТКЛ.</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 1</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 2</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 3</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 4</string>
+                      </property>
+                     </item>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="channel1_2">
+                    <widget class="QComboBox" name="combo4ChannelArch">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>41</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Open Sans</family>
                        <pointsize>16</pointsize>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>SL1:CH3</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                     </property>
-                     <property name="margin">
-                      <number>0</number>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QFrame" name="frameCh1_4">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>31</height>
-                   </size>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_8">
-                   <property name="spacing">
-                    <number>9</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>2</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>2</number>
-                   </property>
-                   <item>
-                    <widget class="QWidget" name="colorCh1_4" native="true">
-                     <property name="minimumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Open Sans</family>
-                      </font>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background-color: rgb(44, 61, 77);
-border-color: rgb(0, 0, 0);
-border: 1px solid;</string>
+color: rgb(255, 255, 255);
+border-radius: 0px;
+text-align: center;</string>
                      </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="channel1_4">
-                     <property name="font">
-                      <font>
-                       <family>Open Sans</family>
-                       <pointsize>16</pointsize>
-                      </font>
+                     <property name="currentText">
+                      <string>ОТКЛ.</string>
                      </property>
-                     <property name="text">
-                      <string>SL1:CH4</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                     </property>
-                     <property name="margin">
+                     <property name="currentIndex">
                       <number>0</number>
                      </property>
+                     <property name="insertPolicy">
+                      <enum>QComboBox::NoInsert</enum>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>ОТКЛ.</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 1</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 2</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 3</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Ch 4</string>
+                      </property>
+                     </item>
                     </widget>
                    </item>
                   </layout>
@@ -3896,7 +3904,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
+                     <width>671</width>
                      <height>1363</height>
                     </rect>
                    </property>

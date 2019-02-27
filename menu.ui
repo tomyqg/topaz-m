@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>22</number>
+            <number>21</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -842,8 +842,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>473</height>
+                  <width>98</width>
+                  <height>306</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -1171,8 +1171,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>406</height>
+                  <width>100</width>
+                  <height>30</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -4626,7 +4626,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>729</width>
+                  <width>111</width>
                   <height>778</height>
                  </rect>
                 </property>
@@ -5676,8 +5676,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>473</height>
+                  <width>555</width>
+                  <height>324</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_42">
@@ -5985,8 +5985,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>397</height>
+                  <width>100</width>
+                  <height>30</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -7078,7 +7078,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>729</width>
+                  <width>223</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -8419,8 +8419,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>473</height>
+                  <width>316</width>
+                  <height>124</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -8722,8 +8722,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>473</height>
+                  <width>494</width>
+                  <height>69</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_39">

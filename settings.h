@@ -63,6 +63,7 @@ private:
     bool mouseOnScalede;
     bool mouseOnScaledeX;
     bool mouseOnMove;
+    bool fNeadRescale;
     QTimer timerUpdateGraf;
     int yPosList;
     int curRow;
@@ -82,8 +83,10 @@ private:
     void reactOnMousePress();
     void reactOnMouseRelease();
     void ReactOnMouseSlide();
+    void updateArchGraf();
 
 private slots:
+    void initComboChannels(void);
     void on_exitButton_clicked();
     void on_saveButton_clicked();
     void timeoutLoad();
@@ -109,6 +112,11 @@ private slots:
     void on_steelRelayTimeOut_activated(int index);
     void on_bDeleteUstavka_clicked();
     void on_bUserPeriod_clicked();
+    void on_combo1ChannelArch_currentIndexChanged(int index);
+    void on_combo2ChannelArch_currentIndexChanged(int index);
+    void on_combo3ChannelArch_currentIndexChanged(int index);
+    void on_combo4ChannelArch_currentIndexChanged(int index);
+
 };
 
 #endif // SETTINGS_H

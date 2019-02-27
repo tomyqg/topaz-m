@@ -297,7 +297,7 @@ QVector<double> cArchivator::getVector(int ch)
     int lastIndexBig = 0;   // предыдущий индекс большого периода
     QVector<double> ret(period / numAvg, NAN);
     //возврат пустого вектора, если канал задан неверно
-    if(ch >= TOTAL_NUM_CHANNELS) return ret;
+    if((ch >= TOTAL_NUM_CHANNELS) || (ch < 0)) return ret;
 
     QDateTime firstTime = askTime.addSecs(-period);
 //    ret.resize(period / numAvg);

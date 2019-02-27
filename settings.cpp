@@ -185,7 +185,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
 
     //настройки для архива
     if(arch != NULL)
+    {
         connect(arch, SIGNAL(loadFinished()), this, SLOT(drowGraf()));
+        connect(arch, SIGNAL(loadFinished()), this, SLOT(initComboChannels()));
+    }
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
     QList<QSpinBox*> spinList = findChildren<QSpinBox*> ();
@@ -291,6 +294,8 @@ void dSettings::updateWidgets()
         //страница архива
         ui->saveButton->hide();
         ui->nameSubMenu->setText("АРХИВ");
+
+
         /*
         InitiateArchive();
         UpdateArchiveData();
@@ -308,7 +313,9 @@ void dSettings::updateWidgets()
         archivePeriod = 60;
         periodShift = 0;
         ui->period->setEnabled(false);
+        fNeadRescale = true;
         arch->load(archivePeriod, periodShift);
+
 
     }
     if(ui->stackedWidget->currentIndex() == 3)
@@ -339,6 +346,37 @@ void dSettings::updateWidgets()
     ui->shadowSubMenu->setGeometry(ui->shadowSubMenu->x(), ui->shadowSubMenu->y(), \
                                    ui->shadowSubMenu->width(), h);
 
+}
+
+void dSettings::initComboChannels(void)
+{
+    static bool fInit = false;
+
+    if(!fInit)
+    {
+
+        QList<QComboBox*> listCombo;
+        listCombo.append(ui->combo1ChannelArch);
+        listCombo.append(ui->combo2ChannelArch);
+        listCombo.append(ui->combo3ChannelArch);
+        listCombo.append(ui->combo4ChannelArch);
+
+        QStringList channels;
+        foreach (ChannelOptions * channel, listChannels) {
+            channels << QString(channel->GetChannelName() + " (" \
+                                + QString::number(channel->getNum()) + ")");
+        }
+
+        foreach(QComboBox * combo, listCombo)
+        {
+            combo->clear();
+            combo->addItem("ОТКЛ.");
+            combo->addItems(channels);
+        }
+
+    }
+
+    fInit = true;
 }
 
 void dSettings::on_verticalScrollBar_sliderMoved(int position)
@@ -373,10 +411,10 @@ void dSettings::updateGraf(int period)
     int periodToGraf = period / multiplier;
 
     // копирование уже считанных с файлов данных
-    Y_coordinates_Chanel_1 = arch->getVector(0);
-    Y_coordinates_Chanel_2 = arch->getVector(1);
-    Y_coordinates_Chanel_3 = arch->getVector(2);
-    Y_coordinates_Chanel_4 = arch->getVector(3);
+    Y_coordinates_Chanel_1 = arch->getVector(ui->combo1ChannelArch->currentIndex() - 1);
+    Y_coordinates_Chanel_2 = arch->getVector(ui->combo2ChannelArch->currentIndex() - 1);
+    Y_coordinates_Chanel_3 = arch->getVector(ui->combo3ChannelArch->currentIndex() - 1);
+    Y_coordinates_Chanel_4 = arch->getVector(ui->combo4ChannelArch->currentIndex() - 1);
 
     //вставить сюда усреднитель данных,
     //чтобы большие периоды свести числу точек от 1000 до 10000
@@ -457,10 +495,10 @@ void dSettings::updateGraf(int period)
         ui->customPlot->graph()->setPen(graphPen);
     }
 
+//        ui->customPlot->rescaleAxes();
+//        ui->customPlot->replot();
+//        ui->customPlot->clearItems();
 
-    ui->customPlot->rescaleAxes();
-    ui->customPlot->replot();
-    ui->customPlot->clearItems();
 
     if((!Y_coordinates_Chanel_1.isEmpty()) &&\
             !Y_coordinates_Chanel_2.isEmpty() &&\
@@ -469,7 +507,14 @@ void dSettings::updateGraf(int period)
     {
         // авто масшабирование
         ui->customPlot->rescaleAxes();
-        ui->customPlot->xAxis->setRange(0, periodToGraf);
+        if(fNeadRescale)
+        {
+            ui->customPlot->xAxis->setRange(0, periodToGraf);
+        }
+        else
+        {
+            ui->customPlot->xAxis->setRange(posPlotX, sizePlotX, Qt::AlignCenter);
+        }
         ui->customPlot->replot();
         ui->customPlot->clearItems();// удаляем стрелочку а то она будет потом мешаться
     }
@@ -664,6 +709,7 @@ void dSettings::loadArchFromFile()
     Y_coordinates_Chanel_3.reserve(0);
     Y_coordinates_Chanel_4.reserve(0);
     // Запрос данных из файлов архива
+    fNeadRescale = true;
     arch->load(archivePeriod, periodShift);
 }
 
@@ -1252,4 +1298,39 @@ void dSettings::on_bUserPeriod_clicked()
     archivePeriod = cCustomPeriod::startDT.secsTo(cCustomPeriod::finishDT);
     periodShift = cCustomPeriod::finishDT.secsTo(QDateTime::currentDateTime());
     loadArchFromFile();
+}
+
+void dSettings::updateArchGraf()
+{
+    if(arch != NULL)
+    {
+        sizePlotX = ui->customPlot->xAxis->range().size();
+        posPlotX = ui->customPlot->xAxis->range().center();
+        fNeadRescale = false;
+        drowGraf();
+    }
+}
+
+void dSettings::on_combo1ChannelArch_currentIndexChanged(int index)
+{
+    if((index >= 0) && (index <= listChannels.size()))
+        updateArchGraf();
+}
+
+void dSettings::on_combo2ChannelArch_currentIndexChanged(int index)
+{
+    if((index >=0) && (index <= listChannels.size()))
+        updateArchGraf();
+}
+
+void dSettings::on_combo3ChannelArch_currentIndexChanged(int index)
+{
+    if((index >=0) && (index <= listChannels.size()))
+        updateArchGraf();
+}
+
+void dSettings::on_combo4ChannelArch_currentIndexChanged(int index)
+{
+    if((index >=0) && (index <= listChannels.size()))
+        updateArchGraf();
 }
