@@ -460,7 +460,7 @@ void worker::run()
         //                  в мск     бит  норма    скорость порта
         int timeSleepMcs = (1000000 * 11 * 3.5)  /  comportbaud;
         // минимум 1,75 мс
-        if(timeSleepMcs < 1750) timeSleepMcs = 1750000;
+        if(timeSleepMcs < 1750) timeSleepMcs = 1750;
         this->thread()->usleep(timeSleepMcs);
     }
 }
