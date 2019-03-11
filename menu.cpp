@@ -728,7 +728,8 @@ void dMenu::slotOpenGroup(int num)
     for(int i = 0; i < listChannels.size(); i++)
     {
         QString nameCh = listChannels.at(i)->GetChannelName();
-        listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ")");
+        QString stateCh = (listChannels.at(i)->enable ? "ВКЛ." : "ОТКЛ.");
+        listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ") | " + stateCh);
     }
 
     //математические каналы

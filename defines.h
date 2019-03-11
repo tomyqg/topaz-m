@@ -15,7 +15,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "1.67" //версия ПО
+#define CURRENT_VER "1.70" //версия ПО
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
@@ -210,5 +210,14 @@
 #define TOTAL_NUM_RELAIS    8
 #endif
 //-----------------------
+
+#ifdef Q_OS_WIN32
+//    #define RANDOM_CHAN
+#endif
+
+//#define RANDOM_CHAN
+
+#define DEBUG_RELAY
+
 
 // DEFINES_H

@@ -38,13 +38,7 @@
 #include "Communicator/communicator.h"
 #endif
 
-#ifdef Q_OS_WIN32
-//    #define RANDOM_CHAN
-#endif
 
-//#define RANDOM_CHAN
-
-#define DEBUG_RELAY
 
 namespace Ui {
 class MainWindow;

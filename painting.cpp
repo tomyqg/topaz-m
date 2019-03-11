@@ -708,11 +708,19 @@ void MainWindow::PaintPolarDiagramm()
 
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i ++)
     {
-        if(group->typeInput[i] == 1)
+        if((group->typeInput[i] == 1) && (group->channel[i] != -1))
         {
-            channelLenght[i] = listChannels.at(group->channel[i])->GetValuePercent();
+            ChannelOptions * channel = listChannels.at(group->channel[i]);
+#ifdef RANDOM_CHAN
+            if((channel->getNum() <= NUM_CHAN_IN_4AI) || channel->enable)
+#else
+            if(channel->enable)
+#endif
+            {
+                channelLenght[i] = channel->GetValuePercent();
+            }
         }
-        else if(group->typeInput[i] == 2)
+        else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
         {
             channelLenght[i] = listMath.at(group->mathChannel[i])->GetValuePercent();
         }

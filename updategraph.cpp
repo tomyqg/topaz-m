@@ -146,8 +146,10 @@ void MainWindow::AddValuesToBuffer()
 
 void MainWindow::UpdateGraphics()
 {
+#ifndef RANDOM_CHAN
     // если нет данных от плат, то и строить нечего
     if(!slotSteelOnline && !slotAnalogOnline) return;
+#endif
     // если прелоадер не завершился
     if(!plotReady) return;
     // если есть плата STEEL, то ставим режим Steel
@@ -213,9 +215,9 @@ void MainWindow::GrafsUpdateTrends()
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
     {
         ui->customPlot->addGraph();
-        ui->customPlot->graph()->setName(listChannels.at(group->channel[i])->GetChannelName());
         if((group->typeInput[i] == 1) && (group->channel[i] != -1))
         {
+            ui->customPlot->graph()->setName(listChannels.at(group->channel[i])->GetChannelName());
             ui->customPlot->graph()->setData(listChannels.at(group->channel[i])->GetChannelXBuffer(), \
                     listChannels.at(group->channel[i])->GetChannelValuesBuffer());
         }
@@ -227,47 +229,7 @@ void MainWindow::GrafsUpdateTrends()
         ui->customPlot->graph()->setPen(graphPen);
     }
 
-//    ui->customPlot->addGraph();
-//    ui->customPlot->graph()->setName("graph #1");
-//    if((group->typeInput[0] == 1) && (group->channel[0] != -1))
-//    {
-//        ui->customPlot->graph()->setData(listChannels.at(group->channel[0])->GetChannelXBuffer(), \
-//                listChannels.at(group->channel[0])->GetChannelValuesBuffer());
-//    }
-//    else if((group->typeInput[0] == 2) && (group->mathChannel[0] != -1))
-//    {
-//        //Vag: вставить сюда буффер матканала
-//    }
-//    graphPen.setColor(ColorCh1);
-//    ui->customPlot->graph()->setPen(graphPen);
 
-//    ui->customPlot->addGraph();
-//    if((group->typeInput[1] == 1) && (group->channel[1] != nullptr))
-//    {
-//        ui->customPlot->graph()->setData(group->channel[1]->GetChannelXBuffer(), \
-//                group->channel[1]->GetChannelValuesBuffer());
-//    }
-//    graphPen.setColor(ColorCh2);
-//    ui->customPlot->graph()->setPen(graphPen);
-
-//    ui->customPlot->addGraph();
-//    if((group->typeInput[2] == 1) && (group->channel[2] != nullptr))
-//    {
-//        ui->customPlot->graph()->setData(group->channel[2]->GetChannelXBuffer(), \
-//                group->channel[2]->GetChannelValuesBuffer());
-//    }
-//    graphPen.setColor(ColorCh3);
-//    ui->customPlot->graph()->setPen(graphPen);
-
-
-//    ui->customPlot->addGraph();
-//    if((group->typeInput[3] == 1) && (group->channel[3] != nullptr))
-//    {
-//        ui->customPlot->graph()->setData(group->channel[3]->GetChannelXBuffer(), \
-//                group->channel[3]->GetChannelValuesBuffer());
-//    }
-//    graphPen.setColor(ColorCh4);
-//    ui->customPlot->graph()->setPen(graphPen);
 
     ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
     ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
@@ -285,23 +247,12 @@ void MainWindow::GrafsUpdateTrends()
 
     if (systemOptions.arrows)
     {
-        // add the arrows:
-
-//        QList<ChannelOptions *> ChannelsObjectsList;
-
-//        ChannelsObjectsList.append(&channel1);
-//        ChannelsObjectsList.append(&channel2);
-//        ChannelsObjectsList.append(&channel3);
-//        ChannelsObjectsList.append(&channel4);
-
-        // рисуем стрелки для каждого канала
-
-//        QList<QColor> colors;
-//        colors << ColorCh1 << ColorCh2 << ColorCh3 << ColorCh4;
 
         for(int index = 0; index < MAX_NUM_CHAN_GROUP; index++)
         {
             if(group->typeInput[index] == 0) continue;
+            if((group->typeInput[index] == 1) && (group->channel[index] == -1)) continue;
+            if((group->typeInput[index] == 2) && (group->mathChannel[index] == -1)) continue;
             ChannelOptions * channel = listChannels.at(group->channel[index]);
 
             QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
@@ -409,7 +360,11 @@ void MainWindow::updateBars(void)
             {
                 ChannelOptions * channel = listChannels.at(group->channel[i]);
 
+#ifdef RANDOM_CHAN
+                if((channel->getNum() <= NUM_CHAN_IN_4AI) || channel->enable)
+#else
                 if(channel->enable)
+#endif
                 {
                     bar->setExtr(channel->GetMinimumChannelValue(), channel->GetMaximumChannelValue());
                     bar->setBarDiapazon(max(abs(channel->GetHigherMeasureLimit()), \
@@ -426,6 +381,9 @@ void MainWindow::updateBars(void)
                     bar->show();
                     listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Preferred);
                 }
+
+
+
             }
         }
         else if(group->typeInput[i] == 2)
@@ -570,7 +528,12 @@ void MainWindow::updateVols()
         {
             if(group->channel[i] != -1)
             {
+                ChannelOptions * channel = listChannels.at(group->channel[i]);
+#ifdef RANDOM_CHAN
+                if((channel->getNum() <= NUM_CHAN_IN_4AI) || channel->enable)
+#else
                 if(listChannels.at(group->channel[i])->enable)
+#endif
                 {
                     vol->setVol(listChannels.at(group->channel[i])->GetCurrentChannelValue());
                     vol->show();

@@ -2,6 +2,7 @@
 #include "../uartdriver.h"
 #include "../metrologicalcalc.h"
 #include <QDebug>
+#include <stdlib.h>
 
 extern QVector<double> X_Coordinates;
 
@@ -385,6 +386,15 @@ void ChannelOptions::timerSlot()
         Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
         emit sendToWorker(tr);
     }
+    else if(!enable)
+    {
+#ifdef RANDOM_CHAN
+        if(numChannel <= NUM_CHAN_IN_4AI)
+        {
+            SetCurrentChannelValue(currentvalue + ((double)((rand()%101) - 50) / 100));
+        }
+#endif
+    }
 
     timer->setInterval((int)(measureperiod*1000));
 }
@@ -459,7 +469,9 @@ void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 
 double ChannelOptions::GetCurrentChannelValue()
 {
+#ifndef RANDOM_CHAN
     if(!enable) return NAN;
+#endif
 
     int regtype = GetRegistrationType();
 
