@@ -17,23 +17,6 @@
 //By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
 // Edit: Vagiz Abdulin
 
-//void loadModules(QSplashScreen* psplash)
-//{
-//    QTime time;
-//    time.start();
-
-//    for (int i = 0; i < 100; ) {
-//        if (time.elapsed() > 100) {
-//            time.start();
-//            ++i;
-//        }
-//        psplash->showMessage("Loading modules: "
-//                             + QString::number(i) + "%",
-//                             Qt::AlignHCenter | Qt::AlignBottom,
-//                             Qt::black
-//                            );
-//    }
-//}
 
 /** Cache for template files */
 TemplateCache* templateCache;

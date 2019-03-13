@@ -386,15 +386,15 @@ void ChannelOptions::timerSlot()
         Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
         emit sendToWorker(tr);
     }
+#ifdef RANDOM_CHAN
     else if(!enable)
     {
-#ifdef RANDOM_CHAN
         if(numChannel <= NUM_CHAN_IN_4AI)
         {
             SetCurrentChannelValue(currentvalue + ((double)((rand()%101) - 50) / 100));
         }
-#endif
     }
+#endif
 
     timer->setInterval((int)(measureperiod*1000));
 }

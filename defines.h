@@ -215,7 +215,7 @@
 //    #define RANDOM_CHAN
 #endif
 
-//#define RANDOM_CHAN
+#define RANDOM_CHAN
 
 #define DEBUG_RELAY
 

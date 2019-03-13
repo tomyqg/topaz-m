@@ -217,9 +217,9 @@ void MainWindow::GrafsUpdateTrends()
         ui->customPlot->addGraph();
         if((group->typeInput[i] == 1) && (group->channel[i] != -1))
         {
-            ui->customPlot->graph()->setName(listChannels.at(group->channel[i])->GetChannelName());
-            ui->customPlot->graph()->setData(listChannels.at(group->channel[i])->GetChannelXBuffer(), \
-                    listChannels.at(group->channel[i])->GetChannelValuesBuffer());
+            ChannelOptions * channel = listChannels.at(group->channel[i]);
+            ui->customPlot->graph()->setName(channel->GetChannelName());
+            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
         }
         else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
         {
@@ -295,36 +295,36 @@ void MainWindow::GrafsUpdateNone()
     ui->MessagesWidget->update();
 }
 
-void MainWindow::updateChannelSlot(int ch)
-{
-    ChannelOptions * channel = listChannels.at(ch);
-    if(!channel->enable) return;
-    if(channel->GetSignalType() == 0) return;
-    if(systemOptions.display == cSystemOptions::Steel) return;
-    int slot = channel->getSlot();
-    int slChannel = channel->getSlotChannel();
-//    int period = channel->GetMeasurePeriod()*1000;
-    DataBuffer::writeupdatestatus(0,true);
-    QString nameParam = "chan" + QString::number(slChannel) + "Data";
-    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
-    Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
-#ifndef RANDOM_CHAN
-    emit sendTransToWorker(tr);
-#else
-    /* Test */
-//    if(ch < 4)
-//    {
-        randVal[ch] += ((double)((rand()%101) - 50) / 100);
-        channel->SetCurrentChannelValue(randVal[ch]);
-//        wVolueBar * bars[] = {ui->wBar_1 , ui->wBar_2, ui->wBar_3, ui->wBar_4};
-//        bars[ch]->setVolue(randVal[ch]);
-//        wVol * vol[] = {ui->widgetVol1, ui->widgetVol2, ui->widgetVol3, ui->widgetVol4};
-//        vol[ch]->setVol(randVal[ch]);
-//    }
-#endif
-//    QTimer * timers[] = {channeltimer1, channeltimer2, channeltimer3, channeltimer4};
-//    timers[ch]->setInterval(period);
-}
+//void MainWindow::updateChannelSlot(int ch)
+//{
+//    ChannelOptions * channel = listChannels.at(ch);
+//    if(!channel->enable) return;
+//    if(channel->GetSignalType() == 0) return;
+//    if(systemOptions.display == cSystemOptions::Steel) return;
+//    int slot = channel->getSlot();
+//    int slChannel = channel->getSlotChannel();
+////    int period = channel->GetMeasurePeriod()*1000;
+//    DataBuffer::writeupdatestatus(0,true);
+//    QString nameParam = "chan" + QString::number(slChannel) + "Data";
+//    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+//    Transaction tr(Transaction::R, (uint8_t)slot, offset, 0);
+//#ifndef RANDOM_CHAN
+//    emit sendTransToWorker(tr);
+//#else
+//    /* Test */
+////    if(ch < 4)
+////    {
+//        randVal[ch] += ((double)((rand()%101) - 50) / 100);
+//        channel->SetCurrentChannelValue(randVal[ch]);
+////        wVolueBar * bars[] = {ui->wBar_1 , ui->wBar_2, ui->wBar_3, ui->wBar_4};
+////        bars[ch]->setVolue(randVal[ch]);
+////        wVol * vol[] = {ui->widgetVol1, ui->widgetVol2, ui->widgetVol3, ui->widgetVol4};
+////        vol[ch]->setVol(randVal[ch]);
+////    }
+//#endif
+////    QTimer * timers[] = {channeltimer1, channeltimer2, channeltimer3, channeltimer4};
+////    timers[ch]->setInterval(period);
+//}
 
 
 

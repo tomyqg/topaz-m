@@ -246,14 +246,16 @@ void MainWindow::MainWindowInitialization()
     // добавление 1 группы (обязательной)
     cGroupChannels * group = new cGroupChannels();
     group->groupName = "Group 1";
-//    group->channel[0] = listChannels.at(0);
-//    group->typeInput[0] = 1;
-//    group->channel[1] = listChannels.at(1);
-//    group->typeInput[1] = 1;
-//    group->channel[2] = listChannels.at(2);
-//    group->typeInput[2] = 1;
-//    group->channel[3] = listChannels.at(3);
-//    group->typeInput[3] = 1;
+#ifdef RANDOM_CHAN
+    group->channel[0] = 0;
+    group->typeInput[0] = 1;
+    group->channel[1] = 1;
+    group->typeInput[1] = 1;
+    group->channel[2] = 2;
+    group->typeInput[2] = 1;
+    group->channel[3] = 3;
+    group->typeInput[3] = 1;
+#endif
     group->enabled = true;
     listGroup.append(group);
     curGroupChannel = 0;        //по-умолчанию активная группа - первая

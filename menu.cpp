@@ -271,7 +271,7 @@ void dMenu::on_saveButton_clicked()
 
 void dMenu::updateSystemOptions(QString path)
 {
-    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
+//    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
     ui->arrowscheckBox->setChecked(sysOptions.arrows);
     ui->modeBar->setCurrentIndex((sysOptions.display >> 2) % ui->modeBar->count());
     ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
@@ -327,7 +327,7 @@ void dMenu::addWidgetGroup()
 
     clearLayout(ui->verticalLayoutGroup);
 
-    // генерация виджетов (кнопок) уставок
+    // генерация виджетов (кнопок) групп
     int i = 0;
     foreach (cGroupChannels * group, listGroup) {
         wButtonStyled * bGroup = new wButtonStyled(ui->widgetScrollAreaGroup);
@@ -1996,7 +1996,7 @@ void dMenu::on_bAddGroup_clicked()
     group->groupName = "Group " + QString::number(size+1);
     listGroup.append(group);
 
-    //регенерация кнопок уставок
+    //регенерация кнопок групп
     addWidgetGroup();
 }
 
@@ -2019,7 +2019,7 @@ void dMenu::on_bDelMath_clicked()
     }
     ui->stackedWidget->setCurrentIndex(20);
     ui->nameSubMenu->setText("МАТЕМАТИКА");
-    addWidgetGroup();
+    addWidgetMath();
 }
 
 void dMenu::on_bApplayGroup_clicked()

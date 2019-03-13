@@ -103,7 +103,7 @@ public slots:
     void ModbusConnectionErrorSlot();
     void SetEcoMode(bool EcoMode);
     void updateDevicesComplect();
-    void updateChannelSlot(int ch);
+//    void updateChannelSlot(int ch);
 //    void UpdateChannel1Slot();
 //    void UpdateChannel2Slot();
 //    void UpdateChannel3Slot();
