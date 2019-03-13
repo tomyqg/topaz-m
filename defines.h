@@ -176,6 +176,7 @@
 #define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
+#define NUM_CHAN_IN_STEEL   2
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
 #define MAX_NUM_GROUP       10      //максимальное количество группировок каналов
 #define TOTAL_NUM_RELAY     24      //максимальное число подключаемых реле

@@ -20,6 +20,7 @@ enum deviceTypeEnum{
     Device_4AI = 1,
     Device_8RP = 2,
     Device_STEEL = 3,
+    Count_Device_Type
 };
 enum deviceStateEnum{
     Device_State_OK = 0,

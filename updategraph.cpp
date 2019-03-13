@@ -598,7 +598,7 @@ void MainWindow::updateSteel()
      */
     for(int i = 0; i<listSteel.size(); i++)
     {
-        if(listRelais.size() == 0) return;
+        if(listRelais.size() == 0) continue;
         cSteel * steel = listSteel.at(i);
         int countRele = SUM_RELAYS;
         uint8_t relayStates[countRele];

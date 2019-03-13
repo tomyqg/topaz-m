@@ -557,13 +557,6 @@ void MainWindow::openSettingsChannel(int num)
 }
 
 
-//void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
-//{
-//    listChannels.at(0)->SetCurrentChannelValue(arg1);
-//    ui->wBar_1->setVolue(arg1);
-//    ui->widgetVol1->setVol(arg1);
-//}
-
 void MainWindow::plotPress(QMouseEvent * pe)
 {
     if(pe->pos().x() > (ui->customPlot->width() / 10))
@@ -576,7 +569,7 @@ void MainWindow::plotPress(QMouseEvent * pe)
     posPlot = ui->customPlot->yAxis->range().center();
     mouseOnScalede = true;
     waitAutoScale = true;
-    qDebug() << "plotPress";
+//    qDebug() << "plotPress";
 }
 
 void MainWindow::plotReleas(QMouseEvent * pe)
@@ -584,7 +577,7 @@ void MainWindow::plotReleas(QMouseEvent * pe)
     mouseOnScalede = false;
     mouseOnMove = false;
     timerScale.start(3000);
-    qDebug() << "plotReleas";
+//    qDebug() << "plotReleas";
 }
 
 void MainWindow::plotMove(QMouseEvent * pe)
@@ -607,7 +600,7 @@ void MainWindow::plotMove(QMouseEvent * pe)
 //        ui->customPlot->replot();
     }
     timerScale.start(3000);
-    qDebug() << "plotMove";
+//    qDebug() << "plotMove";
 }
 
 void MainWindow::reactOnMousePress()

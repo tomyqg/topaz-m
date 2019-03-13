@@ -927,14 +927,28 @@ void MainWindow::updateDevicesComplect()
     }
 
     i = 0;
-    foreach (cGroupChannels * group, listGroup) {
-        if(!listChannels.at(group->channel[0])->enable && \
-                !listChannels.at(group->channel[1])->enable && \
-                !listChannels.at(group->channel[2])->enable && \
-                !listChannels.at(group->channel[3])->enable)
+    foreach (cGroupChannels * group, listGroup)
+    {
+
+//        if(!listChannels.at(group->channel[0])->enable && \
+//                !listChannels.at(group->channel[1])->enable && \
+//                !listChannels.at(group->channel[2])->enable && \
+//                !listChannels.at(group->channel[3])->enable)
+//        {
+//            if(i != 0) group->enabled = false;
+//        }
+        int countActive = 0;
+        for(int j = 0; j < MAX_NUM_CHAN_GROUP; j++)
         {
-            if(i != 0) group->enabled = false;
+            int ch = group->channel[j];
+            if(ch != -1)
+            {
+                if(listChannels.at(ch)->enable) countActive++;
+            }
         }
+
+        if((i != 0) && (countActive == 0)) group->enabled = false;
+
         i++;
     }
 }

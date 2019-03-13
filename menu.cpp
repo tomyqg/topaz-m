@@ -1101,6 +1101,7 @@ void dMenu::on_bBackDevice_clicked()
 void dMenu::on_bDevice1_clicked()
 {
     if(!listDevice.at(0)->getOnline()) return;
+    if(listDevice.at(0)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 1");
     curDiagnostDevice = 1;
@@ -1109,6 +1110,7 @@ void dMenu::on_bDevice1_clicked()
 void dMenu::on_bDevice2_clicked()
 {
     if(!listDevice.at(1)->getOnline()) return;
+    if(listDevice.at(1)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 2");
     curDiagnostDevice = 2;
@@ -1117,6 +1119,7 @@ void dMenu::on_bDevice2_clicked()
 void dMenu::on_bDevice3_clicked()
 {
     if(!listDevice.at(2)->getOnline()) return;
+    if(listDevice.at(2)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 3");
     curDiagnostDevice = 3;
@@ -1125,6 +1128,7 @@ void dMenu::on_bDevice3_clicked()
 void dMenu::on_bDevice4_clicked()
 {
     if(!listDevice.at(3)->getOnline()) return;
+    if(listDevice.at(3)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 4");
     curDiagnostDevice = 4;
@@ -1133,6 +1137,7 @@ void dMenu::on_bDevice4_clicked()
 void dMenu::on_bDevice5_clicked()
 {
     if(!listDevice.at(4)->getOnline()) return;
+    if(listDevice.at(4)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 5");
     curDiagnostDevice = 5;
@@ -1141,6 +1146,7 @@ void dMenu::on_bDevice5_clicked()
 void dMenu::on_bDevice6_clicked()
 {
     if(!listDevice.at(5)->getOnline()) return;
+    if(listDevice.at(5)->deviceType >= Count_Device_Type) return;
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 6");
     curDiagnostDevice = 6;
@@ -2245,15 +2251,27 @@ void dMenu::updateDevicesUI()
         cDevice * device = listDevice.at(i);
         QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
         QStringList strOnline;
-        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
-        str += strOnline.at(device->getOnline());
+//        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
+//        str += strOnline.at(device->getOnline());
 
-        if(device->getOnline())
+        if(device->getOnline()) //плата онлайн
         {
-            if(strType.at((int)(device->deviceType) % strType.size()).size())
+            if((int)(device->deviceType) >= Count_Device_Type)
             {
-                str +=  " | " + strType.at(device->deviceType % strType.size());
+                str += "ВКЛЮЧЕН";
+                if(strType.at((int)(device->deviceType)).size())
+                {
+                    str +=  " | " + strType.at(device->deviceType);
+                }
             }
+            else
+            {
+                str += "МОДУЛЬ (" + QString::number((int)(device->deviceType)) + ")";
+            }
+        }
+        else    //плата оффлайн
+        {
+            str += "ОТКЛЮЧЕН";
         }
 
         bDev->setText(str);
