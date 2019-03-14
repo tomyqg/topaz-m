@@ -132,7 +132,7 @@ void cDevice::updateStatus()
     if(!online) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
-    if(deviceType == Device_None)
+    if((deviceType == Device_None) || ((int)deviceType >= Count_Device_Type))
     {
         params << "deviceType";
     }
@@ -152,6 +152,7 @@ void cDevice::updateConstParam()
 {
     if(pauseUpdateParam) return;
     if(!online) return;
+    if((deviceType == Device_None) || ((int)deviceType >= Count_Device_Type)) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
     params << "protocolVersion" << "hardwareVersion" << "softwareVersion"\

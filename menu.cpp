@@ -112,6 +112,10 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDigitalOutputs, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaChannels, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDevices, QScroller::LeftMouseButtonGesture);
+
+
 
     log = new cLogger(pathtomessages, cLogger::UI);
 
@@ -213,7 +217,8 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
          (object->property("enabled").toString() == "true") && \
          ((object->objectName() == "ipAddr") ||\
           (object->objectName() == "netMask") ||\
-          (object->objectName() == "gateWay")))
+          (object->objectName() == "gateWay") ||\
+          (object->objectName() == "nameGroup")))
     {
         if(QString::fromLatin1(object->metaObject()->className()) == "QLineEdit")
         {
@@ -2256,7 +2261,7 @@ void dMenu::updateDevicesUI()
 
         if(device->getOnline()) //плата онлайн
         {
-            if((int)(device->deviceType) >= Count_Device_Type)
+            if((int)(device->deviceType) < Count_Device_Type)
             {
                 str += "ВКЛЮЧЕН";
                 if(strType.at((int)(device->deviceType)).size())

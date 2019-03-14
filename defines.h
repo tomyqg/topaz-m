@@ -15,7 +15,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define CURRENT_VER "1.70" //версия ПО
+#define CURRENT_VER "1.72" //версия ПО
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
@@ -216,7 +216,7 @@
 //    #define RANDOM_CHAN
 #endif
 
-#define RANDOM_CHAN
+//#define RANDOM_CHAN
 
 #define DEBUG_RELAY
 
