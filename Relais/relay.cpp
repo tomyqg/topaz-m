@@ -8,8 +8,11 @@ cRelay::cRelay(uint8_t numDev, uint8_t slot, QObject *parent):
     enable = false;
     newState = false;
     oldState = false;
-    confirmedState = true;
+    confirmedState = false;
     curState = false;
+    type = false;
+    connect(&timerUpdate, SIGNAL(timeout()), this, SLOT(update()));
+    timerUpdate.start(500);
 }
 
 void cRelay::setState(bool f)
@@ -27,6 +30,23 @@ void cRelay::setCurState(bool state)
 {
     if(type) state = !state;//инвертирование, если надо
     curState = state;
-    if(curState == newState) confirmedState = true;
-    else confirmedState = false;
+
+    if(curState != newState)
+    {
+        confirmedState = false;
+        if(type) state = !state;
+        emit signalSwitch(mySlot, myPhysicalNum, !state);
+    }
+    else
+    {
+        confirmedState = true;
+    }
+}
+
+void cRelay::update()
+{
+    if(enable && !confirmedState)
+    {
+        emit signalGetState(mySlot, myPhysicalNum);
+    }
 }
