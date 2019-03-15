@@ -2678,6 +2678,13 @@ border-radius: 0px;</string>
               <number>53</number>
              </property>
              <item>
+              <widget class="QStackedWidget" name="stackedWidgetTypeAnaliz">
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="pageAnalizAnalog">
+                <layout class="QVBoxLayout" name="verticalLayout_14">
+                 <item>
               <widget class="QFrame" name="frame">
                <property name="minimumSize">
                 <size>
@@ -3511,6 +3518,10 @@ border-radius: 0px;</string>
                  </widget>
                 </item>
                </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
              <item>

@@ -23,6 +23,7 @@
 #define TIME_UPDATE_DEVICE_UI   500
 #define DRIVE_UPDATE 500
 #define TIME_UPD_DIAGNOSTIC     500
+#define TIME_UPD_ANALIZ         500
 
 //cExpertAccess access;
 
@@ -248,6 +249,13 @@ void dMenu::on_exitButton_clicked()
     cExpertAccess::resetAccess();
     // Изменить видимость виджетов в соответствии с режимом доступа
     changeVisibleWidgets();
+
+    foreach (cDevice * device, listDevice) {
+        device->setMode(Device_Mode_Regular);
+    }
+    foreach (cSteel * steel, listSteel) {
+        steel->mode = Device_Mode_Regular;
+    }
     this->close();
 }
 
@@ -270,6 +278,12 @@ void dMenu::on_saveButton_clicked()
 //    setBrightness(light);
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
+    foreach (cDevice * device, listDevice) {
+        device->setMode(Device_Mode_Regular);
+    }
+    foreach (cSteel * steel, listSteel) {
+        steel->mode = Device_Mode_Regular;
+    }
     emit saveButtonSignal();
     //Окно закроется по сигналу таймаута
 }
@@ -408,50 +422,182 @@ void dMenu::addWidgetMeasures()
     clearLayout(ui->verticalLayoutMeasures);
     listLabelDiagnostic.clear();
     // генерация виджетов
-    int i = 0;
-    foreach (ChannelOptions * channel, listChannels) {
-        QFont font2;
-        font2.setFamily(QStringLiteral("Open Sans"));
-        font2.setPointSize(20);
+    if(systemOptions.display == cSystemOptions::Steel)
+    {
+        listComboTypeTermo.clear();
+        listLabelTempAnalizSteel.clear();
+        listLabelCj.clear();
+        listLabelEmfpAnalizSteel.clear();
+
+        for(int i = 0; i < listSteel.size(); i++)
+        {
+            if(!listSteel.at(i)->enable) return;
+            QFont font1;
+            font1.setFamily(QStringLiteral("Open Sans"));
+            font1.setPointSize(14);
+            QFont font4;
+            font4.setFamily(QStringLiteral("Open Sans"));
+            font4.setPointSize(20);
+
+            QFrame * frameAnalizSteel = new QFrame(ui->widgetScrollAreaMeasures);
+            frameAnalizSteel->setFrameShape(QFrame::NoFrame);
+            frameAnalizSteel->setFrameShadow(QFrame::Raised);
+            QGridLayout * gridLayout_24 = new QGridLayout(frameAnalizSteel);
+            gridLayout_24->setHorizontalSpacing(0);
+            gridLayout_24->setVerticalSpacing(9);
+            QLabel * analizeLblGroupSteel = new QLabel(frameAnalizSteel);
+            analizeLblGroupSteel->setFont(font4);
+            gridLayout_24->addWidget(analizeLblGroupSteel, 0, 0, 1, 1);
+
+//            QLabel * labelTypeTermo = new QLabel(frameAnalizSteel);
+//            labelTypeTermo->setFont(font1);
+//            labelTypeTermo->setAlignment(Qt::AlignLeading);
+//            gridLayout_24->addWidget(labelTypeTermo, 1, 0, 1, 1);
+
+//            QComboBox * typeTermoCouple = new QComboBox(frameAnalizSteel);
+//            typeTermoCouple->setMinimumSize(QSize(131, 31));
+//            typeTermoCouple->setMaximumSize(QSize(185, 45));
+//            typeTermoCouple->setFont(font1);
+//            typeTermoCouple->setStyleSheet(QLatin1String("QComboBox {\n"
+//                                                         "background-color: rgb(230, 230, 230);\n"
+//                                                         "color: rgb(0, 0, 0);\n"
+//                                                         "border-radius: 0px;\n"
+//                                                         "}\n"
+//                                                         "QComboBox::drop-down {\n"
+//                                                         "	width:30px;\n"
+//                                                         " }"));
+//            gridLayout_24->addWidget(typeTermoCouple, 1, 1, 1, 1);
+
+            QLabel * analizeLblTemp = new QLabel(frameAnalizSteel);
+            analizeLblTemp->setFont(font1);
+            gridLayout_24->addWidget(analizeLblTemp, 2, 0, 1, 1);
+
+            QLabel * analizeLblCj = new QLabel(frameAnalizSteel);
+            analizeLblCj->setFont(font1);
+            gridLayout_24->addWidget(analizeLblCj, 3, 0, 1, 1);
+
+            QLabel * analizeSteelCj = new QLabel(frameAnalizSteel);
+            analizeSteelCj->setMinimumSize(QSize(131, 31));
+            analizeSteelCj->setMaximumSize(QSize(185, 45));
+            analizeSteelCj->setFont(font1);
+            analizeSteelCj->setStyleSheet(QLatin1String("background-color:rgb(44, 61, 77);\n"
+                                                         "color: rgb(255 , 255, 255);\n"
+                                                         "border-radius: 0px;"));
+            analizeSteelCj->setAlignment(Qt::AlignCenter);
+            gridLayout_24->addWidget(analizeSteelCj, 3, 1, 1, 1);
+
+            QLabel * analizeLblEmf = new QLabel(frameAnalizSteel);
+            analizeLblEmf->setFont(font1);
+            gridLayout_24->addWidget(analizeLblEmf, 4, 0, 1, 1);
+
+            QLabel * analizeSteelEmf = new QLabel(frameAnalizSteel);
+            analizeSteelEmf->setMinimumSize(QSize(131, 31));
+            analizeSteelEmf->setMaximumSize(QSize(185, 45));
+            analizeSteelEmf->setFont(font1);
+            analizeSteelEmf->setStyleSheet(QLatin1String("background-color:rgb(44, 61, 77);\n"
+                                                         "color: rgb(255 , 255, 255);\n"
+                                                         "border-radius: 0px;"));
+            analizeSteelEmf->setAlignment(Qt::AlignCenter);
+            gridLayout_24->addWidget(analizeSteelEmf, 4, 1, 1, 1);
+
+            QLabel * analizeLblNameTech = new QLabel(frameAnalizSteel);
+            analizeLblNameTech->setMinimumSize(QSize(131, 31));
+            analizeLblNameTech->setMaximumSize(QSize(185, 45));
+            analizeLblNameTech->setFont(font1);
+            analizeLblNameTech->setStyleSheet(QLatin1String("background-color: rgb(230, 230, 230);\n"
+                                                            "color: rgb(0, 0, 0);\n"
+                                                            "border-radius: 0px;\n"
+                                                            ""));
+            analizeLblNameTech->setAlignment(Qt::AlignCenter);
+            gridLayout_24->addWidget(analizeLblNameTech, 0, 1, 1, 1);
+
+            QLabel * analizeLblTmp = new QLabel(frameAnalizSteel);
+            analizeLblTmp->setMinimumSize(QSize(131, 31));
+            analizeLblTmp->setMaximumSize(QSize(185, 45));
+            analizeLblTmp->setFont(font1);
+            analizeLblTmp->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                                       "	color: rgb(255, 255, 255);\n"
+                                                       "	border-radius: 0px;"));
+            analizeLblTmp->setAlignment(Qt::AlignCenter);
+            gridLayout_24->addWidget(analizeLblTmp, 2, 1, 1, 1);
+            ui->verticalLayoutMeasures->addWidget(frameAnalizSteel);
+
+            analizeLblGroupSteel->setText("ВХОДНАЯ ГРУППА" + QString::number(i+1));
+//            labelTypeTermo->setText("ТЕРМОПАРА");
+            analizeLblCj->setText("ХОЛОДНЫЙ СПАЙ, °C");
+            analizeLblTemp->setText("ТЕМПЕРАТУРА, °C");
+            analizeLblEmf->setText("EMF, мВ");
+            cSteel * steel = listSteel.at(i);
+            analizeLblNameTech->setText(QString(steel->technology->name));
+//            typeTermoCouple->clear();
+//            typeTermoCouple->insertItems(0, QStringList() << "ТИП S" << "ТИП B" << "ТИП A1");
+//            int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
+//            typeTermoCouple->setCurrentIndex(indexTC[steel->technology->nSt]);
+//            connect(typeTermoCouple, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+//                    [=](int index){
+//                Transaction tr(Transaction::W);
+//                tr.slave = steel->slot;
+//                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(steel->slotIndex) + "AdditionalParameter1");
+//                tr.paramA12[1] = steel->technology->nSt;
+//                emit signalToWorker(tr);
+//            });
+            analizeSteelCj->setText(QString::number(steel->cj));
+            analizeLblTmp->setText(QString::number(steel->temp));
+            analizeSteelEmf->setText(QString::number(steel->eds));
+
+            listLabelTempAnalizSteel.append(analizeLblTmp);
+            listLabelCj.append(analizeSteelCj);
+            listLabelEmfpAnalizSteel.append(analizeSteelEmf);
+//            listComboTypeTermo.append(typeTermoCouple);
+        }
+    }
+    else
+    {
+        int i = 0;
+        foreach (ChannelOptions * channel, listChannels) {
+            QFont font2;
+            font2.setFamily(QStringLiteral("Open Sans"));
+            font2.setPointSize(20);
 
 
-        QFrame * frameMeasure1 = new QFrame(ui->widgetScrollAreaMeasures);
-        frameMeasure1->setFrameShape(QFrame::NoFrame);
-        frameMeasure1->setFrameShadow(QFrame::Raised);
+            QFrame * frameMeasure1 = new QFrame(ui->widgetScrollAreaMeasures);
+            frameMeasure1->setFrameShape(QFrame::NoFrame);
+            frameMeasure1->setFrameShadow(QFrame::Raised);
 
-        QHBoxLayout * horizontalLayout_3 = new QHBoxLayout(frameMeasure1);
+            QHBoxLayout * horizontalLayout_3 = new QHBoxLayout(frameMeasure1);
 
-        QLabel * labelMeasure1 = new QLabel(frameMeasure1);
-        labelMeasure1->setFont(font2);
-        labelMeasure1->setText("КАНАЛ " + QString::number(channel->getNum()));
-        horizontalLayout_3->addWidget(labelMeasure1);
+            QLabel * labelMeasure1 = new QLabel(frameMeasure1);
+            labelMeasure1->setFont(font2);
+            labelMeasure1->setText("КАНАЛ " + QString::number(channel->getNum()));
+            horizontalLayout_3->addWidget(labelMeasure1);
 
-        QLabel * labelNameMeasure1 = new QLabel(frameMeasure1);
-        labelNameMeasure1->setFont(font2);
-        labelNameMeasure1->setAlignment(Qt::AlignCenter);
-        labelNameMeasure1->setText(channel->GetChannelName());
-        horizontalLayout_3->addWidget(labelNameMeasure1);
-        ui->verticalLayoutMeasures->addWidget(frameMeasure1);
+            QLabel * labelNameMeasure1 = new QLabel(frameMeasure1);
+            labelNameMeasure1->setFont(font2);
+            labelNameMeasure1->setAlignment(Qt::AlignCenter);
+            labelNameMeasure1->setText(channel->GetChannelName());
+            horizontalLayout_3->addWidget(labelNameMeasure1);
+            ui->verticalLayoutMeasures->addWidget(frameMeasure1);
 
-        QLabel * volMeasure1 = new QLabel(frameMeasure1);
-        volMeasure1->setMinimumSize(QSize(131, 31));
-        volMeasure1->setMaximumSize(QSize(185, 45));
-        volMeasure1->setFont(font2);
-        volMeasure1->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
-                                                 "	color: rgb(255, 255, 255);\n"
-                                                 "	border-radius: 0px;"));
-        volMeasure1->setAlignment(Qt::AlignCenter);
-        volMeasure1->setText(QString::number(channel->GetCurrentChannelValue()));
-        listLabelDiagnostic.append(volMeasure1);
-        horizontalLayout_3->addWidget(volMeasure1);
+            QLabel * volMeasure1 = new QLabel(frameMeasure1);
+            volMeasure1->setMinimumSize(QSize(131, 31));
+            volMeasure1->setMaximumSize(QSize(185, 45));
+            volMeasure1->setFont(font2);
+            volMeasure1->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                                     "	color: rgb(255, 255, 255);\n"
+                                                     "	border-radius: 0px;"));
+            volMeasure1->setAlignment(Qt::AlignCenter);
+            volMeasure1->setText(QString::number(channel->GetCurrentChannelValue()));
+            listLabelDiagnostic.append(volMeasure1);
+            horizontalLayout_3->addWidget(volMeasure1);
 
-        QLabel * labelMesMeasure1 = new QLabel(frameMeasure1);
-        labelMesMeasure1->setFont(font2);
-        labelMesMeasure1->setAlignment(Qt::AlignCenter);
-        labelMesMeasure1->setText(channel->GetUnitsName());
-        horizontalLayout_3->addWidget(labelMesMeasure1);
+            QLabel * labelMesMeasure1 = new QLabel(frameMeasure1);
+            labelMesMeasure1->setFont(font2);
+            labelMesMeasure1->setAlignment(Qt::AlignCenter);
+            labelMesMeasure1->setText(channel->GetUnitsName());
+            horizontalLayout_3->addWidget(labelMesMeasure1);
 
-        i++;
+            i++;
+        }
     }
 
         QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -690,8 +836,22 @@ void dMenu::on_bBackUstavki_clicked()
 
 void dMenu::on_bDiagnost_clicked()
 {
-    if(systemOptions.display == cSystemOptions::Steel) ui->bMeasuredValue->hide();
-    else ui->bMeasuredValue->show();
+    //if(systemOptions.display == cSystemOptions::Steel) ui->bMeasuredValue->hide();
+    //else ui->bMeasuredValue->show();
+
+    if(systemOptions.display == cSystemOptions::Steel)
+    {
+        ui->bAnaliz->hide();
+        // включаем режим проверки метрологии на всех платах
+        // пока только для стали
+        foreach (cDevice * device, listDevice) {
+            device->setMode(Device_Mode_Metrological);
+        }
+        foreach (cSteel * steel, listSteel) {
+            steel->mode = Device_Mode_Metrological;
+        }
+    }
+    else ui->bAnaliz->show();
     ui->stackedWidget->setCurrentIndex(8);
     ui->nameSubMenu->setText("ДИАГНОСТИКА");
     ui->frameNameSubMenu->setHidden(false);
@@ -765,26 +925,6 @@ void dMenu::slotOpenGroup(int num)
         }
         i++;
     }
-
-//    for(int k = 0; k < listCombo.size(); k++)
-//    {
-//        for(int i = 0; i < listChannels.size(); i++)
-//        {
-//            if((group->typeInput[k] == 1)
-//                    && (group->channel[k] == listChannels.at(i)))
-//            {
-//                listCombo.at(k)->setCurrentIndex(i+1); ;
-//            }
-//        }
-//        for(int i = 0; i < listMath.size(); i++)
-//        {
-//            if((group->typeInput[k] == 2)
-//                    && (group->mathChannel[k] == listMath.at(i)))
-//            {
-//                listCombo.at(k)->setCurrentIndex(i+1 + listChannels.size()); ;
-//            }
-//        }
-//    }
 
     ui->stackedWidget->setCurrentIndex(23);
     ui->nameSubMenu->setText("ГРУППА " + QString::number(num));
@@ -895,6 +1035,7 @@ void dMenu::changeVisibleWidgets()
 void dMenu::on_bAnaliz_clicked()
 {
     if(systemOptions.display == cSystemOptions::Steel) return;
+    initAnalizePage();
     UpdateAnalyze();
     ui->stackedWidget->setCurrentIndex(11);
     ui->nameSubMenu->setText("АНАЛИЗ");
@@ -1368,8 +1509,28 @@ void dMenu::on_bResetToDefault_clicked()
     emit saveButtonSignal();
 }
 
+void dMenu::initAnalizePage()
+{
+//    if(systemOptions.display == cSystemOptions::Steel)
+//    {
+//        ui->stackedWidgetTypeAnaliz->setCurrentIndex(1);
+
+//        clearLayout(ui->verticalLayoutAnalizSteel);
+
+//        QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+//        ui->verticalLayoutAnalizSteel->addItem(verticalSpacer);
+//    }
+//    else
+//    {
+        if(listChannels.size() == 0) return;
+        ui->stackedWidgetTypeAnaliz->setCurrentIndex(0);
+//    }
+}
+
 void dMenu::UpdateAnalyze()
 {
+
+    if(listChannels.size() < 4) return;
     double averagechannel_1 , averagechannel_2 , averagechannel_3,averagechannel_4 , sum;
 
     averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
@@ -2096,14 +2257,30 @@ void dMenu::on_bLogEvents_clicked()
 
 void dMenu::updateLabelDiagnostic()
 {
-    int i = 0;
-    foreach(QLabel * volLabel, listLabelDiagnostic)
+    if(systemOptions.display == cSystemOptions::Steel)
     {
-        if(i < listChannels.size())
+        if(listSteel.size() == 0) return;
+        if(listLabelEmfpAnalizSteel.size() == 0) return;
+        for(int i = 0; (i < listSteel.size()) && (i < listLabelEmfpAnalizSteel.size()); i++)
         {
-            volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+            cSteel * steel = listSteel.at(i);
+            listLabelTempAnalizSteel.at(i)->setText(QString::number(steel->temp));
+            listLabelEmfpAnalizSteel.at(i)->setText(QString::number(steel->eds));
+//            int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
+//            listComboTypeTermo.at(i)->setCurrentIndex(indexTC[steel->technology->nSt]);
         }
-        i++;
+    }
+    else
+    {
+        int i = 0;
+        foreach(QLabel * volLabel, listLabelDiagnostic)
+        {
+            if(i < listChannels.size())
+            {
+                volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+            }
+            i++;
+        }
     }
 }
 
@@ -2113,8 +2290,8 @@ void dMenu::updateLabelModeling()
     foreach(QLabel * volLabel, listLabelModeling)
     {
         QList<QColor> colors;
-                  //ON        //OFF            //ERR
-        colors << ColorCh1 << ColorCh4Light << ColorCh3;
+                  //ON        //OFF            //NO_CONFIRM
+        colors << ColorCh1 << ColorCh4Light << COLOR_GRAY;
 
         QStringList strStyle;
         strStyle << "background-color: rgb(" + \
@@ -2140,14 +2317,14 @@ void dMenu::updateLabelModeling()
         {
             cRelay * r = listRelais.at(i);
             volLabel->setText(r->getCurState() ? "ON" : "OFF");
-//            if(r->confirmedState)
-//            {
+            if(r->confirmedState)
+            {
                 volLabel->setStyleSheet(r->getCurState() ? strStyle.at(0) : strStyle.at(1));
-//            }
-//            else
-//            {
-//                volLabel->setStyleSheet(strStyle.at(2));
-//            }
+            }
+            else
+            {
+                volLabel->setStyleSheet(strStyle.at(2));
+            }
         }
         i++;
     }
@@ -2336,7 +2513,7 @@ void dMenu::updateDeviceInfo(uint8_t index)
         QStringList strType;
         strType << "" << "4AI" << "8RP" << "STEEL";
         ui->deviceType->setText(strType.at(device->deviceType % strType.size()));
-        ui->deviceState->setText(QString::number(device->deviceState));
+//        ui->deviceState->setText(QString::number(device->deviceState));
         ui->deviceStatus->setText(QString::number(device->deviceStatus));
 //        int countErr = 0;
 //        QList<int> listErrors;

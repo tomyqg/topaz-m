@@ -40,6 +40,10 @@ enum deviceStatusEnum{
     Device_Status_ERROR = 4     //ошибка устройства на этапе запуска
 };
 
+enum deviceModeEnum {
+    Device_Mode_Regular = 0,        // штатный режим
+    Device_Mode_Metrological = 1,   // режим проверки метрологии
+};
 
 enum statusChannelEnum{
     StatusCh_Off = 0,                       //выключен

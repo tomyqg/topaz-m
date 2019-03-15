@@ -5,10 +5,18 @@
 #include <QDateTime>
 #include <QVector>
 #include "steel_technology.h"
+#include "transaction.h"
+#include <QTimer>
 
 #define SIZE_ARRAY  160
+#define SIZE_ONE_ARRAY  32
 #define SUM_RELAYS   4
 
+enum {
+    STEEL_WAIT,             //ожидание измерения на одной из входных групп
+    STEEL_MEASURE,          //измерение температуры
+    STEEL_READY,            //измерения выполнены
+};
 
 class cSteel : public QObject
 {
@@ -24,6 +32,7 @@ public:
     static int countSteel;
     typeSteelTech * technology;
     uint8_t status; //статус входной группы
+    uint8_t verifStatus;    //подтверждение статуса
     float temp;     //измеряемая температура, град.
     float eds;      //ЭДС датчика активности кислорода, мВ
     uint16_t ao;    //активность кислорода, ppm
@@ -36,18 +45,45 @@ public:
     bool vectorTempReceived;
     bool vectorEdsReceived;
     bool allVectorsReceived;        //массивы для графиков получены полностью
+    bool fConfirm;                  //признак подтверждения получения всех данных
     bool lastItemEds;
     bool lastItemTemp;
     int8_t relais[SUM_RELAYS];
     uint8_t countRelayTime;         //обратнфый счётчик реле "ВРЕМЯ"
     uint8_t numSmelt;           // номер плавки
+    float cj;       // температура холодного спая
+    int state;      //состояние входной группы (из статуса)
+    deviceModeEnum mode;   //режим работы: 0 - рабочий, 1 - диагностика
 
 signals:
+    void sendTransToWorker(Transaction tr);
+    void signalDevicesPause(bool pause);
+    void signalSteelFrame(bool steelFrame);
+    void signalReady(int n);
+    void signalMeasure(int n);
+    void signalArchive(int n);
 
 public slots:
+    void parserSteel(Transaction tr);
+
+private slots:
+    void update();
+    void updateParam();
 
 private:
+    QTimer timerUpdate;
+    QTimer timerUpdateParam;
+    QStringList listBadParam;
+    QStringList blackListParam;
+    QList<QString> listUpdateParam;
+    QList<QString> listDiagnosticParam;
+    int countParam;
+    int countDiagnostic;
 
+    int getIndexArray();
+    void readArrays();
+    bool isBlackListParam(QString param);
+    void addBadParam(QString param);
 };
 
 #endif // CSTEEL_H

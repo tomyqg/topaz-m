@@ -35,9 +35,11 @@ public:
     uint32_t softwareCrc32;         // контролльная сумма ПО
     uint8_t uniqueId[12];           // уникальный идентификатор контроллера
     uint16_t root_Access;           // регистр доступа ROOT
+    uint16_t deviceMode;            // режим работы платы
     int parseDeviceParam(Transaction tr);
     bool getStable() { return stableOnline; }
-
+    void setMode(int m);
+    int getMode() { return deviceMode; }
 
 signals:
     void updateParam(Transaction tr);
@@ -58,6 +60,7 @@ private:
     bool pauseUpdateParam;          // пауза обновления параметров
     bool stableOnline;              // признак стабильного признакак онлайн/оффлайн
     int counterStatus;              // счётчик статусов для определения стабильности
+    int countParams;                // счетчик для перебора запрашиваемых параметров
 };
 
 #endif // CDEVICE_H

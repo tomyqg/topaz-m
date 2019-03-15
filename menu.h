@@ -70,12 +70,17 @@ private:
     QTimer tUpdateBar;
     QTimer tUpdateDiagnostic;
     QTimer tUpdateDeviceUI;
+    QTimer tUpdateAnaliz;
     dSettings * dialogSetingsChannel;
     QList<QLabel*> listLabelDiagnostic;
     QList<QLabel*> listLabelModeling;
+    QList<QLabel*> listLabelTempAnalizSteel;
+    QList<QLabel*> listLabelEmfpAnalizSteel;
+    QList<QComboBox*> listComboTypeTermo;
+    QList<QLabel*> listLabelCj;
 //    QList<QPushButton*> listButtonModeling;
 //    QList<ChannelOptions *> listChannels;
-    void UpdateAnalyze();
+    void initAnalizePage();
     void updateDiagnosticMess();
     void updateSystemOptions(QString path = pathtosystemoptions);
     cSystemOptions sysOptions;
@@ -108,6 +113,7 @@ private:
     void addWidgetMath();
 private slots:
     void updateDevicesUI();
+    void UpdateAnalyze();
     void updateDeviceInfo(uint8_t index);
     void updateLabelDiagnostic();
     void updateLabelModeling();
@@ -236,6 +242,7 @@ signals:
     void saveButtonSignal();
     void finishCopyArchive();
     void newUstavka(int num);
+    void signalToWorker(Transaction tr);
 };
 
 #endif // MENU_H

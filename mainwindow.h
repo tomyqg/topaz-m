@@ -123,6 +123,11 @@ public slots:
     void updateSystemOptions();
     void updateSteel();
     void writeArchiveSteel(int steelNum);
+    void slotReadySteel(int n);
+    void slotMeasureSteel(int n);
+    void slotSteelArchivate(int n);
+    void slotSteelFrame(bool steelFrame);
+    void devicesPause(bool f);
 
 private slots:
 
@@ -147,7 +152,7 @@ private slots:
     void logginStates(int channel, QString mess);
     void newUstavkaConnect(int num);
     void slotRelay(uint8_t sl, uint8_t num, bool state);
-
+    void slotGetRelay(uint8_t sl, uint8_t num);
 //    void askAnybusIRQ();
 
 //    void on_sendI2C_clicked();
@@ -379,7 +384,6 @@ private:
     void updateSteelWidget();   //обновление виджета с данными и графиком стали
     bool steelSelectFrame;
     void logginSteel(int numSteel);
-    void devicesPause(bool f);
 
     cServerHttp * server;
 
@@ -393,6 +397,9 @@ private:
 
 
 
+    int getStateSteel();
+    cSteel *getReadySteel();
+    cSteel *getMeasureSteel();
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

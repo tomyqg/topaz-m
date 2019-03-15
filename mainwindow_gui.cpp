@@ -705,6 +705,12 @@ void MainWindow::initSteel()
             steel->slot = CONST_SLAVE_STEEL_2;
         steel->slotIndex = i % 2;
         steel->technology = &steelTech[i%NUM_TECHNOLOGIES];
+        connect(steel, SIGNAL(sendTransToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
+        connect(steel, SIGNAL(signalDevicesPause(bool)), this, SLOT(devicesPause(bool)));
+        connect(steel, SIGNAL(signalSteelFrame(bool)), this, SLOT(slotSteelFrame(bool)));
+        connect(steel, SIGNAL(signalMeasure(int)), this, SLOT(slotMeasureSteel(int)));
+        connect(steel, SIGNAL(signalReady(int)), this, SLOT(slotReadySteel(int)));
+        connect(steel, SIGNAL(signalArchive(int)), this, SLOT(slotSteelArchivate(int)));
         listSteel.append(steel);
     }
 }

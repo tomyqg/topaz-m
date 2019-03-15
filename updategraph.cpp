@@ -662,167 +662,11 @@ void MainWindow::updateSteel()
 
         }
     }
+}
 
-    //Запрос статусов входных групп внезависимости от текущего состояния виджетов
-//    Transaction tr(Transaction::R, (uint8_t)ssc.getSlotBySteel(steelReadyNum));
-//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(0)) + "Status");
-//    emit sendTransToWorker(tr);
-//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(1)) + "Status");
-//    emit sendTransToWorker(tr);
-//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(2)) + "Status");
-//    emit sendTransToWorker(tr);
-//    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(ssc.getDevSteel(3)) + "Status");
-//    emit sendTransToWorker(tr);
-    Transaction tr(Transaction::R);
-    foreach (cSteel * st, listSteel) {
-        if(st->enable)
-        {
-            tr.slave = st->slot;
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(st->slotIndex) + "Status");
-            emit sendTransToWorker(tr);
-        }
-    }
-
-    if(stateWidgetSteel == STEEL_READY)
-    {   //в плате STEEL имеются данные для получения
-//        if((listSteel.at(steelReadyNum)->vectorEdsReceived) && \
-//                (listSteel.at(steelReadyNum)->vectorTempReceived))
-//        {
-//            if(!listSteel.at(steelReadyNum)->allVectorsReceived)
-//            {
-//                //запись в журнал
-//                logginSteel(steelReadyNum);
-//                writeArchiveSteel(steelReadyNum);
-//            }
-//            listSteel.at(steelReadyNum)->allVectorsReceived = true;
-//        }
-//        else
-//        {
-//            listSteel.at(steelReadyNum)->allVectorsReceived = false;
-//        }
-
-        if(listSteel.at(steelReadyNum)->allVectorsReceived)
-        {
-            //запись в журнал
-            logginSteel(steelReadyNum);
-            writeArchiveSteel(steelReadyNum);
-            listSteel.at(steelReadyNum)->allVectorsReceived = false;
-        }
-
-        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelUpdateData)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorTC)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_SteelErrorEds))
-        {
-//            steelReady = false;
-//            steelMeasure = false;
-            stateWidgetSteel = STEEL_WAIT;
-            devicesPause(false);
-        }
-
-//        return;
-    }
-    else if(stateWidgetSteel == STEEL_MEASURE)
-    {   //началось измерение температуры и поиск площадки
-        Transaction tr(Transaction::R, listSteel.at(steelReadyNum)->slot);
-        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(listSteel.at(steelReadyNum)->slotIndex) + "Data");
-        emit sendTransToWorker(tr);
-//        for(int i = 1; i <= 10; i ++)
-//        {
-        if((numArraySteel < 5) && askNewArray)
-        {
-            //запрос текущего участка графика ЭДС
-            tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+1));
-            emit sendTransToWorker(tr);
-            //запрос текущего участка графика температуры
-            tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel+6));
-            emit sendTransToWorker(tr);
-            askNewArray = false;
-            listSteel.at(steelReadyNum)->lastItemEds = false;
-            listSteel.at(steelReadyNum)->lastItemTemp = false;
-        }
-//        }
-        if((listSteel.at(steelReadyNum)->status == StatusCh_SteelWaitData)\
-                || (listSteel.at(steelReadyNum)->status == StatusCh_WaitConf))
-        {
-            stateWidgetSteel = STEEL_WAIT;
-            devicesPause(false);
-        }
-    }
-
-    for(int i = 0; i<listSteel.size(); i++)
-    {   // поочерёдный опрос статуса всех входных групп
-        cSteel * steel = listSteel.at(i);
-        int slot = steel->slot;
-        int devCh = steel->slotIndex;
-        Transaction tr(Transaction::R, (uint8_t)slot, 0, 0);
-
-        if((steel->status == StatusCh_SteelSquaresOK) ||\
-                (steel->status == StatusCh_SteelNotFoundSquareTemp) || \
-                (steel->status == StatusCh_SteelNotFoundSquareEds) || \
-                (steel->status == StatusCh_SteelNotFoundSquares))
-        {   // i-тая входная группа нашла площадку и имеются готовые данные
-            if(stateWidgetSteel != STEEL_READY)
-            {
-                QList<QString> str;
-                str << "Data" << "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
-                if(listSteel.at(steelReadyNum)->technology->COH != 0)
-                {
-                    foreach (QString s, str) {
-                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + s);
-                        emit sendTransToWorker(tr);
-                    }
-                }
-                else
-                {
-                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Data");
-                    emit sendTransToWorker(tr);
-                    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(devCh) + "Carbon");
-                    emit sendTransToWorker(tr);
-                }
-            }
-//            for(int i = 1; i <= 10; i ++)
-//            {
-//                tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(i));
-//                emit sendTransToWorker(tr);
-//            }
-            //очистка векторов для новых данных
-//            QVector<double> vec = QVector(SIZE_ARRAY, NAN);
-//            steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
-//            steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
-            //очистка признаков завершения получения векторов (только всё начинается)
-//            steel->allVectorsReceived = false;
-            steel->vectorTempReceived = false;
-            steel->vectorEdsReceived = false;
-            steel->allVectorsReceived = false;
-            steel->alg = 0x7FFF;
-            steel->ao = 0x7FFF;
-            steel->temp = NAN;
-            steel->eds = NAN;
-            steel->cl = NAN;
-            //данные на стороне платы STEEL готовы - запомним
-//            steelReady = true;  //данные готовы
-            stateWidgetSteel = STEEL_READY;
-            devicesPause(false);
-            steelReadyNum = i;  //запоминаем номер входной группы
-//            steelSelectFrame = false;   //разрешаем показывать график
-            steel->timeUpdateData = QDateTime::currentDateTime();
-               break;  //выход из цикла, на первой же входной группе с площадкой
-        }
-        else if(steel->status == StatusCh_SteelUpdateData)
-        {
-            if(stateWidgetSteel != STEEL_MEASURE)
-            {
-                stateWidgetSteel = STEEL_MEASURE;
-                devicesPause(true);
-                steelSelectFrame = false;
-                steelReadyNum = i;
-                numArraySteel = 0;
-                askNewArray = true;
-                steel->vectorEds = QVector<double>(SIZE_ARRAY, NAN);
-                steel->vectorTemp = QVector<double>(SIZE_ARRAY, NAN);
-            }
-        }
-    }
+void MainWindow::slotSteelFrame(bool steelFrame)
+{
+    steelSelectFrame = steelFrame;
 }
 
 void MainWindow::updateSteelWidget(void)
@@ -865,6 +709,7 @@ void MainWindow::updateSteelWidget(void)
     ui->PlavkaNum_3->setText(QString::number(listSteel.at(2)->numSmelt));
     ui->PlavkaNum_4->setText(QString::number(listSteel.at(3)->numSmelt));
 
+
     if((stateWidgetSteel == STEEL_READY) || (stateWidgetSteel == STEEL_MEASURE))
     {   //найдена площадка
         //steelReadyNum
@@ -899,44 +744,35 @@ void MainWindow::updateSteelWidget(void)
             ui->frameTemperature->hide();
         }
 
-//        if(listSteel.at(steelReadyNum)->allVectorsReceived)
-//        {
-            Y_Coord_SteelTemp = listSteel.at(steelReadyNum)->vectorTemp;
-//            if(listSteel.at(steelReadyNum)->technology->COH != 0)
-//            {
-                Y_Coord_SteelEds = listSteel.at(steelReadyNum)->vectorEds;
-//            }
-//            else
-//            {
-//                Y_Coord_SteelEds = QVector<double>(Y_Coord_SteelTemp.size(), NAN);
-//            }
-            X_Coord_Steel.resize(0);
-            for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
-            {
-                X_Coord_Steel.append((i * PERIOD_MEASURE_STEEL) / 1000.0);
-            }
-            ui->plotSteel->clearGraphs();
-            ui->plotSteel->addGraph();
-            ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
-            ui->plotSteel->xAxis->setLabel("t,sec");
-            ui->plotSteel->yAxis2->setLabel("Emf, mV");
-            ui->plotSteel->yAxis->setLabel("Temp, °C");
-            ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
+        Y_Coord_SteelTemp = steel->vectorTemp;
+        Y_Coord_SteelEds = steel->vectorEds;
+        X_Coord_Steel.resize(0);
+        for(int i = 0; i < Y_Coord_SteelTemp.size(); i++)
+        {
+            X_Coord_Steel.append((i * PERIOD_MEASURE_STEEL) / 1000.0);
+        }
+        ui->plotSteel->clearGraphs();
+        ui->plotSteel->addGraph();
+        ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
+        ui->plotSteel->xAxis->setLabel("t,sec");
+        ui->plotSteel->yAxis2->setLabel("Emf, mV");
+        ui->plotSteel->yAxis->setLabel("Temp, °C");
+        ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
 
-            ui->plotSteel->addGraph(ui->plotSteel->xAxis, ui->plotSteel->yAxis2);
-            ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelEds);
-            ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
-//            ui->plotSteel->rescaleAxes();
-            double size = steel->technology->tPt;
-            double position = size / 2;
-            ui->plotSteel->xAxis->setRange(position, size, Qt::AlignCenter);
-            size = (steel->technology->LPth - steel->technology->LPtl) * 1.1;
-            position = (steel->technology->LPth + steel->technology->LPtl) / 2;
-            ui->plotSteel->yAxis->setRange(position, size, Qt::AlignCenter);
-            ui->plotSteel->yAxis2->setRange(100, 800, Qt::AlignCenter);
-            ui->plotSteel->replot();
-            ui->plotSteel->clearItems();
-//        }
+        ui->plotSteel->addGraph(ui->plotSteel->xAxis, ui->plotSteel->yAxis2);
+        ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelEds);
+        ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
+        //            ui->plotSteel->rescaleAxes();
+        double size = steel->technology->tPt;
+        double position = size / 2;
+        ui->plotSteel->xAxis->setRange(position, size, Qt::AlignCenter);
+        size = (steel->technology->LPth - steel->technology->LPtl) * 1.1;
+        position = (steel->technology->LPth + steel->technology->LPtl) / 2;
+        ui->plotSteel->yAxis->setRange(position, size, Qt::AlignCenter);
+        ui->plotSteel->yAxis2->setRange(100, 800, Qt::AlignCenter);
+        ui->plotSteel->replot();
+        ui->plotSteel->clearItems();
+
     }
     else
     {
@@ -961,3 +797,21 @@ void MainWindow::updateSteelWidget(void)
     }
 }
 
+
+void MainWindow::slotReadySteel(int n)
+{
+    steelReadyNum = n;
+    stateWidgetSteel = STEEL_READY;
+}
+
+void MainWindow::slotMeasureSteel(int n)
+{
+    steelReadyNum = n;
+    stateWidgetSteel = STEEL_MEASURE;
+}
+
+void MainWindow::slotSteelArchivate(int n)
+{
+    logginSteel(n);
+    writeArchiveSteel(n);
+}

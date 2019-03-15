@@ -430,7 +430,8 @@ void worker::run()
                     }
                     else
                     {
-                        qDebug() << "Modbus Read  slave:" << tr.slave \
+                        qDebug() << "[" << trans.size() << "]" \
+                                 << "Modbus Read  slave:" << tr.slave \
                                  << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                                  << " offset:" << tr.offset \
                                  << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
@@ -444,16 +445,17 @@ void worker::run()
 
 
 #ifdef DEBUG_WORKER
-                    qDebug() << "Modbus Write  slave:" << tr.slave \
+                    qDebug() << "[" << trans.size() << "]" \
+                             << "Modbus Write  slave:" << tr.slave \
                              << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                              << " offset:" << tr.offset \
                              << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                              << "Time: " << time.elapsed();
 #endif
-                tr.dir = Transaction::R;
-                mQueue.lock();
-                trans.enqueue(tr);
-                mQueue.unlock();
+//                tr.dir = Transaction::R;
+//                mQueue.lock();
+//                trans.enqueue(tr);
+//                mQueue.unlock();
             }
         }
         // время тишины линии Modbus
@@ -481,7 +483,8 @@ void worker::getTransSlot(Transaction tr)
 //    std::string utf8_text = cRegistersMap::getNameByOffset(tr.offset).toUtf8().constData();
     if(tr.dir == Transaction::R)
     {
-        qDebug() << "Modbus Ask  slave:" << tr.slave \
+        qDebug() << "[" << trans.size() << "]" \
+                 << "Modbus Ask  slave:" << tr.slave \
                  << "name:"  << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                  << " offset:" << tr.offset;
     }

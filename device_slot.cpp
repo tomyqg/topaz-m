@@ -26,6 +26,8 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);
     timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
+    countParams = 0;
+    deviceMode = 0;
 }
 
 int cDevice::parseDeviceParam(Transaction tr)
@@ -105,7 +107,30 @@ int cDevice::parseDeviceParam(Transaction tr)
     {
         root_Access = (uint16_t)tr.volInt;
     }
+    else if(nameParam == "deviceMode")
+    {
+        if(deviceMode != (uint16_t)tr.volInt)
+        {
+            Transaction trans(Transaction::W, slot);
+            trans.offset = cRegistersMap::getOffsetByName("deviceMode");
+            trans.volInt = deviceMode;
+            emit updateParam(trans);
+        }
+    }
+
     return 0;
+}
+
+void cDevice::setMode(int m)
+{
+    if((deviceMode != m) && online)
+    {
+        deviceMode = m;
+        Transaction tr(Transaction::W, slot);
+        tr.offset = cRegistersMap::getOffsetByName("deviceMode");
+        tr.volInt = deviceMode;
+        emit updateParam(tr);
+    }
 }
 
 void cDevice::resetOnline()

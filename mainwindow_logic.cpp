@@ -429,11 +429,6 @@ void MainWindow::InitUstavka()
 
 void MainWindow::UpdUst()
 {
-//    QList<ChannelOptions *> ChannelsObjectsList;
-//    ChannelsObjectsList.append(&channel1);
-//    ChannelsObjectsList.append(&channel2);
-//    ChannelsObjectsList.append(&channel3);
-//    ChannelsObjectsList.append(&channel4);
 
     foreach (Ustavka * ust, listUstavok) {
         int ch = ust->getChannel();
@@ -457,28 +452,15 @@ void MainWindow::InitChannelSlotTable()
     csc.addChannelSlot(1, 1, CONST_SLAVE_ADC);
     csc.addChannelSlot(2, 2, CONST_SLAVE_ADC);
     csc.addChannelSlot(3, 3, CONST_SLAVE_ADC);
-//    csc.addChannelSlot(4, 0, CONST_SLAVE_ADC_2);
-//    csc.addChannelSlot(5, 1, CONST_SLAVE_ADC_2);
-//    csc.addChannelSlot(2, 2, CONST_SLAVE_ADC_2);
-//    csc.addChannelSlot(3, 3, CONST_SLAVE_ADC_2);
 }
 
 void MainWindow::InitRelaySlotTable()
 {
-//    //временный механизм создания связей
-//    rsc.addRelaySlot(0, 0, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(1, 1, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(2, 2, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(3, 3, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(4, 7, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(5, 6, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(6, 5, CONST_SLAVE_RELAY);
-//    rsc.addRelaySlot(7, 4, CONST_SLAVE_RELAY);
     for(int i = 0; i < TOTAL_NUM_RELAY; i++)
     {
         cRelay * relay = new cRelay(i);
         connect(relay, SIGNAL(signalSwitch(uint8_t, uint8_t, bool)), this, SLOT(slotRelay(uint8_t, uint8_t, bool)));
-
+        connect(relay, SIGNAL(signalGetState(uint8_t, uint8_t)), this, SLOT(slotGetRelay(uint8_t, uint8_t)));
         listRelais.append(relay);
     }
 }
@@ -845,16 +827,6 @@ void MainWindow::updateDevicesComplect()
             ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
             ch->enable = true;
         }
-//        else
-//        {   // добавить каналы, если плат стало больше
-//            ChannelOptions * ch = new ChannelOptions();
-//            ch->SetCurrentChannelValue(0);
-//            ch->setNum(i+1);
-//            ch->setSlot(slot);     //
-//            ch->setSlotChannel(i%4);
-//            connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-//            listChannels.append(ch);
-//        }
         i++;
     }
     if(listChannels.size() > list4AI.size())
@@ -877,13 +849,6 @@ void MainWindow::updateDevicesComplect()
             r->mySlot = slot;     //
             r->myPhysicalNum = i%NUM_RELAY_IN_8RP;
         }
-//        else
-//        {   // добавить каналы, если соответствующих плат стало больше
-//            // но так не должно быть )
-//            cRelay * r = new cRelay(i%NUM_RELAY_IN_8RP, slot);
-//            connect(r, SIGNAL(signalSwitch(uint8_t,uint8_t,bool)), this, SLOT(slotRelay(uint8_t,uint8_t,bool)));
-//            listRelais.append(r);
-//        }
         i++;
     }
     if(listRelais.size() > list8RP.size())
@@ -903,18 +868,18 @@ void MainWindow::updateDevicesComplect()
             //обновление параметров реле
             cSteel * s = listSteel.at(i);
             s->slot = slot;     //
-            s->slotIndex = i%2;
+            s->slotIndex = i%NUM_CHAN_IN_STEEL;
             s->enable = true;
         }
-        else
-        {   // добавить каналы, если соответствующих плат стало больше
-            cSteel * s = new cSteel(this);
-            s->slot = slot;     //
-            s->slotIndex = i%2;
-            s->enable = true;
-            s->technology = NULL;
-            listSteel.append(s);
-        }
+//        else
+//        {   // добавить каналы, если соответствующих плат стало больше
+//            cSteel * s = new cSteel(this);
+//            s->slot = slot;     //
+//            s->slotIndex = i%2;
+//            s->enable = true;
+//            s->technology = NULL;
+//            listSteel.append(s);
+//        }
         i++;
     }
     if(listSteel.size() > listSTEEL.size())
@@ -925,25 +890,6 @@ void MainWindow::updateDevicesComplect()
             listSteel.at(i)->enable = false;
         }
     }
-
-//    i = 0;
-//    foreach (cGroupChannels * group, listGroup)
-//    {
-
-//        int countActive = 0;
-//        for(int j = 0; j < MAX_NUM_CHAN_GROUP; j++)
-//        {
-//            int ch = group->channel[j];
-//            if(ch != -1)
-//            {
-//                if(listChannels.at(ch)->enable) countActive++;
-//            }
-//        }
-
-//        if((i != 0) && (countActive == 0)) group->enabled = false;
-
-//        i++;
-//    }
 }
 
 
@@ -1037,6 +983,21 @@ void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
 #ifdef DEBUG_RELAY
     qDebug() << "Relay:" << num << "=" << state;
 #endif
+    emit sendTransToWorker(tr);
+}
+
+void MainWindow::slotGetRelay(uint8_t sl, uint8_t num)
+{
+
+    Transaction tr(Transaction::R);
+    int index = num >> 1;
+    int level = num & 1;
+    QString strLevel = (level ? "ReleyLo" : "ReleyHi");
+    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(index) + strLevel);
+    tr.slave = sl;
+//#ifdef DEBUG_RELAY
+//    qDebug() << "Relay:" << num << "=" << state;
+//#endif
     emit sendTransToWorker(tr);
 }
 
@@ -1211,22 +1172,44 @@ void MainWindow::parseWorkerReceive()
             // канал 1
         {
             ch = 0;
-            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
-            if(index != -1)
+            if(device->deviceType == Device_4AI)
             {
-                channel = listChannels.at(index);
-                channel->parserChannel(tr);
+                int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    channel = listChannels.at(index);
+                    channel->parserChannel(tr);
+                }
+            }
+            if(device->deviceType == Device_STEEL)
+            {
+                int index = getIndexSteelBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listSteel.at(index)->parserSteel(tr);
+                }
             }
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_2) && (tr.offset < BASE_OFFSET_CHANNEL_3))
             // канал 2
         {
             ch = 1;
-            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
-            if(index != -1)
+           if(device->deviceType == Device_4AI)
             {
-                channel = listChannels.at(index);
-                channel->parserChannel(tr);
+                int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    channel = listChannels.at(index);
+                    channel->parserChannel(tr);
+                }
+            }
+            if(device->deviceType == Device_STEEL)
+            {
+                int index = getIndexSteelBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listSteel.at(index)->parserSteel(tr);
+                }
             }
         }
         else if((tr.offset >= BASE_OFFSET_CHANNEL_3) && (tr.offset < BASE_OFFSET_CHANNEL_4))
@@ -1254,163 +1237,7 @@ void MainWindow::parseWorkerReceive()
 
         if(!isDeviceParam)
         {
-            if(device->deviceType == Device_4AI)
-            {
-                //Это ответ от платы 4AI, значит читаем параметры канала
-//                channel->parserChannel(tr);
-            }
-//            emit retransToSlotConfig(tr);
-            if(paramName == QString("chan" + QString::number(ch) + "SignalType"))
-            {
-                if(device->deviceType == Device_4AI)   //контроллировать источник нужно во всех "else if"
-                {
-//                    channel->SetSignalType(tr.volInt);
-//                    channel->SetCurSignalType(tr.volInt);
-//                    emit retransToSlotConfig(tr);
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "Status"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1) listSteel.at(index)->status = tr.volInt;
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "AdditionalParameter1"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
-                    if((channel->GetSignalType() == ChannelOptions::MeasureTermoResistance) ||
-                            (channel->GetSignalType() == ChannelOptions::MeasureTC))
-                    {
-//                        channel->SetDiapason(tr.paramA12[1]);
-//                        emit retransToSlotConfig(tr);
-
-                    }
-                    else if(channel->GetSignalType() == ChannelOptions::MeasureVoltage)
-                    {
-//                        channel->SetDiapason(tr.paramA12[0]);
-//                        emit retransToSlotConfig(tr);
-                    }
-
-                }
-            }
-//            else if((paramName == "DataChan0") || (paramName == "chan0Data"))
-//            {
-//                if(device->deviceType == Device_4AI)
-//                {
-
-//#ifndef RANDOM_CHAN
-//                    channel->SetCurrentChannelValue((double)tr.volFlo);
-////                    ui->wBar_1->setVolue((double)tr.volFlo);
-////                    ui->widgetVol1->setVol((double)tr.volFlo);
-//#endif
-//                }
-////                else if(device->deviceType == Device_STEEL)
-////                {
-////                    listSteel.at(0)->temp = tr.volFlo;
-////                }
-//            }
-//            else if((paramName == "DataChan1") || (paramName == "chan1Data"))
-//            {
-//                if(device->deviceType == Device_4AI)
-//                {
-//#ifndef RANDOM_CHAN
-//                    channel->SetCurrentChannelValue((double)tr.volFlo);
-////                    ui->wBar_2->setVolue((double)tr.volFlo);
-////                    ui->widgetVol2->setVol((double)tr.volFlo);
-//#endif
-//                }
-////                else if(device->deviceType == Device_STEEL)
-////                {
-////                    listSteel.at(1)->temp = tr.volFlo;
-////                }
-//            }
-//            else if((paramName == "DataChan2") || (paramName == "chan2Data"))
-//            {
-//                if(device->deviceType == Device_4AI)
-//                {
-//#ifndef RANDOM_CHAN
-//                    channel->SetCurrentChannelValue((double)tr.volFlo);
-////                    ui->wBar_3->setVolue((double)tr.volFlo);
-////                    ui->widgetVol3->setVol((double)tr.volFlo);
-//#endif
-//                }
-////                else if(device->deviceType == Device_STEEL)
-////                {
-////                    listSteel.at(2)->temp = tr.volFlo;
-////                }
-//            }
-//            else if((paramName == "DataChan3") || (paramName == "chan3Data"))
-//            {
-//                if(device->deviceType == Device_4AI)
-//                {
-//#ifndef RANDOM_CHAN
-//                    channel->SetCurrentChannelValue((double)tr.volFlo);
-////                    ui->wBar_4->setVolue((double)tr.volFlo);
-////                    ui->widgetVol4->setVol((double)tr.volFlo);
-//#endif
-//                }
-////                else if(device->deviceType == Device_STEEL)
-////                {
-////                    listSteel.at(3)->temp = tr.volFlo;
-////                }
-//            }
-            else if((paramName == "DataChan" + QString("chan" + QString::number(ch))) || \
-                    paramName == QString("chan" + QString::number(ch) + "Data"))
-            {
-                if(device->deviceType == Device_4AI)
-                {
-//                    channel->SetCurrentChannelValue((double)tr.volFlo);
-                }
-                if(device->deviceType == Device_STEEL)
-                {
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1) listSteel.at(index)->temp = tr.volFlo;
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "OxActivity"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1) listSteel.at(index)->ao = tr.volInt & 0xFFFF;
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "MassAl"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1) listSteel.at(index)->alg = tr.volInt & 0xFFFF;
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "Carbon"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    //получены все данные по площадке - это последний параметр
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1)
-                    {
-                        listSteel.at(index)->allVectorsReceived = true;
-                        if(tr.paramA12[0] != 0x7FFF)
-                            listSteel.at(index)->cl = (float)tr.paramA12[0] / 1000;
-                        else
-                            listSteel.at(index)->cl = NAN;
-                    }
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "PrimaryActivity"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    int index = getIndexSteelBySlotAndCh(tr.slave, ch);
-                    if(index != -1) listSteel.at(index)->eds = tr.volFlo;
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "ReleyHi"))
+            if(paramName == QString("chan" + QString::number(ch) + "ReleyHi"))
             {
                 if(device->deviceType == Device_8RP)
                 {
@@ -1462,89 +1289,6 @@ void MainWindow::parseWorkerReceive()
                         //Vag: тут вставить инициализацию списка входных групп
                     }
                     slotAnalogOnline = true;
-                }
-            }
-            else if(paramName.contains("DataArray"))
-            {
-                if(device->deviceType == Device_STEEL)
-                {
-                    bool needNextArray = true;  //признак необходимости запроса следующего массива
-                    int curArray = 0;
-                    for(int i = 1; i <= 5; i++)
-                    {   //перебор массивов по номерам в карте регистров
-                        if(paramName == QString("DataArray" + QString::number(i)))
-                        {   //подобран номер массива
-                            listSteel.at(steelReadyNum)->vectorEdsReceived = true;
-                            listSteel.at(steelReadyNum)->lastItemEds = true;
-                            for(int j = 0; j < 32; j++)
-                            {   //поэлементное копирование полученного массива в соответствующий объект стали
-                                curArray = i;
-                                int indexVec = j + (i - 1) * 32;
-                                if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
-                                {
-                                    if(tr.paramInt16[j] != 0x7FFF)
-                                    {
-                                        if(listSteel.at(steelReadyNum)->technology->COH != 0)
-                                        {
-                                            listSteel.at(steelReadyNum)->vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
-                                        }
-                                    }
-                                }
-                            }
-                            if(tr.paramInt16[31] == 0x7FFF)
-                            {
-                                listSteel.at(steelReadyNum)->lastItemEds = false;
-                            }
-                            break;
-                        }
-                        else if(paramName == QString("DataArray" + QString::number(i+5)))
-                        {
-                            listSteel.at(steelReadyNum)->vectorTempReceived = true;
-                            listSteel.at(steelReadyNum)->lastItemTemp = true;
-                            for(int j = 0; j < 32; j++)
-                            {   //поэлементное копирование полученного массива в соответствующий объект стали
-                                curArray = i;
-                                int indexVec = j + (i - 1) * 32;
-                                if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
-                                {
-                                    if(tr.paramInt16[j] != 0x7FFF)
-                                    {
-                                        listSteel.at(steelReadyNum)->vectorTemp.replace(indexVec, (double)tr.paramInt16[j]);
-                                    }
-                                }
-                            }
-                            if(tr.paramInt16[31] == 0x7FFF)
-                            {
-                                listSteel.at(steelReadyNum)->lastItemTemp = false;
-                            }
-                            break;
-                        }
-                    }
-
-                    //оба масива после запроса
-                    if(((listSteel.at(steelReadyNum)->vectorEdsReceived) || \
-                        (listSteel.at(steelReadyNum)->technology->COH == 0)) && \
-                            (listSteel.at(steelReadyNum)->vectorTempReceived))
-                    {
-                        askNewArray = true;
-                        listSteel.at(steelReadyNum)->vectorTempReceived = false;
-                        listSteel.at(steelReadyNum)->vectorEdsReceived = false;
-                    }
-
-                    //если оба массива полные значениями,
-                    // или только температуры при отключенной окисленности
-                    //массив получен, можно запросить ещё
-                    if((listSteel.at(steelReadyNum)->lastItemEds || \
-                        (listSteel.at(steelReadyNum)->technology->COH == 0)) && \
-                            listSteel.at(steelReadyNum)->lastItemTemp)
-                    {
-                        numArraySteel = curArray;
-                    }
-//                    if(needNextArray)
-//                    {   //если массив заполнен, то переход на следующий
-//                            numArraySteel = curArray;
-////                                assert(numArraySteel < 5);  //номер массива не может быть равен 5 или больше
-//                    }
                 }
             }
             emit retransToSlotConfig(tr);
@@ -1631,11 +1375,6 @@ bool MainWindow::isChannelInMinNow(int ch)
 
 void MainWindow::sendConfigChannelsToSlave()
 {
-//    QList<ChannelOptions *> ChannelsObjectsList;
-//    ChannelsObjectsList.append(&channel1);
-//    ChannelsObjectsList.append(&channel2);
-//    ChannelsObjectsList.append(&channel3);
-//    ChannelsObjectsList.append(&channel4);
 
     Transaction tr;
     tr.dir = Transaction::W;
@@ -1687,6 +1426,9 @@ void MainWindow::sendConfigChannelsToSlave()
         for(int i = 0; i < listSteel.size(); i++)
         {
             cSteel * st = listSteel.at(i);
+
+            if(!st->enable) continue;
+
             int devS = st->slotIndex;
             tr.slave = st->slot;
 
@@ -1774,7 +1516,7 @@ void MainWindow::sendConfigChannelsToSlave()
             tr.volInt = st->technology->G;
             emit sendTransToWorker(tr);
 
-            // запись Mass_melting
+            // запись AdditionalParameter
             str = "chan" + QString::number(devS) + "AdditionalParameter1";
             tr.offset = cRegistersMap::getOffsetByName(str);
             tr.paramA12[1] = st->technology->nSt;
