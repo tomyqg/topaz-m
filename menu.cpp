@@ -115,6 +115,7 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaChannels, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDevices, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaMeasures, QScroller::LeftMouseButtonGesture);
 
 
 
@@ -266,17 +267,17 @@ void dMenu::on_saveButton_clicked()
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
     timerLoad.start(1000);
     //  запись файла //
-    sysOptions.arrows = ui->arrowscheckBox->checkState();
-    sysOptions.display = ui->modeGraf->currentIndex();
-    sysOptions.display += (ui->modeBar->currentIndex() << 2);
+    systemOptions.arrows = ui->arrowscheckBox->checkState();
+    systemOptions.display = ui->modeGraf->currentIndex();
+    systemOptions.display += (ui->modeBar->currentIndex() << 2);
 //    if(ui->radioButSteelModes->isChecked())
 //    {
 //        sysOptions.display = cSystemOptions::Steel;
 //    }
-    sysOptions.autoscale = ui->autoscalecheckbox->isChecked();
-    sysOptions.brightness = light;
+    systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
+    systemOptions.brightness = light;
 //    setBrightness(light);
-    cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &sysOptions);
+    cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &systemOptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
     foreach (cDevice * device, listDevice) {
         device->setMode(Device_Mode_Regular);
@@ -291,9 +292,10 @@ void dMenu::on_saveButton_clicked()
 void dMenu::updateSystemOptions(QString path)
 {
 //    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
-    ui->arrowscheckBox->setChecked(sysOptions.arrows);
-    ui->modeBar->setCurrentIndex((sysOptions.display >> 2) % ui->modeBar->count());
-    ui->modeGraf->setCurrentIndex(sysOptions.display & 3);
+
+    ui->arrowscheckBox->setChecked(systemOptions.arrows);
+    ui->modeBar->setCurrentIndex((systemOptions.display >> 2) % ui->modeBar->count());
+    ui->modeGraf->setCurrentIndex(systemOptions.display & 3);
 //    if((listSteel.size() > 0) && (listChannels.size() > 0))
 //    {
 //        ui->groupBoxTypePribor->show();
@@ -313,7 +315,7 @@ void dMenu::updateSystemOptions(QString path)
 //    {
 //        ui->groupBoxTypePribor->hide();
 //    }
-    ui->autoscalecheckbox->setChecked(sysOptions.autoscale);
+    ui->autoscalecheckbox->setChecked(systemOptions.autoscale);
 }
 
 void dMenu::addWidgetUstavki()

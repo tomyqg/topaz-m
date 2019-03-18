@@ -2,7 +2,7 @@
 
 #define TIME_RESET_ONLINE_SEC   7
 #define TIME_UPDATE_STATUS_SEC  3
-#define TIME_UPDATE_CONST_SEC   10
+#define TIME_UPDATE_CONST_SEC   100
 #define COUNT_STABLE_STATUS     3
 
 int cDevice::countDev = 1;
@@ -23,6 +23,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     connect(timerUpdateStatus, SIGNAL(timeout()), this, SLOT(updateStatus()));
     updateStatus();
     connect(timerUpdateConstParam, SIGNAL(timeout()), this, SLOT(updateConstParam()));
+    updateConstParam();
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);
     timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
