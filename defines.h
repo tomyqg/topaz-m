@@ -15,7 +15,16 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#ifdef Q_OS_WIN32
+//    #define RANDOM_CHAN
+#endif
+//#define RANDOM_CHAN
+
+#ifdef RANDOM_CHAN
 #define CURRENT_VER "1.70" //версия ПО
+#else
+#define CURRENT_VER "1.72" //версия ПО
+#endif
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
@@ -212,11 +221,7 @@
 #endif
 //-----------------------
 
-#ifdef Q_OS_WIN32
-//    #define RANDOM_CHAN
-#endif
 
-#define RANDOM_CHAN
 
 #define DEBUG_RELAY
 

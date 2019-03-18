@@ -2,7 +2,7 @@
 
 #define TIME_RESET_ONLINE_SEC   7
 #define TIME_UPDATE_STATUS_SEC  3
-#define TIME_UPDATE_CONST_SEC   1000
+#define TIME_UPDATE_CONST_SEC   10
 #define COUNT_STABLE_STATUS     3
 
 int cDevice::countDev = 1;
@@ -163,14 +163,17 @@ void cDevice::updateStatus()
     }
     else
     {
-        params << "uptime" << "deviceState" << "accessType" << "mbCommCount"\
-               << "mbCommError" << "deviceStatus" << "devErrors" << "root_Access";
+        params << "uptime" /*<< "deviceState"*/ << "accessType" << "mbCommCount"\
+           << "mbCommError" << "deviceStatus" << "devErrors" << "deviceMode";/* << "root_Access";*/
     }
-    for(int i = 0; i < params.size(); i++)
-    {
-        tr.offset = cRegistersMap::getOffsetByName(params.at(i));
-        emit updateParam(tr);
-    }
+//    for(int i = 0; i < params.size(); i++)
+//    {
+//        tr.offset = cRegistersMap::getOffsetByName(params.at(i));
+//        emit updateParam(tr);
+//    }
+    tr.offset = cRegistersMap::getOffsetByName(params.at(countParams++));
+    emit updateParam(tr);
+    if(countParams >= params.size()) countParams = 0;
 }
 
 void cDevice::updateConstParam()
