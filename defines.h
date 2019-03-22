@@ -18,7 +18,7 @@
 #ifdef Q_OS_WIN32
 //    #define RANDOM_CHAN
 #endif
-//#define RANDOM_CHAN
+#define RANDOM_CHAN
 
 #ifdef RANDOM_CHAN
 #define CURRENT_VER "1.70" //версия ПО

@@ -399,9 +399,15 @@ void dSettings::updateGraf(int period)
 
     assert(arch != NULL);
     if(arch == NULL) return;
+    //               1 мин 10 мин 1 час 10 часов сутки  неделя  месяц    3 месяца год
+    int periods[] = {60,   600,   3600, 36000,   86400, 604800, 2592000, 7776000, 31104000};
+    QStringList listLabels;
+    //            1 мин      10 мин        1 час      10 часов
+    listLabels << "hh:mm:ss" << "hh:mm:ss" << "hh:mm:ss" << "hh:mm:ss"
+    //              сутки       неделя     месяц      3 месяца      год
+               << "dd.MM hh:mm" << "dd.MM.yy" << "dd.MM.yy" << "dd.MM.yy" << "dd.MM.yy";
 
     /*QDateTime */firstTime = QDateTime::currentDateTime().addSecs(-period-periodShift);
-    /*QString */strLabel = "hh:mm:ss";
 
     /*int */multiplier = 1;
     if(period >= 604800)
@@ -409,6 +415,8 @@ void dSettings::updateGraf(int period)
         multiplier = 600;
     }
     int periodToGraf = period / multiplier;
+
+
 
     // копирование уже считанных с файлов данных
     Y_coordinates_Chanel_1 = arch->getVector(ui->combo1ChannelArch->currentIndex() - 1);
@@ -437,19 +445,26 @@ void dSettings::updateGraf(int period)
         }
     }
 
+    //Расстановка меток времени согласно периоду
+    strLabel = "hh:mm:ss";
+    if(listLabels.size() == (sizeof(periods)/sizeof(int)))
+    {
+        for(int i = 0; i < listLabels.size(); i++)
+        {
+            strLabel = listLabels.at(i);
+            if(period <= periods[i]) break;
+        }
+    }
     //Генерация шкалы Х
     for(int i = 0; i < periodToGraf; i ++)
     {
         X_Coordinates.append(i);
 
         //создание массива подписей
-        if((i%(periodToGraf/5) == 0)/* && (i >= firstLabel)*/) //
+//        if((i%(periodToGraf/5) == 0)/* && (i >= firstLabel)*/) //
             Labels.append(firstTime.addSecs(i*multiplier).toString(strLabel));
     }
-
-    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickStep(periodToGraf/5); //
-
+    ui->customPlot->xAxis->setAutoTickStep(true);
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
@@ -1075,6 +1090,7 @@ void dSettings::ReactOnMouseSlide()
         double pos = ui->customPlot->xAxis->range().center();
         double size = sizePlotX * scale * scale ;
         ui->customPlot->xAxis->setRange(pos, size, Qt::AlignCenter);
+
 //        ui->customPlot->replot();
     }
     else if(mouseOnMove)
