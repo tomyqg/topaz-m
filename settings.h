@@ -84,6 +84,7 @@ private:
     void reactOnMouseRelease();
     void ReactOnMouseSlide();
     void updateArchGraf();
+    bool fInitComboChannles;
 
 private slots:
     void initComboChannels(void);

@@ -93,10 +93,6 @@ void MainWindow::MainWindowInitialization()
     QPixmap pixLoad(pathtologotip);
     ui->logoOnLoad->setPixmap(pixLoad);
 
-
-
-
-
     // Инициализация потока Worker ---------------------
     WorkerThread = new QThread;
     worker* myWorker = new worker;

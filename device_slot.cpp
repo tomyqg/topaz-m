@@ -14,6 +14,9 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     counterStatus = 0;
     stableOnline = false;
     deviceType = Device_None;
+    deviceStatus = Device_Status_NOINIT;
+    deviceState = Device_State_OK;
+    factoryDate = 0;
     pauseUpdateParam = false;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);

@@ -2464,15 +2464,21 @@ void dMenu::updateDevicesUI()
     if(curDiagnostDevice != 0)
     {
         cDevice * curDev = listDevice.at(curDiagnostDevice - 1);
-        ui->deviceType->setText(strType.at(curDev->deviceType));
+        if(curDev->deviceType < strType.size())
+        {
+            ui->deviceType->setText(strType.at(curDev->deviceType));
+        }
         ui->deviceState->setText(QString::number(curDev->deviceState));
         QStringList strStatus;
         strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
-        ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
+        if((int)curDev->deviceStatus < strStatus.size())
+        {
+            ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
+        }
         int numErr = 0;
         QStringList devErrors;
-        devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS"\
-                  << "SPEED" << "MODEL_CHECK" << "REZERV" << "RESERVE" << "RESERVE"
+        devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS" \
+                  << "SPEED" << "MODEL_CHECK" << "REZERV" << "RESERVE" << "RESERVE" \
                   << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE" << "RESERVE";
         QStringList activeErrors;
         for(int i = 0; i < 16; i++)

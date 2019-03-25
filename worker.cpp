@@ -67,7 +67,7 @@ int worker::WriteModbusData(uint8_t sl, const tLookupRegisters * dp, uint32_t * 
     int num;
     //int slave = ModBus::Board4AIAddress;
     int slave = sl;
-    uint16_t * data = (uint16_t *) &data32;
+    uint16_t * data = (uint16_t *) data32;
 
     switch (dp->type) {
     case LKUP_TYPE_ASCII:
@@ -441,7 +441,7 @@ void worker::run()
                     emit sendTrans(tr);
                 }
             } else {    //(tr.dir == Transaction::W)
-                res = WriteModbusData(tr.slave, &dp, (uint32_t *)(tr.volInt));
+                res = WriteModbusData(tr.slave, &dp, (uint32_t *)(&tr.volInt));
 
 
 #ifdef DEBUG_WORKER

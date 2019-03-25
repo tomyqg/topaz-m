@@ -615,7 +615,7 @@ void MainWindow::reactOnMousePress()
     posPlot = ui->customPlot->yAxis->range().center();
     mouseOnScalede = true;
     waitAutoScale = true;
-    qDebug() << "plotPress";
+//    qDebug() << "plotPress";
 }
 
 void MainWindow::reactOnMouseRelease()
@@ -623,7 +623,7 @@ void MainWindow::reactOnMouseRelease()
     mouseOnScalede = false;
     mouseOnMove = false;
     timerScale.start(3000);
-    qDebug() << "plotReleas";
+//    qDebug() << "plotReleas";
 }
 
 void MainWindow::ReactOnMouseSlide()
@@ -646,7 +646,7 @@ void MainWindow::ReactOnMouseSlide()
 //        ui->customPlot->replot();
     }
     timerScale.start(3000);
-    qDebug() << "plotMove";
+//    qDebug() << "plotMove";
 }
 
 void MainWindow::updateAutoScale()

@@ -35,7 +35,7 @@ ChannelOptions::ChannelOptions()
     timerUpdateParam = new QTimer();
     connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     updateParam();
-    timerUpdateParam->start(5000);
+    timerUpdateParam->start(15000);
 
 }
 

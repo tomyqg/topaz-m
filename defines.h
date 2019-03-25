@@ -23,7 +23,7 @@
 #ifdef RANDOM_CHAN
 #define CURRENT_VER "1.70" //версия ПО
 #else
-#define CURRENT_VER "1.72" //версия ПО
+#define CURRENT_VER "1.74" //версия ПО
 #endif
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
