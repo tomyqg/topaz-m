@@ -112,16 +112,16 @@ void cArchWorker::run()
                                     {
                                         lastTick.channel[i] = lastTick.channel[i]/countAvg[i];
                                     }
-                                    countAvg[i] = 1;
+                                    countAvg[i] = 0;
 
                                 }
 
-                                //перезапись последнего элемента
-                                vecTicks.replace(vecSize - 1, lastTick);
 
                                 //добавление нового тика
                                 vecTicks.append(tick);
                             }
+                            //перезапись последнего элемента
+                            vecTicks.replace(vecSize - 1, lastTick);
                         }
                     }
                     count++;
