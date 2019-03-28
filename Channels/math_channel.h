@@ -2,6 +2,8 @@
 #define CMATHCHANNEL_H
 
 #include <QObject>
+#include <QMutex>
+#include <QVector>
 #include "../mathresolver.h"
 
 class cMathChannel : public QObject
@@ -9,6 +11,7 @@ class cMathChannel : public QObject
     Q_OBJECT
 public:
     explicit cMathChannel(QObject *parent = 0);
+    ~cMathChannel();
     void setNum(int n) { num = n; }
     int getNum() { return num; }
     QString getName() { return name; }
@@ -18,8 +21,12 @@ public:
     double GetCurrentMathValue();
     int numChannel[4];      //номера подключенных каналов в качестве аргументов формулы
     double GetValuePercent();
-    double GetHigherMeasureLimit();
-    double GetLowerMeasureLimit();
+    double GetHigherMeasureLimit() { return higherLimit; }
+    double GetLowerMeasureLimit() { return lowerLimit; }
+    void SetHigherMeasureLimit(double limit) { higherLimit = limit; }
+    void SetLowerMeasureLimit(double limit) { lowerLimit = limit; }
+    QVector<double> GetMathValuesBuffer();
+    QVector<double> GetMathXBuffer();
 signals:
 
 public slots:
@@ -30,6 +37,13 @@ private:
     QString mathstring; //формула
     double higherLimit;
     double lowerLimit;
+
+    //Буфферы данных
+    QMutex * buffermutex;
+    QVector<double> mathvaluesbuffer;
+    QVector<double> dempheredvaluesbuffer;
+    QVector<double> mathxbuffer;
+    QVector<double> mathpercentbuffer;
 };
 
 #endif // CMATHCHANNEL_H

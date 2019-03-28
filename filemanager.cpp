@@ -7,9 +7,11 @@
 #include <steel.h>
 #include <defines.h>
 #include "Channels/group_channels.h"
+#include "Channels/math_channel.h"
 
 extern QList<ChannelOptions *> listChannels;
 extern QList<cGroupChannels*> listGroup;
+extern QList<cMathChannel*> listMath;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
@@ -22,8 +24,8 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> listChannels*/)
 {
     QJsonObject channeljsonobj,options;
-    QJsonObject ustavkijsonobj;
-    QJsonArray settings, settingsUst;
+    QJsonObject ustavkijsonobj, mathjsonobj;
+    QJsonArray settings, settingsUst, settingsMath;
 
     int countCh = 0;
     foreach (ChannelOptions * Channel, listChannels) {
@@ -83,6 +85,19 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
     options["countUst"] = listUstavok.length();
     options["ustavki"] = settingsUst;
+
+    foreach (cMathChannel * math, listMath)
+    {
+        mathjsonobj["Name"] = math->getName();
+        mathjsonobj["MathString"] = math->GetMathString();
+        mathjsonobj["HigherMeasureLimit"] = math->GetHigherMeasureLimit();
+        mathjsonobj["LowerMeasureLimit"] = math->GetLowerMeasureLimit();
+
+        settingsMath.append(mathjsonobj);
+    }
+
+    options["countMath"] = listMath.length();
+    options["mathChannels"] = settingsMath;
 
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(path);
@@ -224,6 +239,30 @@ int cFileManager::readChannelsSettings(QString path)
 //        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
     }
 
+    count = json["countMath"].toInt();
+    if(count != 0)
+    {
+        listMath.clear();
+        for(int i = 0; i < count; i ++)
+        {
+            cMathChannel *math = new cMathChannel();
+            math->setNum(i);
+            math->setName("Math " + QString::number(i+1));
+            listMath.append(math);
+        }
+    }
+
+    array = json["mathChannels"].toArray();
+    index = 0;
+    foreach (cMathChannel * math, listMath)
+    {
+        jsonobj = array.at(index++).toObject();
+        math->setName(jsonobj.value("Name").toString().toUtf8());
+        math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
+        math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
+        math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
+    }
+
     return 0;
 
 }
@@ -304,11 +343,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     QJsonObject systemoptions;
     QJsonObject options, groupsjsonobj;
     QJsonArray settingsGroup;
-//    systemoptions["Time"] = GetNewTimeString();
-//    systemoptions["Date"] = GetNewDateString();
-//    systemoptions["Display"] = GetCurrentDisplayParametr();
-//    systemoptions["Calibration"] = GetCalibration();
-//    systemoptions["Resolution"] = GetNewDisplayResolution();
+
     systemoptions["Arrows"] = opt->arrows;
     systemoptions["Display"] = opt->display;
     systemoptions["Autoscale"] = opt->autoscale;
@@ -317,10 +352,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     foreach (cGroupChannels * group, listGroup) {
         groupsjsonobj["Enabled"] = group->enabled;
         groupsjsonobj["Name"] = group->groupName;
-//        groupsjsonobj["Channel1"] = -1;
-//        groupsjsonobj["Channel2"] = -1;
-//        groupsjsonobj["Channel3"] = -1;
-//        groupsjsonobj["Channel4"] = -1;
+
         groupsjsonobj["Channel1"] = group->channel[0];
         groupsjsonobj["Channel2"] = group->channel[1];
         groupsjsonobj["Channel3"] = group->channel[2];
@@ -330,29 +362,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
         groupsjsonobj["Math2"] = group->mathChannel[1];
         groupsjsonobj["Math3"] = group->mathChannel[2];
         groupsjsonobj["Math4"] = group->mathChannel[3];
-//        for(int i = 0; i < listChannels.size(); i++)
-//        {
-//            if(group->channel[0] == listChannels.at(i))
-//                groupsjsonobj["Channel1"] = i;
-//            if(group->channel[1] == listChannels.at(i))
-//                groupsjsonobj["Channel2"] = i;
-//            if(group->channel[2] == listChannels.at(i))
-//                groupsjsonobj["Channel3"] = i;
-//            if(group->channel[3] == listChannels.at(i))
-//                groupsjsonobj["Channel4"] = i;
-//        }
 
-//        for(int i = 0; i < listMath.size(); i++)
-//        {
-//            if(group->mathChannel[0] == listMath.at(i))
-//                groupsjsonobj["Math1"] = i;
-//            if(group->mathChannel[1] == listMath.at(i))
-//                groupsjsonobj["Math2"] = i;
-//            if(group->mathChannel[2] == listMath.at(i))
-//                groupsjsonobj["Math3"] = i;
-//            if(group->mathChannel[3] == listMath.at(i))
-//                groupsjsonobj["Math4"] = i;
-//        }
         groupsjsonobj["Type1"] = group->typeInput[0];
         groupsjsonobj["Type2"] = group->typeInput[1];
         groupsjsonobj["Type3"] = group->typeInput[2];

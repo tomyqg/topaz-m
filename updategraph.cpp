@@ -223,7 +223,12 @@ void MainWindow::GrafsUpdateTrends()
         }
         else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
         {
-            //Vag: вставить сюда буффер матканала
+            if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
+            {
+                cMathChannel * math = listMath.at(group->mathChannel[i]);
+                ui->customPlot->graph()->setName(math->getName());
+                ui->customPlot->graph()->setData(math->GetMathXBuffer(), math->GetMathValuesBuffer());
+            }
         }
         graphPen.setColor(colors.at(i));
         ui->customPlot->graph()->setPen(graphPen);
@@ -390,7 +395,7 @@ void MainWindow::updateBars(void)
         {
             if(group->mathChannel[i] != -1)
             {
-                if(group->mathChannel[i] < listMath.size())
+                if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
                     cMathChannel * math = listMath.at(group->mathChannel[i]);
 

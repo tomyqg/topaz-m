@@ -2,6 +2,7 @@
 #include "channelOptions.h"
 
 extern QList<ChannelOptions *> listChannels;
+extern QVector<double> X_Coordinates;
 
 cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
 {
@@ -10,6 +11,12 @@ cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
     mathstring = "x1 + x2 + x3 + x4";
     higherLimit = 100;
     lowerLimit = 0;
+    buffermutex = new QMutex();
+}
+
+cMathChannel::~cMathChannel()
+{
+    delete buffermutex;
 }
 
 QString cMathChannel::GetMathString()
@@ -39,7 +46,24 @@ double cMathChannel::GetCurrentMathValue()
         }
     }
 
-    return mathresolver::SolveEquation(mathstring, arg[0], arg[1], arg[2], arg[3]);
+    double currentvalue = mathresolver::SolveEquation(mathstring, arg[0], arg[1], arg[2], arg[3]);
+
+    buffermutex->lock();
+    while (mathxbuffer.length()>300)
+        mathxbuffer.removeFirst();
+    while (mathvaluesbuffer.length()>300)
+        mathvaluesbuffer.removeFirst();
+    while (dempheredvaluesbuffer.length()>300)
+        dempheredvaluesbuffer.removeFirst();
+    if(!X_Coordinates.isEmpty())
+    {
+        mathvaluesbuffer.append(currentvalue);
+//        dempheredvaluesbuffer.append(GetDempheredMathValue());
+        mathxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+    }
+    buffermutex->unlock();
+
+    return currentvalue;
 }
 
 double cMathChannel::GetValuePercent()
@@ -50,12 +74,32 @@ double cMathChannel::GetValuePercent()
     return x;
 }
 
-double cMathChannel::GetHigherMeasureLimit()
+
+
+
+
+QVector<double> cMathChannel::GetMathValuesBuffer()
 {
-    return higherLimit;
+    QVector<double> buf;
+
+    buffermutex->lock();
+
+//    if (GetDempherValue()<=1)
+        buf = mathvaluesbuffer;
+//    else
+//        buf = dempheredvaluesbuffer;
+
+    buffermutex->unlock();
+
+    return buf;
 }
 
-double cMathChannel::GetLowerMeasureLimit()
+
+QVector<double> cMathChannel::GetMathXBuffer()
 {
-    return lowerLimit;
+    QVector<double> buf;
+    buffermutex->lock();
+    buf = mathxbuffer;
+    buffermutex->unlock();
+    return buf;
 }

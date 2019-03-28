@@ -30,7 +30,7 @@ double mathresolver::SolveEquation(QString eqstring, double x)
     return Result;
 }
 
-double mathresolver::SolveEquation(QString eqstring, double x1, double x2, double x3, double x4)
+double mathresolver:: SolveEquation(QString eqstring, double x1, double x2, double x3, double x4)
 {
     QString replaced=eqstring;
     replaced.replace(QString("sin"), QString("Math.sin"));
@@ -138,3 +138,4 @@ double mathresolver::dGetDempheredValue(QVector<double> &qvect, int count)
     dempheredvalue /= count;
     return dempheredvalue;
 }
+
