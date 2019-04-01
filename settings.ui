@@ -512,8 +512,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
-                     <width>564</width>
+                     <y>-82</y>
+                     <width>551</width>
                      <height>608</height>
                     </rect>
                    </property>
@@ -1288,94 +1288,6 @@ border-radius: 0px;</string>
                     </item>
                    </layout>
                   </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QFrame" name="frameButUstavk">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>68</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>68</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Sunken</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_4">
-                   <item>
-                    <spacer name="horizontalSpacer_3">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>157</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="wButtonStyled" name="buttonUstavk">
-                     <property name="minimumSize">
-                      <size>
-                       <width>321</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Open Sans</family>
-                       <pointsize>21</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">color: rgb(14, 210, 226);</string>
-                     </property>
-                     <property name="text">
-                      <string>НАСТРОЙКА УСТАВОК</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_4">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>157</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_8">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>157</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -2480,7 +2392,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
+                     <y>-392</y>
                      <width>757</width>
                      <height>918</height>
                     </rect>
@@ -3652,94 +3564,6 @@ border-radius: 0px;
                </layout>
               </widget>
              </item>
-             <item>
-              <widget class="QFrame" name="frameButUstavk_2">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>68</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>68</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::NoFrame</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Sunken</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_12">
-                <item>
-                 <spacer name="horizontalSpacer_9">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>157</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="wButtonStyled" name="buttonBackUstavki">
-                  <property name="minimumSize">
-                   <size>
-                    <width>321</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>21</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(14, 210, 226);</string>
-                  </property>
-                  <property name="text">
-                   <string>НАСТРОЙКИ КАНАЛА</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>157</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_11">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>157</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="steel">
@@ -3904,7 +3728,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
+                     <width>671</width>
                      <height>1363</height>
                     </rect>
                    </property>

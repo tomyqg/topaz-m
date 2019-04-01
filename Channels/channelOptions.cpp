@@ -775,3 +775,20 @@ void ChannelOptions::setShema(int sh)
         outputData.chanAdditionalParameter1[0];
     }
 }
+
+void ChannelOptions::copyOptions(ChannelOptions * ch)
+{
+    outputData = ch->outputData;
+    signaltype = ch->signaltype;
+    lowerlimit = ch->lowerlimit;
+    higherlimit = ch->higherlimit;
+    lowermeasurelimit = ch->lowermeasurelimit;
+    highermeasurelimit = ch->highermeasurelimit;
+    measureperiod = ch->measureperiod;
+    unitsname = ch->unitsname;
+    channelname = ch->channelname;
+    diapason = ch->diapason;
+    shema = ch->shema;
+    registrationtype = ch->registrationtype;
+
+}

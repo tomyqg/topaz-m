@@ -91,12 +91,12 @@ private slots:
     void on_exitButton_clicked();
     void on_saveButton_clicked();
     void timeoutLoad();
-    void on_buttonUstavk_clicked();
+//    void on_buttonUstavk_clicked();
     void DateUpdate();
     void updateBar();
     void on_verticalScrollBar_sliderMoved(int position);
     void on_period_currentIndexChanged(int index);
-    void on_buttonBackUstavki_clicked();
+//    void on_buttonBackUstavki_clicked();
     bool eventFilter(QObject* watched, QEvent* event);
     void on_typeSignal_currentIndexChanged(int index);
     void plotPress(QMouseEvent * pe);

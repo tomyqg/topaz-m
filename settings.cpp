@@ -94,8 +94,8 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
 //    ui->label_21->hide();
 //    ui->ustavkaTimer->hide();
 //    ui->label_24->hide();
-    ui->frameButUstavk_2->hide();
-    ui->frameButUstavk->hide();
+//    ui->frameButUstavk_2->hide();
+//    ui->frameButUstavk->hide();
     ui->ustavkaVolDown->hide();
     ui->label_29->hide();
     ui->releyDown->hide();
@@ -130,10 +130,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
 
-    ui->buttonUstavk->setColorText(ColorBlue);
-    ui->buttonUstavk->setColorBg(QColor(0xf0,0xf0,0xf0));
-    ui->buttonBackUstavki->setColorText(ColorBlue);
-    ui->buttonBackUstavki->setColorBg(QColor(0xf0,0xf0,0xf0));
+//    ui->buttonUstavk->setColorText(ColorBlue);
+//    ui->buttonUstavk->setColorBg(QColor(0xf0,0xf0,0xf0));
+//    ui->buttonBackUstavki->setColorText(ColorBlue);
+//    ui->buttonBackUstavki->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->buttonResetSteel->setColorText(ColorBlue);
     ui->buttonResetSteel->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->bDeleteUstavka->setColorText(ColorBlue);
@@ -723,11 +723,11 @@ void dSettings::loadArchFromFile()
     arch->load(archivePeriod, periodShift);
 }
 
-void dSettings::on_buttonBackUstavki_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-    updateWidgets();
-}
+//void dSettings::on_buttonBackUstavki_clicked()
+//{
+//    ui->stackedWidget->setCurrentIndex(0);
+//    updateWidgets();
+//}
 
 void dSettings::on_saveButton_clicked()
 {
@@ -745,12 +745,12 @@ void dSettings::timeoutLoad()
         this->close();
 }
 
-void dSettings::on_buttonUstavk_clicked()
-{
-    //тут запускать окно настройки уставок или переключить вид главного фрэйма
-    ui->stackedWidget->setCurrentIndex(3);
-    updateWidgets();
-}
+//void dSettings::on_buttonUstavk_clicked()
+//{
+//    //тут запускать окно настройки уставок или переключить вид главного фрэйма
+//    ui->stackedWidget->setCurrentIndex(3);
+//    updateWidgets();
+//}
 
 void dSettings::resizeEvent(QResizeEvent * s)
 {

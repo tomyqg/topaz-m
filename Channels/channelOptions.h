@@ -94,11 +94,9 @@ public:
     void SetMinimumColor(QColor newmincolor);
     int getShema();
     void setShema(int sh);
-
-
     bool IsChannelMathematical();
-
     void parserChannel(Transaction tr);
+    void copyOptions(ChannelOptions *ch);
 
 signals:
     void updateSignal(int index);
@@ -185,6 +183,7 @@ private:
 
 
 public:
+
 
 //    enum SignalType {
 //        NoMeasure= 0,
@@ -448,6 +447,7 @@ public:
 
     };
     Q_ENUM(ParamOffset)
+
 
 };
 #endif // CHANNEL1_H
