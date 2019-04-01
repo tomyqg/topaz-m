@@ -24,8 +24,8 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> listChannels*/)
 {
     QJsonObject channeljsonobj,options;
-    QJsonObject ustavkijsonobj, mathjsonobj;
-    QJsonArray settings, settingsUst, settingsMath;
+    QJsonObject ustavkijsonobj;
+    QJsonArray settings, settingsUst;
 
     int countCh = 0;
     foreach (ChannelOptions * Channel, listChannels) {
@@ -86,18 +86,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
     options["countUst"] = listUstavok.length();
     options["ustavki"] = settingsUst;
 
-    foreach (cMathChannel * math, listMath)
-    {
-        mathjsonobj["Name"] = math->getName();
-        mathjsonobj["MathString"] = math->GetMathString();
-        mathjsonobj["HigherMeasureLimit"] = math->GetHigherMeasureLimit();
-        mathjsonobj["LowerMeasureLimit"] = math->GetLowerMeasureLimit();
 
-        settingsMath.append(mathjsonobj);
-    }
-
-    options["countMath"] = listMath.length();
-    options["mathChannels"] = settingsMath;
 
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
     QFile file(path);
@@ -239,29 +228,29 @@ int cFileManager::readChannelsSettings(QString path)
 //        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
     }
 
-    count = json["countMath"].toInt();
-    if(count != 0)
-    {
-        listMath.clear();
-        for(int i = 0; i < count; i ++)
-        {
-            cMathChannel *math = new cMathChannel();
-            math->setNum(i);
-            math->setName("Math " + QString::number(i+1));
-            listMath.append(math);
-        }
-    }
+//    count = json["countMath"].toInt();
+//    if(count != 0)
+//    {
+//        listMath.clear();
+//        for(int i = 0; i < count; i ++)
+//        {
+//            cMathChannel *math = new cMathChannel();
+//            math->setNum(i);
+//            math->setName("Math " + QString::number(i+1));
+//            listMath.append(math);
+//        }
+//    }
 
-    array = json["mathChannels"].toArray();
-    index = 0;
-    foreach (cMathChannel * math, listMath)
-    {
-        jsonobj = array.at(index++).toObject();
-        math->setName(jsonobj.value("Name").toString().toUtf8());
-        math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
-        math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
-        math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
-    }
+//    array = json["mathChannels"].toArray();
+//    index = 0;
+//    foreach (cMathChannel * math, listMath)
+//    {
+//        jsonobj = array.at(index++).toObject();
+//        math->setName(jsonobj.value("Name").toString().toUtf8());
+//        math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
+//        math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
+//        math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
+//    }
 
     return 0;
 
@@ -341,8 +330,8 @@ int cFileManager::readSteelsSettings(QString path)
 int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 {
     QJsonObject systemoptions;
-    QJsonObject options, groupsjsonobj;
-    QJsonArray settingsGroup;
+    QJsonObject options, groupsjsonobj, mathjsonobj;
+    QJsonArray settingsGroup, settingsMath;
 
     systemoptions["Arrows"] = opt->arrows;
     systemoptions["Display"] = opt->display;
@@ -372,8 +361,25 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
     options["countGrp"] = listGroup.length();
     options["groups"] = settingsGroup;
-    systemoptions["Options"] = options;
 
+    foreach (cMathChannel * math, listMath)
+    {
+        mathjsonobj["Name"] = math->getName();
+        mathjsonobj["MathString"] = math->GetMathString();
+        mathjsonobj["HigherMeasureLimit"] = math->GetHigherMeasureLimit();
+        mathjsonobj["LowerMeasureLimit"] = math->GetLowerMeasureLimit();
+        mathjsonobj["X1"] = math->numChannel[0];
+        mathjsonobj["X2"] = math->numChannel[1];
+        mathjsonobj["X3"] = math->numChannel[2];
+        mathjsonobj["X4"] = math->numChannel[3];
+
+        settingsMath.append(mathjsonobj);
+    }
+
+    options["countMath"] = listMath.length();
+    options["mathChannels"] = settingsMath;
+
+    systemoptions["Options"] = options;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
     QFile file(path);
     if(file.open(QIODevice::WriteOnly))
@@ -394,6 +400,9 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 {
     QFile infile(path);
     QString sss;
+    QJsonArray array;
+    QJsonObject jsonobj;
+
     if(infile.open(QIODevice::ReadOnly))
     {
         QTextStream in(&infile);
@@ -417,8 +426,8 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 
     QJsonObject options = json["Options"].toObject();
     int countGroup = options["countGrp"].toInt();
-    QJsonArray array = options["groups"].toArray();
-    QJsonObject jsonobj;
+    array = options["groups"].toArray();
+
     int index = 0;
 
     while(countGroup > listGroup.size())
@@ -452,8 +461,36 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
         }
         index++;
     }
-    return 0;
 
+    int countMath = options["countMath"].toInt();
+    if(countMath != 0)
+    {
+        listMath.clear();
+        for(int i = 0; i < countMath; i ++)
+        {
+            cMathChannel *math = new cMathChannel();
+            math->setNum(i);
+            math->setName("Math " + QString::number(i+1));
+            listMath.append(math);
+        }
+    }
+
+    array = options["mathChannels"].toArray();
+    index = 0;
+    foreach (cMathChannel * math, listMath)
+    {
+        jsonobj = array.at(index++).toObject();
+        math->setName(jsonobj.value("Name").toString().toUtf8());
+        math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
+        math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
+        math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
+        math->numChannel[0] = jsonobj.value("X1").toInt();
+        math->numChannel[1] = jsonobj.value("X2").toInt();
+        math->numChannel[2] = jsonobj.value("X3").toInt();
+        math->numChannel[3] = jsonobj.value("X4").toInt();
+    }
+
+    return 0;
 }
 
 int cFileManager::writeSteelsSettings(QString path)

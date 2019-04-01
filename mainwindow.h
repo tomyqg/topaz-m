@@ -227,7 +227,6 @@ private:
     void InitTouchScreen();
     void PaintOnWidget();
 //    void ReactOnTouch();
-    void PaintCyfrasBottom();
     void PaintCyfrasRight();
     void PaintCyfrasNew();
     void PaintCyfrasFullScreen();

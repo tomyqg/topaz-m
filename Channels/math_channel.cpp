@@ -11,6 +11,9 @@ cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
     mathstring = "x1 + x2 + x3 + x4";
     higherLimit = 100;
     lowerLimit = 0;
+    currentvalue = 0;
+    connect(&timerUpdate, SIGNAL(timeout()), this, SLOT(slotUpdate()));
+    timerUpdate.start(500);
     buffermutex = new QMutex();
 }
 
@@ -31,6 +34,11 @@ void cMathChannel::SetMathEquation(QString newmathstring)
 
 double cMathChannel::GetCurrentMathValue()
 {
+    return currentvalue;
+}
+
+void cMathChannel::slotUpdate()
+{
     const int countArgs = 4;
     double arg[countArgs];
 
@@ -46,7 +54,7 @@ double cMathChannel::GetCurrentMathValue()
         }
     }
 
-    double currentvalue = mathresolver::SolveEquation(mathstring, arg[0], arg[1], arg[2], arg[3]);
+    currentvalue = mathresolver::SolveEquation(mathstring, arg[0], arg[1], arg[2], arg[3]);
 
     buffermutex->lock();
     while (mathxbuffer.length()>300)
@@ -58,13 +66,12 @@ double cMathChannel::GetCurrentMathValue()
     if(!X_Coordinates.isEmpty())
     {
         mathvaluesbuffer.append(currentvalue);
-//        dempheredvaluesbuffer.append(GetDempheredMathValue());
+        //        dempheredvaluesbuffer.append(GetDempheredMathValue());
         mathxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
     }
     buffermutex->unlock();
-
-    return currentvalue;
 }
+
 
 double cMathChannel::GetValuePercent()
 {

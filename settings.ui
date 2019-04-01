@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -513,7 +513,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>551</width>
+                     <width>564</width>
                      <height>608</height>
                     </rect>
                    </property>
@@ -1205,16 +1205,16 @@ border-radius: 0px;</string>
                        <number>1</number>
                       </property>
                       <property name="minimum">
-                       <double>0.100000000000000</double>
+                       <double>0.500000000000000</double>
                       </property>
                       <property name="maximum">
                        <double>10.000000000000000</double>
                       </property>
                       <property name="singleStep">
-                       <double>0.100000000000000</double>
+                       <double>0.500000000000000</double>
                       </property>
                       <property name="value">
-                       <double>1.000000000000000</double>
+                       <double>5.000000000000000</double>
                       </property>
                      </widget>
                     </item>
@@ -2481,7 +2481,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>692</width>
+                     <width>757</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -3904,7 +3904,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>671</width>
+                     <width>757</width>
                      <height>1363</height>
                     </rect>
                    </property>

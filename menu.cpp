@@ -1194,6 +1194,7 @@ void dMenu::on_bMath_clicked()
 {
     ui->stackedWidget->setCurrentIndex(20);
     ui->nameSubMenu->setText("МАТЕМАТИКА");
+    addWidgetMath();
 }
 
 void dMenu::on_bBackMath_clicked()

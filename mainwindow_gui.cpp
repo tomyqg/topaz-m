@@ -89,6 +89,7 @@ void MainWindow::on_WorkButton_clicked()
     connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
     menu->selectPageWork();
     menu->exec();
+    disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
 //    cLogger * log = new cLogger(pathtomessages, cLogger::UI);
     logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();

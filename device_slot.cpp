@@ -1,6 +1,6 @@
 #include "device_slot.h"
 
-#define TIME_RESET_ONLINE_SEC   7
+#define TIME_RESET_ONLINE_SEC   10
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   100
 #define COUNT_STABLE_STATUS     3

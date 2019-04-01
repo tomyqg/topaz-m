@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QMutex>
 #include <QVector>
+#include <QTimer>
 #include "../mathresolver.h"
 
 class cMathChannel : public QObject
@@ -27,9 +28,13 @@ public:
     void SetLowerMeasureLimit(double limit) { lowerLimit = limit; }
     QVector<double> GetMathValuesBuffer();
     QVector<double> GetMathXBuffer();
+
 signals:
 
 public slots:
+
+private slots:
+    void slotUpdate();
 
 private:
     int num;                // номер матканала
@@ -37,6 +42,8 @@ private:
     QString mathstring; //формула
     double higherLimit;
     double lowerLimit;
+    double currentvalue;
+    QTimer timerUpdate;     //таймер обновления результа
 
     //Буфферы данных
     QMutex * buffermutex;

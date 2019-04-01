@@ -242,7 +242,7 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setAutoTickLabels(false);
     ui->customPlot->xAxis->setTickVectorLabels(Labels);
 
-    // авто масшабирование
+    // авто масштабирование
     if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
     {
         ui->customPlot->yAxis->rescale();
@@ -451,6 +451,7 @@ void MainWindow::setTextBars()
             {
                 bar->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
+                bar->changeNum(listChannels.at(group->channel[i])->getNum());
             }
 
         }
@@ -458,7 +459,7 @@ void MainWindow::setTextBars()
         {
             if(group->mathChannel[i] != -1)
             {
-                if(group->mathChannel[i] < listMath.size())
+                if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
                     bar->setText(listMath.at(group->mathChannel[i])->getName(), "Хз");
                 }
@@ -501,7 +502,7 @@ void MainWindow::updateWidgetsVols(void)
         {
             if(group->mathChannel[i] != -1)
             {
-                if(group->mathChannel[i] < listMath.size())
+                if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
                     vol->setText(listMath.at(group->mathChannel[i])->getName(), "Хз");
                 }
@@ -549,8 +550,11 @@ void MainWindow::updateVols()
         {
             if(group->mathChannel[i] != -1)
             {
-                vol->setVol(listMath.at(group->mathChannel[i])->GetCurrentMathValue());
-                vol->show();
+                if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
+                {
+                    vol->setVol(listMath.at(group->mathChannel[i])->GetCurrentMathValue());
+                    vol->show();
+                }
             }
         }
         i++;
