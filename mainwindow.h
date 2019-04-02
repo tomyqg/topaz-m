@@ -399,6 +399,7 @@ private:
     int getStateSteel();
     cSteel *getReadySteel();
     cSteel *getMeasureSteel();
+    void updateVer();
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

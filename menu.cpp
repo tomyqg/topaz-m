@@ -56,8 +56,7 @@ dMenu::dMenu(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::CustomizeWindowHint);
 
-    QString ver = CURRENT_VER;
-    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">MULTIGRAPH<br/>Ver. " + ver + "</span></p></body></html>"));
+    updateVer();
 
     ui->frameModeAccess->hide();
 
@@ -159,10 +158,24 @@ dMenu::dMenu(QWidget *parent) :
                       << ui->bEthernetIP \
                       << ui->bProfibus \
                       << ui->bProfinet;
+    listWidgetsAdmin << ui->bTypeMultigraph;
+
     // скрыть эти выджеты(кнопки) изначально
     changeVisibleWidgets();
 
 //    qDebug() << "Time start dMenu:" << time.elapsed();
+}
+
+void dMenu::updateVer()
+{
+    QString ver = CURRENT_VER;
+    QString name = "MULTIGRAPH";
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
+    {
+        ver = ver + "S";
+        name = name + "<br>STEEL";
+    }
+    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">" + name + "<br/>Ver. " + ver + "</span></p></body></html>"));
 }
 
 bool dMenu::eventFilter(QObject *object, QEvent *event)
@@ -270,15 +283,17 @@ void dMenu::on_saveButton_clicked()
     systemOptions.arrows = ui->arrowscheckBox->checkState();
     systemOptions.display = ui->modeGraf->currentIndex();
     systemOptions.display += (ui->modeBar->currentIndex() << 2);
-//    if(ui->radioButSteelModes->isChecked())
-//    {
-//        sysOptions.display = cSystemOptions::Steel;
-//    }
     systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
     systemOptions.brightness = light;
-//    setBrightness(light);
+    systemOptions.typeMultigraph = (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex();
+
+    updateVer();
+
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &systemOptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
+    cExpertAccess::resetAccess();
+    // Изменить видимость виджетов в соответствии с режимом доступа
+    changeVisibleWidgets();
     foreach (cDevice * device, listDevice) {
         device->setMode(Device_Mode_Regular);
     }
@@ -316,6 +331,7 @@ void dMenu::updateSystemOptions(QString path)
 //        ui->groupBoxTypePribor->hide();
 //    }
     ui->autoscalecheckbox->setChecked(systemOptions.autoscale);
+    ui->comboTypeMultigraph->setCurrentIndex((int)systemOptions.typeMultigraph);
 }
 
 void dMenu::addWidgetUstavki()
@@ -1418,6 +1434,19 @@ void dMenu::on_bBackMathSetting_clicked()
     ui->stackedWidget->setCurrentIndex(20);
     ui->nameSubMenu->setText("МАТЕМАТИКА");
 }
+
+void dMenu::on_bTypeMultigraph_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(33);
+    ui->nameSubMenu->setText("ТИП ПРИБОРА");
+}
+
+void dMenu::on_bBackTypeMultigraph_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(12);
+    ui->nameSubMenu->setText("ОПЦИИ");
+}
+
 
 void dMenu::updateDriversWidgets()
 {
@@ -2652,3 +2681,7 @@ void dMenu::on_bApplayMath_clicked()
     ui->nameSubMenu->setText("МАТЕМАТИКА");
     addWidgetMath();
 }
+
+
+
+

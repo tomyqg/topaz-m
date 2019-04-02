@@ -25,6 +25,7 @@ public slots:
 private:
     Ui::wVol *ui;
     int numBar;
+    int numChan;
 };
 
 #endif // VOL_H

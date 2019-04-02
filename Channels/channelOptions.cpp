@@ -772,7 +772,7 @@ void ChannelOptions::setShema(int sh)
     shema = sh;
     if(outputData.chanSignalType == TermoResistanceMeasure)
     {
-        outputData.chanAdditionalParameter1[0];
+        outputData.chanAdditionalParameter1[0] = sh;
     }
 }
 

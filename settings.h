@@ -85,7 +85,12 @@ private:
     void ReactOnMouseSlide();
     void updateArchGraf();
     bool fInitComboChannles;
+    bool fInitCompoCopyChannels;
 
+    int getIndexVoltageTable(int d);
+    int getIndexTableTC(int d);
+    int getIndexTableRTD(int d);
+    void updateVer();
 private slots:
     void initComboChannels(void);
     void on_exitButton_clicked();
@@ -118,6 +123,7 @@ private slots:
     void on_combo3ChannelArch_currentIndexChanged(int index);
     void on_combo4ChannelArch_currentIndexChanged(int index);
 
+    void on_srcChannel_currentIndexChanged(int index);
 };
 
 #endif // SETTINGS_H

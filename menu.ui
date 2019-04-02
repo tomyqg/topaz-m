@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>32</number>
+            <number>33</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -3585,6 +3585,25 @@ border-radius: 0px;</string>
                </property>
                <property name="text">
                 <string>СБРОС К НАСТРОЙКАМ ПО УМОЛЧАНИЮ</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bTypeMultigraph">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>ТИП ПРИБОРА</string>
                </property>
               </widget>
              </item>
@@ -9974,6 +9993,113 @@ border-radius: 0px;
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="pageTypeMultigraph">
+            <layout class="QGridLayout" name="gridLayout_25">
+             <property name="leftMargin">
+              <number>29</number>
+             </property>
+             <property name="topMargin">
+              <number>30</number>
+             </property>
+             <property name="rightMargin">
+              <number>53</number>
+             </property>
+             <item row="2" column="0" colspan="2">
+              <spacer name="verticalSpacer_37">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>478</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelTypeMultigraph">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ТИП</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackTypeMultigraph">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboTypeMultigraph">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>41</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>МУЛЬТИГРАФ</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>МУЛЬТИГРАФ-СТАЛЬ</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -10151,7 +10277,7 @@ border-radius: 0px;
         <property name="minimumSize">
          <size>
           <width>17</width>
-          <height>86</height>
+          <height>126</height>
          </size>
         </property>
         <property name="maximumSize">

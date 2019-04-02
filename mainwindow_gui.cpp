@@ -165,6 +165,7 @@ void MainWindow::on_MenuButton_clicked()
 void MainWindow::updateSystemOptions()
 {
     cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &systemOptions);
+    updateVer();
     ClearPolarCoords();
 }
 

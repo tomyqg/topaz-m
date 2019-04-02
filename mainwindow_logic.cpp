@@ -65,6 +65,7 @@ extern QList<cRelay*> listRelais;
 extern QList<cSteel*> listSteel;
 extern QList<cGroupChannels*> listGroup;
 extern cIpController * ethernet;
+extern cSystemOptions systemOptions;
 //extern tDeviceBasicParams g_deviceDataStorage;
 
 void MainWindow::MainWindowInitialization()
@@ -81,10 +82,10 @@ void MainWindow::MainWindowInitialization()
     ui->header->hide();
     ui->footer->hide();
     ui->splash->setMaximumWidth(16777215);
-    QString ver = CURRENT_VER;
-    ui->labelNameVersion->setText(QString("MULTIGRAPH " + ver));
-    QString revision = SOFTWARE_REVISION;
-    ui->labelRevision->setText(QString("SOFTWARE REVISION: " + revision));
+
+    //Получение системных настроек из файла
+    updateSystemOptions();
+
     ui->splash->show();
     ui->frameSteel->setMaximumWidth(0);
     ui->frameSteel->hide();
@@ -295,8 +296,8 @@ void MainWindow::MainWindowInitialization()
 //    op.ReadSystemOptionsFromFile(); // читаем опции из файла (это режим отображения и т.п.)
 //    op.deleteLater();
 
-    //Получение системных настроек из файла
-    updateSystemOptions();
+//    //Получение системных настроек из файла
+//    updateSystemOptions();
 
     // сразу активируем отладку по USB
     QProcess process;
@@ -363,6 +364,22 @@ void MainWindow::MainWindowInitialization()
     connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
 
     qDebug() << "MainWindow is init";
+}
+
+
+void MainWindow::updateVer()
+{
+    QString ver = CURRENT_VER;
+    QString name = "MULTIGRAPH";
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
+    {
+        ver = ver + "S";
+        name = name + "-STEEL";
+    }
+    ui->labelNameVersion->setText(QString(name + " " + ver));
+    QString revision = SOFTWARE_REVISION;
+    ui->labelRevision->setText(QString("SOFTWARE REVISION: " + revision));
+    ui->multigrapf->setText(name);
 }
 
 static QString descriptiveDataTypeName( int funcCode )

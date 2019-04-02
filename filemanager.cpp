@@ -51,6 +51,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
+            channeljsonobj["Scheme"] = Channel->getShema();
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
             channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
             settings.append(channeljsonobj);
@@ -178,6 +179,7 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetMathEquation(ch.value("MathString").toString());
             channel->SetDempher(ch.value("Dempher").toInt());
             channel->SetDiapason(ch.value("Diapason").toInt());
+            channel->setShema(ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
         }
         else
@@ -337,6 +339,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     systemoptions["Display"] = opt->display;
     systemoptions["Autoscale"] = opt->autoscale;
     systemoptions["Brightness"] = opt->brightness;
+    systemoptions["TypeMultigraph"] = opt->typeMultigraph;
 
     foreach (cGroupChannels * group, listGroup) {
         groupsjsonobj["Enabled"] = group->enabled;
@@ -423,6 +426,7 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     opt->autoscale = json["Autoscale"].toBool();
     opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
     opt->brightness = json["Brightness"].toInt();
+    opt->typeMultigraph = (cSystemOptions::TypeMultigraphEnum)(json["TypeMultigraph"].toInt());
 
     QJsonObject options = json["Options"].toObject();
     int countGroup = options["countGrp"].toInt();

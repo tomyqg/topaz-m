@@ -15,6 +15,25 @@ enum termoCoupleType{
     TC_Type_J = 5,
     TC_Type_N = 6,
 };
+enum voltageType{
+    Voltage_None = 0,
+    Voltage_1V = 2,
+    Voltage_10V = 3,
+    Voltage_30V = 4,
+};
+enum rtdType{
+    RTD_Pt50_3910 = 0,
+    RTD_Pt100_3910 = 1,
+    RTD_Cu50_4260 = 2,
+    RTD_Cu100_4260 = 3,
+    RTD_Pt50_3850 = 4,
+    RTD_Pt100_3850 = 5,
+    RTD_Cu50_4280 = 6,
+    RTD_Cu100_4280 = 7,
+    RTD_Pt21_TSP21 = 8,
+    RTD_Cu23_TSM23 = 9,
+};
+
 enum deviceTypeEnum{
     Device_None = 0,
     Device_4AI = 1,

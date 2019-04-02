@@ -220,7 +220,7 @@ void wVolueBar::setText(QString type, QString mes)
         ui->typeBar->setText("<html><head/><body><p>" + \
                              type + \
                              "<span style=\" vertical-align:sub;\">" + \
-                             QString::number(numBar) + \
+                             QString::number(numChan) + \
                              "</span></p></body></html>");
     }
     else

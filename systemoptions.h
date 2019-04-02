@@ -27,6 +27,11 @@ public:
         BarsCyfra = 0xF7,
         TrendsCyfraBars = 0xF8
     };
+    enum TypeMultigraphEnum {
+        Multigraph = 0,
+        Multigraph_Steel = 1
+    };
+    TypeMultigraphEnum typeMultigraph;
 
 signals:
 

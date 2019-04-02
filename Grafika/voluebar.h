@@ -30,6 +30,7 @@ public:
     void resetLim();
     void setText(QString type, QString mes);
     void changeNum(int num);
+    void setNumChan(int num) { numChan = num; }
     void cleanMarker();
     void addMarker(int vol, bool dir);
 
@@ -46,6 +47,7 @@ private:
     Ui::wVolueBar *ui;
     double razmah;  //размах, значение бара в крайних точках виджета
     int numBar;
+    int numChan;
     QColor colorBar;    //цвет бара
     QColor colorLight;  //цвет светлой части бара
 //    typedef struct {

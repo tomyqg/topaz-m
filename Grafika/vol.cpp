@@ -50,7 +50,7 @@ void wVol::setText(QString name, QString mes)
         ui->labelName->setText("<html><head/><body><p>" + \
                              name + \
                              "<span style=\" vertical-align:sub;\">" + \
-                             QString::number(numBar) + \
+                             QString::number(numChan) + \
                              "</span></p></body></html>");
     }
     else

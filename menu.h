@@ -83,7 +83,6 @@ private:
     void initAnalizePage();
     void updateDiagnosticMess();
     void updateSystemOptions(QString path = pathtosystemoptions);
-    cSystemOptions sysOptions;
     QDateTime dateTime;
     QStringList listDrives;
     kvitirovanie mesDialog;
@@ -111,6 +110,7 @@ private:
 
     void makeCsvFileArchive(QString src, QString csv, QString dest);
     void addWidgetMath();
+    void updateVer();
 private slots:
     void updateDevicesUI();
     void UpdateAnalyze();
@@ -237,6 +237,11 @@ private slots:
     void on_bDelMath_clicked();
 
     void on_bApplayMath_clicked();
+
+    void on_bTypeMultigraph_clicked();
+
+    void on_bBackTypeMultigraph_clicked();
+
 
 signals:
     void saveButtonSignal();

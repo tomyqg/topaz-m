@@ -33,6 +33,48 @@ const typeTableSignalTypes tableSignalTypes[] = {
     {TermoResistance, ModBus::TermoResistanceMeasure, "Т/С"},   //4
 };
 
+typedef struct {
+    int numItem;
+    voltageType diapason;
+    QString nameItem;
+} typeTableDiapasone;
+const typeTableDiapasone tableVoltageDiapasone[] = {
+//    {0, Voltage_None, "НЕТ"},     //0
+    {1, Voltage_1V,   "±1    В"},       //2
+    {2, Voltage_10V,  "±10   В"},     //3
+    {3, Voltage_30V,  "±30   В"},       //4
+};
+typedef struct {
+    int numItem;
+    termoCoupleType diapason;
+    QString nameItem;
+} typeTableDiapasoneTC;
+const typeTableDiapasoneTC tableDiapasoneTC[] = {
+    {0, TC_Type_S,  "Тип S"},     //0
+    {1, TC_Type_K,  "Тип K"},       //2
+    {2, TC_Type_L,  "Тип L"},     //3
+    {3, TC_Type_B,  "Тип B"},       //4
+    {4, TC_Type_A1, "Тип А1"},     //0
+    {5, TC_Type_J,  "Тип J"},       //2
+    {6, TC_Type_N,  "Тип N"},     //3
+};
+typedef struct {
+    int numItem;
+    rtdType diapason;
+    QString nameItem;
+} typeTableDiapasoneRTD;
+const typeTableDiapasoneRTD tableDiapasoneRTD[] = {
+    {0, RTD_Pt50_3910,  "50П"},     //0
+    {1, RTD_Pt100_3910, "100П"},       //1
+    {2, RTD_Cu50_4260,  "50М(1.426)"},     //2
+    {3, RTD_Cu100_4260, "100М(1.426)"},       //3
+    {4, RTD_Pt50_3850,  "Pt50"},     //4
+    {5, RTD_Pt100_3850, "Pt100"},       //5
+    {6, RTD_Cu50_4280,  "50М(1.428)"},     //6
+    {7, RTD_Cu100_4280, "100М(1.428)"},       //7
+    {8, RTD_Pt21_TSP21, "ТСП21"},       //8
+    {9, RTD_Cu23_TSM23, "ТСМ23"},       //9
+};
 
 
 #define TIME_UPDATE DateLabelUpdateTimer
@@ -56,46 +98,39 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui(new Ui::dSettings),
     arch(ar)
 {
+    fInitComboChannles = false;
+    fInitCompoCopyChannels = false;
     ui->setupUi(this);
-    QString ver = CURRENT_VER;
-    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">MULTIGRAPH<br/>Ver. " + ver + "</span></p></body></html>"));
-
+    updateVer();
     //списки типов датчиков
     StringListNapryagenie.clear();
-    StringListNapryagenie.append("Нет");
-    StringListNapryagenie.append("0-100 мВ");
-    StringListNapryagenie.append("0-1   В");
-    StringListNapryagenie.append("±10   В");
-    StringListNapryagenie.append("±30   В");
+    for(int i = 0; i < (sizeof(tableVoltageDiapasone)/sizeof(typeTableDiapasone)); i++)
+    {
+        StringListNapryagenie.append(tableVoltageDiapasone[i].nameItem);
+    }
+//    StringListNapryagenie.append("Нет");
+////    StringListNapryagenie.append("0-100 мВ");
+//    StringListNapryagenie.append("±1    В");
+//    StringListNapryagenie.append("±10   В");
+//    StringListNapryagenie.append("±30   В");
     StringListTC.clear();
-    StringListTC.append("Тип S");           // (Pt10Rh-Pt)
-    StringListTC.append("Тип K");           // (NiCr-Ni)
-    StringListTC.append("Тип L");           // (Fe-CuNi)
-    StringListTC.append("Тип B");           // (Pt30Rh-Pt60Rh)
-    StringListTC.append("Тип А1");          // (W5Re-W20Re)
-    StringListTC.append("Тип J");           // (Fe-CuNi)
-    StringListTC.append("Тип N");           // (NiCrSi-NiSi)
+    for(int i = 0; i < (sizeof(tableDiapasoneTC)/sizeof(typeTableDiapasoneTC)); i++)
+    {
+        StringListTC.append(tableDiapasoneTC[i].nameItem);
+    }
+//    StringListTC.append("Тип S");           // (Pt10Rh-Pt)
+//    StringListTC.append("Тип K");           // (NiCr-Ni)
+//    StringListTC.append("Тип L");           // (Fe-CuNi)
+//    StringListTC.append("Тип B");           // (Pt30Rh-Pt60Rh)
+//    StringListTC.append("Тип А1");          // (W5Re-W20Re)
+//    StringListTC.append("Тип J");           // (Fe-CuNi)
+//    StringListTC.append("Тип N");           // (NiCrSi-NiSi)
     StringListRTD.clear();
-    StringListRTD.append("Pt50 (3910)");
-    StringListRTD.append("Pt100 (3910)");
-    StringListRTD.append("Cu50 (4260)");
-    StringListRTD.append("Cu100 (4260)");
-    StringListRTD.append("Pt50 (3850)");
-    StringListRTD.append("Pt100 (3850)");
-    StringListRTD.append("Cu50 (4280)");
-    StringListRTD.append("Cu100 (4280)");
-    StringListRTD.append("Pt21 (ТСП21)");
-    StringListRTD.append("Cu23 (ТСМ23)");
+    for(int i = 0; i < (sizeof(tableDiapasoneRTD)/sizeof(typeTableDiapasoneRTD)); i++)
+    {
+        StringListRTD.append(tableDiapasoneRTD[i].nameItem);
+    }
 
-    // <---- временно скрыть некоторые пункты настроек уставок
-//    ui->ustavkaChannel->hide();
-//    ui->label_19->hide();
-//    ui->typeFix->hide();U
-//    ui->label_21->hide();
-//    ui->ustavkaTimer->hide();
-//    ui->label_24->hide();
-//    ui->frameButUstavk_2->hide();
-//    ui->frameButUstavk->hide();
     ui->ustavkaVolDown->hide();
     ui->label_29->hide();
     ui->releyDown->hide();
@@ -130,10 +165,6 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     tUpdateTime.start(TIME_UPDATE);
     DateUpdate();
 
-//    ui->buttonUstavk->setColorText(ColorBlue);
-//    ui->buttonUstavk->setColorBg(QColor(0xf0,0xf0,0xf0));
-//    ui->buttonBackUstavki->setColorText(ColorBlue);
-//    ui->buttonBackUstavki->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->buttonResetSteel->setColorText(ColorBlue);
     ui->buttonResetSteel->setColorBg(QColor(0xf0,0xf0,0xf0));
     ui->bDeleteUstavka->setColorText(ColorBlue);
@@ -155,27 +186,17 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     mouseOnScaledeX = false;
     mouseOnMove = false;
     ui->customPlot->installEventFilter(this);
-//    connect(ui->customPlot, SIGNAL(mousePress(QMouseEvent*)),\
-//            this, SLOT(plotPress(QMouseEvent*)));
-//    connect(ui->customPlot, SIGNAL(mouseRelease(QMouseEvent*)),\
-//            this, SLOT(plotReleas(QMouseEvent*)));
-//    connect(ui->customPlot, SIGNAL(mouseMove(QMouseEvent*)),\
-//            this, SLOT(plotMove(QMouseEvent*)));
+
     connect(&timerUpdateGraf, SIGNAL(timeout()), this, SLOT(replotGraf()));
     timerUpdateGraf.start(200);
 
     //настройки для скролинга списка сообщений
-//    ui->listWidget->viewport()->installEventFilter(this);
     QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
     mouseScroll = false;
     //скролинг виджетов настроек каналов
-//    ui->scrollArea->installEventFilter(this);
     QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
-//    ui->scrollArea->verticalScrollBar()->setSingleStep(1);
     QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
-//    ui->scrollArea_2->installEventFilter(this);
-//    ui->scrollArea_3->installEventFilter(this);
 
     //обновим параметры виджетов, чтобы всё на своих местах стояло и написано, что надо
     updateWidgets();
@@ -234,6 +255,19 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         }
 
     }
+}
+
+
+void dSettings::updateVer()
+{
+    QString ver = CURRENT_VER;
+    QString name = "MULTIGRAPH";
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
+    {
+        ver = ver + "S";
+        name = name + "<br>STEEL";
+    }
+    ui->name->setText(QString("<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">" + name + "<br/>Ver. " + ver + "</span></p></body></html>"));
 
 }
 
@@ -262,6 +296,17 @@ void dSettings::updateWidgets()
         h = 72;
         ui->saveButton->show();
         ui->nameSubMenu->setText("<html><head/><body><p>НАСТРОЙКИ<br>КАНАЛА</p></body></html>");
+//        srcChannel
+        ui->srcChannel->clear();
+        ui->srcChannel->addItem("---");
+        foreach (ChannelOptions * ch, listChannels) {
+//            if(ch->enable)
+//            {
+                ui->srcChannel->addItem(ch->GetChannelName() + " (" + QString::number(ch->getNum()) + ")");
+//            }
+        }
+        fInitCompoCopyChannels = true;
+
     }
     else if(ui->stackedWidget->currentIndex() == 1)
     {
@@ -350,9 +395,9 @@ void dSettings::updateWidgets()
 
 void dSettings::initComboChannels(void)
 {
-    static bool fInit = false;
+//    static bool fInit = false;
 
-    if(!fInit)
+    if(!fInitComboChannles)
     {
 
         QList<QComboBox*> listCombo;
@@ -376,7 +421,7 @@ void dSettings::initComboChannels(void)
 
     }
 
-    fInit = true;
+    fInitComboChannles = true;
 }
 
 void dSettings::on_verticalScrollBar_sliderMoved(int position)
@@ -551,10 +596,11 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
         ui->unit->setText(channel->GetUnitsName().toUtf8());
         ui->periodCh->setValue(channel->GetMeasurePeriod());
-        ui->labelNumChannel->setText("КАНАЛ #" + QString::number(ch_num));
-        ui->bar->changeNum(ch_num);
+        ui->labelNumChannel->setText("КАНАЛ #" + QString::number(channel->getNum()));
+        ui->bar->setNumChan(channel->getNum());
         ui->dempfer->setValue(channel->GetDempherValue());
         ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
+        ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
     }
 
     //параметры уставок
@@ -651,7 +697,20 @@ void dSettings::saveParam()
             channel->SetMeasurePeriod(ui->periodCh->value());
             channel->SetDempher(ui->dempfer->value());
             channel->SetRegistrationType(ui->typeReg->currentIndex());
-            channel->SetDiapason(ui->sensorDiapazon->currentIndex());
+            int diapasone = ui->sensorDiapazon->currentIndex();
+            if(channel->GetSignalType() == Voltage)
+            {
+                diapasone = tableVoltageDiapasone[ui->sensorDiapazon->currentIndex()].diapason;
+            }
+            else if(channel->GetSignalType() == TermoCouple)
+            {
+                diapasone = tableDiapasoneTC[ui->sensorDiapazon->currentIndex()].diapason;
+            }
+            else if(channel->GetSignalType() == TermoResistance)
+            {
+                diapasone = tableDiapasoneRTD[ui->sensorDiapazon->currentIndex()].diapason;
+            }
+            channel->SetDiapason(diapasone);
             channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
 
@@ -892,35 +951,40 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelDiapazon->hide();
         ui->labelShema->hide();
     }
-    else  if(index == Voltage)
+    else if(index == Voltage)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListNapryagenie);
+        ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(channel->GetDiapason()));
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
         ui->sensorShema->hide();
         ui->labelShema->hide();
     }
-    else  if(index == TermoCouple)
+    else if(index == TermoCouple)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListTC);
+        ui->sensorDiapazon->setCurrentIndex(getIndexTableTC(channel->GetDiapason()));
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
         ui->sensorShema->hide();
         ui->labelShema->hide();
     }
-    else  if(index == TermoResistance)
+    else if(index == TermoResistance)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListRTD);
+        ui->sensorDiapazon->setCurrentIndex(getIndexTableRTD(channel->GetDiapason()));
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
         ui->sensorShema->show();
         ui->labelShema->show();
     }
-    ui->sensorDiapazon->setCurrentIndex(channel->GetDiapason());
+
     ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
+
+
 }
 
 /*
@@ -931,6 +995,45 @@ int dSettings::getIndexSignalTypeTable(int st)
     for(int i = 0; i < sizeof(tableSignalTypes)/sizeof(typeTableSignalTypes); i++)
     {
         if(tableSignalTypes[i].st == st)
+            return i;
+    }
+    return 0;
+}
+
+/*
+ * Получение индекса в таблице по диапазону напряжений
+ */
+int dSettings::getIndexVoltageTable(int d)
+{
+    for(int i = 0; i < sizeof(tableVoltageDiapasone)/sizeof(typeTableDiapasone); i++)
+    {
+        if(tableVoltageDiapasone[i].diapason == d)
+            return i;
+    }
+    return 0;
+}
+
+/*
+ * Получение индекса в таблице по диапазону TC
+ */
+int dSettings::getIndexTableTC(int d)
+{
+    for(int i = 0; i < sizeof(tableDiapasoneTC)/sizeof(typeTableDiapasoneTC); i++)
+    {
+        if(tableDiapasoneTC[i].diapason == d)
+            return i;
+    }
+    return 0;
+}
+
+/*
+ * Получение индекса в таблице по диапазону TC
+ */
+int dSettings::getIndexTableRTD(int d)
+{
+    for(int i = 0; i < sizeof(tableDiapasoneRTD)/sizeof(typeTableDiapasoneRTD); i++)
+    {
+        if(tableDiapasoneRTD[i].diapason == d)
             return i;
     }
     return 0;
@@ -1344,4 +1447,25 @@ void dSettings::on_combo4ChannelArch_currentIndexChanged(int index)
 {
     if((index >=0) && (index <= listChannels.size()))
         updateArchGraf();
+}
+
+void dSettings::on_srcChannel_currentIndexChanged(int index)
+{
+    if((index > 0) && fInitCompoCopyChannels)
+    {
+//        channel->copyOptions(listChannels.at(index-1));
+        ChannelOptions * srcChannel = listChannels.at(index-1);
+        ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(srcChannel->GetSignalType()));
+        ui->nameChannel->setText(srcChannel->GetChannelName().toUtf8());
+        ui->scaleUp->setValue(srcChannel->GetHigherMeasureLimit());
+        ui->scaleDown->setValue(srcChannel->GetLowerMeasureLimit());
+        ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
+        ui->periodCh->setValue(srcChannel->GetMeasurePeriod());
+        ui->dempfer->setValue(srcChannel->GetDempherValue());
+        ui->typeReg->setCurrentIndex(srcChannel->GetRegistrationType());
+
+
+        updateUiSignalTypeParam(getIndexSignalTypeTable(srcChannel->GetSignalType()));
+
+    }
 }

@@ -451,7 +451,7 @@ void MainWindow::setTextBars()
             {
                 bar->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
-                bar->changeNum(listChannels.at(group->channel[i])->getNum());
+                bar->setNumChan(listChannels.at(group->channel[i])->getNum());
             }
 
         }
