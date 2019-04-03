@@ -153,7 +153,8 @@ void MainWindow::UpdateGraphics()
     // если прелоадер не завершился
     if(!plotReady) return;
     // если есть плата STEEL, то ставим режим Steel
-    if(slotSteelOnline)
+//    if(slotSteelOnline)
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
     {
         systemOptions.display = cSystemOptions::Steel;
     }
@@ -609,9 +610,8 @@ void MainWindow::updateSteel()
     {
         if(listRelais.size() == 0) continue;
         cSteel * steel = listSteel.at(i);
-        int countRele = SUM_RELAYS;
-        uint8_t relayStates[countRele];
-        memset(relayStates, 0, countRele * sizeof(relayStates[0]));
+        uint8_t relayStates[SUM_RELAYS];
+        memset(relayStates, 0, SUM_RELAYS);
         if(steel->status == StatusCh_SteelWaitData)
         {
             relayStates[1] = 1;
@@ -623,16 +623,18 @@ void MainWindow::updateSteel()
         else if((steel->status == StatusCh_SteelNotFoundSquareTemp)\
                 || (steel->status == StatusCh_SteelNotFoundSquareEds)\
                 || (steel->status == StatusCh_SteelNotFoundSquares)\
+                || (steel->status == StatusCh_SteelErrorTC)\
+                || (steel->status == StatusCh_SteelErrorEds)\
                 || (steel->status == StatusCh_SteelSquaresOK))
         {
             relayStates[3] = 1;
         }
-        else if(steel->status == StatusCh_WaitConf) //обрыв датчика
+        else if((steel->status == StatusCh_WaitConf) || (steel->status == StatusCh_EndConfig)) //обрыв датчика
         {
             relayStates[0] = 1;
         }
 
-        for(int i = 0; i < countRele; i++)
+        for(int i = 0; i < SUM_RELAYS; i++)
         {
             int8_t relay = steel->relais[i];
             if((relay != -1) && (listRelais.size() > relay))
@@ -640,35 +642,20 @@ void MainWindow::updateSteel()
                 if(listRelais.at(relay)->getCurState() != relayStates[i])
                 {
                     listRelais.at(relay)->setState(relayStates[i]);
-//                    Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
-//                    uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
-//                    if(relay%2)
-//                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
-//                    else
-//                        tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
-//                    tr.volInt = relayStates[i];
-//                    emit sendTransToWorker(tr);
                     steel->countRelayTime = 4000 / UpdateSteelTime;
                 }
                 if((listRelais.at(relay)->getCurState() == true) && (i == 3))
                 {
                     if(steel->countRelayTime > 0)
+                    {
                         steel->countRelayTime--;
+                    }
                     else
                     {
-//                        Transaction tr(Transaction::W, (uint8_t)listRelais.at(relay)->mySlot);
-//                        uint8_t numDevRelay = listRelais.at(relay)->myPhysicalNum;
-//                        if(relay%2)
-//                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyLo");
-//                        else
-//                            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(numDevRelay >> 1) + "ReleyHi");
-//                        tr.volInt = 0;
-//                        emit sendTransToWorker(tr);
+                        listRelais.at(relay)->setState(false);
                     }
                 }
-
             }
-
         }
     }
 }
@@ -680,11 +667,9 @@ void MainWindow::slotSteelFrame(bool steelFrame)
 
 void MainWindow::updateSteelWidget(void)
 {
-//    simulatorSteel();
-
     QList<QString> strings;
-    strings << "ОТКЛЮЧЕНО" << " " << "ОБРЫВ" \
-            << " " << " " << "ГОТОВ" \
+    strings << "ОТКЛЮЧЕНО" << " " << " " \
+            << " " << "ОБРЫВ" << "ГОТОВ" \
             << "ИЗМЕРЕНИЕ" << " " << "ОШИБКА ТС" \
             << "ОШИБКА ЭДС" << "ВРЕМЯ" << "ВРЕМЯ" \
             << "ВРЕМЯ" << "ВРЕМЯ";

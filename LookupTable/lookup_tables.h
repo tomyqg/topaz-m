@@ -50,10 +50,6 @@ typedef struct
 
 // pointer to function which is used for handling request
 typedef uint8_t (*tCmdExecuteFuncPtr)(void* param, void* buffer);
-
-// Structure Definitions
-// {Par Offset, NV Offset, Check Func, Parameter Offset, Data Type, Data Size, Work Mode Access |
-// Service Mode Access | Write Protect}
 typedef struct
 {
     uint16_t            offset;           // This is the Modbus location. This is the 0 based value.
@@ -61,8 +57,9 @@ typedef struct
     uint16_t            nvAddress;        // NV parameter data offset, NULL means not save in NV
     tCmdExecuteFuncPtr  cmdFuncPtr;       // W/R check function
     uint16_t            paramOffset;      // Parameter name (OFFSET in the parameter structure)
-    const char *        nameParam;        // Parameter name string
+    const char*        nameParam;        // Parameter name string
     uint8_t             type;             // Float, U8, U16, U32, ASCII, etc.
+
     uint8_t             size;             // Number of bytes in parameter. U8 = 1, Float = 4, ASCII size
                                                 //  depends on parameter.
     uint8_t             access;           // Access permissions based on mode
@@ -70,8 +67,8 @@ typedef struct
 
 
 
-
-
+#define LKUP_ACCESS_USER            0x02
+#define LKUP_ACCESS_ROOT            0x03
 
 // Work Access
 #define LKUP_ACCESS_WORK_NA         0x00
@@ -111,15 +108,11 @@ typedef struct
 #define LKUP_SIZE_FLOAT                4
 #define LKUP_SIZE_ASCII                8
 
-// Discrete Bit Masks
 #define LKUP_COIL_MASK_BIT0  (uint8_t)0x01
 #define LKUP_COIL_MASK_BIT1  (uint8_t)0x02
 #define LKUP_COIL_MASK_BIT2  (uint8_t)0x04
-#define LKUP_COIL_MASK_BIT3  (uint8_t)0x08
 #define LKUP_COIL_MASK_BIT4  (uint8_t)0x10
 #define LKUP_COIL_MASK_BIT5  (uint8_t)0x20
-#define LKUP_COIL_MASK_BIT6  (uint8_t)0x40
-#define LKUP_COIL_MASK_BIT7  (uint8_t)0x80
 
 extern const tLookupRegisters g_stLookupRegisters[];
 extern const uint16_t g_numLookupRegisters;

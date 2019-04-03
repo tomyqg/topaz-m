@@ -1357,7 +1357,10 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
         ui->customPlotSteel->addGraph(ui->customPlotSteel->xAxis, ui->customPlotSteel->yAxis2);
         ui->customPlotSteel->graph()->setData(X_Steel, Y_SteelEds);
         ui->customPlotSteel->graph()->setPen(QPen(QBrush(ColorCh4), 2));
-        ui->customPlotSteel->rescaleAxes();
+        ui->customPlotSteel->rescaleAxes(true);
+        double pos = ui->customPlotSteel->yAxis->range().center();
+        double size = ui->customPlotSteel->yAxis->range().size() * 1.1;
+        ui->customPlotSteel->yAxis->setRange(pos, size, Qt::AlignCenter);
         ui->customPlotSteel->replot();
         ui->customPlotSteel->clearItems();
 

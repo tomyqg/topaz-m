@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>33</number>
+            <number>25</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -7361,7 +7361,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </property>
                  </widget>
                 </item>
-                <item row="5" column="1">
+                <item row="4" column="1">
                  <widget class="QLabel" name="devErrors">
                   <property name="minimumSize">
                    <size>
@@ -7394,8 +7394,21 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="deviceState">
+                <item row="4" column="0">
+                 <widget class="QLabel" name="devicelbl_2">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ОШИБКИ, ШТ.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLabel" name="deviceStatus">
                   <property name="minimumSize">
                    <size>
                     <width>131</width>
@@ -7415,42 +7428,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;
-</string>
+                   <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
                   </property>
                   <property name="text">
                    <string> 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="devicelbl_3">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>СОСТОЯНИЕ</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="devicelbl_2">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>ОШИБКИ, ШТ.</string>
                   </property>
                  </widget>
                 </item>
@@ -7487,66 +7473,7 @@ border-radius: 0px;
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
-                 <widget class="QLabel" name="deviceStatus">
-                  <property name="minimumSize">
-                   <size>
-                    <width>131</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>185</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color:rgb(44, 61, 77);
-color: rgb(255 , 255, 255);
-border-radius: 0px;</string>
-                  </property>
-                  <property name="text">
-                   <string> 0</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="devicelbl_4">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>СТАТУС</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="7" column="0" colspan="2">
-                 <spacer name="verticalSpacer_32">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="6" column="0" colspan="2">
+                <item row="5" column="0" colspan="2">
                  <widget class="QListWidget" name="listDeviceErrors">
                   <property name="minimumSize">
                    <size>
@@ -7605,6 +7532,32 @@ QListWidget::item {
                    <enum>Qt::ScrollBarAlwaysOff</enum>
                   </property>
                  </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="devicelbl_4">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>СТАТУС</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0" colspan="2">
+                 <spacer name="verticalSpacer_32">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -8449,8 +8402,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>480</height>
+                  <width>316</width>
+                  <height>124</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -8752,8 +8705,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>480</height>
+                  <width>494</width>
+                  <height>69</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_39">

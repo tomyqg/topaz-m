@@ -2498,7 +2498,7 @@ void dMenu::updateDevicesUI()
         {
             ui->deviceType->setText(strType.at(curDev->deviceType));
         }
-        ui->deviceState->setText(QString::number(curDev->deviceState));
+//        ui->deviceState->setText(QString::number(curDev->deviceState));
         QStringList strStatus;
         strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
         if((int)curDev->deviceStatus < strStatus.size())

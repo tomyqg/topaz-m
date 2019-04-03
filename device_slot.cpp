@@ -15,7 +15,6 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     stableOnline = false;
     deviceType = Device_None;
     deviceStatus = Device_Status_NOINIT;
-    deviceState = Device_State_OK;
     factoryDate = 0;
     pauseUpdateParam = false;
     timerResetOnline = new QTimer(this);
@@ -71,10 +70,10 @@ int cDevice::parseDeviceParam(Transaction tr)
     {
         uptime = tr.volInt;
     }
-    else if(nameParam == "deviceState")
-    {
-        deviceState = (deviceStateEnum)tr.volInt;
-    }
+//    else if(nameParam == "deviceState")
+//    {
+//        deviceState = (deviceStateEnum)tr.volInt;
+//    }
     else if(nameParam == "accessType")
     {
         accessType = (accessTypeEnum)tr.volInt;

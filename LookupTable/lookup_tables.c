@@ -24,7 +24,6 @@
  *
 ***************************************************************************************/
 #include <stdint.h>
-//#include "cModbusController.h"
 #include "lookup_tables.h"
 //
 #define OFFSET(field) ( (uint16_t)offsetof(tDeviceBasicParams, field) )
@@ -49,530 +48,516 @@ const tLookupRegisters g_stLookupRegisters[] =
     {4, 0, mbRegRwCheckFunc,  OFFSET(DataChan2), "DataChan2", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data channel 3 : DataChan3
     {6, 0, mbRegRwCheckFunc,  OFFSET(DataChan3), "DataChan3", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray1 : DataArray1
-    {8, 0, mbRegRwCheckFunc,  OFFSET(DataArray1), "DataArray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray2 : DataArray2
-    {40, 0, mbRegRwCheckFunc,  OFFSET(DataArray2), "DataArray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray3 : DataArray3
-    {72, 0, mbRegRwCheckFunc,  OFFSET(DataArray3), "DataArray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray4 : DataArray4
-    {104, 0, mbRegRwCheckFunc,  OFFSET(DataArray4), "DataArray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray5 : DataArray5
-    {136, 0, mbRegRwCheckFunc,  OFFSET(DataArray5), "DataArray5", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray6 : DataArray6
-    {168, 0, mbRegRwCheckFunc,  OFFSET(DataArray6), "DataArray6", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray7 : DataArray7
-    {200, 0, mbRegRwCheckFunc,  OFFSET(DataArray7), "DataArray7", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray8 : DataArray8
-    {232, 0, mbRegRwCheckFunc,  OFFSET(DataArray8), "DataArray8", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray9 : DataArray9
-    {264, 0, mbRegRwCheckFunc,  OFFSET(DataArray9), "DataArray9", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: DataArray10 : DataArray10
-    {296, 0, mbRegRwCheckFunc,  OFFSET(DataArray10), "DataArray10", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Protocol version  : protocolVersion
-    {16384, 0, mbRegRwCheckFunc,  OFFSET(protocolVersion), "protocolVersion", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16384, 0, mbRegRwCheckFunc,  OFFSET(protocolVersion), "protocolVersion", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Hardware version  : hardwareVersion
-    {16385, 2, mbRegRwCheckFunc,  OFFSET(hardwareVersion), "hardwareVersion", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16386, 4, mbRegRwCheckFunc,  OFFSET(hardwareVersion), "hardwareVersion", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Software Version : softwareVersion
-    {16386, 4, mbRegRwCheckFunc,  OFFSET(softwareVersion), "softwareVersion", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16388, 8, mbRegRwCheckFunc,  OFFSET(softwareVersion), "softwareVersion", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Device Type : deviceType
-    {16388, 8, mbRegRwCheckFunc,  OFFSET(deviceType), "deviceType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16390, 12, mbRegRwCheckFunc,  OFFSET(deviceType), "deviceType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Serial number  : serialNumber
-    {16395, 12, mbRegRwCheckFunc,  OFFSET(serialNumber), "serialNumber", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {16397, 16, mbRegRwCheckFunc,  OFFSET(serialNumber), "serialNumber", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Up time  : uptime
-    {16397, 16, mbRegRwCheckFunc,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: Device state  : deviceState
-    {16399, 16, mbRegRwCheckFunc,  OFFSET(deviceState), "deviceState", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16399, 20, mbRegRwCheckFunc,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Access type  : accessType
-    {16402, 16, mbRegRwCheckFunc,  OFFSET(accessType), "accessType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16404, 20, mbRegRwCheckFunc,  OFFSET(accessType), "accessType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Modbus comm count  : mbCommCount
-    {16404, 18, mbRegRwCheckFunc,  OFFSET(mbCommCount), "mbCommCount", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16406, 22, mbRegRwCheckFunc,  OFFSET(mbCommCount), "mbCommCount", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Modbus comm error  : mbCommError
-    {16405, 18, mbRegRwCheckFunc,  OFFSET(mbCommError), "mbCommError", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16408, 22, mbRegRwCheckFunc,  OFFSET(mbCommError), "mbCommError", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Status : deviceStatus
-    {16406, 18, mbRegRwCheckFunc,  OFFSET(deviceStatus), "deviceStatus", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16410, 22, mbRegRwCheckFunc,  OFFSET(deviceStatus), "deviceStatus", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Errors : devErrors
-    {16407, 18, mbRegRwCheckFunc,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {16411, 22, mbRegRwCheckFunc,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Factory date  : factoryDate
-    {16408, 18, mbRegRwCheckFunc,  OFFSET(factoryDate), "factoryDate", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {16412, 22, mbRegRwCheckFunc,  OFFSET(factoryDate), "factoryDate", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Software CRC32  : softwareCrc32
-    {16410, 22, mbRegRwCheckFunc,  OFFSET(softwareCrc32), "softwareCrc32", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {16414, 26, mbRegRwCheckFunc,  OFFSET(softwareCrc32), "softwareCrc32", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Unique ID  : uniqueId
-    {16412, 26, mbRegRwCheckFunc,  OFFSET(uniqueId), "uniqueId", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: Root Access : root_Access
-    {16418, 26, mbRegRwCheckFunc,  OFFSET(root_Access), "root_Access", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
+    {16416, 30, mbRegRwCheckFunc,  OFFSET(uniqueId), "uniqueId", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W | LKUP_ACCESS_SERV_W | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: Mode  : deviceMode
+    {16432, 30, mbRegRwCheckFunc,  OFFSET(deviceMode), "deviceMode", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Data (Measure/Generate)  : chan0Data
-    {32768, 28, mbRegRwCheckFunc,  OFFSET(chan0Data), "chan0Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32768, 30, mbRegRwCheckFunc,  OFFSET(chan0Data), "chan0Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data flags : chan0DataFlags
-    {32770, 28, mbRegRwCheckFunc,  OFFSET(chan0DataFlags), "chan0DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32770, 30, mbRegRwCheckFunc,  OFFSET(chan0DataFlags), "chan0DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Status : chan0Status
-    {32771, 28, mbRegRwCheckFunc,  OFFSET(chan0Status), "chan0Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32771, 30, mbRegRwCheckFunc,  OFFSET(chan0Status), "chan0Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Ошибки канала.  : chan0Error
-    {32772, 28, mbRegRwCheckFunc,  OFFSET(chan0Error), "chan0Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32772, 30, mbRegRwCheckFunc,  OFFSET(chan0Error), "chan0Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Quantity  : chan0Quantity
-    {32773, 28, mbRegRwCheckFunc,  OFFSET(chan0Quantity), "chan0Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32773, 30, mbRegRwCheckFunc,  OFFSET(chan0Quantity), "chan0Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Uptime  : chan0Uptime
-    {32775, 28, mbRegRwCheckFunc,  OFFSET(chan0Uptime), "chan0Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32775, 30, mbRegRwCheckFunc,  OFFSET(chan0Uptime), "chan0Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Raw Data : chan0RawData
-    {32777, 28, mbRegRwCheckFunc,  OFFSET(chan0RawData), "chan0RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32777, 30, mbRegRwCheckFunc,  OFFSET(chan0RawData), "chan0RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: Verification read Master : chan0VerificationRead
+    {32779, 30, mbRegRwCheckFunc,  OFFSET(chan0VerificationRead), "chan0VerificationRead", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Signal Type : chan0SignalType
-    {32781, 28, mbRegRwCheckFunc,  OFFSET(chan0SignalType), "chan0SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32781, 30, mbRegRwCheckFunc,  OFFSET(chan0SignalType), "chan0SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Additional parameter1 : chan0AdditionalParameter1
-    {32782, 30, mbRegRwCheckFunc,  OFFSET(chan0AdditionalParameter1), "chan0AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Additional parameter2 : chan0AdditionalParameter2
-    {32788, 42, mbRegRwCheckFunc,  OFFSET(chan0AdditionalParameter2), "chan0AdditionalParameter2", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32782, 30, mbRegRwCheckFunc,  OFFSET(chan0AdditionalParameter1), "chan0AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal low limit  : chan0TransferSignalLowLim
+    {32799, 46, mbRegRwCheckFunc,  OFFSET(chan0TransferSignalLowLim), "chan0TransferSignalLowLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal high limit  : chan0TransferSignalHighLim
+    {32801, 46, mbRegRwCheckFunc,  OFFSET(chan0TransferSignalHighLim), "chan0TransferSignalHighLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi alarm_Reley : chan0ReleyHi
-    {32810, 74, mbRegRwCheckFunc,  OFFSET(chan0ReleyHi), "chan0ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32810, 54, mbRegRwCheckFunc,  OFFSET(chan0ReleyHi), "chan0ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Lo alarm_Reley : chan0ReleyLo
-    {32811, 76, mbRegRwCheckFunc,  OFFSET(chan0ReleyLo), "chan0ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32811, 56, mbRegRwCheckFunc,  OFFSET(chan0ReleyLo), "chan0ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_square_temperature : chan0TimeSquareTemp
-    {32812, 78, mbRegRwCheckFunc,  OFFSET(chan0TimeSquareTemp), "chan0TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32812, 58, mbRegRwCheckFunc,  OFFSET(chan0TimeSquareTemp), "chan0TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Range_temperature : chan0RangeTemp
-    {32814, 82, mbRegRwCheckFunc,  OFFSET(chan0RangeTemp), "chan0RangeTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32814, 58, mbRegRwCheckFunc,  OFFSET(chan0RangeTemp), "chan0RangeTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_measure_temperature : chan0TimeMeasureTemp
-    {32816, 86, mbRegRwCheckFunc,  OFFSET(chan0TimeMeasureTemp), "chan0TimeMeasureTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32816, 58, mbRegRwCheckFunc,  OFFSET(chan0TimeMeasureTemp), "chan0TimeMeasureTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Low_lim_temp : chan0LowTemp
-    {32818, 90, mbRegRwCheckFunc,  OFFSET(chan0LowTemp), "chan0LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32818, 58, mbRegRwCheckFunc,  OFFSET(chan0LowTemp), "chan0LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi_lim_temp : chan0HiTemp
-    {32819, 92, mbRegRwCheckFunc,  OFFSET(chan0HiTemp), "chan0HiTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32819, 58, mbRegRwCheckFunc,  OFFSET(chan0HiTemp), "chan0HiTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Sensor_Type_Activty : chan0SensorType
-    {32820, 94, mbRegRwCheckFunc,  OFFSET(chan0SensorType), "chan0SensorType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32820, 58, mbRegRwCheckFunc,  OFFSET(chan0SensorType), "chan0SensorType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_square_EDS : chan0TimeSquareEDS
-    {32821, 96, mbRegRwCheckFunc,  OFFSET(chan0TimeSquareEDS), "chan0TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32821, 58, mbRegRwCheckFunc,  OFFSET(chan0TimeSquareEDS), "chan0TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Range_EDS : chan0RangeEDS
-    {32823, 100, mbRegRwCheckFunc,  OFFSET(chan0RangeEDS), "chan0RangeEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32823, 58, mbRegRwCheckFunc,  OFFSET(chan0RangeEDS), "chan0RangeEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_measure_EDS : chan0TimeMeasureEDS
-    {32825, 104, mbRegRwCheckFunc,  OFFSET(chan0TimeMeasureEDS), "chan0TimeMeasureEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32825, 58, mbRegRwCheckFunc,  OFFSET(chan0TimeMeasureEDS), "chan0TimeMeasureEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Сrystallization_temperature : chan0Crystallization
-    {32827, 108, mbRegRwCheckFunc,  OFFSET(chan0Crystallization), "chan0Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32827, 58, mbRegRwCheckFunc,  OFFSET(chan0Crystallization), "chan0Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_coefficient : chan0MassCoeff
-    {32828, 110, mbRegRwCheckFunc,  OFFSET(chan0MassCoeff), "chan0MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32828, 58, mbRegRwCheckFunc,  OFFSET(chan0MassCoeff), "chan0MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Final_oxidation : chan0FinalOx
-    {32829, 112, mbRegRwCheckFunc,  OFFSET(chan0FinalOx), "chan0FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32829, 58, mbRegRwCheckFunc,  OFFSET(chan0FinalOx), "chan0FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Assimilation of aluminum : chan0Assimilation
-    {32830, 114, mbRegRwCheckFunc,  OFFSET(chan0Assimilation), "chan0Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32830, 58, mbRegRwCheckFunc,  OFFSET(chan0Assimilation), "chan0Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_melting : chan0MassMelting
-    {32831, 116, mbRegRwCheckFunc,  OFFSET(chan0MassMelting), "chan0MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32831, 58, mbRegRwCheckFunc,  OFFSET(chan0MassMelting), "chan0MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Oxygen_activity : chan0OxActivity
-    {32832, 118, mbRegRwCheckFunc,  OFFSET(chan0OxActivity), "chan0OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32832, 58, mbRegRwCheckFunc,  OFFSET(chan0OxActivity), "chan0OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_Aluminium : chan0MassAl
-    {32833, 118, mbRegRwCheckFunc,  OFFSET(chan0MassAl), "chan0MassAl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32833, 58, mbRegRwCheckFunc,  OFFSET(chan0MassAl), "chan0MassAl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Сarbon_сontent : chan0Carbon
-    {32834, 118, mbRegRwCheckFunc,  OFFSET(chan0Carbon), "chan0Carbon", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32834, 58, mbRegRwCheckFunc,  OFFSET(chan0Carbon), "chan0Carbon", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Senson_activity_oxygen : chan0PrimaryActivity
-    {32835, 118, mbRegRwCheckFunc,  OFFSET(chan0PrimaryActivity), "chan0PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Service_Buffer : chan0Buff
-    {32837, 118, mbRegRwCheckFunc,  OFFSET(chan0Buff), "chan0Buff", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {32836, 58, mbRegRwCheckFunc,  OFFSET(chan0PrimaryActivity), "chan0PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Result CJ Value : chan0ResultCjValue
-    {32847, 134, mbRegRwCheckFunc,  OFFSET(chan0ResultCjValue), "chan0ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {32848, 74, mbRegRwCheckFunc,  OFFSET(chan0ResultCjValue), "chan0ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array0 : chan0TEMParray0
+    {32850, 74, mbRegRwCheckFunc,  OFFSET(chan0TEMParray0), "chan0TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array1 : chan0TEMParray1
+    {32882, 74, mbRegRwCheckFunc,  OFFSET(chan0TEMParray1), "chan0TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array2 : chan0TEMParray2
+    {32914, 74, mbRegRwCheckFunc,  OFFSET(chan0TEMParray2), "chan0TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array3 : chan0TEMParray3
+    {32946, 74, mbRegRwCheckFunc,  OFFSET(chan0TEMParray3), "chan0TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array4 : chan0TEMParray4
+    {32978, 74, mbRegRwCheckFunc,  OFFSET(chan0TEMParray4), "chan0TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array0 : chan0EMFarray0
+    {33010, 74, mbRegRwCheckFunc,  OFFSET(chan0EMFarray0), "chan0EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array1 : chan0EMFarray1
+    {33042, 74, mbRegRwCheckFunc,  OFFSET(chan0EMFarray1), "chan0EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array2 : chan0EMFarray2
+    {33074, 74, mbRegRwCheckFunc,  OFFSET(chan0EMFarray2), "chan0EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array3 : chan0EMFarray3
+    {33106, 74, mbRegRwCheckFunc,  OFFSET(chan0EMFarray3), "chan0EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array4 : chan0EMFarray4
+    {33138, 74, mbRegRwCheckFunc,  OFFSET(chan0EMFarray4), "chan0EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data (Measure/Generate)  : chan1Data
-    {32896, 134, mbRegRwCheckFunc,  OFFSET(chan1Data), "chan1Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33170, 74, mbRegRwCheckFunc,  OFFSET(chan1Data), "chan1Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data flags : chan1DataFlags
-    {32898, 134, mbRegRwCheckFunc,  OFFSET(chan1DataFlags), "chan1DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33172, 74, mbRegRwCheckFunc,  OFFSET(chan1DataFlags), "chan1DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Status : chan1Status
-    {32899, 134, mbRegRwCheckFunc,  OFFSET(chan1Status), "chan1Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33173, 74, mbRegRwCheckFunc,  OFFSET(chan1Status), "chan1Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Ошибки канала.  : chan1Error
-    {32900, 134, mbRegRwCheckFunc,  OFFSET(chan1Error), "chan1Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33174, 74, mbRegRwCheckFunc,  OFFSET(chan1Error), "chan1Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Quantity  : chan1Quantity
-    {32901, 134, mbRegRwCheckFunc,  OFFSET(chan1Quantity), "chan1Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33175, 74, mbRegRwCheckFunc,  OFFSET(chan1Quantity), "chan1Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Uptime  : chan1Uptime
-    {32903, 134, mbRegRwCheckFunc,  OFFSET(chan1Uptime), "chan1Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33177, 74, mbRegRwCheckFunc,  OFFSET(chan1Uptime), "chan1Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Raw Data : chan1RawData
-    {32905, 134, mbRegRwCheckFunc,  OFFSET(chan1RawData), "chan1RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33179, 74, mbRegRwCheckFunc,  OFFSET(chan1RawData), "chan1RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: Verification read Master : chan1VerificationRead
+    {33181, 74, mbRegRwCheckFunc,  OFFSET(chan1VerificationRead), "chan1VerificationRead", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Signal Type : chan1SignalType
-    {32909, 134, mbRegRwCheckFunc,  OFFSET(chan1SignalType), "chan1SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33183, 74, mbRegRwCheckFunc,  OFFSET(chan1SignalType), "chan1SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Additional parameter1 : chan1AdditionalParameter1
-    {32910, 136, mbRegRwCheckFunc,  OFFSET(chan1AdditionalParameter1), "chan1AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Additional parameter2 : chan1AdditionalParameter2
-    {32916, 148, mbRegRwCheckFunc,  OFFSET(chan1AdditionalParameter2), "chan1AdditionalParameter2", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33184, 74, mbRegRwCheckFunc,  OFFSET(chan1AdditionalParameter1), "chan1AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal low limit  : chan1TransferSignalLowLim
+    {33201, 78, mbRegRwCheckFunc,  OFFSET(chan1TransferSignalLowLim), "chan1TransferSignalLowLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal high limit  : chan1TransferSignalHighLim
+    {33203, 78, mbRegRwCheckFunc,  OFFSET(chan1TransferSignalHighLim), "chan1TransferSignalHighLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi alarm_Reley : chan1ReleyHi
-    {32938, 180, mbRegRwCheckFunc,  OFFSET(chan1ReleyHi), "chan1ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33212, 86, mbRegRwCheckFunc,  OFFSET(chan1ReleyHi), "chan1ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Lo alarm_Reley : chan1ReleyLo
-    {32939, 182, mbRegRwCheckFunc,  OFFSET(chan1ReleyLo), "chan1ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33213, 88, mbRegRwCheckFunc,  OFFSET(chan1ReleyLo), "chan1ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_square_temperature : chan1TimeSquareTemp
-    {32940, 184, mbRegRwCheckFunc,  OFFSET(chan1TimeSquareTemp), "chan1TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33214, 90, mbRegRwCheckFunc,  OFFSET(chan1TimeSquareTemp), "chan1TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Range_temperature : chan1RangeTemp
-    {32942, 188, mbRegRwCheckFunc,  OFFSET(chan1RangeTemp), "chan1RangeTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33216, 90, mbRegRwCheckFunc,  OFFSET(chan1RangeTemp), "chan1RangeTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_measure_temperature : chan1TimeMeasureTemp
-    {32944, 192, mbRegRwCheckFunc,  OFFSET(chan1TimeMeasureTemp), "chan1TimeMeasureTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33218, 90, mbRegRwCheckFunc,  OFFSET(chan1TimeMeasureTemp), "chan1TimeMeasureTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Low_lim_temp : chan1LowTemp
-    {32946, 196, mbRegRwCheckFunc,  OFFSET(chan1LowTemp), "chan1LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33220, 90, mbRegRwCheckFunc,  OFFSET(chan1LowTemp), "chan1LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi_lim_temp : chan1HiTemp
-    {32947, 198, mbRegRwCheckFunc,  OFFSET(chan1HiTemp), "chan1HiTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33221, 90, mbRegRwCheckFunc,  OFFSET(chan1HiTemp), "chan1HiTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Sensor_Type_Activty : chan1SensorType
-    {32948, 200, mbRegRwCheckFunc,  OFFSET(chan1SensorType), "chan1SensorType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33222, 90, mbRegRwCheckFunc,  OFFSET(chan1SensorType), "chan1SensorType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_square_EDS : chan1TimeSquareEDS
-    {32949, 202, mbRegRwCheckFunc,  OFFSET(chan1TimeSquareEDS), "chan1TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33223, 90, mbRegRwCheckFunc,  OFFSET(chan1TimeSquareEDS), "chan1TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Range_EDS : chan1RangeEDS
-    {32951, 206, mbRegRwCheckFunc,  OFFSET(chan1RangeEDS), "chan1RangeEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33225, 90, mbRegRwCheckFunc,  OFFSET(chan1RangeEDS), "chan1RangeEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Time_measure_EDS : chan1TimeMeasureEDS
-    {32953, 210, mbRegRwCheckFunc,  OFFSET(chan1TimeMeasureEDS), "chan1TimeMeasureEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33227, 90, mbRegRwCheckFunc,  OFFSET(chan1TimeMeasureEDS), "chan1TimeMeasureEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Сrystallization_temperature : chan1Crystallization
-    {32955, 214, mbRegRwCheckFunc,  OFFSET(chan1Crystallization), "chan1Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33229, 90, mbRegRwCheckFunc,  OFFSET(chan1Crystallization), "chan1Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_coefficient : chan1MassCoeff
-    {32956, 216, mbRegRwCheckFunc,  OFFSET(chan1MassCoeff), "chan1MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33230, 90, mbRegRwCheckFunc,  OFFSET(chan1MassCoeff), "chan1MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Final_oxidation : chan1FinalOx
-    {32957, 218, mbRegRwCheckFunc,  OFFSET(chan1FinalOx), "chan1FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33231, 90, mbRegRwCheckFunc,  OFFSET(chan1FinalOx), "chan1FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Assimilation of aluminum : chan1Assimilation
-    {32958, 220, mbRegRwCheckFunc,  OFFSET(chan1Assimilation), "chan1Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33232, 90, mbRegRwCheckFunc,  OFFSET(chan1Assimilation), "chan1Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_melting : chan1MassMelting
-    {32959, 222, mbRegRwCheckFunc,  OFFSET(chan1MassMelting), "chan1MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33233, 90, mbRegRwCheckFunc,  OFFSET(chan1MassMelting), "chan1MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Oxygen_activity : chan1OxActivity
-    {32960, 224, mbRegRwCheckFunc,  OFFSET(chan1OxActivity), "chan1OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33234, 90, mbRegRwCheckFunc,  OFFSET(chan1OxActivity), "chan1OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Mass_Aluminium : chan1MassAl
-    {32961, 224, mbRegRwCheckFunc,  OFFSET(chan1MassAl), "chan1MassAl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33235, 90, mbRegRwCheckFunc,  OFFSET(chan1MassAl), "chan1MassAl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Сarbon_сontent : chan1Carbon
-    {32962, 224, mbRegRwCheckFunc,  OFFSET(chan1Carbon), "chan1Carbon", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33236, 90, mbRegRwCheckFunc,  OFFSET(chan1Carbon), "chan1Carbon", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Senson_activity_oxygen : chan1PrimaryActivity
-    {32963, 224, mbRegRwCheckFunc,  OFFSET(chan1PrimaryActivity), "chan1PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Service_Buffer : chan1Buff
-    {32965, 224, mbRegRwCheckFunc,  OFFSET(chan1Buff), "chan1Buff", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33238, 90, mbRegRwCheckFunc,  OFFSET(chan1PrimaryActivity), "chan1PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Result CJ Value : chan1ResultCjValue
-    {32975, 240, mbRegRwCheckFunc,  OFFSET(chan1ResultCjValue), "chan1ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33250, 106, mbRegRwCheckFunc,  OFFSET(chan1ResultCjValue), "chan1ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array0 : chan1TEMParray0
+    {33252, 106, mbRegRwCheckFunc,  OFFSET(chan1TEMParray0), "chan1TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array1 : chan1TEMParray1
+    {33284, 106, mbRegRwCheckFunc,  OFFSET(chan1TEMParray1), "chan1TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array2 : chan1TEMParray2
+    {33316, 106, mbRegRwCheckFunc,  OFFSET(chan1TEMParray2), "chan1TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array3 : chan1TEMParray3
+    {33348, 106, mbRegRwCheckFunc,  OFFSET(chan1TEMParray3), "chan1TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: TEMP array4 : chan1TEMParray4
+    {33380, 106, mbRegRwCheckFunc,  OFFSET(chan1TEMParray4), "chan1TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array0 : chan1EMFarray0
+    {33412, 106, mbRegRwCheckFunc,  OFFSET(chan1EMFarray0), "chan1EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array1 : chan1EMFarray1
+    {33444, 106, mbRegRwCheckFunc,  OFFSET(chan1EMFarray1), "chan1EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array2 : chan1EMFarray2
+    {33476, 106, mbRegRwCheckFunc,  OFFSET(chan1EMFarray2), "chan1EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array3 : chan1EMFarray3
+    {33508, 106, mbRegRwCheckFunc,  OFFSET(chan1EMFarray3), "chan1EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    // Parameter: EMF array4 : chan1EMFarray4
+    {33540, 106, mbRegRwCheckFunc,  OFFSET(chan1EMFarray4), "chan1EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data (Measure/Generate)  : chan2Data
-    {33024, 240, mbRegRwCheckFunc,  OFFSET(chan2Data), "chan2Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33572, 106, mbRegRwCheckFunc,  OFFSET(chan2Data), "chan2Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data flags : chan2DataFlags
-    {33026, 240, mbRegRwCheckFunc,  OFFSET(chan2DataFlags), "chan2DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33574, 106, mbRegRwCheckFunc,  OFFSET(chan2DataFlags), "chan2DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Status : chan2Status
-    {33027, 240, mbRegRwCheckFunc,  OFFSET(chan2Status), "chan2Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33575, 106, mbRegRwCheckFunc,  OFFSET(chan2Status), "chan2Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Ошибки канала.  : chan2Error
-    {33028, 240, mbRegRwCheckFunc,  OFFSET(chan2Error), "chan2Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33576, 106, mbRegRwCheckFunc,  OFFSET(chan2Error), "chan2Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Quantity  : chan2Quantity
-    {33029, 240, mbRegRwCheckFunc,  OFFSET(chan2Quantity), "chan2Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33577, 106, mbRegRwCheckFunc,  OFFSET(chan2Quantity), "chan2Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Uptime  : chan2Uptime
-    {33031, 240, mbRegRwCheckFunc,  OFFSET(chan2Uptime), "chan2Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33579, 106, mbRegRwCheckFunc,  OFFSET(chan2Uptime), "chan2Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Raw Data : chan2RawData
-    {33033, 240, mbRegRwCheckFunc,  OFFSET(chan2RawData), "chan2RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33581, 106, mbRegRwCheckFunc,  OFFSET(chan2RawData), "chan2RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Signal Type : chan2SignalType
-    {33037, 240, mbRegRwCheckFunc,  OFFSET(chan2SignalType), "chan2SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33585, 106, mbRegRwCheckFunc,  OFFSET(chan2SignalType), "chan2SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Additional parameter1 : chan2AdditionalParameter1
-    {33038, 242, mbRegRwCheckFunc,  OFFSET(chan2AdditionalParameter1), "chan2AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Additional parameter2 : chan2AdditionalParameter2
-    {33044, 254, mbRegRwCheckFunc,  OFFSET(chan2AdditionalParameter2), "chan2AdditionalParameter2", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33586, 106, mbRegRwCheckFunc,  OFFSET(chan2AdditionalParameter1), "chan2AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal low limit  : chan2TransferSignalLowLim
+    {33603, 122, mbRegRwCheckFunc,  OFFSET(chan2TransferSignalLowLim), "chan2TransferSignalLowLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal high limit  : chan2TransferSignalHighLim
+    {33605, 126, mbRegRwCheckFunc,  OFFSET(chan2TransferSignalHighLim), "chan2TransferSignalHighLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi alarm_Reley : chan2ReleyHi
-    {33066, 286, mbRegRwCheckFunc,  OFFSET(chan2ReleyHi), "chan2ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33614, 138, mbRegRwCheckFunc,  OFFSET(chan2ReleyHi), "chan2ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Lo alarm_Reley : chan2ReleyLo
-    {33067, 288, mbRegRwCheckFunc,  OFFSET(chan2ReleyLo), "chan2ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_square_temperature : chan2TimeSquareTemp
-    {33068, 290, mbRegRwCheckFunc,  OFFSET(chan2TimeSquareTemp), "chan2TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Range_temperature : chan2RangeTemp
-    {33070, 294, mbRegRwCheckFunc,  OFFSET(chan2RangeTemp), "chan2RangeTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_measure_temperature : chan2TimeMeasureTemp
-    {33072, 298, mbRegRwCheckFunc,  OFFSET(chan2TimeMeasureTemp), "chan2TimeMeasureTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Low_lim_temp : chan2LowTemp
-    {33074, 302, mbRegRwCheckFunc,  OFFSET(chan2LowTemp), "chan2LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Hi_lim_temp : chan2HiTemp
-    {33075, 304, mbRegRwCheckFunc,  OFFSET(chan2HiTemp), "chan2HiTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Sensor_Type_Activty : chan2SensorType
-    {33076, 306, mbRegRwCheckFunc,  OFFSET(chan2SensorType), "chan2SensorType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_square_EDS : chan2TimeSquareEDS
-    {33077, 308, mbRegRwCheckFunc,  OFFSET(chan2TimeSquareEDS), "chan2TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Range_EDS : chan2RangeEDS
-    {33079, 312, mbRegRwCheckFunc,  OFFSET(chan2RangeEDS), "chan2RangeEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_measure_EDS : chan2TimeMeasureEDS
-    {33081, 316, mbRegRwCheckFunc,  OFFSET(chan2TimeMeasureEDS), "chan2TimeMeasureEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Сrystallization_temperature : chan2Crystallization
-    {33083, 320, mbRegRwCheckFunc,  OFFSET(chan2Crystallization), "chan2Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_coefficient : chan2MassCoeff
-    {33084, 322, mbRegRwCheckFunc,  OFFSET(chan2MassCoeff), "chan2MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Final_oxidation : chan2FinalOx
-    {33085, 324, mbRegRwCheckFunc,  OFFSET(chan2FinalOx), "chan2FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Assimilation of aluminum : chan2Assimilation
-    {33086, 326, mbRegRwCheckFunc,  OFFSET(chan2Assimilation), "chan2Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_melting : chan2MassMelting
-    {33087, 328, mbRegRwCheckFunc,  OFFSET(chan2MassMelting), "chan2MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Oxygen_activity : chan2OxActivity
-    {33088, 330, mbRegRwCheckFunc,  OFFSET(chan2OxActivity), "chan2OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_Aluminium : chan2MassAl
-    {33089, 330, mbRegRwCheckFunc,  OFFSET(chan2MassAl), "chan2MassAl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Сarbon_сontent : chan2Carbon
-    {33090, 330, mbRegRwCheckFunc,  OFFSET(chan2Carbon), "chan2Carbon", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Senson_activity_oxygen : chan2PrimaryActivity
-    {33091, 330, mbRegRwCheckFunc,  OFFSET(chan2PrimaryActivity), "chan2PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Service_Buffer : chan2Buff
-    {33093, 330, mbRegRwCheckFunc,  OFFSET(chan2Buff), "chan2Buff", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33615, 140, mbRegRwCheckFunc,  OFFSET(chan2ReleyLo), "chan2ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Result CJ Value : chan2ResultCjValue
-    {33103, 346, mbRegRwCheckFunc,  OFFSET(chan2ResultCjValue), "chan2ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33652, 198, mbRegRwCheckFunc,  OFFSET(chan2ResultCjValue), "chan2ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data (Measure/Generate)  : chan3Data
-    {33152, 346, mbRegRwCheckFunc,  OFFSET(chan3Data), "chan3Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33152, 198, mbRegRwCheckFunc,  OFFSET(chan3Data), "chan3Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Data flags : chan3DataFlags
-    {33154, 346, mbRegRwCheckFunc,  OFFSET(chan3DataFlags), "chan3DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33154, 198, mbRegRwCheckFunc,  OFFSET(chan3DataFlags), "chan3DataFlags", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Status : chan3Status
-    {33155, 346, mbRegRwCheckFunc,  OFFSET(chan3Status), "chan3Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33155, 198, mbRegRwCheckFunc,  OFFSET(chan3Status), "chan3Status", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Ошибки канала.  : chan3Error
-    {33156, 346, mbRegRwCheckFunc,  OFFSET(chan3Error), "chan3Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33156, 198, mbRegRwCheckFunc,  OFFSET(chan3Error), "chan3Error", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Quantity  : chan3Quantity
-    {33157, 346, mbRegRwCheckFunc,  OFFSET(chan3Quantity), "chan3Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33157, 198, mbRegRwCheckFunc,  OFFSET(chan3Quantity), "chan3Quantity", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Uptime  : chan3Uptime
-    {33159, 346, mbRegRwCheckFunc,  OFFSET(chan3Uptime), "chan3Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33159, 198, mbRegRwCheckFunc,  OFFSET(chan3Uptime), "chan3Uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Raw Data : chan3RawData
-    {33161, 346, mbRegRwCheckFunc,  OFFSET(chan3RawData), "chan3RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
+    {33161, 198, mbRegRwCheckFunc,  OFFSET(chan3RawData), "chan3RawData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: Signal Type : chan3SignalType
-    {33165, 346, mbRegRwCheckFunc,  OFFSET(chan3SignalType), "chan3SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33165, 198, mbRegRwCheckFunc,  OFFSET(chan3SignalType), "chan3SignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Additional parameter1 : chan3AdditionalParameter1
-    {33166, 348, mbRegRwCheckFunc,  OFFSET(chan3AdditionalParameter1), "chan3AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Additional parameter2 : chan3AdditionalParameter2
-    {33172, 360, mbRegRwCheckFunc,  OFFSET(chan3AdditionalParameter2), "chan3AdditionalParameter2", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33166, 198, mbRegRwCheckFunc,  OFFSET(chan3AdditionalParameter1), "chan3AdditionalParameter1", LKUP_TYPE_ASCII, 12, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal low limit  : chan3TransferSignalLowLim
+    {33183, 214, mbRegRwCheckFunc,  OFFSET(chan3TransferSignalLowLim), "chan3TransferSignalLowLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Transfer signal high limit  : chan3TransferSignalHighLim
+    {33185, 214, mbRegRwCheckFunc,  OFFSET(chan3TransferSignalHighLim), "chan3TransferSignalHighLim", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Hi alarm_Reley : chan3ReleyHi
-    {33194, 392, mbRegRwCheckFunc,  OFFSET(chan3ReleyHi), "chan3ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33194, 222, mbRegRwCheckFunc,  OFFSET(chan3ReleyHi), "chan3ReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Lo alarm_Reley : chan3ReleyLo
-    {33195, 394, mbRegRwCheckFunc,  OFFSET(chan3ReleyLo), "chan3ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_square_temperature : chan3TimeSquareTemp
-    {33196, 396, mbRegRwCheckFunc,  OFFSET(chan3TimeSquareTemp), "chan3TimeSquareTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Range_temperature : chan3RangeTemp
-    {33198, 400, mbRegRwCheckFunc,  OFFSET(chan3RangeTemp), "chan3RangeTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_measure_temperature : chan3TimeMeasureTemp
-    {33199, 402, mbRegRwCheckFunc,  OFFSET(chan3TimeMeasureTemp), "chan3TimeMeasureTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Low_lim_temp : chan3LowTemp
-    {33200, 404, mbRegRwCheckFunc,  OFFSET(chan3LowTemp), "chan3LowTemp", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Hi_lim_temp : chan3HiTemp
-    {33201, 406, mbRegRwCheckFunc,  OFFSET(chan3HiTemp), "chan3HiTemp", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Sensor_Type_Activty : chan3SensorType
-    {33203, 410, mbRegRwCheckFunc,  OFFSET(chan3SensorType), "chan3SensorType", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_square_EDS : chan3TimeSquareEDS
-    {33205, 414, mbRegRwCheckFunc,  OFFSET(chan3TimeSquareEDS), "chan3TimeSquareEDS", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Range_EDS : chan3RangeEDS
-    {33207, 418, mbRegRwCheckFunc,  OFFSET(chan3RangeEDS), "chan3RangeEDS", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Time_measure_EDS : chan3TimeMeasureEDS
-    {33208, 420, mbRegRwCheckFunc,  OFFSET(chan3TimeMeasureEDS), "chan3TimeMeasureEDS", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Сrystallization_temperature : chan3Crystallization
-    {33209, 422, mbRegRwCheckFunc,  OFFSET(chan3Crystallization), "chan3Crystallization", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_coefficient : chan3MassCoeff
-    {33210, 424, mbRegRwCheckFunc,  OFFSET(chan3MassCoeff), "chan3MassCoeff", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Final_oxidation : chan3FinalOx
-    {33211, 426, mbRegRwCheckFunc,  OFFSET(chan3FinalOx), "chan3FinalOx", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Assimilation of aluminum : chan3Assimilation
-    {33212, 428, mbRegRwCheckFunc,  OFFSET(chan3Assimilation), "chan3Assimilation", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_melting : chan3MassMelting
-    {33213, 428, mbRegRwCheckFunc,  OFFSET(chan3MassMelting), "chan3MassMelting", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Oxygen_activity : chan3OxActivity
-    {33214, 428, mbRegRwCheckFunc,  OFFSET(chan3OxActivity), "chan3OxActivity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Mass_Aluminium : chan3MassAl
-    {33215, 428, mbRegRwCheckFunc,  OFFSET(chan3MassAl), "chan3MassAl", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Сarbon_сontent : chan3Carbon
-    {33217, 428, mbRegRwCheckFunc,  OFFSET(chan3Carbon), "chan3Carbon", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Senson_activity_oxygen : chan3PrimaryActivity
-    {33219, 432, mbRegRwCheckFunc,  OFFSET(chan3PrimaryActivity), "chan3PrimaryActivity", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: Service_Buffer : chan3Buff
-    {33221, 436, mbRegRwCheckFunc,  OFFSET(chan3Buff), "chan3Buff", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33195, 222, mbRegRwCheckFunc,  OFFSET(chan3ReleyLo), "chan3ReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: Result CJ Value : chan3ResultCjValue
-    {33231, 452, mbRegRwCheckFunc,  OFFSET(chan3ResultCjValue), "chan3ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
-    // Parameter: CalibOCR20mV : chan0OCR20mV
-    {33233, 7000, mbRegRwCheckFunc,  OFFSET(chan0OCR20mV), "chan0OCR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFCR20mV : chan0FSR20mV
-    {33235, 7004, mbRegRwCheckFunc,  OFFSET(chan0FSR20mV), "chan0FSR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFDate20mV : chan0Date20mV
-    {33237, 7008, mbRegRwCheckFunc,  OFFSET(chan0Date20mV), "chan0Date20mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33231, 278, mbRegRwCheckFunc,  OFFSET(chan3ResultCjValue), "chan3ResultCjValue", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_R | LKUP_ACCESS_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan0OCR100mV
-    {33239, 7012, mbRegRwCheckFunc,  OFFSET(chan0OCR100mV), "chan0OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33239, 7012, mbRegRwCheckFunc,  OFFSET(chan0OCR100mV), "chan0OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR100mV : chan0FSR100mV
-    {33241, 7016, mbRegRwCheckFunc,  OFFSET(chan0FSR100mV), "chan0FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33241, 7016, mbRegRwCheckFunc,  OFFSET(chan0FSR100mV), "chan0FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate100mV : chan0Date100mV
-    {33243, 7020, mbRegRwCheckFunc,  OFFSET(chan0Date100mV), "chan0Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33243, 7020, mbRegRwCheckFunc,  OFFSET(chan0Date100mV), "chan0Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR1V : chan0OCR1V
-    {33245, 7024, mbRegRwCheckFunc,  OFFSET(chan0OCR1V), "chan0OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33245, 7024, mbRegRwCheckFunc,  OFFSET(chan0OCR1V), "chan0OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR1V : chan0FSR1V
-    {33247, 7028, mbRegRwCheckFunc,  OFFSET(chan0FSR1V), "chan0FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33247, 7028, mbRegRwCheckFunc,  OFFSET(chan0FSR1V), "chan0FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate1V : chan0Date1V
-    {33249, 7032, mbRegRwCheckFunc,  OFFSET(chan0Date1V), "chan0Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33249, 7032, mbRegRwCheckFunc,  OFFSET(chan0Date1V), "chan0Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR10V : chan0OCR10V
-    {33251, 7036, mbRegRwCheckFunc,  OFFSET(chan0OCR10V), "chan0OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33251, 7036, mbRegRwCheckFunc,  OFFSET(chan0OCR10V), "chan0OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR10V : chan0FSR10V
-    {33253, 7040, mbRegRwCheckFunc,  OFFSET(chan0FSR10V), "chan0FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33253, 7040, mbRegRwCheckFunc,  OFFSET(chan0FSR10V), "chan0FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate10V : chan0Date10V
-    {33255, 7044, mbRegRwCheckFunc,  OFFSET(chan0Date10V), "chan0Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33255, 7044, mbRegRwCheckFunc,  OFFSET(chan0Date10V), "chan0Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR30V : chan0OCR30V
-    {33257, 7048, mbRegRwCheckFunc,  OFFSET(chan0OCR30V), "chan0OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33257, 7048, mbRegRwCheckFunc,  OFFSET(chan0OCR30V), "chan0OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR30V : chan0FSR30V
-    {33259, 7052, mbRegRwCheckFunc,  OFFSET(chan0FSR30V), "chan0FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33259, 7052, mbRegRwCheckFunc,  OFFSET(chan0FSR30V), "chan0FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate30V : chan0Date30V
-    {33261, 7056, mbRegRwCheckFunc,  OFFSET(chan0Date30V), "chan0Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33261, 7056, mbRegRwCheckFunc,  OFFSET(chan0Date30V), "chan0Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR20mA : chan0OCR20mA
-    {33263, 7060, mbRegRwCheckFunc,  OFFSET(chan0OCR20mA), "chan0OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33263, 7060, mbRegRwCheckFunc,  OFFSET(chan0OCR20mA), "chan0OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR20mA : chan0FSR20mA
-    {33265, 7064, mbRegRwCheckFunc,  OFFSET(chan0FSR20mA), "chan0FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33265, 7064, mbRegRwCheckFunc,  OFFSET(chan0FSR20mA), "chan0FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate20mA : chan0Date20mA
-    {33267, 7068, mbRegRwCheckFunc,  OFFSET(chan0Date20mA), "chan0Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33267, 7068, mbRegRwCheckFunc,  OFFSET(chan0Date20mA), "chan0Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR4x : chan0OCR4x
-    {33269, 7072, mbRegRwCheckFunc,  OFFSET(chan0OCR4x), "chan0OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33269, 7072, mbRegRwCheckFunc,  OFFSET(chan0OCR4x), "chan0OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR4x : chan0FSR4x
-    {33271, 7076, mbRegRwCheckFunc,  OFFSET(chan0FSR4x), "chan0FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33271, 7076, mbRegRwCheckFunc,  OFFSET(chan0FSR4x), "chan0FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate4x : chan0Date4x
-    {33273, 7080, mbRegRwCheckFunc,  OFFSET(chan0Date4x), "chan0Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33273, 7080, mbRegRwCheckFunc,  OFFSET(chan0Date4x), "chan0Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR3x : chan0OCR3x
-    {33275, 7084, mbRegRwCheckFunc,  OFFSET(chan0OCR3x), "chan0OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33275, 7084, mbRegRwCheckFunc,  OFFSET(chan0OCR3x), "chan0OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR3x : chan0FSR3x
-    {33277, 7088, mbRegRwCheckFunc,  OFFSET(chan0FSR3x), "chan0FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33277, 7088, mbRegRwCheckFunc,  OFFSET(chan0FSR3x), "chan0FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate3x : chan0Date3x
-    {33279, 7092, mbRegRwCheckFunc,  OFFSET(chan0Date3x), "chan0Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33279, 7092, mbRegRwCheckFunc,  OFFSET(chan0Date3x), "chan0Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCRinternal : chan0OCRinternal
-    {33281, 7096, mbRegRwCheckFunc,  OFFSET(chan0OCRinternal), "chan0OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33281, 7096, mbRegRwCheckFunc,  OFFSET(chan0OCRinternal), "chan0OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan0FSRinternal
-    {33283, 7100, mbRegRwCheckFunc,  OFFSET(chan0FSRinternal), "chan0FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33283, 7100, mbRegRwCheckFunc,  OFFSET(chan0FSRinternal), "chan0FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan0DateRinternal
-    {33285, 7104, mbRegRwCheckFunc,  OFFSET(chan0DateRinternal), "chan0DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibOCR20mV : chan1OCR20mV
-    {33287, 7108, mbRegRwCheckFunc,  OFFSET(chan1OCR20mV), "chan1OCR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFCR20mV : chan1FSR20mV
-    {33289, 7112, mbRegRwCheckFunc,  OFFSET(chan1FSR20mV), "chan1FSR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFDate20mV : chan1Date20mV
-    {33291, 7116, mbRegRwCheckFunc,  OFFSET(chan1Date20mV), "chan1Date20mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33285, 7104, mbRegRwCheckFunc,  OFFSET(chan0DateRinternal), "chan0DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan1OCR100mV
-    {33293, 7120, mbRegRwCheckFunc,  OFFSET(chan1OCR100mV), "chan1OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33293, 7120, mbRegRwCheckFunc,  OFFSET(chan1OCR100mV), "chan1OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR100mV : chan1FSR100mV
-    {33295, 7124, mbRegRwCheckFunc,  OFFSET(chan1FSR100mV), "chan1FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33295, 7124, mbRegRwCheckFunc,  OFFSET(chan1FSR100mV), "chan1FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate100mV : chan1Date100mV
-    {33297, 7128, mbRegRwCheckFunc,  OFFSET(chan1Date100mV), "chan1Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33297, 7128, mbRegRwCheckFunc,  OFFSET(chan1Date100mV), "chan1Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR1V : chan1OCR1V
-    {33299, 7132, mbRegRwCheckFunc,  OFFSET(chan1OCR1V), "chan1OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33299, 7132, mbRegRwCheckFunc,  OFFSET(chan1OCR1V), "chan1OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR1V : chan1FSR1V
-    {33301, 7136, mbRegRwCheckFunc,  OFFSET(chan1FSR1V), "chan1FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33301, 7136, mbRegRwCheckFunc,  OFFSET(chan1FSR1V), "chan1FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate1V : chan1Date1V
-    {33303, 7140, mbRegRwCheckFunc,  OFFSET(chan1Date1V), "chan1Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33303, 7140, mbRegRwCheckFunc,  OFFSET(chan1Date1V), "chan1Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR10V : chan1OCR10V
-    {33305, 7144, mbRegRwCheckFunc,  OFFSET(chan1OCR10V), "chan1OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33305, 7144, mbRegRwCheckFunc,  OFFSET(chan1OCR10V), "chan1OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR10V : chan1FSR10V
-    {33307, 7148, mbRegRwCheckFunc,  OFFSET(chan1FSR10V), "chan1FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33307, 7148, mbRegRwCheckFunc,  OFFSET(chan1FSR10V), "chan1FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate10V : chan1Date10V
-    {33309, 7152, mbRegRwCheckFunc,  OFFSET(chan1Date10V), "chan1Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33309, 7152, mbRegRwCheckFunc,  OFFSET(chan1Date10V), "chan1Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR30V : chan1OCR30V
-    {33311, 7156, mbRegRwCheckFunc,  OFFSET(chan1OCR30V), "chan1OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33311, 7156, mbRegRwCheckFunc,  OFFSET(chan1OCR30V), "chan1OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR30V : chan1FSR30V
-    {33313, 7160, mbRegRwCheckFunc,  OFFSET(chan1FSR30V), "chan1FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33313, 7160, mbRegRwCheckFunc,  OFFSET(chan1FSR30V), "chan1FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate30V : chan1Date30V
-    {33315, 7164, mbRegRwCheckFunc,  OFFSET(chan1Date30V), "chan1Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33315, 7164, mbRegRwCheckFunc,  OFFSET(chan1Date30V), "chan1Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR20mA : chan1OCR20mA
-    {33317, 7168, mbRegRwCheckFunc,  OFFSET(chan1OCR20mA), "chan1OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33317, 7168, mbRegRwCheckFunc,  OFFSET(chan1OCR20mA), "chan1OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR20mA : chan1FSR20mA
-    {33319, 7172, mbRegRwCheckFunc,  OFFSET(chan1FSR20mA), "chan1FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33319, 7172, mbRegRwCheckFunc,  OFFSET(chan1FSR20mA), "chan1FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate20mA : chan1Date20mA
-    {33321, 7176, mbRegRwCheckFunc,  OFFSET(chan1Date20mA), "chan1Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33321, 7176, mbRegRwCheckFunc,  OFFSET(chan1Date20mA), "chan1Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR4x : chan1OCR4x
-    {33323, 7180, mbRegRwCheckFunc,  OFFSET(chan1OCR4x), "chan1OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33323, 7180, mbRegRwCheckFunc,  OFFSET(chan1OCR4x), "chan1OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR4x : chan1FSR4x
-    {33325, 7184, mbRegRwCheckFunc,  OFFSET(chan1FSR4x), "chan1FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33325, 7184, mbRegRwCheckFunc,  OFFSET(chan1FSR4x), "chan1FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate4x : chan1Date4x
-    {33327, 7188, mbRegRwCheckFunc,  OFFSET(chan1Date4x), "chan1Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33327, 7188, mbRegRwCheckFunc,  OFFSET(chan1Date4x), "chan1Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR3x : chan1OCR3x
-    {33329, 7192, mbRegRwCheckFunc,  OFFSET(chan1OCR3x), "chan1OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33329, 7192, mbRegRwCheckFunc,  OFFSET(chan1OCR3x), "chan1OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR3x : chan1FSR3x
-    {33331, 7196, mbRegRwCheckFunc,  OFFSET(chan1FSR3x), "chan1FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33331, 7196, mbRegRwCheckFunc,  OFFSET(chan1FSR3x), "chan1FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate3x : chan1Date3x
-    {33333, 7200, mbRegRwCheckFunc,  OFFSET(chan1Date3x), "chan1Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33333, 7200, mbRegRwCheckFunc,  OFFSET(chan1Date3x), "chan1Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCRinternal : chan1OCRinternal
-    {33335, 7204, mbRegRwCheckFunc,  OFFSET(chan1OCRinternal), "chan1OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33335, 7204, mbRegRwCheckFunc,  OFFSET(chan1OCRinternal), "chan1OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan1FSRinternal
-    {33337, 7208, mbRegRwCheckFunc,  OFFSET(chan1FSRinternal), "chan1FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33337, 7208, mbRegRwCheckFunc,  OFFSET(chan1FSRinternal), "chan1FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan1DateRinternal
-    {33339, 7212, mbRegRwCheckFunc,  OFFSET(chan1DateRinternal), "chan1DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibOCR20mV : chan2OCR20mV
-    {33341, 7216, mbRegRwCheckFunc,  OFFSET(chan2OCR20mV), "chan2OCR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFCR20mV : chan2FSR20mV
-    {33343, 7220, mbRegRwCheckFunc,  OFFSET(chan2FSR20mV), "chan2FSR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFDate20mV : chan2Date20mV
-    {33345, 7224, mbRegRwCheckFunc,  OFFSET(chan2Date20mV), "chan2Date20mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33339, 7212, mbRegRwCheckFunc,  OFFSET(chan1DateRinternal), "chan1DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan2OCR100mV
-    {33347, 7228, mbRegRwCheckFunc,  OFFSET(chan2OCR100mV), "chan2OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33347, 7228, mbRegRwCheckFunc,  OFFSET(chan2OCR100mV), "chan2OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR100mV : chan2FSR100mV
-    {33349, 7232, mbRegRwCheckFunc,  OFFSET(chan2FSR100mV), "chan2FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33349, 7232, mbRegRwCheckFunc,  OFFSET(chan2FSR100mV), "chan2FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate100mV : chan2Date100mV
-    {33351, 7236, mbRegRwCheckFunc,  OFFSET(chan2Date100mV), "chan2Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33351, 7236, mbRegRwCheckFunc,  OFFSET(chan2Date100mV), "chan2Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR1V : chan2OCR1V
-    {33353, 7240, mbRegRwCheckFunc,  OFFSET(chan2OCR1V), "chan2OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33353, 7240, mbRegRwCheckFunc,  OFFSET(chan2OCR1V), "chan2OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR1V : chan2FSR1V
-    {33355, 7244, mbRegRwCheckFunc,  OFFSET(chan2FSR1V), "chan2FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33355, 7244, mbRegRwCheckFunc,  OFFSET(chan2FSR1V), "chan2FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate1V : chan2Date1V
-    {33357, 7248, mbRegRwCheckFunc,  OFFSET(chan2Date1V), "chan2Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33357, 7248, mbRegRwCheckFunc,  OFFSET(chan2Date1V), "chan2Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR10V : chan2OCR10V
-    {33359, 7252, mbRegRwCheckFunc,  OFFSET(chan2OCR10V), "chan2OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33359, 7252, mbRegRwCheckFunc,  OFFSET(chan2OCR10V), "chan2OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR10V : chan2FSR10V
-    {33361, 7256, mbRegRwCheckFunc,  OFFSET(chan2FSR10V), "chan2FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33361, 7256, mbRegRwCheckFunc,  OFFSET(chan2FSR10V), "chan2FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate10V : chan2Date10V
-    {33363, 7260, mbRegRwCheckFunc,  OFFSET(chan2Date10V), "chan2Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33363, 7260, mbRegRwCheckFunc,  OFFSET(chan2Date10V), "chan2Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR30V : chan2OCR30V
-    {33365, 7264, mbRegRwCheckFunc,  OFFSET(chan2OCR30V), "chan2OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33365, 7264, mbRegRwCheckFunc,  OFFSET(chan2OCR30V), "chan2OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR30V : chan2FSR30V
-    {33367, 7268, mbRegRwCheckFunc,  OFFSET(chan2FSR30V), "chan2FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33367, 7268, mbRegRwCheckFunc,  OFFSET(chan2FSR30V), "chan2FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate30V : chan2Date30V
-    {33369, 7272, mbRegRwCheckFunc,  OFFSET(chan2Date30V), "chan2Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33369, 7272, mbRegRwCheckFunc,  OFFSET(chan2Date30V), "chan2Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR20mA : chan2OCR20mA
-    {33371, 7276, mbRegRwCheckFunc,  OFFSET(chan2OCR20mA), "chan2OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33371, 7276, mbRegRwCheckFunc,  OFFSET(chan2OCR20mA), "chan2OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR20mA : chan2FSR20mA
-    {33373, 7280, mbRegRwCheckFunc,  OFFSET(chan2FSR20mA), "chan2FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33373, 7280, mbRegRwCheckFunc,  OFFSET(chan2FSR20mA), "chan2FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate20mA : chan2Date20mA
-    {33375, 7284, mbRegRwCheckFunc,  OFFSET(chan2Date20mA), "chan2Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33375, 7284, mbRegRwCheckFunc,  OFFSET(chan2Date20mA), "chan2Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR4x : chan2OCR4x
-    {33377, 7288, mbRegRwCheckFunc,  OFFSET(chan2OCR4x), "chan2OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33377, 7288, mbRegRwCheckFunc,  OFFSET(chan2OCR4x), "chan2OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR4x : chan2FSR4x
-    {33379, 7292, mbRegRwCheckFunc,  OFFSET(chan2FSR4x), "chan2FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33379, 7292, mbRegRwCheckFunc,  OFFSET(chan2FSR4x), "chan2FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate4x : chan2Date4x
-    {33381, 7296, mbRegRwCheckFunc,  OFFSET(chan2Date4x), "chan2Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33381, 7296, mbRegRwCheckFunc,  OFFSET(chan2Date4x), "chan2Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR3x : chan2OCR3x
-    {33383, 7300, mbRegRwCheckFunc,  OFFSET(chan2OCR3x), "chan2OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33383, 7300, mbRegRwCheckFunc,  OFFSET(chan2OCR3x), "chan2OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR3x : chan2FSR3x
-    {33385, 7304, mbRegRwCheckFunc,  OFFSET(chan2FSR3x), "chan2FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33385, 7304, mbRegRwCheckFunc,  OFFSET(chan2FSR3x), "chan2FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate3x : chan2Date3x
-    {33387, 7308, mbRegRwCheckFunc,  OFFSET(chan2Date3x), "chan2Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33387, 7308, mbRegRwCheckFunc,  OFFSET(chan2Date3x), "chan2Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCRinternal : chan2OCRinternal
-    {33389, 7312, mbRegRwCheckFunc,  OFFSET(chan2OCRinternal), "chan2OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33389, 7312, mbRegRwCheckFunc,  OFFSET(chan2OCRinternal), "chan2OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan2FSRinternal
-    {33391, 7316, mbRegRwCheckFunc,  OFFSET(chan2FSRinternal), "chan2FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33391, 7316, mbRegRwCheckFunc,  OFFSET(chan2FSRinternal), "chan2FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan2DateRinternal
-    {33393, 7320, mbRegRwCheckFunc,  OFFSET(chan2DateRinternal), "chan2DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibOCR20mV : chan3OCR20mV
-    {33395, 7324, mbRegRwCheckFunc,  OFFSET(chan3OCR20mV), "chan3OCR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFCR20mV : chan3FSR20mV
-    {33397, 7328, mbRegRwCheckFunc,  OFFSET(chan3FSR20mV), "chan3FSR20mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
-    // Parameter: CalibFDate20mV : chan3Date20mV
-    {33399, 7332, mbRegRwCheckFunc,  OFFSET(chan3Date20mV), "chan3Date20mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33393, 7320, mbRegRwCheckFunc,  OFFSET(chan2DateRinternal), "chan2DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan3OCR100mV
-    {33401, 7336, mbRegRwCheckFunc,  OFFSET(chan3OCR100mV), "chan3OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33401, 7336, mbRegRwCheckFunc,  OFFSET(chan3OCR100mV), "chan3OCR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR100mV : chan3FSR100mV
-    {33403, 7340, mbRegRwCheckFunc,  OFFSET(chan3FSR100mV), "chan3FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33403, 7340, mbRegRwCheckFunc,  OFFSET(chan3FSR100mV), "chan3FSR100mV", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate100mV : chan3Date100mV
-    {33405, 7344, mbRegRwCheckFunc,  OFFSET(chan3Date100mV), "chan3Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33405, 7344, mbRegRwCheckFunc,  OFFSET(chan3Date100mV), "chan3Date100mV", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR1V : chan3OCR1V
-    {33407, 7348, mbRegRwCheckFunc,  OFFSET(chan3OCR1V), "chan3OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33407, 7348, mbRegRwCheckFunc,  OFFSET(chan3OCR1V), "chan3OCR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR1V : chan3FSR1V
-    {33409, 7352, mbRegRwCheckFunc,  OFFSET(chan3FSR1V), "chan3FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33409, 7352, mbRegRwCheckFunc,  OFFSET(chan3FSR1V), "chan3FSR1V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate1V : chan3Date1V
-    {33411, 7356, mbRegRwCheckFunc,  OFFSET(chan3Date1V), "chan3Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33411, 7356, mbRegRwCheckFunc,  OFFSET(chan3Date1V), "chan3Date1V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR10V : chan3OCR10V
-    {33413, 7360, mbRegRwCheckFunc,  OFFSET(chan3OCR10V), "chan3OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33413, 7360, mbRegRwCheckFunc,  OFFSET(chan3OCR10V), "chan3OCR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR10V : chan3FSR10V
-    {33415, 7364, mbRegRwCheckFunc,  OFFSET(chan3FSR10V), "chan3FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33415, 7364, mbRegRwCheckFunc,  OFFSET(chan3FSR10V), "chan3FSR10V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate10V : chan3Date10V
-    {33417, 7368, mbRegRwCheckFunc,  OFFSET(chan3Date10V), "chan3Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33417, 7368, mbRegRwCheckFunc,  OFFSET(chan3Date10V), "chan3Date10V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR30V : chan3OCR30V
-    {33419, 7372, mbRegRwCheckFunc,  OFFSET(chan3OCR30V), "chan3OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33419, 7372, mbRegRwCheckFunc,  OFFSET(chan3OCR30V), "chan3OCR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR30V : chan3FSR30V
-    {33421, 7376, mbRegRwCheckFunc,  OFFSET(chan3FSR30V), "chan3FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33421, 7376, mbRegRwCheckFunc,  OFFSET(chan3FSR30V), "chan3FSR30V", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate30V : chan3Date30V
-    {33423, 7380, mbRegRwCheckFunc,  OFFSET(chan3Date30V), "chan3Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33423, 7380, mbRegRwCheckFunc,  OFFSET(chan3Date30V), "chan3Date30V", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR20mA : chan3OCR20mA
-    {33425, 7384, mbRegRwCheckFunc,  OFFSET(chan3OCR20mA), "chan3OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33425, 7384, mbRegRwCheckFunc,  OFFSET(chan3OCR20mA), "chan3OCR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFCR20mA : chan3FSR20mA
-    {33427, 7388, mbRegRwCheckFunc,  OFFSET(chan3FSR20mA), "chan3FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33427, 7388, mbRegRwCheckFunc,  OFFSET(chan3FSR20mA), "chan3FSR20mA", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFDate20mA : chan3Date20mA
-    {33429, 7392, mbRegRwCheckFunc,  OFFSET(chan3Date20mA), "chan3Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33429, 7392, mbRegRwCheckFunc,  OFFSET(chan3Date20mA), "chan3Date20mA", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR4x : chan3OCR4x
-    {33431, 7396, mbRegRwCheckFunc,  OFFSET(chan3OCR4x), "chan3OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33431, 7396, mbRegRwCheckFunc,  OFFSET(chan3OCR4x), "chan3OCR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR4x : chan3FSR4x
-    {33433, 7400, mbRegRwCheckFunc,  OFFSET(chan3FSR4x), "chan3FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33433, 7400, mbRegRwCheckFunc,  OFFSET(chan3FSR4x), "chan3FSR4x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate4x : chan3Date4x
-    {33435, 7404, mbRegRwCheckFunc,  OFFSET(chan3Date4x), "chan3Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33435, 7404, mbRegRwCheckFunc,  OFFSET(chan3Date4x), "chan3Date4x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR3x : chan3OCR3x
-    {33437, 7408, mbRegRwCheckFunc,  OFFSET(chan3OCR3x), "chan3OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33437, 7408, mbRegRwCheckFunc,  OFFSET(chan3OCR3x), "chan3OCR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSR3x : chan3FSR3x
-    {33439, 7412, mbRegRwCheckFunc,  OFFSET(chan3FSR3x), "chan3FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33439, 7412, mbRegRwCheckFunc,  OFFSET(chan3FSR3x), "chan3FSR3x", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDate3x : chan3Date3x
-    {33441, 7416, mbRegRwCheckFunc,  OFFSET(chan3Date3x), "chan3Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33441, 7416, mbRegRwCheckFunc,  OFFSET(chan3Date3x), "chan3Date3x", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCRinternal : chan3OCRinternal
-    {33443, 7420, mbRegRwCheckFunc,  OFFSET(chan3OCRinternal), "chan3OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33443, 7420, mbRegRwCheckFunc,  OFFSET(chan3OCRinternal), "chan3OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan3FSRinternal
-    {33445, 7424, mbRegRwCheckFunc,  OFFSET(chan3FSRinternal), "chan3FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33445, 7424, mbRegRwCheckFunc,  OFFSET(chan3FSRinternal), "chan3FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan3DateRinternal
-    {33447, 7428, mbRegRwCheckFunc,  OFFSET(chan3DateRinternal), "chan3DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33447, 7428, mbRegRwCheckFunc,  OFFSET(chan3DateRinternal), "chan3DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan0DigitalData
+    {33449, 282, mbRegRwCheckFunc,  OFFSET(chan0DigitalData), "chan0DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan0DigitSignalType
+    {33451, 282, mbRegRwCheckFunc,  OFFSET(chan0DigitSignalType), "chan0DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan0DigitDamping
+    {33452, 282, mbRegRwCheckFunc,  OFFSET(chan0DigitDamping), "chan0DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan0DigitalReleyHi
+    {33467, 294, mbRegRwCheckFunc,  OFFSET(chan0DigitalReleyHi), "chan0DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan0DigitalReleyLo
+    {33468, 294, mbRegRwCheckFunc,  OFFSET(chan0DigitalReleyLo), "chan0DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan1DigitalData
+    {33469, 294, mbRegRwCheckFunc,  OFFSET(chan1DigitalData), "chan1DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan1DigitSignalType
+    {33471, 294, mbRegRwCheckFunc,  OFFSET(chan1DigitSignalType), "chan1DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan1DigitDamping
+    {33472, 294, mbRegRwCheckFunc,  OFFSET(chan1DigitDamping), "chan1DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan1DigitalReleyHi
+    {33487, 306, mbRegRwCheckFunc,  OFFSET(chan1DigitalReleyHi), "chan1DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan1DigitalReleyLo
+    {33488, 306, mbRegRwCheckFunc,  OFFSET(chan1DigitalReleyLo), "chan1DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan2DigitalData
+    {33489, 306, mbRegRwCheckFunc,  OFFSET(chan2DigitalData), "chan2DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan2DigitSignalType
+    {33491, 306, mbRegRwCheckFunc,  OFFSET(chan2DigitSignalType), "chan2DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan2DigitDamping
+    {33492, 306, mbRegRwCheckFunc,  OFFSET(chan2DigitDamping), "chan2DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan2DigitalReleyHi
+    {33507, 318, mbRegRwCheckFunc,  OFFSET(chan2DigitalReleyHi), "chan2DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan2DigitalReleyLo
+    {33508, 318, mbRegRwCheckFunc,  OFFSET(chan2DigitalReleyLo), "chan2DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan3DigitalData
+    {33509, 318, mbRegRwCheckFunc,  OFFSET(chan3DigitalData), "chan3DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan3DigitSignalType
+    {33511, 318, mbRegRwCheckFunc,  OFFSET(chan3DigitSignalType), "chan3DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan3DigitDamping
+    {33512, 318, mbRegRwCheckFunc,  OFFSET(chan3DigitDamping), "chan3DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan3DigitalReleyHi
+    {33527, 330, mbRegRwCheckFunc,  OFFSET(chan3DigitalReleyHi), "chan3DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan3DigitalReleyLo
+    {33528, 330, mbRegRwCheckFunc,  OFFSET(chan3DigitalReleyLo), "chan3DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan4DigitalData
+    {33529, 330, mbRegRwCheckFunc,  OFFSET(chan4DigitalData), "chan4DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan4DigitSignalType
+    {33531, 330, mbRegRwCheckFunc,  OFFSET(chan4DigitSignalType), "chan4DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan4DigitDamping
+    {33532, 330, mbRegRwCheckFunc,  OFFSET(chan4DigitDamping), "chan4DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan4DigitalReleyHi
+    {33547, 342, mbRegRwCheckFunc,  OFFSET(chan4DigitalReleyHi), "chan4DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan4DigitalReleyLo
+    {33548, 342, mbRegRwCheckFunc,  OFFSET(chan4DigitalReleyLo), "chan4DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: DigitalData : chan5DigitalData
+    {33549, 342, mbRegRwCheckFunc,  OFFSET(chan5DigitalData), "chan5DigitalData", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: SignalType(Digital) : chan5DigitSignalType
+    {33551, 342, mbRegRwCheckFunc,  OFFSET(chan5DigitSignalType), "chan5DigitSignalType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: TimeDamping : chan5DigitDamping
+    {33552, 342, mbRegRwCheckFunc,  OFFSET(chan5DigitDamping), "chan5DigitDamping", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Hi alarm_Reley : chan5DigitalReleyHi
+    {33567, 354, mbRegRwCheckFunc,  OFFSET(chan5DigitalReleyHi), "chan5DigitalReleyHi", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    // Parameter: Lo alarm_Reley : chan5DigitalReleyLo
+    {33568, 354, mbRegRwCheckFunc,  OFFSET(chan5DigitalReleyLo), "chan5DigitalReleyLo", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
 };
 const uint16_t g_numLookupRegisters = (sizeof(g_stLookupRegisters)/sizeof(g_stLookupRegisters[0]));
 

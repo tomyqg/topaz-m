@@ -25,7 +25,7 @@ public:
     deviceTypeEnum deviceType;      // тип устройства
     uint32_t serialNumber;          // серийный номер платы
     uint32_t uptime;                // время работы с момента включения
-    deviceStateEnum deviceState;    // состояние устройства
+//    deviceStateEnum deviceState;    // состояние устройства
     accessTypeEnum accessType;      // уровень доступа
     uint32_t mbCommCount;           // количество обработанных запросов
     uint32_t mbCommError;           // количество возникших ошибок в Modbus

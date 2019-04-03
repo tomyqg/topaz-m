@@ -10,7 +10,7 @@ QT += serialport
 QT += testlib
 QT += network
 
-VERSION = 1.62
+VERSION = 1.70
 QMAKE_TARGET_COMPANY = Teplopribor-Sensor
 QMAKE_TARGET_PRODUCT = Multigraph
 QMAKE_TARGET_DESCRIPTION = Рaperless video recorder

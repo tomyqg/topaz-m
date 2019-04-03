@@ -35,7 +35,7 @@ typedef struct
 {
   uint16_t par1;
   uint16_t par2;
-  uint16_t par3;
+   uint16_t   par3;
   uint16_t par4;
   uint16_t par5;
   uint16_t par6;
@@ -44,28 +44,24 @@ typedef struct
 // chanDataFlags - channel data flags enum
 typedef enum
 {
-  EDF_WAIT_DATA = 0x00,     // Х 0 Ц WAIT_DATA Ц ожидание значени¤
-  EDF_UPDATE = 0x01,        // Х 1 Ц UPDATE Ц обновление значени¤,
+  EDF_OK = 0x00,     // Х 0 Ц OK Ц измерение в штатном режиме
+  EDF_BREAK = 0x01,        // Х 1 Ц BREAK Ц обрыв линии
   EDF_OVERLOAD_MIN = 0x02,  // Х 2 Ц OVERLOAD_MIN Ц значение ниже диапазона
   EDF_OVERLOAD_MAX = 0x03,  // Х 3 Ц OVERLOAD_MAX Ц значение выше диапазона
-  EDF_ERROR_CONF = 0x04,    // Х 4 Ц ERROR_CONF Ц ошибка конфигурации
-  EDF_ERROR_COMM = 0x05,    // Х 5 Ц ERROR_COMM Ц ошибка св¤зи с канальным блоком
-  EDF_ERROR_HW = 0x06,      // Х 6 Ц ERROR_HW Ц аппаратна¤ ошибка
-  EDF_ERROR_SW = 0x07       // Х 7Ц ERROR_SW Ц программна¤ ошибка
-
 } eDataFlags;
 
 // chanStatus parameter values - channel state
 typedef enum
 {
-  EMS_CH_OFF = 0x00,            // Х 0 Ц выключен
+  EMS_CH_OFF = 0x00,             // Х 0 Ц выключен
   EMS_CH_ON = 0x01,             // Х 1 Ц включен
-  EMS_CH_WAIT_CONF = 0x02,      // Х 2 Ц ожидает конфигурации
-  EMS_CH_CONF_PROGRESS = 0x03,  // Х 3 Ц выполн¤ет процесс конфигурации
-  EMS_CH_CONF_COMPLETE = 0x04,  // Х 4 Ц конфигураци¤ завершена
+  EMS_CH_WAIT_CONF = 0x02,    // Х 2 Ц ожидает конфигурации
+  EMS_CH_EMS_ERROR = 0x03,    // Х 3 Ц ошибка св¤зи
+
+  EMS_CH_BREAK = 0x04,      // Х 4 Ц датчик не подключЄн
   EMS_CH_WAIT_DATA = 0x05,      // Х 5 Ц ожидание обновлени¤ значени¤ параметра Data
   EMS_CH_DATA_PROCESS = 0x06,   // Х 6 Ц обработка обновлени¤ значени¤ параметра Data
-  EMS_CH_DATA_UPDATED = 0x07,    // Х 7 Ц значение параметра Data обновлено
+
   EMS_CH_ERR_TEMP = 0x08,        // Х 8 - ошибка термопары
   EMS_CH_ERR_EDS = 0x09,        // Х 9 - ошибка датчика окисленности
   EMS_CH_NOFIND_TEMP = 0xA,        // Х 10 - площадка по температуре не найдена
@@ -110,15 +106,11 @@ typedef enum
 typedef enum
 {
    EDE_NO_ERR = (uint16_t)(0),                 // NO ANY device error
-   EDE_SERVICE = (uint16_t)(1 << 0),           // MODEL Ц ошибка определени¤ типа устройства.
-   EDE_SERIAL = (uint16_t)(1 << 1),            // SERIAL Ц ошибка серийного номера. Ќомер не записан или поврежден
+   EDE_SERIAL = (uint16_t)(1 << 0),            // SERIAL Ц ошибка серийного номера. Ќомер не записан или поврежден
    EDE_FACTORY = (uint16_t)(1 << 2),           // FACTORY Ц ошибка даты производства.
    EDE_CRC32 = (uint16_t)(1 << 3),             // CRC32 Ц ошибка контрольной суммы.
-   EDE_MODE = (uint16_t)(1 << 4),              // MODE Ц ошибка идентификации режима
-   EDE_ADDRESS = (uint16_t)(1 << 5),           // ADDRESS Ц ошибка идентификации адреса в сети Modbus
-   EDE_SPEED = (uint16_t)(1 << 6),             // SPEED Ц ошибка идентификации скорости Modbus
-   EDE_MODEL_CHECK = (uint16_t)(1 << 7),       // MODEL_CHECK Ц автоматически определенна¤ модель устройства не
-                                               //соответствует заводской установке
+
+   EDE_FRAM = (uint16_t)(1 << 6),             //FRAM Ц ќшибка пам¤ти
    EDE_RESERV1 = (uint16_t)(1 << 8),           // Reserved
    EDE_RESERV2 = (uint16_t)(1 << 9),           // Reserved
 } eDevErrors;
@@ -126,9 +118,9 @@ typedef enum
 typedef enum
 {
   CN_NOERR = 0,
-  CN_CONFIG = (uint16_t)(1 << 0),
-  CN_CALIB = (uint16_t)(1 << 1),
-  CN_CONNECT = (uint16_t)(1 << 2),
+  CN_ERR_ADC = (uint16_t)(1 << 0),             //ошибка св¤зи с ацп
+  CN_ERR_TMP123 = (uint16_t)(1 << 1),    // ошибка св¤зи с tmp123
+
 } eCnErros;
 
 #pragma pack(push, 1)
@@ -143,320 +135,264 @@ typedef struct
     float DataChan2;
     // Parameter: Data channel 3 : DataChan3 : NV Address: 0
     float DataChan3;
-    // Parameter: DataArray1 : DataArray1 : NV Address: 0
-    uint8_t DataArray1[64];
-    // Parameter: DataArray2 : DataArray2 : NV Address: 0
-    uint8_t DataArray2[64];
-    // Parameter: DataArray3 : DataArray3 : NV Address: 0
-    uint8_t DataArray3[64];
-    // Parameter: DataArray4 : DataArray4 : NV Address: 0
-    uint8_t DataArray4[64];
-    // Parameter: DataArray5 : DataArray5 : NV Address: 0
-    uint8_t DataArray5[64];
-    // Parameter: DataArray6 : DataArray6 : NV Address: 0
-    uint8_t DataArray6[64];
-    // Parameter: DataArray7 : DataArray7 : NV Address: 0
-    uint8_t DataArray7[64];
-    // Parameter: DataArray8 : DataArray8 : NV Address: 0
-    uint8_t DataArray8[64];
-    // Parameter: DataArray9 : DataArray9 : NV Address: 0
-    uint8_t DataArray9[64];
-    // Parameter: DataArray10 : DataArray10 : NV Address: 0
-    uint8_t DataArray10[64];
     // Parameter: Protocol version  : protocolVersion : NV Address: 0
-    uint16_t protocolVersion;
-    // Parameter: Hardware version  : hardwareVersion : NV Address: 2
-    uint16_t hardwareVersion;
-    // Parameter: Software Version : softwareVersion : NV Address: 4
-    uint16_t softwareVersion;
-    // Parameter: Device Type : deviceType : NV Address: 8
+    uint32_t protocolVersion;
+    // Parameter: Hardware version  : hardwareVersion : NV Address: 4
+    uint32_t hardwareVersion;
+    // Parameter: Software Version : softwareVersion : NV Address: 8
+    uint32_t softwareVersion;
+    // Parameter: Device Type : deviceType : NV Address: 12
     uint16_t deviceType;
-    // Parameter: Serial number  : serialNumber : NV Address: 12
+    // Parameter: Serial number  : serialNumber : NV Address: 16
     uint32_t serialNumber;
-    // Parameter: Up time  : uptime : NV Address: 16
+    // Parameter: Up time  : uptime : NV Address: 20
     uint32_t uptime;
-    // Parameter: Device state  : deviceState : NV Address: 16
-    uint16_t deviceState;
-    // Parameter: Access type  : accessType : NV Address: 16
+    // Parameter: Access type  : accessType : NV Address: 20
     uint16_t accessType;
-    // Parameter: Modbus comm count  : mbCommCount : NV Address: 18
-    uint16_t mbCommCount;
-    // Parameter: Modbus comm error  : mbCommError : NV Address: 18
-    uint16_t mbCommError;
-    // Parameter: Status : deviceStatus : NV Address: 18
+    // Parameter: Modbus comm count  : mbCommCount : NV Address: 22
+    uint32_t mbCommCount;
+    // Parameter: Modbus comm error  : mbCommError : NV Address: 22
+    uint32_t mbCommError;
+    // Parameter: Status : deviceStatus : NV Address: 22
     uint16_t deviceStatus;
-    // Parameter: Errors : devErrors : NV Address: 18
+    // Parameter: Errors : devErrors : NV Address: 22
     uint16_t devErrors;
-    // Parameter: Factory date  : factoryDate : NV Address: 18
+    // Parameter: Factory date  : factoryDate : NV Address: 22
     uint32_t factoryDate;
-    // Parameter: Software CRC32  : softwareCrc32 : NV Address: 22
+    // Parameter: Software CRC32  : softwareCrc32 : NV Address: 26
     uint32_t softwareCrc32;
-    // Parameter: Unique ID  : uniqueId : NV Address: 26
+    // Parameter: Unique ID  : uniqueId : NV Address: 30
     uint8_t uniqueId[12];
-    // Parameter: Root Access : root_Access : NV Address: 26
-    uint16_t root_Access;
-    // Parameter: Data (Measure/Generate)  : chan0Data : NV Address: 28
+    // Parameter: Mode  : deviceMode : NV Address: 30
+    uint16_t deviceMode;
+    // Parameter: Data (Measure/Generate)  : chan0Data : NV Address: 30
     float chan0Data;
-    // Parameter: Data flags : chan0DataFlags : NV Address: 28
+    // Parameter: Data flags : chan0DataFlags : NV Address: 30
     uint16_t chan0DataFlags;
-    // Parameter: Status : chan0Status : NV Address: 28
+    // Parameter: Status : chan0Status : NV Address: 30
     uint16_t chan0Status;
-    // Parameter: ќшибки канала.  : chan0Error : NV Address: 28
+    // Parameter: ќшибки канала.  : chan0Error : NV Address: 30
     uint16_t chan0Error;
-    // Parameter: Quantity  : chan0Quantity : NV Address: 28
+    // Parameter: Quantity  : chan0Quantity : NV Address: 30
     uint32_t chan0Quantity;
-    // Parameter: Uptime  : chan0Uptime : NV Address: 28
+    // Parameter: Uptime  : chan0Uptime : NV Address: 30
     uint32_t chan0Uptime;
-    // Parameter: Raw Data : chan0RawData : NV Address: 28
+    // Parameter: Raw Data : chan0RawData : NV Address: 30
     float chan0RawData;
-    // Parameter: Signal Type : chan0SignalType : NV Address: 28
+    // Parameter: Verification read Master : chan0VerificationRead : NV Address: 30
+    uint16_t chan0VerificationRead;
+    // Parameter: Signal Type : chan0SignalType : NV Address: 30
     uint16_t chan0SignalType;
     // Parameter: Additional parameter1 : chan0AdditionalParameter1 : NV Address: 30
     uint8_t chan0AdditionalParameter1[12];
-    // Parameter: Additional parameter2 : chan0AdditionalParameter2 : NV Address: 42
-    uint8_t chan0AdditionalParameter2[12];
-    // Parameter: Hi alarm_Reley : chan0ReleyHi : NV Address: 74
+    // Parameter: Transfer signal low limit  : chan0TransferSignalLowLim : NV Address: 46
+    float chan0TransferSignalLowLim;
+    // Parameter: Transfer signal high limit  : chan0TransferSignalHighLim : NV Address: 46
+    float chan0TransferSignalHighLim;
+    // Parameter: Hi alarm_Reley : chan0ReleyHi : NV Address: 54
     uint16_t chan0ReleyHi;
-    // Parameter: Lo alarm_Reley : chan0ReleyLo : NV Address: 76
+    // Parameter: Lo alarm_Reley : chan0ReleyLo : NV Address: 56
     uint16_t chan0ReleyLo;
-    // Parameter: Time_square_temperature : chan0TimeSquareTemp : NV Address: 78
+    // Parameter: Time_square_temperature : chan0TimeSquareTemp : NV Address: 58
     float chan0TimeSquareTemp;
-    // Parameter: Range_temperature : chan0RangeTemp : NV Address: 82
+    // Parameter: Range_temperature : chan0RangeTemp : NV Address: 58
     float chan0RangeTemp;
-    // Parameter: Time_measure_temperature : chan0TimeMeasureTemp : NV Address: 86
+    // Parameter: Time_measure_temperature : chan0TimeMeasureTemp : NV Address: 58
     float chan0TimeMeasureTemp;
-    // Parameter: Low_lim_temp : chan0LowTemp : NV Address: 90
+    // Parameter: Low_lim_temp : chan0LowTemp : NV Address: 58
     uint16_t chan0LowTemp;
-    // Parameter: Hi_lim_temp : chan0HiTemp : NV Address: 92
+    // Parameter: Hi_lim_temp : chan0HiTemp : NV Address: 58
     uint16_t chan0HiTemp;
-    // Parameter: Sensor_Type_Activty : chan0SensorType : NV Address: 94
+    // Parameter: Sensor_Type_Activty : chan0SensorType : NV Address: 58
     uint16_t chan0SensorType;
-    // Parameter: Time_square_EDS : chan0TimeSquareEDS : NV Address: 96
+    // Parameter: Time_square_EDS : chan0TimeSquareEDS : NV Address: 58
     float chan0TimeSquareEDS;
-    // Parameter: Range_EDS : chan0RangeEDS : NV Address: 100
+    // Parameter: Range_EDS : chan0RangeEDS : NV Address: 58
     float chan0RangeEDS;
-    // Parameter: Time_measure_EDS : chan0TimeMeasureEDS : NV Address: 104
+    // Parameter: Time_measure_EDS : chan0TimeMeasureEDS : NV Address: 58
     float chan0TimeMeasureEDS;
-    // Parameter: —rystallization_temperature : chan0Crystallization : NV Address: 108
+    // Parameter: —rystallization_temperature : chan0Crystallization : NV Address: 58
     uint16_t chan0Crystallization;
-    // Parameter: Mass_coefficient : chan0MassCoeff : NV Address: 110
+    // Parameter: Mass_coefficient : chan0MassCoeff : NV Address: 58
     uint16_t chan0MassCoeff;
-    // Parameter: Final_oxidation : chan0FinalOx : NV Address: 112
+    // Parameter: Final_oxidation : chan0FinalOx : NV Address: 58
     uint16_t chan0FinalOx;
-    // Parameter: Assimilation of aluminum : chan0Assimilation : NV Address: 114
+    // Parameter: Assimilation of aluminum : chan0Assimilation : NV Address: 58
     uint16_t chan0Assimilation;
-    // Parameter: Mass_melting : chan0MassMelting : NV Address: 116
+    // Parameter: Mass_melting : chan0MassMelting : NV Address: 58
     uint16_t chan0MassMelting;
-    // Parameter: Oxygen_activity : chan0OxActivity : NV Address: 118
+    // Parameter: Oxygen_activity : chan0OxActivity : NV Address: 58
     uint16_t chan0OxActivity;
-    // Parameter: Mass_Aluminium : chan0MassAl : NV Address: 118
+    // Parameter: Mass_Aluminium : chan0MassAl : NV Address: 58
     uint16_t chan0MassAl;
-    // Parameter: —arbon_сontent : chan0Carbon : NV Address: 118
-    uint16_t chan0Carbon;
-    // Parameter: Senson_activity_oxygen : chan0PrimaryActivity : NV Address: 118
+    // Parameter: —arbon_сontent : chan0Carbon : NV Address: 58
+    float chan0Carbon;
+    // Parameter: Senson_activity_oxygen : chan0PrimaryActivity : NV Address: 58
     float chan0PrimaryActivity;
-    // Parameter: Service_Buffer : chan0Buff : NV Address: 118
-    float chan0Buff;
-    // Parameter: Result CJ Value : chan0ResultCjValue : NV Address: 134
+    // Parameter: Result CJ Value : chan0ResultCjValue : NV Address: 74
     float chan0ResultCjValue;
-    // Parameter: Data (Measure/Generate)  : chan1Data : NV Address: 134
+    // Parameter: TEMP array0 : chan0TEMParray0 : NV Address: 74
+    int16_t chan0TEMParray0[64];
+    // Parameter: TEMP array1 : chan0TEMParray1 : NV Address: 74
+    int16_t chan0TEMParray1[64];
+    // Parameter: TEMP array2 : chan0TEMParray2 : NV Address: 74
+    int16_t chan0TEMParray2[64];
+    // Parameter: TEMP array3 : chan0TEMParray3 : NV Address: 74
+    int16_t chan0TEMParray3[64];
+    // Parameter: TEMP array4 : chan0TEMParray4 : NV Address: 74
+    int16_t chan0TEMParray4[64];
+    // Parameter: EMF array0 : chan0EMFarray0 : NV Address: 74
+    int16_t chan0EMFarray0[64];
+    // Parameter: EMF array1 : chan0EMFarray1 : NV Address: 74
+    int16_t chan0EMFarray1[64];
+    // Parameter: EMF array2 : chan0EMFarray2 : NV Address: 74
+    int16_t chan0EMFarray2[64];
+    // Parameter: EMF array3 : chan0EMFarray3 : NV Address: 74
+    int16_t chan0EMFarray3[64];
+    // Parameter: EMF array4 : chan0EMFarray4 : NV Address: 74
+    int16_t chan0EMFarray4[64];
+    // Parameter: Data (Measure/Generate)  : chan1Data : NV Address: 74
     float chan1Data;
-    // Parameter: Data flags : chan1DataFlags : NV Address: 134
+    // Parameter: Data flags : chan1DataFlags : NV Address: 74
     uint16_t chan1DataFlags;
-    // Parameter: Status : chan1Status : NV Address: 134
+    // Parameter: Status : chan1Status : NV Address: 74
     uint16_t chan1Status;
-    // Parameter: ќшибки канала.  : chan1Error : NV Address: 134
+    // Parameter: ќшибки канала.  : chan1Error : NV Address: 74
     uint16_t chan1Error;
-    // Parameter: Quantity  : chan1Quantity : NV Address: 134
+    // Parameter: Quantity  : chan1Quantity : NV Address: 74
     uint32_t chan1Quantity;
-    // Parameter: Uptime  : chan1Uptime : NV Address: 134
+    // Parameter: Uptime  : chan1Uptime : NV Address: 74
     uint32_t chan1Uptime;
-    // Parameter: Raw Data : chan1RawData : NV Address: 134
+    // Parameter: Raw Data : chan1RawData : NV Address: 74
     float chan1RawData;
-    // Parameter: Signal Type : chan1SignalType : NV Address: 134
+    // Parameter: Verification read Master : chan1VerificationRead : NV Address: 74
+    uint16_t chan1VerificationRead;
+    // Parameter: Signal Type : chan1SignalType : NV Address: 74
     uint16_t chan1SignalType;
-    // Parameter: Additional parameter1 : chan1AdditionalParameter1 : NV Address: 136
+    // Parameter: Additional parameter1 : chan1AdditionalParameter1 : NV Address: 74
     uint8_t chan1AdditionalParameter1[12];
-    // Parameter: Additional parameter2 : chan1AdditionalParameter2 : NV Address: 148
-    uint8_t chan1AdditionalParameter2[12];
-    // Parameter: Hi alarm_Reley : chan1ReleyHi : NV Address: 180
+    // Parameter: Transfer signal low limit  : chan1TransferSignalLowLim : NV Address: 78
+    float chan1TransferSignalLowLim;
+    // Parameter: Transfer signal high limit  : chan1TransferSignalHighLim : NV Address: 78
+    float chan1TransferSignalHighLim;
+    // Parameter: Hi alarm_Reley : chan1ReleyHi : NV Address: 86
     uint16_t chan1ReleyHi;
-    // Parameter: Lo alarm_Reley : chan1ReleyLo : NV Address: 182
+    // Parameter: Lo alarm_Reley : chan1ReleyLo : NV Address: 88
     uint16_t chan1ReleyLo;
-    // Parameter: Time_square_temperature : chan1TimeSquareTemp : NV Address: 184
+    // Parameter: Time_square_temperature : chan1TimeSquareTemp : NV Address: 90
     float chan1TimeSquareTemp;
-    // Parameter: Range_temperature : chan1RangeTemp : NV Address: 188
+    // Parameter: Range_temperature : chan1RangeTemp : NV Address: 90
     float chan1RangeTemp;
-    // Parameter: Time_measure_temperature : chan1TimeMeasureTemp : NV Address: 192
+    // Parameter: Time_measure_temperature : chan1TimeMeasureTemp : NV Address: 90
     float chan1TimeMeasureTemp;
-    // Parameter: Low_lim_temp : chan1LowTemp : NV Address: 196
+    // Parameter: Low_lim_temp : chan1LowTemp : NV Address: 90
     uint16_t chan1LowTemp;
-    // Parameter: Hi_lim_temp : chan1HiTemp : NV Address: 198
+    // Parameter: Hi_lim_temp : chan1HiTemp : NV Address: 90
     uint16_t chan1HiTemp;
-    // Parameter: Sensor_Type_Activty : chan1SensorType : NV Address: 200
+    // Parameter: Sensor_Type_Activty : chan1SensorType : NV Address: 90
     uint16_t chan1SensorType;
-    // Parameter: Time_square_EDS : chan1TimeSquareEDS : NV Address: 202
+    // Parameter: Time_square_EDS : chan1TimeSquareEDS : NV Address: 90
     float chan1TimeSquareEDS;
-    // Parameter: Range_EDS : chan1RangeEDS : NV Address: 206
+    // Parameter: Range_EDS : chan1RangeEDS : NV Address: 90
     float chan1RangeEDS;
-    // Parameter: Time_measure_EDS : chan1TimeMeasureEDS : NV Address: 210
+    // Parameter: Time_measure_EDS : chan1TimeMeasureEDS : NV Address: 90
     float chan1TimeMeasureEDS;
-    // Parameter: —rystallization_temperature : chan1Crystallization : NV Address: 214
+    // Parameter: —rystallization_temperature : chan1Crystallization : NV Address: 90
     uint16_t chan1Crystallization;
-    // Parameter: Mass_coefficient : chan1MassCoeff : NV Address: 216
+    // Parameter: Mass_coefficient : chan1MassCoeff : NV Address: 90
     uint16_t chan1MassCoeff;
-    // Parameter: Final_oxidation : chan1FinalOx : NV Address: 218
+    // Parameter: Final_oxidation : chan1FinalOx : NV Address: 90
     uint16_t chan1FinalOx;
-    // Parameter: Assimilation of aluminum : chan1Assimilation : NV Address: 220
+    // Parameter: Assimilation of aluminum : chan1Assimilation : NV Address: 90
     uint16_t chan1Assimilation;
-    // Parameter: Mass_melting : chan1MassMelting : NV Address: 222
+    // Parameter: Mass_melting : chan1MassMelting : NV Address: 90
     uint16_t chan1MassMelting;
-    // Parameter: Oxygen_activity : chan1OxActivity : NV Address: 224
+    // Parameter: Oxygen_activity : chan1OxActivity : NV Address: 90
     uint16_t chan1OxActivity;
-    // Parameter: Mass_Aluminium : chan1MassAl : NV Address: 224
+    // Parameter: Mass_Aluminium : chan1MassAl : NV Address: 90
     uint16_t chan1MassAl;
-    // Parameter: —arbon_сontent : chan1Carbon : NV Address: 224
-    uint16_t chan1Carbon;
-    // Parameter: Senson_activity_oxygen : chan1PrimaryActivity : NV Address: 224
+    // Parameter: —arbon_сontent : chan1Carbon : NV Address: 90
+    float chan1Carbon;
+    // Parameter: Senson_activity_oxygen : chan1PrimaryActivity : NV Address: 90
     float chan1PrimaryActivity;
-    // Parameter: Service_Buffer : chan1Buff : NV Address: 224
-    float chan1Buff;
-    // Parameter: Result CJ Value : chan1ResultCjValue : NV Address: 240
+    // Parameter: Result CJ Value : chan1ResultCjValue : NV Address: 106
     float chan1ResultCjValue;
-    // Parameter: Data (Measure/Generate)  : chan2Data : NV Address: 240
+    // Parameter: TEMP array0 : chan1TEMParray0 : NV Address: 106
+    int16_t chan1TEMParray0[64];
+    // Parameter: TEMP array1 : chan1TEMParray1 : NV Address: 106
+    int16_t chan1TEMParray1[64];
+    // Parameter: TEMP array2 : chan1TEMParray2 : NV Address: 106
+    int16_t chan1TEMParray2[64];
+    // Parameter: TEMP array3 : chan1TEMParray3 : NV Address: 106
+    int16_t chan1TEMParray3[64];
+    // Parameter: TEMP array4 : chan1TEMParray4 : NV Address: 106
+    int16_t chan1TEMParray4[64];
+    // Parameter: EMF array0 : chan1EMFarray0 : NV Address: 106
+    int16_t chan1EMFarray0[64];
+    // Parameter: EMF array1 : chan1EMFarray1 : NV Address: 106
+    int16_t chan1EMFarray1[64];
+    // Parameter: EMF array2 : chan1EMFarray2 : NV Address: 106
+    int16_t chan1EMFarray2[64];
+    // Parameter: EMF array3 : chan1EMFarray3 : NV Address: 106
+    int16_t chan1EMFarray3[64];
+    // Parameter: EMF array4 : chan1EMFarray4 : NV Address: 106
+    int16_t chan1EMFarray4[64];
+    // Parameter: Data (Measure/Generate)  : chan2Data : NV Address: 106
     float chan2Data;
-    // Parameter: Data flags : chan2DataFlags : NV Address: 240
+    // Parameter: Data flags : chan2DataFlags : NV Address: 106
     uint16_t chan2DataFlags;
-    // Parameter: Status : chan2Status : NV Address: 240
+    // Parameter: Status : chan2Status : NV Address: 106
     uint16_t chan2Status;
-    // Parameter: ќшибки канала.  : chan2Error : NV Address: 240
+    // Parameter: ќшибки канала.  : chan2Error : NV Address: 106
     uint16_t chan2Error;
-    // Parameter: Quantity  : chan2Quantity : NV Address: 240
+    // Parameter: Quantity  : chan2Quantity : NV Address: 106
     uint32_t chan2Quantity;
-    // Parameter: Uptime  : chan2Uptime : NV Address: 240
+    // Parameter: Uptime  : chan2Uptime : NV Address: 106
     uint32_t chan2Uptime;
-    // Parameter: Raw Data : chan2RawData : NV Address: 240
+    // Parameter: Raw Data : chan2RawData : NV Address: 106
     float chan2RawData;
-    // Parameter: Signal Type : chan2SignalType : NV Address: 240
+    // Parameter: Signal Type : chan2SignalType : NV Address: 106
     uint16_t chan2SignalType;
-    // Parameter: Additional parameter1 : chan2AdditionalParameter1 : NV Address: 242
+    // Parameter: Additional parameter1 : chan2AdditionalParameter1 : NV Address: 106
     uint8_t chan2AdditionalParameter1[12];
-    // Parameter: Additional parameter2 : chan2AdditionalParameter2 : NV Address: 254
-    uint8_t chan2AdditionalParameter2[12];
-    // Parameter: Hi alarm_Reley : chan2ReleyHi : NV Address: 286
+    // Parameter: Transfer signal low limit  : chan2TransferSignalLowLim : NV Address: 122
+    float chan2TransferSignalLowLim;
+    // Parameter: Transfer signal high limit  : chan2TransferSignalHighLim : NV Address: 126
+    float chan2TransferSignalHighLim;
+    // Parameter: Hi alarm_Reley : chan2ReleyHi : NV Address: 138
     uint16_t chan2ReleyHi;
-    // Parameter: Lo alarm_Reley : chan2ReleyLo : NV Address: 288
+    // Parameter: Lo alarm_Reley : chan2ReleyLo : NV Address: 140
     uint16_t chan2ReleyLo;
-    // Parameter: Time_square_temperature : chan2TimeSquareTemp : NV Address: 290
-    float chan2TimeSquareTemp;
-    // Parameter: Range_temperature : chan2RangeTemp : NV Address: 294
-    float chan2RangeTemp;
-    // Parameter: Time_measure_temperature : chan2TimeMeasureTemp : NV Address: 298
-    float chan2TimeMeasureTemp;
-    // Parameter: Low_lim_temp : chan2LowTemp : NV Address: 302
-    uint16_t chan2LowTemp;
-    // Parameter: Hi_lim_temp : chan2HiTemp : NV Address: 304
-    uint16_t chan2HiTemp;
-    // Parameter: Sensor_Type_Activty : chan2SensorType : NV Address: 306
-    uint16_t chan2SensorType;
-    // Parameter: Time_square_EDS : chan2TimeSquareEDS : NV Address: 308
-    float chan2TimeSquareEDS;
-    // Parameter: Range_EDS : chan2RangeEDS : NV Address: 312
-    float chan2RangeEDS;
-    // Parameter: Time_measure_EDS : chan2TimeMeasureEDS : NV Address: 316
-    float chan2TimeMeasureEDS;
-    // Parameter: —rystallization_temperature : chan2Crystallization : NV Address: 320
-    uint16_t chan2Crystallization;
-    // Parameter: Mass_coefficient : chan2MassCoeff : NV Address: 322
-    uint16_t chan2MassCoeff;
-    // Parameter: Final_oxidation : chan2FinalOx : NV Address: 324
-    uint16_t chan2FinalOx;
-    // Parameter: Assimilation of aluminum : chan2Assimilation : NV Address: 326
-    uint16_t chan2Assimilation;
-    // Parameter: Mass_melting : chan2MassMelting : NV Address: 328
-    uint16_t chan2MassMelting;
-    // Parameter: Oxygen_activity : chan2OxActivity : NV Address: 330
-    uint16_t chan2OxActivity;
-    // Parameter: Mass_Aluminium : chan2MassAl : NV Address: 330
-    uint16_t chan2MassAl;
-    // Parameter: —arbon_сontent : chan2Carbon : NV Address: 330
-    uint16_t chan2Carbon;
-    // Parameter: Senson_activity_oxygen : chan2PrimaryActivity : NV Address: 330
-    float chan2PrimaryActivity;
-    // Parameter: Service_Buffer : chan2Buff : NV Address: 330
-    float chan2Buff;
-    // Parameter: Result CJ Value : chan2ResultCjValue : NV Address: 346
+    // Parameter: Result CJ Value : chan2ResultCjValue : NV Address: 198
     float chan2ResultCjValue;
-    // Parameter: Data (Measure/Generate)  : chan3Data : NV Address: 346
+    // Parameter: Data (Measure/Generate)  : chan3Data : NV Address: 198
     float chan3Data;
-    // Parameter: Data flags : chan3DataFlags : NV Address: 346
+    // Parameter: Data flags : chan3DataFlags : NV Address: 198
     uint16_t chan3DataFlags;
-    // Parameter: Status : chan3Status : NV Address: 346
+    // Parameter: Status : chan3Status : NV Address: 198
     uint16_t chan3Status;
-    // Parameter: ќшибки канала.  : chan3Error : NV Address: 346
+    // Parameter: ќшибки канала.  : chan3Error : NV Address: 198
     uint16_t chan3Error;
-    // Parameter: Quantity  : chan3Quantity : NV Address: 346
+    // Parameter: Quantity  : chan3Quantity : NV Address: 198
     uint32_t chan3Quantity;
-    // Parameter: Uptime  : chan3Uptime : NV Address: 346
+    // Parameter: Uptime  : chan3Uptime : NV Address: 198
     uint32_t chan3Uptime;
-    // Parameter: Raw Data : chan3RawData : NV Address: 346
+    // Parameter: Raw Data : chan3RawData : NV Address: 198
     float chan3RawData;
-    // Parameter: Signal Type : chan3SignalType : NV Address: 346
+    // Parameter: Signal Type : chan3SignalType : NV Address: 198
     uint16_t chan3SignalType;
-    // Parameter: Additional parameter1 : chan3AdditionalParameter1 : NV Address: 348
+    // Parameter: Additional parameter1 : chan3AdditionalParameter1 : NV Address: 198
     uint8_t chan3AdditionalParameter1[12];
-    // Parameter: Additional parameter2 : chan3AdditionalParameter2 : NV Address: 360
-    uint8_t chan3AdditionalParameter2[12];
-    // Parameter: Hi alarm_Reley : chan3ReleyHi : NV Address: 392
+    // Parameter: Transfer signal low limit  : chan3TransferSignalLowLim : NV Address: 214
+    float chan3TransferSignalLowLim;
+    // Parameter: Transfer signal high limit  : chan3TransferSignalHighLim : NV Address: 214
+    float chan3TransferSignalHighLim;
+    // Parameter: Hi alarm_Reley : chan3ReleyHi : NV Address: 222
     uint16_t chan3ReleyHi;
-    // Parameter: Lo alarm_Reley : chan3ReleyLo : NV Address: 394
+    // Parameter: Lo alarm_Reley : chan3ReleyLo : NV Address: 222
     uint16_t chan3ReleyLo;
-    // Parameter: Time_square_temperature : chan3TimeSquareTemp : NV Address: 396
-    float chan3TimeSquareTemp;
-    // Parameter: Range_temperature : chan3RangeTemp : NV Address: 400
-    uint16_t chan3RangeTemp;
-    // Parameter: Time_measure_temperature : chan3TimeMeasureTemp : NV Address: 402
-    uint16_t chan3TimeMeasureTemp;
-    // Parameter: Low_lim_temp : chan3LowTemp : NV Address: 404
-    uint16_t chan3LowTemp;
-    // Parameter: Hi_lim_temp : chan3HiTemp : NV Address: 406
-    float chan3HiTemp;
-    // Parameter: Sensor_Type_Activty : chan3SensorType : NV Address: 410
-    float chan3SensorType;
-    // Parameter: Time_square_EDS : chan3TimeSquareEDS : NV Address: 414
-    float chan3TimeSquareEDS;
-    // Parameter: Range_EDS : chan3RangeEDS : NV Address: 418
-    uint16_t chan3RangeEDS;
-    // Parameter: Time_measure_EDS : chan3TimeMeasureEDS : NV Address: 420
-    uint16_t chan3TimeMeasureEDS;
-    // Parameter: —rystallization_temperature : chan3Crystallization : NV Address: 422
-    uint16_t chan3Crystallization;
-    // Parameter: Mass_coefficient : chan3MassCoeff : NV Address: 424
-    uint16_t chan3MassCoeff;
-    // Parameter: Final_oxidation : chan3FinalOx : NV Address: 426
-    uint16_t chan3FinalOx;
-    // Parameter: Assimilation of aluminum : chan3Assimilation : NV Address: 428
-    uint16_t chan3Assimilation;
-    // Parameter: Mass_melting : chan3MassMelting : NV Address: 428
-    uint16_t chan3MassMelting;
-    // Parameter: Oxygen_activity : chan3OxActivity : NV Address: 428
-    uint16_t chan3OxActivity;
-    // Parameter: Mass_Aluminium : chan3MassAl : NV Address: 428
-    float chan3MassAl;
-    // Parameter: —arbon_сontent : chan3Carbon : NV Address: 428
-    float chan3Carbon;
-    // Parameter: Senson_activity_oxygen : chan3PrimaryActivity : NV Address: 432
-    float chan3PrimaryActivity;
-    // Parameter: Service_Buffer : chan3Buff : NV Address: 436
-    float chan3Buff;
-    // Parameter: Result CJ Value : chan3ResultCjValue : NV Address: 452
+    // Parameter: Result CJ Value : chan3ResultCjValue : NV Address: 278
     float chan3ResultCjValue;
-    // Parameter: CalibOCR20mV : chan0OCR20mV : NV Address: 7000
-    float chan0OCR20mV;
-    // Parameter: CalibFCR20mV : chan0FSR20mV : NV Address: 7004
-    float chan0FSR20mV;
-    // Parameter: CalibFDate20mV : chan0Date20mV : NV Address: 7008
-    uint32_t chan0Date20mV;
     // Parameter: CalibOCR100mV : chan0OCR100mV : NV Address: 7012
     float chan0OCR100mV;
     // Parameter: CalibFCR100mV : chan0FSR100mV : NV Address: 7016
@@ -505,12 +441,6 @@ typedef struct
     float chan0FSRinternal;
     // Parameter: CalibDateinternal : chan0DateRinternal : NV Address: 7104
     uint32_t chan0DateRinternal;
-    // Parameter: CalibOCR20mV : chan1OCR20mV : NV Address: 7108
-    float chan1OCR20mV;
-    // Parameter: CalibFCR20mV : chan1FSR20mV : NV Address: 7112
-    float chan1FSR20mV;
-    // Parameter: CalibFDate20mV : chan1Date20mV : NV Address: 7116
-    uint32_t chan1Date20mV;
     // Parameter: CalibOCR100mV : chan1OCR100mV : NV Address: 7120
     float chan1OCR100mV;
     // Parameter: CalibFCR100mV : chan1FSR100mV : NV Address: 7124
@@ -559,12 +489,6 @@ typedef struct
     float chan1FSRinternal;
     // Parameter: CalibDateinternal : chan1DateRinternal : NV Address: 7212
     uint32_t chan1DateRinternal;
-    // Parameter: CalibOCR20mV : chan2OCR20mV : NV Address: 7216
-    float chan2OCR20mV;
-    // Parameter: CalibFCR20mV : chan2FSR20mV : NV Address: 7220
-    float chan2FSR20mV;
-    // Parameter: CalibFDate20mV : chan2Date20mV : NV Address: 7224
-    uint32_t chan2Date20mV;
     // Parameter: CalibOCR100mV : chan2OCR100mV : NV Address: 7228
     float chan2OCR100mV;
     // Parameter: CalibFCR100mV : chan2FSR100mV : NV Address: 7232
@@ -613,12 +537,6 @@ typedef struct
     float chan2FSRinternal;
     // Parameter: CalibDateinternal : chan2DateRinternal : NV Address: 7320
     uint32_t chan2DateRinternal;
-    // Parameter: CalibOCR20mV : chan3OCR20mV : NV Address: 7324
-    float chan3OCR20mV;
-    // Parameter: CalibFCR20mV : chan3FSR20mV : NV Address: 7328
-    float chan3FSR20mV;
-    // Parameter: CalibFDate20mV : chan3Date20mV : NV Address: 7332
-    uint32_t chan3Date20mV;
     // Parameter: CalibOCR100mV : chan3OCR100mV : NV Address: 7336
     float chan3OCR100mV;
     // Parameter: CalibFCR100mV : chan3FSR100mV : NV Address: 7340
@@ -667,6 +585,66 @@ typedef struct
     float chan3FSRinternal;
     // Parameter: CalibDateinternal : chan3DateRinternal : NV Address: 7428
     uint32_t chan3DateRinternal;
+    // Parameter: DigitalData : chan0DigitalData : NV Address: 282
+    float chan0DigitalData;
+    // Parameter: SignalType(Digital) : chan0DigitSignalType : NV Address: 282
+    uint16_t chan0DigitSignalType;
+    // Parameter: TimeDamping : chan0DigitDamping : NV Address: 282
+    uint16_t chan0DigitDamping;
+    // Parameter: Hi alarm_Reley : chan0DigitalReleyHi : NV Address: 294
+    uint16_t chan0DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan0DigitalReleyLo : NV Address: 294
+    uint16_t chan0DigitalReleyLo;
+    // Parameter: DigitalData : chan1DigitalData : NV Address: 294
+    float chan1DigitalData;
+    // Parameter: SignalType(Digital) : chan1DigitSignalType : NV Address: 294
+    uint16_t chan1DigitSignalType;
+    // Parameter: TimeDamping : chan1DigitDamping : NV Address: 294
+    uint16_t chan1DigitDamping;
+    // Parameter: Hi alarm_Reley : chan1DigitalReleyHi : NV Address: 306
+    uint16_t chan1DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan1DigitalReleyLo : NV Address: 306
+    uint16_t chan1DigitalReleyLo;
+    // Parameter: DigitalData : chan2DigitalData : NV Address: 306
+    float chan2DigitalData;
+    // Parameter: SignalType(Digital) : chan2DigitSignalType : NV Address: 306
+    uint16_t chan2DigitSignalType;
+    // Parameter: TimeDamping : chan2DigitDamping : NV Address: 306
+    uint16_t chan2DigitDamping;
+    // Parameter: Hi alarm_Reley : chan2DigitalReleyHi : NV Address: 318
+    uint16_t chan2DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan2DigitalReleyLo : NV Address: 318
+    uint16_t chan2DigitalReleyLo;
+    // Parameter: DigitalData : chan3DigitalData : NV Address: 318
+    float chan3DigitalData;
+    // Parameter: SignalType(Digital) : chan3DigitSignalType : NV Address: 318
+    uint16_t chan3DigitSignalType;
+    // Parameter: TimeDamping : chan3DigitDamping : NV Address: 318
+    uint16_t chan3DigitDamping;
+    // Parameter: Hi alarm_Reley : chan3DigitalReleyHi : NV Address: 330
+    uint16_t chan3DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan3DigitalReleyLo : NV Address: 330
+    uint16_t chan3DigitalReleyLo;
+    // Parameter: DigitalData : chan4DigitalData : NV Address: 330
+    float chan4DigitalData;
+    // Parameter: SignalType(Digital) : chan4DigitSignalType : NV Address: 330
+    uint16_t chan4DigitSignalType;
+    // Parameter: TimeDamping : chan4DigitDamping : NV Address: 330
+    uint16_t chan4DigitDamping;
+    // Parameter: Hi alarm_Reley : chan4DigitalReleyHi : NV Address: 342
+    uint16_t chan4DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan4DigitalReleyLo : NV Address: 342
+    uint16_t chan4DigitalReleyLo;
+    // Parameter: DigitalData : chan5DigitalData : NV Address: 342
+    float chan5DigitalData;
+    // Parameter: SignalType(Digital) : chan5DigitSignalType : NV Address: 342
+    uint16_t chan5DigitSignalType;
+    // Parameter: TimeDamping : chan5DigitDamping : NV Address: 342
+    uint16_t chan5DigitDamping;
+    // Parameter: Hi alarm_Reley : chan5DigitalReleyHi : NV Address: 354
+    uint16_t chan5DigitalReleyHi;
+    // Parameter: Lo alarm_Reley : chan5DigitalReleyLo : NV Address: 354
+    uint16_t chan5DigitalReleyLo;
 } tDeviceBasicParams;
 #pragma pack(pop)
 #define PAR_HELPER(fmt, ...) printf(fmt " \ n%; s; ", __VA_ARGS__)
