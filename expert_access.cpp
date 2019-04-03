@@ -6,9 +6,9 @@
 #include "expert_access.h"
 //#include "keyboard.h"
 
-//РџР°СЂРѕР»СЊ СЌРєРїРµСЂС‚Р°. "0000" - РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ
+//Пароль экперта. "0000" - по-умолчанию
 QString cExpertAccess::passExpert = "0000";
-// РџР°СЂРѕР»СЊ РґРѕСЃС‚СѓРїР° Р°РґРјРёРЅР°
+// Пароль доступа админа
 QString cExpertAccess::passAdmin = "abrakadabra";
 QString cExpertAccess::configFileName = "";
 accessModeType cExpertAccess::mode = ACCESS_USER;

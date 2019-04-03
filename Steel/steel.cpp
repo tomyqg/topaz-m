@@ -23,12 +23,12 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     numSmelt = 1;
     state = STEEL_WAIT;
     mode = Device_Mode_Regular;
-    //запуск периодического запроса данных
+    //Р·Р°РїСѓСЃРє РїРµСЂРёРѕРґРёС‡РµСЃРєРѕРіРѕ Р·Р°РїСЂРѕСЃР° РґР°РЅРЅС‹С…
     connect(&timerUpdate, SIGNAL(timeout()), this, SLOT(update()));
     timerUpdate.start(UpdateSteelTime);
     connect(&timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     timerUpdateParam.start(TIME_UPDATE_PARAM_STEEL_MC);
-    //список параметров конфигурации в карте регистров
+    //СЃРїРёСЃРѕРє РїР°СЂР°РјРµС‚СЂРѕРІ РєРѕРЅС„РёРіСѓСЂР°С†РёРё РІ РєР°СЂС‚Рµ СЂРµРіРёСЃС‚СЂРѕРІ
     listUpdateParam << "TimeSquareTemp" << "RangeTemp" << "TimeMeasureTemp" << "LowTemp" << "HiTemp" << "SensorType"\
         << "TimeSquareEDS" << "RangeEDS" << "TimeMeasureEDS" << "Crystallization" << "MassCoeff" \
         << "FinalOx" << "Assimilation" << "MassMelting" << "AdditionalParameter1";
@@ -79,17 +79,17 @@ void cSteel::parserSteel(Transaction tr)
     {
         int curArray = 0;
         for(int i = 0; i < 5; i++)
-        { //перебор массивов по номерам в карте регистров
+        { //РїРµСЂРµР±РѕСЂ РјР°СЃСЃРёРІРѕРІ РїРѕ РЅРѕРјРµСЂР°Рј РІ РєР°СЂС‚Рµ СЂРµРіРёСЃС‚СЂРѕРІ
             if(paramName == QString("chan" + QString::number(slotIndex) \
                                     + "EMFarray" + QString::number(i)))
-            {   //подобран номер массива
+            {   //РїРѕРґРѕР±СЂР°РЅ РЅРѕРјРµСЂ РјР°СЃСЃРёРІР°
                 vectorEdsReceived = true;
                 lastItemEds = true;
                 for(int j = 0; j < 32; j++)
-                {   //поэлементное копирование полученного массива в соответствующий объект стали
+                {   //РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РѕР±СЉРµРєС‚ СЃС‚Р°Р»Рё
                     curArray = i;
                     int indexVec = j + i * 32;
-                    if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
+                    if(indexVec < SIZE_ARRAY) //РїСЂРѕРІРµСЂРєР° РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№, С‡С‚РѕР±С‹ РЅРµ РІС‹Р№С‚Рё Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°
                     {
                         if(tr.paramInt16[j] != 0x7FFF)
                         {
@@ -107,10 +107,10 @@ void cSteel::parserSteel(Transaction tr)
                 vectorTempReceived = true;
                 lastItemTemp = true;
                 for(int j = 0; j < 32; j++)
-                {   //поэлементное копирование полученного массива в соответствующий объект стали
+                {   //РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РѕР±СЉРµРєС‚ СЃС‚Р°Р»Рё
                     curArray = i;
                     int indexVec = j + i * 32;
-                    if(indexVec < SIZE_ARRAY) //проверка на всякий случай, чтобы не выйти за пределы массива
+                    if(indexVec < SIZE_ARRAY) //РїСЂРѕРІРµСЂРєР° РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№, С‡С‚РѕР±С‹ РЅРµ РІС‹Р№С‚Рё Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°
                     {
                         if(tr.paramInt16[j] != 0x7FFF)
                         {
@@ -119,7 +119,7 @@ void cSteel::parserSteel(Transaction tr)
                     }
                 }
             }
-            //оба масива после запроса
+            //РѕР±Р° РјР°СЃРёРІР° РїРѕСЃР»Рµ Р·Р°РїСЂРѕСЃР°
             if((vectorEdsReceived || (technology->COH == 0)) && \
                     vectorTempReceived)
             {
@@ -128,7 +128,7 @@ void cSteel::parserSteel(Transaction tr)
                 vectorEdsReceived = false;
                 if(state == STEEL_MEASURE)
                 {
-                    //очередной запрос массива
+                    //РѕС‡РµСЂРµРґРЅРѕР№ Р·Р°РїСЂРѕСЃ РјР°СЃСЃРёРІР°
                     readArrays();
                 }
             }
@@ -273,7 +273,7 @@ void cSteel::update()
     if(enable)
     {
 
-        //нужны постоянно в режими диагностики
+        //РЅСѓР¶РЅС‹ РїРѕСЃС‚РѕСЏРЅРЅРѕ РІ СЂРµР¶РёРјРё РґРёР°РіРЅРѕСЃС‚РёРєРё
         if(mode == Device_Mode_Metrological)
         {
             tr.offset = cRegistersMap::getOffsetByName("chan" \
@@ -361,14 +361,14 @@ void cSteel::update()
 
             if(allVectorsReceived)
             {
-                //запись в журнал
+                //Р·Р°РїРёСЃСЊ РІ Р¶СѓСЂРЅР°Р»
                 emit signalArchive(num);
                 allVectorsReceived = false;
                 fConfirm = true;
             }
             if(!fConfirm)
             {
-                //если ещё весь массив не считали, то нельзя подтверждать статус
+                //РµСЃР»Рё РµС‰С‘ РІРµСЃСЊ РјР°СЃСЃРёРІ РЅРµ СЃС‡РёС‚Р°Р»Рё, С‚Рѕ РЅРµР»СЊР·СЏ РїРѕРґС‚РІРµСЂР¶РґР°С‚СЊ СЃС‚Р°С‚СѓСЃ
                 verifStatus = StatusCh_SteelUpdateData;
             }
             if((status == StatusCh_SteelWaitData)\
@@ -413,7 +413,7 @@ int cSteel::getIndexArray()
 {
     for(int i = 1; i <= (SIZE_ARRAY / SIZE_ONE_ARRAY); i++)
     {
-        //проверка на NaN
+        //РїСЂРѕРІРµСЂРєР° РЅР° NaN
         if((vectorTemp.at(i * SIZE_ONE_ARRAY - 1)) != (vectorTemp.at(i * SIZE_ONE_ARRAY - 1)))
         {
             return (i - 1);
@@ -424,12 +424,12 @@ int cSteel::getIndexArray()
 void cSteel::readArrays()
 {
     Transaction tr(Transaction::R, slot);
-    //запрос текущего участка графика температуры
+    //Р·Р°РїСЂРѕСЃ С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° РіСЂР°С„РёРєР° С‚РµРјРїРµСЂР°С‚СѓСЂС‹
     tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) \
                                                + "TEMParray" + QString::number(getIndexArray()));
     emit sendTransToWorker(tr);
 
-    //запрос текущего участка графика ЭДС, если задан тип первичного преобразователя окисленности
+    //Р·Р°РїСЂРѕСЃ С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° РіСЂР°С„РёРєР° Р­Р”РЎ, РµСЃР»Рё Р·Р°РґР°РЅ С‚РёРї РїРµСЂРІРёС‡РЅРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚РµР»СЏ РѕРєРёСЃР»РµРЅРЅРѕСЃС‚Рё
     if(technology->COH != 0) {
         //            tr.offset = cRegistersMap::getOffsetByName("DataArray" + QString::number(numArraySteel));
         tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) \
