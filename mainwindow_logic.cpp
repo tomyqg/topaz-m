@@ -240,21 +240,24 @@ void MainWindow::MainWindowInitialization()
     //перехват событий на стрелках переключения групп
     ui->arrowGroupLeft->installEventFilter(this);
     ui->arrowGroupRight->installEventFilter(this);
-    // добавление 1 группы (обязательной)
-    cGroupChannels * group = new cGroupChannels();
-    group->groupName = "Group 1";
+    if(listGroup.size() == 0)
+    {
+        // добавление 1 группы (обязательной)
+        cGroupChannels * group = new cGroupChannels();
+        group->groupName = "Group 1";
 #ifdef RANDOM_CHAN
-    group->channel[0] = 0;
-    group->typeInput[0] = 1;
-    group->channel[1] = 1;
-    group->typeInput[1] = 1;
-    group->channel[2] = 2;
-    group->typeInput[2] = 1;
-    group->channel[3] = 3;
-    group->typeInput[3] = 1;
+        group->channel[0] = 0;
+        group->typeInput[0] = 1;
+        group->channel[1] = 1;
+        group->typeInput[1] = 1;
+        group->channel[2] = 2;
+        group->typeInput[2] = 1;
+        group->channel[3] = 3;
+        group->typeInput[3] = 1;
 #endif
-    group->enabled = true;
-    listGroup.append(group);
+        group->enabled = true;
+        listGroup.append(group);
+    }
     curGroupChannel = 0;        //по-умолчанию активная группа - первая
 
     //инициализация параметров измерения стали

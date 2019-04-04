@@ -157,8 +157,9 @@ dMenu::dMenu(QWidget *parent) :
                       << ui->bModbusSlave \
                       << ui->bEthernetIP \
                       << ui->bProfibus \
-                      << ui->bProfinet;
-    listWidgetsAdmin << ui->bTypeMultigraph;
+                      << ui->bProfinet \
+                      << ui->bTypeMultigraph;
+//    listWidgetsAdmin << ui->bTypeMultigraph;
 
     // скрыть эти выджеты(кнопки) изначально
     changeVisibleWidgets();
@@ -756,6 +757,7 @@ void dMenu::DateUpdate() // каждую секунду обновляем зн�
                   + local.date().toString(datestrings.at(dateindex)) + \
                   "</span></p></body></html>";
     ui->date_time->setText(str);
+
 }
 
 

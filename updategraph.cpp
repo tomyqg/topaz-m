@@ -170,15 +170,18 @@ void MainWindow::UpdateGraphics()
         ui->stackedWidget->setCurrentIndex(0);
 //        GrafsUpdateBars();
         updateBars();
+        setTextBars();
         break;
     case cSystemOptions::TrendsBars:
         ui->stackedWidget->setCurrentIndex(0);
         GrafsUpdateTrends();
         updateBars();
+        setTextBars();
         break;
     case cSystemOptions::PolarBars:
         ui->stackedWidget->setCurrentIndex(0);
         updateBars();
+        setTextBars();
         GrafsUpdateNone();
         break;
     case cSystemOptions::PolarCyfra:
