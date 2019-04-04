@@ -39,6 +39,7 @@ void MainWindow::PaintPolarDiagramm()
     int channel3value = GetPolarAngle();
     int channel4value = GetPolarAngle();
 
+    if(curGroupChannel >= listGroup.size()) return;
     //получение текущих значений в процентах
     cGroupChannels * group = listGroup.at(curGroupChannel);
     float channelLenght[MAX_NUM_CHAN_GROUP];

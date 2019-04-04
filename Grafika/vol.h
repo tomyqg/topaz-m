@@ -18,6 +18,7 @@ public:
     void setText(QString name, QString mes);
     void changeNum(int num);
     void setColor(QColor color);
+    void setChanNum(int num) { numChan = num; }
 
 public slots:
     void resizeEvent(QResizeEvent * s);

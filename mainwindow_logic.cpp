@@ -380,6 +380,8 @@ void MainWindow::updateVer()
         name = name + "-STEEL";
     }
     ui->labelNameVersion->setText(QString(name + " " + ver));
+    QString protocol = PROTOCOL_VER;
+    ui->labelProtocol->setText(QString("PROTOCOL VERSION: " + protocol));
     QString revision = SOFTWARE_REVISION;
     ui->labelRevision->setText(QString("SOFTWARE REVISION: " + revision));
     ui->multigrapf->setText(name);

@@ -170,18 +170,18 @@ void MainWindow::UpdateGraphics()
         ui->stackedWidget->setCurrentIndex(0);
 //        GrafsUpdateBars();
         updateBars();
-        setTextBars();
+//        setTextBars();
         break;
     case cSystemOptions::TrendsBars:
         ui->stackedWidget->setCurrentIndex(0);
         GrafsUpdateTrends();
         updateBars();
-        setTextBars();
+//        setTextBars();
         break;
     case cSystemOptions::PolarBars:
         ui->stackedWidget->setCurrentIndex(0);
         updateBars();
-        setTextBars();
+//        setTextBars();
         GrafsUpdateNone();
         break;
     case cSystemOptions::PolarCyfra:
@@ -206,6 +206,7 @@ void MainWindow::UpdateGraphics()
 
 void MainWindow::GrafsUpdateTrends()
 {
+    if(curGroupChannel >= listGroup.size()) return;
 
     cGroupChannels * group = listGroup.at(curGroupChannel);
 
@@ -340,6 +341,8 @@ void MainWindow::GrafsUpdateNone()
 
 void MainWindow::updateBars(void)
 {
+    if(curGroupChannel >= listGroup.size()) return;
+
     QList<QSpacerItem*> listSpacerBar;
     listSpacerBar.append(ui->spacerBar0);
     listSpacerBar.append(ui->spacerBar1);
@@ -439,6 +442,8 @@ void MainWindow::setStyleBars()
 
 void MainWindow::setTextBars()
 {
+    if(curGroupChannel >= listGroup.size()) return;
+
     QList<wVolueBar*> listBars;
     listBars.append(ui->wBar_1);
     listBars.append(ui->wBar_2);
@@ -453,9 +458,9 @@ void MainWindow::setTextBars()
         {
             if(group->channel[i] != -1)
             {
+                bar->setNumChan(listChannels.at(group->channel[i])->getNum());
                 bar->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
-                bar->setNumChan(listChannels.at(group->channel[i])->getNum());
             }
 
         }
@@ -465,10 +470,12 @@ void MainWindow::setTextBars()
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
-                    bar->setText(listMath.at(group->mathChannel[i])->getName(), "Хз");
+                    bar->setNumChan(listMath.at(group->mathChannel[i])->getNum());
+                    bar->setText(listMath.at(group->mathChannel[i])->getName(), "");
                 }
                 else
                 {
+                    bar->setNumChan(0);
                     bar->setText("", "");
                 }
             }
@@ -481,6 +488,8 @@ void MainWindow::setTextBars()
 
 void MainWindow::updateWidgetsVols(void)
 {
+    if(curGroupChannel >= listGroup.size()) return;
+
     QList<wVol*> listVols;
     listVols.append(ui->widgetVol1);
     listVols.append(ui->widgetVol2);
@@ -497,6 +506,7 @@ void MainWindow::updateWidgetsVols(void)
         {
             if(group->channel[i] != -1)
             {
+                vol->setChanNum(listChannels.at(group->channel[i])->getNum());
                 vol->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
             }
@@ -508,10 +518,12 @@ void MainWindow::updateWidgetsVols(void)
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
-                    vol->setText(listMath.at(group->mathChannel[i])->getName(), "Хз");
+                    vol->setChanNum(listMath.at(group->mathChannel[i])->getNum());
+                    vol->setText(listMath.at(group->mathChannel[i])->getName(), "");
                 }
                 else
                 {
+                    vol->setChanNum(0);
                     vol->setText("", "");
                 }
             }
@@ -523,6 +535,7 @@ void MainWindow::updateWidgetsVols(void)
 
 void MainWindow::updateVols()
 {
+    if(curGroupChannel >= listGroup.size()) return;
 
     QList<wVol*> listVols;
     listVols.append(ui->widgetVol1);

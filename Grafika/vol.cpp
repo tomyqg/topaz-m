@@ -45,7 +45,7 @@ void wVol::setText(QString name, QString mes)
     if(mes.size()>2)
         mes.resize(2);
 
-    if(numBar != 0)
+    if(numChan != 0)
     {
         ui->labelName->setText("<html><head/><body><p>" + \
                              name + \

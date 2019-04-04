@@ -215,7 +215,7 @@ void wVolueBar::setText(QString type, QString mes)
     if(mes.size()>2)
         mes.resize(2);
 
-    if(numBar != 0)
+    if(numChan != 0)
     {
         ui->typeBar->setText("<html><head/><body><p>" + \
                              type + \

@@ -73,6 +73,7 @@ void MainWindow::updateDateLabel()
 
     // между делом обновляем лэйбл и стрелки переключения групп
     if(listGroup.size() > 1) {
+        if(curGroupChannel >= listGroup.size()) curGroupChannel = 0;
         ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
         ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
         ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
@@ -540,6 +541,7 @@ void MainWindow::SetWindowHeightPixels(int newh)
 void MainWindow::openSettingsChannel(int num)
 {
 
+    if(curGroupChannel >= listGroup.size()) return;
     //проверка на наличие такого номера канала
     cGroupChannels * group = listGroup.at(curGroupChannel);
     if(group->typeInput[num-1] != 1) return;

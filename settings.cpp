@@ -1303,7 +1303,7 @@ void dSettings::UpdateSteelUI(typeSteelTech * tech)
 void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
 {
     //открыть файл архива анализа стали
-    ui->customPlotSteel->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+//    ui->customPlotSteel->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     ui->customPlotSteel->yAxis2->setVisible(true);
     ui->customPlotSteel->yAxis2->setTickLabels(true);
 //    ui->customPlotSteel->
@@ -1341,15 +1341,28 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
             Y_SteelTemp.replace(i, valTemp.at(i).toString().toDouble());
         }
 
-        for(int i = 0; i < max(valTemp.size(), valEds.size()); i++)
+        X_Steel.resize(0);
+        for(int i = 0; i < max(Y_SteelTemp.size(), Y_SteelEds.size()); i++)
         {
-            X_Steel.append(i);
+//            if(!std::isnan(Y_SteelTemp.at(i)) && !std::isnan(Y_SteelEds.at(i)))
+//            {
+                X_Steel.append(i*0.1);
+//            }
         }
 
         ui->customPlotSteel->clearGraphs();
         ui->customPlotSteel->addGraph();
         ui->customPlotSteel->graph()->setData(X_Steel, Y_SteelTemp);
         ui->customPlotSteel->xAxis->setLabel("t,sec");
+        ui->customPlotSteel->xAxis->setAutoTickStep(false);
+//        if(X_Steel.size() > 20)
+//        {
+            ui->customPlotSteel->xAxis->setTickStep(1);
+//        }
+//        else
+//        {
+//            ui->customPlotSteel->xAxis->setTickStep(0.5);
+//        }
         ui->customPlotSteel->yAxis2->setLabel("Emf, mV");
         ui->customPlotSteel->yAxis->setLabel("Temp, °C");
         ui->customPlotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));

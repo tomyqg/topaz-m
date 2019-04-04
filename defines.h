@@ -18,13 +18,14 @@
 #ifdef Q_OS_WIN32
 //    #define RANDOM_CHAN
 #endif
-#define RANDOM_CHAN
+//#define RANDOM_CHAN
 
 #ifdef RANDOM_CHAN
 #define CURRENT_VER "1.80" //версия ПО
 #else
-#define CURRENT_VER "1.80" //версия ПО
+#define CURRENT_VER "1.81" //версия ПО
 #endif
+#define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 #define MYD
