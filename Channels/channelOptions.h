@@ -87,16 +87,17 @@ public:
     void SetMathematical(bool newstate);
     void SetCurrentChannelValue(double value);
     void SetDempher(int newdempher);
-    void SetDiapason(int newdiapason);
+//    void SetDiapason(int newdiapason);
     void SetRegistrationType(int newdregistrationtype);
     void SetNormalColor(QColor newcolor);
     void SetMaximumColor(QColor newmaxcolor);
     void SetMinimumColor(QColor newmincolor);
     int getShema();
-    void setShema(int sh);
+//    void setShema(int sh);
     bool IsChannelMathematical();
     void parserChannel(Transaction tr);
     void copyOptions(ChannelOptions *ch);
+    void SetDiapasonShema(int newdiapason, int sh);
 
 signals:
     void updateSignal(int index);
@@ -447,6 +448,7 @@ public:
 
     };
     Q_ENUM(ParamOffset)
+
 
 
 };

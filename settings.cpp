@@ -710,8 +710,8 @@ void dSettings::saveParam()
             {
                 diapasone = tableDiapasoneRTD[ui->sensorDiapazon->currentIndex()].diapason;
             }
-            channel->SetDiapason(diapasone);
-            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+            channel->SetDiapasonShema(diapasone, sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+//            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
 
         if(listUstavok.size() > 0)

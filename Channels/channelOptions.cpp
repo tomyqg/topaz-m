@@ -93,7 +93,7 @@ int ChannelOptions::GetDiapason()
     }
     else if(outputData.chanSignalType == TermoCoupleMeasure)
     {
-        return outputData.chanAdditionalParameter1[0];
+        return outputData.chanAdditionalParameter1[2];
     }
 //    return diapason;
 }
@@ -107,6 +107,12 @@ void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
     outputData.chanSignalType = newsignaltype;
+    // Отправка тут же актуальной информации в плату
+    QString nameParam = "chan" + QString::number(slotChannel) + "SignalType";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+    trans.volInt = outputData.chanSignalType;
+    emit sendToWorker(trans);
 }
 
 void ChannelOptions::SetCurSignalType(uint16_t newsignaltype)
@@ -114,21 +120,56 @@ void ChannelOptions::SetCurSignalType(uint16_t newsignaltype)
     this->cursignaltype = newsignaltype;
 }
 
-void ChannelOptions::SetDiapason(int newdiapason)
+//void ChannelOptions::SetDiapason(int newdiapason)
+//{
+//    this->diapason = newdiapason;
+//    if(outputData.chanSignalType == VoltageMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[0] = newdiapason;
+//    }
+//    else if(outputData.chanSignalType == TermoResistanceMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[2] = newdiapason;
+//    }
+//    else if(outputData.chanSignalType == TermoCoupleMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[2] = newdiapason;
+//    }
+//    // Отправка тут же актуальной информации в плату
+//    QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter1";
+//    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+//    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+//    memcpy(trans.paramA12, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+//    emit sendToWorker(trans);
+
+//}
+
+void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
 {
-    this->diapason = newdiapason;
+    diapason = newdiapason;
+    shema = sh;
+
     if(outputData.chanSignalType == VoltageMeasure)
     {
         outputData.chanAdditionalParameter1[0] = newdiapason;
     }
     else if(outputData.chanSignalType == TermoResistanceMeasure)
     {
+        outputData.chanAdditionalParameter1[0] = sh;
         outputData.chanAdditionalParameter1[2] = newdiapason;
     }
     else if(outputData.chanSignalType == TermoCoupleMeasure)
     {
-        outputData.chanAdditionalParameter1[0] = newdiapason;
+        outputData.chanAdditionalParameter1[2] = newdiapason;
     }
+
+    // Отправка тут же актуальной информации в плату
+    QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter1";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+    memcpy(trans.paramA12, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+    emit sendToWorker(trans);
+
 }
 
 void ChannelOptions::SetRegistrationType(int newdregistrationtype)
@@ -767,14 +808,20 @@ int ChannelOptions::getShema()
     return 0;
 }
 
-void ChannelOptions::setShema(int sh)
-{
-    shema = sh;
-    if(outputData.chanSignalType == TermoResistanceMeasure)
-    {
-        outputData.chanAdditionalParameter1[0] = sh;
-    }
-}
+//void ChannelOptions::setShema(int sh)
+//{
+//    shema = sh;
+//    if(outputData.chanSignalType == TermoResistanceMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[0] = sh;
+//    }
+//    // Отправка тут же актуальной информации в плату
+//    QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter1";
+//    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+//    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+//    memcpy(trans.paramA12, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+//    emit sendToWorker(trans);
+//}
 
 void ChannelOptions::copyOptions(ChannelOptions * ch)
 {

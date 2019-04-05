@@ -1402,40 +1402,40 @@ void MainWindow::sendConfigChannelsToSlave()
     {
         for(int i = 0; i < listChannels.size(); i++)
         {
-            ChannelOptions * channel = listChannels.at(i);
-            if(!channel->enable) continue;  //пропуск, если канала нет
+//            ChannelOptions * channel = listChannels.at(i);
+//            if(!channel->enable) continue;  //пропуск, если канала нет
 
-            int devCh = channel->getSlotChannel();// csc.getDevChannel(i);
-            tr.slave = channel->getSlot(); //csc.getSlotByChannel(devCh);
+//            int devCh = channel->getSlotChannel();// csc.getDevChannel(i);
+//            tr.slave = channel->getSlot(); //csc.getSlotByChannel(devCh);
 
-            // запись актуального значения SignalType
-            str = "chan" + QString::number(devCh) + "SignalType";
-            tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = channel->GetSignalType();
-            emit sendTransToWorker(tr);
+//            // запись актуального значения SignalType
+//            str = "chan" + QString::number(devCh) + "SignalType";
+//            tr.offset = cRegistersMap::getOffsetByName(str);
+//            tr.volInt = channel->GetSignalType();
+//            emit sendTransToWorker(tr);
 
-            // запись актуального Additional parameter1
-            str = "chan" + QString::number(devCh) + "AdditionalParameter1";
-            tr.offset = cRegistersMap::getOffsetByName(str);
-            //        tr.volInt = 0;
-            int size = sizeof(tr.paramA12);
-            memset(tr.paramA12, 0, size);
-            if(channel->GetSignalType() == ModBus::VoltageMeasure)
-            {
-                tr.paramA12[0] = (uint16_t)channel->GetDiapason();
-            }
-            else if(channel->GetSignalType() == ModBus::TermoResistanceMeasure)
-            {
-                tr.paramA12[0] = (uint16_t)channel->getShema();
-                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
-            }
-            else if((channel->GetSignalType() == ModBus::TermoCoupleMeasure))
-            {
-                tr.paramA12[0] = 1;
-                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
-                tr.paramA12[2] = 2;
-            }
-            emit sendTransToWorker(tr);
+//            // запись актуального Additional parameter1
+//            str = "chan" + QString::number(devCh) + "AdditionalParameter1";
+//            tr.offset = cRegistersMap::getOffsetByName(str);
+//            //        tr.volInt = 0;
+//            int size = sizeof(tr.paramA12);
+//            memset(tr.paramA12, 0, size);
+//            if(channel->GetSignalType() == ModBus::VoltageMeasure)
+//            {
+//                tr.paramA12[0] = (uint16_t)channel->GetDiapason();
+//            }
+//            else if(channel->GetSignalType() == ModBus::TermoResistanceMeasure)
+//            {
+//                tr.paramA12[0] = (uint16_t)channel->getShema();
+//                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
+//            }
+//            else if((channel->GetSignalType() == ModBus::TermoCoupleMeasure))
+//            {
+//                tr.paramA12[0] = 1;
+//                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
+//                tr.paramA12[2] = 2;
+//            }
+//            emit sendTransToWorker(tr);
         }
     }
 

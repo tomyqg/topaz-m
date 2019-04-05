@@ -178,8 +178,8 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetMathematical(ch.value("MathWork").toBool());
             channel->SetMathEquation(ch.value("MathString").toString());
             channel->SetDempher(ch.value("Dempher").toInt());
-            channel->SetDiapason(ch.value("Diapason").toInt());
-            channel->setShema(ch.value("Scheme").toInt());
+            channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
+//            channel->setShema(ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
         }
         else

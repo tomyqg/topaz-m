@@ -118,7 +118,7 @@ void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
     this->SetMathematical(ch.value("MathWork").toBool());
     this->SetMathEquation(ch.value("MathString").toString());
     this->SetDempher(ch.value("Dempher").toInt());
-    this->SetDiapason(ch.value("Diapason").toInt());
+//    this->SetDiapason(ch.value("Diapason").toInt());
     this->SetRegistrationType(ch.value("RegistrationType").toInt());
 
     infile.close();
