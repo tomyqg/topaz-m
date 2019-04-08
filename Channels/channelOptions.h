@@ -98,6 +98,10 @@ public:
     void parserChannel(Transaction tr);
     void copyOptions(ChannelOptions *ch);
     void SetDiapasonShema(int newdiapason, int sh);
+    void enableColdJunction(bool en);
+    bool getStateColdJunction(void);
+    void setShiftColdJunction(double shift);
+    double getShiftColdJunction(void);
 
 signals:
     void updateSignal(int index);
@@ -136,6 +140,8 @@ private:
         uint8_t chanAdditionalParameter1[12];
         // Parameter: Additional parameter2 : chanAdditionalParameter2 : NV Address: 42
         uint8_t chanAdditionalParameter2[12];
+        // Смещение компенсации холодного спая
+        float chanFSRinternal;  //Vag: врменная ячейка для записи смещения х.с.
     } tChanParams;
 
     tChanParams inputData;  //полученные значения
@@ -172,6 +178,8 @@ private:
     int diapason;           //диапазон - тип датчика
     int shema;              //схема подключения датчика
     int registrationtype;
+    bool enColdJunction;    //Включение компенсации холодного спая
+    double shiftColdJunction;    //Величина компенсации холодного спая
 
     QVector<double> channelvaluesbuffer;
     QVector<double> dempheredvaluesbuffer;

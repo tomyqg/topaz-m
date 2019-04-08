@@ -172,6 +172,34 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
 
 }
 
+void ChannelOptions::enableColdJunction(bool en)
+{
+    enColdJunction = en;
+    outputData.chanAdditionalParameter1[4] = enColdJunction;
+}
+
+bool ChannelOptions::getStateColdJunction()
+{
+    return (bool)inputData.chanAdditionalParameter1[4];
+}
+
+void ChannelOptions::setShiftColdJunction(double shift)
+{
+    shiftColdJunction = shift;
+    outputData.chanFSRinternal = (float)shift;
+    // Отправка тут же актуальной информации в плату
+    QString nameParam = "chan" + QString::number(slotChannel) + "chanFSRinternal";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+    trans.volFlo = outputData.chanFSRinternal;
+    emit sendToWorker(trans);
+}
+
+double ChannelOptions::getShiftColdJunction()
+{
+    return (double)outputData.chanFSRinternal;
+}
+
 void ChannelOptions::SetRegistrationType(int newdregistrationtype)
 {
     this->registrationtype = newdregistrationtype;

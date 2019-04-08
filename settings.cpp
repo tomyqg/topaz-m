@@ -943,6 +943,10 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->sensorShema->hide();
         ui->labelDiapazon->hide();
         ui->labelShema->hide();
+        ui->enableColdJunction->hide();
+        ui->labelColdJunction->hide();
+        ui->shiftColdJunction->hide();
+        ui->labelShiftColdJunction->hide();
     }
     else if(index == Current)
     {
