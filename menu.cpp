@@ -1452,6 +1452,7 @@ void dMenu::on_bBackTypeMultigraph_clicked()
 
 void dMenu::updateDriversWidgets()
 {
+    QStringList listComboStrDrives;
     listDrives.clear();
     int size = flash->getNumDisk();
     for(int i = 0; i < size; i++)
@@ -1460,10 +1461,21 @@ void dMenu::updateDriversWidgets()
 #ifdef Q_OS_WIN
         name.resize(name.size()-1);
 #endif
-        listDrives.append(name);
+        if(!name.contains("mmc"))
+        {
+            if(name.contains("sd"))
+            {
+                listComboStrDrives.append("USB накопитель (" + name + ")");
+            }
+            else
+            {
+                listComboStrDrives.append("Накопитель (" + name + ")");
+            }
+            listDrives.append(name);
+        }
     }
     ui->comboDrives->clear();
-    ui->comboDrives->addItems(listDrives);
+    ui->comboDrives->addItems(listComboStrDrives);
     ui->comboDrives->setCurrentIndex(ui->comboDrives->count() - 1);
 }
 
@@ -1747,7 +1759,7 @@ void dMenu::on_bReadSysFromDrive_clicked()
 {
 //    QProcess process;
     QString src, dest, path;
-    path = ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/";
+    path = listDrives.at(ui->comboDrives->currentIndex()) + "/" + ui->nameDirOnDrive->text() + "/";
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1778,7 +1790,7 @@ void dMenu::on_bReadSysFromDrive_clicked()
 void dMenu::on_bSaveSysToDrive_clicked()
 {
     QString src, dest, path;
-    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+    path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" + ui->nameDirOnDrive->text() + "/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1817,7 +1829,7 @@ void dMenu::on_bSaveSysToDrive_clicked()
 void dMenu::on_bSaveMesToDrive_clicked()
 {
     QString src, dest, path;
-    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+    path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" + ui->nameDirOnDrive->text() + "/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1856,7 +1868,7 @@ void dMenu::on_bSaveMesToDrive_clicked()
 void dMenu::on_bSaveChanToDrive_clicked()
 {
     QString src, src2, dest, dest2, path;
-    path = QString(ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/");
+    path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" + ui->nameDirOnDrive->text() + "/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1900,7 +1912,7 @@ void dMenu::on_bSaveChanToDrive_clicked()
 void dMenu::on_bReadChanFromDrive_clicked()
 {
     QString src, src2, dest, dest2, path;
-    path = ui->comboDrives->currentText() + "/" + ui->nameDirOnDrive->text() + "/";
+    path = listDrives.at(ui->comboDrives->currentIndex()) + "/" + ui->nameDirOnDrive->text() + "/";
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
 #endif
@@ -1942,7 +1954,7 @@ void dMenu::on_bSaveArchiveToDrive_clicked()
     QStringList sl = pathArch.split(".");
     int n = sl.size();
     QStringList strlist = pathArch.split("/");
-    path = QString(ui->comboDrives->currentText() + "/" \
+    path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" \
                    + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);
@@ -2015,7 +2027,7 @@ void dMenu::copyArchiveFile()
         QStringList sl = pathArch.split(".");
         int n = sl.size();
 //        QStringList strlist = pathArch.split("/");
-        path = QString(ui->comboDrives->currentText() + "/" \
+        path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" \
                        + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
         path = QString("/media/" + path);
@@ -2044,7 +2056,7 @@ void dMenu::copyArchiveFile()
 void dMenu::copyLastArchFile()
 {
     QString src, dest, path, csv, destCsv;
-    path = QString(ui->comboDrives->currentText() + "/" \
+    path = QString(listDrives.at(ui->comboDrives->currentIndex()) + "/" \
                    + ui->nameDirOnDrive->text() + "/archive/");
 #ifdef Q_OS_LINUX
     path = QString("/media/" + path);

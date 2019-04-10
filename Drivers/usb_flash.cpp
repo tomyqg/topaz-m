@@ -32,13 +32,13 @@ void cUsbFlash::scanUsbFlash()
     QString cmd;
     QChar separator;
 #ifdef Q_OS_WIN32
-    cmd = "fsutil fsinfo drives";
+    cmd = "fsutil fsinfo drives";   // команда которая покажет что подключено в данный момент
     separator = ' ';
 #else
     cmd = "ls /media";
     separator = '\n';
 #endif
-    process.start(cmd); // команда которая покажет что подключено в данный момент
+    process.start(cmd);
     process.waitForFinished();
     string = process.readAll();
     listFlash = string.split(separator);

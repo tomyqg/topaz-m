@@ -1445,6 +1445,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -3720,6 +3721,7 @@ border-radius: 0px;</string>
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -4122,6 +4124,7 @@ QComboBox::drop-down {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -4325,6 +4328,7 @@ border: 0px solid rgba(255, 255, 255, 0);</string>
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -4922,6 +4926,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -5919,6 +5924,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -6137,6 +6143,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -6457,6 +6464,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 background-color: rgb(230, 230, 230);
 color: rgb(0, 0, 0);
 border-radius: 0px;
+selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
 	width:30px;
@@ -7108,7 +7116,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>223</width>
+                  <width>729</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -9335,6 +9343,7 @@ border-radius: 0px;</string>
 	background-color: rgb(21, 159, 133);
 	color: rgb(255, 255, 255);
 	border-radius: 0px;
+
 }
 
 QComboBox::drop-down {
@@ -9436,6 +9445,7 @@ QComboBox::drop-down {
 	background-color: #6666ff;
 	color: rgb(255, 255, 255);
 	border-radius: 0px;
+
 }
 
 QComboBox::drop-down {
@@ -9553,6 +9563,7 @@ QComboBox::drop-down {
 	background-color: rgb(232, 76, 61);
 	color: rgb(255, 255, 255);
 	border-radius: 0px;
+
 }
 
 QComboBox::drop-down {
@@ -9689,6 +9700,7 @@ QComboBox::drop-down {
 	background-color:rgb(44, 61, 77);
 	color: rgb(255 , 255, 255);
 	border-radius: 0px;
+
 }
 
 QComboBox::drop-down {
