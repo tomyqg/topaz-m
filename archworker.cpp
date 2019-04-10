@@ -36,9 +36,10 @@ void cArchWorker::run()
     for(int d = 0; d <= daysPeriod; d++)
     {
         QString strDay = firstTime.addDays(d).toString("yyMMdd.");
+        QString strToday = QDateTime::currentDateTime().toString("yyMMdd.");
         QString fileName;
 
-        if(d == daysPeriod)
+        if(strDay == strToday)  //имя файла сегодняшнее, то подменяем имя на имя файла без даты
             fileName = fileArch;
         else
         {

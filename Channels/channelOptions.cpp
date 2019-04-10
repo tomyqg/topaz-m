@@ -107,6 +107,7 @@ void ChannelOptions::SetSignalType(uint16_t newsignaltype)
 {
     this->signaltype = newsignaltype;
     outputData.chanSignalType = newsignaltype;
+    if (!enable) return;
     // Отправка тут же актуальной информации в плату
     QString nameParam = "chan" + QString::number(slotChannel) + "SignalType";
     uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
@@ -163,6 +164,7 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
         outputData.chanAdditionalParameter1[2] = newdiapason;
     }
 
+    if (!enable) return;
     // Отправка тут же актуальной информации в плату
     QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter1";
     uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
@@ -172,23 +174,24 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
 
 }
 
-void ChannelOptions::enableColdJunction(bool en)
+void ChannelOptions::enableColdJunction(int en)
 {
     enColdJunction = en;
     outputData.chanAdditionalParameter1[4] = enColdJunction;
 }
 
-bool ChannelOptions::getStateColdJunction()
+int ChannelOptions::getStateColdJunction()
 {
-    return (bool)inputData.chanAdditionalParameter1[4];
+    return outputData.chanAdditionalParameter1[4];
 }
 
 void ChannelOptions::setShiftColdJunction(double shift)
 {
     shiftColdJunction = shift;
     outputData.chanFSRinternal = (float)shift;
+    if (!enable) return;
     // Отправка тут же актуальной информации в плату
-    QString nameParam = "chan" + QString::number(slotChannel) + "chanFSRinternal";
+    QString nameParam = "chan" + QString::number(slotChannel) + "FSRinternal";
     uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
     Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
     trans.volFlo = outputData.chanFSRinternal;
@@ -443,6 +446,15 @@ void ChannelOptions::parserChannel(Transaction tr)
             emit sendToWorker(trans);
         }
     }
+    else if(paramName == chanName + "FSRinternal")
+    {
+        inputData.chanFSRinternal = tr.volFlo;
+        if(inputData.chanFSRinternal != outputData.chanFSRinternal)
+        {
+            trans.volFlo = outputData.chanFSRinternal;
+            emit sendToWorker(trans);
+        }
+    }
 }
 
 void ChannelOptions::timerSlot()
@@ -478,6 +490,11 @@ void ChannelOptions::updateParam()
     QStringList listStr;
     listStr << "chan" + QString::number(devCh) + "SignalType" \
             << "chan" + QString::number(devCh) + "AdditionalParameter1";
+    if(outputData.chanSignalType == TermoCoupleMeasure)
+    {
+        listStr << "chan" + QString::number(devCh) + "FSRinternal";
+    }
+
     foreach (QString str, listStr) {
         tr.offset = cRegistersMap::getOffsetByName(str);
         emit sendToWorker(tr);

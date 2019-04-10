@@ -51,6 +51,8 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
+            channeljsonobj["ShiftCJ"] = Channel->getShiftColdJunction();
+            channeljsonobj["EnShiftCJ"] = Channel->getStateColdJunction();
             channeljsonobj["Scheme"] = Channel->getShema();
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
             channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
@@ -178,6 +180,8 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetMathematical(ch.value("MathWork").toBool());
             channel->SetMathEquation(ch.value("MathString").toString());
             channel->SetDempher(ch.value("Dempher").toInt());
+            channel->setShiftColdJunction(ch.value("ShiftCJ").toDouble());
+            channel->enableColdJunction(ch.value("EnShiftCJ").toInt());
             channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
 //            channel->setShema(ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
@@ -229,30 +233,6 @@ int cFileManager::readChannelsSettings(QString path)
         ust->setKvitirUp(jsonobj.value("KvitirUp").toBool());
 //        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
     }
-
-//    count = json["countMath"].toInt();
-//    if(count != 0)
-//    {
-//        listMath.clear();
-//        for(int i = 0; i < count; i ++)
-//        {
-//            cMathChannel *math = new cMathChannel();
-//            math->setNum(i);
-//            math->setName("Math " + QString::number(i+1));
-//            listMath.append(math);
-//        }
-//    }
-
-//    array = json["mathChannels"].toArray();
-//    index = 0;
-//    foreach (cMathChannel * math, listMath)
-//    {
-//        jsonobj = array.at(index++).toObject();
-//        math->setName(jsonobj.value("Name").toString().toUtf8());
-//        math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
-//        math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
-//        math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
-//    }
 
     return 0;
 

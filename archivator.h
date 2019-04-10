@@ -62,6 +62,7 @@ private:
     QThread * threadReadFile;
     QVector<sTickCh> arrTicks;
     int period;
+    int shiftPeriod;
 };
 
 #endif // CARCHIVATOR_H

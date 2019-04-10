@@ -340,6 +340,13 @@ void dSettings::updateWidgets()
         ui->saveButton->hide();
         ui->nameSubMenu->setText("АРХИВ");
 
+//        initComboChannels();
+
+//        ui->combo1ChannelArch->setCurrentIndex(1);
+//        ui->combo2ChannelArch->setCurrentIndex(2);
+//        ui->combo3ChannelArch->setCurrentIndex(3);
+//        ui->combo4ChannelArch->setCurrentIndex(4);
+
 
         /*
         InitiateArchive();
@@ -601,6 +608,8 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->dempfer->setValue(channel->GetDempherValue());
         ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
         ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
+        ui->enableColdJunction->setCurrentIndex(channel->getStateColdJunction());
+        ui->shiftColdJunction->setValue(channel->getShiftColdJunction());
     }
 
     //параметры уставок
@@ -710,6 +719,8 @@ void dSettings::saveParam()
             {
                 diapasone = tableDiapasoneRTD[ui->sensorDiapazon->currentIndex()].diapason;
             }
+            channel->setShiftColdJunction(ui->shiftColdJunction->value());
+            channel->enableColdJunction(ui->enableColdJunction->currentIndex());
             channel->SetDiapasonShema(diapasone, sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
@@ -1424,8 +1435,8 @@ void dSettings::on_bDeleteUstavka_clicked()
 
 void dSettings::on_bUserPeriod_clicked()
 {
-    QDateTime start = QDateTime::currentDateTime().addSecs(-archivePeriod);
-    QDateTime finish = QDateTime::currentDateTime();
+    QDateTime start = QDateTime::currentDateTime().addSecs(-archivePeriod-periodShift);
+    QDateTime finish = QDateTime::currentDateTime().addSecs(-periodShift);
     cCustomPeriod dialogPeriod(start, finish);
     dialogPeriod.setModal(true);
     dialogPeriod.exec();

@@ -233,11 +233,12 @@ void cArchivator::load(int per, int shift)
     assert(per<40000000);//период не больше года с хвостиком
     if(per > 40000000) return;
     period = per;
+    shiftPeriod = shift;
     arrTicks.resize(0); //сброс предыдущего буффера
     worker = new cArchWorker(fileName_sek);
     threadReadFile = new QThread;
     worker->setPeriod(period);  //сообщение воркеру нужного периода в сек
-    worker->setShift(shift);
+    worker->setShift(shiftPeriod);
     worker->moveToThread(threadReadFile);
     connect(threadReadFile, SIGNAL(started()), worker, SLOT(run()));
     connect(worker, SIGNAL(finished()), this, SLOT(endLoad()), Qt::DirectConnection);
@@ -299,7 +300,7 @@ QVector<double> cArchivator::getVector(int ch)
     //возврат пустого вектора, если канал задан неверно
     if((ch >= TOTAL_NUM_CHANNELS) || (ch < 0)) return ret;
 
-    QDateTime firstTime = askTime.addSecs(-period);
+    QDateTime firstTime = askTime.addSecs(-period-shiftPeriod);
 //    ret.resize(period / numAvg);
 
     foreach(sTickCh tick, arrTicks)

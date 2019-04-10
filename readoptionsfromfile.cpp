@@ -91,38 +91,38 @@ extern QList<Ustavka *> listUstavok;
 //    return MessageWrite::messagesqueue;
 //}
 
-void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
-{
-    QFile infile(pathtooptions);
-    infile.open(QIODevice::ReadOnly);
-    QTextStream in(&infile);
-    QString sss = in.readLine();
-    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
-    QJsonObject json = doc.object();
-    QJsonArray array = json["channels"].toArray();
-    QJsonObject ch = array.at(channel-1).toObject();
+//void ChannelOptions::ReadSingleChannelOptionFromFile(int channel)
+//{
+//    QFile infile(pathtooptions);
+//    infile.open(QIODevice::ReadOnly);
+//    QTextStream in(&infile);
+//    QString sss = in.readLine();
+//    QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
+//    QJsonObject json = doc.object();
+//    QJsonArray array = json["channels"].toArray();
+//    QJsonObject ch = array.at(channel-1).toObject();
 
-    this->SetHigherLimit(ch.value("HigherLimit").toDouble());
-    this->SetLowerLimit(ch.value("LowerLimit").toDouble());
-    this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
-    this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
-    this->SetSignalType(ch.value("Type").toInt());
-//    this->SetCurSignalType(this->GetSignalType());
-    this->SetUnitsName(ch.value("Units").toString().toUtf8());
-    this->SetMeasurePeriod(ch.value("Period").toDouble());
-    this->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
-    this->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());
-    this->SetState2HighMessage(ch.value("State2HighMessage").toString().toUtf8());
-    this->SetState2LowMessage(ch.value("State2LowMessage").toString().toUtf8());
-    this->SetChannelName(ch.value("Name").toString().toUtf8());
-    this->SetMathematical(ch.value("MathWork").toBool());
-    this->SetMathEquation(ch.value("MathString").toString());
-    this->SetDempher(ch.value("Dempher").toInt());
-//    this->SetDiapason(ch.value("Diapason").toInt());
-    this->SetRegistrationType(ch.value("RegistrationType").toInt());
+//    this->SetHigherLimit(ch.value("HigherLimit").toDouble());
+//    this->SetLowerLimit(ch.value("LowerLimit").toDouble());
+//    this->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
+//    this->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
+//    this->SetSignalType(ch.value("Type").toInt());
+////    this->SetCurSignalType(this->GetSignalType());
+//    this->SetUnitsName(ch.value("Units").toString().toUtf8());
+//    this->SetMeasurePeriod(ch.value("Period").toDouble());
+//    this->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
+//    this->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());
+//    this->SetState2HighMessage(ch.value("State2HighMessage").toString().toUtf8());
+//    this->SetState2LowMessage(ch.value("State2LowMessage").toString().toUtf8());
+//    this->SetChannelName(ch.value("Name").toString().toUtf8());
+//    this->SetMathematical(ch.value("MathWork").toBool());
+//    this->SetMathEquation(ch.value("MathString").toString());
+//    this->SetDempher(ch.value("Dempher").toInt());
+//    this->SetDiapasonShema(ch.value("Diapason").toInt(), 0);
+//    this->SetRegistrationType(ch.value("RegistrationType").toInt());
 
-    infile.close();
-}
+//    infile.close();
+//}
 
 void MainWindow::ReadUstavkiFromFile()
 {

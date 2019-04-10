@@ -351,7 +351,7 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: CalibOCRinternal : chan0OCRinternal
     {33281, 7096, mbRegRwCheckFunc,  OFFSET(chan0OCRinternal), "chan0OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan0FSRinternal
-    {33283, 7100, mbRegRwCheckFunc,  OFFSET(chan0FSRinternal), "chan0FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33283, 7100, mbRegRwCheckFunc,  OFFSET(chan0FSRinternal), "chan0FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan0DateRinternal
     {33285, 7104, mbRegRwCheckFunc,  OFFSET(chan0DateRinternal), "chan0DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan1OCR100mV
@@ -399,7 +399,7 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: CalibOCRinternal : chan1OCRinternal
     {33335, 7204, mbRegRwCheckFunc,  OFFSET(chan1OCRinternal), "chan1OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan1FSRinternal
-    {33337, 7208, mbRegRwCheckFunc,  OFFSET(chan1FSRinternal), "chan1FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33337, 7208, mbRegRwCheckFunc,  OFFSET(chan1FSRinternal), "chan1FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan1DateRinternal
     {33339, 7212, mbRegRwCheckFunc,  OFFSET(chan1DateRinternal), "chan1DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan2OCR100mV
@@ -447,7 +447,7 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: CalibOCRinternal : chan2OCRinternal
     {33389, 7312, mbRegRwCheckFunc,  OFFSET(chan2OCRinternal), "chan2OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan2FSRinternal
-    {33391, 7316, mbRegRwCheckFunc,  OFFSET(chan2FSRinternal), "chan2FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33391, 7316, mbRegRwCheckFunc,  OFFSET(chan2FSRinternal), "chan2FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan2DateRinternal
     {33393, 7320, mbRegRwCheckFunc,  OFFSET(chan2DateRinternal), "chan2DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibOCR100mV : chan3OCR100mV
@@ -495,7 +495,7 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: CalibOCRinternal : chan3OCRinternal
     {33443, 7420, mbRegRwCheckFunc,  OFFSET(chan3OCRinternal), "chan3OCRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibFSRinternal : chan3FSRinternal
-    {33445, 7424, mbRegRwCheckFunc,  OFFSET(chan3FSRinternal), "chan3FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
+    {33445, 7424, mbRegRwCheckFunc,  OFFSET(chan3FSRinternal), "chan3FSRinternal", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: CalibDateinternal : chan3DateRinternal
     {33447, 7428, mbRegRwCheckFunc,  OFFSET(chan3DateRinternal), "chan3DateRinternal", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_NA | LKUP_ACCESS_SERV_RW | LKUP_ACCESS_NO_WRITE_PROTECT},
     // Parameter: DigitalData : chan0DigitalData

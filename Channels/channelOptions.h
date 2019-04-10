@@ -69,7 +69,7 @@ public:
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
     void SetCurSignalType(uint16_t newsignaltype);
-    void ReadSingleChannelOptionFromFile(int channel);
+//    void ReadSingleChannelOptionFromFile(int channel);
     void SetChannelName(QString newname);
     void SetLowerLimit(double newsignaltype);
     void SetHigherLimit(double newhigherlimit);
@@ -98,8 +98,8 @@ public:
     void parserChannel(Transaction tr);
     void copyOptions(ChannelOptions *ch);
     void SetDiapasonShema(int newdiapason, int sh);
-    void enableColdJunction(bool en);
-    bool getStateColdJunction(void);
+    void enableColdJunction(int en);
+    int getStateColdJunction(void);
     void setShiftColdJunction(double shift);
     double getShiftColdJunction(void);
 
