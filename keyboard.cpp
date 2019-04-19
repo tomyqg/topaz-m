@@ -57,22 +57,25 @@ keyboard::keyboard(QWidget *parent) :
 {
     shift = false;
     secret = false;
-    newString = "";
+    newString = olderprop;
     ui->setupUi(this);
+    ui->textEdit->setEchoMode( QLineEdit::Normal);
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(textinput(int)) );
-
+//    connect(ui->textEdit, SIGNAL(editingFinished()), this, SLOT(on_pushButton_13_clicked()));
     ui->labelWarning->hide();
     ui->textEdit->setText(olderprop);
-    ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
+//    ui->textEdit->setFocus(); // чтобы при загрузке сразу активным было окошечко с вводом параметров
 
     //курсор сразу в конец строки
 //    QTextCursor cursor = ui->textEdit->cursor();
 //    cursor.movePosition(QTextCursor::End);
 //    ui->textEdit->setTextCursor(cursor);
 //    int pos = ui->textEdit->cursorPosition();
-    ui->textEdit->setCursorPosition(ui->textEdit->text().size()-1);
+//    ui->textEdit->setCursorPosition(ui->textEdit->text().size()-1);
+    ui->textEdit->end(true);
 
     ui->textEdit->installEventFilter(this);
+    ui->textEdit->deselect();
 
     //запись в журнал об использовании клавиатуры
     cLogger mk(pathtomessages, cLogger::UI);
@@ -114,11 +117,12 @@ void keyboard::setWarning(QString warn, bool secr)
     ui->labelWarning->setText(warn);
     ui->labelWarning->show();
     secret = secr;
+    ui->textEdit->setEchoMode(QLineEdit::Password);
 }
 
 QString keyboard::getcustomstring()
 {
-    return ui->textEdit->text();//toPlainText();
+    return newString;//ui->textEdit->text();//toPlainText();
 }
 
 void keyboard::textinput(int b)
@@ -129,17 +133,19 @@ void keyboard::textinput(int b)
     int pos = ui->textEdit->cursorPosition();//cursor.position();
 //    qDebug() << "cursor" << pos;
     QPushButton *button = static_cast<QPushButton*>(widget);
-    QString textnew;
-    if(secret)
-    {
-        textnew = textwas.insert(pos, "*");
-        newString = newString.insert(pos, button->text());
-    }
-    else
-    {
-        textnew = textwas.insert(pos, button->text());
-    }
-    ui->textEdit->setText(textnew);
+//    QString textnew;
+//    if(secret)
+//    {
+//        textnew = textwas.insert(pos, "*");
+//        newString = newString.insert(pos, button->text());
+//    }
+//    else
+//    {
+//        textnew = textwas.insert(pos, button->text());
+//    }
+//    ui->textEdit->setText(textnew);
+//    ui->textEdit->setText(newString);
+        ui->textEdit->insert(button->text());
 //    cursor.setPosition(pos+1);
 //    ui->textEdit->setTextCursor(cursor);
     ui->textEdit->setCursorPosition(pos+1);
@@ -147,6 +153,7 @@ void keyboard::textinput(int b)
 
 void keyboard::on_pushButton_13_clicked()
 {
+    newString = ui->textEdit->text();
     cLogger mk(pathtomessages, cLogger::UI);
     mk.addMess("Keyboard " + olderprop + " > " + ui->textEdit->text()/*->toPlainText()*/,\
                cLogger::SERVICE);

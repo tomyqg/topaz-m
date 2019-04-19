@@ -78,6 +78,7 @@ private:
     QList<QLabel*> listLabelEmfpAnalizSteel;
     QList<QComboBox*> listComboTypeTermo;
     QList<QLabel*> listLabelCj;
+
 //    QList<QPushButton*> listButtonModeling;
 //    QList<ChannelOptions *> listChannels;
     void initAnalizePage();
@@ -107,6 +108,7 @@ private:
     void changeVisibleWidgets();
     QList<QWidget *> listWidgetsExpert;
     QList<QWidget *> listWidgetsAdmin;
+    QList<QWidget *> listEditableLineText;
 
     void makeCsvFileArchive(QString src, QString csv, QString dest);
     void addWidgetMath();

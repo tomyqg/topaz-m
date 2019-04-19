@@ -134,10 +134,25 @@ dMenu::dMenu(QWidget *parent) :
 //    connect(ethernet, SIGNAL(signalErrIp()), this, SLOT(slotIpErr()));
 //    connect(ethernet, SIGNAL(signalStatus(bool,bool)), \
 //            this, SLOT(slotUpdateEthernetStatus(bool,bool)));
-    ui->ipAddr->installEventFilter(this);
-    ui->netMask->installEventFilter(this);
-    ui->gateWay->installEventFilter(this);
-    ui->nameGroup->installEventFilter(this);
+
+    // Подключение редактируемых с клавиатуры текстовых полей QLineEdit
+    listEditableLineText << ui->ipAddr \
+                         << ui->netMask \
+                         << ui->gateWay \
+                         << ui->nameGroup \
+                         << ui->nameMath \
+                         << ui->formulaMath;
+
+    foreach (QWidget * w, listEditableLineText) {
+        w->installEventFilter(this);
+    }
+
+//    ui->ipAddr->installEventFilter(this);
+//    ui->netMask->installEventFilter(this);
+//    ui->gateWay->installEventFilter(this);
+//    ui->nameGroup->installEventFilter(this);
+//    ui->nameMath->installEventFilter(this);
+//    ui->formulaMath->installEventFilter(this);
 
     // список виджетов, которые нужно скрывать от лишних глаз
     listWidgetsExpert << ui->frameModeAccess \
@@ -230,19 +245,22 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
 
 #ifndef Q_OS_WIN
     if ( (event->type() == QEvent::MouseButtonPress) && \
-         (object->property("enabled").toString() == "true") && \
-         ((object->objectName() == "ipAddr") ||\
-          (object->objectName() == "netMask") ||\
-          (object->objectName() == "gateWay") ||\
-          (object->objectName() == "nameGroup")))
+         (object->property("enabled").toString() == "true"))
     {
-        if(QString::fromLatin1(object->metaObject()->className()) == "QLineEdit")
-        {
-            keyboard::olderprop = object->property("text").toString();
-            keyboard kb(this);
-            kb.setModal(true);
-            kb.exec();
-            object->setProperty("text",kb.getcustomstring() );
+        // проверка виджетов на разрешение использовать клавиатуру для ввода
+        foreach (QWidget * w, listEditableLineText) {
+            if(object->objectName() == w->objectName()){
+                //окрывать клавиатуру только, если это QLineEdit
+                if(QString::fromLatin1(object->metaObject()->className()) == "QLineEdit")
+                {
+                    keyboard::olderprop = object->property("text").toString();
+                    keyboard kb(this);
+                    kb.setModal(true);
+                    kb.exec();
+                    object->setProperty("text",kb.getcustomstring() );
+                }
+                break;
+            }
         }
     }
 #endif
@@ -1005,8 +1023,8 @@ void dMenu::on_bBackDateTime_clicked()
 
 void dMenu::on_bExpert_clicked()
 {
-    keyboard kb(this);
     keyboard::olderprop = "";
+    keyboard kb(this);
     kb.setModal(true);
     kb.setWarning("Введите пароль режима ЭКСПЕРТ", true);
     kb.exec();
