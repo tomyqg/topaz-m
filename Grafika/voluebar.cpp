@@ -42,8 +42,13 @@ wVolueBar::~wVolueBar()
 /*
  * Задание текущей величины
  */
-void wVolueBar::setVolue(double vol)
+void wVolueBar::setValue(double vol)
 {
+    int prec = 2;
+    if(abs(vol) >= 1000) prec = 0;
+    else if(abs(vol) >= 100) prec = 1;
+    else if(abs(vol) >= 10) prec = 2;
+    else prec = 3;
 
     //геометрия виждета текущей величины
     if(vol >= 0)
@@ -63,7 +68,16 @@ void wVolueBar::setVolue(double vol)
                                  );
     }
 
-    ui->volBar->setText(QString::number(vol, 'f', 2));
+    QString valBar;
+    if(valueType == BarValue_Real)
+    {
+        valBar = QString::number(vol, 'f', prec);
+    }
+    else //valueType == BarValue_Procent
+    {
+        valBar = QString::number(vol/razmah*100, 'f', 2);
+    }
+    ui->volBar->setText(valBar);
 
 
     //геометрия поля значения
@@ -210,18 +224,21 @@ void wVolueBar::setColor(QColor color, QColor colorL)
 void wVolueBar::setText(QString type, QString mes)
 {
     //реализовать тут контроль переданных строк
-    if(type.size()>2)
-        type.resize(2);
+    if(type.size()>8)
+        type.resize(8);
     if(mes.size()>2)
         mes.resize(2);
 
     if(numChan != 0)
     {
-        ui->typeBar->setText("<html><head/><body><p>" + \
+//        ui->typeBar->setText("<html><head/><body><p>" + \
+//                             type + \
+//                             "<span style=\" vertical-align:sub;\">" + \
+//                             QString::number(numChan) + \
+//                             "</span></p></body></html>");
+        ui->typeBar->setText("<html><head/><body><p><strong>" + \
                              type + \
-                             "<span style=\" vertical-align:sub;\">" + \
-                             QString::number(numChan) + \
-                             "</span></p></body></html>");
+                             "</strong></p></body></html>");
     }
     else
     {
@@ -263,6 +280,7 @@ void wVolueBar::addMarker(int vol, bool dir)
  */
 void wVolueBar::setBarDiapazon(double diap)
 {
+
     razmah = diap;
 }
 

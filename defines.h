@@ -18,12 +18,12 @@
 #ifdef Q_OS_WIN32
 //    #define RANDOM_CHAN
 #endif
-//#define RANDOM_CHAN
+#define RANDOM_CHAN
 
 #ifdef RANDOM_CHAN
 #define CURRENT_VER "1.80" //версия ПО
 #else
-#define CURRENT_VER "1.81" //версия ПО
+#define CURRENT_VER "1.82" //версия ПО
 #endif
 #define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
@@ -152,23 +152,49 @@
 #define COLOR_2 QColor(0x66,0x66,0xff)
 #define COLOR_3 QColor(0xe8,0x4c,0x3d)
 #define COLOR_4 QColor(0x2b,0x3e,0x4c)
-#define COLOR_LIGHT_1 QColor(0x57,0xe9,0xc5)
-#define COLOR_LIGHT_2 QColor(0x99,0x99,0xff)
-#define COLOR_LIGHT_3 QColor(0xeb,0x9f,0x85)
-#define COLOR_LIGHT_4 QColor(0x80,0x9f,0xbc)
+#define COLOR_LIGHT_1 QColor(0x50,0xdc,0xc1)
+#define COLOR_LIGHT_2 QColor(0x8c,0x8c,0xff)
+#define COLOR_LIGHT_3 QColor(0xF3,0x7A,0x6D)
+#define COLOR_LIGHT_4 QColor(0x70,0x8F,0xA5)
+//#define COLOR_5 QColor(0xff,0x7c,0x27)
+//#define COLOR_6 QColor(0xff,0xd2,0x4b)
+//#define COLOR_7 QColor(0x2e,0xaf,0x4b)
+//#define COLOR_8 QColor(0x76,0x5F,0x40)
+//#define COLOR_LIGHT_5 QColor(0xff,0x9d,0x5d)
+//#define COLOR_LIGHT_6 QColor(0xff,0xdd,0x78)
+//#define COLOR_LIGHT_7 QColor(0x60,0xD7,0x7A)
+//#define COLOR_LIGHT_8 QColor(0xBB,0x9F,0x7A)
+#define COLOR_5 QColor(0x2b,0x3e,0x4c)
+#define COLOR_6 QColor(0xe8,0x4c,0x3d)
+#define COLOR_7 QColor(0x66,0x66,0xff)
+#define COLOR_8 QColor(0x1c,0xb9,0x9a)
+#define COLOR_LIGHT_5 QColor(0x70,0x8F,0xA5)
+#define COLOR_LIGHT_6 QColor(0xF3,0x7A,0x6D)
+#define COLOR_LIGHT_7 QColor(0x8c,0x8c,0xff)
+#define COLOR_LIGHT_8 QColor(0x50,0xdc,0xc1)
+
+
 #define COLOR_DARK  QColor(0x2b,0x3e,0x4c)
 #define COLOR_LIGHT QColor(0x0e,0xd2,0xe2)
-#define COLOR_GRAY  QColor(0xe6,0xe6,0xe6)
+#define COLOR_GRAY  QColor(0x60,0xD7,0x7A)
 
 // Цвета элементов
 #define ColorCh1 COLOR_1
 #define ColorCh2 COLOR_2
 #define ColorCh3 COLOR_3
 #define ColorCh4 COLOR_4
+#define ColorCh5 COLOR_5
+#define ColorCh6 COLOR_6
+#define ColorCh7 COLOR_7
+#define ColorCh8 COLOR_8
 #define ColorCh1Light COLOR_LIGHT_1
 #define ColorCh2Light COLOR_LIGHT_2
 #define ColorCh3Light COLOR_LIGHT_3
 #define ColorCh4Light COLOR_LIGHT_4
+#define ColorCh5Light COLOR_LIGHT_5
+#define ColorCh6Light COLOR_LIGHT_6
+#define ColorCh7Light COLOR_LIGHT_7
+#define ColorCh8Light COLOR_LIGHT_8
 #define ColorButtonNormal   COLOR_DARK
 #define ColorBlue           COLOR_LIGHT
 #define EcoColor COLOR_DARK

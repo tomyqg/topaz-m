@@ -124,6 +124,9 @@ private slots:
     void on_combo4ChannelArch_currentIndexChanged(int index);
 
     void on_srcChannel_currentIndexChanged(int index);
+
+    void on_comboTypeValue_currentIndexChanged(int index);
+    void on_sensorDiapazon_currentIndexChanged(int index);
 };
 
 #endif // SETTINGS_H

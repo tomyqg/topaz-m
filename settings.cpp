@@ -21,16 +21,16 @@ enum numItems{
 
 typedef struct {
     numItems numItem;
-    ModBus::SignalType st;
+    SignalType st;
     QString nameItem;
 } typeTableSignalTypes;
 
 const typeTableSignalTypes tableSignalTypes[] = {
-    {NoSignal, ModBus::NoMeasure, "ОТКЛ."},     //0
-    {Current, ModBus::CurrentMeasure, "ТОК"},       //1
-    {Voltage, ModBus::VoltageMeasure, "НАРЯЖЕНИЕ"},     //2
-    {TermoCouple, ModBus::TermoCoupleMeasure, "Т/П"},       //3
-    {TermoResistance, ModBus::TermoResistanceMeasure, "Т/С"},   //4
+    {NoSignal, NoMeasure, "ОТКЛ."},     //0
+    {Current, CurrentMeasure, "ТОК"},       //1
+    {Voltage, VoltageMeasure, "НАРЯЖЕНИЕ"},     //2
+    {TermoCouple, TermoCoupleMeasure, "Т/П"},       //3
+    {TermoResistance, TermoResistanceMeasure, "Т/С"},   //4
 };
 
 typedef struct {
@@ -139,6 +139,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->label_30->hide();
     ui->messageOffDown->hide();
     ui->label_31->hide();
+    ui->unit->hide();
+    ui->label_11->hide();
+    ui->comboCapacity->hide();
+    ui->labelCapacity->hide();
     // ----->
 
     ui->saveButton->setColorText(ColorBlue);
@@ -601,7 +605,6 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->nameChannel->setText(channel->GetChannelName().toUtf8());
         ui->scaleUp->setValue(channel->GetHigherMeasureLimit());
         ui->scaleDown->setValue(channel->GetLowerMeasureLimit());
-        ui->unit->setText(channel->GetUnitsName().toUtf8());
         ui->periodCh->setValue(channel->GetMeasurePeriod());
         ui->labelNumChannel->setText("КАНАЛ #" + QString::number(channel->getNum()));
         ui->bar->setNumChan(channel->getNum());
@@ -610,6 +613,9 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
         ui->enableColdJunction->setCurrentIndex(channel->getStateColdJunction());
         ui->shiftColdJunction->setValue(channel->getShiftColdJunction());
+        ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
+//        ui->unit->setText(channel->GetUnitsName().toUtf8());
+//        ui->comboCapacity->setCurrentIndex(channel->getCapacity());
     }
 
     //параметры уставок
@@ -658,7 +664,7 @@ void dSettings::updateBar()
         ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
         ui->bar->setBarDiapazon(max(abs(ui->scaleUp->value()), abs(ui->scaleDown->value())));
-        ui->bar->setVolue(channel->GetCurrentChannelValue());
+        ui->bar->setValue(channel->GetCurrentChannelValue());
     }
 }
 
@@ -707,21 +713,23 @@ void dSettings::saveParam()
             channel->SetDempher(ui->dempfer->value());
             channel->SetRegistrationType(ui->typeReg->currentIndex());
             int diapasone = ui->sensorDiapazon->currentIndex();
-            if(channel->GetSignalType() == Voltage)
+            if(channel->GetSignalType() == VoltageMeasure)
             {
                 diapasone = tableVoltageDiapasone[ui->sensorDiapazon->currentIndex()].diapason;
             }
-            else if(channel->GetSignalType() == TermoCouple)
+            else if(channel->GetSignalType() == TermoCoupleMeasure)
             {
                 diapasone = tableDiapasoneTC[ui->sensorDiapazon->currentIndex()].diapason;
             }
-            else if(channel->GetSignalType() == TermoResistance)
+            else if(channel->GetSignalType() == TermoResistanceMeasure)
             {
                 diapasone = tableDiapasoneRTD[ui->sensorDiapazon->currentIndex()].diapason;
             }
             channel->setShiftColdJunction(ui->shiftColdJunction->value());
             channel->enableColdJunction(ui->enableColdJunction->currentIndex());
             channel->SetDiapasonShema(diapasone, sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+            channel->setVolueVoltageType(ui->comboTypeValue->currentIndex());
+//            channel->setCapacity(ui->comboCapacity->currentIndex());
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
 
@@ -948,7 +956,7 @@ void dSettings::on_typeSignal_currentIndexChanged(int index)
  */
 void dSettings::updateUiSignalTypeParam(int index)
 {
-    if(index == NoSignal)
+    if(index == NoMeasure)
     {
         ui->sensorDiapazon->hide();
         ui->sensorShema->hide();
@@ -958,15 +966,23 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelColdJunction->hide();
         ui->shiftColdJunction->hide();
         ui->labelShiftColdJunction->hide();
+        ui->labelValue->hide();
+        ui->comboTypeValue->hide();
     }
-    else if(index == Current)
+    else if(index == CurrentMeasure)
     {
         ui->sensorDiapazon->hide();
         ui->sensorShema->hide();
         ui->labelDiapazon->hide();
         ui->labelShema->hide();
+        ui->enableColdJunction->hide();
+        ui->labelColdJunction->hide();
+        ui->shiftColdJunction->hide();
+        ui->labelShiftColdJunction->hide();
+        ui->labelValue->show();
+        ui->comboTypeValue->show();
     }
-    else if(index == Voltage)
+    else if(index == VoltageMeasure)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListNapryagenie);
@@ -975,8 +991,14 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelDiapazon->show();
         ui->sensorShema->hide();
         ui->labelShema->hide();
+        ui->enableColdJunction->hide();
+        ui->labelColdJunction->hide();
+        ui->shiftColdJunction->hide();
+        ui->labelShiftColdJunction->hide();
+        ui->labelValue->show();
+        ui->comboTypeValue->show();
     }
-    else if(index == TermoCouple)
+    else if(index == TermoCoupleMeasure)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListTC);
@@ -985,8 +1007,15 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelDiapazon->show();
         ui->sensorShema->hide();
         ui->labelShema->hide();
+        ui->enableColdJunction->show();
+        ui->labelColdJunction->show();
+        ui->shiftColdJunction->show();
+        ui->labelShiftColdJunction->show();
+        ui->labelValue->hide();
+        ui->comboTypeValue->hide();
+        channel->setVolueVoltageType(ChannelOptions::Value_Real);
     }
-    else if(index == TermoResistance)
+    else if(index == TermoResistanceMeasure)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListRTD);
@@ -995,12 +1024,25 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelDiapazon->show();
         ui->sensorShema->show();
         ui->labelShema->show();
+        ui->enableColdJunction->hide();
+        ui->labelColdJunction->hide();
+        ui->shiftColdJunction->hide();
+        ui->labelShiftColdJunction->hide();
+        ui->labelValue->hide();
+        ui->comboTypeValue->hide();
+        channel->setVolueVoltageType(ChannelOptions::Value_Real);
     }
 
+
+    ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
+    if(ui->comboTypeValue->currentIndex() == ChannelOptions::Value_Real)
+    {
+        ui->unit->setText(channel->getNameUnitByParam(index, channel->GetDiapason()));
+    }
     ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
-
-
 }
+
+
 
 /*
  * Получение индекса в таблице по типу сигнала
@@ -1487,16 +1529,54 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
 //        channel->copyOptions(listChannels.at(index-1));
         ChannelOptions * srcChannel = listChannels.at(index-1);
         ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(srcChannel->GetSignalType()));
+        updateUiSignalTypeParam(getIndexSignalTypeTable(srcChannel->GetSignalType()));
         ui->nameChannel->setText(srcChannel->GetChannelName().toUtf8());
         ui->scaleUp->setValue(srcChannel->GetHigherMeasureLimit());
         ui->scaleDown->setValue(srcChannel->GetLowerMeasureLimit());
-        ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
         ui->periodCh->setValue(srcChannel->GetMeasurePeriod());
         ui->dempfer->setValue(srcChannel->GetDempherValue());
         ui->typeReg->setCurrentIndex(srcChannel->GetRegistrationType());
-
-
-        updateUiSignalTypeParam(getIndexSignalTypeTable(srcChannel->GetSignalType()));
+        ui->comboTypeValue->setCurrentIndex(srcChannel->getVoltageType());
+        ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
+        if(srcChannel->GetSignalType() == VoltageMeasure)
+        {
+            ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
+        }
+        else if(index == TermoCoupleMeasure)
+        {
+            ui->sensorDiapazon->setCurrentIndex(getIndexTableTC(srcChannel->GetDiapason()));
+        }
+        else if(index == TermoResistanceMeasure)
+        {
+            ui->sensorDiapazon->setCurrentIndex(getIndexTableRTD(srcChannel->GetDiapason()));
+        }
 
     }
 }
+
+void dSettings::on_comboTypeValue_currentIndexChanged(int index)
+{
+    switch(index)
+    {
+    case ChannelOptions::Value_Real:
+        ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st,\
+                          tableVoltageDiapasone[ui->sensorDiapazon->currentIndex()].diapason));
+        break;
+    case ChannelOptions::Value_Procent:
+        ui->unit->setText("%");
+        break;
+    default:
+        break;
+    }
+}
+
+void dSettings::on_sensorDiapazon_currentIndexChanged(int index)
+{
+    if(ui->comboTypeValue->currentIndex() != ChannelOptions::Value_Procent)
+    {
+        ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st,\
+                          tableVoltageDiapasone[index].diapason));
+    }
+}
+
+

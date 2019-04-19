@@ -119,6 +119,7 @@ public slots:
     void WorkerMessSlot(QString mess);
     void sendRelayStateToWorker(int relay, bool state);
     void retransToWorker(Transaction tr);
+    void retransDeviceToWorker(Transaction tr);
     void openSettingsChannel(int num);
     void updateSystemOptions();
     void updateSteel();
@@ -400,6 +401,7 @@ private:
     cSteel *getReadySteel();
     cSteel *getMeasureSteel();
     void updateVer();
+    void updateGroupWodgets();
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

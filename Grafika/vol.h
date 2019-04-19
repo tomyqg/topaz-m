@@ -14,7 +14,7 @@ class wVol : public QWidget
 public:
     explicit wVol(QWidget *parent = 0);
     ~wVol();
-    void setVol(double vol);
+    void setVol(double vol, int prec = 10);
     void setText(QString name, QString mes);
     void changeNum(int num);
     void setColor(QColor color);
@@ -22,6 +22,10 @@ public:
 
 public slots:
     void resizeEvent(QResizeEvent * s);
+    bool eventFilter(QObject* watched, QEvent* event);
+
+signals:
+    void clickedLabel(int);
 
 private:
     Ui::wVol *ui;

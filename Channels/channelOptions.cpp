@@ -36,6 +36,7 @@ ChannelOptions::ChannelOptions()
     connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     updateParam();
     timerUpdateParam->start(15000);
+    valueVoltage = Value_Real;
 
 }
 
@@ -340,16 +341,6 @@ void ChannelOptions::SetState2LowMessage(QString newmessage)
     this->state2lowmessage = newmessage;
 }
 
-void ChannelOptions::SetState1Value(double value)
-{
-    this->state1value = value;
-}
-
-void ChannelOptions::SetState2Value(double value)
-{
-    this->state2value = value;
-}
-
 void ChannelOptions::SetMathematical(bool newstate)
 {
     this->MathematicalState = newstate;
@@ -363,15 +354,6 @@ void ChannelOptions::SetMathematical(bool newstate)
 //    this->h = height;
 //}
 
-double ChannelOptions::GetState1Value()
-{
-    return this->state1value;
-}
-
-double ChannelOptions::GetState2Value()
-{
-    return this->state2value;
-}
 
 int ChannelOptions::GetDempherValue()
 {
@@ -651,7 +633,7 @@ double ChannelOptions::ConvertSignalToValue(double signal)
     double hisignal = 0, lowsignal = 0 ;
 
 
-    if (GetSignalType() == MeasureCurrent)
+    if (GetSignalType() == CurrentMeasure)
     {
 
         switch (GetDiapason()) {
@@ -702,85 +684,28 @@ double ChannelOptions::ConvertSignalToValue(double signal)
         value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
     }
 
-    if (GetSignalType() == MeasureVoltage)
+    if (GetSignalType() == VoltageMeasure)
     {
         switch (GetDiapason()) {
-        case Voltage0_100mV:
+
+        case Voltage_1V:
         {
-            hisignal = 0.1;
-            lowsignal = 0;
+            hisignal = 1000;
+            lowsignal = -1000;
             break;
         }
 
-        case Voltage0_10V:
-        {
-            hisignal = 10;
-            lowsignal = 0;
-            break;
-        }
-
-        case Voltage0_5V:
-        {
-            hisignal = 5;
-            lowsignal = 0;
-            break;
-        }
-
-        case Voltage1_5V:
-        {
-            hisignal = 5;
-            lowsignal = 1;
-            break;
-        }
-
-        case Voltage150_150mV:
-        {
-            hisignal = 0.15;
-            lowsignal = -0.15;
-            break;
-        }
-
-
-        case Voltage1_1V:
-        {
-            hisignal = 1;
-            lowsignal = -1;
-            break;
-        }
-
-        case Voltage10_10V:
+        case Voltage_10V:
         {
             hisignal = 10;
             lowsignal = -10;
             break;
         }
 
-
-        case Voltage30_30V:
+        case Voltage_30V:
         {
             hisignal = 30;
             lowsignal = -30;
-            break;
-        }
-
-        case Voltage0_1V_sqrt:
-        {
-            hisignal = 1;
-            lowsignal = 0;
-            break;
-        }
-
-        case Voltage0_10V_sqrt:
-        {
-            hisignal = 10;
-            lowsignal = 0;
-            break;
-        }
-
-        case Voltage1_5V_sqrt:
-        {
-            hisignal = 5;
-            lowsignal = 1;
             break;
         }
         default:
@@ -792,6 +717,126 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
     return value;
 }
+
+double ChannelOptions::ConvertVisualValue(double signal)
+{
+    double value = signal;
+    double hisignal = 0, lowsignal = 0 ;
+    double lowlimit = 0;
+    double hilimit = 0;
+//    double multiplier = 1;
+
+
+
+    if (GetSignalType() == VoltageMeasure)
+    {
+        switch (GetDiapason()) {
+
+        case Voltage_1V:   // значение приходит в милливольтах
+        {
+            lowsignal = -1000;
+            hisignal = 1000;
+//            lowlimit = -1000;
+//            hilimit = 1000;
+            break;
+        }
+
+        case Voltage_10V: // значение приходит в вольтах
+        {
+            lowsignal = -10;
+            hisignal = 10;
+//            lowlimit = -10;
+//            hilimit = 10;
+            break;
+        }
+
+        case Voltage_30V: // значение приходит в вольтах
+        {
+            lowsignal = -30;
+            hisignal = 30;
+//            lowlimit = -30;
+//            hilimit = 30;
+            break;
+        }
+        default:
+            break;
+        }
+
+        switch (getVoltageType()) {
+        case Value_Real:
+//            multiplier = 1000;
+            lowlimit = lowsignal;
+            hilimit = hisignal;
+            break;
+        case Value_Procent:
+//            multiplier = 1;
+            lowlimit = 0;
+            hilimit = 100;
+        default:
+            break;
+        }
+
+
+        value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
+//        value *= multiplier;
+
+    }
+    return value;
+}
+
+int ChannelOptions::optimalPrecision()
+{
+    int prec = 2;
+
+    if (GetSignalType() == CurrentMeasure)
+    {
+        prec = 3;
+    }
+    else if (GetSignalType() == VoltageMeasure)
+    {
+        switch (GetDiapason()) {
+
+        case Voltage_1V:   // значение приходит в милливольтах
+        {
+            prec = 1;
+            break;
+        }
+        case Voltage_10V: // значение приходит в вольтах
+        {
+            prec = 2;
+            break;
+        }
+        case Voltage_30V: // значение приходит в вольтах
+        {
+            prec = 2;
+            break;
+        }
+        default:
+            break;
+        }
+    }
+    else if (GetSignalType() == TermoCoupleMeasure)
+    {
+        prec = 1;
+    }
+    else if (GetSignalType() == TermoResistanceMeasure)
+    {
+        prec = 2;
+    }
+
+    switch (getVoltageType()) {
+    case Value_Real:
+        //prec = prec;
+        break;
+    case Value_Procent:
+        prec = 2;
+    default:
+        break;
+    }
+
+    return prec;
+}
+
 
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
@@ -883,4 +928,72 @@ void ChannelOptions::copyOptions(ChannelOptions * ch)
     shema = ch->shema;
     registrationtype = ch->registrationtype;
 
+}
+
+//QString ChannelOptions::getNameUnitByParam(void)
+//{
+//    QString unit = "..";
+//    if(GetSignalType() == VoltageMeasure)
+//    {
+//        if(diapason == Voltage_1V)
+//        {
+//            unit = "мВ";
+//        }
+//        else
+//        {
+//            unit = "В";
+//        }
+//    }
+//    else if(GetSignalType() == CurrentMeasure)
+//    {
+//        unit = "мА";
+//    }
+//    else if(GetSignalType() == TermoCoupleMeasure)
+//    {
+//        unit = "°C";
+//    }
+//    else if(GetSignalType() == TermoResistanceMeasure)
+//    {
+//        unit = "°C";
+//    }
+//    else
+//    {
+//        unit = "..";
+//    }
+
+//    return unit;
+//}
+
+QString ChannelOptions::getNameUnitByParam(uint16_t type, int diap)
+{
+    QString unit = "..";
+    if(type == VoltageMeasure)
+    {
+        if(diap == Voltage_1V)
+        {
+            unit = "мВ";
+        }
+        else
+        {
+            unit = "В";
+        }
+    }
+    else if(type == CurrentMeasure)
+    {
+        unit = "мА";
+    }
+    else if(type == TermoCoupleMeasure)
+    {
+        unit = "°C";
+    }
+    else if(type == TermoResistanceMeasure)
+    {
+        unit = "°C";
+    }
+    else
+    {
+        unit = "..";
+    }
+
+    return unit;
 }

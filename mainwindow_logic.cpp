@@ -327,10 +327,18 @@ void MainWindow::MainWindowInitialization()
     ui->wBar_2->changeNum(2);
     ui->wBar_3->changeNum(3);
     ui->wBar_4->changeNum(4);
+    ui->wBar_5->changeNum(5);
+    ui->wBar_6->changeNum(6);
+    ui->wBar_7->changeNum(7);
+    ui->wBar_8->changeNum(8);
     connect(ui->wBar_1, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_2, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_3, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     connect(ui->wBar_4, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_5, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_6, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_7, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->wBar_8, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     setStyleBars();
     setTextBars();
 
@@ -339,6 +347,18 @@ void MainWindow::MainWindowInitialization()
     ui->widgetVol2->changeNum(2);
     ui->widgetVol3->changeNum(3);
     ui->widgetVol4->changeNum(4);
+    ui->widgetVol5->changeNum(5);
+    ui->widgetVol6->changeNum(6);
+    ui->widgetVol7->changeNum(7);
+    ui->widgetVol8->changeNum(8);
+    connect(ui->widgetVol1, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol2, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol3, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol4, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol5, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol6, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol7, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
+    connect(ui->widgetVol8, SIGNAL(clickedLabel(int)), this, SLOT(openSettingsChannel(int)));
     updateWidgetsVols();
 
 //    ui->wBar_1->setBarDiapazon(1000);
@@ -650,7 +670,7 @@ void MainWindow::InitDevices()
     for(int i = 0; i < TOTAL_NUM_DEVICES; i++)
     {
         cDevice * device = new cDevice();
-        connect(device, SIGNAL(updateParam(Transaction)), this, SLOT(retransToWorker(Transaction)));
+        connect(device, SIGNAL(updateParam(Transaction)), this, SLOT(retransDeviceToWorker(Transaction)));
         listDevice.append(device);
     }
 }
@@ -1146,7 +1166,25 @@ uint32_t MainWindow::getDevOffsetByChannel(int ch, uint32_t offset)
 
 void MainWindow::retransToWorker(Transaction tr)
 {
-    emit sendTransToWorker(tr);
+    if((tr.slave <= listDevice.size()) && (tr.slave != 0))
+    {
+        deviceTypeEnum deviceType = listDevice.at(tr.slave - 1)->deviceType;
+        if(systemOptions.typeMultigraph == cSystemOptions::Multigraph)
+        {
+            if((deviceType == Device_4AI) || (deviceType == Device_8RP))
+                emit sendTransToWorker(tr);
+        }
+        else if((systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel))
+        {
+            if((deviceType == Device_STEEL) || (deviceType == Device_8RP))
+                emit sendTransToWorker(tr);
+        }
+    }
+}
+
+void MainWindow::retransDeviceToWorker(Transaction tr)
+{
+        emit sendTransToWorker(tr);
 }
 
 void MainWindow::getTransFromWorkerSlot(Transaction tr)
@@ -1177,16 +1215,8 @@ void MainWindow::parseWorkerReceive()
         device->setOnline();
         paramName = cRegistersMap::getNameByOffset(tr.offset);
         isDeviceParam = false;
-        if(tr.offset < BASE_OFFSET_DEVICE)
-        {
-            isDeviceParam = true;
-        }
-        else if((tr.offset >= BASE_OFFSET_DEVICE) && (tr.offset < BASE_OFFSET_CHANNEL_1))
-        {
-            isDeviceParam = true;
-            device->parseDeviceParam(tr);
-        }
-        else if((tr.offset >= BASE_OFFSET_CHANNEL_1) && (tr.offset < BASE_OFFSET_CHANNEL_2))
+
+        if(paramName.contains("chan0"))
             // канал 1
         {
             ch = 0;
@@ -1208,7 +1238,7 @@ void MainWindow::parseWorkerReceive()
                 }
             }
         }
-        else if((tr.offset >= BASE_OFFSET_CHANNEL_2) && (tr.offset < BASE_OFFSET_CHANNEL_3))
+        else if(paramName.contains("chan1"))
             // канал 2
         {
             ch = 1;
@@ -1230,7 +1260,7 @@ void MainWindow::parseWorkerReceive()
                 }
             }
         }
-        else if((tr.offset >= BASE_OFFSET_CHANNEL_3) && (tr.offset < BASE_OFFSET_CHANNEL_4))
+        else if(paramName.contains("chan2"))
             // канал 3
         {
             ch = 2;
@@ -1241,7 +1271,7 @@ void MainWindow::parseWorkerReceive()
                 channel->parserChannel(tr);
             }
         }
-        else if((tr.offset >= BASE_OFFSET_CHANNEL_4) && (tr.offset < (BASE_OFFSET_CHANNEL_4 + 128)))
+        else if(paramName.contains("chan3"))
             // канал 4
         {
             ch = 3;
@@ -1251,6 +1281,11 @@ void MainWindow::parseWorkerReceive()
                 channel = listChannels.at(index);
                 channel->parserChannel(tr);
             }
+        }
+        else
+        {
+            isDeviceParam = true;
+            device->parseDeviceParam(tr);
         }
 
         if(!isDeviceParam)

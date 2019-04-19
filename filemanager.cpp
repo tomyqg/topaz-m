@@ -56,6 +56,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["Scheme"] = Channel->getShema();
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
             channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
+            channeljsonobj["ValueType"] = Channel->getVoltageType();
             settings.append(channeljsonobj);
             countCh++;
         }
@@ -185,6 +186,7 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
 //            channel->setShema(ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
+            channel->setVolueVoltageType(ch.value("ValueType").toInt());
         }
         else
         {
@@ -447,16 +449,25 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     }
 
     int countMath = options["countMath"].toInt();
-    if(countMath != 0)
+//    if(countMath != 0)
+//    {
+//        listMath.clear();
+//        for(int i = 0; i < countMath; i ++)
+//        {
+//            cMathChannel *math = new cMathChannel();
+//            math->setNum(i);
+//            math->setName("Math " + QString::number(i+1));
+//            listMath.append(math);
+//        }
+//    }
+    index = 0;
+    while(countMath > listMath.size())
     {
-        listMath.clear();
-        for(int i = 0; i < countMath; i ++)
-        {
-            cMathChannel *math = new cMathChannel();
-            math->setNum(i);
-            math->setName("Math " + QString::number(i+1));
-            listMath.append(math);
-        }
+        cMathChannel * math = new cMathChannel();
+        math->setNum(index+1);
+        math->setName("Math " + QString::number(index+1));
+        listMath.append(math);
+        index++;
     }
 
     array = options["mathChannels"].toArray();

@@ -13,7 +13,7 @@
 #include "registersmap.h"
 #include "assert.h"
 #include "Channels/group_channels.h"
-
+#include "qrect.h"
 
 
 #define PERIOD_MEASURE_STEEL 100    //msec период точек на графике анализа стали
@@ -148,7 +148,7 @@ void MainWindow::UpdateGraphics()
 {
 #ifndef RANDOM_CHAN
     // если нет данных от плат, то и строить нечего
-    if(!slotSteelOnline && !slotAnalogOnline) return;
+//    if(!slotSteelOnline && !slotAnalogOnline) return;
 #endif
     // если прелоадер не завершился
     if(!plotReady) return;
@@ -271,7 +271,8 @@ void MainWindow::GrafsUpdateTrends()
             int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
 
             arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
-            arrow->end->setCoords(xoffset, channel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+//            arrow->end->setCoords(xoffset, channel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
+            arrow->end->setCoords(xoffset, channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(colors.at(index),1,  Qt::DashLine));
             arrow->setAntialiased(true);
@@ -343,12 +344,12 @@ void MainWindow::updateBars(void)
 {
     if(curGroupChannel >= listGroup.size()) return;
 
-    QList<QSpacerItem*> listSpacerBar;
-    listSpacerBar.append(ui->spacerBar0);
-    listSpacerBar.append(ui->spacerBar1);
-    listSpacerBar.append(ui->spacerBar2);
-    listSpacerBar.append(ui->spacerBar3);
-    listSpacerBar.append(ui->spacerBar4);
+//    QList<QSpacerItem*> listSpacerBar;
+//    listSpacerBar.append(ui->spacerBar0);
+//    listSpacerBar.append(ui->spacerBar1);
+//    listSpacerBar.append(ui->spacerBar2);
+//    listSpacerBar.append(ui->spacerBar3);
+//    listSpacerBar.append(ui->spacerBar4);
 //    ui->spacerBar0->changeSize(0, 0, QSizePolicy::Maximum);
 //    ui->spacerBar1->changeSize(0, 0, QSizePolicy::Maximum);
 
@@ -358,14 +359,40 @@ void MainWindow::updateBars(void)
     listBars.append(ui->wBar_3);
     listBars.append(ui->wBar_4);
 
-    listSpacerBar.at(0)->changeSize(0, 0, QSizePolicy::Preferred);
-
     cGroupChannels * group = listGroup.at(curGroupChannel);
+
+    //добавляются дополнительные виджеты для следующей группы сигналов
+    cGroupChannels * groupDop;
+    if(systemOptions.display == cSystemOptions::Bars)
+    {
+        if(listGroup.size() > 1)
+        {
+            listBars.append(ui->wBar_5);
+            listBars.append(ui->wBar_6);
+            listBars.append(ui->wBar_7);
+            listBars.append(ui->wBar_8);
+            int indexNextGroup = curGroupChannel + 1;
+            if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+            groupDop = listGroup.at(indexNextGroup);
+        }
+    }
+    else
+    {
+        ui->wBar_5->hide();
+        ui->wBar_6->hide();
+        ui->wBar_7->hide();
+        ui->wBar_8->hide();
+        ui->nameGroupChannels2->hide();
+    }
+
+//    listSpacerBar.at(0)->changeSize(0, 0, QSizePolicy::Preferred);
+
     int i = 0;
+    int indexGroup = 0;
     foreach (wVolueBar * bar, listBars)
     {
+        if(indexGroup >= 4) group = groupDop;
         bar->hide();
-        listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Fixed);
         if(group->typeInput[i] == 1)
         {
             if(group->channel[i] != -1)
@@ -378,10 +405,20 @@ void MainWindow::updateBars(void)
                 if(channel->enable)
 #endif
                 {
-                    bar->setExtr(channel->GetMinimumChannelValue(), channel->GetMaximumChannelValue());
+                    bar->setExtr(channel->GetMinimumChannelValue(),\
+                                 channel->GetMaximumChannelValue());
                     bar->setBarDiapazon(max(abs(channel->GetHigherMeasureLimit()), \
                                             abs(channel->GetLowerMeasureLimit())));
-                    bar->setVolue(channel->GetCurrentChannelValue());
+                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+                    {
+                        bar->setValueType(wVolueBar::BarValue_Real);
+                    }
+                    else
+                    {
+                        bar->setValueType(wVolueBar::BarValue_Procent);
+//                        val = channel->GetValuePercent();
+                    }
+                    bar->setValue(channel->GetCurrentChannelValue());
                     bar->cleanMarker();
                     foreach(Ustavka * ust, listUstavok)
                     {
@@ -391,7 +428,10 @@ void MainWindow::updateBars(void)
                         }
                     }
                     bar->show();
-                    listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Preferred);
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
                 }
 
 
@@ -409,7 +449,7 @@ void MainWindow::updateBars(void)
 //                    bar->setExtr(math->GetMinimumChannelValue(), math->GetMaximumChannelValue());
                     bar->setBarDiapazon(max(abs(math->GetHigherMeasureLimit()), \
                                             abs(math->GetLowerMeasureLimit())));
-                    bar->setVolue(math->GetCurrentMathValue());
+                    bar->setValue(math->GetCurrentMathValue());
                     bar->cleanMarker();
 //                    foreach(Ustavka * ust, listUstavok)
 //                    {
@@ -419,11 +459,16 @@ void MainWindow::updateBars(void)
 //                        }
 //                    }
                     bar->show();
-                    listSpacerBar.at(i+1)->changeSize(0, 0, QSizePolicy::Preferred);
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
                 }
             }
         }
         i++;
+        i %= MAX_NUM_CHAN_GROUP;
+        indexGroup++;
     }
 }
 
@@ -433,6 +478,10 @@ void MainWindow::setStyleBars()
     ui->wBar_2->setColor(ColorCh2, ColorCh2Light);
     ui->wBar_3->setColor(ColorCh3, ColorCh3Light);
     ui->wBar_4->setColor(ColorCh4, ColorCh4Light);
+    ui->wBar_5->setColor(ColorCh5, ColorCh5Light);
+    ui->wBar_6->setColor(ColorCh6, ColorCh6Light);
+    ui->wBar_7->setColor(ColorCh7, ColorCh7Light);
+    ui->wBar_8->setColor(ColorCh8, ColorCh8Light);
 
 //    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
 //    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
@@ -451,9 +500,35 @@ void MainWindow::setTextBars()
     listBars.append(ui->wBar_4);
     cGroupChannels * group = listGroup.at(curGroupChannel);
 
+    //добавляются дополнительные виджеты для следующей группы сигналов
+    cGroupChannels * groupDop;
+    if(systemOptions.display == cSystemOptions::Bars)
+    {
+        if(listGroup.size() > 1)
+        {
+            listBars.append(ui->wBar_5);
+            listBars.append(ui->wBar_6);
+            listBars.append(ui->wBar_7);
+            listBars.append(ui->wBar_8);
+            int indexNextGroup = curGroupChannel + 1;
+            if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+            groupDop = listGroup.at(indexNextGroup);
+        }
+    }
+    else
+    {
+        ui->wBar_5->hide();
+        ui->wBar_6->hide();
+        ui->wBar_7->hide();
+        ui->wBar_8->hide();
+        ui->nameGroupChannels2->hide();
+    }
+
     int i = 0;
+    int indexGroup = 0;
     foreach (wVolueBar * bar, listBars)
     {
+        if(indexGroup >= 4) group = groupDop;
         if(group->typeInput[i] == 1)
         {
             if(group->channel[i] != -1)
@@ -481,6 +556,8 @@ void MainWindow::setTextBars()
             }
         }
         i++;
+        i %= MAX_NUM_CHAN_GROUP;
+        indexGroup++;
     }
 }
 
@@ -497,11 +574,40 @@ void MainWindow::updateWidgetsVols(void)
     listVols.append(ui->widgetVol4);
     cGroupChannels * group = listGroup.at(curGroupChannel);
 
-    QColor color[4] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4};
+    //добавляются дополнительные виджеты для следующей группы сигналов
+    cGroupChannels * groupDop;
+    if(systemOptions.display == cSystemOptions::Cyfra)
+    {
+        if(listGroup.size() > 1)
+        {
+            listVols.append(ui->widgetVol5);
+            listVols.append(ui->widgetVol6);
+            listVols.append(ui->widgetVol7);
+            listVols.append(ui->widgetVol8);
+            int indexNextGroup = curGroupChannel + 1;
+            if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+            groupDop = listGroup.at(indexNextGroup);
+        }
+    }
+    else
+    {
+        ui->widgetVol5->hide();
+        ui->widgetVol6->hide();
+        ui->widgetVol7->hide();
+        ui->widgetVol8->hide();
+        ui->nameGroupChannels2->hide();
+//        ui->horizontalSpacerGroupName1->changeSize(0, 0, QSizePolicy::Maximum, QSizePolicy::Maximum);
+//        ui->horizontalSpacerGroupName2->changeSize(0, 0, QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+    }
+
+    QColor color[8] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4, ColorCh5, ColorCh6, ColorCh7, ColorCh8};
 
     int i = 0;
+    int indexGroup = 0;
     foreach (wVol * vol, listVols)
     {
+        if(indexGroup >= 4) group = groupDop;
         if(group->typeInput[i] == 1)
         {
             if(group->channel[i] != -1)
@@ -510,7 +616,7 @@ void MainWindow::updateWidgetsVols(void)
                 vol->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
             }
-            vol->setColor(color[i]);
+            vol->setColor(color[indexGroup]);
         }
         else if(group->typeInput[i] == 2)
         {
@@ -527,9 +633,11 @@ void MainWindow::updateWidgetsVols(void)
                     vol->setText("", "");
                 }
             }
-            vol->setColor(color[i]);
+            vol->setColor(color[indexGroup]);
         }
         i++;
+        i %= MAX_NUM_CHAN_GROUP;
+        indexGroup++;
     }
 }
 
@@ -543,9 +651,34 @@ void MainWindow::updateVols()
     listVols.append(ui->widgetVol3);
     listVols.append(ui->widgetVol4);
     cGroupChannels * group = listGroup.at(curGroupChannel);
+
+    cGroupChannels * groupDop;
+    if(systemOptions.display == cSystemOptions::Cyfra)
+    {
+        if(listGroup.size() > 1)
+        {
+            listVols.append(ui->widgetVol5);
+            listVols.append(ui->widgetVol6);
+            listVols.append(ui->widgetVol7);
+            listVols.append(ui->widgetVol8);
+            int indexNextGroup = curGroupChannel + 1;
+            if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+            groupDop = listGroup.at(indexNextGroup);
+        }
+    }
+    else
+    {
+        ui->widgetVol5->hide();
+        ui->widgetVol6->hide();
+        ui->widgetVol7->hide();
+        ui->widgetVol8->hide();
+    }
+
     int i = 0;
+    int indexGroup = 0;
     foreach (wVol * vol, listVols)
     {
+        if(indexGroup >= 4) group = groupDop;
         vol->hide();
         if(group->typeInput[i] == 1)
         {
@@ -558,8 +691,21 @@ void MainWindow::updateVols()
                 if(listChannels.at(group->channel[i])->enable)
 #endif
                 {
-                    vol->setVol(listChannels.at(group->channel[i])->GetCurrentChannelValue());
+//                    double value = channel->GetCurrentChannelValue();
+                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+                    {
+                        vol->setVol(channel->GetCurrentChannelValue(), channel->optimalPrecision());
+                    }
+                    else
+                    {
+                        vol->setVol(channel->GetValuePercent(), channel->optimalPrecision());
+                    }
                     vol->show();
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
+
                 }
             }
         }
@@ -571,10 +717,16 @@ void MainWindow::updateVols()
                 {
                     vol->setVol(listMath.at(group->mathChannel[i])->GetCurrentMathValue());
                     vol->show();
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
                 }
             }
         }
         i++;
+        i %= MAX_NUM_CHAN_GROUP;
+        indexGroup++;
     }
 }
 
@@ -687,8 +839,8 @@ void MainWindow::updateSteelWidget(void)
     strings << "ОТКЛЮЧЕНО" << " " << " " \
             << " " << "ОБРЫВ" << "ГОТОВ" \
             << "ИЗМЕРЕНИЕ" << " " << "ОШИБКА ТС" \
-            << "ОШИБКА ЭДС" << "ВРЕМЯ" << "ВРЕМЯ" \
-            << "ВРЕМЯ" << "ВРЕМЯ";
+            << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ" << "НЕТ ПЛОЩАДКИ" \
+            << "НЕТ ПЛОЩАДКИ" << "ВРЕМЯ";
     QList<QString> colorStyles;
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");

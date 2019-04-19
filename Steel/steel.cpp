@@ -126,7 +126,7 @@ void cSteel::parserSteel(Transaction tr)
 //                askNewArray = true;
                 vectorTempReceived = false;
                 vectorEdsReceived = false;
-                if(state == STEEL_MEASURE)
+                if((state == STEEL_MEASURE) || (state == STEEL_READY))
                 {
                     //очередной запрос массива
                     readArrays();

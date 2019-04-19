@@ -20,6 +20,10 @@ public:
     explicit ChannelOptions();
     ~ChannelOptions();
 public:
+    enum {
+
+    };
+
     bool enable;        // флаг включения и отключения канала (для сохранения настроек)
     int getNum() { return numChannel; }
     void setNum(int i) { numChannel = i; }
@@ -36,8 +40,6 @@ public:
     double GetLowerMeasureLimit();
     double GetHigherMeasureLimit();
     double GetMeasurePeriod();
-    double GetState1Value();
-    double GetState2Value();
     int GetDempherValue();
 
     double GetCurrentChannelValue();
@@ -48,6 +50,7 @@ public:
     double GetDempheredChannelValue();
     double GetValuePercent();
     double ConvertSignalToValue(double signal);
+    double ConvertVisualValue(double signal);
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -77,8 +80,6 @@ public:
     void SetHigherMeasureLimit(double newhighermeaslimit);
     void SetMeasurePeriod(double newmeasperiod);
     void SetUnitsName(QString newunit);
-    void SetState1Value(double newvalue);
-    void SetState2Value(double newvalue);
     void SetState1HighMessage(QString newmessage);
     void SetState1LowMessage(QString newmessage);
     void SetState2HighMessage(QString newmessage);
@@ -102,6 +103,11 @@ public:
     int getStateColdJunction(void);
     void setShiftColdJunction(double shift);
     double getShiftColdJunction(void);
+    void setVolueVoltageType(int type) { valueVoltage = type; }
+    int getVoltageType(void) { return valueVoltage; }
+    void setCapacity(int cap) { capacity = cap; }
+    int getCapacity(void) { return capacity; }
+
 
 signals:
     void updateSignal(int index);
@@ -155,13 +161,13 @@ private:
     double lowermeasurelimit;
     double highermeasurelimit;
     double measureperiod;
-    double state1value;
-    double state2value;
     double currentvalue;
     int demphervalue;
     int numChannel;
     int slot;
     int slotChannel;
+    int valueVoltage;
+    int capacity;
 
     QString unitsname;
     QString state1highmessage;
@@ -191,192 +197,9 @@ private:
     QTimer * timerUpdateParam;
 
 
+
+
 public:
-
-
-//    enum SignalType {
-//        NoMeasure= 0,
-//        CurrentMeasure= 1,
-//        VoltageMeasure= 2,
-////        ResistanceMeasure= 3,
-//        TermoCoupleMeasure= 3,
-//        TermoResistanceMeasure= 4,
-//        DiscretMeasure= 6,
-//        ImpulseCounterMeasure= 7,
-//        FrequencyMeasure= 8
-//    };
-//    Q_ENUM(SignalType)
-
-//    enum SupportedSignals {
-//        SupportedSignalError= 0,
-//        SupportedSignalCurrent = 1,
-//        SupportedSignalVoltage = 2,
-//        SupportedSignalResistance = 4,
-//        SupportedSignalTermoCouple = 8,
-//        SupportedSignalTermoResistance = 16,
-//        SupportedSignalDiscret = 32,
-//        SupportedSignalImpulseCounter = 64,
-//        SupportedSignalFrequency = 128
-//    };
-//    Q_ENUM(SupportedSignals)
-
-//    enum Status {
-//        StatusOff = 0,
-//        StatusOn = 1,
-//        StatusConfigWait = 2,
-//        StatusConfigWorking = 3,
-//        StatusConfigCompleted = 4,
-//        StatusWaitForUpdateData = 5,
-//        StatusDataWorking = 6,
-//        StatusDataCompleted = 7
-//    };
-//    Q_ENUM(Status)
-
-//    enum ModBusErrors {
-//        ConnectionError = -9998 ,
-//        BadCRC = -9999 ,
-//    };
-//    Q_ENUM(ModBusErrors)
-
-//    enum UartErrors {
-//        NoResponse = 0x01 ,
-//        CrcError = 0x02
-//    };
-//    Q_ENUM(UartErrors)
-
-//    enum DeviceAdress {
-//        MainDeviceAddress = 0x01 ,
-//        Board4AIAddress = 0x01 ,
-//        UniversalChannel1 = 0x01 ,
-//        UniversalChannel2 = 0x02 ,
-//        UniversalChannel3 = 0x04 ,
-//        UniversalChannel4 = 0x08
-//    };
-//    Q_ENUM(DeviceAdress)
-
-//    enum DeviceType{
-//        DeviceType4AI = 1,
-//        DeviceType8RP = 5
-//    };
-//    Q_ENUM(DeviceType)
-
-//    enum RegisterAdress {
-//        TemperetureAdress     = 0x0000,
-//        VoltageAdressHi       = 0x02,
-//        CurrentAdressHi       = 0x04,
-//        ResistanceAdressHi    = 0x08,
-//        FrequencyAdressHi     = 0x10,
-//        TemperetureAdressLo   = 0x00, // возможно, не нужно
-//        VoltageAdressLo       = 0x00,
-//        CurrentAdressLo       = 0x00,
-//        ResistanceAdressLo    = 0x00,
-//        FrequencyAdressLo     = 0x00,
-//        ElmetroRelayAddress = 0x01,
-//        ElmetroChannelAB1Address = 0x00,
-//        ElmetroChannelAB2Address = 0x02,
-//        ElmetroChannelAB3Address = 0x04,
-//        ElmetroChannelAB4Address = 0x06
-//    };
-//    Q_ENUM(RegisterAdress)
-
-//    enum RegisterCount{
-//        TemperetureRegLenght = 0x000A,
-//        VoltageRegCountHi = 0x01,
-//        CurrentRegCountHi = 0x01,
-//        ResistanceRegCountHi = 0x01,
-//        FrequencyRegCountHi = 0x01,
-//        TemperetureRegCountLo = 0x00,
-//        VoltageRegCountLo = 0x00,
-//        CurrentRegCountLo = 0x00,
-//        ResistanceRegCountLo = 0x00,
-//        FrequencyRegCountLo = 0x00
-//    };
-//    Q_ENUM(RegisterCount)
-
-//    enum Function {
-//        ReadCoils = 0x01,
-//        ReadDiscreteInputs = 0x02,
-//        ReadHoldingRegisters = 0x03,
-//        ReadInputRegisters = 0x04,
-//        WriteSingleCoil = 0x05,
-//        WriteSingleRegister = 0x06,
-//        ReadExceptionStatus = 0x07,
-//        DiagnosticRequest = 0x08,
-//        GetCommEventCounter = 0x0B,
-//        GetCommEventLog = 0x0C,
-//        WriteMultipleRegisters = 0x10
-//    };
-//    Q_ENUM(Function)
-
-    /* Параметры устройства для группы G00 (выходные данные канала):
-     * Для модуля типа 4AI при доступе по команде 03 (0x03)
-     * Read Holding Registers и 04 (0x04) Read Input Registers
-     * (формат команд аналогичный).
-     * */
-//    enum G00_Group
-//    {
-//        G00Bias = 0,
-//        DataChannel1 = G00Bias + 2,
-//        DataChannel2 = G00Bias + 6,
-//        DataChannel3 = G00Bias + 10,
-//        DataChannel4 = G00Bias + 14,
-//        DataChannelLenght = 2
-//    };
-//    Q_ENUM(G00_Group)
-
-    /* Доступ к параметрам данного раздела осуществляется
-     * с использованием команды 03 (0x03)
-     * Read Holding Registers
-     * */
-
-//    enum MeasureTypeVoltage{
-//        Voltage1VoltNoBreakControl = 1,
-//        Voltage1VoltWithBreakControl = 2,
-//        Voltage100mVoltNoBreakControl = 3,
-//        Voltage100mVoltWithBreakControl = 4,
-//        Voltage5VoltNoBreakControl = 5,
-//        Voltage5VoltWithBreakControl = 6,
-//        Voltage10VoltNoBreakControl = 7,
-//        Voltage10VoltWithBreakControl = 8
-//    };
-//    Q_ENUM(MeasureTypeVoltage)
-
-
-//    enum MeasureTypeWireMode{
-//        Wire3NoBreakControl = 3,
-//        Wire3WithBreakControl = 4,
-//        Wire4NoBreakControl = 5,
-//        Wire4WithBreakControl = 6
-//    };
-//    Q_ENUM(MeasureTypeWireMode)
-
-//    enum TermoCoupleType{
-//        R = 1,  //(ТПП 13)
-//        S = 2,  //(ТПП 10)
-//        B = 3,  //(ТПР)
-//        J = 4,  //(ТЖК)
-//        T = 5,  //(ТМКн)
-//        E = 6,  //(ТХКн)
-//        K = 7,  //(ТХА)
-//        N = 8,  //(ТНН)
-//        A1 = 9, //(ТВР)
-//        A2 = 10,//(ТВР)
-//        A3 = 11,//(ТВР)
-//        L = 12, //(ТХК)
-//        M = 14  //(ТМК)
-//    };
-//    Q_ENUM(TermoCoupleType)
-
-//    enum TermoResistorType{
-//        Pt1dot3910 = 1,
-//        Pt1dot3850  = 2,
-//        Cu1dot4280 = 3,
-//        Cu1dot4260  = 4,
-//        Ni1dot6170 = 5,
-//        m5m3m = 6,
-//        PP46P = 7
-//    };
-//    Q_ENUM(TermoResistorType)
 
     enum SignalTypeSelect{
         MeasureOff = 0,
@@ -416,21 +239,6 @@ public:
     Q_ENUM(CurrentDiapason)
 
 
-    enum VoltageDiapason{
-        Voltage0_100mV ,
-        Voltage0_10V ,
-        Voltage0_5V ,
-        Voltage1_5V ,
-        Voltage150_150mV ,
-        Voltage1_1V ,
-        Voltage10_10V ,
-        Voltage30_30V ,
-        Voltage0_1V_sqrt ,
-        Voltage0_10V_sqrt ,
-        Voltage1_5V_sqrt
-    };
-    Q_ENUM(VoltageDiapason)
-
     enum ParamOffset{
         chanData = 0,
         chanDataFlags = 2,
@@ -457,7 +265,15 @@ public:
     };
     Q_ENUM(ParamOffset)
 
+    enum ValueType {
+        Value_Real = 0,
+        Value_Procent = 1
+    };
+    Q_ENUM(ValueType)
 
 
+//    QString getNameUnitByParam(void);
+    QString getNameUnitByParam(uint16_t type, int diap);
+    int optimalPrecision();
 };
 #endif // CHANNEL1_H

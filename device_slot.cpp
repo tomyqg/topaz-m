@@ -1,6 +1,6 @@
 #include "device_slot.h"
 
-#define TIME_RESET_ONLINE_SEC   10
+#define TIME_RESET_ONLINE_SEC   15
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   100
 #define COUNT_STABLE_STATUS     3
@@ -44,7 +44,7 @@ int cDevice::parseDeviceParam(Transaction tr)
     else stableOnline = false;
 
     online  = true;     // устройство на связи
-    timerResetOnline->start();  // перезапуск таймера сброса Онлайна
+    timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);  // перезапуск таймера сброса Онлайна
     QString nameParam = cRegistersMap::getNameByOffset(tr.offset);
     if(nameParam == "protocolVersion")
     {

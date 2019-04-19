@@ -2311,6 +2311,7 @@ void dMenu::updateLabelDiagnostic()
         {
             cSteel * steel = listSteel.at(i);
             listLabelTempAnalizSteel.at(i)->setText(QString::number(steel->temp));
+            listLabelCj.at(i)->setText(QString::number(steel->cj));
             listLabelEmfpAnalizSteel.at(i)->setText(QString::number(steel->eds));
 //            int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
 //            listComboTypeTermo.at(i)->setCurrentIndex(indexTC[steel->technology->nSt]);

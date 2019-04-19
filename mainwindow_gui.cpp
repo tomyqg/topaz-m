@@ -72,14 +72,7 @@ void MainWindow::updateDateLabel()
     DateUpdate();
 
     // между делом обновляем лэйбл и стрелки переключения групп
-    if(listGroup.size() > 1) {
-        if(curGroupChannel >= listGroup.size()) curGroupChannel = 0;
-        ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
-        ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
-        ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
-        ui->frameGroup->show();
-    }
-    else ui->frameGroup->hide();
+    updateGroupWodgets();
 }
 
 void MainWindow::on_WorkButton_clicked()
@@ -97,6 +90,25 @@ void MainWindow::on_WorkButton_clicked()
     setTextBars();
     setStyleBars();
     updateWidgetsVols();
+    updateGroupWodgets();
+}
+
+void MainWindow::updateGroupWodgets()
+{
+    if(listGroup.size() > 1) {
+        if(curGroupChannel >= listGroup.size()) curGroupChannel = 0;
+        ui->nameGroupChannels1->setText(listGroup.at(curGroupChannel)->groupName);
+        if(listGroup.size() > 1)
+        {
+            int indexNextGroup = curGroupChannel + 1;
+            if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+            ui->nameGroupChannels2->setText(listGroup.at(indexNextGroup)->groupName);
+        }
+        ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
+        ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
+        ui->frameGroup->show();
+    }
+    else ui->frameGroup->hide();
 }
 
 void MainWindow::on_ArchiveButton_clicked()
@@ -352,11 +364,9 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
                     (newCurGroupChannel != curGroupChannel));
         }
         curGroupChannel = newCurGroupChannel;
-        ui->nameGroupChannels->setText(listGroup.at(curGroupChannel)->groupName);
-//        ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
-//        ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
         updateWidgetsVols();
         setTextBars();
+        updateGroupWodgets();
     }
     return QWidget::eventFilter(watched, event);
 }

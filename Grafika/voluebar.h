@@ -24,7 +24,7 @@ public:
     explicit wVolueBar(/*int num = 0, */QWidget *parent = 0);
     ~wVolueBar();
     void setBarDiapazon(double diap);
-    void setVolue(double vol);
+    void setValue(double vol);
     void setExtr(double min, double max);
     void setLim(double low, double hi);
     void resetLim();
@@ -33,6 +33,14 @@ public:
     void setNumChan(int num) { numChan = num; }
     void cleanMarker();
     void addMarker(int vol, bool dir);
+    void setValueType(int type) { valueType = type; }
+    int getValueType(void) { return valueType; }
+
+    enum BarValueType {
+        BarValue_Real = 0,
+        BarValue_Procent = 1
+    };
+    Q_ENUM(BarValueType)
 
 signals:
     void clickedLabel(int);
@@ -55,6 +63,7 @@ private:
 //        bool dir;   // направление уставки: 0 - вниз, 1 - вверх
 //    } typeMarker;
     QList <cMarker*> listMarker;
+    int valueType;  //тип отображения: 0 - абсолютная величина, 1 - %
 };
 
 
