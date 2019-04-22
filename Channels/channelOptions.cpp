@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 extern QVector<double> X_Coordinates;
+extern QVector<double> X_Date_Coordinates;
 
 double cnt;
 
@@ -528,6 +529,15 @@ QVector<double> ChannelOptions::GetChannelXBuffer()
     return buf;
 }
 
+QVector<double> ChannelOptions::GetChannelTimeBuffer()
+{
+    QVector<double> buf;
+    buffermutex->lock();
+    buf = channeltimebuffer;
+    buffermutex->unlock();
+    return buf;
+}
+
 void ChannelOptions::SetConfirmationNeed(bool confirmationstate)
 {
     needConfirmationchannel = confirmationstate;
@@ -857,12 +867,16 @@ void ChannelOptions::SetCurrentChannelValue(double value)
         channelvaluesbuffer.removeFirst();
     while (dempheredvaluesbuffer.length()>300)
         dempheredvaluesbuffer.removeFirst();
+    while (channeltimebuffer.length() > 300)
+        channeltimebuffer.removeFirst();
 
     if(!X_Coordinates.isEmpty())
     {
         channelvaluesbuffer.append(currentvalue);
         dempheredvaluesbuffer.append(GetDempheredChannelValue());
         channelxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+//        channelxbuffer.append(X_Date_Coordinates.last());
+        channeltimebuffer.append(QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0);
     }
 
     buffermutex->unlock();

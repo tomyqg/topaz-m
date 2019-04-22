@@ -173,7 +173,7 @@ void MainWindow::MainWindowInitialization()
     mouseOnScalede = false;
     mouseOnMove = false;
     waitAutoScale = false;
-    ui->customPlot->yAxis->setRange(-GetXRange(), GetXRange());
+    ui->customPlot->yAxis->setRange(-GetXRange(), 0/*GetXRange()*/);
     ui->customPlot->setAntialiasedElements(QCP::aeNone);
 
     QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();

@@ -68,6 +68,7 @@ public:
     bool MinimumNow();
     QVector<double> GetChannelValuesBuffer();
     QVector<double> GetChannelXBuffer();
+    QVector<double> GetChannelTimeBuffer();
 
     void SetConfirmationNeed(bool confirmationstate);
     void SetSignalType(uint16_t newsignaltype);
@@ -107,6 +108,8 @@ public:
     int getVoltageType(void) { return valueVoltage; }
     void setCapacity(int cap) { capacity = cap; }
     int getCapacity(void) { return capacity; }
+
+
 
 
 signals:
@@ -191,6 +194,7 @@ private:
     QVector<double> dempheredvaluesbuffer;
     QVector<double> channelxbuffer;
     QVector<double> channelpercentbuffer;
+    QVector<double> channeltimebuffer;
 
     QMutex * buffermutex;
     QTimer * timer;
@@ -275,5 +279,6 @@ public:
 //    QString getNameUnitByParam(void);
     QString getNameUnitByParam(uint16_t type, int diap);
     int optimalPrecision();
+
 };
 #endif // CHANNEL1_H

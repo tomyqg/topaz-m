@@ -260,8 +260,8 @@ private:
     int GetTimePeriodSecs() {return 20;}
     int GetTickCountInOneSecond() {return 5;}
     int GetGraphWidthInPixels() {return 600;}
-    int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}
-    int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}
+    int GetTotalLabelsCount() {return GetGraphWidthInPixels() / (GetTimePeriodSecs() * GetTickCountInOneSecond() ) ;}   // 600/20*5=150
+    int GetTickStep() {return GetGraphWidthInPixels() / GetTotalLabelsCount() ;}    // 600/150=4
     bool EcoMode;
     int polar_angle;
 

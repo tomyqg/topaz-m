@@ -18,6 +18,8 @@ public:
     QString getName() { return name; }
     void setName(QString str) { name = str; }
     QString GetMathString();
+    void setUnit(QString str) { unit = str; }
+    QString getUnit(void) { return unit; }
     void SetMathEquation(QString newmathstring);
     double GetCurrentMathValue();
     int numChannel[4];      //номера подключенных каналов в качестве аргументов формулы
@@ -40,6 +42,7 @@ private:
     int num;                // номер матканала
     QString name;  // идентификатор уставки
     QString mathstring; //формула
+    QString unit;       //ед. измерения
     double higherLimit;
     double lowerLimit;
     double currentvalue;

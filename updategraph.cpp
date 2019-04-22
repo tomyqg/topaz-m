@@ -30,7 +30,7 @@ QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y
 QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 QVector<double> vectorsChannels[24];
 QVector<double> vectorsChannelsArch[24];
-QVector<QDateTime> X_Date_Coordinates;
+QVector<double> X_Date_Coordinates;
 QVector<double> X_Coord_Steel, Y_Coord_SteelTemp, Y_Coord_SteelEds;
 
 extern cChannelSlotController csc;
@@ -70,7 +70,7 @@ void MainWindow::AddValuesToBuffer()
 {
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
     X_Coordinates_archive.append(xoffset);
-    X_Date_Coordinates.append(QDateTime::currentDateTime());
+    X_Date_Coordinates.append(QDateTime::currentDateTime().toTime_t());
 
 //    vectorsChannels.resize(listChannels.size());
 //    QVector<double> * vectors[] = {&Y_coordinates_Chanel_1,\
@@ -115,11 +115,15 @@ void MainWindow::AddValuesToBuffer()
     while (X_Coordinates.length()>150)
     {
         X_Coordinates.removeFirst();
-        X_Date_Coordinates.removeFirst();
 //        Y_coordinates_Chanel_1.removeFirst();
 //        Y_coordinates_Chanel_2.removeFirst();
 //        Y_coordinates_Chanel_3.removeFirst();
 //        Y_coordinates_Chanel_4.removeFirst();
+    }
+
+    while (X_Date_Coordinates.length() > 300)
+    {
+        X_Date_Coordinates.removeFirst();
     }
 
     //пока нет ограничений на объём хранения
@@ -137,7 +141,7 @@ void MainWindow::AddValuesToBuffer()
     // если последняя точка по иксу попала на тайм-лейбел, его нужно корректировать
     if (xoffset%tickstep==0)
     {
-        LabelsCorrect();
+//        LabelsCorrect();
     }
 
     xoffset++;
@@ -210,7 +214,13 @@ void MainWindow::GrafsUpdateTrends()
 
     cGroupChannels * group = listGroup.at(curGroupChannel);
 
-    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset+GetXRange());
+    double xCurTime = QDateTime::currentDateTime().toTime_t();
+
+//    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset/*+GetXRange()*/);
+    ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/5);
+    ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+    ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
+    ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
     ui->customPlot->clearGraphs();
     graphPen.setWidth(GraphWidthinPixels);
 
@@ -224,7 +234,9 @@ void MainWindow::GrafsUpdateTrends()
         {
             ChannelOptions * channel = listChannels.at(group->channel[i]);
             ui->customPlot->graph()->setName(channel->GetChannelName());
-            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
+//            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
+            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
+
         }
         else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
         {
@@ -241,11 +253,13 @@ void MainWindow::GrafsUpdateTrends()
 
 
 
-    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
-    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
+//    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
+//    ui->customPlot->xAxis->setTickStep(GetTickStep()); // 60 secs btw timestamp
+    ui->customPlot->xAxis->setAutoTickStep(true);
 
-    ui->customPlot->xAxis->setAutoTickLabels(false);
-    ui->customPlot->xAxis->setTickVectorLabels(Labels);
+//    ui->customPlot->xAxis->setAutoTickLabels(false);
+//    ui->customPlot->xAxis->setTickVectorLabels(Labels);
+    ui->customPlot->xAxis->setAutoTickLabels(true);
 
     // авто масштабирование
     if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
@@ -270,11 +284,12 @@ void MainWindow::GrafsUpdateTrends()
             int ystart = ui->customPlot->height() / 5;
             int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
 
-            arrow->start->setPixelPoint(QPointF(xstart, ystart + ui->customPlot->height() * index / 5));
+            arrow->start->setPixelPoint(QPointF(xstart - 55, ystart + ui->customPlot->height() * index / 5));
 //            arrow->end->setCoords(xoffset, channel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
-            arrow->end->setCoords(xoffset, channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
+//            arrow->end->setCoords(xoffset, channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
+            arrow->end->setCoords(xCurTime, channel->GetCurrentChannelValue());
             arrow->setHead(QCPLineEnding::esSpikeArrow);
-            arrow->setPen(QPen(colors.at(index),1,  Qt::DashLine));
+            arrow->setPen(QPen(colors.at(index), 1, Qt::DashLine));
             arrow->setAntialiased(true);
             ui->customPlot->setAntialiasedElements(QCP::aeAll);
 //            ui->customPlot->addItem(arrow);
@@ -284,9 +299,10 @@ void MainWindow::GrafsUpdateTrends()
 
             QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
 //            ui->customPlot->addItem(NameLabel);
-            NameLabel->position->setPixelPoint(QPointF(xstart+20, ystart + ui->customPlot->height() * index / 5));
+            NameLabel->position->setPixelPoint(QPointF(xstart+35, ystart + ui->customPlot->height() * index / 5 - 10));
             NameLabel->setText(channel->GetChannelName());
-            NameLabel->setFont(QFont(Font, 14, QFont::Bold));
+            NameLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignRight);
+            NameLabel->setFont(QFont(Font, 12, QFont::Bold));
             NameLabel->setColor(colors.at(index));
 
             arrow->deleteLater();
@@ -546,7 +562,8 @@ void MainWindow::setTextBars()
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
                     bar->setNumChan(listMath.at(group->mathChannel[i])->getNum());
-                    bar->setText(listMath.at(group->mathChannel[i])->getName(), "");
+                    bar->setText(listMath.at(group->mathChannel[i])->getName(), \
+                                 listMath.at(group->mathChannel[i])->getUnit());
                 }
                 else
                 {
@@ -625,7 +642,8 @@ void MainWindow::updateWidgetsVols(void)
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
                     vol->setChanNum(listMath.at(group->mathChannel[i])->getNum());
-                    vol->setText(listMath.at(group->mathChannel[i])->getName(), "");
+                    vol->setText(listMath.at(group->mathChannel[i])->getName(), \
+                                 listMath.at(group->mathChannel[i])->getUnit());
                 }
                 else
                 {

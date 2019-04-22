@@ -141,7 +141,8 @@ dMenu::dMenu(QWidget *parent) :
                          << ui->gateWay \
                          << ui->nameGroup \
                          << ui->nameMath \
-                         << ui->formulaMath;
+                         << ui->formulaMath \
+                         << ui->unitMath;
 
     foreach (QWidget * w, listEditableLineText) {
         w->installEventFilter(this);
@@ -2649,7 +2650,7 @@ void dMenu::slotOpenMathChannel(int num)
 
     ui->nameMath->setText(math->getName());
     ui->formulaMath->setText(math->GetMathString());
-
+    ui->unitMath->setText(math->getUnit());
 
     //определяем существующие каналы и добавляем в комбобоксы
     QStringList listComboChannels;
@@ -2674,7 +2675,6 @@ void dMenu::slotOpenMathChannel(int num)
         combo->clear();
         combo->addItems(listComboChannels);
     }
-
 
     for(int k = 0; k < listCombo.size(); k++)
     {
@@ -2701,6 +2701,7 @@ void dMenu::on_bApplayMath_clicked()
     cMathChannel * math = listMath.at(curMathEdit);
     math->setName(ui->nameMath->text());
     math->SetMathEquation(ui->formulaMath->text());
+    math->setUnit(ui->unitMath->text());
     QList<QComboBox*> listCombo;
     listCombo.append(ui->comboMathArg1);
     listCombo.append(ui->comboMathArg2);

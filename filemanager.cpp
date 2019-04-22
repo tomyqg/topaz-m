@@ -351,6 +351,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     {
         mathjsonobj["Name"] = math->getName();
         mathjsonobj["MathString"] = math->GetMathString();
+        mathjsonobj["MathUnit"] = math->getUnit();
         mathjsonobj["HigherMeasureLimit"] = math->GetHigherMeasureLimit();
         mathjsonobj["LowerMeasureLimit"] = math->GetLowerMeasureLimit();
         mathjsonobj["X1"] = math->numChannel[0];
@@ -477,6 +478,7 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
         jsonobj = array.at(index++).toObject();
         math->setName(jsonobj.value("Name").toString().toUtf8());
         math->SetMathEquation(jsonobj.value("MathString").toString().toUtf8());
+        math->setUnit(jsonobj.value("MathUnit").toString().toUtf8());
         math->SetHigherMeasureLimit(jsonobj.value("HigherMeasureLimit").toDouble());
         math->SetLowerMeasureLimit(jsonobj.value("LowerMeasureLimit").toDouble());
         math->numChannel[0] = jsonobj.value("X1").toInt();
