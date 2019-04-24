@@ -217,7 +217,14 @@ void MainWindow::GrafsUpdateTrends()
     double xCurTime = QDateTime::currentDateTime().toTime_t();
 
 //    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset/*+GetXRange()*/);
-    ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/5);
+    if (systemOptions.arrows)
+    {
+        ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/5);
+    }
+    else
+    {
+        ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/100);
+    }
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
     ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
@@ -244,7 +251,7 @@ void MainWindow::GrafsUpdateTrends()
             {
                 cMathChannel * math = listMath.at(group->mathChannel[i]);
                 ui->customPlot->graph()->setName(math->getName());
-                ui->customPlot->graph()->setData(math->GetMathXBuffer(), math->GetMathValuesBuffer());
+                ui->customPlot->graph()->setData(math->GetMathTimeBuffer(), math->GetMathValuesBuffer());
             }
         }
         graphPen.setColor(colors.at(i));
@@ -277,17 +284,29 @@ void MainWindow::GrafsUpdateTrends()
             if(group->typeInput[index] == 0) continue;
             if((group->typeInput[index] == 1) && (group->channel[index] == -1)) continue;
             if((group->typeInput[index] == 2) && (group->mathChannel[index] == -1)) continue;
-            ChannelOptions * channel = listChannels.at(group->channel[index]);
 
-            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
+            double value;
+            QString name;
+            if(group->typeInput[index] == 1)
+            {
+                value = listChannels.at(group->channel[index])->GetCurrentChannelValue();
+                name = listChannels.at(group->channel[index])->GetChannelName();
+            }
+            else if(group->typeInput[index] == 2)
+            {
+                value = listMath.at(group->mathChannel[index])->GetCurrentMathValue();
+                name = listMath.at(group->mathChannel[index])->getName();
+            }
+
 
             int ystart = ui->customPlot->height() / 5;
             int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
 
+            QCPItemLine *arrow = new QCPItemLine(ui->customPlot);
             arrow->start->setPixelPoint(QPointF(xstart - 55, ystart + ui->customPlot->height() * index / 5));
 //            arrow->end->setCoords(xoffset, channel->GetCurrentChannelValue()); // point to (4, 1.6) in x-y-plot coordinates
 //            arrow->end->setCoords(xoffset, channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
-            arrow->end->setCoords(xCurTime, channel->GetCurrentChannelValue());
+            arrow->end->setCoords(xCurTime, value);
             arrow->setHead(QCPLineEnding::esSpikeArrow);
             arrow->setPen(QPen(colors.at(index), 1, Qt::DashLine));
             arrow->setAntialiased(true);
@@ -300,7 +319,7 @@ void MainWindow::GrafsUpdateTrends()
             QCPItemText *NameLabel = new QCPItemText(ui->customPlot);
 //            ui->customPlot->addItem(NameLabel);
             NameLabel->position->setPixelPoint(QPointF(xstart+35, ystart + ui->customPlot->height() * index / 5 - 10));
-            NameLabel->setText(channel->GetChannelName());
+            NameLabel->setText(name);
             NameLabel->setPositionAlignment(Qt::AlignTop|Qt::AlignRight);
             NameLabel->setFont(QFont(Font, 12, QFont::Bold));
             NameLabel->setColor(colors.at(index));
@@ -463,6 +482,8 @@ void MainWindow::updateBars(void)
                     cMathChannel * math = listMath.at(group->mathChannel[i]);
 
 //                    bar->setExtr(math->GetMinimumChannelValue(), math->GetMaximumChannelValue());
+                    bar->setExtr(math->GetMinimumMathValue(),\
+                                 math->GetMaximumMathValue());
                     bar->setBarDiapazon(max(abs(math->GetHigherMeasureLimit()), \
                                             abs(math->GetLowerMeasureLimit())));
                     bar->setValue(math->GetCurrentMathValue());

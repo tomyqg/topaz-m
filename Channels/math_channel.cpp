@@ -63,11 +63,14 @@ void cMathChannel::slotUpdate()
         mathvaluesbuffer.removeFirst();
     while (dempheredvaluesbuffer.length()>300)
         dempheredvaluesbuffer.removeFirst();
+    while (mathtimebuffer.length() > 300)
+        mathtimebuffer.removeFirst();
     if(!X_Coordinates.isEmpty())
     {
         mathvaluesbuffer.append(currentvalue);
         //        dempheredvaluesbuffer.append(GetDempheredMathValue());
         mathxbuffer.append(X_Coordinates.last()); // добавляем последнюю координату
+        mathtimebuffer.append(QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0);
     }
     buffermutex->unlock();
 }
@@ -109,4 +112,31 @@ QVector<double> cMathChannel::GetMathXBuffer()
     buf = mathxbuffer;
     buffermutex->unlock();
     return buf;
+}
+
+QVector<double> cMathChannel::GetMathTimeBuffer()
+{
+    QVector<double> buf;
+    buffermutex->lock();
+    buf = mathtimebuffer;
+    buffermutex->unlock();
+    return buf;
+}
+
+double cMathChannel::GetMaximumMathValue()
+{
+    if(mathvaluesbuffer.isEmpty()) return 0;
+    return mathresolver::dGetMaximumValue(mathvaluesbuffer);
+}
+
+double cMathChannel::GetMinimumMathValue()
+{
+    if(mathvaluesbuffer.isEmpty()) return 0;
+    return mathresolver::dGetMinimumValue(mathvaluesbuffer);
+}
+
+double cMathChannel::GetAverageMathValue()
+{
+    if(mathvaluesbuffer.isEmpty()) return 0;
+    return mathresolver::dGetAverageValue(mathvaluesbuffer);
 }

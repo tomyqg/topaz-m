@@ -23,7 +23,7 @@
 #ifdef RANDOM_CHAN
 #define CURRENT_VER "1.80" //версия ПО
 #else
-#define CURRENT_VER "1.82" //версия ПО
+#define CURRENT_VER "1.83" //версия ПО
 #endif
 #define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО

@@ -30,7 +30,11 @@ public:
     void SetLowerMeasureLimit(double limit) { lowerLimit = limit; }
     QVector<double> GetMathValuesBuffer();
     QVector<double> GetMathXBuffer();
+    QVector<double> GetMathTimeBuffer();
 
+    double GetMaximumMathValue();
+    double GetMinimumMathValue();
+    double GetAverageMathValue();
 signals:
 
 public slots:
@@ -54,6 +58,7 @@ private:
     QVector<double> dempheredvaluesbuffer;
     QVector<double> mathxbuffer;
     QVector<double> mathpercentbuffer;
+    QVector<double> mathtimebuffer;
 };
 
 #endif // CMATHCHANNEL_H
