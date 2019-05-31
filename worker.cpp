@@ -306,7 +306,9 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
                     errno == EIO
                     )
             {
+#ifdef DEBUG_WORKER
                 qDebug() << "I/O error"  << "I/O error: did not receive any data from slave" << slave ;
+#endif
                 //фиксировать потерю связи при многократном повторении
                 if((slave > 0) && (slave <= (sizeof(slaves)/sizeof(typeStateSlave))))
                 {
@@ -341,7 +343,9 @@ int worker::sendModbusRequest( int slave, int func, int addr, int num, int state
         }
         else
         {
+#ifdef DEBUG_WORKER
             qDebug() << "Protocol error"  << "Number of registers returned does not match number of registers requested! " ;
+#endif
         }
     }
     return ret;

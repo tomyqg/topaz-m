@@ -33,6 +33,7 @@
 #define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
+#define DEBUG_RELAY
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС
 
@@ -267,7 +268,7 @@
 
 
 
-#define DEBUG_RELAY
+
 
 
 // DEFINES_H

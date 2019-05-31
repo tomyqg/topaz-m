@@ -7,6 +7,17 @@
 #include "ext_modbus.h"
 #include "defines.h"
 
+#if defined(_WIN32)
+#include <ws2tcpip.h>
+#else
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#endif
+
+//#define DEBUG_EXT_MODBUS
+
+
 // Below are the wrapper function for executions of methods from pure "C" code
 extern "C" {
 
@@ -85,8 +96,10 @@ int cExtModbus::init(int type)
     }
     header_length = modbus_get_header_length(ctx);
 
+#ifdef DEBUG_EXT_MODBUS
     modbus_set_debug(ctx, TRUE);
     modbus_set_error_recovery(ctx, TRUE);
+#endif
 
     if(ctx != NULL)
     {
@@ -144,7 +157,7 @@ void cExtModbus::run()
                     if (FD_ISSET(master_socket, &rdset)) {
                         if (master_socket == socket) {
                             /* A client is asking a new connection */
-                            int addrlen;
+                            socklen_t addrlen;
                             struct sockaddr_in clientaddr;
                             int newfd;
 
@@ -207,7 +220,11 @@ void cExtModbus::reply(){
     // чтение адреса параметра в карте регистров
     uint16_t offset = (query[header_length + 1] << 8) + query[header_length + 2];
     // число считываемых/записываемых значений
-    int nb = (query[header_length + 3] << 8) + query[header_length + 4];
+    int nb = 1;
+    if(func != _FC_WRITE_SINGLE_REGISTER)
+    {
+        nb = (query[header_length + 3] << 8) + query[header_length + 4];
+    }
 
     //проверка адреса и количества
     const tExtLookupRegisters * param;
@@ -235,7 +252,7 @@ void cExtModbus::reply(){
     {
         return;
     }
-    uint16_t * data = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
+//    uint16_t * data = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
 
     /* Read holding registers */
     if((func == _FC_READ_HOLDING_REGISTERS)
