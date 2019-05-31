@@ -253,10 +253,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
-                                      + QString::number(ColorButtonNormal.red() - 20) + "," \
-                                      + QString::number(ColorButtonNormal.green() - 20) + "," \
-                                      + QString::number(ColorButtonNormal.blue() - 20) + ");" \
+                widget->setStyleSheet("color:#FFFFFF;background-color:" + QString(ColorToTextRgbWithShift(ColorButtonNormal,-20)) + ";" \
                                       + "border: 0px;");
             }
         }
@@ -279,10 +276,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("color:#FFFFFF;background-color:rgb(" \
-                                      + QString::number(ColorButtonNormal.red()) + "," \
-                                      + QString::number(ColorButtonNormal.green()) + "," \
-                                      + QString::number(ColorButtonNormal.blue()) + ");" \
+                widget->setStyleSheet("color:#FFFFFF;background-color:" + QString(ColorToTextRgb(ColorButtonNormal)) + ";" \
                                       + "border: 0px;");
             }
         }
@@ -299,11 +293,13 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("color:#000000;background-color:rgb(" \
-                                      + QString::number(COLOR_GRAY.red() - 20) + "," \
-                                      + QString::number(COLOR_GRAY.green() - 20) + "," \
-                                      + QString::number(COLOR_GRAY.blue() - 20) + ");" \
-                                      + "border: 0px;");
+//                widget->setStyleSheet("color:#000000;background-color:rgb(" \
+//                                      + QString::number(COLOR_GRAY.red() - 20) + "," \
+//                                      + QString::number(COLOR_GRAY.green() - 20) + "," \
+//                                      + QString::number(COLOR_GRAY.blue() - 20) + ");" \
+//                                      + "border: 0px;");
+                widget->setStyleSheet("color:#000000;background-color:" + QString(ColorToTextRgbWithShift(COLOR_GRAY,-20)) + ";" \
+                                              + "border: 0px;");
             }
         }
     }
@@ -319,10 +315,12 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             // ищем нажатую кнопку и подсвечиваем ее, т.е. назначаем стайлшит
             if (widget->objectName() == watched->property("objectName"))
             {
-                widget->setStyleSheet("color:#000000;background-color:rgb(" \
-                                      + QString::number(COLOR_GRAY.red()) + "," \
-                                      + QString::number(COLOR_GRAY.green()) + "," \
-                                      + QString::number(COLOR_GRAY.blue()) + ");" \
+//                widget->setStyleSheet("color:#000000;background-color:rgb(" \
+//                                      + QString::number(COLOR_GRAY.red()) + "," \
+//                                      + QString::number(COLOR_GRAY.green()) + "," \
+//                                      + QString::number(COLOR_GRAY.blue()) + ");" \
+//                                      + "border: 0px;");
+                widget->setStyleSheet("color:#000000;background-color:" + QString(ColorToTextRgb(COLOR_GRAY)) + ";" \
                                       + "border: 0px;");
             }
         }
@@ -724,6 +722,7 @@ void MainWindow::initSteel()
         connect(steel, SIGNAL(signalSteelFrame(bool)), this, SLOT(slotSteelFrame(bool)));
         connect(steel, SIGNAL(signalMeasure(int)), this, SLOT(slotMeasureSteel(int)));
         connect(steel, SIGNAL(signalReady(int)), this, SLOT(slotReadySteel(int)));
+        connect(steel, SIGNAL(signalWait(int)), this, SLOT(slotWaitSteel(int)));
         connect(steel, SIGNAL(signalArchive(int)), this, SLOT(slotSteelArchivate(int)));
         listSteel.append(steel);
     }

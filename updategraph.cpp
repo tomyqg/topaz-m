@@ -1011,6 +1011,12 @@ void MainWindow::slotMeasureSteel(int n)
     stateWidgetSteel = STEEL_MEASURE;
 }
 
+void MainWindow::slotWaitSteel(int n)
+{
+    steelReadyNum = n;
+    stateWidgetSteel = STEEL_WAIT;
+}
+
 void MainWindow::slotSteelArchivate(int n)
 {
     logginSteel(n);

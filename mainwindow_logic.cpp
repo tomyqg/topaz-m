@@ -47,6 +47,7 @@
 #include "defines.h"
 #include <QDebug>
 
+
 //#include <QKeyEvent>
 
 int dateindex;
@@ -56,6 +57,7 @@ cChannelSlotController csc;
 cSteelController ssc;
 QDateTime timeOutBuff;
 cUsbFlash * flash;
+QMutex mSysOpt;
 
 extern MainWindow * globalMainWin;
 extern QList<cDevice*> listDevice;
@@ -107,6 +109,22 @@ void MainWindow::MainWindowInitialization()
 //    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
     // /Инициализация потока Worker ---------------------
+
+    // Инициализация потока внешнего Modbus ---------------------------
+    // Vag: перенести позже в отдельную функцию и выполнять при включении опции
+    cExtModbus * extModbus = new cExtModbus;
+    extModbusThread = new QThread;
+    extModbus->init(cExtModbus::TCP);
+    connect(extModbusThread, SIGNAL(started()), extModbus, SLOT(run()));
+    connect(this, SIGNAL(signalToExtModbus(QString,tModbusBuffer)), extModbus, SLOT(updateData(QString,tModbusBuffer)), Qt::DirectConnection);
+    connect(extModbus, SIGNAL(signalUpdateParam(QString,tModbusBuffer)), this, SLOT(slotFromExtModbus(QString,tModbusBuffer)), Qt::DirectConnection);
+    connect(&timerModbus, SIGNAL(timeout()), this, SLOT(updateExtModbusData()));
+
+
+    timerModbus.start(100);
+    extModbus->moveToThread(extModbusThread);
+    extModbusThread->start();
+    // /Инициализация потока внешнего Modbus ---------------------------
 
 
     //инициализация виртуальных копий устройств
@@ -1055,6 +1073,28 @@ void MainWindow::devicesPause(bool f)
 {
     foreach (cDevice * dev, listDevice) {
         dev->pause(f);
+    }
+}
+
+void MainWindow::updateExtModbusData()
+{
+    tModbusBuffer data;
+    float dataFloat = (float)listChannels.at(0)->GetCurrentChannelValue();
+    memcpy(&data, &dataFloat, sizeof(dataFloat));
+    emit signalToExtModbus("analogChan1", data);
+
+    uint16_t dataUint16 = systemOptions.display;
+    memcpy(&data, &dataUint16, sizeof(dataUint16));
+    emit signalToExtModbus("displayMode", data);
+}
+
+void MainWindow::slotFromExtModbus(QString name, tModbusBuffer data)
+{
+    if(name == "displayMode")
+    {
+        mSysOpt.lock();
+        systemOptions.display = data.data[0];
+        mSysOpt.unlock();
     }
 }
 

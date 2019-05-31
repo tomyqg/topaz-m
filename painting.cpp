@@ -19,8 +19,6 @@ extern QList<cMathChannel *> listMath;
 
 
 
-
-
 // полярные координаты
 void MainWindow::PaintPolarDiagramm()
 {

@@ -44,7 +44,7 @@ extern cUsbFlash * flash;
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel*> listMath;
 extern cIpController * ethernet;
-
+extern QMutex mSysOpt;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -180,6 +180,8 @@ dMenu::dMenu(QWidget *parent) :
     // скрыть эти выджеты(кнопки) изначально
     changeVisibleWidgets();
 
+//    connect(ui->arrowscheckBox, SIGNAL(clicked(bool)), this, SLOT(clickCheckBox()));
+
 //    qDebug() << "Time start dMenu:" << time.elapsed();
 }
 
@@ -300,12 +302,14 @@ void dMenu::on_saveButton_clicked()
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
     timerLoad.start(1000);
     //  запись файла //
+    mSysOpt.lock();
     systemOptions.arrows = ui->arrowscheckBox->checkState();
     systemOptions.display = ui->modeGraf->currentIndex();
     systemOptions.display += (ui->modeBar->currentIndex() << 2);
     systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
     systemOptions.brightness = light;
     systemOptions.typeMultigraph = (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex();
+    mSysOpt.unlock();
 
     updateVer();
 
@@ -532,9 +536,10 @@ void dMenu::addWidgetMeasures()
             analizeSteelEmf->setMinimumSize(QSize(131, 31));
             analizeSteelEmf->setMaximumSize(QSize(185, 45));
             analizeSteelEmf->setFont(font1);
-            analizeSteelEmf->setStyleSheet(QLatin1String("background-color:rgb(44, 61, 77);\n"
+//            analizeSteelEmf->setStyleSheet(QLatin1String("background-color:rgb(44, 61, 77);\n"
+            analizeSteelEmf->setStyleSheet("background-color:" + QString(ColorToTextRgb(ColorCh3)) + ";\n"
                                                          "color: rgb(255 , 255, 255);\n"
-                                                         "border-radius: 0px;"));
+                                                         "border-radius: 0px;");
             analizeSteelEmf->setAlignment(Qt::AlignCenter);
             gridLayout_24->addWidget(analizeSteelEmf, 4, 1, 1, 1);
 
@@ -766,8 +771,21 @@ void dMenu::on_bSystem_clicked()
     ui->nameSubMenu->setText("СИСТЕМА");
 }
 
+//void dMenu::clickCheckBox()
+//{
+//    if (widget->inherits("QCheckBox")) {
+//        QCheckBox *cbox = static_cast<QCheckBox *>(widget);
+////        button->toggle();
+//        cbox->setObjectName("Bla-bla-bla");
+//      }
+//}
+
+
 void dMenu::DateUpdate() // каждую секунду обновляем значок времени
 {
+
+
+
     QDateTime local(QDateTime::currentDateTime());
     QString str = "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; color:#ffffff;\">" \
                   + local.time().toString(timestrings.at(timeindex)) + \
@@ -2329,9 +2347,21 @@ void dMenu::updateLabelDiagnostic()
         for(int i = 0; (i < listSteel.size()) && (i < listLabelEmfpAnalizSteel.size()); i++)
         {
             cSteel * steel = listSteel.at(i);
-            listLabelTempAnalizSteel.at(i)->setText(QString::number(steel->temp));
-            listLabelCj.at(i)->setText(QString::number(steel->cj));
-            listLabelEmfpAnalizSteel.at(i)->setText(QString::number(steel->eds));
+            if(!std::isnan(steel->temp))
+                listLabelTempAnalizSteel.at(i)->setText(QString::number(steel->temp, 'f', 1));
+            else
+                listLabelTempAnalizSteel.at(i)->setText("НЕТ ДАННЫХ");
+
+            if(!std::isnan(steel->cj))
+                listLabelCj.at(i)->setText(QString::number(steel->cj, 'f', 1));
+            else
+                listLabelCj.at(i)->setText("НЕТ ДАННЫХ");
+
+            if(!std::isnan(steel->eds))
+                listLabelEmfpAnalizSteel.at(i)->setText(QString::number(steel->eds, 'f', 1));
+            else
+                listLabelEmfpAnalizSteel.at(i)->setText("НЕТ ДАННЫХ");
+
 //            int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
 //            listComboTypeTermo.at(i)->setCurrentIndex(indexTC[steel->technology->nSt]);
         }
@@ -2715,7 +2745,5 @@ void dMenu::on_bApplayMath_clicked()
     ui->nameSubMenu->setText("МАТЕМАТИКА");
     addWidgetMath();
 }
-
-
 
 

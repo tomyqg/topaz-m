@@ -61,6 +61,7 @@ signals:
     void signalSteelFrame(bool steelFrame);
     void signalReady(int n);
     void signalMeasure(int n);
+    void signalWait(int n);
     void signalArchive(int n);
 
 public slots:

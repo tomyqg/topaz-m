@@ -70,10 +70,11 @@ void cSteel::parserSteel(Transaction tr)
     else if(paramName == chanName + "Carbon")
     {
         allVectorsReceived = true;
-        if(tr.paramA12[0] != 0x7FFF)
-            cl = (float)tr.paramA12[0] / 1000;
-        else
-            cl = NAN;
+//        if(tr.paramA12[0] != 0x7FFF)
+//            cl = (float)tr.paramA12[0] / 1000;
+//        else
+//            cl = NAN;
+        cl = tr.volFlo;
     }
     else if(paramName.contains("TEMParray") || paramName.contains("EMFarray"))
     {
@@ -348,11 +349,13 @@ void cSteel::update()
                     || (status == StatusCh_WaitConf) || (status == StatusCh_EndConfig))
             {
                 state = STEEL_WAIT;
+                emit signalWait(num);
                 emit signalDevicesPause(false);
             }
             else if((status == StatusCh_SteelErrorTC) || (status == StatusCh_SteelErrorEds))
             {
                 state = STEEL_WAIT;
+                emit signalWait(num);
                 emit signalDevicesPause(false);
             }
         }
@@ -379,6 +382,7 @@ void cSteel::update()
                 //            steelReady = false;
                 //            steelMeasure = false;
                 state = STEEL_WAIT;
+                emit signalWait(num);
                 emit signalDevicesPause(false);
             }
         }

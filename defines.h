@@ -20,11 +20,16 @@
 #endif
 #define RANDOM_CHAN
 
+#define VER "1.90"
+
+//#define CURRENT_VER "1.84" //версия ПО
+
 #ifdef RANDOM_CHAN
-#define CURRENT_VER "1.80" //версия ПО
+#define CURRENT_VER VER"r" //версия ПО
 #else
-#define CURRENT_VER "1.83" //версия ПО
+#define CURRENT_VER VER
 #endif
+
 #define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
@@ -33,6 +38,7 @@
 
 #ifndef Q_OS_WIN32
 #define comportname "/dev/ttyO1" // com port for MYD board
+#define comportextmodbusrtu "/dev/ttyO3"    //port for External Modbus RTU
 #define pathtofiles  "/opt/"
 #define pathtodirarchive "/opt/archive/"
 #define pathtosystemoptions  "/opt/systemoptions.txt"
@@ -63,6 +69,7 @@
 
 #else
 #define comportname "COM6"
+#define comportextmodbusrtu "COM9"    //port for External Modbus RTU
 #define uartsleep Sleep(80);
 #define longsleep Sleep(1000);
 #define ETH_NAME  "eth0"
@@ -115,6 +122,12 @@
 #define comportbaud 9600
 #define comportdatabit 8
 #define comportstopbit 1
+
+#define extmodbus_parity 'N'
+#define extmodbus_baud 9600
+#define extmodbus_databit 8
+#define extmodbus_stopbit 1
+#define extmodbus_server_id 17
 
 #define BADCRCCODE -9999
 #define CONNECTERRORCODE -9998
@@ -172,11 +185,15 @@
 #define COLOR_LIGHT_6 QColor(0xF3,0x7A,0x6D)
 #define COLOR_LIGHT_7 QColor(0x8c,0x8c,0xff)
 #define COLOR_LIGHT_8 QColor(0x50,0xdc,0xc1)
+//QColor rgb(96, 215, 122);
 
 
 #define COLOR_DARK  QColor(0x2b,0x3e,0x4c)
 #define COLOR_LIGHT QColor(0x0e,0xd2,0xe2)
-#define COLOR_GRAY  QColor(0x60,0xD7,0x7A)
+#define COLOR_GRAY  QColor(0xe6,0xe6,0xe6)
+
+#define ColorToTextRgb(x) "rgb("+QString::number((x).red())+","+QString::number((x).green())+","+QString::number((x).blue())+")"
+#define ColorToTextRgbWithShift(x, s) "rgb("+QString::number((x).red()+s)+","+QString::number((x).green()+s)+","+QString::number((x).blue()+s)+")"
 
 // Цвета элементов
 #define ColorCh1 COLOR_1

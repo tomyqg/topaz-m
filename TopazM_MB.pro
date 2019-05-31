@@ -101,6 +101,9 @@ SOURCES += main.cpp \
     qtcsv-master/sources/stringdata.cpp \
     qtcsv-master/sources/variantdata.cpp \
     qtcsv-master/sources/writer.cpp \
+    ExtModbus/ext_modbus.cpp \
+    ExtModbus/modbus_lookup_tables.c \
+    3rdparty/libmodbus/src/modbus-tcp.c
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -218,6 +221,9 @@ HEADERS  += mainwindow.h \
     qtcsv-master/sources/contentiterator.h \
     qtcsv-master/sources/filechecker.h \
     qtcsv-master/sources/symbols.h \
+    ExtModbus/ext_modbus.h \
+    ExtModbus/device_params.h \
+    ExtModbus/modbus_lookup_tables.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

@@ -63,6 +63,7 @@ public slots:
     void slotOpenChannel(int num);
     void slotOpenDigitOutput(int num);
 
+//    void clickCheckBox();
 private:
     Ui::dMenu *ui;
     QMovie mo;

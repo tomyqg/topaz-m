@@ -15,6 +15,7 @@ extern QList<cMathChannel*> listMath;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
+extern QMutex mSysOpt;
 
 cFileManager::cFileManager(QObject *parent) : QObject(parent)
 {
@@ -404,12 +405,14 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 //    StackedOptions::calibrationprm = json["Calibration"].toString();
 //    StackedOptions::DisplayParametr = json["Display"].toInt();
 //    StackedOptions::displayResolution = json["Resolution"].toString();
+    mSysOpt.lock();
     opt->arrows = json["Arrows"].toBool();
     opt->display = json["Display"].toInt();
     opt->autoscale = json["Autoscale"].toBool();
     opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
     opt->brightness = json["Brightness"].toInt();
     opt->typeMultigraph = (cSystemOptions::TypeMultigraphEnum)(json["TypeMultigraph"].toInt());
+    mSysOpt.unlock();
 
     QJsonObject options = json["Options"].toObject();
     int countGroup = options["countGrp"].toInt();

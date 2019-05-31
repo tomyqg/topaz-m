@@ -31,6 +31,7 @@
 #include <QNetworkProxyFactory>
 #include "usb_flash.h"
 #include "ip_controller.h"
+#include "ExtModbus/ext_modbus.h"
 #ifndef Q_OS_WIN32
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
@@ -38,7 +39,7 @@
 #include "Communicator/communicator.h"
 #endif
 
-
+typedef uint32_t (*funcExtModbus)();
 
 namespace Ui {
 class MainWindow;
@@ -126,9 +127,13 @@ public slots:
     void writeArchiveSteel(int steelNum);
     void slotReadySteel(int n);
     void slotMeasureSteel(int n);
+    void slotWaitSteel(int n);
     void slotSteelArchivate(int n);
     void slotSteelFrame(bool steelFrame);
     void devicesPause(bool f);
+    void updateExtModbusData();
+    void slotFromExtModbus(QString name,tModbusBuffer data);
+
 
 private slots:
 
@@ -184,6 +189,7 @@ private slots:
     void on_PlavkaButtonUp_4_clicked();
     void on_PlavkaButtonDown_4_clicked();
 
+
 signals:
     void error(const QString &s);
     void ThreadSignal(ChannelOptions*  channel);
@@ -193,6 +199,7 @@ signals:
     void sendTransToWorker(Transaction tr);
     void setReleToOptionsForm(int code);
     void retransToSlotConfig(Transaction tr);
+    void signalToExtModbus(QString name,tModbusBuffer buffer);
 
 private:
     Ui::MainWindow *ui;
@@ -272,6 +279,23 @@ private:
 
     modbus_t * m_modbus;
 
+    //    Extern Modbus
+    QTimer timerModbus;
+//    QStringList
+    typedef struct {
+        QString name;
+        int type;
+        void * var;
+        funcExtModbus funcGet;
+    } typeTableExtModbus;
+    QList<typeTableExtModbus> tablExtModbus;
+//    enum{
+//        LKUP_TYPE_FLOAT
+//    };
+//    typeTableExtModbus tablExtModbus[] = {
+//        {"analogChan1", LKUP_TYPE_FLOAT, NULL, listChannels.at(0)->GetCurrentChannelValue()}
+//    };
+
     void MainWindowInitialization();
     uint8_t halfSecondflag;
     QPen graphPen;
@@ -304,6 +328,7 @@ private:
     //QTimer *timerUpdConfig;
 
     QThread *WorkerThread;
+    QThread * extModbusThread;
 
     QMutex *mutex;
 
