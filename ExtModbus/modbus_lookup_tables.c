@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include "modbus_lookup_tables.h"
-//
+
 #define OFFSET(field) ( (uint16_t)offsetof(tExtDeviceBasicParams, field) )
-//
+
 // This is main storage for device parameters packed by 1 byte
 #pragma pack(push, 1)
 tExtDeviceBasicParams g_extModbusDataStorage = {0};
