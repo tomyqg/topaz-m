@@ -114,6 +114,7 @@ private:
     void makeCsvFileArchive(QString src, QString csv, QString dest);
     void addWidgetMath();
     void updateVer();
+    void updateInterfaceWidgets();
 private slots:
     void updateDevicesUI();
     void UpdateAnalyze();
@@ -245,6 +246,12 @@ private slots:
 
     void on_bBackTypeMultigraph_clicked();
 
+
+    void on_bModbusSlave_clicked();
+
+    void on_bBackModbusSlave_clicked();
+
+    void on_comboModbusSlaveInterface_currentIndexChanged(int index);
 
 signals:
     void saveButtonSignal();

@@ -52,6 +52,7 @@ private:
     const tExtLookupRegisters *getLookupElementByOffsetAndFunc(uint16_t offset, uint8_t func);
     uint8_t updateParam(const void *param);
     void reply();
+
 };
 
 

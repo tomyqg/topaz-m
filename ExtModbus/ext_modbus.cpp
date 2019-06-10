@@ -7,6 +7,8 @@
 #include "ext_modbus.h"
 #include "defines.h"
 
+#include <QMessageBox>
+
 #if defined(_WIN32)
 #include <ws2tcpip.h>
 #else
@@ -221,7 +223,8 @@ void cExtModbus::reply(){
     uint16_t offset = (query[header_length + 1] << 8) + query[header_length + 2];
     // число считываемых/записываемых значений
     int nb = 1;
-    if(func != _FC_WRITE_SINGLE_REGISTER)
+    if((func != _FC_WRITE_SINGLE_REGISTER)
+            && (func != _FC_WRITE_SINGLE_COIL))
     {
         nb = (query[header_length + 3] << 8) + query[header_length + 4];
     }
@@ -242,7 +245,17 @@ void cExtModbus::reply(){
             modbus_reply_exception(ctx, query, MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
             return;
         }
-        size = (param->size >> 1);
+        if((func == _FC_READ_HOLDING_REGISTERS)
+                || (func == _FC_WRITE_SINGLE_REGISTER)
+                || (func == _FC_WRITE_MULTIPLE_REGISTERS)
+                || (func == _FC_READ_INPUT_REGISTERS))
+        {
+            size = (param->size >> 1);
+        }
+        else
+        {
+            size = param->size;
+        }
 
     }
 
@@ -254,7 +267,7 @@ void cExtModbus::reply(){
     }
 //    uint16_t * data = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
 
-    /* Read holding registers */
+    /* Read/write holding registers */
     if((func == _FC_READ_HOLDING_REGISTERS)
             || (func == _FC_WRITE_SINGLE_REGISTER)
             || (func == _FC_WRITE_MULTIPLE_REGISTERS))
@@ -263,13 +276,31 @@ void cExtModbus::reply(){
         mb_mapping = modbus_mapping_new(0, 0, nb, 0);
         mb_mapping->tab_registers = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
     }
-    else if(func == _FC_READ_INPUT_REGISTERS)
+    else if(func == _FC_READ_INPUT_REGISTERS) /* Read input data */
     {
         // подготовка миникарты для ответа
         mb_mapping = modbus_mapping_new(0, 0, 0, nb);
 
         // указатель на первый элемент в миникарту
         mb_mapping->tab_input_registers = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
+    }
+    else if(func == _FC_READ_DISCRETE_INPUTS) /* Read discrete inputs */
+    {
+        // подготовка миникарты для ответа
+        mb_mapping = modbus_mapping_new(0, nb, 0, 0);
+
+        // указатель на первый элемент в миникарту
+        mb_mapping->tab_input_bits = (uint8_t *)GET_PARAM_ADDRESS(lookupElement);
+    }
+    else if((func == _FC_READ_COILS)
+            || (func == _FC_WRITE_SINGLE_COIL)
+            || (func == _FC_WRITE_MULTIPLE_COILS)) /* Read/write coil */
+    {
+        // подготовка миникарты для ответа
+        mb_mapping = modbus_mapping_new(nb, 0, 0, 0);
+
+        // указатель на первый элемент в миникарту
+        mb_mapping->tab_bits = (uint8_t *)GET_PARAM_ADDRESS(lookupElement);
     }
     else    // не корректная функция
     {
@@ -355,6 +386,7 @@ const tExtLookupRegisters * cExtModbus::getLookupElementByOffsetAndFunc(uint16_t
                 && (g_extModbusLookupRegisters[i].typeMapping == map))
         {
             tlr = &g_extModbusLookupRegisters[i];
+            break;
         }
     }
 

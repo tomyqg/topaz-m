@@ -103,7 +103,8 @@ SOURCES += main.cpp \
     qtcsv-master/sources/writer.cpp \
     ExtModbus/ext_modbus.cpp \
     ExtModbus/modbus_lookup_tables.c \
-    3rdparty/libmodbus/src/modbus-tcp.c
+    3rdparty/libmodbus/src/modbus-tcp.c \
+    mainwindow_ext_interface.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \

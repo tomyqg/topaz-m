@@ -39,7 +39,7 @@
 #include "Communicator/communicator.h"
 #endif
 
-typedef uint32_t (*funcExtModbus)();
+
 
 namespace Ui {
 class MainWindow;
@@ -78,9 +78,6 @@ public:
 
     int GetXOffsetForAlign(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText, int alerttextsize);
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
-
-
-
 
 //    transaction device1;
 //    transaction device2;
@@ -131,7 +128,7 @@ public slots:
     void slotSteelArchivate(int n);
     void slotSteelFrame(bool steelFrame);
     void devicesPause(bool f);
-    void updateExtModbusData();
+    void updateExtIntefaceData();
     void slotFromExtModbus(QString name,tModbusBuffer data);
 
 
@@ -279,22 +276,21 @@ private:
 
     modbus_t * m_modbus;
 
-    //    Extern Modbus
-    QTimer timerModbus;
-//    QStringList
+    //    Extern Interface
+    QTimer timerExtInterface;
+    typedef void (MainWindow::*funcExtInterface)(QString name);
     typedef struct {
         QString name;
-        int type;
-        void * var;
-        funcExtModbus funcGet;
-    } typeTableExtModbus;
-    QList<typeTableExtModbus> tablExtModbus;
-//    enum{
-//        LKUP_TYPE_FLOAT
-//    };
-//    typeTableExtModbus tablExtModbus[] = {
-//        {"analogChan1", LKUP_TYPE_FLOAT, NULL, listChannels.at(0)->GetCurrentChannelValue()}
-//    };
+        funcExtInterface funcGet;
+    } typeTableExtInterface;
+    QList<typeTableExtInterface> tablExtInterfaceChannels;
+    typedef void (MainWindow::*funcApplyNewParamFromExtInterface)(QString name, uint8_t * data);
+    typedef struct {
+        QString name;
+        funcExtInterface funcGet;
+        funcApplyNewParamFromExtInterface funcSet;
+    } typeTableSetParamExtInterface;
+    QList<typeTableSetParamExtInterface> tablSetParamExtInterface;
 
     void MainWindowInitialization();
     uint8_t halfSecondflag;
@@ -421,12 +417,16 @@ private:
     void ReactOnMouseSlide();
 
 
-
     int getStateSteel();
     cSteel *getReadySteel();
     cSteel *getMeasureSteel();
     void updateVer();
     void updateGroupWodgets();
+    void initExtInterface();
+    void extGetChannel(QString name);
+    void applyParam(QString name, uint8_t *data);
+    void extSetDisplayMode(QString name, uint8_t * data);
+    void extGetDisplayMode(QString name);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

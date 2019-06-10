@@ -33,7 +33,7 @@
 #define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
-#define DEBUG_RELAY
+//#define DEBUG_RELAY
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС
 
@@ -227,6 +227,7 @@
 #define TOTAL_NUM_DEVICES   6       //максимальное количество плат
 #define NUM_CHAN_DEFAULT    4
 #define TOTAL_NUM_CHAN      24      //максимальное число подключаемых каналов
+#define TOTAL_NUM_MATH      30      //максимальное число подключаемых мат. каналов
 #define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4

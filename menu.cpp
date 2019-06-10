@@ -100,6 +100,7 @@ dMenu::dMenu(QWidget *parent) :
     updateSystemOptions();
 
 
+
     QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();
     foreach(wButtonStyled * button, buttons)
     {
@@ -179,6 +180,9 @@ dMenu::dMenu(QWidget *parent) :
 
     // скрыть эти выджеты(кнопки) изначально
     changeVisibleWidgets();
+
+    // обновить состояния виджетов интерфейсов
+    updateInterfaceWidgets();
 
 //    connect(ui->arrowscheckBox, SIGNAL(clicked(bool)), this, SLOT(clickCheckBox()));
 
@@ -1486,6 +1490,21 @@ void dMenu::on_bBackTypeMultigraph_clicked()
     ui->nameSubMenu->setText("ОПЦИИ");
 }
 
+void dMenu::on_bModbusSlave_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(34);
+    ui->nameSubMenu->setText("MODBUS");
+    updateInterfaceWidgets();
+}
+
+void dMenu::on_bBackModbusSlave_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(30);
+    ui->nameSubMenu->setText("ТИП СВЯЗИ");
+}
+
+
+
 
 void dMenu::updateDriversWidgets()
 {
@@ -2746,4 +2765,37 @@ void dMenu::on_bApplayMath_clicked()
     addWidgetMath();
 }
 
+void dMenu::updateInterfaceWidgets()
+{
+    ui->comboModbusSlaveInterface->setCurrentIndex(systemOptions.extModbus.type);
+    ui->modbusSlaveAdress->setValue(systemOptions.extModbus.adress);
+    QList<int> listBauds;
+    listBauds << 9600 << 19200 << 38400 << 57600 << 115200;
+    int i = listBauds.size();
+    foreach (int b, listBauds) {
+        i--;
+        if(b == systemOptions.extModbus.baud) break;
+    }
+    ui->comboModbusSlaveBaud->setCurrentIndex(i);
+    ui->comboModbusSlaveEven->setCurrentIndex(systemOptions.extModbus.even);
+    ui->comboModbusSlaveStopBit->setCurrentIndex(systemOptions.extModbus.stopBits-1);
+    ui->modbusSlavePort->setText(QString::number(systemOptions.extModbus.port));
+    // принудительный вызов слота
+    on_comboModbusSlaveInterface_currentIndexChanged(ui->comboModbusSlaveInterface->currentIndex());
+}
+
+void dMenu::on_comboModbusSlaveInterface_currentIndexChanged(int index)
+{
+    ui->frameExtModbusTCP->hide();
+    ui->frameExtModbusRTU->hide();
+    if(index == cSystemOptions::ExtModbus_RTU)
+    {
+        ui->frameExtModbusRTU->show();
+    }
+    else if(index == cSystemOptions::ExtModbus_TCP)
+    {
+        ui->frameExtModbusTCP->show();
+    }
+
+}
 

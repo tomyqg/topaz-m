@@ -2,9 +2,7 @@
 #define CSYSTEMOPTIONS_H
 
 #include <QObject>
-
-
-
+#include <QtCore>
 
 class cSystemOptions : public QObject
 {
@@ -34,6 +32,27 @@ public:
         Multigraph_Steel = 1
     };
     TypeMultigraphEnum typeMultigraph;
+    enum TypeExtModbusInterface {
+        ExtModbus_None = 0,
+        ExtModbus_RTU = 1,
+        ExtModbus_TCP = 2,
+    };
+//    TypeExtModbusInterface typeExtModbus;
+    enum TypeExtModbusEven {
+        ExtModbus_EvenOff = 0,
+        ExtModbus_EvenYes = 1,
+        ExtModbus_EvenNo = 2,
+    };
+//    TypeExtModbusEven extModbasEven;
+    typedef struct {
+        TypeExtModbusInterface type;
+        uint8_t adress;
+        int baud;
+        uint8_t stopBits;
+        TypeExtModbusEven even;
+        uint16_t port;
+    } typeExtModbus;
+    typeExtModbus extModbus;
 
 signals:
 
