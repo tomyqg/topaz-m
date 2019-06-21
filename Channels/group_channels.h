@@ -19,9 +19,16 @@ public:
     int channel[MAX_NUM_CHAN_GROUP];
 //    cMathChannel * mathChannel[MAX_NUM_CHAN_GROUP];
     int mathChannel[MAX_NUM_CHAN_GROUP];
+    int freqChannel[MAX_NUM_CHAN_GROUP];
     int typeInput[MAX_NUM_CHAN_GROUP];            //тип входа: 0 - не назначен
-                                                //1 - AI, 2 - MI, 3 - DI
+                                                //1 - AI, 2 - MI, 3 - FI
     int numChannel;    //номер канала в системе для идентификации при включении
+    enum {
+        Input_None = 0,
+        Input_Analog = 1,
+        Input_Math = 2,
+        Input_Freq = 3,
+    };
 
 signals:
 

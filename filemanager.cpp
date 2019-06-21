@@ -8,8 +8,10 @@
 #include <defines.h>
 #include "Channels/group_channels.h"
 #include "Channels/math_channel.h"
+#include "Channels/freq_channel.h"
 
 extern QList<ChannelOptions *> listChannels;
+extern QList<cFreqChannel *> listFreq;
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel*> listMath;
 extern QList<Ustavka *> listUstavok;
@@ -24,9 +26,9 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 
 int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> listChannels*/)
 {
-    QJsonObject channeljsonobj,options;
-    QJsonObject ustavkijsonobj;
-    QJsonArray settings, settingsUst;
+    QJsonObject options;
+    QJsonObject channeljsonobj, ustavkijsonobj, freqjsonobj;
+    QJsonArray settings, settingsUst, settingsFreq;
 
     int countCh = 0;
     foreach (ChannelOptions * Channel, listChannels) {
@@ -62,9 +64,31 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             countCh++;
         }
     }
-
     options["count"] = countCh;
     options["channels"] = settings;
+
+    int countChFreq = 0;
+    foreach (cFreqChannel * freq, listFreq) {
+        if(freq->enable)
+        {
+            freqjsonobj["Slot"] = freq->getSlot();
+            freqjsonobj["Type"] = freq->GetSignalType();
+            freqjsonobj["Name"] = (freq->GetChannelName());
+            freqjsonobj["Units"] = freq->getUnit();
+            freqjsonobj["HigherLimit"] = freq->GetHigherLimit();
+            freqjsonobj["LowerLimit"] = freq->GetLowerLimit();
+            freqjsonobj["HigherMeasLimit"] = freq->GetHigherMeasureLimit();
+            freqjsonobj["LowerMeasLimit"] = freq->GetLowerMeasureLimit();
+            freqjsonobj["Period"] = freq->getMeasurePeriod();
+            freqjsonobj["Dempher"] = freq->getDempher();
+            freqjsonobj["ImpulseDuration"] = freq->GetImpulseDuration();
+            freqjsonobj["ImpulseWeight"] = freq->getImpulseWeight();
+            settingsFreq.append(freqjsonobj);
+            countChFreq++;
+        }
+    }
+    options["countFreq"] = countChFreq;
+    options["channelsFreq"] = settingsFreq;
 
     foreach (Ustavka * ust, listUstavok)
     {
@@ -192,6 +216,33 @@ int cFileManager::readChannelsSettings(QString path)
         else
         {
             channel->enable = false;
+        }
+        index++;
+    }
+
+    QJsonArray arrayFreq = json["channelsFreq"].toArray();
+    int countFr = json["countFreq"].toInt();
+    index = 0;
+    foreach (cFreqChannel * freq, listFreq) {
+        if(index < countFr)
+        {
+            ch = arrayFreq.at(index).toObject();
+            freq->SetHigherLimit(ch.value("HigherLimit").toDouble());
+            freq->SetLowerLimit(ch.value("LowerLimit").toDouble());
+            freq->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
+            freq->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
+            freq->SetSignalType(ch.value("Type").toInt());
+//            freq->SetCurSignalType(freq->GetSignalType());
+            freq->setUnit(ch.value("Units").toString().toUtf8());
+            freq->SetMeasurePeriod(ch.value("Period").toDouble());
+            freq->setName(ch.value("Name").toString().toUtf8());
+            freq->setDempher(ch.value("Dempher").toInt());
+            freq->setImpulseDuration(ch.value("ImpulseDuration").toDouble());
+            freq->setImpulseWeight(ch.value("ImpulseWeight").toDouble());
+        }
+        else
+        {
+            freq->enable = false;
         }
         index++;
     }
@@ -338,6 +389,11 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
         groupsjsonobj["Math3"] = group->mathChannel[2];
         groupsjsonobj["Math4"] = group->mathChannel[3];
 
+        groupsjsonobj["Freq1"] = group->freqChannel[0];
+        groupsjsonobj["Freq2"] = group->freqChannel[1];
+        groupsjsonobj["Freq3"] = group->freqChannel[2];
+        groupsjsonobj["Freq4"] = group->freqChannel[3];
+
         groupsjsonobj["Type1"] = group->typeInput[0];
         groupsjsonobj["Type2"] = group->typeInput[1];
         groupsjsonobj["Type3"] = group->typeInput[2];
@@ -448,6 +504,10 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
             group->mathChannel[1] = jsonobj.value("Math2").toInt();
             group->mathChannel[2] = jsonobj.value("Math3").toInt();
             group->mathChannel[3] = jsonobj.value("Math4").toInt();
+            group->freqChannel[0] = jsonobj.value("Freq1").toInt();
+            group->freqChannel[1] = jsonobj.value("Freq2").toInt();
+            group->freqChannel[2] = jsonobj.value("Freq3").toInt();
+            group->freqChannel[3] = jsonobj.value("Freq4").toInt();
         }
         index++;
     }

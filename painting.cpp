@@ -9,14 +9,14 @@
 #include "defines.h"
 #include "stackedoptions.h"
 #include "Channels/group_channels.h"
+#include "Channels/freq_channel.h"
 
 //extern QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
 extern QList<ChannelOptions *> listChannels;
 extern QList<cMathChannel *> listMath;
-
-
+extern QList<cFreqChannel *> listFreq;
 
 
 // полярные координаты
@@ -48,7 +48,7 @@ void MainWindow::PaintPolarDiagramm()
 
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i ++)
     {
-        if((group->typeInput[i] == 1) && (group->channel[i] != -1))
+        if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
             ChannelOptions * channel = listChannels.at(group->channel[i]);
 #ifdef RANDOM_CHAN
@@ -60,12 +60,20 @@ void MainWindow::PaintPolarDiagramm()
                 channelLenght[i] = channel->GetValuePercent();
             }
         }
-        else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
+        else if((group->typeInput[i] == cGroupChannels::Input_Math) && (group->mathChannel[i] != -1))
         {
             if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
             {
                 cMathChannel * math = listMath.at(group->mathChannel[i]);
                 channelLenght[i] = math->GetValuePercent();
+            }
+        }
+        else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
+        {
+            cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
+            if(channel->enable)
+            {
+                channelLenght[i] = channel->GetValuePercent();
             }
         }
         else

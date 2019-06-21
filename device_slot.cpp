@@ -1,6 +1,6 @@
 #include "device_slot.h"
 
-#define TIME_RESET_ONLINE_SEC   15
+#define TIME_RESET_ONLINE_SEC   10
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   100
 #define COUNT_STABLE_STATUS     3
@@ -86,10 +86,10 @@ int cDevice::parseDeviceParam(Transaction tr)
     {
         mbCommError = tr.volInt;
     }
-    else if(nameParam == "deviceStatus")
-    {
-        deviceStatus = (deviceStatusEnum)tr.volInt;
-    }
+//    else if(nameParam == "deviceStatus")
+//    {
+//        deviceStatus = (deviceStatusEnum)tr.volInt;
+//    }
     else if(nameParam == "devErrors")
     {
         devErrors = (uint16_t)tr.volInt;
@@ -167,7 +167,7 @@ void cDevice::updateStatus()
     else
     {
         params << "uptime" /*<< "deviceState"*/ << "accessType" << "mbCommCount"\
-           << "mbCommError" << "deviceStatus" << "devErrors" << "deviceMode";/* << "root_Access";*/
+           << "mbCommError" << "deviceStatus" << "devErrors" << "deviceMode"; /*<< "root_Access";*/
     }
 //    for(int i = 0; i < params.size(); i++)
 //    {

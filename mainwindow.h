@@ -227,6 +227,7 @@ private:
     void InitProcessorMinFreq();
     void InitDevices();
     void InitChannels();
+    void InitFreq();
     void InitUstavka();
     void InitTimers();
     void InitTouchScreen();
@@ -427,6 +428,8 @@ private:
     void applyParam(QString name, uint8_t *data);
     void extSetDisplayMode(QString name, uint8_t * data);
     void extGetDisplayMode(QString name);
+
+    int getIndexFreqBySlotAndCh(int slot, int ch);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

@@ -8,6 +8,7 @@ cGroupChannels::cGroupChannels(QObject *parent) : QObject(parent)
         typeInput[i] = 0;
         channel[i] = -1;
         mathChannel[i] = -1;
+        freqChannel[i] = -1;
     }
 //    memset(channel, 0, sizeof(channel));
 //    memset(mathChannel, 0, sizeof(mathChannel));

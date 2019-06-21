@@ -11,6 +11,7 @@
 #include "assert.h"
 #include "usb_flash.h"
 #include "Channels/group_channels.h"
+#include "Channels/freq_channel.h"
 #include "device_slot.h"
 #include "ip_controller.h"
 #include "qtcsv-master/include/qtcsv/writer.h"
@@ -43,6 +44,7 @@ extern cSystemOptions systemOptions;  //класс хранения состем
 extern cUsbFlash * flash;
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel*> listMath;
+extern QList<cFreqChannel*> listFreq; //список частотных каналов
 extern cIpController * ethernet;
 extern QMutex mSysOpt;
 
@@ -116,6 +118,7 @@ dMenu::dMenu(QWidget *parent) :
     QScroller::grabGesture(ui->scrollAreaChannels, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDevices, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaMeasures, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaFreq, QScroller::LeftMouseButtonGesture);
 
 
 
@@ -124,6 +127,7 @@ dMenu::dMenu(QWidget *parent) :
     //добавить виджеты групп каналов
     addWidgetGroup();
     addWidgetChannels();
+    addWidgetFreqs();
 
     light = systemOptions.brightness;
     ui->volLight->setText(QString::number(light));
@@ -318,6 +322,7 @@ void dMenu::on_saveButton_clicked()
     updateVer();
 
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &systemOptions);
+    cFileManager::writeChannelsSettings(pathtooptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
     cExpertAccess::resetAccess();
     // Изменить видимость виджетов в соответствии с режимом доступа
@@ -437,6 +442,31 @@ void dMenu::addWidgetChannels()
     }
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutChannels->addItem(verticalSpacer);
+}
+
+void dMenu::addWidgetFreqs()
+{
+    clearLayout(ui->verticalLayoutFreq);
+
+    int i = 0;
+    foreach (cFreqChannel * freq, listFreq) {
+        if(freq->enable)
+        {
+            wButtonStyled * bFreq = new wButtonStyled(ui->widgetScrollAreaFreq);
+            bFreq->index = i+1;
+            QString nameChannel = freq->GetChannelName().size() ? (" | " + freq->GetChannelName()) : " ";
+            bFreq->setText("КАНАЛ " + QString::number(bFreq->index) + nameChannel);
+            bFreq->setMinimumSize(QSize(0, 70));
+            bFreq->setColorText(QColor(0xff,0xff,0xff));
+            bFreq->setColorBg(ColorButtonNormal);
+            bFreq->setAlignLeft();
+            connect(bFreq, SIGNAL(clicked(int)), this, SLOT(slotOpenFreq(int)));
+            ui->verticalLayoutFreq->addWidget(bFreq);
+            i++;
+        }
+    }
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutFreq->addItem(verticalSpacer);
 }
 
 void dMenu::addWidgetDigitOutputs()
@@ -963,6 +993,13 @@ void dMenu::slotOpenGroup(int num)
         listComboChannels.append(listMath.at(i)->getName() + " (M" + QString::number(i+1) + ")");
     }
 
+    //частотные каналы
+    for (int i = 0; i < listFreq.size(); i++) {
+        QString nameCh = listFreq.at(i)->GetChannelName();
+        QString stateCh = (listFreq.at(i)->enable ? "ВКЛ." : "ОТКЛ.");
+        listComboChannels.append(nameCh + " (F" + QString::number(i+1) + ") | " + stateCh);
+    }
+
     QList<QComboBox*> listCombo;
     listCombo.append(ui->comboGroupChannel1);
     listCombo.append(ui->comboGroupChannel2);
@@ -972,13 +1009,17 @@ void dMenu::slotOpenGroup(int num)
     foreach (QComboBox * combo, listCombo) {
         combo->clear();
         combo->addItems(listComboChannels);
-        if(group->typeInput[i] == 1)
+        if(group->typeInput[i] == cGroupChannels::Input_Analog)
         {
             combo->setCurrentIndex(group->channel[i] + 1);
         }
-        else if(group->typeInput[i] == 2)
+        else if(group->typeInput[i] == cGroupChannels::Input_Math)
         {
             combo->setCurrentIndex(group->mathChannel[i] + listChannels.size() + 1);
+        }
+        else if(group->typeInput[i] == cGroupChannels::Input_Freq)
+        {
+            combo->setCurrentIndex(group->freqChannel[i] + listMath.size() + listChannels.size() + 1);
         }
         else
         {
@@ -1002,6 +1043,24 @@ void dMenu::slotOpenDigitOutput(int num)
     ui->comboDigitOutputType->setCurrentIndex(listRelais.at(curRelay)->type & 1);
     ui->stackedWidget->setCurrentIndex(19);
     ui->nameSubMenu->setText("ВЫХОД " + QString::number(num));
+}
+
+void dMenu::slotOpenFreq(int num)
+{
+    curFreq = num - 1;
+    cFreqChannel * freq = listFreq.at(curFreq);
+    ui->comboTypeFreq->setCurrentIndex(freq->GetSignalType());
+    ui->impulseDuration->setValue(freq->GetCurImpulseDuration());
+    ui->impulseWeight->setValue(freq->getImpulseWeight());
+    ui->nameFreqChannel->setText(freq->GetChannelName());
+    ui->scaleDownFreq->setValue(freq->GetLowerMeasureLimit());
+    ui->scaleUpFreq->setValue(freq->GetHigherMeasureLimit());
+    ui->unitFreq->setText(freq->getUnit());
+    ui->periodChFreq->setValue(freq->getMeasurePeriod());
+    ui->dempferFreq->setValue(freq->getDempher());
+    on_comboTypeFreq_currentIndexChanged(ui->comboTypeFreq->currentIndex());
+    ui->stackedWidget->setCurrentIndex(35);
+    ui->nameSubMenu->setText("ВХОД " + QString::number(num));
 }
 
 void dMenu::selectPageMain()
@@ -1161,7 +1220,7 @@ void dMenu::on_bSteel_clicked()
 void dMenu::on_bBackDigitInputSettings_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
-    ui->nameSubMenu->setText("ЦИФР. ВХОДА");
+    ui->nameSubMenu->setText("ЦИФР. ВХОДЫ");
 }
 
 void dMenu::on_bBackDigitInputs_clicked()
@@ -1179,7 +1238,7 @@ void dMenu::on_bAddDigitInput_clicked()
 void dMenu::on_bDigitals_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
-    ui->nameSubMenu->setText("ЦИФР. ВХОДА");
+    ui->nameSubMenu->setText("ЦИФР. ВХОДЫ");
 }
 
 void dMenu::on_bDigitInput1_clicked()
@@ -1422,6 +1481,8 @@ void dMenu::on_bTypeConnect_clicked()
     ui->nameSubMenu->setText("ТИП СВЯЗИ");
 }
 
+
+
 void dMenu::on_bEthernet_clicked()
 {
 //    if(ethernet->getOnline())
@@ -1503,8 +1564,25 @@ void dMenu::on_bBackModbusSlave_clicked()
     ui->nameSubMenu->setText("ТИП СВЯЗИ");
 }
 
+void dMenu::on_bFreq_clicked()
+{
+    addWidgetFreqs();
+    ui->stackedWidget->setCurrentIndex(36);
+    ui->nameSubMenu->setText("ЧАСТ. ВХОДЫ");
+}
 
+void dMenu::on_bBackFreq_clicked()
+{
+    addWidgetFreqs();
+    ui->stackedWidget->setCurrentIndex(36);
+    ui->nameSubMenu->setText("ЧАСТ. ВХОДЫ");
+}
 
+void dMenu::on_bBackListFreq_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->nameSubMenu->setText("ВХОДЫ");
+}
 
 void dMenu::updateDriversWidgets()
 {
@@ -2312,17 +2390,22 @@ void dMenu::on_bApplayGroup_clicked()
         int indexCh = listCombo.at(i)->currentIndex();
         if(indexCh == 0)
         {
-            g->typeInput[i] = 0;
+            g->typeInput[i] = cGroupChannels::Input_None;
         }
         else if(indexCh <= listChannels.size())
         {
-            g->typeInput[i] = 1;
+            g->typeInput[i] = cGroupChannels::Input_Analog;
             g->channel[i] = indexCh-1;
         }
         else if(indexCh <= (listChannels.size() + listMath.size()))
         {
-            g->typeInput[i] = 2;
+            g->typeInput[i] = cGroupChannels::Input_Math;
             g->mathChannel[i] = indexCh-1-listChannels.size();
+        }
+        else if(indexCh <= (listChannels.size() + listMath.size() + listFreq.size()))
+        {
+            g->typeInput[i] = cGroupChannels::Input_Freq;
+            g->freqChannel[i] = indexCh-1-listChannels.size()-listMath.size();
         }
     }
 
@@ -2330,8 +2413,6 @@ void dMenu::on_bApplayGroup_clicked()
     ui->nameSubMenu->setText("ГРУППЫ");
     addWidgetGroup();
 }
-
-
 
 void dMenu::on_lightUp_clicked()
 {
@@ -2541,7 +2622,7 @@ void dMenu::updateDevicesUI()
                       << ui->bDevice4 << ui->bDevice5 << ui->bDevice6;
     assert(listDevice.size() == listButtonDevices.size());
     QStringList strType;
-    strType << "" << "4AI" << "8RP" << "STEEL";
+    strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
     int i = 0;
     foreach(wButtonStyled * bDev, listButtonDevices)
     {
@@ -2583,11 +2664,11 @@ void dMenu::updateDevicesUI()
         }
 //        ui->deviceState->setText(QString::number(curDev->deviceState));
         QStringList strStatus;
-        strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
-        if((int)curDev->deviceStatus < strStatus.size())
-        {
-            ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
-        }
+//        strStatus << "NOINIT" << "CONFIG" << "EXECUTE" << "IDLE" << "ERROR";
+//        if((int)curDev->deviceStatus < strStatus.size())
+//        {
+//            ui->deviceStatus->setText(strStatus.at(curDev->deviceStatus));
+//        }
         int numErr = 0;
         QStringList devErrors;
         devErrors << "MODEL" << "SERIAL" << "FACTORY" << "CRC32" << "MODE" << "ADDRESS" \
@@ -2632,10 +2713,10 @@ void dMenu::updateDeviceInfo(uint8_t index)
     else
     {
         QStringList strType;
-        strType << "" << "4AI" << "8RP" << "STEEL";
+        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
         ui->deviceType->setText(strType.at(device->deviceType % strType.size()));
 //        ui->deviceState->setText(QString::number(device->deviceState));
-        ui->deviceStatus->setText(QString::number(device->deviceStatus));
+//        ui->deviceStatus->setText(QString::number(device->deviceStatus));
 //        int countErr = 0;
 //        QList<int> listErrors;
 //        for(int i = 0; i < 8; i++)
@@ -2799,3 +2880,58 @@ void dMenu::on_comboModbusSlaveInterface_currentIndexChanged(int index)
 
 }
 
+
+
+void dMenu::on_comboTypeFreq_currentIndexChanged(int index)
+{
+    ui->frameFreqCountImp->hide();
+    ui->frameFreqOptions->hide();
+    if(index == ImpulseCounterMeasure)
+    {
+        ui->frameFreqCountImp->show();
+        ui->frameFreqOptions->show();
+    }
+    else if(index == FrequencyMeasure)
+    {
+        ui->frameFreqOptions->show();
+    }
+}
+
+void dMenu::on_bApplyFreq_clicked()
+{
+    cFreqChannel * freq = listFreq.at(curFreq);
+    int type = ui->comboTypeFreq->currentIndex();
+    freq->SetSignalType(type);
+    if(type == ImpulseCounterMeasure)
+    {
+        freq->setImpulseDuration(ui->impulseDuration->value());
+        freq->setImpulseWeight(ui->impulseWeight->value());
+    }
+    freq->setName(ui->nameFreqChannel->text());
+    freq->SetLowerMeasureLimit(ui->scaleDownFreq->value());
+    freq->SetHigherMeasureLimit(ui->scaleUpFreq->value());
+    freq->setUnit(ui->unitFreq->text());
+    freq->SetMeasurePeriod(ui->periodChFreq->value());
+    freq->setDempher(ui->dempferFreq->value());
+    on_bBackFreq_clicked();
+}
+
+void dMenu::on_bFreqResetCountImp_clicked()
+{
+    listFreq.at(curFreq)->slotResetImpulsBuffer();
+}
+
+void dMenu::on_bCancelFreq_clicked()
+{
+    cFreqChannel * freq = listFreq.at(curFreq);
+    ui->comboTypeFreq->setCurrentIndex(freq->GetSignalType());
+    ui->impulseDuration->setValue(freq->GetImpulseDuration());
+    ui->impulseWeight->setValue(freq->getImpulseWeight());
+    ui->nameFreqChannel->setText(freq->GetChannelName());
+    ui->scaleDownFreq->setValue(freq->GetLowerMeasureLimit());
+    ui->scaleUpFreq->setValue(freq->GetHigherMeasureLimit());
+    ui->unitFreq->setText(freq->getUnit());
+    ui->periodChFreq->setValue(freq->getMeasurePeriod());
+    ui->dempferFreq->setValue(freq->getDempher());
+    on_comboTypeFreq_currentIndexChanged(ui->comboTypeFreq->currentIndex());
+}

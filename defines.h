@@ -18,9 +18,9 @@
 #ifdef Q_OS_WIN32
 //    #define RANDOM_CHAN
 #endif
-#define RANDOM_CHAN
+//#define RANDOM_CHAN
 
-#define VER "1.90"
+#define VER "1.92"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
@@ -30,7 +30,7 @@
 #define CURRENT_VER VER
 #endif
 
-#define PROTOCOL_VER "11.4"  //версия протокола внутреннего Modbus
+#define PROTOCOL_VER "12.2"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 //#define DEBUG_RELAY
@@ -155,7 +155,8 @@
 #define UstavkiUpdateTimer 500      // период мсек обновления состояний уставок
 #define ParsingReceiveTrans 1       // период парсинга входящих транзакций от Workera в мсек
 #define UpdateSteelTime 500
-#define timeUpdateDevices 1000       // время обновления комплекта плат
+#define timeInitDevices 1000       // период инициализации комплекта плат, мсек
+#define timeUpdateDevices 10000     // период обновления комплекта плат, мсек
 
 #endif
 
@@ -228,7 +229,9 @@
 #define NUM_CHAN_DEFAULT    4
 #define TOTAL_NUM_CHAN      24      //максимальное число подключаемых каналов
 #define TOTAL_NUM_MATH      30      //максимальное число подключаемых мат. каналов
+#define TOTAL_NUM_FREQ      36      //максимальное число подключаемых частотных каналов
 #define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
+#define NUM_CHAN_IN_6DI6RO  6       // количество каналов в одной плате 6DI6RO
 #define TOTAL_NUM_USTAVKI   8
 #define NUM_STEEL           4
 #define NUM_CHAN_IN_STEEL   2

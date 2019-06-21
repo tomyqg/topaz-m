@@ -13,6 +13,7 @@
 #include "registersmap.h"
 #include "assert.h"
 #include "Channels/group_channels.h"
+#include "Channels/freq_channel.h"
 #include "qrect.h"
 
 
@@ -42,6 +43,7 @@ extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel *> listMath;
+extern QList<cFreqChannel *> listFreq;
 
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
@@ -237,7 +239,7 @@ void MainWindow::GrafsUpdateTrends()
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
     {
         ui->customPlot->addGraph();
-        if((group->typeInput[i] == 1) && (group->channel[i] != -1))
+        if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
             ChannelOptions * channel = listChannels.at(group->channel[i]);
             ui->customPlot->graph()->setName(channel->GetChannelName());
@@ -245,7 +247,7 @@ void MainWindow::GrafsUpdateTrends()
             ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
 
         }
-        else if((group->typeInput[i] == 2) && (group->mathChannel[i] != -1))
+        else if((group->typeInput[i] == cGroupChannels::Input_Math) && (group->mathChannel[i] != -1))
         {
             if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
             {
@@ -253,6 +255,14 @@ void MainWindow::GrafsUpdateTrends()
                 ui->customPlot->graph()->setName(math->getName());
                 ui->customPlot->graph()->setData(math->GetMathTimeBuffer(), math->GetMathValuesBuffer());
             }
+        }
+        else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
+        {
+            cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
+            ui->customPlot->graph()->setName(channel->GetChannelName());
+//            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
+            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
+
         }
         graphPen.setColor(colors.at(i));
         ui->customPlot->graph()->setPen(graphPen);
@@ -428,7 +438,7 @@ void MainWindow::updateBars(void)
     {
         if(indexGroup >= 4) group = groupDop;
         bar->hide();
-        if(group->typeInput[i] == 1)
+        if(group->typeInput[i] == cGroupChannels::Input_Analog)
         {
             if(group->channel[i] != -1)
             {
@@ -468,12 +478,9 @@ void MainWindow::updateBars(void)
                         ui->nameGroupChannels2->show();
                     }
                 }
-
-
-
             }
         }
-        else if(group->typeInput[i] == 2)
+        else if(group->typeInput[i] == cGroupChannels::Input_Math)
         {
             if(group->mathChannel[i] != -1)
             {
@@ -487,6 +494,44 @@ void MainWindow::updateBars(void)
                     bar->setBarDiapazon(max(abs(math->GetHigherMeasureLimit()), \
                                             abs(math->GetLowerMeasureLimit())));
                     bar->setValue(math->GetCurrentMathValue());
+                    bar->cleanMarker();
+//                    foreach(Ustavka * ust, listUstavok)
+//                    {
+//                        if(ust->getChannel() == channel->getNum())
+//                        {
+//                            bar->addMarker(ust->getHiStateValue(), ust->getTypeFix());
+//                        }
+//                    }
+                    bar->show();
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
+                }
+            }
+        }
+        else if(group->typeInput[i] == cGroupChannels::Input_Freq)
+        {
+            if(group->freqChannel[i] != -1)
+            {
+                cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
+
+                if(channel->enable)
+                {
+                    //bar->setExtr(channel->GetMinimumChannelValue(),\
+                                 channel->GetMaximumChannelValue());
+                    bar->setBarDiapazon(max(abs(channel->GetHigherMeasureLimit()), \
+                                            abs(channel->GetLowerMeasureLimit())));
+//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+//                    {
+                        bar->setValueType(wVolueBar::BarValue_Real);
+//                    }
+//                    else
+//                    {
+//                        bar->setValueType(wVolueBar::BarValue_Procent);
+////                        val = channel->GetValuePercent();
+//                    }
+                    bar->setValue(channel->GetCurrentChannelValue());
                     bar->cleanMarker();
 //                    foreach(Ustavka * ust, listUstavok)
 //                    {
@@ -566,7 +611,7 @@ void MainWindow::setTextBars()
     foreach (wVolueBar * bar, listBars)
     {
         if(indexGroup >= 4) group = groupDop;
-        if(group->typeInput[i] == 1)
+        if(group->typeInput[i] == cGroupChannels::Input_Analog)
         {
             if(group->channel[i] != -1)
             {
@@ -576,7 +621,7 @@ void MainWindow::setTextBars()
             }
 
         }
-        else if(group->typeInput[i] == 2)
+        else if(group->typeInput[i] == cGroupChannels::Input_Math)
         {
             if(group->mathChannel[i] != -1)
             {
@@ -593,6 +638,17 @@ void MainWindow::setTextBars()
                 }
             }
         }
+        else if(group->typeInput[i] == cGroupChannels::Input_Freq)
+        {
+            if(group->freqChannel[i] != -1)
+            {
+
+                    bar->setNumChan(listFreq.at(group->freqChannel[i])->getNum());
+                    bar->setText(listFreq.at(group->freqChannel[i])->GetChannelName(), \
+                                 listFreq.at(group->freqChannel[i])->getUnit());
+            }
+        }
+
         i++;
         i %= MAX_NUM_CHAN_GROUP;
         indexGroup++;
@@ -646,7 +702,7 @@ void MainWindow::updateWidgetsVols(void)
     foreach (wVol * vol, listVols)
     {
         if(indexGroup >= 4) group = groupDop;
-        if(group->typeInput[i] == 1)
+        if(group->typeInput[i] == cGroupChannels::Input_Analog)
         {
             if(group->channel[i] != -1)
             {
@@ -656,7 +712,7 @@ void MainWindow::updateWidgetsVols(void)
             }
             vol->setColor(color[indexGroup]);
         }
-        else if(group->typeInput[i] == 2)
+        else if(group->typeInput[i] == cGroupChannels::Input_Math)
         {
             if(group->mathChannel[i] != -1)
             {
@@ -671,6 +727,16 @@ void MainWindow::updateWidgetsVols(void)
                     vol->setChanNum(0);
                     vol->setText("", "");
                 }
+            }
+            vol->setColor(color[indexGroup]);
+        }
+        else if(group->typeInput[i] == cGroupChannels::Input_Freq)
+        {
+            if(group->freqChannel[i] != -1)
+            {
+                vol->setChanNum(listFreq.at(group->freqChannel[i])->getNum());
+                vol->setText(listFreq.at(group->freqChannel[i])->GetChannelName(), \
+                             listFreq.at(group->freqChannel[i])->getUnit());
             }
             vol->setColor(color[indexGroup]);
         }
@@ -719,7 +785,7 @@ void MainWindow::updateVols()
     {
         if(indexGroup >= 4) group = groupDop;
         vol->hide();
-        if(group->typeInput[i] == 1)
+        if(group->typeInput[i] == cGroupChannels::Input_Analog)
         {
             if(group->channel[i] != -1)
             {
@@ -748,7 +814,7 @@ void MainWindow::updateVols()
                 }
             }
         }
-        else if(group->typeInput[i] == 2)
+        else if(group->typeInput[i] == cGroupChannels::Input_Math)
         {
             if(group->mathChannel[i] != -1)
             {
@@ -760,6 +826,31 @@ void MainWindow::updateVols()
                     {
                         ui->nameGroupChannels2->show();
                     }
+                }
+            }
+        }
+        else if(group->typeInput[i] == cGroupChannels::Input_Freq)
+        {
+            if(group->freqChannel[i] != -1)
+            {
+                cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
+                if(channel->enable)
+                {
+//                    double value = channel->GetCurrentChannelValue();
+//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+//                    {
+                        vol->setVol(channel->GetCurrentChannelValue()/*, channel->optimalPrecision()*/);
+//                    }
+//                    else
+//                    {
+//                        vol->setVol(channel->GetValuePercent(), channel->optimalPrecision());
+//                    }
+                    vol->show();
+                    if(indexGroup >= 4)
+                    {
+                        ui->nameGroupChannels2->show();
+                    }
+
                 }
             }
         }

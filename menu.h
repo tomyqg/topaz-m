@@ -101,6 +101,7 @@ private:
     int light;
     int curDiagnostDevice;
     int curRelay;
+    int curFreq;
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
@@ -115,6 +116,7 @@ private:
     void addWidgetMath();
     void updateVer();
     void updateInterfaceWidgets();
+    void addWidgetFreqs();
 private slots:
     void updateDevicesUI();
     void UpdateAnalyze();
@@ -124,6 +126,7 @@ private slots:
     void setBrightness(int l);
     void slotUpdateEthernetStatus(bool online, bool enable);
     void slotIpErr();
+    void slotOpenFreq(int num);
     void on_bResetToDefault_clicked();
     void on_bExpert_clicked();
     void on_bAnaliz_clicked();
@@ -246,12 +249,25 @@ private slots:
 
     void on_bBackTypeMultigraph_clicked();
 
-
     void on_bModbusSlave_clicked();
 
     void on_bBackModbusSlave_clicked();
 
     void on_comboModbusSlaveInterface_currentIndexChanged(int index);
+
+    void on_bFreq_clicked();
+
+    void on_bBackFreq_clicked();
+
+    void on_bBackListFreq_clicked();
+
+    void on_comboTypeFreq_currentIndexChanged(int index);
+
+    void on_bApplyFreq_clicked();
+
+    void on_bFreqResetCountImp_clicked();
+
+    void on_bCancelFreq_clicked();
 
 signals:
     void saveButtonSignal();

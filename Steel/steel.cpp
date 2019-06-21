@@ -32,7 +32,7 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     listUpdateParam << "TimeSquareTemp" << "RangeTemp" << "TimeMeasureTemp" << "LowTemp" << "HiTemp" << "SensorType"\
         << "TimeSquareEDS" << "RangeEDS" << "TimeMeasureEDS" << "Crystallization" << "MassCoeff" \
         << "FinalOx" << "Assimilation" << "MassMelting" << "AdditionalParameter1";
-    listDiagnosticParam << "Data" << "PrimaryActivity" << "ResultCjValue";
+    listDiagnosticParam << "Data" << "PrimaryActivity" << "SteelResultCjValue";
     countParam = 0;
     countDiagnostic = 0;
 }
@@ -55,7 +55,7 @@ void cSteel::parserSteel(Transaction tr)
     {
         eds = tr.volFlo;
     }
-    else if(paramName == chanName + "ResultCjValue")
+    else if(paramName == chanName + "SteelResultCjValue")
     {
         cj = tr.volFlo;
     }

@@ -5,9 +5,10 @@
 #include "keyboard.h"
 #include "mathresolver.h"
 #include "Channels/channelOptions.h"
+#include "Channels/group_channels.h"
+#include "Channels/freq_channel.h"
 #include "uartdriver.h"
 #include "filemanager.h"
-#include "Channels/group_channels.h"
 #include "device_slot.h"
 
 #include <QPixmap>
@@ -44,6 +45,7 @@ typeSteelTech steelTech[NUM_TECHNOLOGIES];
 cSystemOptions systemOptions;  //класс хранения состемных опций
 cIpController * ethernet;
 QList<cMathChannel*> listMath;
+QList<cFreqChannel*> listFreq; //список частотных каналов
 
 
 extern QColor Channel1Color;
@@ -550,9 +552,17 @@ void MainWindow::openSettingsChannel(int num)
 {
 
     if(curGroupChannel >= listGroup.size()) return;
-    //проверка на наличие такого номера канала
     cGroupChannels * group = listGroup.at(curGroupChannel);
-    if(group->typeInput[num-1] != 1) return;
+    if(num > MAX_NUM_CHAN_GROUP)
+    {
+        num -= MAX_NUM_CHAN_GROUP;
+        int indexNextGroup = curGroupChannel + 1;
+        if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
+        group = listGroup.at(indexNextGroup);
+    }
+
+    //проверка на наличие такого номера канала
+    if(group->typeInput[num-1] != cGroupChannels::Input_Analog) return;
     if(group->channel[num-1] > listChannels.size()) return;
 
 //    ChannelOptions * channel = group->channel[num-1];

@@ -416,31 +416,31 @@ void worker::run()
                 if(res > 0)
                 {
 #ifdef DEBUG_WORKER
-                    if((tr.offset >= 8) && (tr.offset <= 296))
-                    {
-                        qDebug() /*<< "Modbus Read  slave:" << tr.slave \
-                                 << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
-                                 << " offset:" << tr.offset \ */
-                                 << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() << " vol: [" \
-                                 << tr.paramInt16[0] << tr.paramInt16[1] << tr.paramInt16[2] << tr.paramInt16[3] \
-                                 << tr.paramInt16[4] << tr.paramInt16[5] << tr.paramInt16[6] << tr.paramInt16[7] \
-                                 << tr.paramInt16[8] << tr.paramInt16[9] << tr.paramInt16[10] << tr.paramInt16[11] \
-                                 << tr.paramInt16[12] << tr.paramInt16[13] << tr.paramInt16[14] << tr.paramInt16[15] \
-                                 << tr.paramInt16[16] << tr.paramInt16[17] << tr.paramInt16[18] << tr.paramInt16[19] \
-                                 << tr.paramInt16[20] << tr.paramInt16[21] << tr.paramInt16[22] << tr.paramInt16[23] \
-                                 << tr.paramInt16[24] << tr.paramInt16[25] << tr.paramInt16[26] << tr.paramInt16[27] \
-                                 << tr.paramInt16[28] << tr.paramInt16[29] << tr.paramInt16[30] << tr.paramInt16[31] \
-                                 << "] Time:" << time.elapsed();
-                    }
-                    else
-                    {
+//                    if((tr.offset >= 8) && (tr.offset <= 296))
+//                    {
+//                        qDebug() /*<< "Modbus Read  slave:" << tr.slave \
+//                                 << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
+//                                 << " offset:" << tr.offset \ */
+//                                 << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() << " vol: [" \
+//                                 << tr.paramInt16[0] << tr.paramInt16[1] << tr.paramInt16[2] << tr.paramInt16[3] \
+//                                 << tr.paramInt16[4] << tr.paramInt16[5] << tr.paramInt16[6] << tr.paramInt16[7] \
+//                                 << tr.paramInt16[8] << tr.paramInt16[9] << tr.paramInt16[10] << tr.paramInt16[11] \
+//                                 << tr.paramInt16[12] << tr.paramInt16[13] << tr.paramInt16[14] << tr.paramInt16[15] \
+//                                 << tr.paramInt16[16] << tr.paramInt16[17] << tr.paramInt16[18] << tr.paramInt16[19] \
+//                                 << tr.paramInt16[20] << tr.paramInt16[21] << tr.paramInt16[22] << tr.paramInt16[23] \
+//                                 << tr.paramInt16[24] << tr.paramInt16[25] << tr.paramInt16[26] << tr.paramInt16[27] \
+//                                 << tr.paramInt16[28] << tr.paramInt16[29] << tr.paramInt16[30] << tr.paramInt16[31] \
+//                                 << "] Time:" << time.elapsed();
+//                    }
+//                    else
+//                    {
                         qDebug() << "[" << trans.size() << "]" \
                                  << "Modbus Read  slave:" << tr.slave \
                                  << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                                  << " offset:" << tr.offset \
                                  << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                                  << "Time: " << time.elapsed();
-                    }
+//                    }
 #endif
                     emit sendTrans(tr);
                 }

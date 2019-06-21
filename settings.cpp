@@ -72,8 +72,10 @@ const typeTableDiapasoneRTD tableDiapasoneRTD[] = {
     {5, RTD_Pt100_3850, "Pt100"},       //5
     {6, RTD_Cu50_4280,  "50М(1.428)"},     //6
     {7, RTD_Cu100_4280, "100М(1.428)"},       //7
-    {8, RTD_Pt21_TSP21, "ТСП21"},       //8
-    {9, RTD_Cu23_TSM23, "ТСМ23"},       //9
+//    {8, RTD_Pt21_TSP21, "ТСП21"},       //8
+//    {9, RTD_Cu23_TSM23, "ТСМ23"},       //9
+    {8, RTD_Pt500_3850, "Pt500"},       //8
+    {9, RTD_Pt1000_3850, "Pt1000"},       //9
 };
 
 
@@ -610,7 +612,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->bar->setNumChan(channel->getNum());
         ui->dempfer->setValue(channel->GetDempherValue());
         ui->typeReg->setCurrentIndex(channel->GetRegistrationType());
-        ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
+        ui->sensorShema->setCurrentIndex(channel->getShema() /*indexUiShemaFromSensorShema(channel->getShema())*/);
         ui->enableColdJunction->setCurrentIndex(channel->getStateColdJunction());
         ui->shiftColdJunction->setValue(channel->getShiftColdJunction());
         ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
@@ -727,7 +729,7 @@ void dSettings::saveParam()
             }
             channel->setShiftColdJunction(ui->shiftColdJunction->value());
             channel->enableColdJunction(ui->enableColdJunction->currentIndex());
-            channel->SetDiapasonShema(diapasone, sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
+            channel->SetDiapasonShema(diapasone, ui->sensorShema->currentIndex() /*sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex())*/);
             channel->setVolueVoltageType(ui->comboTypeValue->currentIndex());
 //            channel->setCapacity(ui->comboCapacity->currentIndex());
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
@@ -1039,7 +1041,7 @@ void dSettings::updateUiSignalTypeParam(int index)
     {
         ui->unit->setText(channel->getNameUnitByParam(index, channel->GetDiapason()));
     }
-    ui->sensorShema->setCurrentIndex(indexUiShemaFromSensorShema(channel->getShema()));
+    ui->sensorShema->setCurrentIndex(channel->getShema() /*indexUiShemaFromSensorShema(channel->getShema())*/);
 }
 
 

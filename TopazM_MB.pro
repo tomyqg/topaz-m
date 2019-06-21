@@ -104,7 +104,8 @@ SOURCES += main.cpp \
     ExtModbus/ext_modbus.cpp \
     ExtModbus/modbus_lookup_tables.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
-    mainwindow_ext_interface.cpp
+    mainwindow_ext_interface.cpp \
+    Channels/freq_channel.cpp
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -224,7 +225,8 @@ HEADERS  += mainwindow.h \
     qtcsv-master/sources/symbols.h \
     ExtModbus/ext_modbus.h \
     ExtModbus/device_params.h \
-    ExtModbus/modbus_lookup_tables.h
+    ExtModbus/modbus_lookup_tables.h \
+    Channels/freq_channel.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

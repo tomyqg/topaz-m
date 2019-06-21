@@ -16,10 +16,11 @@ enum termoCoupleType{
     TC_Type_N = 6,
 };
 enum voltageType{
-    Voltage_None = 0,
-    Voltage_1V = 2,
-    Voltage_10V = 3,
-    Voltage_30V = 4,
+//    Voltage_None = 0,
+    Voltage_1V = 0,
+    Voltage_10V = 1,
+    Voltage_30V = 2,
+    Voltage_100mV = 3,
 };
 enum rtdType{
     RTD_Pt50_3910 = 0,
@@ -30,8 +31,10 @@ enum rtdType{
     RTD_Pt100_3850 = 5,
     RTD_Cu50_4280 = 6,
     RTD_Cu100_4280 = 7,
-    RTD_Pt21_TSP21 = 8,
-    RTD_Cu23_TSM23 = 9,
+//    RTD_Pt21_TSP21 = 8,
+//    RTD_Cu23_TSM23 = 9,
+    RTD_Pt500_3850 = 8,
+    RTD_Pt1000_3850 = 9,
 };
 
 enum deviceTypeEnum{
@@ -39,6 +42,7 @@ enum deviceTypeEnum{
     Device_4AI = 1,
     Device_8RP = 2,
     Device_STEEL = 3,
+    Divece_6DI6RO = 4,
     Count_Device_Type
 };
 enum deviceStateEnum{
@@ -82,14 +86,18 @@ enum statusChannelEnum{
 };
 
 enum SignalType {
-    NoMeasure= 0,
-    CurrentMeasure= 1,
-    VoltageMeasure= 2,
-    TermoCoupleMeasure= 3,
-    TermoResistanceMeasure= 4,
-    DiscretMeasure= 6,
-    ImpulseCounterMeasure= 7,
-    FrequencyMeasure= 8
+    NoMeasure = 0,
+    CurrentMeasure = 1,
+    VoltageMeasure = 2,
+    TermoCoupleMeasure = 3,
+    TermoResistanceMeasure = 4,
+    DiscretMeasure = 6,
+};
+
+enum FreqSignalType {
+    FreqNoMeasure = 0,
+    FrequencyMeasure = 1,
+    ImpulseCounterMeasure = 2,
 };
 
 

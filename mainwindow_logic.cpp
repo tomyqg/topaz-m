@@ -12,6 +12,7 @@
 #include "qextserialenumerator.h"
 #include "registersmap.h"
 #include "Channels/group_channels.h"
+#include "Channels/freq_channel.h"
 #include "device_slot.h"
 
 #include <filemanager.h>
@@ -66,6 +67,7 @@ extern QList<Ustavka *> listUstavok;
 extern QList<cRelay*> listRelais;
 extern QList<cSteel*> listSteel;
 extern QList<cGroupChannels*> listGroup;
+extern QList<cFreqChannel*> listFreq; //список частотных каналов
 extern cIpController * ethernet;
 extern cSystemOptions systemOptions;
 //extern tDeviceBasicParams g_deviceDataStorage;
@@ -189,11 +191,21 @@ void MainWindow::MainWindowInitialization()
         }
     }
 
+    /* Инициализация объектов */
     // инициализация каналов (входов)
     InitChannels();
-
     // инициализация уставок
     InitUstavka();
+    // инициализация частотных каналов
+    InitFreq();
+
+    //чтение настроек каналов и уставок
+    int res = cFileManager::readChannelsSettings(pathtooptions);
+    if(res == 4)
+    {
+        cLogger mk(pathtomessages, cLogger::CONFIG);
+        mk.addMess("File " + QString(pathtooptions) + " is empty", cLogger::ERR);
+    }
 
     // Инициализация потока внешнего Modbus ---------------------------
     // Vag: перенести позже в отдельную функцию и выполнять при включении опции
@@ -710,46 +722,36 @@ void MainWindow::InitChannels()
         listChannels.append(ch);
     }
 
-    //чтение настроек каналов и уставок
-//    int countChannels = listChannels.size();
-    int res = cFileManager::readChannelsSettings(pathtooptions);
-    if(res == 4)
+
+}
+
+void MainWindow::InitFreq()
+{
+    for(int i = 0; i < TOTAL_NUM_FREQ; i++)
     {
-        cLogger mk(pathtomessages, cLogger::CONFIG);
-        mk.addMess("File " + QString(pathtooptions) + " is empty", cLogger::ERR);
+        cFreqChannel * freq = new cFreqChannel();
+        freq->SetCurrentChannelValue(0);
+        freq->setNum(i+1);
+        freq->setSlotChannel(i%NUM_CHAN_IN_6DI6RO);
+        connect(freq, SIGNAL(sendToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
+        listFreq.append(freq);
     }
-//    int newCountChannels = listChannels.size();
-//    for(int i = countChannels; i < newCountChannels; i++)
-//    {
-//        connect(listChannels.at(i), SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-//    }
 }
 
 void MainWindow::InitTimers()
 {
-//    channeltimer1 = new QTimer();
-//    channeltimer2 = new QTimer();
-//    channeltimer3 = new QTimer();
-//    channeltimer4 = new QTimer();
+
     archivetimer  = new QTimer();
     halfSecondTimer  = new QTimer();
     timerUpdateDevices = new QTimer();
 
-//    connect(channeltimer1, SIGNAL(timeout()), this, SLOT(UpdateChannel1Slot()));
-//    connect(channeltimer2, SIGNAL(timeout()), this, SLOT(UpdateChannel2Slot()));
-//    connect(channeltimer3, SIGNAL(timeout()), this, SLOT(UpdateChannel3Slot()));
-//    connect(channeltimer4, SIGNAL(timeout()), this, SLOT(UpdateChannel4Slot()));
-
     connect(halfSecondTimer, SIGNAL(timeout()), this, SLOT(HalfSecondGone()));
     connect(timerUpdateDevices, SIGNAL(timeout()), this, SLOT(updateDevicesComplect()));
     updateDevicesComplect();
-//    channeltimer1->start(1000);
-//    channeltimer2->start(1000);
-//    channeltimer3->start(1000);
-//    channeltimer4->start(1000);
+
     halfSecondTimer->start(500);
     archivetimer->start(6000); // каждые 6 минут записываем архив на флешку
-    timerUpdateDevices->start(timeUpdateDevices);
+    timerUpdateDevices->start(timeInitDevices);
 }
 
 void MainWindow::InitTouchScreen()
@@ -831,12 +833,13 @@ void MainWindow::updateDevicesComplect()
     QList<uint8_t> list4AI;
     QList<uint8_t> list8RP;
     QList<uint8_t> listSTEEL;
+    QList<uint8_t> list6DI6RO;
     int countStableDevice = 0;
     foreach (cDevice * device, listDevice) {
 
         if(device->getStable()) countStableDevice++;
 
-        if(device->getOnline()){
+        if(device->getOnline() || !device->getStable()){
             switch(device->deviceType)
             {
             case Device_4AI:
@@ -859,6 +862,13 @@ void MainWindow::updateDevicesComplect()
                 listSTEEL.append(device->getSlot());
                 listSTEEL.append(device->getSlot());
                 break;
+            case Divece_6DI6RO:
+                list6DI6RO.append(device->getSlot());
+                list6DI6RO.append(device->getSlot());
+                list6DI6RO.append(device->getSlot());
+                list6DI6RO.append(device->getSlot());
+                list6DI6RO.append(device->getSlot());
+                list6DI6RO.append(device->getSlot());
             default:
                 cLogger mk(pathtomessages, cLogger::DEVICE);
                 QString strSlot = QString::number(device->getSlot());
@@ -871,7 +881,11 @@ void MainWindow::updateDevicesComplect()
     }
 
     // все ли модули определились онлайн/оффлайн ?
-    if(countStableDevice == listDevice.size()) allDeviceStable = true;
+    if(countStableDevice == listDevice.size())
+    {
+        allDeviceStable = true;
+        timerUpdateDevices->setInterval(timeUpdateDevices);
+    }
 
 
     // обновление списка каналов
@@ -893,6 +907,28 @@ void MainWindow::updateDevicesComplect()
         for(int i = list4AI.size(); i < listChannels.size(); i++)
         {
             listChannels.at(i)->enable = false;
+        }
+    }
+
+    // обновление списка частотных каналов
+    i = 0;
+    foreach (uint8_t slot, list6DI6RO) {
+        if(i < listFreq.size())
+        {
+            //обновление параметров каналов
+            cFreqChannel * ch = listFreq.at(i);
+            ch->setSlot(slot);     //
+            ch->setSlotChannel(i%NUM_CHAN_IN_6DI6RO);
+            ch->enable = true;
+        }
+        i++;
+    }
+    if(listFreq.size() > list6DI6RO.size())
+    {
+        // плат стало меньше, тогда временно отключем каналы, но не удаляем
+        for(int i = list6DI6RO.size(); i < listFreq.size(); i++)
+        {
+            listFreq.at(i)->enable = false;
         }
     }
 
@@ -949,8 +985,6 @@ void MainWindow::updateDevicesComplect()
         }
     }
 }
-
-
 
 bool MainWindow::GetEcoMode()
 {
@@ -1195,7 +1229,7 @@ void MainWindow::retransToWorker(Transaction tr)
         deviceTypeEnum deviceType = listDevice.at(tr.slave - 1)->deviceType;
         if(systemOptions.typeMultigraph == cSystemOptions::Multigraph)
         {
-            if((deviceType == Device_4AI) || (deviceType == Device_8RP))
+            if((deviceType == Device_4AI) || (deviceType == Device_8RP)  || (deviceType == Divece_6DI6RO))
                 emit sendTransToWorker(tr);
         }
         else if((systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel))
@@ -1253,7 +1287,7 @@ void MainWindow::parseWorkerReceive()
                     channel->parserChannel(tr);
                 }
             }
-            if(device->deviceType == Device_STEEL)
+            else if(device->deviceType == Device_STEEL)
             {
                 int index = getIndexSteelBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1261,12 +1295,20 @@ void MainWindow::parseWorkerReceive()
                     listSteel.at(index)->parserSteel(tr);
                 }
             }
+            else if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
+            }
         }
         else if(paramName.contains("chan1"))
             // канал 2
         {
             ch = 1;
-           if(device->deviceType == Device_4AI)
+            if(device->deviceType == Device_4AI)
             {
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1275,7 +1317,7 @@ void MainWindow::parseWorkerReceive()
                     channel->parserChannel(tr);
                 }
             }
-            if(device->deviceType == Device_STEEL)
+            else if(device->deviceType == Device_STEEL)
             {
                 int index = getIndexSteelBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1283,27 +1325,84 @@ void MainWindow::parseWorkerReceive()
                     listSteel.at(index)->parserSteel(tr);
                 }
             }
+            else if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
+            }
+
         }
         else if(paramName.contains("chan2"))
             // канал 3
         {
             ch = 2;
-            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
-            if(index != -1)
+            if(device->deviceType == Device_4AI)
             {
-                channel = listChannels.at(index);
-                channel->parserChannel(tr);
+                int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    channel = listChannels.at(index);
+                    channel->parserChannel(tr);
+                }
+            }
+            else if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
             }
         }
         else if(paramName.contains("chan3"))
             // канал 4
         {
             ch = 3;
-            int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
-            if(index != -1)
+            if(device->deviceType == Device_4AI)
             {
-                channel = listChannels.at(index);
-                channel->parserChannel(tr);
+                int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    channel = listChannels.at(index);
+                    channel->parserChannel(tr);
+                }
+            }
+            else if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
+            }
+        }
+        else if(paramName.contains("chan4"))
+            // канал 5
+        {
+            ch = 4;
+            if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
+            }
+        }
+        else if(paramName.contains("chan5"))
+            // канал 6
+        {
+            ch = 5;
+            if(device->deviceType == Divece_6DI6RO)
+            {
+                int index = getIndexFreqBySlotAndCh(tr.slave, ch);
+                if(index != -1)
+                {
+                    listFreq.at(index)->parserChannel(tr);
+                }
             }
         }
         else
@@ -1398,6 +1497,21 @@ int MainWindow::getIndexAnalogBySlotAndCh(int slot, int ch)
     {
         ChannelOptions * channel = listChannels.at(i);
         if((channel->getSlot() == slot) && (channel->getSlotChannel() == ch))
+        {
+            ret = i;
+            break;
+        }
+    }
+    return ret;
+}
+
+int MainWindow::getIndexFreqBySlotAndCh(int slot, int ch)
+{
+    int ret = -1;
+    for(int i = 0; i < listFreq.size(); i++)
+    {
+        cFreqChannel * freq = listFreq.at(i);
+        if((freq->getSlot() == slot) && (freq->getSlotChannel() == ch))
         {
             ret = i;
             break;
