@@ -34,12 +34,10 @@ QVector<double> vectorsChannelsArch[24];
 QVector<double> X_Date_Coordinates;
 QVector<double> X_Coord_Steel, Y_Coord_SteelTemp, Y_Coord_SteelEds;
 
-extern cChannelSlotController csc;
 extern QList<ChannelOptions*> listChannels;
 extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern QList<cRelay*> listRelais;
-extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel *> listMath;

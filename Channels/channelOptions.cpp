@@ -85,18 +85,20 @@ uint16_t ChannelOptions::GetCurSignalType()
 
 int ChannelOptions::GetDiapason()
 {
-    if(outputData.chanSignalType == VoltageMeasure)
-    {
-        return outputData.chanAdditionalParameter1[0];
-    }
-    else if(outputData.chanSignalType == TermoResistanceMeasure)
-    {
-        return outputData.chanAdditionalParameter1[2];
-    }
-    else if(outputData.chanSignalType == TermoCoupleMeasure)
-    {
-        return outputData.chanAdditionalParameter1[2];
-    }
+
+    return outputData.chanAdditionalParameter1[0];
+//    if(outputData.chanSignalType == VoltageMeasure)
+//    {
+//        return outputData.chanAdditionalParameter1[0];
+//    }
+//    else if(outputData.chanSignalType == TermoResistanceMeasure)
+//    {
+//        return outputData.chanAdditionalParameter1[2];
+//    }
+//    else if(outputData.chanSignalType == TermoCoupleMeasure)
+//    {
+//        return outputData.chanAdditionalParameter1[2];
+//    }
 //    return diapason;
 }
 
@@ -152,19 +154,22 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
     diapason = newdiapason;
     shema = sh;
 
-    if(outputData.chanSignalType == VoltageMeasure)
-    {
-        outputData.chanAdditionalParameter1[0] = newdiapason;
-    }
-    else if(outputData.chanSignalType == TermoResistanceMeasure)
-    {
-        outputData.chanAdditionalParameter1[0] = sh;
-        outputData.chanAdditionalParameter1[2] = newdiapason;
-    }
-    else if(outputData.chanSignalType == TermoCoupleMeasure)
-    {
-        outputData.chanAdditionalParameter1[2] = newdiapason;
-    }
+    outputData.chanAdditionalParameter1[0] = newdiapason;
+    outputData.chanAdditionalParameter1[2] = sh;
+
+//    if(outputData.chanSignalType == VoltageMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[0] = newdiapason;
+//    }
+//    else if(outputData.chanSignalType == TermoResistanceMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[0] = sh;
+//        outputData.chanAdditionalParameter1[2] = newdiapason;
+//    }
+//    else if(outputData.chanSignalType == TermoCoupleMeasure)
+//    {
+//        outputData.chanAdditionalParameter1[2] = newdiapason;
+//    }
 
     if (!enable) return;
     // Отправка тут же актуальной информации в плату
@@ -179,12 +184,12 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
 void ChannelOptions::enableColdJunction(int en)
 {
     enColdJunction = en;
-    outputData.chanAdditionalParameter1[4] = enColdJunction;
+    outputData.chanAdditionalParameter1[2] = enColdJunction;
 }
 
 int ChannelOptions::getStateColdJunction()
 {
-    return outputData.chanAdditionalParameter1[4];
+    return outputData.chanAdditionalParameter1[2];
 }
 
 void ChannelOptions::setShiftColdJunction(double shift)
@@ -905,11 +910,11 @@ void ChannelOptions::SetMinimumColor(QColor newmincolor)
 int ChannelOptions::getShema()
 {
 
-    if(outputData.chanSignalType == TermoResistanceMeasure)
-    {
-        return outputData.chanAdditionalParameter1[0];
-    }
-    return 0;
+//    if(outputData.chanSignalType == TermoResistanceMeasure)
+//    {
+        return outputData.chanAdditionalParameter1[2];
+//    }
+//    return 0;
 }
 
 //void ChannelOptions::setShema(int sh)

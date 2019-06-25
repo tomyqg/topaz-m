@@ -7,7 +7,6 @@ cRelay::cRelay(uint8_t numDev, uint8_t slot, QObject *parent):
 {
     enable = false;
     newState = false;
-    oldState = false;
     confirmedState = false;
     curState = false;
     type = false;

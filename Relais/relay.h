@@ -17,7 +17,7 @@ public:
     bool type;           // false - нормальноразомкнутое, true - нормальнозамкнутое
 
     void setState(bool f);
-    bool getState();
+    bool getState() { return newState; }
     bool getCurState() { return curState; }
     void setCurState(bool state);
 
@@ -28,7 +28,6 @@ signals:
 public slots:
 
 private:
-    bool oldState;
     bool newState;
     bool curState;      //текщее состояние из Modbus
     QTimer timerUpdate;

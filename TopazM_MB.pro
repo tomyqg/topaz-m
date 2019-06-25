@@ -55,16 +55,9 @@ SOURCES += main.cpp \
     3rdparty/libmodbus/src/modbus.c \
     3rdparty/qextserialport/qextserialport.cpp \
 #    stackedoptions.cpp \
-    device.cpp \
     ustavka.cpp \
     Slots/slot.cpp \
     Channels/channelOptions.cpp \
-    Channels/channelslotconnector.cpp \
-    Channels/channelslotcontroller.cpp \
-    Relais/relayslotcontroller.cpp \
-    Relais/relayslotconnector.cpp \
-    Slots/slotsconfig.cpp \
-    registermap.cpp \
     processwritetofile.cpp \
     Slots/devicechannel.cpp \
     archivator.cpp \
@@ -82,8 +75,6 @@ SOURCES += main.cpp \
     LookupTable/registersmap.cpp \
     archworker.cpp \
     Steel/steel.cpp \
-    Steel/steel_connect.cpp \
-    Steel/steel_controller.cpp \
     Relais/relay.cpp \
     Server/serverhttp.cpp \
     Server/socket_thread.cpp \
@@ -168,18 +159,11 @@ HEADERS  += mainwindow.h \
     defines.h \
     3rdparty/qextserialport/qextserialenumerator.h \
     3rdparty/qextserialport/qextserialport.h \
-    device.h \
 #    stackedoptions.h \
-    registermap.h \
     transaction.h \
     ustavka.h \
     Slots/slot.h \
     Channels/channelOptions.h \
-    Channels/channelslotconnector.h \
-    Channels/channelslotcontroller.h \
-    Relais/relayslotcontroller.h \
-    Relais/relayslotconnector.h \
-    Slots/slotsconfig.h \
     processwritetofile.h \
     Slots/devicechannel.h \
     archivator.h \
@@ -200,8 +184,6 @@ HEADERS  += mainwindow.h \
     archticks.h \
     Steel/steel.h \
     Steel/steel_technology.h \
-    Steel/steel_connect.h \
-    Steel/steel_controller.h \
     Relais/relay.h \
     Server/serverhttp.h \
     Server/socket_thread.h \

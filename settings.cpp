@@ -196,19 +196,21 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     connect(&timerUpdateGraf, SIGNAL(timeout()), this, SLOT(replotGraf()));
     timerUpdateGraf.start(200);
 
-    //настройки для скролинга списка сообщений
-    QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
-    mouseScroll = false;
-    //скролинг виджетов настроек каналов
-    QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
-
     //обновим параметры виджетов, чтобы всё на своих местах стояло и написано, что надо
     updateWidgets();
 
     //обновление параметров: тип сигнала, тип датчика, схема включения
     updateUiSignalTypeParam(getIndexSignalTypeTable(channel->GetSignalType()));
+
+    //настройки для скролинга списка сообщений
+    QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
+    mouseScroll = false;
+    //скролинг виджетов настроек каналов
+    QScroller *scroller = QScroller::scroller(ui->scrollAreaChannelOptions);
+    scroller->grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
+//    QScroller::grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
 
     //настройки для архива
     if(arch != NULL)
@@ -302,7 +304,6 @@ void dSettings::updateWidgets()
         h = 72;
         ui->saveButton->show();
         ui->nameSubMenu->setText("<html><head/><body><p>НАСТРОЙКИ<br>КАНАЛА</p></body></html>");
-//        srcChannel
         ui->srcChannel->clear();
         ui->srcChannel->addItem("---");
         foreach (ChannelOptions * ch, listChannels) {

@@ -4,7 +4,7 @@
 #include <QQueue>
 #include "uartdriver.h"
 #include "Channels/channelOptions.h"
-#include "device.h"
+//#include "device.h"
 #include "src/modbus.h"
 #include "transaction.h"
 #include "registersmap.h"

@@ -38,8 +38,6 @@ extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern QList<cRelay*> listRelais;
 extern typeSteelTech steelTech[];
-extern cChannelSlotController csc;
-extern cSteelController ssc;
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern cUsbFlash * flash;
 extern QList<cGroupChannels*> listGroup;
@@ -853,7 +851,7 @@ void dMenu::openSettingsChannel(int num, int page)
         //проверка на наличие такого номера канала
         if((num <= 0) || (num > listChannels.size())) return;
 
-        dialogSetingsChannel = new dSettings(listChannels, num, page);
+        dialogSetingsChannel = new dSettings(listChannels, num);
         dialogSetingsChannel->exec();
         dialogSetingsChannel->deleteLater();
         addWidgetChannels();

@@ -54,8 +54,6 @@
 int dateindex;
 int timeindex;
 QStringList datestrings, timestrings;
-cChannelSlotController csc;
-cSteelController ssc;
 QDateTime timeOutBuff;
 cUsbFlash * flash;
 QMutex mSysOpt;
@@ -253,18 +251,11 @@ void MainWindow::MainWindowInitialization()
     connect(UpdateGraficsTimer, SIGNAL(timeout()), this, SLOT(UpdateGraphics()));
     UpdateGraficsTimer->start(GraphicsUpdateTimer); // этот таймер отвечает за обновление графика (частота отрисовки графика) должно быть 100-200 милисекунд
 
-
-
-
     //
     LabelsInit();
 
     // инициализация таблицы реле-слот
     InitRelaySlotTable();
-
-    //инициализация таблицы сталь-слот
-    InitSteelSlotTable();
-
 
     // получение значений уставок из файла
 //    ReadUstavkiFromFile();
@@ -515,14 +506,6 @@ void MainWindow::UpdUst()
     }
 }
 
-//-----Временная реализация соединения слотов----
-void MainWindow::InitChannelSlotTable()
-{
-    csc.addChannelSlot(0, 0, CONST_SLAVE_ADC);
-    csc.addChannelSlot(1, 1, CONST_SLAVE_ADC);
-    csc.addChannelSlot(2, 2, CONST_SLAVE_ADC);
-    csc.addChannelSlot(3, 3, CONST_SLAVE_ADC);
-}
 
 void MainWindow::InitRelaySlotTable()
 {
@@ -535,16 +518,6 @@ void MainWindow::InitRelaySlotTable()
     }
 }
 
-void MainWindow::InitSteelSlotTable()
-{
-    ssc.addSteelSlot(0, 0, CONST_SLAVE_STEEL);
-    ssc.addSteelSlot(1, 1, CONST_SLAVE_STEEL);
-    ssc.addSteelSlot(2, 2, CONST_SLAVE_STEEL);
-    ssc.addSteelSlot(3, 3, CONST_SLAVE_STEEL);
-
-}
-
-//-----/Временная реализация соединения слотов----
 
 
 /*
@@ -1066,12 +1039,15 @@ void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
 {
 
     Transaction tr(Transaction::W);
-    int index = num >> 1;
-    int level = num & 1;
-    QString strLevel = (level ? "ReleyLo" : "ReleyHi");
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(index) + strLevel);
+    int relayControlRregister = 0;
+    for(int i = 0; i < NUM_RELAY_IN_8RP; i ++)
+    {
+        int index = getIndexRelayBySlotAndCh(sl, i);
+        relayControlRregister += (listRelais.at(index)->getState() << i);
+    }
+    tr.offset = cRegistersMap::getOffsetByName("RelayControl");
     tr.slave = sl;
-    tr.volInt = state;
+    tr.volInt = relayControlRregister;
 #ifdef DEBUG_RELAY
     qDebug() << "Relay:" << num << "=" << state;
 #endif
@@ -1082,10 +1058,15 @@ void MainWindow::slotGetRelay(uint8_t sl, uint8_t num)
 {
 
     Transaction tr(Transaction::R);
-    int index = num >> 1;
-    int level = num & 1;
-    QString strLevel = (level ? "ReleyLo" : "ReleyHi");
-    tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(index) + strLevel);
+    int relayControlRregister = 0;
+    for(int i = 0; i < NUM_RELAY_IN_8RP; i ++)
+    {
+        int index = getIndexRelayBySlotAndCh(sl, i);
+        relayControlRregister += (listRelais.at(index)->getState() << i);
+    }
+    tr.offset = cRegistersMap::getOffsetByName("RelayControl");
+    tr.slave = sl;
+    tr.volInt = relayControlRregister;
     tr.slave = sl;
 //#ifdef DEBUG_RELAY
 //    qDebug() << "Relay:" << num << "=" << state;
@@ -1439,16 +1420,33 @@ void MainWindow::parseWorkerReceive()
                     }
                 }
             }
-            else
-            {
-                emit retransToSlotConfig(tr);
-            }
+
         }
         else    //isDeviceParam
         {
 
+            //для реле регистр выходов как параметр платы
+            if(paramName == "RelayControl")
+            {
+                if(device->deviceType == Device_8RP)
+                {
+//                    foreach (cRelay * r, listRelais) {
+//                        if((tr.slave == r->mySlot))
+//                        {
+//                            r->setCurState(tr.volInt);
+//                        }
+//                    }
+                    for(int i = 0; i < NUM_RELAY_IN_8RP; i++)
+                    {
+                        int index = getIndexRelayBySlotAndCh(tr.slave, i);
+                        bool state = (bool)((tr.volInt >> i) & 1);
+                        listRelais.at(index)->setCurState(state);
+                    }
+
+                }
+            }
             // Vag: уместить всё внутри обработчика устройства cDevice (вверху)
-            if(paramName == "deviceType")
+            else if(paramName == "deviceType")
             {
                 if(tr.volInt == Device_STEEL)
                 {
@@ -1467,7 +1465,6 @@ void MainWindow::parseWorkerReceive()
                     slotAnalogOnline = true;
                 }
             }
-            emit retransToSlotConfig(tr);
         }
 
     }

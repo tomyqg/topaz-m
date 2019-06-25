@@ -12,11 +12,11 @@
 #include "mathresolver.h"
 #include "uartdriver.h"
 #include "src/modbus.h"
-#include "device.h"
+//#include "device.h"
 #include "transaction.h"
-#include "Channels/channelslotcontroller.h"
-#include "Relais/relayslotcontroller.h"
-#include "Slots/slotsconfig.h"
+//#include "Channels/channelslotcontroller.h"
+//#include "Relais/relayslotcontroller.h"
+//#include "Slots/slotsconfig.h"
 #include "archivator.h"
 #include "log.h"
 #include "defines.h"
@@ -25,7 +25,7 @@
 #include "systemoptions.h"
 #include "steel.h"
 #include "steel_technology.h"
-#include "steel_controller.h"
+//#include "steel_controller.h"
 #include "relay.h"
 #include "serverhttp.h"
 #include <QNetworkProxyFactory>
@@ -195,7 +195,6 @@ signals:
 //    void SendObjectsToWorker(ChannelOptions* c1,ChannelOptions* c2,ChannelOptions* c3 ,ChannelOptions* c4);
     void sendTransToWorker(Transaction tr);
     void setReleToOptionsForm(int code);
-    void retransToSlotConfig(Transaction tr);
     void signalToExtModbus(QString name,tModbusBuffer buffer);
 
 private:
@@ -355,15 +354,12 @@ private:
     bool isChannelInMaxNow(int ch);
     bool isChannelInMinNow(int ch);
 
-//    cChannelSlotController csc;
     void InitChannelSlotTable();
 
 //    cRelaySlotController rsc;
     void InitRelaySlotTable();
 
     uint32_t getDevOffsetByChannel(int ch, uint32_t offset);
-
-    cSlotsConfig * sc;
 
     QQueue<Transaction> queueTransaction;
     QMutex * mQTr;
@@ -386,7 +382,6 @@ private:
     dSettings * dialogSetingsChannel;
 
     void initSteel();
-    void InitSteelSlotTable();
     bool slotSteelOnline;       //признак наличия платы STEEL в слоте
     bool slotAnalogOnline;       //признак наличия платы 4AI
     bool allDeviceStable;       // признак установившего статуса плат онлайн/оффлайн
