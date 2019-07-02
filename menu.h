@@ -74,6 +74,7 @@ private:
     QTimer tUpdateAnaliz;
     dSettings * dialogSetingsChannel;
     QList<QLabel*> listLabelDiagnostic;
+    QList<QLabel*> listLabelDiagnosticFreq;
     QList<QLabel*> listLabelModeling;
     QList<QLabel*> listLabelTempAnalizSteel;
     QList<QLabel*> listLabelEmfpAnalizSteel;
@@ -117,6 +118,7 @@ private:
     void updateVer();
     void updateInterfaceWidgets();
     void addWidgetFreqs();
+    QLabel *addFramMeasureDiagnostic(QString lblParam, QString lblName, QString lblValue, QString lblUnit);
 private slots:
     void updateDevicesUI();
     void UpdateAnalyze();

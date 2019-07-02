@@ -29,10 +29,10 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     connect(&timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     timerUpdateParam.start(TIME_UPDATE_PARAM_STEEL_MC);
     //список параметров конфигурации в карте регистров
-    listUpdateParam << "TimeSquareTemp" << "RangeTemp" << "TimeMeasureTemp" << "LowTemp" << "HiTemp" << "SensorType"\
+    listUpdateParam << "TimeSquareTemp" << "RangeTemp" << "TimeMeasure" << "LowTemp" << "HiTemp" << "SensorType"\
         << "TimeSquareEDS" << "RangeEDS" << "TimeMeasureEDS" << "Crystallization" << "MassCoeff" \
-        << "FinalOx" << "Assimilation" << "MassMelting" << "AdditionalParameter1";
-    listDiagnosticParam << "Data" << "PrimaryActivity" << "SteelResultCjValue";
+        << "FinalOx" << "Assimilation" << "MassMelting" << "AdditionalParameter1" << "SteelCorrectionjValue";
+    listDiagnosticParam << "TempSquare" << "PrimaryActivity" << "SteelResultCjValue";
     countParam = 0;
     countDiagnostic = 0;
 }
@@ -43,11 +43,16 @@ void cSteel::parserSteel(Transaction tr)
     trans.dir = Transaction::W;
     QString paramName = cRegistersMap::getNameByOffset(tr.offset);
     QString chanName = "chan" + QString::number(slotIndex);
-    if(paramName == chanName + "Status")
+
+    if(paramName == chanName + "SteelStatus")
     {
         status = tr.volInt;
     }
-    else if(paramName == chanName + "Data")
+    else if(paramName == chanName + "SteelError")
+    {
+        //Vag: ображать ошибки в журнале и т.п.
+    }
+    else if(paramName == chanName + "TempSquare")
     {
         temp = tr.volFlo;
     }
@@ -154,7 +159,7 @@ void cSteel::parserSteel(Transaction tr)
                 emit sendTransToWorker(trans);
             }
         }
-        else if(paramName == chanName + "TimeMeasureTemp")
+        else if(paramName == chanName + "TimeMeasure")
         {
             if(technology->tPt != tr.volFlo)
             {
@@ -274,7 +279,7 @@ void cSteel::update()
     if(enable)
     {
 
-        //нужны постоянно в режими диагностики
+        //нужны постоянно в режиме диагностики
         if(mode == Device_Mode_Metrological)
         {
             tr.offset = cRegistersMap::getOffsetByName("chan" \
@@ -285,8 +290,11 @@ void cSteel::update()
         }
         else //mode == Device_Mode_Regular
         {
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "Status");
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "SteelStatus");
             emit sendTransToWorker(tr);
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "SteelError");
+            emit sendTransToWorker(tr);
+
         }
 
         if(state == STEEL_WAIT)
@@ -304,7 +312,7 @@ void cSteel::update()
         }
         else if(state == STEEL_MEASURE)
         {
-            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "Data");
+            tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "TempSquare");
             emit sendTransToWorker(tr);
 
             if((status == StatusCh_SteelSquaresOK) ||\
@@ -316,7 +324,7 @@ void cSteel::update()
                 emit signalReady(num);
                 verifStatus = StatusCh_SteelUpdateData;
                 QList<QString> str;
-                str /*<< "Data" */<< "OxActivity" << "MassAl" << "MassAl" << "PrimaryActivity" << "Carbon";
+                str /*<< "Data" */<< "OxActivity" << "MassAl" << "PrimaryActivity" << "Carbon";
                 if(technology->COH != 0)
                 {
                     foreach (QString s, str) {

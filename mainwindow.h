@@ -340,6 +340,7 @@ private:
     bool mouseOnMove;
     bool waitAutoScale;
     QTimer timerScale;
+    bool pauseUpdateGraph;  // пауза посторения графиков
 
 //    void DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize);
     void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, QPainter painter, int alerttextsize, int smalltextsize);

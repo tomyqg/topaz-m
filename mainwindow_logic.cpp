@@ -177,7 +177,8 @@ void MainWindow::MainWindowInitialization()
     mouseOnMove = false;
     waitAutoScale = false;
     ui->customPlot->yAxis->setRange(-GetXRange(), 0/*GetXRange()*/);
-    ui->customPlot->setAntialiasedElements(QCP::aeNone);
+    ui->customPlot->setAntialiasedElements(QCP::aeAll);
+    pauseUpdateGraph = false;
 
     QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр
@@ -1240,7 +1241,6 @@ void MainWindow::parseWorkerReceive()
     QString paramName;
     ChannelOptions * channel = listChannels.at(0);
     int ch;
-    bool isDeviceParam = false;
 
     mQTr->lock();
     int counter = 0;
@@ -1253,7 +1253,6 @@ void MainWindow::parseWorkerReceive()
         cDevice * device = listDevice.at(indexDev);
         device->setOnline();
         paramName = cRegistersMap::getNameByOffset(tr.offset);
-        isDeviceParam = false;
 
         if(paramName.contains("chan0"))
             // канал 1
@@ -1388,42 +1387,7 @@ void MainWindow::parseWorkerReceive()
         }
         else
         {
-            isDeviceParam = true;
             device->parseDeviceParam(tr);
-        }
-
-        if(!isDeviceParam)
-        {
-            if(paramName == QString("chan" + QString::number(ch) + "ReleyHi"))
-            {
-                if(device->deviceType == Device_8RP)
-                {
-                    int num = ch << 1;
-                    foreach (cRelay * r, listRelais) {
-                        if((tr.slave == r->mySlot) && (r->myPhysicalNum == num) )
-                        {
-                            r->setCurState(tr.volInt);
-                        }
-                    }
-                }
-            }
-            else if(paramName == QString("chan" + QString::number(ch) + "ReleyLo"))
-            {
-                if(device->deviceType == Device_8RP)
-                {
-                    int num = (ch << 1) + 1;
-                    foreach (cRelay * r, listRelais) {
-                        if((tr.slave == r->mySlot) && (r->myPhysicalNum == num) )
-                        {
-                            r->setCurState(tr.volInt);
-                        }
-                    }
-                }
-            }
-
-        }
-        else    //isDeviceParam
-        {
 
             //для реле регистр выходов как параметр платы
             if(paramName == "RelayControl")
@@ -1633,7 +1597,7 @@ void MainWindow::sendConfigChannelsToSlave()
             emit sendTransToWorker(tr);
 
             // запись Time_measure_temperature
-            str = "chan" + QString::number(devS) + "TimeMeasureTemp";
+            str = "chan" + QString::number(devS) + "TimeMeasure";
             tr.offset = cRegistersMap::getOffsetByName(str);
             tr.volFlo = st->technology->tPt;
             emit sendTransToWorker(tr);

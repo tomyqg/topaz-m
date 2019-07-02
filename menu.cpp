@@ -306,7 +306,7 @@ void dMenu::on_saveButton_clicked()
     mo.start();
     ui->load->setHidden(false);
 //     засекаем время записи настроек в файл или ждать сигнал о завершении
-    timerLoad.start(1000);
+    timerLoad.start(3000);
     //  запись файла //
     mSysOpt.lock();
     systemOptions.arrows = ui->arrowscheckBox->checkState();
@@ -332,8 +332,14 @@ void dMenu::on_saveButton_clicked()
         steel->mode = Device_Mode_Regular;
     }
     emit saveButtonSignal();
-    //Окно закроется по сигналу таймаута
+
+//    // ожидание таймера
+//    while(timerLoad.remainingTime);
+//    timeoutLoad();
+
 }
+
+
 
 void dMenu::updateSystemOptions(QString path)
 {
@@ -495,6 +501,7 @@ void dMenu::addWidgetMeasures()
 {
     clearLayout(ui->verticalLayoutMeasures);
     listLabelDiagnostic.clear();
+    listLabelDiagnosticFreq.clear();
     // генерация виджетов
     if(systemOptions.display == cSystemOptions::Steel)
     {
@@ -522,25 +529,6 @@ void dMenu::addWidgetMeasures()
             QLabel * analizeLblGroupSteel = new QLabel(frameAnalizSteel);
             analizeLblGroupSteel->setFont(font4);
             gridLayout_24->addWidget(analizeLblGroupSteel, 0, 0, 1, 1);
-
-//            QLabel * labelTypeTermo = new QLabel(frameAnalizSteel);
-//            labelTypeTermo->setFont(font1);
-//            labelTypeTermo->setAlignment(Qt::AlignLeading);
-//            gridLayout_24->addWidget(labelTypeTermo, 1, 0, 1, 1);
-
-//            QComboBox * typeTermoCouple = new QComboBox(frameAnalizSteel);
-//            typeTermoCouple->setMinimumSize(QSize(131, 31));
-//            typeTermoCouple->setMaximumSize(QSize(185, 45));
-//            typeTermoCouple->setFont(font1);
-//            typeTermoCouple->setStyleSheet(QLatin1String("QComboBox {\n"
-//                                                         "background-color: rgb(230, 230, 230);\n"
-//                                                         "color: rgb(0, 0, 0);\n"
-//                                                         "border-radius: 0px;\n"
-//                                                         "}\n"
-//                                                         "QComboBox::drop-down {\n"
-//                                                         "	width:30px;\n"
-//                                                         " }"));
-//            gridLayout_24->addWidget(typeTermoCouple, 1, 1, 1, 1);
 
             QLabel * analizeLblTemp = new QLabel(frameAnalizSteel);
             analizeLblTemp->setFont(font1);
@@ -604,18 +592,6 @@ void dMenu::addWidgetMeasures()
             analizeLblEmf->setText("EMF, мВ");
             cSteel * steel = listSteel.at(i);
             analizeLblNameTech->setText(QString(steel->technology->name));
-//            typeTermoCouple->clear();
-//            typeTermoCouple->insertItems(0, QStringList() << "ТИП S" << "ТИП B" << "ТИП A1");
-//            int indexTC[] = {0, 0, 0, 1, 2, 0, 0};
-//            typeTermoCouple->setCurrentIndex(indexTC[steel->technology->nSt]);
-//            connect(typeTermoCouple, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-//                    [=](int index){
-//                Transaction tr(Transaction::W);
-//                tr.slave = steel->slot;
-//                tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(steel->slotIndex) + "AdditionalParameter1");
-//                tr.paramA12[1] = steel->technology->nSt;
-//                emit signalToWorker(tr);
-//            });
             analizeSteelCj->setText(QString::number(steel->cj));
             analizeLblTmp->setText(QString::number(steel->temp));
             analizeSteelEmf->setText(QString::number(steel->eds));
@@ -630,55 +606,81 @@ void dMenu::addWidgetMeasures()
     {
         int i = 0;
         foreach (ChannelOptions * channel, listChannels) {
-            QFont font2;
-            font2.setFamily(QStringLiteral("Open Sans"));
-            font2.setPointSize(20);
 
-
-            QFrame * frameMeasure1 = new QFrame(ui->widgetScrollAreaMeasures);
-            frameMeasure1->setFrameShape(QFrame::NoFrame);
-            frameMeasure1->setFrameShadow(QFrame::Raised);
-
-            QHBoxLayout * horizontalLayout_3 = new QHBoxLayout(frameMeasure1);
-
-            QLabel * labelMeasure1 = new QLabel(frameMeasure1);
-            labelMeasure1->setFont(font2);
-            labelMeasure1->setText("КАНАЛ " + QString::number(channel->getNum()));
-            horizontalLayout_3->addWidget(labelMeasure1);
-
-            QLabel * labelNameMeasure1 = new QLabel(frameMeasure1);
-            labelNameMeasure1->setFont(font2);
-            labelNameMeasure1->setAlignment(Qt::AlignCenter);
-            labelNameMeasure1->setText(channel->GetChannelName());
-            horizontalLayout_3->addWidget(labelNameMeasure1);
-            ui->verticalLayoutMeasures->addWidget(frameMeasure1);
-
-            QLabel * volMeasure1 = new QLabel(frameMeasure1);
-            volMeasure1->setMinimumSize(QSize(131, 31));
-            volMeasure1->setMaximumSize(QSize(185, 45));
-            volMeasure1->setFont(font2);
-            volMeasure1->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
-                                                     "	color: rgb(255, 255, 255);\n"
-                                                     "	border-radius: 0px;"));
-            volMeasure1->setAlignment(Qt::AlignCenter);
-            volMeasure1->setText(QString::number(channel->GetCurrentChannelValue()));
-            listLabelDiagnostic.append(volMeasure1);
-            horizontalLayout_3->addWidget(volMeasure1);
-
-            QLabel * labelMesMeasure1 = new QLabel(frameMeasure1);
-            labelMesMeasure1->setFont(font2);
-            labelMesMeasure1->setAlignment(Qt::AlignCenter);
-            labelMesMeasure1->setText(channel->GetUnitsName());
-            horizontalLayout_3->addWidget(labelMesMeasure1);
-
+            if(channel->enable)
+            {
+                QLabel * labelValMeasure = addFramMeasureDiagnostic("АНАЛОГ. КАНАЛ " + QString::number(channel->getNum()),\
+                                                                    channel->GetChannelName(),\
+                                                                    QString::number(channel->GetCurrentChannelValue()),\
+                                                                    channel->GetUnitsName());
+                listLabelDiagnostic.append(labelValMeasure);
+            }
             i++;
         }
+
+        i = 0;
+        foreach (cFreqChannel * channel, listFreq) {
+            if(channel->enable)
+            {
+                QLabel * labelValMeasure = addFramMeasureDiagnostic("ЧАСТОТ. КАНАЛ " + QString::number(channel->getNum()),\
+                                                                    channel->GetChannelName(),\
+                                                                    QString::number(channel->GetCurrentChannelValue()),\
+                                                                    channel->getUnit());
+                listLabelDiagnosticFreq.append(labelValMeasure);
+            }
+            i++;
+        }
+
     }
 
         QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
         ui->verticalLayoutMeasures->addItem(verticalSpacer);
 }
 
+QLabel * dMenu::addFramMeasureDiagnostic(QString lblParam, QString lblName, QString lblValue, QString lblUnit)
+{
+    QFont font2;
+    font2.setFamily(QStringLiteral("Open Sans"));
+    font2.setPointSize(14);
+
+    QFrame * frameMeasure1 = new QFrame(ui->widgetScrollAreaMeasures);
+    frameMeasure1->setFrameShape(QFrame::NoFrame);
+    frameMeasure1->setFrameShadow(QFrame::Raised);
+
+    QHBoxLayout * horizontalLayout_3 = new QHBoxLayout(frameMeasure1);
+
+    QLabel * labelMeasure1 = new QLabel(frameMeasure1);
+    labelMeasure1->setFont(font2);
+    labelMeasure1->setText(lblParam);
+    horizontalLayout_3->addWidget(labelMeasure1);
+
+    QLabel * labelNameMeasure1 = new QLabel(frameMeasure1);
+    labelNameMeasure1->setFont(font2);
+    labelNameMeasure1->setAlignment(Qt::AlignCenter);
+    labelNameMeasure1->setText(lblName);
+    horizontalLayout_3->addWidget(labelNameMeasure1);
+    ui->verticalLayoutMeasures->addWidget(frameMeasure1);
+
+    QLabel * volMeasure1 = new QLabel(frameMeasure1);
+    volMeasure1->setMinimumSize(QSize(131, 31));
+    volMeasure1->setMaximumSize(QSize(185, 45));
+    volMeasure1->setFont(font2);
+    volMeasure1->setStyleSheet(QLatin1String("	background-color: rgb(21, 159, 133);\n"
+                                             "	color: rgb(255, 255, 255);\n"
+                                             "	border-radius: 0px;"));
+    volMeasure1->setAlignment(Qt::AlignCenter);
+    volMeasure1->setText(lblValue);
+//    listLabelDiagnosticFreq.append(volMeasure1);
+    horizontalLayout_3->addWidget(volMeasure1);
+
+    QLabel * labelMesMeasure1 = new QLabel(frameMeasure1);
+    labelMesMeasure1->setFont(font2);
+    labelMesMeasure1->setAlignment(Qt::AlignCenter);
+    labelMesMeasure1->setText(lblUnit);
+    horizontalLayout_3->addWidget(labelMesMeasure1);
+
+    return volMeasure1;
+}
 
 
 void dMenu::clearLayout(QLayout* layout, bool deleteWidgets)
@@ -1048,7 +1050,7 @@ void dMenu::slotOpenFreq(int num)
     curFreq = num - 1;
     cFreqChannel * freq = listFreq.at(curFreq);
     ui->comboTypeFreq->setCurrentIndex(freq->GetSignalType());
-    ui->impulseDuration->setValue(freq->GetCurImpulseDuration());
+    ui->impulseDuration->setValue(freq->GetImpulseDuration());
     ui->impulseWeight->setValue(freq->getImpulseWeight());
     ui->nameFreqChannel->setText(freq->GetChannelName());
     ui->scaleDownFreq->setValue(freq->GetLowerMeasureLimit());
@@ -2435,7 +2437,9 @@ void dMenu::on_bLogEvents_clicked()
     dialogSetingsChannel->deleteLater();
 }
 
-
+/*
+ * Обновление данных диагностики (измеренные значения)
+ */
 void dMenu::updateLabelDiagnostic()
 {
     if(systemOptions.display == cSystemOptions::Steel)
@@ -2466,13 +2470,26 @@ void dMenu::updateLabelDiagnostic()
     }
     else
     {
+        // Аналоговые сигналы
         int i = 0;
         foreach(QLabel * volLabel, listLabelDiagnostic)
         {
-            if(i < listChannels.size())
-            {
-                volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
-            }
+
+            if(i >= listChannels.size()) break; // Ошибка: столько каналов тут нет
+            if(listChannels.at(i)->enable == false) continue; // Пропустить отключенные каналы
+
+            volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+            i++;
+        }
+        // Частотные сигналы
+        i = 0;
+        foreach(QLabel * volLabel, listLabelDiagnosticFreq)
+        {
+
+            if(i >= listFreq.size()) break; // Ошибка: столько каналов тут нет
+            if(listFreq.at(i)->enable == false) continue; // Пропустить отключенные каналы
+
+            volLabel->setText(QString::number(listFreq.at(i)->GetCurrentChannelValue()));
             i++;
         }
     }

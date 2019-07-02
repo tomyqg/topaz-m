@@ -20,7 +20,7 @@
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.92"
+#define VER "1.94"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
@@ -145,7 +145,7 @@
 
 #define MultiThread
 #define ValuesUpdateTimer 200        // период чтения данных в архив
-#define GraphicsUpdateTimer 100      // время в мсек для обновления самого графика
+#define GraphicsUpdateTimer 200      // время в мсек для обновления самого графика
 #define ArchiveUpdateTimer 30000     // время архивации на флешку в мсекундах
 #define DateLabelUpdateTimer 500    // время обновления времени
 //#define LogUpdTimer 10000             // время обновления журнала сообщений (Log.txt)
@@ -232,7 +232,7 @@
 #define TOTAL_NUM_FREQ      36      //максимальное число подключаемых частотных каналов
 #define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
 #define NUM_CHAN_IN_6DI6RO  6       // количество каналов в одной плате 6DI6RO
-#define TOTAL_NUM_USTAVKI   8
+#define TOTAL_NUM_USTAVKI   128     //максимальное число уставок (уловное ограничение)
 #define NUM_STEEL           4
 #define NUM_CHAN_IN_STEEL   2
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали

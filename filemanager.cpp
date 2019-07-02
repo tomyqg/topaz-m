@@ -118,13 +118,15 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
 
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
-    QFile file(path);
-    QTextStream out(&file);
+    QFile file(path + QString(".backup"));
     if(file.open(QIODevice::WriteOnly))
     {
         file.resize(0); // clear file
+        QTextStream out(&file);
         out << setstr;
         file.close();
+        QFile::remove(path);
+        QFile::copy(path + QString(".backup"), path);
     }
     else
     {
@@ -139,20 +141,38 @@ int cFileManager::readChannelsSettings(QString path)
 {
 
     QFile infile(path);
-    QString sss;
     if(!infile.exists()) return 2;  //файл не доступен
+    QString sss;
+    bool fileIsBad = false;
     if(infile.open(QIODevice::ReadOnly))
     {
         QTextStream in(&infile);
         sss = in.readLine();
+        if(sss.size() < 10) fileIsBad = true;
         infile.close();
     }
     else
     {
-        return 1;   //файл не открывается
+        fileIsBad = true;
     }
 
-    if(sss.size() == 0) return 4;    //файл пустой
+    if(fileIsBad)   //проблемы с файлом настроек, воспользуемся предыдущими настройками
+    {
+        infile.setFileName(path + QString(".backup"));
+        if(infile.open(QIODevice::ReadOnly))
+        {
+            QTextStream in(&infile);
+            sss = in.readLine();
+            if(sss.size() < 10) return 4;   //пустой файл
+            infile.close();
+        }
+        else
+        {
+            return 1; //есть проблемы с открытием файлов
+        }
+    }
+
+//    if(sss.size() == 0) return 4;    //файл пустой
 
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
@@ -424,13 +444,16 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
     systemoptions["Options"] = options;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-    QFile file(path);
+    QFile file(path + QString(".backup"));
+//    QFile::copy(path + QString(".backup"));
     if(file.open(QIODevice::WriteOnly))
     {
         file.resize(0); // clear file
         QTextStream out(&file);
         out << setstr;
         file.close();
+        QFile::remove(path);
+        QFile::copy(path + QString(".backup"), path);
     }
     else
     {
@@ -442,20 +465,41 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 {
     QFile infile(path);
+    if(!infile.exists()) return 2;  //файл не доступен
     QString sss;
     QJsonArray array;
     QJsonObject jsonobj;
+    bool fileIsBad = false;
 
     if(infile.open(QIODevice::ReadOnly))
     {
         QTextStream in(&infile);
         sss = in.readLine();
+        if(sss.size() < 10) fileIsBad = true;
         infile.close();
     }
     else
     {
-        return 1; //есть проблемы с открытием файла
+        fileIsBad = true;
     }
+
+    if(fileIsBad)   //проблемы с файлом настроек, воспользуемся предыдущими настройками
+    {
+        infile.setFileName(path + QString(".backup"));
+        if(infile.open(QIODevice::ReadOnly))
+        {
+            QTextStream in(&infile);
+            sss = in.readLine();
+            if(sss.size() < 10) return 4;   //пустой файл
+            infile.close();
+        }
+        else
+        {
+            return 1; //есть проблемы с открытием файлов
+        }
+    }
+
+
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
 //    StackedOptions::calibrationprm = json["Calibration"].toString();

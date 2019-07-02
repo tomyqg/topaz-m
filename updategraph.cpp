@@ -207,43 +207,81 @@ void MainWindow::UpdateGraphics()
     selectWidgetDiagram();
 }
 
-
+/*
+ *      Построение графиков трендов
+ * */
 void MainWindow::GrafsUpdateTrends()
 {
+
+    if(dialogMenu->isVisible()) return;     //Не рисовать графики пока в меню
+    if(pauseUpdateGraph)
+    {
+        ui->customPlot->replot();
+//        ui->customPlot->update();
+        return;
+    }
     if(curGroupChannel >= listGroup.size()) return;
 
     cGroupChannels * group = listGroup.at(curGroupChannel);
+    double xCurTime = QDateTime::currentDateTime()/*.toTime_t()*/.toMSecsSinceEpoch()/1000.0;
+    QList<QColor> colors;
+    colors << ColorCh1 << ColorCh2 << ColorCh3 << ColorCh4;
+    double leftXTime, rightXTime;
 
-    double xCurTime = QDateTime::currentDateTime().toTime_t();
-
-//    ui->customPlot->xAxis->setRange(xoffset-GetXRange(), xoffset/*+GetXRange()*/);
     if (systemOptions.arrows)
     {
-        ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/5);
+        leftXTime = xCurTime-GetXRange()/2;
+        rightXTime = xCurTime + GetXRange()/5;
     }
     else
     {
-        ui->customPlot->xAxis->setRange(xCurTime-GetXRange()/2, xCurTime+GetXRange()/100);
+        leftXTime = xCurTime-GetXRange()/2;
+        rightXTime = xCurTime + GetXRange()/100;
     }
+
+    ui->customPlot->xAxis->setRange(leftXTime, rightXTime);
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
     ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
     ui->customPlot->clearGraphs();
+
     graphPen.setWidth(GraphWidthinPixels);
 
-    QList<QColor> colors;
-    colors << ColorCh1 << ColorCh2 << ColorCh3 << ColorCh4;
 
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
     {
+
         ui->customPlot->addGraph();
         if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
             ChannelOptions * channel = listChannels.at(group->channel[i]);
             ui->customPlot->graph()->setName(channel->GetChannelName());
-//            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
-            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
 
+            //            if(channel->isNewValue())
+            //            {
+            //                if(ui->customPlot->graphCount() > i)
+            //                {
+            ////                    for(int j=0; j<channel->GetChannelTimeBuffer().size(); j++)
+            ////                    {
+            ////                        if(channel->GetChannelTimeBuffer().at(j) > ui->customPlot->graph(i)->data()->lastKey())
+            ////                        {
+            ////                            ui->customPlot->graph(i)->addData(channel->GetChannelTimeBuffer().at(j), \
+            ////                                                              channel->GetChannelValuesBuffer().at(j));
+            ////                        }
+            //////                        ui->customPlot->graph(i)->addData(channel->GetChannelTimeBuffer().last(), \
+            //////                                                          channel->GetChannelValuesBuffer().last());
+            ////                    }
+            //                }
+            //                else
+            //                {
+            //                    ui->customPlot->addGraph();
+            //                    ui->customPlot->graph()->setName(channel->GetChannelName());
+            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
+            //                    graphPen.setColor(colors.at(i));
+            //                    ui->customPlot->graph()->setPen(graphPen);
+            //        }
+            //            }
+            //            ui->customPlot->graph()->removeDataBefore(leftXTime+GetXRange()/4);
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Math) && (group->mathChannel[i] != -1))
         {
@@ -258,14 +296,12 @@ void MainWindow::GrafsUpdateTrends()
         {
             cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
             ui->customPlot->graph()->setName(channel->GetChannelName());
-//            ui->customPlot->graph()->setData(channel->GetChannelXBuffer(), channel->GetChannelValuesBuffer());
             ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
 
         }
         graphPen.setColor(colors.at(i));
         ui->customPlot->graph()->setPen(graphPen);
     }
-
 
 
 //    ui->customPlot->xAxis->setAutoTickStep(false); // выключаем автоматические отсчеты
@@ -280,6 +316,7 @@ void MainWindow::GrafsUpdateTrends()
     if (systemOptions.autoscale && !waitAutoScale /*ui->autoscalecheckbox->checkState()*/)
     {
         ui->customPlot->yAxis->rescale();
+        ui->customPlot->yAxis->setScaleRatio(ui->customPlot->yAxis, 1.1);
     }
 
     // add the helper arrow:
@@ -337,11 +374,10 @@ void MainWindow::GrafsUpdateTrends()
         }
     }
 
-    ui->customPlot->setAntialiasedElements(QCP::aeAll);
+//    ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
     ui->customPlot->replot();
-//    ui->customPlot->clearGraphs();
-//    ui->customPlot->clearItems();
+
 }
 
 void MainWindow::GrafsUpdateNone()

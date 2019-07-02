@@ -15,6 +15,7 @@ ChannelOptions::ChannelOptions()
     SetConfirmationNeed(true);
     enable = false;
     currentvalue = 0;
+    newValue = false;
     measureperiod = 1;
     diapason = 1;
     slot = 0;       //по-умолчанию присваиваем несуществующий слот
@@ -208,6 +209,18 @@ void ChannelOptions::setShiftColdJunction(double shift)
 double ChannelOptions::getShiftColdJunction()
 {
     return (double)outputData.chanFSRinternal;
+}
+
+
+/*
+ *      Проверка наличия новых данных
+ *      Тут же сбрасывается признак новых данных
+ */
+bool ChannelOptions::isNewValue()
+{
+    bool ret = newValue;
+    newValue = false;
+    return ret;
 }
 
 void ChannelOptions::SetRegistrationType(int newdregistrationtype)
@@ -857,6 +870,7 @@ void ChannelOptions::SetCurrentChannelValue(double value)
 {
 //    currentvalue = ConvertSignalToValue(value);
     currentvalue = value;
+    newValue = true;
 
     if (this->IsChannelMathematical())
     {

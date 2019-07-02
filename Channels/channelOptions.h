@@ -108,8 +108,7 @@ public:
     int getVoltageType(void) { return valueVoltage; }
     void setCapacity(int cap) { capacity = cap; }
     int getCapacity(void) { return capacity; }
-
-
+    bool isNewValue();
 
 
 signals:
@@ -171,6 +170,7 @@ private:
     int slotChannel;
     int valueVoltage;
     int capacity;
+    bool newValue;      // признак наличия свежих данных
 
     QString unitsname;
     QString state1highmessage;

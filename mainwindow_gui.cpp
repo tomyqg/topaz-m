@@ -220,10 +220,12 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     if (watched == ui->customPlot && event->type() != QEvent::Paint \
             && event->type() != QEvent::Resize) {
         if (watched == ui->customPlot && event->type() == QEvent::MouseButtonPress) {
+            pauseUpdateGraph = true;
             reactOnMousePress();
         }
 
         if (watched == ui->customPlot && event->type() == QEvent::MouseButtonRelease) {
+            pauseUpdateGraph = false;
             reactOnMouseRelease();
         }
 
