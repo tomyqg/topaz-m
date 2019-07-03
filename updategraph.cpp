@@ -223,19 +223,19 @@ void MainWindow::GrafsUpdateTrends()
     if(curGroupChannel >= listGroup.size()) return;
 
     cGroupChannels * group = listGroup.at(curGroupChannel);
-    double xCurTime = QDateTime::currentDateTime()/*.toTime_t()*/.toMSecsSinceEpoch()/1000.0;
+    double xCurTime = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
     QList<QColor> colors;
     colors << ColorCh1 << ColorCh2 << ColorCh3 << ColorCh4;
     double leftXTime, rightXTime;
 
     if (systemOptions.arrows)
     {
-        leftXTime = xCurTime-GetXRange()/2;
+        leftXTime = xCurTime - GetXRange()/2;
         rightXTime = xCurTime + GetXRange()/5;
     }
     else
     {
-        leftXTime = xCurTime-GetXRange()/2;
+        leftXTime = xCurTime - GetXRange()/2;
         rightXTime = xCurTime + GetXRange()/100;
     }
 
@@ -243,11 +243,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
     ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
-    if(updateGraph)
-    {
-        ui->customPlot->clearGraphs();
-        updateGraph = false;
-    }
 
     graphPen.setWidth(GraphWidthinPixels);
 
@@ -317,6 +312,12 @@ void MainWindow::GrafsUpdateTrends()
             yCoord = channel->GetChannelValuesBuffer();
         }
 
+        if(updateGraph)
+        {
+            ui->customPlot->clearGraphs();
+            updateGraph = false;
+        }
+
         //Добавление в конец недостающих точек или добавление линии тренда целиком
         if(ui->customPlot->graphCount() > i)
         {
@@ -338,7 +339,7 @@ void MainWindow::GrafsUpdateTrends()
         }
 
         // Чистка точек за пределами графика
-        double lastKey = ui->customPlot->graph(i)->data()->keys().at(0);
+        double lastKey = leftXTime;
         foreach (double key, ui->customPlot->graph(i)->data()->keys())
         {
             if(key > leftXTime)
