@@ -93,6 +93,7 @@ void MainWindow::on_WorkButton_clicked()
     setStyleBars();
     updateWidgetsVols();
     updateGroupWodgets();
+    updateGraph = true;
 }
 
 void MainWindow::updateGroupWodgets()
@@ -175,6 +176,7 @@ void MainWindow::on_MenuButton_clicked()
     setTextBars();
     setStyleBars();
     updateWidgetsVols();
+    updateGraph = true;
 }
 
 void MainWindow::updateSystemOptions()
@@ -333,6 +335,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     if ((event->type() == QEvent::MouseButtonRelease)\
             && ((watched->objectName().contains("arrowGroup"))))
     {
+        updateGraph = true; //перерисовать графики с новыми данными
         int newCurGroupChannel = curGroupChannel;
         if(watched->objectName().contains("Left"))
         {

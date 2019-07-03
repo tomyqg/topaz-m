@@ -179,6 +179,7 @@ void MainWindow::MainWindowInitialization()
     ui->customPlot->yAxis->setRange(-GetXRange(), 0/*GetXRange()*/);
     ui->customPlot->setAntialiasedElements(QCP::aeAll);
     pauseUpdateGraph = false;
+    updateGraph = false;
 
     QList<QPushButton*> ButtonList = findChildren<QPushButton*> ();
     // добавляем все кнопошки в евентфильтр

@@ -243,22 +243,36 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
     ui->customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
     ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
-    ui->customPlot->clearGraphs();
+    if(updateGraph)
+    {
+        ui->customPlot->clearGraphs();
+        updateGraph = false;
+    }
 
     graphPen.setWidth(GraphWidthinPixels);
 
 
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
     {
+        QVector<double> xCoord, yCoord;
 
-        ui->customPlot->addGraph();
+//        ui->customPlot->addGraph();
         if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
             ChannelOptions * channel = listChannels.at(group->channel[i]);
-            ui->customPlot->graph()->setName(channel->GetChannelName());
+//            ui->customPlot->graph()->setName(channel->GetChannelName());
 
-            //            if(channel->isNewValue())
-            //            {
+
+
+            if(channel->isNewValue())
+            {
+                xCoord = channel->GetChannelTimeBuffer();
+                yCoord = channel->GetChannelValuesBuffer();
+            }
+//            else
+//            {
+////                continue;
+//            }
             //                if(ui->customPlot->graphCount() > i)
             //                {
             ////                    for(int j=0; j<channel->GetChannelTimeBuffer().size(); j++)
@@ -276,7 +290,7 @@ void MainWindow::GrafsUpdateTrends()
             //                {
             //                    ui->customPlot->addGraph();
             //                    ui->customPlot->graph()->setName(channel->GetChannelName());
-            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
+//            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
             //                    graphPen.setColor(colors.at(i));
             //                    ui->customPlot->graph()->setPen(graphPen);
             //        }
@@ -288,19 +302,52 @@ void MainWindow::GrafsUpdateTrends()
             if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
             {
                 cMathChannel * math = listMath.at(group->mathChannel[i]);
-                ui->customPlot->graph()->setName(math->getName());
-                ui->customPlot->graph()->setData(math->GetMathTimeBuffer(), math->GetMathValuesBuffer());
+/*                ui->customPlot->graph()->setName(math->getName());
+                ui->customPlot->graph()->setData(math->GetMathTimeBuffer(), math->GetMathValuesBuffer())*/;
+                xCoord = math->GetMathTimeBuffer();
+                yCoord = math->GetMathValuesBuffer();
             }
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
         {
             cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
-            ui->customPlot->graph()->setName(channel->GetChannelName());
-            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
-
+//            ui->customPlot->graph()->setName(channel->GetChannelName());
+//            ui->customPlot->graph()->setData(channel->GetChannelTimeBuffer(), channel->GetChannelValuesBuffer());
+            xCoord = channel->GetChannelTimeBuffer();
+            yCoord = channel->GetChannelValuesBuffer();
         }
-        graphPen.setColor(colors.at(i));
-        ui->customPlot->graph()->setPen(graphPen);
+
+        //Добавление в конец недостающих точек или добавление линии тренда целиком
+        if(ui->customPlot->graphCount() > i)
+        {
+            for(int j=0; j<xCoord.size(); j++)
+            {
+                if(xCoord.at(j) > ui->customPlot->graph(i)->data()->lastKey())
+                {
+                    ui->customPlot->graph(i)->addData(xCoord.at(j), \
+                                                      yCoord.at(j));
+                }
+            }
+        }
+        else
+        {
+            ui->customPlot->addGraph();
+            ui->customPlot->graph()->setData(xCoord, yCoord);
+            graphPen.setColor(colors.at(i));
+            ui->customPlot->graph()->setPen(graphPen);
+        }
+
+        // Чистка точек за пределами графика
+        double lastKey = ui->customPlot->graph(i)->data()->keys().at(0);
+        foreach (double key, ui->customPlot->graph(i)->data()->keys())
+        {
+            if(key > leftXTime)
+            {
+                ui->customPlot->graph(i)->removeDataBefore(lastKey);
+                break;
+            }
+            lastKey = key;
+        }
     }
 
 

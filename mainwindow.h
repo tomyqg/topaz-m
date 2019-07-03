@@ -341,6 +341,7 @@ private:
     bool waitAutoScale;
     QTimer timerScale;
     bool pauseUpdateGraph;  // пауза посторения графиков
+    bool updateGraph;       // нужно обновить график
 
 //    void DrawRectangles(QList<ChannelOptions *> ChannelsObjectsList, int alerttextsize, int smalltextsize);
     void DrawAlertsAndStatesRectangles(QList<ChannelOptions *> ChannelsObjectsList, QPainter painter, int alerttextsize, int smalltextsize);
