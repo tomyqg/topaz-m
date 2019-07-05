@@ -31,7 +31,7 @@ cSteel::cSteel(QObject *parent) : QObject(parent)
     //список параметров конфигурации в карте регистров
     listUpdateParam << "TimeSquareTemp" << "RangeTemp" << "TimeMeasure" << "LowTemp" << "HiTemp" << "SensorType"\
         << "TimeSquareEDS" << "RangeEDS" << "TimeMeasureEDS" << "Crystallization" << "MassCoeff" \
-        << "FinalOx" << "Assimilation" << "MassMelting" << "AdditionalParameter1" << "SteelCorrectionjValue";
+        << "FinalOx" << "Assimilation" << "MassMelting" << "SteelAdditionalParameter1" << "SteelCorrectionjValue";
     listDiagnosticParam << "TempSquare" << "PrimaryActivity" << "SteelResultCjValue";
     countParam = 0;
     countDiagnostic = 0;
@@ -66,11 +66,11 @@ void cSteel::parserSteel(Transaction tr)
     }
     else if(paramName == chanName + "OxActivity")
     {
-        ao = tr.volInt;
+        ao = tr.volFlo;
     }
     else if(paramName == chanName + "MassAl")
     {
-        alg = tr.volInt;
+        alg = tr.volFlo;
     }
     else if(paramName == chanName + "Carbon")
     {
@@ -169,25 +169,25 @@ void cSteel::parserSteel(Transaction tr)
         }
         else if(paramName == chanName + "LowTemp")
         {
-            if(technology->LPtl != tr.volInt)
+            if(technology->LPtl != tr.volFlo)
             {
-                trans.volInt = technology->LPtl;
+                trans.volFlo = technology->LPtl;
                 emit sendTransToWorker(trans);
             }
         }
         else if(paramName == chanName + "HiTemp")
         {
-            if(technology->LPth != tr.volInt)
+            if(technology->LPth != tr.volFlo)
             {
-                trans.volInt = technology->LPth;
+                trans.volFlo = technology->LPth;
                 emit sendTransToWorker(trans);
             }
         }
         else if(paramName == chanName + "SensorType")
         {
-            if(technology->COH != tr.volInt)
+            if(technology->COH != tr.volFlo)
             {
-                trans.volInt = technology->COH;
+                trans.volFlo = technology->COH;
                 emit sendTransToWorker(trans);
             }
         }
@@ -217,17 +217,17 @@ void cSteel::parserSteel(Transaction tr)
         }
         else if(paramName == chanName + "Crystallization")
         {
-            if(technology->b1 != tr.volInt)
+            if(technology->b1 != tr.volFlo)
             {
-                trans.volInt = technology->b1;
+                trans.volFlo = technology->b1;
                 emit sendTransToWorker(trans);
             }
         }
         else if(paramName == chanName + "MassCoeff")
         {
-            if(technology->b2 != tr.volInt)
+            if(technology->b2 != tr.volFlo)
             {
-                trans.volInt = technology->b2;
+                trans.volFlo = technology->b2;
                 emit sendTransToWorker(trans);
             }
         }
@@ -235,31 +235,31 @@ void cSteel::parserSteel(Transaction tr)
         {
             if(!isBlackListParam(paramName))
             {
-                if(technology->O != tr.volInt)
+                if(technology->O != tr.volFlo)
                 {
                     addBadParam(paramName);
-                    trans.volInt = technology->O;
+                    trans.volFlo = technology->O;
                     emit sendTransToWorker(trans);
                 }
             }
         }
         else if(paramName == chanName + "Assimilation")
         {
-            if(technology->Y != tr.volInt)
+            if(technology->Y != tr.volFlo)
             {
-                trans.volInt = technology->Y;
+                trans.volFlo = technology->Y;
                 emit sendTransToWorker(trans);
             }
         }
         else if(paramName == chanName + "MassMelting")
         {
-            if(technology->G != tr.volInt)
+            if(technology->G != tr.volFlo)
             {
-                trans.volInt = technology->G;
+                trans.volFlo = technology->G;
                 emit sendTransToWorker(trans);
             }
         }
-        else if(paramName == chanName + "AdditionalParameter1")
+        else if(paramName == chanName + "SteelAdditionalParameter1")
         {
             uint16_t param[6] = {0, technology->nSt, 0, 0, 0, 0};
             if(memcmp(tr.paramA12, param, sizeof(tr.paramA12)) != 0)
@@ -299,7 +299,7 @@ void cSteel::update()
 
         if(state == STEEL_WAIT)
         {
-            if(status == StatusCh_SteelUpdateData)
+            if(status == ESCS_MEASURE)
             {
                 state = STEEL_MEASURE;
                 emit signalMeasure(num);
@@ -315,14 +315,14 @@ void cSteel::update()
             tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "TempSquare");
             emit sendTransToWorker(tr);
 
-            if((status == StatusCh_SteelSquaresOK) ||\
-                    (status == StatusCh_SteelNotFoundSquareTemp) || \
-                    (status == StatusCh_SteelNotFoundSquareEds) || \
-                    (status == StatusCh_SteelNotFoundSquares))
+            if((status == ESCS_FIND) ||\
+                    (status == ESCS_NOFIND_TEMP) || \
+                    (status == ESCS_NOFIND_EMF) || \
+                    (status == ESCS_NOFIND))
             {
                 state = STEEL_READY;
                 emit signalReady(num);
-                verifStatus = StatusCh_SteelUpdateData;
+                verifStatus = ESCS_MEASURE;
                 QList<QString> str;
                 str /*<< "Data" */<< "OxActivity" << "MassAl" << "PrimaryActivity" << "Carbon";
                 if(technology->COH != 0)
@@ -353,14 +353,14 @@ void cSteel::update()
                 readArrays();
 
             }
-            else if((status == StatusCh_SteelWaitData)\
-                    || (status == StatusCh_WaitConf) || (status == StatusCh_EndConfig))
+            else if((status == ESCS_ON)\
+                    /*|| (status == StatusCh_WaitConf) */|| (status == ESCS_BREAK))
             {
                 state = STEEL_WAIT;
                 emit signalWait(num);
                 emit signalDevicesPause(false);
             }
-            else if((status == StatusCh_SteelErrorTC) || (status == StatusCh_SteelErrorEds))
+            else if((status == ESCS_ERROR_TC) || (status == ESCS_ERROR_EMF))
             {
                 state = STEEL_WAIT;
                 emit signalWait(num);
@@ -380,12 +380,12 @@ void cSteel::update()
             if(!fConfirm)
             {
                 //если ещё весь массив не считали, то нельзя подтверждать статус
-                verifStatus = StatusCh_SteelUpdateData;
+                verifStatus = ESCS_MEASURE;
             }
-            if((status == StatusCh_SteelWaitData)\
-                    || (status == StatusCh_SteelErrorTC)\
-                    || (status == StatusCh_SteelErrorEds)\
-                    || (status == StatusCh_EndConfig))
+            if((status == ESCS_ON)\
+                    || (status == ESCS_ERROR_TC)\
+                    || (status == ESCS_ERROR_EMF)\
+                    || (status == ESCS_BREAK))
             {
                 //            steelReady = false;
                 //            steelMeasure = false;
@@ -394,11 +394,11 @@ void cSteel::update()
                 emit signalDevicesPause(false);
             }
         }
-        if(status != StatusCh_Off)
+        if(status != ESCS_OFF)
         {
             tr = Transaction(Transaction::W, slot);
             tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + "VerificationRead");
-            tr.volInt = verifStatus;
+            tr.volFlo = verifStatus;
             emit sendTransToWorker(tr);
         }
     }
@@ -412,7 +412,7 @@ void cSteel::updateParam()
     if(enable)
     {
         if((state == STEEL_WAIT) \
-                && ((status == StatusCh_SteelWaitData) || (status == StatusCh_EndConfig)))
+                && ((status == ESCS_ON) || (status == ESCS_BREAK)))
         {
             tr.offset = cRegistersMap::getOffsetByName("chan" + QString::number(slotIndex) + listUpdateParam.at(countParam++));
             emit sendTransToWorker(tr);

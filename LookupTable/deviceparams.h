@@ -328,25 +328,25 @@ typedef struct
     // Parameter: Mass_melting : chan0MassMelting : NV Address: 1000
     float chan0MassMelting;
     // Parameter: TEMP array0 : chan0TEMParray0 : NV Address: 1000
-    uint16_t chan0TEMParray0;
+    int16_t chan0TEMParray0[64];
     // Parameter: TEMP array1 : chan0TEMParray1 : NV Address: 1000
-    uint16_t chan0TEMParray1;
+    int16_t chan0TEMParray1[64];
     // Parameter: TEMP array2 : chan0TEMParray2 : NV Address: 1000
-    uint16_t chan0TEMParray2;
+    int16_t chan0TEMParray2[64];
     // Parameter: TEMP array3 : chan0TEMParray3 : NV Address: 1000
-    uint16_t chan0TEMParray3;
+    int16_t chan0TEMParray3[64];
     // Parameter: TEMP array4 : chan0TEMParray4 : NV Address: 1000
-    uint16_t chan0TEMParray4;
+    int16_t chan0TEMParray4[64];
     // Parameter: EMF array0 : chan0EMFarray0 : NV Address: 1000
-    uint16_t chan0EMFarray0;
+    int16_t chan0EMFarray0[64];
     // Parameter: EMF array1 : chan0EMFarray1 : NV Address: 1000
-    uint16_t chan0EMFarray1;
+    int16_t chan0EMFarray1[64];
     // Parameter: EMF array2 : chan0EMFarray2 : NV Address: 1000
-    uint16_t chan0EMFarray2;
+    int16_t chan0EMFarray2[64];
     // Parameter: EMF array3 : chan0EMFarray3 : NV Address: 1000
-    uint16_t chan0EMFarray3;
+    int16_t chan0EMFarray3[64];
     // Parameter: EMF array4 : chan0EMFarray4 : NV Address: 1000
-    uint16_t chan0EMFarray4;
+    int16_t chan0EMFarray4[64];
     // Parameter: Temperature square : chan1TempSquare : NV Address: 1000
     float chan1TempSquare;
     // Parameter: Senson activity oxygen : chan1PrimaryActivity : NV Address: 1000
@@ -396,25 +396,25 @@ typedef struct
     // Parameter: Mass_melting : chan1MassMelting : NV Address: 1000
     float chan1MassMelting;
     // Parameter: TEMP array0 : chan1TEMParray0 : NV Address: 1000
-    uint16_t chan1TEMParray0;
+    int16_t chan1TEMParray0[64];
     // Parameter: TEMP array1 : chan1TEMParray1 : NV Address: 1000
-    uint16_t chan1TEMParray1;
+    int16_t chan1TEMParray1[64];
     // Parameter: TEMP array2 : chan1TEMParray2 : NV Address: 1000
-    uint16_t chan1TEMParray2;
+    int16_t chan1TEMParray2[64];
     // Parameter: TEMP array3 : chan1TEMParray3 : NV Address: 1000
-    uint16_t chan1TEMParray3;
+    int16_t chan1TEMParray3[64];
     // Parameter: TEMP array4 : chan1TEMParray4 : NV Address: 1000
-    uint16_t chan1TEMParray4;
+    int16_t chan1TEMParray4[64];
     // Parameter: EMF array0 : chan1EMFarray0 : NV Address: 1000
-    uint16_t chan1EMFarray0;
+    int16_t chan1EMFarray0[64];
     // Parameter: EMF array1 : chan1EMFarray1 : NV Address: 1000
-    uint16_t chan1EMFarray1;
+    int16_t chan1EMFarray1[64];
     // Parameter: EMF array2 : chan1EMFarray2 : NV Address: 1000
-    uint16_t chan1EMFarray2;
+    int16_t chan1EMFarray2[64];
     // Parameter: EMF array3 : chan1EMFarray3 : NV Address: 1000
-    uint16_t chan1EMFarray3;
+    int16_t chan1EMFarray3[64];
     // Parameter: EMF array4 : chan1EMFarray4 : NV Address: 1000
-    uint16_t chan1EMFarray4;
+    int16_t chan1EMFarray4[64];
     // Parameter: Temperature square : chan2TempSquare : NV Address: 1000
     float chan2TempSquare;
     // Parameter: Senson activity oxygen : chan2PrimaryActivity : NV Address: 1000
@@ -464,25 +464,25 @@ typedef struct
     // Parameter: Mass_melting : chan2MassMelting : NV Address: 1000
     float chan2MassMelting;
     // Parameter: TEMP array0 : chan2TEMParray0 : NV Address: 1000
-    uint16_t chan2TEMParray0;
+    int16_t chan2TEMParray0[64];
     // Parameter: TEMP array1 : chan2TEMParray1 : NV Address: 1000
-    uint16_t chan2TEMParray1;
+    int16_t chan2TEMParray1[64];
     // Parameter: TEMP array2 : chan2TEMParray2 : NV Address: 1000
-    uint16_t chan2TEMParray2;
+    int16_t chan2TEMParray2[64];
     // Parameter: TEMP array3 : chan2TEMParray3 : NV Address: 1000
-    uint16_t chan2TEMParray3;
+    int16_t chan2TEMParray3[64];
     // Parameter: TEMP array4 : chan2TEMParray4 : NV Address: 1000
-    uint16_t chan2TEMParray4;
+    int16_t chan2TEMParray4[64];
     // Parameter: EMF array0 : chan2EMFarray0 : NV Address: 1000
-    uint16_t chan2EMFarray0;
+    int16_t chan2EMFarray0[64];
     // Parameter: EMF array1 : chan2EMFarray1 : NV Address: 1000
-    uint16_t chan2EMFarray1;
+    int16_t chan2EMFarray1[64];
     // Parameter: EMF array2 : chan2EMFarray2 : NV Address: 1000
-    uint16_t chan2EMFarray2;
+    int16_t chan2EMFarray2[64];
     // Parameter: EMF array3 : chan2EMFarray3 : NV Address: 1000
-    uint16_t chan2EMFarray3;
+    int16_t chan2EMFarray3[64];
     // Parameter: EMF array4 : chan2EMFarray4 : NV Address: 1000
-    uint16_t chan2EMFarray4;
+    int16_t chan2EMFarray4[64];
     // Parameter: Temperature square : chan3TempSquare : NV Address: 1000
     float chan3TempSquare;
     // Parameter: Senson activity oxygen : chan3PrimaryActivity : NV Address: 1000
@@ -532,25 +532,25 @@ typedef struct
     // Parameter: Mass_melting : chan3MassMelting : NV Address: 1000
     float chan3MassMelting;
     // Parameter: TEMP array0 : chan3TEMParray0 : NV Address: 1000
-    uint16_t chan3TEMParray0;
+    int16_t chan3TEMParray0[64];
     // Parameter: TEMP array1 : chan3TEMParray1 : NV Address: 1000
-    uint16_t chan3TEMParray1;
+    int16_t chan3TEMParray1[64];
     // Parameter: TEMP array2 : chan3TEMParray2 : NV Address: 1000
-    uint16_t chan3TEMParray2;
+    int16_t chan3TEMParray2[64];
     // Parameter: TEMP array3 : chan3TEMParray3 : NV Address: 1000
-    uint16_t chan3TEMParray3;
+    int16_t chan3TEMParray3[64];
     // Parameter: TEMP array4 : chan3TEMParray4 : NV Address: 1000
-    uint16_t chan3TEMParray4;
+    int16_t chan3TEMParray4[64];
     // Parameter: EMF array0 : chan3EMFarray0 : NV Address: 1000
-    uint16_t chan3EMFarray0;
+    int16_t chan3EMFarray0[64];
     // Parameter: EMF array1 : chan3EMFarray1 : NV Address: 1000
-    uint16_t chan3EMFarray1;
+    int16_t chan3EMFarray1[64];
     // Parameter: EMF array2 : chan3EMFarray2 : NV Address: 1000
-    uint16_t chan3EMFarray2;
+    int16_t chan3EMFarray2[64];
     // Parameter: EMF array3 : chan3EMFarray3 : NV Address: 1000
-    uint16_t chan3EMFarray3;
+    int16_t chan3EMFarray3[64];
     // Parameter: EMF array4 : chan3EMFarray4 : NV Address: 1000
-    uint16_t chan3EMFarray4;
+    int16_t chan3EMFarray4[64];
     // Parameter: Hi alarm_Reley : RelayControl : NV Address: 1000
     uint16_t RelayControl;
     // Parameter: Out freq chan : chan0MeasureFreq : NV Address: 1000

@@ -31,7 +31,7 @@
 extern int dateindex;
 extern int timeindex;
 extern QStringList datestrings, timestrings;
-extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+//extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 extern QList<cDevice*> listDevice;
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;
@@ -1715,22 +1715,22 @@ void dMenu::UpdateAnalyze()
 
     averagechannel_1 = averagechannel_2 = averagechannel_3 = averagechannel_4 = 0.0;
 
-    averagechannel_1 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_1_archive);
-    averagechannel_2 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_2_archive);
-    averagechannel_3 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_3_archive);
-    averagechannel_4 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_4_archive);
+//    averagechannel_1 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_1_archive);
+//    averagechannel_2 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_2_archive);
+//    averagechannel_3 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_3_archive);
+//    averagechannel_4 = mathresolver::dGetAverageValue(Y_coordinates_Chanel_4_archive);
 
-    double minimumchannel_1 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1_archive);
-    double maximumchannel_1 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1_archive);
+//    double minimumchannel_1 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_1_archive);
+//    double maximumchannel_1 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_1_archive);
 
-    double minimumchannel_2 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2_archive);
-    double maximumchannel_2 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2_archive);
+//    double minimumchannel_2 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_2_archive);
+//    double maximumchannel_2 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_2_archive);
 
-    double minimumchannel_3 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3_archive);
-    double maximumchannel_3 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3_archive);
+//    double minimumchannel_3 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_3_archive);
+//    double maximumchannel_3 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_3_archive);
 
-    double minimumchannel_4 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4_archive);
-    double maximumchannel_4 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4_archive);
+//    double minimumchannel_4 = mathresolver::dGetMinimumValue(Y_coordinates_Chanel_4_archive);
+//    double maximumchannel_4 = mathresolver::dGetMaximumValue(Y_coordinates_Chanel_4_archive);
 
     ui->analizenameChannel_1->setText( listChannels.at(0)->GetChannelName() \
                                         + " [" + listChannels.at(0)->GetUnitsName() + "]" );
@@ -1746,15 +1746,15 @@ void dMenu::UpdateAnalyze()
     ui->analizeavgvaluechannel_3->setText(QString::number(averagechannel_3, 'f', 2));
     ui->analizeavgvaluechannel_4->setText(QString::number(averagechannel_4, 'f', 2));
 
-    ui->analizeminvaluechannel_1->setText(QString::number(minimumchannel_1));
-    ui->analizeminvaluechannel_2->setText(QString::number(minimumchannel_2));
-    ui->analizeminvaluechannel_3->setText(QString::number(minimumchannel_3));
-    ui->analizeminvaluechannel_4->setText(QString::number(minimumchannel_4));
+//    ui->analizeminvaluechannel_1->setText(QString::number(minimumchannel_1));
+//    ui->analizeminvaluechannel_2->setText(QString::number(minimumchannel_2));
+//    ui->analizeminvaluechannel_3->setText(QString::number(minimumchannel_3));
+//    ui->analizeminvaluechannel_4->setText(QString::number(minimumchannel_4));
 
-    ui->analizemaxvaluechannel_1->setText(QString::number(maximumchannel_1));
-    ui->analizemaxvaluechannel_2->setText(QString::number(maximumchannel_2));
-    ui->analizemaxvaluechannel_3->setText(QString::number(maximumchannel_3));
-    ui->analizemaxvaluechannel_4->setText(QString::number(maximumchannel_4));
+//    ui->analizemaxvaluechannel_1->setText(QString::number(maximumchannel_1));
+//    ui->analizemaxvaluechannel_2->setText(QString::number(maximumchannel_2));
+//    ui->analizemaxvaluechannel_3->setText(QString::number(maximumchannel_3));
+//    ui->analizemaxvaluechannel_4->setText(QString::number(maximumchannel_4));
 }
 
 void dMenu::updateDiagnosticMess()

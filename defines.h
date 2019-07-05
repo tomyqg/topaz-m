@@ -30,7 +30,7 @@
 #define CURRENT_VER VER
 #endif
 
-#define PROTOCOL_VER "12.2"  //версия протокола внутреннего Modbus
+#define PROTOCOL_VER "12.3"  //версия протокола внутреннего Modbus
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
 //#define DEBUG_RELAY

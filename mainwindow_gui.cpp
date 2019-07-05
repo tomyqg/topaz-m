@@ -86,7 +86,6 @@ void MainWindow::on_WorkButton_clicked()
     menu->selectPageWork();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
-//    cLogger * log = new cLogger(pathtomessages, cLogger::UI);
     logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();
@@ -170,7 +169,6 @@ void MainWindow::on_MenuButton_clicked()
     menu->selectPageMain();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
-//    cLogger * log = new cLogger(pathtomessages, cLogger::UI);
     logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();

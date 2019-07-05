@@ -55,7 +55,6 @@ public:
     ~MainWindow();
 
     QDialog * dialogMenu;
-//    dMenu * menu;
 
     void ShowMessageBox (QString title,QString message);
     void resizeWindow(QWidget & qw, qreal mratio);
@@ -200,7 +199,6 @@ signals:
 private:
     Ui::MainWindow *ui;
 
-//    dMenu * menu;
 
     QTimer timerLoad;
     int countLoader;

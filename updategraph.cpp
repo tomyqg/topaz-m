@@ -28,7 +28,7 @@ double randVal[24] = {((double)((rand()%101) - 50) / 10),\
 
 
 QVector<double> X_Coordinates, Y_coordinates_Chanel_1, Y_coordinates_Chanel_2, Y_coordinates_Chanel_3, Y_coordinates_Chanel_4;
-QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+//QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 QVector<double> vectorsChannels[24];
 QVector<double> vectorsChannelsArch[24];
 QVector<double> X_Date_Coordinates;
@@ -69,7 +69,7 @@ void MainWindow::DrawScene()
 void MainWindow::AddValuesToBuffer()
 {
     X_Coordinates.append(xoffset); // добавляем смещение по иксу
-    X_Coordinates_archive.append(xoffset);
+//    X_Coordinates_archive.append(xoffset);
     X_Date_Coordinates.append(QDateTime::currentDateTime().toTime_t());
 
 //    vectorsChannels.resize(listChannels.size());
@@ -85,12 +85,10 @@ void MainWindow::AddValuesToBuffer()
 
     int i = 0;
     foreach (ChannelOptions * channel, listChannels) {
-//        vectors[i]->append(channel->GetCurrentChannelValue());
-//        QVector<double> * vector = &vectorsChannels.value(i);
+
         vectorsChannels[i].append(channel->GetCurrentChannelValue());
-//        vectorsArch[i]->append(channel->GetCurrentChannelValue());
-//        QVector<double> * vectorArch = &vectorsChannelsArch.at(i);
-        vectorsChannelsArch[i].append(channel->GetCurrentChannelValue());
+
+//        vectorsChannelsArch[i].append(channel->GetCurrentChannelValue());
         while (vectorsChannels[i].length()>150)
         {
             vectorsChannels[i].removeFirst();
@@ -127,14 +125,14 @@ void MainWindow::AddValuesToBuffer()
     }
 
     //пока нет ограничений на объём хранения
-    while (X_Coordinates_archive.length()>15000)
-    {
-        X_Coordinates_archive.removeFirst();
+//    while (X_Coordinates_archive.length()>15000)
+//    {
+//        X_Coordinates_archive.removeFirst();
 //        Y_coordinates_Chanel_1_archive.removeFirst();
 //        Y_coordinates_Chanel_2_archive.removeFirst();
 //        Y_coordinates_Chanel_3_archive.removeFirst();
 //        Y_coordinates_Chanel_4_archive.removeFirst();
-    }
+//    }
 
     int tickstep = GetTickStep();
 
@@ -946,24 +944,24 @@ void MainWindow::updateSteel()
         cSteel * steel = listSteel.at(i);
         uint8_t relayStates[SUM_RELAYS];
         memset(relayStates, 0, SUM_RELAYS);
-        if(steel->status == StatusCh_SteelWaitData)
+        if(steel->status == ESCS_ON)
         {
             relayStates[1] = 1;
         }
-        else if(steel->status == StatusCh_SteelUpdateData)
+        else if(steel->status == ESCS_MEASURE)
         {
             relayStates[2] = 1;
         }
-        else if((steel->status == StatusCh_SteelNotFoundSquareTemp)\
-                || (steel->status == StatusCh_SteelNotFoundSquareEds)\
-                || (steel->status == StatusCh_SteelNotFoundSquares)\
-                || (steel->status == StatusCh_SteelErrorTC)\
-                || (steel->status == StatusCh_SteelErrorEds)\
-                || (steel->status == StatusCh_SteelSquaresOK))
+        else if((steel->status == ESCS_NOFIND_TEMP)\
+                || (steel->status == ESCS_NOFIND_EMF)\
+                || (steel->status == ESCS_NOFIND)\
+                || (steel->status == ESCS_ERROR_TC)\
+                || (steel->status == ESCS_ERROR_EMF)\
+                || (steel->status == ESCS_FIND))
         {
             relayStates[3] = 1;
         }
-        else if((steel->status == StatusCh_WaitConf) || (steel->status == StatusCh_EndConfig)) //обрыв датчика
+        else if(/*(steel->status == StatusCh_WaitConf) || */(steel->status == ESCS_BREAK)) //обрыв датчика
         {
             relayStates[0] = 1;
         }
@@ -1002,26 +1000,26 @@ void MainWindow::slotSteelFrame(bool steelFrame)
 void MainWindow::updateSteelWidget(void)
 {
     QList<QString> strings;
-    strings << "ОТКЛЮЧЕНО" << " " << " " \
-            << " " << "ОБРЫВ" << "ГОТОВ" \
-            << "ИЗМЕРЕНИЕ" << " " << "ОШИБКА ТС" \
-            << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ" << "НЕТ ПЛОЩАДКИ" \
-            << "НЕТ ПЛОЩАДКИ" << "ВРЕМЯ";
+    strings << "ОТКЛЮЧЕНО" << "ГОТОВ" << "ИЗМЕРЕНИЕ" \
+            << "ОШИБКА TC" << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ TC" \
+            << "НЕТ ПЛОЩАДКИ ЭДС" << "НЕТ ПЛОЩАДОК" << "КОНЕЦ" \
+            << "ОБРЫВ TC" << "ОШИБКА КАНАЛА";
     QList<QString> colorStyles;
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_4.red()) + ", " + QString::number(COLOR_4.green()) + ", " + QString::number(COLOR_4.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_2.red()) + ", " + QString::number(COLOR_2.green()) + ", " + QString::number(COLOR_2.blue()) + ");color: rgb(255, 255, 255);");
+
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
+
+    colorStyles.append("background-color: rgb(" + QString::number(COLOR_4.red()) + ", " + QString::number(COLOR_4.green()) + ", " + QString::number(COLOR_4.blue()) + ");color: rgb(255, 255, 255);");
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_3.red()) + ", " + QString::number(COLOR_3.green()) + ", " + QString::number(COLOR_3.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
-    colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
+
     ui->steelStatus1->setText(strings.at(listSteel.at(0)->status));
     ui->steelStatus2->setText(strings.at(listSteel.at(1)->status));
     ui->steelStatus3->setText(strings.at(listSteel.at(2)->status));

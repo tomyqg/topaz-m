@@ -82,7 +82,7 @@ const typeTableDiapasoneRTD tableDiapasoneRTD[] = {
 #define TIME_UPDATE DateLabelUpdateTimer
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
 
-extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
+//extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 
 extern QList<ChannelOptions *> listChannels;
 extern QList<Ustavka *> listUstavok;

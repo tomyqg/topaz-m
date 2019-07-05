@@ -1606,19 +1606,19 @@ void MainWindow::sendConfigChannelsToSlave()
             // запись Low_lim_temp
             str = "chan" + QString::number(devS) + "LowTemp";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->LPtl;
+            tr.volFlo = st->technology->LPtl;
             emit sendTransToWorker(tr);
 
             // запись Hi_lim_temp
             str = "chan" + QString::number(devS) + "HiTemp";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->LPth;
+            tr.volFlo = st->technology->LPth;
             emit sendTransToWorker(tr);
 
             // запись Sensor_Type_Activty
             str = "chan" + QString::number(devS) + "SensorType";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->COH;
+            tr.volFlo = st->technology->COH;
             emit sendTransToWorker(tr);
 
             // запись Time_square_EDS
@@ -1642,31 +1642,31 @@ void MainWindow::sendConfigChannelsToSlave()
             // запись Сrystallization_temperature
             str = "chan" + QString::number(devS) + "Crystallization";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->b1;
+            tr.volFlo = st->technology->b1;
             emit sendTransToWorker(tr);
 
             // запись Mass_coefficient
             str = "chan" + QString::number(devS) + "MassCoeff";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->b2;
+            tr.volFlo = st->technology->b2;
             emit sendTransToWorker(tr);
 
             // запись Final_oxidation
             str = "chan" + QString::number(devS) + "FinalOx";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->O;
+            tr.volFlo = st->technology->O;
             emit sendTransToWorker(tr);
 
             // запись Assimilation of aluminum
             str = "chan" + QString::number(devS) + "Assimilation";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->Y;
+            tr.volFlo = st->technology->Y;
             emit sendTransToWorker(tr);
 
             // запись Mass_melting
             str = "chan" + QString::number(devS) + "MassMelting";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.volInt = st->technology->G;
+            tr.volFlo = st->technology->G;
             emit sendTransToWorker(tr);
 
             // запись AdditionalParameter

@@ -261,25 +261,25 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: Mass_melting : chan0MassMelting
     {5048, 1000,  OFFSET(chan0MassMelting), "chan0MassMelting", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: TEMP array0 : chan0TEMParray0
-    {5050, 1000,  OFFSET(chan0TEMParray0), "chan0TEMParray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5050, 1000,  OFFSET(chan0TEMParray0), "chan0TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array1 : chan0TEMParray1
-    {5051, 1000,  OFFSET(chan0TEMParray1), "chan0TEMParray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5082, 1000,  OFFSET(chan0TEMParray1), "chan0TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array2 : chan0TEMParray2
-    {5052, 1000,  OFFSET(chan0TEMParray2), "chan0TEMParray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5114, 1000,  OFFSET(chan0TEMParray2), "chan0TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array3 : chan0TEMParray3
-    {5053, 1000,  OFFSET(chan0TEMParray3), "chan0TEMParray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5146, 1000,  OFFSET(chan0TEMParray3), "chan0TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array4 : chan0TEMParray4
-    {5054, 1000,  OFFSET(chan0TEMParray4), "chan0TEMParray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5178, 1000,  OFFSET(chan0TEMParray4), "chan0TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array0 : chan0EMFarray0
-    {5055, 1000,  OFFSET(chan0EMFarray0), "chan0EMFarray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5210, 1000,  OFFSET(chan0EMFarray0), "chan0EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array1 : chan0EMFarray1
-    {5056, 1000,  OFFSET(chan0EMFarray1), "chan0EMFarray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5242, 1000,  OFFSET(chan0EMFarray1), "chan0EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array2 : chan0EMFarray2
-    {5057, 1000,  OFFSET(chan0EMFarray2), "chan0EMFarray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5274, 1000,  OFFSET(chan0EMFarray2), "chan0EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array3 : chan0EMFarray3
-    {5058, 1000,  OFFSET(chan0EMFarray3), "chan0EMFarray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5306, 1000,  OFFSET(chan0EMFarray3), "chan0EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array4 : chan0EMFarray4
-    {5059, 1000,  OFFSET(chan0EMFarray4), "chan0EMFarray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {5338, 1000,  OFFSET(chan0EMFarray4), "chan0EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Temperature square : chan1TempSquare
     {6000, 1000,  OFFSET(chan1TempSquare), "chan1TempSquare", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Senson activity oxygen : chan1PrimaryActivity
@@ -329,25 +329,25 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: Mass_melting : chan1MassMelting
     {6048, 1000,  OFFSET(chan1MassMelting), "chan1MassMelting", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: TEMP array0 : chan1TEMParray0
-    {6050, 1000,  OFFSET(chan1TEMParray0), "chan1TEMParray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6050, 1000,  OFFSET(chan1TEMParray0), "chan1TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array1 : chan1TEMParray1
-    {6051, 1000,  OFFSET(chan1TEMParray1), "chan1TEMParray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6082, 1000,  OFFSET(chan1TEMParray1), "chan1TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array2 : chan1TEMParray2
-    {6052, 1000,  OFFSET(chan1TEMParray2), "chan1TEMParray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6114, 1000,  OFFSET(chan1TEMParray2), "chan1TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array3 : chan1TEMParray3
-    {6053, 1000,  OFFSET(chan1TEMParray3), "chan1TEMParray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6146, 1000,  OFFSET(chan1TEMParray3), "chan1TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array4 : chan1TEMParray4
-    {6054, 1000,  OFFSET(chan1TEMParray4), "chan1TEMParray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6178, 1000,  OFFSET(chan1TEMParray4), "chan1TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array0 : chan1EMFarray0
-    {6055, 1000,  OFFSET(chan1EMFarray0), "chan1EMFarray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6210, 1000,  OFFSET(chan1EMFarray0), "chan1EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array1 : chan1EMFarray1
-    {6056, 1000,  OFFSET(chan1EMFarray1), "chan1EMFarray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6242, 1000,  OFFSET(chan1EMFarray1), "chan1EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array2 : chan1EMFarray2
-    {6057, 1000,  OFFSET(chan1EMFarray2), "chan1EMFarray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6274, 1000,  OFFSET(chan1EMFarray2), "chan1EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array3 : chan1EMFarray3
-    {6058, 1000,  OFFSET(chan1EMFarray3), "chan1EMFarray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6306, 1000,  OFFSET(chan1EMFarray3), "chan1EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array4 : chan1EMFarray4
-    {6059, 1000,  OFFSET(chan1EMFarray4), "chan1EMFarray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {6338, 1000,  OFFSET(chan1EMFarray4), "chan1EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Temperature square : chan2TempSquare
     {7000, 1000,  OFFSET(chan2TempSquare), "chan2TempSquare", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Senson activity oxygen : chan2PrimaryActivity
@@ -397,25 +397,25 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: Mass_melting : chan2MassMelting
     {7048, 1000,  OFFSET(chan2MassMelting), "chan2MassMelting", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: TEMP array0 : chan2TEMParray0
-    {7050, 1000,  OFFSET(chan2TEMParray0), "chan2TEMParray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7050, 1000,  OFFSET(chan2TEMParray0), "chan2TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array1 : chan2TEMParray1
-    {7051, 1000,  OFFSET(chan2TEMParray1), "chan2TEMParray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7082, 1000,  OFFSET(chan2TEMParray1), "chan2TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array2 : chan2TEMParray2
-    {7052, 1000,  OFFSET(chan2TEMParray2), "chan2TEMParray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7114, 1000,  OFFSET(chan2TEMParray2), "chan2TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array3 : chan2TEMParray3
-    {7053, 1000,  OFFSET(chan2TEMParray3), "chan2TEMParray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7146, 1000,  OFFSET(chan2TEMParray3), "chan2TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array4 : chan2TEMParray4
-    {7054, 1000,  OFFSET(chan2TEMParray4), "chan2TEMParray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7178, 1000,  OFFSET(chan2TEMParray4), "chan2TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array0 : chan2EMFarray0
-    {7055, 1000,  OFFSET(chan2EMFarray0), "chan2EMFarray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7210, 1000,  OFFSET(chan2EMFarray0), "chan2EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array1 : chan2EMFarray1
-    {7056, 1000,  OFFSET(chan2EMFarray1), "chan2EMFarray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7242, 1000,  OFFSET(chan2EMFarray1), "chan2EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array2 : chan2EMFarray2
-    {7057, 1000,  OFFSET(chan2EMFarray2), "chan2EMFarray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7274, 1000,  OFFSET(chan2EMFarray2), "chan2EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array3 : chan2EMFarray3
-    {7058, 1000,  OFFSET(chan2EMFarray3), "chan2EMFarray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7306, 1000,  OFFSET(chan2EMFarray3), "chan2EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array4 : chan2EMFarray4
-    {7059, 1000,  OFFSET(chan2EMFarray4), "chan2EMFarray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {7338, 1000,  OFFSET(chan2EMFarray4), "chan2EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Temperature square : chan3TempSquare
     {8000, 1000,  OFFSET(chan3TempSquare), "chan3TempSquare", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Senson activity oxygen : chan3PrimaryActivity
@@ -465,25 +465,25 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: Mass_melting : chan3MassMelting
     {8048, 1000,  OFFSET(chan3MassMelting), "chan3MassMelting", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: TEMP array0 : chan3TEMParray0
-    {8050, 1000,  OFFSET(chan3TEMParray0), "chan3TEMParray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8050, 1000,  OFFSET(chan3TEMParray0), "chan3TEMParray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array1 : chan3TEMParray1
-    {8051, 1000,  OFFSET(chan3TEMParray1), "chan3TEMParray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8082, 1000,  OFFSET(chan3TEMParray1), "chan3TEMParray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array2 : chan3TEMParray2
-    {8052, 1000,  OFFSET(chan3TEMParray2), "chan3TEMParray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8114, 1000,  OFFSET(chan3TEMParray2), "chan3TEMParray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array3 : chan3TEMParray3
-    {8053, 1000,  OFFSET(chan3TEMParray3), "chan3TEMParray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8146, 1000,  OFFSET(chan3TEMParray3), "chan3TEMParray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: TEMP array4 : chan3TEMParray4
-    {8054, 1000,  OFFSET(chan3TEMParray4), "chan3TEMParray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8178, 1000,  OFFSET(chan3TEMParray4), "chan3TEMParray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array0 : chan3EMFarray0
-    {8055, 1000,  OFFSET(chan3EMFarray0), "chan3EMFarray0", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8210, 1000,  OFFSET(chan3EMFarray0), "chan3EMFarray0", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array1 : chan3EMFarray1
-    {8056, 1000,  OFFSET(chan3EMFarray1), "chan3EMFarray1", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8242, 1000,  OFFSET(chan3EMFarray1), "chan3EMFarray1", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array2 : chan3EMFarray2
-    {8057, 1000,  OFFSET(chan3EMFarray2), "chan3EMFarray2", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8274, 1000,  OFFSET(chan3EMFarray2), "chan3EMFarray2", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array3 : chan3EMFarray3
-    {8058, 1000,  OFFSET(chan3EMFarray3), "chan3EMFarray3", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8306, 1000,  OFFSET(chan3EMFarray3), "chan3EMFarray3", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: EMF array4 : chan3EMFarray4
-    {8059, 1000,  OFFSET(chan3EMFarray4), "chan3EMFarray4", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {8338, 1000,  OFFSET(chan3EMFarray4), "chan3EMFarray4", LKUP_TYPE_ASCII, 64, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Hi alarm_Reley : RelayControl
     {9000, 1000,  OFFSET(RelayControl), "RelayControl", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Out freq chan : chan0MeasureFreq
