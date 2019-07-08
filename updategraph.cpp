@@ -934,6 +934,7 @@ void MainWindow::selectWidgetDiagram(void)
 void MainWindow::updateSteel()
 {
     if(!slotSteelOnline) return;
+    if(systemOptions.typeMultigraph != cSystemOptions::Multigraph_Steel) return;
 
     /*
      * Управление реле

@@ -232,12 +232,13 @@
 #define TOTAL_NUM_FREQ      36      //максимальное число подключаемых частотных каналов
 #define NUM_CHAN_IN_4AI     4       // количество каналов в одной плате 4AI
 #define NUM_CHAN_IN_6DI6RO  6       // количество каналов в одной плате 6DI6RO
+#define NUM_RELAY_IN_6DI6RO 6       // количество твердотельных реле
 #define TOTAL_NUM_USTAVKI   128     //максимальное число уставок (уловное ограничение)
 #define NUM_STEEL           4
 #define NUM_CHAN_IN_STEEL   2
 #define NUM_TECHNOLOGIES    8       //количество групп технологий измерения стали
 #define MAX_NUM_GROUP       10      //максимальное количество группировок каналов
-#define TOTAL_NUM_RELAY     24      //максимальное число подключаемых реле
+#define TOTAL_NUM_RELAY     36      //максимальное число подключаемых реле
 #define NUM_RELAY_IN_8RP    8       //количество реле в одной плате 8RP
 
 #define BASE_OFFSET_DEVICE      0x4000

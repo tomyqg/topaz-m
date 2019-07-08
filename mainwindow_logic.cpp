@@ -885,27 +885,7 @@ void MainWindow::updateDevicesComplect()
         }
     }
 
-    // обновление списка частотных каналов
-    i = 0;
-    foreach (uint8_t slot, list6DI6RO) {
-        if(i < listFreq.size())
-        {
-            //обновление параметров каналов
-            cFreqChannel * ch = listFreq.at(i);
-            ch->setSlot(slot);     //
-            ch->setSlotChannel(i%NUM_CHAN_IN_6DI6RO);
-            ch->enable = true;
-        }
-        i++;
-    }
-    if(listFreq.size() > list6DI6RO.size())
-    {
-        // плат стало меньше, тогда временно отключем каналы, но не удаляем
-        for(int i = list6DI6RO.size(); i < listFreq.size(); i++)
-        {
-            listFreq.at(i)->enable = false;
-        }
-    }
+
 
     // обновление списка реле
     i = 0;
@@ -929,6 +909,50 @@ void MainWindow::updateDevicesComplect()
         }
     }
 
+
+    // обновление списка частотных каналов и твердотельных реле
+    i = 0;
+    int sizeList8RP = list8RP.size();
+    foreach (uint8_t slot, list6DI6RO) {
+        if(i < listFreq.size())
+        {
+            //обновление параметров каналов
+            cFreqChannel * ch = listFreq.at(i);
+            ch->setSlot(slot);     //
+            ch->setSlotChannel(i%NUM_CHAN_IN_6DI6RO);
+            ch->enable = true;
+        }
+        if((i + sizeList8RP) < listRelais.size())
+        {
+            //обновление параметров реле (твердортельных реле)
+            cRelay * r = listRelais.at(i + sizeList8RP);
+            r->enable = true;
+            r->mySlot = slot;     //
+            r->myPhysicalNum = i%NUM_RELAY_IN_6DI6RO;
+        }
+        i++;
+    }
+    if(listFreq.size() > list6DI6RO.size())
+    {
+        // плат стало меньше, тогда временно отключем каналы, но не удаляем
+        for(int i = list6DI6RO.size(); i < listFreq.size(); i++)
+        {
+            listFreq.at(i)->enable = false;
+        }
+    }
+
+
+
+    if(listRelais.size() > (list8RP.size() + list6DI6RO.size()))
+    {
+        // плат стало меньше, тогда отключаем объекты
+        for(int i = (list8RP.size() + list6DI6RO.size()); i < listRelais.size(); i++)
+        {
+            listRelais.at(i)->enable = false;
+        }
+    }
+
+
     // обновление списка входных групп анализа стали
     i = 0;
     foreach (uint8_t slot, listSTEEL) {
@@ -940,15 +964,6 @@ void MainWindow::updateDevicesComplect()
             s->slotIndex = i%NUM_CHAN_IN_STEEL;
             s->enable = true;
         }
-//        else
-//        {   // добавить каналы, если соответствующих плат стало больше
-//            cSteel * s = new cSteel(this);
-//            s->slot = slot;     //
-//            s->slotIndex = i%2;
-//            s->enable = true;
-//            s->technology = NULL;
-//            listSteel.append(s);
-//        }
         i++;
     }
     if(listSteel.size() > listSTEEL.size())
@@ -1045,7 +1060,10 @@ void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
     for(int i = 0; i < NUM_RELAY_IN_8RP; i ++)
     {
         int index = getIndexRelayBySlotAndCh(sl, i);
-        relayControlRregister += (listRelais.at(index)->getState() << i);
+        if(index != -1)
+        {
+            relayControlRregister += (listRelais.at(index)->getState() << i);
+        }
     }
     tr.offset = cRegistersMap::getOffsetByName("RelayControl");
     tr.slave = sl;
@@ -1064,7 +1082,10 @@ void MainWindow::slotGetRelay(uint8_t sl, uint8_t num)
     for(int i = 0; i < NUM_RELAY_IN_8RP; i ++)
     {
         int index = getIndexRelayBySlotAndCh(sl, i);
-        relayControlRregister += (listRelais.at(index)->getState() << i);
+        if(index != -1)
+        {
+            relayControlRregister += (listRelais.at(index)->getState() << i);
+        }
     }
     tr.offset = cRegistersMap::getOffsetByName("RelayControl");
     tr.slave = sl;
@@ -1393,19 +1414,17 @@ void MainWindow::parseWorkerReceive()
             //для реле регистр выходов как параметр платы
             if(paramName == "RelayControl")
             {
-                if(device->deviceType == Device_8RP)
+                if((device->deviceType == Device_8RP)\
+                        || (device->deviceType == Divece_6DI6RO))
                 {
-//                    foreach (cRelay * r, listRelais) {
-//                        if((tr.slave == r->mySlot))
-//                        {
-//                            r->setCurState(tr.volInt);
-//                        }
-//                    }
                     for(int i = 0; i < NUM_RELAY_IN_8RP; i++)
                     {
                         int index = getIndexRelayBySlotAndCh(tr.slave, i);
-                        bool state = (bool)((tr.volInt >> i) & 1);
-                        listRelais.at(index)->setCurState(state);
+                        if(index != -1)
+                        {
+                            bool state = (bool)((tr.volInt >> i) & 1);
+                            listRelais.at(index)->setCurState(state);
+                        }
                     }
 
                 }
