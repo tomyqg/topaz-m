@@ -1003,7 +1003,7 @@ void MainWindow::updateSteelWidget(void)
     QList<QString> strings;
     strings << "ОТКЛЮЧЕНО" << "ГОТОВ" << "ИЗМЕРЕНИЕ" \
             << "ОШИБКА TC" << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ TC" \
-            << "НЕТ ПЛОЩАДКИ ЭДС" << "НЕТ ПЛОЩАДОК" << "КОНЕЦ" \
+            << "НЕТ ПЛОЩАДКИ ЭДС" << "НЕТ ПЛОЩАДОК" << "КОНЕЦ ИЗМЕРЕНИЯ" \
             << "ОБРЫВ TC" << "ОШИБКА КАНАЛА";
     QList<QString> colorStyles;
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");

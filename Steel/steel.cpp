@@ -261,7 +261,7 @@ void cSteel::parserSteel(Transaction tr)
         }
         else if(paramName == chanName + "SteelAdditionalParameter1")
         {
-            uint16_t param[6] = {0, technology->nSt, 0, 0, 0, 0};
+            uint16_t param[6] = {technology->nSt, 0, 0, 0, 0, 0};
             if(memcmp(tr.paramA12, param, sizeof(tr.paramA12)) != 0)
             {
                 memcpy(trans.paramA12, param, sizeof(trans.paramA12));

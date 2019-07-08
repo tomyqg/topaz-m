@@ -1691,7 +1691,7 @@ void MainWindow::sendConfigChannelsToSlave()
             // запись AdditionalParameter
             str = "chan" + QString::number(devS) + "AdditionalParameter1";
             tr.offset = cRegistersMap::getOffsetByName(str);
-            tr.paramA12[1] = st->technology->nSt;
+            tr.paramA12[0] = st->technology->nSt;
             emit sendTransToWorker(tr);
         }
     }

@@ -647,7 +647,7 @@ int cFileManager::writeSteelsSettings(QString path)
     if(file.open(QIODevice::WriteOnly))
     {
         file.resize(0); // clear file
-        out << setstr;
+        out << setstr.toUtf8();
         file.close();
     }
     else
