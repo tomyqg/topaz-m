@@ -7,6 +7,9 @@
 #include <QTimer>
 #include "../mathresolver.h"
 
+#define NUM_MATH_ARG 4
+#define MATH_UPDATE_PERIOD_MS 500
+
 class cMathChannel : public QObject
 {
     Q_OBJECT
@@ -22,7 +25,7 @@ public:
     QString getUnit(void) { return unit; }
     void SetMathEquation(QString newmathstring);
     double GetCurrentMathValue();
-    int numChannel[4];      //номера подключенных каналов в качестве аргументов формулы
+    int numChannel[NUM_MATH_ARG];      //номера подключенных каналов в качестве аргументов формулы
     double GetValuePercent();
     double GetHigherMeasureLimit() { return higherLimit; }
     double GetLowerMeasureLimit() { return lowerLimit; }

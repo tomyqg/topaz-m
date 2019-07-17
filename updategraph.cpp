@@ -42,6 +42,9 @@ extern cSystemOptions systemOptions;  //класс хранения состем
 extern QList<cGroupChannels*> listGroup;
 extern QList<cMathChannel *> listMath;
 extern QList<cFreqChannel *> listFreq;
+extern QMutex mListUstvok;
+extern QMutex mListMath;
+extern QMutex mListChannel;
 
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
@@ -84,6 +87,7 @@ void MainWindow::AddValuesToBuffer()
 //                                &Y_coordinates_Chanel_4_archive};
 
     int i = 0;
+    mListChannel.lock();
     foreach (ChannelOptions * channel, listChannels) {
 
         vectorsChannels[i].append(channel->GetCurrentChannelValue());
@@ -99,6 +103,7 @@ void MainWindow::AddValuesToBuffer()
         }
         i++;
     }
+    mListChannel.unlock();
 
 //    Y_coordinates_Chanel_1.append(listChannels.at(0)->GetCurrentChannelValue());
 //    Y_coordinates_Chanel_2.append(listChannels.at(1)->GetCurrentChannelValue());
@@ -252,17 +257,21 @@ void MainWindow::GrafsUpdateTrends()
 
         if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
+            mListChannel.lock();
             ChannelOptions * channel = listChannels.at(group->channel[i]);
             xCoord = channel->GetChannelTimeBuffer();
             yCoord = channel->GetChannelValuesBuffer();
+            mListChannel.unlock();
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Math) && (group->mathChannel[i] != -1))
         {
             if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
             {
+                mListMath.lock();
                 cMathChannel * math = listMath.at(group->mathChannel[i]);
                 xCoord = math->GetMathTimeBuffer();
                 yCoord = math->GetMathValuesBuffer();
+                mListMath.unlock();
             }
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
@@ -334,13 +343,17 @@ void MainWindow::GrafsUpdateTrends()
             QString name;
             if(group->typeInput[index] == 1)
             {
+                mListChannel.lock();
                 value = listChannels.at(group->channel[index])->GetCurrentChannelValue();
                 name = listChannels.at(group->channel[index])->GetChannelName();
+                mListChannel.unlock();
             }
             else if(group->typeInput[index] == 2)
             {
+                mListMath.lock();
                 value = listMath.at(group->mathChannel[index])->GetCurrentMathValue();
                 name = listMath.at(group->mathChannel[index])->getName();
+                mListMath.unlock();
             }
 
 
@@ -476,6 +489,7 @@ void MainWindow::updateBars(void)
         {
             if(group->channel[i] != -1)
             {
+                mListChannel.lock();
                 ChannelOptions * channel = listChannels.at(group->channel[i]);
 
 #ifdef RANDOM_CHAN
@@ -499,6 +513,7 @@ void MainWindow::updateBars(void)
                     }
                     bar->setValue(channel->GetCurrentChannelValue());
                     bar->cleanMarker();
+                    mListUstvok.lock();
                     foreach(Ustavka * ust, listUstavok)
                     {
                         if(ust->getChannel() == channel->getNum())
@@ -506,12 +521,14 @@ void MainWindow::updateBars(void)
                             bar->addMarker(ust->getHiStateValue(), ust->getTypeFix());
                         }
                     }
+                    mListUstvok.unlock();
                     bar->show();
                     if(indexGroup >= 4)
                     {
                         ui->nameGroupChannels2->show();
                     }
                 }
+                mListChannel.unlock();
             }
         }
         else if(group->typeInput[i] == cGroupChannels::Input_Math)
@@ -520,22 +537,16 @@ void MainWindow::updateBars(void)
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
+                    mListMath.lock();
                     cMathChannel * math = listMath.at(group->mathChannel[i]);
-
 //                    bar->setExtr(math->GetMinimumChannelValue(), math->GetMaximumChannelValue());
                     bar->setExtr(math->GetMinimumMathValue(),\
                                  math->GetMaximumMathValue());
                     bar->setBarDiapazon(max(abs(math->GetHigherMeasureLimit()), \
                                             abs(math->GetLowerMeasureLimit())));
                     bar->setValue(math->GetCurrentMathValue());
+                    mListMath.unlock();
                     bar->cleanMarker();
-//                    foreach(Ustavka * ust, listUstavok)
-//                    {
-//                        if(ust->getChannel() == channel->getNum())
-//                        {
-//                            bar->addMarker(ust->getHiStateValue(), ust->getTypeFix());
-//                        }
-//                    }
                     bar->show();
                     if(indexGroup >= 4)
                     {
@@ -649,9 +660,11 @@ void MainWindow::setTextBars()
         {
             if(group->channel[i] != -1)
             {
+                mListChannel.lock();
                 bar->setNumChan(listChannels.at(group->channel[i])->getNum());
                 bar->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
+                mListChannel.unlock();
             }
 
         }
@@ -661,9 +674,11 @@ void MainWindow::setTextBars()
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
+                    mListMath.lock();
                     bar->setNumChan(listMath.at(group->mathChannel[i])->getNum());
                     bar->setText(listMath.at(group->mathChannel[i])->getName(), \
                                  listMath.at(group->mathChannel[i])->getUnit());
+                    mListMath.unlock();
                 }
                 else
                 {
@@ -740,9 +755,11 @@ void MainWindow::updateWidgetsVols(void)
         {
             if(group->channel[i] != -1)
             {
+                mListChannel.lock();
                 vol->setChanNum(listChannels.at(group->channel[i])->getNum());
                 vol->setText(listChannels.at(group->channel[i])->GetChannelName(), \
                              listChannels.at(group->channel[i])->GetUnitsName());
+                mListChannel.unlock();
             }
             vol->setColor(color[indexGroup]);
         }
@@ -752,9 +769,11 @@ void MainWindow::updateWidgetsVols(void)
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
+                    mListMath.lock();
                     vol->setChanNum(listMath.at(group->mathChannel[i])->getNum());
                     vol->setText(listMath.at(group->mathChannel[i])->getName(), \
                                  listMath.at(group->mathChannel[i])->getUnit());
+                    mListMath.unlock();
                 }
                 else
                 {
@@ -823,6 +842,7 @@ void MainWindow::updateVols()
         {
             if(group->channel[i] != -1)
             {
+                mListChannel.lock();
                 ChannelOptions * channel = listChannels.at(group->channel[i]);
 #ifdef RANDOM_CHAN
                 if((channel->getNum() <= NUM_CHAN_IN_4AI) || channel->enable)
@@ -846,6 +866,7 @@ void MainWindow::updateVols()
                     }
 
                 }
+                mListChannel.unlock();
             }
         }
         else if(group->typeInput[i] == cGroupChannels::Input_Math)
@@ -854,7 +875,9 @@ void MainWindow::updateVols()
             {
                 if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
                 {
+                    mListMath.lock();
                     vol->setVol(listMath.at(group->mathChannel[i])->GetCurrentMathValue());
+                    mListMath.unlock();
                     vol->show();
                     if(indexGroup >= 4)
                     {

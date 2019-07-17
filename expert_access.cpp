@@ -12,6 +12,7 @@ QString cExpertAccess::passExpert = "0000";
 QString cExpertAccess::passAdmin = "abrakadabra";
 QString cExpertAccess::configFileName = "";
 accessModeType cExpertAccess::mode = ACCESS_USER;
+accessModeType cExpertAccess::modeModbusExt = ACCESS_USER;
 
 cExpertAccess::cExpertAccess(QObject *parent) : QObject(parent)
 {
@@ -40,7 +41,6 @@ bool cExpertAccess::accessRequest(QString pass)
         mode = ACCESS_USER;
         return false;
     }
-
 }
 
 void cExpertAccess::resetAccess()

@@ -20,7 +20,7 @@
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.94"
+#define VER "1.95"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
@@ -31,9 +31,10 @@
 #endif
 
 #define PROTOCOL_VER "12.3"  //версия протокола внутреннего Modbus
+#define HARDWARE_VERSION "1.0" // версия железа
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 
-//#define DEBUG_RELAY
+#define DEBUG_RELAY
 #define MYD
 //#define Demo // раскоментить если делаем демо программу на РС
 

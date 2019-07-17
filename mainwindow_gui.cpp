@@ -47,11 +47,11 @@ cIpController * ethernet;
 QList<cMathChannel*> listMath;
 QList<cFreqChannel*> listFreq; //список частотных каналов
 
-
 extern QColor Channel1Color;
 extern QColor Channel2Color;
 extern QColor Channel3Color;
 extern QColor Channel4Color;
+extern QMutex mListChannel;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -569,8 +569,10 @@ void MainWindow::openSettingsChannel(int num)
     if(group->channel[num-1] > listChannels.size()) return;
 
 //    ChannelOptions * channel = group->channel[num-1];
+    mListChannel.lock();
     ChannelOptions * channel = listChannels.at(group->channel[num-1]);
     int index = channel->getNum();
+    mListChannel.unlock();
 
     dialogSetingsChannel = new dSettings(listChannels, index);
     dialogSetingsChannel->exec();

@@ -7,6 +7,7 @@
 QString pathtofile2 = "";
 
 extern QList<Ustavka *> listUstavok;
+extern QMutex mListUstvok;
 
 //void Options::ReadSystemOptionsFromFile()
 //{
@@ -137,6 +138,7 @@ void MainWindow::ReadUstavkiFromFile()
     QJsonObject jsonobj;
 
     int index = 0;
+    mListUstvok.lock();
     foreach (Ustavka * ust, listUstavok)
     {
         jsonobj = array.at(index).toObject();
@@ -161,4 +163,5 @@ void MainWindow::ReadUstavkiFromFile()
 //        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
         index++;
     }
+    mListUstvok.unlock();
 }

@@ -1,4 +1,4 @@
-/************************************************************************************
+п»ї/************************************************************************************
  * Filename: modbus_lookup_tables.c
  *
  * Notice:
@@ -107,438 +107,374 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     {30, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay31), "relay31", LKUP_TYPE_U8, 1},
     // Parameter: Relay 32 : relay32
     {31, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay32), "relay32", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 1  : ustavka1
-    {0, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka1), "ustavka1", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 2 : ustavka2
-    {1, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka2), "ustavka2", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 3 : ustavka3
-    {2, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka3), "ustavka3", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 4 : ustavka4
-    {3, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka4), "ustavka4", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 5 : ustavka5
-    {4, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka5), "ustavka5", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 6 : ustavka6
-    {5, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka6), "ustavka6", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 7 : ustavka7
-    {6, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka7), "ustavka7", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 8 : ustavka8
-    {7, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka8), "ustavka8", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 9 : ustavka9
-    {8, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka9), "ustavka9", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 10 : ustavka10
-    {9, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka10), "ustavka10", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 11 : ustavka11
-    {10, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka11), "ustavka11", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 12 : ustavka12
-    {11, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka12), "ustavka12", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 13 : ustavka13
-    {12, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka13), "ustavka13", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 14 : ustavka14
-    {13, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka14), "ustavka14", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 15 : ustavka15
-    {14, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka15), "ustavka15", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 16 : ustavka16
-    {15, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka16), "ustavka16", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 17 : ustavka17
-    {16, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka17), "ustavka17", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 18 : ustavka18
-    {17, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka18), "ustavka18", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 19 : ustavka19
-    {18, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka19), "ustavka19", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 20 : ustavka20
-    {19, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka20), "ustavka20", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 21 : ustavka21
-    {20, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka21), "ustavka21", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 22 : ustavka22
-    {21, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka22), "ustavka22", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 23 : ustavka23
-    {22, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka23), "ustavka23", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 24 : ustavka24
-    {23, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka24), "ustavka24", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 25 : ustavka25
-    {24, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka25), "ustavka25", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 26 : ustavka26
-    {25, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka26), "ustavka26", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 27 : ustavka27
-    {26, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka27), "ustavka27", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 28 : ustavka28
-    {27, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka28), "ustavka28", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 29 : ustavka29
-    {28, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka29), "ustavka29", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 30 : ustavka30
-    {29, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka30), "ustavka30", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 31 : ustavka31
-    {30, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka31), "ustavka31", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 32 : ustavka32
-    {31, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka32), "ustavka32", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 33 : ustavka33
-    {32, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka33), "ustavka33", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 34 : ustavka34
-    {33, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka34), "ustavka34", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 35 : ustavka35
-    {34, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka35), "ustavka35", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 36 : ustavka36
-    {35, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka36), "ustavka36", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 37 : ustavka37
-    {36, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka37), "ustavka37", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 38 : ustavka38
-    {37, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka38), "ustavka38", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 39 : ustavka39
-    {38, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka39), "ustavka39", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 40 : ustavka40
-    {39, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka40), "ustavka40", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 41 : ustavka41
-    {40, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka41), "ustavka41", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 42 : ustavka42
-    {41, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka42), "ustavka42", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 43 : ustavka43
-    {42, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka43), "ustavka43", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 44 : ustavka44
-    {43, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka44), "ustavka44", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 45 : ustavka45
-    {44, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka45), "ustavka45", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 46 : ustavka46
-    {45, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka46), "ustavka46", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 47 : ustavka47
-    {46, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka47), "ustavka47", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 48 : ustavka48
-    {47, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka48), "ustavka48", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 49 : ustavka49
-    {48, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka49), "ustavka49", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 50 : ustavka50
-    {49, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka50), "ustavka50", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 51 : ustavka51
-    {50, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka51), "ustavka51", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 52 : ustavka52
-    {51, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka52), "ustavka52", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 53 : ustavka53
-    {52, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka53), "ustavka53", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 54 : ustavka54
-    {53, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka54), "ustavka54", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 55 : ustavka55
-    {54, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka55), "ustavka55", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 56 : ustavka56
-    {55, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka56), "ustavka56", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 57 : ustavka57
-    {56, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka57), "ustavka57", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 58 : ustavka58
-    {57, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka58), "ustavka58", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 59 : ustavka59
-    {58, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka59), "ustavka59", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 60 : ustavka60
-    {59, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka60), "ustavka60", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 61 : ustavka61
-    {60, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka61), "ustavka61", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 62 : ustavka62
-    {61, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka62), "ustavka62", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 63 : ustavka63
-    {62, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka63), "ustavka63", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 64 : ustavka64
-    {63, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka64), "ustavka64", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 65 : ustavka65
-    {64, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka65), "ustavka65", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 66 : ustavka66
-    {65, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka66), "ustavka66", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 67 : ustavka67
-    {66, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka67), "ustavka67", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 68 : ustavka68
-    {67, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka68), "ustavka68", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 69 : ustavka69
-    {68, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka69), "ustavka69", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 70 : ustavka70
-    {69, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka70), "ustavka70", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 71 : ustavka71
-    {70, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka71), "ustavka71", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 72 : ustavka72
-    {71, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka72), "ustavka72", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 73 : ustavka73
-    {72, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka73), "ustavka73", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 74 : ustavka74
-    {73, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka74), "ustavka74", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 75 : ustavka75
-    {74, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka75), "ustavka75", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 76 : ustavka76
-    {75, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka76), "ustavka76", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 77 : ustavka77
-    {76, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka77), "ustavka77", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 78 : ustavka78
-    {77, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka78), "ustavka78", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 79 : ustavka79
-    {78, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka79), "ustavka79", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 80 : ustavka80
-    {79, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka80), "ustavka80", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 81 : ustavka81
-    {80, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka81), "ustavka81", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 82 : ustavka82
-    {81, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka82), "ustavka82", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 83 : ustavka83
-    {82, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka83), "ustavka83", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 84 : ustavka84
-    {83, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka84), "ustavka84", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 85 : ustavka85
-    {84, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka85), "ustavka85", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 86 : ustavka86
-    {85, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka86), "ustavka86", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 87 : ustavka87
-    {86, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka87), "ustavka87", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 88 : ustavka88
-    {87, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka88), "ustavka88", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 89 : ustavka89
-    {88, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka89), "ustavka89", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 90 : ustavka90
-    {89, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka90), "ustavka90", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 91 : ustavka91
-    {90, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka91), "ustavka91", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 92 : ustavka92
-    {91, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka92), "ustavka92", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 93 : ustavka93
-    {92, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka93), "ustavka93", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 94 : ustavka94
-    {93, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka94), "ustavka94", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 95 : ustavka95
-    {94, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka95), "ustavka95", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 96 : ustavka96
-    {95, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka96), "ustavka96", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 97 : ustavka97
-    {96, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka97), "ustavka97", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 98 : ustavka98
-    {97, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka98), "ustavka98", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 99 : ustavka99
-    {98, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka99), "ustavka99", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 100 : ustavka100
-    {99, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka100), "ustavka100", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 101 : ustavka101
-    {100, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka101), "ustavka101", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 102 : ustavka102
-    {101, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka102), "ustavka102", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 103 : ustavka103
-    {102, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka103), "ustavka103", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 104 : ustavka104
-    {103, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka104), "ustavka104", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 105 : ustavka105
-    {104, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka105), "ustavka105", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 106 : ustavka106
-    {105, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka106), "ustavka106", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 107 : ustavka107
-    {106, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka107), "ustavka107", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 108 : ustavka108
-    {107, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka108), "ustavka108", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 109 : ustavka109
-    {108, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka109), "ustavka109", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 110 : ustavka110
-    {109, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka110), "ustavka110", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 111 : ustavka111
-    {110, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka111), "ustavka111", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 112 : ustavka112
-    {111, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka112), "ustavka112", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 113 : ustavka113
-    {112, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka113), "ustavka113", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 114 : ustavka114
-    {113, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka114), "ustavka114", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 115 : ustavka115
-    {114, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka115), "ustavka115", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 116 : ustavka116
-    {115, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka116), "ustavka116", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 117 : ustavka117
-    {116, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka117), "ustavka117", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 118 : ustavka118
-    {117, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka118), "ustavka118", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 119 : ustavka119
-    {118, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka119), "ustavka119", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 120 : ustavka120
-    {119, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka120), "ustavka120", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 121 : ustavka121
-    {120, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka121), "ustavka121", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 122 : ustavka122
-    {121, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka122), "ustavka122", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 123 : ustavka123
-    {122, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka123), "ustavka123", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 124 : ustavka124
-    {123, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka124), "ustavka124", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 125 : ustavka125
-    {124, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka125), "ustavka125", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 126 : ustavka126
-    {125, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka126), "ustavka126", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 127 : ustavka127
-    {126, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka127), "ustavka127", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 128 : ustavka128
-    {127, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka128), "ustavka128", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 129 : ustavka129
-    {128, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka129), "ustavka129", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 130 : ustavka130
-    {129, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka130), "ustavka130", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 131 : ustavka131
-    {130, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka131), "ustavka131", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 132 : ustavka132
-    {131, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka132), "ustavka132", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 133 : ustavka133
-    {132, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka133), "ustavka133", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 134 : ustavka134
-    {133, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka134), "ustavka134", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 135 : ustavka135
-    {134, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka135), "ustavka135", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 136 : ustavka136
-    {135, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka136), "ustavka136", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 137 : ustavka137
-    {136, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka137), "ustavka137", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 138 : ustavka138
-    {137, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka138), "ustavka138", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 139 : ustavka139
-    {138, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka139), "ustavka139", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 140 : ustavka140
-    {139, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka140), "ustavka140", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 141 : ustavka141
-    {140, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka141), "ustavka141", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 142 : ustavka142
-    {141, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka142), "ustavka142", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 143 : ustavka143
-    {142, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka143), "ustavka143", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 144 : ustavka144
-    {143, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka144), "ustavka144", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 145 : ustavka145
-    {144, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka145), "ustavka145", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 146 : ustavka146
-    {145, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka146), "ustavka146", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 147 : ustavka147
-    {146, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka147), "ustavka147", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 148 : ustavka148
-    {147, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka148), "ustavka148", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 149 : ustavka149
-    {148, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka149), "ustavka149", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 150 : ustavka150
-    {149, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka150), "ustavka150", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 151 : ustavka151
-    {150, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka151), "ustavka151", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 152 : ustavka152
-    {151, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka152), "ustavka152", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 153 : ustavka153
-    {152, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka153), "ustavka153", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 154 : ustavka154
-    {153, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka154), "ustavka154", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 155 : ustavka155
-    {154, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka155), "ustavka155", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 156 : ustavka156
-    {155, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka156), "ustavka156", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 157 : ustavka157
-    {156, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka157), "ustavka157", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 158 : ustavka158
-    {157, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka158), "ustavka158", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 159 : ustavka159
-    {158, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka159), "ustavka159", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 160 : ustavka160
-    {159, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka160), "ustavka160", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 161 : ustavka161
-    {160, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka161), "ustavka161", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 162 : ustavka162
-    {161, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka162), "ustavka162", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 163 : ustavka163
-    {162, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka163), "ustavka163", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 164 : ustavka164
-    {163, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka164), "ustavka164", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 165 : ustavka165
-    {164, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka165), "ustavka165", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 166 : ustavka166
-    {165, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka166), "ustavka166", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 167 : ustavka167
-    {166, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka167), "ustavka167", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 168 : ustavka168
-    {167, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka168), "ustavka168", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 169 : ustavka169
-    {168, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka169), "ustavka169", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 170 : ustavka170
-    {169, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka170), "ustavka170", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 171 : ustavka171
-    {170, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka171), "ustavka171", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 172 : ustavka172
-    {171, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka172), "ustavka172", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 173 : ustavka173
-    {172, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka173), "ustavka173", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 174 : ustavka174
-    {173, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka174), "ustavka174", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 175 : ustavka175
-    {174, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka175), "ustavka175", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 176 : ustavka176
-    {175, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka176), "ustavka176", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 177 : ustavka177
-    {176, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka177), "ustavka177", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 178 : ustavka178
-    {177, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka178), "ustavka178", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 179 : ustavka179
-    {178, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka179), "ustavka179", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 180 : ustavka180
-    {179, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka180), "ustavka180", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 181 : ustavka181
-    {180, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka181), "ustavka181", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 182 : ustavka182
-    {181, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka182), "ustavka182", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 183 : ustavka183
-    {182, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka183), "ustavka183", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 184 : ustavka184
-    {183, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka184), "ustavka184", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 185 : ustavka185
-    {184, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka185), "ustavka185", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 186 : ustavka186
-    {185, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka186), "ustavka186", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 187 : ustavka187
-    {186, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka187), "ustavka187", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 188 : ustavka188
-    {187, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka188), "ustavka188", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 189 : ustavka189
-    {188, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka189), "ustavka189", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 190 : ustavka190
-    {189, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka190), "ustavka190", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 191 : ustavka191
-    {190, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka191), "ustavka191", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 192 : ustavka192
-    {191, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka192), "ustavka192", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 193 : ustavka193
-    {192, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka193), "ustavka193", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 194 : ustavka194
-    {193, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka194), "ustavka194", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 195 : ustavka195
-    {194, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka195), "ustavka195", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 196 : ustavka196
-    {195, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka196), "ustavka196", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 197 : ustavka197
-    {196, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka197), "ustavka197", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 198 : ustavka198
-    {197, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka198), "ustavka198", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 199 : ustavka199
-    {198, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka199), "ustavka199", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 200 : ustavka200
-    {199, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka200), "ustavka200", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 201 : ustavka201
-    {200, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka201), "ustavka201", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 202 : ustavka202
-    {201, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka202), "ustavka202", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 203 : ustavka203
-    {202, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka203), "ustavka203", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 204 : ustavka204
-    {203, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka204), "ustavka204", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 205 : ustavka205
-    {204, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka205), "ustavka205", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 206 : ustavka206
-    {205, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka206), "ustavka206", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 207 : ustavka207
-    {206, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka207), "ustavka207", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 208 : ustavka208
-    {207, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka208), "ustavka208", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 209 : ustavka209
-    {208, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka209), "ustavka209", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 210 : ustavka210
-    {209, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka210), "ustavka210", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 211 : ustavka211
-    {210, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka211), "ustavka211", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 212 : ustavka212
-    {211, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka212), "ustavka212", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 213 : ustavka213
-    {212, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka213), "ustavka213", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 214 : ustavka214
-    {213, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka214), "ustavka214", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 215 : ustavka215
-    {214, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka215), "ustavka215", LKUP_TYPE_U8, 1},
-    // Parameter: Ustavka 216 : ustavka216
-    {215, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(ustavka216), "ustavka216", LKUP_TYPE_U8, 1},
+    // Parameter: Relay 33 : relay33
+    {32, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay33), "relay33", LKUP_TYPE_U8, 1},
+    // Parameter: Relay 34 : relay34
+    {33, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay34), "relay34", LKUP_TYPE_U8, 1},
+    // Parameter: Relay 35 : relay35
+    {34, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay35), "relay35", LKUP_TYPE_U8, 1},
+    // Parameter: Relay 36 : relay36
+    {35, LKUP_MAP_COILS, mbExtRegRwCheckFunc,  OFFSET(relay36), "relay36", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 1  : setpoint1
+    {0, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint1), "setpoint1", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 2 : setpoint2
+    {1, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint2), "setpoint2", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 3 : setpoint3
+    {2, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint3), "setpoint3", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 4 : setpoint4
+    {3, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint4), "setpoint4", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 5 : setpoint5
+    {4, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint5), "setpoint5", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 6 : setpoint6
+    {5, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint6), "setpoint6", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 7 : setpoint7
+    {6, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint7), "setpoint7", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 8 : setpoint8
+    {7, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint8), "setpoint8", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 9 : setpoint9
+    {8, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint9), "setpoint9", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 10 : setpoint10
+    {9, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint10), "setpoint10", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 11 : setpoint11
+    {10, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint11), "setpoint11", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 12 : setpoint12
+    {11, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint12), "setpoint12", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 13 : setpoint13
+    {12, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint13), "setpoint13", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 14 : setpoint14
+    {13, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint14), "setpoint14", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 15 : setpoint15
+    {14, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint15), "setpoint15", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 16 : setpoint16
+    {15, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint16), "setpoint16", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 17 : setpoint17
+    {16, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint17), "setpoint17", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 18 : setpoint18
+    {17, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint18), "setpoint18", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 19 : setpoint19
+    {18, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint19), "setpoint19", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 20 : setpoint20
+    {19, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint20), "setpoint20", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 21 : setpoint21
+    {20, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint21), "setpoint21", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 22 : setpoint22
+    {21, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint22), "setpoint22", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 23 : setpoint23
+    {22, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint23), "setpoint23", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 24 : setpoint24
+    {23, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint24), "setpoint24", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 25 : setpoint25
+    {24, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint25), "setpoint25", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 26 : setpoint26
+    {25, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint26), "setpoint26", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 27 : setpoint27
+    {26, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint27), "setpoint27", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 28 : setpoint28
+    {27, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint28), "setpoint28", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 29 : setpoint29
+    {28, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint29), "setpoint29", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 30 : setpoint30
+    {29, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint30), "setpoint30", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 31 : setpoint31
+    {30, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint31), "setpoint31", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 32 : setpoint32
+    {31, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint32), "setpoint32", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 33 : setpoint33
+    {32, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint33), "setpoint33", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 34 : setpoint34
+    {33, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint34), "setpoint34", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 35 : setpoint35
+    {34, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint35), "setpoint35", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 36 : setpoint36
+    {35, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint36), "setpoint36", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 37 : setpoint37
+    {36, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint37), "setpoint37", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 38 : setpoint38
+    {37, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint38), "setpoint38", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 39 : setpoint39
+    {38, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint39), "setpoint39", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 40 : setpoint40
+    {39, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint40), "setpoint40", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 41 : setpoint41
+    {40, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint41), "setpoint41", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 42 : setpoint42
+    {41, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint42), "setpoint42", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 43 : setpoint43
+    {42, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint43), "setpoint43", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 44 : setpoint44
+    {43, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint44), "setpoint44", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 45 : setpoint45
+    {44, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint45), "setpoint45", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 46 : setpoint46
+    {45, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint46), "setpoint46", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 47 : setpoint47
+    {46, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint47), "setpoint47", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 48 : setpoint48
+    {47, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint48), "setpoint48", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 49 : setpoint49
+    {48, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint49), "setpoint49", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 50 : setpoint50
+    {49, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint50), "setpoint50", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 51 : setpoint51
+    {50, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint51), "setpoint51", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 52 : setpoint52
+    {51, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint52), "setpoint52", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 53 : setpoint53
+    {52, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint53), "setpoint53", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 54 : setpoint54
+    {53, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint54), "setpoint54", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 55 : setpoint55
+    {54, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint55), "setpoint55", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 56 : setpoint56
+    {55, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint56), "setpoint56", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 57 : setpoint57
+    {56, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint57), "setpoint57", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 58 : setpoint58
+    {57, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint58), "setpoint58", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 59 : setpoint59
+    {58, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint59), "setpoint59", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 60 : setpoint60
+    {59, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint60), "setpoint60", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 61 : setpoint61
+    {60, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint61), "setpoint61", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 62 : setpoint62
+    {61, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint62), "setpoint62", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 63 : setpoint63
+    {62, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint63), "setpoint63", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 64 : setpoint64
+    {63, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint64), "setpoint64", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 65 : setpoint65
+    {64, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint65), "setpoint65", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 66 : setpoint66
+    {65, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint66), "setpoint66", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 67 : setpoint67
+    {66, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint67), "setpoint67", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 68 : setpoint68
+    {67, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint68), "setpoint68", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 69 : setpoint69
+    {68, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint69), "setpoint69", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 70 : setpoint70
+    {69, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint70), "setpoint70", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 71 : setpoint71
+    {70, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint71), "setpoint71", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 72 : setpoint72
+    {71, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint72), "setpoint72", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 73 : setpoint73
+    {72, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint73), "setpoint73", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 74 : setpoint74
+    {73, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint74), "setpoint74", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 75 : setpoint75
+    {74, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint75), "setpoint75", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 76 : setpoint76
+    {75, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint76), "setpoint76", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 77 : setpoint77
+    {76, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint77), "setpoint77", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 78 : setpoint78
+    {77, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint78), "setpoint78", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 79 : setpoint79
+    {78, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint79), "setpoint79", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 80 : setpoint80
+    {79, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint80), "setpoint80", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 81 : setpoint81
+    {80, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint81), "setpoint81", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 82 : setpoint82
+    {81, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint82), "setpoint82", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 83 : setpoint83
+    {82, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint83), "setpoint83", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 84 : setpoint84
+    {83, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint84), "setpoint84", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 85 : setpoint85
+    {84, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint85), "setpoint85", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 86 : setpoint86
+    {85, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint86), "setpoint86", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 87 : setpoint87
+    {86, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint87), "setpoint87", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 88 : setpoint88
+    {87, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint88), "setpoint88", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 89 : setpoint89
+    {88, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint89), "setpoint89", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 90 : setpoint90
+    {89, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint90), "setpoint90", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 91 : setpoint91
+    {90, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint91), "setpoint91", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 92 : setpoint92
+    {91, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint92), "setpoint92", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 93 : setpoint93
+    {92, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint93), "setpoint93", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 94 : setpoint94
+    {93, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint94), "setpoint94", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 95 : setpoint95
+    {94, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint95), "setpoint95", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 96 : setpoint96
+    {95, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint96), "setpoint96", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 97 : setpoint97
+    {96, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint97), "setpoint97", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 98 : setpoint98
+    {97, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint98), "setpoint98", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 99 : setpoint99
+    {98, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint99), "setpoint99", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 100 : setpoint100
+    {99, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint100), "setpoint100", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 101 : setpoint101
+    {100, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint101), "setpoint101", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 102 : setpoint102
+    {101, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint102), "setpoint102", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 103 : setpoint103
+    {102, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint103), "setpoint103", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 104 : setpoint104
+    {103, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint104), "setpoint104", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 105 : setpoint105
+    {104, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint105), "setpoint105", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 106 : setpoint106
+    {105, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint106), "setpoint106", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 107 : setpoint107
+    {106, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint107), "setpoint107", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 108 : setpoint108
+    {107, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint108), "setpoint108", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 109 : setpoint109
+    {108, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint109), "setpoint109", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 110 : setpoint110
+    {109, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint110), "setpoint110", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 111 : setpoint111
+    {110, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint111), "setpoint111", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 112 : setpoint112
+    {111, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint112), "setpoint112", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 113 : setpoint113
+    {112, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint113), "setpoint113", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 114 : setpoint114
+    {113, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint114), "setpoint114", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 115 : setpoint115
+    {114, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint115), "setpoint115", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 116 : setpoint116
+    {115, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint116), "setpoint116", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 117 : setpoint117
+    {116, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint117), "setpoint117", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 118 : setpoint118
+    {117, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint118), "setpoint118", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 119 : setpoint119
+    {118, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint119), "setpoint119", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 120 : setpoint120
+    {119, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint120), "setpoint120", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 121 : setpoint121
+    {120, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint121), "setpoint121", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 122 : setpoint122
+    {121, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint122), "setpoint122", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 123 : setpoint123
+    {122, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint123), "setpoint123", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 124 : setpoint124
+    {123, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint124), "setpoint124", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 125 : setpoint125
+    {124, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint125), "setpoint125", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 126 : setpoint126
+    {125, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint126), "setpoint126", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 127 : setpoint127
+    {126, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint127), "setpoint127", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 128 : setpoint128
+    {127, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint128), "setpoint128", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 129 : setpoint129
+    {128, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint129), "setpoint129", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 130 : setpoint130
+    {129, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint130), "setpoint130", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 131 : setpoint131
+    {130, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint131), "setpoint131", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 132 : setpoint132
+    {131, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint132), "setpoint132", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 133 : setpoint133
+    {132, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint133), "setpoint133", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 134 : setpoint134
+    {133, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint134), "setpoint134", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 135 : setpoint135
+    {134, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint135), "setpoint135", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 136 : setpoint136
+    {135, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint136), "setpoint136", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 137 : setpoint137
+    {136, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint137), "setpoint137", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 138 : setpoint138
+    {137, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint138), "setpoint138", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 139 : setpoint139
+    {138, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint139), "setpoint139", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 140 : setpoint140
+    {139, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint140), "setpoint140", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 141 : setpoint141
+    {140, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint141), "setpoint141", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 142 : setpoint142
+    {141, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint142), "setpoint142", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 143 : setpoint143
+    {142, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint143), "setpoint143", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 144 : setpoint144
+    {143, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint144), "setpoint144", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 145 : setpoint145
+    {144, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint145), "setpoint145", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 146 : setpoint146
+    {145, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint146), "setpoint146", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 147 : setpoint147
+    {146, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint147), "setpoint147", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 148 : setpoint148
+    {147, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint148), "setpoint148", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 149 : setpoint149
+    {148, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint149), "setpoint149", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 150 : setpoint150
+    {149, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint150), "setpoint150", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 151 : setpoint151
+    {150, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint151), "setpoint151", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 152 : setpoint152
+    {151, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint152), "setpoint152", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 153 : setpoint153
+    {152, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint153), "setpoint153", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 154 : setpoint154
+    {153, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint154), "setpoint154", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 155 : setpoint155
+    {154, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint155), "setpoint155", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 156 : setpoint156
+    {155, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint156), "setpoint156", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 157 : setpoint157
+    {156, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint157), "setpoint157", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 158 : setpoint158
+    {157, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint158), "setpoint158", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 159 : setpoint159
+    {158, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint159), "setpoint159", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 160 : setpoint160
+    {159, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint160), "setpoint160", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 161 : setpoint161
+    {160, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint161), "setpoint161", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 162 : setpoint162
+    {161, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint162), "setpoint162", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 163 : setpoint163
+    {162, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint163), "setpoint163", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 164 : setpoint164
+    {163, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint164), "setpoint164", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 165 : setpoint165
+    {164, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint165), "setpoint165", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 166 : setpoint166
+    {165, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint166), "setpoint166", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 167 : setpoint167
+    {166, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint167), "setpoint167", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 168 : setpoint168
+    {167, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint168), "setpoint168", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 169 : setpoint169
+    {168, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint169), "setpoint169", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 170 : setpoint170
+    {169, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint170), "setpoint170", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 171 : setpoint171
+    {170, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint171), "setpoint171", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 172 : setpoint172
+    {171, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint172), "setpoint172", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 173 : setpoint173
+    {172, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint173), "setpoint173", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 174 : setpoint174
+    {173, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint174), "setpoint174", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 175 : setpoint175
+    {174, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint175), "setpoint175", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 176 : setpoint176
+    {175, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint176), "setpoint176", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 177 : setpoint177
+    {176, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint177), "setpoint177", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 178 : setpoint178
+    {177, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint178), "setpoint178", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 179 : setpoint179
+    {178, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint179), "setpoint179", LKUP_TYPE_U8, 1},
+    // Parameter: State Set Point 180 : setpoint180
+    {179, LKUP_MAP_DISCRETE, mbExtRegRwCheckFunc,  OFFSET(setpoint180), "setpoint180", LKUP_TYPE_U8, 1},
     // Parameter: IP Address : ipAddress
     {0, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(ipAddress), "ipAddress", LKUP_TYPE_U32, 4},
     // Parameter: Mask IP : maskIP
@@ -587,18 +523,2830 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     {105, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(currentDate), "currentDate", LKUP_TYPE_U32, 4},
     // Parameter: Current Time : currentTime
     {107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(currentTime), "currentTime", LKUP_TYPE_U32, 4},
-    // Parameter: Настройки интерфейсов : var1
-    {200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var1), "var1", LKUP_TYPE_U32, 4},
-    // Parameter: Конфигурация уставок : var2
-    {1000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var2), "var2", LKUP_TYPE_U32, 4},
-    // Parameter: Конфигурация  матканалов : var3
-    {2000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var3), "var3", LKUP_TYPE_U32, 4},
-    // Parameter: Конфигурация модулей (плат) : var4
-    {3000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var4), "var4", LKUP_TYPE_U32, 4},
-    // Parameter: Конфигурация аналоговых каналов : var5
-    {5000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var5), "var5", LKUP_TYPE_U32, 4},
-    // Parameter: Конфигурация частотных каналов : var6
-    {6000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(var6), "var6", LKUP_TYPE_U32, 4},
+    // Parameter: Interface Parametrs : interfaceParametrs
+    {200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(interfaceParametrs), "interfaceParametrs", LKUP_TYPE_ASCII, 64},
+    // Parameter: Access Password : accessPass
+    {300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(accessPass), "accessPass", LKUP_TYPE_ASCII, 32},
+    // Parameter: Current Setpoint Num : currentSetpointNum
+    {1000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(currentSetpointNum), "currentSetpointNum", LKUP_TYPE_U16, 2},
+    // Parameter: Total Set Point : totalSetpoint
+    {1001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(totalSetpoint), "totalSetpoint", LKUP_TYPE_U16, 2},
+    // Parameter: Set Point Identifikator : setpointIdentifikator
+    {1002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointIdentifikator), "setpointIdentifikator", LKUP_TYPE_ASCII, 32},
+    // Parameter: Set Point Num Channel : setpointNumChan
+    {1018, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointNumChan), "setpointNumChan", LKUP_TYPE_U16, 2},
+    // Parameter: Set Point Type Fixation : setpointTypeFix
+    {1019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointTypeFix), "setpointTypeFix", LKUP_TYPE_U16, 2},
+    // Parameter: Set Point Value : setpointValue
+    {1020, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointValue), "setpointValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Set Point Histeresis : setpointHisteresis
+    {1022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointHisteresis), "setpointHisteresis", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Set Point Num Relay : setpointNumRelay
+    {1024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointNumRelay), "setpointNumRelay", LKUP_TYPE_U16, 2},
+    // Parameter: Set Point Over Message : setpointOverMess
+    {1025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointOverMess), "setpointOverMess", LKUP_TYPE_ASCII, 64},
+    // Parameter: Set Point Norm Message : setpointNormMess
+    {1057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointNormMess), "setpointNormMess", LKUP_TYPE_ASCII, 64},
+    // Parameter: Set Point User РЎonfirmation : setpointUserConfirm
+    {1089, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointUserConfirm), "setpointUserConfirm", LKUP_TYPE_U16, 2},
+    // Parameter: Set Point Time Filter : setpointTimeFilter
+    {1090, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(setpointTimeFilter), "setpointTimeFilter", LKUP_TYPE_U16, 2},
+    // Parameter: Current Mathematical Channel Number : currentMathNum
+    {2000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(currentMathNum), "currentMathNum", LKUP_TYPE_U16, 2},
+    // Parameter: Total Mathematical Channels : totalMath
+    {2001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(totalMath), "totalMath", LKUP_TYPE_U16, 2},
+    // Parameter: Mathematic Channel Name : mathName
+    {2002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathName), "mathName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Mathematic Formula : mathFormula
+    {2006, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathFormula), "mathFormula", LKUP_TYPE_ASCII, 32},
+    // Parameter: Argument X1 : mathX1
+    {2022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathX1), "mathX1", LKUP_TYPE_U16, 2},
+    // Parameter: Argument X2 : mathX2
+    {2023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathX2), "mathX2", LKUP_TYPE_U16, 2},
+    // Parameter: Argument X3 : mathX3
+    {2024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathX3), "mathX3", LKUP_TYPE_U16, 2},
+    // Parameter: Argument X4 : mathX4
+    {2025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathX4), "mathX4", LKUP_TYPE_U16, 2},
+    // Parameter: Mathematic Unit Name : mathUnit
+    {2026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathUnit), "mathUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Mathematic High Limit : mathHiLimit
+    {2028, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathHiLimit), "mathHiLimit", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Mathematic Low Limit : mathLowLimit
+    {2030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathLowLimit), "mathLowLimit", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Mathematic Period : mathPeriod
+    {2032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(mathPeriod), "mathPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Module Mode : module1Mode
+    {3000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module1Mode), "module1Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Module Modbus Baudrate : module1ModbusBaud
+    {3001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module1ModbusBaud), "module1ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Module Modbus parity  : module1ModbusParity
+    {3002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module1ModbusParity), "module1ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Module Modbus stopbit  : module1MbStopBits
+    {3003, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module1MbStopBits), "module1MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module1DataOrder
+    {3004, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module1DataOrder), "module1DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Mode : module2Mode
+    {3010, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module2Mode), "module2Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus Baudrate : module2ModbusBaud
+    {3011, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module2ModbusBaud), "module2ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus parity : module2ModbusParity
+    {3012, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module2ModbusParity), "module2ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus stopbit : module2MbStopBits
+    {3013, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module2MbStopBits), "module2MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module2DataOrder
+    {3014, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module2DataOrder), "module2DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Mode : module3Mode
+    {3020, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module3Mode), "module3Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus Baudrate : module3ModbusBaud
+    {3021, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module3ModbusBaud), "module3ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus parity : module3ModbusParity
+    {3022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module3ModbusParity), "module3ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus stopbit : module3MbStopBits
+    {3023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module3MbStopBits), "module3MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module3DataOrder
+    {3024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module3DataOrder), "module3DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Mode : module4Mode
+    {3030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module4Mode), "module4Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus Baudrate : module4ModbusBaud
+    {3031, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module4ModbusBaud), "module4ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus parity : module4ModbusParity
+    {3032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module4ModbusParity), "module4ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus stopbit : module4MbStopBits
+    {3033, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module4MbStopBits), "module4MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module4DataOrder
+    {3034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module4DataOrder), "module4DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Mode : module5Mode
+    {3040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module5Mode), "module5Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus Baudrate : module5ModbusBaud
+    {3041, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module5ModbusBaud), "module5ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus parity : module5ModbusParity
+    {3042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module5ModbusParity), "module5ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus stopbit : module5MbStopBits
+    {3043, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module5MbStopBits), "module5MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module5DataOrder
+    {3044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module5DataOrder), "module5DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Mode : module6Mode
+    {3050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module6Mode), "module6Mode", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus Baudrate : module6ModbusBaud
+    {3051, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module6ModbusBaud), "module6ModbusBaud", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus parity : module6ModbusParity
+    {3052, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module6ModbusParity), "module6ModbusParity", LKUP_TYPE_U16, 2},
+    // Parameter: Modbus stopbit : module6MbStopBits
+    {3053, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module6MbStopBits), "module6MbStopBits", LKUP_TYPE_U16, 2},
+    // Parameter: Data order : module6DataOrder
+    {3054, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(module6DataOrder), "module6DataOrder", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan1SignalType
+    {5000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1SignalType), "chan1SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter1 : chan1AdditionalParameter1
+    {5001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1AdditionalParameter1), "chan1AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter2 : chan1AdditionalParameter2
+    {5007, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1AdditionalParameter2), "chan1AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan1CorrectionCjValue
+    {5013, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1CorrectionCjValue), "chan1CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan1LowMeasureLim
+    {5015, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1LowMeasureLim), "chan1LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan1HighMeasureLim
+    {5017, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1HighMeasureLim), "chan1HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan1Name
+    {5019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Name), "chan1Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan1Period
+    {5023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Period), "chan1Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan1Dempher
+    {5025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Dempher), "chan1Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan1TypeRegistration
+    {5026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeRegistration), "chan1TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan1TypeValue
+    {5027, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeValue), "chan1TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan2SignalType
+    {5040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2SignalType), "chan2SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter21 : chan2AdditionalParameter1
+    {5041, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2AdditionalParameter1), "chan2AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter20 : chan2AdditionalParameter2
+    {5047, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2AdditionalParameter2), "chan2AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan2CorrectionCjValue
+    {5053, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2CorrectionCjValue), "chan2CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan2LowMeasureLim
+    {5055, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2LowMeasureLim), "chan2LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan2HighMeasureLim
+    {5057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2HighMeasureLim), "chan2HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan2Name
+    {5059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Name), "chan2Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan2Period
+    {5063, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Period), "chan2Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan2Dempher
+    {5065, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Dempher), "chan2Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan2TypeRegistration
+    {5066, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeRegistration), "chan2TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan2TypeValue
+    {5067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeValue), "chan2TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan3SignalType
+    {5080, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3SignalType), "chan3SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter19 : chan3AdditionalParameter1
+    {5081, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3AdditionalParameter1), "chan3AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter18 : chan3AdditionalParameter2
+    {5087, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3AdditionalParameter2), "chan3AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan3CorrectionCjValue
+    {5093, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3CorrectionCjValue), "chan3CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan3LowMeasureLim
+    {5095, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3LowMeasureLim), "chan3LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan3HighMeasureLim
+    {5097, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3HighMeasureLim), "chan3HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan3Name
+    {5099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Name), "chan3Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan3Period
+    {5103, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Period), "chan3Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan3Dempher
+    {5105, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Dempher), "chan3Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan3TypeRegistration
+    {5106, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeRegistration), "chan3TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan3TypeValue
+    {5107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeValue), "chan3TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan4SignalType
+    {5120, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4SignalType), "chan4SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter19 : chan4AdditionalParameter1
+    {5121, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4AdditionalParameter1), "chan4AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter18 : chan4AdditionalParameter2
+    {5127, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4AdditionalParameter2), "chan4AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan4CorrectionCjValue
+    {5133, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4CorrectionCjValue), "chan4CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan4LowMeasureLim
+    {5135, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4LowMeasureLim), "chan4LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan4HighMeasureLim
+    {5137, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4HighMeasureLim), "chan4HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan4Name
+    {5139, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Name), "chan4Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan4Period
+    {5143, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Period), "chan4Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan4Dempher
+    {5145, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Dempher), "chan4Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan4TypeRegistration
+    {5146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeRegistration), "chan4TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan4TypeValue
+    {5147, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeValue), "chan4TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan5SignalType
+    {5160, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5SignalType), "chan5SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter17 : chan5AdditionalParameter1
+    {5161, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5AdditionalParameter1), "chan5AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter16 : chan5AdditionalParameter2
+    {5167, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5AdditionalParameter2), "chan5AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan5CorrectionCjValue
+    {5173, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5CorrectionCjValue), "chan5CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan5LowMeasureLim
+    {5175, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5LowMeasureLim), "chan5LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan5HighMeasureLim
+    {5177, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5HighMeasureLim), "chan5HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan5Name
+    {5179, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Name), "chan5Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan5Period
+    {5183, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Period), "chan5Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan5Dempher
+    {5185, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Dempher), "chan5Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan5TypeRegistration
+    {5186, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeRegistration), "chan5TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan5TypeValue
+    {5187, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeValue), "chan5TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan6SignalType
+    {5200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6SignalType), "chan6SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter17 : chan6AdditionalParameter1
+    {5201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6AdditionalParameter1), "chan6AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter16 : chan6AdditionalParameter2
+    {5207, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6AdditionalParameter2), "chan6AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan6CorrectionCjValue
+    {5213, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6CorrectionCjValue), "chan6CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan6LowMeasureLim
+    {5215, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6LowMeasureLim), "chan6LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan6HighMeasureLim
+    {5217, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6HighMeasureLim), "chan6HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan6Name
+    {5219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Name), "chan6Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan6Period
+    {5223, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Period), "chan6Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan6Dempher
+    {5225, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Dempher), "chan6Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan6TypeRegistration
+    {5226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeRegistration), "chan6TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan6TypeValue
+    {5227, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeValue), "chan6TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan7SignalType
+    {5240, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7SignalType), "chan7SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter15 : chan7AdditionalParameter1
+    {5241, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7AdditionalParameter1), "chan7AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter14 : chan7AdditionalParameter2
+    {5247, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7AdditionalParameter2), "chan7AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan7CorrectionCjValue
+    {5253, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7CorrectionCjValue), "chan7CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan7LowMeasureLim
+    {5255, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7LowMeasureLim), "chan7LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan7HighMeasureLim
+    {5257, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7HighMeasureLim), "chan7HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan7Name
+    {5259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Name), "chan7Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan7Period
+    {5263, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Period), "chan7Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan7Dempher
+    {5265, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Dempher), "chan7Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan7TypeRegistration
+    {5266, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeRegistration), "chan7TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan7TypeValue
+    {5267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeValue), "chan7TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan8SignalType
+    {5280, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8SignalType), "chan8SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter15 : chan8AdditionalParameter1
+    {5281, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8AdditionalParameter1), "chan8AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter14 : chan8AdditionalParameter2
+    {5287, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8AdditionalParameter2), "chan8AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan8CorrectionCjValue
+    {5293, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8CorrectionCjValue), "chan8CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan8LowMeasureLim
+    {5295, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8LowMeasureLim), "chan8LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan8HighMeasureLim
+    {5297, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8HighMeasureLim), "chan8HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan8Name
+    {5299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Name), "chan8Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan8Period
+    {5303, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Period), "chan8Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan8Dempher
+    {5305, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Dempher), "chan8Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan8TypeRegistration
+    {5306, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeRegistration), "chan8TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan8TypeValue
+    {5307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeValue), "chan8TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan9SignalType
+    {5320, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9SignalType), "chan9SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter13 : chan9AdditionalParameter1
+    {5321, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9AdditionalParameter1), "chan9AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter12 : chan9AdditionalParameter2
+    {5327, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9AdditionalParameter2), "chan9AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan9CorrectionCjValue
+    {5333, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9CorrectionCjValue), "chan9CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan9LowMeasureLim
+    {5335, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9LowMeasureLim), "chan9LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan9HighMeasureLim
+    {5337, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9HighMeasureLim), "chan9HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan9Name
+    {5339, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Name), "chan9Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan9Period
+    {5343, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Period), "chan9Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan9Dempher
+    {5345, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Dempher), "chan9Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan9TypeRegistration
+    {5346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeRegistration), "chan9TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan9TypeValue
+    {5347, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeValue), "chan9TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan10SignalType
+    {5360, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10SignalType), "chan10SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter13 : chan10AdditionalParameter1
+    {5361, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10AdditionalParameter1), "chan10AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter12 : chan10AdditionalParameter2
+    {5367, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10AdditionalParameter2), "chan10AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan10CorrectionCjValue
+    {5373, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10CorrectionCjValue), "chan10CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan10LowMeasureLim
+    {5375, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10LowMeasureLim), "chan10LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan10HighMeasureLim
+    {5377, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10HighMeasureLim), "chan10HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan10Name
+    {5379, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Name), "chan10Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan10Period
+    {5383, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Period), "chan10Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan10Dempher
+    {5385, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Dempher), "chan10Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan10TypeRegistration
+    {5386, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeRegistration), "chan10TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan10TypeValue
+    {5387, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeValue), "chan10TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan11SignalType
+    {5400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11SignalType), "chan11SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter11 : chan11AdditionalParameter1
+    {5401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11AdditionalParameter1), "chan11AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter10 : chan11AdditionalParameter2
+    {5407, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11AdditionalParameter2), "chan11AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan11CorrectionCjValue
+    {5413, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11CorrectionCjValue), "chan11CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan11LowMeasureLim
+    {5415, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11LowMeasureLim), "chan11LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan11HighMeasureLim
+    {5417, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11HighMeasureLim), "chan11HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan11Name
+    {5419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Name), "chan11Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan11Period
+    {5423, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Period), "chan11Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan11Dempher
+    {5425, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Dempher), "chan11Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan11TypeRegistration
+    {5426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeRegistration), "chan11TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan11TypeValue
+    {5427, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeValue), "chan11TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan12SignalType
+    {5440, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12SignalType), "chan12SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter11 : chan12AdditionalParameter1
+    {5441, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12AdditionalParameter1), "chan12AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter10 : chan12AdditionalParameter2
+    {5447, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12AdditionalParameter2), "chan12AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan12CorrectionCjValue
+    {5453, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12CorrectionCjValue), "chan12CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan12LowMeasureLim
+    {5455, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12LowMeasureLim), "chan12LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan12HighMeasureLim
+    {5457, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12HighMeasureLim), "chan12HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan12Name
+    {5459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Name), "chan12Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan12Period
+    {5463, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Period), "chan12Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan12Dempher
+    {5465, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Dempher), "chan12Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan12TypeRegistration
+    {5466, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeRegistration), "chan12TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan12TypeValue
+    {5467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeValue), "chan12TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan13SignalType
+    {5480, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13SignalType), "chan13SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter9 : chan13AdditionalParameter1
+    {5481, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13AdditionalParameter1), "chan13AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter8 : chan13AdditionalParameter2
+    {5487, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13AdditionalParameter2), "chan13AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan13CorrectionCjValue
+    {5493, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13CorrectionCjValue), "chan13CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan13LowMeasureLim
+    {5495, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13LowMeasureLim), "chan13LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan13HighMeasureLim
+    {5497, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13HighMeasureLim), "chan13HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan13Name
+    {5499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Name), "chan13Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan13Period
+    {5503, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Period), "chan13Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan13Dempher
+    {5505, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Dempher), "chan13Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan13TypeRegistration
+    {5506, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeRegistration), "chan13TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan13TypeValue
+    {5507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeValue), "chan13TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan14SignalType
+    {5520, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14SignalType), "chan14SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter9 : chan14AdditionalParameter1
+    {5521, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14AdditionalParameter1), "chan14AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter8 : chan14AdditionalParameter2
+    {5527, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14AdditionalParameter2), "chan14AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan14CorrectionCjValue
+    {5533, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14CorrectionCjValue), "chan14CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan14LowMeasureLim
+    {5535, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14LowMeasureLim), "chan14LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan14HighMeasureLim
+    {5537, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14HighMeasureLim), "chan14HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan14Name
+    {5539, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Name), "chan14Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan14Period
+    {5543, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Period), "chan14Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan14Dempher
+    {5545, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Dempher), "chan14Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan14TypeRegistration
+    {5546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeRegistration), "chan14TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan14TypeValue
+    {5547, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeValue), "chan14TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan15SignalType
+    {5560, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15SignalType), "chan15SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter7 : chan15AdditionalParameter1
+    {5561, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15AdditionalParameter1), "chan15AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter6 : chan15AdditionalParameter2
+    {5567, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15AdditionalParameter2), "chan15AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan15CorrectionCjValue
+    {5573, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15CorrectionCjValue), "chan15CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan15LowMeasureLim
+    {5575, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15LowMeasureLim), "chan15LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan15HighMeasureLim
+    {5577, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15HighMeasureLim), "chan15HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan15Name
+    {5579, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Name), "chan15Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan15Period
+    {5583, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Period), "chan15Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan15Dempher
+    {5585, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Dempher), "chan15Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan15TypeRegistration
+    {5586, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeRegistration), "chan15TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan15TypeValue
+    {5587, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeValue), "chan15TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan16SignalType
+    {5600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16SignalType), "chan16SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter7 : chan16AdditionalParameter1
+    {5601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16AdditionalParameter1), "chan16AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter6 : chan16AdditionalParameter2
+    {5607, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16AdditionalParameter2), "chan16AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan16CorrectionCjValue
+    {5613, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16CorrectionCjValue), "chan16CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan16LowMeasureLim
+    {5615, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16LowMeasureLim), "chan16LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan16HighMeasureLim
+    {5617, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16HighMeasureLim), "chan16HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan16Name
+    {5619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Name), "chan16Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan16Period
+    {5623, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Period), "chan16Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan16Dempher
+    {5625, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Dempher), "chan16Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan16TypeRegistration
+    {5626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeRegistration), "chan16TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan16TypeValue
+    {5627, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeValue), "chan16TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan17SignalType
+    {5640, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17SignalType), "chan17SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter5 : chan17AdditionalParameter1
+    {5641, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17AdditionalParameter1), "chan17AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter4 : chan17AdditionalParameter2
+    {5647, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17AdditionalParameter2), "chan17AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan17CorrectionCjValue
+    {5653, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17CorrectionCjValue), "chan17CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan17LowMeasureLim
+    {5655, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17LowMeasureLim), "chan17LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan17HighMeasureLim
+    {5657, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17HighMeasureLim), "chan17HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan17Name
+    {5659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Name), "chan17Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan17Period
+    {5663, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Period), "chan17Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan17Dempher
+    {5665, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Dempher), "chan17Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan17TypeRegistration
+    {5666, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeRegistration), "chan17TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan17TypeValue
+    {5667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeValue), "chan17TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan18SignalType
+    {5680, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18SignalType), "chan18SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter5 : chan18AdditionalParameter1
+    {5681, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18AdditionalParameter1), "chan18AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter4 : chan18AdditionalParameter2
+    {5687, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18AdditionalParameter2), "chan18AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan18CorrectionCjValue
+    {5693, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18CorrectionCjValue), "chan18CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan18LowMeasureLim
+    {5695, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18LowMeasureLim), "chan18LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan18HighMeasureLim
+    {5697, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18HighMeasureLim), "chan18HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan18Name
+    {5699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Name), "chan18Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan18Period
+    {5703, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Period), "chan18Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan18Dempher
+    {5705, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Dempher), "chan18Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan18TypeRegistration
+    {5706, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeRegistration), "chan18TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan18TypeValue
+    {5707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeValue), "chan18TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan19SignalType
+    {5720, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19SignalType), "chan19SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter3 : chan19AdditionalParameter1
+    {5721, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19AdditionalParameter1), "chan19AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter2 : chan19AdditionalParameter2
+    {5727, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19AdditionalParameter2), "chan19AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan19CorrectionCjValue
+    {5733, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19CorrectionCjValue), "chan19CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan19LowMeasureLim
+    {5735, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19LowMeasureLim), "chan19LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan19HighMeasureLim
+    {5737, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19HighMeasureLim), "chan19HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan19Name
+    {5739, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Name), "chan19Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan19Period
+    {5743, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Period), "chan19Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan19Dempher
+    {5745, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Dempher), "chan19Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan19TypeRegistration
+    {5746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeRegistration), "chan19TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan19TypeValue
+    {5747, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeValue), "chan19TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan20SignalType
+    {5760, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20SignalType), "chan20SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter3 : chan20AdditionalParameter1
+    {5761, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20AdditionalParameter1), "chan20AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter2 : chan20AdditionalParameter2
+    {5767, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20AdditionalParameter2), "chan20AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan20CorrectionCjValue
+    {5773, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20CorrectionCjValue), "chan20CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan20LowMeasureLim
+    {5775, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20LowMeasureLim), "chan20LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan20HighMeasureLim
+    {5777, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20HighMeasureLim), "chan20HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan20Name
+    {5779, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Name), "chan20Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan20Period
+    {5783, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Period), "chan20Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan20Dempher
+    {5785, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Dempher), "chan20Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan20TypeRegistration
+    {5786, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeRegistration), "chan20TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan20TypeValue
+    {5787, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeValue), "chan20TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan21SignalType
+    {5800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21SignalType), "chan21SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter1 : chan21AdditionalParameter1
+    {5801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21AdditionalParameter1), "chan21AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter0 : chan21AdditionalParameter2
+    {5807, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21AdditionalParameter2), "chan21AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan21CorrectionCjValue
+    {5813, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21CorrectionCjValue), "chan21CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan21LowMeasureLim
+    {5815, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21LowMeasureLim), "chan21LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan21HighMeasureLim
+    {5817, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21HighMeasureLim), "chan21HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan21Name
+    {5819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Name), "chan21Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan21Period
+    {5823, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Period), "chan21Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan21Dempher
+    {5825, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Dempher), "chan21Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan21TypeRegistration
+    {5826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeRegistration), "chan21TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan21TypeValue
+    {5827, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeValue), "chan21TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan22SignalType
+    {5840, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22SignalType), "chan22SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter1 : chan22AdditionalParameter1
+    {5841, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22AdditionalParameter1), "chan22AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter0 : chan22AdditionalParameter2
+    {5847, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22AdditionalParameter2), "chan22AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan22CorrectionCjValue
+    {5853, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22CorrectionCjValue), "chan22CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan22LowMeasureLim
+    {5855, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22LowMeasureLim), "chan22LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan22HighMeasureLim
+    {5857, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22HighMeasureLim), "chan22HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan22Name
+    {5859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Name), "chan22Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan22Period
+    {5863, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Period), "chan22Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan22Dempher
+    {5865, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Dempher), "chan22Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan22TypeRegistration
+    {5866, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeRegistration), "chan22TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan22TypeValue
+    {5867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeValue), "chan22TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan23SignalType
+    {5880, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23SignalType), "chan23SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter1 : chan23AdditionalParameter1
+    {5881, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23AdditionalParameter1), "chan23AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter2 : chan23AdditionalParameter2
+    {5887, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23AdditionalParameter2), "chan23AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan23CorrectionCjValue
+    {5893, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23CorrectionCjValue), "chan23CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan23LowMeasureLim
+    {5895, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23LowMeasureLim), "chan23LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan23HighMeasureLim
+    {5897, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23HighMeasureLim), "chan23HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan23Name
+    {5899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Name), "chan23Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan23Period
+    {5903, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Period), "chan23Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan23Dempher
+    {5905, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Dempher), "chan23Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan23TypeRegistration
+    {5906, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeRegistration), "chan23TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan23TypeValue
+    {5907, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeValue), "chan23TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type : chan24SignalType
+    {5920, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24SignalType), "chan24SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter1 : chan24AdditionalParameter1
+    {5921, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24AdditionalParameter1), "chan24AdditionalParameter1", LKUP_TYPE_ASCII, 12},
+    // Parameter: Additional parameter2 : chan24AdditionalParameter2
+    {5927, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24AdditionalParameter2), "chan24AdditionalParameter2", LKUP_TYPE_ASCII, 12},
+    // Parameter: Correction CJ Value : chan24CorrectionCjValue
+    {5933, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24CorrectionCjValue), "chan24CorrectionCjValue", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan24LowMeasureLim
+    {5935, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24LowMeasureLim), "chan24LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit : chan24HighMeasureLim
+    {5937, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24HighMeasureLim), "chan24HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan24Name
+    {5939, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Name), "chan24Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Period : chan24Period
+    {5943, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Period), "chan24Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan24Dempher
+    {5945, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Dempher), "chan24Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Registration : chan24TypeRegistration
+    {5946, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeRegistration), "chan24TypeRegistration", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan24TypeValue
+    {5947, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeValue), "chan24TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan1FreqSignalType
+    {6000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqSignalType), "chan1FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan1FreqalAdditionalParameter
+    {6001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqalAdditionalParameter), "chan1FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan1ImpulseDuration
+    {6007, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1ImpulseDuration), "chan1ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan1FreqLowMeasureLim
+    {6009, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqLowMeasureLim), "chan1FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan1FreqHighMeasureLim
+    {6011, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqHighMeasureLim), "chan1FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan1FreqName
+    {6013, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqName), "chan1FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan1FreqUnit
+    {6017, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqUnit), "chan1FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan1FreqImpWeight
+    {6019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqImpWeight), "chan1FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan1FreqPeriod
+    {6021, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqPeriod), "chan1FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan1FreqDempher
+    {6023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqDempher), "chan1FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan1FreqTypeValue
+    {6024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqTypeValue), "chan1FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan2FreqSignalType
+    {6025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqSignalType), "chan2FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan2FreqAdditionalParameter
+    {6026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqAdditionalParameter), "chan2FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan2ImpulseDuration
+    {6032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2ImpulseDuration), "chan2ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan2FreqLowMeasureLim
+    {6034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqLowMeasureLim), "chan2FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan2FreqHighMeasureLim
+    {6036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqHighMeasureLim), "chan2FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan2FreqName
+    {6038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqName), "chan2FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan2FreqUnit
+    {6042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqUnit), "chan2FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan2ImpWeight
+    {6044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2ImpWeight), "chan2ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan2FreqPeriod
+    {6046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqPeriod), "chan2FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan2FreqDempher
+    {6048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqDempher), "chan2FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan2FreqTypeValue
+    {6049, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqTypeValue), "chan2FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan3FreqSignalType
+    {6050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqSignalType), "chan3FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan3FreqalAdditionalParameter
+    {6051, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqalAdditionalParameter), "chan3FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan3ImpulseDuration
+    {6057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3ImpulseDuration), "chan3ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan3FreqLowMeasureLim
+    {6059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqLowMeasureLim), "chan3FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan3FreqHighMeasureLim
+    {6061, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqHighMeasureLim), "chan3FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan3FreqName
+    {6063, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqName), "chan3FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan3FreqUnit
+    {6067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqUnit), "chan3FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan3FreqImpWeight
+    {6069, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqImpWeight), "chan3FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan3FreqPeriod
+    {6071, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqPeriod), "chan3FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan3FreqDempher
+    {6073, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqDempher), "chan3FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan3FreqTypeValue
+    {6074, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqTypeValue), "chan3FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan4FreqSignalType
+    {6075, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqSignalType), "chan4FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan4FreqAdditionalParameter
+    {6076, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqAdditionalParameter), "chan4FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan4ImpulseDuration
+    {6082, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4ImpulseDuration), "chan4ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan4FreqLowMeasureLim
+    {6084, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqLowMeasureLim), "chan4FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan4FreqHighMeasureLim
+    {6086, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqHighMeasureLim), "chan4FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan4FreqName
+    {6088, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqName), "chan4FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan4FreqUnit
+    {6092, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqUnit), "chan4FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan4ImpWeight
+    {6094, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4ImpWeight), "chan4ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan4FreqPeriod
+    {6096, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqPeriod), "chan4FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan4FreqDempher
+    {6098, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqDempher), "chan4FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan4FreqTypeValue
+    {6099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqTypeValue), "chan4FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan5FreqSignalType
+    {6100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqSignalType), "chan5FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan5FreqalAdditionalParameter
+    {6101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqalAdditionalParameter), "chan5FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan5ImpulseDuration
+    {6107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5ImpulseDuration), "chan5ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan5FreqLowMeasureLim
+    {6109, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqLowMeasureLim), "chan5FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan5FreqHighMeasureLim
+    {6111, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqHighMeasureLim), "chan5FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan5FreqName
+    {6113, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqName), "chan5FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan5FreqUnit
+    {6117, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqUnit), "chan5FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan5FreqImpWeight
+    {6119, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqImpWeight), "chan5FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan5FreqPeriod
+    {6121, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqPeriod), "chan5FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan5FreqDempher
+    {6123, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqDempher), "chan5FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan5FreqTypeValue
+    {6124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqTypeValue), "chan5FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan6FreqSignalType
+    {6125, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqSignalType), "chan6FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan6FreqAdditionalParameter
+    {6126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqAdditionalParameter), "chan6FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan6ImpulseDuration
+    {6132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6ImpulseDuration), "chan6ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan6FreqLowMeasureLim
+    {6134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqLowMeasureLim), "chan6FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan6FreqHighMeasureLim
+    {6136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqHighMeasureLim), "chan6FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan6FreqName
+    {6138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqName), "chan6FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan6FreqUnit
+    {6142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqUnit), "chan6FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan6ImpWeight
+    {6144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6ImpWeight), "chan6ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan6FreqPeriod
+    {6146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqPeriod), "chan6FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan6FreqDempher
+    {6148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqDempher), "chan6FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan6FreqTypeValue
+    {6149, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqTypeValue), "chan6FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan7FreqSignalType
+    {6150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqSignalType), "chan7FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan7FreqalAdditionalParameter
+    {6151, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqalAdditionalParameter), "chan7FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan7ImpulseDuration
+    {6157, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7ImpulseDuration), "chan7ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan7FreqLowMeasureLim
+    {6159, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqLowMeasureLim), "chan7FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan7FreqHighMeasureLim
+    {6161, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqHighMeasureLim), "chan7FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan7FreqName
+    {6163, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqName), "chan7FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan7FreqUnit
+    {6167, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqUnit), "chan7FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan7FreqImpWeight
+    {6169, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqImpWeight), "chan7FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan7FreqPeriod
+    {6171, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqPeriod), "chan7FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan7FreqDempher
+    {6173, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqDempher), "chan7FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan7FreqTypeValue
+    {6174, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqTypeValue), "chan7FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan8FreqSignalType
+    {6175, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqSignalType), "chan8FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan8FreqAdditionalParameter
+    {6176, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqAdditionalParameter), "chan8FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan8ImpulseDuration
+    {6182, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8ImpulseDuration), "chan8ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan8FreqLowMeasureLim
+    {6184, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqLowMeasureLim), "chan8FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan8FreqHighMeasureLim
+    {6186, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqHighMeasureLim), "chan8FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan8FreqName
+    {6188, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqName), "chan8FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan8FreqUnit
+    {6192, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqUnit), "chan8FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan8ImpWeight
+    {6194, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8ImpWeight), "chan8ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan8FreqPeriod
+    {6196, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqPeriod), "chan8FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan8FreqDempher
+    {6198, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqDempher), "chan8FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan8FreqTypeValue
+    {6199, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqTypeValue), "chan8FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan9FreqSignalType
+    {6200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqSignalType), "chan9FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan9FreqalAdditionalParameter
+    {6201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqalAdditionalParameter), "chan9FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan9ImpulseDuration
+    {6207, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9ImpulseDuration), "chan9ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan9FreqLowMeasureLim
+    {6209, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqLowMeasureLim), "chan9FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan9FreqHighMeasureLim
+    {6211, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqHighMeasureLim), "chan9FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan9FreqName
+    {6213, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqName), "chan9FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan9FreqUnit
+    {6217, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqUnit), "chan9FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan9FreqImpWeight
+    {6219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqImpWeight), "chan9FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan9FreqPeriod
+    {6221, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqPeriod), "chan9FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan9FreqDempher
+    {6223, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqDempher), "chan9FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan9FreqTypeValue
+    {6224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqTypeValue), "chan9FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan10FreqSignalType
+    {6225, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqSignalType), "chan10FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan10FreqAdditionalParameter
+    {6226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqAdditionalParameter), "chan10FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan10ImpulseDuration
+    {6232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10ImpulseDuration), "chan10ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan10FreqLowMeasureLim
+    {6234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqLowMeasureLim), "chan10FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan10FreqHighMeasureLim
+    {6236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqHighMeasureLim), "chan10FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan10FreqName
+    {6238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqName), "chan10FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan10FreqUnit
+    {6242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqUnit), "chan10FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan10ImpWeight
+    {6244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10ImpWeight), "chan10ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan10FreqPeriod
+    {6246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqPeriod), "chan10FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan10FreqDempher
+    {6248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqDempher), "chan10FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan10FreqTypeValue
+    {6249, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqTypeValue), "chan10FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan11FreqSignalType
+    {6250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqSignalType), "chan11FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan11FreqalAdditionalParameter
+    {6251, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqalAdditionalParameter), "chan11FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan11ImpulseDuration
+    {6257, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11ImpulseDuration), "chan11ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan11FreqLowMeasureLim
+    {6259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqLowMeasureLim), "chan11FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan11FreqHighMeasureLim
+    {6261, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqHighMeasureLim), "chan11FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan11FreqName
+    {6263, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqName), "chan11FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan11FreqUnit
+    {6267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqUnit), "chan11FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan11FreqImpWeight
+    {6269, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqImpWeight), "chan11FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan11FreqPeriod
+    {6271, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqPeriod), "chan11FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan11FreqDempher
+    {6273, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqDempher), "chan11FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan11FreqTypeValue
+    {6274, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqTypeValue), "chan11FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan12FreqSignalType
+    {6275, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqSignalType), "chan12FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan12FreqAdditionalParameter
+    {6276, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqAdditionalParameter), "chan12FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan12ImpulseDuration
+    {6282, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12ImpulseDuration), "chan12ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan12FreqLowMeasureLim
+    {6284, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqLowMeasureLim), "chan12FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan12FreqHighMeasureLim
+    {6286, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqHighMeasureLim), "chan12FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan12FreqName
+    {6288, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqName), "chan12FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan12FreqUnit
+    {6292, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqUnit), "chan12FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan12ImpWeight
+    {6294, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12ImpWeight), "chan12ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan12FreqPeriod
+    {6296, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqPeriod), "chan12FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan12FreqDempher
+    {6298, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqDempher), "chan12FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan12FreqTypeValue
+    {6299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqTypeValue), "chan12FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan13FreqSignalType
+    {6300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqSignalType), "chan13FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan13FreqalAdditionalParameter
+    {6301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqalAdditionalParameter), "chan13FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan13ImpulseDuration
+    {6307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13ImpulseDuration), "chan13ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan13FreqLowMeasureLim
+    {6309, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqLowMeasureLim), "chan13FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan13FreqHighMeasureLim
+    {6311, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqHighMeasureLim), "chan13FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan13FreqName
+    {6313, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqName), "chan13FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan13FreqUnit
+    {6317, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqUnit), "chan13FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan13FreqImpWeight
+    {6319, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqImpWeight), "chan13FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan13FreqPeriod
+    {6321, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqPeriod), "chan13FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan13FreqDempher
+    {6323, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqDempher), "chan13FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan13FreqTypeValue
+    {6324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqTypeValue), "chan13FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan14FreqSignalType
+    {6325, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqSignalType), "chan14FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan14FreqAdditionalParameter
+    {6326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqAdditionalParameter), "chan14FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan14ImpulseDuration
+    {6332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14ImpulseDuration), "chan14ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan14FreqLowMeasureLim
+    {6334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqLowMeasureLim), "chan14FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan14FreqHighMeasureLim
+    {6336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqHighMeasureLim), "chan14FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan14FreqName
+    {6338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqName), "chan14FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan14FreqUnit
+    {6342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqUnit), "chan14FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan14ImpWeight
+    {6344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14ImpWeight), "chan14ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan14FreqPeriod
+    {6346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqPeriod), "chan14FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan14FreqDempher
+    {6348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqDempher), "chan14FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan14FreqTypeValue
+    {6349, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqTypeValue), "chan14FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan15FreqSignalType
+    {6350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqSignalType), "chan15FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan15FreqalAdditionalParameter
+    {6351, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqalAdditionalParameter), "chan15FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan15ImpulseDuration
+    {6357, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15ImpulseDuration), "chan15ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan15FreqLowMeasureLim
+    {6359, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqLowMeasureLim), "chan15FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan15FreqHighMeasureLim
+    {6361, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqHighMeasureLim), "chan15FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan15FreqName
+    {6363, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqName), "chan15FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan15FreqUnit
+    {6367, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqUnit), "chan15FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan15FreqImpWeight
+    {6369, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqImpWeight), "chan15FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan15FreqPeriod
+    {6371, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqPeriod), "chan15FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan15FreqDempher
+    {6373, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqDempher), "chan15FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan15FreqTypeValue
+    {6374, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqTypeValue), "chan15FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan16FreqSignalType
+    {6375, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqSignalType), "chan16FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan16FreqAdditionalParameter
+    {6376, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqAdditionalParameter), "chan16FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan16ImpulseDuration
+    {6382, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16ImpulseDuration), "chan16ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan16FreqLowMeasureLim
+    {6384, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqLowMeasureLim), "chan16FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan16FreqHighMeasureLim
+    {6386, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqHighMeasureLim), "chan16FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan16FreqName
+    {6388, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqName), "chan16FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan16FreqUnit
+    {6392, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqUnit), "chan16FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan16ImpWeight
+    {6394, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16ImpWeight), "chan16ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan16FreqPeriod
+    {6396, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqPeriod), "chan16FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan16FreqDempher
+    {6398, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqDempher), "chan16FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan16FreqTypeValue
+    {6399, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqTypeValue), "chan16FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan17FreqSignalType
+    {6400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqSignalType), "chan17FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan17FreqalAdditionalParameter
+    {6401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqalAdditionalParameter), "chan17FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan17ImpulseDuration
+    {6407, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17ImpulseDuration), "chan17ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan17FreqLowMeasureLim
+    {6409, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqLowMeasureLim), "chan17FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan17FreqHighMeasureLim
+    {6411, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqHighMeasureLim), "chan17FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan17FreqName
+    {6413, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqName), "chan17FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan17FreqUnit
+    {6417, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqUnit), "chan17FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan17FreqImpWeight
+    {6419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqImpWeight), "chan17FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan17FreqPeriod
+    {6421, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqPeriod), "chan17FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan17FreqDempher
+    {6423, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqDempher), "chan17FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan17FreqTypeValue
+    {6424, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqTypeValue), "chan17FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan18FreqSignalType
+    {6425, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqSignalType), "chan18FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan18FreqAdditionalParameter
+    {6426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqAdditionalParameter), "chan18FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan18ImpulseDuration
+    {6432, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18ImpulseDuration), "chan18ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan18FreqLowMeasureLim
+    {6434, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqLowMeasureLim), "chan18FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan18FreqHighMeasureLim
+    {6436, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqHighMeasureLim), "chan18FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan18FreqName
+    {6438, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqName), "chan18FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan18FreqUnit
+    {6442, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqUnit), "chan18FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan18ImpWeight
+    {6444, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18ImpWeight), "chan18ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan18FreqPeriod
+    {6446, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqPeriod), "chan18FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan18FreqDempher
+    {6448, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqDempher), "chan18FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan18FreqTypeValue
+    {6449, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqTypeValue), "chan18FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan19FreqSignalType
+    {6450, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqSignalType), "chan19FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan19FreqalAdditionalParameter
+    {6451, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqalAdditionalParameter), "chan19FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan19ImpulseDuration
+    {6457, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19ImpulseDuration), "chan19ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan19FreqLowMeasureLim
+    {6459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqLowMeasureLim), "chan19FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan19FreqHighMeasureLim
+    {6461, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqHighMeasureLim), "chan19FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan19FreqName
+    {6463, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqName), "chan19FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan19FreqUnit
+    {6467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqUnit), "chan19FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan19FreqImpWeight
+    {6469, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqImpWeight), "chan19FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan19FreqPeriod
+    {6471, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqPeriod), "chan19FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan19FreqDempher
+    {6473, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqDempher), "chan19FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan19FreqTypeValue
+    {6474, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqTypeValue), "chan19FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan20FreqSignalType
+    {6475, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqSignalType), "chan20FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan20FreqAdditionalParameter
+    {6476, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqAdditionalParameter), "chan20FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan20ImpulseDuration
+    {6482, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20ImpulseDuration), "chan20ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan20FreqLowMeasureLim
+    {6484, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqLowMeasureLim), "chan20FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan20FreqHighMeasureLim
+    {6486, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqHighMeasureLim), "chan20FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan20FreqName
+    {6488, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqName), "chan20FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan20FreqUnit
+    {6492, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqUnit), "chan20FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan20ImpWeight
+    {6494, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20ImpWeight), "chan20ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan20FreqPeriod
+    {6496, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqPeriod), "chan20FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan20FreqDempher
+    {6498, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqDempher), "chan20FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan20FreqTypeValue
+    {6499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqTypeValue), "chan20FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan21FreqSignalType
+    {6500, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqSignalType), "chan21FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan21FreqalAdditionalParameter
+    {6501, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqalAdditionalParameter), "chan21FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan21ImpulseDuration
+    {6507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21ImpulseDuration), "chan21ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan21FreqLowMeasureLim
+    {6509, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqLowMeasureLim), "chan21FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan21FreqHighMeasureLim
+    {6511, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqHighMeasureLim), "chan21FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan21FreqName
+    {6513, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqName), "chan21FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan21FreqUnit
+    {6517, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqUnit), "chan21FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan21FreqImpWeight
+    {6519, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqImpWeight), "chan21FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan21FreqPeriod
+    {6521, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqPeriod), "chan21FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan21FreqDempher
+    {6523, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqDempher), "chan21FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan21FreqTypeValue
+    {6524, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqTypeValue), "chan21FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan22FreqSignalType
+    {6525, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqSignalType), "chan22FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan22FreqAdditionalParameter
+    {6526, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqAdditionalParameter), "chan22FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan22ImpulseDuration
+    {6532, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22ImpulseDuration), "chan22ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan22FreqLowMeasureLim
+    {6534, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqLowMeasureLim), "chan22FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan22FreqHighMeasureLim
+    {6536, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqHighMeasureLim), "chan22FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan22FreqName
+    {6538, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqName), "chan22FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan22FreqUnit
+    {6542, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqUnit), "chan22FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan22ImpWeight
+    {6544, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22ImpWeight), "chan22ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan22FreqPeriod
+    {6546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqPeriod), "chan22FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan22FreqDempher
+    {6548, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqDempher), "chan22FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan22FreqTypeValue
+    {6549, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqTypeValue), "chan22FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan23FreqSignalType
+    {6550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqSignalType), "chan23FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan23FreqalAdditionalParameter
+    {6551, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqalAdditionalParameter), "chan23FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan23ImpulseDuration
+    {6557, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23ImpulseDuration), "chan23ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan23FreqLowMeasureLim
+    {6559, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqLowMeasureLim), "chan23FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan23FreqHighMeasureLim
+    {6561, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqHighMeasureLim), "chan23FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan23FreqName
+    {6563, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqName), "chan23FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan23FreqUnit
+    {6567, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqUnit), "chan23FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan23FreqImpWeight
+    {6569, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqImpWeight), "chan23FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan23FreqPeriod
+    {6571, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqPeriod), "chan23FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan23FreqDempher
+    {6573, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqDempher), "chan23FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan23FreqTypeValue
+    {6574, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqTypeValue), "chan23FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan24FreqSignalType
+    {6575, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqSignalType), "chan24FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan24FreqAdditionalParameter
+    {6576, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqAdditionalParameter), "chan24FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan24ImpulseDuration
+    {6582, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24ImpulseDuration), "chan24ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan24FreqLowMeasureLim
+    {6584, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqLowMeasureLim), "chan24FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan24FreqHighMeasureLim
+    {6586, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqHighMeasureLim), "chan24FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan24FreqName
+    {6588, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqName), "chan24FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan24FreqUnit
+    {6592, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqUnit), "chan24FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan24ImpWeight
+    {6594, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24ImpWeight), "chan24ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan24FreqPeriod
+    {6596, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqPeriod), "chan24FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan24FreqDempher
+    {6598, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqDempher), "chan24FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan24FreqTypeValue
+    {6599, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqTypeValue), "chan24FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan25FreqSignalType
+    {6600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqSignalType), "chan25FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan25FreqalAdditionalParameter
+    {6601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqalAdditionalParameter), "chan25FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan25ImpulseDuration
+    {6607, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25ImpulseDuration), "chan25ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan25FreqLowMeasureLim
+    {6609, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqLowMeasureLim), "chan25FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan25FreqHighMeasureLim
+    {6611, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqHighMeasureLim), "chan25FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan25FreqName
+    {6613, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqName), "chan25FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan25FreqUnit
+    {6617, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqUnit), "chan25FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan25FreqImpWeight
+    {6619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqImpWeight), "chan25FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan25FreqPeriod
+    {6621, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqPeriod), "chan25FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan25FreqDempher
+    {6623, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqDempher), "chan25FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan25FreqTypeValue
+    {6624, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqTypeValue), "chan25FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan26FreqSignalType
+    {6625, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqSignalType), "chan26FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan26FreqAdditionalParameter
+    {6626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqAdditionalParameter), "chan26FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan26ImpulseDuration
+    {6632, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26ImpulseDuration), "chan26ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan26FreqLowMeasureLim
+    {6634, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqLowMeasureLim), "chan26FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan26FreqHighMeasureLim
+    {6636, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqHighMeasureLim), "chan26FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan26FreqName
+    {6638, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqName), "chan26FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan26FreqUnit
+    {6642, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqUnit), "chan26FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan26ImpWeight
+    {6644, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26ImpWeight), "chan26ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan26FreqPeriod
+    {6646, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqPeriod), "chan26FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan26FreqDempher
+    {6648, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqDempher), "chan26FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan26FreqTypeValue
+    {6649, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqTypeValue), "chan26FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan27FreqSignalType
+    {6650, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqSignalType), "chan27FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan27FreqalAdditionalParameter
+    {6651, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqalAdditionalParameter), "chan27FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan27ImpulseDuration
+    {6657, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27ImpulseDuration), "chan27ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan27FreqLowMeasureLim
+    {6659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqLowMeasureLim), "chan27FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan27FreqHighMeasureLim
+    {6661, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqHighMeasureLim), "chan27FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan27FreqName
+    {6663, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqName), "chan27FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan27FreqUnit
+    {6667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqUnit), "chan27FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan27FreqImpWeight
+    {6669, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqImpWeight), "chan27FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan27FreqPeriod
+    {6671, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqPeriod), "chan27FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan27FreqDempher
+    {6673, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqDempher), "chan27FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan27FreqTypeValue
+    {6674, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqTypeValue), "chan27FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan28FreqSignalType
+    {6675, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqSignalType), "chan28FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan28FreqAdditionalParameter
+    {6676, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqAdditionalParameter), "chan28FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan28ImpulseDuration
+    {6682, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28ImpulseDuration), "chan28ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan28FreqLowMeasureLim
+    {6684, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqLowMeasureLim), "chan28FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan28FreqHighMeasureLim
+    {6686, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqHighMeasureLim), "chan28FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan28FreqName
+    {6688, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqName), "chan28FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan28FreqUnit
+    {6692, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqUnit), "chan28FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan28ImpWeight
+    {6694, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28ImpWeight), "chan28ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan28FreqPeriod
+    {6696, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqPeriod), "chan28FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan28FreqDempher
+    {6698, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqDempher), "chan28FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan28FreqTypeValue
+    {6699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqTypeValue), "chan28FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan29FreqSignalType
+    {6700, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqSignalType), "chan29FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan29FreqalAdditionalParameter
+    {6701, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqalAdditionalParameter), "chan29FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan29ImpulseDuration
+    {6707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29ImpulseDuration), "chan29ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan29FreqLowMeasureLim
+    {6709, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqLowMeasureLim), "chan29FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan29FreqHighMeasureLim
+    {6711, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqHighMeasureLim), "chan29FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan29FreqName
+    {6713, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqName), "chan29FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan29FreqUnit
+    {6717, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqUnit), "chan29FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan29FreqImpWeight
+    {6719, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqImpWeight), "chan29FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan29FreqPeriod
+    {6721, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqPeriod), "chan29FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan29FreqDempher
+    {6723, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqDempher), "chan29FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan29FreqTypeValue
+    {6724, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqTypeValue), "chan29FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan30FreqSignalType
+    {6725, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqSignalType), "chan30FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan30FreqAdditionalParameter
+    {6726, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqAdditionalParameter), "chan30FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan30ImpulseDuration
+    {6732, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30ImpulseDuration), "chan30ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan30FreqLowMeasureLim
+    {6734, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqLowMeasureLim), "chan30FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan30FreqHighMeasureLim
+    {6736, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqHighMeasureLim), "chan30FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan30FreqName
+    {6738, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqName), "chan30FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan30FreqUnit
+    {6742, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqUnit), "chan30FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan30ImpWeight
+    {6744, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30ImpWeight), "chan30ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan30FreqPeriod
+    {6746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqPeriod), "chan30FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan30FreqDempher
+    {6748, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqDempher), "chan30FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan30FreqTypeValue
+    {6749, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqTypeValue), "chan30FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan31FreqSignalType
+    {6750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqSignalType), "chan31FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan31FreqalAdditionalParameter
+    {6751, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqalAdditionalParameter), "chan31FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan31ImpulseDuration
+    {6757, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31ImpulseDuration), "chan31ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan31FreqLowMeasureLim
+    {6759, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqLowMeasureLim), "chan31FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan31FreqHighMeasureLim
+    {6761, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqHighMeasureLim), "chan31FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan31FreqName
+    {6763, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqName), "chan31FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan31FreqUnit
+    {6767, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqUnit), "chan31FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan31FreqImpWeight
+    {6769, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqImpWeight), "chan31FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan31FreqPeriod
+    {6771, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqPeriod), "chan31FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan31FreqDempher
+    {6773, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqDempher), "chan31FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan31FreqTypeValue
+    {6774, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqTypeValue), "chan31FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan32FreqSignalType
+    {6775, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqSignalType), "chan32FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan32FreqAdditionalParameter
+    {6776, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqAdditionalParameter), "chan32FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan32ImpulseDuration
+    {6782, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32ImpulseDuration), "chan32ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan32FreqLowMeasureLim
+    {6784, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqLowMeasureLim), "chan32FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan32FreqHighMeasureLim
+    {6786, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqHighMeasureLim), "chan32FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan32FreqName
+    {6788, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqName), "chan32FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan32FreqUnit
+    {6792, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqUnit), "chan32FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan32ImpWeight
+    {6794, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32ImpWeight), "chan32ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan32FreqPeriod
+    {6796, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqPeriod), "chan32FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan32FreqDempher
+    {6798, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqDempher), "chan32FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan32FreqTypeValue
+    {6799, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqTypeValue), "chan32FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan33FreqSignalType
+    {6800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqSignalType), "chan33FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan33FreqalAdditionalParameter
+    {6801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqalAdditionalParameter), "chan33FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan33ImpulseDuration
+    {6807, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33ImpulseDuration), "chan33ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan33FreqLowMeasureLim
+    {6809, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqLowMeasureLim), "chan33FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan33FreqHighMeasureLim
+    {6811, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqHighMeasureLim), "chan33FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan33FreqName
+    {6813, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqName), "chan33FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan33FreqUnit
+    {6817, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqUnit), "chan33FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan33FreqImpWeight
+    {6819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqImpWeight), "chan33FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan33FreqPeriod
+    {6821, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqPeriod), "chan33FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan33FreqDempher
+    {6823, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqDempher), "chan33FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan33FreqTypeValue
+    {6824, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqTypeValue), "chan33FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan34FreqSignalType
+    {6825, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqSignalType), "chan34FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan34FreqAdditionalParameter
+    {6826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqAdditionalParameter), "chan34FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan34ImpulseDuration
+    {6832, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34ImpulseDuration), "chan34ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan34FreqLowMeasureLim
+    {6834, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqLowMeasureLim), "chan34FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan34FreqHighMeasureLim
+    {6836, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqHighMeasureLim), "chan34FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan34FreqName
+    {6838, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqName), "chan34FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan34FreqUnit
+    {6842, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqUnit), "chan34FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan34ImpWeight
+    {6844, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34ImpWeight), "chan34ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan34FreqPeriod
+    {6846, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqPeriod), "chan34FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan34FreqDempher
+    {6848, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqDempher), "chan34FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan34FreqTypeValue
+    {6849, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqTypeValue), "chan34FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan35FreqSignalType
+    {6850, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqSignalType), "chan35FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan35FreqalAdditionalParameter
+    {6851, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqalAdditionalParameter), "chan35FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan35ImpulseDuration
+    {6857, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35ImpulseDuration), "chan35ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan35FreqLowMeasureLim
+    {6859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqLowMeasureLim), "chan35FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan35FreqHighMeasureLim
+    {6861, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqHighMeasureLim), "chan35FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan35FreqName
+    {6863, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqName), "chan35FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan35FreqUnit
+    {6867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqUnit), "chan35FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan35FreqImpWeight
+    {6869, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqImpWeight), "chan35FreqImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan35FreqPeriod
+    {6871, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqPeriod), "chan35FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan35FreqDempher
+    {6873, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqDempher), "chan35FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan35FreqTypeValue
+    {6874, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqTypeValue), "chan35FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : chan36FreqSignalType
+    {6875, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqSignalType), "chan36FreqSignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : chan36FreqAdditionalParameter
+    {6876, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqAdditionalParameter), "chan36FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : chan36ImpulseDuration
+    {6882, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36ImpulseDuration), "chan36ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : chan36FreqLowMeasureLim
+    {6884, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqLowMeasureLim), "chan36FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : chan36FreqHighMeasureLim
+    {6886, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqHighMeasureLim), "chan36FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : chan36FreqName
+    {6888, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqName), "chan36FreqName", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : chan36FreqUnit
+    {6892, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqUnit), "chan36FreqUnit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : chan36ImpWeight
+    {6894, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36ImpWeight), "chan36ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : chan36FreqPeriod
+    {6896, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqPeriod), "chan36FreqPeriod", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : chan36FreqDempher
+    {6898, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqDempher), "chan36FreqDempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : chan36FreqTypeValue
+    {6899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqTypeValue), "chan36FreqTypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: SysOCalb : chan1SysOCR
+    {10000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1SysOCR), "chan1SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan1SysFSR
+    {10001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1SysFSR), "chan1SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan1OCR20mV
+    {10002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR20mV), "chan1OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan1FSR20mV
+    {10004, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR20mV), "chan1FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan1Date20mV
+    {10006, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date20mV), "chan1Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan1OCR100mV
+    {10008, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR100mV), "chan1OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan1FSR100mV
+    {10010, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR100mV), "chan1FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan1Date100mV
+    {10012, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date100mV), "chan1Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan1OCR1V
+    {10014, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR1V), "chan1OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan1FSR1V
+    {10016, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR1V), "chan1FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan1Date1V
+    {10018, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date1V), "chan1Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan1OCR10V
+    {10020, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR10V), "chan1OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan1FSR10V
+    {10022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR10V), "chan1FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan1Date10V
+    {10024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date10V), "chan1Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan1OCR30V
+    {10026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR30V), "chan1OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan1FSR30V
+    {10028, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR30V), "chan1FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan1Date30V
+    {10030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date30V), "chan1Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan1OCR20mA
+    {10032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR20mA), "chan1OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan1FSR20mA
+    {10034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR20mA), "chan1FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan1Date20mA
+    {10036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date20mA), "chan1Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan1OCR4x
+    {10038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR4x), "chan1OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan1FSR4x
+    {10040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR4x), "chan1FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan1Date4x
+    {10042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date4x), "chan1Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan1OCR3x
+    {10044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCR3x), "chan1OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan1FSR3x
+    {10046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSR3x), "chan1FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan1Date3x
+    {10048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Date3x), "chan1Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan1OCRinternal
+    {10050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1OCRinternal), "chan1OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan1FSRinternal
+    {10052, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FSRinternal), "chan1FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan1DateInternal
+    {10054, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1DateInternal), "chan1DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan2SysOCR
+    {10100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2SysOCR), "chan2SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan2SysFSR
+    {10101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2SysFSR), "chan2SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan2OCR20mV
+    {10102, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR20mV), "chan2OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan2FSR20mV
+    {10104, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR20mV), "chan2FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan2Date20mV
+    {10106, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date20mV), "chan2Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan2OCR100mV
+    {10108, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR100mV), "chan2OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan2FSR100mV
+    {10110, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR100mV), "chan2FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan2Date100mV
+    {10112, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date100mV), "chan2Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan2OCR1V
+    {10114, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR1V), "chan2OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan2FSR1V
+    {10116, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR1V), "chan2FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan2Date1V
+    {10118, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date1V), "chan2Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan2OCR10V
+    {10120, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR10V), "chan2OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan2FSR10V
+    {10122, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR10V), "chan2FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan2Date10V
+    {10124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date10V), "chan2Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan2OCR30V
+    {10126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR30V), "chan2OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan2FSR30V
+    {10128, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR30V), "chan2FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan2Date30V
+    {10130, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date30V), "chan2Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan2OCR20mA
+    {10132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR20mA), "chan2OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan2FSR20mA
+    {10134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR20mA), "chan2FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan2Date20mA
+    {10136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date20mA), "chan2Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan2OCR4x
+    {10138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR4x), "chan2OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan2FSR4x
+    {10140, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR4x), "chan2FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan2Date4x
+    {10142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date4x), "chan2Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan2OCR3x
+    {10144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCR3x), "chan2OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan2FSR3x
+    {10146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSR3x), "chan2FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan2Date3x
+    {10148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Date3x), "chan2Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan2OCRinternal
+    {10150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2OCRinternal), "chan2OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan2FSRinternal
+    {10152, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FSRinternal), "chan2FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan2DateInternal
+    {10154, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2DateInternal), "chan2DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan3SysOCR
+    {10200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3SysOCR), "chan3SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan3SysFSR
+    {10201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3SysFSR), "chan3SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan3OCR20mV
+    {10202, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR20mV), "chan3OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan3FSR20mV
+    {10204, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR20mV), "chan3FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan3Date20mV
+    {10206, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date20mV), "chan3Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan3OCR100mV
+    {10208, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR100mV), "chan3OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan3FSR100mV
+    {10210, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR100mV), "chan3FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan3Date100mV
+    {10212, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date100mV), "chan3Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan3OCR1V
+    {10214, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR1V), "chan3OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan3FSR1V
+    {10216, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR1V), "chan3FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan3Date1V
+    {10218, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date1V), "chan3Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan3OCR10V
+    {10220, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR10V), "chan3OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan3FSR10V
+    {10222, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR10V), "chan3FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan3Date10V
+    {10224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date10V), "chan3Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan3OCR30V
+    {10226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR30V), "chan3OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan3FSR30V
+    {10228, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR30V), "chan3FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan3Date30V
+    {10230, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date30V), "chan3Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan3OCR20mA
+    {10232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR20mA), "chan3OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan3FSR20mA
+    {10234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR20mA), "chan3FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan3Date20mA
+    {10236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date20mA), "chan3Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan3OCR4x
+    {10238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR4x), "chan3OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan3FSR4x
+    {10240, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR4x), "chan3FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan3Date4x
+    {10242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date4x), "chan3Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan3OCR3x
+    {10244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCR3x), "chan3OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan3FSR3x
+    {10246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSR3x), "chan3FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan3Date3x
+    {10248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Date3x), "chan3Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan3OCRinternal
+    {10250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3OCRinternal), "chan3OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan3FSRinternal
+    {10252, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FSRinternal), "chan3FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan3DateInternal
+    {10254, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3DateInternal), "chan3DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan4SysOCR
+    {10300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4SysOCR), "chan4SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan4SysFSR
+    {10301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4SysFSR), "chan4SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan4OCR20mV
+    {10302, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR20mV), "chan4OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan4FSR20mV
+    {10304, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR20mV), "chan4FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan4Date20mV
+    {10306, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date20mV), "chan4Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan4OCR100mV
+    {10308, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR100mV), "chan4OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan4FSR100mV
+    {10310, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR100mV), "chan4FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan4Date100mV
+    {10312, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date100mV), "chan4Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan4OCR1V
+    {10314, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR1V), "chan4OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan4FSR1V
+    {10316, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR1V), "chan4FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan4Date1V
+    {10318, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date1V), "chan4Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan4OCR10V
+    {10320, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR10V), "chan4OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan4FSR10V
+    {10322, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR10V), "chan4FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan4Date10V
+    {10324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date10V), "chan4Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan4OCR30V
+    {10326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR30V), "chan4OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan4FSR30V
+    {10328, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR30V), "chan4FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan4Date30V
+    {10330, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date30V), "chan4Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan4OCR20mA
+    {10332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR20mA), "chan4OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan4FSR20mA
+    {10334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR20mA), "chan4FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan4Date20mA
+    {10336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date20mA), "chan4Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan4OCR4x
+    {10338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR4x), "chan4OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan4FSR4x
+    {10340, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR4x), "chan4FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan4Date4x
+    {10342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date4x), "chan4Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan4OCR3x
+    {10344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCR3x), "chan4OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan4FSR3x
+    {10346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSR3x), "chan4FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan4Date3x
+    {10348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Date3x), "chan4Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan4OCRinternal
+    {10350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4OCRinternal), "chan4OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan4FSRinternal
+    {10352, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FSRinternal), "chan4FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan4DateInternal
+    {10354, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4DateInternal), "chan4DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan5SysOCR
+    {10400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5SysOCR), "chan5SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan5SysFSR
+    {10401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5SysFSR), "chan5SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan5OCR20mV
+    {10402, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR20mV), "chan5OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan5FSR20mV
+    {10404, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR20mV), "chan5FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan5Date20mV
+    {10406, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date20mV), "chan5Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan5OCR100mV
+    {10408, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR100mV), "chan5OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan5FSR100mV
+    {10410, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR100mV), "chan5FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan5Date100mV
+    {10412, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date100mV), "chan5Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan5OCR1V
+    {10414, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR1V), "chan5OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan5FSR1V
+    {10416, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR1V), "chan5FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan5Date1V
+    {10418, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date1V), "chan5Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan5OCR10V
+    {10420, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR10V), "chan5OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan5FSR10V
+    {10422, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR10V), "chan5FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan5Date10V
+    {10424, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date10V), "chan5Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan5OCR30V
+    {10426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR30V), "chan5OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan5FSR30V
+    {10428, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR30V), "chan5FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan5Date30V
+    {10430, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date30V), "chan5Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan5OCR20mA
+    {10432, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR20mA), "chan5OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan5FSR20mA
+    {10434, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR20mA), "chan5FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan5Date20mA
+    {10436, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date20mA), "chan5Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan5OCR4x
+    {10438, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR4x), "chan5OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan5FSR4x
+    {10440, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR4x), "chan5FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan5Date4x
+    {10442, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date4x), "chan5Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan5OCR3x
+    {10444, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCR3x), "chan5OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan5FSR3x
+    {10446, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSR3x), "chan5FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan5Date3x
+    {10448, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Date3x), "chan5Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan5OCRinternal
+    {10450, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5OCRinternal), "chan5OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan5FSRinternal
+    {10452, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FSRinternal), "chan5FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan5DateInternal
+    {10454, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5DateInternal), "chan5DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan6SysOCR
+    {10500, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6SysOCR), "chan6SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan6SysFSR
+    {10501, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6SysFSR), "chan6SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan6OCR20mV
+    {10502, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR20mV), "chan6OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan6FSR20mV
+    {10504, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR20mV), "chan6FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan6Date20mV
+    {10506, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date20mV), "chan6Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan6OCR100mV
+    {10508, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR100mV), "chan6OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan6FSR100mV
+    {10510, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR100mV), "chan6FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan6Date100mV
+    {10512, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date100mV), "chan6Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan6OCR1V
+    {10514, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR1V), "chan6OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan6FSR1V
+    {10516, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR1V), "chan6FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan6Date1V
+    {10518, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date1V), "chan6Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan6OCR10V
+    {10520, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR10V), "chan6OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan6FSR10V
+    {10522, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR10V), "chan6FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan6Date10V
+    {10524, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date10V), "chan6Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan6OCR30V
+    {10526, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR30V), "chan6OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan6FSR30V
+    {10528, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR30V), "chan6FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan6Date30V
+    {10530, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date30V), "chan6Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan6OCR20mA
+    {10532, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR20mA), "chan6OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan6FSR20mA
+    {10534, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR20mA), "chan6FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan6Date20mA
+    {10536, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date20mA), "chan6Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan6OCR4x
+    {10538, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR4x), "chan6OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan6FSR4x
+    {10540, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR4x), "chan6FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan6Date4x
+    {10542, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date4x), "chan6Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan6OCR3x
+    {10544, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCR3x), "chan6OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan6FSR3x
+    {10546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSR3x), "chan6FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan6Date3x
+    {10548, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Date3x), "chan6Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan6OCRinternal
+    {10550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6OCRinternal), "chan6OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan6FSRinternal
+    {10552, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FSRinternal), "chan6FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan6DateInternal
+    {10554, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6DateInternal), "chan6DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan7SysOCR
+    {10600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7SysOCR), "chan7SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan7SysFSR
+    {10601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7SysFSR), "chan7SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan7OCR20mV
+    {10602, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR20mV), "chan7OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan7FSR20mV
+    {10604, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR20mV), "chan7FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan7Date20mV
+    {10606, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date20mV), "chan7Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan7OCR100mV
+    {10608, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR100mV), "chan7OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan7FSR100mV
+    {10610, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR100mV), "chan7FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan7Date100mV
+    {10612, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date100mV), "chan7Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan7OCR1V
+    {10614, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR1V), "chan7OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan7FSR1V
+    {10616, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR1V), "chan7FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan7Date1V
+    {10618, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date1V), "chan7Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan7OCR10V
+    {10620, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR10V), "chan7OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan7FSR10V
+    {10622, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR10V), "chan7FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan7Date10V
+    {10624, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date10V), "chan7Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan7OCR30V
+    {10626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR30V), "chan7OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan7FSR30V
+    {10628, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR30V), "chan7FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan7Date30V
+    {10630, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date30V), "chan7Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan7OCR20mA
+    {10632, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR20mA), "chan7OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan7FSR20mA
+    {10634, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR20mA), "chan7FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan7Date20mA
+    {10636, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date20mA), "chan7Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan7OCR4x
+    {10638, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR4x), "chan7OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan7FSR4x
+    {10640, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR4x), "chan7FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan7Date4x
+    {10642, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date4x), "chan7Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan7OCR3x
+    {10644, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCR3x), "chan7OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan7FSR3x
+    {10646, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSR3x), "chan7FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan7Date3x
+    {10648, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Date3x), "chan7Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan7OCRinternal
+    {10650, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7OCRinternal), "chan7OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan7FSRinternal
+    {10652, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FSRinternal), "chan7FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan7DateInternal
+    {10654, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7DateInternal), "chan7DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan8SysOCR
+    {10700, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8SysOCR), "chan8SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan8SysFSR
+    {10701, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8SysFSR), "chan8SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan8OCR20mV
+    {10702, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR20mV), "chan8OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan8FSR20mV
+    {10704, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR20mV), "chan8FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan8Date20mV
+    {10706, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date20mV), "chan8Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan8OCR100mV
+    {10708, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR100mV), "chan8OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan8FSR100mV
+    {10710, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR100mV), "chan8FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan8Date100mV
+    {10712, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date100mV), "chan8Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan8OCR1V
+    {10714, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR1V), "chan8OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan8FSR1V
+    {10716, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR1V), "chan8FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan8Date1V
+    {10718, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date1V), "chan8Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan8OCR10V
+    {10720, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR10V), "chan8OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan8FSR10V
+    {10722, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR10V), "chan8FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan8Date10V
+    {10724, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date10V), "chan8Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan8OCR30V
+    {10726, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR30V), "chan8OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan8FSR30V
+    {10728, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR30V), "chan8FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan8Date30V
+    {10730, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date30V), "chan8Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan8OCR20mA
+    {10732, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR20mA), "chan8OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan8FSR20mA
+    {10734, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR20mA), "chan8FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan8Date20mA
+    {10736, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date20mA), "chan8Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan8OCR4x
+    {10738, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR4x), "chan8OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan8FSR4x
+    {10740, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR4x), "chan8FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan8Date4x
+    {10742, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date4x), "chan8Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan8OCR3x
+    {10744, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCR3x), "chan8OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan8FSR3x
+    {10746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSR3x), "chan8FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan8Date3x
+    {10748, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Date3x), "chan8Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan8OCRinternal
+    {10750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8OCRinternal), "chan8OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan8FSRinternal
+    {10752, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FSRinternal), "chan8FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan8DateInternal
+    {10754, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8DateInternal), "chan8DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan9SysOCR
+    {10800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9SysOCR), "chan9SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan9SysFSR
+    {10801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9SysFSR), "chan9SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan9OCR20mV
+    {10802, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR20mV), "chan9OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan9FSR20mV
+    {10804, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR20mV), "chan9FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan9Date20mV
+    {10806, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date20mV), "chan9Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan9OCR100mV
+    {10808, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR100mV), "chan9OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan9FSR100mV
+    {10810, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR100mV), "chan9FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan9Date100mV
+    {10812, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date100mV), "chan9Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan9OCR1V
+    {10814, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR1V), "chan9OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan9FSR1V
+    {10816, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR1V), "chan9FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan9Date1V
+    {10818, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date1V), "chan9Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan9OCR10V
+    {10820, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR10V), "chan9OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan9FSR10V
+    {10822, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR10V), "chan9FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan9Date10V
+    {10824, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date10V), "chan9Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan9OCR30V
+    {10826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR30V), "chan9OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan9FSR30V
+    {10828, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR30V), "chan9FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan9Date30V
+    {10830, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date30V), "chan9Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan9OCR20mA
+    {10832, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR20mA), "chan9OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan9FSR20mA
+    {10834, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR20mA), "chan9FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan9Date20mA
+    {10836, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date20mA), "chan9Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan9OCR4x
+    {10838, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR4x), "chan9OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan9FSR4x
+    {10840, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR4x), "chan9FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan9Date4x
+    {10842, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date4x), "chan9Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan9OCR3x
+    {10844, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCR3x), "chan9OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan9FSR3x
+    {10846, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSR3x), "chan9FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan9Date3x
+    {10848, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Date3x), "chan9Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan9OCRinternal
+    {10850, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9OCRinternal), "chan9OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan9FSRinternal
+    {10852, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FSRinternal), "chan9FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan9DateInternal
+    {10854, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9DateInternal), "chan9DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan10SysOCR
+    {10900, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10SysOCR), "chan10SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan10SysFSR
+    {10901, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10SysFSR), "chan10SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan10OCR20mV
+    {10902, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR20mV), "chan10OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan10FSR20mV
+    {10904, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR20mV), "chan10FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan10Date20mV
+    {10906, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date20mV), "chan10Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan10OCR100mV
+    {10908, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR100mV), "chan10OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan10FSR100mV
+    {10910, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR100mV), "chan10FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan10Date100mV
+    {10912, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date100mV), "chan10Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan10OCR1V
+    {10914, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR1V), "chan10OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan10FSR1V
+    {10916, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR1V), "chan10FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan10Date1V
+    {10918, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date1V), "chan10Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan10OCR10V
+    {10920, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR10V), "chan10OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan10FSR10V
+    {10922, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR10V), "chan10FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan10Date10V
+    {10924, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date10V), "chan10Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan10OCR30V
+    {10926, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR30V), "chan10OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan10FSR30V
+    {10928, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR30V), "chan10FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan10Date30V
+    {10930, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date30V), "chan10Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan10OCR20mA
+    {10932, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR20mA), "chan10OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan10FSR20mA
+    {10934, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR20mA), "chan10FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan10Date20mA
+    {10936, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date20mA), "chan10Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan10OCR4x
+    {10938, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR4x), "chan10OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan10FSR4x
+    {10940, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR4x), "chan10FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan10Date4x
+    {10942, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date4x), "chan10Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan10OCR3x
+    {10944, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCR3x), "chan10OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan10FSR3x
+    {10946, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSR3x), "chan10FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan10Date3x
+    {10948, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Date3x), "chan10Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan10OCRinternal
+    {10950, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10OCRinternal), "chan10OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan10FSRinternal
+    {10952, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FSRinternal), "chan10FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan10DateInternal
+    {10954, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10DateInternal), "chan10DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan11SysOCR
+    {11000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11SysOCR), "chan11SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan11SysFSR
+    {11001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11SysFSR), "chan11SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan11OCR20mV
+    {11002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR20mV), "chan11OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan11FSR20mV
+    {11004, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR20mV), "chan11FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan11Date20mV
+    {11006, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date20mV), "chan11Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan11OCR100mV
+    {11008, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR100mV), "chan11OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan11FSR100mV
+    {11010, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR100mV), "chan11FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan11Date100mV
+    {11012, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date100mV), "chan11Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan11OCR1V
+    {11014, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR1V), "chan11OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan11FSR1V
+    {11016, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR1V), "chan11FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan11Date1V
+    {11018, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date1V), "chan11Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan11OCR10V
+    {11020, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR10V), "chan11OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan11FSR10V
+    {11022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR10V), "chan11FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan11Date10V
+    {11024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date10V), "chan11Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan11OCR30V
+    {11026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR30V), "chan11OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan11FSR30V
+    {11028, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR30V), "chan11FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan11Date30V
+    {11030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date30V), "chan11Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan11OCR20mA
+    {11032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR20mA), "chan11OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan11FSR20mA
+    {11034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR20mA), "chan11FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan11Date20mA
+    {11036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date20mA), "chan11Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan11OCR4x
+    {11038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR4x), "chan11OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan11FSR4x
+    {11040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR4x), "chan11FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan11Date4x
+    {11042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date4x), "chan11Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan11OCR3x
+    {11044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCR3x), "chan11OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan11FSR3x
+    {11046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSR3x), "chan11FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan11Date3x
+    {11048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Date3x), "chan11Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan11OCRinternal
+    {11050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11OCRinternal), "chan11OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan11FSRinternal
+    {11052, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FSRinternal), "chan11FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan11DateInternal
+    {11054, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11DateInternal), "chan11DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan12SysOCR
+    {11100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12SysOCR), "chan12SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan12SysFSR
+    {11101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12SysFSR), "chan12SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan12OCR20mV
+    {11102, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR20mV), "chan12OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan12FSR20mV
+    {11104, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR20mV), "chan12FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan12Date20mV
+    {11106, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date20mV), "chan12Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan12OCR100mV
+    {11108, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR100mV), "chan12OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan12FSR100mV
+    {11110, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR100mV), "chan12FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan12Date100mV
+    {11112, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date100mV), "chan12Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan12OCR1V
+    {11114, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR1V), "chan12OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan12FSR1V
+    {11116, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR1V), "chan12FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan12Date1V
+    {11118, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date1V), "chan12Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan12OCR10V
+    {11120, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR10V), "chan12OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan12FSR10V
+    {11122, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR10V), "chan12FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan12Date10V
+    {11124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date10V), "chan12Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan12OCR30V
+    {11126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR30V), "chan12OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan12FSR30V
+    {11128, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR30V), "chan12FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan12Date30V
+    {11130, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date30V), "chan12Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan12OCR20mA
+    {11132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR20mA), "chan12OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan12FSR20mA
+    {11134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR20mA), "chan12FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan12Date20mA
+    {11136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date20mA), "chan12Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan12OCR4x
+    {11138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR4x), "chan12OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan12FSR4x
+    {11140, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR4x), "chan12FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan12Date4x
+    {11142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date4x), "chan12Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan12OCR3x
+    {11144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCR3x), "chan12OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan12FSR3x
+    {11146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSR3x), "chan12FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan12Date3x
+    {11148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Date3x), "chan12Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan12OCRinternal
+    {11150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12OCRinternal), "chan12OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan12FSRinternal
+    {11152, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FSRinternal), "chan12FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan12DateInternal
+    {11154, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12DateInternal), "chan12DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan13SysOCR
+    {11200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13SysOCR), "chan13SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan13SysFSR
+    {11201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13SysFSR), "chan13SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan13OCR20mV
+    {11202, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR20mV), "chan13OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan13FSR20mV
+    {11204, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR20mV), "chan13FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan13Date20mV
+    {11206, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date20mV), "chan13Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan13OCR100mV
+    {11208, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR100mV), "chan13OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan13FSR100mV
+    {11210, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR100mV), "chan13FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan13Date100mV
+    {11212, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date100mV), "chan13Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan13OCR1V
+    {11214, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR1V), "chan13OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan13FSR1V
+    {11216, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR1V), "chan13FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan13Date1V
+    {11218, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date1V), "chan13Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan13OCR10V
+    {11220, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR10V), "chan13OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan13FSR10V
+    {11222, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR10V), "chan13FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan13Date10V
+    {11224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date10V), "chan13Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan13OCR30V
+    {11226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR30V), "chan13OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan13FSR30V
+    {11228, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR30V), "chan13FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan13Date30V
+    {11230, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date30V), "chan13Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan13OCR20mA
+    {11232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR20mA), "chan13OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan13FSR20mA
+    {11234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR20mA), "chan13FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan13Date20mA
+    {11236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date20mA), "chan13Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan13OCR4x
+    {11238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR4x), "chan13OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan13FSR4x
+    {11240, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR4x), "chan13FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan13Date4x
+    {11242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date4x), "chan13Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan13OCR3x
+    {11244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCR3x), "chan13OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan13FSR3x
+    {11246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSR3x), "chan13FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan13Date3x
+    {11248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Date3x), "chan13Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan13OCRinternal
+    {11250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13OCRinternal), "chan13OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan13FSRinternal
+    {11252, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FSRinternal), "chan13FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan13DateInternal
+    {11254, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13DateInternal), "chan13DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan14SysOCR
+    {11300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14SysOCR), "chan14SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan14SysFSR
+    {11301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14SysFSR), "chan14SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan14OCR20mV
+    {11302, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR20mV), "chan14OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan14FSR20mV
+    {11304, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR20mV), "chan14FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan14Date20mV
+    {11306, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date20mV), "chan14Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan14OCR100mV
+    {11308, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR100mV), "chan14OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan14FSR100mV
+    {11310, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR100mV), "chan14FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan14Date100mV
+    {11312, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date100mV), "chan14Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan14OCR1V
+    {11314, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR1V), "chan14OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan14FSR1V
+    {11316, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR1V), "chan14FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan14Date1V
+    {11318, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date1V), "chan14Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan14OCR10V
+    {11320, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR10V), "chan14OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan14FSR10V
+    {11322, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR10V), "chan14FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan14Date10V
+    {11324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date10V), "chan14Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan14OCR30V
+    {11326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR30V), "chan14OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan14FSR30V
+    {11328, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR30V), "chan14FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan14Date30V
+    {11330, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date30V), "chan14Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan14OCR20mA
+    {11332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR20mA), "chan14OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan14FSR20mA
+    {11334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR20mA), "chan14FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan14Date20mA
+    {11336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date20mA), "chan14Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan14OCR4x
+    {11338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR4x), "chan14OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan14FSR4x
+    {11340, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR4x), "chan14FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan14Date4x
+    {11342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date4x), "chan14Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan14OCR3x
+    {11344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCR3x), "chan14OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan14FSR3x
+    {11346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSR3x), "chan14FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan14Date3x
+    {11348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Date3x), "chan14Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan14OCRinternal
+    {11350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14OCRinternal), "chan14OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan14FSRinternal
+    {11352, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FSRinternal), "chan14FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan14DateInternal
+    {11354, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14DateInternal), "chan14DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan15SysOCR
+    {11400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15SysOCR), "chan15SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan15SysFSR
+    {11401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15SysFSR), "chan15SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan15OCR20mV
+    {11402, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR20mV), "chan15OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan15FSR20mV
+    {11404, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR20mV), "chan15FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan15Date20mV
+    {11406, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date20mV), "chan15Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan15OCR100mV
+    {11408, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR100mV), "chan15OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan15FSR100mV
+    {11410, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR100mV), "chan15FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan15Date100mV
+    {11412, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date100mV), "chan15Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan15OCR1V
+    {11414, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR1V), "chan15OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan15FSR1V
+    {11416, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR1V), "chan15FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan15Date1V
+    {11418, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date1V), "chan15Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan15OCR10V
+    {11420, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR10V), "chan15OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan15FSR10V
+    {11422, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR10V), "chan15FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan15Date10V
+    {11424, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date10V), "chan15Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan15OCR30V
+    {11426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR30V), "chan15OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan15FSR30V
+    {11428, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR30V), "chan15FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan15Date30V
+    {11430, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date30V), "chan15Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan15OCR20mA
+    {11432, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR20mA), "chan15OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan15FSR20mA
+    {11434, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR20mA), "chan15FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan15Date20mA
+    {11436, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date20mA), "chan15Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan15OCR4x
+    {11438, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR4x), "chan15OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan15FSR4x
+    {11440, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR4x), "chan15FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan15Date4x
+    {11442, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date4x), "chan15Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan15OCR3x
+    {11444, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCR3x), "chan15OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan15FSR3x
+    {11446, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSR3x), "chan15FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan15Date3x
+    {11448, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Date3x), "chan15Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan15OCRinternal
+    {11450, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15OCRinternal), "chan15OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan15FSRinternal
+    {11452, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FSRinternal), "chan15FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan15DateInternal
+    {11454, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15DateInternal), "chan15DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan16SysOCR
+    {11500, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16SysOCR), "chan16SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan16SysFSR
+    {11501, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16SysFSR), "chan16SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan16OCR20mV
+    {11502, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR20mV), "chan16OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan16FSR20mV
+    {11504, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR20mV), "chan16FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan16Date20mV
+    {11506, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date20mV), "chan16Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan16OCR100mV
+    {11508, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR100mV), "chan16OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan16FSR100mV
+    {11510, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR100mV), "chan16FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan16Date100mV
+    {11512, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date100mV), "chan16Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan16OCR1V
+    {11514, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR1V), "chan16OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan16FSR1V
+    {11516, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR1V), "chan16FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan16Date1V
+    {11518, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date1V), "chan16Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan16OCR10V
+    {11520, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR10V), "chan16OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan16FSR10V
+    {11522, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR10V), "chan16FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan16Date10V
+    {11524, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date10V), "chan16Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan16OCR30V
+    {11526, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR30V), "chan16OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan16FSR30V
+    {11528, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR30V), "chan16FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan16Date30V
+    {11530, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date30V), "chan16Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan16OCR20mA
+    {11532, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR20mA), "chan16OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan16FSR20mA
+    {11534, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR20mA), "chan16FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan16Date20mA
+    {11536, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date20mA), "chan16Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan16OCR4x
+    {11538, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR4x), "chan16OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan16FSR4x
+    {11540, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR4x), "chan16FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan16Date4x
+    {11542, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date4x), "chan16Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan16OCR3x
+    {11544, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCR3x), "chan16OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan16FSR3x
+    {11546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSR3x), "chan16FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan16Date3x
+    {11548, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Date3x), "chan16Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan16OCRinternal
+    {11550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16OCRinternal), "chan16OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan16FSRinternal
+    {11552, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FSRinternal), "chan16FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan16DateInternal
+    {11554, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16DateInternal), "chan16DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan17SysOCR
+    {11600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17SysOCR), "chan17SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan17SysFSR
+    {11601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17SysFSR), "chan17SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan17OCR20mV
+    {11602, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR20mV), "chan17OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan17FSR20mV
+    {11604, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR20mV), "chan17FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan17Date20mV
+    {11606, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date20mV), "chan17Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan17OCR100mV
+    {11608, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR100mV), "chan17OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan17FSR100mV
+    {11610, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR100mV), "chan17FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan17Date100mV
+    {11612, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date100mV), "chan17Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan17OCR1V
+    {11614, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR1V), "chan17OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan17FSR1V
+    {11616, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR1V), "chan17FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan17Date1V
+    {11618, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date1V), "chan17Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan17OCR10V
+    {11620, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR10V), "chan17OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan17FSR10V
+    {11622, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR10V), "chan17FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan17Date10V
+    {11624, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date10V), "chan17Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan17OCR30V
+    {11626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR30V), "chan17OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan17FSR30V
+    {11628, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR30V), "chan17FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan17Date30V
+    {11630, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date30V), "chan17Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan17OCR20mA
+    {11632, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR20mA), "chan17OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan17FSR20mA
+    {11634, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR20mA), "chan17FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan17Date20mA
+    {11636, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date20mA), "chan17Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan17OCR4x
+    {11638, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR4x), "chan17OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan17FSR4x
+    {11640, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR4x), "chan17FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan17Date4x
+    {11642, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date4x), "chan17Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan17OCR3x
+    {11644, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCR3x), "chan17OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan17FSR3x
+    {11646, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSR3x), "chan17FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan17Date3x
+    {11648, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Date3x), "chan17Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan17OCRinternal
+    {11650, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17OCRinternal), "chan17OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan17FSRinternal
+    {11652, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FSRinternal), "chan17FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan17DateInternal
+    {11654, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17DateInternal), "chan17DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan18SysOCR
+    {11700, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18SysOCR), "chan18SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan18SysFSR
+    {11701, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18SysFSR), "chan18SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan18OCR20mV
+    {11702, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR20mV), "chan18OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan18FSR20mV
+    {11704, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR20mV), "chan18FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan18Date20mV
+    {11706, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date20mV), "chan18Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan18OCR100mV
+    {11708, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR100mV), "chan18OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan18FSR100mV
+    {11710, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR100mV), "chan18FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan18Date100mV
+    {11712, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date100mV), "chan18Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan18OCR1V
+    {11714, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR1V), "chan18OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan18FSR1V
+    {11716, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR1V), "chan18FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan18Date1V
+    {11718, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date1V), "chan18Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan18OCR10V
+    {11720, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR10V), "chan18OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan18FSR10V
+    {11722, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR10V), "chan18FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan18Date10V
+    {11724, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date10V), "chan18Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan18OCR30V
+    {11726, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR30V), "chan18OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan18FSR30V
+    {11728, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR30V), "chan18FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan18Date30V
+    {11730, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date30V), "chan18Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan18OCR20mA
+    {11732, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR20mA), "chan18OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan18FSR20mA
+    {11734, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR20mA), "chan18FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan18Date20mA
+    {11736, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date20mA), "chan18Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan18OCR4x
+    {11738, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR4x), "chan18OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan18FSR4x
+    {11740, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR4x), "chan18FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan18Date4x
+    {11742, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date4x), "chan18Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan18OCR3x
+    {11744, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCR3x), "chan18OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan18FSR3x
+    {11746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSR3x), "chan18FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan18Date3x
+    {11748, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Date3x), "chan18Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan18OCRinternal
+    {11750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18OCRinternal), "chan18OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan18FSRinternal
+    {11752, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FSRinternal), "chan18FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan18DateInternal
+    {11754, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18DateInternal), "chan18DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan19SysOCR
+    {11800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19SysOCR), "chan19SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan19SysFSR
+    {11801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19SysFSR), "chan19SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan19OCR20mV
+    {11802, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR20mV), "chan19OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan19FSR20mV
+    {11804, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR20mV), "chan19FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan19Date20mV
+    {11806, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date20mV), "chan19Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan19OCR100mV
+    {11808, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR100mV), "chan19OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan19FSR100mV
+    {11810, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR100mV), "chan19FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan19Date100mV
+    {11812, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date100mV), "chan19Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan19OCR1V
+    {11814, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR1V), "chan19OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan19FSR1V
+    {11816, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR1V), "chan19FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan19Date1V
+    {11818, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date1V), "chan19Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan19OCR10V
+    {11820, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR10V), "chan19OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan19FSR10V
+    {11822, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR10V), "chan19FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan19Date10V
+    {11824, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date10V), "chan19Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan19OCR30V
+    {11826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR30V), "chan19OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan19FSR30V
+    {11828, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR30V), "chan19FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan19Date30V
+    {11830, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date30V), "chan19Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan19OCR20mA
+    {11832, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR20mA), "chan19OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan19FSR20mA
+    {11834, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR20mA), "chan19FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan19Date20mA
+    {11836, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date20mA), "chan19Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan19OCR4x
+    {11838, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR4x), "chan19OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan19FSR4x
+    {11840, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR4x), "chan19FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan19Date4x
+    {11842, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date4x), "chan19Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan19OCR3x
+    {11844, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCR3x), "chan19OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan19FSR3x
+    {11846, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSR3x), "chan19FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan19Date3x
+    {11848, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Date3x), "chan19Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan19OCRinternal
+    {11850, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19OCRinternal), "chan19OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan19FSRinternal
+    {11852, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FSRinternal), "chan19FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan19DateInternal
+    {11854, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19DateInternal), "chan19DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan20SysOCR
+    {11900, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20SysOCR), "chan20SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan20SysFSR
+    {11901, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20SysFSR), "chan20SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan20OCR20mV
+    {11902, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR20mV), "chan20OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan20FSR20mV
+    {11904, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR20mV), "chan20FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan20Date20mV
+    {11906, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date20mV), "chan20Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan20OCR100mV
+    {11908, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR100mV), "chan20OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan20FSR100mV
+    {11910, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR100mV), "chan20FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan20Date100mV
+    {11912, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date100mV), "chan20Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan20OCR1V
+    {11914, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR1V), "chan20OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan20FSR1V
+    {11916, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR1V), "chan20FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan20Date1V
+    {11918, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date1V), "chan20Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan20OCR10V
+    {11920, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR10V), "chan20OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan20FSR10V
+    {11922, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR10V), "chan20FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan20Date10V
+    {11924, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date10V), "chan20Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan20OCR30V
+    {11926, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR30V), "chan20OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan20FSR30V
+    {11928, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR30V), "chan20FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan20Date30V
+    {11930, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date30V), "chan20Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan20OCR20mA
+    {11932, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR20mA), "chan20OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan20FSR20mA
+    {11934, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR20mA), "chan20FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan20Date20mA
+    {11936, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date20mA), "chan20Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan20OCR4x
+    {11938, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR4x), "chan20OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan20FSR4x
+    {11940, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR4x), "chan20FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan20Date4x
+    {11942, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date4x), "chan20Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan20OCR3x
+    {11944, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCR3x), "chan20OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan20FSR3x
+    {11946, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSR3x), "chan20FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan20Date3x
+    {11948, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Date3x), "chan20Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan20OCRinternal
+    {11950, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20OCRinternal), "chan20OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan20FSRinternal
+    {11952, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FSRinternal), "chan20FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan20DateInternal
+    {11954, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20DateInternal), "chan20DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan21SysOCR
+    {12000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21SysOCR), "chan21SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan21SysFSR
+    {12001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21SysFSR), "chan21SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan21OCR20mV
+    {12002, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR20mV), "chan21OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan21FSR20mV
+    {12004, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR20mV), "chan21FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan21Date20mV
+    {12006, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date20mV), "chan21Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan21OCR100mV
+    {12008, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR100mV), "chan21OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan21FSR100mV
+    {12010, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR100mV), "chan21FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan21Date100mV
+    {12012, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date100mV), "chan21Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan21OCR1V
+    {12014, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR1V), "chan21OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan21FSR1V
+    {12016, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR1V), "chan21FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan21Date1V
+    {12018, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date1V), "chan21Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan21OCR10V
+    {12020, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR10V), "chan21OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan21FSR10V
+    {12022, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR10V), "chan21FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan21Date10V
+    {12024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date10V), "chan21Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan21OCR30V
+    {12026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR30V), "chan21OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan21FSR30V
+    {12028, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR30V), "chan21FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan21Date30V
+    {12030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date30V), "chan21Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan21OCR20mA
+    {12032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR20mA), "chan21OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan21FSR20mA
+    {12034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR20mA), "chan21FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan21Date20mA
+    {12036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date20mA), "chan21Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan21OCR4x
+    {12038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR4x), "chan21OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan21FSR4x
+    {12040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR4x), "chan21FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan21Date4x
+    {12042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date4x), "chan21Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan21OCR3x
+    {12044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCR3x), "chan21OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan21FSR3x
+    {12046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSR3x), "chan21FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan21Date3x
+    {12048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Date3x), "chan21Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan21OCRinternal
+    {12050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21OCRinternal), "chan21OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan21FSRinternal
+    {12052, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FSRinternal), "chan21FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan21DateInternal
+    {12054, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21DateInternal), "chan21DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan22SysOCR
+    {12100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22SysOCR), "chan22SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan22SysFSR
+    {12101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22SysFSR), "chan22SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan22OCR20mV
+    {12102, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR20mV), "chan22OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan22FSR20mV
+    {12104, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR20mV), "chan22FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan22Date20mV
+    {12106, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date20mV), "chan22Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan22OCR100mV
+    {12108, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR100mV), "chan22OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan22FSR100mV
+    {12110, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR100mV), "chan22FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan22Date100mV
+    {12112, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date100mV), "chan22Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan22OCR1V
+    {12114, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR1V), "chan22OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan22FSR1V
+    {12116, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR1V), "chan22FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan22Date1V
+    {12118, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date1V), "chan22Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan22OCR10V
+    {12120, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR10V), "chan22OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan22FSR10V
+    {12122, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR10V), "chan22FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan22Date10V
+    {12124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date10V), "chan22Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan22OCR30V
+    {12126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR30V), "chan22OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan22FSR30V
+    {12128, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR30V), "chan22FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan22Date30V
+    {12130, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date30V), "chan22Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan22OCR20mA
+    {12132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR20mA), "chan22OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan22FSR20mA
+    {12134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR20mA), "chan22FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan22Date20mA
+    {12136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date20mA), "chan22Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan22OCR4x
+    {12138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR4x), "chan22OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan22FSR4x
+    {12140, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR4x), "chan22FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan22Date4x
+    {12142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date4x), "chan22Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan22OCR3x
+    {12144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCR3x), "chan22OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan22FSR3x
+    {12146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSR3x), "chan22FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan22Date3x
+    {12148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Date3x), "chan22Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan22OCRinternal
+    {12150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22OCRinternal), "chan22OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan22FSRinternal
+    {12152, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FSRinternal), "chan22FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan22DateInternal
+    {12154, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22DateInternal), "chan22DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan23SysOCR
+    {12200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23SysOCR), "chan23SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan23SysFSR
+    {12201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23SysFSR), "chan23SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan23OCR20mV
+    {12202, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR20mV), "chan23OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan23FSR20mV
+    {12204, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR20mV), "chan23FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan23Date20mV
+    {12206, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date20mV), "chan23Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan23OCR100mV
+    {12208, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR100mV), "chan23OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan23FSR100mV
+    {12210, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR100mV), "chan23FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan23Date100mV
+    {12212, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date100mV), "chan23Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan23OCR1V
+    {12214, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR1V), "chan23OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan23FSR1V
+    {12216, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR1V), "chan23FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan23Date1V
+    {12218, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date1V), "chan23Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan23OCR10V
+    {12220, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR10V), "chan23OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan23FSR10V
+    {12222, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR10V), "chan23FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan23Date10V
+    {12224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date10V), "chan23Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan23OCR30V
+    {12226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR30V), "chan23OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan23FSR30V
+    {12228, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR30V), "chan23FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan23Date30V
+    {12230, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date30V), "chan23Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan23OCR20mA
+    {12232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR20mA), "chan23OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan23FSR20mA
+    {12234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR20mA), "chan23FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan23Date20mA
+    {12236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date20mA), "chan23Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan23OCR4x
+    {12238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR4x), "chan23OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan23FSR4x
+    {12240, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR4x), "chan23FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan23Date4x
+    {12242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date4x), "chan23Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan23OCR3x
+    {12244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCR3x), "chan23OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan23FSR3x
+    {12246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSR3x), "chan23FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan23Date3x
+    {12248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Date3x), "chan23Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan23OCRinternal
+    {12250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23OCRinternal), "chan23OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan23FSRinternal
+    {12252, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FSRinternal), "chan23FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan23DateInternal
+    {12254, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23DateInternal), "chan23DateInternal", LKUP_TYPE_U32, 4},
+    // Parameter: SysOCalb : chan24SysOCR
+    {12300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24SysOCR), "chan24SysOCR", LKUP_TYPE_U16, 2},
+    // Parameter: SysGCalb : chan24SysFSR
+    {12301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24SysFSR), "chan24SysFSR", LKUP_TYPE_U16, 2},
+    // Parameter: CalibOCR20mV : chan24OCR20mV
+    {12302, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR20mV), "chan24OCR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mV : chan24FSR20mV
+    {12304, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR20mV), "chan24FSR20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mV : chan24Date20mV
+    {12306, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date20mV), "chan24Date20mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR100mV : chan24OCR100mV
+    {12308, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR100mV), "chan24OCR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR100mV : chan24FSR100mV
+    {12310, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR100mV), "chan24FSR100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate100mV : chan24Date100mV
+    {12312, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date100mV), "chan24Date100mV", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR1V : chan24OCR1V
+    {12314, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR1V), "chan24OCR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR1V : chan24FSR1V
+    {12316, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR1V), "chan24FSR1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate1V : chan24Date1V
+    {12318, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date1V), "chan24Date1V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR10V : chan24OCR10V
+    {12320, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR10V), "chan24OCR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR10V : chan24FSR10V
+    {12322, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR10V), "chan24FSR10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate10V : chan24Date10V
+    {12324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date10V), "chan24Date10V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR30V : chan24OCR30V
+    {12326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR30V), "chan24OCR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR30V : chan24FSR30V
+    {12328, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR30V), "chan24FSR30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate30V : chan24Date30V
+    {12330, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date30V), "chan24Date30V", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR20mA : chan24OCR20mA
+    {12332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR20mA), "chan24OCR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFCR20mA : chan24FSR20mA
+    {12334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR20mA), "chan24FSR20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFDate20mA : chan24Date20mA
+    {12336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date20mA), "chan24Date20mA", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR4x : chan24OCR4x
+    {12338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR4x), "chan24OCR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR4x : chan24FSR4x
+    {12340, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR4x), "chan24FSR4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate4x : chan24Date4x
+    {12342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date4x), "chan24Date4x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCR3x : chan24OCR3x
+    {12344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCR3x), "chan24OCR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibFSR3x : chan24FSR3x
+    {12346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSR3x), "chan24FSR3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibDate3x : chan24Date3x
+    {12348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Date3x), "chan24Date3x", LKUP_TYPE_U32, 4},
+    // Parameter: CalibOCRinternal : chan24OCRinternal
+    {12350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24OCRinternal), "chan24OCRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibFSRinternal : chan24FSRinternal
+    {12352, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FSRinternal), "chan24FSRinternal", LKUP_TYPE_FLOAT, 4},
+    // Parameter: CalibDateinternal : chan24DateInternal
+    {12354, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24DateInternal), "chan24DateInternal", LKUP_TYPE_U32, 4},
     // Parameter: Modbus Protocol Version : modbusProtocolVersion
     {0, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(modbusProtocolVersion), "modbusProtocolVersion", LKUP_TYPE_U32, 4},
     // Parameter: Hardware Version : hardwareVersion
@@ -629,22 +3377,120 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     {202, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(modbusCountErrors), "modbusCountErrors", LKUP_TYPE_U16, 2},
     // Parameter: Modbus Count Goods : modbusCountGoods
     {203, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(modbusCountGoods), "modbusCountGoods", LKUP_TYPE_U16, 2},
+    // Parameter: Access type  : accessType
+    {300, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(accessType), "accessType", LKUP_TYPE_U16, 2},
     // Parameter: Count Modules : countModules
     {1000, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(countModules), "countModules", LKUP_TYPE_U16, 2},
-    // Parameter: Info Moduls : var7
-    {1000, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var7), "var7", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 1 : var8
-    {1100, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var8), "var8", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 2 : var9
-    {1200, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var9), "var9", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 3 : var10
-    {1300, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var10), "var10", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 4 : var11
-    {1400, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var11), "var11", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 5 : var12
-    {1500, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var12), "var12", LKUP_TYPE_U16, 2},
-    // Parameter: Modul 6 : var13
-    {1600, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(var13), "var13", LKUP_TYPE_U16, 2},
+    // Parameter: Mother Board Model : matherBoardModel
+    {1001, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(matherBoardModel), "matherBoardModel", LKUP_TYPE_ASCII, 16},
+    // Parameter: Module 1 Online Flag : module1Online
+    {1100, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1Online), "module1Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 1 Protocol Version : module1ProtocolVersion
+    {1101, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1ProtocolVersion), "module1ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 1 Hardware Version : module1HardwareVersion
+    {1103, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1HardwareVersion), "module1HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 1 Software Version : module1SoftwareVersion
+    {1105, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1SoftwareVersion), "module1SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 1 Serial Number : module1SerialNumber
+    {1107, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1SerialNumber), "module1SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 1 Factory Date : module1FactoryDate
+    {1109, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1FactoryDate), "module1FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 1 Type : module1Type
+    {1111, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1Type), "module1Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 1 Access Type : module1AccessType
+    {1112, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1AccessType), "module1AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 1 Errors : module1Errors
+    {1113, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module1Errors), "module1Errors", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Online Flag : module2Online
+    {1200, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2Online), "module2Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 2 Protocol Version : module2ProtocolVersion
+    {1201, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2ProtocolVersion), "module2ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Hardware Version : module2HardwareVersion
+    {1203, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2HardwareVersion), "module2HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Software Version : module2SoftwareVersion
+    {1205, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2SoftwareVersion), "module2SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Serial Number : module2SerialNumber
+    {1207, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2SerialNumber), "module2SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Factory Date : module2FactoryDate
+    {1209, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2FactoryDate), "module2FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 2 Type : module2Type
+    {1211, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2Type), "module2Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 2 Access Type : module2AccessType
+    {1212, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2AccessType), "module2AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 2 Errors : module2Errors
+    {1213, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module2Errors), "module2Errors", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Online Flag : module3Online
+    {1300, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3Online), "module3Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 3 Protocol Version : module3ProtocolVersion
+    {1301, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3ProtocolVersion), "module3ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Hardware Version : module3HardwareVersion
+    {1303, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3HardwareVersion), "module3HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Software Version : module3SoftwareVersion
+    {1305, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3SoftwareVersion), "module3SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Serial Number : module3SerialNumber
+    {1307, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3SerialNumber), "module3SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Factory Date : module3FactoryDate
+    {1309, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3FactoryDate), "module3FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 3 Type : module3Type
+    {1311, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3Type), "module3Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 3 Access Type : module3AccessType
+    {1312, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3AccessType), "module3AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 3 Errors : module3Errors
+    {1313, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module3Errors), "module3Errors", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Online Flag : module4Online
+    {1400, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4Online), "module4Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 4 Protocol Version : module4ProtocolVersion
+    {1401, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4ProtocolVersion), "module4ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Hardware Version : module4HardwareVersion
+    {1403, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4HardwareVersion), "module4HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Software Version : module4SoftwareVersion
+    {1405, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4SoftwareVersion), "module4SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Serial Number : module4SerialNumber
+    {1407, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4SerialNumber), "module4SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Factory Date : module4FactoryDate
+    {1409, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4FactoryDate), "module4FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 4 Type : module4Type
+    {1411, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4Type), "module4Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 4 Access Type : module4AccessType
+    {1412, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4AccessType), "module4AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 4 Errors : module4Errors
+    {1413, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module4Errors), "module4Errors", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Online Flag : module5Online
+    {1500, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5Online), "module5Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 5 Protocol Version : module5ProtocolVersion
+    {1501, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5ProtocolVersion), "module5ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Hardware Version : module5HardwareVersion
+    {1503, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5HardwareVersion), "module5HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Software Version : module5SoftwareVersion
+    {1505, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5SoftwareVersion), "module5SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Serial Number : module5SerialNumber
+    {1507, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5SerialNumber), "module5SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Factory Date : module5FactoryDate
+    {1509, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5FactoryDate), "module5FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 5 Type : module5Type
+    {1511, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5Type), "module5Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 5 Access Type : module5AccessType
+    {1512, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5AccessType), "module5AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 5 Errors : module5Errors
+    {1513, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module5Errors), "module5Errors", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Online Flag : module6Online
+    {1600, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6Online), "module6Online", LKUP_TYPE_U16, 2},
+    // Parameter: Module 6 Protocol Version : module6ProtocolVersion
+    {1601, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6ProtocolVersion), "module6ProtocolVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Hardware Version : module6HardwareVersion
+    {1603, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6HardwareVersion), "module6HardwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Software Version : module6SoftwareVersion
+    {1605, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6SoftwareVersion), "module6SoftwareVersion", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Serial Number : module6SerialNumber
+    {1607, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6SerialNumber), "module6SerialNumber", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Factory Date : module6FactoryDate
+    {1609, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6FactoryDate), "module6FactoryDate", LKUP_TYPE_U32, 4},
+    // Parameter: Module 6 Type : module6Type
+    {1611, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6Type), "module6Type", LKUP_TYPE_U16, 2},
+    // Parameter: Module 6 Access Type : module6AccessType
+    {1612, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6AccessType), "module6AccessType", LKUP_TYPE_U16, 2},
+    // Parameter: Module 6 Errors : module6Errors
+    {1613, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(module6Errors), "module6Errors", LKUP_TYPE_U32, 4},
     // Parameter: Analog channel 1 : analogChan1
     {5000, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(analogChan1), "analogChan1", LKUP_TYPE_FLOAT, 4},
     // Parameter: Analog channel 2 : analogChan2
@@ -785,6 +3631,46 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     {5228, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan15), "freqChan15", LKUP_TYPE_FLOAT, 4},
     // Parameter: Freq channel 16 : freqChan16
     {5230, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan16), "freqChan16", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 17 : freqChan17
+    {5232, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan17), "freqChan17", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 18 : freqChan18
+    {5234, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan18), "freqChan18", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 19 : freqChan19
+    {5236, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan19), "freqChan19", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 20 : freqChan20
+    {5238, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan20), "freqChan20", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 21 : freqChan21
+    {5240, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan21), "freqChan21", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 22 : freqChan22
+    {5242, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan22), "freqChan22", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 23 : freqChan23
+    {5244, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan23), "freqChan23", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 24 : freqChan24
+    {5246, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan24), "freqChan24", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 25 : freqChan25
+    {5248, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan25), "freqChan25", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 26 : freqChan26
+    {5250, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan26), "freqChan26", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 27 : freqChan27
+    {5252, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan27), "freqChan27", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 28 : freqChan28
+    {5254, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan28), "freqChan28", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 29 : freqChan29
+    {5256, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan29), "freqChan29", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 30 : freqChan30
+    {5258, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan30), "freqChan30", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 31 : freqChan31
+    {5260, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan31), "freqChan31", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 32 : freqChan32
+    {5262, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan32), "freqChan32", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 33 : freqChan33
+    {5264, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan33), "freqChan33", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 34 : freqChan34
+    {5266, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan34), "freqChan34", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 35 : freqChan35
+    {5268, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan35), "freqChan35", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Freq channel 36 : freqChan36
+    {5270, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(freqChan36), "freqChan36", LKUP_TYPE_FLOAT, 4},
     // Parameter: Analog Channel Status 1 : analogStatusChan1
     {7000, LKUP_MAP_INPUTS, mbExtRegRwCheckFunc,  OFFSET(analogStatusChan1), "analogStatusChan1", LKUP_TYPE_U16, 2},
     // Parameter: Analog Channel Status 2 : analogStatusChan2

@@ -109,7 +109,7 @@ public:
     void setCapacity(int cap) { capacity = cap; }
     int getCapacity(void) { return capacity; }
     bool isNewValue();
-
+    int getChannelStatus() { return inputData.chanStatus; }
 
 signals:
     void updateSignal(int index);
@@ -280,5 +280,9 @@ public:
     QString getNameUnitByParam(uint16_t type, int diap);
     int optimalPrecision();
 
+    void setAdditionalParametr1(uint8_t *param);
+    void setAdditionalParametr2(uint8_t *param);
+    void getAdditionalParametr1(uint8_t *param);
+    void getAdditionalParametr2(uint8_t *param);
 };
 #endif // CHANNEL1_H

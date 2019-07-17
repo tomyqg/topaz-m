@@ -17,6 +17,8 @@ extern QList<cGroupChannels*> listGroup;
 extern QList<ChannelOptions *> listChannels;
 extern QList<cMathChannel *> listMath;
 extern QList<cFreqChannel *> listFreq;
+extern QMutex mListMath;
+extern QMutex mListChannel;
 
 
 // полярные координаты
@@ -50,6 +52,7 @@ void MainWindow::PaintPolarDiagramm()
     {
         if((group->typeInput[i] == cGroupChannels::Input_Analog) && (group->channel[i] != -1))
         {
+            mListChannel.lock();
             ChannelOptions * channel = listChannels.at(group->channel[i]);
 #ifdef RANDOM_CHAN
             if((channel->getNum() <= NUM_CHAN_IN_4AI) || channel->enable)
@@ -59,12 +62,15 @@ void MainWindow::PaintPolarDiagramm()
             {
                 channelLenght[i] = channel->GetValuePercent();
             }
+            mListChannel.unlock();
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Math) && (group->mathChannel[i] != -1))
         {
             if((group->mathChannel[i] < listMath.size()) && (listMath.size() != 0))
             {
+                mListMath.lock();
                 cMathChannel * math = listMath.at(group->mathChannel[i]);
+                mListMath.unlock();
                 channelLenght[i] = math->GetValuePercent();
             }
         }

@@ -57,6 +57,9 @@ QStringList datestrings, timestrings;
 QDateTime timeOutBuff;
 cUsbFlash * flash;
 QMutex mSysOpt;
+QMutex mListUstvok;
+QMutex mListMath;
+QMutex mListChannel;
 
 extern MainWindow * globalMainWin;
 extern QList<cDevice*> listDevice;
@@ -194,8 +197,6 @@ void MainWindow::MainWindowInitialization()
     /* Инициализация объектов */
     // инициализация каналов (входов)
     InitChannels();
-    // инициализация уставок
-    InitUstavka();
     // инициализация частотных каналов
     InitFreq();
 
@@ -206,6 +207,8 @@ void MainWindow::MainWindowInitialization()
         cLogger mk(pathtomessages, cLogger::CONFIG);
         mk.addMess("File " + QString(pathtooptions) + " is empty", cLogger::ERR);
     }
+    // инициализация уставок
+    InitUstavka();
 
     // Инициализация потока внешнего Modbus ---------------------------
     // Vag: перенести позже в отдельную функцию и выполнять при включении опции
@@ -215,6 +218,7 @@ void MainWindow::MainWindowInitialization()
     connect(extModbusThread, SIGNAL(started()), extModbus, SLOT(run()));
     connect(this, SIGNAL(signalToExtModbus(QString,tModbusBuffer)), extModbus, SLOT(updateData(QString,tModbusBuffer)), Qt::DirectConnection);
     connect(extModbus, SIGNAL(signalUpdateParam(QString,tModbusBuffer)), this, SLOT(slotFromExtModbus(QString,tModbusBuffer)), Qt::DirectConnection);
+    connect(extModbus, SIGNAL(signalActualizeParam(QString)), this, SLOT(slotUpdateExtIntefaceData(QString)), Qt::DirectConnection);
 
     extModbus->moveToThread(extModbusThread);
     extModbusThread->start();
@@ -337,7 +341,6 @@ void MainWindow::MainWindowInitialization()
 
 
     //инициализация архиватора
-
     QListIterator<ChannelOptions*> li(listChannels);
     arch = new cArchivator(pathtoarchivedata, li);
 
@@ -478,11 +481,13 @@ void MainWindow::LabelsInit()
 void MainWindow::InitUstavka()
 {
     // установки сигнал/слотов для новых уставок
+    mListUstvok.lock();
     for(int i = 0; i < listUstavok.size(); i ++)
     {
         Ustavka * ust = listUstavok.at(i);
         connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
     }
+    mListUstvok.unlock();
 
     // запуск обновления уставок по таймеру
     timeUpdUst = new QTimer();
@@ -493,19 +498,23 @@ void MainWindow::InitUstavka()
 void MainWindow::UpdUst()
 {
 
+    mListUstvok.lock();
     foreach (Ustavka * ust, listUstavok) {
         int ch = ust->getChannel();
         int i = 0;
         if(ch)
         {
+            mListChannel.lock();
             ChannelOptions * channel = listChannels.at(ch-1);
             ust->update(channel->GetCurrentChannelValue());
+            mListChannel.unlock();
 //            ust->setNameCh(channel->GetChannelName());
 //            ust->setNum(i+1);
 //            ust->setIdentifikator("Limit" + QString::number(i+1));
         }
         i++;
     }
+    mListUstvok.unlock();
 }
 
 
@@ -865,6 +874,7 @@ void MainWindow::updateDevicesComplect()
 
     // обновление списка каналов
     int i = 0;
+    mListChannel.lock();
     foreach (uint8_t slot, list4AI) {
         if(i < listChannels.size())
         {
@@ -884,6 +894,7 @@ void MainWindow::updateDevicesComplect()
             listChannels.at(i)->enable = false;
         }
     }
+    mListChannel.unlock();
 
 
 
@@ -1048,8 +1059,10 @@ void MainWindow::logginStates(int channel, QString mess)
 
 void MainWindow::newUstavkaConnect(int num)
 {
+    mListUstvok.lock();
     Ustavka * ust = listUstavok.at(num);
     connect(ust, SIGNAL(workReleSignal(int, bool)), this, SLOT(sendRelayStateToWorker(int, bool)));
+    mListUstvok.unlock();
 }
 
 void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
@@ -1285,8 +1298,10 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListChannel.lock();
                     channel = listChannels.at(index);
                     channel->parserChannel(tr);
+                    mListChannel.unlock();
                 }
             }
             else if(device->deviceType == Device_STEEL)
@@ -1315,8 +1330,10 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListChannel.lock();
                     channel = listChannels.at(index);
                     channel->parserChannel(tr);
+                    mListChannel.unlock();
                 }
             }
             else if(device->deviceType == Device_STEEL)
@@ -1346,8 +1363,10 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListChannel.lock();
                     channel = listChannels.at(index);
                     channel->parserChannel(tr);
+                    mListChannel.unlock();
                 }
             }
             else if(device->deviceType == Divece_6DI6RO)
@@ -1368,8 +1387,10 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListChannel.lock();
                     channel = listChannels.at(index);
                     channel->parserChannel(tr);
+                    mListChannel.unlock();
                 }
             }
             else if(device->deviceType == Divece_6DI6RO)
@@ -1474,6 +1495,7 @@ int MainWindow::getIndexSteelBySlotAndCh(int slot, int ch)
 int MainWindow::getIndexAnalogBySlotAndCh(int slot, int ch)
 {
     int ret = -1;
+    mListChannel.lock();
     for(int i = 0; i < listChannels.size(); i++)
     {
         ChannelOptions * channel = listChannels.at(i);
@@ -1483,6 +1505,7 @@ int MainWindow::getIndexAnalogBySlotAndCh(int slot, int ch)
             break;
         }
     }
+    mListChannel.unlock();
     return ret;
 }
 
@@ -1521,12 +1544,18 @@ bool MainWindow::isChannelInMaxNow(int ch)
     //индекс -> номер канала [1...]
     ch = ch + 1;
 
+    mListUstvok.lock();
     foreach (Ustavka * u, listUstavok) {
         if(u->getChannel() == ch)
         {
-            if(u->isUp()) return true;
+            if(u->isUp())
+            {
+                mListUstvok.unlock();
+                return true;
+            }
         }
     }
+    mListUstvok.unlock();
     return false;
 }
 
@@ -1535,12 +1564,14 @@ bool MainWindow::isChannelInMinNow(int ch)
     //индекс -> номер канала [1...]
     ch = ch + 1;
 
+    mListUstvok.lock();
     foreach (Ustavka * u, listUstavok) {
         if(u->getChannel() == ch)
         {
 //            if(u->isDown()) return true;
         }
     }
+    mListUstvok.unlock();
     return false;
 }
 
@@ -1554,43 +1585,7 @@ void MainWindow::sendConfigChannelsToSlave()
 
     if(slotAnalogOnline)
     {
-        for(int i = 0; i < listChannels.size(); i++)
-        {
-//            ChannelOptions * channel = listChannels.at(i);
-//            if(!channel->enable) continue;  //пропуск, если канала нет
 
-//            int devCh = channel->getSlotChannel();// csc.getDevChannel(i);
-//            tr.slave = channel->getSlot(); //csc.getSlotByChannel(devCh);
-
-//            // запись актуального значения SignalType
-//            str = "chan" + QString::number(devCh) + "SignalType";
-//            tr.offset = cRegistersMap::getOffsetByName(str);
-//            tr.volInt = channel->GetSignalType();
-//            emit sendTransToWorker(tr);
-
-//            // запись актуального Additional parameter1
-//            str = "chan" + QString::number(devCh) + "AdditionalParameter1";
-//            tr.offset = cRegistersMap::getOffsetByName(str);
-//            //        tr.volInt = 0;
-//            int size = sizeof(tr.paramA12);
-//            memset(tr.paramA12, 0, size);
-//            if(channel->GetSignalType() == ModBus::VoltageMeasure)
-//            {
-//                tr.paramA12[0] = (uint16_t)channel->GetDiapason();
-//            }
-//            else if(channel->GetSignalType() == ModBus::TermoResistanceMeasure)
-//            {
-//                tr.paramA12[0] = (uint16_t)channel->getShema();
-//                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
-//            }
-//            else if((channel->GetSignalType() == ModBus::TermoCoupleMeasure))
-//            {
-//                tr.paramA12[0] = 1;
-//                tr.paramA12[1] = (uint16_t)channel->GetDiapason();
-//                tr.paramA12[2] = 2;
-//            }
-//            emit sendTransToWorker(tr);
-        }
     }
 
     if(slotSteelOnline)

@@ -48,15 +48,15 @@ int cDevice::parseDeviceParam(Transaction tr)
     QString nameParam = cRegistersMap::getNameByOffset(tr.offset);
     if(nameParam == "protocolVersion")
     {
-        protocolVersion = (uint16_t)tr.volInt;
+        protocolVersion = (uint32_t)tr.volInt;
     }
     else if(nameParam == "hardwareVersion")
     {
-        hardwareVersion = (uint16_t)tr.volInt;
+        hardwareVersion = (uint32_t)tr.volInt;
     }
     else if(nameParam == "softwareVersion")
     {
-        softwareVersion = (uint16_t)tr.volInt;
+        softwareVersion = (uint32_t)tr.volInt;
     }
     else if(nameParam == "deviceType")
     {

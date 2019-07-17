@@ -90,6 +90,8 @@ extern QList<cSteel*> listSteel;
 extern QList<cRelay*> listRelais;
 extern typeSteelTech steelTech[];
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
+extern QMutex mListUstvok;
+extern QMutex mListChannel;
 
 dSettings::dSettings(QList<ChannelOptions*> channels,
                      int num,
@@ -306,12 +308,14 @@ void dSettings::updateWidgets()
         ui->nameSubMenu->setText("<html><head/><body><p>НАСТРОЙКИ<br>КАНАЛА</p></body></html>");
         ui->srcChannel->clear();
         ui->srcChannel->addItem("---");
+        mListChannel.lock();
         foreach (ChannelOptions * ch, listChannels) {
 //            if(ch->enable)
 //            {
                 ui->srcChannel->addItem(ch->GetChannelName() + " (" + QString::number(ch->getNum()) + ")");
 //            }
         }
+        mListChannel.unlock();
         fInitCompoCopyChannels = true;
 
     }
@@ -421,10 +425,12 @@ void dSettings::initComboChannels(void)
         listCombo.append(ui->combo4ChannelArch);
 
         QStringList channels;
+        mListChannel.lock();
         foreach (ChannelOptions * channel, listChannels) {
             channels << QString(channel->GetChannelName() + " (" \
                                 + QString::number(channel->getNum()) + ")");
         }
+        mListChannel.unlock();
 
         foreach(QComboBox * combo, listCombo)
         {
@@ -597,8 +603,8 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
     int ch_num = num;
     int ust_num = num;
     if(ch_num == 0) ch_num = 1;
+    mListChannel.lock();
     if(ch_num > listChannels.size()) ch_num = listChannels.size();
-    if(ust_num > listUstavok.size()) ust_num = listUstavok.size();
     numChannel = ch_num;
 
     if(listChannels.size() > 0)
@@ -620,8 +626,11 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
 //        ui->unit->setText(channel->GetUnitsName().toUtf8());
 //        ui->comboCapacity->setCurrentIndex(channel->getCapacity());
     }
+    mListChannel.unlock();
 
     //параметры уставок
+    mListUstvok.lock();
+    if(ust_num > listUstavok.size()) ust_num = listUstavok.size();
     if(listUstavok.size() > 0)
     {
         ustavka = listUstavok.at(ust_num-1);
@@ -640,6 +649,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         //    ui->messageOnDown->setText(ustavka->getMessInLow());
         //    ui->messageOffDown->setText(ustavka->getMessNormHigh());
     }
+    mListUstvok.unlock();
 
     connect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     tUpdateBar.start(TIME_UPDATE_BAR);
@@ -652,6 +662,7 @@ void dSettings::updateBar()
         ui->bar->setExtr(channel->GetMinimumChannelValue(), channel->GetMaximumChannelValue());
 //        ui->bar->resetLim();
         ui->bar->cleanMarker();
+        mListUstvok.lock();
         foreach (Ustavka * ustavka, listUstavok) {
             if(ustavka->getChannel() == channel->getNum())
             {
@@ -661,6 +672,7 @@ void dSettings::updateBar()
 //                break;
             }
         }
+        mListUstvok.unlock();
 //        QColor colors[8] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4,\
 //                           ColorCh1Light, ColorCh2Light,\
 //                           ColorCh3Light, ColorCh4Light};
@@ -705,6 +717,7 @@ void dSettings::saveParam()
     }
     else
     {
+        mListChannel.lock();
         if(listChannels.size() > 0)
         {
             channel->SetChannelName(ui->nameChannel->text().toUtf8());
@@ -735,7 +748,9 @@ void dSettings::saveParam()
 //            channel->setCapacity(ui->comboCapacity->currentIndex());
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
+        mListChannel.unlock();
 
+        mListUstvok.lock();
         if(listUstavok.size() > 0)
         {
             ustavka->setUstavka(\
@@ -755,6 +770,7 @@ void dSettings::saveParam()
             //        ustavka->setMessInLow(ui->messageOnDown->text().toUtf8());
             //        ustavka->setMessNormLow(ui->messageOffDown->text().toUtf8());
         }
+        mListUstvok.unlock();
     }
 
 
@@ -1473,7 +1489,9 @@ void dSettings::on_steelRelayTimeOut_activated(int index)
 
 void dSettings::on_bDeleteUstavka_clicked()
 {
+    mListUstvok.lock();
     listUstavok.removeAt(ustavka->getNum());
+    mListUstvok.unlock();
     saveParamToFile();
     this->close();
 }

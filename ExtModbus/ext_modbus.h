@@ -27,6 +27,7 @@ public:
 
 signals:
     void signalUpdateParam(QString name, tModbusBuffer buffer);
+    void signalActualizeParam(QString name);
 
 public slots:
     void run();

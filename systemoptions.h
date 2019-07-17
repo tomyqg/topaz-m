@@ -13,6 +13,7 @@ public:
     bool arrows;
     bool autoscale;
     int brightness;
+    int mode;   // режим прибора
     enum DisplayParametrEnum {
         Bars = 0x00,
         TrendsBars = 0x01,

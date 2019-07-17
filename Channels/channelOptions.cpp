@@ -24,6 +24,8 @@ ChannelOptions::ChannelOptions()
     MathematicalState = false;
     lowermeasurelimit = -100;
     highermeasurelimit = 100;
+    higherlimit = 100;
+    lowerlimit = -100;
     signaltype = 2;
     outputData.chanSignalType = VoltageMeasure;
     memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
@@ -1029,4 +1031,24 @@ QString ChannelOptions::getNameUnitByParam(uint16_t type, int diap)
     }
 
     return unit;
+}
+
+void ChannelOptions::setAdditionalParametr1(uint8_t * param)
+{
+    memcpy(outputData.chanAdditionalParameter1, param, sizeof(outputData.chanAdditionalParameter1));
+}
+
+void ChannelOptions::setAdditionalParametr2(uint8_t * param)
+{
+    memcpy(outputData.chanAdditionalParameter2, param, sizeof(outputData.chanAdditionalParameter2));
+}
+
+void ChannelOptions::getAdditionalParametr1(uint8_t * param)
+{
+    memcpy(param, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+}
+
+void ChannelOptions::getAdditionalParametr2(uint8_t * param)
+{
+    memcpy(param, outputData.chanAdditionalParameter2, sizeof(outputData.chanAdditionalParameter2));
 }

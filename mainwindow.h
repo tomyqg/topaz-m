@@ -85,6 +85,7 @@ public:
 //    transaction typeSign1;
 
 
+
 public slots:
     void tickLoadWidget();
     void destroyedslot(QObject *);
@@ -128,8 +129,9 @@ public slots:
     void slotSteelFrame(bool steelFrame);
     void devicesPause(bool f);
     void updateExtIntefaceData();
+    void slotUpdateExtIntefaceData(QString name);
     void slotFromExtModbus(QString name,tModbusBuffer data);
-
+    void updateObjectsOfMainThread();
 
 private slots:
 
@@ -184,6 +186,7 @@ private slots:
     void on_PlavkaButtonDown_3_clicked();
     void on_PlavkaButtonUp_4_clicked();
     void on_PlavkaButtonDown_4_clicked();
+
 
 
 signals:
@@ -281,7 +284,12 @@ private:
         QString name;
         funcExtInterface funcGet;
     } typeTableExtInterface;
-    QList<typeTableExtInterface> tablExtInterfaceChannels;
+//    QList<typeTableExtInterface> tablExtInterfaceConstants;
+//    QList<typeTableExtInterface> tablExtInterfaceSlowInfo;
+//    QList<typeTableExtInterface> tablExtInterfaceInfo;
+//    QList<typeTableExtInterface> tablExtInterfaceState;
+//    QList<typeTableExtInterface> tablExtInterfaceChannels;
+    QList<typeTableExtInterface> tablExtInterfaceRegisters;
     typedef void (MainWindow::*funcApplyNewParamFromExtInterface)(QString name, uint8_t * data);
     typedef struct {
         QString name;
@@ -420,11 +428,133 @@ private:
     void updateGroupWodgets();
     void initExtInterface();
     void extGetChannel(QString name);
+    void extGetProtVer(QString name);
     void applyParam(QString name, uint8_t *data);
     void extSetDisplayMode(QString name, uint8_t * data);
     void extGetDisplayMode(QString name);
 
     int getIndexFreqBySlotAndCh(int slot, int ch);
+    void extGetHardVer(QString name);
+    void extGetSoftVer(QString name);
+    void extGetDevType(QString name);
+    void extGetDevName(QString name);
+    void extGetManufact(QString name);
+    void extGetWebSite(QString name);
+    void extGetSerialNum(QString name);
+    void extGetManufDate(QString name);
+    void extGetDevID(QString name);
+    void extGetDevState(QString name);
+    void extGetWorkingTime(QString name);
+    void extGetModbusErrs(QString name);
+    void extGetModbusGoods(QString name);
+    void extGetAccessType(QString name);
+    void extGetCountModules(QString name);
+    void extGetModelMatherboard(QString name);
+    void extGetModuleHardVer(QString name);
+    void extGetModuleProtocolVer(QString name);
+    void extGetModulAccessType(QString name);
+    void extGetModulIsOnline(QString name);
+    void extGetModulIsErrors(QString name);
+    void extGetModuleSerialNumber(QString name);
+    void extGetModuleSoftVer(QString name);
+    void extGetModuleFactoryDate(QString name);
+    void extGetModuleType(QString name);
+    void extGetChannelStatus(QString name);
+    void extGetBroadcast(QString name);
+    void extSetBroadcast(QString name, uint8_t *data);
+
+    void extGetIpMask(QString name);
+    void extSetIpMask(QString name, uint8_t *data);
+    void extGetIpAddress(QString name);
+    void extSetIpAddress(QString name, uint8_t *data);
+    void extGetCurrentDate(QString name);
+    void extSetCurrentDate(QString name, uint8_t *data);
+    void extGetDevMode(QString name);
+    void extSetDevMode(QString name, uint8_t *data);
+    void extGetDisplayBrightness(QString name);
+    void extSetDisplayBrightness(QString name, uint8_t *data);
+    void extGetDisplayArrows(QString name);
+    void extSetDisplayArrows(QString name, uint8_t *data);
+    void extGetDisplayAutoscale(QString name);
+    void extSetDisplayAutoscale(QString name, uint8_t *data);
+    void extGetModbusRtuBaudrate(QString name);
+    void extSetModbusRtuBaudrate(QString name, uint8_t *data);
+    void extGetModbusSlave(QString name);
+    void extSetModbusSlave(QString name, uint8_t *data);
+    void extGetPortModbusType(QString name);
+    void extSetPortModbusType(QString name, uint8_t *data);
+    void extGetPortModbus(QString name);
+    void extSetPortModbus(QString name, uint8_t *data);
+    void extGetPortWebServer(QString name);
+    void extSetPortWebServer(QString name, uint8_t *data);
+    void extGetCurrentTime(QString name);
+    void extSetCurrentTime(QString name, uint8_t *data);
+    void extSetAccessPass(QString name, uint8_t *data);
+    void extGetAccessPass(QString name);
+    void extSetSetPoint(QString name, uint8_t *data);
+    void extGetSetPoint(QString name);
+    void extSetTotalSetpoint(QString name, uint8_t *data);
+    void extGetTotalSetpoint(QString name);
+    void extSetSetpointIdentifikator(QString name, uint8_t *data);
+    void extGetSetpointIdentifikator(QString name);
+    void extGetSetpointChannel(QString name);
+    void extSetSetpointChannel(QString name, uint8_t *data);
+    void extGetSetpointType(QString name);
+    void extSetSetpointType(QString name, uint8_t *data);
+    void extSetSetpointValue(QString name, uint8_t *data);
+    void extGetSetpointValue(QString name);
+    void extSetSetpointHister(QString name, uint8_t *data);
+    void extGetSetpointHister(QString name);
+    void extSetSetpointRelay(QString name, uint8_t *data);
+    void extGetSetpointRelay(QString name);
+    void extSetSetpointOverMess(QString name, uint8_t *data);
+    void extGetSetpointOverMess(QString name);
+    void extSetSetpointNormMess(QString name, uint8_t *data);
+    void extGetSetpointNormMess(QString name);
+    void extSetSetpointConfirm(QString name, uint8_t *data);
+    void extGetSetpointConfirm(QString name);
+    void extSetSetpointTimeFilter(QString name, uint8_t *data);
+    void extGetSetpointTimeFilter(QString name);
+    void extSetCurrentMath(QString name, uint8_t *data);
+    void extGetCurrentMath(QString name);
+    void extSetTotalMath(QString name, uint8_t *data);
+    void extGetTotalMath(QString name);
+    void extSetMathName(QString name, uint8_t *data);
+    void extGetMathName(QString name);
+    void extGetMathFormula(QString name);
+    void extSetMathFormula(QString name, uint8_t *data);
+    void extGetMathArgument(QString name);
+    void extSetMathArgument(QString name, uint8_t *data);
+    void extSetMathUnit(QString name, uint8_t *data);
+    void extGetMathUnit(QString name);
+    void extSetMathHiLimit(QString name, uint8_t *data);
+    void extGetMathHiLimit(QString name);
+    void extSetMathLowLimit(QString name, uint8_t *data);
+    void extGetMathLowLimit(QString name);
+    void extSetMathPeriod(QString name, uint8_t *data);
+    void extGetMathPeriod(QString name);
+    void extSetChannelSignalType(QString name, uint8_t *data);
+    void extGetChannelSignalType(QString name);
+    void extSetChannelAdditionalPar1(QString name, uint8_t *data);
+    void extGetChannelAdditionalPar1(QString name);
+    void extSetChannelAdditionalPar2(QString name, uint8_t *data);
+    void extGetChannelAdditionalPar2(QString name);
+    void extGetChannelCorrectionCj(QString name);
+    void extSetChannelCorrectionCj(QString name, uint8_t *data);
+    void extSetChannelLowLim(QString name, uint8_t *data);
+    void extGetChannelLowLim(QString name);
+    void extSetChannelHiLim(QString name, uint8_t *data);
+    void extGetChannelHiLim(QString name);
+    void extSetChannelName(QString name, uint8_t *data);
+    void extGetChannelName(QString name);
+    void extSetChannelPeriod(QString name, uint8_t *data);
+    void extGetChannelPeriod(QString name);
+    void extSetChannelTypeRegistration(QString name, uint8_t *data);
+    void extGetChannelTypeRegistration(QString name);
+    void extGetChannelDempher(QString name);
+    void extSetChannelDempher(QString name, uint8_t *data);
+    void extSetChannelTypeValue(QString name, uint8_t *data);
+    void extGetChannelTypeValue(QString name);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

@@ -250,6 +250,9 @@ void cExtModbus::reply(){
                 || (func == _FC_WRITE_MULTIPLE_REGISTERS)
                 || (func == _FC_READ_INPUT_REGISTERS))
         {
+            //Vag: Запустить сигнал в основной поток для обновления запрошенных регистров
+            emit signalActualizeParam(QString(param->nameParam));
+
             size = (param->size >> 1);
         }
         else
@@ -265,7 +268,6 @@ void cExtModbus::reply(){
     {
         return;
     }
-//    uint16_t * data = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
 
     /* Read/write holding registers */
     if((func == _FC_READ_HOLDING_REGISTERS)

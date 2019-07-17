@@ -3,6 +3,9 @@
 
 extern QList<ChannelOptions *> listChannels;
 extern QVector<double> X_Coordinates;
+extern QMutex mListChannel;
+
+
 
 cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
 {
@@ -13,7 +16,7 @@ cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
     lowerLimit = 0;
     currentvalue = 0;
     connect(&timerUpdate, SIGNAL(timeout()), this, SLOT(slotUpdate()));
-    timerUpdate.start(500);
+    timerUpdate.start(MATH_UPDATE_PERIOD_MS);
     buffermutex = new QMutex();
 }
 
@@ -39,14 +42,15 @@ double cMathChannel::GetCurrentMathValue()
 
 void cMathChannel::slotUpdate()
 {
-    const int countArgs = 4;
-    double arg[countArgs];
+    double arg[NUM_MATH_ARG];
 
-    for(int i = 0; i < countArgs; i++)
+    for(int i = 0; i < NUM_MATH_ARG; i++)
     {
         if((numChannel[i] != -1) && (numChannel[i] < listChannels.size()))
         {
+            mListChannel.lock();
             arg[i] = listChannels.at(numChannel[i])->GetCurrentChannelValue();
+            mListChannel.unlock();
         }
         else
         {

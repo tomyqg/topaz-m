@@ -18,6 +18,9 @@ extern QList<Ustavka *> listUstavok;
 extern QList<cSteel*> listSteel;
 extern typeSteelTech steelTech[];
 extern QMutex mSysOpt;
+extern QMutex mListUstvok;
+extern QMutex mListMath;
+extern QMutex mListChannel;
 
 cFileManager::cFileManager(QObject *parent) : QObject(parent)
 {
@@ -26,11 +29,14 @@ cFileManager::cFileManager(QObject *parent) : QObject(parent)
 
 int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> listChannels*/)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
+
     QJsonObject options;
     QJsonObject channeljsonobj, ustavkijsonobj, freqjsonobj;
     QJsonArray settings, settingsUst, settingsFreq;
 
     int countCh = 0;
+    mListChannel.lock();
     foreach (ChannelOptions * Channel, listChannels) {
 #ifdef RANDOM_CHAN
         if((Channel->getNum() <= NUM_CHAN_IN_4AI) || Channel->enable)
@@ -64,6 +70,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             countCh++;
         }
     }
+    mListChannel.unlock();
     options["count"] = countCh;
     options["channels"] = settings;
 
@@ -90,6 +97,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
     options["countFreq"] = countChFreq;
     options["channelsFreq"] = settingsFreq;
 
+    mListUstvok.lock();
     foreach (Ustavka * ust, listUstavok)
     {
 //        ustavkijsonobj["Num"] = ust->getNum();
@@ -114,6 +122,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
     options["countUst"] = listUstavok.length();
     options["ustavki"] = settingsUst;
+    mListUstvok.unlock();
 
 
 
@@ -139,6 +148,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
 int cFileManager::readChannelsSettings(QString path)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
 
     QFile infile(path);
     if(!infile.exists()) return 2;  //файл не доступен
@@ -172,8 +182,6 @@ int cFileManager::readChannelsSettings(QString path)
         }
     }
 
-//    if(sss.size() == 0) return 4;    //файл пустой
-
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
@@ -181,7 +189,7 @@ int cFileManager::readChannelsSettings(QString path)
     QJsonObject ch;
 
     int count = json["count"].toInt();
-//    assert(count = array.size());
+
     if(count != array.size())
     {
         cLogger mk(pathtomessages, cLogger::UI);
@@ -189,27 +197,12 @@ int cFileManager::readChannelsSettings(QString path)
         return 3;
     }
 
-//    int size = listChannels.size();
-//    if(count > size)
-//    {
-//        for(int i = size; i < count; i++)
-//        {
-//            ChannelOptions * ch = new ChannelOptions();
-//            ch->SetCurrentChannelValue(0);
-//            ch->setNum(i+1);
-////            connect(ch, SIGNAL(updateSignal(int)), parent, SLOT(&MainWindow::updateChannelSlot(int)));
-//            listChannels.append(ch);
-//        }
-//    }
-
     int index = 0;
+    mListChannel.lock();
     foreach (ChannelOptions * channel, listChannels) {
         if(index < count)
         {
             ch = array.at(index).toObject();
-//            channel->enable = true;
-//            channel->setSlot(ch.value("Slot").toInt());
-//            channel->setSlotChannel(index%NUM_CHAN_IN_4AI);
             channel->SetHigherLimit(ch.value("HigherLimit").toDouble());
             channel->SetLowerLimit(ch.value("LowerLimit").toDouble());
             channel->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
@@ -229,7 +222,6 @@ int cFileManager::readChannelsSettings(QString path)
             channel->setShiftColdJunction(ch.value("ShiftCJ").toDouble());
             channel->enableColdJunction(ch.value("EnShiftCJ").toInt());
             channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
-//            channel->setShema(ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
             channel->setVolueVoltageType(ch.value("ValueType").toInt());
         }
@@ -239,6 +231,7 @@ int cFileManager::readChannelsSettings(QString path)
         }
         index++;
     }
+    mListChannel.unlock();
 
     QJsonArray arrayFreq = json["channelsFreq"].toArray();
     int countFr = json["countFreq"].toInt();
@@ -252,7 +245,6 @@ int cFileManager::readChannelsSettings(QString path)
             freq->SetHigherMeasureLimit(ch.value("HigherMeasLimit").toDouble());
             freq->SetLowerMeasureLimit(ch.value("LowerMeasLimit").toDouble());
             freq->SetSignalType(ch.value("Type").toInt());
-//            freq->SetCurSignalType(freq->GetSignalType());
             freq->setUnit(ch.value("Units").toString().toUtf8());
             freq->SetMeasurePeriod(ch.value("Period").toDouble());
             freq->setName(ch.value("Name").toString().toUtf8());
@@ -267,6 +259,7 @@ int cFileManager::readChannelsSettings(QString path)
         index++;
     }
 
+    mListUstvok.lock();
     count = json["countUst"].toInt();
     // если уставки описаны в файле настроек, то очистить список по умолчанию
     // и пересоздать
@@ -289,24 +282,18 @@ int cFileManager::readChannelsSettings(QString path)
     {
         jsonobj = array.at(index++).toObject();
         ust->setUstavka(
-                    /*jsonobj.value("Num").toInt(),*/ \
                     jsonobj.value("Identifikator").toString().toUtf8(), \
                     jsonobj.value("UstavkaChannel").toInt(), \
                     jsonobj.value("TypeFix").toBool(), \
                     jsonobj.value("StateHiValue").toDouble(), \
-                    /*jsonobj.value("StateLowValue").toDouble(),*/ \
                     jsonobj.value("lowHisteresis").toDouble(), \
-                    /*jsonobj.value("lowLowsteresis").toDouble(),*/ \
                     jsonobj.value("numRelayUp").toInt() \
-                    /*jsonobj.value("numRelayDown").toInt()*/ \
                     );
         ust->setMessInHigh(jsonobj.value("MessInHigh").toString().toUtf8());
         ust->setMessNormHigh(jsonobj.value("MessNormHigh").toString().toUtf8());
-//        ust->setMessInLow(jsonobj.value("MessInLow").toString().toUtf8());
-//        ust->setMessNormLow(jsonobj.value("MessNormLow").toString().toUtf8());
         ust->setKvitirUp(jsonobj.value("KvitirUp").toBool());
-//        ust->setKvitirDown(jsonobj.value("KvitirDown").toBool());
     }
+    mListUstvok.unlock();
 
     return 0;
 
@@ -314,6 +301,7 @@ int cFileManager::readChannelsSettings(QString path)
 
 int cFileManager::readSteelsSettings(QString path)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
 
     int ret = 0;
     QFile infile(path);
@@ -360,9 +348,7 @@ int cFileManager::readSteelsSettings(QString path)
     for(int i = 0; (i < count) && (i < NUM_TECHNOLOGIES); i++)
     {
         QJsonObject techObj = arrayTech.at(i).toObject();
-//        int size = min(techObj.value("Name").toString().size(), SIZE_TECH_NAME_STR);
         strcpy(steelTech[i].name, techObj.value("Name").toString().toUtf8().data());
-//        steelTech[i].name = techObj.value("Name").toString().toLatin1().data();
         steelTech[i].nSt = techObj.value("TermoCouple").toInt();
         steelTech[i].COH = techObj.value("SensorActivity").toInt();
         steelTech[i].b1 = techObj.value("Crystallization").toInt();
@@ -385,6 +371,8 @@ int cFileManager::readSteelsSettings(QString path)
 
 int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
+
     QJsonObject systemoptions;
     QJsonObject options, groupsjsonobj, mathjsonobj;
     QJsonArray settingsGroup, settingsMath;
@@ -424,6 +412,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     options["countGrp"] = listGroup.length();
     options["groups"] = settingsGroup;
 
+    mListMath.lock();
     foreach (cMathChannel * math, listMath)
     {
         mathjsonobj["Name"] = math->getName();
@@ -441,6 +430,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
     options["countMath"] = listMath.length();
     options["mathChannels"] = settingsMath;
+    mListMath.unlock();
 
     systemoptions["Options"] = options;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
@@ -464,6 +454,8 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
 int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
+
     QFile infile(path);
     if(!infile.exists()) return 2;  //файл не доступен
     QString sss;
@@ -502,9 +494,6 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
-//    StackedOptions::calibrationprm = json["Calibration"].toString();
-//    StackedOptions::DisplayParametr = json["Display"].toInt();
-//    StackedOptions::displayResolution = json["Resolution"].toString();
     mSysOpt.lock();
     opt->arrows = json["Arrows"].toBool();
     opt->display = json["Display"].toInt();
@@ -556,18 +545,9 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
         index++;
     }
 
+    mListMath.lock();
     int countMath = options["countMath"].toInt();
-//    if(countMath != 0)
-//    {
-//        listMath.clear();
-//        for(int i = 0; i < countMath; i ++)
-//        {
-//            cMathChannel *math = new cMathChannel();
-//            math->setNum(i);
-//            math->setName("Math " + QString::number(i+1));
-//            listMath.append(math);
-//        }
-//    }
+
     index = 0;
     while(countMath > listMath.size())
     {
@@ -593,12 +573,15 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
         math->numChannel[2] = jsonobj.value("X3").toInt();
         math->numChannel[3] = jsonobj.value("X4").toInt();
     }
+    mListMath.unlock();
 
     return 0;
 }
 
 int cFileManager::writeSteelsSettings(QString path)
 {
+    QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
+
     QJsonObject steeljsonobj, options, techjsobj;
     QJsonArray settingssteel, settingstech;
 

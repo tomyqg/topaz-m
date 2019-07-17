@@ -19,9 +19,9 @@ public:
     void setOnline() { online = true; }
     void pause(bool f) { pauseUpdateParam = f; }
     int getSlot() { return slot; }  // номер слота, к которому относится объект устройства
-    uint16_t protocolVersion;       // версия протокола
-    uint16_t hardwareVersion;       // версия аппаратного обеспечения
-    uint16_t softwareVersion;       // версия ПО
+    uint32_t protocolVersion;       // версия протокола
+    uint32_t hardwareVersion;       // версия аппаратного обеспечения
+    uint32_t softwareVersion;       // версия ПО
     deviceTypeEnum deviceType;      // тип устройства
     uint32_t serialNumber;          // серийный номер платы
     uint32_t uptime;                // время работы с момента включения

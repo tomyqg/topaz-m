@@ -1,4 +1,4 @@
-/************************************************************************************
+п»ї/************************************************************************************
  * Filename: device_params.h
  *
  * Notice:
@@ -100,438 +100,374 @@ typedef struct
     uint8_t relay31;
     // Parameter: Relay 32 : relay32 : MB Offset: 31
     uint8_t relay32;
-    // Parameter: Ustavka 1  : ustavka1 : MB Offset: 0
-    uint8_t ustavka1;
-    // Parameter: Ustavka 2 : ustavka2 : MB Offset: 1
-    uint8_t ustavka2;
-    // Parameter: Ustavka 3 : ustavka3 : MB Offset: 2
-    uint8_t ustavka3;
-    // Parameter: Ustavka 4 : ustavka4 : MB Offset: 3
-    uint8_t ustavka4;
-    // Parameter: Ustavka 5 : ustavka5 : MB Offset: 4
-    uint8_t ustavka5;
-    // Parameter: Ustavka 6 : ustavka6 : MB Offset: 5
-    uint8_t ustavka6;
-    // Parameter: Ustavka 7 : ustavka7 : MB Offset: 6
-    uint8_t ustavka7;
-    // Parameter: Ustavka 8 : ustavka8 : MB Offset: 7
-    uint8_t ustavka8;
-    // Parameter: Ustavka 9 : ustavka9 : MB Offset: 8
-    uint8_t ustavka9;
-    // Parameter: Ustavka 10 : ustavka10 : MB Offset: 9
-    uint8_t ustavka10;
-    // Parameter: Ustavka 11 : ustavka11 : MB Offset: 10
-    uint8_t ustavka11;
-    // Parameter: Ustavka 12 : ustavka12 : MB Offset: 11
-    uint8_t ustavka12;
-    // Parameter: Ustavka 13 : ustavka13 : MB Offset: 12
-    uint8_t ustavka13;
-    // Parameter: Ustavka 14 : ustavka14 : MB Offset: 13
-    uint8_t ustavka14;
-    // Parameter: Ustavka 15 : ustavka15 : MB Offset: 14
-    uint8_t ustavka15;
-    // Parameter: Ustavka 16 : ustavka16 : MB Offset: 15
-    uint8_t ustavka16;
-    // Parameter: Ustavka 17 : ustavka17 : MB Offset: 16
-    uint8_t ustavka17;
-    // Parameter: Ustavka 18 : ustavka18 : MB Offset: 17
-    uint8_t ustavka18;
-    // Parameter: Ustavka 19 : ustavka19 : MB Offset: 18
-    uint8_t ustavka19;
-    // Parameter: Ustavka 20 : ustavka20 : MB Offset: 19
-    uint8_t ustavka20;
-    // Parameter: Ustavka 21 : ustavka21 : MB Offset: 20
-    uint8_t ustavka21;
-    // Parameter: Ustavka 22 : ustavka22 : MB Offset: 21
-    uint8_t ustavka22;
-    // Parameter: Ustavka 23 : ustavka23 : MB Offset: 22
-    uint8_t ustavka23;
-    // Parameter: Ustavka 24 : ustavka24 : MB Offset: 23
-    uint8_t ustavka24;
-    // Parameter: Ustavka 25 : ustavka25 : MB Offset: 24
-    uint8_t ustavka25;
-    // Parameter: Ustavka 26 : ustavka26 : MB Offset: 25
-    uint8_t ustavka26;
-    // Parameter: Ustavka 27 : ustavka27 : MB Offset: 26
-    uint8_t ustavka27;
-    // Parameter: Ustavka 28 : ustavka28 : MB Offset: 27
-    uint8_t ustavka28;
-    // Parameter: Ustavka 29 : ustavka29 : MB Offset: 28
-    uint8_t ustavka29;
-    // Parameter: Ustavka 30 : ustavka30 : MB Offset: 29
-    uint8_t ustavka30;
-    // Parameter: Ustavka 31 : ustavka31 : MB Offset: 30
-    uint8_t ustavka31;
-    // Parameter: Ustavka 32 : ustavka32 : MB Offset: 31
-    uint8_t ustavka32;
-    // Parameter: Ustavka 33 : ustavka33 : MB Offset: 32
-    uint8_t ustavka33;
-    // Parameter: Ustavka 34 : ustavka34 : MB Offset: 33
-    uint8_t ustavka34;
-    // Parameter: Ustavka 35 : ustavka35 : MB Offset: 34
-    uint8_t ustavka35;
-    // Parameter: Ustavka 36 : ustavka36 : MB Offset: 35
-    uint8_t ustavka36;
-    // Parameter: Ustavka 37 : ustavka37 : MB Offset: 36
-    uint8_t ustavka37;
-    // Parameter: Ustavka 38 : ustavka38 : MB Offset: 37
-    uint8_t ustavka38;
-    // Parameter: Ustavka 39 : ustavka39 : MB Offset: 38
-    uint8_t ustavka39;
-    // Parameter: Ustavka 40 : ustavka40 : MB Offset: 39
-    uint8_t ustavka40;
-    // Parameter: Ustavka 41 : ustavka41 : MB Offset: 40
-    uint8_t ustavka41;
-    // Parameter: Ustavka 42 : ustavka42 : MB Offset: 41
-    uint8_t ustavka42;
-    // Parameter: Ustavka 43 : ustavka43 : MB Offset: 42
-    uint8_t ustavka43;
-    // Parameter: Ustavka 44 : ustavka44 : MB Offset: 43
-    uint8_t ustavka44;
-    // Parameter: Ustavka 45 : ustavka45 : MB Offset: 44
-    uint8_t ustavka45;
-    // Parameter: Ustavka 46 : ustavka46 : MB Offset: 45
-    uint8_t ustavka46;
-    // Parameter: Ustavka 47 : ustavka47 : MB Offset: 46
-    uint8_t ustavka47;
-    // Parameter: Ustavka 48 : ustavka48 : MB Offset: 47
-    uint8_t ustavka48;
-    // Parameter: Ustavka 49 : ustavka49 : MB Offset: 48
-    uint8_t ustavka49;
-    // Parameter: Ustavka 50 : ustavka50 : MB Offset: 49
-    uint8_t ustavka50;
-    // Parameter: Ustavka 51 : ustavka51 : MB Offset: 50
-    uint8_t ustavka51;
-    // Parameter: Ustavka 52 : ustavka52 : MB Offset: 51
-    uint8_t ustavka52;
-    // Parameter: Ustavka 53 : ustavka53 : MB Offset: 52
-    uint8_t ustavka53;
-    // Parameter: Ustavka 54 : ustavka54 : MB Offset: 53
-    uint8_t ustavka54;
-    // Parameter: Ustavka 55 : ustavka55 : MB Offset: 54
-    uint8_t ustavka55;
-    // Parameter: Ustavka 56 : ustavka56 : MB Offset: 55
-    uint8_t ustavka56;
-    // Parameter: Ustavka 57 : ustavka57 : MB Offset: 56
-    uint8_t ustavka57;
-    // Parameter: Ustavka 58 : ustavka58 : MB Offset: 57
-    uint8_t ustavka58;
-    // Parameter: Ustavka 59 : ustavka59 : MB Offset: 58
-    uint8_t ustavka59;
-    // Parameter: Ustavka 60 : ustavka60 : MB Offset: 59
-    uint8_t ustavka60;
-    // Parameter: Ustavka 61 : ustavka61 : MB Offset: 60
-    uint8_t ustavka61;
-    // Parameter: Ustavka 62 : ustavka62 : MB Offset: 61
-    uint8_t ustavka62;
-    // Parameter: Ustavka 63 : ustavka63 : MB Offset: 62
-    uint8_t ustavka63;
-    // Parameter: Ustavka 64 : ustavka64 : MB Offset: 63
-    uint8_t ustavka64;
-    // Parameter: Ustavka 65 : ustavka65 : MB Offset: 64
-    uint8_t ustavka65;
-    // Parameter: Ustavka 66 : ustavka66 : MB Offset: 65
-    uint8_t ustavka66;
-    // Parameter: Ustavka 67 : ustavka67 : MB Offset: 66
-    uint8_t ustavka67;
-    // Parameter: Ustavka 68 : ustavka68 : MB Offset: 67
-    uint8_t ustavka68;
-    // Parameter: Ustavka 69 : ustavka69 : MB Offset: 68
-    uint8_t ustavka69;
-    // Parameter: Ustavka 70 : ustavka70 : MB Offset: 69
-    uint8_t ustavka70;
-    // Parameter: Ustavka 71 : ustavka71 : MB Offset: 70
-    uint8_t ustavka71;
-    // Parameter: Ustavka 72 : ustavka72 : MB Offset: 71
-    uint8_t ustavka72;
-    // Parameter: Ustavka 73 : ustavka73 : MB Offset: 72
-    uint8_t ustavka73;
-    // Parameter: Ustavka 74 : ustavka74 : MB Offset: 73
-    uint8_t ustavka74;
-    // Parameter: Ustavka 75 : ustavka75 : MB Offset: 74
-    uint8_t ustavka75;
-    // Parameter: Ustavka 76 : ustavka76 : MB Offset: 75
-    uint8_t ustavka76;
-    // Parameter: Ustavka 77 : ustavka77 : MB Offset: 76
-    uint8_t ustavka77;
-    // Parameter: Ustavka 78 : ustavka78 : MB Offset: 77
-    uint8_t ustavka78;
-    // Parameter: Ustavka 79 : ustavka79 : MB Offset: 78
-    uint8_t ustavka79;
-    // Parameter: Ustavka 80 : ustavka80 : MB Offset: 79
-    uint8_t ustavka80;
-    // Parameter: Ustavka 81 : ustavka81 : MB Offset: 80
-    uint8_t ustavka81;
-    // Parameter: Ustavka 82 : ustavka82 : MB Offset: 81
-    uint8_t ustavka82;
-    // Parameter: Ustavka 83 : ustavka83 : MB Offset: 82
-    uint8_t ustavka83;
-    // Parameter: Ustavka 84 : ustavka84 : MB Offset: 83
-    uint8_t ustavka84;
-    // Parameter: Ustavka 85 : ustavka85 : MB Offset: 84
-    uint8_t ustavka85;
-    // Parameter: Ustavka 86 : ustavka86 : MB Offset: 85
-    uint8_t ustavka86;
-    // Parameter: Ustavka 87 : ustavka87 : MB Offset: 86
-    uint8_t ustavka87;
-    // Parameter: Ustavka 88 : ustavka88 : MB Offset: 87
-    uint8_t ustavka88;
-    // Parameter: Ustavka 89 : ustavka89 : MB Offset: 88
-    uint8_t ustavka89;
-    // Parameter: Ustavka 90 : ustavka90 : MB Offset: 89
-    uint8_t ustavka90;
-    // Parameter: Ustavka 91 : ustavka91 : MB Offset: 90
-    uint8_t ustavka91;
-    // Parameter: Ustavka 92 : ustavka92 : MB Offset: 91
-    uint8_t ustavka92;
-    // Parameter: Ustavka 93 : ustavka93 : MB Offset: 92
-    uint8_t ustavka93;
-    // Parameter: Ustavka 94 : ustavka94 : MB Offset: 93
-    uint8_t ustavka94;
-    // Parameter: Ustavka 95 : ustavka95 : MB Offset: 94
-    uint8_t ustavka95;
-    // Parameter: Ustavka 96 : ustavka96 : MB Offset: 95
-    uint8_t ustavka96;
-    // Parameter: Ustavka 97 : ustavka97 : MB Offset: 96
-    uint8_t ustavka97;
-    // Parameter: Ustavka 98 : ustavka98 : MB Offset: 97
-    uint8_t ustavka98;
-    // Parameter: Ustavka 99 : ustavka99 : MB Offset: 98
-    uint8_t ustavka99;
-    // Parameter: Ustavka 100 : ustavka100 : MB Offset: 99
-    uint8_t ustavka100;
-    // Parameter: Ustavka 101 : ustavka101 : MB Offset: 100
-    uint8_t ustavka101;
-    // Parameter: Ustavka 102 : ustavka102 : MB Offset: 101
-    uint8_t ustavka102;
-    // Parameter: Ustavka 103 : ustavka103 : MB Offset: 102
-    uint8_t ustavka103;
-    // Parameter: Ustavka 104 : ustavka104 : MB Offset: 103
-    uint8_t ustavka104;
-    // Parameter: Ustavka 105 : ustavka105 : MB Offset: 104
-    uint8_t ustavka105;
-    // Parameter: Ustavka 106 : ustavka106 : MB Offset: 105
-    uint8_t ustavka106;
-    // Parameter: Ustavka 107 : ustavka107 : MB Offset: 106
-    uint8_t ustavka107;
-    // Parameter: Ustavka 108 : ustavka108 : MB Offset: 107
-    uint8_t ustavka108;
-    // Parameter: Ustavka 109 : ustavka109 : MB Offset: 108
-    uint8_t ustavka109;
-    // Parameter: Ustavka 110 : ustavka110 : MB Offset: 109
-    uint8_t ustavka110;
-    // Parameter: Ustavka 111 : ustavka111 : MB Offset: 110
-    uint8_t ustavka111;
-    // Parameter: Ustavka 112 : ustavka112 : MB Offset: 111
-    uint8_t ustavka112;
-    // Parameter: Ustavka 113 : ustavka113 : MB Offset: 112
-    uint8_t ustavka113;
-    // Parameter: Ustavka 114 : ustavka114 : MB Offset: 113
-    uint8_t ustavka114;
-    // Parameter: Ustavka 115 : ustavka115 : MB Offset: 114
-    uint8_t ustavka115;
-    // Parameter: Ustavka 116 : ustavka116 : MB Offset: 115
-    uint8_t ustavka116;
-    // Parameter: Ustavka 117 : ustavka117 : MB Offset: 116
-    uint8_t ustavka117;
-    // Parameter: Ustavka 118 : ustavka118 : MB Offset: 117
-    uint8_t ustavka118;
-    // Parameter: Ustavka 119 : ustavka119 : MB Offset: 118
-    uint8_t ustavka119;
-    // Parameter: Ustavka 120 : ustavka120 : MB Offset: 119
-    uint8_t ustavka120;
-    // Parameter: Ustavka 121 : ustavka121 : MB Offset: 120
-    uint8_t ustavka121;
-    // Parameter: Ustavka 122 : ustavka122 : MB Offset: 121
-    uint8_t ustavka122;
-    // Parameter: Ustavka 123 : ustavka123 : MB Offset: 122
-    uint8_t ustavka123;
-    // Parameter: Ustavka 124 : ustavka124 : MB Offset: 123
-    uint8_t ustavka124;
-    // Parameter: Ustavka 125 : ustavka125 : MB Offset: 124
-    uint8_t ustavka125;
-    // Parameter: Ustavka 126 : ustavka126 : MB Offset: 125
-    uint8_t ustavka126;
-    // Parameter: Ustavka 127 : ustavka127 : MB Offset: 126
-    uint8_t ustavka127;
-    // Parameter: Ustavka 128 : ustavka128 : MB Offset: 127
-    uint8_t ustavka128;
-    // Parameter: Ustavka 129 : ustavka129 : MB Offset: 128
-    uint8_t ustavka129;
-    // Parameter: Ustavka 130 : ustavka130 : MB Offset: 129
-    uint8_t ustavka130;
-    // Parameter: Ustavka 131 : ustavka131 : MB Offset: 130
-    uint8_t ustavka131;
-    // Parameter: Ustavka 132 : ustavka132 : MB Offset: 131
-    uint8_t ustavka132;
-    // Parameter: Ustavka 133 : ustavka133 : MB Offset: 132
-    uint8_t ustavka133;
-    // Parameter: Ustavka 134 : ustavka134 : MB Offset: 133
-    uint8_t ustavka134;
-    // Parameter: Ustavka 135 : ustavka135 : MB Offset: 134
-    uint8_t ustavka135;
-    // Parameter: Ustavka 136 : ustavka136 : MB Offset: 135
-    uint8_t ustavka136;
-    // Parameter: Ustavka 137 : ustavka137 : MB Offset: 136
-    uint8_t ustavka137;
-    // Parameter: Ustavka 138 : ustavka138 : MB Offset: 137
-    uint8_t ustavka138;
-    // Parameter: Ustavka 139 : ustavka139 : MB Offset: 138
-    uint8_t ustavka139;
-    // Parameter: Ustavka 140 : ustavka140 : MB Offset: 139
-    uint8_t ustavka140;
-    // Parameter: Ustavka 141 : ustavka141 : MB Offset: 140
-    uint8_t ustavka141;
-    // Parameter: Ustavka 142 : ustavka142 : MB Offset: 141
-    uint8_t ustavka142;
-    // Parameter: Ustavka 143 : ustavka143 : MB Offset: 142
-    uint8_t ustavka143;
-    // Parameter: Ustavka 144 : ustavka144 : MB Offset: 143
-    uint8_t ustavka144;
-    // Parameter: Ustavka 145 : ustavka145 : MB Offset: 144
-    uint8_t ustavka145;
-    // Parameter: Ustavka 146 : ustavka146 : MB Offset: 145
-    uint8_t ustavka146;
-    // Parameter: Ustavka 147 : ustavka147 : MB Offset: 146
-    uint8_t ustavka147;
-    // Parameter: Ustavka 148 : ustavka148 : MB Offset: 147
-    uint8_t ustavka148;
-    // Parameter: Ustavka 149 : ustavka149 : MB Offset: 148
-    uint8_t ustavka149;
-    // Parameter: Ustavka 150 : ustavka150 : MB Offset: 149
-    uint8_t ustavka150;
-    // Parameter: Ustavka 151 : ustavka151 : MB Offset: 150
-    uint8_t ustavka151;
-    // Parameter: Ustavka 152 : ustavka152 : MB Offset: 151
-    uint8_t ustavka152;
-    // Parameter: Ustavka 153 : ustavka153 : MB Offset: 152
-    uint8_t ustavka153;
-    // Parameter: Ustavka 154 : ustavka154 : MB Offset: 153
-    uint8_t ustavka154;
-    // Parameter: Ustavka 155 : ustavka155 : MB Offset: 154
-    uint8_t ustavka155;
-    // Parameter: Ustavka 156 : ustavka156 : MB Offset: 155
-    uint8_t ustavka156;
-    // Parameter: Ustavka 157 : ustavka157 : MB Offset: 156
-    uint8_t ustavka157;
-    // Parameter: Ustavka 158 : ustavka158 : MB Offset: 157
-    uint8_t ustavka158;
-    // Parameter: Ustavka 159 : ustavka159 : MB Offset: 158
-    uint8_t ustavka159;
-    // Parameter: Ustavka 160 : ustavka160 : MB Offset: 159
-    uint8_t ustavka160;
-    // Parameter: Ustavka 161 : ustavka161 : MB Offset: 160
-    uint8_t ustavka161;
-    // Parameter: Ustavka 162 : ustavka162 : MB Offset: 161
-    uint8_t ustavka162;
-    // Parameter: Ustavka 163 : ustavka163 : MB Offset: 162
-    uint8_t ustavka163;
-    // Parameter: Ustavka 164 : ustavka164 : MB Offset: 163
-    uint8_t ustavka164;
-    // Parameter: Ustavka 165 : ustavka165 : MB Offset: 164
-    uint8_t ustavka165;
-    // Parameter: Ustavka 166 : ustavka166 : MB Offset: 165
-    uint8_t ustavka166;
-    // Parameter: Ustavka 167 : ustavka167 : MB Offset: 166
-    uint8_t ustavka167;
-    // Parameter: Ustavka 168 : ustavka168 : MB Offset: 167
-    uint8_t ustavka168;
-    // Parameter: Ustavka 169 : ustavka169 : MB Offset: 168
-    uint8_t ustavka169;
-    // Parameter: Ustavka 170 : ustavka170 : MB Offset: 169
-    uint8_t ustavka170;
-    // Parameter: Ustavka 171 : ustavka171 : MB Offset: 170
-    uint8_t ustavka171;
-    // Parameter: Ustavka 172 : ustavka172 : MB Offset: 171
-    uint8_t ustavka172;
-    // Parameter: Ustavka 173 : ustavka173 : MB Offset: 172
-    uint8_t ustavka173;
-    // Parameter: Ustavka 174 : ustavka174 : MB Offset: 173
-    uint8_t ustavka174;
-    // Parameter: Ustavka 175 : ustavka175 : MB Offset: 174
-    uint8_t ustavka175;
-    // Parameter: Ustavka 176 : ustavka176 : MB Offset: 175
-    uint8_t ustavka176;
-    // Parameter: Ustavka 177 : ustavka177 : MB Offset: 176
-    uint8_t ustavka177;
-    // Parameter: Ustavka 178 : ustavka178 : MB Offset: 177
-    uint8_t ustavka178;
-    // Parameter: Ustavka 179 : ustavka179 : MB Offset: 178
-    uint8_t ustavka179;
-    // Parameter: Ustavka 180 : ustavka180 : MB Offset: 179
-    uint8_t ustavka180;
-    // Parameter: Ustavka 181 : ustavka181 : MB Offset: 180
-    uint8_t ustavka181;
-    // Parameter: Ustavka 182 : ustavka182 : MB Offset: 181
-    uint8_t ustavka182;
-    // Parameter: Ustavka 183 : ustavka183 : MB Offset: 182
-    uint8_t ustavka183;
-    // Parameter: Ustavka 184 : ustavka184 : MB Offset: 183
-    uint8_t ustavka184;
-    // Parameter: Ustavka 185 : ustavka185 : MB Offset: 184
-    uint8_t ustavka185;
-    // Parameter: Ustavka 186 : ustavka186 : MB Offset: 185
-    uint8_t ustavka186;
-    // Parameter: Ustavka 187 : ustavka187 : MB Offset: 186
-    uint8_t ustavka187;
-    // Parameter: Ustavka 188 : ustavka188 : MB Offset: 187
-    uint8_t ustavka188;
-    // Parameter: Ustavka 189 : ustavka189 : MB Offset: 188
-    uint8_t ustavka189;
-    // Parameter: Ustavka 190 : ustavka190 : MB Offset: 189
-    uint8_t ustavka190;
-    // Parameter: Ustavka 191 : ustavka191 : MB Offset: 190
-    uint8_t ustavka191;
-    // Parameter: Ustavka 192 : ustavka192 : MB Offset: 191
-    uint8_t ustavka192;
-    // Parameter: Ustavka 193 : ustavka193 : MB Offset: 192
-    uint8_t ustavka193;
-    // Parameter: Ustavka 194 : ustavka194 : MB Offset: 193
-    uint8_t ustavka194;
-    // Parameter: Ustavka 195 : ustavka195 : MB Offset: 194
-    uint8_t ustavka195;
-    // Parameter: Ustavka 196 : ustavka196 : MB Offset: 195
-    uint8_t ustavka196;
-    // Parameter: Ustavka 197 : ustavka197 : MB Offset: 196
-    uint8_t ustavka197;
-    // Parameter: Ustavka 198 : ustavka198 : MB Offset: 197
-    uint8_t ustavka198;
-    // Parameter: Ustavka 199 : ustavka199 : MB Offset: 198
-    uint8_t ustavka199;
-    // Parameter: Ustavka 200 : ustavka200 : MB Offset: 199
-    uint8_t ustavka200;
-    // Parameter: Ustavka 201 : ustavka201 : MB Offset: 200
-    uint8_t ustavka201;
-    // Parameter: Ustavka 202 : ustavka202 : MB Offset: 201
-    uint8_t ustavka202;
-    // Parameter: Ustavka 203 : ustavka203 : MB Offset: 202
-    uint8_t ustavka203;
-    // Parameter: Ustavka 204 : ustavka204 : MB Offset: 203
-    uint8_t ustavka204;
-    // Parameter: Ustavka 205 : ustavka205 : MB Offset: 204
-    uint8_t ustavka205;
-    // Parameter: Ustavka 206 : ustavka206 : MB Offset: 205
-    uint8_t ustavka206;
-    // Parameter: Ustavka 207 : ustavka207 : MB Offset: 206
-    uint8_t ustavka207;
-    // Parameter: Ustavka 208 : ustavka208 : MB Offset: 207
-    uint8_t ustavka208;
-    // Parameter: Ustavka 209 : ustavka209 : MB Offset: 208
-    uint8_t ustavka209;
-    // Parameter: Ustavka 210 : ustavka210 : MB Offset: 209
-    uint8_t ustavka210;
-    // Parameter: Ustavka 211 : ustavka211 : MB Offset: 210
-    uint8_t ustavka211;
-    // Parameter: Ustavka 212 : ustavka212 : MB Offset: 211
-    uint8_t ustavka212;
-    // Parameter: Ustavka 213 : ustavka213 : MB Offset: 212
-    uint8_t ustavka213;
-    // Parameter: Ustavka 214 : ustavka214 : MB Offset: 213
-    uint8_t ustavka214;
-    // Parameter: Ustavka 215 : ustavka215 : MB Offset: 214
-    uint8_t ustavka215;
-    // Parameter: Ustavka 216 : ustavka216 : MB Offset: 215
-    uint8_t ustavka216;
+    // Parameter: Relay 33 : relay33 : MB Offset: 32
+    uint8_t relay33;
+    // Parameter: Relay 34 : relay34 : MB Offset: 33
+    uint8_t relay34;
+    // Parameter: Relay 35 : relay35 : MB Offset: 34
+    uint8_t relay35;
+    // Parameter: Relay 36 : relay36 : MB Offset: 35
+    uint8_t relay36;
+    // Parameter: State Set Point 1  : setpoint1 : MB Offset: 0
+    uint8_t setpoint1;
+    // Parameter: State Set Point 2 : setpoint2 : MB Offset: 1
+    uint8_t setpoint2;
+    // Parameter: State Set Point 3 : setpoint3 : MB Offset: 2
+    uint8_t setpoint3;
+    // Parameter: State Set Point 4 : setpoint4 : MB Offset: 3
+    uint8_t setpoint4;
+    // Parameter: State Set Point 5 : setpoint5 : MB Offset: 4
+    uint8_t setpoint5;
+    // Parameter: State Set Point 6 : setpoint6 : MB Offset: 5
+    uint8_t setpoint6;
+    // Parameter: State Set Point 7 : setpoint7 : MB Offset: 6
+    uint8_t setpoint7;
+    // Parameter: State Set Point 8 : setpoint8 : MB Offset: 7
+    uint8_t setpoint8;
+    // Parameter: State Set Point 9 : setpoint9 : MB Offset: 8
+    uint8_t setpoint9;
+    // Parameter: State Set Point 10 : setpoint10 : MB Offset: 9
+    uint8_t setpoint10;
+    // Parameter: State Set Point 11 : setpoint11 : MB Offset: 10
+    uint8_t setpoint11;
+    // Parameter: State Set Point 12 : setpoint12 : MB Offset: 11
+    uint8_t setpoint12;
+    // Parameter: State Set Point 13 : setpoint13 : MB Offset: 12
+    uint8_t setpoint13;
+    // Parameter: State Set Point 14 : setpoint14 : MB Offset: 13
+    uint8_t setpoint14;
+    // Parameter: State Set Point 15 : setpoint15 : MB Offset: 14
+    uint8_t setpoint15;
+    // Parameter: State Set Point 16 : setpoint16 : MB Offset: 15
+    uint8_t setpoint16;
+    // Parameter: State Set Point 17 : setpoint17 : MB Offset: 16
+    uint8_t setpoint17;
+    // Parameter: State Set Point 18 : setpoint18 : MB Offset: 17
+    uint8_t setpoint18;
+    // Parameter: State Set Point 19 : setpoint19 : MB Offset: 18
+    uint8_t setpoint19;
+    // Parameter: State Set Point 20 : setpoint20 : MB Offset: 19
+    uint8_t setpoint20;
+    // Parameter: State Set Point 21 : setpoint21 : MB Offset: 20
+    uint8_t setpoint21;
+    // Parameter: State Set Point 22 : setpoint22 : MB Offset: 21
+    uint8_t setpoint22;
+    // Parameter: State Set Point 23 : setpoint23 : MB Offset: 22
+    uint8_t setpoint23;
+    // Parameter: State Set Point 24 : setpoint24 : MB Offset: 23
+    uint8_t setpoint24;
+    // Parameter: State Set Point 25 : setpoint25 : MB Offset: 24
+    uint8_t setpoint25;
+    // Parameter: State Set Point 26 : setpoint26 : MB Offset: 25
+    uint8_t setpoint26;
+    // Parameter: State Set Point 27 : setpoint27 : MB Offset: 26
+    uint8_t setpoint27;
+    // Parameter: State Set Point 28 : setpoint28 : MB Offset: 27
+    uint8_t setpoint28;
+    // Parameter: State Set Point 29 : setpoint29 : MB Offset: 28
+    uint8_t setpoint29;
+    // Parameter: State Set Point 30 : setpoint30 : MB Offset: 29
+    uint8_t setpoint30;
+    // Parameter: State Set Point 31 : setpoint31 : MB Offset: 30
+    uint8_t setpoint31;
+    // Parameter: State Set Point 32 : setpoint32 : MB Offset: 31
+    uint8_t setpoint32;
+    // Parameter: State Set Point 33 : setpoint33 : MB Offset: 32
+    uint8_t setpoint33;
+    // Parameter: State Set Point 34 : setpoint34 : MB Offset: 33
+    uint8_t setpoint34;
+    // Parameter: State Set Point 35 : setpoint35 : MB Offset: 34
+    uint8_t setpoint35;
+    // Parameter: State Set Point 36 : setpoint36 : MB Offset: 35
+    uint8_t setpoint36;
+    // Parameter: State Set Point 37 : setpoint37 : MB Offset: 36
+    uint8_t setpoint37;
+    // Parameter: State Set Point 38 : setpoint38 : MB Offset: 37
+    uint8_t setpoint38;
+    // Parameter: State Set Point 39 : setpoint39 : MB Offset: 38
+    uint8_t setpoint39;
+    // Parameter: State Set Point 40 : setpoint40 : MB Offset: 39
+    uint8_t setpoint40;
+    // Parameter: State Set Point 41 : setpoint41 : MB Offset: 40
+    uint8_t setpoint41;
+    // Parameter: State Set Point 42 : setpoint42 : MB Offset: 41
+    uint8_t setpoint42;
+    // Parameter: State Set Point 43 : setpoint43 : MB Offset: 42
+    uint8_t setpoint43;
+    // Parameter: State Set Point 44 : setpoint44 : MB Offset: 43
+    uint8_t setpoint44;
+    // Parameter: State Set Point 45 : setpoint45 : MB Offset: 44
+    uint8_t setpoint45;
+    // Parameter: State Set Point 46 : setpoint46 : MB Offset: 45
+    uint8_t setpoint46;
+    // Parameter: State Set Point 47 : setpoint47 : MB Offset: 46
+    uint8_t setpoint47;
+    // Parameter: State Set Point 48 : setpoint48 : MB Offset: 47
+    uint8_t setpoint48;
+    // Parameter: State Set Point 49 : setpoint49 : MB Offset: 48
+    uint8_t setpoint49;
+    // Parameter: State Set Point 50 : setpoint50 : MB Offset: 49
+    uint8_t setpoint50;
+    // Parameter: State Set Point 51 : setpoint51 : MB Offset: 50
+    uint8_t setpoint51;
+    // Parameter: State Set Point 52 : setpoint52 : MB Offset: 51
+    uint8_t setpoint52;
+    // Parameter: State Set Point 53 : setpoint53 : MB Offset: 52
+    uint8_t setpoint53;
+    // Parameter: State Set Point 54 : setpoint54 : MB Offset: 53
+    uint8_t setpoint54;
+    // Parameter: State Set Point 55 : setpoint55 : MB Offset: 54
+    uint8_t setpoint55;
+    // Parameter: State Set Point 56 : setpoint56 : MB Offset: 55
+    uint8_t setpoint56;
+    // Parameter: State Set Point 57 : setpoint57 : MB Offset: 56
+    uint8_t setpoint57;
+    // Parameter: State Set Point 58 : setpoint58 : MB Offset: 57
+    uint8_t setpoint58;
+    // Parameter: State Set Point 59 : setpoint59 : MB Offset: 58
+    uint8_t setpoint59;
+    // Parameter: State Set Point 60 : setpoint60 : MB Offset: 59
+    uint8_t setpoint60;
+    // Parameter: State Set Point 61 : setpoint61 : MB Offset: 60
+    uint8_t setpoint61;
+    // Parameter: State Set Point 62 : setpoint62 : MB Offset: 61
+    uint8_t setpoint62;
+    // Parameter: State Set Point 63 : setpoint63 : MB Offset: 62
+    uint8_t setpoint63;
+    // Parameter: State Set Point 64 : setpoint64 : MB Offset: 63
+    uint8_t setpoint64;
+    // Parameter: State Set Point 65 : setpoint65 : MB Offset: 64
+    uint8_t setpoint65;
+    // Parameter: State Set Point 66 : setpoint66 : MB Offset: 65
+    uint8_t setpoint66;
+    // Parameter: State Set Point 67 : setpoint67 : MB Offset: 66
+    uint8_t setpoint67;
+    // Parameter: State Set Point 68 : setpoint68 : MB Offset: 67
+    uint8_t setpoint68;
+    // Parameter: State Set Point 69 : setpoint69 : MB Offset: 68
+    uint8_t setpoint69;
+    // Parameter: State Set Point 70 : setpoint70 : MB Offset: 69
+    uint8_t setpoint70;
+    // Parameter: State Set Point 71 : setpoint71 : MB Offset: 70
+    uint8_t setpoint71;
+    // Parameter: State Set Point 72 : setpoint72 : MB Offset: 71
+    uint8_t setpoint72;
+    // Parameter: State Set Point 73 : setpoint73 : MB Offset: 72
+    uint8_t setpoint73;
+    // Parameter: State Set Point 74 : setpoint74 : MB Offset: 73
+    uint8_t setpoint74;
+    // Parameter: State Set Point 75 : setpoint75 : MB Offset: 74
+    uint8_t setpoint75;
+    // Parameter: State Set Point 76 : setpoint76 : MB Offset: 75
+    uint8_t setpoint76;
+    // Parameter: State Set Point 77 : setpoint77 : MB Offset: 76
+    uint8_t setpoint77;
+    // Parameter: State Set Point 78 : setpoint78 : MB Offset: 77
+    uint8_t setpoint78;
+    // Parameter: State Set Point 79 : setpoint79 : MB Offset: 78
+    uint8_t setpoint79;
+    // Parameter: State Set Point 80 : setpoint80 : MB Offset: 79
+    uint8_t setpoint80;
+    // Parameter: State Set Point 81 : setpoint81 : MB Offset: 80
+    uint8_t setpoint81;
+    // Parameter: State Set Point 82 : setpoint82 : MB Offset: 81
+    uint8_t setpoint82;
+    // Parameter: State Set Point 83 : setpoint83 : MB Offset: 82
+    uint8_t setpoint83;
+    // Parameter: State Set Point 84 : setpoint84 : MB Offset: 83
+    uint8_t setpoint84;
+    // Parameter: State Set Point 85 : setpoint85 : MB Offset: 84
+    uint8_t setpoint85;
+    // Parameter: State Set Point 86 : setpoint86 : MB Offset: 85
+    uint8_t setpoint86;
+    // Parameter: State Set Point 87 : setpoint87 : MB Offset: 86
+    uint8_t setpoint87;
+    // Parameter: State Set Point 88 : setpoint88 : MB Offset: 87
+    uint8_t setpoint88;
+    // Parameter: State Set Point 89 : setpoint89 : MB Offset: 88
+    uint8_t setpoint89;
+    // Parameter: State Set Point 90 : setpoint90 : MB Offset: 89
+    uint8_t setpoint90;
+    // Parameter: State Set Point 91 : setpoint91 : MB Offset: 90
+    uint8_t setpoint91;
+    // Parameter: State Set Point 92 : setpoint92 : MB Offset: 91
+    uint8_t setpoint92;
+    // Parameter: State Set Point 93 : setpoint93 : MB Offset: 92
+    uint8_t setpoint93;
+    // Parameter: State Set Point 94 : setpoint94 : MB Offset: 93
+    uint8_t setpoint94;
+    // Parameter: State Set Point 95 : setpoint95 : MB Offset: 94
+    uint8_t setpoint95;
+    // Parameter: State Set Point 96 : setpoint96 : MB Offset: 95
+    uint8_t setpoint96;
+    // Parameter: State Set Point 97 : setpoint97 : MB Offset: 96
+    uint8_t setpoint97;
+    // Parameter: State Set Point 98 : setpoint98 : MB Offset: 97
+    uint8_t setpoint98;
+    // Parameter: State Set Point 99 : setpoint99 : MB Offset: 98
+    uint8_t setpoint99;
+    // Parameter: State Set Point 100 : setpoint100 : MB Offset: 99
+    uint8_t setpoint100;
+    // Parameter: State Set Point 101 : setpoint101 : MB Offset: 100
+    uint8_t setpoint101;
+    // Parameter: State Set Point 102 : setpoint102 : MB Offset: 101
+    uint8_t setpoint102;
+    // Parameter: State Set Point 103 : setpoint103 : MB Offset: 102
+    uint8_t setpoint103;
+    // Parameter: State Set Point 104 : setpoint104 : MB Offset: 103
+    uint8_t setpoint104;
+    // Parameter: State Set Point 105 : setpoint105 : MB Offset: 104
+    uint8_t setpoint105;
+    // Parameter: State Set Point 106 : setpoint106 : MB Offset: 105
+    uint8_t setpoint106;
+    // Parameter: State Set Point 107 : setpoint107 : MB Offset: 106
+    uint8_t setpoint107;
+    // Parameter: State Set Point 108 : setpoint108 : MB Offset: 107
+    uint8_t setpoint108;
+    // Parameter: State Set Point 109 : setpoint109 : MB Offset: 108
+    uint8_t setpoint109;
+    // Parameter: State Set Point 110 : setpoint110 : MB Offset: 109
+    uint8_t setpoint110;
+    // Parameter: State Set Point 111 : setpoint111 : MB Offset: 110
+    uint8_t setpoint111;
+    // Parameter: State Set Point 112 : setpoint112 : MB Offset: 111
+    uint8_t setpoint112;
+    // Parameter: State Set Point 113 : setpoint113 : MB Offset: 112
+    uint8_t setpoint113;
+    // Parameter: State Set Point 114 : setpoint114 : MB Offset: 113
+    uint8_t setpoint114;
+    // Parameter: State Set Point 115 : setpoint115 : MB Offset: 114
+    uint8_t setpoint115;
+    // Parameter: State Set Point 116 : setpoint116 : MB Offset: 115
+    uint8_t setpoint116;
+    // Parameter: State Set Point 117 : setpoint117 : MB Offset: 116
+    uint8_t setpoint117;
+    // Parameter: State Set Point 118 : setpoint118 : MB Offset: 117
+    uint8_t setpoint118;
+    // Parameter: State Set Point 119 : setpoint119 : MB Offset: 118
+    uint8_t setpoint119;
+    // Parameter: State Set Point 120 : setpoint120 : MB Offset: 119
+    uint8_t setpoint120;
+    // Parameter: State Set Point 121 : setpoint121 : MB Offset: 120
+    uint8_t setpoint121;
+    // Parameter: State Set Point 122 : setpoint122 : MB Offset: 121
+    uint8_t setpoint122;
+    // Parameter: State Set Point 123 : setpoint123 : MB Offset: 122
+    uint8_t setpoint123;
+    // Parameter: State Set Point 124 : setpoint124 : MB Offset: 123
+    uint8_t setpoint124;
+    // Parameter: State Set Point 125 : setpoint125 : MB Offset: 124
+    uint8_t setpoint125;
+    // Parameter: State Set Point 126 : setpoint126 : MB Offset: 125
+    uint8_t setpoint126;
+    // Parameter: State Set Point 127 : setpoint127 : MB Offset: 126
+    uint8_t setpoint127;
+    // Parameter: State Set Point 128 : setpoint128 : MB Offset: 127
+    uint8_t setpoint128;
+    // Parameter: State Set Point 129 : setpoint129 : MB Offset: 128
+    uint8_t setpoint129;
+    // Parameter: State Set Point 130 : setpoint130 : MB Offset: 129
+    uint8_t setpoint130;
+    // Parameter: State Set Point 131 : setpoint131 : MB Offset: 130
+    uint8_t setpoint131;
+    // Parameter: State Set Point 132 : setpoint132 : MB Offset: 131
+    uint8_t setpoint132;
+    // Parameter: State Set Point 133 : setpoint133 : MB Offset: 132
+    uint8_t setpoint133;
+    // Parameter: State Set Point 134 : setpoint134 : MB Offset: 133
+    uint8_t setpoint134;
+    // Parameter: State Set Point 135 : setpoint135 : MB Offset: 134
+    uint8_t setpoint135;
+    // Parameter: State Set Point 136 : setpoint136 : MB Offset: 135
+    uint8_t setpoint136;
+    // Parameter: State Set Point 137 : setpoint137 : MB Offset: 136
+    uint8_t setpoint137;
+    // Parameter: State Set Point 138 : setpoint138 : MB Offset: 137
+    uint8_t setpoint138;
+    // Parameter: State Set Point 139 : setpoint139 : MB Offset: 138
+    uint8_t setpoint139;
+    // Parameter: State Set Point 140 : setpoint140 : MB Offset: 139
+    uint8_t setpoint140;
+    // Parameter: State Set Point 141 : setpoint141 : MB Offset: 140
+    uint8_t setpoint141;
+    // Parameter: State Set Point 142 : setpoint142 : MB Offset: 141
+    uint8_t setpoint142;
+    // Parameter: State Set Point 143 : setpoint143 : MB Offset: 142
+    uint8_t setpoint143;
+    // Parameter: State Set Point 144 : setpoint144 : MB Offset: 143
+    uint8_t setpoint144;
+    // Parameter: State Set Point 145 : setpoint145 : MB Offset: 144
+    uint8_t setpoint145;
+    // Parameter: State Set Point 146 : setpoint146 : MB Offset: 145
+    uint8_t setpoint146;
+    // Parameter: State Set Point 147 : setpoint147 : MB Offset: 146
+    uint8_t setpoint147;
+    // Parameter: State Set Point 148 : setpoint148 : MB Offset: 147
+    uint8_t setpoint148;
+    // Parameter: State Set Point 149 : setpoint149 : MB Offset: 148
+    uint8_t setpoint149;
+    // Parameter: State Set Point 150 : setpoint150 : MB Offset: 149
+    uint8_t setpoint150;
+    // Parameter: State Set Point 151 : setpoint151 : MB Offset: 150
+    uint8_t setpoint151;
+    // Parameter: State Set Point 152 : setpoint152 : MB Offset: 151
+    uint8_t setpoint152;
+    // Parameter: State Set Point 153 : setpoint153 : MB Offset: 152
+    uint8_t setpoint153;
+    // Parameter: State Set Point 154 : setpoint154 : MB Offset: 153
+    uint8_t setpoint154;
+    // Parameter: State Set Point 155 : setpoint155 : MB Offset: 154
+    uint8_t setpoint155;
+    // Parameter: State Set Point 156 : setpoint156 : MB Offset: 155
+    uint8_t setpoint156;
+    // Parameter: State Set Point 157 : setpoint157 : MB Offset: 156
+    uint8_t setpoint157;
+    // Parameter: State Set Point 158 : setpoint158 : MB Offset: 157
+    uint8_t setpoint158;
+    // Parameter: State Set Point 159 : setpoint159 : MB Offset: 158
+    uint8_t setpoint159;
+    // Parameter: State Set Point 160 : setpoint160 : MB Offset: 159
+    uint8_t setpoint160;
+    // Parameter: State Set Point 161 : setpoint161 : MB Offset: 160
+    uint8_t setpoint161;
+    // Parameter: State Set Point 162 : setpoint162 : MB Offset: 161
+    uint8_t setpoint162;
+    // Parameter: State Set Point 163 : setpoint163 : MB Offset: 162
+    uint8_t setpoint163;
+    // Parameter: State Set Point 164 : setpoint164 : MB Offset: 163
+    uint8_t setpoint164;
+    // Parameter: State Set Point 165 : setpoint165 : MB Offset: 164
+    uint8_t setpoint165;
+    // Parameter: State Set Point 166 : setpoint166 : MB Offset: 165
+    uint8_t setpoint166;
+    // Parameter: State Set Point 167 : setpoint167 : MB Offset: 166
+    uint8_t setpoint167;
+    // Parameter: State Set Point 168 : setpoint168 : MB Offset: 167
+    uint8_t setpoint168;
+    // Parameter: State Set Point 169 : setpoint169 : MB Offset: 168
+    uint8_t setpoint169;
+    // Parameter: State Set Point 170 : setpoint170 : MB Offset: 169
+    uint8_t setpoint170;
+    // Parameter: State Set Point 171 : setpoint171 : MB Offset: 170
+    uint8_t setpoint171;
+    // Parameter: State Set Point 172 : setpoint172 : MB Offset: 171
+    uint8_t setpoint172;
+    // Parameter: State Set Point 173 : setpoint173 : MB Offset: 172
+    uint8_t setpoint173;
+    // Parameter: State Set Point 174 : setpoint174 : MB Offset: 173
+    uint8_t setpoint174;
+    // Parameter: State Set Point 175 : setpoint175 : MB Offset: 174
+    uint8_t setpoint175;
+    // Parameter: State Set Point 176 : setpoint176 : MB Offset: 175
+    uint8_t setpoint176;
+    // Parameter: State Set Point 177 : setpoint177 : MB Offset: 176
+    uint8_t setpoint177;
+    // Parameter: State Set Point 178 : setpoint178 : MB Offset: 177
+    uint8_t setpoint178;
+    // Parameter: State Set Point 179 : setpoint179 : MB Offset: 178
+    uint8_t setpoint179;
+    // Parameter: State Set Point 180 : setpoint180 : MB Offset: 179
+    uint8_t setpoint180;
     // Parameter: IP Address : ipAddress : MB Offset: 0
     uint32_t ipAddress;
     // Parameter: Mask IP : maskIP : MB Offset: 2
@@ -580,18 +516,2830 @@ typedef struct
     uint32_t currentDate;
     // Parameter: Current Time : currentTime : MB Offset: 107
     uint32_t currentTime;
-    // Parameter: Настройки интерфейсов : var1 : MB Offset: 200
-    uint32_t var1;
-    // Parameter: Конфигурация уставок : var2 : MB Offset: 1000
-    uint32_t var2;
-    // Parameter: Конфигурация  матканалов : var3 : MB Offset: 2000
-    uint32_t var3;
-    // Parameter: Конфигурация модулей (плат) : var4 : MB Offset: 3000
-    uint32_t var4;
-    // Parameter: Конфигурация аналоговых каналов : var5 : MB Offset: 5000
-    uint32_t var5;
-    // Parameter: Конфигурация частотных каналов : var6 : MB Offset: 6000
-    uint32_t var6;
+    // Parameter: Interface Parametrs : interfaceParametrs : MB Offset: 200
+    uint8_t interfaceParametrs[64];
+    // Parameter: Access Password : accessPass : MB Offset: 300
+    uint8_t accessPass[32];
+    // Parameter: Current Setpoint Num : currentSetpointNum : MB Offset: 1000
+    uint16_t currentSetpointNum;
+    // Parameter: Total Set Point : totalSetpoint : MB Offset: 1001
+    uint16_t totalSetpoint;
+    // Parameter: Set Point Identifikator : setpointIdentifikator : MB Offset: 1002
+    uint8_t setpointIdentifikator[32];
+    // Parameter: Set Point Num Channel : setpointNumChan : MB Offset: 1018
+    uint16_t setpointNumChan;
+    // Parameter: Set Point Type Fixation : setpointTypeFix : MB Offset: 1019
+    uint16_t setpointTypeFix;
+    // Parameter: Set Point Value : setpointValue : MB Offset: 1020
+    float setpointValue;
+    // Parameter: Set Point Histeresis : setpointHisteresis : MB Offset: 1022
+    float setpointHisteresis;
+    // Parameter: Set Point Num Relay : setpointNumRelay : MB Offset: 1024
+    uint16_t setpointNumRelay;
+    // Parameter: Set Point Over Message : setpointOverMess : MB Offset: 1025
+    uint8_t setpointOverMess[64];
+    // Parameter: Set Point Norm Message : setpointNormMess : MB Offset: 1057
+    uint8_t setpointNormMess[64];
+    // Parameter: Set Point User РЎonfirmation : setpointUserConfirm : MB Offset: 1089
+    uint16_t setpointUserConfirm;
+    // Parameter: Set Point Time Filter : setpointTimeFilter : MB Offset: 1090
+    uint16_t setpointTimeFilter;
+    // Parameter: Current Mathematical Channel Number : currentMathNum : MB Offset: 2000
+    uint16_t currentMathNum;
+    // Parameter: Total Mathematical Channels : totalMath : MB Offset: 2001
+    uint16_t totalMath;
+    // Parameter: Mathematic Channel Name : mathName : MB Offset: 2002
+    uint8_t mathName[8];
+    // Parameter: Mathematic Formula : mathFormula : MB Offset: 2006
+    uint8_t mathFormula[32];
+    // Parameter: Argument X1 : mathX1 : MB Offset: 2022
+    uint16_t mathX1;
+    // Parameter: Argument X2 : mathX2 : MB Offset: 2023
+    uint16_t mathX2;
+    // Parameter: Argument X3 : mathX3 : MB Offset: 2024
+    uint16_t mathX3;
+    // Parameter: Argument X4 : mathX4 : MB Offset: 2025
+    uint16_t mathX4;
+    // Parameter: Mathematic Unit Name : mathUnit : MB Offset: 2026
+    uint8_t mathUnit[4];
+    // Parameter: Mathematic High Limit : mathHiLimit : MB Offset: 2028
+    float mathHiLimit;
+    // Parameter: Mathematic Low Limit : mathLowLimit : MB Offset: 2030
+    float mathLowLimit;
+    // Parameter: Mathematic Period : mathPeriod : MB Offset: 2032
+    float mathPeriod;
+    // Parameter: Module Mode : module1Mode : MB Offset: 3000
+    uint16_t module1Mode;
+    // Parameter: Module Modbus Baudrate : module1ModbusBaud : MB Offset: 3001
+    uint16_t module1ModbusBaud;
+    // Parameter: Module Modbus parity  : module1ModbusParity : MB Offset: 3002
+    uint16_t module1ModbusParity;
+    // Parameter: Module Modbus stopbit  : module1MbStopBits : MB Offset: 3003
+    uint16_t module1MbStopBits;
+    // Parameter: Data order : module1DataOrder : MB Offset: 3004
+    uint16_t module1DataOrder;
+    // Parameter: Mode : module2Mode : MB Offset: 3010
+    uint16_t module2Mode;
+    // Parameter: Modbus Baudrate : module2ModbusBaud : MB Offset: 3011
+    uint16_t module2ModbusBaud;
+    // Parameter: Modbus parity : module2ModbusParity : MB Offset: 3012
+    uint16_t module2ModbusParity;
+    // Parameter: Modbus stopbit : module2MbStopBits : MB Offset: 3013
+    uint16_t module2MbStopBits;
+    // Parameter: Data order : module2DataOrder : MB Offset: 3014
+    uint16_t module2DataOrder;
+    // Parameter: Mode : module3Mode : MB Offset: 3020
+    uint16_t module3Mode;
+    // Parameter: Modbus Baudrate : module3ModbusBaud : MB Offset: 3021
+    uint16_t module3ModbusBaud;
+    // Parameter: Modbus parity : module3ModbusParity : MB Offset: 3022
+    uint16_t module3ModbusParity;
+    // Parameter: Modbus stopbit : module3MbStopBits : MB Offset: 3023
+    uint16_t module3MbStopBits;
+    // Parameter: Data order : module3DataOrder : MB Offset: 3024
+    uint16_t module3DataOrder;
+    // Parameter: Mode : module4Mode : MB Offset: 3030
+    uint16_t module4Mode;
+    // Parameter: Modbus Baudrate : module4ModbusBaud : MB Offset: 3031
+    uint16_t module4ModbusBaud;
+    // Parameter: Modbus parity : module4ModbusParity : MB Offset: 3032
+    uint16_t module4ModbusParity;
+    // Parameter: Modbus stopbit : module4MbStopBits : MB Offset: 3033
+    uint16_t module4MbStopBits;
+    // Parameter: Data order : module4DataOrder : MB Offset: 3034
+    uint16_t module4DataOrder;
+    // Parameter: Mode : module5Mode : MB Offset: 3040
+    uint16_t module5Mode;
+    // Parameter: Modbus Baudrate : module5ModbusBaud : MB Offset: 3041
+    uint16_t module5ModbusBaud;
+    // Parameter: Modbus parity : module5ModbusParity : MB Offset: 3042
+    uint16_t module5ModbusParity;
+    // Parameter: Modbus stopbit : module5MbStopBits : MB Offset: 3043
+    uint16_t module5MbStopBits;
+    // Parameter: Data order : module5DataOrder : MB Offset: 3044
+    uint16_t module5DataOrder;
+    // Parameter: Mode : module6Mode : MB Offset: 3050
+    uint16_t module6Mode;
+    // Parameter: Modbus Baudrate : module6ModbusBaud : MB Offset: 3051
+    uint16_t module6ModbusBaud;
+    // Parameter: Modbus parity : module6ModbusParity : MB Offset: 3052
+    uint16_t module6ModbusParity;
+    // Parameter: Modbus stopbit : module6MbStopBits : MB Offset: 3053
+    uint16_t module6MbStopBits;
+    // Parameter: Data order : module6DataOrder : MB Offset: 3054
+    uint16_t module6DataOrder;
+    // Parameter: Signal Type : chan1SignalType : MB Offset: 5000
+    uint16_t chan1SignalType;
+    // Parameter: Additional parameter1 : chan1AdditionalParameter1 : MB Offset: 5001
+    uint8_t chan1AdditionalParameter1[12];
+    // Parameter: Additional parameter2 : chan1AdditionalParameter2 : MB Offset: 5007
+    uint8_t chan1AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan1CorrectionCjValue : MB Offset: 5013
+    float chan1CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan1LowMeasureLim : MB Offset: 5015
+    float chan1LowMeasureLim;
+    // Parameter: Measure signal high limit  : chan1HighMeasureLim : MB Offset: 5017
+    float chan1HighMeasureLim;
+    // Parameter: Name Channel : chan1Name : MB Offset: 5019
+    uint8_t chan1Name[8];
+    // Parameter: Period : chan1Period : MB Offset: 5023
+    float chan1Period;
+    // Parameter: Dempher : chan1Dempher : MB Offset: 5025
+    uint16_t chan1Dempher;
+    // Parameter: Type Registration : chan1TypeRegistration : MB Offset: 5026
+    uint16_t chan1TypeRegistration;
+    // Parameter: Type Value : chan1TypeValue : MB Offset: 5027
+    uint16_t chan1TypeValue;
+    // Parameter: Signal Type : chan2SignalType : MB Offset: 5040
+    uint16_t chan2SignalType;
+    // Parameter: Additional parameter21 : chan2AdditionalParameter1 : MB Offset: 5041
+    uint8_t chan2AdditionalParameter1[12];
+    // Parameter: Additional parameter20 : chan2AdditionalParameter2 : MB Offset: 5047
+    uint8_t chan2AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan2CorrectionCjValue : MB Offset: 5053
+    float chan2CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan2LowMeasureLim : MB Offset: 5055
+    float chan2LowMeasureLim;
+    // Parameter: Measure signal high limit : chan2HighMeasureLim : MB Offset: 5057
+    float chan2HighMeasureLim;
+    // Parameter: Name Channel : chan2Name : MB Offset: 5059
+    uint8_t chan2Name[8];
+    // Parameter: Period : chan2Period : MB Offset: 5063
+    float chan2Period;
+    // Parameter: Dempher : chan2Dempher : MB Offset: 5065
+    uint16_t chan2Dempher;
+    // Parameter: Type Registration : chan2TypeRegistration : MB Offset: 5066
+    uint16_t chan2TypeRegistration;
+    // Parameter: Type Value : chan2TypeValue : MB Offset: 5067
+    uint16_t chan2TypeValue;
+    // Parameter: Signal Type : chan3SignalType : MB Offset: 5080
+    uint16_t chan3SignalType;
+    // Parameter: Additional parameter19 : chan3AdditionalParameter1 : MB Offset: 5081
+    uint8_t chan3AdditionalParameter1[12];
+    // Parameter: Additional parameter18 : chan3AdditionalParameter2 : MB Offset: 5087
+    uint8_t chan3AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan3CorrectionCjValue : MB Offset: 5093
+    float chan3CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan3LowMeasureLim : MB Offset: 5095
+    float chan3LowMeasureLim;
+    // Parameter: Measure signal high limit : chan3HighMeasureLim : MB Offset: 5097
+    float chan3HighMeasureLim;
+    // Parameter: Name Channel : chan3Name : MB Offset: 5099
+    uint8_t chan3Name[8];
+    // Parameter: Period : chan3Period : MB Offset: 5103
+    float chan3Period;
+    // Parameter: Dempher : chan3Dempher : MB Offset: 5105
+    uint16_t chan3Dempher;
+    // Parameter: Type Registration : chan3TypeRegistration : MB Offset: 5106
+    uint16_t chan3TypeRegistration;
+    // Parameter: Type Value : chan3TypeValue : MB Offset: 5107
+    uint16_t chan3TypeValue;
+    // Parameter: Signal Type : chan4SignalType : MB Offset: 5120
+    uint16_t chan4SignalType;
+    // Parameter: Additional parameter19 : chan4AdditionalParameter1 : MB Offset: 5121
+    uint8_t chan4AdditionalParameter1[12];
+    // Parameter: Additional parameter18 : chan4AdditionalParameter2 : MB Offset: 5127
+    uint8_t chan4AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan4CorrectionCjValue : MB Offset: 5133
+    float chan4CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan4LowMeasureLim : MB Offset: 5135
+    float chan4LowMeasureLim;
+    // Parameter: Measure signal high limit : chan4HighMeasureLim : MB Offset: 5137
+    float chan4HighMeasureLim;
+    // Parameter: Name Channel : chan4Name : MB Offset: 5139
+    uint8_t chan4Name[8];
+    // Parameter: Period : chan4Period : MB Offset: 5143
+    float chan4Period;
+    // Parameter: Dempher : chan4Dempher : MB Offset: 5145
+    uint16_t chan4Dempher;
+    // Parameter: Type Registration : chan4TypeRegistration : MB Offset: 5146
+    uint16_t chan4TypeRegistration;
+    // Parameter: Type Value : chan4TypeValue : MB Offset: 5147
+    uint16_t chan4TypeValue;
+    // Parameter: Signal Type : chan5SignalType : MB Offset: 5160
+    uint16_t chan5SignalType;
+    // Parameter: Additional parameter17 : chan5AdditionalParameter1 : MB Offset: 5161
+    uint8_t chan5AdditionalParameter1[12];
+    // Parameter: Additional parameter16 : chan5AdditionalParameter2 : MB Offset: 5167
+    uint8_t chan5AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan5CorrectionCjValue : MB Offset: 5173
+    float chan5CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan5LowMeasureLim : MB Offset: 5175
+    float chan5LowMeasureLim;
+    // Parameter: Measure signal high limit : chan5HighMeasureLim : MB Offset: 5177
+    float chan5HighMeasureLim;
+    // Parameter: Name Channel : chan5Name : MB Offset: 5179
+    uint8_t chan5Name[8];
+    // Parameter: Period : chan5Period : MB Offset: 5183
+    float chan5Period;
+    // Parameter: Dempher : chan5Dempher : MB Offset: 5185
+    uint16_t chan5Dempher;
+    // Parameter: Type Registration : chan5TypeRegistration : MB Offset: 5186
+    uint16_t chan5TypeRegistration;
+    // Parameter: Type Value : chan5TypeValue : MB Offset: 5187
+    uint16_t chan5TypeValue;
+    // Parameter: Signal Type : chan6SignalType : MB Offset: 5200
+    uint16_t chan6SignalType;
+    // Parameter: Additional parameter17 : chan6AdditionalParameter1 : MB Offset: 5201
+    uint8_t chan6AdditionalParameter1[12];
+    // Parameter: Additional parameter16 : chan6AdditionalParameter2 : MB Offset: 5207
+    uint8_t chan6AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan6CorrectionCjValue : MB Offset: 5213
+    float chan6CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan6LowMeasureLim : MB Offset: 5215
+    float chan6LowMeasureLim;
+    // Parameter: Measure signal high limit : chan6HighMeasureLim : MB Offset: 5217
+    float chan6HighMeasureLim;
+    // Parameter: Name Channel : chan6Name : MB Offset: 5219
+    uint8_t chan6Name[8];
+    // Parameter: Period : chan6Period : MB Offset: 5223
+    float chan6Period;
+    // Parameter: Dempher : chan6Dempher : MB Offset: 5225
+    uint16_t chan6Dempher;
+    // Parameter: Type Registration : chan6TypeRegistration : MB Offset: 5226
+    uint16_t chan6TypeRegistration;
+    // Parameter: Type Value : chan6TypeValue : MB Offset: 5227
+    uint16_t chan6TypeValue;
+    // Parameter: Signal Type : chan7SignalType : MB Offset: 5240
+    uint16_t chan7SignalType;
+    // Parameter: Additional parameter15 : chan7AdditionalParameter1 : MB Offset: 5241
+    uint8_t chan7AdditionalParameter1[12];
+    // Parameter: Additional parameter14 : chan7AdditionalParameter2 : MB Offset: 5247
+    uint8_t chan7AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan7CorrectionCjValue : MB Offset: 5253
+    float chan7CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan7LowMeasureLim : MB Offset: 5255
+    float chan7LowMeasureLim;
+    // Parameter: Measure signal high limit : chan7HighMeasureLim : MB Offset: 5257
+    float chan7HighMeasureLim;
+    // Parameter: Name Channel : chan7Name : MB Offset: 5259
+    uint8_t chan7Name[8];
+    // Parameter: Period : chan7Period : MB Offset: 5263
+    float chan7Period;
+    // Parameter: Dempher : chan7Dempher : MB Offset: 5265
+    uint16_t chan7Dempher;
+    // Parameter: Type Registration : chan7TypeRegistration : MB Offset: 5266
+    uint16_t chan7TypeRegistration;
+    // Parameter: Type Value : chan7TypeValue : MB Offset: 5267
+    uint16_t chan7TypeValue;
+    // Parameter: Signal Type : chan8SignalType : MB Offset: 5280
+    uint16_t chan8SignalType;
+    // Parameter: Additional parameter15 : chan8AdditionalParameter1 : MB Offset: 5281
+    uint8_t chan8AdditionalParameter1[12];
+    // Parameter: Additional parameter14 : chan8AdditionalParameter2 : MB Offset: 5287
+    uint8_t chan8AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan8CorrectionCjValue : MB Offset: 5293
+    float chan8CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan8LowMeasureLim : MB Offset: 5295
+    float chan8LowMeasureLim;
+    // Parameter: Measure signal high limit : chan8HighMeasureLim : MB Offset: 5297
+    float chan8HighMeasureLim;
+    // Parameter: Name Channel : chan8Name : MB Offset: 5299
+    uint8_t chan8Name[8];
+    // Parameter: Period : chan8Period : MB Offset: 5303
+    float chan8Period;
+    // Parameter: Dempher : chan8Dempher : MB Offset: 5305
+    uint16_t chan8Dempher;
+    // Parameter: Type Registration : chan8TypeRegistration : MB Offset: 5306
+    uint16_t chan8TypeRegistration;
+    // Parameter: Type Value : chan8TypeValue : MB Offset: 5307
+    uint16_t chan8TypeValue;
+    // Parameter: Signal Type : chan9SignalType : MB Offset: 5320
+    uint16_t chan9SignalType;
+    // Parameter: Additional parameter13 : chan9AdditionalParameter1 : MB Offset: 5321
+    uint8_t chan9AdditionalParameter1[12];
+    // Parameter: Additional parameter12 : chan9AdditionalParameter2 : MB Offset: 5327
+    uint8_t chan9AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan9CorrectionCjValue : MB Offset: 5333
+    float chan9CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan9LowMeasureLim : MB Offset: 5335
+    float chan9LowMeasureLim;
+    // Parameter: Measure signal high limit : chan9HighMeasureLim : MB Offset: 5337
+    float chan9HighMeasureLim;
+    // Parameter: Name Channel : chan9Name : MB Offset: 5339
+    uint8_t chan9Name[8];
+    // Parameter: Period : chan9Period : MB Offset: 5343
+    float chan9Period;
+    // Parameter: Dempher : chan9Dempher : MB Offset: 5345
+    uint16_t chan9Dempher;
+    // Parameter: Type Registration : chan9TypeRegistration : MB Offset: 5346
+    uint16_t chan9TypeRegistration;
+    // Parameter: Type Value : chan9TypeValue : MB Offset: 5347
+    uint16_t chan9TypeValue;
+    // Parameter: Signal Type : chan10SignalType : MB Offset: 5360
+    uint16_t chan10SignalType;
+    // Parameter: Additional parameter13 : chan10AdditionalParameter1 : MB Offset: 5361
+    uint8_t chan10AdditionalParameter1[12];
+    // Parameter: Additional parameter12 : chan10AdditionalParameter2 : MB Offset: 5367
+    uint8_t chan10AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan10CorrectionCjValue : MB Offset: 5373
+    float chan10CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan10LowMeasureLim : MB Offset: 5375
+    float chan10LowMeasureLim;
+    // Parameter: Measure signal high limit : chan10HighMeasureLim : MB Offset: 5377
+    float chan10HighMeasureLim;
+    // Parameter: Name Channel : chan10Name : MB Offset: 5379
+    uint8_t chan10Name[8];
+    // Parameter: Period : chan10Period : MB Offset: 5383
+    float chan10Period;
+    // Parameter: Dempher : chan10Dempher : MB Offset: 5385
+    uint16_t chan10Dempher;
+    // Parameter: Type Registration : chan10TypeRegistration : MB Offset: 5386
+    uint16_t chan10TypeRegistration;
+    // Parameter: Type Value : chan10TypeValue : MB Offset: 5387
+    uint16_t chan10TypeValue;
+    // Parameter: Signal Type : chan11SignalType : MB Offset: 5400
+    uint16_t chan11SignalType;
+    // Parameter: Additional parameter11 : chan11AdditionalParameter1 : MB Offset: 5401
+    uint8_t chan11AdditionalParameter1[12];
+    // Parameter: Additional parameter10 : chan11AdditionalParameter2 : MB Offset: 5407
+    uint8_t chan11AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan11CorrectionCjValue : MB Offset: 5413
+    float chan11CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan11LowMeasureLim : MB Offset: 5415
+    float chan11LowMeasureLim;
+    // Parameter: Measure signal high limit : chan11HighMeasureLim : MB Offset: 5417
+    float chan11HighMeasureLim;
+    // Parameter: Name Channel : chan11Name : MB Offset: 5419
+    uint8_t chan11Name[8];
+    // Parameter: Period : chan11Period : MB Offset: 5423
+    float chan11Period;
+    // Parameter: Dempher : chan11Dempher : MB Offset: 5425
+    uint16_t chan11Dempher;
+    // Parameter: Type Registration : chan11TypeRegistration : MB Offset: 5426
+    uint16_t chan11TypeRegistration;
+    // Parameter: Type Value : chan11TypeValue : MB Offset: 5427
+    uint16_t chan11TypeValue;
+    // Parameter: Signal Type : chan12SignalType : MB Offset: 5440
+    uint16_t chan12SignalType;
+    // Parameter: Additional parameter11 : chan12AdditionalParameter1 : MB Offset: 5441
+    uint8_t chan12AdditionalParameter1[12];
+    // Parameter: Additional parameter10 : chan12AdditionalParameter2 : MB Offset: 5447
+    uint8_t chan12AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan12CorrectionCjValue : MB Offset: 5453
+    float chan12CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan12LowMeasureLim : MB Offset: 5455
+    float chan12LowMeasureLim;
+    // Parameter: Measure signal high limit : chan12HighMeasureLim : MB Offset: 5457
+    float chan12HighMeasureLim;
+    // Parameter: Name Channel : chan12Name : MB Offset: 5459
+    uint8_t chan12Name[8];
+    // Parameter: Period : chan12Period : MB Offset: 5463
+    float chan12Period;
+    // Parameter: Dempher : chan12Dempher : MB Offset: 5465
+    uint16_t chan12Dempher;
+    // Parameter: Type Registration : chan12TypeRegistration : MB Offset: 5466
+    uint16_t chan12TypeRegistration;
+    // Parameter: Type Value : chan12TypeValue : MB Offset: 5467
+    uint16_t chan12TypeValue;
+    // Parameter: Signal Type : chan13SignalType : MB Offset: 5480
+    uint16_t chan13SignalType;
+    // Parameter: Additional parameter9 : chan13AdditionalParameter1 : MB Offset: 5481
+    uint8_t chan13AdditionalParameter1[12];
+    // Parameter: Additional parameter8 : chan13AdditionalParameter2 : MB Offset: 5487
+    uint8_t chan13AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan13CorrectionCjValue : MB Offset: 5493
+    float chan13CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan13LowMeasureLim : MB Offset: 5495
+    float chan13LowMeasureLim;
+    // Parameter: Measure signal high limit : chan13HighMeasureLim : MB Offset: 5497
+    float chan13HighMeasureLim;
+    // Parameter: Name Channel : chan13Name : MB Offset: 5499
+    uint8_t chan13Name[8];
+    // Parameter: Period : chan13Period : MB Offset: 5503
+    float chan13Period;
+    // Parameter: Dempher : chan13Dempher : MB Offset: 5505
+    uint16_t chan13Dempher;
+    // Parameter: Type Registration : chan13TypeRegistration : MB Offset: 5506
+    uint16_t chan13TypeRegistration;
+    // Parameter: Type Value : chan13TypeValue : MB Offset: 5507
+    uint16_t chan13TypeValue;
+    // Parameter: Signal Type : chan14SignalType : MB Offset: 5520
+    uint16_t chan14SignalType;
+    // Parameter: Additional parameter9 : chan14AdditionalParameter1 : MB Offset: 5521
+    uint8_t chan14AdditionalParameter1[12];
+    // Parameter: Additional parameter8 : chan14AdditionalParameter2 : MB Offset: 5527
+    uint8_t chan14AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan14CorrectionCjValue : MB Offset: 5533
+    float chan14CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan14LowMeasureLim : MB Offset: 5535
+    float chan14LowMeasureLim;
+    // Parameter: Measure signal high limit : chan14HighMeasureLim : MB Offset: 5537
+    float chan14HighMeasureLim;
+    // Parameter: Name Channel : chan14Name : MB Offset: 5539
+    uint8_t chan14Name[8];
+    // Parameter: Period : chan14Period : MB Offset: 5543
+    float chan14Period;
+    // Parameter: Dempher : chan14Dempher : MB Offset: 5545
+    uint16_t chan14Dempher;
+    // Parameter: Type Registration : chan14TypeRegistration : MB Offset: 5546
+    uint16_t chan14TypeRegistration;
+    // Parameter: Type Value : chan14TypeValue : MB Offset: 5547
+    uint16_t chan14TypeValue;
+    // Parameter: Signal Type : chan15SignalType : MB Offset: 5560
+    uint16_t chan15SignalType;
+    // Parameter: Additional parameter7 : chan15AdditionalParameter1 : MB Offset: 5561
+    uint8_t chan15AdditionalParameter1[12];
+    // Parameter: Additional parameter6 : chan15AdditionalParameter2 : MB Offset: 5567
+    uint8_t chan15AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan15CorrectionCjValue : MB Offset: 5573
+    float chan15CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan15LowMeasureLim : MB Offset: 5575
+    float chan15LowMeasureLim;
+    // Parameter: Measure signal high limit : chan15HighMeasureLim : MB Offset: 5577
+    float chan15HighMeasureLim;
+    // Parameter: Name Channel : chan15Name : MB Offset: 5579
+    uint8_t chan15Name[8];
+    // Parameter: Period : chan15Period : MB Offset: 5583
+    float chan15Period;
+    // Parameter: Dempher : chan15Dempher : MB Offset: 5585
+    uint16_t chan15Dempher;
+    // Parameter: Type Registration : chan15TypeRegistration : MB Offset: 5586
+    uint16_t chan15TypeRegistration;
+    // Parameter: Type Value : chan15TypeValue : MB Offset: 5587
+    uint16_t chan15TypeValue;
+    // Parameter: Signal Type : chan16SignalType : MB Offset: 5600
+    uint16_t chan16SignalType;
+    // Parameter: Additional parameter7 : chan16AdditionalParameter1 : MB Offset: 5601
+    uint8_t chan16AdditionalParameter1[12];
+    // Parameter: Additional parameter6 : chan16AdditionalParameter2 : MB Offset: 5607
+    uint8_t chan16AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan16CorrectionCjValue : MB Offset: 5613
+    float chan16CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan16LowMeasureLim : MB Offset: 5615
+    float chan16LowMeasureLim;
+    // Parameter: Measure signal high limit : chan16HighMeasureLim : MB Offset: 5617
+    float chan16HighMeasureLim;
+    // Parameter: Name Channel : chan16Name : MB Offset: 5619
+    uint8_t chan16Name[8];
+    // Parameter: Period : chan16Period : MB Offset: 5623
+    float chan16Period;
+    // Parameter: Dempher : chan16Dempher : MB Offset: 5625
+    uint16_t chan16Dempher;
+    // Parameter: Type Registration : chan16TypeRegistration : MB Offset: 5626
+    uint16_t chan16TypeRegistration;
+    // Parameter: Type Value : chan16TypeValue : MB Offset: 5627
+    uint16_t chan16TypeValue;
+    // Parameter: Signal Type : chan17SignalType : MB Offset: 5640
+    uint16_t chan17SignalType;
+    // Parameter: Additional parameter5 : chan17AdditionalParameter1 : MB Offset: 5641
+    uint8_t chan17AdditionalParameter1[12];
+    // Parameter: Additional parameter4 : chan17AdditionalParameter2 : MB Offset: 5647
+    uint8_t chan17AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan17CorrectionCjValue : MB Offset: 5653
+    float chan17CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan17LowMeasureLim : MB Offset: 5655
+    float chan17LowMeasureLim;
+    // Parameter: Measure signal high limit : chan17HighMeasureLim : MB Offset: 5657
+    float chan17HighMeasureLim;
+    // Parameter: Name Channel : chan17Name : MB Offset: 5659
+    uint8_t chan17Name[8];
+    // Parameter: Period : chan17Period : MB Offset: 5663
+    float chan17Period;
+    // Parameter: Dempher : chan17Dempher : MB Offset: 5665
+    uint16_t chan17Dempher;
+    // Parameter: Type Registration : chan17TypeRegistration : MB Offset: 5666
+    uint16_t chan17TypeRegistration;
+    // Parameter: Type Value : chan17TypeValue : MB Offset: 5667
+    uint16_t chan17TypeValue;
+    // Parameter: Signal Type : chan18SignalType : MB Offset: 5680
+    uint16_t chan18SignalType;
+    // Parameter: Additional parameter5 : chan18AdditionalParameter1 : MB Offset: 5681
+    uint8_t chan18AdditionalParameter1[12];
+    // Parameter: Additional parameter4 : chan18AdditionalParameter2 : MB Offset: 5687
+    uint8_t chan18AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan18CorrectionCjValue : MB Offset: 5693
+    float chan18CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan18LowMeasureLim : MB Offset: 5695
+    float chan18LowMeasureLim;
+    // Parameter: Measure signal high limit : chan18HighMeasureLim : MB Offset: 5697
+    float chan18HighMeasureLim;
+    // Parameter: Name Channel : chan18Name : MB Offset: 5699
+    uint8_t chan18Name[8];
+    // Parameter: Period : chan18Period : MB Offset: 5703
+    float chan18Period;
+    // Parameter: Dempher : chan18Dempher : MB Offset: 5705
+    uint16_t chan18Dempher;
+    // Parameter: Type Registration : chan18TypeRegistration : MB Offset: 5706
+    uint16_t chan18TypeRegistration;
+    // Parameter: Type Value : chan18TypeValue : MB Offset: 5707
+    uint16_t chan18TypeValue;
+    // Parameter: Signal Type : chan19SignalType : MB Offset: 5720
+    uint16_t chan19SignalType;
+    // Parameter: Additional parameter3 : chan19AdditionalParameter1 : MB Offset: 5721
+    uint8_t chan19AdditionalParameter1[12];
+    // Parameter: Additional parameter2 : chan19AdditionalParameter2 : MB Offset: 5727
+    uint8_t chan19AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan19CorrectionCjValue : MB Offset: 5733
+    float chan19CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan19LowMeasureLim : MB Offset: 5735
+    float chan19LowMeasureLim;
+    // Parameter: Measure signal high limit : chan19HighMeasureLim : MB Offset: 5737
+    float chan19HighMeasureLim;
+    // Parameter: Name Channel : chan19Name : MB Offset: 5739
+    uint8_t chan19Name[8];
+    // Parameter: Period : chan19Period : MB Offset: 5743
+    float chan19Period;
+    // Parameter: Dempher : chan19Dempher : MB Offset: 5745
+    uint16_t chan19Dempher;
+    // Parameter: Type Registration : chan19TypeRegistration : MB Offset: 5746
+    uint16_t chan19TypeRegistration;
+    // Parameter: Type Value : chan19TypeValue : MB Offset: 5747
+    uint16_t chan19TypeValue;
+    // Parameter: Signal Type : chan20SignalType : MB Offset: 5760
+    uint16_t chan20SignalType;
+    // Parameter: Additional parameter3 : chan20AdditionalParameter1 : MB Offset: 5761
+    uint8_t chan20AdditionalParameter1[12];
+    // Parameter: Additional parameter2 : chan20AdditionalParameter2 : MB Offset: 5767
+    uint8_t chan20AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan20CorrectionCjValue : MB Offset: 5773
+    float chan20CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan20LowMeasureLim : MB Offset: 5775
+    float chan20LowMeasureLim;
+    // Parameter: Measure signal high limit : chan20HighMeasureLim : MB Offset: 5777
+    float chan20HighMeasureLim;
+    // Parameter: Name Channel : chan20Name : MB Offset: 5779
+    uint8_t chan20Name[8];
+    // Parameter: Period : chan20Period : MB Offset: 5783
+    float chan20Period;
+    // Parameter: Dempher : chan20Dempher : MB Offset: 5785
+    uint16_t chan20Dempher;
+    // Parameter: Type Registration : chan20TypeRegistration : MB Offset: 5786
+    uint16_t chan20TypeRegistration;
+    // Parameter: Type Value : chan20TypeValue : MB Offset: 5787
+    uint16_t chan20TypeValue;
+    // Parameter: Signal Type : chan21SignalType : MB Offset: 5800
+    uint16_t chan21SignalType;
+    // Parameter: Additional parameter1 : chan21AdditionalParameter1 : MB Offset: 5801
+    uint8_t chan21AdditionalParameter1[12];
+    // Parameter: Additional parameter0 : chan21AdditionalParameter2 : MB Offset: 5807
+    uint8_t chan21AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan21CorrectionCjValue : MB Offset: 5813
+    float chan21CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan21LowMeasureLim : MB Offset: 5815
+    float chan21LowMeasureLim;
+    // Parameter: Measure signal high limit : chan21HighMeasureLim : MB Offset: 5817
+    float chan21HighMeasureLim;
+    // Parameter: Name Channel : chan21Name : MB Offset: 5819
+    uint8_t chan21Name[8];
+    // Parameter: Period : chan21Period : MB Offset: 5823
+    float chan21Period;
+    // Parameter: Dempher : chan21Dempher : MB Offset: 5825
+    uint16_t chan21Dempher;
+    // Parameter: Type Registration : chan21TypeRegistration : MB Offset: 5826
+    uint16_t chan21TypeRegistration;
+    // Parameter: Type Value : chan21TypeValue : MB Offset: 5827
+    uint16_t chan21TypeValue;
+    // Parameter: Signal Type : chan22SignalType : MB Offset: 5840
+    uint16_t chan22SignalType;
+    // Parameter: Additional parameter1 : chan22AdditionalParameter1 : MB Offset: 5841
+    uint8_t chan22AdditionalParameter1[12];
+    // Parameter: Additional parameter0 : chan22AdditionalParameter2 : MB Offset: 5847
+    uint8_t chan22AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan22CorrectionCjValue : MB Offset: 5853
+    float chan22CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan22LowMeasureLim : MB Offset: 5855
+    float chan22LowMeasureLim;
+    // Parameter: Measure signal high limit : chan22HighMeasureLim : MB Offset: 5857
+    float chan22HighMeasureLim;
+    // Parameter: Name Channel : chan22Name : MB Offset: 5859
+    uint8_t chan22Name[8];
+    // Parameter: Period : chan22Period : MB Offset: 5863
+    float chan22Period;
+    // Parameter: Dempher : chan22Dempher : MB Offset: 5865
+    uint16_t chan22Dempher;
+    // Parameter: Type Registration : chan22TypeRegistration : MB Offset: 5866
+    uint16_t chan22TypeRegistration;
+    // Parameter: Type Value : chan22TypeValue : MB Offset: 5867
+    uint16_t chan22TypeValue;
+    // Parameter: Signal Type : chan23SignalType : MB Offset: 5880
+    uint16_t chan23SignalType;
+    // Parameter: Additional parameter1 : chan23AdditionalParameter1 : MB Offset: 5881
+    uint8_t chan23AdditionalParameter1[12];
+    // Parameter: Additional parameter2 : chan23AdditionalParameter2 : MB Offset: 5887
+    uint8_t chan23AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan23CorrectionCjValue : MB Offset: 5893
+    float chan23CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan23LowMeasureLim : MB Offset: 5895
+    float chan23LowMeasureLim;
+    // Parameter: Measure signal high limit : chan23HighMeasureLim : MB Offset: 5897
+    float chan23HighMeasureLim;
+    // Parameter: Name Channel : chan23Name : MB Offset: 5899
+    uint8_t chan23Name[8];
+    // Parameter: Period : chan23Period : MB Offset: 5903
+    float chan23Period;
+    // Parameter: Dempher : chan23Dempher : MB Offset: 5905
+    uint16_t chan23Dempher;
+    // Parameter: Type Registration : chan23TypeRegistration : MB Offset: 5906
+    uint16_t chan23TypeRegistration;
+    // Parameter: Type Value : chan23TypeValue : MB Offset: 5907
+    uint16_t chan23TypeValue;
+    // Parameter: Signal Type : chan24SignalType : MB Offset: 5920
+    uint16_t chan24SignalType;
+    // Parameter: Additional parameter1 : chan24AdditionalParameter1 : MB Offset: 5921
+    uint8_t chan24AdditionalParameter1[12];
+    // Parameter: Additional parameter2 : chan24AdditionalParameter2 : MB Offset: 5927
+    uint8_t chan24AdditionalParameter2[12];
+    // Parameter: Correction CJ Value : chan24CorrectionCjValue : MB Offset: 5933
+    float chan24CorrectionCjValue;
+    // Parameter: Measure signal low limit  : chan24LowMeasureLim : MB Offset: 5935
+    float chan24LowMeasureLim;
+    // Parameter: Measure signal high limit : chan24HighMeasureLim : MB Offset: 5937
+    float chan24HighMeasureLim;
+    // Parameter: Name Channel : chan24Name : MB Offset: 5939
+    uint8_t chan24Name[8];
+    // Parameter: Period : chan24Period : MB Offset: 5943
+    float chan24Period;
+    // Parameter: Dempher : chan24Dempher : MB Offset: 5945
+    uint16_t chan24Dempher;
+    // Parameter: Type Registration : chan24TypeRegistration : MB Offset: 5946
+    uint16_t chan24TypeRegistration;
+    // Parameter: Type Value : chan24TypeValue : MB Offset: 5947
+    uint16_t chan24TypeValue;
+    // Parameter: Signal Type Frequency : chan1FreqSignalType : MB Offset: 6000
+    uint16_t chan1FreqSignalType;
+    // Parameter: Additional parameter : chan1FreqalAdditionalParameter : MB Offset: 6001
+    uint8_t chan1FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan1ImpulseDuration : MB Offset: 6007
+    float chan1ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan1FreqLowMeasureLim : MB Offset: 6009
+    float chan1FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan1FreqHighMeasureLim : MB Offset: 6011
+    float chan1FreqHighMeasureLim;
+    // Parameter: Name Channel : chan1FreqName : MB Offset: 6013
+    uint8_t chan1FreqName[8];
+    // Parameter: Unit Name : chan1FreqUnit : MB Offset: 6017
+    uint8_t chan1FreqUnit[4];
+    // Parameter: Impulse Weight : chan1FreqImpWeight : MB Offset: 6019
+    float chan1FreqImpWeight;
+    // Parameter: Period : chan1FreqPeriod : MB Offset: 6021
+    float chan1FreqPeriod;
+    // Parameter: Dempher : chan1FreqDempher : MB Offset: 6023
+    uint16_t chan1FreqDempher;
+    // Parameter: Type Value : chan1FreqTypeValue : MB Offset: 6024
+    uint16_t chan1FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan2FreqSignalType : MB Offset: 6025
+    uint16_t chan2FreqSignalType;
+    // Parameter: Additional parameter : chan2FreqAdditionalParameter : MB Offset: 6026
+    uint8_t chan2FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan2ImpulseDuration : MB Offset: 6032
+    float chan2ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan2FreqLowMeasureLim : MB Offset: 6034
+    float chan2FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan2FreqHighMeasureLim : MB Offset: 6036
+    float chan2FreqHighMeasureLim;
+    // Parameter: Name Channel : chan2FreqName : MB Offset: 6038
+    uint8_t chan2FreqName[8];
+    // Parameter: Unit Name : chan2FreqUnit : MB Offset: 6042
+    uint8_t chan2FreqUnit[4];
+    // Parameter: Impulse Weight : chan2ImpWeight : MB Offset: 6044
+    float chan2ImpWeight;
+    // Parameter: Period : chan2FreqPeriod : MB Offset: 6046
+    float chan2FreqPeriod;
+    // Parameter: Dempher : chan2FreqDempher : MB Offset: 6048
+    uint16_t chan2FreqDempher;
+    // Parameter: Type Value : chan2FreqTypeValue : MB Offset: 6049
+    uint16_t chan2FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan3FreqSignalType : MB Offset: 6050
+    uint16_t chan3FreqSignalType;
+    // Parameter: Additional parameter : chan3FreqalAdditionalParameter : MB Offset: 6051
+    uint8_t chan3FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan3ImpulseDuration : MB Offset: 6057
+    float chan3ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan3FreqLowMeasureLim : MB Offset: 6059
+    float chan3FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan3FreqHighMeasureLim : MB Offset: 6061
+    float chan3FreqHighMeasureLim;
+    // Parameter: Name Channel : chan3FreqName : MB Offset: 6063
+    uint8_t chan3FreqName[8];
+    // Parameter: Unit Name : chan3FreqUnit : MB Offset: 6067
+    uint8_t chan3FreqUnit[4];
+    // Parameter: Impulse Weight : chan3FreqImpWeight : MB Offset: 6069
+    float chan3FreqImpWeight;
+    // Parameter: Period : chan3FreqPeriod : MB Offset: 6071
+    float chan3FreqPeriod;
+    // Parameter: Dempher : chan3FreqDempher : MB Offset: 6073
+    uint16_t chan3FreqDempher;
+    // Parameter: Type Value : chan3FreqTypeValue : MB Offset: 6074
+    uint16_t chan3FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan4FreqSignalType : MB Offset: 6075
+    uint16_t chan4FreqSignalType;
+    // Parameter: Additional parameter : chan4FreqAdditionalParameter : MB Offset: 6076
+    uint8_t chan4FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan4ImpulseDuration : MB Offset: 6082
+    float chan4ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan4FreqLowMeasureLim : MB Offset: 6084
+    float chan4FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan4FreqHighMeasureLim : MB Offset: 6086
+    float chan4FreqHighMeasureLim;
+    // Parameter: Name Channel : chan4FreqName : MB Offset: 6088
+    uint8_t chan4FreqName[8];
+    // Parameter: Unit Name : chan4FreqUnit : MB Offset: 6092
+    uint8_t chan4FreqUnit[4];
+    // Parameter: Impulse Weight : chan4ImpWeight : MB Offset: 6094
+    float chan4ImpWeight;
+    // Parameter: Period : chan4FreqPeriod : MB Offset: 6096
+    float chan4FreqPeriod;
+    // Parameter: Dempher : chan4FreqDempher : MB Offset: 6098
+    uint16_t chan4FreqDempher;
+    // Parameter: Type Value : chan4FreqTypeValue : MB Offset: 6099
+    uint16_t chan4FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan5FreqSignalType : MB Offset: 6100
+    uint16_t chan5FreqSignalType;
+    // Parameter: Additional parameter : chan5FreqalAdditionalParameter : MB Offset: 6101
+    uint8_t chan5FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan5ImpulseDuration : MB Offset: 6107
+    float chan5ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan5FreqLowMeasureLim : MB Offset: 6109
+    float chan5FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan5FreqHighMeasureLim : MB Offset: 6111
+    float chan5FreqHighMeasureLim;
+    // Parameter: Name Channel : chan5FreqName : MB Offset: 6113
+    uint8_t chan5FreqName[8];
+    // Parameter: Unit Name : chan5FreqUnit : MB Offset: 6117
+    uint8_t chan5FreqUnit[4];
+    // Parameter: Impulse Weight : chan5FreqImpWeight : MB Offset: 6119
+    float chan5FreqImpWeight;
+    // Parameter: Period : chan5FreqPeriod : MB Offset: 6121
+    float chan5FreqPeriod;
+    // Parameter: Dempher : chan5FreqDempher : MB Offset: 6123
+    uint16_t chan5FreqDempher;
+    // Parameter: Type Value : chan5FreqTypeValue : MB Offset: 6124
+    uint16_t chan5FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan6FreqSignalType : MB Offset: 6125
+    uint16_t chan6FreqSignalType;
+    // Parameter: Additional parameter : chan6FreqAdditionalParameter : MB Offset: 6126
+    uint8_t chan6FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan6ImpulseDuration : MB Offset: 6132
+    float chan6ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan6FreqLowMeasureLim : MB Offset: 6134
+    float chan6FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan6FreqHighMeasureLim : MB Offset: 6136
+    float chan6FreqHighMeasureLim;
+    // Parameter: Name Channel : chan6FreqName : MB Offset: 6138
+    uint8_t chan6FreqName[8];
+    // Parameter: Unit Name : chan6FreqUnit : MB Offset: 6142
+    uint8_t chan6FreqUnit[4];
+    // Parameter: Impulse Weight : chan6ImpWeight : MB Offset: 6144
+    float chan6ImpWeight;
+    // Parameter: Period : chan6FreqPeriod : MB Offset: 6146
+    float chan6FreqPeriod;
+    // Parameter: Dempher : chan6FreqDempher : MB Offset: 6148
+    uint16_t chan6FreqDempher;
+    // Parameter: Type Value : chan6FreqTypeValue : MB Offset: 6149
+    uint16_t chan6FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan7FreqSignalType : MB Offset: 6150
+    uint16_t chan7FreqSignalType;
+    // Parameter: Additional parameter : chan7FreqalAdditionalParameter : MB Offset: 6151
+    uint8_t chan7FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan7ImpulseDuration : MB Offset: 6157
+    float chan7ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan7FreqLowMeasureLim : MB Offset: 6159
+    float chan7FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan7FreqHighMeasureLim : MB Offset: 6161
+    float chan7FreqHighMeasureLim;
+    // Parameter: Name Channel : chan7FreqName : MB Offset: 6163
+    uint8_t chan7FreqName[8];
+    // Parameter: Unit Name : chan7FreqUnit : MB Offset: 6167
+    uint8_t chan7FreqUnit[4];
+    // Parameter: Impulse Weight : chan7FreqImpWeight : MB Offset: 6169
+    float chan7FreqImpWeight;
+    // Parameter: Period : chan7FreqPeriod : MB Offset: 6171
+    float chan7FreqPeriod;
+    // Parameter: Dempher : chan7FreqDempher : MB Offset: 6173
+    uint16_t chan7FreqDempher;
+    // Parameter: Type Value : chan7FreqTypeValue : MB Offset: 6174
+    uint16_t chan7FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan8FreqSignalType : MB Offset: 6175
+    uint16_t chan8FreqSignalType;
+    // Parameter: Additional parameter : chan8FreqAdditionalParameter : MB Offset: 6176
+    uint8_t chan8FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan8ImpulseDuration : MB Offset: 6182
+    float chan8ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan8FreqLowMeasureLim : MB Offset: 6184
+    float chan8FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan8FreqHighMeasureLim : MB Offset: 6186
+    float chan8FreqHighMeasureLim;
+    // Parameter: Name Channel : chan8FreqName : MB Offset: 6188
+    uint8_t chan8FreqName[8];
+    // Parameter: Unit Name : chan8FreqUnit : MB Offset: 6192
+    uint8_t chan8FreqUnit[4];
+    // Parameter: Impulse Weight : chan8ImpWeight : MB Offset: 6194
+    float chan8ImpWeight;
+    // Parameter: Period : chan8FreqPeriod : MB Offset: 6196
+    float chan8FreqPeriod;
+    // Parameter: Dempher : chan8FreqDempher : MB Offset: 6198
+    uint16_t chan8FreqDempher;
+    // Parameter: Type Value : chan8FreqTypeValue : MB Offset: 6199
+    uint16_t chan8FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan9FreqSignalType : MB Offset: 6200
+    uint16_t chan9FreqSignalType;
+    // Parameter: Additional parameter : chan9FreqalAdditionalParameter : MB Offset: 6201
+    uint8_t chan9FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan9ImpulseDuration : MB Offset: 6207
+    float chan9ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan9FreqLowMeasureLim : MB Offset: 6209
+    float chan9FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan9FreqHighMeasureLim : MB Offset: 6211
+    float chan9FreqHighMeasureLim;
+    // Parameter: Name Channel : chan9FreqName : MB Offset: 6213
+    uint8_t chan9FreqName[8];
+    // Parameter: Unit Name : chan9FreqUnit : MB Offset: 6217
+    uint8_t chan9FreqUnit[4];
+    // Parameter: Impulse Weight : chan9FreqImpWeight : MB Offset: 6219
+    float chan9FreqImpWeight;
+    // Parameter: Period : chan9FreqPeriod : MB Offset: 6221
+    float chan9FreqPeriod;
+    // Parameter: Dempher : chan9FreqDempher : MB Offset: 6223
+    uint16_t chan9FreqDempher;
+    // Parameter: Type Value : chan9FreqTypeValue : MB Offset: 6224
+    uint16_t chan9FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan10FreqSignalType : MB Offset: 6225
+    uint16_t chan10FreqSignalType;
+    // Parameter: Additional parameter : chan10FreqAdditionalParameter : MB Offset: 6226
+    uint8_t chan10FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan10ImpulseDuration : MB Offset: 6232
+    float chan10ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan10FreqLowMeasureLim : MB Offset: 6234
+    float chan10FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan10FreqHighMeasureLim : MB Offset: 6236
+    float chan10FreqHighMeasureLim;
+    // Parameter: Name Channel : chan10FreqName : MB Offset: 6238
+    uint8_t chan10FreqName[8];
+    // Parameter: Unit Name : chan10FreqUnit : MB Offset: 6242
+    uint8_t chan10FreqUnit[4];
+    // Parameter: Impulse Weight : chan10ImpWeight : MB Offset: 6244
+    float chan10ImpWeight;
+    // Parameter: Period : chan10FreqPeriod : MB Offset: 6246
+    float chan10FreqPeriod;
+    // Parameter: Dempher : chan10FreqDempher : MB Offset: 6248
+    uint16_t chan10FreqDempher;
+    // Parameter: Type Value : chan10FreqTypeValue : MB Offset: 6249
+    uint16_t chan10FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan11FreqSignalType : MB Offset: 6250
+    uint16_t chan11FreqSignalType;
+    // Parameter: Additional parameter : chan11FreqalAdditionalParameter : MB Offset: 6251
+    uint8_t chan11FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan11ImpulseDuration : MB Offset: 6257
+    float chan11ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan11FreqLowMeasureLim : MB Offset: 6259
+    float chan11FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan11FreqHighMeasureLim : MB Offset: 6261
+    float chan11FreqHighMeasureLim;
+    // Parameter: Name Channel : chan11FreqName : MB Offset: 6263
+    uint8_t chan11FreqName[8];
+    // Parameter: Unit Name : chan11FreqUnit : MB Offset: 6267
+    uint8_t chan11FreqUnit[4];
+    // Parameter: Impulse Weight : chan11FreqImpWeight : MB Offset: 6269
+    float chan11FreqImpWeight;
+    // Parameter: Period : chan11FreqPeriod : MB Offset: 6271
+    float chan11FreqPeriod;
+    // Parameter: Dempher : chan11FreqDempher : MB Offset: 6273
+    uint16_t chan11FreqDempher;
+    // Parameter: Type Value : chan11FreqTypeValue : MB Offset: 6274
+    uint16_t chan11FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan12FreqSignalType : MB Offset: 6275
+    uint16_t chan12FreqSignalType;
+    // Parameter: Additional parameter : chan12FreqAdditionalParameter : MB Offset: 6276
+    uint8_t chan12FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan12ImpulseDuration : MB Offset: 6282
+    float chan12ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan12FreqLowMeasureLim : MB Offset: 6284
+    float chan12FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan12FreqHighMeasureLim : MB Offset: 6286
+    float chan12FreqHighMeasureLim;
+    // Parameter: Name Channel : chan12FreqName : MB Offset: 6288
+    uint8_t chan12FreqName[8];
+    // Parameter: Unit Name : chan12FreqUnit : MB Offset: 6292
+    uint8_t chan12FreqUnit[4];
+    // Parameter: Impulse Weight : chan12ImpWeight : MB Offset: 6294
+    float chan12ImpWeight;
+    // Parameter: Period : chan12FreqPeriod : MB Offset: 6296
+    float chan12FreqPeriod;
+    // Parameter: Dempher : chan12FreqDempher : MB Offset: 6298
+    uint16_t chan12FreqDempher;
+    // Parameter: Type Value : chan12FreqTypeValue : MB Offset: 6299
+    uint16_t chan12FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan13FreqSignalType : MB Offset: 6300
+    uint16_t chan13FreqSignalType;
+    // Parameter: Additional parameter : chan13FreqalAdditionalParameter : MB Offset: 6301
+    uint8_t chan13FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan13ImpulseDuration : MB Offset: 6307
+    float chan13ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan13FreqLowMeasureLim : MB Offset: 6309
+    float chan13FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan13FreqHighMeasureLim : MB Offset: 6311
+    float chan13FreqHighMeasureLim;
+    // Parameter: Name Channel : chan13FreqName : MB Offset: 6313
+    uint8_t chan13FreqName[8];
+    // Parameter: Unit Name : chan13FreqUnit : MB Offset: 6317
+    uint8_t chan13FreqUnit[4];
+    // Parameter: Impulse Weight : chan13FreqImpWeight : MB Offset: 6319
+    float chan13FreqImpWeight;
+    // Parameter: Period : chan13FreqPeriod : MB Offset: 6321
+    float chan13FreqPeriod;
+    // Parameter: Dempher : chan13FreqDempher : MB Offset: 6323
+    uint16_t chan13FreqDempher;
+    // Parameter: Type Value : chan13FreqTypeValue : MB Offset: 6324
+    uint16_t chan13FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan14FreqSignalType : MB Offset: 6325
+    uint16_t chan14FreqSignalType;
+    // Parameter: Additional parameter : chan14FreqAdditionalParameter : MB Offset: 6326
+    uint8_t chan14FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan14ImpulseDuration : MB Offset: 6332
+    float chan14ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan14FreqLowMeasureLim : MB Offset: 6334
+    float chan14FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan14FreqHighMeasureLim : MB Offset: 6336
+    float chan14FreqHighMeasureLim;
+    // Parameter: Name Channel : chan14FreqName : MB Offset: 6338
+    uint8_t chan14FreqName[8];
+    // Parameter: Unit Name : chan14FreqUnit : MB Offset: 6342
+    uint8_t chan14FreqUnit[4];
+    // Parameter: Impulse Weight : chan14ImpWeight : MB Offset: 6344
+    float chan14ImpWeight;
+    // Parameter: Period : chan14FreqPeriod : MB Offset: 6346
+    float chan14FreqPeriod;
+    // Parameter: Dempher : chan14FreqDempher : MB Offset: 6348
+    uint16_t chan14FreqDempher;
+    // Parameter: Type Value : chan14FreqTypeValue : MB Offset: 6349
+    uint16_t chan14FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan15FreqSignalType : MB Offset: 6350
+    uint16_t chan15FreqSignalType;
+    // Parameter: Additional parameter : chan15FreqalAdditionalParameter : MB Offset: 6351
+    uint8_t chan15FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan15ImpulseDuration : MB Offset: 6357
+    float chan15ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan15FreqLowMeasureLim : MB Offset: 6359
+    float chan15FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan15FreqHighMeasureLim : MB Offset: 6361
+    float chan15FreqHighMeasureLim;
+    // Parameter: Name Channel : chan15FreqName : MB Offset: 6363
+    uint8_t chan15FreqName[8];
+    // Parameter: Unit Name : chan15FreqUnit : MB Offset: 6367
+    uint8_t chan15FreqUnit[4];
+    // Parameter: Impulse Weight : chan15FreqImpWeight : MB Offset: 6369
+    float chan15FreqImpWeight;
+    // Parameter: Period : chan15FreqPeriod : MB Offset: 6371
+    float chan15FreqPeriod;
+    // Parameter: Dempher : chan15FreqDempher : MB Offset: 6373
+    uint16_t chan15FreqDempher;
+    // Parameter: Type Value : chan15FreqTypeValue : MB Offset: 6374
+    uint16_t chan15FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan16FreqSignalType : MB Offset: 6375
+    uint16_t chan16FreqSignalType;
+    // Parameter: Additional parameter : chan16FreqAdditionalParameter : MB Offset: 6376
+    uint8_t chan16FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan16ImpulseDuration : MB Offset: 6382
+    float chan16ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan16FreqLowMeasureLim : MB Offset: 6384
+    float chan16FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan16FreqHighMeasureLim : MB Offset: 6386
+    float chan16FreqHighMeasureLim;
+    // Parameter: Name Channel : chan16FreqName : MB Offset: 6388
+    uint8_t chan16FreqName[8];
+    // Parameter: Unit Name : chan16FreqUnit : MB Offset: 6392
+    uint8_t chan16FreqUnit[4];
+    // Parameter: Impulse Weight : chan16ImpWeight : MB Offset: 6394
+    float chan16ImpWeight;
+    // Parameter: Period : chan16FreqPeriod : MB Offset: 6396
+    float chan16FreqPeriod;
+    // Parameter: Dempher : chan16FreqDempher : MB Offset: 6398
+    uint16_t chan16FreqDempher;
+    // Parameter: Type Value : chan16FreqTypeValue : MB Offset: 6399
+    uint16_t chan16FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan17FreqSignalType : MB Offset: 6400
+    uint16_t chan17FreqSignalType;
+    // Parameter: Additional parameter : chan17FreqalAdditionalParameter : MB Offset: 6401
+    uint8_t chan17FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan17ImpulseDuration : MB Offset: 6407
+    float chan17ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan17FreqLowMeasureLim : MB Offset: 6409
+    float chan17FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan17FreqHighMeasureLim : MB Offset: 6411
+    float chan17FreqHighMeasureLim;
+    // Parameter: Name Channel : chan17FreqName : MB Offset: 6413
+    uint8_t chan17FreqName[8];
+    // Parameter: Unit Name : chan17FreqUnit : MB Offset: 6417
+    uint8_t chan17FreqUnit[4];
+    // Parameter: Impulse Weight : chan17FreqImpWeight : MB Offset: 6419
+    float chan17FreqImpWeight;
+    // Parameter: Period : chan17FreqPeriod : MB Offset: 6421
+    float chan17FreqPeriod;
+    // Parameter: Dempher : chan17FreqDempher : MB Offset: 6423
+    uint16_t chan17FreqDempher;
+    // Parameter: Type Value : chan17FreqTypeValue : MB Offset: 6424
+    uint16_t chan17FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan18FreqSignalType : MB Offset: 6425
+    uint16_t chan18FreqSignalType;
+    // Parameter: Additional parameter : chan18FreqAdditionalParameter : MB Offset: 6426
+    uint8_t chan18FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan18ImpulseDuration : MB Offset: 6432
+    float chan18ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan18FreqLowMeasureLim : MB Offset: 6434
+    float chan18FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan18FreqHighMeasureLim : MB Offset: 6436
+    float chan18FreqHighMeasureLim;
+    // Parameter: Name Channel : chan18FreqName : MB Offset: 6438
+    uint8_t chan18FreqName[8];
+    // Parameter: Unit Name : chan18FreqUnit : MB Offset: 6442
+    uint8_t chan18FreqUnit[4];
+    // Parameter: Impulse Weight : chan18ImpWeight : MB Offset: 6444
+    float chan18ImpWeight;
+    // Parameter: Period : chan18FreqPeriod : MB Offset: 6446
+    float chan18FreqPeriod;
+    // Parameter: Dempher : chan18FreqDempher : MB Offset: 6448
+    uint16_t chan18FreqDempher;
+    // Parameter: Type Value : chan18FreqTypeValue : MB Offset: 6449
+    uint16_t chan18FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan19FreqSignalType : MB Offset: 6450
+    uint16_t chan19FreqSignalType;
+    // Parameter: Additional parameter : chan19FreqalAdditionalParameter : MB Offset: 6451
+    uint8_t chan19FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan19ImpulseDuration : MB Offset: 6457
+    float chan19ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan19FreqLowMeasureLim : MB Offset: 6459
+    float chan19FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan19FreqHighMeasureLim : MB Offset: 6461
+    float chan19FreqHighMeasureLim;
+    // Parameter: Name Channel : chan19FreqName : MB Offset: 6463
+    uint8_t chan19FreqName[8];
+    // Parameter: Unit Name : chan19FreqUnit : MB Offset: 6467
+    uint8_t chan19FreqUnit[4];
+    // Parameter: Impulse Weight : chan19FreqImpWeight : MB Offset: 6469
+    float chan19FreqImpWeight;
+    // Parameter: Period : chan19FreqPeriod : MB Offset: 6471
+    float chan19FreqPeriod;
+    // Parameter: Dempher : chan19FreqDempher : MB Offset: 6473
+    uint16_t chan19FreqDempher;
+    // Parameter: Type Value : chan19FreqTypeValue : MB Offset: 6474
+    uint16_t chan19FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan20FreqSignalType : MB Offset: 6475
+    uint16_t chan20FreqSignalType;
+    // Parameter: Additional parameter : chan20FreqAdditionalParameter : MB Offset: 6476
+    uint8_t chan20FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan20ImpulseDuration : MB Offset: 6482
+    float chan20ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan20FreqLowMeasureLim : MB Offset: 6484
+    float chan20FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan20FreqHighMeasureLim : MB Offset: 6486
+    float chan20FreqHighMeasureLim;
+    // Parameter: Name Channel : chan20FreqName : MB Offset: 6488
+    uint8_t chan20FreqName[8];
+    // Parameter: Unit Name : chan20FreqUnit : MB Offset: 6492
+    uint8_t chan20FreqUnit[4];
+    // Parameter: Impulse Weight : chan20ImpWeight : MB Offset: 6494
+    float chan20ImpWeight;
+    // Parameter: Period : chan20FreqPeriod : MB Offset: 6496
+    float chan20FreqPeriod;
+    // Parameter: Dempher : chan20FreqDempher : MB Offset: 6498
+    uint16_t chan20FreqDempher;
+    // Parameter: Type Value : chan20FreqTypeValue : MB Offset: 6499
+    uint16_t chan20FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan21FreqSignalType : MB Offset: 6500
+    uint16_t chan21FreqSignalType;
+    // Parameter: Additional parameter : chan21FreqalAdditionalParameter : MB Offset: 6501
+    uint8_t chan21FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan21ImpulseDuration : MB Offset: 6507
+    float chan21ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan21FreqLowMeasureLim : MB Offset: 6509
+    float chan21FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan21FreqHighMeasureLim : MB Offset: 6511
+    float chan21FreqHighMeasureLim;
+    // Parameter: Name Channel : chan21FreqName : MB Offset: 6513
+    uint8_t chan21FreqName[8];
+    // Parameter: Unit Name : chan21FreqUnit : MB Offset: 6517
+    uint8_t chan21FreqUnit[4];
+    // Parameter: Impulse Weight : chan21FreqImpWeight : MB Offset: 6519
+    float chan21FreqImpWeight;
+    // Parameter: Period : chan21FreqPeriod : MB Offset: 6521
+    float chan21FreqPeriod;
+    // Parameter: Dempher : chan21FreqDempher : MB Offset: 6523
+    uint16_t chan21FreqDempher;
+    // Parameter: Type Value : chan21FreqTypeValue : MB Offset: 6524
+    uint16_t chan21FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan22FreqSignalType : MB Offset: 6525
+    uint16_t chan22FreqSignalType;
+    // Parameter: Additional parameter : chan22FreqAdditionalParameter : MB Offset: 6526
+    uint8_t chan22FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan22ImpulseDuration : MB Offset: 6532
+    float chan22ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan22FreqLowMeasureLim : MB Offset: 6534
+    float chan22FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan22FreqHighMeasureLim : MB Offset: 6536
+    float chan22FreqHighMeasureLim;
+    // Parameter: Name Channel : chan22FreqName : MB Offset: 6538
+    uint8_t chan22FreqName[8];
+    // Parameter: Unit Name : chan22FreqUnit : MB Offset: 6542
+    uint8_t chan22FreqUnit[4];
+    // Parameter: Impulse Weight : chan22ImpWeight : MB Offset: 6544
+    float chan22ImpWeight;
+    // Parameter: Period : chan22FreqPeriod : MB Offset: 6546
+    float chan22FreqPeriod;
+    // Parameter: Dempher : chan22FreqDempher : MB Offset: 6548
+    uint16_t chan22FreqDempher;
+    // Parameter: Type Value : chan22FreqTypeValue : MB Offset: 6549
+    uint16_t chan22FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan23FreqSignalType : MB Offset: 6550
+    uint16_t chan23FreqSignalType;
+    // Parameter: Additional parameter : chan23FreqalAdditionalParameter : MB Offset: 6551
+    uint8_t chan23FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan23ImpulseDuration : MB Offset: 6557
+    float chan23ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan23FreqLowMeasureLim : MB Offset: 6559
+    float chan23FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan23FreqHighMeasureLim : MB Offset: 6561
+    float chan23FreqHighMeasureLim;
+    // Parameter: Name Channel : chan23FreqName : MB Offset: 6563
+    uint8_t chan23FreqName[8];
+    // Parameter: Unit Name : chan23FreqUnit : MB Offset: 6567
+    uint8_t chan23FreqUnit[4];
+    // Parameter: Impulse Weight : chan23FreqImpWeight : MB Offset: 6569
+    float chan23FreqImpWeight;
+    // Parameter: Period : chan23FreqPeriod : MB Offset: 6571
+    float chan23FreqPeriod;
+    // Parameter: Dempher : chan23FreqDempher : MB Offset: 6573
+    uint16_t chan23FreqDempher;
+    // Parameter: Type Value : chan23FreqTypeValue : MB Offset: 6574
+    uint16_t chan23FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan24FreqSignalType : MB Offset: 6575
+    uint16_t chan24FreqSignalType;
+    // Parameter: Additional parameter : chan24FreqAdditionalParameter : MB Offset: 6576
+    uint8_t chan24FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan24ImpulseDuration : MB Offset: 6582
+    float chan24ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan24FreqLowMeasureLim : MB Offset: 6584
+    float chan24FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan24FreqHighMeasureLim : MB Offset: 6586
+    float chan24FreqHighMeasureLim;
+    // Parameter: Name Channel : chan24FreqName : MB Offset: 6588
+    uint8_t chan24FreqName[8];
+    // Parameter: Unit Name : chan24FreqUnit : MB Offset: 6592
+    uint8_t chan24FreqUnit[4];
+    // Parameter: Impulse Weight : chan24ImpWeight : MB Offset: 6594
+    float chan24ImpWeight;
+    // Parameter: Period : chan24FreqPeriod : MB Offset: 6596
+    float chan24FreqPeriod;
+    // Parameter: Dempher : chan24FreqDempher : MB Offset: 6598
+    uint16_t chan24FreqDempher;
+    // Parameter: Type Value : chan24FreqTypeValue : MB Offset: 6599
+    uint16_t chan24FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan25FreqSignalType : MB Offset: 6600
+    uint16_t chan25FreqSignalType;
+    // Parameter: Additional parameter : chan25FreqalAdditionalParameter : MB Offset: 6601
+    uint8_t chan25FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan25ImpulseDuration : MB Offset: 6607
+    float chan25ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan25FreqLowMeasureLim : MB Offset: 6609
+    float chan25FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan25FreqHighMeasureLim : MB Offset: 6611
+    float chan25FreqHighMeasureLim;
+    // Parameter: Name Channel : chan25FreqName : MB Offset: 6613
+    uint8_t chan25FreqName[8];
+    // Parameter: Unit Name : chan25FreqUnit : MB Offset: 6617
+    uint8_t chan25FreqUnit[4];
+    // Parameter: Impulse Weight : chan25FreqImpWeight : MB Offset: 6619
+    float chan25FreqImpWeight;
+    // Parameter: Period : chan25FreqPeriod : MB Offset: 6621
+    float chan25FreqPeriod;
+    // Parameter: Dempher : chan25FreqDempher : MB Offset: 6623
+    uint16_t chan25FreqDempher;
+    // Parameter: Type Value : chan25FreqTypeValue : MB Offset: 6624
+    uint16_t chan25FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan26FreqSignalType : MB Offset: 6625
+    uint16_t chan26FreqSignalType;
+    // Parameter: Additional parameter : chan26FreqAdditionalParameter : MB Offset: 6626
+    uint8_t chan26FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan26ImpulseDuration : MB Offset: 6632
+    float chan26ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan26FreqLowMeasureLim : MB Offset: 6634
+    float chan26FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan26FreqHighMeasureLim : MB Offset: 6636
+    float chan26FreqHighMeasureLim;
+    // Parameter: Name Channel : chan26FreqName : MB Offset: 6638
+    uint8_t chan26FreqName[8];
+    // Parameter: Unit Name : chan26FreqUnit : MB Offset: 6642
+    uint8_t chan26FreqUnit[4];
+    // Parameter: Impulse Weight : chan26ImpWeight : MB Offset: 6644
+    float chan26ImpWeight;
+    // Parameter: Period : chan26FreqPeriod : MB Offset: 6646
+    float chan26FreqPeriod;
+    // Parameter: Dempher : chan26FreqDempher : MB Offset: 6648
+    uint16_t chan26FreqDempher;
+    // Parameter: Type Value : chan26FreqTypeValue : MB Offset: 6649
+    uint16_t chan26FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan27FreqSignalType : MB Offset: 6650
+    uint16_t chan27FreqSignalType;
+    // Parameter: Additional parameter : chan27FreqalAdditionalParameter : MB Offset: 6651
+    uint8_t chan27FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan27ImpulseDuration : MB Offset: 6657
+    float chan27ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan27FreqLowMeasureLim : MB Offset: 6659
+    float chan27FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan27FreqHighMeasureLim : MB Offset: 6661
+    float chan27FreqHighMeasureLim;
+    // Parameter: Name Channel : chan27FreqName : MB Offset: 6663
+    uint8_t chan27FreqName[8];
+    // Parameter: Unit Name : chan27FreqUnit : MB Offset: 6667
+    uint8_t chan27FreqUnit[4];
+    // Parameter: Impulse Weight : chan27FreqImpWeight : MB Offset: 6669
+    float chan27FreqImpWeight;
+    // Parameter: Period : chan27FreqPeriod : MB Offset: 6671
+    float chan27FreqPeriod;
+    // Parameter: Dempher : chan27FreqDempher : MB Offset: 6673
+    uint16_t chan27FreqDempher;
+    // Parameter: Type Value : chan27FreqTypeValue : MB Offset: 6674
+    uint16_t chan27FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan28FreqSignalType : MB Offset: 6675
+    uint16_t chan28FreqSignalType;
+    // Parameter: Additional parameter : chan28FreqAdditionalParameter : MB Offset: 6676
+    uint8_t chan28FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan28ImpulseDuration : MB Offset: 6682
+    float chan28ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan28FreqLowMeasureLim : MB Offset: 6684
+    float chan28FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan28FreqHighMeasureLim : MB Offset: 6686
+    float chan28FreqHighMeasureLim;
+    // Parameter: Name Channel : chan28FreqName : MB Offset: 6688
+    uint8_t chan28FreqName[8];
+    // Parameter: Unit Name : chan28FreqUnit : MB Offset: 6692
+    uint8_t chan28FreqUnit[4];
+    // Parameter: Impulse Weight : chan28ImpWeight : MB Offset: 6694
+    float chan28ImpWeight;
+    // Parameter: Period : chan28FreqPeriod : MB Offset: 6696
+    float chan28FreqPeriod;
+    // Parameter: Dempher : chan28FreqDempher : MB Offset: 6698
+    uint16_t chan28FreqDempher;
+    // Parameter: Type Value : chan28FreqTypeValue : MB Offset: 6699
+    uint16_t chan28FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan29FreqSignalType : MB Offset: 6700
+    uint16_t chan29FreqSignalType;
+    // Parameter: Additional parameter : chan29FreqalAdditionalParameter : MB Offset: 6701
+    uint8_t chan29FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan29ImpulseDuration : MB Offset: 6707
+    float chan29ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan29FreqLowMeasureLim : MB Offset: 6709
+    float chan29FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan29FreqHighMeasureLim : MB Offset: 6711
+    float chan29FreqHighMeasureLim;
+    // Parameter: Name Channel : chan29FreqName : MB Offset: 6713
+    uint8_t chan29FreqName[8];
+    // Parameter: Unit Name : chan29FreqUnit : MB Offset: 6717
+    uint8_t chan29FreqUnit[4];
+    // Parameter: Impulse Weight : chan29FreqImpWeight : MB Offset: 6719
+    float chan29FreqImpWeight;
+    // Parameter: Period : chan29FreqPeriod : MB Offset: 6721
+    float chan29FreqPeriod;
+    // Parameter: Dempher : chan29FreqDempher : MB Offset: 6723
+    uint16_t chan29FreqDempher;
+    // Parameter: Type Value : chan29FreqTypeValue : MB Offset: 6724
+    uint16_t chan29FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan30FreqSignalType : MB Offset: 6725
+    uint16_t chan30FreqSignalType;
+    // Parameter: Additional parameter : chan30FreqAdditionalParameter : MB Offset: 6726
+    uint8_t chan30FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan30ImpulseDuration : MB Offset: 6732
+    float chan30ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan30FreqLowMeasureLim : MB Offset: 6734
+    float chan30FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan30FreqHighMeasureLim : MB Offset: 6736
+    float chan30FreqHighMeasureLim;
+    // Parameter: Name Channel : chan30FreqName : MB Offset: 6738
+    uint8_t chan30FreqName[8];
+    // Parameter: Unit Name : chan30FreqUnit : MB Offset: 6742
+    uint8_t chan30FreqUnit[4];
+    // Parameter: Impulse Weight : chan30ImpWeight : MB Offset: 6744
+    float chan30ImpWeight;
+    // Parameter: Period : chan30FreqPeriod : MB Offset: 6746
+    float chan30FreqPeriod;
+    // Parameter: Dempher : chan30FreqDempher : MB Offset: 6748
+    uint16_t chan30FreqDempher;
+    // Parameter: Type Value : chan30FreqTypeValue : MB Offset: 6749
+    uint16_t chan30FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan31FreqSignalType : MB Offset: 6750
+    uint16_t chan31FreqSignalType;
+    // Parameter: Additional parameter : chan31FreqalAdditionalParameter : MB Offset: 6751
+    uint8_t chan31FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan31ImpulseDuration : MB Offset: 6757
+    float chan31ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan31FreqLowMeasureLim : MB Offset: 6759
+    float chan31FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan31FreqHighMeasureLim : MB Offset: 6761
+    float chan31FreqHighMeasureLim;
+    // Parameter: Name Channel : chan31FreqName : MB Offset: 6763
+    uint8_t chan31FreqName[8];
+    // Parameter: Unit Name : chan31FreqUnit : MB Offset: 6767
+    uint8_t chan31FreqUnit[4];
+    // Parameter: Impulse Weight : chan31FreqImpWeight : MB Offset: 6769
+    float chan31FreqImpWeight;
+    // Parameter: Period : chan31FreqPeriod : MB Offset: 6771
+    float chan31FreqPeriod;
+    // Parameter: Dempher : chan31FreqDempher : MB Offset: 6773
+    uint16_t chan31FreqDempher;
+    // Parameter: Type Value : chan31FreqTypeValue : MB Offset: 6774
+    uint16_t chan31FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan32FreqSignalType : MB Offset: 6775
+    uint16_t chan32FreqSignalType;
+    // Parameter: Additional parameter : chan32FreqAdditionalParameter : MB Offset: 6776
+    uint8_t chan32FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan32ImpulseDuration : MB Offset: 6782
+    float chan32ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan32FreqLowMeasureLim : MB Offset: 6784
+    float chan32FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan32FreqHighMeasureLim : MB Offset: 6786
+    float chan32FreqHighMeasureLim;
+    // Parameter: Name Channel : chan32FreqName : MB Offset: 6788
+    uint8_t chan32FreqName[8];
+    // Parameter: Unit Name : chan32FreqUnit : MB Offset: 6792
+    uint8_t chan32FreqUnit[4];
+    // Parameter: Impulse Weight : chan32ImpWeight : MB Offset: 6794
+    float chan32ImpWeight;
+    // Parameter: Period : chan32FreqPeriod : MB Offset: 6796
+    float chan32FreqPeriod;
+    // Parameter: Dempher : chan32FreqDempher : MB Offset: 6798
+    uint16_t chan32FreqDempher;
+    // Parameter: Type Value : chan32FreqTypeValue : MB Offset: 6799
+    uint16_t chan32FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan33FreqSignalType : MB Offset: 6800
+    uint16_t chan33FreqSignalType;
+    // Parameter: Additional parameter : chan33FreqalAdditionalParameter : MB Offset: 6801
+    uint8_t chan33FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan33ImpulseDuration : MB Offset: 6807
+    float chan33ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan33FreqLowMeasureLim : MB Offset: 6809
+    float chan33FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan33FreqHighMeasureLim : MB Offset: 6811
+    float chan33FreqHighMeasureLim;
+    // Parameter: Name Channel : chan33FreqName : MB Offset: 6813
+    uint8_t chan33FreqName[8];
+    // Parameter: Unit Name : chan33FreqUnit : MB Offset: 6817
+    uint8_t chan33FreqUnit[4];
+    // Parameter: Impulse Weight : chan33FreqImpWeight : MB Offset: 6819
+    float chan33FreqImpWeight;
+    // Parameter: Period : chan33FreqPeriod : MB Offset: 6821
+    float chan33FreqPeriod;
+    // Parameter: Dempher : chan33FreqDempher : MB Offset: 6823
+    uint16_t chan33FreqDempher;
+    // Parameter: Type Value : chan33FreqTypeValue : MB Offset: 6824
+    uint16_t chan33FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan34FreqSignalType : MB Offset: 6825
+    uint16_t chan34FreqSignalType;
+    // Parameter: Additional parameter : chan34FreqAdditionalParameter : MB Offset: 6826
+    uint8_t chan34FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan34ImpulseDuration : MB Offset: 6832
+    float chan34ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan34FreqLowMeasureLim : MB Offset: 6834
+    float chan34FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan34FreqHighMeasureLim : MB Offset: 6836
+    float chan34FreqHighMeasureLim;
+    // Parameter: Name Channel : chan34FreqName : MB Offset: 6838
+    uint8_t chan34FreqName[8];
+    // Parameter: Unit Name : chan34FreqUnit : MB Offset: 6842
+    uint8_t chan34FreqUnit[4];
+    // Parameter: Impulse Weight : chan34ImpWeight : MB Offset: 6844
+    float chan34ImpWeight;
+    // Parameter: Period : chan34FreqPeriod : MB Offset: 6846
+    float chan34FreqPeriod;
+    // Parameter: Dempher : chan34FreqDempher : MB Offset: 6848
+    uint16_t chan34FreqDempher;
+    // Parameter: Type Value : chan34FreqTypeValue : MB Offset: 6849
+    uint16_t chan34FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan35FreqSignalType : MB Offset: 6850
+    uint16_t chan35FreqSignalType;
+    // Parameter: Additional parameter : chan35FreqalAdditionalParameter : MB Offset: 6851
+    uint8_t chan35FreqalAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan35ImpulseDuration : MB Offset: 6857
+    float chan35ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan35FreqLowMeasureLim : MB Offset: 6859
+    float chan35FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan35FreqHighMeasureLim : MB Offset: 6861
+    float chan35FreqHighMeasureLim;
+    // Parameter: Name Channel : chan35FreqName : MB Offset: 6863
+    uint8_t chan35FreqName[8];
+    // Parameter: Unit Name : chan35FreqUnit : MB Offset: 6867
+    uint8_t chan35FreqUnit[4];
+    // Parameter: Impulse Weight : chan35FreqImpWeight : MB Offset: 6869
+    float chan35FreqImpWeight;
+    // Parameter: Period : chan35FreqPeriod : MB Offset: 6871
+    float chan35FreqPeriod;
+    // Parameter: Dempher : chan35FreqDempher : MB Offset: 6873
+    uint16_t chan35FreqDempher;
+    // Parameter: Type Value : chan35FreqTypeValue : MB Offset: 6874
+    uint16_t chan35FreqTypeValue;
+    // Parameter: Signal Type Frequency : chan36FreqSignalType : MB Offset: 6875
+    uint16_t chan36FreqSignalType;
+    // Parameter: Additional parameter : chan36FreqAdditionalParameter : MB Offset: 6876
+    uint8_t chan36FreqAdditionalParameter[12];
+    // Parameter: Impulse Duration : chan36ImpulseDuration : MB Offset: 6882
+    float chan36ImpulseDuration;
+    // Parameter: Measure signal low limit  : chan36FreqLowMeasureLim : MB Offset: 6884
+    float chan36FreqLowMeasureLim;
+    // Parameter: Measure signal high limit  : chan36FreqHighMeasureLim : MB Offset: 6886
+    float chan36FreqHighMeasureLim;
+    // Parameter: Name Channel : chan36FreqName : MB Offset: 6888
+    uint8_t chan36FreqName[8];
+    // Parameter: Unit Name : chan36FreqUnit : MB Offset: 6892
+    uint8_t chan36FreqUnit[4];
+    // Parameter: Impulse Weight : chan36ImpWeight : MB Offset: 6894
+    float chan36ImpWeight;
+    // Parameter: Period : chan36FreqPeriod : MB Offset: 6896
+    float chan36FreqPeriod;
+    // Parameter: Dempher : chan36FreqDempher : MB Offset: 6898
+    uint16_t chan36FreqDempher;
+    // Parameter: Type Value : chan36FreqTypeValue : MB Offset: 6899
+    uint16_t chan36FreqTypeValue;
+    // Parameter: SysOCalb : chan1SysOCR : MB Offset: 10000
+    uint16_t chan1SysOCR;
+    // Parameter: SysGCalb : chan1SysFSR : MB Offset: 10001
+    uint16_t chan1SysFSR;
+    // Parameter: CalibOCR20mV : chan1OCR20mV : MB Offset: 10002
+    uint32_t chan1OCR20mV;
+    // Parameter: CalibFCR20mV : chan1FSR20mV : MB Offset: 10004
+    uint32_t chan1FSR20mV;
+    // Parameter: CalibFDate20mV : chan1Date20mV : MB Offset: 10006
+    uint32_t chan1Date20mV;
+    // Parameter: CalibOCR100mV : chan1OCR100mV : MB Offset: 10008
+    uint32_t chan1OCR100mV;
+    // Parameter: CalibFCR100mV : chan1FSR100mV : MB Offset: 10010
+    uint32_t chan1FSR100mV;
+    // Parameter: CalibFDate100mV : chan1Date100mV : MB Offset: 10012
+    uint32_t chan1Date100mV;
+    // Parameter: CalibOCR1V : chan1OCR1V : MB Offset: 10014
+    uint32_t chan1OCR1V;
+    // Parameter: CalibFCR1V : chan1FSR1V : MB Offset: 10016
+    uint32_t chan1FSR1V;
+    // Parameter: CalibFDate1V : chan1Date1V : MB Offset: 10018
+    uint32_t chan1Date1V;
+    // Parameter: CalibOCR10V : chan1OCR10V : MB Offset: 10020
+    uint32_t chan1OCR10V;
+    // Parameter: CalibFCR10V : chan1FSR10V : MB Offset: 10022
+    uint32_t chan1FSR10V;
+    // Parameter: CalibFDate10V : chan1Date10V : MB Offset: 10024
+    uint32_t chan1Date10V;
+    // Parameter: CalibOCR30V : chan1OCR30V : MB Offset: 10026
+    uint32_t chan1OCR30V;
+    // Parameter: CalibFCR30V : chan1FSR30V : MB Offset: 10028
+    uint32_t chan1FSR30V;
+    // Parameter: CalibFDate30V : chan1Date30V : MB Offset: 10030
+    uint32_t chan1Date30V;
+    // Parameter: CalibOCR20mA : chan1OCR20mA : MB Offset: 10032
+    uint32_t chan1OCR20mA;
+    // Parameter: CalibFCR20mA : chan1FSR20mA : MB Offset: 10034
+    uint32_t chan1FSR20mA;
+    // Parameter: CalibFDate20mA : chan1Date20mA : MB Offset: 10036
+    uint32_t chan1Date20mA;
+    // Parameter: CalibOCR4x : chan1OCR4x : MB Offset: 10038
+    uint32_t chan1OCR4x;
+    // Parameter: CalibFSR4x : chan1FSR4x : MB Offset: 10040
+    uint32_t chan1FSR4x;
+    // Parameter: CalibDate4x : chan1Date4x : MB Offset: 10042
+    uint32_t chan1Date4x;
+    // Parameter: CalibOCR3x : chan1OCR3x : MB Offset: 10044
+    uint32_t chan1OCR3x;
+    // Parameter: CalibFSR3x : chan1FSR3x : MB Offset: 10046
+    uint32_t chan1FSR3x;
+    // Parameter: CalibDate3x : chan1Date3x : MB Offset: 10048
+    uint32_t chan1Date3x;
+    // Parameter: CalibOCRinternal : chan1OCRinternal : MB Offset: 10050
+    float chan1OCRinternal;
+    // Parameter: CalibFSRinternal : chan1FSRinternal : MB Offset: 10052
+    float chan1FSRinternal;
+    // Parameter: CalibDateinternal : chan1DateInternal : MB Offset: 10054
+    uint32_t chan1DateInternal;
+    // Parameter: SysOCalb : chan2SysOCR : MB Offset: 10100
+    uint16_t chan2SysOCR;
+    // Parameter: SysGCalb : chan2SysFSR : MB Offset: 10101
+    uint16_t chan2SysFSR;
+    // Parameter: CalibOCR20mV : chan2OCR20mV : MB Offset: 10102
+    uint32_t chan2OCR20mV;
+    // Parameter: CalibFCR20mV : chan2FSR20mV : MB Offset: 10104
+    uint32_t chan2FSR20mV;
+    // Parameter: CalibFDate20mV : chan2Date20mV : MB Offset: 10106
+    uint32_t chan2Date20mV;
+    // Parameter: CalibOCR100mV : chan2OCR100mV : MB Offset: 10108
+    uint32_t chan2OCR100mV;
+    // Parameter: CalibFCR100mV : chan2FSR100mV : MB Offset: 10110
+    uint32_t chan2FSR100mV;
+    // Parameter: CalibFDate100mV : chan2Date100mV : MB Offset: 10112
+    uint32_t chan2Date100mV;
+    // Parameter: CalibOCR1V : chan2OCR1V : MB Offset: 10114
+    uint32_t chan2OCR1V;
+    // Parameter: CalibFCR1V : chan2FSR1V : MB Offset: 10116
+    uint32_t chan2FSR1V;
+    // Parameter: CalibFDate1V : chan2Date1V : MB Offset: 10118
+    uint32_t chan2Date1V;
+    // Parameter: CalibOCR10V : chan2OCR10V : MB Offset: 10120
+    uint32_t chan2OCR10V;
+    // Parameter: CalibFCR10V : chan2FSR10V : MB Offset: 10122
+    uint32_t chan2FSR10V;
+    // Parameter: CalibFDate10V : chan2Date10V : MB Offset: 10124
+    uint32_t chan2Date10V;
+    // Parameter: CalibOCR30V : chan2OCR30V : MB Offset: 10126
+    uint32_t chan2OCR30V;
+    // Parameter: CalibFCR30V : chan2FSR30V : MB Offset: 10128
+    uint32_t chan2FSR30V;
+    // Parameter: CalibFDate30V : chan2Date30V : MB Offset: 10130
+    uint32_t chan2Date30V;
+    // Parameter: CalibOCR20mA : chan2OCR20mA : MB Offset: 10132
+    uint32_t chan2OCR20mA;
+    // Parameter: CalibFCR20mA : chan2FSR20mA : MB Offset: 10134
+    uint32_t chan2FSR20mA;
+    // Parameter: CalibFDate20mA : chan2Date20mA : MB Offset: 10136
+    uint32_t chan2Date20mA;
+    // Parameter: CalibOCR4x : chan2OCR4x : MB Offset: 10138
+    uint32_t chan2OCR4x;
+    // Parameter: CalibFSR4x : chan2FSR4x : MB Offset: 10140
+    uint32_t chan2FSR4x;
+    // Parameter: CalibDate4x : chan2Date4x : MB Offset: 10142
+    uint32_t chan2Date4x;
+    // Parameter: CalibOCR3x : chan2OCR3x : MB Offset: 10144
+    uint32_t chan2OCR3x;
+    // Parameter: CalibFSR3x : chan2FSR3x : MB Offset: 10146
+    uint32_t chan2FSR3x;
+    // Parameter: CalibDate3x : chan2Date3x : MB Offset: 10148
+    uint32_t chan2Date3x;
+    // Parameter: CalibOCRinternal : chan2OCRinternal : MB Offset: 10150
+    float chan2OCRinternal;
+    // Parameter: CalibFSRinternal : chan2FSRinternal : MB Offset: 10152
+    float chan2FSRinternal;
+    // Parameter: CalibDateinternal : chan2DateInternal : MB Offset: 10154
+    uint32_t chan2DateInternal;
+    // Parameter: SysOCalb : chan3SysOCR : MB Offset: 10200
+    uint16_t chan3SysOCR;
+    // Parameter: SysGCalb : chan3SysFSR : MB Offset: 10201
+    uint16_t chan3SysFSR;
+    // Parameter: CalibOCR20mV : chan3OCR20mV : MB Offset: 10202
+    uint32_t chan3OCR20mV;
+    // Parameter: CalibFCR20mV : chan3FSR20mV : MB Offset: 10204
+    uint32_t chan3FSR20mV;
+    // Parameter: CalibFDate20mV : chan3Date20mV : MB Offset: 10206
+    uint32_t chan3Date20mV;
+    // Parameter: CalibOCR100mV : chan3OCR100mV : MB Offset: 10208
+    uint32_t chan3OCR100mV;
+    // Parameter: CalibFCR100mV : chan3FSR100mV : MB Offset: 10210
+    uint32_t chan3FSR100mV;
+    // Parameter: CalibFDate100mV : chan3Date100mV : MB Offset: 10212
+    uint32_t chan3Date100mV;
+    // Parameter: CalibOCR1V : chan3OCR1V : MB Offset: 10214
+    uint32_t chan3OCR1V;
+    // Parameter: CalibFCR1V : chan3FSR1V : MB Offset: 10216
+    uint32_t chan3FSR1V;
+    // Parameter: CalibFDate1V : chan3Date1V : MB Offset: 10218
+    uint32_t chan3Date1V;
+    // Parameter: CalibOCR10V : chan3OCR10V : MB Offset: 10220
+    uint32_t chan3OCR10V;
+    // Parameter: CalibFCR10V : chan3FSR10V : MB Offset: 10222
+    uint32_t chan3FSR10V;
+    // Parameter: CalibFDate10V : chan3Date10V : MB Offset: 10224
+    uint32_t chan3Date10V;
+    // Parameter: CalibOCR30V : chan3OCR30V : MB Offset: 10226
+    uint32_t chan3OCR30V;
+    // Parameter: CalibFCR30V : chan3FSR30V : MB Offset: 10228
+    uint32_t chan3FSR30V;
+    // Parameter: CalibFDate30V : chan3Date30V : MB Offset: 10230
+    uint32_t chan3Date30V;
+    // Parameter: CalibOCR20mA : chan3OCR20mA : MB Offset: 10232
+    uint32_t chan3OCR20mA;
+    // Parameter: CalibFCR20mA : chan3FSR20mA : MB Offset: 10234
+    uint32_t chan3FSR20mA;
+    // Parameter: CalibFDate20mA : chan3Date20mA : MB Offset: 10236
+    uint32_t chan3Date20mA;
+    // Parameter: CalibOCR4x : chan3OCR4x : MB Offset: 10238
+    uint32_t chan3OCR4x;
+    // Parameter: CalibFSR4x : chan3FSR4x : MB Offset: 10240
+    uint32_t chan3FSR4x;
+    // Parameter: CalibDate4x : chan3Date4x : MB Offset: 10242
+    uint32_t chan3Date4x;
+    // Parameter: CalibOCR3x : chan3OCR3x : MB Offset: 10244
+    uint32_t chan3OCR3x;
+    // Parameter: CalibFSR3x : chan3FSR3x : MB Offset: 10246
+    uint32_t chan3FSR3x;
+    // Parameter: CalibDate3x : chan3Date3x : MB Offset: 10248
+    uint32_t chan3Date3x;
+    // Parameter: CalibOCRinternal : chan3OCRinternal : MB Offset: 10250
+    float chan3OCRinternal;
+    // Parameter: CalibFSRinternal : chan3FSRinternal : MB Offset: 10252
+    float chan3FSRinternal;
+    // Parameter: CalibDateinternal : chan3DateInternal : MB Offset: 10254
+    uint32_t chan3DateInternal;
+    // Parameter: SysOCalb : chan4SysOCR : MB Offset: 10300
+    uint16_t chan4SysOCR;
+    // Parameter: SysGCalb : chan4SysFSR : MB Offset: 10301
+    uint16_t chan4SysFSR;
+    // Parameter: CalibOCR20mV : chan4OCR20mV : MB Offset: 10302
+    uint32_t chan4OCR20mV;
+    // Parameter: CalibFCR20mV : chan4FSR20mV : MB Offset: 10304
+    uint32_t chan4FSR20mV;
+    // Parameter: CalibFDate20mV : chan4Date20mV : MB Offset: 10306
+    uint32_t chan4Date20mV;
+    // Parameter: CalibOCR100mV : chan4OCR100mV : MB Offset: 10308
+    uint32_t chan4OCR100mV;
+    // Parameter: CalibFCR100mV : chan4FSR100mV : MB Offset: 10310
+    uint32_t chan4FSR100mV;
+    // Parameter: CalibFDate100mV : chan4Date100mV : MB Offset: 10312
+    uint32_t chan4Date100mV;
+    // Parameter: CalibOCR1V : chan4OCR1V : MB Offset: 10314
+    uint32_t chan4OCR1V;
+    // Parameter: CalibFCR1V : chan4FSR1V : MB Offset: 10316
+    uint32_t chan4FSR1V;
+    // Parameter: CalibFDate1V : chan4Date1V : MB Offset: 10318
+    uint32_t chan4Date1V;
+    // Parameter: CalibOCR10V : chan4OCR10V : MB Offset: 10320
+    uint32_t chan4OCR10V;
+    // Parameter: CalibFCR10V : chan4FSR10V : MB Offset: 10322
+    uint32_t chan4FSR10V;
+    // Parameter: CalibFDate10V : chan4Date10V : MB Offset: 10324
+    uint32_t chan4Date10V;
+    // Parameter: CalibOCR30V : chan4OCR30V : MB Offset: 10326
+    uint32_t chan4OCR30V;
+    // Parameter: CalibFCR30V : chan4FSR30V : MB Offset: 10328
+    uint32_t chan4FSR30V;
+    // Parameter: CalibFDate30V : chan4Date30V : MB Offset: 10330
+    uint32_t chan4Date30V;
+    // Parameter: CalibOCR20mA : chan4OCR20mA : MB Offset: 10332
+    uint32_t chan4OCR20mA;
+    // Parameter: CalibFCR20mA : chan4FSR20mA : MB Offset: 10334
+    uint32_t chan4FSR20mA;
+    // Parameter: CalibFDate20mA : chan4Date20mA : MB Offset: 10336
+    uint32_t chan4Date20mA;
+    // Parameter: CalibOCR4x : chan4OCR4x : MB Offset: 10338
+    uint32_t chan4OCR4x;
+    // Parameter: CalibFSR4x : chan4FSR4x : MB Offset: 10340
+    uint32_t chan4FSR4x;
+    // Parameter: CalibDate4x : chan4Date4x : MB Offset: 10342
+    uint32_t chan4Date4x;
+    // Parameter: CalibOCR3x : chan4OCR3x : MB Offset: 10344
+    uint32_t chan4OCR3x;
+    // Parameter: CalibFSR3x : chan4FSR3x : MB Offset: 10346
+    uint32_t chan4FSR3x;
+    // Parameter: CalibDate3x : chan4Date3x : MB Offset: 10348
+    uint32_t chan4Date3x;
+    // Parameter: CalibOCRinternal : chan4OCRinternal : MB Offset: 10350
+    float chan4OCRinternal;
+    // Parameter: CalibFSRinternal : chan4FSRinternal : MB Offset: 10352
+    float chan4FSRinternal;
+    // Parameter: CalibDateinternal : chan4DateInternal : MB Offset: 10354
+    uint32_t chan4DateInternal;
+    // Parameter: SysOCalb : chan5SysOCR : MB Offset: 10400
+    uint16_t chan5SysOCR;
+    // Parameter: SysGCalb : chan5SysFSR : MB Offset: 10401
+    uint16_t chan5SysFSR;
+    // Parameter: CalibOCR20mV : chan5OCR20mV : MB Offset: 10402
+    uint32_t chan5OCR20mV;
+    // Parameter: CalibFCR20mV : chan5FSR20mV : MB Offset: 10404
+    uint32_t chan5FSR20mV;
+    // Parameter: CalibFDate20mV : chan5Date20mV : MB Offset: 10406
+    uint32_t chan5Date20mV;
+    // Parameter: CalibOCR100mV : chan5OCR100mV : MB Offset: 10408
+    uint32_t chan5OCR100mV;
+    // Parameter: CalibFCR100mV : chan5FSR100mV : MB Offset: 10410
+    uint32_t chan5FSR100mV;
+    // Parameter: CalibFDate100mV : chan5Date100mV : MB Offset: 10412
+    uint32_t chan5Date100mV;
+    // Parameter: CalibOCR1V : chan5OCR1V : MB Offset: 10414
+    uint32_t chan5OCR1V;
+    // Parameter: CalibFCR1V : chan5FSR1V : MB Offset: 10416
+    uint32_t chan5FSR1V;
+    // Parameter: CalibFDate1V : chan5Date1V : MB Offset: 10418
+    uint32_t chan5Date1V;
+    // Parameter: CalibOCR10V : chan5OCR10V : MB Offset: 10420
+    uint32_t chan5OCR10V;
+    // Parameter: CalibFCR10V : chan5FSR10V : MB Offset: 10422
+    uint32_t chan5FSR10V;
+    // Parameter: CalibFDate10V : chan5Date10V : MB Offset: 10424
+    uint32_t chan5Date10V;
+    // Parameter: CalibOCR30V : chan5OCR30V : MB Offset: 10426
+    uint32_t chan5OCR30V;
+    // Parameter: CalibFCR30V : chan5FSR30V : MB Offset: 10428
+    uint32_t chan5FSR30V;
+    // Parameter: CalibFDate30V : chan5Date30V : MB Offset: 10430
+    uint32_t chan5Date30V;
+    // Parameter: CalibOCR20mA : chan5OCR20mA : MB Offset: 10432
+    uint32_t chan5OCR20mA;
+    // Parameter: CalibFCR20mA : chan5FSR20mA : MB Offset: 10434
+    uint32_t chan5FSR20mA;
+    // Parameter: CalibFDate20mA : chan5Date20mA : MB Offset: 10436
+    uint32_t chan5Date20mA;
+    // Parameter: CalibOCR4x : chan5OCR4x : MB Offset: 10438
+    uint32_t chan5OCR4x;
+    // Parameter: CalibFSR4x : chan5FSR4x : MB Offset: 10440
+    uint32_t chan5FSR4x;
+    // Parameter: CalibDate4x : chan5Date4x : MB Offset: 10442
+    uint32_t chan5Date4x;
+    // Parameter: CalibOCR3x : chan5OCR3x : MB Offset: 10444
+    uint32_t chan5OCR3x;
+    // Parameter: CalibFSR3x : chan5FSR3x : MB Offset: 10446
+    uint32_t chan5FSR3x;
+    // Parameter: CalibDate3x : chan5Date3x : MB Offset: 10448
+    uint32_t chan5Date3x;
+    // Parameter: CalibOCRinternal : chan5OCRinternal : MB Offset: 10450
+    float chan5OCRinternal;
+    // Parameter: CalibFSRinternal : chan5FSRinternal : MB Offset: 10452
+    float chan5FSRinternal;
+    // Parameter: CalibDateinternal : chan5DateInternal : MB Offset: 10454
+    uint32_t chan5DateInternal;
+    // Parameter: SysOCalb : chan6SysOCR : MB Offset: 10500
+    uint16_t chan6SysOCR;
+    // Parameter: SysGCalb : chan6SysFSR : MB Offset: 10501
+    uint16_t chan6SysFSR;
+    // Parameter: CalibOCR20mV : chan6OCR20mV : MB Offset: 10502
+    uint32_t chan6OCR20mV;
+    // Parameter: CalibFCR20mV : chan6FSR20mV : MB Offset: 10504
+    uint32_t chan6FSR20mV;
+    // Parameter: CalibFDate20mV : chan6Date20mV : MB Offset: 10506
+    uint32_t chan6Date20mV;
+    // Parameter: CalibOCR100mV : chan6OCR100mV : MB Offset: 10508
+    uint32_t chan6OCR100mV;
+    // Parameter: CalibFCR100mV : chan6FSR100mV : MB Offset: 10510
+    uint32_t chan6FSR100mV;
+    // Parameter: CalibFDate100mV : chan6Date100mV : MB Offset: 10512
+    uint32_t chan6Date100mV;
+    // Parameter: CalibOCR1V : chan6OCR1V : MB Offset: 10514
+    uint32_t chan6OCR1V;
+    // Parameter: CalibFCR1V : chan6FSR1V : MB Offset: 10516
+    uint32_t chan6FSR1V;
+    // Parameter: CalibFDate1V : chan6Date1V : MB Offset: 10518
+    uint32_t chan6Date1V;
+    // Parameter: CalibOCR10V : chan6OCR10V : MB Offset: 10520
+    uint32_t chan6OCR10V;
+    // Parameter: CalibFCR10V : chan6FSR10V : MB Offset: 10522
+    uint32_t chan6FSR10V;
+    // Parameter: CalibFDate10V : chan6Date10V : MB Offset: 10524
+    uint32_t chan6Date10V;
+    // Parameter: CalibOCR30V : chan6OCR30V : MB Offset: 10526
+    uint32_t chan6OCR30V;
+    // Parameter: CalibFCR30V : chan6FSR30V : MB Offset: 10528
+    uint32_t chan6FSR30V;
+    // Parameter: CalibFDate30V : chan6Date30V : MB Offset: 10530
+    uint32_t chan6Date30V;
+    // Parameter: CalibOCR20mA : chan6OCR20mA : MB Offset: 10532
+    uint32_t chan6OCR20mA;
+    // Parameter: CalibFCR20mA : chan6FSR20mA : MB Offset: 10534
+    uint32_t chan6FSR20mA;
+    // Parameter: CalibFDate20mA : chan6Date20mA : MB Offset: 10536
+    uint32_t chan6Date20mA;
+    // Parameter: CalibOCR4x : chan6OCR4x : MB Offset: 10538
+    uint32_t chan6OCR4x;
+    // Parameter: CalibFSR4x : chan6FSR4x : MB Offset: 10540
+    uint32_t chan6FSR4x;
+    // Parameter: CalibDate4x : chan6Date4x : MB Offset: 10542
+    uint32_t chan6Date4x;
+    // Parameter: CalibOCR3x : chan6OCR3x : MB Offset: 10544
+    uint32_t chan6OCR3x;
+    // Parameter: CalibFSR3x : chan6FSR3x : MB Offset: 10546
+    uint32_t chan6FSR3x;
+    // Parameter: CalibDate3x : chan6Date3x : MB Offset: 10548
+    uint32_t chan6Date3x;
+    // Parameter: CalibOCRinternal : chan6OCRinternal : MB Offset: 10550
+    float chan6OCRinternal;
+    // Parameter: CalibFSRinternal : chan6FSRinternal : MB Offset: 10552
+    float chan6FSRinternal;
+    // Parameter: CalibDateinternal : chan6DateInternal : MB Offset: 10554
+    uint32_t chan6DateInternal;
+    // Parameter: SysOCalb : chan7SysOCR : MB Offset: 10600
+    uint16_t chan7SysOCR;
+    // Parameter: SysGCalb : chan7SysFSR : MB Offset: 10601
+    uint16_t chan7SysFSR;
+    // Parameter: CalibOCR20mV : chan7OCR20mV : MB Offset: 10602
+    uint32_t chan7OCR20mV;
+    // Parameter: CalibFCR20mV : chan7FSR20mV : MB Offset: 10604
+    uint32_t chan7FSR20mV;
+    // Parameter: CalibFDate20mV : chan7Date20mV : MB Offset: 10606
+    uint32_t chan7Date20mV;
+    // Parameter: CalibOCR100mV : chan7OCR100mV : MB Offset: 10608
+    uint32_t chan7OCR100mV;
+    // Parameter: CalibFCR100mV : chan7FSR100mV : MB Offset: 10610
+    uint32_t chan7FSR100mV;
+    // Parameter: CalibFDate100mV : chan7Date100mV : MB Offset: 10612
+    uint32_t chan7Date100mV;
+    // Parameter: CalibOCR1V : chan7OCR1V : MB Offset: 10614
+    uint32_t chan7OCR1V;
+    // Parameter: CalibFCR1V : chan7FSR1V : MB Offset: 10616
+    uint32_t chan7FSR1V;
+    // Parameter: CalibFDate1V : chan7Date1V : MB Offset: 10618
+    uint32_t chan7Date1V;
+    // Parameter: CalibOCR10V : chan7OCR10V : MB Offset: 10620
+    uint32_t chan7OCR10V;
+    // Parameter: CalibFCR10V : chan7FSR10V : MB Offset: 10622
+    uint32_t chan7FSR10V;
+    // Parameter: CalibFDate10V : chan7Date10V : MB Offset: 10624
+    uint32_t chan7Date10V;
+    // Parameter: CalibOCR30V : chan7OCR30V : MB Offset: 10626
+    uint32_t chan7OCR30V;
+    // Parameter: CalibFCR30V : chan7FSR30V : MB Offset: 10628
+    uint32_t chan7FSR30V;
+    // Parameter: CalibFDate30V : chan7Date30V : MB Offset: 10630
+    uint32_t chan7Date30V;
+    // Parameter: CalibOCR20mA : chan7OCR20mA : MB Offset: 10632
+    uint32_t chan7OCR20mA;
+    // Parameter: CalibFCR20mA : chan7FSR20mA : MB Offset: 10634
+    uint32_t chan7FSR20mA;
+    // Parameter: CalibFDate20mA : chan7Date20mA : MB Offset: 10636
+    uint32_t chan7Date20mA;
+    // Parameter: CalibOCR4x : chan7OCR4x : MB Offset: 10638
+    uint32_t chan7OCR4x;
+    // Parameter: CalibFSR4x : chan7FSR4x : MB Offset: 10640
+    uint32_t chan7FSR4x;
+    // Parameter: CalibDate4x : chan7Date4x : MB Offset: 10642
+    uint32_t chan7Date4x;
+    // Parameter: CalibOCR3x : chan7OCR3x : MB Offset: 10644
+    uint32_t chan7OCR3x;
+    // Parameter: CalibFSR3x : chan7FSR3x : MB Offset: 10646
+    uint32_t chan7FSR3x;
+    // Parameter: CalibDate3x : chan7Date3x : MB Offset: 10648
+    uint32_t chan7Date3x;
+    // Parameter: CalibOCRinternal : chan7OCRinternal : MB Offset: 10650
+    float chan7OCRinternal;
+    // Parameter: CalibFSRinternal : chan7FSRinternal : MB Offset: 10652
+    float chan7FSRinternal;
+    // Parameter: CalibDateinternal : chan7DateInternal : MB Offset: 10654
+    uint32_t chan7DateInternal;
+    // Parameter: SysOCalb : chan8SysOCR : MB Offset: 10700
+    uint16_t chan8SysOCR;
+    // Parameter: SysGCalb : chan8SysFSR : MB Offset: 10701
+    uint16_t chan8SysFSR;
+    // Parameter: CalibOCR20mV : chan8OCR20mV : MB Offset: 10702
+    uint32_t chan8OCR20mV;
+    // Parameter: CalibFCR20mV : chan8FSR20mV : MB Offset: 10704
+    uint32_t chan8FSR20mV;
+    // Parameter: CalibFDate20mV : chan8Date20mV : MB Offset: 10706
+    uint32_t chan8Date20mV;
+    // Parameter: CalibOCR100mV : chan8OCR100mV : MB Offset: 10708
+    uint32_t chan8OCR100mV;
+    // Parameter: CalibFCR100mV : chan8FSR100mV : MB Offset: 10710
+    uint32_t chan8FSR100mV;
+    // Parameter: CalibFDate100mV : chan8Date100mV : MB Offset: 10712
+    uint32_t chan8Date100mV;
+    // Parameter: CalibOCR1V : chan8OCR1V : MB Offset: 10714
+    uint32_t chan8OCR1V;
+    // Parameter: CalibFCR1V : chan8FSR1V : MB Offset: 10716
+    uint32_t chan8FSR1V;
+    // Parameter: CalibFDate1V : chan8Date1V : MB Offset: 10718
+    uint32_t chan8Date1V;
+    // Parameter: CalibOCR10V : chan8OCR10V : MB Offset: 10720
+    uint32_t chan8OCR10V;
+    // Parameter: CalibFCR10V : chan8FSR10V : MB Offset: 10722
+    uint32_t chan8FSR10V;
+    // Parameter: CalibFDate10V : chan8Date10V : MB Offset: 10724
+    uint32_t chan8Date10V;
+    // Parameter: CalibOCR30V : chan8OCR30V : MB Offset: 10726
+    uint32_t chan8OCR30V;
+    // Parameter: CalibFCR30V : chan8FSR30V : MB Offset: 10728
+    uint32_t chan8FSR30V;
+    // Parameter: CalibFDate30V : chan8Date30V : MB Offset: 10730
+    uint32_t chan8Date30V;
+    // Parameter: CalibOCR20mA : chan8OCR20mA : MB Offset: 10732
+    uint32_t chan8OCR20mA;
+    // Parameter: CalibFCR20mA : chan8FSR20mA : MB Offset: 10734
+    uint32_t chan8FSR20mA;
+    // Parameter: CalibFDate20mA : chan8Date20mA : MB Offset: 10736
+    uint32_t chan8Date20mA;
+    // Parameter: CalibOCR4x : chan8OCR4x : MB Offset: 10738
+    uint32_t chan8OCR4x;
+    // Parameter: CalibFSR4x : chan8FSR4x : MB Offset: 10740
+    uint32_t chan8FSR4x;
+    // Parameter: CalibDate4x : chan8Date4x : MB Offset: 10742
+    uint32_t chan8Date4x;
+    // Parameter: CalibOCR3x : chan8OCR3x : MB Offset: 10744
+    uint32_t chan8OCR3x;
+    // Parameter: CalibFSR3x : chan8FSR3x : MB Offset: 10746
+    uint32_t chan8FSR3x;
+    // Parameter: CalibDate3x : chan8Date3x : MB Offset: 10748
+    uint32_t chan8Date3x;
+    // Parameter: CalibOCRinternal : chan8OCRinternal : MB Offset: 10750
+    float chan8OCRinternal;
+    // Parameter: CalibFSRinternal : chan8FSRinternal : MB Offset: 10752
+    float chan8FSRinternal;
+    // Parameter: CalibDateinternal : chan8DateInternal : MB Offset: 10754
+    uint32_t chan8DateInternal;
+    // Parameter: SysOCalb : chan9SysOCR : MB Offset: 10800
+    uint16_t chan9SysOCR;
+    // Parameter: SysGCalb : chan9SysFSR : MB Offset: 10801
+    uint16_t chan9SysFSR;
+    // Parameter: CalibOCR20mV : chan9OCR20mV : MB Offset: 10802
+    uint32_t chan9OCR20mV;
+    // Parameter: CalibFCR20mV : chan9FSR20mV : MB Offset: 10804
+    uint32_t chan9FSR20mV;
+    // Parameter: CalibFDate20mV : chan9Date20mV : MB Offset: 10806
+    uint32_t chan9Date20mV;
+    // Parameter: CalibOCR100mV : chan9OCR100mV : MB Offset: 10808
+    uint32_t chan9OCR100mV;
+    // Parameter: CalibFCR100mV : chan9FSR100mV : MB Offset: 10810
+    uint32_t chan9FSR100mV;
+    // Parameter: CalibFDate100mV : chan9Date100mV : MB Offset: 10812
+    uint32_t chan9Date100mV;
+    // Parameter: CalibOCR1V : chan9OCR1V : MB Offset: 10814
+    uint32_t chan9OCR1V;
+    // Parameter: CalibFCR1V : chan9FSR1V : MB Offset: 10816
+    uint32_t chan9FSR1V;
+    // Parameter: CalibFDate1V : chan9Date1V : MB Offset: 10818
+    uint32_t chan9Date1V;
+    // Parameter: CalibOCR10V : chan9OCR10V : MB Offset: 10820
+    uint32_t chan9OCR10V;
+    // Parameter: CalibFCR10V : chan9FSR10V : MB Offset: 10822
+    uint32_t chan9FSR10V;
+    // Parameter: CalibFDate10V : chan9Date10V : MB Offset: 10824
+    uint32_t chan9Date10V;
+    // Parameter: CalibOCR30V : chan9OCR30V : MB Offset: 10826
+    uint32_t chan9OCR30V;
+    // Parameter: CalibFCR30V : chan9FSR30V : MB Offset: 10828
+    uint32_t chan9FSR30V;
+    // Parameter: CalibFDate30V : chan9Date30V : MB Offset: 10830
+    uint32_t chan9Date30V;
+    // Parameter: CalibOCR20mA : chan9OCR20mA : MB Offset: 10832
+    uint32_t chan9OCR20mA;
+    // Parameter: CalibFCR20mA : chan9FSR20mA : MB Offset: 10834
+    uint32_t chan9FSR20mA;
+    // Parameter: CalibFDate20mA : chan9Date20mA : MB Offset: 10836
+    uint32_t chan9Date20mA;
+    // Parameter: CalibOCR4x : chan9OCR4x : MB Offset: 10838
+    uint32_t chan9OCR4x;
+    // Parameter: CalibFSR4x : chan9FSR4x : MB Offset: 10840
+    uint32_t chan9FSR4x;
+    // Parameter: CalibDate4x : chan9Date4x : MB Offset: 10842
+    uint32_t chan9Date4x;
+    // Parameter: CalibOCR3x : chan9OCR3x : MB Offset: 10844
+    uint32_t chan9OCR3x;
+    // Parameter: CalibFSR3x : chan9FSR3x : MB Offset: 10846
+    uint32_t chan9FSR3x;
+    // Parameter: CalibDate3x : chan9Date3x : MB Offset: 10848
+    uint32_t chan9Date3x;
+    // Parameter: CalibOCRinternal : chan9OCRinternal : MB Offset: 10850
+    float chan9OCRinternal;
+    // Parameter: CalibFSRinternal : chan9FSRinternal : MB Offset: 10852
+    float chan9FSRinternal;
+    // Parameter: CalibDateinternal : chan9DateInternal : MB Offset: 10854
+    uint32_t chan9DateInternal;
+    // Parameter: SysOCalb : chan10SysOCR : MB Offset: 10900
+    uint16_t chan10SysOCR;
+    // Parameter: SysGCalb : chan10SysFSR : MB Offset: 10901
+    uint16_t chan10SysFSR;
+    // Parameter: CalibOCR20mV : chan10OCR20mV : MB Offset: 10902
+    uint32_t chan10OCR20mV;
+    // Parameter: CalibFCR20mV : chan10FSR20mV : MB Offset: 10904
+    uint32_t chan10FSR20mV;
+    // Parameter: CalibFDate20mV : chan10Date20mV : MB Offset: 10906
+    uint32_t chan10Date20mV;
+    // Parameter: CalibOCR100mV : chan10OCR100mV : MB Offset: 10908
+    uint32_t chan10OCR100mV;
+    // Parameter: CalibFCR100mV : chan10FSR100mV : MB Offset: 10910
+    uint32_t chan10FSR100mV;
+    // Parameter: CalibFDate100mV : chan10Date100mV : MB Offset: 10912
+    uint32_t chan10Date100mV;
+    // Parameter: CalibOCR1V : chan10OCR1V : MB Offset: 10914
+    uint32_t chan10OCR1V;
+    // Parameter: CalibFCR1V : chan10FSR1V : MB Offset: 10916
+    uint32_t chan10FSR1V;
+    // Parameter: CalibFDate1V : chan10Date1V : MB Offset: 10918
+    uint32_t chan10Date1V;
+    // Parameter: CalibOCR10V : chan10OCR10V : MB Offset: 10920
+    uint32_t chan10OCR10V;
+    // Parameter: CalibFCR10V : chan10FSR10V : MB Offset: 10922
+    uint32_t chan10FSR10V;
+    // Parameter: CalibFDate10V : chan10Date10V : MB Offset: 10924
+    uint32_t chan10Date10V;
+    // Parameter: CalibOCR30V : chan10OCR30V : MB Offset: 10926
+    uint32_t chan10OCR30V;
+    // Parameter: CalibFCR30V : chan10FSR30V : MB Offset: 10928
+    uint32_t chan10FSR30V;
+    // Parameter: CalibFDate30V : chan10Date30V : MB Offset: 10930
+    uint32_t chan10Date30V;
+    // Parameter: CalibOCR20mA : chan10OCR20mA : MB Offset: 10932
+    uint32_t chan10OCR20mA;
+    // Parameter: CalibFCR20mA : chan10FSR20mA : MB Offset: 10934
+    uint32_t chan10FSR20mA;
+    // Parameter: CalibFDate20mA : chan10Date20mA : MB Offset: 10936
+    uint32_t chan10Date20mA;
+    // Parameter: CalibOCR4x : chan10OCR4x : MB Offset: 10938
+    uint32_t chan10OCR4x;
+    // Parameter: CalibFSR4x : chan10FSR4x : MB Offset: 10940
+    uint32_t chan10FSR4x;
+    // Parameter: CalibDate4x : chan10Date4x : MB Offset: 10942
+    uint32_t chan10Date4x;
+    // Parameter: CalibOCR3x : chan10OCR3x : MB Offset: 10944
+    uint32_t chan10OCR3x;
+    // Parameter: CalibFSR3x : chan10FSR3x : MB Offset: 10946
+    uint32_t chan10FSR3x;
+    // Parameter: CalibDate3x : chan10Date3x : MB Offset: 10948
+    uint32_t chan10Date3x;
+    // Parameter: CalibOCRinternal : chan10OCRinternal : MB Offset: 10950
+    float chan10OCRinternal;
+    // Parameter: CalibFSRinternal : chan10FSRinternal : MB Offset: 10952
+    float chan10FSRinternal;
+    // Parameter: CalibDateinternal : chan10DateInternal : MB Offset: 10954
+    uint32_t chan10DateInternal;
+    // Parameter: SysOCalb : chan11SysOCR : MB Offset: 11000
+    uint16_t chan11SysOCR;
+    // Parameter: SysGCalb : chan11SysFSR : MB Offset: 11001
+    uint16_t chan11SysFSR;
+    // Parameter: CalibOCR20mV : chan11OCR20mV : MB Offset: 11002
+    uint32_t chan11OCR20mV;
+    // Parameter: CalibFCR20mV : chan11FSR20mV : MB Offset: 11004
+    uint32_t chan11FSR20mV;
+    // Parameter: CalibFDate20mV : chan11Date20mV : MB Offset: 11006
+    uint32_t chan11Date20mV;
+    // Parameter: CalibOCR100mV : chan11OCR100mV : MB Offset: 11008
+    uint32_t chan11OCR100mV;
+    // Parameter: CalibFCR100mV : chan11FSR100mV : MB Offset: 11010
+    uint32_t chan11FSR100mV;
+    // Parameter: CalibFDate100mV : chan11Date100mV : MB Offset: 11012
+    uint32_t chan11Date100mV;
+    // Parameter: CalibOCR1V : chan11OCR1V : MB Offset: 11014
+    uint32_t chan11OCR1V;
+    // Parameter: CalibFCR1V : chan11FSR1V : MB Offset: 11016
+    uint32_t chan11FSR1V;
+    // Parameter: CalibFDate1V : chan11Date1V : MB Offset: 11018
+    uint32_t chan11Date1V;
+    // Parameter: CalibOCR10V : chan11OCR10V : MB Offset: 11020
+    uint32_t chan11OCR10V;
+    // Parameter: CalibFCR10V : chan11FSR10V : MB Offset: 11022
+    uint32_t chan11FSR10V;
+    // Parameter: CalibFDate10V : chan11Date10V : MB Offset: 11024
+    uint32_t chan11Date10V;
+    // Parameter: CalibOCR30V : chan11OCR30V : MB Offset: 11026
+    uint32_t chan11OCR30V;
+    // Parameter: CalibFCR30V : chan11FSR30V : MB Offset: 11028
+    uint32_t chan11FSR30V;
+    // Parameter: CalibFDate30V : chan11Date30V : MB Offset: 11030
+    uint32_t chan11Date30V;
+    // Parameter: CalibOCR20mA : chan11OCR20mA : MB Offset: 11032
+    uint32_t chan11OCR20mA;
+    // Parameter: CalibFCR20mA : chan11FSR20mA : MB Offset: 11034
+    uint32_t chan11FSR20mA;
+    // Parameter: CalibFDate20mA : chan11Date20mA : MB Offset: 11036
+    uint32_t chan11Date20mA;
+    // Parameter: CalibOCR4x : chan11OCR4x : MB Offset: 11038
+    uint32_t chan11OCR4x;
+    // Parameter: CalibFSR4x : chan11FSR4x : MB Offset: 11040
+    uint32_t chan11FSR4x;
+    // Parameter: CalibDate4x : chan11Date4x : MB Offset: 11042
+    uint32_t chan11Date4x;
+    // Parameter: CalibOCR3x : chan11OCR3x : MB Offset: 11044
+    uint32_t chan11OCR3x;
+    // Parameter: CalibFSR3x : chan11FSR3x : MB Offset: 11046
+    uint32_t chan11FSR3x;
+    // Parameter: CalibDate3x : chan11Date3x : MB Offset: 11048
+    uint32_t chan11Date3x;
+    // Parameter: CalibOCRinternal : chan11OCRinternal : MB Offset: 11050
+    float chan11OCRinternal;
+    // Parameter: CalibFSRinternal : chan11FSRinternal : MB Offset: 11052
+    float chan11FSRinternal;
+    // Parameter: CalibDateinternal : chan11DateInternal : MB Offset: 11054
+    uint32_t chan11DateInternal;
+    // Parameter: SysOCalb : chan12SysOCR : MB Offset: 11100
+    uint16_t chan12SysOCR;
+    // Parameter: SysGCalb : chan12SysFSR : MB Offset: 11101
+    uint16_t chan12SysFSR;
+    // Parameter: CalibOCR20mV : chan12OCR20mV : MB Offset: 11102
+    uint32_t chan12OCR20mV;
+    // Parameter: CalibFCR20mV : chan12FSR20mV : MB Offset: 11104
+    uint32_t chan12FSR20mV;
+    // Parameter: CalibFDate20mV : chan12Date20mV : MB Offset: 11106
+    uint32_t chan12Date20mV;
+    // Parameter: CalibOCR100mV : chan12OCR100mV : MB Offset: 11108
+    uint32_t chan12OCR100mV;
+    // Parameter: CalibFCR100mV : chan12FSR100mV : MB Offset: 11110
+    uint32_t chan12FSR100mV;
+    // Parameter: CalibFDate100mV : chan12Date100mV : MB Offset: 11112
+    uint32_t chan12Date100mV;
+    // Parameter: CalibOCR1V : chan12OCR1V : MB Offset: 11114
+    uint32_t chan12OCR1V;
+    // Parameter: CalibFCR1V : chan12FSR1V : MB Offset: 11116
+    uint32_t chan12FSR1V;
+    // Parameter: CalibFDate1V : chan12Date1V : MB Offset: 11118
+    uint32_t chan12Date1V;
+    // Parameter: CalibOCR10V : chan12OCR10V : MB Offset: 11120
+    uint32_t chan12OCR10V;
+    // Parameter: CalibFCR10V : chan12FSR10V : MB Offset: 11122
+    uint32_t chan12FSR10V;
+    // Parameter: CalibFDate10V : chan12Date10V : MB Offset: 11124
+    uint32_t chan12Date10V;
+    // Parameter: CalibOCR30V : chan12OCR30V : MB Offset: 11126
+    uint32_t chan12OCR30V;
+    // Parameter: CalibFCR30V : chan12FSR30V : MB Offset: 11128
+    uint32_t chan12FSR30V;
+    // Parameter: CalibFDate30V : chan12Date30V : MB Offset: 11130
+    uint32_t chan12Date30V;
+    // Parameter: CalibOCR20mA : chan12OCR20mA : MB Offset: 11132
+    uint32_t chan12OCR20mA;
+    // Parameter: CalibFCR20mA : chan12FSR20mA : MB Offset: 11134
+    uint32_t chan12FSR20mA;
+    // Parameter: CalibFDate20mA : chan12Date20mA : MB Offset: 11136
+    uint32_t chan12Date20mA;
+    // Parameter: CalibOCR4x : chan12OCR4x : MB Offset: 11138
+    uint32_t chan12OCR4x;
+    // Parameter: CalibFSR4x : chan12FSR4x : MB Offset: 11140
+    uint32_t chan12FSR4x;
+    // Parameter: CalibDate4x : chan12Date4x : MB Offset: 11142
+    uint32_t chan12Date4x;
+    // Parameter: CalibOCR3x : chan12OCR3x : MB Offset: 11144
+    uint32_t chan12OCR3x;
+    // Parameter: CalibFSR3x : chan12FSR3x : MB Offset: 11146
+    uint32_t chan12FSR3x;
+    // Parameter: CalibDate3x : chan12Date3x : MB Offset: 11148
+    uint32_t chan12Date3x;
+    // Parameter: CalibOCRinternal : chan12OCRinternal : MB Offset: 11150
+    float chan12OCRinternal;
+    // Parameter: CalibFSRinternal : chan12FSRinternal : MB Offset: 11152
+    float chan12FSRinternal;
+    // Parameter: CalibDateinternal : chan12DateInternal : MB Offset: 11154
+    uint32_t chan12DateInternal;
+    // Parameter: SysOCalb : chan13SysOCR : MB Offset: 11200
+    uint16_t chan13SysOCR;
+    // Parameter: SysGCalb : chan13SysFSR : MB Offset: 11201
+    uint16_t chan13SysFSR;
+    // Parameter: CalibOCR20mV : chan13OCR20mV : MB Offset: 11202
+    uint32_t chan13OCR20mV;
+    // Parameter: CalibFCR20mV : chan13FSR20mV : MB Offset: 11204
+    uint32_t chan13FSR20mV;
+    // Parameter: CalibFDate20mV : chan13Date20mV : MB Offset: 11206
+    uint32_t chan13Date20mV;
+    // Parameter: CalibOCR100mV : chan13OCR100mV : MB Offset: 11208
+    uint32_t chan13OCR100mV;
+    // Parameter: CalibFCR100mV : chan13FSR100mV : MB Offset: 11210
+    uint32_t chan13FSR100mV;
+    // Parameter: CalibFDate100mV : chan13Date100mV : MB Offset: 11212
+    uint32_t chan13Date100mV;
+    // Parameter: CalibOCR1V : chan13OCR1V : MB Offset: 11214
+    uint32_t chan13OCR1V;
+    // Parameter: CalibFCR1V : chan13FSR1V : MB Offset: 11216
+    uint32_t chan13FSR1V;
+    // Parameter: CalibFDate1V : chan13Date1V : MB Offset: 11218
+    uint32_t chan13Date1V;
+    // Parameter: CalibOCR10V : chan13OCR10V : MB Offset: 11220
+    uint32_t chan13OCR10V;
+    // Parameter: CalibFCR10V : chan13FSR10V : MB Offset: 11222
+    uint32_t chan13FSR10V;
+    // Parameter: CalibFDate10V : chan13Date10V : MB Offset: 11224
+    uint32_t chan13Date10V;
+    // Parameter: CalibOCR30V : chan13OCR30V : MB Offset: 11226
+    uint32_t chan13OCR30V;
+    // Parameter: CalibFCR30V : chan13FSR30V : MB Offset: 11228
+    uint32_t chan13FSR30V;
+    // Parameter: CalibFDate30V : chan13Date30V : MB Offset: 11230
+    uint32_t chan13Date30V;
+    // Parameter: CalibOCR20mA : chan13OCR20mA : MB Offset: 11232
+    uint32_t chan13OCR20mA;
+    // Parameter: CalibFCR20mA : chan13FSR20mA : MB Offset: 11234
+    uint32_t chan13FSR20mA;
+    // Parameter: CalibFDate20mA : chan13Date20mA : MB Offset: 11236
+    uint32_t chan13Date20mA;
+    // Parameter: CalibOCR4x : chan13OCR4x : MB Offset: 11238
+    uint32_t chan13OCR4x;
+    // Parameter: CalibFSR4x : chan13FSR4x : MB Offset: 11240
+    uint32_t chan13FSR4x;
+    // Parameter: CalibDate4x : chan13Date4x : MB Offset: 11242
+    uint32_t chan13Date4x;
+    // Parameter: CalibOCR3x : chan13OCR3x : MB Offset: 11244
+    uint32_t chan13OCR3x;
+    // Parameter: CalibFSR3x : chan13FSR3x : MB Offset: 11246
+    uint32_t chan13FSR3x;
+    // Parameter: CalibDate3x : chan13Date3x : MB Offset: 11248
+    uint32_t chan13Date3x;
+    // Parameter: CalibOCRinternal : chan13OCRinternal : MB Offset: 11250
+    float chan13OCRinternal;
+    // Parameter: CalibFSRinternal : chan13FSRinternal : MB Offset: 11252
+    float chan13FSRinternal;
+    // Parameter: CalibDateinternal : chan13DateInternal : MB Offset: 11254
+    uint32_t chan13DateInternal;
+    // Parameter: SysOCalb : chan14SysOCR : MB Offset: 11300
+    uint16_t chan14SysOCR;
+    // Parameter: SysGCalb : chan14SysFSR : MB Offset: 11301
+    uint16_t chan14SysFSR;
+    // Parameter: CalibOCR20mV : chan14OCR20mV : MB Offset: 11302
+    uint32_t chan14OCR20mV;
+    // Parameter: CalibFCR20mV : chan14FSR20mV : MB Offset: 11304
+    uint32_t chan14FSR20mV;
+    // Parameter: CalibFDate20mV : chan14Date20mV : MB Offset: 11306
+    uint32_t chan14Date20mV;
+    // Parameter: CalibOCR100mV : chan14OCR100mV : MB Offset: 11308
+    uint32_t chan14OCR100mV;
+    // Parameter: CalibFCR100mV : chan14FSR100mV : MB Offset: 11310
+    uint32_t chan14FSR100mV;
+    // Parameter: CalibFDate100mV : chan14Date100mV : MB Offset: 11312
+    uint32_t chan14Date100mV;
+    // Parameter: CalibOCR1V : chan14OCR1V : MB Offset: 11314
+    uint32_t chan14OCR1V;
+    // Parameter: CalibFCR1V : chan14FSR1V : MB Offset: 11316
+    uint32_t chan14FSR1V;
+    // Parameter: CalibFDate1V : chan14Date1V : MB Offset: 11318
+    uint32_t chan14Date1V;
+    // Parameter: CalibOCR10V : chan14OCR10V : MB Offset: 11320
+    uint32_t chan14OCR10V;
+    // Parameter: CalibFCR10V : chan14FSR10V : MB Offset: 11322
+    uint32_t chan14FSR10V;
+    // Parameter: CalibFDate10V : chan14Date10V : MB Offset: 11324
+    uint32_t chan14Date10V;
+    // Parameter: CalibOCR30V : chan14OCR30V : MB Offset: 11326
+    uint32_t chan14OCR30V;
+    // Parameter: CalibFCR30V : chan14FSR30V : MB Offset: 11328
+    uint32_t chan14FSR30V;
+    // Parameter: CalibFDate30V : chan14Date30V : MB Offset: 11330
+    uint32_t chan14Date30V;
+    // Parameter: CalibOCR20mA : chan14OCR20mA : MB Offset: 11332
+    uint32_t chan14OCR20mA;
+    // Parameter: CalibFCR20mA : chan14FSR20mA : MB Offset: 11334
+    uint32_t chan14FSR20mA;
+    // Parameter: CalibFDate20mA : chan14Date20mA : MB Offset: 11336
+    uint32_t chan14Date20mA;
+    // Parameter: CalibOCR4x : chan14OCR4x : MB Offset: 11338
+    uint32_t chan14OCR4x;
+    // Parameter: CalibFSR4x : chan14FSR4x : MB Offset: 11340
+    uint32_t chan14FSR4x;
+    // Parameter: CalibDate4x : chan14Date4x : MB Offset: 11342
+    uint32_t chan14Date4x;
+    // Parameter: CalibOCR3x : chan14OCR3x : MB Offset: 11344
+    uint32_t chan14OCR3x;
+    // Parameter: CalibFSR3x : chan14FSR3x : MB Offset: 11346
+    uint32_t chan14FSR3x;
+    // Parameter: CalibDate3x : chan14Date3x : MB Offset: 11348
+    uint32_t chan14Date3x;
+    // Parameter: CalibOCRinternal : chan14OCRinternal : MB Offset: 11350
+    float chan14OCRinternal;
+    // Parameter: CalibFSRinternal : chan14FSRinternal : MB Offset: 11352
+    float chan14FSRinternal;
+    // Parameter: CalibDateinternal : chan14DateInternal : MB Offset: 11354
+    uint32_t chan14DateInternal;
+    // Parameter: SysOCalb : chan15SysOCR : MB Offset: 11400
+    uint16_t chan15SysOCR;
+    // Parameter: SysGCalb : chan15SysFSR : MB Offset: 11401
+    uint16_t chan15SysFSR;
+    // Parameter: CalibOCR20mV : chan15OCR20mV : MB Offset: 11402
+    uint32_t chan15OCR20mV;
+    // Parameter: CalibFCR20mV : chan15FSR20mV : MB Offset: 11404
+    uint32_t chan15FSR20mV;
+    // Parameter: CalibFDate20mV : chan15Date20mV : MB Offset: 11406
+    uint32_t chan15Date20mV;
+    // Parameter: CalibOCR100mV : chan15OCR100mV : MB Offset: 11408
+    uint32_t chan15OCR100mV;
+    // Parameter: CalibFCR100mV : chan15FSR100mV : MB Offset: 11410
+    uint32_t chan15FSR100mV;
+    // Parameter: CalibFDate100mV : chan15Date100mV : MB Offset: 11412
+    uint32_t chan15Date100mV;
+    // Parameter: CalibOCR1V : chan15OCR1V : MB Offset: 11414
+    uint32_t chan15OCR1V;
+    // Parameter: CalibFCR1V : chan15FSR1V : MB Offset: 11416
+    uint32_t chan15FSR1V;
+    // Parameter: CalibFDate1V : chan15Date1V : MB Offset: 11418
+    uint32_t chan15Date1V;
+    // Parameter: CalibOCR10V : chan15OCR10V : MB Offset: 11420
+    uint32_t chan15OCR10V;
+    // Parameter: CalibFCR10V : chan15FSR10V : MB Offset: 11422
+    uint32_t chan15FSR10V;
+    // Parameter: CalibFDate10V : chan15Date10V : MB Offset: 11424
+    uint32_t chan15Date10V;
+    // Parameter: CalibOCR30V : chan15OCR30V : MB Offset: 11426
+    uint32_t chan15OCR30V;
+    // Parameter: CalibFCR30V : chan15FSR30V : MB Offset: 11428
+    uint32_t chan15FSR30V;
+    // Parameter: CalibFDate30V : chan15Date30V : MB Offset: 11430
+    uint32_t chan15Date30V;
+    // Parameter: CalibOCR20mA : chan15OCR20mA : MB Offset: 11432
+    uint32_t chan15OCR20mA;
+    // Parameter: CalibFCR20mA : chan15FSR20mA : MB Offset: 11434
+    uint32_t chan15FSR20mA;
+    // Parameter: CalibFDate20mA : chan15Date20mA : MB Offset: 11436
+    uint32_t chan15Date20mA;
+    // Parameter: CalibOCR4x : chan15OCR4x : MB Offset: 11438
+    uint32_t chan15OCR4x;
+    // Parameter: CalibFSR4x : chan15FSR4x : MB Offset: 11440
+    uint32_t chan15FSR4x;
+    // Parameter: CalibDate4x : chan15Date4x : MB Offset: 11442
+    uint32_t chan15Date4x;
+    // Parameter: CalibOCR3x : chan15OCR3x : MB Offset: 11444
+    uint32_t chan15OCR3x;
+    // Parameter: CalibFSR3x : chan15FSR3x : MB Offset: 11446
+    uint32_t chan15FSR3x;
+    // Parameter: CalibDate3x : chan15Date3x : MB Offset: 11448
+    uint32_t chan15Date3x;
+    // Parameter: CalibOCRinternal : chan15OCRinternal : MB Offset: 11450
+    float chan15OCRinternal;
+    // Parameter: CalibFSRinternal : chan15FSRinternal : MB Offset: 11452
+    float chan15FSRinternal;
+    // Parameter: CalibDateinternal : chan15DateInternal : MB Offset: 11454
+    uint32_t chan15DateInternal;
+    // Parameter: SysOCalb : chan16SysOCR : MB Offset: 11500
+    uint16_t chan16SysOCR;
+    // Parameter: SysGCalb : chan16SysFSR : MB Offset: 11501
+    uint16_t chan16SysFSR;
+    // Parameter: CalibOCR20mV : chan16OCR20mV : MB Offset: 11502
+    uint32_t chan16OCR20mV;
+    // Parameter: CalibFCR20mV : chan16FSR20mV : MB Offset: 11504
+    uint32_t chan16FSR20mV;
+    // Parameter: CalibFDate20mV : chan16Date20mV : MB Offset: 11506
+    uint32_t chan16Date20mV;
+    // Parameter: CalibOCR100mV : chan16OCR100mV : MB Offset: 11508
+    uint32_t chan16OCR100mV;
+    // Parameter: CalibFCR100mV : chan16FSR100mV : MB Offset: 11510
+    uint32_t chan16FSR100mV;
+    // Parameter: CalibFDate100mV : chan16Date100mV : MB Offset: 11512
+    uint32_t chan16Date100mV;
+    // Parameter: CalibOCR1V : chan16OCR1V : MB Offset: 11514
+    uint32_t chan16OCR1V;
+    // Parameter: CalibFCR1V : chan16FSR1V : MB Offset: 11516
+    uint32_t chan16FSR1V;
+    // Parameter: CalibFDate1V : chan16Date1V : MB Offset: 11518
+    uint32_t chan16Date1V;
+    // Parameter: CalibOCR10V : chan16OCR10V : MB Offset: 11520
+    uint32_t chan16OCR10V;
+    // Parameter: CalibFCR10V : chan16FSR10V : MB Offset: 11522
+    uint32_t chan16FSR10V;
+    // Parameter: CalibFDate10V : chan16Date10V : MB Offset: 11524
+    uint32_t chan16Date10V;
+    // Parameter: CalibOCR30V : chan16OCR30V : MB Offset: 11526
+    uint32_t chan16OCR30V;
+    // Parameter: CalibFCR30V : chan16FSR30V : MB Offset: 11528
+    uint32_t chan16FSR30V;
+    // Parameter: CalibFDate30V : chan16Date30V : MB Offset: 11530
+    uint32_t chan16Date30V;
+    // Parameter: CalibOCR20mA : chan16OCR20mA : MB Offset: 11532
+    uint32_t chan16OCR20mA;
+    // Parameter: CalibFCR20mA : chan16FSR20mA : MB Offset: 11534
+    uint32_t chan16FSR20mA;
+    // Parameter: CalibFDate20mA : chan16Date20mA : MB Offset: 11536
+    uint32_t chan16Date20mA;
+    // Parameter: CalibOCR4x : chan16OCR4x : MB Offset: 11538
+    uint32_t chan16OCR4x;
+    // Parameter: CalibFSR4x : chan16FSR4x : MB Offset: 11540
+    uint32_t chan16FSR4x;
+    // Parameter: CalibDate4x : chan16Date4x : MB Offset: 11542
+    uint32_t chan16Date4x;
+    // Parameter: CalibOCR3x : chan16OCR3x : MB Offset: 11544
+    uint32_t chan16OCR3x;
+    // Parameter: CalibFSR3x : chan16FSR3x : MB Offset: 11546
+    uint32_t chan16FSR3x;
+    // Parameter: CalibDate3x : chan16Date3x : MB Offset: 11548
+    uint32_t chan16Date3x;
+    // Parameter: CalibOCRinternal : chan16OCRinternal : MB Offset: 11550
+    float chan16OCRinternal;
+    // Parameter: CalibFSRinternal : chan16FSRinternal : MB Offset: 11552
+    float chan16FSRinternal;
+    // Parameter: CalibDateinternal : chan16DateInternal : MB Offset: 11554
+    uint32_t chan16DateInternal;
+    // Parameter: SysOCalb : chan17SysOCR : MB Offset: 11600
+    uint16_t chan17SysOCR;
+    // Parameter: SysGCalb : chan17SysFSR : MB Offset: 11601
+    uint16_t chan17SysFSR;
+    // Parameter: CalibOCR20mV : chan17OCR20mV : MB Offset: 11602
+    uint32_t chan17OCR20mV;
+    // Parameter: CalibFCR20mV : chan17FSR20mV : MB Offset: 11604
+    uint32_t chan17FSR20mV;
+    // Parameter: CalibFDate20mV : chan17Date20mV : MB Offset: 11606
+    uint32_t chan17Date20mV;
+    // Parameter: CalibOCR100mV : chan17OCR100mV : MB Offset: 11608
+    uint32_t chan17OCR100mV;
+    // Parameter: CalibFCR100mV : chan17FSR100mV : MB Offset: 11610
+    uint32_t chan17FSR100mV;
+    // Parameter: CalibFDate100mV : chan17Date100mV : MB Offset: 11612
+    uint32_t chan17Date100mV;
+    // Parameter: CalibOCR1V : chan17OCR1V : MB Offset: 11614
+    uint32_t chan17OCR1V;
+    // Parameter: CalibFCR1V : chan17FSR1V : MB Offset: 11616
+    uint32_t chan17FSR1V;
+    // Parameter: CalibFDate1V : chan17Date1V : MB Offset: 11618
+    uint32_t chan17Date1V;
+    // Parameter: CalibOCR10V : chan17OCR10V : MB Offset: 11620
+    uint32_t chan17OCR10V;
+    // Parameter: CalibFCR10V : chan17FSR10V : MB Offset: 11622
+    uint32_t chan17FSR10V;
+    // Parameter: CalibFDate10V : chan17Date10V : MB Offset: 11624
+    uint32_t chan17Date10V;
+    // Parameter: CalibOCR30V : chan17OCR30V : MB Offset: 11626
+    uint32_t chan17OCR30V;
+    // Parameter: CalibFCR30V : chan17FSR30V : MB Offset: 11628
+    uint32_t chan17FSR30V;
+    // Parameter: CalibFDate30V : chan17Date30V : MB Offset: 11630
+    uint32_t chan17Date30V;
+    // Parameter: CalibOCR20mA : chan17OCR20mA : MB Offset: 11632
+    uint32_t chan17OCR20mA;
+    // Parameter: CalibFCR20mA : chan17FSR20mA : MB Offset: 11634
+    uint32_t chan17FSR20mA;
+    // Parameter: CalibFDate20mA : chan17Date20mA : MB Offset: 11636
+    uint32_t chan17Date20mA;
+    // Parameter: CalibOCR4x : chan17OCR4x : MB Offset: 11638
+    uint32_t chan17OCR4x;
+    // Parameter: CalibFSR4x : chan17FSR4x : MB Offset: 11640
+    uint32_t chan17FSR4x;
+    // Parameter: CalibDate4x : chan17Date4x : MB Offset: 11642
+    uint32_t chan17Date4x;
+    // Parameter: CalibOCR3x : chan17OCR3x : MB Offset: 11644
+    uint32_t chan17OCR3x;
+    // Parameter: CalibFSR3x : chan17FSR3x : MB Offset: 11646
+    uint32_t chan17FSR3x;
+    // Parameter: CalibDate3x : chan17Date3x : MB Offset: 11648
+    uint32_t chan17Date3x;
+    // Parameter: CalibOCRinternal : chan17OCRinternal : MB Offset: 11650
+    float chan17OCRinternal;
+    // Parameter: CalibFSRinternal : chan17FSRinternal : MB Offset: 11652
+    float chan17FSRinternal;
+    // Parameter: CalibDateinternal : chan17DateInternal : MB Offset: 11654
+    uint32_t chan17DateInternal;
+    // Parameter: SysOCalb : chan18SysOCR : MB Offset: 11700
+    uint16_t chan18SysOCR;
+    // Parameter: SysGCalb : chan18SysFSR : MB Offset: 11701
+    uint16_t chan18SysFSR;
+    // Parameter: CalibOCR20mV : chan18OCR20mV : MB Offset: 11702
+    uint32_t chan18OCR20mV;
+    // Parameter: CalibFCR20mV : chan18FSR20mV : MB Offset: 11704
+    uint32_t chan18FSR20mV;
+    // Parameter: CalibFDate20mV : chan18Date20mV : MB Offset: 11706
+    uint32_t chan18Date20mV;
+    // Parameter: CalibOCR100mV : chan18OCR100mV : MB Offset: 11708
+    uint32_t chan18OCR100mV;
+    // Parameter: CalibFCR100mV : chan18FSR100mV : MB Offset: 11710
+    uint32_t chan18FSR100mV;
+    // Parameter: CalibFDate100mV : chan18Date100mV : MB Offset: 11712
+    uint32_t chan18Date100mV;
+    // Parameter: CalibOCR1V : chan18OCR1V : MB Offset: 11714
+    uint32_t chan18OCR1V;
+    // Parameter: CalibFCR1V : chan18FSR1V : MB Offset: 11716
+    uint32_t chan18FSR1V;
+    // Parameter: CalibFDate1V : chan18Date1V : MB Offset: 11718
+    uint32_t chan18Date1V;
+    // Parameter: CalibOCR10V : chan18OCR10V : MB Offset: 11720
+    uint32_t chan18OCR10V;
+    // Parameter: CalibFCR10V : chan18FSR10V : MB Offset: 11722
+    uint32_t chan18FSR10V;
+    // Parameter: CalibFDate10V : chan18Date10V : MB Offset: 11724
+    uint32_t chan18Date10V;
+    // Parameter: CalibOCR30V : chan18OCR30V : MB Offset: 11726
+    uint32_t chan18OCR30V;
+    // Parameter: CalibFCR30V : chan18FSR30V : MB Offset: 11728
+    uint32_t chan18FSR30V;
+    // Parameter: CalibFDate30V : chan18Date30V : MB Offset: 11730
+    uint32_t chan18Date30V;
+    // Parameter: CalibOCR20mA : chan18OCR20mA : MB Offset: 11732
+    uint32_t chan18OCR20mA;
+    // Parameter: CalibFCR20mA : chan18FSR20mA : MB Offset: 11734
+    uint32_t chan18FSR20mA;
+    // Parameter: CalibFDate20mA : chan18Date20mA : MB Offset: 11736
+    uint32_t chan18Date20mA;
+    // Parameter: CalibOCR4x : chan18OCR4x : MB Offset: 11738
+    uint32_t chan18OCR4x;
+    // Parameter: CalibFSR4x : chan18FSR4x : MB Offset: 11740
+    uint32_t chan18FSR4x;
+    // Parameter: CalibDate4x : chan18Date4x : MB Offset: 11742
+    uint32_t chan18Date4x;
+    // Parameter: CalibOCR3x : chan18OCR3x : MB Offset: 11744
+    uint32_t chan18OCR3x;
+    // Parameter: CalibFSR3x : chan18FSR3x : MB Offset: 11746
+    uint32_t chan18FSR3x;
+    // Parameter: CalibDate3x : chan18Date3x : MB Offset: 11748
+    uint32_t chan18Date3x;
+    // Parameter: CalibOCRinternal : chan18OCRinternal : MB Offset: 11750
+    float chan18OCRinternal;
+    // Parameter: CalibFSRinternal : chan18FSRinternal : MB Offset: 11752
+    float chan18FSRinternal;
+    // Parameter: CalibDateinternal : chan18DateInternal : MB Offset: 11754
+    uint32_t chan18DateInternal;
+    // Parameter: SysOCalb : chan19SysOCR : MB Offset: 11800
+    uint16_t chan19SysOCR;
+    // Parameter: SysGCalb : chan19SysFSR : MB Offset: 11801
+    uint16_t chan19SysFSR;
+    // Parameter: CalibOCR20mV : chan19OCR20mV : MB Offset: 11802
+    uint32_t chan19OCR20mV;
+    // Parameter: CalibFCR20mV : chan19FSR20mV : MB Offset: 11804
+    uint32_t chan19FSR20mV;
+    // Parameter: CalibFDate20mV : chan19Date20mV : MB Offset: 11806
+    uint32_t chan19Date20mV;
+    // Parameter: CalibOCR100mV : chan19OCR100mV : MB Offset: 11808
+    uint32_t chan19OCR100mV;
+    // Parameter: CalibFCR100mV : chan19FSR100mV : MB Offset: 11810
+    uint32_t chan19FSR100mV;
+    // Parameter: CalibFDate100mV : chan19Date100mV : MB Offset: 11812
+    uint32_t chan19Date100mV;
+    // Parameter: CalibOCR1V : chan19OCR1V : MB Offset: 11814
+    uint32_t chan19OCR1V;
+    // Parameter: CalibFCR1V : chan19FSR1V : MB Offset: 11816
+    uint32_t chan19FSR1V;
+    // Parameter: CalibFDate1V : chan19Date1V : MB Offset: 11818
+    uint32_t chan19Date1V;
+    // Parameter: CalibOCR10V : chan19OCR10V : MB Offset: 11820
+    uint32_t chan19OCR10V;
+    // Parameter: CalibFCR10V : chan19FSR10V : MB Offset: 11822
+    uint32_t chan19FSR10V;
+    // Parameter: CalibFDate10V : chan19Date10V : MB Offset: 11824
+    uint32_t chan19Date10V;
+    // Parameter: CalibOCR30V : chan19OCR30V : MB Offset: 11826
+    uint32_t chan19OCR30V;
+    // Parameter: CalibFCR30V : chan19FSR30V : MB Offset: 11828
+    uint32_t chan19FSR30V;
+    // Parameter: CalibFDate30V : chan19Date30V : MB Offset: 11830
+    uint32_t chan19Date30V;
+    // Parameter: CalibOCR20mA : chan19OCR20mA : MB Offset: 11832
+    uint32_t chan19OCR20mA;
+    // Parameter: CalibFCR20mA : chan19FSR20mA : MB Offset: 11834
+    uint32_t chan19FSR20mA;
+    // Parameter: CalibFDate20mA : chan19Date20mA : MB Offset: 11836
+    uint32_t chan19Date20mA;
+    // Parameter: CalibOCR4x : chan19OCR4x : MB Offset: 11838
+    uint32_t chan19OCR4x;
+    // Parameter: CalibFSR4x : chan19FSR4x : MB Offset: 11840
+    uint32_t chan19FSR4x;
+    // Parameter: CalibDate4x : chan19Date4x : MB Offset: 11842
+    uint32_t chan19Date4x;
+    // Parameter: CalibOCR3x : chan19OCR3x : MB Offset: 11844
+    uint32_t chan19OCR3x;
+    // Parameter: CalibFSR3x : chan19FSR3x : MB Offset: 11846
+    uint32_t chan19FSR3x;
+    // Parameter: CalibDate3x : chan19Date3x : MB Offset: 11848
+    uint32_t chan19Date3x;
+    // Parameter: CalibOCRinternal : chan19OCRinternal : MB Offset: 11850
+    float chan19OCRinternal;
+    // Parameter: CalibFSRinternal : chan19FSRinternal : MB Offset: 11852
+    float chan19FSRinternal;
+    // Parameter: CalibDateinternal : chan19DateInternal : MB Offset: 11854
+    uint32_t chan19DateInternal;
+    // Parameter: SysOCalb : chan20SysOCR : MB Offset: 11900
+    uint16_t chan20SysOCR;
+    // Parameter: SysGCalb : chan20SysFSR : MB Offset: 11901
+    uint16_t chan20SysFSR;
+    // Parameter: CalibOCR20mV : chan20OCR20mV : MB Offset: 11902
+    uint32_t chan20OCR20mV;
+    // Parameter: CalibFCR20mV : chan20FSR20mV : MB Offset: 11904
+    uint32_t chan20FSR20mV;
+    // Parameter: CalibFDate20mV : chan20Date20mV : MB Offset: 11906
+    uint32_t chan20Date20mV;
+    // Parameter: CalibOCR100mV : chan20OCR100mV : MB Offset: 11908
+    uint32_t chan20OCR100mV;
+    // Parameter: CalibFCR100mV : chan20FSR100mV : MB Offset: 11910
+    uint32_t chan20FSR100mV;
+    // Parameter: CalibFDate100mV : chan20Date100mV : MB Offset: 11912
+    uint32_t chan20Date100mV;
+    // Parameter: CalibOCR1V : chan20OCR1V : MB Offset: 11914
+    uint32_t chan20OCR1V;
+    // Parameter: CalibFCR1V : chan20FSR1V : MB Offset: 11916
+    uint32_t chan20FSR1V;
+    // Parameter: CalibFDate1V : chan20Date1V : MB Offset: 11918
+    uint32_t chan20Date1V;
+    // Parameter: CalibOCR10V : chan20OCR10V : MB Offset: 11920
+    uint32_t chan20OCR10V;
+    // Parameter: CalibFCR10V : chan20FSR10V : MB Offset: 11922
+    uint32_t chan20FSR10V;
+    // Parameter: CalibFDate10V : chan20Date10V : MB Offset: 11924
+    uint32_t chan20Date10V;
+    // Parameter: CalibOCR30V : chan20OCR30V : MB Offset: 11926
+    uint32_t chan20OCR30V;
+    // Parameter: CalibFCR30V : chan20FSR30V : MB Offset: 11928
+    uint32_t chan20FSR30V;
+    // Parameter: CalibFDate30V : chan20Date30V : MB Offset: 11930
+    uint32_t chan20Date30V;
+    // Parameter: CalibOCR20mA : chan20OCR20mA : MB Offset: 11932
+    uint32_t chan20OCR20mA;
+    // Parameter: CalibFCR20mA : chan20FSR20mA : MB Offset: 11934
+    uint32_t chan20FSR20mA;
+    // Parameter: CalibFDate20mA : chan20Date20mA : MB Offset: 11936
+    uint32_t chan20Date20mA;
+    // Parameter: CalibOCR4x : chan20OCR4x : MB Offset: 11938
+    uint32_t chan20OCR4x;
+    // Parameter: CalibFSR4x : chan20FSR4x : MB Offset: 11940
+    uint32_t chan20FSR4x;
+    // Parameter: CalibDate4x : chan20Date4x : MB Offset: 11942
+    uint32_t chan20Date4x;
+    // Parameter: CalibOCR3x : chan20OCR3x : MB Offset: 11944
+    uint32_t chan20OCR3x;
+    // Parameter: CalibFSR3x : chan20FSR3x : MB Offset: 11946
+    uint32_t chan20FSR3x;
+    // Parameter: CalibDate3x : chan20Date3x : MB Offset: 11948
+    uint32_t chan20Date3x;
+    // Parameter: CalibOCRinternal : chan20OCRinternal : MB Offset: 11950
+    float chan20OCRinternal;
+    // Parameter: CalibFSRinternal : chan20FSRinternal : MB Offset: 11952
+    float chan20FSRinternal;
+    // Parameter: CalibDateinternal : chan20DateInternal : MB Offset: 11954
+    uint32_t chan20DateInternal;
+    // Parameter: SysOCalb : chan21SysOCR : MB Offset: 12000
+    uint16_t chan21SysOCR;
+    // Parameter: SysGCalb : chan21SysFSR : MB Offset: 12001
+    uint16_t chan21SysFSR;
+    // Parameter: CalibOCR20mV : chan21OCR20mV : MB Offset: 12002
+    uint32_t chan21OCR20mV;
+    // Parameter: CalibFCR20mV : chan21FSR20mV : MB Offset: 12004
+    uint32_t chan21FSR20mV;
+    // Parameter: CalibFDate20mV : chan21Date20mV : MB Offset: 12006
+    uint32_t chan21Date20mV;
+    // Parameter: CalibOCR100mV : chan21OCR100mV : MB Offset: 12008
+    uint32_t chan21OCR100mV;
+    // Parameter: CalibFCR100mV : chan21FSR100mV : MB Offset: 12010
+    uint32_t chan21FSR100mV;
+    // Parameter: CalibFDate100mV : chan21Date100mV : MB Offset: 12012
+    uint32_t chan21Date100mV;
+    // Parameter: CalibOCR1V : chan21OCR1V : MB Offset: 12014
+    uint32_t chan21OCR1V;
+    // Parameter: CalibFCR1V : chan21FSR1V : MB Offset: 12016
+    uint32_t chan21FSR1V;
+    // Parameter: CalibFDate1V : chan21Date1V : MB Offset: 12018
+    uint32_t chan21Date1V;
+    // Parameter: CalibOCR10V : chan21OCR10V : MB Offset: 12020
+    uint32_t chan21OCR10V;
+    // Parameter: CalibFCR10V : chan21FSR10V : MB Offset: 12022
+    uint32_t chan21FSR10V;
+    // Parameter: CalibFDate10V : chan21Date10V : MB Offset: 12024
+    uint32_t chan21Date10V;
+    // Parameter: CalibOCR30V : chan21OCR30V : MB Offset: 12026
+    uint32_t chan21OCR30V;
+    // Parameter: CalibFCR30V : chan21FSR30V : MB Offset: 12028
+    uint32_t chan21FSR30V;
+    // Parameter: CalibFDate30V : chan21Date30V : MB Offset: 12030
+    uint32_t chan21Date30V;
+    // Parameter: CalibOCR20mA : chan21OCR20mA : MB Offset: 12032
+    uint32_t chan21OCR20mA;
+    // Parameter: CalibFCR20mA : chan21FSR20mA : MB Offset: 12034
+    uint32_t chan21FSR20mA;
+    // Parameter: CalibFDate20mA : chan21Date20mA : MB Offset: 12036
+    uint32_t chan21Date20mA;
+    // Parameter: CalibOCR4x : chan21OCR4x : MB Offset: 12038
+    uint32_t chan21OCR4x;
+    // Parameter: CalibFSR4x : chan21FSR4x : MB Offset: 12040
+    uint32_t chan21FSR4x;
+    // Parameter: CalibDate4x : chan21Date4x : MB Offset: 12042
+    uint32_t chan21Date4x;
+    // Parameter: CalibOCR3x : chan21OCR3x : MB Offset: 12044
+    uint32_t chan21OCR3x;
+    // Parameter: CalibFSR3x : chan21FSR3x : MB Offset: 12046
+    uint32_t chan21FSR3x;
+    // Parameter: CalibDate3x : chan21Date3x : MB Offset: 12048
+    uint32_t chan21Date3x;
+    // Parameter: CalibOCRinternal : chan21OCRinternal : MB Offset: 12050
+    float chan21OCRinternal;
+    // Parameter: CalibFSRinternal : chan21FSRinternal : MB Offset: 12052
+    float chan21FSRinternal;
+    // Parameter: CalibDateinternal : chan21DateInternal : MB Offset: 12054
+    uint32_t chan21DateInternal;
+    // Parameter: SysOCalb : chan22SysOCR : MB Offset: 12100
+    uint16_t chan22SysOCR;
+    // Parameter: SysGCalb : chan22SysFSR : MB Offset: 12101
+    uint16_t chan22SysFSR;
+    // Parameter: CalibOCR20mV : chan22OCR20mV : MB Offset: 12102
+    uint32_t chan22OCR20mV;
+    // Parameter: CalibFCR20mV : chan22FSR20mV : MB Offset: 12104
+    uint32_t chan22FSR20mV;
+    // Parameter: CalibFDate20mV : chan22Date20mV : MB Offset: 12106
+    uint32_t chan22Date20mV;
+    // Parameter: CalibOCR100mV : chan22OCR100mV : MB Offset: 12108
+    uint32_t chan22OCR100mV;
+    // Parameter: CalibFCR100mV : chan22FSR100mV : MB Offset: 12110
+    uint32_t chan22FSR100mV;
+    // Parameter: CalibFDate100mV : chan22Date100mV : MB Offset: 12112
+    uint32_t chan22Date100mV;
+    // Parameter: CalibOCR1V : chan22OCR1V : MB Offset: 12114
+    uint32_t chan22OCR1V;
+    // Parameter: CalibFCR1V : chan22FSR1V : MB Offset: 12116
+    uint32_t chan22FSR1V;
+    // Parameter: CalibFDate1V : chan22Date1V : MB Offset: 12118
+    uint32_t chan22Date1V;
+    // Parameter: CalibOCR10V : chan22OCR10V : MB Offset: 12120
+    uint32_t chan22OCR10V;
+    // Parameter: CalibFCR10V : chan22FSR10V : MB Offset: 12122
+    uint32_t chan22FSR10V;
+    // Parameter: CalibFDate10V : chan22Date10V : MB Offset: 12124
+    uint32_t chan22Date10V;
+    // Parameter: CalibOCR30V : chan22OCR30V : MB Offset: 12126
+    uint32_t chan22OCR30V;
+    // Parameter: CalibFCR30V : chan22FSR30V : MB Offset: 12128
+    uint32_t chan22FSR30V;
+    // Parameter: CalibFDate30V : chan22Date30V : MB Offset: 12130
+    uint32_t chan22Date30V;
+    // Parameter: CalibOCR20mA : chan22OCR20mA : MB Offset: 12132
+    uint32_t chan22OCR20mA;
+    // Parameter: CalibFCR20mA : chan22FSR20mA : MB Offset: 12134
+    uint32_t chan22FSR20mA;
+    // Parameter: CalibFDate20mA : chan22Date20mA : MB Offset: 12136
+    uint32_t chan22Date20mA;
+    // Parameter: CalibOCR4x : chan22OCR4x : MB Offset: 12138
+    uint32_t chan22OCR4x;
+    // Parameter: CalibFSR4x : chan22FSR4x : MB Offset: 12140
+    uint32_t chan22FSR4x;
+    // Parameter: CalibDate4x : chan22Date4x : MB Offset: 12142
+    uint32_t chan22Date4x;
+    // Parameter: CalibOCR3x : chan22OCR3x : MB Offset: 12144
+    uint32_t chan22OCR3x;
+    // Parameter: CalibFSR3x : chan22FSR3x : MB Offset: 12146
+    uint32_t chan22FSR3x;
+    // Parameter: CalibDate3x : chan22Date3x : MB Offset: 12148
+    uint32_t chan22Date3x;
+    // Parameter: CalibOCRinternal : chan22OCRinternal : MB Offset: 12150
+    float chan22OCRinternal;
+    // Parameter: CalibFSRinternal : chan22FSRinternal : MB Offset: 12152
+    float chan22FSRinternal;
+    // Parameter: CalibDateinternal : chan22DateInternal : MB Offset: 12154
+    uint32_t chan22DateInternal;
+    // Parameter: SysOCalb : chan23SysOCR : MB Offset: 12200
+    uint16_t chan23SysOCR;
+    // Parameter: SysGCalb : chan23SysFSR : MB Offset: 12201
+    uint16_t chan23SysFSR;
+    // Parameter: CalibOCR20mV : chan23OCR20mV : MB Offset: 12202
+    uint32_t chan23OCR20mV;
+    // Parameter: CalibFCR20mV : chan23FSR20mV : MB Offset: 12204
+    uint32_t chan23FSR20mV;
+    // Parameter: CalibFDate20mV : chan23Date20mV : MB Offset: 12206
+    uint32_t chan23Date20mV;
+    // Parameter: CalibOCR100mV : chan23OCR100mV : MB Offset: 12208
+    uint32_t chan23OCR100mV;
+    // Parameter: CalibFCR100mV : chan23FSR100mV : MB Offset: 12210
+    uint32_t chan23FSR100mV;
+    // Parameter: CalibFDate100mV : chan23Date100mV : MB Offset: 12212
+    uint32_t chan23Date100mV;
+    // Parameter: CalibOCR1V : chan23OCR1V : MB Offset: 12214
+    uint32_t chan23OCR1V;
+    // Parameter: CalibFCR1V : chan23FSR1V : MB Offset: 12216
+    uint32_t chan23FSR1V;
+    // Parameter: CalibFDate1V : chan23Date1V : MB Offset: 12218
+    uint32_t chan23Date1V;
+    // Parameter: CalibOCR10V : chan23OCR10V : MB Offset: 12220
+    uint32_t chan23OCR10V;
+    // Parameter: CalibFCR10V : chan23FSR10V : MB Offset: 12222
+    uint32_t chan23FSR10V;
+    // Parameter: CalibFDate10V : chan23Date10V : MB Offset: 12224
+    uint32_t chan23Date10V;
+    // Parameter: CalibOCR30V : chan23OCR30V : MB Offset: 12226
+    uint32_t chan23OCR30V;
+    // Parameter: CalibFCR30V : chan23FSR30V : MB Offset: 12228
+    uint32_t chan23FSR30V;
+    // Parameter: CalibFDate30V : chan23Date30V : MB Offset: 12230
+    uint32_t chan23Date30V;
+    // Parameter: CalibOCR20mA : chan23OCR20mA : MB Offset: 12232
+    uint32_t chan23OCR20mA;
+    // Parameter: CalibFCR20mA : chan23FSR20mA : MB Offset: 12234
+    uint32_t chan23FSR20mA;
+    // Parameter: CalibFDate20mA : chan23Date20mA : MB Offset: 12236
+    uint32_t chan23Date20mA;
+    // Parameter: CalibOCR4x : chan23OCR4x : MB Offset: 12238
+    uint32_t chan23OCR4x;
+    // Parameter: CalibFSR4x : chan23FSR4x : MB Offset: 12240
+    uint32_t chan23FSR4x;
+    // Parameter: CalibDate4x : chan23Date4x : MB Offset: 12242
+    uint32_t chan23Date4x;
+    // Parameter: CalibOCR3x : chan23OCR3x : MB Offset: 12244
+    uint32_t chan23OCR3x;
+    // Parameter: CalibFSR3x : chan23FSR3x : MB Offset: 12246
+    uint32_t chan23FSR3x;
+    // Parameter: CalibDate3x : chan23Date3x : MB Offset: 12248
+    uint32_t chan23Date3x;
+    // Parameter: CalibOCRinternal : chan23OCRinternal : MB Offset: 12250
+    float chan23OCRinternal;
+    // Parameter: CalibFSRinternal : chan23FSRinternal : MB Offset: 12252
+    float chan23FSRinternal;
+    // Parameter: CalibDateinternal : chan23DateInternal : MB Offset: 12254
+    uint32_t chan23DateInternal;
+    // Parameter: SysOCalb : chan24SysOCR : MB Offset: 12300
+    uint16_t chan24SysOCR;
+    // Parameter: SysGCalb : chan24SysFSR : MB Offset: 12301
+    uint16_t chan24SysFSR;
+    // Parameter: CalibOCR20mV : chan24OCR20mV : MB Offset: 12302
+    uint32_t chan24OCR20mV;
+    // Parameter: CalibFCR20mV : chan24FSR20mV : MB Offset: 12304
+    uint32_t chan24FSR20mV;
+    // Parameter: CalibFDate20mV : chan24Date20mV : MB Offset: 12306
+    uint32_t chan24Date20mV;
+    // Parameter: CalibOCR100mV : chan24OCR100mV : MB Offset: 12308
+    uint32_t chan24OCR100mV;
+    // Parameter: CalibFCR100mV : chan24FSR100mV : MB Offset: 12310
+    uint32_t chan24FSR100mV;
+    // Parameter: CalibFDate100mV : chan24Date100mV : MB Offset: 12312
+    uint32_t chan24Date100mV;
+    // Parameter: CalibOCR1V : chan24OCR1V : MB Offset: 12314
+    uint32_t chan24OCR1V;
+    // Parameter: CalibFCR1V : chan24FSR1V : MB Offset: 12316
+    uint32_t chan24FSR1V;
+    // Parameter: CalibFDate1V : chan24Date1V : MB Offset: 12318
+    uint32_t chan24Date1V;
+    // Parameter: CalibOCR10V : chan24OCR10V : MB Offset: 12320
+    uint32_t chan24OCR10V;
+    // Parameter: CalibFCR10V : chan24FSR10V : MB Offset: 12322
+    uint32_t chan24FSR10V;
+    // Parameter: CalibFDate10V : chan24Date10V : MB Offset: 12324
+    uint32_t chan24Date10V;
+    // Parameter: CalibOCR30V : chan24OCR30V : MB Offset: 12326
+    uint32_t chan24OCR30V;
+    // Parameter: CalibFCR30V : chan24FSR30V : MB Offset: 12328
+    uint32_t chan24FSR30V;
+    // Parameter: CalibFDate30V : chan24Date30V : MB Offset: 12330
+    uint32_t chan24Date30V;
+    // Parameter: CalibOCR20mA : chan24OCR20mA : MB Offset: 12332
+    uint32_t chan24OCR20mA;
+    // Parameter: CalibFCR20mA : chan24FSR20mA : MB Offset: 12334
+    uint32_t chan24FSR20mA;
+    // Parameter: CalibFDate20mA : chan24Date20mA : MB Offset: 12336
+    uint32_t chan24Date20mA;
+    // Parameter: CalibOCR4x : chan24OCR4x : MB Offset: 12338
+    uint32_t chan24OCR4x;
+    // Parameter: CalibFSR4x : chan24FSR4x : MB Offset: 12340
+    uint32_t chan24FSR4x;
+    // Parameter: CalibDate4x : chan24Date4x : MB Offset: 12342
+    uint32_t chan24Date4x;
+    // Parameter: CalibOCR3x : chan24OCR3x : MB Offset: 12344
+    uint32_t chan24OCR3x;
+    // Parameter: CalibFSR3x : chan24FSR3x : MB Offset: 12346
+    uint32_t chan24FSR3x;
+    // Parameter: CalibDate3x : chan24Date3x : MB Offset: 12348
+    uint32_t chan24Date3x;
+    // Parameter: CalibOCRinternal : chan24OCRinternal : MB Offset: 12350
+    float chan24OCRinternal;
+    // Parameter: CalibFSRinternal : chan24FSRinternal : MB Offset: 12352
+    float chan24FSRinternal;
+    // Parameter: CalibDateinternal : chan24DateInternal : MB Offset: 12354
+    uint32_t chan24DateInternal;
     // Parameter: Modbus Protocol Version : modbusProtocolVersion : MB Offset: 0
     uint32_t modbusProtocolVersion;
     // Parameter: Hardware Version : hardwareVersion : MB Offset: 100
@@ -622,22 +3370,120 @@ typedef struct
     uint16_t modbusCountErrors;
     // Parameter: Modbus Count Goods : modbusCountGoods : MB Offset: 203
     uint16_t modbusCountGoods;
+    // Parameter: Access type  : accessType : MB Offset: 300
+    uint16_t accessType;
     // Parameter: Count Modules : countModules : MB Offset: 1000
     uint16_t countModules;
-    // Parameter: Info Moduls : var7 : MB Offset: 1000
-    uint16_t var7;
-    // Parameter: Modul 1 : var8 : MB Offset: 1100
-    uint16_t var8;
-    // Parameter: Modul 2 : var9 : MB Offset: 1200
-    uint16_t var9;
-    // Parameter: Modul 3 : var10 : MB Offset: 1300
-    uint16_t var10;
-    // Parameter: Modul 4 : var11 : MB Offset: 1400
-    uint16_t var11;
-    // Parameter: Modul 5 : var12 : MB Offset: 1500
-    uint16_t var12;
-    // Parameter: Modul 6 : var13 : MB Offset: 1600
-    uint16_t var13;
+    // Parameter: Mother Board Model : matherBoardModel : MB Offset: 1001
+    uint8_t matherBoardModel[16];
+    // Parameter: Module 1 Online Flag : module1Online : MB Offset: 1100
+    uint16_t module1Online;
+    // Parameter: Module 1 Protocol Version : module1ProtocolVersion : MB Offset: 1101
+    uint32_t module1ProtocolVersion;
+    // Parameter: Module 1 Hardware Version : module1HardwareVersion : MB Offset: 1103
+    uint32_t module1HardwareVersion;
+    // Parameter: Module 1 Software Version : module1SoftwareVersion : MB Offset: 1105
+    uint32_t module1SoftwareVersion;
+    // Parameter: Module 1 Serial Number : module1SerialNumber : MB Offset: 1107
+    uint32_t module1SerialNumber;
+    // Parameter: Module 1 Factory Date : module1FactoryDate : MB Offset: 1109
+    uint32_t module1FactoryDate;
+    // Parameter: Module 1 Type : module1Type : MB Offset: 1111
+    uint16_t module1Type;
+    // Parameter: Module 1 Access Type : module1AccessType : MB Offset: 1112
+    uint16_t module1AccessType;
+    // Parameter: Module 1 Errors : module1Errors : MB Offset: 1113
+    uint32_t module1Errors;
+    // Parameter: Module 2 Online Flag : module2Online : MB Offset: 1200
+    uint16_t module2Online;
+    // Parameter: Module 2 Protocol Version : module2ProtocolVersion : MB Offset: 1201
+    uint32_t module2ProtocolVersion;
+    // Parameter: Module 2 Hardware Version : module2HardwareVersion : MB Offset: 1203
+    uint32_t module2HardwareVersion;
+    // Parameter: Module 2 Software Version : module2SoftwareVersion : MB Offset: 1205
+    uint32_t module2SoftwareVersion;
+    // Parameter: Module 2 Serial Number : module2SerialNumber : MB Offset: 1207
+    uint32_t module2SerialNumber;
+    // Parameter: Module 2 Factory Date : module2FactoryDate : MB Offset: 1209
+    uint32_t module2FactoryDate;
+    // Parameter: Module 2 Type : module2Type : MB Offset: 1211
+    uint16_t module2Type;
+    // Parameter: Module 2 Access Type : module2AccessType : MB Offset: 1212
+    uint16_t module2AccessType;
+    // Parameter: Module 2 Errors : module2Errors : MB Offset: 1213
+    uint32_t module2Errors;
+    // Parameter: Module 3 Online Flag : module3Online : MB Offset: 1300
+    uint16_t module3Online;
+    // Parameter: Module 3 Protocol Version : module3ProtocolVersion : MB Offset: 1301
+    uint32_t module3ProtocolVersion;
+    // Parameter: Module 3 Hardware Version : module3HardwareVersion : MB Offset: 1303
+    uint32_t module3HardwareVersion;
+    // Parameter: Module 3 Software Version : module3SoftwareVersion : MB Offset: 1305
+    uint32_t module3SoftwareVersion;
+    // Parameter: Module 3 Serial Number : module3SerialNumber : MB Offset: 1307
+    uint32_t module3SerialNumber;
+    // Parameter: Module 3 Factory Date : module3FactoryDate : MB Offset: 1309
+    uint32_t module3FactoryDate;
+    // Parameter: Module 3 Type : module3Type : MB Offset: 1311
+    uint16_t module3Type;
+    // Parameter: Module 3 Access Type : module3AccessType : MB Offset: 1312
+    uint16_t module3AccessType;
+    // Parameter: Module 3 Errors : module3Errors : MB Offset: 1313
+    uint32_t module3Errors;
+    // Parameter: Module 4 Online Flag : module4Online : MB Offset: 1400
+    uint16_t module4Online;
+    // Parameter: Module 4 Protocol Version : module4ProtocolVersion : MB Offset: 1401
+    uint32_t module4ProtocolVersion;
+    // Parameter: Module 4 Hardware Version : module4HardwareVersion : MB Offset: 1403
+    uint32_t module4HardwareVersion;
+    // Parameter: Module 4 Software Version : module4SoftwareVersion : MB Offset: 1405
+    uint32_t module4SoftwareVersion;
+    // Parameter: Module 4 Serial Number : module4SerialNumber : MB Offset: 1407
+    uint32_t module4SerialNumber;
+    // Parameter: Module 4 Factory Date : module4FactoryDate : MB Offset: 1409
+    uint32_t module4FactoryDate;
+    // Parameter: Module 4 Type : module4Type : MB Offset: 1411
+    uint16_t module4Type;
+    // Parameter: Module 4 Access Type : module4AccessType : MB Offset: 1412
+    uint16_t module4AccessType;
+    // Parameter: Module 4 Errors : module4Errors : MB Offset: 1413
+    uint32_t module4Errors;
+    // Parameter: Module 5 Online Flag : module5Online : MB Offset: 1500
+    uint16_t module5Online;
+    // Parameter: Module 5 Protocol Version : module5ProtocolVersion : MB Offset: 1501
+    uint32_t module5ProtocolVersion;
+    // Parameter: Module 5 Hardware Version : module5HardwareVersion : MB Offset: 1503
+    uint32_t module5HardwareVersion;
+    // Parameter: Module 5 Software Version : module5SoftwareVersion : MB Offset: 1505
+    uint32_t module5SoftwareVersion;
+    // Parameter: Module 5 Serial Number : module5SerialNumber : MB Offset: 1507
+    uint32_t module5SerialNumber;
+    // Parameter: Module 5 Factory Date : module5FactoryDate : MB Offset: 1509
+    uint32_t module5FactoryDate;
+    // Parameter: Module 5 Type : module5Type : MB Offset: 1511
+    uint16_t module5Type;
+    // Parameter: Module 5 Access Type : module5AccessType : MB Offset: 1512
+    uint16_t module5AccessType;
+    // Parameter: Module 5 Errors : module5Errors : MB Offset: 1513
+    uint32_t module5Errors;
+    // Parameter: Module 6 Online Flag : module6Online : MB Offset: 1600
+    uint16_t module6Online;
+    // Parameter: Module 6 Protocol Version : module6ProtocolVersion : MB Offset: 1601
+    uint32_t module6ProtocolVersion;
+    // Parameter: Module 6 Hardware Version : module6HardwareVersion : MB Offset: 1603
+    uint32_t module6HardwareVersion;
+    // Parameter: Module 6 Software Version : module6SoftwareVersion : MB Offset: 1605
+    uint32_t module6SoftwareVersion;
+    // Parameter: Module 6 Serial Number : module6SerialNumber : MB Offset: 1607
+    uint32_t module6SerialNumber;
+    // Parameter: Module 6 Factory Date : module6FactoryDate : MB Offset: 1609
+    uint32_t module6FactoryDate;
+    // Parameter: Module 6 Type : module6Type : MB Offset: 1611
+    uint16_t module6Type;
+    // Parameter: Module 6 Access Type : module6AccessType : MB Offset: 1612
+    uint16_t module6AccessType;
+    // Parameter: Module 6 Errors : module6Errors : MB Offset: 1613
+    uint32_t module6Errors;
     // Parameter: Analog channel 1 : analogChan1 : MB Offset: 5000
     float analogChan1;
     // Parameter: Analog channel 2 : analogChan2 : MB Offset: 5002
@@ -778,6 +3624,46 @@ typedef struct
     float freqChan15;
     // Parameter: Freq channel 16 : freqChan16 : MB Offset: 5230
     float freqChan16;
+    // Parameter: Freq channel 17 : freqChan17 : MB Offset: 5232
+    float freqChan17;
+    // Parameter: Freq channel 18 : freqChan18 : MB Offset: 5234
+    float freqChan18;
+    // Parameter: Freq channel 19 : freqChan19 : MB Offset: 5236
+    float freqChan19;
+    // Parameter: Freq channel 20 : freqChan20 : MB Offset: 5238
+    float freqChan20;
+    // Parameter: Freq channel 21 : freqChan21 : MB Offset: 5240
+    float freqChan21;
+    // Parameter: Freq channel 22 : freqChan22 : MB Offset: 5242
+    float freqChan22;
+    // Parameter: Freq channel 23 : freqChan23 : MB Offset: 5244
+    float freqChan23;
+    // Parameter: Freq channel 24 : freqChan24 : MB Offset: 5246
+    float freqChan24;
+    // Parameter: Freq channel 25 : freqChan25 : MB Offset: 5248
+    float freqChan25;
+    // Parameter: Freq channel 26 : freqChan26 : MB Offset: 5250
+    float freqChan26;
+    // Parameter: Freq channel 27 : freqChan27 : MB Offset: 5252
+    float freqChan27;
+    // Parameter: Freq channel 28 : freqChan28 : MB Offset: 5254
+    float freqChan28;
+    // Parameter: Freq channel 29 : freqChan29 : MB Offset: 5256
+    float freqChan29;
+    // Parameter: Freq channel 30 : freqChan30 : MB Offset: 5258
+    float freqChan30;
+    // Parameter: Freq channel 31 : freqChan31 : MB Offset: 5260
+    float freqChan31;
+    // Parameter: Freq channel 32 : freqChan32 : MB Offset: 5262
+    float freqChan32;
+    // Parameter: Freq channel 33 : freqChan33 : MB Offset: 5264
+    float freqChan33;
+    // Parameter: Freq channel 34 : freqChan34 : MB Offset: 5266
+    float freqChan34;
+    // Parameter: Freq channel 35 : freqChan35 : MB Offset: 5268
+    float freqChan35;
+    // Parameter: Freq channel 36 : freqChan36 : MB Offset: 5270
+    float freqChan36;
     // Parameter: Analog Channel Status 1 : analogStatusChan1 : MB Offset: 7000
     uint16_t analogStatusChan1;
     // Parameter: Analog Channel Status 2 : analogStatusChan2 : MB Offset: 7001

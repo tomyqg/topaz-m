@@ -12,11 +12,11 @@ cFreqChannel::cFreqChannel(QObject *parent) : QObject(parent)
     measureperiod = 1;
     slot = 0;       //по-умолчанию присваиваем несуществующий слот
     name = "Fr";
-    lowermeasurelimit = -100;
+    lowermeasurelimit = 0;
     highermeasurelimit = 100;
     unit = "Гц";
     weight = 1;
-    lowerlimit = -100;
+    lowerlimit = 0;
     higherlimit = 100;
     demphervalue = 0;
     outputData.impulseDuration = 40;

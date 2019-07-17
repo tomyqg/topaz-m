@@ -28,6 +28,7 @@ private:
     static QString passAdmin;
     static QString configFileName;
     static accessModeType mode;
+    static accessModeType modeModbusExt;
 
 };
 

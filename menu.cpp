@@ -45,6 +45,9 @@ extern QList<cMathChannel*> listMath;
 extern QList<cFreqChannel*> listFreq; //список частотных каналов
 extern cIpController * ethernet;
 extern QMutex mSysOpt;
+extern QMutex mListUstvok;
+extern QMutex mListMath;
+extern QMutex mListChannel;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -377,6 +380,7 @@ void dMenu::addWidgetUstavki()
 
     // генерация виджетов (кнопок) уставок
     int i = 0;
+    mListUstvok.lock();
     foreach (Ustavka * u, listUstavok) {
         wButtonStyled * bUstavka = new wButtonStyled(ui->widgetScrollAreaUstavki);
         bUstavka->index = i+1;
@@ -390,6 +394,7 @@ void dMenu::addWidgetUstavki()
         ui->verticalLayoutUstavki->addWidget(bUstavka);
         i++;
     }
+    mListUstvok.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutUstavki->addItem(verticalSpacer);
 }
@@ -428,6 +433,7 @@ void dMenu::addWidgetChannels()
 
     // генерация виджетов (кнопок) уставок
     int i = 0;
+    mListChannel.lock();
     foreach (ChannelOptions * channel, listChannels) {
         if(channel->enable)
         {
@@ -444,6 +450,7 @@ void dMenu::addWidgetChannels()
             i++;
         }
     }
+    mListChannel.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutChannels->addItem(verticalSpacer);
 }
@@ -605,6 +612,7 @@ void dMenu::addWidgetMeasures()
     else
     {
         int i = 0;
+        mListChannel.lock();
         foreach (ChannelOptions * channel, listChannels) {
 
             if(channel->enable)
@@ -617,6 +625,7 @@ void dMenu::addWidgetMeasures()
             }
             i++;
         }
+        mListChannel.unlock();
 
         i = 0;
         foreach (cFreqChannel * channel, listFreq) {
@@ -957,9 +966,11 @@ void dMenu::on_bBackDiagnostika_clicked()
 
 void dMenu::addChannels(QList<ChannelOptions *> channels)
 {
+    mListChannel.lock();
     foreach (ChannelOptions * ch, channels) {
         listChannels.append(ch);
     }
+    mListChannel.unlock();
 
     //генерация кнопок уставок
     addWidgetUstavki();
@@ -981,17 +992,21 @@ void dMenu::slotOpenGroup(int num)
     //определяем существующие каналы и добавляем в комбобоксы
     QStringList listComboChannels;
     listComboChannels.append("ОТКЛЮЧЕН");
+    mListChannel.lock();
     for(int i = 0; i < listChannels.size(); i++)
     {
         QString nameCh = listChannels.at(i)->GetChannelName();
         QString stateCh = (listChannels.at(i)->enable ? "ВКЛ." : "ОТКЛ.");
         listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ") | " + stateCh);
     }
+    mListChannel.unlock();
 
     //математические каналы
+    mListMath.lock();
     for (int i = 0; i < listMath.size(); i++) {
         listComboChannels.append(listMath.at(i)->getName() + " (M" + QString::number(i+1) + ")");
     }
+    mListMath.unlock();
 
     //частотные каналы
     for (int i = 0; i < listFreq.size(); i++) {
@@ -2327,10 +2342,12 @@ void dMenu::on_digitInoutToOutput_currentIndexChanged(int index)
 
 void dMenu::on_bAddUstavka_clicked()
 {
-    Ustavka *ust = new Ustavka(this);
+    mListUstvok.lock();
+    Ustavka *ust = new Ustavka();
     int i = listUstavok.size();
     ust->setIdentifikator("Limit " + QString::number(i+1));
     listUstavok.append(ust);
+    mListUstvok.unlock();
     emit newUstavka(i);
 
     //регенерация кнопок уставок
@@ -2365,10 +2382,12 @@ void dMenu::on_bDelGroup_clicked()
 
 void dMenu::on_bDelMath_clicked()
 {
+    mListMath.lock();
     if(listMath.size() > 1)
     {
         listMath.removeAt(curMathEdit);
     }
+    mListMath.unlock();
     ui->stackedWidget->setCurrentIndex(20);
     ui->nameSubMenu->setText("МАТЕМАТИКА");
     addWidgetMath();
@@ -2474,11 +2493,12 @@ void dMenu::updateLabelDiagnostic()
         int i = 0;
         foreach(QLabel * volLabel, listLabelDiagnostic)
         {
-
+            mListChannel.lock();
             if(i >= listChannels.size()) break; // Ошибка: столько каналов тут нет
             if(listChannels.at(i)->enable == false) continue; // Пропустить отключенные каналы
 
             volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+            mListChannel.unlock();
             i++;
         }
         // Частотные сигналы
@@ -2771,6 +2791,7 @@ void dMenu::addWidgetMath()
 
     // генерация виджетов (кнопок) матканалов
     int i = 0;
+    mListMath.lock();
     foreach (cMathChannel * math, listMath) {
         wButtonStyled * bMath = new wButtonStyled(ui->widgetScrollAreaMath);
         bMath->index = i+1;
@@ -2784,6 +2805,7 @@ void dMenu::addWidgetMath()
         ui->verticalLayoutMath->addWidget(bMath);
         i++;
     }
+    mListMath.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutMath->addItem(verticalSpacer);
 }
@@ -2800,11 +2822,13 @@ void dMenu::slotOpenMathChannel(int num)
     //определяем существующие каналы и добавляем в комбобоксы
     QStringList listComboChannels;
     listComboChannels.append("ОТКЛЮЧЕН");
+    mListChannel.lock();
     for(int i = 0; i < listChannels.size(); i++)
     {
         QString nameCh = listChannels.at(i)->GetChannelName();
         listComboChannels.append(nameCh + " (A" + QString::number(i+1) + ")");
     }
+    mListChannel.unlock();
 //    foreach (ChannelOptions * ch, listChannels) {
 //        listComboChannels.append(ch->GetChannelName());
 //    }
@@ -2832,11 +2856,13 @@ void dMenu::slotOpenMathChannel(int num)
 
 void dMenu::on_bAddMath_clicked()
 {
+    mListMath.lock();
     cMathChannel * math = new cMathChannel();
     int size = listMath.size();
     math->setNum(size+1);
     math->setName("Math " + QString::number(size+1));
     listMath.append(math);
+    mListMath.lock();
 
     addWidgetMath();
 }
