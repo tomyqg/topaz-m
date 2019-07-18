@@ -21,6 +21,7 @@ extern QMutex mSysOpt;
 extern QMutex mListUstvok;
 extern QMutex mListMath;
 extern QMutex mListChannel;
+extern QMutex mListFreq;
 
 cFileManager::cFileManager(QObject *parent) : QObject(parent)
 {
@@ -75,6 +76,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
     options["channels"] = settings;
 
     int countChFreq = 0;
+    mListFreq.lock();
     foreach (cFreqChannel * freq, listFreq) {
         if(freq->enable)
         {
@@ -94,6 +96,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             countChFreq++;
         }
     }
+    mListFreq.unlock();
     options["countFreq"] = countChFreq;
     options["channelsFreq"] = settingsFreq;
 
@@ -236,6 +239,7 @@ int cFileManager::readChannelsSettings(QString path)
     QJsonArray arrayFreq = json["channelsFreq"].toArray();
     int countFr = json["countFreq"].toInt();
     index = 0;
+    mListFreq.lock();
     foreach (cFreqChannel * freq, listFreq) {
         if(index < countFr)
         {
@@ -258,6 +262,7 @@ int cFileManager::readChannelsSettings(QString path)
         }
         index++;
     }
+    mListFreq.unlock();
 
     mListUstvok.lock();
     count = json["countUst"].toInt();

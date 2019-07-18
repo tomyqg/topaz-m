@@ -33,6 +33,8 @@ extern QMutex mSysOpt;
 extern QMutex mListUstvok;
 extern QMutex mListMath;
 extern QMutex mListChannel;
+extern QMutex mListDev;
+extern QMutex mListFreq;
 
 QMutex mExtModbus;
 int currentSetpointNum = 1;
@@ -65,7 +67,6 @@ void MainWindow::initExtInterface()
     //Подключаемые модули (платы)
     for(int i=0; i<TOTAL_NUM_DEVICES; i++)
     {
-        cDevice * dev = listDevice.at(i);
         QString module = "module" + QString::number(i+1);
         tablExtInterfaceRegisters.append({module + "Errors", &MainWindow::extGetModulIsErrors});
         tablExtInterfaceRegisters.append({module + "Online", &MainWindow::extGetModulIsOnline});
@@ -76,6 +77,12 @@ void MainWindow::initExtInterface()
         tablExtInterfaceRegisters.append({module + "SoftwareVersion", &MainWindow::extGetModuleSoftVer});
         tablExtInterfaceRegisters.append({module + "SerialNumber", &MainWindow::extGetModuleSerialNumber});
         tablExtInterfaceRegisters.append({module + "FactoryDate", &MainWindow::extGetModuleFactoryDate});
+
+        tablSetParamExtInterface.append({"module" + module + "Mode", &MainWindow::extGetModuleMode, &MainWindow::extSetModuleMode});
+        tablSetParamExtInterface.append({"module" + module + "ModbusBaud", &MainWindow::extGetModuleModbusBaud, &MainWindow::extSetModuleModbusBaud});
+        tablSetParamExtInterface.append({"module" + module + "ModbusParity", &MainWindow::extGetModuleModbusParity, &MainWindow::extSetModuleModbusParity});
+        tablSetParamExtInterface.append({"module" + module + "MbStopBits", &MainWindow::extGetModuleModbusStopBits, &MainWindow::extSetModuleModbusStopBits});
+        tablSetParamExtInterface.append({"module" + module + "DataOrder", &MainWindow::extGetModuleModbusDataOrder, &MainWindow::extSetModuleModbusDataOrder});
     }
 
     // Аналоговые каналы
@@ -111,9 +118,21 @@ void MainWindow::initExtInterface()
     // Частотные каналы
     for(int i = 0; i < TOTAL_NUM_FREQ; i++)
     {
-        QString name = "freqChan" + QString::number(i+1);
-//        tablExtInterfaceChannels.append({name, &MainWindow::extGetChannel});
-        tablExtInterfaceRegisters.append({name, &MainWindow::extGetChannel});
+        QString num = QString::number(i+1);
+        tablExtInterfaceRegisters.append({"freqChan" + num, &MainWindow::extGetChannel});
+
+        tablSetParamExtInterface.append({"freq" + num + "SignalType", &MainWindow::extGetFreqSignalType, &MainWindow::extSetFreqSignalType});
+        tablSetParamExtInterface.append({"freq" + num + "AdditionalParameter", &MainWindow::extGetFreqAdditionalParameter, &MainWindow::extSetFreqAdditionalParameter});
+        tablSetParamExtInterface.append({"freq" + num + "ImpulseDuration", &MainWindow::extGetFreqImpulseDuration, &MainWindow::extSetFreqImpulseDuration});
+        tablSetParamExtInterface.append({"freq" + num + "ImpWeight", &MainWindow::extGetFreqImpWeight, &MainWindow::extSetFreqImpWeight});
+        tablSetParamExtInterface.append({"freq" + num + "LowMeasureLim", &MainWindow::extGetFreqLowMeasureLim, &MainWindow::extSetFreqLowMeasureLim});
+        tablSetParamExtInterface.append({"freq" + num + "HighMeasureLim", &MainWindow::extGetFreqHighMeasureLim, &MainWindow::extSetFreqHighMeasureLim});
+        tablSetParamExtInterface.append({"freq" + num + "Period", &MainWindow::extGetFreqPeriod, &MainWindow::extSetFreqPeriod});
+        tablSetParamExtInterface.append({"freq" + num + "Dempher", &MainWindow::extGetFreqDempher, &MainWindow::extSetFreqDempher});
+        tablSetParamExtInterface.append({"freq" + num + "TypeValue", &MainWindow::extGetFreqTypeValue, &MainWindow::extSetFreqTypeValue});
+        tablSetParamExtInterface.append({"freq" + num + "Name", &MainWindow::extGetFreqName, &MainWindow::extSetFreqName});
+        tablSetParamExtInterface.append({"freq" + num + "Unit", &MainWindow::extGetFreqUnit, &MainWindow::extSetFreqUnit});
+
     }
 
 
@@ -296,10 +315,12 @@ void MainWindow::extGetChannel(QString name)
     {
         int chan = name.right(name.size() - QString("freqChan").size()).toInt();
         float fl = 0;
+        mListFreq.lock();
         if((chan > 0) && (chan <= listFreq.size()))
         {
             fl = (float)listFreq.at(chan-1)->GetCurrentChannelValue();
         }
+        mListFreq.unlock();
         memcpy(&data, &fl, sizeof(float));
     }
 
@@ -486,9 +507,11 @@ void MainWindow::extGetCountModules(QString name)
 {
     tModbusBuffer data;
     uint8_t count = 0;
+    mListDev.lock();
     foreach (cDevice * dev, listDevice) {
         if(dev->getOnline()) count++;
     }
+    mListDev.unlock();
     data.data[0] = count;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -510,11 +533,13 @@ void MainWindow::extGetModulIsErrors(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t errors = listDevice.at(num-1)->devErrors;
         memcpy(&data, &errors, sizeof(errors));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -526,11 +551,13 @@ void MainWindow::extGetModulIsOnline(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint16_t flag = listDevice.at(num-1)->getOnline()?1:0;
         memcpy(&data, &flag, sizeof(flag));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -542,6 +569,7 @@ void MainWindow::extGetModulAccessType(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint16_t flag = 0;
@@ -555,6 +583,7 @@ void MainWindow::extGetModulAccessType(QString name)
         }
         memcpy(&data, &flag, sizeof(flag));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -566,11 +595,13 @@ void MainWindow::extGetModuleProtocolVer(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t ver = (uint32_t)listDevice.at(num-1)->protocolVersion;
         memcpy(&data, &ver, sizeof(ver));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -582,11 +613,13 @@ void MainWindow::extGetModuleHardVer(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t ver = (uint32_t)listDevice.at(num-1)->hardwareVersion;
         memcpy(&data, &ver, sizeof(ver));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -598,11 +631,13 @@ void MainWindow::extGetModuleSoftVer(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t ver = (uint32_t)listDevice.at(num-1)->softwareVersion;
         memcpy(&data, &ver, sizeof(ver));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -614,11 +649,13 @@ void MainWindow::extGetModuleSerialNumber(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t serial = (uint32_t)listDevice.at(num-1)->serialNumber;
         memcpy(&data, &serial, sizeof(serial));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -630,11 +667,13 @@ void MainWindow::extGetModuleFactoryDate(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint32_t serial = (uint32_t)listDevice.at(num-1)->serialNumber;
         memcpy(&data, &serial, sizeof(serial));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -646,11 +685,13 @@ void MainWindow::extGetModuleType(QString name)
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
+    mListDev.lock();
     if((num > 0) && (num <= listDevice.size()))
     {
         uint16_t type = (uint16_t)listDevice.at(num-1)->deviceType;
         memcpy(&data, &type, sizeof(type));
     }
+    mListDev.unlock();
 
     emit signalToExtModbus(name, data);
 }
@@ -1890,4 +1931,412 @@ void MainWindow::extGetChannelTypeValue(QString name)
     mListChannel.unlock();
 
     emit signalToExtModbus(name, data);
+}
+
+
+// Получение режима работы платы
+void MainWindow::extGetModuleMode(QString name)
+{
+    tModbusBuffer data;
+    memset(&data, 0, 8);
+    QString module = name.right(name.size() - QString("module").size());//.toInt();
+    int num = module.left(1).toInt();
+
+    mListDev.lock();
+    if((num > 0) && (num <= listDevice.size()))
+    {
+        uint16_t type = (uint16_t)listDevice.at(num-1)->getMode() & 0x7FFF;
+        memcpy(&data, &type, sizeof(type));
+    }
+    mListDev.unlock();
+
+    emit signalToExtModbus(name, data);
+}
+
+// Установка режима работы платы
+void MainWindow::extSetModuleMode(QString name, uint8_t * data)
+{
+    QString module = name.right(name.size() - QString("module").size());//.toInt();
+    int num = module.left(1).toInt();
+    mListDev.lock();
+    if((num > 0) && (num <= listDevice.size()))
+    {
+        uint16_t mode;
+        memcpy(&mode, &data, sizeof(mode));
+        listDevice.at(num-1)->setMode(mode);
+    }
+    mListDev.unlock();
+}
+
+// Получение текущей скорости внутреннего MODBUS
+void MainWindow::extGetModuleModbusBaud(QString name)
+{
+    //Vag: пока не реализовано
+}
+// Установка скорости внутреннего MODBUS
+void MainWindow::extSetModuleModbusBaud(QString name, uint8_t * data)
+{
+    //Vag: пока не реализовано
+}
+
+// Получение бита чётности
+void MainWindow::extGetModuleModbusParity(QString name)
+{
+    //Vag: пока не реализовано
+}
+// Установка бита чётности
+void MainWindow::extSetModuleModbusParity(QString name, uint8_t * data)
+{
+    //Vag: пока не реализовано
+}
+
+// Получение количества стоп-битов
+void MainWindow::extGetModuleModbusStopBits(QString name)
+{
+    //Vag: пока не реализовано
+}
+// Установка количества стоп-битов
+void MainWindow::extSetModuleModbusStopBits(QString name, uint8_t * data)
+{
+    //Vag: пока не реализовано
+}
+
+// Получение формата данных MODBUS
+void MainWindow::extGetModuleModbusDataOrder(QString name)
+{
+    //Vag: пока не реализовано
+}
+// Установка формата данных MODBUS
+void MainWindow::extSetModuleModbusDataOrder(QString name, uint8_t * data)
+{
+    //Vag: пока не реализовано
+}
+
+// Установка типа сигнала частотного канала
+void MainWindow::extSetFreqSignalType(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("chan").size());
+    int num = chan.left(chan.size() - QString("FreqSignalType").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        listFreq.at(num-1)->SetSignalType(data[0]);
+    }
+    mListFreq.unlock();
+}
+// Получение типа сигнала частотного канала
+void MainWindow::extGetFreqSignalType(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("chan").size());
+    int num = chan.left(chan.size() - QString("FreqSignalType").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        uint16_t type = listFreq.at(num-1)->GetSignalType();
+        memcpy(&data, &type, sizeof(type));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+
+// Установка Additional Parametr1 частотного канала
+void MainWindow::extSetFreqAdditionalParameter(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("AdditionalParameter").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+//        listFreq.at(num-1)->setAdditionalParametr1(data);
+    }
+    mListFreq.unlock();
+}
+// Получение Additional Parametr1 частотного канала
+void MainWindow::extGetFreqAdditionalParameter(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("AdditionalParameter").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+//        listFreq.at(num-1)->getAdditionalParametr1(data.data);
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка длительности единиченого импульса
+void MainWindow::extSetFreqImpulseDuration(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("ImpulseDuration").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->setImpulseDuration(value);
+    }
+    mListFreq.unlock();
+}
+// Получение длительности единиченого импульса
+void MainWindow::extGetFreqImpulseDuration(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("ImpulseDuration").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value = listFreq.at(num-1)->GetImpulseDuration();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка веса импульса
+void MainWindow::extSetFreqImpWeight(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("ImpWeight").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->setImpulseWeight(value);
+    }
+    mListFreq.unlock();
+}
+// Получение веса импульса
+void MainWindow::extGetFreqImpWeight(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("ImpWeight").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value = listFreq.at(num-1)->getImpulseWeight();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка нижнего предела измеряемого частотного сигнала
+void MainWindow::extSetFreqLowMeasureLim(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("LowMeasureLim").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->SetLowerMeasureLimit(value);
+    }
+    mListFreq.unlock();
+}
+// Получение нижнего предела измеряемого частотного сигнала
+void MainWindow::extGetFreqLowMeasureLim(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("LowMeasureLim").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value = listFreq.at(num-1)->GetLowerMeasureLimit();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка верхнего предела измеряемого частотного сигнала
+void MainWindow::extSetFreqHighMeasureLim(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("HighMeasureLim").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->SetHigherMeasureLimit(value);
+    }
+    mListFreq.unlock();
+}
+// Получение верхнего предела измеряемого частотного сигнала
+void MainWindow::extGetFreqHighMeasureLim(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("HighMeasureLim").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value = listFreq.at(num-1)->GetHigherMeasureLimit();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка периода обновления измерения
+void MainWindow::extSetFreqPeriod(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Period").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->SetMeasurePeriod(value);
+    }
+    mListFreq.unlock();
+}
+// Получение периода обновления измерения
+void MainWindow::extGetFreqPeriod(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Period").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        float value = listFreq.at(num-1)->getMeasurePeriod();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка числа демпфирования
+void MainWindow::extSetFreqDempher(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Dempher").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        uint16_t value;
+        memcpy(&value, data, sizeof(value));
+        listFreq.at(num-1)->setDempher(value);
+    }
+    mListFreq.unlock();
+}
+// Получение числа демпфирования
+void MainWindow::extGetFreqDempher(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Dempher").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        uint16_t value = listFreq.at(num-1)->getDempher();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+// Установка типа отображения измерения
+void MainWindow::extSetFreqTypeValue(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("TypeValue").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        uint16_t value;
+        memcpy(&value, data, sizeof(value));
+//        listFreq.at(num-1)->setTypeValue(value); //Vag: пока не реализовано
+    }
+    mListFreq.unlock();
+}
+// Получение типа отображения измерения
+void MainWindow::extGetFreqTypeValue(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("TypeValue").size()).toInt();
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        //Vag: пока не реализовано
+//        uint16_t value = listFreq.at(num-1)->getTypeValue();
+//        memcpy(data, &value, sizeof(value));
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+#define LENGHT_FREQ_NAME 8
+// Получение имени частотного канала
+void MainWindow::extGetFreqName(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Name").size()).toInt();
+    memset(&data, 0, LENGHT_FREQ_NAME);
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        QString StrName = listFreq.at(num-1)->GetChannelName();
+        memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+// Установка имени частотного канала
+void MainWindow::extSetFreqName(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Name").size()).toInt();
+    QString strName = QString(QByteArray((char*)data, LENGHT_FREQ_NAME));
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        listFreq.at(num-1)->setName(strName);
+    }
+    mListFreq.unlock();
+}
+
+#define LENGHT_FREQ_UNIT 4
+// Получение имени частотного канала
+void MainWindow::extGetFreqUnit(QString name)
+{
+    tModbusBuffer data;
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Unit").size()).toInt();
+    memset(&data, 0, LENGHT_FREQ_UNIT);
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        QString StrName = listFreq.at(num-1)->getUnit();
+        memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
+    }
+    mListFreq.unlock();
+    emit signalToExtModbus(name, data);
+}
+// Установка имени частотного канала
+void MainWindow::extSetFreqUnit(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("freq").size());
+    int num = chan.left(chan.size() - QString("Unit").size()).toInt();
+    QString strName = QString(QByteArray((char*)data, LENGHT_FREQ_UNIT));
+    mListFreq.lock();
+    if((num > 0) && (num <= listFreq.size()))
+    {
+        listFreq.at(num-1)->setUnit(strName);
+    }
+    mListFreq.unlock();
 }

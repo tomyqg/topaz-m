@@ -648,15 +648,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit  : chan1HighMeasureLim
     {5017, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1HighMeasureLim), "chan1HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan1Name
-    {5019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Name), "chan1Name", LKUP_TYPE_ASCII, 8},
+    {5019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Name), "chan1Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan1Period
-    {5023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Period), "chan1Period", LKUP_TYPE_FLOAT, 4},
+    {5027, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Period), "chan1Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan1Dempher
-    {5025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Dempher), "chan1Dempher", LKUP_TYPE_U16, 2},
+    {5029, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1Dempher), "chan1Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan1TypeRegistration
-    {5026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeRegistration), "chan1TypeRegistration", LKUP_TYPE_U16, 2},
+    {5030, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeRegistration), "chan1TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan1TypeValue
-    {5027, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeValue), "chan1TypeValue", LKUP_TYPE_U16, 2},
+    {5031, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1TypeValue), "chan1TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan2SignalType
     {5040, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2SignalType), "chan2SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter21 : chan2AdditionalParameter1
@@ -670,15 +670,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan2HighMeasureLim
     {5057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2HighMeasureLim), "chan2HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan2Name
-    {5059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Name), "chan2Name", LKUP_TYPE_ASCII, 8},
+    {5059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Name), "chan2Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan2Period
-    {5063, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Period), "chan2Period", LKUP_TYPE_FLOAT, 4},
+    {5067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Period), "chan2Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan2Dempher
-    {5065, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Dempher), "chan2Dempher", LKUP_TYPE_U16, 2},
+    {5069, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2Dempher), "chan2Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan2TypeRegistration
-    {5066, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeRegistration), "chan2TypeRegistration", LKUP_TYPE_U16, 2},
+    {5070, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeRegistration), "chan2TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan2TypeValue
-    {5067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeValue), "chan2TypeValue", LKUP_TYPE_U16, 2},
+    {5071, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2TypeValue), "chan2TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan3SignalType
     {5080, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3SignalType), "chan3SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter19 : chan3AdditionalParameter1
@@ -692,15 +692,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan3HighMeasureLim
     {5097, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3HighMeasureLim), "chan3HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan3Name
-    {5099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Name), "chan3Name", LKUP_TYPE_ASCII, 8},
+    {5099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Name), "chan3Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan3Period
-    {5103, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Period), "chan3Period", LKUP_TYPE_FLOAT, 4},
+    {5107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Period), "chan3Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan3Dempher
-    {5105, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Dempher), "chan3Dempher", LKUP_TYPE_U16, 2},
+    {5109, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3Dempher), "chan3Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan3TypeRegistration
-    {5106, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeRegistration), "chan3TypeRegistration", LKUP_TYPE_U16, 2},
+    {5110, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeRegistration), "chan3TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan3TypeValue
-    {5107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeValue), "chan3TypeValue", LKUP_TYPE_U16, 2},
+    {5111, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3TypeValue), "chan3TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan4SignalType
     {5120, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4SignalType), "chan4SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter19 : chan4AdditionalParameter1
@@ -714,15 +714,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan4HighMeasureLim
     {5137, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4HighMeasureLim), "chan4HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan4Name
-    {5139, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Name), "chan4Name", LKUP_TYPE_ASCII, 8},
+    {5139, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Name), "chan4Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan4Period
-    {5143, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Period), "chan4Period", LKUP_TYPE_FLOAT, 4},
+    {5147, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Period), "chan4Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan4Dempher
-    {5145, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Dempher), "chan4Dempher", LKUP_TYPE_U16, 2},
+    {5149, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4Dempher), "chan4Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan4TypeRegistration
-    {5146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeRegistration), "chan4TypeRegistration", LKUP_TYPE_U16, 2},
+    {5150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeRegistration), "chan4TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan4TypeValue
-    {5147, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeValue), "chan4TypeValue", LKUP_TYPE_U16, 2},
+    {5151, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4TypeValue), "chan4TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan5SignalType
     {5160, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5SignalType), "chan5SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter17 : chan5AdditionalParameter1
@@ -736,15 +736,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan5HighMeasureLim
     {5177, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5HighMeasureLim), "chan5HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan5Name
-    {5179, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Name), "chan5Name", LKUP_TYPE_ASCII, 8},
+    {5179, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Name), "chan5Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan5Period
-    {5183, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Period), "chan5Period", LKUP_TYPE_FLOAT, 4},
+    {5187, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Period), "chan5Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan5Dempher
-    {5185, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Dempher), "chan5Dempher", LKUP_TYPE_U16, 2},
+    {5189, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5Dempher), "chan5Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan5TypeRegistration
-    {5186, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeRegistration), "chan5TypeRegistration", LKUP_TYPE_U16, 2},
+    {5190, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeRegistration), "chan5TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan5TypeValue
-    {5187, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeValue), "chan5TypeValue", LKUP_TYPE_U16, 2},
+    {5191, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5TypeValue), "chan5TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan6SignalType
     {5200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6SignalType), "chan6SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter17 : chan6AdditionalParameter1
@@ -758,15 +758,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan6HighMeasureLim
     {5217, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6HighMeasureLim), "chan6HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan6Name
-    {5219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Name), "chan6Name", LKUP_TYPE_ASCII, 8},
+    {5219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Name), "chan6Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan6Period
-    {5223, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Period), "chan6Period", LKUP_TYPE_FLOAT, 4},
+    {5227, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Period), "chan6Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan6Dempher
-    {5225, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Dempher), "chan6Dempher", LKUP_TYPE_U16, 2},
+    {5229, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6Dempher), "chan6Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan6TypeRegistration
-    {5226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeRegistration), "chan6TypeRegistration", LKUP_TYPE_U16, 2},
+    {5230, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeRegistration), "chan6TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan6TypeValue
-    {5227, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeValue), "chan6TypeValue", LKUP_TYPE_U16, 2},
+    {5231, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6TypeValue), "chan6TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan7SignalType
     {5240, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7SignalType), "chan7SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter15 : chan7AdditionalParameter1
@@ -780,15 +780,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan7HighMeasureLim
     {5257, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7HighMeasureLim), "chan7HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan7Name
-    {5259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Name), "chan7Name", LKUP_TYPE_ASCII, 8},
+    {5259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Name), "chan7Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan7Period
-    {5263, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Period), "chan7Period", LKUP_TYPE_FLOAT, 4},
+    {5267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Period), "chan7Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan7Dempher
-    {5265, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Dempher), "chan7Dempher", LKUP_TYPE_U16, 2},
+    {5269, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7Dempher), "chan7Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan7TypeRegistration
-    {5266, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeRegistration), "chan7TypeRegistration", LKUP_TYPE_U16, 2},
+    {5270, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeRegistration), "chan7TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan7TypeValue
-    {5267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeValue), "chan7TypeValue", LKUP_TYPE_U16, 2},
+    {5271, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7TypeValue), "chan7TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan8SignalType
     {5280, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8SignalType), "chan8SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter15 : chan8AdditionalParameter1
@@ -802,15 +802,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan8HighMeasureLim
     {5297, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8HighMeasureLim), "chan8HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan8Name
-    {5299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Name), "chan8Name", LKUP_TYPE_ASCII, 8},
+    {5299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Name), "chan8Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan8Period
-    {5303, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Period), "chan8Period", LKUP_TYPE_FLOAT, 4},
+    {5307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Period), "chan8Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan8Dempher
-    {5305, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Dempher), "chan8Dempher", LKUP_TYPE_U16, 2},
+    {5309, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8Dempher), "chan8Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan8TypeRegistration
-    {5306, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeRegistration), "chan8TypeRegistration", LKUP_TYPE_U16, 2},
+    {5310, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeRegistration), "chan8TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan8TypeValue
-    {5307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeValue), "chan8TypeValue", LKUP_TYPE_U16, 2},
+    {5311, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8TypeValue), "chan8TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan9SignalType
     {5320, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9SignalType), "chan9SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter13 : chan9AdditionalParameter1
@@ -824,15 +824,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan9HighMeasureLim
     {5337, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9HighMeasureLim), "chan9HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan9Name
-    {5339, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Name), "chan9Name", LKUP_TYPE_ASCII, 8},
+    {5339, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Name), "chan9Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan9Period
-    {5343, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Period), "chan9Period", LKUP_TYPE_FLOAT, 4},
+    {5347, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Period), "chan9Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan9Dempher
-    {5345, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Dempher), "chan9Dempher", LKUP_TYPE_U16, 2},
+    {5349, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9Dempher), "chan9Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan9TypeRegistration
-    {5346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeRegistration), "chan9TypeRegistration", LKUP_TYPE_U16, 2},
+    {5350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeRegistration), "chan9TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan9TypeValue
-    {5347, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeValue), "chan9TypeValue", LKUP_TYPE_U16, 2},
+    {5351, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9TypeValue), "chan9TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan10SignalType
     {5360, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10SignalType), "chan10SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter13 : chan10AdditionalParameter1
@@ -846,15 +846,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan10HighMeasureLim
     {5377, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10HighMeasureLim), "chan10HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan10Name
-    {5379, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Name), "chan10Name", LKUP_TYPE_ASCII, 8},
+    {5379, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Name), "chan10Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan10Period
-    {5383, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Period), "chan10Period", LKUP_TYPE_FLOAT, 4},
+    {5387, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Period), "chan10Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan10Dempher
-    {5385, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Dempher), "chan10Dempher", LKUP_TYPE_U16, 2},
+    {5389, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10Dempher), "chan10Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan10TypeRegistration
-    {5386, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeRegistration), "chan10TypeRegistration", LKUP_TYPE_U16, 2},
+    {5390, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeRegistration), "chan10TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan10TypeValue
-    {5387, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeValue), "chan10TypeValue", LKUP_TYPE_U16, 2},
+    {5391, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10TypeValue), "chan10TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan11SignalType
     {5400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11SignalType), "chan11SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter11 : chan11AdditionalParameter1
@@ -868,15 +868,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan11HighMeasureLim
     {5417, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11HighMeasureLim), "chan11HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan11Name
-    {5419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Name), "chan11Name", LKUP_TYPE_ASCII, 8},
+    {5419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Name), "chan11Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan11Period
-    {5423, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Period), "chan11Period", LKUP_TYPE_FLOAT, 4},
+    {5427, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Period), "chan11Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan11Dempher
-    {5425, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Dempher), "chan11Dempher", LKUP_TYPE_U16, 2},
+    {5429, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11Dempher), "chan11Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan11TypeRegistration
-    {5426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeRegistration), "chan11TypeRegistration", LKUP_TYPE_U16, 2},
+    {5430, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeRegistration), "chan11TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan11TypeValue
-    {5427, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeValue), "chan11TypeValue", LKUP_TYPE_U16, 2},
+    {5431, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11TypeValue), "chan11TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan12SignalType
     {5440, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12SignalType), "chan12SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter11 : chan12AdditionalParameter1
@@ -890,15 +890,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan12HighMeasureLim
     {5457, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12HighMeasureLim), "chan12HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan12Name
-    {5459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Name), "chan12Name", LKUP_TYPE_ASCII, 8},
+    {5459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Name), "chan12Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan12Period
-    {5463, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Period), "chan12Period", LKUP_TYPE_FLOAT, 4},
+    {5467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Period), "chan12Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan12Dempher
-    {5465, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Dempher), "chan12Dempher", LKUP_TYPE_U16, 2},
+    {5469, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12Dempher), "chan12Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan12TypeRegistration
-    {5466, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeRegistration), "chan12TypeRegistration", LKUP_TYPE_U16, 2},
+    {5470, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeRegistration), "chan12TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan12TypeValue
-    {5467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeValue), "chan12TypeValue", LKUP_TYPE_U16, 2},
+    {5471, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12TypeValue), "chan12TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan13SignalType
     {5480, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13SignalType), "chan13SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter9 : chan13AdditionalParameter1
@@ -912,15 +912,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan13HighMeasureLim
     {5497, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13HighMeasureLim), "chan13HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan13Name
-    {5499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Name), "chan13Name", LKUP_TYPE_ASCII, 8},
+    {5499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Name), "chan13Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan13Period
-    {5503, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Period), "chan13Period", LKUP_TYPE_FLOAT, 4},
+    {5507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Period), "chan13Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan13Dempher
-    {5505, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Dempher), "chan13Dempher", LKUP_TYPE_U16, 2},
+    {5509, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13Dempher), "chan13Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan13TypeRegistration
-    {5506, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeRegistration), "chan13TypeRegistration", LKUP_TYPE_U16, 2},
+    {5510, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeRegistration), "chan13TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan13TypeValue
-    {5507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeValue), "chan13TypeValue", LKUP_TYPE_U16, 2},
+    {5511, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13TypeValue), "chan13TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan14SignalType
     {5520, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14SignalType), "chan14SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter9 : chan14AdditionalParameter1
@@ -934,15 +934,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan14HighMeasureLim
     {5537, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14HighMeasureLim), "chan14HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan14Name
-    {5539, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Name), "chan14Name", LKUP_TYPE_ASCII, 8},
+    {5539, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Name), "chan14Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan14Period
-    {5543, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Period), "chan14Period", LKUP_TYPE_FLOAT, 4},
+    {5547, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Period), "chan14Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan14Dempher
-    {5545, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Dempher), "chan14Dempher", LKUP_TYPE_U16, 2},
+    {5549, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14Dempher), "chan14Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan14TypeRegistration
-    {5546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeRegistration), "chan14TypeRegistration", LKUP_TYPE_U16, 2},
+    {5550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeRegistration), "chan14TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan14TypeValue
-    {5547, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeValue), "chan14TypeValue", LKUP_TYPE_U16, 2},
+    {5551, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14TypeValue), "chan14TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan15SignalType
     {5560, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15SignalType), "chan15SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter7 : chan15AdditionalParameter1
@@ -956,15 +956,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan15HighMeasureLim
     {5577, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15HighMeasureLim), "chan15HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan15Name
-    {5579, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Name), "chan15Name", LKUP_TYPE_ASCII, 8},
+    {5579, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Name), "chan15Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan15Period
-    {5583, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Period), "chan15Period", LKUP_TYPE_FLOAT, 4},
+    {5587, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Period), "chan15Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan15Dempher
-    {5585, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Dempher), "chan15Dempher", LKUP_TYPE_U16, 2},
+    {5589, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15Dempher), "chan15Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan15TypeRegistration
-    {5586, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeRegistration), "chan15TypeRegistration", LKUP_TYPE_U16, 2},
+    {5590, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeRegistration), "chan15TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan15TypeValue
-    {5587, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeValue), "chan15TypeValue", LKUP_TYPE_U16, 2},
+    {5591, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15TypeValue), "chan15TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan16SignalType
     {5600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16SignalType), "chan16SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter7 : chan16AdditionalParameter1
@@ -978,15 +978,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan16HighMeasureLim
     {5617, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16HighMeasureLim), "chan16HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan16Name
-    {5619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Name), "chan16Name", LKUP_TYPE_ASCII, 8},
+    {5619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Name), "chan16Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan16Period
-    {5623, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Period), "chan16Period", LKUP_TYPE_FLOAT, 4},
+    {5627, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Period), "chan16Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan16Dempher
-    {5625, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Dempher), "chan16Dempher", LKUP_TYPE_U16, 2},
+    {5629, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16Dempher), "chan16Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan16TypeRegistration
-    {5626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeRegistration), "chan16TypeRegistration", LKUP_TYPE_U16, 2},
+    {5630, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeRegistration), "chan16TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan16TypeValue
-    {5627, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeValue), "chan16TypeValue", LKUP_TYPE_U16, 2},
+    {5631, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16TypeValue), "chan16TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan17SignalType
     {5640, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17SignalType), "chan17SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter5 : chan17AdditionalParameter1
@@ -1000,15 +1000,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan17HighMeasureLim
     {5657, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17HighMeasureLim), "chan17HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan17Name
-    {5659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Name), "chan17Name", LKUP_TYPE_ASCII, 8},
+    {5659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Name), "chan17Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan17Period
-    {5663, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Period), "chan17Period", LKUP_TYPE_FLOAT, 4},
+    {5667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Period), "chan17Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan17Dempher
-    {5665, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Dempher), "chan17Dempher", LKUP_TYPE_U16, 2},
+    {5669, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17Dempher), "chan17Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan17TypeRegistration
-    {5666, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeRegistration), "chan17TypeRegistration", LKUP_TYPE_U16, 2},
+    {5670, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeRegistration), "chan17TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan17TypeValue
-    {5667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeValue), "chan17TypeValue", LKUP_TYPE_U16, 2},
+    {5671, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17TypeValue), "chan17TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan18SignalType
     {5680, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18SignalType), "chan18SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter5 : chan18AdditionalParameter1
@@ -1022,15 +1022,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan18HighMeasureLim
     {5697, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18HighMeasureLim), "chan18HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan18Name
-    {5699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Name), "chan18Name", LKUP_TYPE_ASCII, 8},
+    {5699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Name), "chan18Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan18Period
-    {5703, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Period), "chan18Period", LKUP_TYPE_FLOAT, 4},
+    {5707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Period), "chan18Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan18Dempher
-    {5705, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Dempher), "chan18Dempher", LKUP_TYPE_U16, 2},
+    {5709, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18Dempher), "chan18Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan18TypeRegistration
-    {5706, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeRegistration), "chan18TypeRegistration", LKUP_TYPE_U16, 2},
+    {5710, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeRegistration), "chan18TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan18TypeValue
-    {5707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeValue), "chan18TypeValue", LKUP_TYPE_U16, 2},
+    {5711, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18TypeValue), "chan18TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan19SignalType
     {5720, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19SignalType), "chan19SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter3 : chan19AdditionalParameter1
@@ -1044,15 +1044,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan19HighMeasureLim
     {5737, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19HighMeasureLim), "chan19HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan19Name
-    {5739, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Name), "chan19Name", LKUP_TYPE_ASCII, 8},
+    {5739, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Name), "chan19Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan19Period
-    {5743, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Period), "chan19Period", LKUP_TYPE_FLOAT, 4},
+    {5747, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Period), "chan19Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan19Dempher
-    {5745, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Dempher), "chan19Dempher", LKUP_TYPE_U16, 2},
+    {5749, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19Dempher), "chan19Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan19TypeRegistration
-    {5746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeRegistration), "chan19TypeRegistration", LKUP_TYPE_U16, 2},
+    {5750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeRegistration), "chan19TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan19TypeValue
-    {5747, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeValue), "chan19TypeValue", LKUP_TYPE_U16, 2},
+    {5751, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19TypeValue), "chan19TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan20SignalType
     {5760, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20SignalType), "chan20SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter3 : chan20AdditionalParameter1
@@ -1066,15 +1066,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan20HighMeasureLim
     {5777, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20HighMeasureLim), "chan20HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan20Name
-    {5779, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Name), "chan20Name", LKUP_TYPE_ASCII, 8},
+    {5779, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Name), "chan20Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan20Period
-    {5783, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Period), "chan20Period", LKUP_TYPE_FLOAT, 4},
+    {5787, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Period), "chan20Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan20Dempher
-    {5785, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Dempher), "chan20Dempher", LKUP_TYPE_U16, 2},
+    {5789, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20Dempher), "chan20Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan20TypeRegistration
-    {5786, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeRegistration), "chan20TypeRegistration", LKUP_TYPE_U16, 2},
+    {5790, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeRegistration), "chan20TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan20TypeValue
-    {5787, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeValue), "chan20TypeValue", LKUP_TYPE_U16, 2},
+    {5791, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20TypeValue), "chan20TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan21SignalType
     {5800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21SignalType), "chan21SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter1 : chan21AdditionalParameter1
@@ -1088,15 +1088,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan21HighMeasureLim
     {5817, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21HighMeasureLim), "chan21HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan21Name
-    {5819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Name), "chan21Name", LKUP_TYPE_ASCII, 8},
+    {5819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Name), "chan21Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan21Period
-    {5823, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Period), "chan21Period", LKUP_TYPE_FLOAT, 4},
+    {5827, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Period), "chan21Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan21Dempher
-    {5825, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Dempher), "chan21Dempher", LKUP_TYPE_U16, 2},
+    {5829, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21Dempher), "chan21Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan21TypeRegistration
-    {5826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeRegistration), "chan21TypeRegistration", LKUP_TYPE_U16, 2},
+    {5830, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeRegistration), "chan21TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan21TypeValue
-    {5827, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeValue), "chan21TypeValue", LKUP_TYPE_U16, 2},
+    {5831, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21TypeValue), "chan21TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan22SignalType
     {5840, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22SignalType), "chan22SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter1 : chan22AdditionalParameter1
@@ -1110,15 +1110,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan22HighMeasureLim
     {5857, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22HighMeasureLim), "chan22HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan22Name
-    {5859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Name), "chan22Name", LKUP_TYPE_ASCII, 8},
+    {5859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Name), "chan22Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan22Period
-    {5863, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Period), "chan22Period", LKUP_TYPE_FLOAT, 4},
+    {5867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Period), "chan22Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan22Dempher
-    {5865, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Dempher), "chan22Dempher", LKUP_TYPE_U16, 2},
+    {5869, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22Dempher), "chan22Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan22TypeRegistration
-    {5866, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeRegistration), "chan22TypeRegistration", LKUP_TYPE_U16, 2},
+    {5870, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeRegistration), "chan22TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan22TypeValue
-    {5867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeValue), "chan22TypeValue", LKUP_TYPE_U16, 2},
+    {5871, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22TypeValue), "chan22TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan23SignalType
     {5880, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23SignalType), "chan23SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter1 : chan23AdditionalParameter1
@@ -1132,15 +1132,15 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan23HighMeasureLim
     {5897, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23HighMeasureLim), "chan23HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan23Name
-    {5899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Name), "chan23Name", LKUP_TYPE_ASCII, 8},
+    {5899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Name), "chan23Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan23Period
-    {5903, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Period), "chan23Period", LKUP_TYPE_FLOAT, 4},
+    {5907, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Period), "chan23Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan23Dempher
-    {5905, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Dempher), "chan23Dempher", LKUP_TYPE_U16, 2},
+    {5909, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23Dempher), "chan23Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan23TypeRegistration
-    {5906, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeRegistration), "chan23TypeRegistration", LKUP_TYPE_U16, 2},
+    {5910, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeRegistration), "chan23TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan23TypeValue
-    {5907, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeValue), "chan23TypeValue", LKUP_TYPE_U16, 2},
+    {5911, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23TypeValue), "chan23TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: Signal Type : chan24SignalType
     {5920, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24SignalType), "chan24SignalType", LKUP_TYPE_U16, 2},
     // Parameter: Additional parameter1 : chan24AdditionalParameter1
@@ -1154,807 +1154,807 @@ const tExtLookupRegisters g_extModbusLookupRegisters[] =
     // Parameter: Measure signal high limit : chan24HighMeasureLim
     {5937, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24HighMeasureLim), "chan24HighMeasureLim", LKUP_TYPE_FLOAT, 4},
     // Parameter: Name Channel : chan24Name
-    {5939, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Name), "chan24Name", LKUP_TYPE_ASCII, 8},
+    {5939, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Name), "chan24Name", LKUP_TYPE_ASCII, 16},
     // Parameter: Period : chan24Period
-    {5943, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Period), "chan24Period", LKUP_TYPE_FLOAT, 4},
+    {5947, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Period), "chan24Period", LKUP_TYPE_FLOAT, 4},
     // Parameter: Dempher : chan24Dempher
-    {5945, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Dempher), "chan24Dempher", LKUP_TYPE_U16, 2},
+    {5949, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24Dempher), "chan24Dempher", LKUP_TYPE_U16, 2},
     // Parameter: Type Registration : chan24TypeRegistration
-    {5946, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeRegistration), "chan24TypeRegistration", LKUP_TYPE_U16, 2},
+    {5950, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeRegistration), "chan24TypeRegistration", LKUP_TYPE_U16, 2},
     // Parameter: Type Value : chan24TypeValue
-    {5947, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeValue), "chan24TypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan1FreqSignalType
-    {6000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqSignalType), "chan1FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan1FreqalAdditionalParameter
-    {6001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqalAdditionalParameter), "chan1FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan1ImpulseDuration
-    {6007, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1ImpulseDuration), "chan1ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan1FreqLowMeasureLim
-    {6009, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqLowMeasureLim), "chan1FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan1FreqHighMeasureLim
-    {6011, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqHighMeasureLim), "chan1FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan1FreqName
-    {6013, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqName), "chan1FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan1FreqUnit
-    {6017, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqUnit), "chan1FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan1FreqImpWeight
-    {6019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqImpWeight), "chan1FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan1FreqPeriod
-    {6021, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqPeriod), "chan1FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan1FreqDempher
-    {6023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqDempher), "chan1FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan1FreqTypeValue
-    {6024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1FreqTypeValue), "chan1FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan2FreqSignalType
-    {6025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqSignalType), "chan2FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan2FreqAdditionalParameter
-    {6026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqAdditionalParameter), "chan2FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan2ImpulseDuration
-    {6032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2ImpulseDuration), "chan2ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan2FreqLowMeasureLim
-    {6034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqLowMeasureLim), "chan2FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan2FreqHighMeasureLim
-    {6036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqHighMeasureLim), "chan2FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan2FreqName
-    {6038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqName), "chan2FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan2FreqUnit
-    {6042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqUnit), "chan2FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan2ImpWeight
-    {6044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2ImpWeight), "chan2ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan2FreqPeriod
-    {6046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqPeriod), "chan2FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan2FreqDempher
-    {6048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqDempher), "chan2FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan2FreqTypeValue
-    {6049, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan2FreqTypeValue), "chan2FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan3FreqSignalType
-    {6050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqSignalType), "chan3FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan3FreqalAdditionalParameter
-    {6051, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqalAdditionalParameter), "chan3FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan3ImpulseDuration
-    {6057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3ImpulseDuration), "chan3ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan3FreqLowMeasureLim
-    {6059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqLowMeasureLim), "chan3FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan3FreqHighMeasureLim
-    {6061, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqHighMeasureLim), "chan3FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan3FreqName
-    {6063, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqName), "chan3FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan3FreqUnit
-    {6067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqUnit), "chan3FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan3FreqImpWeight
-    {6069, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqImpWeight), "chan3FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan3FreqPeriod
-    {6071, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqPeriod), "chan3FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan3FreqDempher
-    {6073, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqDempher), "chan3FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan3FreqTypeValue
-    {6074, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan3FreqTypeValue), "chan3FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan4FreqSignalType
-    {6075, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqSignalType), "chan4FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan4FreqAdditionalParameter
-    {6076, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqAdditionalParameter), "chan4FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan4ImpulseDuration
-    {6082, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4ImpulseDuration), "chan4ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan4FreqLowMeasureLim
-    {6084, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqLowMeasureLim), "chan4FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan4FreqHighMeasureLim
-    {6086, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqHighMeasureLim), "chan4FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan4FreqName
-    {6088, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqName), "chan4FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan4FreqUnit
-    {6092, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqUnit), "chan4FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan4ImpWeight
-    {6094, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4ImpWeight), "chan4ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan4FreqPeriod
-    {6096, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqPeriod), "chan4FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan4FreqDempher
-    {6098, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqDempher), "chan4FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan4FreqTypeValue
-    {6099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan4FreqTypeValue), "chan4FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan5FreqSignalType
-    {6100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqSignalType), "chan5FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan5FreqalAdditionalParameter
-    {6101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqalAdditionalParameter), "chan5FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan5ImpulseDuration
-    {6107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5ImpulseDuration), "chan5ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan5FreqLowMeasureLim
-    {6109, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqLowMeasureLim), "chan5FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan5FreqHighMeasureLim
-    {6111, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqHighMeasureLim), "chan5FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan5FreqName
-    {6113, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqName), "chan5FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan5FreqUnit
-    {6117, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqUnit), "chan5FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan5FreqImpWeight
-    {6119, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqImpWeight), "chan5FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan5FreqPeriod
-    {6121, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqPeriod), "chan5FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan5FreqDempher
-    {6123, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqDempher), "chan5FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan5FreqTypeValue
-    {6124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan5FreqTypeValue), "chan5FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan6FreqSignalType
-    {6125, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqSignalType), "chan6FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan6FreqAdditionalParameter
-    {6126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqAdditionalParameter), "chan6FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan6ImpulseDuration
-    {6132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6ImpulseDuration), "chan6ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan6FreqLowMeasureLim
-    {6134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqLowMeasureLim), "chan6FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan6FreqHighMeasureLim
-    {6136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqHighMeasureLim), "chan6FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan6FreqName
-    {6138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqName), "chan6FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan6FreqUnit
-    {6142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqUnit), "chan6FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan6ImpWeight
-    {6144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6ImpWeight), "chan6ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan6FreqPeriod
-    {6146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqPeriod), "chan6FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan6FreqDempher
-    {6148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqDempher), "chan6FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan6FreqTypeValue
-    {6149, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan6FreqTypeValue), "chan6FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan7FreqSignalType
-    {6150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqSignalType), "chan7FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan7FreqalAdditionalParameter
-    {6151, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqalAdditionalParameter), "chan7FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan7ImpulseDuration
-    {6157, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7ImpulseDuration), "chan7ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan7FreqLowMeasureLim
-    {6159, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqLowMeasureLim), "chan7FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan7FreqHighMeasureLim
-    {6161, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqHighMeasureLim), "chan7FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan7FreqName
-    {6163, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqName), "chan7FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan7FreqUnit
-    {6167, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqUnit), "chan7FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan7FreqImpWeight
-    {6169, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqImpWeight), "chan7FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan7FreqPeriod
-    {6171, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqPeriod), "chan7FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan7FreqDempher
-    {6173, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqDempher), "chan7FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan7FreqTypeValue
-    {6174, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan7FreqTypeValue), "chan7FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan8FreqSignalType
-    {6175, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqSignalType), "chan8FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan8FreqAdditionalParameter
-    {6176, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqAdditionalParameter), "chan8FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan8ImpulseDuration
-    {6182, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8ImpulseDuration), "chan8ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan8FreqLowMeasureLim
-    {6184, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqLowMeasureLim), "chan8FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan8FreqHighMeasureLim
-    {6186, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqHighMeasureLim), "chan8FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan8FreqName
-    {6188, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqName), "chan8FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan8FreqUnit
-    {6192, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqUnit), "chan8FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan8ImpWeight
-    {6194, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8ImpWeight), "chan8ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan8FreqPeriod
-    {6196, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqPeriod), "chan8FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan8FreqDempher
-    {6198, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqDempher), "chan8FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan8FreqTypeValue
-    {6199, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan8FreqTypeValue), "chan8FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan9FreqSignalType
-    {6200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqSignalType), "chan9FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan9FreqalAdditionalParameter
-    {6201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqalAdditionalParameter), "chan9FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan9ImpulseDuration
-    {6207, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9ImpulseDuration), "chan9ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan9FreqLowMeasureLim
-    {6209, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqLowMeasureLim), "chan9FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan9FreqHighMeasureLim
-    {6211, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqHighMeasureLim), "chan9FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan9FreqName
-    {6213, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqName), "chan9FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan9FreqUnit
-    {6217, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqUnit), "chan9FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan9FreqImpWeight
-    {6219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqImpWeight), "chan9FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan9FreqPeriod
-    {6221, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqPeriod), "chan9FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan9FreqDempher
-    {6223, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqDempher), "chan9FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan9FreqTypeValue
-    {6224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan9FreqTypeValue), "chan9FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan10FreqSignalType
-    {6225, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqSignalType), "chan10FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan10FreqAdditionalParameter
-    {6226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqAdditionalParameter), "chan10FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan10ImpulseDuration
-    {6232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10ImpulseDuration), "chan10ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan10FreqLowMeasureLim
-    {6234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqLowMeasureLim), "chan10FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan10FreqHighMeasureLim
-    {6236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqHighMeasureLim), "chan10FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan10FreqName
-    {6238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqName), "chan10FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan10FreqUnit
-    {6242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqUnit), "chan10FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan10ImpWeight
-    {6244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10ImpWeight), "chan10ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan10FreqPeriod
-    {6246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqPeriod), "chan10FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan10FreqDempher
-    {6248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqDempher), "chan10FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan10FreqTypeValue
-    {6249, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan10FreqTypeValue), "chan10FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan11FreqSignalType
-    {6250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqSignalType), "chan11FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan11FreqalAdditionalParameter
-    {6251, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqalAdditionalParameter), "chan11FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan11ImpulseDuration
-    {6257, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11ImpulseDuration), "chan11ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan11FreqLowMeasureLim
-    {6259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqLowMeasureLim), "chan11FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan11FreqHighMeasureLim
-    {6261, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqHighMeasureLim), "chan11FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan11FreqName
-    {6263, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqName), "chan11FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan11FreqUnit
-    {6267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqUnit), "chan11FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan11FreqImpWeight
-    {6269, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqImpWeight), "chan11FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan11FreqPeriod
-    {6271, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqPeriod), "chan11FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan11FreqDempher
-    {6273, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqDempher), "chan11FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan11FreqTypeValue
-    {6274, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan11FreqTypeValue), "chan11FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan12FreqSignalType
-    {6275, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqSignalType), "chan12FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan12FreqAdditionalParameter
-    {6276, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqAdditionalParameter), "chan12FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan12ImpulseDuration
-    {6282, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12ImpulseDuration), "chan12ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan12FreqLowMeasureLim
-    {6284, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqLowMeasureLim), "chan12FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan12FreqHighMeasureLim
-    {6286, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqHighMeasureLim), "chan12FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan12FreqName
-    {6288, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqName), "chan12FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan12FreqUnit
-    {6292, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqUnit), "chan12FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan12ImpWeight
-    {6294, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12ImpWeight), "chan12ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan12FreqPeriod
-    {6296, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqPeriod), "chan12FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan12FreqDempher
-    {6298, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqDempher), "chan12FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan12FreqTypeValue
-    {6299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan12FreqTypeValue), "chan12FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan13FreqSignalType
-    {6300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqSignalType), "chan13FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan13FreqalAdditionalParameter
-    {6301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqalAdditionalParameter), "chan13FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan13ImpulseDuration
-    {6307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13ImpulseDuration), "chan13ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan13FreqLowMeasureLim
-    {6309, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqLowMeasureLim), "chan13FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan13FreqHighMeasureLim
-    {6311, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqHighMeasureLim), "chan13FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan13FreqName
-    {6313, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqName), "chan13FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan13FreqUnit
-    {6317, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqUnit), "chan13FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan13FreqImpWeight
-    {6319, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqImpWeight), "chan13FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan13FreqPeriod
-    {6321, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqPeriod), "chan13FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan13FreqDempher
-    {6323, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqDempher), "chan13FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan13FreqTypeValue
-    {6324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan13FreqTypeValue), "chan13FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan14FreqSignalType
-    {6325, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqSignalType), "chan14FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan14FreqAdditionalParameter
-    {6326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqAdditionalParameter), "chan14FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan14ImpulseDuration
-    {6332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14ImpulseDuration), "chan14ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan14FreqLowMeasureLim
-    {6334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqLowMeasureLim), "chan14FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan14FreqHighMeasureLim
-    {6336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqHighMeasureLim), "chan14FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan14FreqName
-    {6338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqName), "chan14FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan14FreqUnit
-    {6342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqUnit), "chan14FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan14ImpWeight
-    {6344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14ImpWeight), "chan14ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan14FreqPeriod
-    {6346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqPeriod), "chan14FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan14FreqDempher
-    {6348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqDempher), "chan14FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan14FreqTypeValue
-    {6349, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan14FreqTypeValue), "chan14FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan15FreqSignalType
-    {6350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqSignalType), "chan15FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan15FreqalAdditionalParameter
-    {6351, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqalAdditionalParameter), "chan15FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan15ImpulseDuration
-    {6357, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15ImpulseDuration), "chan15ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan15FreqLowMeasureLim
-    {6359, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqLowMeasureLim), "chan15FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan15FreqHighMeasureLim
-    {6361, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqHighMeasureLim), "chan15FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan15FreqName
-    {6363, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqName), "chan15FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan15FreqUnit
-    {6367, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqUnit), "chan15FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan15FreqImpWeight
-    {6369, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqImpWeight), "chan15FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan15FreqPeriod
-    {6371, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqPeriod), "chan15FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan15FreqDempher
-    {6373, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqDempher), "chan15FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan15FreqTypeValue
-    {6374, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan15FreqTypeValue), "chan15FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan16FreqSignalType
-    {6375, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqSignalType), "chan16FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan16FreqAdditionalParameter
-    {6376, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqAdditionalParameter), "chan16FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan16ImpulseDuration
-    {6382, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16ImpulseDuration), "chan16ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan16FreqLowMeasureLim
-    {6384, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqLowMeasureLim), "chan16FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan16FreqHighMeasureLim
-    {6386, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqHighMeasureLim), "chan16FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan16FreqName
-    {6388, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqName), "chan16FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan16FreqUnit
-    {6392, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqUnit), "chan16FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan16ImpWeight
-    {6394, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16ImpWeight), "chan16ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan16FreqPeriod
-    {6396, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqPeriod), "chan16FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan16FreqDempher
-    {6398, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqDempher), "chan16FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan16FreqTypeValue
-    {6399, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan16FreqTypeValue), "chan16FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan17FreqSignalType
-    {6400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqSignalType), "chan17FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan17FreqalAdditionalParameter
-    {6401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqalAdditionalParameter), "chan17FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan17ImpulseDuration
-    {6407, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17ImpulseDuration), "chan17ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan17FreqLowMeasureLim
-    {6409, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqLowMeasureLim), "chan17FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan17FreqHighMeasureLim
-    {6411, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqHighMeasureLim), "chan17FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan17FreqName
-    {6413, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqName), "chan17FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan17FreqUnit
-    {6417, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqUnit), "chan17FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan17FreqImpWeight
-    {6419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqImpWeight), "chan17FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan17FreqPeriod
-    {6421, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqPeriod), "chan17FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan17FreqDempher
-    {6423, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqDempher), "chan17FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan17FreqTypeValue
-    {6424, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan17FreqTypeValue), "chan17FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan18FreqSignalType
-    {6425, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqSignalType), "chan18FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan18FreqAdditionalParameter
-    {6426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqAdditionalParameter), "chan18FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan18ImpulseDuration
-    {6432, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18ImpulseDuration), "chan18ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan18FreqLowMeasureLim
-    {6434, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqLowMeasureLim), "chan18FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan18FreqHighMeasureLim
-    {6436, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqHighMeasureLim), "chan18FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan18FreqName
-    {6438, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqName), "chan18FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan18FreqUnit
-    {6442, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqUnit), "chan18FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan18ImpWeight
-    {6444, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18ImpWeight), "chan18ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan18FreqPeriod
-    {6446, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqPeriod), "chan18FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan18FreqDempher
-    {6448, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqDempher), "chan18FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan18FreqTypeValue
-    {6449, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan18FreqTypeValue), "chan18FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan19FreqSignalType
-    {6450, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqSignalType), "chan19FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan19FreqalAdditionalParameter
-    {6451, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqalAdditionalParameter), "chan19FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan19ImpulseDuration
-    {6457, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19ImpulseDuration), "chan19ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan19FreqLowMeasureLim
-    {6459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqLowMeasureLim), "chan19FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan19FreqHighMeasureLim
-    {6461, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqHighMeasureLim), "chan19FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan19FreqName
-    {6463, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqName), "chan19FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan19FreqUnit
-    {6467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqUnit), "chan19FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan19FreqImpWeight
-    {6469, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqImpWeight), "chan19FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan19FreqPeriod
-    {6471, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqPeriod), "chan19FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan19FreqDempher
-    {6473, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqDempher), "chan19FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan19FreqTypeValue
-    {6474, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan19FreqTypeValue), "chan19FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan20FreqSignalType
-    {6475, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqSignalType), "chan20FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan20FreqAdditionalParameter
-    {6476, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqAdditionalParameter), "chan20FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan20ImpulseDuration
-    {6482, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20ImpulseDuration), "chan20ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan20FreqLowMeasureLim
-    {6484, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqLowMeasureLim), "chan20FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan20FreqHighMeasureLim
-    {6486, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqHighMeasureLim), "chan20FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan20FreqName
-    {6488, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqName), "chan20FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan20FreqUnit
-    {6492, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqUnit), "chan20FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan20ImpWeight
-    {6494, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20ImpWeight), "chan20ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan20FreqPeriod
-    {6496, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqPeriod), "chan20FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan20FreqDempher
-    {6498, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqDempher), "chan20FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan20FreqTypeValue
-    {6499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan20FreqTypeValue), "chan20FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan21FreqSignalType
-    {6500, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqSignalType), "chan21FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan21FreqalAdditionalParameter
-    {6501, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqalAdditionalParameter), "chan21FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan21ImpulseDuration
-    {6507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21ImpulseDuration), "chan21ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan21FreqLowMeasureLim
-    {6509, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqLowMeasureLim), "chan21FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan21FreqHighMeasureLim
-    {6511, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqHighMeasureLim), "chan21FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan21FreqName
-    {6513, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqName), "chan21FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan21FreqUnit
-    {6517, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqUnit), "chan21FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan21FreqImpWeight
-    {6519, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqImpWeight), "chan21FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan21FreqPeriod
-    {6521, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqPeriod), "chan21FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan21FreqDempher
-    {6523, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqDempher), "chan21FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan21FreqTypeValue
-    {6524, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan21FreqTypeValue), "chan21FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan22FreqSignalType
-    {6525, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqSignalType), "chan22FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan22FreqAdditionalParameter
-    {6526, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqAdditionalParameter), "chan22FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan22ImpulseDuration
-    {6532, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22ImpulseDuration), "chan22ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan22FreqLowMeasureLim
-    {6534, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqLowMeasureLim), "chan22FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan22FreqHighMeasureLim
-    {6536, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqHighMeasureLim), "chan22FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan22FreqName
-    {6538, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqName), "chan22FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan22FreqUnit
-    {6542, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqUnit), "chan22FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan22ImpWeight
-    {6544, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22ImpWeight), "chan22ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan22FreqPeriod
-    {6546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqPeriod), "chan22FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan22FreqDempher
-    {6548, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqDempher), "chan22FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan22FreqTypeValue
-    {6549, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan22FreqTypeValue), "chan22FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan23FreqSignalType
-    {6550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqSignalType), "chan23FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan23FreqalAdditionalParameter
-    {6551, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqalAdditionalParameter), "chan23FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan23ImpulseDuration
-    {6557, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23ImpulseDuration), "chan23ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan23FreqLowMeasureLim
-    {6559, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqLowMeasureLim), "chan23FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan23FreqHighMeasureLim
-    {6561, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqHighMeasureLim), "chan23FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan23FreqName
-    {6563, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqName), "chan23FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan23FreqUnit
-    {6567, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqUnit), "chan23FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan23FreqImpWeight
-    {6569, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqImpWeight), "chan23FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan23FreqPeriod
-    {6571, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqPeriod), "chan23FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan23FreqDempher
-    {6573, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqDempher), "chan23FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan23FreqTypeValue
-    {6574, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan23FreqTypeValue), "chan23FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan24FreqSignalType
-    {6575, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqSignalType), "chan24FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan24FreqAdditionalParameter
-    {6576, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqAdditionalParameter), "chan24FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan24ImpulseDuration
-    {6582, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24ImpulseDuration), "chan24ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan24FreqLowMeasureLim
-    {6584, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqLowMeasureLim), "chan24FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan24FreqHighMeasureLim
-    {6586, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqHighMeasureLim), "chan24FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan24FreqName
-    {6588, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqName), "chan24FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan24FreqUnit
-    {6592, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqUnit), "chan24FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan24ImpWeight
-    {6594, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24ImpWeight), "chan24ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan24FreqPeriod
-    {6596, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqPeriod), "chan24FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan24FreqDempher
-    {6598, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqDempher), "chan24FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan24FreqTypeValue
-    {6599, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24FreqTypeValue), "chan24FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan25FreqSignalType
-    {6600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqSignalType), "chan25FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan25FreqalAdditionalParameter
-    {6601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqalAdditionalParameter), "chan25FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan25ImpulseDuration
-    {6607, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25ImpulseDuration), "chan25ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan25FreqLowMeasureLim
-    {6609, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqLowMeasureLim), "chan25FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan25FreqHighMeasureLim
-    {6611, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqHighMeasureLim), "chan25FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan25FreqName
-    {6613, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqName), "chan25FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan25FreqUnit
-    {6617, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqUnit), "chan25FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan25FreqImpWeight
-    {6619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqImpWeight), "chan25FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan25FreqPeriod
-    {6621, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqPeriod), "chan25FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan25FreqDempher
-    {6623, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqDempher), "chan25FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan25FreqTypeValue
-    {6624, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan25FreqTypeValue), "chan25FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan26FreqSignalType
-    {6625, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqSignalType), "chan26FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan26FreqAdditionalParameter
-    {6626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqAdditionalParameter), "chan26FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan26ImpulseDuration
-    {6632, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26ImpulseDuration), "chan26ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan26FreqLowMeasureLim
-    {6634, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqLowMeasureLim), "chan26FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan26FreqHighMeasureLim
-    {6636, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqHighMeasureLim), "chan26FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan26FreqName
-    {6638, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqName), "chan26FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan26FreqUnit
-    {6642, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqUnit), "chan26FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan26ImpWeight
-    {6644, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26ImpWeight), "chan26ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan26FreqPeriod
-    {6646, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqPeriod), "chan26FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan26FreqDempher
-    {6648, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqDempher), "chan26FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan26FreqTypeValue
-    {6649, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan26FreqTypeValue), "chan26FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan27FreqSignalType
-    {6650, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqSignalType), "chan27FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan27FreqalAdditionalParameter
-    {6651, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqalAdditionalParameter), "chan27FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan27ImpulseDuration
-    {6657, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27ImpulseDuration), "chan27ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan27FreqLowMeasureLim
-    {6659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqLowMeasureLim), "chan27FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan27FreqHighMeasureLim
-    {6661, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqHighMeasureLim), "chan27FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan27FreqName
-    {6663, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqName), "chan27FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan27FreqUnit
-    {6667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqUnit), "chan27FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan27FreqImpWeight
-    {6669, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqImpWeight), "chan27FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan27FreqPeriod
-    {6671, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqPeriod), "chan27FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan27FreqDempher
-    {6673, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqDempher), "chan27FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan27FreqTypeValue
-    {6674, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan27FreqTypeValue), "chan27FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan28FreqSignalType
-    {6675, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqSignalType), "chan28FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan28FreqAdditionalParameter
-    {6676, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqAdditionalParameter), "chan28FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan28ImpulseDuration
-    {6682, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28ImpulseDuration), "chan28ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan28FreqLowMeasureLim
-    {6684, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqLowMeasureLim), "chan28FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan28FreqHighMeasureLim
-    {6686, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqHighMeasureLim), "chan28FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan28FreqName
-    {6688, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqName), "chan28FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan28FreqUnit
-    {6692, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqUnit), "chan28FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan28ImpWeight
-    {6694, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28ImpWeight), "chan28ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan28FreqPeriod
-    {6696, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqPeriod), "chan28FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan28FreqDempher
-    {6698, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqDempher), "chan28FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan28FreqTypeValue
-    {6699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan28FreqTypeValue), "chan28FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan29FreqSignalType
-    {6700, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqSignalType), "chan29FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan29FreqalAdditionalParameter
-    {6701, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqalAdditionalParameter), "chan29FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan29ImpulseDuration
-    {6707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29ImpulseDuration), "chan29ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan29FreqLowMeasureLim
-    {6709, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqLowMeasureLim), "chan29FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan29FreqHighMeasureLim
-    {6711, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqHighMeasureLim), "chan29FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan29FreqName
-    {6713, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqName), "chan29FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan29FreqUnit
-    {6717, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqUnit), "chan29FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan29FreqImpWeight
-    {6719, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqImpWeight), "chan29FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan29FreqPeriod
-    {6721, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqPeriod), "chan29FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan29FreqDempher
-    {6723, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqDempher), "chan29FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan29FreqTypeValue
-    {6724, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan29FreqTypeValue), "chan29FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan30FreqSignalType
-    {6725, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqSignalType), "chan30FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan30FreqAdditionalParameter
-    {6726, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqAdditionalParameter), "chan30FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan30ImpulseDuration
-    {6732, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30ImpulseDuration), "chan30ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan30FreqLowMeasureLim
-    {6734, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqLowMeasureLim), "chan30FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan30FreqHighMeasureLim
-    {6736, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqHighMeasureLim), "chan30FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan30FreqName
-    {6738, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqName), "chan30FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan30FreqUnit
-    {6742, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqUnit), "chan30FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan30ImpWeight
-    {6744, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30ImpWeight), "chan30ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan30FreqPeriod
-    {6746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqPeriod), "chan30FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan30FreqDempher
-    {6748, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqDempher), "chan30FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan30FreqTypeValue
-    {6749, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan30FreqTypeValue), "chan30FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan31FreqSignalType
-    {6750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqSignalType), "chan31FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan31FreqalAdditionalParameter
-    {6751, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqalAdditionalParameter), "chan31FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan31ImpulseDuration
-    {6757, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31ImpulseDuration), "chan31ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan31FreqLowMeasureLim
-    {6759, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqLowMeasureLim), "chan31FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan31FreqHighMeasureLim
-    {6761, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqHighMeasureLim), "chan31FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan31FreqName
-    {6763, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqName), "chan31FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan31FreqUnit
-    {6767, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqUnit), "chan31FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan31FreqImpWeight
-    {6769, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqImpWeight), "chan31FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan31FreqPeriod
-    {6771, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqPeriod), "chan31FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan31FreqDempher
-    {6773, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqDempher), "chan31FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan31FreqTypeValue
-    {6774, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan31FreqTypeValue), "chan31FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan32FreqSignalType
-    {6775, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqSignalType), "chan32FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan32FreqAdditionalParameter
-    {6776, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqAdditionalParameter), "chan32FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan32ImpulseDuration
-    {6782, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32ImpulseDuration), "chan32ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan32FreqLowMeasureLim
-    {6784, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqLowMeasureLim), "chan32FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan32FreqHighMeasureLim
-    {6786, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqHighMeasureLim), "chan32FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan32FreqName
-    {6788, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqName), "chan32FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan32FreqUnit
-    {6792, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqUnit), "chan32FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan32ImpWeight
-    {6794, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32ImpWeight), "chan32ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan32FreqPeriod
-    {6796, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqPeriod), "chan32FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan32FreqDempher
-    {6798, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqDempher), "chan32FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan32FreqTypeValue
-    {6799, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan32FreqTypeValue), "chan32FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan33FreqSignalType
-    {6800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqSignalType), "chan33FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan33FreqalAdditionalParameter
-    {6801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqalAdditionalParameter), "chan33FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan33ImpulseDuration
-    {6807, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33ImpulseDuration), "chan33ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan33FreqLowMeasureLim
-    {6809, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqLowMeasureLim), "chan33FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan33FreqHighMeasureLim
-    {6811, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqHighMeasureLim), "chan33FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan33FreqName
-    {6813, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqName), "chan33FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan33FreqUnit
-    {6817, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqUnit), "chan33FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan33FreqImpWeight
-    {6819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqImpWeight), "chan33FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan33FreqPeriod
-    {6821, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqPeriod), "chan33FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan33FreqDempher
-    {6823, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqDempher), "chan33FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan33FreqTypeValue
-    {6824, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan33FreqTypeValue), "chan33FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan34FreqSignalType
-    {6825, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqSignalType), "chan34FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan34FreqAdditionalParameter
-    {6826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqAdditionalParameter), "chan34FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan34ImpulseDuration
-    {6832, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34ImpulseDuration), "chan34ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan34FreqLowMeasureLim
-    {6834, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqLowMeasureLim), "chan34FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan34FreqHighMeasureLim
-    {6836, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqHighMeasureLim), "chan34FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan34FreqName
-    {6838, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqName), "chan34FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan34FreqUnit
-    {6842, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqUnit), "chan34FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan34ImpWeight
-    {6844, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34ImpWeight), "chan34ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan34FreqPeriod
-    {6846, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqPeriod), "chan34FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan34FreqDempher
-    {6848, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqDempher), "chan34FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan34FreqTypeValue
-    {6849, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan34FreqTypeValue), "chan34FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan35FreqSignalType
-    {6850, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqSignalType), "chan35FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan35FreqalAdditionalParameter
-    {6851, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqalAdditionalParameter), "chan35FreqalAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan35ImpulseDuration
-    {6857, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35ImpulseDuration), "chan35ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan35FreqLowMeasureLim
-    {6859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqLowMeasureLim), "chan35FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan35FreqHighMeasureLim
-    {6861, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqHighMeasureLim), "chan35FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan35FreqName
-    {6863, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqName), "chan35FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan35FreqUnit
-    {6867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqUnit), "chan35FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan35FreqImpWeight
-    {6869, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqImpWeight), "chan35FreqImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan35FreqPeriod
-    {6871, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqPeriod), "chan35FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan35FreqDempher
-    {6873, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqDempher), "chan35FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan35FreqTypeValue
-    {6874, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan35FreqTypeValue), "chan35FreqTypeValue", LKUP_TYPE_U16, 2},
-    // Parameter: Signal Type Frequency : chan36FreqSignalType
-    {6875, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqSignalType), "chan36FreqSignalType", LKUP_TYPE_U16, 2},
-    // Parameter: Additional parameter : chan36FreqAdditionalParameter
-    {6876, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqAdditionalParameter), "chan36FreqAdditionalParameter", LKUP_TYPE_ASCII, 12},
-    // Parameter: Impulse Duration : chan36ImpulseDuration
-    {6882, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36ImpulseDuration), "chan36ImpulseDuration", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal low limit  : chan36FreqLowMeasureLim
-    {6884, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqLowMeasureLim), "chan36FreqLowMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Measure signal high limit  : chan36FreqHighMeasureLim
-    {6886, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqHighMeasureLim), "chan36FreqHighMeasureLim", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Name Channel : chan36FreqName
-    {6888, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqName), "chan36FreqName", LKUP_TYPE_ASCII, 8},
-    // Parameter: Unit Name : chan36FreqUnit
-    {6892, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqUnit), "chan36FreqUnit", LKUP_TYPE_ASCII, 4},
-    // Parameter: Impulse Weight : chan36ImpWeight
-    {6894, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36ImpWeight), "chan36ImpWeight", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Period : chan36FreqPeriod
-    {6896, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqPeriod), "chan36FreqPeriod", LKUP_TYPE_FLOAT, 4},
-    // Parameter: Dempher : chan36FreqDempher
-    {6898, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqDempher), "chan36FreqDempher", LKUP_TYPE_U16, 2},
-    // Parameter: Type Value : chan36FreqTypeValue
-    {6899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan36FreqTypeValue), "chan36FreqTypeValue", LKUP_TYPE_U16, 2},
+    {5951, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan24TypeValue), "chan24TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq1SignalType
+    {6000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1SignalType), "freq1SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq1AdditionalParameter
+    {6001, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1AdditionalParameter), "freq1AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq1ImpulseDuration
+    {6007, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1ImpulseDuration), "freq1ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq1LowMeasureLim
+    {6009, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1LowMeasureLim), "freq1LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq1HighMeasureLim
+    {6011, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1HighMeasureLim), "freq1HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq1Name
+    {6013, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1Name), "freq1Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq1Unit
+    {6017, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1Unit), "freq1Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq1ImpWeight
+    {6019, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1ImpWeight), "freq1ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq1Period
+    {6021, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1Period), "freq1Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq1Dempher
+    {6023, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1Dempher), "freq1Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq1TypeValue
+    {6024, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq1TypeValue), "freq1TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq2SignalType
+    {6025, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2SignalType), "freq2SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq2AdditionalParameter
+    {6026, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2AdditionalParameter), "freq2AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq2ImpulseDuration
+    {6032, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2ImpulseDuration), "freq2ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq2LowMeasureLim
+    {6034, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2LowMeasureLim), "freq2LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq2HighMeasureLim
+    {6036, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2HighMeasureLim), "freq2HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq2Name
+    {6038, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2Name), "freq2Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq2Unit
+    {6042, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2Unit), "freq2Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq2ImpWeight
+    {6044, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2ImpWeight), "freq2ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq2Period
+    {6046, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2Period), "freq2Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq2Dempher
+    {6048, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2Dempher), "freq2Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq2TypeValue
+    {6049, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq2TypeValue), "freq2TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq3SignalType
+    {6050, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3SignalType), "freq3SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq3alAdditionalParameter
+    {6051, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3alAdditionalParameter), "freq3alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq3ImpulseDuration
+    {6057, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3ImpulseDuration), "freq3ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq3LowMeasureLim
+    {6059, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3LowMeasureLim), "freq3LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq3HighMeasureLim
+    {6061, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3HighMeasureLim), "freq3HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq3Name
+    {6063, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3Name), "freq3Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq3Unit
+    {6067, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3Unit), "freq3Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq3ImpWeight
+    {6069, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3ImpWeight), "freq3ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq3Period
+    {6071, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3Period), "freq3Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq3Dempher
+    {6073, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3Dempher), "freq3Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq3TypeValue
+    {6074, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq3TypeValue), "freq3TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq4SignalType
+    {6075, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4SignalType), "freq4SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq4AdditionalParameter
+    {6076, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4AdditionalParameter), "freq4AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq4ImpulseDuration
+    {6082, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4ImpulseDuration), "freq4ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq4LowMeasureLim
+    {6084, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4LowMeasureLim), "freq4LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq4HighMeasureLim
+    {6086, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4HighMeasureLim), "freq4HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq4Name
+    {6088, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4Name), "freq4Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq4Unit
+    {6092, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4Unit), "freq4Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq4ImpWeight
+    {6094, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4ImpWeight), "freq4ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq4Period
+    {6096, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4Period), "freq4Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq4Dempher
+    {6098, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4Dempher), "freq4Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq4TypeValue
+    {6099, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq4TypeValue), "freq4TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq5SignalType
+    {6100, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5SignalType), "freq5SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq5alAdditionalParameter
+    {6101, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5alAdditionalParameter), "freq5alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq5ImpulseDuration
+    {6107, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5ImpulseDuration), "freq5ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq5LowMeasureLim
+    {6109, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5LowMeasureLim), "freq5LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq5HighMeasureLim
+    {6111, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5HighMeasureLim), "freq5HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq5Name
+    {6113, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5Name), "freq5Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq5Unit
+    {6117, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5Unit), "freq5Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq5ImpWeight
+    {6119, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5ImpWeight), "freq5ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq5Period
+    {6121, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5Period), "freq5Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq5Dempher
+    {6123, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5Dempher), "freq5Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq5TypeValue
+    {6124, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq5TypeValue), "freq5TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq6SignalType
+    {6125, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6SignalType), "freq6SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq6AdditionalParameter
+    {6126, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6AdditionalParameter), "freq6AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq6ImpulseDuration
+    {6132, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6ImpulseDuration), "freq6ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq6LowMeasureLim
+    {6134, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6LowMeasureLim), "freq6LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq6HighMeasureLim
+    {6136, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6HighMeasureLim), "freq6HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq6Name
+    {6138, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6Name), "freq6Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq6Unit
+    {6142, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6Unit), "freq6Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq6ImpWeight
+    {6144, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6ImpWeight), "freq6ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq6Period
+    {6146, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6Period), "freq6Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq6Dempher
+    {6148, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6Dempher), "freq6Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq6TypeValue
+    {6149, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq6TypeValue), "freq6TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq7SignalType
+    {6150, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7SignalType), "freq7SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq7alAdditionalParameter
+    {6151, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7alAdditionalParameter), "freq7alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq7ImpulseDuration
+    {6157, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7ImpulseDuration), "freq7ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq7LowMeasureLim
+    {6159, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7LowMeasureLim), "freq7LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq7HighMeasureLim
+    {6161, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7HighMeasureLim), "freq7HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq7Name
+    {6163, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7Name), "freq7Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq7Unit
+    {6167, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7Unit), "freq7Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq7ImpWeight
+    {6169, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7ImpWeight), "freq7ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq7Period
+    {6171, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7Period), "freq7Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq7Dempher
+    {6173, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7Dempher), "freq7Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq7TypeValue
+    {6174, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq7TypeValue), "freq7TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq8SignalType
+    {6175, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8SignalType), "freq8SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq8AdditionalParameter
+    {6176, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8AdditionalParameter), "freq8AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq8ImpulseDuration
+    {6182, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8ImpulseDuration), "freq8ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq8LowMeasureLim
+    {6184, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8LowMeasureLim), "freq8LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq8HighMeasureLim
+    {6186, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8HighMeasureLim), "freq8HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq8Name
+    {6188, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8Name), "freq8Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq8Unit
+    {6192, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8Unit), "freq8Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq8ImpWeight
+    {6194, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8ImpWeight), "freq8ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq8Period
+    {6196, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8Period), "freq8Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq8Dempher
+    {6198, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8Dempher), "freq8Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq8TypeValue
+    {6199, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq8TypeValue), "freq8TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq9SignalType
+    {6200, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9SignalType), "freq9SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq9alAdditionalParameter
+    {6201, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9alAdditionalParameter), "freq9alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq9ImpulseDuration
+    {6207, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9ImpulseDuration), "freq9ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq9LowMeasureLim
+    {6209, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9LowMeasureLim), "freq9LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq9HighMeasureLim
+    {6211, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9HighMeasureLim), "freq9HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq9Name
+    {6213, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9Name), "freq9Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq9Unit
+    {6217, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9Unit), "freq9Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq9ImpWeight
+    {6219, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9ImpWeight), "freq9ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq9Period
+    {6221, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9Period), "freq9Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq9Dempher
+    {6223, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9Dempher), "freq9Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq9TypeValue
+    {6224, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq9TypeValue), "freq9TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq10SignalType
+    {6225, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10SignalType), "freq10SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq10AdditionalParameter
+    {6226, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10AdditionalParameter), "freq10AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq10ImpulseDuration
+    {6232, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10ImpulseDuration), "freq10ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq10LowMeasureLim
+    {6234, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10LowMeasureLim), "freq10LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq10HighMeasureLim
+    {6236, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10HighMeasureLim), "freq10HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq10Name
+    {6238, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10Name), "freq10Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq10Unit
+    {6242, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10Unit), "freq10Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq10ImpWeight
+    {6244, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10ImpWeight), "freq10ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq10Period
+    {6246, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10Period), "freq10Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq10Dempher
+    {6248, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10Dempher), "freq10Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq10TypeValue
+    {6249, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq10TypeValue), "freq10TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq11SignalType
+    {6250, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11SignalType), "freq11SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq11alAdditionalParameter
+    {6251, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11alAdditionalParameter), "freq11alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq11ImpulseDuration
+    {6257, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11ImpulseDuration), "freq11ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq11LowMeasureLim
+    {6259, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11LowMeasureLim), "freq11LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq11HighMeasureLim
+    {6261, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11HighMeasureLim), "freq11HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq11Name
+    {6263, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11Name), "freq11Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq11Unit
+    {6267, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11Unit), "freq11Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq11ImpWeight
+    {6269, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11ImpWeight), "freq11ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq11Period
+    {6271, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11Period), "freq11Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq11Dempher
+    {6273, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11Dempher), "freq11Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq11TypeValue
+    {6274, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq11TypeValue), "freq11TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq12SignalType
+    {6275, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12SignalType), "freq12SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq12AdditionalParameter
+    {6276, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12AdditionalParameter), "freq12AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq12ImpulseDuration
+    {6282, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12ImpulseDuration), "freq12ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq12LowMeasureLim
+    {6284, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12LowMeasureLim), "freq12LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq12HighMeasureLim
+    {6286, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12HighMeasureLim), "freq12HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq12Name
+    {6288, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12Name), "freq12Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq12Unit
+    {6292, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12Unit), "freq12Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq12ImpWeight
+    {6294, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12ImpWeight), "freq12ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq12Period
+    {6296, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12Period), "freq12Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq12Dempher
+    {6298, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12Dempher), "freq12Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq12TypeValue
+    {6299, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq12TypeValue), "freq12TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq13SignalType
+    {6300, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13SignalType), "freq13SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq13alAdditionalParameter
+    {6301, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13alAdditionalParameter), "freq13alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq13ImpulseDuration
+    {6307, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13ImpulseDuration), "freq13ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq13LowMeasureLim
+    {6309, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13LowMeasureLim), "freq13LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq13HighMeasureLim
+    {6311, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13HighMeasureLim), "freq13HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq13Name
+    {6313, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13Name), "freq13Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq13Unit
+    {6317, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13Unit), "freq13Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq13ImpWeight
+    {6319, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13ImpWeight), "freq13ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq13Period
+    {6321, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13Period), "freq13Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq13Dempher
+    {6323, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13Dempher), "freq13Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq13TypeValue
+    {6324, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq13TypeValue), "freq13TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq14SignalType
+    {6325, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14SignalType), "freq14SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq14AdditionalParameter
+    {6326, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14AdditionalParameter), "freq14AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq14ImpulseDuration
+    {6332, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14ImpulseDuration), "freq14ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq14LowMeasureLim
+    {6334, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14LowMeasureLim), "freq14LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq14HighMeasureLim
+    {6336, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14HighMeasureLim), "freq14HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq14Name
+    {6338, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14Name), "freq14Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq14Unit
+    {6342, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14Unit), "freq14Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq14ImpWeight
+    {6344, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14ImpWeight), "freq14ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq14Period
+    {6346, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14Period), "freq14Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq14Dempher
+    {6348, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14Dempher), "freq14Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq14TypeValue
+    {6349, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq14TypeValue), "freq14TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq15SignalType
+    {6350, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15SignalType), "freq15SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq15alAdditionalParameter
+    {6351, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15alAdditionalParameter), "freq15alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq15ImpulseDuration
+    {6357, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15ImpulseDuration), "freq15ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq15LowMeasureLim
+    {6359, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15LowMeasureLim), "freq15LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq15HighMeasureLim
+    {6361, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15HighMeasureLim), "freq15HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq15Name
+    {6363, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15Name), "freq15Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq15Unit
+    {6367, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15Unit), "freq15Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq15ImpWeight
+    {6369, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15ImpWeight), "freq15ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq15Period
+    {6371, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15Period), "freq15Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq15Dempher
+    {6373, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15Dempher), "freq15Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq15TypeValue
+    {6374, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq15TypeValue), "freq15TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq16SignalType
+    {6375, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16SignalType), "freq16SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq16AdditionalParameter
+    {6376, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16AdditionalParameter), "freq16AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq16ImpulseDuration
+    {6382, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16ImpulseDuration), "freq16ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq16LowMeasureLim
+    {6384, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16LowMeasureLim), "freq16LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq16HighMeasureLim
+    {6386, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16HighMeasureLim), "freq16HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq16Name
+    {6388, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16Name), "freq16Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq16Unit
+    {6392, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16Unit), "freq16Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq16ImpWeight
+    {6394, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16ImpWeight), "freq16ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq16Period
+    {6396, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16Period), "freq16Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq16Dempher
+    {6398, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16Dempher), "freq16Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq16TypeValue
+    {6399, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq16TypeValue), "freq16TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq17SignalType
+    {6400, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17SignalType), "freq17SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq17alAdditionalParameter
+    {6401, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17alAdditionalParameter), "freq17alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq17ImpulseDuration
+    {6407, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17ImpulseDuration), "freq17ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq17LowMeasureLim
+    {6409, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17LowMeasureLim), "freq17LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq17HighMeasureLim
+    {6411, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17HighMeasureLim), "freq17HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq17Name
+    {6413, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17Name), "freq17Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq17Unit
+    {6417, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17Unit), "freq17Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq17ImpWeight
+    {6419, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17ImpWeight), "freq17ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq17Period
+    {6421, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17Period), "freq17Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq17Dempher
+    {6423, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17Dempher), "freq17Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq17TypeValue
+    {6424, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq17TypeValue), "freq17TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq18SignalType
+    {6425, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18SignalType), "freq18SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq18AdditionalParameter
+    {6426, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18AdditionalParameter), "freq18AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq18ImpulseDuration
+    {6432, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18ImpulseDuration), "freq18ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq18LowMeasureLim
+    {6434, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18LowMeasureLim), "freq18LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq18HighMeasureLim
+    {6436, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18HighMeasureLim), "freq18HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq18Name
+    {6438, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18Name), "freq18Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq18Unit
+    {6442, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18Unit), "freq18Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq18ImpWeight
+    {6444, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18ImpWeight), "freq18ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq18Period
+    {6446, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18Period), "freq18Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq18Dempher
+    {6448, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18Dempher), "freq18Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq18TypeValue
+    {6449, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq18TypeValue), "freq18TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq19SignalType
+    {6450, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19SignalType), "freq19SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq19alAdditionalParameter
+    {6451, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19alAdditionalParameter), "freq19alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq19ImpulseDuration
+    {6457, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19ImpulseDuration), "freq19ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq19LowMeasureLim
+    {6459, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19LowMeasureLim), "freq19LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq19HighMeasureLim
+    {6461, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19HighMeasureLim), "freq19HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq19Name
+    {6463, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19Name), "freq19Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq19Unit
+    {6467, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19Unit), "freq19Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq19ImpWeight
+    {6469, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19ImpWeight), "freq19ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq19Period
+    {6471, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19Period), "freq19Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq19Dempher
+    {6473, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19Dempher), "freq19Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq19TypeValue
+    {6474, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq19TypeValue), "freq19TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq20SignalType
+    {6475, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20SignalType), "freq20SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq20AdditionalParameter
+    {6476, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20AdditionalParameter), "freq20AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq20ImpulseDuration
+    {6482, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20ImpulseDuration), "freq20ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq20LowMeasureLim
+    {6484, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20LowMeasureLim), "freq20LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq20HighMeasureLim
+    {6486, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20HighMeasureLim), "freq20HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq20Name
+    {6488, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20Name), "freq20Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq20Unit
+    {6492, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20Unit), "freq20Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq20ImpWeight
+    {6494, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20ImpWeight), "freq20ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq20Period
+    {6496, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20Period), "freq20Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq20Dempher
+    {6498, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20Dempher), "freq20Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq20TypeValue
+    {6499, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq20TypeValue), "freq20TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq21SignalType
+    {6500, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21SignalType), "freq21SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq21alAdditionalParameter
+    {6501, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21alAdditionalParameter), "freq21alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq21ImpulseDuration
+    {6507, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21ImpulseDuration), "freq21ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq21LowMeasureLim
+    {6509, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21LowMeasureLim), "freq21LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq21HighMeasureLim
+    {6511, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21HighMeasureLim), "freq21HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq21Name
+    {6513, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21Name), "freq21Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq21Unit
+    {6517, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21Unit), "freq21Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq21ImpWeight
+    {6519, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21ImpWeight), "freq21ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq21Period
+    {6521, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21Period), "freq21Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq21Dempher
+    {6523, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21Dempher), "freq21Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq21TypeValue
+    {6524, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq21TypeValue), "freq21TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq22SignalType
+    {6525, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22SignalType), "freq22SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq22AdditionalParameter
+    {6526, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22AdditionalParameter), "freq22AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq22ImpulseDuration
+    {6532, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22ImpulseDuration), "freq22ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq22LowMeasureLim
+    {6534, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22LowMeasureLim), "freq22LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq22HighMeasureLim
+    {6536, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22HighMeasureLim), "freq22HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq22Name
+    {6538, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22Name), "freq22Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq22Unit
+    {6542, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22Unit), "freq22Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq22ImpWeight
+    {6544, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22ImpWeight), "freq22ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq22Period
+    {6546, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22Period), "freq22Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq22Dempher
+    {6548, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22Dempher), "freq22Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq22TypeValue
+    {6549, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq22TypeValue), "freq22TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq23SignalType
+    {6550, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23SignalType), "freq23SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq23alAdditionalParameter
+    {6551, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23alAdditionalParameter), "freq23alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq23ImpulseDuration
+    {6557, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23ImpulseDuration), "freq23ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq23LowMeasureLim
+    {6559, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23LowMeasureLim), "freq23LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq23HighMeasureLim
+    {6561, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23HighMeasureLim), "freq23HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq23Name
+    {6563, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23Name), "freq23Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq23Unit
+    {6567, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23Unit), "freq23Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq23ImpWeight
+    {6569, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23ImpWeight), "freq23ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq23Period
+    {6571, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23Period), "freq23Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq23Dempher
+    {6573, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23Dempher), "freq23Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq23TypeValue
+    {6574, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq23TypeValue), "freq23TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq24SignalType
+    {6575, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24SignalType), "freq24SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq24AdditionalParameter
+    {6576, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24AdditionalParameter), "freq24AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq24ImpulseDuration
+    {6582, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24ImpulseDuration), "freq24ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq24LowMeasureLim
+    {6584, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24LowMeasureLim), "freq24LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq24HighMeasureLim
+    {6586, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24HighMeasureLim), "freq24HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq24Name
+    {6588, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24Name), "freq24Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq24Unit
+    {6592, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24Unit), "freq24Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq24ImpWeight
+    {6594, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24ImpWeight), "freq24ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq24Period
+    {6596, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24Period), "freq24Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq24Dempher
+    {6598, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24Dempher), "freq24Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq24TypeValue
+    {6599, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq24TypeValue), "freq24TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq25SignalType
+    {6600, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25SignalType), "freq25SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq25alAdditionalParameter
+    {6601, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25alAdditionalParameter), "freq25alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq25ImpulseDuration
+    {6607, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25ImpulseDuration), "freq25ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq25LowMeasureLim
+    {6609, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25LowMeasureLim), "freq25LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq25HighMeasureLim
+    {6611, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25HighMeasureLim), "freq25HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq25Name
+    {6613, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25Name), "freq25Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq25Unit
+    {6617, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25Unit), "freq25Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq25ImpWeight
+    {6619, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25ImpWeight), "freq25ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq25Period
+    {6621, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25Period), "freq25Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq25Dempher
+    {6623, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25Dempher), "freq25Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq25TypeValue
+    {6624, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq25TypeValue), "freq25TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq26SignalType
+    {6625, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26SignalType), "freq26SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq26AdditionalParameter
+    {6626, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26AdditionalParameter), "freq26AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq26ImpulseDuration
+    {6632, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26ImpulseDuration), "freq26ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq26LowMeasureLim
+    {6634, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26LowMeasureLim), "freq26LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq26HighMeasureLim
+    {6636, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26HighMeasureLim), "freq26HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq26Name
+    {6638, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26Name), "freq26Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq26Unit
+    {6642, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26Unit), "freq26Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq26ImpWeight
+    {6644, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26ImpWeight), "freq26ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq26Period
+    {6646, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26Period), "freq26Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq26Dempher
+    {6648, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26Dempher), "freq26Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq26TypeValue
+    {6649, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq26TypeValue), "freq26TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq27SignalType
+    {6650, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27SignalType), "freq27SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq27alAdditionalParameter
+    {6651, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27alAdditionalParameter), "freq27alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq27ImpulseDuration
+    {6657, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27ImpulseDuration), "freq27ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq27LowMeasureLim
+    {6659, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27LowMeasureLim), "freq27LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq27HighMeasureLim
+    {6661, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27HighMeasureLim), "freq27HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq27Name
+    {6663, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27Name), "freq27Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq27Unit
+    {6667, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27Unit), "freq27Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq27ImpWeight
+    {6669, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27ImpWeight), "freq27ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq27Period
+    {6671, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27Period), "freq27Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq27Dempher
+    {6673, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27Dempher), "freq27Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq27TypeValue
+    {6674, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq27TypeValue), "freq27TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq28SignalType
+    {6675, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28SignalType), "freq28SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq28AdditionalParameter
+    {6676, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28AdditionalParameter), "freq28AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq28ImpulseDuration
+    {6682, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28ImpulseDuration), "freq28ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq28LowMeasureLim
+    {6684, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28LowMeasureLim), "freq28LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq28HighMeasureLim
+    {6686, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28HighMeasureLim), "freq28HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq28Name
+    {6688, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28Name), "freq28Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq28Unit
+    {6692, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28Unit), "freq28Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq28ImpWeight
+    {6694, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28ImpWeight), "freq28ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq28Period
+    {6696, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28Period), "freq28Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq28Dempher
+    {6698, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28Dempher), "freq28Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq28TypeValue
+    {6699, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq28TypeValue), "freq28TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq29SignalType
+    {6700, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29SignalType), "freq29SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq29alAdditionalParameter
+    {6701, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29alAdditionalParameter), "freq29alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq29ImpulseDuration
+    {6707, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29ImpulseDuration), "freq29ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq29LowMeasureLim
+    {6709, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29LowMeasureLim), "freq29LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq29HighMeasureLim
+    {6711, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29HighMeasureLim), "freq29HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq29Name
+    {6713, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29Name), "freq29Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq29Unit
+    {6717, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29Unit), "freq29Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq29ImpWeight
+    {6719, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29ImpWeight), "freq29ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq29Period
+    {6721, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29Period), "freq29Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq29Dempher
+    {6723, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29Dempher), "freq29Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq29TypeValue
+    {6724, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq29TypeValue), "freq29TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq30SignalType
+    {6725, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30SignalType), "freq30SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq30AdditionalParameter
+    {6726, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30AdditionalParameter), "freq30AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq30ImpulseDuration
+    {6732, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30ImpulseDuration), "freq30ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq30LowMeasureLim
+    {6734, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30LowMeasureLim), "freq30LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq30HighMeasureLim
+    {6736, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30HighMeasureLim), "freq30HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq30Name
+    {6738, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30Name), "freq30Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq30Unit
+    {6742, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30Unit), "freq30Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq30ImpWeight
+    {6744, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30ImpWeight), "freq30ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq30Period
+    {6746, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30Period), "freq30Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq30Dempher
+    {6748, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30Dempher), "freq30Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq30TypeValue
+    {6749, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq30TypeValue), "freq30TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq31SignalType
+    {6750, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31SignalType), "freq31SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq31alAdditionalParameter
+    {6751, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31alAdditionalParameter), "freq31alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq31ImpulseDuration
+    {6757, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31ImpulseDuration), "freq31ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq31LowMeasureLim
+    {6759, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31LowMeasureLim), "freq31LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq31HighMeasureLim
+    {6761, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31HighMeasureLim), "freq31HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq31Name
+    {6763, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31Name), "freq31Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq31Unit
+    {6767, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31Unit), "freq31Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq31ImpWeight
+    {6769, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31ImpWeight), "freq31ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq31Period
+    {6771, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31Period), "freq31Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq31Dempher
+    {6773, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31Dempher), "freq31Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq31TypeValue
+    {6774, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq31TypeValue), "freq31TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq32SignalType
+    {6775, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32SignalType), "freq32SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq32AdditionalParameter
+    {6776, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32AdditionalParameter), "freq32AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq32ImpulseDuration
+    {6782, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32ImpulseDuration), "freq32ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq32LowMeasureLim
+    {6784, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32LowMeasureLim), "freq32LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq32HighMeasureLim
+    {6786, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32HighMeasureLim), "freq32HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq32Name
+    {6788, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32Name), "freq32Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq32Unit
+    {6792, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32Unit), "freq32Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq32ImpWeight
+    {6794, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32ImpWeight), "freq32ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq32Period
+    {6796, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32Period), "freq32Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq32Dempher
+    {6798, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32Dempher), "freq32Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq32TypeValue
+    {6799, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq32TypeValue), "freq32TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq33SignalType
+    {6800, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33SignalType), "freq33SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq33alAdditionalParameter
+    {6801, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33alAdditionalParameter), "freq33alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq33ImpulseDuration
+    {6807, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33ImpulseDuration), "freq33ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq33LowMeasureLim
+    {6809, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33LowMeasureLim), "freq33LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq33HighMeasureLim
+    {6811, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33HighMeasureLim), "freq33HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq33Name
+    {6813, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33Name), "freq33Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq33Unit
+    {6817, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33Unit), "freq33Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq33ImpWeight
+    {6819, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33ImpWeight), "freq33ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq33Period
+    {6821, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33Period), "freq33Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq33Dempher
+    {6823, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33Dempher), "freq33Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq33TypeValue
+    {6824, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq33TypeValue), "freq33TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq34SignalType
+    {6825, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34SignalType), "freq34SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq34AdditionalParameter
+    {6826, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34AdditionalParameter), "freq34AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq34ImpulseDuration
+    {6832, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34ImpulseDuration), "freq34ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq34LowMeasureLim
+    {6834, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34LowMeasureLim), "freq34LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq34HighMeasureLim
+    {6836, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34HighMeasureLim), "freq34HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq34Name
+    {6838, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34Name), "freq34Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq34Unit
+    {6842, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34Unit), "freq34Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq34ImpWeight
+    {6844, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34ImpWeight), "freq34ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq34Period
+    {6846, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34Period), "freq34Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq34Dempher
+    {6848, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34Dempher), "freq34Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq34TypeValue
+    {6849, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq34TypeValue), "freq34TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq35SignalType
+    {6850, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35SignalType), "freq35SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq35alAdditionalParameter
+    {6851, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35alAdditionalParameter), "freq35alAdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq35ImpulseDuration
+    {6857, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35ImpulseDuration), "freq35ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq35LowMeasureLim
+    {6859, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35LowMeasureLim), "freq35LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq35HighMeasureLim
+    {6861, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35HighMeasureLim), "freq35HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq35Name
+    {6863, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35Name), "freq35Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq35Unit
+    {6867, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35Unit), "freq35Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq35ImpWeight
+    {6869, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35ImpWeight), "freq35ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq35Period
+    {6871, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35Period), "freq35Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq35Dempher
+    {6873, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35Dempher), "freq35Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq35TypeValue
+    {6874, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq35TypeValue), "freq35TypeValue", LKUP_TYPE_U16, 2},
+    // Parameter: Signal Type Frequency : freq36SignalType
+    {6875, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36SignalType), "freq36SignalType", LKUP_TYPE_U16, 2},
+    // Parameter: Additional parameter : freq36AdditionalParameter
+    {6876, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36AdditionalParameter), "freq36AdditionalParameter", LKUP_TYPE_ASCII, 12},
+    // Parameter: Impulse Duration : freq36ImpulseDuration
+    {6882, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36ImpulseDuration), "freq36ImpulseDuration", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal low limit  : freq36LowMeasureLim
+    {6884, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36LowMeasureLim), "freq36LowMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Measure signal high limit  : freq36HighMeasureLim
+    {6886, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36HighMeasureLim), "freq36HighMeasureLim", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Name Channel : freq36Name
+    {6888, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36Name), "freq36Name", LKUP_TYPE_ASCII, 8},
+    // Parameter: Unit Name : freq36Unit
+    {6892, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36Unit), "freq36Unit", LKUP_TYPE_ASCII, 4},
+    // Parameter: Impulse Weight : freq36ImpWeight
+    {6894, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36ImpWeight), "freq36ImpWeight", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Period : freq36Period
+    {6896, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36Period), "freq36Period", LKUP_TYPE_FLOAT, 4},
+    // Parameter: Dempher : freq36Dempher
+    {6898, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36Dempher), "freq36Dempher", LKUP_TYPE_U16, 2},
+    // Parameter: Type Value : freq36TypeValue
+    {6899, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(freq36TypeValue), "freq36TypeValue", LKUP_TYPE_U16, 2},
     // Parameter: SysOCalb : chan1SysOCR
     {10000, LKUP_MAP_HILDING, mbExtRegRwCheckFunc,  OFFSET(chan1SysOCR), "chan1SysOCR", LKUP_TYPE_U16, 2},
     // Parameter: SysGCalb : chan1SysFSR

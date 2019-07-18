@@ -1282,7 +1282,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>КОПИРОВАТЬ</string>
+                       <string>КОПИРОВАТЬ ИЗ:</string>
                       </property>
                      </widget>
                     </item>
@@ -2844,7 +2844,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
+                     <width>692</width>
                      <height>918</height>
                     </rect>
                    </property>

@@ -641,14 +641,14 @@ typedef struct
     // Parameter: Measure signal high limit  : chan1HighMeasureLim : MB Offset: 5017
     float chan1HighMeasureLim;
     // Parameter: Name Channel : chan1Name : MB Offset: 5019
-    uint8_t chan1Name[8];
-    // Parameter: Period : chan1Period : MB Offset: 5023
+    uint8_t chan1Name[16];
+    // Parameter: Period : chan1Period : MB Offset: 5027
     float chan1Period;
-    // Parameter: Dempher : chan1Dempher : MB Offset: 5025
+    // Parameter: Dempher : chan1Dempher : MB Offset: 5029
     uint16_t chan1Dempher;
-    // Parameter: Type Registration : chan1TypeRegistration : MB Offset: 5026
+    // Parameter: Type Registration : chan1TypeRegistration : MB Offset: 5030
     uint16_t chan1TypeRegistration;
-    // Parameter: Type Value : chan1TypeValue : MB Offset: 5027
+    // Parameter: Type Value : chan1TypeValue : MB Offset: 5031
     uint16_t chan1TypeValue;
     // Parameter: Signal Type : chan2SignalType : MB Offset: 5040
     uint16_t chan2SignalType;
@@ -663,14 +663,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan2HighMeasureLim : MB Offset: 5057
     float chan2HighMeasureLim;
     // Parameter: Name Channel : chan2Name : MB Offset: 5059
-    uint8_t chan2Name[8];
-    // Parameter: Period : chan2Period : MB Offset: 5063
+    uint8_t chan2Name[16];
+    // Parameter: Period : chan2Period : MB Offset: 5067
     float chan2Period;
-    // Parameter: Dempher : chan2Dempher : MB Offset: 5065
+    // Parameter: Dempher : chan2Dempher : MB Offset: 5069
     uint16_t chan2Dempher;
-    // Parameter: Type Registration : chan2TypeRegistration : MB Offset: 5066
+    // Parameter: Type Registration : chan2TypeRegistration : MB Offset: 5070
     uint16_t chan2TypeRegistration;
-    // Parameter: Type Value : chan2TypeValue : MB Offset: 5067
+    // Parameter: Type Value : chan2TypeValue : MB Offset: 5071
     uint16_t chan2TypeValue;
     // Parameter: Signal Type : chan3SignalType : MB Offset: 5080
     uint16_t chan3SignalType;
@@ -685,14 +685,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan3HighMeasureLim : MB Offset: 5097
     float chan3HighMeasureLim;
     // Parameter: Name Channel : chan3Name : MB Offset: 5099
-    uint8_t chan3Name[8];
-    // Parameter: Period : chan3Period : MB Offset: 5103
+    uint8_t chan3Name[16];
+    // Parameter: Period : chan3Period : MB Offset: 5107
     float chan3Period;
-    // Parameter: Dempher : chan3Dempher : MB Offset: 5105
+    // Parameter: Dempher : chan3Dempher : MB Offset: 5109
     uint16_t chan3Dempher;
-    // Parameter: Type Registration : chan3TypeRegistration : MB Offset: 5106
+    // Parameter: Type Registration : chan3TypeRegistration : MB Offset: 5110
     uint16_t chan3TypeRegistration;
-    // Parameter: Type Value : chan3TypeValue : MB Offset: 5107
+    // Parameter: Type Value : chan3TypeValue : MB Offset: 5111
     uint16_t chan3TypeValue;
     // Parameter: Signal Type : chan4SignalType : MB Offset: 5120
     uint16_t chan4SignalType;
@@ -707,14 +707,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan4HighMeasureLim : MB Offset: 5137
     float chan4HighMeasureLim;
     // Parameter: Name Channel : chan4Name : MB Offset: 5139
-    uint8_t chan4Name[8];
-    // Parameter: Period : chan4Period : MB Offset: 5143
+    uint8_t chan4Name[16];
+    // Parameter: Period : chan4Period : MB Offset: 5147
     float chan4Period;
-    // Parameter: Dempher : chan4Dempher : MB Offset: 5145
+    // Parameter: Dempher : chan4Dempher : MB Offset: 5149
     uint16_t chan4Dempher;
-    // Parameter: Type Registration : chan4TypeRegistration : MB Offset: 5146
+    // Parameter: Type Registration : chan4TypeRegistration : MB Offset: 5150
     uint16_t chan4TypeRegistration;
-    // Parameter: Type Value : chan4TypeValue : MB Offset: 5147
+    // Parameter: Type Value : chan4TypeValue : MB Offset: 5151
     uint16_t chan4TypeValue;
     // Parameter: Signal Type : chan5SignalType : MB Offset: 5160
     uint16_t chan5SignalType;
@@ -729,14 +729,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan5HighMeasureLim : MB Offset: 5177
     float chan5HighMeasureLim;
     // Parameter: Name Channel : chan5Name : MB Offset: 5179
-    uint8_t chan5Name[8];
-    // Parameter: Period : chan5Period : MB Offset: 5183
+    uint8_t chan5Name[16];
+    // Parameter: Period : chan5Period : MB Offset: 5187
     float chan5Period;
-    // Parameter: Dempher : chan5Dempher : MB Offset: 5185
+    // Parameter: Dempher : chan5Dempher : MB Offset: 5189
     uint16_t chan5Dempher;
-    // Parameter: Type Registration : chan5TypeRegistration : MB Offset: 5186
+    // Parameter: Type Registration : chan5TypeRegistration : MB Offset: 5190
     uint16_t chan5TypeRegistration;
-    // Parameter: Type Value : chan5TypeValue : MB Offset: 5187
+    // Parameter: Type Value : chan5TypeValue : MB Offset: 5191
     uint16_t chan5TypeValue;
     // Parameter: Signal Type : chan6SignalType : MB Offset: 5200
     uint16_t chan6SignalType;
@@ -751,14 +751,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan6HighMeasureLim : MB Offset: 5217
     float chan6HighMeasureLim;
     // Parameter: Name Channel : chan6Name : MB Offset: 5219
-    uint8_t chan6Name[8];
-    // Parameter: Period : chan6Period : MB Offset: 5223
+    uint8_t chan6Name[16];
+    // Parameter: Period : chan6Period : MB Offset: 5227
     float chan6Period;
-    // Parameter: Dempher : chan6Dempher : MB Offset: 5225
+    // Parameter: Dempher : chan6Dempher : MB Offset: 5229
     uint16_t chan6Dempher;
-    // Parameter: Type Registration : chan6TypeRegistration : MB Offset: 5226
+    // Parameter: Type Registration : chan6TypeRegistration : MB Offset: 5230
     uint16_t chan6TypeRegistration;
-    // Parameter: Type Value : chan6TypeValue : MB Offset: 5227
+    // Parameter: Type Value : chan6TypeValue : MB Offset: 5231
     uint16_t chan6TypeValue;
     // Parameter: Signal Type : chan7SignalType : MB Offset: 5240
     uint16_t chan7SignalType;
@@ -773,14 +773,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan7HighMeasureLim : MB Offset: 5257
     float chan7HighMeasureLim;
     // Parameter: Name Channel : chan7Name : MB Offset: 5259
-    uint8_t chan7Name[8];
-    // Parameter: Period : chan7Period : MB Offset: 5263
+    uint8_t chan7Name[16];
+    // Parameter: Period : chan7Period : MB Offset: 5267
     float chan7Period;
-    // Parameter: Dempher : chan7Dempher : MB Offset: 5265
+    // Parameter: Dempher : chan7Dempher : MB Offset: 5269
     uint16_t chan7Dempher;
-    // Parameter: Type Registration : chan7TypeRegistration : MB Offset: 5266
+    // Parameter: Type Registration : chan7TypeRegistration : MB Offset: 5270
     uint16_t chan7TypeRegistration;
-    // Parameter: Type Value : chan7TypeValue : MB Offset: 5267
+    // Parameter: Type Value : chan7TypeValue : MB Offset: 5271
     uint16_t chan7TypeValue;
     // Parameter: Signal Type : chan8SignalType : MB Offset: 5280
     uint16_t chan8SignalType;
@@ -795,14 +795,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan8HighMeasureLim : MB Offset: 5297
     float chan8HighMeasureLim;
     // Parameter: Name Channel : chan8Name : MB Offset: 5299
-    uint8_t chan8Name[8];
-    // Parameter: Period : chan8Period : MB Offset: 5303
+    uint8_t chan8Name[16];
+    // Parameter: Period : chan8Period : MB Offset: 5307
     float chan8Period;
-    // Parameter: Dempher : chan8Dempher : MB Offset: 5305
+    // Parameter: Dempher : chan8Dempher : MB Offset: 5309
     uint16_t chan8Dempher;
-    // Parameter: Type Registration : chan8TypeRegistration : MB Offset: 5306
+    // Parameter: Type Registration : chan8TypeRegistration : MB Offset: 5310
     uint16_t chan8TypeRegistration;
-    // Parameter: Type Value : chan8TypeValue : MB Offset: 5307
+    // Parameter: Type Value : chan8TypeValue : MB Offset: 5311
     uint16_t chan8TypeValue;
     // Parameter: Signal Type : chan9SignalType : MB Offset: 5320
     uint16_t chan9SignalType;
@@ -817,14 +817,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan9HighMeasureLim : MB Offset: 5337
     float chan9HighMeasureLim;
     // Parameter: Name Channel : chan9Name : MB Offset: 5339
-    uint8_t chan9Name[8];
-    // Parameter: Period : chan9Period : MB Offset: 5343
+    uint8_t chan9Name[16];
+    // Parameter: Period : chan9Period : MB Offset: 5347
     float chan9Period;
-    // Parameter: Dempher : chan9Dempher : MB Offset: 5345
+    // Parameter: Dempher : chan9Dempher : MB Offset: 5349
     uint16_t chan9Dempher;
-    // Parameter: Type Registration : chan9TypeRegistration : MB Offset: 5346
+    // Parameter: Type Registration : chan9TypeRegistration : MB Offset: 5350
     uint16_t chan9TypeRegistration;
-    // Parameter: Type Value : chan9TypeValue : MB Offset: 5347
+    // Parameter: Type Value : chan9TypeValue : MB Offset: 5351
     uint16_t chan9TypeValue;
     // Parameter: Signal Type : chan10SignalType : MB Offset: 5360
     uint16_t chan10SignalType;
@@ -839,14 +839,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan10HighMeasureLim : MB Offset: 5377
     float chan10HighMeasureLim;
     // Parameter: Name Channel : chan10Name : MB Offset: 5379
-    uint8_t chan10Name[8];
-    // Parameter: Period : chan10Period : MB Offset: 5383
+    uint8_t chan10Name[16];
+    // Parameter: Period : chan10Period : MB Offset: 5387
     float chan10Period;
-    // Parameter: Dempher : chan10Dempher : MB Offset: 5385
+    // Parameter: Dempher : chan10Dempher : MB Offset: 5389
     uint16_t chan10Dempher;
-    // Parameter: Type Registration : chan10TypeRegistration : MB Offset: 5386
+    // Parameter: Type Registration : chan10TypeRegistration : MB Offset: 5390
     uint16_t chan10TypeRegistration;
-    // Parameter: Type Value : chan10TypeValue : MB Offset: 5387
+    // Parameter: Type Value : chan10TypeValue : MB Offset: 5391
     uint16_t chan10TypeValue;
     // Parameter: Signal Type : chan11SignalType : MB Offset: 5400
     uint16_t chan11SignalType;
@@ -861,14 +861,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan11HighMeasureLim : MB Offset: 5417
     float chan11HighMeasureLim;
     // Parameter: Name Channel : chan11Name : MB Offset: 5419
-    uint8_t chan11Name[8];
-    // Parameter: Period : chan11Period : MB Offset: 5423
+    uint8_t chan11Name[16];
+    // Parameter: Period : chan11Period : MB Offset: 5427
     float chan11Period;
-    // Parameter: Dempher : chan11Dempher : MB Offset: 5425
+    // Parameter: Dempher : chan11Dempher : MB Offset: 5429
     uint16_t chan11Dempher;
-    // Parameter: Type Registration : chan11TypeRegistration : MB Offset: 5426
+    // Parameter: Type Registration : chan11TypeRegistration : MB Offset: 5430
     uint16_t chan11TypeRegistration;
-    // Parameter: Type Value : chan11TypeValue : MB Offset: 5427
+    // Parameter: Type Value : chan11TypeValue : MB Offset: 5431
     uint16_t chan11TypeValue;
     // Parameter: Signal Type : chan12SignalType : MB Offset: 5440
     uint16_t chan12SignalType;
@@ -883,14 +883,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan12HighMeasureLim : MB Offset: 5457
     float chan12HighMeasureLim;
     // Parameter: Name Channel : chan12Name : MB Offset: 5459
-    uint8_t chan12Name[8];
-    // Parameter: Period : chan12Period : MB Offset: 5463
+    uint8_t chan12Name[16];
+    // Parameter: Period : chan12Period : MB Offset: 5467
     float chan12Period;
-    // Parameter: Dempher : chan12Dempher : MB Offset: 5465
+    // Parameter: Dempher : chan12Dempher : MB Offset: 5469
     uint16_t chan12Dempher;
-    // Parameter: Type Registration : chan12TypeRegistration : MB Offset: 5466
+    // Parameter: Type Registration : chan12TypeRegistration : MB Offset: 5470
     uint16_t chan12TypeRegistration;
-    // Parameter: Type Value : chan12TypeValue : MB Offset: 5467
+    // Parameter: Type Value : chan12TypeValue : MB Offset: 5471
     uint16_t chan12TypeValue;
     // Parameter: Signal Type : chan13SignalType : MB Offset: 5480
     uint16_t chan13SignalType;
@@ -905,14 +905,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan13HighMeasureLim : MB Offset: 5497
     float chan13HighMeasureLim;
     // Parameter: Name Channel : chan13Name : MB Offset: 5499
-    uint8_t chan13Name[8];
-    // Parameter: Period : chan13Period : MB Offset: 5503
+    uint8_t chan13Name[16];
+    // Parameter: Period : chan13Period : MB Offset: 5507
     float chan13Period;
-    // Parameter: Dempher : chan13Dempher : MB Offset: 5505
+    // Parameter: Dempher : chan13Dempher : MB Offset: 5509
     uint16_t chan13Dempher;
-    // Parameter: Type Registration : chan13TypeRegistration : MB Offset: 5506
+    // Parameter: Type Registration : chan13TypeRegistration : MB Offset: 5510
     uint16_t chan13TypeRegistration;
-    // Parameter: Type Value : chan13TypeValue : MB Offset: 5507
+    // Parameter: Type Value : chan13TypeValue : MB Offset: 5511
     uint16_t chan13TypeValue;
     // Parameter: Signal Type : chan14SignalType : MB Offset: 5520
     uint16_t chan14SignalType;
@@ -927,14 +927,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan14HighMeasureLim : MB Offset: 5537
     float chan14HighMeasureLim;
     // Parameter: Name Channel : chan14Name : MB Offset: 5539
-    uint8_t chan14Name[8];
-    // Parameter: Period : chan14Period : MB Offset: 5543
+    uint8_t chan14Name[16];
+    // Parameter: Period : chan14Period : MB Offset: 5547
     float chan14Period;
-    // Parameter: Dempher : chan14Dempher : MB Offset: 5545
+    // Parameter: Dempher : chan14Dempher : MB Offset: 5549
     uint16_t chan14Dempher;
-    // Parameter: Type Registration : chan14TypeRegistration : MB Offset: 5546
+    // Parameter: Type Registration : chan14TypeRegistration : MB Offset: 5550
     uint16_t chan14TypeRegistration;
-    // Parameter: Type Value : chan14TypeValue : MB Offset: 5547
+    // Parameter: Type Value : chan14TypeValue : MB Offset: 5551
     uint16_t chan14TypeValue;
     // Parameter: Signal Type : chan15SignalType : MB Offset: 5560
     uint16_t chan15SignalType;
@@ -949,14 +949,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan15HighMeasureLim : MB Offset: 5577
     float chan15HighMeasureLim;
     // Parameter: Name Channel : chan15Name : MB Offset: 5579
-    uint8_t chan15Name[8];
-    // Parameter: Period : chan15Period : MB Offset: 5583
+    uint8_t chan15Name[16];
+    // Parameter: Period : chan15Period : MB Offset: 5587
     float chan15Period;
-    // Parameter: Dempher : chan15Dempher : MB Offset: 5585
+    // Parameter: Dempher : chan15Dempher : MB Offset: 5589
     uint16_t chan15Dempher;
-    // Parameter: Type Registration : chan15TypeRegistration : MB Offset: 5586
+    // Parameter: Type Registration : chan15TypeRegistration : MB Offset: 5590
     uint16_t chan15TypeRegistration;
-    // Parameter: Type Value : chan15TypeValue : MB Offset: 5587
+    // Parameter: Type Value : chan15TypeValue : MB Offset: 5591
     uint16_t chan15TypeValue;
     // Parameter: Signal Type : chan16SignalType : MB Offset: 5600
     uint16_t chan16SignalType;
@@ -971,14 +971,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan16HighMeasureLim : MB Offset: 5617
     float chan16HighMeasureLim;
     // Parameter: Name Channel : chan16Name : MB Offset: 5619
-    uint8_t chan16Name[8];
-    // Parameter: Period : chan16Period : MB Offset: 5623
+    uint8_t chan16Name[16];
+    // Parameter: Period : chan16Period : MB Offset: 5627
     float chan16Period;
-    // Parameter: Dempher : chan16Dempher : MB Offset: 5625
+    // Parameter: Dempher : chan16Dempher : MB Offset: 5629
     uint16_t chan16Dempher;
-    // Parameter: Type Registration : chan16TypeRegistration : MB Offset: 5626
+    // Parameter: Type Registration : chan16TypeRegistration : MB Offset: 5630
     uint16_t chan16TypeRegistration;
-    // Parameter: Type Value : chan16TypeValue : MB Offset: 5627
+    // Parameter: Type Value : chan16TypeValue : MB Offset: 5631
     uint16_t chan16TypeValue;
     // Parameter: Signal Type : chan17SignalType : MB Offset: 5640
     uint16_t chan17SignalType;
@@ -993,14 +993,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan17HighMeasureLim : MB Offset: 5657
     float chan17HighMeasureLim;
     // Parameter: Name Channel : chan17Name : MB Offset: 5659
-    uint8_t chan17Name[8];
-    // Parameter: Period : chan17Period : MB Offset: 5663
+    uint8_t chan17Name[16];
+    // Parameter: Period : chan17Period : MB Offset: 5667
     float chan17Period;
-    // Parameter: Dempher : chan17Dempher : MB Offset: 5665
+    // Parameter: Dempher : chan17Dempher : MB Offset: 5669
     uint16_t chan17Dempher;
-    // Parameter: Type Registration : chan17TypeRegistration : MB Offset: 5666
+    // Parameter: Type Registration : chan17TypeRegistration : MB Offset: 5670
     uint16_t chan17TypeRegistration;
-    // Parameter: Type Value : chan17TypeValue : MB Offset: 5667
+    // Parameter: Type Value : chan17TypeValue : MB Offset: 5671
     uint16_t chan17TypeValue;
     // Parameter: Signal Type : chan18SignalType : MB Offset: 5680
     uint16_t chan18SignalType;
@@ -1015,14 +1015,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan18HighMeasureLim : MB Offset: 5697
     float chan18HighMeasureLim;
     // Parameter: Name Channel : chan18Name : MB Offset: 5699
-    uint8_t chan18Name[8];
-    // Parameter: Period : chan18Period : MB Offset: 5703
+    uint8_t chan18Name[16];
+    // Parameter: Period : chan18Period : MB Offset: 5707
     float chan18Period;
-    // Parameter: Dempher : chan18Dempher : MB Offset: 5705
+    // Parameter: Dempher : chan18Dempher : MB Offset: 5709
     uint16_t chan18Dempher;
-    // Parameter: Type Registration : chan18TypeRegistration : MB Offset: 5706
+    // Parameter: Type Registration : chan18TypeRegistration : MB Offset: 5710
     uint16_t chan18TypeRegistration;
-    // Parameter: Type Value : chan18TypeValue : MB Offset: 5707
+    // Parameter: Type Value : chan18TypeValue : MB Offset: 5711
     uint16_t chan18TypeValue;
     // Parameter: Signal Type : chan19SignalType : MB Offset: 5720
     uint16_t chan19SignalType;
@@ -1037,14 +1037,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan19HighMeasureLim : MB Offset: 5737
     float chan19HighMeasureLim;
     // Parameter: Name Channel : chan19Name : MB Offset: 5739
-    uint8_t chan19Name[8];
-    // Parameter: Period : chan19Period : MB Offset: 5743
+    uint8_t chan19Name[16];
+    // Parameter: Period : chan19Period : MB Offset: 5747
     float chan19Period;
-    // Parameter: Dempher : chan19Dempher : MB Offset: 5745
+    // Parameter: Dempher : chan19Dempher : MB Offset: 5749
     uint16_t chan19Dempher;
-    // Parameter: Type Registration : chan19TypeRegistration : MB Offset: 5746
+    // Parameter: Type Registration : chan19TypeRegistration : MB Offset: 5750
     uint16_t chan19TypeRegistration;
-    // Parameter: Type Value : chan19TypeValue : MB Offset: 5747
+    // Parameter: Type Value : chan19TypeValue : MB Offset: 5751
     uint16_t chan19TypeValue;
     // Parameter: Signal Type : chan20SignalType : MB Offset: 5760
     uint16_t chan20SignalType;
@@ -1059,14 +1059,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan20HighMeasureLim : MB Offset: 5777
     float chan20HighMeasureLim;
     // Parameter: Name Channel : chan20Name : MB Offset: 5779
-    uint8_t chan20Name[8];
-    // Parameter: Period : chan20Period : MB Offset: 5783
+    uint8_t chan20Name[16];
+    // Parameter: Period : chan20Period : MB Offset: 5787
     float chan20Period;
-    // Parameter: Dempher : chan20Dempher : MB Offset: 5785
+    // Parameter: Dempher : chan20Dempher : MB Offset: 5789
     uint16_t chan20Dempher;
-    // Parameter: Type Registration : chan20TypeRegistration : MB Offset: 5786
+    // Parameter: Type Registration : chan20TypeRegistration : MB Offset: 5790
     uint16_t chan20TypeRegistration;
-    // Parameter: Type Value : chan20TypeValue : MB Offset: 5787
+    // Parameter: Type Value : chan20TypeValue : MB Offset: 5791
     uint16_t chan20TypeValue;
     // Parameter: Signal Type : chan21SignalType : MB Offset: 5800
     uint16_t chan21SignalType;
@@ -1081,14 +1081,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan21HighMeasureLim : MB Offset: 5817
     float chan21HighMeasureLim;
     // Parameter: Name Channel : chan21Name : MB Offset: 5819
-    uint8_t chan21Name[8];
-    // Parameter: Period : chan21Period : MB Offset: 5823
+    uint8_t chan21Name[16];
+    // Parameter: Period : chan21Period : MB Offset: 5827
     float chan21Period;
-    // Parameter: Dempher : chan21Dempher : MB Offset: 5825
+    // Parameter: Dempher : chan21Dempher : MB Offset: 5829
     uint16_t chan21Dempher;
-    // Parameter: Type Registration : chan21TypeRegistration : MB Offset: 5826
+    // Parameter: Type Registration : chan21TypeRegistration : MB Offset: 5830
     uint16_t chan21TypeRegistration;
-    // Parameter: Type Value : chan21TypeValue : MB Offset: 5827
+    // Parameter: Type Value : chan21TypeValue : MB Offset: 5831
     uint16_t chan21TypeValue;
     // Parameter: Signal Type : chan22SignalType : MB Offset: 5840
     uint16_t chan22SignalType;
@@ -1103,14 +1103,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan22HighMeasureLim : MB Offset: 5857
     float chan22HighMeasureLim;
     // Parameter: Name Channel : chan22Name : MB Offset: 5859
-    uint8_t chan22Name[8];
-    // Parameter: Period : chan22Period : MB Offset: 5863
+    uint8_t chan22Name[16];
+    // Parameter: Period : chan22Period : MB Offset: 5867
     float chan22Period;
-    // Parameter: Dempher : chan22Dempher : MB Offset: 5865
+    // Parameter: Dempher : chan22Dempher : MB Offset: 5869
     uint16_t chan22Dempher;
-    // Parameter: Type Registration : chan22TypeRegistration : MB Offset: 5866
+    // Parameter: Type Registration : chan22TypeRegistration : MB Offset: 5870
     uint16_t chan22TypeRegistration;
-    // Parameter: Type Value : chan22TypeValue : MB Offset: 5867
+    // Parameter: Type Value : chan22TypeValue : MB Offset: 5871
     uint16_t chan22TypeValue;
     // Parameter: Signal Type : chan23SignalType : MB Offset: 5880
     uint16_t chan23SignalType;
@@ -1125,14 +1125,14 @@ typedef struct
     // Parameter: Measure signal high limit : chan23HighMeasureLim : MB Offset: 5897
     float chan23HighMeasureLim;
     // Parameter: Name Channel : chan23Name : MB Offset: 5899
-    uint8_t chan23Name[8];
-    // Parameter: Period : chan23Period : MB Offset: 5903
+    uint8_t chan23Name[16];
+    // Parameter: Period : chan23Period : MB Offset: 5907
     float chan23Period;
-    // Parameter: Dempher : chan23Dempher : MB Offset: 5905
+    // Parameter: Dempher : chan23Dempher : MB Offset: 5909
     uint16_t chan23Dempher;
-    // Parameter: Type Registration : chan23TypeRegistration : MB Offset: 5906
+    // Parameter: Type Registration : chan23TypeRegistration : MB Offset: 5910
     uint16_t chan23TypeRegistration;
-    // Parameter: Type Value : chan23TypeValue : MB Offset: 5907
+    // Parameter: Type Value : chan23TypeValue : MB Offset: 5911
     uint16_t chan23TypeValue;
     // Parameter: Signal Type : chan24SignalType : MB Offset: 5920
     uint16_t chan24SignalType;
@@ -1147,807 +1147,807 @@ typedef struct
     // Parameter: Measure signal high limit : chan24HighMeasureLim : MB Offset: 5937
     float chan24HighMeasureLim;
     // Parameter: Name Channel : chan24Name : MB Offset: 5939
-    uint8_t chan24Name[8];
-    // Parameter: Period : chan24Period : MB Offset: 5943
+    uint8_t chan24Name[16];
+    // Parameter: Period : chan24Period : MB Offset: 5947
     float chan24Period;
-    // Parameter: Dempher : chan24Dempher : MB Offset: 5945
+    // Parameter: Dempher : chan24Dempher : MB Offset: 5949
     uint16_t chan24Dempher;
-    // Parameter: Type Registration : chan24TypeRegistration : MB Offset: 5946
+    // Parameter: Type Registration : chan24TypeRegistration : MB Offset: 5950
     uint16_t chan24TypeRegistration;
-    // Parameter: Type Value : chan24TypeValue : MB Offset: 5947
+    // Parameter: Type Value : chan24TypeValue : MB Offset: 5951
     uint16_t chan24TypeValue;
-    // Parameter: Signal Type Frequency : chan1FreqSignalType : MB Offset: 6000
-    uint16_t chan1FreqSignalType;
-    // Parameter: Additional parameter : chan1FreqalAdditionalParameter : MB Offset: 6001
-    uint8_t chan1FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan1ImpulseDuration : MB Offset: 6007
-    float chan1ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan1FreqLowMeasureLim : MB Offset: 6009
-    float chan1FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan1FreqHighMeasureLim : MB Offset: 6011
-    float chan1FreqHighMeasureLim;
-    // Parameter: Name Channel : chan1FreqName : MB Offset: 6013
-    uint8_t chan1FreqName[8];
-    // Parameter: Unit Name : chan1FreqUnit : MB Offset: 6017
-    uint8_t chan1FreqUnit[4];
-    // Parameter: Impulse Weight : chan1FreqImpWeight : MB Offset: 6019
-    float chan1FreqImpWeight;
-    // Parameter: Period : chan1FreqPeriod : MB Offset: 6021
-    float chan1FreqPeriod;
-    // Parameter: Dempher : chan1FreqDempher : MB Offset: 6023
-    uint16_t chan1FreqDempher;
-    // Parameter: Type Value : chan1FreqTypeValue : MB Offset: 6024
-    uint16_t chan1FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan2FreqSignalType : MB Offset: 6025
-    uint16_t chan2FreqSignalType;
-    // Parameter: Additional parameter : chan2FreqAdditionalParameter : MB Offset: 6026
-    uint8_t chan2FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan2ImpulseDuration : MB Offset: 6032
-    float chan2ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan2FreqLowMeasureLim : MB Offset: 6034
-    float chan2FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan2FreqHighMeasureLim : MB Offset: 6036
-    float chan2FreqHighMeasureLim;
-    // Parameter: Name Channel : chan2FreqName : MB Offset: 6038
-    uint8_t chan2FreqName[8];
-    // Parameter: Unit Name : chan2FreqUnit : MB Offset: 6042
-    uint8_t chan2FreqUnit[4];
-    // Parameter: Impulse Weight : chan2ImpWeight : MB Offset: 6044
-    float chan2ImpWeight;
-    // Parameter: Period : chan2FreqPeriod : MB Offset: 6046
-    float chan2FreqPeriod;
-    // Parameter: Dempher : chan2FreqDempher : MB Offset: 6048
-    uint16_t chan2FreqDempher;
-    // Parameter: Type Value : chan2FreqTypeValue : MB Offset: 6049
-    uint16_t chan2FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan3FreqSignalType : MB Offset: 6050
-    uint16_t chan3FreqSignalType;
-    // Parameter: Additional parameter : chan3FreqalAdditionalParameter : MB Offset: 6051
-    uint8_t chan3FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan3ImpulseDuration : MB Offset: 6057
-    float chan3ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan3FreqLowMeasureLim : MB Offset: 6059
-    float chan3FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan3FreqHighMeasureLim : MB Offset: 6061
-    float chan3FreqHighMeasureLim;
-    // Parameter: Name Channel : chan3FreqName : MB Offset: 6063
-    uint8_t chan3FreqName[8];
-    // Parameter: Unit Name : chan3FreqUnit : MB Offset: 6067
-    uint8_t chan3FreqUnit[4];
-    // Parameter: Impulse Weight : chan3FreqImpWeight : MB Offset: 6069
-    float chan3FreqImpWeight;
-    // Parameter: Period : chan3FreqPeriod : MB Offset: 6071
-    float chan3FreqPeriod;
-    // Parameter: Dempher : chan3FreqDempher : MB Offset: 6073
-    uint16_t chan3FreqDempher;
-    // Parameter: Type Value : chan3FreqTypeValue : MB Offset: 6074
-    uint16_t chan3FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan4FreqSignalType : MB Offset: 6075
-    uint16_t chan4FreqSignalType;
-    // Parameter: Additional parameter : chan4FreqAdditionalParameter : MB Offset: 6076
-    uint8_t chan4FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan4ImpulseDuration : MB Offset: 6082
-    float chan4ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan4FreqLowMeasureLim : MB Offset: 6084
-    float chan4FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan4FreqHighMeasureLim : MB Offset: 6086
-    float chan4FreqHighMeasureLim;
-    // Parameter: Name Channel : chan4FreqName : MB Offset: 6088
-    uint8_t chan4FreqName[8];
-    // Parameter: Unit Name : chan4FreqUnit : MB Offset: 6092
-    uint8_t chan4FreqUnit[4];
-    // Parameter: Impulse Weight : chan4ImpWeight : MB Offset: 6094
-    float chan4ImpWeight;
-    // Parameter: Period : chan4FreqPeriod : MB Offset: 6096
-    float chan4FreqPeriod;
-    // Parameter: Dempher : chan4FreqDempher : MB Offset: 6098
-    uint16_t chan4FreqDempher;
-    // Parameter: Type Value : chan4FreqTypeValue : MB Offset: 6099
-    uint16_t chan4FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan5FreqSignalType : MB Offset: 6100
-    uint16_t chan5FreqSignalType;
-    // Parameter: Additional parameter : chan5FreqalAdditionalParameter : MB Offset: 6101
-    uint8_t chan5FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan5ImpulseDuration : MB Offset: 6107
-    float chan5ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan5FreqLowMeasureLim : MB Offset: 6109
-    float chan5FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan5FreqHighMeasureLim : MB Offset: 6111
-    float chan5FreqHighMeasureLim;
-    // Parameter: Name Channel : chan5FreqName : MB Offset: 6113
-    uint8_t chan5FreqName[8];
-    // Parameter: Unit Name : chan5FreqUnit : MB Offset: 6117
-    uint8_t chan5FreqUnit[4];
-    // Parameter: Impulse Weight : chan5FreqImpWeight : MB Offset: 6119
-    float chan5FreqImpWeight;
-    // Parameter: Period : chan5FreqPeriod : MB Offset: 6121
-    float chan5FreqPeriod;
-    // Parameter: Dempher : chan5FreqDempher : MB Offset: 6123
-    uint16_t chan5FreqDempher;
-    // Parameter: Type Value : chan5FreqTypeValue : MB Offset: 6124
-    uint16_t chan5FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan6FreqSignalType : MB Offset: 6125
-    uint16_t chan6FreqSignalType;
-    // Parameter: Additional parameter : chan6FreqAdditionalParameter : MB Offset: 6126
-    uint8_t chan6FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan6ImpulseDuration : MB Offset: 6132
-    float chan6ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan6FreqLowMeasureLim : MB Offset: 6134
-    float chan6FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan6FreqHighMeasureLim : MB Offset: 6136
-    float chan6FreqHighMeasureLim;
-    // Parameter: Name Channel : chan6FreqName : MB Offset: 6138
-    uint8_t chan6FreqName[8];
-    // Parameter: Unit Name : chan6FreqUnit : MB Offset: 6142
-    uint8_t chan6FreqUnit[4];
-    // Parameter: Impulse Weight : chan6ImpWeight : MB Offset: 6144
-    float chan6ImpWeight;
-    // Parameter: Period : chan6FreqPeriod : MB Offset: 6146
-    float chan6FreqPeriod;
-    // Parameter: Dempher : chan6FreqDempher : MB Offset: 6148
-    uint16_t chan6FreqDempher;
-    // Parameter: Type Value : chan6FreqTypeValue : MB Offset: 6149
-    uint16_t chan6FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan7FreqSignalType : MB Offset: 6150
-    uint16_t chan7FreqSignalType;
-    // Parameter: Additional parameter : chan7FreqalAdditionalParameter : MB Offset: 6151
-    uint8_t chan7FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan7ImpulseDuration : MB Offset: 6157
-    float chan7ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan7FreqLowMeasureLim : MB Offset: 6159
-    float chan7FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan7FreqHighMeasureLim : MB Offset: 6161
-    float chan7FreqHighMeasureLim;
-    // Parameter: Name Channel : chan7FreqName : MB Offset: 6163
-    uint8_t chan7FreqName[8];
-    // Parameter: Unit Name : chan7FreqUnit : MB Offset: 6167
-    uint8_t chan7FreqUnit[4];
-    // Parameter: Impulse Weight : chan7FreqImpWeight : MB Offset: 6169
-    float chan7FreqImpWeight;
-    // Parameter: Period : chan7FreqPeriod : MB Offset: 6171
-    float chan7FreqPeriod;
-    // Parameter: Dempher : chan7FreqDempher : MB Offset: 6173
-    uint16_t chan7FreqDempher;
-    // Parameter: Type Value : chan7FreqTypeValue : MB Offset: 6174
-    uint16_t chan7FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan8FreqSignalType : MB Offset: 6175
-    uint16_t chan8FreqSignalType;
-    // Parameter: Additional parameter : chan8FreqAdditionalParameter : MB Offset: 6176
-    uint8_t chan8FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan8ImpulseDuration : MB Offset: 6182
-    float chan8ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan8FreqLowMeasureLim : MB Offset: 6184
-    float chan8FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan8FreqHighMeasureLim : MB Offset: 6186
-    float chan8FreqHighMeasureLim;
-    // Parameter: Name Channel : chan8FreqName : MB Offset: 6188
-    uint8_t chan8FreqName[8];
-    // Parameter: Unit Name : chan8FreqUnit : MB Offset: 6192
-    uint8_t chan8FreqUnit[4];
-    // Parameter: Impulse Weight : chan8ImpWeight : MB Offset: 6194
-    float chan8ImpWeight;
-    // Parameter: Period : chan8FreqPeriod : MB Offset: 6196
-    float chan8FreqPeriod;
-    // Parameter: Dempher : chan8FreqDempher : MB Offset: 6198
-    uint16_t chan8FreqDempher;
-    // Parameter: Type Value : chan8FreqTypeValue : MB Offset: 6199
-    uint16_t chan8FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan9FreqSignalType : MB Offset: 6200
-    uint16_t chan9FreqSignalType;
-    // Parameter: Additional parameter : chan9FreqalAdditionalParameter : MB Offset: 6201
-    uint8_t chan9FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan9ImpulseDuration : MB Offset: 6207
-    float chan9ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan9FreqLowMeasureLim : MB Offset: 6209
-    float chan9FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan9FreqHighMeasureLim : MB Offset: 6211
-    float chan9FreqHighMeasureLim;
-    // Parameter: Name Channel : chan9FreqName : MB Offset: 6213
-    uint8_t chan9FreqName[8];
-    // Parameter: Unit Name : chan9FreqUnit : MB Offset: 6217
-    uint8_t chan9FreqUnit[4];
-    // Parameter: Impulse Weight : chan9FreqImpWeight : MB Offset: 6219
-    float chan9FreqImpWeight;
-    // Parameter: Period : chan9FreqPeriod : MB Offset: 6221
-    float chan9FreqPeriod;
-    // Parameter: Dempher : chan9FreqDempher : MB Offset: 6223
-    uint16_t chan9FreqDempher;
-    // Parameter: Type Value : chan9FreqTypeValue : MB Offset: 6224
-    uint16_t chan9FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan10FreqSignalType : MB Offset: 6225
-    uint16_t chan10FreqSignalType;
-    // Parameter: Additional parameter : chan10FreqAdditionalParameter : MB Offset: 6226
-    uint8_t chan10FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan10ImpulseDuration : MB Offset: 6232
-    float chan10ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan10FreqLowMeasureLim : MB Offset: 6234
-    float chan10FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan10FreqHighMeasureLim : MB Offset: 6236
-    float chan10FreqHighMeasureLim;
-    // Parameter: Name Channel : chan10FreqName : MB Offset: 6238
-    uint8_t chan10FreqName[8];
-    // Parameter: Unit Name : chan10FreqUnit : MB Offset: 6242
-    uint8_t chan10FreqUnit[4];
-    // Parameter: Impulse Weight : chan10ImpWeight : MB Offset: 6244
-    float chan10ImpWeight;
-    // Parameter: Period : chan10FreqPeriod : MB Offset: 6246
-    float chan10FreqPeriod;
-    // Parameter: Dempher : chan10FreqDempher : MB Offset: 6248
-    uint16_t chan10FreqDempher;
-    // Parameter: Type Value : chan10FreqTypeValue : MB Offset: 6249
-    uint16_t chan10FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan11FreqSignalType : MB Offset: 6250
-    uint16_t chan11FreqSignalType;
-    // Parameter: Additional parameter : chan11FreqalAdditionalParameter : MB Offset: 6251
-    uint8_t chan11FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan11ImpulseDuration : MB Offset: 6257
-    float chan11ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan11FreqLowMeasureLim : MB Offset: 6259
-    float chan11FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan11FreqHighMeasureLim : MB Offset: 6261
-    float chan11FreqHighMeasureLim;
-    // Parameter: Name Channel : chan11FreqName : MB Offset: 6263
-    uint8_t chan11FreqName[8];
-    // Parameter: Unit Name : chan11FreqUnit : MB Offset: 6267
-    uint8_t chan11FreqUnit[4];
-    // Parameter: Impulse Weight : chan11FreqImpWeight : MB Offset: 6269
-    float chan11FreqImpWeight;
-    // Parameter: Period : chan11FreqPeriod : MB Offset: 6271
-    float chan11FreqPeriod;
-    // Parameter: Dempher : chan11FreqDempher : MB Offset: 6273
-    uint16_t chan11FreqDempher;
-    // Parameter: Type Value : chan11FreqTypeValue : MB Offset: 6274
-    uint16_t chan11FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan12FreqSignalType : MB Offset: 6275
-    uint16_t chan12FreqSignalType;
-    // Parameter: Additional parameter : chan12FreqAdditionalParameter : MB Offset: 6276
-    uint8_t chan12FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan12ImpulseDuration : MB Offset: 6282
-    float chan12ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan12FreqLowMeasureLim : MB Offset: 6284
-    float chan12FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan12FreqHighMeasureLim : MB Offset: 6286
-    float chan12FreqHighMeasureLim;
-    // Parameter: Name Channel : chan12FreqName : MB Offset: 6288
-    uint8_t chan12FreqName[8];
-    // Parameter: Unit Name : chan12FreqUnit : MB Offset: 6292
-    uint8_t chan12FreqUnit[4];
-    // Parameter: Impulse Weight : chan12ImpWeight : MB Offset: 6294
-    float chan12ImpWeight;
-    // Parameter: Period : chan12FreqPeriod : MB Offset: 6296
-    float chan12FreqPeriod;
-    // Parameter: Dempher : chan12FreqDempher : MB Offset: 6298
-    uint16_t chan12FreqDempher;
-    // Parameter: Type Value : chan12FreqTypeValue : MB Offset: 6299
-    uint16_t chan12FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan13FreqSignalType : MB Offset: 6300
-    uint16_t chan13FreqSignalType;
-    // Parameter: Additional parameter : chan13FreqalAdditionalParameter : MB Offset: 6301
-    uint8_t chan13FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan13ImpulseDuration : MB Offset: 6307
-    float chan13ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan13FreqLowMeasureLim : MB Offset: 6309
-    float chan13FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan13FreqHighMeasureLim : MB Offset: 6311
-    float chan13FreqHighMeasureLim;
-    // Parameter: Name Channel : chan13FreqName : MB Offset: 6313
-    uint8_t chan13FreqName[8];
-    // Parameter: Unit Name : chan13FreqUnit : MB Offset: 6317
-    uint8_t chan13FreqUnit[4];
-    // Parameter: Impulse Weight : chan13FreqImpWeight : MB Offset: 6319
-    float chan13FreqImpWeight;
-    // Parameter: Period : chan13FreqPeriod : MB Offset: 6321
-    float chan13FreqPeriod;
-    // Parameter: Dempher : chan13FreqDempher : MB Offset: 6323
-    uint16_t chan13FreqDempher;
-    // Parameter: Type Value : chan13FreqTypeValue : MB Offset: 6324
-    uint16_t chan13FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan14FreqSignalType : MB Offset: 6325
-    uint16_t chan14FreqSignalType;
-    // Parameter: Additional parameter : chan14FreqAdditionalParameter : MB Offset: 6326
-    uint8_t chan14FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan14ImpulseDuration : MB Offset: 6332
-    float chan14ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan14FreqLowMeasureLim : MB Offset: 6334
-    float chan14FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan14FreqHighMeasureLim : MB Offset: 6336
-    float chan14FreqHighMeasureLim;
-    // Parameter: Name Channel : chan14FreqName : MB Offset: 6338
-    uint8_t chan14FreqName[8];
-    // Parameter: Unit Name : chan14FreqUnit : MB Offset: 6342
-    uint8_t chan14FreqUnit[4];
-    // Parameter: Impulse Weight : chan14ImpWeight : MB Offset: 6344
-    float chan14ImpWeight;
-    // Parameter: Period : chan14FreqPeriod : MB Offset: 6346
-    float chan14FreqPeriod;
-    // Parameter: Dempher : chan14FreqDempher : MB Offset: 6348
-    uint16_t chan14FreqDempher;
-    // Parameter: Type Value : chan14FreqTypeValue : MB Offset: 6349
-    uint16_t chan14FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan15FreqSignalType : MB Offset: 6350
-    uint16_t chan15FreqSignalType;
-    // Parameter: Additional parameter : chan15FreqalAdditionalParameter : MB Offset: 6351
-    uint8_t chan15FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan15ImpulseDuration : MB Offset: 6357
-    float chan15ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan15FreqLowMeasureLim : MB Offset: 6359
-    float chan15FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan15FreqHighMeasureLim : MB Offset: 6361
-    float chan15FreqHighMeasureLim;
-    // Parameter: Name Channel : chan15FreqName : MB Offset: 6363
-    uint8_t chan15FreqName[8];
-    // Parameter: Unit Name : chan15FreqUnit : MB Offset: 6367
-    uint8_t chan15FreqUnit[4];
-    // Parameter: Impulse Weight : chan15FreqImpWeight : MB Offset: 6369
-    float chan15FreqImpWeight;
-    // Parameter: Period : chan15FreqPeriod : MB Offset: 6371
-    float chan15FreqPeriod;
-    // Parameter: Dempher : chan15FreqDempher : MB Offset: 6373
-    uint16_t chan15FreqDempher;
-    // Parameter: Type Value : chan15FreqTypeValue : MB Offset: 6374
-    uint16_t chan15FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan16FreqSignalType : MB Offset: 6375
-    uint16_t chan16FreqSignalType;
-    // Parameter: Additional parameter : chan16FreqAdditionalParameter : MB Offset: 6376
-    uint8_t chan16FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan16ImpulseDuration : MB Offset: 6382
-    float chan16ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan16FreqLowMeasureLim : MB Offset: 6384
-    float chan16FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan16FreqHighMeasureLim : MB Offset: 6386
-    float chan16FreqHighMeasureLim;
-    // Parameter: Name Channel : chan16FreqName : MB Offset: 6388
-    uint8_t chan16FreqName[8];
-    // Parameter: Unit Name : chan16FreqUnit : MB Offset: 6392
-    uint8_t chan16FreqUnit[4];
-    // Parameter: Impulse Weight : chan16ImpWeight : MB Offset: 6394
-    float chan16ImpWeight;
-    // Parameter: Period : chan16FreqPeriod : MB Offset: 6396
-    float chan16FreqPeriod;
-    // Parameter: Dempher : chan16FreqDempher : MB Offset: 6398
-    uint16_t chan16FreqDempher;
-    // Parameter: Type Value : chan16FreqTypeValue : MB Offset: 6399
-    uint16_t chan16FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan17FreqSignalType : MB Offset: 6400
-    uint16_t chan17FreqSignalType;
-    // Parameter: Additional parameter : chan17FreqalAdditionalParameter : MB Offset: 6401
-    uint8_t chan17FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan17ImpulseDuration : MB Offset: 6407
-    float chan17ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan17FreqLowMeasureLim : MB Offset: 6409
-    float chan17FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan17FreqHighMeasureLim : MB Offset: 6411
-    float chan17FreqHighMeasureLim;
-    // Parameter: Name Channel : chan17FreqName : MB Offset: 6413
-    uint8_t chan17FreqName[8];
-    // Parameter: Unit Name : chan17FreqUnit : MB Offset: 6417
-    uint8_t chan17FreqUnit[4];
-    // Parameter: Impulse Weight : chan17FreqImpWeight : MB Offset: 6419
-    float chan17FreqImpWeight;
-    // Parameter: Period : chan17FreqPeriod : MB Offset: 6421
-    float chan17FreqPeriod;
-    // Parameter: Dempher : chan17FreqDempher : MB Offset: 6423
-    uint16_t chan17FreqDempher;
-    // Parameter: Type Value : chan17FreqTypeValue : MB Offset: 6424
-    uint16_t chan17FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan18FreqSignalType : MB Offset: 6425
-    uint16_t chan18FreqSignalType;
-    // Parameter: Additional parameter : chan18FreqAdditionalParameter : MB Offset: 6426
-    uint8_t chan18FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan18ImpulseDuration : MB Offset: 6432
-    float chan18ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan18FreqLowMeasureLim : MB Offset: 6434
-    float chan18FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan18FreqHighMeasureLim : MB Offset: 6436
-    float chan18FreqHighMeasureLim;
-    // Parameter: Name Channel : chan18FreqName : MB Offset: 6438
-    uint8_t chan18FreqName[8];
-    // Parameter: Unit Name : chan18FreqUnit : MB Offset: 6442
-    uint8_t chan18FreqUnit[4];
-    // Parameter: Impulse Weight : chan18ImpWeight : MB Offset: 6444
-    float chan18ImpWeight;
-    // Parameter: Period : chan18FreqPeriod : MB Offset: 6446
-    float chan18FreqPeriod;
-    // Parameter: Dempher : chan18FreqDempher : MB Offset: 6448
-    uint16_t chan18FreqDempher;
-    // Parameter: Type Value : chan18FreqTypeValue : MB Offset: 6449
-    uint16_t chan18FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan19FreqSignalType : MB Offset: 6450
-    uint16_t chan19FreqSignalType;
-    // Parameter: Additional parameter : chan19FreqalAdditionalParameter : MB Offset: 6451
-    uint8_t chan19FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan19ImpulseDuration : MB Offset: 6457
-    float chan19ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan19FreqLowMeasureLim : MB Offset: 6459
-    float chan19FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan19FreqHighMeasureLim : MB Offset: 6461
-    float chan19FreqHighMeasureLim;
-    // Parameter: Name Channel : chan19FreqName : MB Offset: 6463
-    uint8_t chan19FreqName[8];
-    // Parameter: Unit Name : chan19FreqUnit : MB Offset: 6467
-    uint8_t chan19FreqUnit[4];
-    // Parameter: Impulse Weight : chan19FreqImpWeight : MB Offset: 6469
-    float chan19FreqImpWeight;
-    // Parameter: Period : chan19FreqPeriod : MB Offset: 6471
-    float chan19FreqPeriod;
-    // Parameter: Dempher : chan19FreqDempher : MB Offset: 6473
-    uint16_t chan19FreqDempher;
-    // Parameter: Type Value : chan19FreqTypeValue : MB Offset: 6474
-    uint16_t chan19FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan20FreqSignalType : MB Offset: 6475
-    uint16_t chan20FreqSignalType;
-    // Parameter: Additional parameter : chan20FreqAdditionalParameter : MB Offset: 6476
-    uint8_t chan20FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan20ImpulseDuration : MB Offset: 6482
-    float chan20ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan20FreqLowMeasureLim : MB Offset: 6484
-    float chan20FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan20FreqHighMeasureLim : MB Offset: 6486
-    float chan20FreqHighMeasureLim;
-    // Parameter: Name Channel : chan20FreqName : MB Offset: 6488
-    uint8_t chan20FreqName[8];
-    // Parameter: Unit Name : chan20FreqUnit : MB Offset: 6492
-    uint8_t chan20FreqUnit[4];
-    // Parameter: Impulse Weight : chan20ImpWeight : MB Offset: 6494
-    float chan20ImpWeight;
-    // Parameter: Period : chan20FreqPeriod : MB Offset: 6496
-    float chan20FreqPeriod;
-    // Parameter: Dempher : chan20FreqDempher : MB Offset: 6498
-    uint16_t chan20FreqDempher;
-    // Parameter: Type Value : chan20FreqTypeValue : MB Offset: 6499
-    uint16_t chan20FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan21FreqSignalType : MB Offset: 6500
-    uint16_t chan21FreqSignalType;
-    // Parameter: Additional parameter : chan21FreqalAdditionalParameter : MB Offset: 6501
-    uint8_t chan21FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan21ImpulseDuration : MB Offset: 6507
-    float chan21ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan21FreqLowMeasureLim : MB Offset: 6509
-    float chan21FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan21FreqHighMeasureLim : MB Offset: 6511
-    float chan21FreqHighMeasureLim;
-    // Parameter: Name Channel : chan21FreqName : MB Offset: 6513
-    uint8_t chan21FreqName[8];
-    // Parameter: Unit Name : chan21FreqUnit : MB Offset: 6517
-    uint8_t chan21FreqUnit[4];
-    // Parameter: Impulse Weight : chan21FreqImpWeight : MB Offset: 6519
-    float chan21FreqImpWeight;
-    // Parameter: Period : chan21FreqPeriod : MB Offset: 6521
-    float chan21FreqPeriod;
-    // Parameter: Dempher : chan21FreqDempher : MB Offset: 6523
-    uint16_t chan21FreqDempher;
-    // Parameter: Type Value : chan21FreqTypeValue : MB Offset: 6524
-    uint16_t chan21FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan22FreqSignalType : MB Offset: 6525
-    uint16_t chan22FreqSignalType;
-    // Parameter: Additional parameter : chan22FreqAdditionalParameter : MB Offset: 6526
-    uint8_t chan22FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan22ImpulseDuration : MB Offset: 6532
-    float chan22ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan22FreqLowMeasureLim : MB Offset: 6534
-    float chan22FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan22FreqHighMeasureLim : MB Offset: 6536
-    float chan22FreqHighMeasureLim;
-    // Parameter: Name Channel : chan22FreqName : MB Offset: 6538
-    uint8_t chan22FreqName[8];
-    // Parameter: Unit Name : chan22FreqUnit : MB Offset: 6542
-    uint8_t chan22FreqUnit[4];
-    // Parameter: Impulse Weight : chan22ImpWeight : MB Offset: 6544
-    float chan22ImpWeight;
-    // Parameter: Period : chan22FreqPeriod : MB Offset: 6546
-    float chan22FreqPeriod;
-    // Parameter: Dempher : chan22FreqDempher : MB Offset: 6548
-    uint16_t chan22FreqDempher;
-    // Parameter: Type Value : chan22FreqTypeValue : MB Offset: 6549
-    uint16_t chan22FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan23FreqSignalType : MB Offset: 6550
-    uint16_t chan23FreqSignalType;
-    // Parameter: Additional parameter : chan23FreqalAdditionalParameter : MB Offset: 6551
-    uint8_t chan23FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan23ImpulseDuration : MB Offset: 6557
-    float chan23ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan23FreqLowMeasureLim : MB Offset: 6559
-    float chan23FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan23FreqHighMeasureLim : MB Offset: 6561
-    float chan23FreqHighMeasureLim;
-    // Parameter: Name Channel : chan23FreqName : MB Offset: 6563
-    uint8_t chan23FreqName[8];
-    // Parameter: Unit Name : chan23FreqUnit : MB Offset: 6567
-    uint8_t chan23FreqUnit[4];
-    // Parameter: Impulse Weight : chan23FreqImpWeight : MB Offset: 6569
-    float chan23FreqImpWeight;
-    // Parameter: Period : chan23FreqPeriod : MB Offset: 6571
-    float chan23FreqPeriod;
-    // Parameter: Dempher : chan23FreqDempher : MB Offset: 6573
-    uint16_t chan23FreqDempher;
-    // Parameter: Type Value : chan23FreqTypeValue : MB Offset: 6574
-    uint16_t chan23FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan24FreqSignalType : MB Offset: 6575
-    uint16_t chan24FreqSignalType;
-    // Parameter: Additional parameter : chan24FreqAdditionalParameter : MB Offset: 6576
-    uint8_t chan24FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan24ImpulseDuration : MB Offset: 6582
-    float chan24ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan24FreqLowMeasureLim : MB Offset: 6584
-    float chan24FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan24FreqHighMeasureLim : MB Offset: 6586
-    float chan24FreqHighMeasureLim;
-    // Parameter: Name Channel : chan24FreqName : MB Offset: 6588
-    uint8_t chan24FreqName[8];
-    // Parameter: Unit Name : chan24FreqUnit : MB Offset: 6592
-    uint8_t chan24FreqUnit[4];
-    // Parameter: Impulse Weight : chan24ImpWeight : MB Offset: 6594
-    float chan24ImpWeight;
-    // Parameter: Period : chan24FreqPeriod : MB Offset: 6596
-    float chan24FreqPeriod;
-    // Parameter: Dempher : chan24FreqDempher : MB Offset: 6598
-    uint16_t chan24FreqDempher;
-    // Parameter: Type Value : chan24FreqTypeValue : MB Offset: 6599
-    uint16_t chan24FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan25FreqSignalType : MB Offset: 6600
-    uint16_t chan25FreqSignalType;
-    // Parameter: Additional parameter : chan25FreqalAdditionalParameter : MB Offset: 6601
-    uint8_t chan25FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan25ImpulseDuration : MB Offset: 6607
-    float chan25ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan25FreqLowMeasureLim : MB Offset: 6609
-    float chan25FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan25FreqHighMeasureLim : MB Offset: 6611
-    float chan25FreqHighMeasureLim;
-    // Parameter: Name Channel : chan25FreqName : MB Offset: 6613
-    uint8_t chan25FreqName[8];
-    // Parameter: Unit Name : chan25FreqUnit : MB Offset: 6617
-    uint8_t chan25FreqUnit[4];
-    // Parameter: Impulse Weight : chan25FreqImpWeight : MB Offset: 6619
-    float chan25FreqImpWeight;
-    // Parameter: Period : chan25FreqPeriod : MB Offset: 6621
-    float chan25FreqPeriod;
-    // Parameter: Dempher : chan25FreqDempher : MB Offset: 6623
-    uint16_t chan25FreqDempher;
-    // Parameter: Type Value : chan25FreqTypeValue : MB Offset: 6624
-    uint16_t chan25FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan26FreqSignalType : MB Offset: 6625
-    uint16_t chan26FreqSignalType;
-    // Parameter: Additional parameter : chan26FreqAdditionalParameter : MB Offset: 6626
-    uint8_t chan26FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan26ImpulseDuration : MB Offset: 6632
-    float chan26ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan26FreqLowMeasureLim : MB Offset: 6634
-    float chan26FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan26FreqHighMeasureLim : MB Offset: 6636
-    float chan26FreqHighMeasureLim;
-    // Parameter: Name Channel : chan26FreqName : MB Offset: 6638
-    uint8_t chan26FreqName[8];
-    // Parameter: Unit Name : chan26FreqUnit : MB Offset: 6642
-    uint8_t chan26FreqUnit[4];
-    // Parameter: Impulse Weight : chan26ImpWeight : MB Offset: 6644
-    float chan26ImpWeight;
-    // Parameter: Period : chan26FreqPeriod : MB Offset: 6646
-    float chan26FreqPeriod;
-    // Parameter: Dempher : chan26FreqDempher : MB Offset: 6648
-    uint16_t chan26FreqDempher;
-    // Parameter: Type Value : chan26FreqTypeValue : MB Offset: 6649
-    uint16_t chan26FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan27FreqSignalType : MB Offset: 6650
-    uint16_t chan27FreqSignalType;
-    // Parameter: Additional parameter : chan27FreqalAdditionalParameter : MB Offset: 6651
-    uint8_t chan27FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan27ImpulseDuration : MB Offset: 6657
-    float chan27ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan27FreqLowMeasureLim : MB Offset: 6659
-    float chan27FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan27FreqHighMeasureLim : MB Offset: 6661
-    float chan27FreqHighMeasureLim;
-    // Parameter: Name Channel : chan27FreqName : MB Offset: 6663
-    uint8_t chan27FreqName[8];
-    // Parameter: Unit Name : chan27FreqUnit : MB Offset: 6667
-    uint8_t chan27FreqUnit[4];
-    // Parameter: Impulse Weight : chan27FreqImpWeight : MB Offset: 6669
-    float chan27FreqImpWeight;
-    // Parameter: Period : chan27FreqPeriod : MB Offset: 6671
-    float chan27FreqPeriod;
-    // Parameter: Dempher : chan27FreqDempher : MB Offset: 6673
-    uint16_t chan27FreqDempher;
-    // Parameter: Type Value : chan27FreqTypeValue : MB Offset: 6674
-    uint16_t chan27FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan28FreqSignalType : MB Offset: 6675
-    uint16_t chan28FreqSignalType;
-    // Parameter: Additional parameter : chan28FreqAdditionalParameter : MB Offset: 6676
-    uint8_t chan28FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan28ImpulseDuration : MB Offset: 6682
-    float chan28ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan28FreqLowMeasureLim : MB Offset: 6684
-    float chan28FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan28FreqHighMeasureLim : MB Offset: 6686
-    float chan28FreqHighMeasureLim;
-    // Parameter: Name Channel : chan28FreqName : MB Offset: 6688
-    uint8_t chan28FreqName[8];
-    // Parameter: Unit Name : chan28FreqUnit : MB Offset: 6692
-    uint8_t chan28FreqUnit[4];
-    // Parameter: Impulse Weight : chan28ImpWeight : MB Offset: 6694
-    float chan28ImpWeight;
-    // Parameter: Period : chan28FreqPeriod : MB Offset: 6696
-    float chan28FreqPeriod;
-    // Parameter: Dempher : chan28FreqDempher : MB Offset: 6698
-    uint16_t chan28FreqDempher;
-    // Parameter: Type Value : chan28FreqTypeValue : MB Offset: 6699
-    uint16_t chan28FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan29FreqSignalType : MB Offset: 6700
-    uint16_t chan29FreqSignalType;
-    // Parameter: Additional parameter : chan29FreqalAdditionalParameter : MB Offset: 6701
-    uint8_t chan29FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan29ImpulseDuration : MB Offset: 6707
-    float chan29ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan29FreqLowMeasureLim : MB Offset: 6709
-    float chan29FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan29FreqHighMeasureLim : MB Offset: 6711
-    float chan29FreqHighMeasureLim;
-    // Parameter: Name Channel : chan29FreqName : MB Offset: 6713
-    uint8_t chan29FreqName[8];
-    // Parameter: Unit Name : chan29FreqUnit : MB Offset: 6717
-    uint8_t chan29FreqUnit[4];
-    // Parameter: Impulse Weight : chan29FreqImpWeight : MB Offset: 6719
-    float chan29FreqImpWeight;
-    // Parameter: Period : chan29FreqPeriod : MB Offset: 6721
-    float chan29FreqPeriod;
-    // Parameter: Dempher : chan29FreqDempher : MB Offset: 6723
-    uint16_t chan29FreqDempher;
-    // Parameter: Type Value : chan29FreqTypeValue : MB Offset: 6724
-    uint16_t chan29FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan30FreqSignalType : MB Offset: 6725
-    uint16_t chan30FreqSignalType;
-    // Parameter: Additional parameter : chan30FreqAdditionalParameter : MB Offset: 6726
-    uint8_t chan30FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan30ImpulseDuration : MB Offset: 6732
-    float chan30ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan30FreqLowMeasureLim : MB Offset: 6734
-    float chan30FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan30FreqHighMeasureLim : MB Offset: 6736
-    float chan30FreqHighMeasureLim;
-    // Parameter: Name Channel : chan30FreqName : MB Offset: 6738
-    uint8_t chan30FreqName[8];
-    // Parameter: Unit Name : chan30FreqUnit : MB Offset: 6742
-    uint8_t chan30FreqUnit[4];
-    // Parameter: Impulse Weight : chan30ImpWeight : MB Offset: 6744
-    float chan30ImpWeight;
-    // Parameter: Period : chan30FreqPeriod : MB Offset: 6746
-    float chan30FreqPeriod;
-    // Parameter: Dempher : chan30FreqDempher : MB Offset: 6748
-    uint16_t chan30FreqDempher;
-    // Parameter: Type Value : chan30FreqTypeValue : MB Offset: 6749
-    uint16_t chan30FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan31FreqSignalType : MB Offset: 6750
-    uint16_t chan31FreqSignalType;
-    // Parameter: Additional parameter : chan31FreqalAdditionalParameter : MB Offset: 6751
-    uint8_t chan31FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan31ImpulseDuration : MB Offset: 6757
-    float chan31ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan31FreqLowMeasureLim : MB Offset: 6759
-    float chan31FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan31FreqHighMeasureLim : MB Offset: 6761
-    float chan31FreqHighMeasureLim;
-    // Parameter: Name Channel : chan31FreqName : MB Offset: 6763
-    uint8_t chan31FreqName[8];
-    // Parameter: Unit Name : chan31FreqUnit : MB Offset: 6767
-    uint8_t chan31FreqUnit[4];
-    // Parameter: Impulse Weight : chan31FreqImpWeight : MB Offset: 6769
-    float chan31FreqImpWeight;
-    // Parameter: Period : chan31FreqPeriod : MB Offset: 6771
-    float chan31FreqPeriod;
-    // Parameter: Dempher : chan31FreqDempher : MB Offset: 6773
-    uint16_t chan31FreqDempher;
-    // Parameter: Type Value : chan31FreqTypeValue : MB Offset: 6774
-    uint16_t chan31FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan32FreqSignalType : MB Offset: 6775
-    uint16_t chan32FreqSignalType;
-    // Parameter: Additional parameter : chan32FreqAdditionalParameter : MB Offset: 6776
-    uint8_t chan32FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan32ImpulseDuration : MB Offset: 6782
-    float chan32ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan32FreqLowMeasureLim : MB Offset: 6784
-    float chan32FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan32FreqHighMeasureLim : MB Offset: 6786
-    float chan32FreqHighMeasureLim;
-    // Parameter: Name Channel : chan32FreqName : MB Offset: 6788
-    uint8_t chan32FreqName[8];
-    // Parameter: Unit Name : chan32FreqUnit : MB Offset: 6792
-    uint8_t chan32FreqUnit[4];
-    // Parameter: Impulse Weight : chan32ImpWeight : MB Offset: 6794
-    float chan32ImpWeight;
-    // Parameter: Period : chan32FreqPeriod : MB Offset: 6796
-    float chan32FreqPeriod;
-    // Parameter: Dempher : chan32FreqDempher : MB Offset: 6798
-    uint16_t chan32FreqDempher;
-    // Parameter: Type Value : chan32FreqTypeValue : MB Offset: 6799
-    uint16_t chan32FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan33FreqSignalType : MB Offset: 6800
-    uint16_t chan33FreqSignalType;
-    // Parameter: Additional parameter : chan33FreqalAdditionalParameter : MB Offset: 6801
-    uint8_t chan33FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan33ImpulseDuration : MB Offset: 6807
-    float chan33ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan33FreqLowMeasureLim : MB Offset: 6809
-    float chan33FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan33FreqHighMeasureLim : MB Offset: 6811
-    float chan33FreqHighMeasureLim;
-    // Parameter: Name Channel : chan33FreqName : MB Offset: 6813
-    uint8_t chan33FreqName[8];
-    // Parameter: Unit Name : chan33FreqUnit : MB Offset: 6817
-    uint8_t chan33FreqUnit[4];
-    // Parameter: Impulse Weight : chan33FreqImpWeight : MB Offset: 6819
-    float chan33FreqImpWeight;
-    // Parameter: Period : chan33FreqPeriod : MB Offset: 6821
-    float chan33FreqPeriod;
-    // Parameter: Dempher : chan33FreqDempher : MB Offset: 6823
-    uint16_t chan33FreqDempher;
-    // Parameter: Type Value : chan33FreqTypeValue : MB Offset: 6824
-    uint16_t chan33FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan34FreqSignalType : MB Offset: 6825
-    uint16_t chan34FreqSignalType;
-    // Parameter: Additional parameter : chan34FreqAdditionalParameter : MB Offset: 6826
-    uint8_t chan34FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan34ImpulseDuration : MB Offset: 6832
-    float chan34ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan34FreqLowMeasureLim : MB Offset: 6834
-    float chan34FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan34FreqHighMeasureLim : MB Offset: 6836
-    float chan34FreqHighMeasureLim;
-    // Parameter: Name Channel : chan34FreqName : MB Offset: 6838
-    uint8_t chan34FreqName[8];
-    // Parameter: Unit Name : chan34FreqUnit : MB Offset: 6842
-    uint8_t chan34FreqUnit[4];
-    // Parameter: Impulse Weight : chan34ImpWeight : MB Offset: 6844
-    float chan34ImpWeight;
-    // Parameter: Period : chan34FreqPeriod : MB Offset: 6846
-    float chan34FreqPeriod;
-    // Parameter: Dempher : chan34FreqDempher : MB Offset: 6848
-    uint16_t chan34FreqDempher;
-    // Parameter: Type Value : chan34FreqTypeValue : MB Offset: 6849
-    uint16_t chan34FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan35FreqSignalType : MB Offset: 6850
-    uint16_t chan35FreqSignalType;
-    // Parameter: Additional parameter : chan35FreqalAdditionalParameter : MB Offset: 6851
-    uint8_t chan35FreqalAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan35ImpulseDuration : MB Offset: 6857
-    float chan35ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan35FreqLowMeasureLim : MB Offset: 6859
-    float chan35FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan35FreqHighMeasureLim : MB Offset: 6861
-    float chan35FreqHighMeasureLim;
-    // Parameter: Name Channel : chan35FreqName : MB Offset: 6863
-    uint8_t chan35FreqName[8];
-    // Parameter: Unit Name : chan35FreqUnit : MB Offset: 6867
-    uint8_t chan35FreqUnit[4];
-    // Parameter: Impulse Weight : chan35FreqImpWeight : MB Offset: 6869
-    float chan35FreqImpWeight;
-    // Parameter: Period : chan35FreqPeriod : MB Offset: 6871
-    float chan35FreqPeriod;
-    // Parameter: Dempher : chan35FreqDempher : MB Offset: 6873
-    uint16_t chan35FreqDempher;
-    // Parameter: Type Value : chan35FreqTypeValue : MB Offset: 6874
-    uint16_t chan35FreqTypeValue;
-    // Parameter: Signal Type Frequency : chan36FreqSignalType : MB Offset: 6875
-    uint16_t chan36FreqSignalType;
-    // Parameter: Additional parameter : chan36FreqAdditionalParameter : MB Offset: 6876
-    uint8_t chan36FreqAdditionalParameter[12];
-    // Parameter: Impulse Duration : chan36ImpulseDuration : MB Offset: 6882
-    float chan36ImpulseDuration;
-    // Parameter: Measure signal low limit  : chan36FreqLowMeasureLim : MB Offset: 6884
-    float chan36FreqLowMeasureLim;
-    // Parameter: Measure signal high limit  : chan36FreqHighMeasureLim : MB Offset: 6886
-    float chan36FreqHighMeasureLim;
-    // Parameter: Name Channel : chan36FreqName : MB Offset: 6888
-    uint8_t chan36FreqName[8];
-    // Parameter: Unit Name : chan36FreqUnit : MB Offset: 6892
-    uint8_t chan36FreqUnit[4];
-    // Parameter: Impulse Weight : chan36ImpWeight : MB Offset: 6894
-    float chan36ImpWeight;
-    // Parameter: Period : chan36FreqPeriod : MB Offset: 6896
-    float chan36FreqPeriod;
-    // Parameter: Dempher : chan36FreqDempher : MB Offset: 6898
-    uint16_t chan36FreqDempher;
-    // Parameter: Type Value : chan36FreqTypeValue : MB Offset: 6899
-    uint16_t chan36FreqTypeValue;
+    // Parameter: Signal Type Frequency : freq1SignalType : MB Offset: 6000
+    uint16_t freq1SignalType;
+    // Parameter: Additional parameter : freq1AdditionalParameter : MB Offset: 6001
+    uint8_t freq1AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq1ImpulseDuration : MB Offset: 6007
+    float freq1ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq1LowMeasureLim : MB Offset: 6009
+    float freq1LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq1HighMeasureLim : MB Offset: 6011
+    float freq1HighMeasureLim;
+    // Parameter: Name Channel : freq1Name : MB Offset: 6013
+    uint8_t freq1Name[8];
+    // Parameter: Unit Name : freq1Unit : MB Offset: 6017
+    uint8_t freq1Unit[4];
+    // Parameter: Impulse Weight : freq1ImpWeight : MB Offset: 6019
+    float freq1ImpWeight;
+    // Parameter: Period : freq1Period : MB Offset: 6021
+    float freq1Period;
+    // Parameter: Dempher : freq1Dempher : MB Offset: 6023
+    uint16_t freq1Dempher;
+    // Parameter: Type Value : freq1TypeValue : MB Offset: 6024
+    uint16_t freq1TypeValue;
+    // Parameter: Signal Type Frequency : freq2SignalType : MB Offset: 6025
+    uint16_t freq2SignalType;
+    // Parameter: Additional parameter : freq2AdditionalParameter : MB Offset: 6026
+    uint8_t freq2AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq2ImpulseDuration : MB Offset: 6032
+    float freq2ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq2LowMeasureLim : MB Offset: 6034
+    float freq2LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq2HighMeasureLim : MB Offset: 6036
+    float freq2HighMeasureLim;
+    // Parameter: Name Channel : freq2Name : MB Offset: 6038
+    uint8_t freq2Name[8];
+    // Parameter: Unit Name : freq2Unit : MB Offset: 6042
+    uint8_t freq2Unit[4];
+    // Parameter: Impulse Weight : freq2ImpWeight : MB Offset: 6044
+    float freq2ImpWeight;
+    // Parameter: Period : freq2Period : MB Offset: 6046
+    float freq2Period;
+    // Parameter: Dempher : freq2Dempher : MB Offset: 6048
+    uint16_t freq2Dempher;
+    // Parameter: Type Value : freq2TypeValue : MB Offset: 6049
+    uint16_t freq2TypeValue;
+    // Parameter: Signal Type Frequency : freq3SignalType : MB Offset: 6050
+    uint16_t freq3SignalType;
+    // Parameter: Additional parameter : freq3alAdditionalParameter : MB Offset: 6051
+    uint8_t freq3alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq3ImpulseDuration : MB Offset: 6057
+    float freq3ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq3LowMeasureLim : MB Offset: 6059
+    float freq3LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq3HighMeasureLim : MB Offset: 6061
+    float freq3HighMeasureLim;
+    // Parameter: Name Channel : freq3Name : MB Offset: 6063
+    uint8_t freq3Name[8];
+    // Parameter: Unit Name : freq3Unit : MB Offset: 6067
+    uint8_t freq3Unit[4];
+    // Parameter: Impulse Weight : freq3ImpWeight : MB Offset: 6069
+    float freq3ImpWeight;
+    // Parameter: Period : freq3Period : MB Offset: 6071
+    float freq3Period;
+    // Parameter: Dempher : freq3Dempher : MB Offset: 6073
+    uint16_t freq3Dempher;
+    // Parameter: Type Value : freq3TypeValue : MB Offset: 6074
+    uint16_t freq3TypeValue;
+    // Parameter: Signal Type Frequency : freq4SignalType : MB Offset: 6075
+    uint16_t freq4SignalType;
+    // Parameter: Additional parameter : freq4AdditionalParameter : MB Offset: 6076
+    uint8_t freq4AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq4ImpulseDuration : MB Offset: 6082
+    float freq4ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq4LowMeasureLim : MB Offset: 6084
+    float freq4LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq4HighMeasureLim : MB Offset: 6086
+    float freq4HighMeasureLim;
+    // Parameter: Name Channel : freq4Name : MB Offset: 6088
+    uint8_t freq4Name[8];
+    // Parameter: Unit Name : freq4Unit : MB Offset: 6092
+    uint8_t freq4Unit[4];
+    // Parameter: Impulse Weight : freq4ImpWeight : MB Offset: 6094
+    float freq4ImpWeight;
+    // Parameter: Period : freq4Period : MB Offset: 6096
+    float freq4Period;
+    // Parameter: Dempher : freq4Dempher : MB Offset: 6098
+    uint16_t freq4Dempher;
+    // Parameter: Type Value : freq4TypeValue : MB Offset: 6099
+    uint16_t freq4TypeValue;
+    // Parameter: Signal Type Frequency : freq5SignalType : MB Offset: 6100
+    uint16_t freq5SignalType;
+    // Parameter: Additional parameter : freq5alAdditionalParameter : MB Offset: 6101
+    uint8_t freq5alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq5ImpulseDuration : MB Offset: 6107
+    float freq5ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq5LowMeasureLim : MB Offset: 6109
+    float freq5LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq5HighMeasureLim : MB Offset: 6111
+    float freq5HighMeasureLim;
+    // Parameter: Name Channel : freq5Name : MB Offset: 6113
+    uint8_t freq5Name[8];
+    // Parameter: Unit Name : freq5Unit : MB Offset: 6117
+    uint8_t freq5Unit[4];
+    // Parameter: Impulse Weight : freq5ImpWeight : MB Offset: 6119
+    float freq5ImpWeight;
+    // Parameter: Period : freq5Period : MB Offset: 6121
+    float freq5Period;
+    // Parameter: Dempher : freq5Dempher : MB Offset: 6123
+    uint16_t freq5Dempher;
+    // Parameter: Type Value : freq5TypeValue : MB Offset: 6124
+    uint16_t freq5TypeValue;
+    // Parameter: Signal Type Frequency : freq6SignalType : MB Offset: 6125
+    uint16_t freq6SignalType;
+    // Parameter: Additional parameter : freq6AdditionalParameter : MB Offset: 6126
+    uint8_t freq6AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq6ImpulseDuration : MB Offset: 6132
+    float freq6ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq6LowMeasureLim : MB Offset: 6134
+    float freq6LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq6HighMeasureLim : MB Offset: 6136
+    float freq6HighMeasureLim;
+    // Parameter: Name Channel : freq6Name : MB Offset: 6138
+    uint8_t freq6Name[8];
+    // Parameter: Unit Name : freq6Unit : MB Offset: 6142
+    uint8_t freq6Unit[4];
+    // Parameter: Impulse Weight : freq6ImpWeight : MB Offset: 6144
+    float freq6ImpWeight;
+    // Parameter: Period : freq6Period : MB Offset: 6146
+    float freq6Period;
+    // Parameter: Dempher : freq6Dempher : MB Offset: 6148
+    uint16_t freq6Dempher;
+    // Parameter: Type Value : freq6TypeValue : MB Offset: 6149
+    uint16_t freq6TypeValue;
+    // Parameter: Signal Type Frequency : freq7SignalType : MB Offset: 6150
+    uint16_t freq7SignalType;
+    // Parameter: Additional parameter : freq7alAdditionalParameter : MB Offset: 6151
+    uint8_t freq7alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq7ImpulseDuration : MB Offset: 6157
+    float freq7ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq7LowMeasureLim : MB Offset: 6159
+    float freq7LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq7HighMeasureLim : MB Offset: 6161
+    float freq7HighMeasureLim;
+    // Parameter: Name Channel : freq7Name : MB Offset: 6163
+    uint8_t freq7Name[8];
+    // Parameter: Unit Name : freq7Unit : MB Offset: 6167
+    uint8_t freq7Unit[4];
+    // Parameter: Impulse Weight : freq7ImpWeight : MB Offset: 6169
+    float freq7ImpWeight;
+    // Parameter: Period : freq7Period : MB Offset: 6171
+    float freq7Period;
+    // Parameter: Dempher : freq7Dempher : MB Offset: 6173
+    uint16_t freq7Dempher;
+    // Parameter: Type Value : freq7TypeValue : MB Offset: 6174
+    uint16_t freq7TypeValue;
+    // Parameter: Signal Type Frequency : freq8SignalType : MB Offset: 6175
+    uint16_t freq8SignalType;
+    // Parameter: Additional parameter : freq8AdditionalParameter : MB Offset: 6176
+    uint8_t freq8AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq8ImpulseDuration : MB Offset: 6182
+    float freq8ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq8LowMeasureLim : MB Offset: 6184
+    float freq8LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq8HighMeasureLim : MB Offset: 6186
+    float freq8HighMeasureLim;
+    // Parameter: Name Channel : freq8Name : MB Offset: 6188
+    uint8_t freq8Name[8];
+    // Parameter: Unit Name : freq8Unit : MB Offset: 6192
+    uint8_t freq8Unit[4];
+    // Parameter: Impulse Weight : freq8ImpWeight : MB Offset: 6194
+    float freq8ImpWeight;
+    // Parameter: Period : freq8Period : MB Offset: 6196
+    float freq8Period;
+    // Parameter: Dempher : freq8Dempher : MB Offset: 6198
+    uint16_t freq8Dempher;
+    // Parameter: Type Value : freq8TypeValue : MB Offset: 6199
+    uint16_t freq8TypeValue;
+    // Parameter: Signal Type Frequency : freq9SignalType : MB Offset: 6200
+    uint16_t freq9SignalType;
+    // Parameter: Additional parameter : freq9alAdditionalParameter : MB Offset: 6201
+    uint8_t freq9alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq9ImpulseDuration : MB Offset: 6207
+    float freq9ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq9LowMeasureLim : MB Offset: 6209
+    float freq9LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq9HighMeasureLim : MB Offset: 6211
+    float freq9HighMeasureLim;
+    // Parameter: Name Channel : freq9Name : MB Offset: 6213
+    uint8_t freq9Name[8];
+    // Parameter: Unit Name : freq9Unit : MB Offset: 6217
+    uint8_t freq9Unit[4];
+    // Parameter: Impulse Weight : freq9ImpWeight : MB Offset: 6219
+    float freq9ImpWeight;
+    // Parameter: Period : freq9Period : MB Offset: 6221
+    float freq9Period;
+    // Parameter: Dempher : freq9Dempher : MB Offset: 6223
+    uint16_t freq9Dempher;
+    // Parameter: Type Value : freq9TypeValue : MB Offset: 6224
+    uint16_t freq9TypeValue;
+    // Parameter: Signal Type Frequency : freq10SignalType : MB Offset: 6225
+    uint16_t freq10SignalType;
+    // Parameter: Additional parameter : freq10AdditionalParameter : MB Offset: 6226
+    uint8_t freq10AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq10ImpulseDuration : MB Offset: 6232
+    float freq10ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq10LowMeasureLim : MB Offset: 6234
+    float freq10LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq10HighMeasureLim : MB Offset: 6236
+    float freq10HighMeasureLim;
+    // Parameter: Name Channel : freq10Name : MB Offset: 6238
+    uint8_t freq10Name[8];
+    // Parameter: Unit Name : freq10Unit : MB Offset: 6242
+    uint8_t freq10Unit[4];
+    // Parameter: Impulse Weight : freq10ImpWeight : MB Offset: 6244
+    float freq10ImpWeight;
+    // Parameter: Period : freq10Period : MB Offset: 6246
+    float freq10Period;
+    // Parameter: Dempher : freq10Dempher : MB Offset: 6248
+    uint16_t freq10Dempher;
+    // Parameter: Type Value : freq10TypeValue : MB Offset: 6249
+    uint16_t freq10TypeValue;
+    // Parameter: Signal Type Frequency : freq11SignalType : MB Offset: 6250
+    uint16_t freq11SignalType;
+    // Parameter: Additional parameter : freq11alAdditionalParameter : MB Offset: 6251
+    uint8_t freq11alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq11ImpulseDuration : MB Offset: 6257
+    float freq11ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq11LowMeasureLim : MB Offset: 6259
+    float freq11LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq11HighMeasureLim : MB Offset: 6261
+    float freq11HighMeasureLim;
+    // Parameter: Name Channel : freq11Name : MB Offset: 6263
+    uint8_t freq11Name[8];
+    // Parameter: Unit Name : freq11Unit : MB Offset: 6267
+    uint8_t freq11Unit[4];
+    // Parameter: Impulse Weight : freq11ImpWeight : MB Offset: 6269
+    float freq11ImpWeight;
+    // Parameter: Period : freq11Period : MB Offset: 6271
+    float freq11Period;
+    // Parameter: Dempher : freq11Dempher : MB Offset: 6273
+    uint16_t freq11Dempher;
+    // Parameter: Type Value : freq11TypeValue : MB Offset: 6274
+    uint16_t freq11TypeValue;
+    // Parameter: Signal Type Frequency : freq12SignalType : MB Offset: 6275
+    uint16_t freq12SignalType;
+    // Parameter: Additional parameter : freq12AdditionalParameter : MB Offset: 6276
+    uint8_t freq12AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq12ImpulseDuration : MB Offset: 6282
+    float freq12ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq12LowMeasureLim : MB Offset: 6284
+    float freq12LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq12HighMeasureLim : MB Offset: 6286
+    float freq12HighMeasureLim;
+    // Parameter: Name Channel : freq12Name : MB Offset: 6288
+    uint8_t freq12Name[8];
+    // Parameter: Unit Name : freq12Unit : MB Offset: 6292
+    uint8_t freq12Unit[4];
+    // Parameter: Impulse Weight : freq12ImpWeight : MB Offset: 6294
+    float freq12ImpWeight;
+    // Parameter: Period : freq12Period : MB Offset: 6296
+    float freq12Period;
+    // Parameter: Dempher : freq12Dempher : MB Offset: 6298
+    uint16_t freq12Dempher;
+    // Parameter: Type Value : freq12TypeValue : MB Offset: 6299
+    uint16_t freq12TypeValue;
+    // Parameter: Signal Type Frequency : freq13SignalType : MB Offset: 6300
+    uint16_t freq13SignalType;
+    // Parameter: Additional parameter : freq13alAdditionalParameter : MB Offset: 6301
+    uint8_t freq13alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq13ImpulseDuration : MB Offset: 6307
+    float freq13ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq13LowMeasureLim : MB Offset: 6309
+    float freq13LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq13HighMeasureLim : MB Offset: 6311
+    float freq13HighMeasureLim;
+    // Parameter: Name Channel : freq13Name : MB Offset: 6313
+    uint8_t freq13Name[8];
+    // Parameter: Unit Name : freq13Unit : MB Offset: 6317
+    uint8_t freq13Unit[4];
+    // Parameter: Impulse Weight : freq13ImpWeight : MB Offset: 6319
+    float freq13ImpWeight;
+    // Parameter: Period : freq13Period : MB Offset: 6321
+    float freq13Period;
+    // Parameter: Dempher : freq13Dempher : MB Offset: 6323
+    uint16_t freq13Dempher;
+    // Parameter: Type Value : freq13TypeValue : MB Offset: 6324
+    uint16_t freq13TypeValue;
+    // Parameter: Signal Type Frequency : freq14SignalType : MB Offset: 6325
+    uint16_t freq14SignalType;
+    // Parameter: Additional parameter : freq14AdditionalParameter : MB Offset: 6326
+    uint8_t freq14AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq14ImpulseDuration : MB Offset: 6332
+    float freq14ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq14LowMeasureLim : MB Offset: 6334
+    float freq14LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq14HighMeasureLim : MB Offset: 6336
+    float freq14HighMeasureLim;
+    // Parameter: Name Channel : freq14Name : MB Offset: 6338
+    uint8_t freq14Name[8];
+    // Parameter: Unit Name : freq14Unit : MB Offset: 6342
+    uint8_t freq14Unit[4];
+    // Parameter: Impulse Weight : freq14ImpWeight : MB Offset: 6344
+    float freq14ImpWeight;
+    // Parameter: Period : freq14Period : MB Offset: 6346
+    float freq14Period;
+    // Parameter: Dempher : freq14Dempher : MB Offset: 6348
+    uint16_t freq14Dempher;
+    // Parameter: Type Value : freq14TypeValue : MB Offset: 6349
+    uint16_t freq14TypeValue;
+    // Parameter: Signal Type Frequency : freq15SignalType : MB Offset: 6350
+    uint16_t freq15SignalType;
+    // Parameter: Additional parameter : freq15alAdditionalParameter : MB Offset: 6351
+    uint8_t freq15alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq15ImpulseDuration : MB Offset: 6357
+    float freq15ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq15LowMeasureLim : MB Offset: 6359
+    float freq15LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq15HighMeasureLim : MB Offset: 6361
+    float freq15HighMeasureLim;
+    // Parameter: Name Channel : freq15Name : MB Offset: 6363
+    uint8_t freq15Name[8];
+    // Parameter: Unit Name : freq15Unit : MB Offset: 6367
+    uint8_t freq15Unit[4];
+    // Parameter: Impulse Weight : freq15ImpWeight : MB Offset: 6369
+    float freq15ImpWeight;
+    // Parameter: Period : freq15Period : MB Offset: 6371
+    float freq15Period;
+    // Parameter: Dempher : freq15Dempher : MB Offset: 6373
+    uint16_t freq15Dempher;
+    // Parameter: Type Value : freq15TypeValue : MB Offset: 6374
+    uint16_t freq15TypeValue;
+    // Parameter: Signal Type Frequency : freq16SignalType : MB Offset: 6375
+    uint16_t freq16SignalType;
+    // Parameter: Additional parameter : freq16AdditionalParameter : MB Offset: 6376
+    uint8_t freq16AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq16ImpulseDuration : MB Offset: 6382
+    float freq16ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq16LowMeasureLim : MB Offset: 6384
+    float freq16LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq16HighMeasureLim : MB Offset: 6386
+    float freq16HighMeasureLim;
+    // Parameter: Name Channel : freq16Name : MB Offset: 6388
+    uint8_t freq16Name[8];
+    // Parameter: Unit Name : freq16Unit : MB Offset: 6392
+    uint8_t freq16Unit[4];
+    // Parameter: Impulse Weight : freq16ImpWeight : MB Offset: 6394
+    float freq16ImpWeight;
+    // Parameter: Period : freq16Period : MB Offset: 6396
+    float freq16Period;
+    // Parameter: Dempher : freq16Dempher : MB Offset: 6398
+    uint16_t freq16Dempher;
+    // Parameter: Type Value : freq16TypeValue : MB Offset: 6399
+    uint16_t freq16TypeValue;
+    // Parameter: Signal Type Frequency : freq17SignalType : MB Offset: 6400
+    uint16_t freq17SignalType;
+    // Parameter: Additional parameter : freq17alAdditionalParameter : MB Offset: 6401
+    uint8_t freq17alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq17ImpulseDuration : MB Offset: 6407
+    float freq17ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq17LowMeasureLim : MB Offset: 6409
+    float freq17LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq17HighMeasureLim : MB Offset: 6411
+    float freq17HighMeasureLim;
+    // Parameter: Name Channel : freq17Name : MB Offset: 6413
+    uint8_t freq17Name[8];
+    // Parameter: Unit Name : freq17Unit : MB Offset: 6417
+    uint8_t freq17Unit[4];
+    // Parameter: Impulse Weight : freq17ImpWeight : MB Offset: 6419
+    float freq17ImpWeight;
+    // Parameter: Period : freq17Period : MB Offset: 6421
+    float freq17Period;
+    // Parameter: Dempher : freq17Dempher : MB Offset: 6423
+    uint16_t freq17Dempher;
+    // Parameter: Type Value : freq17TypeValue : MB Offset: 6424
+    uint16_t freq17TypeValue;
+    // Parameter: Signal Type Frequency : freq18SignalType : MB Offset: 6425
+    uint16_t freq18SignalType;
+    // Parameter: Additional parameter : freq18AdditionalParameter : MB Offset: 6426
+    uint8_t freq18AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq18ImpulseDuration : MB Offset: 6432
+    float freq18ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq18LowMeasureLim : MB Offset: 6434
+    float freq18LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq18HighMeasureLim : MB Offset: 6436
+    float freq18HighMeasureLim;
+    // Parameter: Name Channel : freq18Name : MB Offset: 6438
+    uint8_t freq18Name[8];
+    // Parameter: Unit Name : freq18Unit : MB Offset: 6442
+    uint8_t freq18Unit[4];
+    // Parameter: Impulse Weight : freq18ImpWeight : MB Offset: 6444
+    float freq18ImpWeight;
+    // Parameter: Period : freq18Period : MB Offset: 6446
+    float freq18Period;
+    // Parameter: Dempher : freq18Dempher : MB Offset: 6448
+    uint16_t freq18Dempher;
+    // Parameter: Type Value : freq18TypeValue : MB Offset: 6449
+    uint16_t freq18TypeValue;
+    // Parameter: Signal Type Frequency : freq19SignalType : MB Offset: 6450
+    uint16_t freq19SignalType;
+    // Parameter: Additional parameter : freq19alAdditionalParameter : MB Offset: 6451
+    uint8_t freq19alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq19ImpulseDuration : MB Offset: 6457
+    float freq19ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq19LowMeasureLim : MB Offset: 6459
+    float freq19LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq19HighMeasureLim : MB Offset: 6461
+    float freq19HighMeasureLim;
+    // Parameter: Name Channel : freq19Name : MB Offset: 6463
+    uint8_t freq19Name[8];
+    // Parameter: Unit Name : freq19Unit : MB Offset: 6467
+    uint8_t freq19Unit[4];
+    // Parameter: Impulse Weight : freq19ImpWeight : MB Offset: 6469
+    float freq19ImpWeight;
+    // Parameter: Period : freq19Period : MB Offset: 6471
+    float freq19Period;
+    // Parameter: Dempher : freq19Dempher : MB Offset: 6473
+    uint16_t freq19Dempher;
+    // Parameter: Type Value : freq19TypeValue : MB Offset: 6474
+    uint16_t freq19TypeValue;
+    // Parameter: Signal Type Frequency : freq20SignalType : MB Offset: 6475
+    uint16_t freq20SignalType;
+    // Parameter: Additional parameter : freq20AdditionalParameter : MB Offset: 6476
+    uint8_t freq20AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq20ImpulseDuration : MB Offset: 6482
+    float freq20ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq20LowMeasureLim : MB Offset: 6484
+    float freq20LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq20HighMeasureLim : MB Offset: 6486
+    float freq20HighMeasureLim;
+    // Parameter: Name Channel : freq20Name : MB Offset: 6488
+    uint8_t freq20Name[8];
+    // Parameter: Unit Name : freq20Unit : MB Offset: 6492
+    uint8_t freq20Unit[4];
+    // Parameter: Impulse Weight : freq20ImpWeight : MB Offset: 6494
+    float freq20ImpWeight;
+    // Parameter: Period : freq20Period : MB Offset: 6496
+    float freq20Period;
+    // Parameter: Dempher : freq20Dempher : MB Offset: 6498
+    uint16_t freq20Dempher;
+    // Parameter: Type Value : freq20TypeValue : MB Offset: 6499
+    uint16_t freq20TypeValue;
+    // Parameter: Signal Type Frequency : freq21SignalType : MB Offset: 6500
+    uint16_t freq21SignalType;
+    // Parameter: Additional parameter : freq21alAdditionalParameter : MB Offset: 6501
+    uint8_t freq21alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq21ImpulseDuration : MB Offset: 6507
+    float freq21ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq21LowMeasureLim : MB Offset: 6509
+    float freq21LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq21HighMeasureLim : MB Offset: 6511
+    float freq21HighMeasureLim;
+    // Parameter: Name Channel : freq21Name : MB Offset: 6513
+    uint8_t freq21Name[8];
+    // Parameter: Unit Name : freq21Unit : MB Offset: 6517
+    uint8_t freq21Unit[4];
+    // Parameter: Impulse Weight : freq21ImpWeight : MB Offset: 6519
+    float freq21ImpWeight;
+    // Parameter: Period : freq21Period : MB Offset: 6521
+    float freq21Period;
+    // Parameter: Dempher : freq21Dempher : MB Offset: 6523
+    uint16_t freq21Dempher;
+    // Parameter: Type Value : freq21TypeValue : MB Offset: 6524
+    uint16_t freq21TypeValue;
+    // Parameter: Signal Type Frequency : freq22SignalType : MB Offset: 6525
+    uint16_t freq22SignalType;
+    // Parameter: Additional parameter : freq22AdditionalParameter : MB Offset: 6526
+    uint8_t freq22AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq22ImpulseDuration : MB Offset: 6532
+    float freq22ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq22LowMeasureLim : MB Offset: 6534
+    float freq22LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq22HighMeasureLim : MB Offset: 6536
+    float freq22HighMeasureLim;
+    // Parameter: Name Channel : freq22Name : MB Offset: 6538
+    uint8_t freq22Name[8];
+    // Parameter: Unit Name : freq22Unit : MB Offset: 6542
+    uint8_t freq22Unit[4];
+    // Parameter: Impulse Weight : freq22ImpWeight : MB Offset: 6544
+    float freq22ImpWeight;
+    // Parameter: Period : freq22Period : MB Offset: 6546
+    float freq22Period;
+    // Parameter: Dempher : freq22Dempher : MB Offset: 6548
+    uint16_t freq22Dempher;
+    // Parameter: Type Value : freq22TypeValue : MB Offset: 6549
+    uint16_t freq22TypeValue;
+    // Parameter: Signal Type Frequency : freq23SignalType : MB Offset: 6550
+    uint16_t freq23SignalType;
+    // Parameter: Additional parameter : freq23alAdditionalParameter : MB Offset: 6551
+    uint8_t freq23alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq23ImpulseDuration : MB Offset: 6557
+    float freq23ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq23LowMeasureLim : MB Offset: 6559
+    float freq23LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq23HighMeasureLim : MB Offset: 6561
+    float freq23HighMeasureLim;
+    // Parameter: Name Channel : freq23Name : MB Offset: 6563
+    uint8_t freq23Name[8];
+    // Parameter: Unit Name : freq23Unit : MB Offset: 6567
+    uint8_t freq23Unit[4];
+    // Parameter: Impulse Weight : freq23ImpWeight : MB Offset: 6569
+    float freq23ImpWeight;
+    // Parameter: Period : freq23Period : MB Offset: 6571
+    float freq23Period;
+    // Parameter: Dempher : freq23Dempher : MB Offset: 6573
+    uint16_t freq23Dempher;
+    // Parameter: Type Value : freq23TypeValue : MB Offset: 6574
+    uint16_t freq23TypeValue;
+    // Parameter: Signal Type Frequency : freq24SignalType : MB Offset: 6575
+    uint16_t freq24SignalType;
+    // Parameter: Additional parameter : freq24AdditionalParameter : MB Offset: 6576
+    uint8_t freq24AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq24ImpulseDuration : MB Offset: 6582
+    float freq24ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq24LowMeasureLim : MB Offset: 6584
+    float freq24LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq24HighMeasureLim : MB Offset: 6586
+    float freq24HighMeasureLim;
+    // Parameter: Name Channel : freq24Name : MB Offset: 6588
+    uint8_t freq24Name[8];
+    // Parameter: Unit Name : freq24Unit : MB Offset: 6592
+    uint8_t freq24Unit[4];
+    // Parameter: Impulse Weight : freq24ImpWeight : MB Offset: 6594
+    float freq24ImpWeight;
+    // Parameter: Period : freq24Period : MB Offset: 6596
+    float freq24Period;
+    // Parameter: Dempher : freq24Dempher : MB Offset: 6598
+    uint16_t freq24Dempher;
+    // Parameter: Type Value : freq24TypeValue : MB Offset: 6599
+    uint16_t freq24TypeValue;
+    // Parameter: Signal Type Frequency : freq25SignalType : MB Offset: 6600
+    uint16_t freq25SignalType;
+    // Parameter: Additional parameter : freq25alAdditionalParameter : MB Offset: 6601
+    uint8_t freq25alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq25ImpulseDuration : MB Offset: 6607
+    float freq25ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq25LowMeasureLim : MB Offset: 6609
+    float freq25LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq25HighMeasureLim : MB Offset: 6611
+    float freq25HighMeasureLim;
+    // Parameter: Name Channel : freq25Name : MB Offset: 6613
+    uint8_t freq25Name[8];
+    // Parameter: Unit Name : freq25Unit : MB Offset: 6617
+    uint8_t freq25Unit[4];
+    // Parameter: Impulse Weight : freq25ImpWeight : MB Offset: 6619
+    float freq25ImpWeight;
+    // Parameter: Period : freq25Period : MB Offset: 6621
+    float freq25Period;
+    // Parameter: Dempher : freq25Dempher : MB Offset: 6623
+    uint16_t freq25Dempher;
+    // Parameter: Type Value : freq25TypeValue : MB Offset: 6624
+    uint16_t freq25TypeValue;
+    // Parameter: Signal Type Frequency : freq26SignalType : MB Offset: 6625
+    uint16_t freq26SignalType;
+    // Parameter: Additional parameter : freq26AdditionalParameter : MB Offset: 6626
+    uint8_t freq26AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq26ImpulseDuration : MB Offset: 6632
+    float freq26ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq26LowMeasureLim : MB Offset: 6634
+    float freq26LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq26HighMeasureLim : MB Offset: 6636
+    float freq26HighMeasureLim;
+    // Parameter: Name Channel : freq26Name : MB Offset: 6638
+    uint8_t freq26Name[8];
+    // Parameter: Unit Name : freq26Unit : MB Offset: 6642
+    uint8_t freq26Unit[4];
+    // Parameter: Impulse Weight : freq26ImpWeight : MB Offset: 6644
+    float freq26ImpWeight;
+    // Parameter: Period : freq26Period : MB Offset: 6646
+    float freq26Period;
+    // Parameter: Dempher : freq26Dempher : MB Offset: 6648
+    uint16_t freq26Dempher;
+    // Parameter: Type Value : freq26TypeValue : MB Offset: 6649
+    uint16_t freq26TypeValue;
+    // Parameter: Signal Type Frequency : freq27SignalType : MB Offset: 6650
+    uint16_t freq27SignalType;
+    // Parameter: Additional parameter : freq27alAdditionalParameter : MB Offset: 6651
+    uint8_t freq27alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq27ImpulseDuration : MB Offset: 6657
+    float freq27ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq27LowMeasureLim : MB Offset: 6659
+    float freq27LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq27HighMeasureLim : MB Offset: 6661
+    float freq27HighMeasureLim;
+    // Parameter: Name Channel : freq27Name : MB Offset: 6663
+    uint8_t freq27Name[8];
+    // Parameter: Unit Name : freq27Unit : MB Offset: 6667
+    uint8_t freq27Unit[4];
+    // Parameter: Impulse Weight : freq27ImpWeight : MB Offset: 6669
+    float freq27ImpWeight;
+    // Parameter: Period : freq27Period : MB Offset: 6671
+    float freq27Period;
+    // Parameter: Dempher : freq27Dempher : MB Offset: 6673
+    uint16_t freq27Dempher;
+    // Parameter: Type Value : freq27TypeValue : MB Offset: 6674
+    uint16_t freq27TypeValue;
+    // Parameter: Signal Type Frequency : freq28SignalType : MB Offset: 6675
+    uint16_t freq28SignalType;
+    // Parameter: Additional parameter : freq28AdditionalParameter : MB Offset: 6676
+    uint8_t freq28AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq28ImpulseDuration : MB Offset: 6682
+    float freq28ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq28LowMeasureLim : MB Offset: 6684
+    float freq28LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq28HighMeasureLim : MB Offset: 6686
+    float freq28HighMeasureLim;
+    // Parameter: Name Channel : freq28Name : MB Offset: 6688
+    uint8_t freq28Name[8];
+    // Parameter: Unit Name : freq28Unit : MB Offset: 6692
+    uint8_t freq28Unit[4];
+    // Parameter: Impulse Weight : freq28ImpWeight : MB Offset: 6694
+    float freq28ImpWeight;
+    // Parameter: Period : freq28Period : MB Offset: 6696
+    float freq28Period;
+    // Parameter: Dempher : freq28Dempher : MB Offset: 6698
+    uint16_t freq28Dempher;
+    // Parameter: Type Value : freq28TypeValue : MB Offset: 6699
+    uint16_t freq28TypeValue;
+    // Parameter: Signal Type Frequency : freq29SignalType : MB Offset: 6700
+    uint16_t freq29SignalType;
+    // Parameter: Additional parameter : freq29alAdditionalParameter : MB Offset: 6701
+    uint8_t freq29alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq29ImpulseDuration : MB Offset: 6707
+    float freq29ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq29LowMeasureLim : MB Offset: 6709
+    float freq29LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq29HighMeasureLim : MB Offset: 6711
+    float freq29HighMeasureLim;
+    // Parameter: Name Channel : freq29Name : MB Offset: 6713
+    uint8_t freq29Name[8];
+    // Parameter: Unit Name : freq29Unit : MB Offset: 6717
+    uint8_t freq29Unit[4];
+    // Parameter: Impulse Weight : freq29ImpWeight : MB Offset: 6719
+    float freq29ImpWeight;
+    // Parameter: Period : freq29Period : MB Offset: 6721
+    float freq29Period;
+    // Parameter: Dempher : freq29Dempher : MB Offset: 6723
+    uint16_t freq29Dempher;
+    // Parameter: Type Value : freq29TypeValue : MB Offset: 6724
+    uint16_t freq29TypeValue;
+    // Parameter: Signal Type Frequency : freq30SignalType : MB Offset: 6725
+    uint16_t freq30SignalType;
+    // Parameter: Additional parameter : freq30AdditionalParameter : MB Offset: 6726
+    uint8_t freq30AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq30ImpulseDuration : MB Offset: 6732
+    float freq30ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq30LowMeasureLim : MB Offset: 6734
+    float freq30LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq30HighMeasureLim : MB Offset: 6736
+    float freq30HighMeasureLim;
+    // Parameter: Name Channel : freq30Name : MB Offset: 6738
+    uint8_t freq30Name[8];
+    // Parameter: Unit Name : freq30Unit : MB Offset: 6742
+    uint8_t freq30Unit[4];
+    // Parameter: Impulse Weight : freq30ImpWeight : MB Offset: 6744
+    float freq30ImpWeight;
+    // Parameter: Period : freq30Period : MB Offset: 6746
+    float freq30Period;
+    // Parameter: Dempher : freq30Dempher : MB Offset: 6748
+    uint16_t freq30Dempher;
+    // Parameter: Type Value : freq30TypeValue : MB Offset: 6749
+    uint16_t freq30TypeValue;
+    // Parameter: Signal Type Frequency : freq31SignalType : MB Offset: 6750
+    uint16_t freq31SignalType;
+    // Parameter: Additional parameter : freq31alAdditionalParameter : MB Offset: 6751
+    uint8_t freq31alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq31ImpulseDuration : MB Offset: 6757
+    float freq31ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq31LowMeasureLim : MB Offset: 6759
+    float freq31LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq31HighMeasureLim : MB Offset: 6761
+    float freq31HighMeasureLim;
+    // Parameter: Name Channel : freq31Name : MB Offset: 6763
+    uint8_t freq31Name[8];
+    // Parameter: Unit Name : freq31Unit : MB Offset: 6767
+    uint8_t freq31Unit[4];
+    // Parameter: Impulse Weight : freq31ImpWeight : MB Offset: 6769
+    float freq31ImpWeight;
+    // Parameter: Period : freq31Period : MB Offset: 6771
+    float freq31Period;
+    // Parameter: Dempher : freq31Dempher : MB Offset: 6773
+    uint16_t freq31Dempher;
+    // Parameter: Type Value : freq31TypeValue : MB Offset: 6774
+    uint16_t freq31TypeValue;
+    // Parameter: Signal Type Frequency : freq32SignalType : MB Offset: 6775
+    uint16_t freq32SignalType;
+    // Parameter: Additional parameter : freq32AdditionalParameter : MB Offset: 6776
+    uint8_t freq32AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq32ImpulseDuration : MB Offset: 6782
+    float freq32ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq32LowMeasureLim : MB Offset: 6784
+    float freq32LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq32HighMeasureLim : MB Offset: 6786
+    float freq32HighMeasureLim;
+    // Parameter: Name Channel : freq32Name : MB Offset: 6788
+    uint8_t freq32Name[8];
+    // Parameter: Unit Name : freq32Unit : MB Offset: 6792
+    uint8_t freq32Unit[4];
+    // Parameter: Impulse Weight : freq32ImpWeight : MB Offset: 6794
+    float freq32ImpWeight;
+    // Parameter: Period : freq32Period : MB Offset: 6796
+    float freq32Period;
+    // Parameter: Dempher : freq32Dempher : MB Offset: 6798
+    uint16_t freq32Dempher;
+    // Parameter: Type Value : freq32TypeValue : MB Offset: 6799
+    uint16_t freq32TypeValue;
+    // Parameter: Signal Type Frequency : freq33SignalType : MB Offset: 6800
+    uint16_t freq33SignalType;
+    // Parameter: Additional parameter : freq33alAdditionalParameter : MB Offset: 6801
+    uint8_t freq33alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq33ImpulseDuration : MB Offset: 6807
+    float freq33ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq33LowMeasureLim : MB Offset: 6809
+    float freq33LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq33HighMeasureLim : MB Offset: 6811
+    float freq33HighMeasureLim;
+    // Parameter: Name Channel : freq33Name : MB Offset: 6813
+    uint8_t freq33Name[8];
+    // Parameter: Unit Name : freq33Unit : MB Offset: 6817
+    uint8_t freq33Unit[4];
+    // Parameter: Impulse Weight : freq33ImpWeight : MB Offset: 6819
+    float freq33ImpWeight;
+    // Parameter: Period : freq33Period : MB Offset: 6821
+    float freq33Period;
+    // Parameter: Dempher : freq33Dempher : MB Offset: 6823
+    uint16_t freq33Dempher;
+    // Parameter: Type Value : freq33TypeValue : MB Offset: 6824
+    uint16_t freq33TypeValue;
+    // Parameter: Signal Type Frequency : freq34SignalType : MB Offset: 6825
+    uint16_t freq34SignalType;
+    // Parameter: Additional parameter : freq34AdditionalParameter : MB Offset: 6826
+    uint8_t freq34AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq34ImpulseDuration : MB Offset: 6832
+    float freq34ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq34LowMeasureLim : MB Offset: 6834
+    float freq34LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq34HighMeasureLim : MB Offset: 6836
+    float freq34HighMeasureLim;
+    // Parameter: Name Channel : freq34Name : MB Offset: 6838
+    uint8_t freq34Name[8];
+    // Parameter: Unit Name : freq34Unit : MB Offset: 6842
+    uint8_t freq34Unit[4];
+    // Parameter: Impulse Weight : freq34ImpWeight : MB Offset: 6844
+    float freq34ImpWeight;
+    // Parameter: Period : freq34Period : MB Offset: 6846
+    float freq34Period;
+    // Parameter: Dempher : freq34Dempher : MB Offset: 6848
+    uint16_t freq34Dempher;
+    // Parameter: Type Value : freq34TypeValue : MB Offset: 6849
+    uint16_t freq34TypeValue;
+    // Parameter: Signal Type Frequency : freq35SignalType : MB Offset: 6850
+    uint16_t freq35SignalType;
+    // Parameter: Additional parameter : freq35alAdditionalParameter : MB Offset: 6851
+    uint8_t freq35alAdditionalParameter[12];
+    // Parameter: Impulse Duration : freq35ImpulseDuration : MB Offset: 6857
+    float freq35ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq35LowMeasureLim : MB Offset: 6859
+    float freq35LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq35HighMeasureLim : MB Offset: 6861
+    float freq35HighMeasureLim;
+    // Parameter: Name Channel : freq35Name : MB Offset: 6863
+    uint8_t freq35Name[8];
+    // Parameter: Unit Name : freq35Unit : MB Offset: 6867
+    uint8_t freq35Unit[4];
+    // Parameter: Impulse Weight : freq35ImpWeight : MB Offset: 6869
+    float freq35ImpWeight;
+    // Parameter: Period : freq35Period : MB Offset: 6871
+    float freq35Period;
+    // Parameter: Dempher : freq35Dempher : MB Offset: 6873
+    uint16_t freq35Dempher;
+    // Parameter: Type Value : freq35TypeValue : MB Offset: 6874
+    uint16_t freq35TypeValue;
+    // Parameter: Signal Type Frequency : freq36SignalType : MB Offset: 6875
+    uint16_t freq36SignalType;
+    // Parameter: Additional parameter : freq36AdditionalParameter : MB Offset: 6876
+    uint8_t freq36AdditionalParameter[12];
+    // Parameter: Impulse Duration : freq36ImpulseDuration : MB Offset: 6882
+    float freq36ImpulseDuration;
+    // Parameter: Measure signal low limit  : freq36LowMeasureLim : MB Offset: 6884
+    float freq36LowMeasureLim;
+    // Parameter: Measure signal high limit  : freq36HighMeasureLim : MB Offset: 6886
+    float freq36HighMeasureLim;
+    // Parameter: Name Channel : freq36Name : MB Offset: 6888
+    uint8_t freq36Name[8];
+    // Parameter: Unit Name : freq36Unit : MB Offset: 6892
+    uint8_t freq36Unit[4];
+    // Parameter: Impulse Weight : freq36ImpWeight : MB Offset: 6894
+    float freq36ImpWeight;
+    // Parameter: Period : freq36Period : MB Offset: 6896
+    float freq36Period;
+    // Parameter: Dempher : freq36Dempher : MB Offset: 6898
+    uint16_t freq36Dempher;
+    // Parameter: Type Value : freq36TypeValue : MB Offset: 6899
+    uint16_t freq36TypeValue;
     // Parameter: SysOCalb : chan1SysOCR : MB Offset: 10000
     uint16_t chan1SysOCR;
     // Parameter: SysGCalb : chan1SysFSR : MB Offset: 10001

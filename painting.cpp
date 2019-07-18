@@ -19,6 +19,7 @@ extern QList<cMathChannel *> listMath;
 extern QList<cFreqChannel *> listFreq;
 extern QMutex mListMath;
 extern QMutex mListChannel;
+extern QMutex mListFreq;
 
 
 // полярные координаты
@@ -76,11 +77,13 @@ void MainWindow::PaintPolarDiagramm()
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
         {
+            mListFreq.lock();
             cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
             if(channel->enable)
             {
                 channelLenght[i] = channel->GetValuePercent();
             }
+            mListFreq.unlock();
         }
         else
         {

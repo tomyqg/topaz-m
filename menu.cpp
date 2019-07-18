@@ -48,6 +48,8 @@ extern QMutex mSysOpt;
 extern QMutex mListUstvok;
 extern QMutex mListMath;
 extern QMutex mListChannel;
+extern QMutex mListDev;
+extern QMutex mListFreq;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -295,9 +297,11 @@ void dMenu::on_exitButton_clicked()
     // Изменить видимость виджетов в соответствии с режимом доступа
     changeVisibleWidgets();
 
+    mListDev.lock();
     foreach (cDevice * device, listDevice) {
         device->setMode(Device_Mode_Regular);
     }
+    mListDev.unlock();
     foreach (cSteel * steel, listSteel) {
         steel->mode = Device_Mode_Regular;
     }
@@ -328,9 +332,11 @@ void dMenu::on_saveButton_clicked()
     cExpertAccess::resetAccess();
     // Изменить видимость виджетов в соответствии с режимом доступа
     changeVisibleWidgets();
+    mListDev.lock();
     foreach (cDevice * device, listDevice) {
         device->setMode(Device_Mode_Regular);
     }
+    mListDev.unlock();
     foreach (cSteel * steel, listSteel) {
         steel->mode = Device_Mode_Regular;
     }
@@ -460,6 +466,7 @@ void dMenu::addWidgetFreqs()
     clearLayout(ui->verticalLayoutFreq);
 
     int i = 0;
+    mListFreq.lock();
     foreach (cFreqChannel * freq, listFreq) {
         if(freq->enable)
         {
@@ -476,6 +483,7 @@ void dMenu::addWidgetFreqs()
             i++;
         }
     }
+    mListFreq.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutFreq->addItem(verticalSpacer);
 }
@@ -628,6 +636,7 @@ void dMenu::addWidgetMeasures()
         mListChannel.unlock();
 
         i = 0;
+        mListFreq.lock();
         foreach (cFreqChannel * channel, listFreq) {
             if(channel->enable)
             {
@@ -639,11 +648,12 @@ void dMenu::addWidgetMeasures()
             }
             i++;
         }
+        mListFreq.unlock();
 
     }
 
-        QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
-        ui->verticalLayoutMeasures->addItem(verticalSpacer);
+    QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->verticalLayoutMeasures->addItem(verticalSpacer);
 }
 
 QLabel * dMenu::addFramMeasureDiagnostic(QString lblParam, QString lblName, QString lblValue, QString lblUnit)
@@ -944,9 +954,11 @@ void dMenu::on_bDiagnost_clicked()
         ui->bAnaliz->hide();
         // включаем режим проверки метрологии на всех платах
         // пока только для стали
+        mListDev.lock();
         foreach (cDevice * device, listDevice) {
             device->setMode(Device_Mode_Metrological);
         }
+        mListDev.unlock();
         foreach (cSteel * steel, listSteel) {
             steel->mode = Device_Mode_Metrological;
         }
@@ -1009,11 +1021,13 @@ void dMenu::slotOpenGroup(int num)
     mListMath.unlock();
 
     //частотные каналы
+    mListFreq.lock();
     for (int i = 0; i < listFreq.size(); i++) {
         QString nameCh = listFreq.at(i)->GetChannelName();
         QString stateCh = (listFreq.at(i)->enable ? "ВКЛ." : "ОТКЛ.");
         listComboChannels.append(nameCh + " (F" + QString::number(i+1) + ") | " + stateCh);
     }
+    mListFreq.unlock();
 
     QList<QComboBox*> listCombo;
     listCombo.append(ui->comboGroupChannel1);
@@ -1063,6 +1077,7 @@ void dMenu::slotOpenDigitOutput(int num)
 void dMenu::slotOpenFreq(int num)
 {
     curFreq = num - 1;
+    mListFreq.lock();
     cFreqChannel * freq = listFreq.at(curFreq);
     ui->comboTypeFreq->setCurrentIndex(freq->GetSignalType());
     ui->impulseDuration->setValue(freq->GetImpulseDuration());
@@ -1076,6 +1091,7 @@ void dMenu::slotOpenFreq(int num)
     on_comboTypeFreq_currentIndexChanged(ui->comboTypeFreq->currentIndex());
     ui->stackedWidget->setCurrentIndex(35);
     ui->nameSubMenu->setText("ВХОД " + QString::number(num));
+    mListFreq.unlock();
 }
 
 void dMenu::selectPageMain()
@@ -2509,7 +2525,9 @@ void dMenu::updateLabelDiagnostic()
             if(i >= listFreq.size()) break; // Ошибка: столько каналов тут нет
             if(listFreq.at(i)->enable == false) continue; // Пропустить отключенные каналы
 
+            mListFreq.lock();
             volLabel->setText(QString::number(listFreq.at(i)->GetCurrentChannelValue()));
+            mListFreq.unlock();
             i++;
         }
     }
@@ -2661,6 +2679,7 @@ void dMenu::updateDevicesUI()
     int i = 0;
     foreach(wButtonStyled * bDev, listButtonDevices)
     {
+        mListDev.lock();
         cDevice * device = listDevice.at(i);
         QString str = "МОДУЛЬ РАСШИРЕНИЯ " + QString::number(i+1) + " | ";
         QStringList strOnline;
@@ -2689,6 +2708,7 @@ void dMenu::updateDevicesUI()
 
         bDev->setText(str);
         i++;
+        mListDev.unlock();
     }
     if(curDiagnostDevice != 0)
     {
@@ -2739,6 +2759,7 @@ void dMenu::updateDevicesUI()
 
 void dMenu::updateDeviceInfo(uint8_t index)
 {
+    mListDev.lock();
     assert(listDevice.size() >= index);
     cDevice * device = listDevice.at(index);
     if(!device->getOnline()){
@@ -2762,6 +2783,7 @@ void dMenu::updateDeviceInfo(uint8_t index)
         ui->frameDeviceInfo1->show();
         ui->frameDeviceInfo2->show();
     }
+    mListDev.unlock();
 }
 
 
@@ -2940,6 +2962,7 @@ void dMenu::on_comboTypeFreq_currentIndexChanged(int index)
 
 void dMenu::on_bApplyFreq_clicked()
 {
+    mListFreq.lock();
     cFreqChannel * freq = listFreq.at(curFreq);
     int type = ui->comboTypeFreq->currentIndex();
     freq->SetSignalType(type);
@@ -2954,12 +2977,16 @@ void dMenu::on_bApplyFreq_clicked()
     freq->setUnit(ui->unitFreq->text());
     freq->SetMeasurePeriod(ui->periodChFreq->value());
     freq->setDempher(ui->dempferFreq->value());
+    mListFreq.unlock();
     on_bBackFreq_clicked();
 }
 
 void dMenu::on_bFreqResetCountImp_clicked()
 {
+    //Vag: убедиться что не произойдёт клин из-за Мютекса
+    mListFreq.lock();
     listFreq.at(curFreq)->slotResetImpulsBuffer();
+    mListFreq.unlock();
 }
 
 void dMenu::on_bCancelFreq_clicked()

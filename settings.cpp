@@ -1039,6 +1039,7 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListRTD);
         ui->sensorDiapazon->setCurrentIndex(getIndexTableRTD(channel->GetDiapason()));
+        ui->sensorShema->setCurrentIndex(channel->getShema() /*indexUiShemaFromSensorShema(channel->getShema())*/);
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
         ui->sensorShema->show();
@@ -1058,7 +1059,6 @@ void dSettings::updateUiSignalTypeParam(int index)
     {
         ui->unit->setText(channel->getNameUnitByParam(index, channel->GetDiapason()));
     }
-    ui->sensorShema->setCurrentIndex(channel->getShema() /*indexUiShemaFromSensorShema(channel->getShema())*/);
 }
 
 
@@ -1570,6 +1570,7 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         else if(index == TermoResistanceMeasure)
         {
             ui->sensorDiapazon->setCurrentIndex(getIndexTableRTD(srcChannel->GetDiapason()));
+            ui->sensorShema->setCurrentIndex(srcChannel->getShema());
         }
 
     }

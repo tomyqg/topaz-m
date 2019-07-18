@@ -45,6 +45,7 @@ extern QList<cFreqChannel *> listFreq;
 extern QMutex mListUstvok;
 extern QMutex mListMath;
 extern QMutex mListChannel;
+extern QMutex mListFreq;
 
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
@@ -276,9 +277,11 @@ void MainWindow::GrafsUpdateTrends()
         }
         else if((group->typeInput[i] == cGroupChannels::Input_Freq) && (group->freqChannel[i] != -1))
         {
+            mListFreq.lock();
             cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
             xCoord = channel->GetChannelTimeBuffer();
             yCoord = channel->GetChannelValuesBuffer();
+            mListFreq.unlock();
         }
 
         if(updateGraph)
@@ -559,6 +562,7 @@ void MainWindow::updateBars(void)
         {
             if(group->freqChannel[i] != -1)
             {
+                mListFreq.lock();
                 cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
 
                 if(channel->enable)
@@ -591,6 +595,7 @@ void MainWindow::updateBars(void)
                         ui->nameGroupChannels2->show();
                     }
                 }
+                mListFreq.unlock();
             }
         }
         i++;
@@ -691,10 +696,11 @@ void MainWindow::setTextBars()
         {
             if(group->freqChannel[i] != -1)
             {
-
-                    bar->setNumChan(listFreq.at(group->freqChannel[i])->getNum());
-                    bar->setText(listFreq.at(group->freqChannel[i])->GetChannelName(), \
-                                 listFreq.at(group->freqChannel[i])->getUnit());
+                mListFreq.lock();
+                bar->setNumChan(listFreq.at(group->freqChannel[i])->getNum());
+                bar->setText(listFreq.at(group->freqChannel[i])->GetChannelName(), \
+                             listFreq.at(group->freqChannel[i])->getUnit());
+                mListFreq.unlock();
             }
         }
 
@@ -787,9 +793,11 @@ void MainWindow::updateWidgetsVols(void)
         {
             if(group->freqChannel[i] != -1)
             {
+                mListFreq.lock();
                 vol->setChanNum(listFreq.at(group->freqChannel[i])->getNum());
                 vol->setText(listFreq.at(group->freqChannel[i])->GetChannelName(), \
                              listFreq.at(group->freqChannel[i])->getUnit());
+                mListFreq.unlock();
             }
             vol->setColor(color[indexGroup]);
         }
@@ -890,6 +898,7 @@ void MainWindow::updateVols()
         {
             if(group->freqChannel[i] != -1)
             {
+                mListFreq.lock();
                 cFreqChannel * channel = listFreq.at(group->freqChannel[i]);
                 if(channel->enable)
                 {
@@ -909,6 +918,7 @@ void MainWindow::updateVols()
                     }
 
                 }
+                mListFreq.unlock();
             }
         }
         i++;

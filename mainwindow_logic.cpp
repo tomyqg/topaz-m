@@ -60,6 +60,8 @@ QMutex mSysOpt;
 QMutex mListUstvok;
 QMutex mListMath;
 QMutex mListChannel;
+QMutex mListDev;
+QMutex mListFreq;
 
 extern MainWindow * globalMainWin;
 extern QList<cDevice*> listDevice;
@@ -819,6 +821,7 @@ void MainWindow::updateDevicesComplect()
     QList<uint8_t> listSTEEL;
     QList<uint8_t> list6DI6RO;
     int countStableDevice = 0;
+    mListDev.lock();
     foreach (cDevice * device, listDevice) {
 
         if(device->getStable()) countStableDevice++;
@@ -863,13 +866,13 @@ void MainWindow::updateDevicesComplect()
             }
         }
     }
-
     // все ли модули определились онлайн/оффлайн ?
     if(countStableDevice == listDevice.size())
     {
         allDeviceStable = true;
         timerUpdateDevices->setInterval(timeUpdateDevices);
     }
+    mListDev.unlock();
 
 
     // обновление списка каналов
@@ -925,6 +928,7 @@ void MainWindow::updateDevicesComplect()
     i = 0;
     int sizeList8RP = list8RP.size();
     foreach (uint8_t slot, list6DI6RO) {
+        mListFreq.lock();
         if(i < listFreq.size())
         {
             //обновление параметров каналов
@@ -933,6 +937,7 @@ void MainWindow::updateDevicesComplect()
             ch->setSlotChannel(i%NUM_CHAN_IN_6DI6RO);
             ch->enable = true;
         }
+        mListFreq.unlock();
         if((i + sizeList8RP) < listRelais.size())
         {
             //обновление параметров реле (твердортельных реле)
@@ -943,6 +948,7 @@ void MainWindow::updateDevicesComplect()
         }
         i++;
     }
+    mListFreq.lock();
     if(listFreq.size() > list6DI6RO.size())
     {
         // плат стало меньше, тогда временно отключем каналы, но не удаляем
@@ -951,6 +957,7 @@ void MainWindow::updateDevicesComplect()
             listFreq.at(i)->enable = false;
         }
     }
+    mListFreq.unlock();
 
 
 
@@ -1124,9 +1131,11 @@ void MainWindow::logginSteel(int numSteel)
 
 void MainWindow::devicesPause(bool f)
 {
+    mListDev.lock();
     foreach (cDevice * dev, listDevice) {
         dev->pause(f);
     }
+    mListDev.unlock();
 }
 
 
@@ -1243,7 +1252,9 @@ void MainWindow::retransToWorker(Transaction tr)
 {
     if((tr.slave <= listDevice.size()) && (tr.slave != 0))
     {
+        mListDev.lock();
         deviceTypeEnum deviceType = listDevice.at(tr.slave - 1)->deviceType;
+        mListDev.unlock();
         if(systemOptions.typeMultigraph == cSystemOptions::Multigraph)
         {
             if((deviceType == Device_4AI) || (deviceType == Device_8RP)  || (deviceType == Divece_6DI6RO))
@@ -1285,8 +1296,10 @@ void MainWindow::parseWorkerReceive()
 //        int typeDevice = sc->getTypeDevice(tr.slave);
         if((tr.slave == 0) || (tr.slave > TOTAL_NUM_DEVICES)) return;
         int indexDev = tr.slave - 1;
+        mListDev.lock();
         cDevice * device = listDevice.at(indexDev);
         device->setOnline();
+        mListDev.unlock();
         paramName = cRegistersMap::getNameByOffset(tr.offset);
 
         if(paramName.contains("chan0"))
@@ -1317,7 +1330,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
         }
@@ -1349,7 +1364,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
 
@@ -1374,7 +1391,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
         }
@@ -1398,7 +1417,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
         }
@@ -1411,7 +1432,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
         }
@@ -1424,7 +1447,9 @@ void MainWindow::parseWorkerReceive()
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
                 {
+                    mListFreq.lock();
                     listFreq.at(index)->parserChannel(tr);
+                    mListFreq.unlock();
                 }
             }
         }
@@ -1512,6 +1537,7 @@ int MainWindow::getIndexAnalogBySlotAndCh(int slot, int ch)
 int MainWindow::getIndexFreqBySlotAndCh(int slot, int ch)
 {
     int ret = -1;
+    mListFreq.lock();
     for(int i = 0; i < listFreq.size(); i++)
     {
         cFreqChannel * freq = listFreq.at(i);
@@ -1521,6 +1547,7 @@ int MainWindow::getIndexFreqBySlotAndCh(int slot, int ch)
             break;
         }
     }
+    mListFreq.unlock();
     return ret;
 }
 
