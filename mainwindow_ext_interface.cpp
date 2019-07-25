@@ -182,12 +182,14 @@ void MainWindow::initExtInterface()
     tablSetParamExtInterface.append({"mathPeriod", &MainWindow::extGetMathPeriod, &MainWindow::extSetMathPeriod});
 
 
-
-
-
-
-
-
+    //Калибровки каналов
+    for(int i = 0; i < TOTAL_NUM_CHAN; i++)
+    {
+         QString chanNum = "chan" + QString::number(i+1);
+         foreach (QString calib, listChannels.at(i)->listCalibrationRegisters) {
+             tablSetParamExtInterface.append({chanNum + calib, &MainWindow::extGetChanCalibr, &MainWindow::extSetChanCalibr});
+         }
+    }
 
     /* Запуск таймеров */
     // Отправка данных с периодом 0,5 сек
@@ -2339,4 +2341,193 @@ void MainWindow::extSetFreqUnit(QString name, uint8_t * data)
         listFreq.at(num-1)->setUnit(strName);
     }
     mListFreq.unlock();
+}
+
+void MainWindow::extGetChanCalibr(QString name)
+{
+    QString chan = name.right(name.size() - QString("chan").size()); //отброс приставки "chan"
+    int num = chan.left(2).toInt(); //номер канала из внешенго модбаса по двум сиволам слева
+    if(num == 0)
+    {
+        num = chan.left(1).toInt(); //или по одному символу
+    }
+//    chan = "chan" + QString::number((num-1)%NUM_CHAN_IN_4AI); //приставка и номер канала во внутреннем модбасе в плате
+    QString paramName = name.right(name.size() - QString("chan").size() - QString::number(num).size());  //имя калибровочного параметра
+    tModbusBuffer data;
+    uint32_t value = 0;
+    qDebug() << "extGetChanCalibr:" << name.toStdString().c_str() << paramName.toStdString().c_str();
+    mListChannel.lock();
+    if((num > 0) && (num <= listChannels.size()))
+    {
+        listChannels.at(num-1)->periodUpdateCalibrations = 1000;
+        if(paramName == "SysOCR")
+        {
+            value = listChannels.at(num-1)->calibrations.chanSysOCR;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "SysFSR")
+        {
+            value = listChannels.at(num-1)->calibrations.chanSysFSR;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR20mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR20mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR20mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR20mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date20mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate20mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR100mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR100mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR100mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR100mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date100mV")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate100mV;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR1V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR1V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR1V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR1V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date1V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate1V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR10V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR10V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR10V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR10V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date10V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate10V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR30V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR30V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR30V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR30V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date30V")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate30V;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR20mA")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR20mA;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR20mA")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR20mA;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date20mA")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate20mA;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR4x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR4x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR4x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR4x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date4x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate4x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCR3x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCR3x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSR3x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSR3x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "Date3x")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDate3x;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "OCRinternal")
+        {
+            value = listChannels.at(num-1)->calibrations.chanOCRinternal;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "FSRinternal")
+        {
+            value = listChannels.at(num-1)->calibrations.chanFSRinternal;
+            memcpy(data.data, &value, sizeof(value));
+        }
+        else if(paramName == "DateInternal")
+        {
+            value = listChannels.at(num-1)->calibrations.chanDateInternal;
+            memcpy(data.data, &value, sizeof(value));
+        }
+    }
+    mListChannel.unlock();
+    emit signalToExtModbus(name, data);
+
+}
+
+void MainWindow::extSetChanCalibr(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("chan").size()); //отброс приставки "chan"
+    int num = chan.left(2).toInt(); //номер канала из внешенго модбаса по двум сиволам слева
+    if(num == 0)
+    {
+        num = chan.left(1).toInt(); //или по одному символу
+    }
+    chan = "chan" + QString::number((num-1)%NUM_CHAN_IN_4AI); //приставка и номер канала во внутреннем модбасе в плате
+    QString paramName = name.right(name.size() - QString("chan").size() - QString::number(num).size());  //имя калибровочного параметра
+
+    mListChannel.lock();
+    if((num > 0) && (num <= listChannels.size()))
+    {
+        uint32_t value;
+        memcpy(&value, data, sizeof(value));
+        listChannels.at(num-1)->writeCalibration(paramName, value);
+    }
+    mListChannel.unlock();
 }

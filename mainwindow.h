@@ -587,6 +587,8 @@ private:
     void extGetFreqName(QString name);
     void extGetFreqUnit(QString name);
     void extSetFreqUnit(QString name, uint8_t *data);
+    void extGetChanCalibr(QString name);
+    void extSetChanCalibr(QString name, uint8_t *data);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

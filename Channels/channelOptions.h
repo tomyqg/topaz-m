@@ -25,11 +25,19 @@ public:
     };
 
     bool enable;        // флаг включения и отключения канала (для сохранения настроек)
+
+
     int getNum() { return numChannel; }
     void setNum(int i) { numChannel = i; }
     void setSlot(int sl) { slot = sl; }
     int getSlot() { return slot; }
-    void setSlotChannel(int ch) { slotChannel = ch; }
+    void setSlotChannel(int ch) {
+//        if((ch != slotChannel) && (ch >= 0) && (ch < 4))
+//        {
+//            initCalibration();
+//        }
+        slotChannel = ch;
+    }
     int getSlotChannel() { return slotChannel; }
     uint16_t GetSignalType();
     uint16_t GetCurSignalType();
@@ -110,6 +118,70 @@ public:
     int getCapacity(void) { return capacity; }
     bool isNewValue();
     int getChannelStatus() { return inputData.chanStatus; }
+
+    struct
+    {
+        // Parameter: SysOCalb : chanSysOCR : NV Address: 100
+        uint16_t chanSysOCR;
+        // Parameter: SysGCalb : chanSysFSR : NV Address: 100
+        uint16_t chanSysFSR;
+        // Parameter: CalibOCR20mV : chanOCR20mV : NV Address: 100
+        uint32_t chanOCR20mV;
+        // Parameter: CalibFCR20mV : chanFSR20mV : NV Address: 104
+        uint32_t chanFSR20mV;
+        // Parameter: CalibFDate20mV : chanDate20mV : NV Address: 108
+        uint32_t chanDate20mV;
+        // Parameter: CalibOCR100mV : chanOCR100mV : NV Address: 112
+        uint32_t chanOCR100mV;
+        // Parameter: CalibFCR100mV : chanFSR100mV : NV Address: 116
+        uint32_t chanFSR100mV;
+        // Parameter: CalibFDate100mV : chanDate100mV : NV Address: 120
+        uint32_t chanDate100mV;
+        // Parameter: CalibOCR1V : chanOCR1V : NV Address: 124
+        uint32_t chanOCR1V;
+        // Parameter: CalibFCR1V : chanFSR1V : NV Address: 128
+        uint32_t chanFSR1V;
+        // Parameter: CalibFDate1V : chanDate1V : NV Address: 132
+        uint32_t chanDate1V;
+        // Parameter: CalibOCR10V : chanOCR10V : NV Address: 136
+        uint32_t chanOCR10V;
+        // Parameter: CalibFCR10V : chanFSR10V : NV Address: 140
+        uint32_t chanFSR10V;
+        // Parameter: CalibFDate10V : chanDate10V : NV Address: 144
+        uint32_t chanDate10V;
+        // Parameter: CalibOCR30V : chanOCR30V : NV Address: 148
+        uint32_t chanOCR30V;
+        // Parameter: CalibFCR30V : chanFSR30V : NV Address: 152
+        uint32_t chanFSR30V;
+        // Parameter: CalibFDate30V : chanDate30V : NV Address: 156
+        uint32_t chanDate30V;
+        // Parameter: CalibOCR20mA : chanOCR20mA : NV Address: 160
+        uint32_t chanOCR20mA;
+        // Parameter: CalibFCR20mA : chanFSR20mA : NV Address: 164
+        uint32_t chanFSR20mA;
+        // Parameter: CalibFDate20mA : chanDate20mA : NV Address: 168
+        uint32_t chanDate20mA;
+        // Parameter: CalibOCR4x : chanOCR4x : NV Address: 172
+        uint32_t chanOCR4x;
+        // Parameter: CalibFSR4x : chanFSR4x : NV Address: 176
+        uint32_t chanFSR4x;
+        // Parameter: CalibDate4x : chanDate4x : NV Address: 180
+        uint32_t chanDate4x;
+        // Parameter: CalibOCR3x : chanOCR3x : NV Address: 184
+        uint32_t chanOCR3x;
+        // Parameter: CalibFSR3x : chanFSR3x : NV Address: 188
+        uint32_t chanFSR3x;
+        // Parameter: CalibDate3x : chanDate3x : NV Address: 192
+        uint32_t chanDate3x;
+        // Parameter: CalibOCRinternal : chanOCRinternal : NV Address: 196
+        float chanOCRinternal;
+        // Parameter: CalibFSRinternal : chanFSRinternal : NV Address: 200
+        float chanFSRinternal;
+        // Parameter: CalibDateinternal : chanDateInternal : NV Address: 204
+        uint32_t chanDateInternal;
+    } calibrations;
+    QStringList listCalibrationRegisters;
+    int periodUpdateCalibrations;   //мс
 
 signals:
     void updateSignal(int index);
@@ -201,7 +273,12 @@ private:
     QTimer * timerUpdateParam;
 
 
+    QTimer * timerCalibrations;
+    int iteratorCalibration;
 
+
+private slots:
+    void updateCalibrations();
 
 public:
 
@@ -284,5 +361,8 @@ public:
     void setAdditionalParametr2(uint8_t *param);
     void getAdditionalParametr1(uint8_t *param);
     void getAdditionalParametr2(uint8_t *param);
+
+    void initCalibration();
+    void writeCalibration(QString paramName, uint32_t value);
 };
 #endif // CHANNEL1_H

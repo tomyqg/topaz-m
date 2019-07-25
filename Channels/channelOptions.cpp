@@ -39,8 +39,9 @@ ChannelOptions::ChannelOptions()
     timerUpdateParam = new QTimer();
     connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     updateParam();
-    timerUpdateParam->start(15000);
+    timerUpdateParam->start(30000);
     valueVoltage = Value_Real;
+
 
 }
 
@@ -398,27 +399,27 @@ void ChannelOptions::parserChannel(Transaction tr)
         SetCurrentChannelValue((double)tr.volFlo);
         inputData.chanData = tr.volFlo;
     }
-    if(paramName == chanName + "DataFlags")
+    else if(paramName == chanName + "DataFlags")
     {
         inputData.chanDataFlags = (uint16_t)tr.volInt;
     }
-    if(paramName == chanName + "Status")
+    else if(paramName == chanName + "Status")
     {
         inputData.chanStatus = (uint16_t)tr.volInt;
     }
-    if(paramName == chanName + "Error")
+    else if(paramName == chanName + "Error")
     {
         inputData.chanError = (uint16_t)tr.volInt;
     }
-    if(paramName == chanName + "Quantity")
+    else if(paramName == chanName + "Quantity")
     {
         inputData.chanQuantity = (uint32_t)tr.volInt;
     }
-    if(paramName == chanName + "Uptime")
+    else if(paramName == chanName + "Uptime")
     {
         inputData.chanUptime = (uint32_t)tr.volInt;
     }
-    if(paramName == chanName + "RawData")
+    else if(paramName == chanName + "RawData")
     {
         inputData.chanRawData = (float)tr.volFlo;
     }
@@ -458,6 +459,124 @@ void ChannelOptions::parserChannel(Transaction tr)
             emit sendToWorker(trans);
         }
     }
+    else if(paramName == chanName + "SysOCR")
+    {
+        calibrations.chanSysOCR = tr.volInt;
+    }
+    else if(paramName == chanName + "SysFSR")
+    {
+        calibrations.chanSysFSR = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR20mV")
+    {
+        calibrations.chanOCR20mV = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR20mV")
+    {
+        calibrations.chanFSR20mV = tr.volInt;
+    }
+    else if(paramName == chanName + "Date20mV")
+    {
+        calibrations.chanDate20mV = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR100mV")
+    {
+        calibrations.chanOCR100mV = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR100mV")
+    {
+        calibrations.chanFSR100mV = tr.volInt;
+    }
+    else if(paramName == chanName + "Date100mV")
+    {
+        calibrations.chanDate100mV = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR1V")
+    {
+        calibrations.chanOCR1V = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR1V")
+    {
+        calibrations.chanFSR1V = tr.volInt;
+    }
+    else if(paramName == chanName + "Date1V")
+    {
+        calibrations.chanDate1V = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR10V")
+    {
+        calibrations.chanOCR10V = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR10V")
+    {
+        calibrations.chanFSR10V = tr.volInt;
+    }
+    else if(paramName == chanName + "Date10V")
+    {
+        calibrations.chanDate10V = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR30V")
+    {
+        calibrations.chanOCR30V = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR30V")
+    {
+        calibrations.chanFSR30V = tr.volInt;
+    }
+    else if(paramName == chanName + "Date30V")
+    {
+        calibrations.chanDate30V = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR20mA")
+    {
+        calibrations.chanOCR20mA = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR20mA")
+    {
+        calibrations.chanFSR20mA = tr.volInt;
+    }
+    else if(paramName == chanName + "Date20mA")
+    {
+        calibrations.chanDate20mA = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR4x")
+    {
+        calibrations.chanOCR4x = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR4x")
+    {
+        calibrations.chanFSR4x = tr.volInt;
+    }
+    else if(paramName == chanName + "Date4x")
+    {
+        calibrations.chanDate4x = tr.volInt;
+    }
+    else if(paramName == chanName + "OCR3x")
+    {
+        calibrations.chanOCR3x = tr.volInt;
+    }
+    else if(paramName == chanName + "FSR3x")
+    {
+        calibrations.chanFSR3x = tr.volInt;
+    }
+    else if(paramName == chanName + "Date3x")
+    {
+        calibrations.chanDate3x = tr.volInt;
+    }
+    else if(paramName == chanName + "OCRinternal")
+    {
+        calibrations.chanOCRinternal = tr.volInt;
+    }
+    else if(paramName == chanName + "FSRinternal")
+    {
+        calibrations.chanFSRinternal = tr.volInt;
+    }
+    else if(paramName == chanName + "DateInternal")
+    {
+        calibrations.chanDateInternal = tr.volInt;
+    }
+
+
 }
 
 void ChannelOptions::timerSlot()
@@ -492,7 +611,9 @@ void ChannelOptions::updateParam()
     int devCh = slotChannel;
     QStringList listStr;
     listStr << "chan" + QString::number(devCh) + "SignalType" \
-            << "chan" + QString::number(devCh) + "AdditionalParameter1";
+            << "chan" + QString::number(devCh) + "Error" \
+            << "chan" + QString::number(devCh) + "AdditionalParameter1"\
+            << "chan" + QString::number(devCh) + "AdditionalParameter2";
     if(outputData.chanSignalType == TermoCoupleMeasure)
     {
         listStr << "chan" + QString::number(devCh) + "FSRinternal";
@@ -502,6 +623,177 @@ void ChannelOptions::updateParam()
         tr.offset = cRegistersMap::getOffsetByName(str);
         emit sendToWorker(tr);
     }
+}
+
+void ChannelOptions::initCalibration()
+{
+    listCalibrationRegisters.clear();
+
+    listCalibrationRegisters << "SysOCR" << "SysFSR" \
+                             << "OCR20mV" << "FSR20mV" << "Date20mV" \
+                             << "OCR100mV" << "FSR100mV" << "Date100mV" \
+                             << "OCR1V" << "FSR1V" << "Date1V" \
+                             << "OCR10V" << "FSR10V" << "Date10V"
+                             << "OCR30V" << "FSR30V" << "Date30V" \
+                             << "OCR20mA" << "FSR20mA" << "Date20mA" \
+                             << "OCR4x" << "FSR4x" << "Date4x" \
+                             << "OCR3x" << "FSR3x" << "Date3x" \
+                             << "OCRinternal" << "FSRinternal" << "DateInternal";
+    iteratorCalibration = 0;
+    timerCalibrations = new QTimer(this);
+    connect(timerCalibrations, SIGNAL(timeout()), this, SLOT(updateCalibrations()));
+    periodUpdateCalibrations = 1000;    // 1сек
+    timerCalibrations->start(periodUpdateCalibrations);
+}
+
+void ChannelOptions::updateCalibrations()
+{
+    if (!enable) return;
+    Transaction tr;
+    tr.dir = Transaction::R;
+    tr.slave = slot;
+    QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(iteratorCalibration);
+    tr.offset = cRegistersMap::getOffsetByName(name);
+    emit sendToWorker(tr);
+
+    iteratorCalibration++;
+    if(iteratorCalibration >= listCalibrationRegisters.size())
+    {
+        iteratorCalibration = 0;
+        periodUpdateCalibrations = 10000;   //10сек
+    }
+    timerCalibrations->setInterval(periodUpdateCalibrations);
+}
+
+void ChannelOptions::writeCalibration(QString paramName, uint32_t value)
+{
+    if (!enable) return;
+    Transaction tr;
+    tr.dir = Transaction::W;
+    tr.slave = slot;
+    QString name = "chan" + QString::number(slotChannel) + paramName;
+    tr.offset = cRegistersMap::getOffsetByName(name);
+    tr.volInt = value;
+
+    if(paramName == "SysOCR")
+    {
+        calibrations.chanSysOCR = value & 0xFFFF;
+    }
+    else if(paramName == "SysFSR")
+    {
+        calibrations.chanSysFSR = value & 0xFFFF;
+    }
+    else if(paramName == "OCR20mV")
+    {
+        calibrations.chanOCR20mV = value;
+    }
+    else if(paramName == "FSR20mV")
+    {
+        calibrations.chanFSR20mV = value;
+    }
+    else if(paramName == "Date20mV")
+    {
+        calibrations.chanDate20mV = value;
+    }
+    else if(paramName == "OCR100mV")
+    {
+        calibrations.chanOCR100mV = value;
+    }
+    else if(paramName == "FSR100mV")
+    {
+        calibrations.chanFSR100mV = value;
+    }
+    else if(paramName == "Date100mV")
+    {
+        calibrations.chanDate100mV = value;
+    }
+    else if(paramName == "OCR1V")
+    {
+        calibrations.chanOCR1V = value;
+    }
+    else if(paramName == "FSR1V")
+    {
+        calibrations.chanFSR1V = value;
+    }
+    else if(paramName == "Date1V")
+    {
+        calibrations.chanDate1V = value;
+    }
+    else if(paramName == "OCR10V")
+    {
+        calibrations.chanOCR10V = value;
+    }
+    else if(paramName == "FSR10V")
+    {
+        calibrations.chanFSR10V = value;
+    }
+    else if(paramName == "Date10V")
+    {
+        calibrations.chanDate10V = value;
+    }
+    else if(paramName == "OCR30V")
+    {
+        calibrations.chanOCR30V = value;
+    }
+    else if(paramName == "FSR30V")
+    {
+        calibrations.chanFSR30V = value;
+    }
+    else if(paramName == "Date30V")
+    {
+        calibrations.chanDate30V = value;
+    }
+    else if(paramName == "OCR20mA")
+    {
+        calibrations.chanOCR20mA = value;
+    }
+    else if(paramName == "FSR20mA")
+    {
+        calibrations.chanFSR20mA = value;
+    }
+    else if(paramName == "Date20mA")
+    {
+        calibrations.chanDate20mA = value;
+    }
+    else if(paramName == "OCR4x")
+    {
+        calibrations.chanOCR4x = value;
+    }
+    else if(paramName == "FSR4x")
+    {
+        calibrations.chanFSR4x = value;
+    }
+    else if(paramName == "Date4x")
+    {
+        calibrations.chanDate4x = value;
+    }
+    else if(paramName == "OCR3x")
+    {
+        calibrations.chanOCR3x = value;
+    }
+    else if(paramName == "FSR3x")
+    {
+        calibrations.chanFSR3x = value;
+    }
+    else if(paramName == "Date3x")
+    {
+        calibrations.chanDate3x = value;
+    }
+    else if(paramName == "OCRinternal")
+    {
+        calibrations.chanOCRinternal = value;
+    }
+    else if(paramName == "FSRinternal")
+    {
+        calibrations.chanFSRinternal = value;
+    }
+    else if(paramName == "DateInternal")
+    {
+        calibrations.chanDateInternal = value;
+    }
+    emit sendToWorker(tr);
+    tr.dir = Transaction::R;
+    emit sendToWorker(tr);
 
 }
 

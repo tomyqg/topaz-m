@@ -334,6 +334,7 @@ void cExtModbus::reply(){
     {
         for(int i = 0; i < nb; i += size)
         {
+            lookupElement = getLookupElementByOffsetAndFunc(i+offset, func);
             size = updateParam(lookupElement);
         }
     }

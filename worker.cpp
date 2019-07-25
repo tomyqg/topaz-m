@@ -61,7 +61,8 @@ int worker::WriteModbusData(uint8_t sl, const tLookupRegisters * dp, uint32_t * 
 {
     int ret = -1;
     if (((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_W ) \
-            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ))
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ) \
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_NA ))
         return -1;
 
     int num;
@@ -99,7 +100,8 @@ int worker::ReadModbusData(uint8_t sl, const tLookupRegisters* dp, uint32_t *dat
     int ret = -1;
     // если запрещено чтение, а только запись разрешена, то возвращаем функцию
     if (((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_R ) \
-            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ))
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_RW ) \
+            && ((dp->access & LKUP_ACCESS_WORK_MASK) != LKUP_ACCESS_WORK_NA ))
         return -1;
 
     int slave = sl;
@@ -155,11 +157,12 @@ int worker::ReadModbusData(uint8_t sl, const tLookupRegisters* dp, uint32_t *dat
     {
         //        qDebug() << data_dest[0] << data_dest[1] << "U32";
 
-        uint32_t a = (uint32_t)(data_dest[0]);
-        uint32_t b = (uint32_t)(data_dest[1]);
+//        uint32_t a = (uint32_t)(data_dest[0]);
+//        uint32_t b = (uint32_t)(data_dest[1]);
 
         uint32_t val;
-        val = ( a<<16 ) | ( b ) ;
+//        val = ( a<<16 ) | ( b ) ;
+        val = data_dest[0];
 
         QByteArray arraytofloat;
 

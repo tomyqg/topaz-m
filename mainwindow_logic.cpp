@@ -702,8 +702,9 @@ void MainWindow::InitChannels()
         ch->setNum(i+1);
 //        ch->setSlot(0);     //
         ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
+        ch->initCalibration();
 //        connect(ch, SIGNAL(updateSignal(int)), this, SLOT(updateChannelSlot(int)));
-        connect(ch, SIGNAL(sendToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
+        connect(ch, SIGNAL(sendToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)), Qt::DirectConnection);
 //        ch->SetMeasurePeriod(1000);
         listChannels.append(ch);
     }

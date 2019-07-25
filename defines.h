@@ -1,7 +1,6 @@
 #include <QApplication>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//#include "options.h"
 #include "messages.h"
 #include "keyboard.h"
 #include "mathresolver.h"
@@ -10,7 +9,6 @@
 #include "worker.h"
 #include "src/modbus-private.h"
 #include "qextserialenumerator.h"
-
 
 #ifndef DEFINES_H
 #define DEFINES_H

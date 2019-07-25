@@ -31,6 +31,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
     countParams = 0;
     deviceMode = 0;
+    accessType = EAT_ROOT;
 }
 
 int cDevice::parseDeviceParam(Transaction tr)
@@ -76,7 +77,15 @@ int cDevice::parseDeviceParam(Transaction tr)
 //    }
     else if(nameParam == "accessType")
     {
-        accessType = (accessTypeEnum)tr.volInt;
+
+        if(accessType != (uint16_t)tr.volInt)
+        {
+            Transaction trans(Transaction::W, slot);
+            trans.offset = cRegistersMap::getOffsetByName("accessType");
+            trans.volInt = accessType;
+            emit updateParam(trans);
+        }
+//        accessType = tr.volInt;
     }
     else if(nameParam == "mbCommCount")
     {
