@@ -271,10 +271,13 @@ private:
     QMutex * buffermutex;
     QTimer * timer;
     QTimer * timerUpdateParam;
-
+    QStringList listStr;
+    int iteratorParam;
 
     QTimer * timerCalibrations;
     int iteratorCalibration;
+    float processReadCalibrations; // % выполнения чтения
+    bool neadRead;  //признак необходимости считать калибровки
 
 
 private slots:
@@ -364,5 +367,18 @@ public:
 
     void initCalibration();
     void writeCalibration(QString paramName, uint32_t value);
+    void neadReadCalibration()
+    {
+        neadRead = true;
+        processReadCalibrations = 0;
+    }
+    bool getNeadReadCalibtration()
+    {
+        return neadRead;
+    }
+    float getProcessReadCalibrations()
+    {
+        return processReadCalibrations;
+    }
 };
 #endif // CHANNEL1_H

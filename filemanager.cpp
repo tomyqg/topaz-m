@@ -130,15 +130,16 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
 
 
     QString setstr = QJsonDocument(options).toJson(QJsonDocument::Compact);
-    QFile file(path + QString(".backup"));
+    QFile file(path/* + QString(".backup")*/);
     if(file.open(QIODevice::WriteOnly))
     {
         file.resize(0); // clear file
         QTextStream out(&file);
         out << setstr;
         file.close();
-        QFile::remove(path);
-        QFile::copy(path + QString(".backup"), path);
+        system("sync");
+        QFile::remove(path + QString(".backup"));
+        QFile::copy(path, path + QString(".backup"));
     }
     else
     {
@@ -154,15 +155,21 @@ int cFileManager::readChannelsSettings(QString path)
     QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
 
     QFile infile(path);
-    if(!infile.exists()) return 2;  //файл не доступен
     QString sss;
     bool fileIsBad = false;
-    if(infile.open(QIODevice::ReadOnly))
+    if(infile.exists())
     {
-        QTextStream in(&infile);
-        sss = in.readLine();
-        if(sss.size() < 10) fileIsBad = true;
-        infile.close();
+        if(infile.open(QIODevice::ReadOnly))
+        {
+            QTextStream in(&infile);
+            sss = in.readLine();
+            if(sss.size() < 10) fileIsBad = true;
+            infile.close();
+        }
+        else
+        {
+            fileIsBad = true;
+        }
     }
     else
     {
@@ -172,12 +179,13 @@ int cFileManager::readChannelsSettings(QString path)
     if(fileIsBad)   //проблемы с файлом настроек, воспользуемся предыдущими настройками
     {
         infile.setFileName(path + QString(".backup"));
+        if(!infile.exists()) return 2;  //файл не доступен или его нет
         if(infile.open(QIODevice::ReadOnly))
         {
             QTextStream in(&infile);
             sss = in.readLine();
-            if(sss.size() < 10) return 4;   //пустой файл
             infile.close();
+            if(sss.size() < 10) return 4;   //пустой файл
         }
         else
         {
@@ -439,7 +447,7 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
 
     systemoptions["Options"] = options;
     QString setstr = QJsonDocument(systemoptions).toJson(QJsonDocument::Compact);
-    QFile file(path + QString(".backup"));
+    QFile file(path/* + QString(".backup")*/);
 //    QFile::copy(path + QString(".backup"));
     if(file.open(QIODevice::WriteOnly))
     {
@@ -447,8 +455,9 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
         QTextStream out(&file);
         out << setstr;
         file.close();
-        QFile::remove(path);
-        QFile::copy(path + QString(".backup"), path);
+        system("sync");
+        QFile::remove(path + QString(".backup"));
+        QFile::copy(path, path + QString(".backup"));
     }
     else
     {
@@ -462,18 +471,24 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     QTextCodec::setCodecForLocale( QTextCodec::codecForName( "UTF-8" ) );
 
     QFile infile(path);
-    if(!infile.exists()) return 2;  //файл не доступен
     QString sss;
     QJsonArray array;
     QJsonObject jsonobj;
     bool fileIsBad = false;
 
-    if(infile.open(QIODevice::ReadOnly))
+    if(!infile.exists())
     {
-        QTextStream in(&infile);
-        sss = in.readLine();
-        if(sss.size() < 10) fileIsBad = true;
-        infile.close();
+        if(infile.open(QIODevice::ReadOnly))
+        {
+            QTextStream in(&infile);
+            sss = in.readLine();
+            if(sss.size() < 10) fileIsBad = true;
+            infile.close();
+        }
+        else
+        {
+            fileIsBad = true;
+        }
     }
     else
     {
@@ -483,12 +498,13 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     if(fileIsBad)   //проблемы с файлом настроек, воспользуемся предыдущими настройками
     {
         infile.setFileName(path + QString(".backup"));
+        if(!infile.exists()) return 2;  //файл не доступен или его нет
         if(infile.open(QIODevice::ReadOnly))
         {
             QTextStream in(&infile);
             sss = in.readLine();
-            if(sss.size() < 10) return 4;   //пустой файл
             infile.close();
+            if(sss.size() < 10) return 4;   //пустой файл
         }
         else
         {
@@ -637,6 +653,7 @@ int cFileManager::writeSteelsSettings(QString path)
         file.resize(0); // clear file
         out << setstr.toUtf8();
         file.close();
+        system("sync");
     }
     else
     {

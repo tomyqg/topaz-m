@@ -503,8 +503,8 @@ void MainWindow::updateBars(void)
                 {
                     bar->setExtr(channel->GetMinimumChannelValue(),\
                                  channel->GetMaximumChannelValue());
-                    bar->setBarDiapazon(max(abs(channel->GetHigherMeasureLimit()), \
-                                            abs(channel->GetLowerMeasureLimit())));
+                    bar->setBarDiapazon(channel->GetHigherMeasureLimit(), \
+                                            channel->GetLowerMeasureLimit());
                     if(channel->getVoltageType() == ChannelOptions::Value_Real)
                     {
                         bar->setValueType(wVolueBar::BarValue_Real);
@@ -545,8 +545,8 @@ void MainWindow::updateBars(void)
 //                    bar->setExtr(math->GetMinimumChannelValue(), math->GetMaximumChannelValue());
                     bar->setExtr(math->GetMinimumMathValue(),\
                                  math->GetMaximumMathValue());
-                    bar->setBarDiapazon(max(abs(math->GetHigherMeasureLimit()), \
-                                            abs(math->GetLowerMeasureLimit())));
+                    bar->setBarDiapazon(math->GetHigherMeasureLimit(), \
+                                            math->GetLowerMeasureLimit());
                     bar->setValue(math->GetCurrentMathValue());
                     mListMath.unlock();
                     bar->cleanMarker();
@@ -569,8 +569,8 @@ void MainWindow::updateBars(void)
                 {
                     //bar->setExtr(channel->GetMinimumChannelValue(),\
                                  channel->GetMaximumChannelValue());
-                    bar->setBarDiapazon(max(abs(channel->GetHigherMeasureLimit()), \
-                                            abs(channel->GetLowerMeasureLimit())));
+                    bar->setBarDiapazon(channel->GetHigherMeasureLimit(), \
+                                            channel->GetLowerMeasureLimit());
 //                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
 //                    {
                         bar->setValueType(wVolueBar::BarValue_Real);

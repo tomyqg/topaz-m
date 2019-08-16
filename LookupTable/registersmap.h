@@ -5,6 +5,7 @@
 #include "lookup_tables.h"
 
 #define MAGIC_BUFFER_END    0x7FFF
+#define CALIB_START_OFFSET  60000
 
 enum termoCoupleType{
     TC_Type_S = 0,

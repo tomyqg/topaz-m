@@ -30,7 +30,7 @@ cFreqChannel::cFreqChannel(QObject *parent) : QObject(parent)
     timerUpdateParam = new QTimer();
     connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     updateParam();
-    timerUpdateParam->start(15000);
+    timerUpdateParam->start(30000);
 
 }
 

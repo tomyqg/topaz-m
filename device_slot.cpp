@@ -176,7 +176,7 @@ void cDevice::updateStatus()
     else
     {
         params << "uptime" /*<< "deviceState"*/ << "accessType" << "mbCommCount"\
-           << "mbCommError" << "deviceStatus" << "devErrors" << "deviceMode"; /*<< "root_Access";*/
+           << "mbCommError" /*<< "deviceStatus"*/ << "devErrors" << "deviceMode"; /*<< "root_Access";*/
     }
 //    for(int i = 0; i < params.size(); i++)
 //    {

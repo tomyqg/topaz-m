@@ -678,7 +678,7 @@ void dSettings::updateBar()
 //                           ColorCh3Light, ColorCh4Light};
         ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
-        ui->bar->setBarDiapazon(max(abs(ui->scaleUp->value()), abs(ui->scaleDown->value())));
+        ui->bar->setBarDiapazon(ui->scaleUp->value(), ui->scaleDown->value());
         ui->bar->setValue(channel->GetCurrentChannelValue());
     }
 }
@@ -1551,7 +1551,7 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         ChannelOptions * srcChannel = listChannels.at(index-1);
         ui->typeSignal->setCurrentIndex(getIndexSignalTypeTable(srcChannel->GetSignalType()));
         updateUiSignalTypeParam(getIndexSignalTypeTable(srcChannel->GetSignalType()));
-        ui->nameChannel->setText(srcChannel->GetChannelName().toUtf8());
+//        ui->nameChannel->setText(srcChannel->GetChannelName().toUtf8());
         ui->scaleUp->setValue(srcChannel->GetHigherMeasureLimit());
         ui->scaleDown->setValue(srcChannel->GetLowerMeasureLimit());
         ui->periodCh->setValue(srcChannel->GetMeasurePeriod());
@@ -1563,16 +1563,17 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         {
             ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
         }
-        else if(index == TermoCoupleMeasure)
+        else if(srcChannel->GetSignalType() == TermoCoupleMeasure)
         {
             ui->sensorDiapazon->setCurrentIndex(getIndexTableTC(srcChannel->GetDiapason()));
+            ui->enableColdJunction->setCurrentIndex(srcChannel->getStateColdJunction());
+            ui->shiftColdJunction->setValue(srcChannel->getShiftColdJunction());
         }
-        else if(index == TermoResistanceMeasure)
+        else if(srcChannel->GetSignalType() == TermoResistanceMeasure)
         {
             ui->sensorDiapazon->setCurrentIndex(getIndexTableRTD(srcChannel->GetDiapason()));
             ui->sensorShema->setCurrentIndex(srcChannel->getShema());
         }
-
     }
 }
 

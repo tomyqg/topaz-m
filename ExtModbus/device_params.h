@@ -652,9 +652,9 @@ typedef struct
     uint16_t chan1TypeValue;
     // Parameter: Signal Type : chan2SignalType : MB Offset: 5040
     uint16_t chan2SignalType;
-    // Parameter: Additional parameter21 : chan2AdditionalParameter1 : MB Offset: 5041
+    // Parameter: Additional parameter1 : chan2AdditionalParameter1 : MB Offset: 5041
     uint8_t chan2AdditionalParameter1[12];
-    // Parameter: Additional parameter20 : chan2AdditionalParameter2 : MB Offset: 5047
+    // Parameter: Additional parameter2 : chan2AdditionalParameter2 : MB Offset: 5047
     uint8_t chan2AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan2CorrectionCjValue : MB Offset: 5053
     float chan2CorrectionCjValue;
@@ -674,9 +674,9 @@ typedef struct
     uint16_t chan2TypeValue;
     // Parameter: Signal Type : chan3SignalType : MB Offset: 5080
     uint16_t chan3SignalType;
-    // Parameter: Additional parameter19 : chan3AdditionalParameter1 : MB Offset: 5081
+    // Parameter: Additional parameter1 : chan3AdditionalParameter1 : MB Offset: 5081
     uint8_t chan3AdditionalParameter1[12];
-    // Parameter: Additional parameter18 : chan3AdditionalParameter2 : MB Offset: 5087
+    // Parameter: Additional parameter2 : chan3AdditionalParameter2 : MB Offset: 5087
     uint8_t chan3AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan3CorrectionCjValue : MB Offset: 5093
     float chan3CorrectionCjValue;
@@ -696,9 +696,9 @@ typedef struct
     uint16_t chan3TypeValue;
     // Parameter: Signal Type : chan4SignalType : MB Offset: 5120
     uint16_t chan4SignalType;
-    // Parameter: Additional parameter19 : chan4AdditionalParameter1 : MB Offset: 5121
+    // Parameter: Additional parameter1 : chan4AdditionalParameter1 : MB Offset: 5121
     uint8_t chan4AdditionalParameter1[12];
-    // Parameter: Additional parameter18 : chan4AdditionalParameter2 : MB Offset: 5127
+    // Parameter: Additional parameter2 : chan4AdditionalParameter2 : MB Offset: 5127
     uint8_t chan4AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan4CorrectionCjValue : MB Offset: 5133
     float chan4CorrectionCjValue;
@@ -718,9 +718,9 @@ typedef struct
     uint16_t chan4TypeValue;
     // Parameter: Signal Type : chan5SignalType : MB Offset: 5160
     uint16_t chan5SignalType;
-    // Parameter: Additional parameter17 : chan5AdditionalParameter1 : MB Offset: 5161
+    // Parameter: Additional parameter1 : chan5AdditionalParameter1 : MB Offset: 5161
     uint8_t chan5AdditionalParameter1[12];
-    // Parameter: Additional parameter16 : chan5AdditionalParameter2 : MB Offset: 5167
+    // Parameter: Additional parameter2 : chan5AdditionalParameter2 : MB Offset: 5167
     uint8_t chan5AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan5CorrectionCjValue : MB Offset: 5173
     float chan5CorrectionCjValue;
@@ -740,9 +740,9 @@ typedef struct
     uint16_t chan5TypeValue;
     // Parameter: Signal Type : chan6SignalType : MB Offset: 5200
     uint16_t chan6SignalType;
-    // Parameter: Additional parameter17 : chan6AdditionalParameter1 : MB Offset: 5201
+    // Parameter: Additional parameter1 : chan6AdditionalParameter1 : MB Offset: 5201
     uint8_t chan6AdditionalParameter1[12];
-    // Parameter: Additional parameter16 : chan6AdditionalParameter2 : MB Offset: 5207
+    // Parameter: Additional parameter2 : chan6AdditionalParameter2 : MB Offset: 5207
     uint8_t chan6AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan6CorrectionCjValue : MB Offset: 5213
     float chan6CorrectionCjValue;
@@ -762,9 +762,9 @@ typedef struct
     uint16_t chan6TypeValue;
     // Parameter: Signal Type : chan7SignalType : MB Offset: 5240
     uint16_t chan7SignalType;
-    // Parameter: Additional parameter15 : chan7AdditionalParameter1 : MB Offset: 5241
+    // Parameter: Additional parameter1 : chan7AdditionalParameter1 : MB Offset: 5241
     uint8_t chan7AdditionalParameter1[12];
-    // Parameter: Additional parameter14 : chan7AdditionalParameter2 : MB Offset: 5247
+    // Parameter: Additional parameter2 : chan7AdditionalParameter2 : MB Offset: 5247
     uint8_t chan7AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan7CorrectionCjValue : MB Offset: 5253
     float chan7CorrectionCjValue;
@@ -784,9 +784,9 @@ typedef struct
     uint16_t chan7TypeValue;
     // Parameter: Signal Type : chan8SignalType : MB Offset: 5280
     uint16_t chan8SignalType;
-    // Parameter: Additional parameter15 : chan8AdditionalParameter1 : MB Offset: 5281
+    // Parameter: Additional parameter1 : chan8AdditionalParameter1 : MB Offset: 5281
     uint8_t chan8AdditionalParameter1[12];
-    // Parameter: Additional parameter14 : chan8AdditionalParameter2 : MB Offset: 5287
+    // Parameter: Additional parameter2 : chan8AdditionalParameter2 : MB Offset: 5287
     uint8_t chan8AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan8CorrectionCjValue : MB Offset: 5293
     float chan8CorrectionCjValue;
@@ -806,9 +806,9 @@ typedef struct
     uint16_t chan8TypeValue;
     // Parameter: Signal Type : chan9SignalType : MB Offset: 5320
     uint16_t chan9SignalType;
-    // Parameter: Additional parameter13 : chan9AdditionalParameter1 : MB Offset: 5321
+    // Parameter: Additional parameter1 : chan9AdditionalParameter1 : MB Offset: 5321
     uint8_t chan9AdditionalParameter1[12];
-    // Parameter: Additional parameter12 : chan9AdditionalParameter2 : MB Offset: 5327
+    // Parameter: Additional parameter2 : chan9AdditionalParameter2 : MB Offset: 5327
     uint8_t chan9AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan9CorrectionCjValue : MB Offset: 5333
     float chan9CorrectionCjValue;
@@ -828,9 +828,9 @@ typedef struct
     uint16_t chan9TypeValue;
     // Parameter: Signal Type : chan10SignalType : MB Offset: 5360
     uint16_t chan10SignalType;
-    // Parameter: Additional parameter13 : chan10AdditionalParameter1 : MB Offset: 5361
+    // Parameter: Additional parameter1 : chan10AdditionalParameter1 : MB Offset: 5361
     uint8_t chan10AdditionalParameter1[12];
-    // Parameter: Additional parameter12 : chan10AdditionalParameter2 : MB Offset: 5367
+    // Parameter: Additional parameter2 : chan10AdditionalParameter2 : MB Offset: 5367
     uint8_t chan10AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan10CorrectionCjValue : MB Offset: 5373
     float chan10CorrectionCjValue;
@@ -850,9 +850,9 @@ typedef struct
     uint16_t chan10TypeValue;
     // Parameter: Signal Type : chan11SignalType : MB Offset: 5400
     uint16_t chan11SignalType;
-    // Parameter: Additional parameter11 : chan11AdditionalParameter1 : MB Offset: 5401
+    // Parameter: Additional parameter1 : chan11AdditionalParameter1 : MB Offset: 5401
     uint8_t chan11AdditionalParameter1[12];
-    // Parameter: Additional parameter10 : chan11AdditionalParameter2 : MB Offset: 5407
+    // Parameter: Additional parameter2 : chan11AdditionalParameter2 : MB Offset: 5407
     uint8_t chan11AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan11CorrectionCjValue : MB Offset: 5413
     float chan11CorrectionCjValue;
@@ -872,9 +872,9 @@ typedef struct
     uint16_t chan11TypeValue;
     // Parameter: Signal Type : chan12SignalType : MB Offset: 5440
     uint16_t chan12SignalType;
-    // Parameter: Additional parameter11 : chan12AdditionalParameter1 : MB Offset: 5441
+    // Parameter: Additional parameter1 : chan12AdditionalParameter1 : MB Offset: 5441
     uint8_t chan12AdditionalParameter1[12];
-    // Parameter: Additional parameter10 : chan12AdditionalParameter2 : MB Offset: 5447
+    // Parameter: Additional parameter2 : chan12AdditionalParameter2 : MB Offset: 5447
     uint8_t chan12AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan12CorrectionCjValue : MB Offset: 5453
     float chan12CorrectionCjValue;
@@ -894,9 +894,9 @@ typedef struct
     uint16_t chan12TypeValue;
     // Parameter: Signal Type : chan13SignalType : MB Offset: 5480
     uint16_t chan13SignalType;
-    // Parameter: Additional parameter9 : chan13AdditionalParameter1 : MB Offset: 5481
+    // Parameter: Additional parameter1 : chan13AdditionalParameter1 : MB Offset: 5481
     uint8_t chan13AdditionalParameter1[12];
-    // Parameter: Additional parameter8 : chan13AdditionalParameter2 : MB Offset: 5487
+    // Parameter: Additional parameter2 : chan13AdditionalParameter2 : MB Offset: 5487
     uint8_t chan13AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan13CorrectionCjValue : MB Offset: 5493
     float chan13CorrectionCjValue;
@@ -916,9 +916,9 @@ typedef struct
     uint16_t chan13TypeValue;
     // Parameter: Signal Type : chan14SignalType : MB Offset: 5520
     uint16_t chan14SignalType;
-    // Parameter: Additional parameter9 : chan14AdditionalParameter1 : MB Offset: 5521
+    // Parameter: Additional parameter1 : chan14AdditionalParameter1 : MB Offset: 5521
     uint8_t chan14AdditionalParameter1[12];
-    // Parameter: Additional parameter8 : chan14AdditionalParameter2 : MB Offset: 5527
+    // Parameter: Additional parameter2 : chan14AdditionalParameter2 : MB Offset: 5527
     uint8_t chan14AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan14CorrectionCjValue : MB Offset: 5533
     float chan14CorrectionCjValue;
@@ -938,9 +938,9 @@ typedef struct
     uint16_t chan14TypeValue;
     // Parameter: Signal Type : chan15SignalType : MB Offset: 5560
     uint16_t chan15SignalType;
-    // Parameter: Additional parameter7 : chan15AdditionalParameter1 : MB Offset: 5561
+    // Parameter: Additional parameter1 : chan15AdditionalParameter1 : MB Offset: 5561
     uint8_t chan15AdditionalParameter1[12];
-    // Parameter: Additional parameter6 : chan15AdditionalParameter2 : MB Offset: 5567
+    // Parameter: Additional parameter2 : chan15AdditionalParameter2 : MB Offset: 5567
     uint8_t chan15AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan15CorrectionCjValue : MB Offset: 5573
     float chan15CorrectionCjValue;
@@ -960,9 +960,9 @@ typedef struct
     uint16_t chan15TypeValue;
     // Parameter: Signal Type : chan16SignalType : MB Offset: 5600
     uint16_t chan16SignalType;
-    // Parameter: Additional parameter7 : chan16AdditionalParameter1 : MB Offset: 5601
+    // Parameter: Additional parameter1 : chan16AdditionalParameter1 : MB Offset: 5601
     uint8_t chan16AdditionalParameter1[12];
-    // Parameter: Additional parameter6 : chan16AdditionalParameter2 : MB Offset: 5607
+    // Parameter: Additional parameter2 : chan16AdditionalParameter2 : MB Offset: 5607
     uint8_t chan16AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan16CorrectionCjValue : MB Offset: 5613
     float chan16CorrectionCjValue;
@@ -982,9 +982,9 @@ typedef struct
     uint16_t chan16TypeValue;
     // Parameter: Signal Type : chan17SignalType : MB Offset: 5640
     uint16_t chan17SignalType;
-    // Parameter: Additional parameter5 : chan17AdditionalParameter1 : MB Offset: 5641
+    // Parameter: Additional parameter1 : chan17AdditionalParameter1 : MB Offset: 5641
     uint8_t chan17AdditionalParameter1[12];
-    // Parameter: Additional parameter4 : chan17AdditionalParameter2 : MB Offset: 5647
+    // Parameter: Additional parameter2 : chan17AdditionalParameter2 : MB Offset: 5647
     uint8_t chan17AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan17CorrectionCjValue : MB Offset: 5653
     float chan17CorrectionCjValue;
@@ -1004,9 +1004,9 @@ typedef struct
     uint16_t chan17TypeValue;
     // Parameter: Signal Type : chan18SignalType : MB Offset: 5680
     uint16_t chan18SignalType;
-    // Parameter: Additional parameter5 : chan18AdditionalParameter1 : MB Offset: 5681
+    // Parameter: Additional parameter1 : chan18AdditionalParameter1 : MB Offset: 5681
     uint8_t chan18AdditionalParameter1[12];
-    // Parameter: Additional parameter4 : chan18AdditionalParameter2 : MB Offset: 5687
+    // Parameter: Additional parameter2 : chan18AdditionalParameter2 : MB Offset: 5687
     uint8_t chan18AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan18CorrectionCjValue : MB Offset: 5693
     float chan18CorrectionCjValue;
@@ -1026,7 +1026,7 @@ typedef struct
     uint16_t chan18TypeValue;
     // Parameter: Signal Type : chan19SignalType : MB Offset: 5720
     uint16_t chan19SignalType;
-    // Parameter: Additional parameter3 : chan19AdditionalParameter1 : MB Offset: 5721
+    // Parameter: Additional parameter1 : chan19AdditionalParameter1 : MB Offset: 5721
     uint8_t chan19AdditionalParameter1[12];
     // Parameter: Additional parameter2 : chan19AdditionalParameter2 : MB Offset: 5727
     uint8_t chan19AdditionalParameter2[12];
@@ -1048,7 +1048,7 @@ typedef struct
     uint16_t chan19TypeValue;
     // Parameter: Signal Type : chan20SignalType : MB Offset: 5760
     uint16_t chan20SignalType;
-    // Parameter: Additional parameter3 : chan20AdditionalParameter1 : MB Offset: 5761
+    // Parameter: Additional parameter1 : chan20AdditionalParameter1 : MB Offset: 5761
     uint8_t chan20AdditionalParameter1[12];
     // Parameter: Additional parameter2 : chan20AdditionalParameter2 : MB Offset: 5767
     uint8_t chan20AdditionalParameter2[12];
@@ -1072,7 +1072,7 @@ typedef struct
     uint16_t chan21SignalType;
     // Parameter: Additional parameter1 : chan21AdditionalParameter1 : MB Offset: 5801
     uint8_t chan21AdditionalParameter1[12];
-    // Parameter: Additional parameter0 : chan21AdditionalParameter2 : MB Offset: 5807
+    // Parameter: Additional parameter2 : chan21AdditionalParameter2 : MB Offset: 5807
     uint8_t chan21AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan21CorrectionCjValue : MB Offset: 5813
     float chan21CorrectionCjValue;
@@ -1094,7 +1094,7 @@ typedef struct
     uint16_t chan22SignalType;
     // Parameter: Additional parameter1 : chan22AdditionalParameter1 : MB Offset: 5841
     uint8_t chan22AdditionalParameter1[12];
-    // Parameter: Additional parameter0 : chan22AdditionalParameter2 : MB Offset: 5847
+    // Parameter: Additional parameter2 : chan22AdditionalParameter2 : MB Offset: 5847
     uint8_t chan22AdditionalParameter2[12];
     // Parameter: Correction CJ Value : chan22CorrectionCjValue : MB Offset: 5853
     float chan22CorrectionCjValue;
@@ -1948,1397 +1948,1493 @@ typedef struct
     uint16_t freq36Dempher;
     // Parameter: Type Value : freq36TypeValue : MB Offset: 6899
     uint16_t freq36TypeValue;
-    // Parameter: SysOCalb : chan1SysOCR : MB Offset: 10000
+    // Parameter: Nead Read Calibrations : chan1NeadReadCalibrations : MB Offset: 10000
+    uint16_t chan1NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan1ProcessReadCalibrations : MB Offset: 10001
+    float chan1ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan1SysOCR : MB Offset: 10003
     uint16_t chan1SysOCR;
-    // Parameter: SysGCalb : chan1SysFSR : MB Offset: 10001
+    // Parameter: SysGCalb : chan1SysFSR : MB Offset: 10004
     uint16_t chan1SysFSR;
-    // Parameter: CalibOCR20mV : chan1OCR20mV : MB Offset: 10002
+    // Parameter: CalibOCR20mV : chan1OCR20mV : MB Offset: 10005
     uint32_t chan1OCR20mV;
-    // Parameter: CalibFCR20mV : chan1FSR20mV : MB Offset: 10004
+    // Parameter: CalibFSR20mV : chan1FSR20mV : MB Offset: 10007
     uint32_t chan1FSR20mV;
-    // Parameter: CalibFDate20mV : chan1Date20mV : MB Offset: 10006
+    // Parameter: CalibDate20mV : chan1Date20mV : MB Offset: 10009
     uint32_t chan1Date20mV;
-    // Parameter: CalibOCR100mV : chan1OCR100mV : MB Offset: 10008
+    // Parameter: CalibOCR100mV : chan1OCR100mV : MB Offset: 10011
     uint32_t chan1OCR100mV;
-    // Parameter: CalibFCR100mV : chan1FSR100mV : MB Offset: 10010
+    // Parameter: CalibFSR100mV : chan1FSR100mV : MB Offset: 10013
     uint32_t chan1FSR100mV;
-    // Parameter: CalibFDate100mV : chan1Date100mV : MB Offset: 10012
+    // Parameter: CalibDate100mV : chan1Date100mV : MB Offset: 10015
     uint32_t chan1Date100mV;
-    // Parameter: CalibOCR1V : chan1OCR1V : MB Offset: 10014
+    // Parameter: CalibOCR1V : chan1OCR1V : MB Offset: 10017
     uint32_t chan1OCR1V;
-    // Parameter: CalibFCR1V : chan1FSR1V : MB Offset: 10016
+    // Parameter: CalibFSR1V : chan1FSR1V : MB Offset: 10019
     uint32_t chan1FSR1V;
-    // Parameter: CalibFDate1V : chan1Date1V : MB Offset: 10018
+    // Parameter: CalibDate1V : chan1Date1V : MB Offset: 10021
     uint32_t chan1Date1V;
-    // Parameter: CalibOCR10V : chan1OCR10V : MB Offset: 10020
+    // Parameter: CalibOCR10V : chan1OCR10V : MB Offset: 10023
     uint32_t chan1OCR10V;
-    // Parameter: CalibFCR10V : chan1FSR10V : MB Offset: 10022
+    // Parameter: CalibFSR10V : chan1FSR10V : MB Offset: 10025
     uint32_t chan1FSR10V;
-    // Parameter: CalibFDate10V : chan1Date10V : MB Offset: 10024
+    // Parameter: CalibDate10V : chan1Date10V : MB Offset: 10027
     uint32_t chan1Date10V;
-    // Parameter: CalibOCR30V : chan1OCR30V : MB Offset: 10026
+    // Parameter: CalibOCR30V : chan1OCR30V : MB Offset: 10029
     uint32_t chan1OCR30V;
-    // Parameter: CalibFCR30V : chan1FSR30V : MB Offset: 10028
+    // Parameter: CalibFSR30V : chan1FSR30V : MB Offset: 10031
     uint32_t chan1FSR30V;
-    // Parameter: CalibFDate30V : chan1Date30V : MB Offset: 10030
+    // Parameter: CalibDate30V : chan1Date30V : MB Offset: 10033
     uint32_t chan1Date30V;
-    // Parameter: CalibOCR20mA : chan1OCR20mA : MB Offset: 10032
+    // Parameter: CalibOCR20mA : chan1OCR20mA : MB Offset: 10035
     uint32_t chan1OCR20mA;
-    // Parameter: CalibFCR20mA : chan1FSR20mA : MB Offset: 10034
+    // Parameter: CalibFSR20mA : chan1FSR20mA : MB Offset: 10037
     uint32_t chan1FSR20mA;
-    // Parameter: CalibFDate20mA : chan1Date20mA : MB Offset: 10036
+    // Parameter: CalibDate20mA : chan1Date20mA : MB Offset: 10039
     uint32_t chan1Date20mA;
-    // Parameter: CalibOCR4x : chan1OCR4x : MB Offset: 10038
+    // Parameter: CalibOCR4x : chan1OCR4x : MB Offset: 10041
     uint32_t chan1OCR4x;
-    // Parameter: CalibFSR4x : chan1FSR4x : MB Offset: 10040
+    // Parameter: CalibFSR4x : chan1FSR4x : MB Offset: 10043
     uint32_t chan1FSR4x;
-    // Parameter: CalibDate4x : chan1Date4x : MB Offset: 10042
+    // Parameter: CalibDate4x : chan1Date4x : MB Offset: 10045
     uint32_t chan1Date4x;
-    // Parameter: CalibOCR3x : chan1OCR3x : MB Offset: 10044
+    // Parameter: CalibOCR3x : chan1OCR3x : MB Offset: 10047
     uint32_t chan1OCR3x;
-    // Parameter: CalibFSR3x : chan1FSR3x : MB Offset: 10046
+    // Parameter: CalibFSR3x : chan1FSR3x : MB Offset: 10049
     uint32_t chan1FSR3x;
-    // Parameter: CalibDate3x : chan1Date3x : MB Offset: 10048
+    // Parameter: CalibDate3x : chan1Date3x : MB Offset: 10051
     uint32_t chan1Date3x;
-    // Parameter: CalibOCRinternal : chan1OCRinternal : MB Offset: 10050
+    // Parameter: CalibOCRinternal : chan1OCRinternal : MB Offset: 10053
     float chan1OCRinternal;
-    // Parameter: CalibFSRinternal : chan1FSRinternal : MB Offset: 10052
+    // Parameter: CalibFSRinternal : chan1FSRinternal : MB Offset: 10055
     float chan1FSRinternal;
-    // Parameter: CalibDateinternal : chan1DateInternal : MB Offset: 10054
+    // Parameter: CalibDateinternal : chan1DateInternal : MB Offset: 10057
     uint32_t chan1DateInternal;
-    // Parameter: SysOCalb : chan2SysOCR : MB Offset: 10100
+    // Parameter: Nead Read Calibrations : chan2NeadReadCalibrations : MB Offset: 10100
+    uint16_t chan2NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan2ProcessReadCalibrations : MB Offset: 10101
+    float chan2ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan2SysOCR : MB Offset: 10103
     uint16_t chan2SysOCR;
-    // Parameter: SysGCalb : chan2SysFSR : MB Offset: 10101
+    // Parameter: SysGCalb : chan2SysFSR : MB Offset: 10104
     uint16_t chan2SysFSR;
-    // Parameter: CalibOCR20mV : chan2OCR20mV : MB Offset: 10102
+    // Parameter: CalibOCR20mV : chan2OCR20mV : MB Offset: 10105
     uint32_t chan2OCR20mV;
-    // Parameter: CalibFCR20mV : chan2FSR20mV : MB Offset: 10104
+    // Parameter: CalibFSR20mV : chan2FSR20mV : MB Offset: 10107
     uint32_t chan2FSR20mV;
-    // Parameter: CalibFDate20mV : chan2Date20mV : MB Offset: 10106
+    // Parameter: CalibDate20mV : chan2Date20mV : MB Offset: 10109
     uint32_t chan2Date20mV;
-    // Parameter: CalibOCR100mV : chan2OCR100mV : MB Offset: 10108
+    // Parameter: CalibOCR100mV : chan2OCR100mV : MB Offset: 10111
     uint32_t chan2OCR100mV;
-    // Parameter: CalibFCR100mV : chan2FSR100mV : MB Offset: 10110
+    // Parameter: CalibFSR100mV : chan2FSR100mV : MB Offset: 10113
     uint32_t chan2FSR100mV;
-    // Parameter: CalibFDate100mV : chan2Date100mV : MB Offset: 10112
+    // Parameter: CalibDate100mV : chan2Date100mV : MB Offset: 10115
     uint32_t chan2Date100mV;
-    // Parameter: CalibOCR1V : chan2OCR1V : MB Offset: 10114
+    // Parameter: CalibOCR1V : chan2OCR1V : MB Offset: 10117
     uint32_t chan2OCR1V;
-    // Parameter: CalibFCR1V : chan2FSR1V : MB Offset: 10116
+    // Parameter: CalibFSR1V : chan2FSR1V : MB Offset: 10119
     uint32_t chan2FSR1V;
-    // Parameter: CalibFDate1V : chan2Date1V : MB Offset: 10118
+    // Parameter: CalibDate1V : chan2Date1V : MB Offset: 10121
     uint32_t chan2Date1V;
-    // Parameter: CalibOCR10V : chan2OCR10V : MB Offset: 10120
+    // Parameter: CalibOCR10V : chan2OCR10V : MB Offset: 10123
     uint32_t chan2OCR10V;
-    // Parameter: CalibFCR10V : chan2FSR10V : MB Offset: 10122
+    // Parameter: CalibFSR10V : chan2FSR10V : MB Offset: 10125
     uint32_t chan2FSR10V;
-    // Parameter: CalibFDate10V : chan2Date10V : MB Offset: 10124
+    // Parameter: CalibDate10V : chan2Date10V : MB Offset: 10127
     uint32_t chan2Date10V;
-    // Parameter: CalibOCR30V : chan2OCR30V : MB Offset: 10126
+    // Parameter: CalibOCR30V : chan2OCR30V : MB Offset: 10129
     uint32_t chan2OCR30V;
-    // Parameter: CalibFCR30V : chan2FSR30V : MB Offset: 10128
+    // Parameter: CalibFSR30V : chan2FSR30V : MB Offset: 10131
     uint32_t chan2FSR30V;
-    // Parameter: CalibFDate30V : chan2Date30V : MB Offset: 10130
+    // Parameter: CalibDate30V : chan2Date30V : MB Offset: 10133
     uint32_t chan2Date30V;
-    // Parameter: CalibOCR20mA : chan2OCR20mA : MB Offset: 10132
+    // Parameter: CalibOCR20mA : chan2OCR20mA : MB Offset: 10135
     uint32_t chan2OCR20mA;
-    // Parameter: CalibFCR20mA : chan2FSR20mA : MB Offset: 10134
+    // Parameter: CalibFSR20mA : chan2FSR20mA : MB Offset: 10137
     uint32_t chan2FSR20mA;
-    // Parameter: CalibFDate20mA : chan2Date20mA : MB Offset: 10136
+    // Parameter: CalibDate20mA : chan2Date20mA : MB Offset: 10139
     uint32_t chan2Date20mA;
-    // Parameter: CalibOCR4x : chan2OCR4x : MB Offset: 10138
+    // Parameter: CalibOCR4x : chan2OCR4x : MB Offset: 10141
     uint32_t chan2OCR4x;
-    // Parameter: CalibFSR4x : chan2FSR4x : MB Offset: 10140
+    // Parameter: CalibFSR4x : chan2FSR4x : MB Offset: 10143
     uint32_t chan2FSR4x;
-    // Parameter: CalibDate4x : chan2Date4x : MB Offset: 10142
+    // Parameter: CalibDate4x : chan2Date4x : MB Offset: 10145
     uint32_t chan2Date4x;
-    // Parameter: CalibOCR3x : chan2OCR3x : MB Offset: 10144
+    // Parameter: CalibOCR3x : chan2OCR3x : MB Offset: 10147
     uint32_t chan2OCR3x;
-    // Parameter: CalibFSR3x : chan2FSR3x : MB Offset: 10146
+    // Parameter: CalibFSR3x : chan2FSR3x : MB Offset: 10149
     uint32_t chan2FSR3x;
-    // Parameter: CalibDate3x : chan2Date3x : MB Offset: 10148
+    // Parameter: CalibDate3x : chan2Date3x : MB Offset: 10151
     uint32_t chan2Date3x;
-    // Parameter: CalibOCRinternal : chan2OCRinternal : MB Offset: 10150
+    // Parameter: CalibOCRinternal : chan2OCRinternal : MB Offset: 10153
     float chan2OCRinternal;
-    // Parameter: CalibFSRinternal : chan2FSRinternal : MB Offset: 10152
+    // Parameter: CalibFSRinternal : chan2FSRinternal : MB Offset: 10155
     float chan2FSRinternal;
-    // Parameter: CalibDateinternal : chan2DateInternal : MB Offset: 10154
+    // Parameter: CalibDateinternal : chan2DateInternal : MB Offset: 10157
     uint32_t chan2DateInternal;
-    // Parameter: SysOCalb : chan3SysOCR : MB Offset: 10200
+    // Parameter: Nead Read Calibrations : chan3NeadReadCalibrations : MB Offset: 10200
+    uint16_t chan3NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan3ProcessReadCalibrations : MB Offset: 10201
+    float chan3ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan3SysOCR : MB Offset: 10203
     uint16_t chan3SysOCR;
-    // Parameter: SysGCalb : chan3SysFSR : MB Offset: 10201
+    // Parameter: SysGCalb : chan3SysFSR : MB Offset: 10204
     uint16_t chan3SysFSR;
-    // Parameter: CalibOCR20mV : chan3OCR20mV : MB Offset: 10202
+    // Parameter: CalibOCR20mV : chan3OCR20mV : MB Offset: 10205
     uint32_t chan3OCR20mV;
-    // Parameter: CalibFCR20mV : chan3FSR20mV : MB Offset: 10204
+    // Parameter: CalibFSR20mV : chan3FSR20mV : MB Offset: 10207
     uint32_t chan3FSR20mV;
-    // Parameter: CalibFDate20mV : chan3Date20mV : MB Offset: 10206
+    // Parameter: CalibDate20mV : chan3Date20mV : MB Offset: 10209
     uint32_t chan3Date20mV;
-    // Parameter: CalibOCR100mV : chan3OCR100mV : MB Offset: 10208
+    // Parameter: CalibOCR100mV : chan3OCR100mV : MB Offset: 10211
     uint32_t chan3OCR100mV;
-    // Parameter: CalibFCR100mV : chan3FSR100mV : MB Offset: 10210
+    // Parameter: CalibFSR100mV : chan3FSR100mV : MB Offset: 10213
     uint32_t chan3FSR100mV;
-    // Parameter: CalibFDate100mV : chan3Date100mV : MB Offset: 10212
+    // Parameter: CalibDate100mV : chan3Date100mV : MB Offset: 10215
     uint32_t chan3Date100mV;
-    // Parameter: CalibOCR1V : chan3OCR1V : MB Offset: 10214
+    // Parameter: CalibOCR1V : chan3OCR1V : MB Offset: 10217
     uint32_t chan3OCR1V;
-    // Parameter: CalibFCR1V : chan3FSR1V : MB Offset: 10216
+    // Parameter: CalibFSR1V : chan3FSR1V : MB Offset: 10219
     uint32_t chan3FSR1V;
-    // Parameter: CalibFDate1V : chan3Date1V : MB Offset: 10218
+    // Parameter: CalibDate1V : chan3Date1V : MB Offset: 10221
     uint32_t chan3Date1V;
-    // Parameter: CalibOCR10V : chan3OCR10V : MB Offset: 10220
+    // Parameter: CalibOCR10V : chan3OCR10V : MB Offset: 10223
     uint32_t chan3OCR10V;
-    // Parameter: CalibFCR10V : chan3FSR10V : MB Offset: 10222
+    // Parameter: CalibFSR10V : chan3FSR10V : MB Offset: 10225
     uint32_t chan3FSR10V;
-    // Parameter: CalibFDate10V : chan3Date10V : MB Offset: 10224
+    // Parameter: CalibDate10V : chan3Date10V : MB Offset: 10227
     uint32_t chan3Date10V;
-    // Parameter: CalibOCR30V : chan3OCR30V : MB Offset: 10226
+    // Parameter: CalibOCR30V : chan3OCR30V : MB Offset: 10229
     uint32_t chan3OCR30V;
-    // Parameter: CalibFCR30V : chan3FSR30V : MB Offset: 10228
+    // Parameter: CalibFSR30V : chan3FSR30V : MB Offset: 10231
     uint32_t chan3FSR30V;
-    // Parameter: CalibFDate30V : chan3Date30V : MB Offset: 10230
+    // Parameter: CalibDate30V : chan3Date30V : MB Offset: 10233
     uint32_t chan3Date30V;
-    // Parameter: CalibOCR20mA : chan3OCR20mA : MB Offset: 10232
+    // Parameter: CalibOCR20mA : chan3OCR20mA : MB Offset: 10235
     uint32_t chan3OCR20mA;
-    // Parameter: CalibFCR20mA : chan3FSR20mA : MB Offset: 10234
+    // Parameter: CalibFSR20mA : chan3FSR20mA : MB Offset: 10237
     uint32_t chan3FSR20mA;
-    // Parameter: CalibFDate20mA : chan3Date20mA : MB Offset: 10236
+    // Parameter: CalibDate20mA : chan3Date20mA : MB Offset: 10239
     uint32_t chan3Date20mA;
-    // Parameter: CalibOCR4x : chan3OCR4x : MB Offset: 10238
+    // Parameter: CalibOCR4x : chan3OCR4x : MB Offset: 10241
     uint32_t chan3OCR4x;
-    // Parameter: CalibFSR4x : chan3FSR4x : MB Offset: 10240
+    // Parameter: CalibFSR4x : chan3FSR4x : MB Offset: 10243
     uint32_t chan3FSR4x;
-    // Parameter: CalibDate4x : chan3Date4x : MB Offset: 10242
+    // Parameter: CalibDate4x : chan3Date4x : MB Offset: 10245
     uint32_t chan3Date4x;
-    // Parameter: CalibOCR3x : chan3OCR3x : MB Offset: 10244
+    // Parameter: CalibOCR3x : chan3OCR3x : MB Offset: 10247
     uint32_t chan3OCR3x;
-    // Parameter: CalibFSR3x : chan3FSR3x : MB Offset: 10246
+    // Parameter: CalibFSR3x : chan3FSR3x : MB Offset: 10249
     uint32_t chan3FSR3x;
-    // Parameter: CalibDate3x : chan3Date3x : MB Offset: 10248
+    // Parameter: CalibDate3x : chan3Date3x : MB Offset: 10251
     uint32_t chan3Date3x;
-    // Parameter: CalibOCRinternal : chan3OCRinternal : MB Offset: 10250
+    // Parameter: CalibOCRinternal : chan3OCRinternal : MB Offset: 10253
     float chan3OCRinternal;
-    // Parameter: CalibFSRinternal : chan3FSRinternal : MB Offset: 10252
+    // Parameter: CalibFSRinternal : chan3FSRinternal : MB Offset: 10255
     float chan3FSRinternal;
-    // Parameter: CalibDateinternal : chan3DateInternal : MB Offset: 10254
+    // Parameter: CalibDateinternal : chan3DateInternal : MB Offset: 10257
     uint32_t chan3DateInternal;
-    // Parameter: SysOCalb : chan4SysOCR : MB Offset: 10300
+    // Parameter: Nead Read Calibrations : chan4NeadReadCalibrations : MB Offset: 10300
+    uint16_t chan4NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan4ProcessReadCalibrations : MB Offset: 10301
+    float chan4ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan4SysOCR : MB Offset: 10303
     uint16_t chan4SysOCR;
-    // Parameter: SysGCalb : chan4SysFSR : MB Offset: 10301
+    // Parameter: SysGCalb : chan4SysFSR : MB Offset: 10304
     uint16_t chan4SysFSR;
-    // Parameter: CalibOCR20mV : chan4OCR20mV : MB Offset: 10302
+    // Parameter: CalibOCR20mV : chan4OCR20mV : MB Offset: 10305
     uint32_t chan4OCR20mV;
-    // Parameter: CalibFCR20mV : chan4FSR20mV : MB Offset: 10304
+    // Parameter: CalibFSR20mV : chan4FSR20mV : MB Offset: 10307
     uint32_t chan4FSR20mV;
-    // Parameter: CalibFDate20mV : chan4Date20mV : MB Offset: 10306
+    // Parameter: CalibDate20mV : chan4Date20mV : MB Offset: 10309
     uint32_t chan4Date20mV;
-    // Parameter: CalibOCR100mV : chan4OCR100mV : MB Offset: 10308
+    // Parameter: CalibOCR100mV : chan4OCR100mV : MB Offset: 10311
     uint32_t chan4OCR100mV;
-    // Parameter: CalibFCR100mV : chan4FSR100mV : MB Offset: 10310
+    // Parameter: CalibFSR100mV : chan4FSR100mV : MB Offset: 10313
     uint32_t chan4FSR100mV;
-    // Parameter: CalibFDate100mV : chan4Date100mV : MB Offset: 10312
+    // Parameter: CalibDate100mV : chan4Date100mV : MB Offset: 10315
     uint32_t chan4Date100mV;
-    // Parameter: CalibOCR1V : chan4OCR1V : MB Offset: 10314
+    // Parameter: CalibOCR1V : chan4OCR1V : MB Offset: 10317
     uint32_t chan4OCR1V;
-    // Parameter: CalibFCR1V : chan4FSR1V : MB Offset: 10316
+    // Parameter: CalibFSR1V : chan4FSR1V : MB Offset: 10319
     uint32_t chan4FSR1V;
-    // Parameter: CalibFDate1V : chan4Date1V : MB Offset: 10318
+    // Parameter: CalibDate1V : chan4Date1V : MB Offset: 10321
     uint32_t chan4Date1V;
-    // Parameter: CalibOCR10V : chan4OCR10V : MB Offset: 10320
+    // Parameter: CalibOCR10V : chan4OCR10V : MB Offset: 10323
     uint32_t chan4OCR10V;
-    // Parameter: CalibFCR10V : chan4FSR10V : MB Offset: 10322
+    // Parameter: CalibFSR10V : chan4FSR10V : MB Offset: 10325
     uint32_t chan4FSR10V;
-    // Parameter: CalibFDate10V : chan4Date10V : MB Offset: 10324
+    // Parameter: CalibDate10V : chan4Date10V : MB Offset: 10327
     uint32_t chan4Date10V;
-    // Parameter: CalibOCR30V : chan4OCR30V : MB Offset: 10326
+    // Parameter: CalibOCR30V : chan4OCR30V : MB Offset: 10329
     uint32_t chan4OCR30V;
-    // Parameter: CalibFCR30V : chan4FSR30V : MB Offset: 10328
+    // Parameter: CalibFSR30V : chan4FSR30V : MB Offset: 10331
     uint32_t chan4FSR30V;
-    // Parameter: CalibFDate30V : chan4Date30V : MB Offset: 10330
+    // Parameter: CalibDate30V : chan4Date30V : MB Offset: 10333
     uint32_t chan4Date30V;
-    // Parameter: CalibOCR20mA : chan4OCR20mA : MB Offset: 10332
+    // Parameter: CalibOCR20mA : chan4OCR20mA : MB Offset: 10335
     uint32_t chan4OCR20mA;
-    // Parameter: CalibFCR20mA : chan4FSR20mA : MB Offset: 10334
+    // Parameter: CalibFSR20mA : chan4FSR20mA : MB Offset: 10337
     uint32_t chan4FSR20mA;
-    // Parameter: CalibFDate20mA : chan4Date20mA : MB Offset: 10336
+    // Parameter: CalibDate20mA : chan4Date20mA : MB Offset: 10339
     uint32_t chan4Date20mA;
-    // Parameter: CalibOCR4x : chan4OCR4x : MB Offset: 10338
+    // Parameter: CalibOCR4x : chan4OCR4x : MB Offset: 10341
     uint32_t chan4OCR4x;
-    // Parameter: CalibFSR4x : chan4FSR4x : MB Offset: 10340
+    // Parameter: CalibFSR4x : chan4FSR4x : MB Offset: 10343
     uint32_t chan4FSR4x;
-    // Parameter: CalibDate4x : chan4Date4x : MB Offset: 10342
+    // Parameter: CalibDate4x : chan4Date4x : MB Offset: 10345
     uint32_t chan4Date4x;
-    // Parameter: CalibOCR3x : chan4OCR3x : MB Offset: 10344
+    // Parameter: CalibOCR3x : chan4OCR3x : MB Offset: 10347
     uint32_t chan4OCR3x;
-    // Parameter: CalibFSR3x : chan4FSR3x : MB Offset: 10346
+    // Parameter: CalibFSR3x : chan4FSR3x : MB Offset: 10349
     uint32_t chan4FSR3x;
-    // Parameter: CalibDate3x : chan4Date3x : MB Offset: 10348
+    // Parameter: CalibDate3x : chan4Date3x : MB Offset: 10351
     uint32_t chan4Date3x;
-    // Parameter: CalibOCRinternal : chan4OCRinternal : MB Offset: 10350
+    // Parameter: CalibOCRinternal : chan4OCRinternal : MB Offset: 10353
     float chan4OCRinternal;
-    // Parameter: CalibFSRinternal : chan4FSRinternal : MB Offset: 10352
+    // Parameter: CalibFSRinternal : chan4FSRinternal : MB Offset: 10355
     float chan4FSRinternal;
-    // Parameter: CalibDateinternal : chan4DateInternal : MB Offset: 10354
+    // Parameter: CalibDateinternal : chan4DateInternal : MB Offset: 10357
     uint32_t chan4DateInternal;
-    // Parameter: SysOCalb : chan5SysOCR : MB Offset: 10400
+    // Parameter: Nead Read Calibrations : chan5NeadReadCalibrations : MB Offset: 10400
+    uint16_t chan5NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan5ProcessReadCalibrations : MB Offset: 10401
+    float chan5ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan5SysOCR : MB Offset: 10403
     uint16_t chan5SysOCR;
-    // Parameter: SysGCalb : chan5SysFSR : MB Offset: 10401
+    // Parameter: SysGCalb : chan5SysFSR : MB Offset: 10404
     uint16_t chan5SysFSR;
-    // Parameter: CalibOCR20mV : chan5OCR20mV : MB Offset: 10402
+    // Parameter: CalibOCR20mV : chan5OCR20mV : MB Offset: 10405
     uint32_t chan5OCR20mV;
-    // Parameter: CalibFCR20mV : chan5FSR20mV : MB Offset: 10404
+    // Parameter: CalibFSR20mV : chan5FSR20mV : MB Offset: 10407
     uint32_t chan5FSR20mV;
-    // Parameter: CalibFDate20mV : chan5Date20mV : MB Offset: 10406
+    // Parameter: CalibDate20mV : chan5Date20mV : MB Offset: 10409
     uint32_t chan5Date20mV;
-    // Parameter: CalibOCR100mV : chan5OCR100mV : MB Offset: 10408
+    // Parameter: CalibOCR100mV : chan5OCR100mV : MB Offset: 10411
     uint32_t chan5OCR100mV;
-    // Parameter: CalibFCR100mV : chan5FSR100mV : MB Offset: 10410
+    // Parameter: CalibFSR100mV : chan5FSR100mV : MB Offset: 10413
     uint32_t chan5FSR100mV;
-    // Parameter: CalibFDate100mV : chan5Date100mV : MB Offset: 10412
+    // Parameter: CalibDate100mV : chan5Date100mV : MB Offset: 10415
     uint32_t chan5Date100mV;
-    // Parameter: CalibOCR1V : chan5OCR1V : MB Offset: 10414
+    // Parameter: CalibOCR1V : chan5OCR1V : MB Offset: 10417
     uint32_t chan5OCR1V;
-    // Parameter: CalibFCR1V : chan5FSR1V : MB Offset: 10416
+    // Parameter: CalibFSR1V : chan5FSR1V : MB Offset: 10419
     uint32_t chan5FSR1V;
-    // Parameter: CalibFDate1V : chan5Date1V : MB Offset: 10418
+    // Parameter: CalibDate1V : chan5Date1V : MB Offset: 10421
     uint32_t chan5Date1V;
-    // Parameter: CalibOCR10V : chan5OCR10V : MB Offset: 10420
+    // Parameter: CalibOCR10V : chan5OCR10V : MB Offset: 10423
     uint32_t chan5OCR10V;
-    // Parameter: CalibFCR10V : chan5FSR10V : MB Offset: 10422
+    // Parameter: CalibFSR10V : chan5FSR10V : MB Offset: 10425
     uint32_t chan5FSR10V;
-    // Parameter: CalibFDate10V : chan5Date10V : MB Offset: 10424
+    // Parameter: CalibDate10V : chan5Date10V : MB Offset: 10427
     uint32_t chan5Date10V;
-    // Parameter: CalibOCR30V : chan5OCR30V : MB Offset: 10426
+    // Parameter: CalibOCR30V : chan5OCR30V : MB Offset: 10429
     uint32_t chan5OCR30V;
-    // Parameter: CalibFCR30V : chan5FSR30V : MB Offset: 10428
+    // Parameter: CalibFSR30V : chan5FSR30V : MB Offset: 10431
     uint32_t chan5FSR30V;
-    // Parameter: CalibFDate30V : chan5Date30V : MB Offset: 10430
+    // Parameter: CalibDate30V : chan5Date30V : MB Offset: 10433
     uint32_t chan5Date30V;
-    // Parameter: CalibOCR20mA : chan5OCR20mA : MB Offset: 10432
+    // Parameter: CalibOCR20mA : chan5OCR20mA : MB Offset: 10435
     uint32_t chan5OCR20mA;
-    // Parameter: CalibFCR20mA : chan5FSR20mA : MB Offset: 10434
+    // Parameter: CalibFSR20mA : chan5FSR20mA : MB Offset: 10437
     uint32_t chan5FSR20mA;
-    // Parameter: CalibFDate20mA : chan5Date20mA : MB Offset: 10436
+    // Parameter: CalibDate20mA : chan5Date20mA : MB Offset: 10439
     uint32_t chan5Date20mA;
-    // Parameter: CalibOCR4x : chan5OCR4x : MB Offset: 10438
+    // Parameter: CalibOCR4x : chan5OCR4x : MB Offset: 10441
     uint32_t chan5OCR4x;
-    // Parameter: CalibFSR4x : chan5FSR4x : MB Offset: 10440
+    // Parameter: CalibFSR4x : chan5FSR4x : MB Offset: 10443
     uint32_t chan5FSR4x;
-    // Parameter: CalibDate4x : chan5Date4x : MB Offset: 10442
+    // Parameter: CalibDate4x : chan5Date4x : MB Offset: 10445
     uint32_t chan5Date4x;
-    // Parameter: CalibOCR3x : chan5OCR3x : MB Offset: 10444
+    // Parameter: CalibOCR3x : chan5OCR3x : MB Offset: 10447
     uint32_t chan5OCR3x;
-    // Parameter: CalibFSR3x : chan5FSR3x : MB Offset: 10446
+    // Parameter: CalibFSR3x : chan5FSR3x : MB Offset: 10449
     uint32_t chan5FSR3x;
-    // Parameter: CalibDate3x : chan5Date3x : MB Offset: 10448
+    // Parameter: CalibDate3x : chan5Date3x : MB Offset: 10451
     uint32_t chan5Date3x;
-    // Parameter: CalibOCRinternal : chan5OCRinternal : MB Offset: 10450
+    // Parameter: CalibOCRinternal : chan5OCRinternal : MB Offset: 10453
     float chan5OCRinternal;
-    // Parameter: CalibFSRinternal : chan5FSRinternal : MB Offset: 10452
+    // Parameter: CalibFSRinternal : chan5FSRinternal : MB Offset: 10455
     float chan5FSRinternal;
-    // Parameter: CalibDateinternal : chan5DateInternal : MB Offset: 10454
+    // Parameter: CalibDateinternal : chan5DateInternal : MB Offset: 10457
     uint32_t chan5DateInternal;
-    // Parameter: SysOCalb : chan6SysOCR : MB Offset: 10500
+    // Parameter: Nead Read Calibrations : chan6NeadReadCalibrations : MB Offset: 10500
+    uint16_t chan6NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan6ProcessReadCalibrations : MB Offset: 10501
+    float chan6ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan6SysOCR : MB Offset: 10503
     uint16_t chan6SysOCR;
-    // Parameter: SysGCalb : chan6SysFSR : MB Offset: 10501
+    // Parameter: SysGCalb : chan6SysFSR : MB Offset: 10504
     uint16_t chan6SysFSR;
-    // Parameter: CalibOCR20mV : chan6OCR20mV : MB Offset: 10502
+    // Parameter: CalibOCR20mV : chan6OCR20mV : MB Offset: 10505
     uint32_t chan6OCR20mV;
-    // Parameter: CalibFCR20mV : chan6FSR20mV : MB Offset: 10504
+    // Parameter: CalibFSR20mV : chan6FSR20mV : MB Offset: 10507
     uint32_t chan6FSR20mV;
-    // Parameter: CalibFDate20mV : chan6Date20mV : MB Offset: 10506
+    // Parameter: CalibDate20mV : chan6Date20mV : MB Offset: 10509
     uint32_t chan6Date20mV;
-    // Parameter: CalibOCR100mV : chan6OCR100mV : MB Offset: 10508
+    // Parameter: CalibOCR100mV : chan6OCR100mV : MB Offset: 10511
     uint32_t chan6OCR100mV;
-    // Parameter: CalibFCR100mV : chan6FSR100mV : MB Offset: 10510
+    // Parameter: CalibFSR100mV : chan6FSR100mV : MB Offset: 10513
     uint32_t chan6FSR100mV;
-    // Parameter: CalibFDate100mV : chan6Date100mV : MB Offset: 10512
+    // Parameter: CalibDate100mV : chan6Date100mV : MB Offset: 10515
     uint32_t chan6Date100mV;
-    // Parameter: CalibOCR1V : chan6OCR1V : MB Offset: 10514
+    // Parameter: CalibOCR1V : chan6OCR1V : MB Offset: 10517
     uint32_t chan6OCR1V;
-    // Parameter: CalibFCR1V : chan6FSR1V : MB Offset: 10516
+    // Parameter: CalibFSR1V : chan6FSR1V : MB Offset: 10519
     uint32_t chan6FSR1V;
-    // Parameter: CalibFDate1V : chan6Date1V : MB Offset: 10518
+    // Parameter: CalibDate1V : chan6Date1V : MB Offset: 10521
     uint32_t chan6Date1V;
-    // Parameter: CalibOCR10V : chan6OCR10V : MB Offset: 10520
+    // Parameter: CalibOCR10V : chan6OCR10V : MB Offset: 10523
     uint32_t chan6OCR10V;
-    // Parameter: CalibFCR10V : chan6FSR10V : MB Offset: 10522
+    // Parameter: CalibFSR10V : chan6FSR10V : MB Offset: 10525
     uint32_t chan6FSR10V;
-    // Parameter: CalibFDate10V : chan6Date10V : MB Offset: 10524
+    // Parameter: CalibDate10V : chan6Date10V : MB Offset: 10527
     uint32_t chan6Date10V;
-    // Parameter: CalibOCR30V : chan6OCR30V : MB Offset: 10526
+    // Parameter: CalibOCR30V : chan6OCR30V : MB Offset: 10529
     uint32_t chan6OCR30V;
-    // Parameter: CalibFCR30V : chan6FSR30V : MB Offset: 10528
+    // Parameter: CalibFSR30V : chan6FSR30V : MB Offset: 10531
     uint32_t chan6FSR30V;
-    // Parameter: CalibFDate30V : chan6Date30V : MB Offset: 10530
+    // Parameter: CalibDate30V : chan6Date30V : MB Offset: 10533
     uint32_t chan6Date30V;
-    // Parameter: CalibOCR20mA : chan6OCR20mA : MB Offset: 10532
+    // Parameter: CalibOCR20mA : chan6OCR20mA : MB Offset: 10535
     uint32_t chan6OCR20mA;
-    // Parameter: CalibFCR20mA : chan6FSR20mA : MB Offset: 10534
+    // Parameter: CalibFSR20mA : chan6FSR20mA : MB Offset: 10537
     uint32_t chan6FSR20mA;
-    // Parameter: CalibFDate20mA : chan6Date20mA : MB Offset: 10536
+    // Parameter: CalibDate20mA : chan6Date20mA : MB Offset: 10539
     uint32_t chan6Date20mA;
-    // Parameter: CalibOCR4x : chan6OCR4x : MB Offset: 10538
+    // Parameter: CalibOCR4x : chan6OCR4x : MB Offset: 10541
     uint32_t chan6OCR4x;
-    // Parameter: CalibFSR4x : chan6FSR4x : MB Offset: 10540
+    // Parameter: CalibFSR4x : chan6FSR4x : MB Offset: 10543
     uint32_t chan6FSR4x;
-    // Parameter: CalibDate4x : chan6Date4x : MB Offset: 10542
+    // Parameter: CalibDate4x : chan6Date4x : MB Offset: 10545
     uint32_t chan6Date4x;
-    // Parameter: CalibOCR3x : chan6OCR3x : MB Offset: 10544
+    // Parameter: CalibOCR3x : chan6OCR3x : MB Offset: 10547
     uint32_t chan6OCR3x;
-    // Parameter: CalibFSR3x : chan6FSR3x : MB Offset: 10546
+    // Parameter: CalibFSR3x : chan6FSR3x : MB Offset: 10549
     uint32_t chan6FSR3x;
-    // Parameter: CalibDate3x : chan6Date3x : MB Offset: 10548
+    // Parameter: CalibDate3x : chan6Date3x : MB Offset: 10551
     uint32_t chan6Date3x;
-    // Parameter: CalibOCRinternal : chan6OCRinternal : MB Offset: 10550
+    // Parameter: CalibOCRinternal : chan6OCRinternal : MB Offset: 10553
     float chan6OCRinternal;
-    // Parameter: CalibFSRinternal : chan6FSRinternal : MB Offset: 10552
+    // Parameter: CalibFSRinternal : chan6FSRinternal : MB Offset: 10555
     float chan6FSRinternal;
-    // Parameter: CalibDateinternal : chan6DateInternal : MB Offset: 10554
+    // Parameter: CalibDateinternal : chan6DateInternal : MB Offset: 10557
     uint32_t chan6DateInternal;
-    // Parameter: SysOCalb : chan7SysOCR : MB Offset: 10600
+    // Parameter: Nead Read Calibrations : chan7NeadReadCalibrations : MB Offset: 10600
+    uint16_t chan7NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan7ProcessReadCalibrations : MB Offset: 10601
+    float chan7ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan7SysOCR : MB Offset: 10603
     uint16_t chan7SysOCR;
-    // Parameter: SysGCalb : chan7SysFSR : MB Offset: 10601
+    // Parameter: SysGCalb : chan7SysFSR : MB Offset: 10604
     uint16_t chan7SysFSR;
-    // Parameter: CalibOCR20mV : chan7OCR20mV : MB Offset: 10602
+    // Parameter: CalibOCR20mV : chan7OCR20mV : MB Offset: 10605
     uint32_t chan7OCR20mV;
-    // Parameter: CalibFCR20mV : chan7FSR20mV : MB Offset: 10604
+    // Parameter: CalibFSR20mV : chan7FSR20mV : MB Offset: 10607
     uint32_t chan7FSR20mV;
-    // Parameter: CalibFDate20mV : chan7Date20mV : MB Offset: 10606
+    // Parameter: CalibDate20mV : chan7Date20mV : MB Offset: 10609
     uint32_t chan7Date20mV;
-    // Parameter: CalibOCR100mV : chan7OCR100mV : MB Offset: 10608
+    // Parameter: CalibOCR100mV : chan7OCR100mV : MB Offset: 10611
     uint32_t chan7OCR100mV;
-    // Parameter: CalibFCR100mV : chan7FSR100mV : MB Offset: 10610
+    // Parameter: CalibFSR100mV : chan7FSR100mV : MB Offset: 10613
     uint32_t chan7FSR100mV;
-    // Parameter: CalibFDate100mV : chan7Date100mV : MB Offset: 10612
+    // Parameter: CalibDate100mV : chan7Date100mV : MB Offset: 10615
     uint32_t chan7Date100mV;
-    // Parameter: CalibOCR1V : chan7OCR1V : MB Offset: 10614
+    // Parameter: CalibOCR1V : chan7OCR1V : MB Offset: 10617
     uint32_t chan7OCR1V;
-    // Parameter: CalibFCR1V : chan7FSR1V : MB Offset: 10616
+    // Parameter: CalibFSR1V : chan7FSR1V : MB Offset: 10619
     uint32_t chan7FSR1V;
-    // Parameter: CalibFDate1V : chan7Date1V : MB Offset: 10618
+    // Parameter: CalibDate1V : chan7Date1V : MB Offset: 10621
     uint32_t chan7Date1V;
-    // Parameter: CalibOCR10V : chan7OCR10V : MB Offset: 10620
+    // Parameter: CalibOCR10V : chan7OCR10V : MB Offset: 10623
     uint32_t chan7OCR10V;
-    // Parameter: CalibFCR10V : chan7FSR10V : MB Offset: 10622
+    // Parameter: CalibFSR10V : chan7FSR10V : MB Offset: 10625
     uint32_t chan7FSR10V;
-    // Parameter: CalibFDate10V : chan7Date10V : MB Offset: 10624
+    // Parameter: CalibDate10V : chan7Date10V : MB Offset: 10627
     uint32_t chan7Date10V;
-    // Parameter: CalibOCR30V : chan7OCR30V : MB Offset: 10626
+    // Parameter: CalibOCR30V : chan7OCR30V : MB Offset: 10629
     uint32_t chan7OCR30V;
-    // Parameter: CalibFCR30V : chan7FSR30V : MB Offset: 10628
+    // Parameter: CalibFSR30V : chan7FSR30V : MB Offset: 10631
     uint32_t chan7FSR30V;
-    // Parameter: CalibFDate30V : chan7Date30V : MB Offset: 10630
+    // Parameter: CalibDate30V : chan7Date30V : MB Offset: 10633
     uint32_t chan7Date30V;
-    // Parameter: CalibOCR20mA : chan7OCR20mA : MB Offset: 10632
+    // Parameter: CalibOCR20mA : chan7OCR20mA : MB Offset: 10635
     uint32_t chan7OCR20mA;
-    // Parameter: CalibFCR20mA : chan7FSR20mA : MB Offset: 10634
+    // Parameter: CalibFSR20mA : chan7FSR20mA : MB Offset: 10637
     uint32_t chan7FSR20mA;
-    // Parameter: CalibFDate20mA : chan7Date20mA : MB Offset: 10636
+    // Parameter: CalibDate20mA : chan7Date20mA : MB Offset: 10639
     uint32_t chan7Date20mA;
-    // Parameter: CalibOCR4x : chan7OCR4x : MB Offset: 10638
+    // Parameter: CalibOCR4x : chan7OCR4x : MB Offset: 10641
     uint32_t chan7OCR4x;
-    // Parameter: CalibFSR4x : chan7FSR4x : MB Offset: 10640
+    // Parameter: CalibFSR4x : chan7FSR4x : MB Offset: 10643
     uint32_t chan7FSR4x;
-    // Parameter: CalibDate4x : chan7Date4x : MB Offset: 10642
+    // Parameter: CalibDate4x : chan7Date4x : MB Offset: 10645
     uint32_t chan7Date4x;
-    // Parameter: CalibOCR3x : chan7OCR3x : MB Offset: 10644
+    // Parameter: CalibOCR3x : chan7OCR3x : MB Offset: 10647
     uint32_t chan7OCR3x;
-    // Parameter: CalibFSR3x : chan7FSR3x : MB Offset: 10646
+    // Parameter: CalibFSR3x : chan7FSR3x : MB Offset: 10649
     uint32_t chan7FSR3x;
-    // Parameter: CalibDate3x : chan7Date3x : MB Offset: 10648
+    // Parameter: CalibDate3x : chan7Date3x : MB Offset: 10651
     uint32_t chan7Date3x;
-    // Parameter: CalibOCRinternal : chan7OCRinternal : MB Offset: 10650
+    // Parameter: CalibOCRinternal : chan7OCRinternal : MB Offset: 10653
     float chan7OCRinternal;
-    // Parameter: CalibFSRinternal : chan7FSRinternal : MB Offset: 10652
+    // Parameter: CalibFSRinternal : chan7FSRinternal : MB Offset: 10655
     float chan7FSRinternal;
-    // Parameter: CalibDateinternal : chan7DateInternal : MB Offset: 10654
+    // Parameter: CalibDateinternal : chan7DateInternal : MB Offset: 10657
     uint32_t chan7DateInternal;
-    // Parameter: SysOCalb : chan8SysOCR : MB Offset: 10700
+    // Parameter: Nead Read Calibrations : chan8NeadReadCalibrations : MB Offset: 10700
+    uint16_t chan8NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan8ProcessReadCalibrations : MB Offset: 10701
+    float chan8ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan8SysOCR : MB Offset: 10703
     uint16_t chan8SysOCR;
-    // Parameter: SysGCalb : chan8SysFSR : MB Offset: 10701
+    // Parameter: SysGCalb : chan8SysFSR : MB Offset: 10704
     uint16_t chan8SysFSR;
-    // Parameter: CalibOCR20mV : chan8OCR20mV : MB Offset: 10702
+    // Parameter: CalibOCR20mV : chan8OCR20mV : MB Offset: 10705
     uint32_t chan8OCR20mV;
-    // Parameter: CalibFCR20mV : chan8FSR20mV : MB Offset: 10704
+    // Parameter: CalibFSR20mV : chan8FSR20mV : MB Offset: 10707
     uint32_t chan8FSR20mV;
-    // Parameter: CalibFDate20mV : chan8Date20mV : MB Offset: 10706
+    // Parameter: CalibDate20mV : chan8Date20mV : MB Offset: 10709
     uint32_t chan8Date20mV;
-    // Parameter: CalibOCR100mV : chan8OCR100mV : MB Offset: 10708
+    // Parameter: CalibOCR100mV : chan8OCR100mV : MB Offset: 10711
     uint32_t chan8OCR100mV;
-    // Parameter: CalibFCR100mV : chan8FSR100mV : MB Offset: 10710
+    // Parameter: CalibFSR100mV : chan8FSR100mV : MB Offset: 10713
     uint32_t chan8FSR100mV;
-    // Parameter: CalibFDate100mV : chan8Date100mV : MB Offset: 10712
+    // Parameter: CalibDate100mV : chan8Date100mV : MB Offset: 10715
     uint32_t chan8Date100mV;
-    // Parameter: CalibOCR1V : chan8OCR1V : MB Offset: 10714
+    // Parameter: CalibOCR1V : chan8OCR1V : MB Offset: 10717
     uint32_t chan8OCR1V;
-    // Parameter: CalibFCR1V : chan8FSR1V : MB Offset: 10716
+    // Parameter: CalibFSR1V : chan8FSR1V : MB Offset: 10719
     uint32_t chan8FSR1V;
-    // Parameter: CalibFDate1V : chan8Date1V : MB Offset: 10718
+    // Parameter: CalibDate1V : chan8Date1V : MB Offset: 10721
     uint32_t chan8Date1V;
-    // Parameter: CalibOCR10V : chan8OCR10V : MB Offset: 10720
+    // Parameter: CalibOCR10V : chan8OCR10V : MB Offset: 10723
     uint32_t chan8OCR10V;
-    // Parameter: CalibFCR10V : chan8FSR10V : MB Offset: 10722
+    // Parameter: CalibFSR10V : chan8FSR10V : MB Offset: 10725
     uint32_t chan8FSR10V;
-    // Parameter: CalibFDate10V : chan8Date10V : MB Offset: 10724
+    // Parameter: CalibDate10V : chan8Date10V : MB Offset: 10727
     uint32_t chan8Date10V;
-    // Parameter: CalibOCR30V : chan8OCR30V : MB Offset: 10726
+    // Parameter: CalibOCR30V : chan8OCR30V : MB Offset: 10729
     uint32_t chan8OCR30V;
-    // Parameter: CalibFCR30V : chan8FSR30V : MB Offset: 10728
+    // Parameter: CalibFSR30V : chan8FSR30V : MB Offset: 10731
     uint32_t chan8FSR30V;
-    // Parameter: CalibFDate30V : chan8Date30V : MB Offset: 10730
+    // Parameter: CalibDate30V : chan8Date30V : MB Offset: 10733
     uint32_t chan8Date30V;
-    // Parameter: CalibOCR20mA : chan8OCR20mA : MB Offset: 10732
+    // Parameter: CalibOCR20mA : chan8OCR20mA : MB Offset: 10735
     uint32_t chan8OCR20mA;
-    // Parameter: CalibFCR20mA : chan8FSR20mA : MB Offset: 10734
+    // Parameter: CalibFSR20mA : chan8FSR20mA : MB Offset: 10737
     uint32_t chan8FSR20mA;
-    // Parameter: CalibFDate20mA : chan8Date20mA : MB Offset: 10736
+    // Parameter: CalibDate20mA : chan8Date20mA : MB Offset: 10739
     uint32_t chan8Date20mA;
-    // Parameter: CalibOCR4x : chan8OCR4x : MB Offset: 10738
+    // Parameter: CalibOCR4x : chan8OCR4x : MB Offset: 10741
     uint32_t chan8OCR4x;
-    // Parameter: CalibFSR4x : chan8FSR4x : MB Offset: 10740
+    // Parameter: CalibFSR4x : chan8FSR4x : MB Offset: 10743
     uint32_t chan8FSR4x;
-    // Parameter: CalibDate4x : chan8Date4x : MB Offset: 10742
+    // Parameter: CalibDate4x : chan8Date4x : MB Offset: 10745
     uint32_t chan8Date4x;
-    // Parameter: CalibOCR3x : chan8OCR3x : MB Offset: 10744
+    // Parameter: CalibOCR3x : chan8OCR3x : MB Offset: 10747
     uint32_t chan8OCR3x;
-    // Parameter: CalibFSR3x : chan8FSR3x : MB Offset: 10746
+    // Parameter: CalibFSR3x : chan8FSR3x : MB Offset: 10749
     uint32_t chan8FSR3x;
-    // Parameter: CalibDate3x : chan8Date3x : MB Offset: 10748
+    // Parameter: CalibDate3x : chan8Date3x : MB Offset: 10751
     uint32_t chan8Date3x;
-    // Parameter: CalibOCRinternal : chan8OCRinternal : MB Offset: 10750
+    // Parameter: CalibOCRinternal : chan8OCRinternal : MB Offset: 10753
     float chan8OCRinternal;
-    // Parameter: CalibFSRinternal : chan8FSRinternal : MB Offset: 10752
+    // Parameter: CalibFSRinternal : chan8FSRinternal : MB Offset: 10755
     float chan8FSRinternal;
-    // Parameter: CalibDateinternal : chan8DateInternal : MB Offset: 10754
+    // Parameter: CalibDateinternal : chan8DateInternal : MB Offset: 10757
     uint32_t chan8DateInternal;
-    // Parameter: SysOCalb : chan9SysOCR : MB Offset: 10800
+    // Parameter: Nead Read Calibrations : chan9NeadReadCalibrations : MB Offset: 10800
+    uint16_t chan9NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan9ProcessReadCalibrations : MB Offset: 10801
+    float chan9ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan9SysOCR : MB Offset: 10803
     uint16_t chan9SysOCR;
-    // Parameter: SysGCalb : chan9SysFSR : MB Offset: 10801
+    // Parameter: SysGCalb : chan9SysFSR : MB Offset: 10804
     uint16_t chan9SysFSR;
-    // Parameter: CalibOCR20mV : chan9OCR20mV : MB Offset: 10802
+    // Parameter: CalibOCR20mV : chan9OCR20mV : MB Offset: 10805
     uint32_t chan9OCR20mV;
-    // Parameter: CalibFCR20mV : chan9FSR20mV : MB Offset: 10804
+    // Parameter: CalibFSR20mV : chan9FSR20mV : MB Offset: 10807
     uint32_t chan9FSR20mV;
-    // Parameter: CalibFDate20mV : chan9Date20mV : MB Offset: 10806
+    // Parameter: CalibDate20mV : chan9Date20mV : MB Offset: 10809
     uint32_t chan9Date20mV;
-    // Parameter: CalibOCR100mV : chan9OCR100mV : MB Offset: 10808
+    // Parameter: CalibOCR100mV : chan9OCR100mV : MB Offset: 10811
     uint32_t chan9OCR100mV;
-    // Parameter: CalibFCR100mV : chan9FSR100mV : MB Offset: 10810
+    // Parameter: CalibFSR100mV : chan9FSR100mV : MB Offset: 10813
     uint32_t chan9FSR100mV;
-    // Parameter: CalibFDate100mV : chan9Date100mV : MB Offset: 10812
+    // Parameter: CalibDate100mV : chan9Date100mV : MB Offset: 10815
     uint32_t chan9Date100mV;
-    // Parameter: CalibOCR1V : chan9OCR1V : MB Offset: 10814
+    // Parameter: CalibOCR1V : chan9OCR1V : MB Offset: 10817
     uint32_t chan9OCR1V;
-    // Parameter: CalibFCR1V : chan9FSR1V : MB Offset: 10816
+    // Parameter: CalibFSR1V : chan9FSR1V : MB Offset: 10819
     uint32_t chan9FSR1V;
-    // Parameter: CalibFDate1V : chan9Date1V : MB Offset: 10818
+    // Parameter: CalibDate1V : chan9Date1V : MB Offset: 10821
     uint32_t chan9Date1V;
-    // Parameter: CalibOCR10V : chan9OCR10V : MB Offset: 10820
+    // Parameter: CalibOCR10V : chan9OCR10V : MB Offset: 10823
     uint32_t chan9OCR10V;
-    // Parameter: CalibFCR10V : chan9FSR10V : MB Offset: 10822
+    // Parameter: CalibFSR10V : chan9FSR10V : MB Offset: 10825
     uint32_t chan9FSR10V;
-    // Parameter: CalibFDate10V : chan9Date10V : MB Offset: 10824
+    // Parameter: CalibDate10V : chan9Date10V : MB Offset: 10827
     uint32_t chan9Date10V;
-    // Parameter: CalibOCR30V : chan9OCR30V : MB Offset: 10826
+    // Parameter: CalibOCR30V : chan9OCR30V : MB Offset: 10829
     uint32_t chan9OCR30V;
-    // Parameter: CalibFCR30V : chan9FSR30V : MB Offset: 10828
+    // Parameter: CalibFSR30V : chan9FSR30V : MB Offset: 10831
     uint32_t chan9FSR30V;
-    // Parameter: CalibFDate30V : chan9Date30V : MB Offset: 10830
+    // Parameter: CalibDate30V : chan9Date30V : MB Offset: 10833
     uint32_t chan9Date30V;
-    // Parameter: CalibOCR20mA : chan9OCR20mA : MB Offset: 10832
+    // Parameter: CalibOCR20mA : chan9OCR20mA : MB Offset: 10835
     uint32_t chan9OCR20mA;
-    // Parameter: CalibFCR20mA : chan9FSR20mA : MB Offset: 10834
+    // Parameter: CalibFSR20mA : chan9FSR20mA : MB Offset: 10837
     uint32_t chan9FSR20mA;
-    // Parameter: CalibFDate20mA : chan9Date20mA : MB Offset: 10836
+    // Parameter: CalibDate20mA : chan9Date20mA : MB Offset: 10839
     uint32_t chan9Date20mA;
-    // Parameter: CalibOCR4x : chan9OCR4x : MB Offset: 10838
+    // Parameter: CalibOCR4x : chan9OCR4x : MB Offset: 10841
     uint32_t chan9OCR4x;
-    // Parameter: CalibFSR4x : chan9FSR4x : MB Offset: 10840
+    // Parameter: CalibFSR4x : chan9FSR4x : MB Offset: 10843
     uint32_t chan9FSR4x;
-    // Parameter: CalibDate4x : chan9Date4x : MB Offset: 10842
+    // Parameter: CalibDate4x : chan9Date4x : MB Offset: 10845
     uint32_t chan9Date4x;
-    // Parameter: CalibOCR3x : chan9OCR3x : MB Offset: 10844
+    // Parameter: CalibOCR3x : chan9OCR3x : MB Offset: 10847
     uint32_t chan9OCR3x;
-    // Parameter: CalibFSR3x : chan9FSR3x : MB Offset: 10846
+    // Parameter: CalibFSR3x : chan9FSR3x : MB Offset: 10849
     uint32_t chan9FSR3x;
-    // Parameter: CalibDate3x : chan9Date3x : MB Offset: 10848
+    // Parameter: CalibDate3x : chan9Date3x : MB Offset: 10851
     uint32_t chan9Date3x;
-    // Parameter: CalibOCRinternal : chan9OCRinternal : MB Offset: 10850
+    // Parameter: CalibOCRinternal : chan9OCRinternal : MB Offset: 10853
     float chan9OCRinternal;
-    // Parameter: CalibFSRinternal : chan9FSRinternal : MB Offset: 10852
+    // Parameter: CalibFSRinternal : chan9FSRinternal : MB Offset: 10855
     float chan9FSRinternal;
-    // Parameter: CalibDateinternal : chan9DateInternal : MB Offset: 10854
+    // Parameter: CalibDateinternal : chan9DateInternal : MB Offset: 10857
     uint32_t chan9DateInternal;
-    // Parameter: SysOCalb : chan10SysOCR : MB Offset: 10900
+    // Parameter: Nead Read Calibrations : chan10NeadReadCalibrations : MB Offset: 10900
+    uint16_t chan10NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan10ProcessReadCalibrations : MB Offset: 10901
+    float chan10ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan10SysOCR : MB Offset: 10903
     uint16_t chan10SysOCR;
-    // Parameter: SysGCalb : chan10SysFSR : MB Offset: 10901
+    // Parameter: SysGCalb : chan10SysFSR : MB Offset: 10904
     uint16_t chan10SysFSR;
-    // Parameter: CalibOCR20mV : chan10OCR20mV : MB Offset: 10902
+    // Parameter: CalibOCR20mV : chan10OCR20mV : MB Offset: 10905
     uint32_t chan10OCR20mV;
-    // Parameter: CalibFCR20mV : chan10FSR20mV : MB Offset: 10904
+    // Parameter: CalibFSR20mV : chan10FSR20mV : MB Offset: 10907
     uint32_t chan10FSR20mV;
-    // Parameter: CalibFDate20mV : chan10Date20mV : MB Offset: 10906
+    // Parameter: CalibDate20mV : chan10Date20mV : MB Offset: 10909
     uint32_t chan10Date20mV;
-    // Parameter: CalibOCR100mV : chan10OCR100mV : MB Offset: 10908
+    // Parameter: CalibOCR100mV : chan10OCR100mV : MB Offset: 10911
     uint32_t chan10OCR100mV;
-    // Parameter: CalibFCR100mV : chan10FSR100mV : MB Offset: 10910
+    // Parameter: CalibFSR100mV : chan10FSR100mV : MB Offset: 10913
     uint32_t chan10FSR100mV;
-    // Parameter: CalibFDate100mV : chan10Date100mV : MB Offset: 10912
+    // Parameter: CalibDate100mV : chan10Date100mV : MB Offset: 10915
     uint32_t chan10Date100mV;
-    // Parameter: CalibOCR1V : chan10OCR1V : MB Offset: 10914
+    // Parameter: CalibOCR1V : chan10OCR1V : MB Offset: 10917
     uint32_t chan10OCR1V;
-    // Parameter: CalibFCR1V : chan10FSR1V : MB Offset: 10916
+    // Parameter: CalibFSR1V : chan10FSR1V : MB Offset: 10919
     uint32_t chan10FSR1V;
-    // Parameter: CalibFDate1V : chan10Date1V : MB Offset: 10918
+    // Parameter: CalibDate1V : chan10Date1V : MB Offset: 10921
     uint32_t chan10Date1V;
-    // Parameter: CalibOCR10V : chan10OCR10V : MB Offset: 10920
+    // Parameter: CalibOCR10V : chan10OCR10V : MB Offset: 10923
     uint32_t chan10OCR10V;
-    // Parameter: CalibFCR10V : chan10FSR10V : MB Offset: 10922
+    // Parameter: CalibFSR10V : chan10FSR10V : MB Offset: 10925
     uint32_t chan10FSR10V;
-    // Parameter: CalibFDate10V : chan10Date10V : MB Offset: 10924
+    // Parameter: CalibDate10V : chan10Date10V : MB Offset: 10927
     uint32_t chan10Date10V;
-    // Parameter: CalibOCR30V : chan10OCR30V : MB Offset: 10926
+    // Parameter: CalibOCR30V : chan10OCR30V : MB Offset: 10929
     uint32_t chan10OCR30V;
-    // Parameter: CalibFCR30V : chan10FSR30V : MB Offset: 10928
+    // Parameter: CalibFSR30V : chan10FSR30V : MB Offset: 10931
     uint32_t chan10FSR30V;
-    // Parameter: CalibFDate30V : chan10Date30V : MB Offset: 10930
+    // Parameter: CalibDate30V : chan10Date30V : MB Offset: 10933
     uint32_t chan10Date30V;
-    // Parameter: CalibOCR20mA : chan10OCR20mA : MB Offset: 10932
+    // Parameter: CalibOCR20mA : chan10OCR20mA : MB Offset: 10935
     uint32_t chan10OCR20mA;
-    // Parameter: CalibFCR20mA : chan10FSR20mA : MB Offset: 10934
+    // Parameter: CalibFSR20mA : chan10FSR20mA : MB Offset: 10937
     uint32_t chan10FSR20mA;
-    // Parameter: CalibFDate20mA : chan10Date20mA : MB Offset: 10936
+    // Parameter: CalibDate20mA : chan10Date20mA : MB Offset: 10939
     uint32_t chan10Date20mA;
-    // Parameter: CalibOCR4x : chan10OCR4x : MB Offset: 10938
+    // Parameter: CalibOCR4x : chan10OCR4x : MB Offset: 10941
     uint32_t chan10OCR4x;
-    // Parameter: CalibFSR4x : chan10FSR4x : MB Offset: 10940
+    // Parameter: CalibFSR4x : chan10FSR4x : MB Offset: 10943
     uint32_t chan10FSR4x;
-    // Parameter: CalibDate4x : chan10Date4x : MB Offset: 10942
+    // Parameter: CalibDate4x : chan10Date4x : MB Offset: 10945
     uint32_t chan10Date4x;
-    // Parameter: CalibOCR3x : chan10OCR3x : MB Offset: 10944
+    // Parameter: CalibOCR3x : chan10OCR3x : MB Offset: 10947
     uint32_t chan10OCR3x;
-    // Parameter: CalibFSR3x : chan10FSR3x : MB Offset: 10946
+    // Parameter: CalibFSR3x : chan10FSR3x : MB Offset: 10949
     uint32_t chan10FSR3x;
-    // Parameter: CalibDate3x : chan10Date3x : MB Offset: 10948
+    // Parameter: CalibDate3x : chan10Date3x : MB Offset: 10951
     uint32_t chan10Date3x;
-    // Parameter: CalibOCRinternal : chan10OCRinternal : MB Offset: 10950
+    // Parameter: CalibOCRinternal : chan10OCRinternal : MB Offset: 10953
     float chan10OCRinternal;
-    // Parameter: CalibFSRinternal : chan10FSRinternal : MB Offset: 10952
+    // Parameter: CalibFSRinternal : chan10FSRinternal : MB Offset: 10955
     float chan10FSRinternal;
-    // Parameter: CalibDateinternal : chan10DateInternal : MB Offset: 10954
+    // Parameter: CalibDateinternal : chan10DateInternal : MB Offset: 10957
     uint32_t chan10DateInternal;
-    // Parameter: SysOCalb : chan11SysOCR : MB Offset: 11000
+    // Parameter: Nead Read Calibrations : chan11NeadReadCalibrations : MB Offset: 11000
+    uint16_t chan11NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan11ProcessReadCalibrations : MB Offset: 11001
+    float chan11ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan11SysOCR : MB Offset: 11003
     uint16_t chan11SysOCR;
-    // Parameter: SysGCalb : chan11SysFSR : MB Offset: 11001
+    // Parameter: SysGCalb : chan11SysFSR : MB Offset: 11004
     uint16_t chan11SysFSR;
-    // Parameter: CalibOCR20mV : chan11OCR20mV : MB Offset: 11002
+    // Parameter: CalibOCR20mV : chan11OCR20mV : MB Offset: 11005
     uint32_t chan11OCR20mV;
-    // Parameter: CalibFCR20mV : chan11FSR20mV : MB Offset: 11004
+    // Parameter: CalibFSR20mV : chan11FSR20mV : MB Offset: 11007
     uint32_t chan11FSR20mV;
-    // Parameter: CalibFDate20mV : chan11Date20mV : MB Offset: 11006
+    // Parameter: CalibDate20mV : chan11Date20mV : MB Offset: 11009
     uint32_t chan11Date20mV;
-    // Parameter: CalibOCR100mV : chan11OCR100mV : MB Offset: 11008
+    // Parameter: CalibOCR100mV : chan11OCR100mV : MB Offset: 11011
     uint32_t chan11OCR100mV;
-    // Parameter: CalibFCR100mV : chan11FSR100mV : MB Offset: 11010
+    // Parameter: CalibFSR100mV : chan11FSR100mV : MB Offset: 11013
     uint32_t chan11FSR100mV;
-    // Parameter: CalibFDate100mV : chan11Date100mV : MB Offset: 11012
+    // Parameter: CalibDate100mV : chan11Date100mV : MB Offset: 11015
     uint32_t chan11Date100mV;
-    // Parameter: CalibOCR1V : chan11OCR1V : MB Offset: 11014
+    // Parameter: CalibOCR1V : chan11OCR1V : MB Offset: 11017
     uint32_t chan11OCR1V;
-    // Parameter: CalibFCR1V : chan11FSR1V : MB Offset: 11016
+    // Parameter: CalibFSR1V : chan11FSR1V : MB Offset: 11019
     uint32_t chan11FSR1V;
-    // Parameter: CalibFDate1V : chan11Date1V : MB Offset: 11018
+    // Parameter: CalibDate1V : chan11Date1V : MB Offset: 11021
     uint32_t chan11Date1V;
-    // Parameter: CalibOCR10V : chan11OCR10V : MB Offset: 11020
+    // Parameter: CalibOCR10V : chan11OCR10V : MB Offset: 11023
     uint32_t chan11OCR10V;
-    // Parameter: CalibFCR10V : chan11FSR10V : MB Offset: 11022
+    // Parameter: CalibFSR10V : chan11FSR10V : MB Offset: 11025
     uint32_t chan11FSR10V;
-    // Parameter: CalibFDate10V : chan11Date10V : MB Offset: 11024
+    // Parameter: CalibDate10V : chan11Date10V : MB Offset: 11027
     uint32_t chan11Date10V;
-    // Parameter: CalibOCR30V : chan11OCR30V : MB Offset: 11026
+    // Parameter: CalibOCR30V : chan11OCR30V : MB Offset: 11029
     uint32_t chan11OCR30V;
-    // Parameter: CalibFCR30V : chan11FSR30V : MB Offset: 11028
+    // Parameter: CalibFSR30V : chan11FSR30V : MB Offset: 11031
     uint32_t chan11FSR30V;
-    // Parameter: CalibFDate30V : chan11Date30V : MB Offset: 11030
+    // Parameter: CalibDate30V : chan11Date30V : MB Offset: 11033
     uint32_t chan11Date30V;
-    // Parameter: CalibOCR20mA : chan11OCR20mA : MB Offset: 11032
+    // Parameter: CalibOCR20mA : chan11OCR20mA : MB Offset: 11035
     uint32_t chan11OCR20mA;
-    // Parameter: CalibFCR20mA : chan11FSR20mA : MB Offset: 11034
+    // Parameter: CalibFSR20mA : chan11FSR20mA : MB Offset: 11037
     uint32_t chan11FSR20mA;
-    // Parameter: CalibFDate20mA : chan11Date20mA : MB Offset: 11036
+    // Parameter: CalibDate20mA : chan11Date20mA : MB Offset: 11039
     uint32_t chan11Date20mA;
-    // Parameter: CalibOCR4x : chan11OCR4x : MB Offset: 11038
+    // Parameter: CalibOCR4x : chan11OCR4x : MB Offset: 11041
     uint32_t chan11OCR4x;
-    // Parameter: CalibFSR4x : chan11FSR4x : MB Offset: 11040
+    // Parameter: CalibFSR4x : chan11FSR4x : MB Offset: 11043
     uint32_t chan11FSR4x;
-    // Parameter: CalibDate4x : chan11Date4x : MB Offset: 11042
+    // Parameter: CalibDate4x : chan11Date4x : MB Offset: 11045
     uint32_t chan11Date4x;
-    // Parameter: CalibOCR3x : chan11OCR3x : MB Offset: 11044
+    // Parameter: CalibOCR3x : chan11OCR3x : MB Offset: 11047
     uint32_t chan11OCR3x;
-    // Parameter: CalibFSR3x : chan11FSR3x : MB Offset: 11046
+    // Parameter: CalibFSR3x : chan11FSR3x : MB Offset: 11049
     uint32_t chan11FSR3x;
-    // Parameter: CalibDate3x : chan11Date3x : MB Offset: 11048
+    // Parameter: CalibDate3x : chan11Date3x : MB Offset: 11051
     uint32_t chan11Date3x;
-    // Parameter: CalibOCRinternal : chan11OCRinternal : MB Offset: 11050
+    // Parameter: CalibOCRinternal : chan11OCRinternal : MB Offset: 11053
     float chan11OCRinternal;
-    // Parameter: CalibFSRinternal : chan11FSRinternal : MB Offset: 11052
+    // Parameter: CalibFSRinternal : chan11FSRinternal : MB Offset: 11055
     float chan11FSRinternal;
-    // Parameter: CalibDateinternal : chan11DateInternal : MB Offset: 11054
+    // Parameter: CalibDateinternal : chan11DateInternal : MB Offset: 11057
     uint32_t chan11DateInternal;
-    // Parameter: SysOCalb : chan12SysOCR : MB Offset: 11100
+    // Parameter: Nead Read Calibrations : chan12NeadReadCalibrations : MB Offset: 11100
+    uint16_t chan12NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan12ProcessReadCalibrations : MB Offset: 11101
+    float chan12ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan12SysOCR : MB Offset: 11103
     uint16_t chan12SysOCR;
-    // Parameter: SysGCalb : chan12SysFSR : MB Offset: 11101
+    // Parameter: SysGCalb : chan12SysFSR : MB Offset: 11104
     uint16_t chan12SysFSR;
-    // Parameter: CalibOCR20mV : chan12OCR20mV : MB Offset: 11102
+    // Parameter: CalibOCR20mV : chan12OCR20mV : MB Offset: 11105
     uint32_t chan12OCR20mV;
-    // Parameter: CalibFCR20mV : chan12FSR20mV : MB Offset: 11104
+    // Parameter: CalibFSR20mV : chan12FSR20mV : MB Offset: 11107
     uint32_t chan12FSR20mV;
-    // Parameter: CalibFDate20mV : chan12Date20mV : MB Offset: 11106
+    // Parameter: CalibDate20mV : chan12Date20mV : MB Offset: 11109
     uint32_t chan12Date20mV;
-    // Parameter: CalibOCR100mV : chan12OCR100mV : MB Offset: 11108
+    // Parameter: CalibOCR100mV : chan12OCR100mV : MB Offset: 11111
     uint32_t chan12OCR100mV;
-    // Parameter: CalibFCR100mV : chan12FSR100mV : MB Offset: 11110
+    // Parameter: CalibFSR100mV : chan12FSR100mV : MB Offset: 11113
     uint32_t chan12FSR100mV;
-    // Parameter: CalibFDate100mV : chan12Date100mV : MB Offset: 11112
+    // Parameter: CalibDate100mV : chan12Date100mV : MB Offset: 11115
     uint32_t chan12Date100mV;
-    // Parameter: CalibOCR1V : chan12OCR1V : MB Offset: 11114
+    // Parameter: CalibOCR1V : chan12OCR1V : MB Offset: 11117
     uint32_t chan12OCR1V;
-    // Parameter: CalibFCR1V : chan12FSR1V : MB Offset: 11116
+    // Parameter: CalibFSR1V : chan12FSR1V : MB Offset: 11119
     uint32_t chan12FSR1V;
-    // Parameter: CalibFDate1V : chan12Date1V : MB Offset: 11118
+    // Parameter: CalibDate1V : chan12Date1V : MB Offset: 11121
     uint32_t chan12Date1V;
-    // Parameter: CalibOCR10V : chan12OCR10V : MB Offset: 11120
+    // Parameter: CalibOCR10V : chan12OCR10V : MB Offset: 11123
     uint32_t chan12OCR10V;
-    // Parameter: CalibFCR10V : chan12FSR10V : MB Offset: 11122
+    // Parameter: CalibFSR10V : chan12FSR10V : MB Offset: 11125
     uint32_t chan12FSR10V;
-    // Parameter: CalibFDate10V : chan12Date10V : MB Offset: 11124
+    // Parameter: CalibDate10V : chan12Date10V : MB Offset: 11127
     uint32_t chan12Date10V;
-    // Parameter: CalibOCR30V : chan12OCR30V : MB Offset: 11126
+    // Parameter: CalibOCR30V : chan12OCR30V : MB Offset: 11129
     uint32_t chan12OCR30V;
-    // Parameter: CalibFCR30V : chan12FSR30V : MB Offset: 11128
+    // Parameter: CalibFSR30V : chan12FSR30V : MB Offset: 11131
     uint32_t chan12FSR30V;
-    // Parameter: CalibFDate30V : chan12Date30V : MB Offset: 11130
+    // Parameter: CalibDate30V : chan12Date30V : MB Offset: 11133
     uint32_t chan12Date30V;
-    // Parameter: CalibOCR20mA : chan12OCR20mA : MB Offset: 11132
+    // Parameter: CalibOCR20mA : chan12OCR20mA : MB Offset: 11135
     uint32_t chan12OCR20mA;
-    // Parameter: CalibFCR20mA : chan12FSR20mA : MB Offset: 11134
+    // Parameter: CalibFSR20mA : chan12FSR20mA : MB Offset: 11137
     uint32_t chan12FSR20mA;
-    // Parameter: CalibFDate20mA : chan12Date20mA : MB Offset: 11136
+    // Parameter: CalibDate20mA : chan12Date20mA : MB Offset: 11139
     uint32_t chan12Date20mA;
-    // Parameter: CalibOCR4x : chan12OCR4x : MB Offset: 11138
+    // Parameter: CalibOCR4x : chan12OCR4x : MB Offset: 11141
     uint32_t chan12OCR4x;
-    // Parameter: CalibFSR4x : chan12FSR4x : MB Offset: 11140
+    // Parameter: CalibFSR4x : chan12FSR4x : MB Offset: 11143
     uint32_t chan12FSR4x;
-    // Parameter: CalibDate4x : chan12Date4x : MB Offset: 11142
+    // Parameter: CalibDate4x : chan12Date4x : MB Offset: 11145
     uint32_t chan12Date4x;
-    // Parameter: CalibOCR3x : chan12OCR3x : MB Offset: 11144
+    // Parameter: CalibOCR3x : chan12OCR3x : MB Offset: 11147
     uint32_t chan12OCR3x;
-    // Parameter: CalibFSR3x : chan12FSR3x : MB Offset: 11146
+    // Parameter: CalibFSR3x : chan12FSR3x : MB Offset: 11149
     uint32_t chan12FSR3x;
-    // Parameter: CalibDate3x : chan12Date3x : MB Offset: 11148
+    // Parameter: CalibDate3x : chan12Date3x : MB Offset: 11151
     uint32_t chan12Date3x;
-    // Parameter: CalibOCRinternal : chan12OCRinternal : MB Offset: 11150
+    // Parameter: CalibOCRinternal : chan12OCRinternal : MB Offset: 11153
     float chan12OCRinternal;
-    // Parameter: CalibFSRinternal : chan12FSRinternal : MB Offset: 11152
+    // Parameter: CalibFSRinternal : chan12FSRinternal : MB Offset: 11155
     float chan12FSRinternal;
-    // Parameter: CalibDateinternal : chan12DateInternal : MB Offset: 11154
+    // Parameter: CalibDateinternal : chan12DateInternal : MB Offset: 11157
     uint32_t chan12DateInternal;
-    // Parameter: SysOCalb : chan13SysOCR : MB Offset: 11200
+    // Parameter: Nead Read Calibrations : chan13NeadReadCalibrations : MB Offset: 11200
+    uint16_t chan13NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan13ProcessReadCalibrations : MB Offset: 11201
+    float chan13ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan13SysOCR : MB Offset: 11203
     uint16_t chan13SysOCR;
-    // Parameter: SysGCalb : chan13SysFSR : MB Offset: 11201
+    // Parameter: SysGCalb : chan13SysFSR : MB Offset: 11204
     uint16_t chan13SysFSR;
-    // Parameter: CalibOCR20mV : chan13OCR20mV : MB Offset: 11202
+    // Parameter: CalibOCR20mV : chan13OCR20mV : MB Offset: 11205
     uint32_t chan13OCR20mV;
-    // Parameter: CalibFCR20mV : chan13FSR20mV : MB Offset: 11204
+    // Parameter: CalibFSR20mV : chan13FSR20mV : MB Offset: 11207
     uint32_t chan13FSR20mV;
-    // Parameter: CalibFDate20mV : chan13Date20mV : MB Offset: 11206
+    // Parameter: CalibDate20mV : chan13Date20mV : MB Offset: 11209
     uint32_t chan13Date20mV;
-    // Parameter: CalibOCR100mV : chan13OCR100mV : MB Offset: 11208
+    // Parameter: CalibOCR100mV : chan13OCR100mV : MB Offset: 11211
     uint32_t chan13OCR100mV;
-    // Parameter: CalibFCR100mV : chan13FSR100mV : MB Offset: 11210
+    // Parameter: CalibFSR100mV : chan13FSR100mV : MB Offset: 11213
     uint32_t chan13FSR100mV;
-    // Parameter: CalibFDate100mV : chan13Date100mV : MB Offset: 11212
+    // Parameter: CalibDate100mV : chan13Date100mV : MB Offset: 11215
     uint32_t chan13Date100mV;
-    // Parameter: CalibOCR1V : chan13OCR1V : MB Offset: 11214
+    // Parameter: CalibOCR1V : chan13OCR1V : MB Offset: 11217
     uint32_t chan13OCR1V;
-    // Parameter: CalibFCR1V : chan13FSR1V : MB Offset: 11216
+    // Parameter: CalibFSR1V : chan13FSR1V : MB Offset: 11219
     uint32_t chan13FSR1V;
-    // Parameter: CalibFDate1V : chan13Date1V : MB Offset: 11218
+    // Parameter: CalibDate1V : chan13Date1V : MB Offset: 11221
     uint32_t chan13Date1V;
-    // Parameter: CalibOCR10V : chan13OCR10V : MB Offset: 11220
+    // Parameter: CalibOCR10V : chan13OCR10V : MB Offset: 11223
     uint32_t chan13OCR10V;
-    // Parameter: CalibFCR10V : chan13FSR10V : MB Offset: 11222
+    // Parameter: CalibFSR10V : chan13FSR10V : MB Offset: 11225
     uint32_t chan13FSR10V;
-    // Parameter: CalibFDate10V : chan13Date10V : MB Offset: 11224
+    // Parameter: CalibDate10V : chan13Date10V : MB Offset: 11227
     uint32_t chan13Date10V;
-    // Parameter: CalibOCR30V : chan13OCR30V : MB Offset: 11226
+    // Parameter: CalibOCR30V : chan13OCR30V : MB Offset: 11229
     uint32_t chan13OCR30V;
-    // Parameter: CalibFCR30V : chan13FSR30V : MB Offset: 11228
+    // Parameter: CalibFSR30V : chan13FSR30V : MB Offset: 11231
     uint32_t chan13FSR30V;
-    // Parameter: CalibFDate30V : chan13Date30V : MB Offset: 11230
+    // Parameter: CalibDate30V : chan13Date30V : MB Offset: 11233
     uint32_t chan13Date30V;
-    // Parameter: CalibOCR20mA : chan13OCR20mA : MB Offset: 11232
+    // Parameter: CalibOCR20mA : chan13OCR20mA : MB Offset: 11235
     uint32_t chan13OCR20mA;
-    // Parameter: CalibFCR20mA : chan13FSR20mA : MB Offset: 11234
+    // Parameter: CalibFSR20mA : chan13FSR20mA : MB Offset: 11237
     uint32_t chan13FSR20mA;
-    // Parameter: CalibFDate20mA : chan13Date20mA : MB Offset: 11236
+    // Parameter: CalibDate20mA : chan13Date20mA : MB Offset: 11239
     uint32_t chan13Date20mA;
-    // Parameter: CalibOCR4x : chan13OCR4x : MB Offset: 11238
+    // Parameter: CalibOCR4x : chan13OCR4x : MB Offset: 11241
     uint32_t chan13OCR4x;
-    // Parameter: CalibFSR4x : chan13FSR4x : MB Offset: 11240
+    // Parameter: CalibFSR4x : chan13FSR4x : MB Offset: 11243
     uint32_t chan13FSR4x;
-    // Parameter: CalibDate4x : chan13Date4x : MB Offset: 11242
+    // Parameter: CalibDate4x : chan13Date4x : MB Offset: 11245
     uint32_t chan13Date4x;
-    // Parameter: CalibOCR3x : chan13OCR3x : MB Offset: 11244
+    // Parameter: CalibOCR3x : chan13OCR3x : MB Offset: 11247
     uint32_t chan13OCR3x;
-    // Parameter: CalibFSR3x : chan13FSR3x : MB Offset: 11246
+    // Parameter: CalibFSR3x : chan13FSR3x : MB Offset: 11249
     uint32_t chan13FSR3x;
-    // Parameter: CalibDate3x : chan13Date3x : MB Offset: 11248
+    // Parameter: CalibDate3x : chan13Date3x : MB Offset: 11251
     uint32_t chan13Date3x;
-    // Parameter: CalibOCRinternal : chan13OCRinternal : MB Offset: 11250
+    // Parameter: CalibOCRinternal : chan13OCRinternal : MB Offset: 11253
     float chan13OCRinternal;
-    // Parameter: CalibFSRinternal : chan13FSRinternal : MB Offset: 11252
+    // Parameter: CalibFSRinternal : chan13FSRinternal : MB Offset: 11255
     float chan13FSRinternal;
-    // Parameter: CalibDateinternal : chan13DateInternal : MB Offset: 11254
+    // Parameter: CalibDateinternal : chan13DateInternal : MB Offset: 11257
     uint32_t chan13DateInternal;
-    // Parameter: SysOCalb : chan14SysOCR : MB Offset: 11300
+    // Parameter: Nead Read Calibrations : chan14NeadReadCalibrations : MB Offset: 11300
+    uint16_t chan14NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan14ProcessReadCalibrations : MB Offset: 11301
+    float chan14ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan14SysOCR : MB Offset: 11303
     uint16_t chan14SysOCR;
-    // Parameter: SysGCalb : chan14SysFSR : MB Offset: 11301
+    // Parameter: SysGCalb : chan14SysFSR : MB Offset: 11304
     uint16_t chan14SysFSR;
-    // Parameter: CalibOCR20mV : chan14OCR20mV : MB Offset: 11302
+    // Parameter: CalibOCR20mV : chan14OCR20mV : MB Offset: 11305
     uint32_t chan14OCR20mV;
-    // Parameter: CalibFCR20mV : chan14FSR20mV : MB Offset: 11304
+    // Parameter: CalibFSR20mV : chan14FSR20mV : MB Offset: 11307
     uint32_t chan14FSR20mV;
-    // Parameter: CalibFDate20mV : chan14Date20mV : MB Offset: 11306
+    // Parameter: CalibDate20mV : chan14Date20mV : MB Offset: 11309
     uint32_t chan14Date20mV;
-    // Parameter: CalibOCR100mV : chan14OCR100mV : MB Offset: 11308
+    // Parameter: CalibOCR100mV : chan14OCR100mV : MB Offset: 11311
     uint32_t chan14OCR100mV;
-    // Parameter: CalibFCR100mV : chan14FSR100mV : MB Offset: 11310
+    // Parameter: CalibFSR100mV : chan14FSR100mV : MB Offset: 11313
     uint32_t chan14FSR100mV;
-    // Parameter: CalibFDate100mV : chan14Date100mV : MB Offset: 11312
+    // Parameter: CalibDate100mV : chan14Date100mV : MB Offset: 11315
     uint32_t chan14Date100mV;
-    // Parameter: CalibOCR1V : chan14OCR1V : MB Offset: 11314
+    // Parameter: CalibOCR1V : chan14OCR1V : MB Offset: 11317
     uint32_t chan14OCR1V;
-    // Parameter: CalibFCR1V : chan14FSR1V : MB Offset: 11316
+    // Parameter: CalibFSR1V : chan14FSR1V : MB Offset: 11319
     uint32_t chan14FSR1V;
-    // Parameter: CalibFDate1V : chan14Date1V : MB Offset: 11318
+    // Parameter: CalibDate1V : chan14Date1V : MB Offset: 11321
     uint32_t chan14Date1V;
-    // Parameter: CalibOCR10V : chan14OCR10V : MB Offset: 11320
+    // Parameter: CalibOCR10V : chan14OCR10V : MB Offset: 11323
     uint32_t chan14OCR10V;
-    // Parameter: CalibFCR10V : chan14FSR10V : MB Offset: 11322
+    // Parameter: CalibFSR10V : chan14FSR10V : MB Offset: 11325
     uint32_t chan14FSR10V;
-    // Parameter: CalibFDate10V : chan14Date10V : MB Offset: 11324
+    // Parameter: CalibDate10V : chan14Date10V : MB Offset: 11327
     uint32_t chan14Date10V;
-    // Parameter: CalibOCR30V : chan14OCR30V : MB Offset: 11326
+    // Parameter: CalibOCR30V : chan14OCR30V : MB Offset: 11329
     uint32_t chan14OCR30V;
-    // Parameter: CalibFCR30V : chan14FSR30V : MB Offset: 11328
+    // Parameter: CalibFSR30V : chan14FSR30V : MB Offset: 11331
     uint32_t chan14FSR30V;
-    // Parameter: CalibFDate30V : chan14Date30V : MB Offset: 11330
+    // Parameter: CalibDate30V : chan14Date30V : MB Offset: 11333
     uint32_t chan14Date30V;
-    // Parameter: CalibOCR20mA : chan14OCR20mA : MB Offset: 11332
+    // Parameter: CalibOCR20mA : chan14OCR20mA : MB Offset: 11335
     uint32_t chan14OCR20mA;
-    // Parameter: CalibFCR20mA : chan14FSR20mA : MB Offset: 11334
+    // Parameter: CalibFSR20mA : chan14FSR20mA : MB Offset: 11337
     uint32_t chan14FSR20mA;
-    // Parameter: CalibFDate20mA : chan14Date20mA : MB Offset: 11336
+    // Parameter: CalibDate20mA : chan14Date20mA : MB Offset: 11339
     uint32_t chan14Date20mA;
-    // Parameter: CalibOCR4x : chan14OCR4x : MB Offset: 11338
+    // Parameter: CalibOCR4x : chan14OCR4x : MB Offset: 11341
     uint32_t chan14OCR4x;
-    // Parameter: CalibFSR4x : chan14FSR4x : MB Offset: 11340
+    // Parameter: CalibFSR4x : chan14FSR4x : MB Offset: 11343
     uint32_t chan14FSR4x;
-    // Parameter: CalibDate4x : chan14Date4x : MB Offset: 11342
+    // Parameter: CalibDate4x : chan14Date4x : MB Offset: 11345
     uint32_t chan14Date4x;
-    // Parameter: CalibOCR3x : chan14OCR3x : MB Offset: 11344
+    // Parameter: CalibOCR3x : chan14OCR3x : MB Offset: 11347
     uint32_t chan14OCR3x;
-    // Parameter: CalibFSR3x : chan14FSR3x : MB Offset: 11346
+    // Parameter: CalibFSR3x : chan14FSR3x : MB Offset: 11349
     uint32_t chan14FSR3x;
-    // Parameter: CalibDate3x : chan14Date3x : MB Offset: 11348
+    // Parameter: CalibDate3x : chan14Date3x : MB Offset: 11351
     uint32_t chan14Date3x;
-    // Parameter: CalibOCRinternal : chan14OCRinternal : MB Offset: 11350
+    // Parameter: CalibOCRinternal : chan14OCRinternal : MB Offset: 11353
     float chan14OCRinternal;
-    // Parameter: CalibFSRinternal : chan14FSRinternal : MB Offset: 11352
+    // Parameter: CalibFSRinternal : chan14FSRinternal : MB Offset: 11355
     float chan14FSRinternal;
-    // Parameter: CalibDateinternal : chan14DateInternal : MB Offset: 11354
+    // Parameter: CalibDateinternal : chan14DateInternal : MB Offset: 11357
     uint32_t chan14DateInternal;
-    // Parameter: SysOCalb : chan15SysOCR : MB Offset: 11400
+    // Parameter: Nead Read Calibrations : chan15NeadReadCalibrations : MB Offset: 11400
+    uint16_t chan15NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan15ProcessReadCalibrations : MB Offset: 11401
+    float chan15ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan15SysOCR : MB Offset: 11403
     uint16_t chan15SysOCR;
-    // Parameter: SysGCalb : chan15SysFSR : MB Offset: 11401
+    // Parameter: SysGCalb : chan15SysFSR : MB Offset: 11404
     uint16_t chan15SysFSR;
-    // Parameter: CalibOCR20mV : chan15OCR20mV : MB Offset: 11402
+    // Parameter: CalibOCR20mV : chan15OCR20mV : MB Offset: 11405
     uint32_t chan15OCR20mV;
-    // Parameter: CalibFCR20mV : chan15FSR20mV : MB Offset: 11404
+    // Parameter: CalibFSR20mV : chan15FSR20mV : MB Offset: 11407
     uint32_t chan15FSR20mV;
-    // Parameter: CalibFDate20mV : chan15Date20mV : MB Offset: 11406
+    // Parameter: CalibDate20mV : chan15Date20mV : MB Offset: 11409
     uint32_t chan15Date20mV;
-    // Parameter: CalibOCR100mV : chan15OCR100mV : MB Offset: 11408
+    // Parameter: CalibOCR100mV : chan15OCR100mV : MB Offset: 11411
     uint32_t chan15OCR100mV;
-    // Parameter: CalibFCR100mV : chan15FSR100mV : MB Offset: 11410
+    // Parameter: CalibFSR100mV : chan15FSR100mV : MB Offset: 11413
     uint32_t chan15FSR100mV;
-    // Parameter: CalibFDate100mV : chan15Date100mV : MB Offset: 11412
+    // Parameter: CalibDate100mV : chan15Date100mV : MB Offset: 11415
     uint32_t chan15Date100mV;
-    // Parameter: CalibOCR1V : chan15OCR1V : MB Offset: 11414
+    // Parameter: CalibOCR1V : chan15OCR1V : MB Offset: 11417
     uint32_t chan15OCR1V;
-    // Parameter: CalibFCR1V : chan15FSR1V : MB Offset: 11416
+    // Parameter: CalibFSR1V : chan15FSR1V : MB Offset: 11419
     uint32_t chan15FSR1V;
-    // Parameter: CalibFDate1V : chan15Date1V : MB Offset: 11418
+    // Parameter: CalibDate1V : chan15Date1V : MB Offset: 11421
     uint32_t chan15Date1V;
-    // Parameter: CalibOCR10V : chan15OCR10V : MB Offset: 11420
+    // Parameter: CalibOCR10V : chan15OCR10V : MB Offset: 11423
     uint32_t chan15OCR10V;
-    // Parameter: CalibFCR10V : chan15FSR10V : MB Offset: 11422
+    // Parameter: CalibFSR10V : chan15FSR10V : MB Offset: 11425
     uint32_t chan15FSR10V;
-    // Parameter: CalibFDate10V : chan15Date10V : MB Offset: 11424
+    // Parameter: CalibDate10V : chan15Date10V : MB Offset: 11427
     uint32_t chan15Date10V;
-    // Parameter: CalibOCR30V : chan15OCR30V : MB Offset: 11426
+    // Parameter: CalibOCR30V : chan15OCR30V : MB Offset: 11429
     uint32_t chan15OCR30V;
-    // Parameter: CalibFCR30V : chan15FSR30V : MB Offset: 11428
+    // Parameter: CalibFSR30V : chan15FSR30V : MB Offset: 11431
     uint32_t chan15FSR30V;
-    // Parameter: CalibFDate30V : chan15Date30V : MB Offset: 11430
+    // Parameter: CalibDate30V : chan15Date30V : MB Offset: 11433
     uint32_t chan15Date30V;
-    // Parameter: CalibOCR20mA : chan15OCR20mA : MB Offset: 11432
+    // Parameter: CalibOCR20mA : chan15OCR20mA : MB Offset: 11435
     uint32_t chan15OCR20mA;
-    // Parameter: CalibFCR20mA : chan15FSR20mA : MB Offset: 11434
+    // Parameter: CalibFSR20mA : chan15FSR20mA : MB Offset: 11437
     uint32_t chan15FSR20mA;
-    // Parameter: CalibFDate20mA : chan15Date20mA : MB Offset: 11436
+    // Parameter: CalibDate20mA : chan15Date20mA : MB Offset: 11439
     uint32_t chan15Date20mA;
-    // Parameter: CalibOCR4x : chan15OCR4x : MB Offset: 11438
+    // Parameter: CalibOCR4x : chan15OCR4x : MB Offset: 11441
     uint32_t chan15OCR4x;
-    // Parameter: CalibFSR4x : chan15FSR4x : MB Offset: 11440
+    // Parameter: CalibFSR4x : chan15FSR4x : MB Offset: 11443
     uint32_t chan15FSR4x;
-    // Parameter: CalibDate4x : chan15Date4x : MB Offset: 11442
+    // Parameter: CalibDate4x : chan15Date4x : MB Offset: 11445
     uint32_t chan15Date4x;
-    // Parameter: CalibOCR3x : chan15OCR3x : MB Offset: 11444
+    // Parameter: CalibOCR3x : chan15OCR3x : MB Offset: 11447
     uint32_t chan15OCR3x;
-    // Parameter: CalibFSR3x : chan15FSR3x : MB Offset: 11446
+    // Parameter: CalibFSR3x : chan15FSR3x : MB Offset: 11449
     uint32_t chan15FSR3x;
-    // Parameter: CalibDate3x : chan15Date3x : MB Offset: 11448
+    // Parameter: CalibDate3x : chan15Date3x : MB Offset: 11451
     uint32_t chan15Date3x;
-    // Parameter: CalibOCRinternal : chan15OCRinternal : MB Offset: 11450
+    // Parameter: CalibOCRinternal : chan15OCRinternal : MB Offset: 11453
     float chan15OCRinternal;
-    // Parameter: CalibFSRinternal : chan15FSRinternal : MB Offset: 11452
+    // Parameter: CalibFSRinternal : chan15FSRinternal : MB Offset: 11455
     float chan15FSRinternal;
-    // Parameter: CalibDateinternal : chan15DateInternal : MB Offset: 11454
+    // Parameter: CalibDateinternal : chan15DateInternal : MB Offset: 11457
     uint32_t chan15DateInternal;
-    // Parameter: SysOCalb : chan16SysOCR : MB Offset: 11500
+    // Parameter: Nead Read Calibrations : chan16NeadReadCalibrations : MB Offset: 11500
+    uint16_t chan16NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan16ProcessReadCalibrations : MB Offset: 11501
+    float chan16ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan16SysOCR : MB Offset: 11503
     uint16_t chan16SysOCR;
-    // Parameter: SysGCalb : chan16SysFSR : MB Offset: 11501
+    // Parameter: SysGCalb : chan16SysFSR : MB Offset: 11504
     uint16_t chan16SysFSR;
-    // Parameter: CalibOCR20mV : chan16OCR20mV : MB Offset: 11502
+    // Parameter: CalibOCR20mV : chan16OCR20mV : MB Offset: 11505
     uint32_t chan16OCR20mV;
-    // Parameter: CalibFCR20mV : chan16FSR20mV : MB Offset: 11504
+    // Parameter: CalibFSR20mV : chan16FSR20mV : MB Offset: 11507
     uint32_t chan16FSR20mV;
-    // Parameter: CalibFDate20mV : chan16Date20mV : MB Offset: 11506
+    // Parameter: CalibDate20mV : chan16Date20mV : MB Offset: 11509
     uint32_t chan16Date20mV;
-    // Parameter: CalibOCR100mV : chan16OCR100mV : MB Offset: 11508
+    // Parameter: CalibOCR100mV : chan16OCR100mV : MB Offset: 11511
     uint32_t chan16OCR100mV;
-    // Parameter: CalibFCR100mV : chan16FSR100mV : MB Offset: 11510
+    // Parameter: CalibFSR100mV : chan16FSR100mV : MB Offset: 11513
     uint32_t chan16FSR100mV;
-    // Parameter: CalibFDate100mV : chan16Date100mV : MB Offset: 11512
+    // Parameter: CalibDate100mV : chan16Date100mV : MB Offset: 11515
     uint32_t chan16Date100mV;
-    // Parameter: CalibOCR1V : chan16OCR1V : MB Offset: 11514
+    // Parameter: CalibOCR1V : chan16OCR1V : MB Offset: 11517
     uint32_t chan16OCR1V;
-    // Parameter: CalibFCR1V : chan16FSR1V : MB Offset: 11516
+    // Parameter: CalibFSR1V : chan16FSR1V : MB Offset: 11519
     uint32_t chan16FSR1V;
-    // Parameter: CalibFDate1V : chan16Date1V : MB Offset: 11518
+    // Parameter: CalibDate1V : chan16Date1V : MB Offset: 11521
     uint32_t chan16Date1V;
-    // Parameter: CalibOCR10V : chan16OCR10V : MB Offset: 11520
+    // Parameter: CalibOCR10V : chan16OCR10V : MB Offset: 11523
     uint32_t chan16OCR10V;
-    // Parameter: CalibFCR10V : chan16FSR10V : MB Offset: 11522
+    // Parameter: CalibFSR10V : chan16FSR10V : MB Offset: 11525
     uint32_t chan16FSR10V;
-    // Parameter: CalibFDate10V : chan16Date10V : MB Offset: 11524
+    // Parameter: CalibDate10V : chan16Date10V : MB Offset: 11527
     uint32_t chan16Date10V;
-    // Parameter: CalibOCR30V : chan16OCR30V : MB Offset: 11526
+    // Parameter: CalibOCR30V : chan16OCR30V : MB Offset: 11529
     uint32_t chan16OCR30V;
-    // Parameter: CalibFCR30V : chan16FSR30V : MB Offset: 11528
+    // Parameter: CalibFSR30V : chan16FSR30V : MB Offset: 11531
     uint32_t chan16FSR30V;
-    // Parameter: CalibFDate30V : chan16Date30V : MB Offset: 11530
+    // Parameter: CalibDate30V : chan16Date30V : MB Offset: 11533
     uint32_t chan16Date30V;
-    // Parameter: CalibOCR20mA : chan16OCR20mA : MB Offset: 11532
+    // Parameter: CalibOCR20mA : chan16OCR20mA : MB Offset: 11535
     uint32_t chan16OCR20mA;
-    // Parameter: CalibFCR20mA : chan16FSR20mA : MB Offset: 11534
+    // Parameter: CalibFSR20mA : chan16FSR20mA : MB Offset: 11537
     uint32_t chan16FSR20mA;
-    // Parameter: CalibFDate20mA : chan16Date20mA : MB Offset: 11536
+    // Parameter: CalibDate20mA : chan16Date20mA : MB Offset: 11539
     uint32_t chan16Date20mA;
-    // Parameter: CalibOCR4x : chan16OCR4x : MB Offset: 11538
+    // Parameter: CalibOCR4x : chan16OCR4x : MB Offset: 11541
     uint32_t chan16OCR4x;
-    // Parameter: CalibFSR4x : chan16FSR4x : MB Offset: 11540
+    // Parameter: CalibFSR4x : chan16FSR4x : MB Offset: 11543
     uint32_t chan16FSR4x;
-    // Parameter: CalibDate4x : chan16Date4x : MB Offset: 11542
+    // Parameter: CalibDate4x : chan16Date4x : MB Offset: 11545
     uint32_t chan16Date4x;
-    // Parameter: CalibOCR3x : chan16OCR3x : MB Offset: 11544
+    // Parameter: CalibOCR3x : chan16OCR3x : MB Offset: 11547
     uint32_t chan16OCR3x;
-    // Parameter: CalibFSR3x : chan16FSR3x : MB Offset: 11546
+    // Parameter: CalibFSR3x : chan16FSR3x : MB Offset: 11549
     uint32_t chan16FSR3x;
-    // Parameter: CalibDate3x : chan16Date3x : MB Offset: 11548
+    // Parameter: CalibDate3x : chan16Date3x : MB Offset: 11551
     uint32_t chan16Date3x;
-    // Parameter: CalibOCRinternal : chan16OCRinternal : MB Offset: 11550
+    // Parameter: CalibOCRinternal : chan16OCRinternal : MB Offset: 11553
     float chan16OCRinternal;
-    // Parameter: CalibFSRinternal : chan16FSRinternal : MB Offset: 11552
+    // Parameter: CalibFSRinternal : chan16FSRinternal : MB Offset: 11555
     float chan16FSRinternal;
-    // Parameter: CalibDateinternal : chan16DateInternal : MB Offset: 11554
+    // Parameter: CalibDateinternal : chan16DateInternal : MB Offset: 11557
     uint32_t chan16DateInternal;
-    // Parameter: SysOCalb : chan17SysOCR : MB Offset: 11600
+    // Parameter: Nead Read Calibrations : chan17NeadReadCalibrations : MB Offset: 11600
+    uint16_t chan17NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan17ProcessReadCalibrations : MB Offset: 11601
+    float chan17ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan17SysOCR : MB Offset: 11603
     uint16_t chan17SysOCR;
-    // Parameter: SysGCalb : chan17SysFSR : MB Offset: 11601
+    // Parameter: SysGCalb : chan17SysFSR : MB Offset: 11604
     uint16_t chan17SysFSR;
-    // Parameter: CalibOCR20mV : chan17OCR20mV : MB Offset: 11602
+    // Parameter: CalibOCR20mV : chan17OCR20mV : MB Offset: 11605
     uint32_t chan17OCR20mV;
-    // Parameter: CalibFCR20mV : chan17FSR20mV : MB Offset: 11604
+    // Parameter: CalibFSR20mV : chan17FSR20mV : MB Offset: 11607
     uint32_t chan17FSR20mV;
-    // Parameter: CalibFDate20mV : chan17Date20mV : MB Offset: 11606
+    // Parameter: CalibDate20mV : chan17Date20mV : MB Offset: 11609
     uint32_t chan17Date20mV;
-    // Parameter: CalibOCR100mV : chan17OCR100mV : MB Offset: 11608
+    // Parameter: CalibOCR100mV : chan17OCR100mV : MB Offset: 11611
     uint32_t chan17OCR100mV;
-    // Parameter: CalibFCR100mV : chan17FSR100mV : MB Offset: 11610
+    // Parameter: CalibFSR100mV : chan17FSR100mV : MB Offset: 11613
     uint32_t chan17FSR100mV;
-    // Parameter: CalibFDate100mV : chan17Date100mV : MB Offset: 11612
+    // Parameter: CalibDate100mV : chan17Date100mV : MB Offset: 11615
     uint32_t chan17Date100mV;
-    // Parameter: CalibOCR1V : chan17OCR1V : MB Offset: 11614
+    // Parameter: CalibOCR1V : chan17OCR1V : MB Offset: 11617
     uint32_t chan17OCR1V;
-    // Parameter: CalibFCR1V : chan17FSR1V : MB Offset: 11616
+    // Parameter: CalibFSR1V : chan17FSR1V : MB Offset: 11619
     uint32_t chan17FSR1V;
-    // Parameter: CalibFDate1V : chan17Date1V : MB Offset: 11618
+    // Parameter: CalibDate1V : chan17Date1V : MB Offset: 11621
     uint32_t chan17Date1V;
-    // Parameter: CalibOCR10V : chan17OCR10V : MB Offset: 11620
+    // Parameter: CalibOCR10V : chan17OCR10V : MB Offset: 11623
     uint32_t chan17OCR10V;
-    // Parameter: CalibFCR10V : chan17FSR10V : MB Offset: 11622
+    // Parameter: CalibFSR10V : chan17FSR10V : MB Offset: 11625
     uint32_t chan17FSR10V;
-    // Parameter: CalibFDate10V : chan17Date10V : MB Offset: 11624
+    // Parameter: CalibDate10V : chan17Date10V : MB Offset: 11627
     uint32_t chan17Date10V;
-    // Parameter: CalibOCR30V : chan17OCR30V : MB Offset: 11626
+    // Parameter: CalibOCR30V : chan17OCR30V : MB Offset: 11629
     uint32_t chan17OCR30V;
-    // Parameter: CalibFCR30V : chan17FSR30V : MB Offset: 11628
+    // Parameter: CalibFSR30V : chan17FSR30V : MB Offset: 11631
     uint32_t chan17FSR30V;
-    // Parameter: CalibFDate30V : chan17Date30V : MB Offset: 11630
+    // Parameter: CalibDate30V : chan17Date30V : MB Offset: 11633
     uint32_t chan17Date30V;
-    // Parameter: CalibOCR20mA : chan17OCR20mA : MB Offset: 11632
+    // Parameter: CalibOCR20mA : chan17OCR20mA : MB Offset: 11635
     uint32_t chan17OCR20mA;
-    // Parameter: CalibFCR20mA : chan17FSR20mA : MB Offset: 11634
+    // Parameter: CalibFSR20mA : chan17FSR20mA : MB Offset: 11637
     uint32_t chan17FSR20mA;
-    // Parameter: CalibFDate20mA : chan17Date20mA : MB Offset: 11636
+    // Parameter: CalibDate20mA : chan17Date20mA : MB Offset: 11639
     uint32_t chan17Date20mA;
-    // Parameter: CalibOCR4x : chan17OCR4x : MB Offset: 11638
+    // Parameter: CalibOCR4x : chan17OCR4x : MB Offset: 11641
     uint32_t chan17OCR4x;
-    // Parameter: CalibFSR4x : chan17FSR4x : MB Offset: 11640
+    // Parameter: CalibFSR4x : chan17FSR4x : MB Offset: 11643
     uint32_t chan17FSR4x;
-    // Parameter: CalibDate4x : chan17Date4x : MB Offset: 11642
+    // Parameter: CalibDate4x : chan17Date4x : MB Offset: 11645
     uint32_t chan17Date4x;
-    // Parameter: CalibOCR3x : chan17OCR3x : MB Offset: 11644
+    // Parameter: CalibOCR3x : chan17OCR3x : MB Offset: 11647
     uint32_t chan17OCR3x;
-    // Parameter: CalibFSR3x : chan17FSR3x : MB Offset: 11646
+    // Parameter: CalibFSR3x : chan17FSR3x : MB Offset: 11649
     uint32_t chan17FSR3x;
-    // Parameter: CalibDate3x : chan17Date3x : MB Offset: 11648
+    // Parameter: CalibDate3x : chan17Date3x : MB Offset: 11651
     uint32_t chan17Date3x;
-    // Parameter: CalibOCRinternal : chan17OCRinternal : MB Offset: 11650
+    // Parameter: CalibOCRinternal : chan17OCRinternal : MB Offset: 11653
     float chan17OCRinternal;
-    // Parameter: CalibFSRinternal : chan17FSRinternal : MB Offset: 11652
+    // Parameter: CalibFSRinternal : chan17FSRinternal : MB Offset: 11655
     float chan17FSRinternal;
-    // Parameter: CalibDateinternal : chan17DateInternal : MB Offset: 11654
+    // Parameter: CalibDateinternal : chan17DateInternal : MB Offset: 11657
     uint32_t chan17DateInternal;
-    // Parameter: SysOCalb : chan18SysOCR : MB Offset: 11700
+    // Parameter: Nead Read Calibrations : chan18NeadReadCalibrations : MB Offset: 11700
+    uint16_t chan18NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan18ProcessReadCalibrations : MB Offset: 11701
+    float chan18ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan18SysOCR : MB Offset: 11703
     uint16_t chan18SysOCR;
-    // Parameter: SysGCalb : chan18SysFSR : MB Offset: 11701
+    // Parameter: SysGCalb : chan18SysFSR : MB Offset: 11704
     uint16_t chan18SysFSR;
-    // Parameter: CalibOCR20mV : chan18OCR20mV : MB Offset: 11702
+    // Parameter: CalibOCR20mV : chan18OCR20mV : MB Offset: 11705
     uint32_t chan18OCR20mV;
-    // Parameter: CalibFCR20mV : chan18FSR20mV : MB Offset: 11704
+    // Parameter: CalibFSR20mV : chan18FSR20mV : MB Offset: 11707
     uint32_t chan18FSR20mV;
-    // Parameter: CalibFDate20mV : chan18Date20mV : MB Offset: 11706
+    // Parameter: CalibDate20mV : chan18Date20mV : MB Offset: 11709
     uint32_t chan18Date20mV;
-    // Parameter: CalibOCR100mV : chan18OCR100mV : MB Offset: 11708
+    // Parameter: CalibOCR100mV : chan18OCR100mV : MB Offset: 11711
     uint32_t chan18OCR100mV;
-    // Parameter: CalibFCR100mV : chan18FSR100mV : MB Offset: 11710
+    // Parameter: CalibFSR100mV : chan18FSR100mV : MB Offset: 11713
     uint32_t chan18FSR100mV;
-    // Parameter: CalibFDate100mV : chan18Date100mV : MB Offset: 11712
+    // Parameter: CalibDate100mV : chan18Date100mV : MB Offset: 11715
     uint32_t chan18Date100mV;
-    // Parameter: CalibOCR1V : chan18OCR1V : MB Offset: 11714
+    // Parameter: CalibOCR1V : chan18OCR1V : MB Offset: 11717
     uint32_t chan18OCR1V;
-    // Parameter: CalibFCR1V : chan18FSR1V : MB Offset: 11716
+    // Parameter: CalibFSR1V : chan18FSR1V : MB Offset: 11719
     uint32_t chan18FSR1V;
-    // Parameter: CalibFDate1V : chan18Date1V : MB Offset: 11718
+    // Parameter: CalibDate1V : chan18Date1V : MB Offset: 11721
     uint32_t chan18Date1V;
-    // Parameter: CalibOCR10V : chan18OCR10V : MB Offset: 11720
+    // Parameter: CalibOCR10V : chan18OCR10V : MB Offset: 11723
     uint32_t chan18OCR10V;
-    // Parameter: CalibFCR10V : chan18FSR10V : MB Offset: 11722
+    // Parameter: CalibFSR10V : chan18FSR10V : MB Offset: 11725
     uint32_t chan18FSR10V;
-    // Parameter: CalibFDate10V : chan18Date10V : MB Offset: 11724
+    // Parameter: CalibDate10V : chan18Date10V : MB Offset: 11727
     uint32_t chan18Date10V;
-    // Parameter: CalibOCR30V : chan18OCR30V : MB Offset: 11726
+    // Parameter: CalibOCR30V : chan18OCR30V : MB Offset: 11729
     uint32_t chan18OCR30V;
-    // Parameter: CalibFCR30V : chan18FSR30V : MB Offset: 11728
+    // Parameter: CalibFSR30V : chan18FSR30V : MB Offset: 11731
     uint32_t chan18FSR30V;
-    // Parameter: CalibFDate30V : chan18Date30V : MB Offset: 11730
+    // Parameter: CalibDate30V : chan18Date30V : MB Offset: 11733
     uint32_t chan18Date30V;
-    // Parameter: CalibOCR20mA : chan18OCR20mA : MB Offset: 11732
+    // Parameter: CalibOCR20mA : chan18OCR20mA : MB Offset: 11735
     uint32_t chan18OCR20mA;
-    // Parameter: CalibFCR20mA : chan18FSR20mA : MB Offset: 11734
+    // Parameter: CalibFSR20mA : chan18FSR20mA : MB Offset: 11737
     uint32_t chan18FSR20mA;
-    // Parameter: CalibFDate20mA : chan18Date20mA : MB Offset: 11736
+    // Parameter: CalibDate20mA : chan18Date20mA : MB Offset: 11739
     uint32_t chan18Date20mA;
-    // Parameter: CalibOCR4x : chan18OCR4x : MB Offset: 11738
+    // Parameter: CalibOCR4x : chan18OCR4x : MB Offset: 11741
     uint32_t chan18OCR4x;
-    // Parameter: CalibFSR4x : chan18FSR4x : MB Offset: 11740
+    // Parameter: CalibFSR4x : chan18FSR4x : MB Offset: 11743
     uint32_t chan18FSR4x;
-    // Parameter: CalibDate4x : chan18Date4x : MB Offset: 11742
+    // Parameter: CalibDate4x : chan18Date4x : MB Offset: 11745
     uint32_t chan18Date4x;
-    // Parameter: CalibOCR3x : chan18OCR3x : MB Offset: 11744
+    // Parameter: CalibOCR3x : chan18OCR3x : MB Offset: 11747
     uint32_t chan18OCR3x;
-    // Parameter: CalibFSR3x : chan18FSR3x : MB Offset: 11746
+    // Parameter: CalibFSR3x : chan18FSR3x : MB Offset: 11749
     uint32_t chan18FSR3x;
-    // Parameter: CalibDate3x : chan18Date3x : MB Offset: 11748
+    // Parameter: CalibDate3x : chan18Date3x : MB Offset: 11751
     uint32_t chan18Date3x;
-    // Parameter: CalibOCRinternal : chan18OCRinternal : MB Offset: 11750
+    // Parameter: CalibOCRinternal : chan18OCRinternal : MB Offset: 11753
     float chan18OCRinternal;
-    // Parameter: CalibFSRinternal : chan18FSRinternal : MB Offset: 11752
+    // Parameter: CalibFSRinternal : chan18FSRinternal : MB Offset: 11755
     float chan18FSRinternal;
-    // Parameter: CalibDateinternal : chan18DateInternal : MB Offset: 11754
+    // Parameter: CalibDateinternal : chan18DateInternal : MB Offset: 11757
     uint32_t chan18DateInternal;
-    // Parameter: SysOCalb : chan19SysOCR : MB Offset: 11800
+    // Parameter: Nead Read Calibrations : chan19NeadReadCalibrations : MB Offset: 11800
+    uint16_t chan19NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan19ProcessReadCalibrations : MB Offset: 11801
+    float chan19ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan19SysOCR : MB Offset: 11803
     uint16_t chan19SysOCR;
-    // Parameter: SysGCalb : chan19SysFSR : MB Offset: 11801
+    // Parameter: SysGCalb : chan19SysFSR : MB Offset: 11804
     uint16_t chan19SysFSR;
-    // Parameter: CalibOCR20mV : chan19OCR20mV : MB Offset: 11802
+    // Parameter: CalibOCR20mV : chan19OCR20mV : MB Offset: 11805
     uint32_t chan19OCR20mV;
-    // Parameter: CalibFCR20mV : chan19FSR20mV : MB Offset: 11804
+    // Parameter: CalibFSR20mV : chan19FSR20mV : MB Offset: 11807
     uint32_t chan19FSR20mV;
-    // Parameter: CalibFDate20mV : chan19Date20mV : MB Offset: 11806
+    // Parameter: CalibDate20mV : chan19Date20mV : MB Offset: 11809
     uint32_t chan19Date20mV;
-    // Parameter: CalibOCR100mV : chan19OCR100mV : MB Offset: 11808
+    // Parameter: CalibOCR100mV : chan19OCR100mV : MB Offset: 11811
     uint32_t chan19OCR100mV;
-    // Parameter: CalibFCR100mV : chan19FSR100mV : MB Offset: 11810
+    // Parameter: CalibFSR100mV : chan19FSR100mV : MB Offset: 11813
     uint32_t chan19FSR100mV;
-    // Parameter: CalibFDate100mV : chan19Date100mV : MB Offset: 11812
+    // Parameter: CalibDate100mV : chan19Date100mV : MB Offset: 11815
     uint32_t chan19Date100mV;
-    // Parameter: CalibOCR1V : chan19OCR1V : MB Offset: 11814
+    // Parameter: CalibOCR1V : chan19OCR1V : MB Offset: 11817
     uint32_t chan19OCR1V;
-    // Parameter: CalibFCR1V : chan19FSR1V : MB Offset: 11816
+    // Parameter: CalibFSR1V : chan19FSR1V : MB Offset: 11819
     uint32_t chan19FSR1V;
-    // Parameter: CalibFDate1V : chan19Date1V : MB Offset: 11818
+    // Parameter: CalibDate1V : chan19Date1V : MB Offset: 11821
     uint32_t chan19Date1V;
-    // Parameter: CalibOCR10V : chan19OCR10V : MB Offset: 11820
+    // Parameter: CalibOCR10V : chan19OCR10V : MB Offset: 11823
     uint32_t chan19OCR10V;
-    // Parameter: CalibFCR10V : chan19FSR10V : MB Offset: 11822
+    // Parameter: CalibFSR10V : chan19FSR10V : MB Offset: 11825
     uint32_t chan19FSR10V;
-    // Parameter: CalibFDate10V : chan19Date10V : MB Offset: 11824
+    // Parameter: CalibDate10V : chan19Date10V : MB Offset: 11827
     uint32_t chan19Date10V;
-    // Parameter: CalibOCR30V : chan19OCR30V : MB Offset: 11826
+    // Parameter: CalibOCR30V : chan19OCR30V : MB Offset: 11829
     uint32_t chan19OCR30V;
-    // Parameter: CalibFCR30V : chan19FSR30V : MB Offset: 11828
+    // Parameter: CalibFSR30V : chan19FSR30V : MB Offset: 11831
     uint32_t chan19FSR30V;
-    // Parameter: CalibFDate30V : chan19Date30V : MB Offset: 11830
+    // Parameter: CalibDate30V : chan19Date30V : MB Offset: 11833
     uint32_t chan19Date30V;
-    // Parameter: CalibOCR20mA : chan19OCR20mA : MB Offset: 11832
+    // Parameter: CalibOCR20mA : chan19OCR20mA : MB Offset: 11835
     uint32_t chan19OCR20mA;
-    // Parameter: CalibFCR20mA : chan19FSR20mA : MB Offset: 11834
+    // Parameter: CalibFSR20mA : chan19FSR20mA : MB Offset: 11837
     uint32_t chan19FSR20mA;
-    // Parameter: CalibFDate20mA : chan19Date20mA : MB Offset: 11836
+    // Parameter: CalibDate20mA : chan19Date20mA : MB Offset: 11839
     uint32_t chan19Date20mA;
-    // Parameter: CalibOCR4x : chan19OCR4x : MB Offset: 11838
+    // Parameter: CalibOCR4x : chan19OCR4x : MB Offset: 11841
     uint32_t chan19OCR4x;
-    // Parameter: CalibFSR4x : chan19FSR4x : MB Offset: 11840
+    // Parameter: CalibFSR4x : chan19FSR4x : MB Offset: 11843
     uint32_t chan19FSR4x;
-    // Parameter: CalibDate4x : chan19Date4x : MB Offset: 11842
+    // Parameter: CalibDate4x : chan19Date4x : MB Offset: 11845
     uint32_t chan19Date4x;
-    // Parameter: CalibOCR3x : chan19OCR3x : MB Offset: 11844
+    // Parameter: CalibOCR3x : chan19OCR3x : MB Offset: 11847
     uint32_t chan19OCR3x;
-    // Parameter: CalibFSR3x : chan19FSR3x : MB Offset: 11846
+    // Parameter: CalibFSR3x : chan19FSR3x : MB Offset: 11849
     uint32_t chan19FSR3x;
-    // Parameter: CalibDate3x : chan19Date3x : MB Offset: 11848
+    // Parameter: CalibDate3x : chan19Date3x : MB Offset: 11851
     uint32_t chan19Date3x;
-    // Parameter: CalibOCRinternal : chan19OCRinternal : MB Offset: 11850
+    // Parameter: CalibOCRinternal : chan19OCRinternal : MB Offset: 11853
     float chan19OCRinternal;
-    // Parameter: CalibFSRinternal : chan19FSRinternal : MB Offset: 11852
+    // Parameter: CalibFSRinternal : chan19FSRinternal : MB Offset: 11855
     float chan19FSRinternal;
-    // Parameter: CalibDateinternal : chan19DateInternal : MB Offset: 11854
+    // Parameter: CalibDateinternal : chan19DateInternal : MB Offset: 11857
     uint32_t chan19DateInternal;
-    // Parameter: SysOCalb : chan20SysOCR : MB Offset: 11900
+    // Parameter: Nead Read Calibrations : chan20NeadReadCalibrations : MB Offset: 11900
+    uint16_t chan20NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan20ProcessReadCalibrations : MB Offset: 11901
+    float chan20ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan20SysOCR : MB Offset: 11903
     uint16_t chan20SysOCR;
-    // Parameter: SysGCalb : chan20SysFSR : MB Offset: 11901
+    // Parameter: SysGCalb : chan20SysFSR : MB Offset: 11904
     uint16_t chan20SysFSR;
-    // Parameter: CalibOCR20mV : chan20OCR20mV : MB Offset: 11902
+    // Parameter: CalibOCR20mV : chan20OCR20mV : MB Offset: 11905
     uint32_t chan20OCR20mV;
-    // Parameter: CalibFCR20mV : chan20FSR20mV : MB Offset: 11904
+    // Parameter: CalibFSR20mV : chan20FSR20mV : MB Offset: 11907
     uint32_t chan20FSR20mV;
-    // Parameter: CalibFDate20mV : chan20Date20mV : MB Offset: 11906
+    // Parameter: CalibDate20mV : chan20Date20mV : MB Offset: 11909
     uint32_t chan20Date20mV;
-    // Parameter: CalibOCR100mV : chan20OCR100mV : MB Offset: 11908
+    // Parameter: CalibOCR100mV : chan20OCR100mV : MB Offset: 11911
     uint32_t chan20OCR100mV;
-    // Parameter: CalibFCR100mV : chan20FSR100mV : MB Offset: 11910
+    // Parameter: CalibFSR100mV : chan20FSR100mV : MB Offset: 11913
     uint32_t chan20FSR100mV;
-    // Parameter: CalibFDate100mV : chan20Date100mV : MB Offset: 11912
+    // Parameter: CalibDate100mV : chan20Date100mV : MB Offset: 11915
     uint32_t chan20Date100mV;
-    // Parameter: CalibOCR1V : chan20OCR1V : MB Offset: 11914
+    // Parameter: CalibOCR1V : chan20OCR1V : MB Offset: 11917
     uint32_t chan20OCR1V;
-    // Parameter: CalibFCR1V : chan20FSR1V : MB Offset: 11916
+    // Parameter: CalibFSR1V : chan20FSR1V : MB Offset: 11919
     uint32_t chan20FSR1V;
-    // Parameter: CalibFDate1V : chan20Date1V : MB Offset: 11918
+    // Parameter: CalibDate1V : chan20Date1V : MB Offset: 11921
     uint32_t chan20Date1V;
-    // Parameter: CalibOCR10V : chan20OCR10V : MB Offset: 11920
+    // Parameter: CalibOCR10V : chan20OCR10V : MB Offset: 11923
     uint32_t chan20OCR10V;
-    // Parameter: CalibFCR10V : chan20FSR10V : MB Offset: 11922
+    // Parameter: CalibFSR10V : chan20FSR10V : MB Offset: 11925
     uint32_t chan20FSR10V;
-    // Parameter: CalibFDate10V : chan20Date10V : MB Offset: 11924
+    // Parameter: CalibDate10V : chan20Date10V : MB Offset: 11927
     uint32_t chan20Date10V;
-    // Parameter: CalibOCR30V : chan20OCR30V : MB Offset: 11926
+    // Parameter: CalibOCR30V : chan20OCR30V : MB Offset: 11929
     uint32_t chan20OCR30V;
-    // Parameter: CalibFCR30V : chan20FSR30V : MB Offset: 11928
+    // Parameter: CalibFSR30V : chan20FSR30V : MB Offset: 11931
     uint32_t chan20FSR30V;
-    // Parameter: CalibFDate30V : chan20Date30V : MB Offset: 11930
+    // Parameter: CalibDate30V : chan20Date30V : MB Offset: 11933
     uint32_t chan20Date30V;
-    // Parameter: CalibOCR20mA : chan20OCR20mA : MB Offset: 11932
+    // Parameter: CalibOCR20mA : chan20OCR20mA : MB Offset: 11935
     uint32_t chan20OCR20mA;
-    // Parameter: CalibFCR20mA : chan20FSR20mA : MB Offset: 11934
+    // Parameter: CalibFSR20mA : chan20FSR20mA : MB Offset: 11937
     uint32_t chan20FSR20mA;
-    // Parameter: CalibFDate20mA : chan20Date20mA : MB Offset: 11936
+    // Parameter: CalibDate20mA : chan20Date20mA : MB Offset: 11939
     uint32_t chan20Date20mA;
-    // Parameter: CalibOCR4x : chan20OCR4x : MB Offset: 11938
+    // Parameter: CalibOCR4x : chan20OCR4x : MB Offset: 11941
     uint32_t chan20OCR4x;
-    // Parameter: CalibFSR4x : chan20FSR4x : MB Offset: 11940
+    // Parameter: CalibFSR4x : chan20FSR4x : MB Offset: 11943
     uint32_t chan20FSR4x;
-    // Parameter: CalibDate4x : chan20Date4x : MB Offset: 11942
+    // Parameter: CalibDate4x : chan20Date4x : MB Offset: 11945
     uint32_t chan20Date4x;
-    // Parameter: CalibOCR3x : chan20OCR3x : MB Offset: 11944
+    // Parameter: CalibOCR3x : chan20OCR3x : MB Offset: 11947
     uint32_t chan20OCR3x;
-    // Parameter: CalibFSR3x : chan20FSR3x : MB Offset: 11946
+    // Parameter: CalibFSR3x : chan20FSR3x : MB Offset: 11949
     uint32_t chan20FSR3x;
-    // Parameter: CalibDate3x : chan20Date3x : MB Offset: 11948
+    // Parameter: CalibDate3x : chan20Date3x : MB Offset: 11951
     uint32_t chan20Date3x;
-    // Parameter: CalibOCRinternal : chan20OCRinternal : MB Offset: 11950
+    // Parameter: CalibOCRinternal : chan20OCRinternal : MB Offset: 11953
     float chan20OCRinternal;
-    // Parameter: CalibFSRinternal : chan20FSRinternal : MB Offset: 11952
+    // Parameter: CalibFSRinternal : chan20FSRinternal : MB Offset: 11955
     float chan20FSRinternal;
-    // Parameter: CalibDateinternal : chan20DateInternal : MB Offset: 11954
+    // Parameter: CalibDateinternal : chan20DateInternal : MB Offset: 11957
     uint32_t chan20DateInternal;
-    // Parameter: SysOCalb : chan21SysOCR : MB Offset: 12000
+    // Parameter: Nead Read Calibrations : chan21NeadReadCalibrations : MB Offset: 12000
+    uint16_t chan21NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan21ProcessReadCalibrations : MB Offset: 12001
+    float chan21ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan21SysOCR : MB Offset: 12003
     uint16_t chan21SysOCR;
-    // Parameter: SysGCalb : chan21SysFSR : MB Offset: 12001
+    // Parameter: SysGCalb : chan21SysFSR : MB Offset: 12004
     uint16_t chan21SysFSR;
-    // Parameter: CalibOCR20mV : chan21OCR20mV : MB Offset: 12002
+    // Parameter: CalibOCR20mV : chan21OCR20mV : MB Offset: 12005
     uint32_t chan21OCR20mV;
-    // Parameter: CalibFCR20mV : chan21FSR20mV : MB Offset: 12004
+    // Parameter: CalibFSR20mV : chan21FSR20mV : MB Offset: 12007
     uint32_t chan21FSR20mV;
-    // Parameter: CalibFDate20mV : chan21Date20mV : MB Offset: 12006
+    // Parameter: CalibDate20mV : chan21Date20mV : MB Offset: 12009
     uint32_t chan21Date20mV;
-    // Parameter: CalibOCR100mV : chan21OCR100mV : MB Offset: 12008
+    // Parameter: CalibOCR100mV : chan21OCR100mV : MB Offset: 12011
     uint32_t chan21OCR100mV;
-    // Parameter: CalibFCR100mV : chan21FSR100mV : MB Offset: 12010
+    // Parameter: CalibFSR100mV : chan21FSR100mV : MB Offset: 12013
     uint32_t chan21FSR100mV;
-    // Parameter: CalibFDate100mV : chan21Date100mV : MB Offset: 12012
+    // Parameter: CalibDate100mV : chan21Date100mV : MB Offset: 12015
     uint32_t chan21Date100mV;
-    // Parameter: CalibOCR1V : chan21OCR1V : MB Offset: 12014
+    // Parameter: CalibOCR1V : chan21OCR1V : MB Offset: 12017
     uint32_t chan21OCR1V;
-    // Parameter: CalibFCR1V : chan21FSR1V : MB Offset: 12016
+    // Parameter: CalibFSR1V : chan21FSR1V : MB Offset: 12019
     uint32_t chan21FSR1V;
-    // Parameter: CalibFDate1V : chan21Date1V : MB Offset: 12018
+    // Parameter: CalibDate1V : chan21Date1V : MB Offset: 12021
     uint32_t chan21Date1V;
-    // Parameter: CalibOCR10V : chan21OCR10V : MB Offset: 12020
+    // Parameter: CalibOCR10V : chan21OCR10V : MB Offset: 12023
     uint32_t chan21OCR10V;
-    // Parameter: CalibFCR10V : chan21FSR10V : MB Offset: 12022
+    // Parameter: CalibFSR10V : chan21FSR10V : MB Offset: 12025
     uint32_t chan21FSR10V;
-    // Parameter: CalibFDate10V : chan21Date10V : MB Offset: 12024
+    // Parameter: CalibDate10V : chan21Date10V : MB Offset: 12027
     uint32_t chan21Date10V;
-    // Parameter: CalibOCR30V : chan21OCR30V : MB Offset: 12026
+    // Parameter: CalibOCR30V : chan21OCR30V : MB Offset: 12029
     uint32_t chan21OCR30V;
-    // Parameter: CalibFCR30V : chan21FSR30V : MB Offset: 12028
+    // Parameter: CalibFSR30V : chan21FSR30V : MB Offset: 12031
     uint32_t chan21FSR30V;
-    // Parameter: CalibFDate30V : chan21Date30V : MB Offset: 12030
+    // Parameter: CalibDate30V : chan21Date30V : MB Offset: 12033
     uint32_t chan21Date30V;
-    // Parameter: CalibOCR20mA : chan21OCR20mA : MB Offset: 12032
+    // Parameter: CalibOCR20mA : chan21OCR20mA : MB Offset: 12035
     uint32_t chan21OCR20mA;
-    // Parameter: CalibFCR20mA : chan21FSR20mA : MB Offset: 12034
+    // Parameter: CalibFSR20mA : chan21FSR20mA : MB Offset: 12037
     uint32_t chan21FSR20mA;
-    // Parameter: CalibFDate20mA : chan21Date20mA : MB Offset: 12036
+    // Parameter: CalibDate20mA : chan21Date20mA : MB Offset: 12039
     uint32_t chan21Date20mA;
-    // Parameter: CalibOCR4x : chan21OCR4x : MB Offset: 12038
+    // Parameter: CalibOCR4x : chan21OCR4x : MB Offset: 12041
     uint32_t chan21OCR4x;
-    // Parameter: CalibFSR4x : chan21FSR4x : MB Offset: 12040
+    // Parameter: CalibFSR4x : chan21FSR4x : MB Offset: 12043
     uint32_t chan21FSR4x;
-    // Parameter: CalibDate4x : chan21Date4x : MB Offset: 12042
+    // Parameter: CalibDate4x : chan21Date4x : MB Offset: 12045
     uint32_t chan21Date4x;
-    // Parameter: CalibOCR3x : chan21OCR3x : MB Offset: 12044
+    // Parameter: CalibOCR3x : chan21OCR3x : MB Offset: 12047
     uint32_t chan21OCR3x;
-    // Parameter: CalibFSR3x : chan21FSR3x : MB Offset: 12046
+    // Parameter: CalibFSR3x : chan21FSR3x : MB Offset: 12049
     uint32_t chan21FSR3x;
-    // Parameter: CalibDate3x : chan21Date3x : MB Offset: 12048
+    // Parameter: CalibDate3x : chan21Date3x : MB Offset: 12051
     uint32_t chan21Date3x;
-    // Parameter: CalibOCRinternal : chan21OCRinternal : MB Offset: 12050
+    // Parameter: CalibOCRinternal : chan21OCRinternal : MB Offset: 12053
     float chan21OCRinternal;
-    // Parameter: CalibFSRinternal : chan21FSRinternal : MB Offset: 12052
+    // Parameter: CalibFSRinternal : chan21FSRinternal : MB Offset: 12055
     float chan21FSRinternal;
-    // Parameter: CalibDateinternal : chan21DateInternal : MB Offset: 12054
+    // Parameter: CalibDateinternal : chan21DateInternal : MB Offset: 12057
     uint32_t chan21DateInternal;
-    // Parameter: SysOCalb : chan22SysOCR : MB Offset: 12100
+    // Parameter: Nead Read Calibrations : chan22NeadReadCalibrations : MB Offset: 12100
+    uint16_t chan22NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan22ProcessReadCalibrations : MB Offset: 12101
+    float chan22ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan22SysOCR : MB Offset: 12103
     uint16_t chan22SysOCR;
-    // Parameter: SysGCalb : chan22SysFSR : MB Offset: 12101
+    // Parameter: SysGCalb : chan22SysFSR : MB Offset: 12104
     uint16_t chan22SysFSR;
-    // Parameter: CalibOCR20mV : chan22OCR20mV : MB Offset: 12102
+    // Parameter: CalibOCR20mV : chan22OCR20mV : MB Offset: 12105
     uint32_t chan22OCR20mV;
-    // Parameter: CalibFCR20mV : chan22FSR20mV : MB Offset: 12104
+    // Parameter: CalibFSR20mV : chan22FSR20mV : MB Offset: 12107
     uint32_t chan22FSR20mV;
-    // Parameter: CalibFDate20mV : chan22Date20mV : MB Offset: 12106
+    // Parameter: CalibDate20mV : chan22Date20mV : MB Offset: 12109
     uint32_t chan22Date20mV;
-    // Parameter: CalibOCR100mV : chan22OCR100mV : MB Offset: 12108
+    // Parameter: CalibOCR100mV : chan22OCR100mV : MB Offset: 12111
     uint32_t chan22OCR100mV;
-    // Parameter: CalibFCR100mV : chan22FSR100mV : MB Offset: 12110
+    // Parameter: CalibFSR100mV : chan22FSR100mV : MB Offset: 12113
     uint32_t chan22FSR100mV;
-    // Parameter: CalibFDate100mV : chan22Date100mV : MB Offset: 12112
+    // Parameter: CalibDate100mV : chan22Date100mV : MB Offset: 12115
     uint32_t chan22Date100mV;
-    // Parameter: CalibOCR1V : chan22OCR1V : MB Offset: 12114
+    // Parameter: CalibOCR1V : chan22OCR1V : MB Offset: 12117
     uint32_t chan22OCR1V;
-    // Parameter: CalibFCR1V : chan22FSR1V : MB Offset: 12116
+    // Parameter: CalibFSR1V : chan22FSR1V : MB Offset: 12119
     uint32_t chan22FSR1V;
-    // Parameter: CalibFDate1V : chan22Date1V : MB Offset: 12118
+    // Parameter: CalibDate1V : chan22Date1V : MB Offset: 12121
     uint32_t chan22Date1V;
-    // Parameter: CalibOCR10V : chan22OCR10V : MB Offset: 12120
+    // Parameter: CalibOCR10V : chan22OCR10V : MB Offset: 12123
     uint32_t chan22OCR10V;
-    // Parameter: CalibFCR10V : chan22FSR10V : MB Offset: 12122
+    // Parameter: CalibFSR10V : chan22FSR10V : MB Offset: 12125
     uint32_t chan22FSR10V;
-    // Parameter: CalibFDate10V : chan22Date10V : MB Offset: 12124
+    // Parameter: CalibDate10V : chan22Date10V : MB Offset: 12127
     uint32_t chan22Date10V;
-    // Parameter: CalibOCR30V : chan22OCR30V : MB Offset: 12126
+    // Parameter: CalibOCR30V : chan22OCR30V : MB Offset: 12129
     uint32_t chan22OCR30V;
-    // Parameter: CalibFCR30V : chan22FSR30V : MB Offset: 12128
+    // Parameter: CalibFSR30V : chan22FSR30V : MB Offset: 12131
     uint32_t chan22FSR30V;
-    // Parameter: CalibFDate30V : chan22Date30V : MB Offset: 12130
+    // Parameter: CalibDate30V : chan22Date30V : MB Offset: 12133
     uint32_t chan22Date30V;
-    // Parameter: CalibOCR20mA : chan22OCR20mA : MB Offset: 12132
+    // Parameter: CalibOCR20mA : chan22OCR20mA : MB Offset: 12135
     uint32_t chan22OCR20mA;
-    // Parameter: CalibFCR20mA : chan22FSR20mA : MB Offset: 12134
+    // Parameter: CalibFSR20mA : chan22FSR20mA : MB Offset: 12137
     uint32_t chan22FSR20mA;
-    // Parameter: CalibFDate20mA : chan22Date20mA : MB Offset: 12136
+    // Parameter: CalibDate20mA : chan22Date20mA : MB Offset: 12139
     uint32_t chan22Date20mA;
-    // Parameter: CalibOCR4x : chan22OCR4x : MB Offset: 12138
+    // Parameter: CalibOCR4x : chan22OCR4x : MB Offset: 12141
     uint32_t chan22OCR4x;
-    // Parameter: CalibFSR4x : chan22FSR4x : MB Offset: 12140
+    // Parameter: CalibFSR4x : chan22FSR4x : MB Offset: 12143
     uint32_t chan22FSR4x;
-    // Parameter: CalibDate4x : chan22Date4x : MB Offset: 12142
+    // Parameter: CalibDate4x : chan22Date4x : MB Offset: 12145
     uint32_t chan22Date4x;
-    // Parameter: CalibOCR3x : chan22OCR3x : MB Offset: 12144
+    // Parameter: CalibOCR3x : chan22OCR3x : MB Offset: 12147
     uint32_t chan22OCR3x;
-    // Parameter: CalibFSR3x : chan22FSR3x : MB Offset: 12146
+    // Parameter: CalibFSR3x : chan22FSR3x : MB Offset: 12149
     uint32_t chan22FSR3x;
-    // Parameter: CalibDate3x : chan22Date3x : MB Offset: 12148
+    // Parameter: CalibDate3x : chan22Date3x : MB Offset: 12151
     uint32_t chan22Date3x;
-    // Parameter: CalibOCRinternal : chan22OCRinternal : MB Offset: 12150
+    // Parameter: CalibOCRinternal : chan22OCRinternal : MB Offset: 12153
     float chan22OCRinternal;
-    // Parameter: CalibFSRinternal : chan22FSRinternal : MB Offset: 12152
+    // Parameter: CalibFSRinternal : chan22FSRinternal : MB Offset: 12155
     float chan22FSRinternal;
-    // Parameter: CalibDateinternal : chan22DateInternal : MB Offset: 12154
+    // Parameter: CalibDateinternal : chan22DateInternal : MB Offset: 12157
     uint32_t chan22DateInternal;
-    // Parameter: SysOCalb : chan23SysOCR : MB Offset: 12200
+    // Parameter: Nead Read Calibrations : chan23NeadReadCalibrations : MB Offset: 12200
+    uint16_t chan23NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan23ProcessReadCalibrations : MB Offset: 12201
+    float chan23ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan23SysOCR : MB Offset: 12203
     uint16_t chan23SysOCR;
-    // Parameter: SysGCalb : chan23SysFSR : MB Offset: 12201
+    // Parameter: SysGCalb : chan23SysFSR : MB Offset: 12204
     uint16_t chan23SysFSR;
-    // Parameter: CalibOCR20mV : chan23OCR20mV : MB Offset: 12202
+    // Parameter: CalibOCR20mV : chan23OCR20mV : MB Offset: 12205
     uint32_t chan23OCR20mV;
-    // Parameter: CalibFCR20mV : chan23FSR20mV : MB Offset: 12204
+    // Parameter: CalibFSR20mV : chan23FSR20mV : MB Offset: 12207
     uint32_t chan23FSR20mV;
-    // Parameter: CalibFDate20mV : chan23Date20mV : MB Offset: 12206
+    // Parameter: CalibDate20mV : chan23Date20mV : MB Offset: 12209
     uint32_t chan23Date20mV;
-    // Parameter: CalibOCR100mV : chan23OCR100mV : MB Offset: 12208
+    // Parameter: CalibOCR100mV : chan23OCR100mV : MB Offset: 12211
     uint32_t chan23OCR100mV;
-    // Parameter: CalibFCR100mV : chan23FSR100mV : MB Offset: 12210
+    // Parameter: CalibFSR100mV : chan23FSR100mV : MB Offset: 12213
     uint32_t chan23FSR100mV;
-    // Parameter: CalibFDate100mV : chan23Date100mV : MB Offset: 12212
+    // Parameter: CalibDate100mV : chan23Date100mV : MB Offset: 12215
     uint32_t chan23Date100mV;
-    // Parameter: CalibOCR1V : chan23OCR1V : MB Offset: 12214
+    // Parameter: CalibOCR1V : chan23OCR1V : MB Offset: 12217
     uint32_t chan23OCR1V;
-    // Parameter: CalibFCR1V : chan23FSR1V : MB Offset: 12216
+    // Parameter: CalibFSR1V : chan23FSR1V : MB Offset: 12219
     uint32_t chan23FSR1V;
-    // Parameter: CalibFDate1V : chan23Date1V : MB Offset: 12218
+    // Parameter: CalibDate1V : chan23Date1V : MB Offset: 12221
     uint32_t chan23Date1V;
-    // Parameter: CalibOCR10V : chan23OCR10V : MB Offset: 12220
+    // Parameter: CalibOCR10V : chan23OCR10V : MB Offset: 12223
     uint32_t chan23OCR10V;
-    // Parameter: CalibFCR10V : chan23FSR10V : MB Offset: 12222
+    // Parameter: CalibFSR10V : chan23FSR10V : MB Offset: 12225
     uint32_t chan23FSR10V;
-    // Parameter: CalibFDate10V : chan23Date10V : MB Offset: 12224
+    // Parameter: CalibDate10V : chan23Date10V : MB Offset: 12227
     uint32_t chan23Date10V;
-    // Parameter: CalibOCR30V : chan23OCR30V : MB Offset: 12226
+    // Parameter: CalibOCR30V : chan23OCR30V : MB Offset: 12229
     uint32_t chan23OCR30V;
-    // Parameter: CalibFCR30V : chan23FSR30V : MB Offset: 12228
+    // Parameter: CalibFSR30V : chan23FSR30V : MB Offset: 12231
     uint32_t chan23FSR30V;
-    // Parameter: CalibFDate30V : chan23Date30V : MB Offset: 12230
+    // Parameter: CalibDate30V : chan23Date30V : MB Offset: 12233
     uint32_t chan23Date30V;
-    // Parameter: CalibOCR20mA : chan23OCR20mA : MB Offset: 12232
+    // Parameter: CalibOCR20mA : chan23OCR20mA : MB Offset: 12235
     uint32_t chan23OCR20mA;
-    // Parameter: CalibFCR20mA : chan23FSR20mA : MB Offset: 12234
+    // Parameter: CalibFSR20mA : chan23FSR20mA : MB Offset: 12237
     uint32_t chan23FSR20mA;
-    // Parameter: CalibFDate20mA : chan23Date20mA : MB Offset: 12236
+    // Parameter: CalibDate20mA : chan23Date20mA : MB Offset: 12239
     uint32_t chan23Date20mA;
-    // Parameter: CalibOCR4x : chan23OCR4x : MB Offset: 12238
+    // Parameter: CalibOCR4x : chan23OCR4x : MB Offset: 12241
     uint32_t chan23OCR4x;
-    // Parameter: CalibFSR4x : chan23FSR4x : MB Offset: 12240
+    // Parameter: CalibFSR4x : chan23FSR4x : MB Offset: 12243
     uint32_t chan23FSR4x;
-    // Parameter: CalibDate4x : chan23Date4x : MB Offset: 12242
+    // Parameter: CalibDate4x : chan23Date4x : MB Offset: 12245
     uint32_t chan23Date4x;
-    // Parameter: CalibOCR3x : chan23OCR3x : MB Offset: 12244
+    // Parameter: CalibOCR3x : chan23OCR3x : MB Offset: 12247
     uint32_t chan23OCR3x;
-    // Parameter: CalibFSR3x : chan23FSR3x : MB Offset: 12246
+    // Parameter: CalibFSR3x : chan23FSR3x : MB Offset: 12249
     uint32_t chan23FSR3x;
-    // Parameter: CalibDate3x : chan23Date3x : MB Offset: 12248
+    // Parameter: CalibDate3x : chan23Date3x : MB Offset: 12251
     uint32_t chan23Date3x;
-    // Parameter: CalibOCRinternal : chan23OCRinternal : MB Offset: 12250
+    // Parameter: CalibOCRinternal : chan23OCRinternal : MB Offset: 12253
     float chan23OCRinternal;
-    // Parameter: CalibFSRinternal : chan23FSRinternal : MB Offset: 12252
+    // Parameter: CalibFSRinternal : chan23FSRinternal : MB Offset: 12255
     float chan23FSRinternal;
-    // Parameter: CalibDateinternal : chan23DateInternal : MB Offset: 12254
+    // Parameter: CalibDateinternal : chan23DateInternal : MB Offset: 12257
     uint32_t chan23DateInternal;
-    // Parameter: SysOCalb : chan24SysOCR : MB Offset: 12300
+    // Parameter: Nead Read Calibrations : chan24NeadReadCalibrations : MB Offset: 12300
+    uint16_t chan24NeadReadCalibrations;
+    // Parameter: Process Read Calibrations : chan24ProcessReadCalibrations : MB Offset: 12301
+    float chan24ProcessReadCalibrations;
+    // Parameter: SysOCalb : chan24SysOCR : MB Offset: 12303
     uint16_t chan24SysOCR;
-    // Parameter: SysGCalb : chan24SysFSR : MB Offset: 12301
+    // Parameter: SysGCalb : chan24SysFSR : MB Offset: 12304
     uint16_t chan24SysFSR;
-    // Parameter: CalibOCR20mV : chan24OCR20mV : MB Offset: 12302
+    // Parameter: CalibOCR20mV : chan24OCR20mV : MB Offset: 12305
     uint32_t chan24OCR20mV;
-    // Parameter: CalibFCR20mV : chan24FSR20mV : MB Offset: 12304
+    // Parameter: CalibFSR20mV : chan24FSR20mV : MB Offset: 12307
     uint32_t chan24FSR20mV;
-    // Parameter: CalibFDate20mV : chan24Date20mV : MB Offset: 12306
+    // Parameter: CalibDate20mV : chan24Date20mV : MB Offset: 12309
     uint32_t chan24Date20mV;
-    // Parameter: CalibOCR100mV : chan24OCR100mV : MB Offset: 12308
+    // Parameter: CalibOCR100mV : chan24OCR100mV : MB Offset: 12311
     uint32_t chan24OCR100mV;
-    // Parameter: CalibFCR100mV : chan24FSR100mV : MB Offset: 12310
+    // Parameter: CalibFSR100mV : chan24FSR100mV : MB Offset: 12313
     uint32_t chan24FSR100mV;
-    // Parameter: CalibFDate100mV : chan24Date100mV : MB Offset: 12312
+    // Parameter: CalibDate100mV : chan24Date100mV : MB Offset: 12315
     uint32_t chan24Date100mV;
-    // Parameter: CalibOCR1V : chan24OCR1V : MB Offset: 12314
+    // Parameter: CalibOCR1V : chan24OCR1V : MB Offset: 12317
     uint32_t chan24OCR1V;
-    // Parameter: CalibFCR1V : chan24FSR1V : MB Offset: 12316
+    // Parameter: CalibFSR1V : chan24FSR1V : MB Offset: 12319
     uint32_t chan24FSR1V;
-    // Parameter: CalibFDate1V : chan24Date1V : MB Offset: 12318
+    // Parameter: CalibDate1V : chan24Date1V : MB Offset: 12321
     uint32_t chan24Date1V;
-    // Parameter: CalibOCR10V : chan24OCR10V : MB Offset: 12320
+    // Parameter: CalibOCR10V : chan24OCR10V : MB Offset: 12323
     uint32_t chan24OCR10V;
-    // Parameter: CalibFCR10V : chan24FSR10V : MB Offset: 12322
+    // Parameter: CalibFSR10V : chan24FSR10V : MB Offset: 12325
     uint32_t chan24FSR10V;
-    // Parameter: CalibFDate10V : chan24Date10V : MB Offset: 12324
+    // Parameter: CalibDate10V : chan24Date10V : MB Offset: 12327
     uint32_t chan24Date10V;
-    // Parameter: CalibOCR30V : chan24OCR30V : MB Offset: 12326
+    // Parameter: CalibOCR30V : chan24OCR30V : MB Offset: 12329
     uint32_t chan24OCR30V;
-    // Parameter: CalibFCR30V : chan24FSR30V : MB Offset: 12328
+    // Parameter: CalibFSR30V : chan24FSR30V : MB Offset: 12331
     uint32_t chan24FSR30V;
-    // Parameter: CalibFDate30V : chan24Date30V : MB Offset: 12330
+    // Parameter: CalibDate30V : chan24Date30V : MB Offset: 12333
     uint32_t chan24Date30V;
-    // Parameter: CalibOCR20mA : chan24OCR20mA : MB Offset: 12332
+    // Parameter: CalibOCR20mA : chan24OCR20mA : MB Offset: 12335
     uint32_t chan24OCR20mA;
-    // Parameter: CalibFCR20mA : chan24FSR20mA : MB Offset: 12334
+    // Parameter: CalibFSR20mA : chan24FSR20mA : MB Offset: 12337
     uint32_t chan24FSR20mA;
-    // Parameter: CalibFDate20mA : chan24Date20mA : MB Offset: 12336
+    // Parameter: CalibDate20mA : chan24Date20mA : MB Offset: 12339
     uint32_t chan24Date20mA;
-    // Parameter: CalibOCR4x : chan24OCR4x : MB Offset: 12338
+    // Parameter: CalibOCR4x : chan24OCR4x : MB Offset: 12341
     uint32_t chan24OCR4x;
-    // Parameter: CalibFSR4x : chan24FSR4x : MB Offset: 12340
+    // Parameter: CalibFSR4x : chan24FSR4x : MB Offset: 12343
     uint32_t chan24FSR4x;
-    // Parameter: CalibDate4x : chan24Date4x : MB Offset: 12342
+    // Parameter: CalibDate4x : chan24Date4x : MB Offset: 12345
     uint32_t chan24Date4x;
-    // Parameter: CalibOCR3x : chan24OCR3x : MB Offset: 12344
+    // Parameter: CalibOCR3x : chan24OCR3x : MB Offset: 12347
     uint32_t chan24OCR3x;
-    // Parameter: CalibFSR3x : chan24FSR3x : MB Offset: 12346
+    // Parameter: CalibFSR3x : chan24FSR3x : MB Offset: 12349
     uint32_t chan24FSR3x;
-    // Parameter: CalibDate3x : chan24Date3x : MB Offset: 12348
+    // Parameter: CalibDate3x : chan24Date3x : MB Offset: 12351
     uint32_t chan24Date3x;
-    // Parameter: CalibOCRinternal : chan24OCRinternal : MB Offset: 12350
+    // Parameter: CalibOCRinternal : chan24OCRinternal : MB Offset: 12353
     float chan24OCRinternal;
-    // Parameter: CalibFSRinternal : chan24FSRinternal : MB Offset: 12352
+    // Parameter: CalibFSRinternal : chan24FSRinternal : MB Offset: 12355
     float chan24FSRinternal;
-    // Parameter: CalibDateinternal : chan24DateInternal : MB Offset: 12354
+    // Parameter: CalibDateinternal : chan24DateInternal : MB Offset: 12357
     uint32_t chan24DateInternal;
     // Parameter: Modbus Protocol Version : modbusProtocolVersion : MB Offset: 0
     uint32_t modbusProtocolVersion;

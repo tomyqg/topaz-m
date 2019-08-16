@@ -73,7 +73,7 @@ public:
     void SetWindowWidthPixels(int neww);
     void SetWindowHeightPixels(int newh);
     void GetAllUartPorts();
-    void ReadUstavkiFromFile();
+//    void ReadUstavkiFromFile();
 
     int GetXOffsetForAlign(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText, int alerttextsize);
     int GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText);
@@ -589,6 +589,9 @@ private:
     void extSetFreqUnit(QString name, uint8_t *data);
     void extGetChanCalibr(QString name);
     void extSetChanCalibr(QString name, uint8_t *data);
+    void extSetNeadCalibr(QString name, uint8_t *data);
+    void extGetNeadCalibr(QString name);
+    void extGetProcessReadCalibr(QString name);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

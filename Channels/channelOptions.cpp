@@ -27,6 +27,7 @@ ChannelOptions::ChannelOptions()
     higherlimit = 100;
     lowerlimit = -100;
     signaltype = 2;
+    demphervalue = 0;
     outputData.chanSignalType = VoltageMeasure;
     memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
     outputData.chanAdditionalParameter1[0] = diapason;
@@ -36,6 +37,12 @@ ChannelOptions::ChannelOptions()
     timer->setInterval(measureperiod);
     timer->stop();
     buffermutex = new QMutex();
+    listStr << "SignalType" \
+            << "Error" \
+            << "AdditionalParameter1"\
+            << "AdditionalParameter2"\
+            << "FSRinternal";
+    iteratorParam = 0;
     timerUpdateParam = new QTimer();
     connect(timerUpdateParam, SIGNAL(timeout()), this, SLOT(updateParam()));
     updateParam();
@@ -159,7 +166,10 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
     shema = sh;
 
     outputData.chanAdditionalParameter1[0] = newdiapason;
-    outputData.chanAdditionalParameter1[2] = sh;
+    if(outputData.chanSignalType == TermoResistanceMeasure)
+    {
+        outputData.chanAdditionalParameter1[2] = sh;
+    }
 
 //    if(outputData.chanSignalType == VoltageMeasure)
 //    {
@@ -188,7 +198,10 @@ void ChannelOptions::SetDiapasonShema(int newdiapason, int sh = 0)
 void ChannelOptions::enableColdJunction(int en)
 {
     enColdJunction = en;
-    outputData.chanAdditionalParameter1[2] = enColdJunction;
+    if(outputData.chanSignalType == TermoCoupleMeasure)
+    {
+        outputData.chanAdditionalParameter1[2] = enColdJunction;
+    }
 }
 
 int ChannelOptions::getStateColdJunction()
@@ -462,6 +475,7 @@ void ChannelOptions::parserChannel(Transaction tr)
     else if(paramName == chanName + "SysOCR")
     {
         calibrations.chanSysOCR = tr.volInt;
+
     }
     else if(paramName == chanName + "SysFSR")
     {
@@ -576,6 +590,16 @@ void ChannelOptions::parserChannel(Transaction tr)
         calibrations.chanDateInternal = tr.volInt;
     }
 
+    // Если пришли калибровки, то подсчитать долю прочитанных калибровок
+    if(tr.offset >= CALIB_START_OFFSET)
+    {
+        foreach (QString calib, listCalibrationRegisters) {
+            if(paramName == (chanName + calib))
+            {
+                processReadCalibrations += (1.0 / listCalibrationRegisters.size()) ;
+            }
+        }
+    }
 
 }
 
@@ -609,19 +633,27 @@ void ChannelOptions::updateParam()
     tr.dir = Transaction::R;
     tr.slave = slot;
     int devCh = slotChannel;
-    QStringList listStr;
-    listStr << "chan" + QString::number(devCh) + "SignalType" \
-            << "chan" + QString::number(devCh) + "Error" \
-            << "chan" + QString::number(devCh) + "AdditionalParameter1"\
-            << "chan" + QString::number(devCh) + "AdditionalParameter2";
-    if(outputData.chanSignalType == TermoCoupleMeasure)
-    {
-        listStr << "chan" + QString::number(devCh) + "FSRinternal";
-    }
 
-    foreach (QString str, listStr) {
-        tr.offset = cRegistersMap::getOffsetByName(str);
+//    listStr << "chan" + QString::number(devCh) + "SignalType" \
+//            << "chan" + QString::number(devCh) + "Error" \
+//            << "chan" + QString::number(devCh) + "AdditionalParameter1"\
+//            << "chan" + QString::number(devCh) + "AdditionalParameter2";
+//    if(outputData.chanSignalType == TermoCoupleMeasure)
+//    {
+//        listStr << "chan" + QString::number(devCh) + "FSRinternal";
+//    }
+
+    QString str = listStr.at(iteratorParam);
+    if((str != "FSRinternal") || (outputData.chanSignalType == TermoCoupleMeasure))
+    {
+        QString s = "chan" + QString::number(devCh) + str;
+        tr.offset = cRegistersMap::getOffsetByName(s);
         emit sendToWorker(tr);
+    }
+    iteratorParam++;
+    if(iteratorParam >= listStr.size())
+    {
+        iteratorParam = 0;
     }
 }
 
@@ -640,6 +672,9 @@ void ChannelOptions::initCalibration()
                              << "OCR3x" << "FSR3x" << "Date3x" \
                              << "OCRinternal" << "FSRinternal" << "DateInternal";
     iteratorCalibration = 0;
+    neadRead = false;
+    processReadCalibrations = 0;
+
     timerCalibrations = new QTimer(this);
     connect(timerCalibrations, SIGNAL(timeout()), this, SLOT(updateCalibrations()));
     periodUpdateCalibrations = 1000;    // 1сек
@@ -649,20 +684,30 @@ void ChannelOptions::initCalibration()
 void ChannelOptions::updateCalibrations()
 {
     if (!enable) return;
-    Transaction tr;
-    tr.dir = Transaction::R;
-    tr.slave = slot;
-    QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(iteratorCalibration);
-    tr.offset = cRegistersMap::getOffsetByName(name);
-    emit sendToWorker(tr);
-
-    iteratorCalibration++;
-    if(iteratorCalibration >= listCalibrationRegisters.size())
+    if(neadRead)
     {
-        iteratorCalibration = 0;
-        periodUpdateCalibrations = 10000;   //10сек
+        Transaction tr;
+        tr.dir = Transaction::R;
+        tr.slave = slot;
+        for(int i=0; i<listCalibrationRegisters.size(); i++)
+        {
+            QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(i);
+            tr.offset = cRegistersMap::getOffsetByName(name);
+            emit sendToWorker(tr);
+        }
+        neadRead = false;
+//        QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(iteratorCalibration);
+//        tr.offset = cRegistersMap::getOffsetByName(name);
+//        emit sendToWorker(tr);
+
+//        iteratorCalibration++;
+//        if(iteratorCalibration >= listCalibrationRegisters.size())
+//        {
+//            iteratorCalibration = 0;
+//            periodUpdateCalibrations = 10000;   //10сек
+//        }
+//        timerCalibrations->setInterval(periodUpdateCalibrations);
     }
-    timerCalibrations->setInterval(periodUpdateCalibrations);
 }
 
 void ChannelOptions::writeCalibration(QString paramName, uint32_t value)
@@ -792,8 +837,8 @@ void ChannelOptions::writeCalibration(QString paramName, uint32_t value)
         calibrations.chanDateInternal = value;
     }
     emit sendToWorker(tr);
-    tr.dir = Transaction::R;
-    emit sendToWorker(tr);
+//    tr.dir = Transaction::R;
+//    emit sendToWorker(tr);
 
 }
 

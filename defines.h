@@ -14,11 +14,11 @@
 #define DEFINES_H
 
 #ifdef Q_OS_WIN32
-//    #define RANDOM_CHAN
+    //#define RANDOM_CHAN
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.96"
+#define VER "1.98"
 
 //#define CURRENT_VER "1.84" //версия ПО
 

@@ -189,6 +189,8 @@ void MainWindow::initExtInterface()
          foreach (QString calib, listChannels.at(i)->listCalibrationRegisters) {
              tablSetParamExtInterface.append({chanNum + calib, &MainWindow::extGetChanCalibr, &MainWindow::extSetChanCalibr});
          }
+         tablSetParamExtInterface.append({chanNum + "NeadReadCalibrations", &MainWindow::extGetNeadCalibr, &MainWindow::extSetNeadCalibr});
+         tablExtInterfaceRegisters.append({chanNum + "ProcessReadCalibrations", &MainWindow::extGetProcessReadCalibr});
     }
 
     /* Запуск таймеров */
@@ -2530,4 +2532,63 @@ void MainWindow::extSetChanCalibr(QString name, uint8_t * data)
         listChannels.at(num-1)->writeCalibration(paramName, value);
     }
     mListChannel.unlock();
+}
+
+void MainWindow::extGetNeadCalibr(QString name)
+{
+    QString chan = name.right(name.size() - QString("chan").size()); //отброс приставки "chan"
+    int num = chan.left(2).toInt(); //номер канала из внешенго модбаса по двум сиволам слева
+    if(num == 0)
+    {
+        num = chan.left(1).toInt(); //или по одному символу
+    }
+
+    tModbusBuffer data;
+    mListChannel.lock();
+    if((num > 0) && (num <= listChannels.size()))
+    {
+        data.data[0] = listChannels.at(num-1)->getNeadReadCalibtration();
+    }
+    mListChannel.unlock();
+    emit signalToExtModbus(name, data);
+}
+
+void MainWindow::extSetNeadCalibr(QString name, uint8_t * data)
+{
+    QString chan = name.right(name.size() - QString("chan").size()); //отброс приставки "chan"
+    int num = chan.left(2).toInt(); //номер канала из внешенго модбаса по двум сиволам слева
+    if(num == 0)
+    {
+        num = chan.left(1).toInt(); //или по одному символу
+    }
+
+    mListChannel.lock();
+    if((num > 0) && (num <= listChannels.size()))
+    {
+        if(data[0] != 0)
+        {
+            listChannels.at(num-1)->neadReadCalibration();
+        }
+    }
+    mListChannel.unlock();
+}
+
+void MainWindow::extGetProcessReadCalibr(QString name)
+{
+    QString chan = name.right(name.size() - QString("chan").size()); //отброс приставки "chan"
+    int num = chan.left(2).toInt(); //номер канала из внешенго модбаса по двум сиволам слева
+    if(num == 0)
+    {
+        num = chan.left(1).toInt(); //или по одному символу
+    }
+
+    tModbusBuffer data;
+    mListChannel.lock();
+    if((num > 0) && (num <= listChannels.size()))
+    {
+        float value = listChannels.at(num-1)->getProcessReadCalibrations();
+        memcpy(data.data, &value, sizeof(value));
+    }
+    mListChannel.unlock();
+    emit signalToExtModbus(name, data);
 }

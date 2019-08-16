@@ -75,7 +75,7 @@ void wVolueBar::setValue(double vol)
     }
     else //valueType == BarValue_Procent
     {
-        valBar = QString::number(vol/razmah*100, 'f', 2);
+        valBar = QString::number((vol - lowerMeasure)/(higherMeasure - lowerMeasure)*100, 'f', 2);
     }
     ui->volBar->setText(valBar);
 
@@ -278,10 +278,13 @@ void wVolueBar::addMarker(int vol, bool dir)
 /*
  * Задание размаха значений, видимых в баре
  */
-void wVolueBar::setBarDiapazon(double diap)
+void wVolueBar::setBarDiapazon(double hi, double low)
 {
-
-    razmah = diap;
+    if(hi == low) hi += 0.000001;
+    higherMeasure = hi;
+    lowerMeasure = low;
+    razmah = max(abs(hi), abs(low));
+//    razmah = diap;
 }
 
 bool wVolueBar::eventFilter(QObject* watched, QEvent* event)

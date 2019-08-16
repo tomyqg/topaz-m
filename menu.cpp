@@ -2512,8 +2512,16 @@ void dMenu::updateLabelDiagnostic()
             mListChannel.lock();
             if(i >= listChannels.size()) break; // Ошибка: столько каналов тут нет
             if(listChannels.at(i)->enable == false) continue; // Пропустить отключенные каналы
+            ChannelOptions * channel = listChannels.at(i);
 
-            volLabel->setText(QString::number(listChannels.at(i)->GetCurrentChannelValue()));
+            if(channel->getVoltageType() == ChannelOptions::Value_Real)
+            {
+                volLabel->setText(QString::number(channel->GetCurrentChannelValue()));
+            }
+            else
+            {
+                volLabel->setText(QString::number(channel->GetValuePercent()));
+            }
             mListChannel.unlock();
             i++;
         }
