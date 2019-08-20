@@ -17,6 +17,9 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     deviceStatus = Device_Status_NOINIT;
     factoryDate = 0;
     pauseUpdateParam = false;
+    countParams = 0;
+    deviceMode = 0;
+    accessType = EAT_ROOT;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);
     timerUpdateConstParam = new QTimer(this);
@@ -29,9 +32,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);
     timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
-    countParams = 0;
-    deviceMode = 0;
-    accessType = EAT_ROOT;
+
 }
 
 int cDevice::parseDeviceParam(Transaction tr)
@@ -166,10 +167,11 @@ void cDevice::resetOnline()
 void cDevice::updateStatus()
 {
     if(pauseUpdateParam) return;
-    if(!online) return;
+    if(!online && stableOnline) return;
+
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
-    if((deviceType == Device_None) || ((int)deviceType >= Count_Device_Type))
+    if((deviceType == Device_None) || ((int)deviceType >= Count_Device_Type) || !online)
     {
         params << "deviceType";
     }

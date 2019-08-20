@@ -2694,9 +2694,9 @@ void dMenu::updateDevicesUI()
 //        strOnline << "ОТКЛЮЧЕН" << "ВКЛЮЧЕН";
 //        str += strOnline.at(device->getOnline());
 
-        if(device->getOnline()) //плата онлайн
+        if(device->getOnline() || !device->getStable()) //плата онлайн
         {
-            if((int)(device->deviceType) < Count_Device_Type)
+            if(((int)(device->deviceType) < Count_Device_Type) && ((int)(device->deviceType) > Device_None))
             {
                 str += "ВКЛЮЧЕН";
                 if(strType.at((int)(device->deviceType)).size())
