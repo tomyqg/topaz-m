@@ -2072,7 +2072,7 @@ void MainWindow::extGetFreqAdditionalParameter(QString name)
     emit signalToExtModbus(name, data);
 }
 
-// Установка длительности единиченого импульса
+// Установка длительности единичного импульса
 void MainWindow::extSetFreqImpulseDuration(QString name, uint8_t * data)
 {
     QString chan = name.right(name.size() - QString("freq").size());
@@ -2086,7 +2086,7 @@ void MainWindow::extSetFreqImpulseDuration(QString name, uint8_t * data)
     }
     mListFreq.unlock();
 }
-// Получение длительности единиченого импульса
+// Получение длительности единичного импульса
 void MainWindow::extGetFreqImpulseDuration(QString name)
 {
     tModbusBuffer data;

@@ -1373,11 +1373,25 @@ QString ChannelOptions::getNameUnitByParam(uint16_t type, int diap)
 void ChannelOptions::setAdditionalParametr1(uint8_t * param)
 {
     memcpy(outputData.chanAdditionalParameter1, param, sizeof(outputData.chanAdditionalParameter1));
+    if (!enable) return;
+    // Отправка тут же актуальной информации в плату
+    QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter1";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+    memcpy(trans.paramA12, outputData.chanAdditionalParameter1, sizeof(outputData.chanAdditionalParameter1));
+    emit sendToWorker(trans);
 }
 
 void ChannelOptions::setAdditionalParametr2(uint8_t * param)
 {
     memcpy(outputData.chanAdditionalParameter2, param, sizeof(outputData.chanAdditionalParameter2));
+    if (!enable) return;
+    // Отправка тут же актуальной информации в плату
+    QString nameParam = "chan" + QString::number(slotChannel) + "AdditionalParameter2";
+    uint16_t offset = cRegistersMap::getOffsetByName(nameParam);
+    Transaction trans = Transaction(Transaction::W, (uint8_t)slot, offset);
+    memcpy(trans.paramA12, outputData.chanAdditionalParameter2, sizeof(outputData.chanAdditionalParameter2));
+    emit sendToWorker(trans);
 }
 
 void ChannelOptions::getAdditionalParametr1(uint8_t * param)
