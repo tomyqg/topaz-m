@@ -185,9 +185,9 @@ void cDevice::updateStatus()
 //        tr.offset = cRegistersMap::getOffsetByName(params.at(i));
 //        emit updateParam(tr);
 //    }
+    if(countParams >= params.size()) countParams = 0;
     tr.offset = cRegistersMap::getOffsetByName(params.at(countParams++));
     emit updateParam(tr);
-    if(countParams >= params.size()) countParams = 0;
 }
 
 void cDevice::updateConstParam()

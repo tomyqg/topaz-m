@@ -643,7 +643,7 @@ void ChannelOptions::updateParam()
 //        listStr << "chan" + QString::number(devCh) + "FSRinternal";
 //    }
 
-    QString str = listStr.at(iteratorParam);
+    QString str = listStr.at(iteratorParam % listStr.size());
     if((str != "FSRinternal") || (outputData.chanSignalType == TermoCoupleMeasure))
     {
         QString s = "chan" + QString::number(devCh) + str;

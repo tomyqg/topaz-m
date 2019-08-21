@@ -543,39 +543,6 @@ void MainWindow::sendRelayStateToWorker(int relay, bool state)
         listRelais.at(relay)->setState(state);
     }
 
-//    // номер реле -> индекс реле
-//    relay -= 1;
-
-//    // получить номер слота платы реле
-////    int slot = rsc.getSlotByRelay(relay);
-//    int slot = listRelais.at(relay)->mySlot;
-
-//    // получить индекс реле на плате (канал)
-////    int devRelay = rsc.getDevRelay(relay);
-//    int devRelay = listRelais.at(relay)->myPhysicalNum;
-
-//    // определение адреса параметра в соответствии с интексом реле
-//    // это пока временная реализация --------------
-//    uint32_t relayOffset;
-//    if(devRelay%2)
-//    {
-//        relayOffset = ChannelOptions::chanReleyHi;
-//    } else {
-//        relayOffset = ChannelOptions::chanReleyLow;
-//    }
-//    //---------------------------------------------
-
-//    uint16_t offset = getDevOffsetByChannel(devRelay>>1, relayOffset);
-
-//    Transaction tr(Transaction::W, slot, offset, 0);
-//    // значение 1 в регистре замыкает реле
-//    // тут нужно вставить инверсию, если выход нормально замкнут
-//    if(state) tr.volInt = 1;
-//    else tr.volInt = 0;
-//#ifdef DEBUG_RELAY
-//    qDebug() << "Relay:" << relay << "(DevRalay:" << devRelay << ")" << "=" << state;
-//#endif
-//    emit sendTransToWorker(tr);
 }
 
 void MainWindow::InitPins()
@@ -857,6 +824,7 @@ void MainWindow::updateDevicesComplect()
                 list6DI6RO.append(device->getSlot());
                 list6DI6RO.append(device->getSlot());
                 list6DI6RO.append(device->getSlot());
+                break;
             default:
                 cLogger mk(pathtomessages, cLogger::DEVICE);
                 QString strSlot = QString::number(device->getSlot());
@@ -872,6 +840,10 @@ void MainWindow::updateDevicesComplect()
     {
         allDeviceStable = true;
         timerUpdateDevices->setInterval(timeUpdateDevices);
+    }
+    else
+    {
+        timerUpdateDevices->setInterval(timeInitDevices);
     }
     mListDev.unlock();
 
@@ -1286,6 +1258,7 @@ void MainWindow::parseWorkerReceive()
     timerQueueTrans->stop();
     Transaction tr;
     QString paramName;
+    deviceTypeEnum deviceType;
     ChannelOptions * channel = listChannels.at(0);
     int ch;
 
@@ -1299,6 +1272,7 @@ void MainWindow::parseWorkerReceive()
         int indexDev = tr.slave - 1;
         mListDev.lock();
         cDevice * device = listDevice.at(indexDev);
+        deviceType = device->deviceType;
         device->setOnline();
         mListDev.unlock();
         paramName = cRegistersMap::getNameByOffset(tr.offset);
@@ -1307,7 +1281,7 @@ void MainWindow::parseWorkerReceive()
             // канал 1
         {
             ch = 0;
-            if(device->deviceType == Device_4AI)
+            if(deviceType == Device_4AI)
             {
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1318,7 +1292,7 @@ void MainWindow::parseWorkerReceive()
                     mListChannel.unlock();
                 }
             }
-            else if(device->deviceType == Device_STEEL)
+            else if(deviceType == Device_STEEL)
             {
                 int index = getIndexSteelBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1326,7 +1300,7 @@ void MainWindow::parseWorkerReceive()
                     listSteel.at(index)->parserSteel(tr);
                 }
             }
-            else if(device->deviceType == Divece_6DI6RO)
+            else if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1341,7 +1315,7 @@ void MainWindow::parseWorkerReceive()
             // канал 2
         {
             ch = 1;
-            if(device->deviceType == Device_4AI)
+            if(deviceType == Device_4AI)
             {
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1352,7 +1326,7 @@ void MainWindow::parseWorkerReceive()
                     mListChannel.unlock();
                 }
             }
-            else if(device->deviceType == Device_STEEL)
+            else if(deviceType == Device_STEEL)
             {
                 int index = getIndexSteelBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1360,7 +1334,7 @@ void MainWindow::parseWorkerReceive()
                     listSteel.at(index)->parserSteel(tr);
                 }
             }
-            else if(device->deviceType == Divece_6DI6RO)
+            else if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1376,7 +1350,7 @@ void MainWindow::parseWorkerReceive()
             // канал 3
         {
             ch = 2;
-            if(device->deviceType == Device_4AI)
+            if(deviceType == Device_4AI)
             {
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1387,7 +1361,7 @@ void MainWindow::parseWorkerReceive()
                     mListChannel.unlock();
                 }
             }
-            else if(device->deviceType == Divece_6DI6RO)
+            else if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1402,7 +1376,7 @@ void MainWindow::parseWorkerReceive()
             // канал 4
         {
             ch = 3;
-            if(device->deviceType == Device_4AI)
+            if(deviceType == Device_4AI)
             {
                 int index = getIndexAnalogBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1413,7 +1387,7 @@ void MainWindow::parseWorkerReceive()
                     mListChannel.unlock();
                 }
             }
-            else if(device->deviceType == Divece_6DI6RO)
+            else if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1428,7 +1402,7 @@ void MainWindow::parseWorkerReceive()
             // канал 5
         {
             ch = 4;
-            if(device->deviceType == Divece_6DI6RO)
+            if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1443,7 +1417,7 @@ void MainWindow::parseWorkerReceive()
             // канал 6
         {
             ch = 5;
-            if(device->deviceType == Divece_6DI6RO)
+            if(deviceType == Divece_6DI6RO)
             {
                 int index = getIndexFreqBySlotAndCh(tr.slave, ch);
                 if(index != -1)
@@ -1456,13 +1430,15 @@ void MainWindow::parseWorkerReceive()
         }
         else
         {
+            mListDev.lock();
             device->parseDeviceParam(tr);
+            mListDev.unlock();
 
             //для реле регистр выходов как параметр платы
             if(paramName == "RelayControl")
             {
-                if((device->deviceType == Device_8RP)\
-                        || (device->deviceType == Divece_6DI6RO))
+                if((deviceType == Device_8RP)\
+                        || (deviceType == Divece_6DI6RO))
                 {
                     for(int i = 0; i < NUM_RELAY_IN_8RP; i++)
                     {
