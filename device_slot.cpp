@@ -157,7 +157,6 @@ void cDevice::resetOnline()
     if(counterStatus >= COUNT_STABLE_STATUS_OFF) stableOnline = true;
     else stableOnline = false;
 
-
     //если таймер сработал, значит плата давно не отвечала - оффлайн
     online = false;
     Transaction tr(Transaction::R, slot);
