@@ -3,7 +3,8 @@
 #define TIME_RESET_ONLINE_SEC   10
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   100
-#define COUNT_STABLE_STATUS     3
+#define COUNT_STABLE_STATUS_OFF 4
+#define COUNT_STABLE_STATUS_ON  1
 
 int cDevice::countDev = 1;
 
@@ -42,7 +43,7 @@ int cDevice::parseDeviceParam(Transaction tr)
     // определение стабильности платы
     if(online) counterStatus ++;
     else counterStatus = 0;
-    if(counterStatus > COUNT_STABLE_STATUS) stableOnline = true;
+    if(counterStatus >= COUNT_STABLE_STATUS_ON) stableOnline = true;
     else stableOnline = false;
 
     online  = true;     // устройство на связи
@@ -153,7 +154,7 @@ void cDevice::resetOnline()
     // определение стабильности платы
     if(!online) counterStatus ++;
     else counterStatus = 0;
-    if(counterStatus > COUNT_STABLE_STATUS) stableOnline = true;
+    if(counterStatus >= COUNT_STABLE_STATUS_OFF) stableOnline = true;
     else stableOnline = false;
 
 
