@@ -1121,6 +1121,23 @@ double ChannelOptions::getMaxInDiapason(int diapason)
             break;
         }
     }
+    else if (GetSignalType() == CurrentMeasure)
+    {
+        switch (diapason) {
+
+        case Current4_20mA:   // значение приходит в милливольтах
+            ret = 20;
+            break;
+        case Current0_20mA:   // значение приходит в милливольтах
+            ret = 20;
+            break;
+        case Current0_5mA:   // значение приходит в милливольтах
+            ret = 5;
+            break;
+        default:
+            break;
+        }
+    }
     return ret;
 }
 
@@ -1154,6 +1171,23 @@ double ChannelOptions::getMinInDiapason(int diapason)
             break;
         case Voltage30V: // значение приходит в вольтах
             ret = -30;
+            break;
+        default:
+            break;
+        }
+    }
+    else if (GetSignalType() == CurrentMeasure)
+    {
+        switch (diapason) {
+
+        case Current4_20mA:   // значение приходит в милливольтах
+            ret = 4;
+            break;
+        case Current0_20mA:   // значение приходит в милливольтах
+            ret = 0;
+            break;
+        case Current0_5mA:   // значение приходит в милливольтах
+            ret = 0;
             break;
         default:
             break;

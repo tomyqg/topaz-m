@@ -40,7 +40,7 @@ private:
     QMovie moArch;
     QTimer tUpdateTime;
     QTimer tUpdateBar;
-    QStringList StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
+    QStringList StringListCurrent, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
     void updateGraf(int period);
 //    QList<ChannelOptions *> listChannels;
     void updateWidgets();

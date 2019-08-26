@@ -112,6 +112,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->setupUi(this);
     updateVer();
     //списки типов датчиков
+    StringListCurrent.clear();
+    StringListCurrent.append("0-20 мА");
+    StringListCurrent.append("4-20 мА");
+    StringListCurrent.append("0-5 мА");
     StringListNapryagenie.clear();
     for(int i = 0; i < (sizeof(tableVoltageDiapasone)/sizeof(typeTableDiapasone)); i++)
     {
@@ -1001,9 +1005,12 @@ void dSettings::updateUiSignalTypeParam(int index)
     }
     else if(index == CurrentMeasure)
     {
-        ui->sensorDiapazon->hide();
+        ui->sensorDiapazon->clear();
+        ui->sensorDiapazon->addItems(StringListCurrent);
+        ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
+        ui->sensorDiapazon->show();
         ui->sensorShema->hide();
-        ui->labelDiapazon->hide();
+        ui->labelDiapazon->show();
         ui->labelShema->hide();
         ui->enableColdJunction->hide();
         ui->labelColdJunction->hide();

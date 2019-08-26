@@ -316,8 +316,8 @@ public:
     Q_ENUM(TransmissionFunction)
 
     enum CurrentDiapason{
-        Current4_20mA ,
         Current0_20mA ,
+        Current4_20mA ,
         Current0_5mA ,
         Current0_20mA_sqrt ,
         Current4_20mA_sqrt ,
