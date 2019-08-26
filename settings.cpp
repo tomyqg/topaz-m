@@ -40,9 +40,14 @@ typedef struct {
 } typeTableDiapasone;
 const typeTableDiapasone tableVoltageDiapasone[] = {
 //    {0, Voltage_None, "НЕТ"},     //0
-    {1, Voltage_1V,   "±1    В"},       //2
-    {2, Voltage_10V,  "±10   В"},     //3
-    {3, Voltage_30V,  "±30   В"},       //4
+    {ChannelOptions::Voltage150mV,  Voltage_1V,   "±150 мВ"},       //0
+    {ChannelOptions::Voltage300mV,  Voltage_1V,   "±300 мВ"},       //1
+    {ChannelOptions::Voltage0_1V,   Voltage_1V,   "0-1   В"},       //2
+    {ChannelOptions::Voltage0_5V,   Voltage_10V,  "0-5   В"},       //3
+    {ChannelOptions::Voltage0_10V,  Voltage_10V,  "0-10  В"},       //4
+    {ChannelOptions::Voltage1V,     Voltage_1V,   "±1    В"},       //5
+    {ChannelOptions::Voltage10V,    Voltage_10V,  "±10   В"},       //6
+    {ChannelOptions::Voltage30V,    Voltage_30V,  "±30   В"},       //7
 };
 typedef struct {
     int numItem;
@@ -107,6 +112,10 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->setupUi(this);
     updateVer();
     //списки типов датчиков
+    StringListCurrent.clear();
+    StringListCurrent.append("0-20 мА");
+    StringListCurrent.append("4-20 мА");
+    StringListCurrent.append("0-5 мА");
     StringListNapryagenie.clear();
     for(int i = 0; i < (sizeof(tableVoltageDiapasone)/sizeof(typeTableDiapasone)); i++)
     {
@@ -656,11 +665,18 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
 
 }
 
+void dSettings::setColorBar(QColor color, QColor colotLihgt)
+{
+    ui->bar->setColor(color, colotLihgt);
+}
+
 void dSettings::updateBar()
 {
+    double diapason = ui->sensorDiapazon->currentIndex();
     if(channel != NULL) {
-        ui->bar->setExtr(channel->GetMinimumChannelValue(), channel->GetMaximumChannelValue());
-//        ui->bar->resetLim();
+        ui->bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason),\
+                         channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason));
+        //        ui->bar->resetLim();
         ui->bar->cleanMarker();
         mListUstvok.lock();
         foreach (Ustavka * ustavka, listUstavok) {
@@ -673,13 +689,11 @@ void dSettings::updateBar()
             }
         }
         mListUstvok.unlock();
-//        QColor colors[8] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4,\
-//                           ColorCh1Light, ColorCh2Light,\
-//                           ColorCh3Light, ColorCh4Light};
-        ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
+//        ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
-        ui->bar->setBarDiapazon(ui->scaleUp->value(), ui->scaleDown->value());
-        ui->bar->setValue(channel->GetCurrentChannelValue());
+        ui->bar->setBarDiapazon(channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason),\
+                                channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason));
+        ui->bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason));
     }
 }
 
@@ -744,6 +758,7 @@ void dSettings::saveParam()
             channel->setShiftColdJunction(ui->shiftColdJunction->value());
             channel->enableColdJunction(ui->enableColdJunction->currentIndex());
             channel->SetDiapasonShema(diapasone, ui->sensorShema->currentIndex() /*sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex())*/);
+            channel->SetUserDiapason(ui->sensorDiapazon->currentIndex());
             channel->setVolueVoltageType(ui->comboTypeValue->currentIndex());
 //            channel->setCapacity(ui->comboCapacity->currentIndex());
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
@@ -990,9 +1005,12 @@ void dSettings::updateUiSignalTypeParam(int index)
     }
     else if(index == CurrentMeasure)
     {
-        ui->sensorDiapazon->hide();
+        ui->sensorDiapazon->clear();
+        ui->sensorDiapazon->addItems(StringListCurrent);
+        ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
+        ui->sensorDiapazon->show();
         ui->sensorShema->hide();
-        ui->labelDiapazon->hide();
+        ui->labelDiapazon->show();
         ui->labelShema->hide();
         ui->enableColdJunction->hide();
         ui->labelColdJunction->hide();
@@ -1005,7 +1023,8 @@ void dSettings::updateUiSignalTypeParam(int index)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListNapryagenie);
-        ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(channel->GetDiapason()));
+//        ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(channel->GetDiapason()));
+        ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
         ui->sensorShema->hide();
@@ -1561,7 +1580,8 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
         if(srcChannel->GetSignalType() == VoltageMeasure)
         {
-            ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
+//            ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
+            ui->sensorDiapazon->setCurrentIndex(srcChannel->GetUserDiapason());
         }
         else if(srcChannel->GetSignalType() == TermoCoupleMeasure)
         {

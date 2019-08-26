@@ -29,8 +29,10 @@ public:
     void addArch(cArchivator * archiv) {arch = archiv;}
     void addSteel(cSteel * st, typeSteelTech * tech);
 
+    void setColorBar(QColor color, QColor colotLihgt);
 public slots:
     void resizeEvent(QResizeEvent * s);
+    void updateBar();
 
 private:
     Ui::dSettings *ui;
@@ -38,7 +40,7 @@ private:
     QMovie moArch;
     QTimer tUpdateTime;
     QTimer tUpdateBar;
-    QStringList StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
+    QStringList StringListCurrent, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
     void updateGraf(int period);
 //    QList<ChannelOptions *> listChannels;
     void updateWidgets();
@@ -98,7 +100,7 @@ private slots:
     void timeoutLoad();
 //    void on_buttonUstavk_clicked();
     void DateUpdate();
-    void updateBar();
+
     void on_verticalScrollBar_sliderMoved(int position);
     void on_period_currentIndexChanged(int index);
 //    void on_buttonBackUstavki_clicked();

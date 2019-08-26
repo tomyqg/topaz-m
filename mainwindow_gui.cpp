@@ -575,6 +575,10 @@ void MainWindow::openSettingsChannel(int num)
     mListChannel.unlock();
 
     dialogSetingsChannel = new dSettings(listChannels, index);
+    QColor color[8] = {ColorCh1, ColorCh2, ColorCh3, ColorCh4, ColorCh5, ColorCh6, ColorCh7, ColorCh8};
+    QColor colorLight[8] = {ColorCh1Light, ColorCh2Light, ColorCh3Light, ColorCh4Light, ColorCh5Light, ColorCh6Light, ColorCh7Light, ColorCh8Light};
+    dialogSetingsChannel->setColorBar(color[num-1], colorLight[num-1]);
+    dialogSetingsChannel->updateBar();
     dialogSetingsChannel->exec();
     dialogSetingsChannel->deleteLater();
     sendConfigChannelsToSlave();

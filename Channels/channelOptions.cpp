@@ -17,7 +17,8 @@ ChannelOptions::ChannelOptions()
     currentvalue = 0;
     newValue = false;
     measureperiod = 1;
-    diapason = 1;
+    diapason = Voltage_1V;
+    diapasonUser = Voltage1V;
     slot = 0;       //по-умолчанию присваиваем несуществующий слот
     registrationtype = 0;
     channelname = "Ch";
@@ -1085,69 +1086,141 @@ double ChannelOptions::ConvertSignalToValue(double signal)
     return value;
 }
 
-double ChannelOptions::ConvertVisualValue(double signal)
+double ChannelOptions::getMaxInDiapason(int diapason)
 {
-    double value = signal;
-    double hisignal = 0, lowsignal = 0 ;
-    double lowlimit = 0;
-    double hilimit = 0;
-//    double multiplier = 1;
-
-
-
+    double ret = GetHigherMeasureLimit();
     if (GetSignalType() == VoltageMeasure)
     {
-        switch (GetDiapason()) {
+        switch (diapason) {
 
-        case Voltage_1V:   // значение приходит в милливольтах
-        {
-            lowsignal = -1000;
-            hisignal = 1000;
-//            lowlimit = -1000;
-//            hilimit = 1000;
+        case Voltage150mV:   // значение приходит в милливольтах
+            ret = 150;
             break;
-        }
-
-        case Voltage_10V: // значение приходит в вольтах
-        {
-            lowsignal = -10;
-            hisignal = 10;
-//            lowlimit = -10;
-//            hilimit = 10;
+        case Voltage300mV:   // значение приходит в милливольтах
+            ret = 300;
             break;
-        }
-
-        case Voltage_30V: // значение приходит в вольтах
-        {
-            lowsignal = -30;
-            hisignal = 30;
-//            lowlimit = -30;
-//            hilimit = 30;
+        case Voltage0_1V:   // значение приходит в милливольтах
+            ret = 1000;
             break;
-        }
+        case Voltage0_5V:   // значение приходит в вольтах
+            ret = 5;
+            break;
+        case Voltage0_10V:   // значение приходит в вольтах
+            ret = 10;
+            break;
+        case Voltage1V:   // значение приходит в милливольтах
+            ret = 1000;
+            break;
+        case Voltage10V: // значение приходит в вольтах
+            ret = 10;
+            break;
+        case Voltage30V: // значение приходит в вольтах
+            ret = 30;
+            break;
         default:
             break;
         }
-
-        switch (getVoltageType()) {
-        case Value_Real:
-//            multiplier = 1000;
-            lowlimit = lowsignal;
-            hilimit = hisignal;
-            break;
-        case Value_Procent:
-//            multiplier = 1;
-            lowlimit = 0;
-            hilimit = 100;
-        default:
-            break;
-        }
-
-
-        value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
-//        value *= multiplier;
-
     }
+    else if (GetSignalType() == CurrentMeasure)
+    {
+        switch (diapason) {
+
+        case Current4_20mA:   // значение приходит в милливольтах
+            ret = 20;
+            break;
+        case Current0_20mA:   // значение приходит в милливольтах
+            ret = 20;
+            break;
+        case Current0_5mA:   // значение приходит в милливольтах
+            ret = 5;
+            break;
+        default:
+            break;
+        }
+    }
+    return ret;
+}
+
+double ChannelOptions::getMinInDiapason(int diapason)
+{
+    double ret = GetLowerMeasureLimit();
+    if (GetSignalType() == VoltageMeasure)
+    {
+        switch (diapason) {
+
+        case Voltage150mV:   // значение приходит в милливольтах
+            ret = -150;
+            break;
+        case Voltage300mV:   // значение приходит в милливольтах
+            ret = -300;
+            break;
+        case Voltage0_1V:   // значение приходит в милливольтах
+            ret = 0;
+            break;
+        case Voltage0_5V:   // значение приходит в вольтах
+            ret = 0;
+            break;
+        case Voltage0_10V:   // значение приходит в вольтах
+            ret = 0;
+            break;
+        case Voltage1V:   // значение приходит в милливольтах
+            ret = -1000;
+            break;
+        case Voltage10V: // значение приходит в вольтах
+            ret = -10;
+            break;
+        case Voltage30V: // значение приходит в вольтах
+            ret = -30;
+            break;
+        default:
+            break;
+        }
+    }
+    else if (GetSignalType() == CurrentMeasure)
+    {
+        switch (diapason) {
+
+        case Current4_20mA:   // значение приходит в милливольтах
+            ret = 4;
+            break;
+        case Current0_20mA:   // значение приходит в милливольтах
+            ret = 0;
+            break;
+        case Current0_5mA:   // значение приходит в милливольтах
+            ret = 0;
+            break;
+        default:
+            break;
+        }
+    }
+    return ret;
+}
+
+double ChannelOptions::ConvertVisualValue(double signal, int diapason)
+{
+    double value = signal;
+    double hisignal = getMaxInDiapason(diapason);
+    double lowsignal = getMinInDiapason(diapason);
+    double lowlimit = 0;
+    double hilimit = 0;
+
+
+    switch (getVoltageType()) {
+    case Value_Real:
+        //            multiplier = 1000;
+        lowlimit = lowsignal;
+        hilimit = hisignal;
+        break;
+    case Value_Procent:
+        //            multiplier = 1;
+        lowlimit = 0;
+        hilimit = 100;
+    default:
+        break;
+    }
+
+    value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
+
     return value;
 }
 
@@ -1297,6 +1370,7 @@ void ChannelOptions::copyOptions(ChannelOptions * ch)
     unitsname = ch->unitsname;
     channelname = ch->channelname;
     diapason = ch->diapason;
+    diapasonUser = ch->diapasonUser;
     shema = ch->shema;
     registrationtype = ch->registrationtype;
 

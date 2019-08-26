@@ -15,8 +15,8 @@ wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
     ui(new Ui::wVolueBar)
 {
     ui->setupUi(this);
-    ui->metkaLow->setPixmap(QPixmap(pathtolowlimico));
-    ui->metkaHi->setPixmap(QPixmap(pathtohilimico));
+//    ui->metkaLow->setPixmap(QPixmap(pathtolowlimico));
+//    ui->metkaHi->setPixmap(QPixmap(pathtohilimico));
     ui->curHBar->setGeometry(ui->curHBar->x(), ui->curHBar->y(),\
                              ui->curHBar->width(), 0);
     ui->volBar->setText("0.00");
@@ -50,35 +50,39 @@ void wVolueBar::setValue(double vol)
     else if(abs(vol) >= 10) prec = 2;
     else prec = 3;
 
+    double lineZeroY = ui->lineZero->y() + 1;
+
     //геометрия виждета текущей величины
     if(vol >= 0)
     {
-        ui->curHBar->setGeometry(0, \
+//        ui->curHBar->setGeometry(0, \
                                  (ui->placeBar->height() / 2) * (1 - (vol / razmah)), \
                                  ui->placeBar->width(), \
                                  (vol / razmah) * (ui->placeBar->height() / 2) \
                                  );
+        ui->curHBar->setGeometry(0, \
+                                 lineZeroY - ui->placeBar->height() * (vol / razmah), \
+                                 ui->placeBar->width(), \
+                                 (vol / razmah) * ui->placeBar->height() \
+                                 );
     }
     else if(vol < 0)
     {
-        ui->curHBar->setGeometry(0, \
+//        ui->curHBar->setGeometry(0, \
                                  ui->placeBar->height() / 2, \
                                  ui->placeBar->width(), \
                                  vol * ui->placeBar->height() / 2 * (-1) / razmah \
                                  );
+        ui->curHBar->setGeometry(0, \
+                                 lineZeroY, \
+                                 ui->placeBar->width(), \
+                                 (abs(vol) / razmah) * ui->placeBar->height() \
+                                 );
     }
 
     QString valBar;
-    if(valueType == BarValue_Real)
-    {
-        valBar = QString::number(vol, 'f', prec);
-    }
-    else //valueType == BarValue_Procent
-    {
-        valBar = QString::number((vol - lowerMeasure)/(higherMeasure - lowerMeasure)*100, 'f', 2);
-    }
+    valBar = QString::number(vol, 'f', prec);
     ui->volBar->setText(valBar);
-
 
     //геометрия поля значения
     if(ui->curHBar->height() <= VOL_TEXT_MIN_HEIGHT)
@@ -86,13 +90,13 @@ void wVolueBar::setValue(double vol)
         //если поле в теле бара слишком узкое для текста
         if(vol >= 0)
             ui->volBar->setGeometry( \
-                        0, ui->placeBar->height() / 2 - ui->volBar->height() - VOL_TEXT_PADDING_BOTTOM, \
+                        0, lineZeroY - ui->volBar->height() - VOL_TEXT_PADDING_BOTTOM, \
                         ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
                         );
         else
             ui->volBar->setGeometry( \
-                        0, ui->placeBar->height() / 2, \
-                                    ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
+                        0, lineZeroY, \
+                        ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT \
                         );
 
     }
@@ -100,15 +104,19 @@ void wVolueBar::setValue(double vol)
     {
         // если места достаточно для размещения текста и выравнивания по середине
         ui->volBar->setGeometry(ui->curHBar->geometry());
+    }
 
-        //коррекция положения текста измеренной величины
-        if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + ui->placeBar->height() / 2 < 0)
-            ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
-        else if(ui->curHBar->height() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
-            ui->volBar->setGeometry(ui->placeBar->x(), \
-                                    ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
-                                    ui->placeBar->width(), \
-                                    VOL_TEXT_MIN_HEIGHT );
+    //коррекция положения текста измеренной величины
+    if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + lineZeroY < 0)
+    {
+        ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
+    }
+    else if(ui->curHBar->y() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
+    {
+        ui->volBar->setGeometry(ui->placeBar->x(), \
+                                ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
+                                ui->placeBar->width(), \
+                                VOL_TEXT_MIN_HEIGHT );
     }
 
     QList<QLabel *> metki = ui->placeBar->findChildren<QLabel *>();
@@ -124,7 +132,7 @@ void wVolueBar::setValue(double vol)
     foreach (cMarker * mark, listMarker) {
         QLabel * metka = new QLabel(ui->placeBar);
         metka->setObjectName(QStringLiteral("metka") + QString::number(i++));
-        metka->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (mark->vol / razmah)) - METKA_HEIGHT / 2, \
+        metka->setGeometry(0, (lineZeroY - ui->placeBar->height() * (mark->vol / razmah)) - METKA_HEIGHT / 2, \
                                   ui->placeBar->width(), METKA_HEIGHT);
         metka->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
         if(mark->dir)
@@ -156,9 +164,14 @@ void wVolueBar::resizeEvent(QResizeEvent * s)
                 ui->shadowBar->width(),      \
                 ui->frameBar->height() - BAR_PADDING_BOTTOM \
                 );
-    ui->lineZero->setGeometry(  \
+//    ui->lineZero->setGeometry(  \
                 0,  \
                 ui->placeBar->height()/2 - 1,  \
+                ui->placeBar->width(),      \
+                2 );
+    ui->lineZero->setGeometry(  \
+                0,  \
+                (higherMeasure / razmah) * ui->placeBar->height() - 1,  \
                 ui->placeBar->width(),      \
                 2 );
 }
@@ -167,12 +180,13 @@ void wVolueBar::resizeEvent(QResizeEvent * s)
  * Задание экстремумов - минимальное и максимальное значения в буфере измерения
  */
 
-void wVolueBar::setExtr(double min, double max)
+void wVolueBar::setExtr(double minimum, double maximum)
 {
+    double lineZeroY = ui->lineZero->y() + 1;
     ui->amplBar->setGeometry(0, \
-                             (ui->placeBar->height() / 2) * (1 - (max / razmah)), \
+                             lineZeroY - ui->placeBar->height() * (maximum / razmah), \
                              ui->placeBar->width(), \
-                             (ui->placeBar->height() / 2) * (max - min) / razmah + 1 \
+                             ui->placeBar->height() * (maximum - minimum) / razmah \
                              );
 }
 
@@ -266,7 +280,7 @@ void wVolueBar::cleanMarker()
     listMarker.clear();
 }
 
-void wVolueBar::addMarker(int vol, bool dir)
+void wVolueBar::addMarker(double vol, bool dir)
 {
     cMarker * marker = new cMarker;
     marker->vol = vol;
@@ -283,8 +297,13 @@ void wVolueBar::setBarDiapazon(double hi, double low)
     if(hi == low) hi += 0.000001;
     higherMeasure = hi;
     lowerMeasure = low;
-    razmah = max(abs(hi), abs(low));
-//    razmah = diap;
+//    razmah = max(abs(hi), abs(low));
+    razmah = higherMeasure - lowerMeasure;
+    ui->lineZero->setGeometry(  \
+                0,  \
+                (higherMeasure / razmah) * ui->placeBar->height() - 1,  \
+                ui->placeBar->width(),      \
+                2 );
 }
 
 bool wVolueBar::eventFilter(QObject* watched, QEvent* event)

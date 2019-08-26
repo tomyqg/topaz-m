@@ -61,6 +61,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["MathString"] = Channel->GetMathString();
             channeljsonobj["MathWork"] = Channel->IsChannelMathematical();
             channeljsonobj["Diapason"] = Channel->GetDiapason();
+            channeljsonobj["SubDiapason"] = Channel->GetUserDiapason();
             channeljsonobj["ShiftCJ"] = Channel->getShiftColdJunction();
             channeljsonobj["EnShiftCJ"] = Channel->getStateColdJunction();
             channeljsonobj["Scheme"] = Channel->getShema();
@@ -232,6 +233,7 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetDempher(ch.value("Dempher").toInt());
             channel->setShiftColdJunction(ch.value("ShiftCJ").toDouble());
             channel->enableColdJunction(ch.value("EnShiftCJ").toInt());
+            channel->SetUserDiapason(ch.value("SubDiapason").toInt());
             channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
             channel->setVolueVoltageType(ch.value("ValueType").toInt());

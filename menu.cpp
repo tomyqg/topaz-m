@@ -2520,7 +2520,7 @@ void dMenu::updateLabelDiagnostic()
             }
             else
             {
-                volLabel->setText(QString::number(channel->GetValuePercent()));
+                volLabel->setText(QString::number(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), channel->GetUserDiapason())));
             }
             mListChannel.unlock();
             i++;
