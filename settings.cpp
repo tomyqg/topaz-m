@@ -673,9 +673,10 @@ void dSettings::setColorBar(QColor color, QColor colotLihgt)
 void dSettings::updateBar()
 {
     double diapason = ui->sensorDiapazon->currentIndex();
+    double valueType= ui->comboTypeValue->currentIndex();
     if(channel != NULL) {
-        ui->bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason),\
-                         channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason));
+        ui->bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason, valueType),\
+                         channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason, valueType));
         //        ui->bar->resetLim();
         ui->bar->cleanMarker();
         mListUstvok.lock();
@@ -691,9 +692,9 @@ void dSettings::updateBar()
         mListUstvok.unlock();
 //        ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
-        ui->bar->setBarDiapazon(channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason),\
-                                channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason));
-        ui->bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason));
+        ui->bar->setBarDiapazon(channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason, valueType),\
+                                channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason, valueType));
+        ui->bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason, valueType));
     }
 }
 

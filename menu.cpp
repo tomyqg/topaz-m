@@ -2520,7 +2520,7 @@ void dMenu::updateLabelDiagnostic()
             }
             else
             {
-                volLabel->setText(QString::number(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), channel->GetUserDiapason())));
+                volLabel->setText(QString::number(channel->ConvertVisualValue(channel->GetCurrentChannelValue())));
             }
             mListChannel.unlock();
             i++;

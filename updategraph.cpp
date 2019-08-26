@@ -502,8 +502,8 @@ void MainWindow::updateBars(void)
 #endif
                 {
                     double diapason = channel->GetUserDiapason();
-                    double maximum = channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason);
-                    double minimum = channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason);
+                    double maximum = channel->ConvertVisualValue(channel->getMaxInDiapason());
+                    double minimum = channel->ConvertVisualValue(channel->getMinInDiapason());
 //                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
 //                    {
 ////                        bar->setValueType(wVolueBar::BarValue_Real);
@@ -515,10 +515,10 @@ void MainWindow::updateBars(void)
 //                        max = 100;
 //                        min = 0;
 //                    }
-                    bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason),\
-                                 channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason));
+                    bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue()),\
+                                 channel->ConvertVisualValue(channel->GetMaximumChannelValue()));
                     bar->setBarDiapazon(maximum, minimum);
-                    bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason));
+                    bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
                     bar->cleanMarker();
                     mListUstvok.lock();
                     foreach(Ustavka * ust, listUstavok)

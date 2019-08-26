@@ -107,11 +107,11 @@ void wVolueBar::setValue(double vol)
     }
 
     //коррекция положения текста измеренной величины
-    if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + lineZeroY < 0)
+    if(ui->curHBar->y() + (ui->curHBar->height() - VOL_TEXT_MIN_HEIGHT) / 2 < 0)
     {
         ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
     }
-    else if(ui->curHBar->y() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
+    else if(ui->curHBar->y() + (ui->curHBar->height() + VOL_TEXT_MIN_HEIGHT) / 2 > ui->placeBar->height())
     {
         ui->volBar->setGeometry(ui->placeBar->x(), \
                                 ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \

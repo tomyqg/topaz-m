@@ -1088,6 +1088,7 @@ double ChannelOptions::ConvertSignalToValue(double signal)
 
 double ChannelOptions::getMaxInDiapason(int diapason)
 {
+    if(diapason == -1) diapason = GetUserDiapason();
     double ret = GetHigherMeasureLimit();
     if (GetSignalType() == VoltageMeasure)
     {
@@ -1143,6 +1144,7 @@ double ChannelOptions::getMaxInDiapason(int diapason)
 
 double ChannelOptions::getMinInDiapason(int diapason)
 {
+    if(diapason == -1) diapason = GetUserDiapason();
     double ret = GetLowerMeasureLimit();
     if (GetSignalType() == VoltageMeasure)
     {
@@ -1196,16 +1198,24 @@ double ChannelOptions::getMinInDiapason(int diapason)
     return ret;
 }
 
-double ChannelOptions::ConvertVisualValue(double signal, int diapason)
+double ChannelOptions::ConvertVisualValue(double signal, int diapason, int valueType)
 {
     double value = signal;
+    if(diapason == -1)
+    {
+        diapason = GetUserDiapason();
+    }
+    if(valueType == -1)
+    {
+        valueType = getVoltageType();
+    }
     double hisignal = getMaxInDiapason(diapason);
     double lowsignal = getMinInDiapason(diapason);
     double lowlimit = 0;
     double hilimit = 0;
 
 
-    switch (getVoltageType()) {
+    switch (valueType) {
     case Value_Real:
         //            multiplier = 1000;
         lowlimit = lowsignal;
