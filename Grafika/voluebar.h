@@ -32,7 +32,7 @@ public:
     void changeNum(int num);
     void setNumChan(int num) { numChan = num; }
     void cleanMarker();
-    void addMarker(int vol, bool dir);
+    void addMarker(double vol, bool dir);
     void setValueType(int type) { valueType = type; }
     int getValueType(void) { return valueType; }
 

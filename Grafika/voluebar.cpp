@@ -104,15 +104,19 @@ void wVolueBar::setValue(double vol)
     {
         // если места достаточно для размещения текста и выравнивания по середине
         ui->volBar->setGeometry(ui->curHBar->geometry());
+    }
 
-        //коррекция положения текста измеренной величины
-        if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + lineZeroY < 0)
-            ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
-        else if(ui->curHBar->height() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
-            ui->volBar->setGeometry(ui->placeBar->x(), \
-                                    ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
-                                    ui->placeBar->width(), \
-                                    VOL_TEXT_MIN_HEIGHT );
+    //коррекция положения текста измеренной величины
+    if(ui->curHBar->y() - VOL_TEXT_MIN_HEIGHT + lineZeroY < 0)
+    {
+        ui->volBar->setGeometry(ui->placeBar->x(), 0, ui->placeBar->width(), VOL_TEXT_MIN_HEIGHT );
+    }
+    else if(ui->curHBar->y() + VOL_TEXT_MIN_HEIGHT > ui->placeBar->height())
+    {
+        ui->volBar->setGeometry(ui->placeBar->x(), \
+                                ui->placeBar->height() - VOL_TEXT_MIN_HEIGHT, \
+                                ui->placeBar->width(), \
+                                VOL_TEXT_MIN_HEIGHT );
     }
 
     QList<QLabel *> metki = ui->placeBar->findChildren<QLabel *>();
@@ -276,7 +280,7 @@ void wVolueBar::cleanMarker()
     listMarker.clear();
 }
 
-void wVolueBar::addMarker(int vol, bool dir)
+void wVolueBar::addMarker(double vol, bool dir)
 {
     cMarker * marker = new cMarker;
     marker->vol = vol;
