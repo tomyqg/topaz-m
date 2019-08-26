@@ -58,7 +58,7 @@ public:
     double GetDempheredChannelValue();
     double GetValuePercent();
     double ConvertSignalToValue(double signal);
-    double ConvertVisualValue(double signal);
+    double ConvertVisualValue(double signal, int diapason);
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -108,6 +108,8 @@ public:
     void parserChannel(Transaction tr);
     void copyOptions(ChannelOptions *ch);
     void SetDiapasonShema(int newdiapason, int sh);
+    void SetUserDiapason(int ud) { diapasonUser = ud; }
+    int GetUserDiapason() { return diapasonUser; }
     void enableColdJunction(int en);
     int getStateColdJunction(void);
     void setShiftColdJunction(double shift);
@@ -256,7 +258,8 @@ private:
     QColor maximumcolor; // цвет канала на графике макс
     QColor minimumcolor; // цвет канала на графике мин
     bool needConfirmationchannel;
-    int diapason;           //диапазон - тип датчика
+    int diapason;           //диапазон - тип измерения АЦП
+    int diapasonUser;           //диапазон для пользователя - тип датчика
     int shema;              //схема подключения датчика
     int registrationtype;
     bool enColdJunction;    //Включение компенсации холодного спая
@@ -322,6 +325,18 @@ public:
     };
     Q_ENUM(CurrentDiapason)
 
+    enum VoltageDiapason{
+        Voltage150mV,
+        Voltage300mV,
+        Voltage0_1V,
+        Voltage0_5V,
+        Voltage0_10V,
+        Voltage1V,
+        Voltage10V,
+        Voltage30V
+    };
+    Q_ENUM(VoltageDiapason)
+
 
     enum ParamOffset{
         chanData = 0,
@@ -380,5 +395,7 @@ public:
     {
         return processReadCalibrations;
     }
+    double getMinInDiapason(int diapason);
+    double getMaxInDiapason(int diapason);
 };
 #endif // CHANNEL1_H

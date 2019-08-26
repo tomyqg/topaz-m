@@ -25,7 +25,7 @@ public:
     ~wVolueBar();
     void setBarDiapazon(double hi, double low);
     void setValue(double vol);
-    void setExtr(double min, double max);
+    void setExtr(double minimum, double maximum);
     void setLim(double low, double hi);
     void resetLim();
     void setText(QString type, QString mes);
@@ -53,7 +53,7 @@ public slots:
 
 private:
     Ui::wVolueBar *ui;
-    double razmah;  //размах, значение бара в крайних точках виджета
+    double razmah;  //размах
     double higherMeasure;
     double lowerMeasure;
     int numBar;

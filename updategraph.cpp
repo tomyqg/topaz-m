@@ -501,20 +501,24 @@ void MainWindow::updateBars(void)
                 if(channel->enable)
 #endif
                 {
-                    bar->setExtr(channel->GetMinimumChannelValue(),\
-                                 channel->GetMaximumChannelValue());
-                    bar->setBarDiapazon(channel->GetHigherMeasureLimit(), \
-                                            channel->GetLowerMeasureLimit());
-                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
-                    {
-                        bar->setValueType(wVolueBar::BarValue_Real);
-                    }
-                    else
-                    {
-                        bar->setValueType(wVolueBar::BarValue_Procent);
-//                        val = channel->GetValuePercent();
-                    }
-                    bar->setValue(channel->GetCurrentChannelValue());
+                    double diapason = channel->GetUserDiapason();
+                    double maximum = channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason);
+                    double minimum = channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason);
+//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+//                    {
+////                        bar->setValueType(wVolueBar::BarValue_Real);
+
+//                    }
+//                    else
+//                    {
+////                        bar->setValueType(wVolueBar::BarValue_Procent);
+//                        max = 100;
+//                        min = 0;
+//                    }
+                    bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason),\
+                                 channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason));
+                    bar->setBarDiapazon(maximum, minimum);
+                    bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason));
                     bar->cleanMarker();
                     mListUstvok.lock();
                     foreach(Ustavka * ust, listUstavok)
@@ -865,7 +869,9 @@ void MainWindow::updateVols()
                     }
                     else
                     {
-                        vol->setVol(channel->GetValuePercent(), channel->optimalPrecision());
+                        vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
+                                                                channel->GetUserDiapason()), \
+                                    channel->optimalPrecision());
                     }
                     vol->show();
                     if(indexGroup >= 4)
