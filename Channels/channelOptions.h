@@ -58,7 +58,7 @@ public:
     double GetDempheredChannelValue();
     double GetValuePercent();
     double ConvertSignalToValue(double signal);
-    double ConvertVisualValue(double signal, int diapason);
+    double ConvertVisualValue(double signal, int diapason = -1, int valueType = -1);
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -395,7 +395,7 @@ public:
     {
         return processReadCalibrations;
     }
-    double getMinInDiapason(int diapason);
-    double getMaxInDiapason(int diapason);
+    double getMinInDiapason(int diapason = -1);
+    double getMaxInDiapason(int diapason = -1);
 };
 #endif // CHANNEL1_H
