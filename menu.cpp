@@ -2892,7 +2892,7 @@ void dMenu::on_bAddMath_clicked()
     math->setNum(size+1);
     math->setName("Math " + QString::number(size+1));
     listMath.append(math);
-    mListMath.lock();
+    mListMath.unlock();
 
     addWidgetMath();
 }
