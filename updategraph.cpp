@@ -865,13 +865,13 @@ void MainWindow::updateVols()
 //                    double value = channel->GetCurrentChannelValue();
                     if(channel->getVoltageType() == ChannelOptions::Value_Real)
                     {
-                        vol->setVol(channel->GetCurrentChannelValue(), channel->optimalPrecision());
+                        vol->setVol(channel->GetCurrentChannelValue(), channel->getPrecision());
                     }
                     else
                     {
                         vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
                                                                 channel->GetUserDiapason()), \
-                                    channel->optimalPrecision());
+                                    channel->getPrecision());
                     }
                     vol->show();
                     if(indexGroup >= 4)

@@ -83,6 +83,21 @@ const typeTableDiapasoneRTD tableDiapasoneRTD[] = {
     {9, RTD_Pt1000_3850, "Pt1000"},       //9
 };
 
+typedef struct {
+    int numItem;
+    ChannelOptions::typePrecision precision;
+    QString nameItem;
+} typeTablePrecisions;
+const typeTablePrecisions tablePrecisions[] = {
+    {0, ChannelOptions::Precision_X,        "X"},     //0
+    {1, ChannelOptions::Precision_X_X,      "X.X"},       //2
+    {2, ChannelOptions::Precision_X_XX,     "X.XX"},     //3
+    {3, ChannelOptions::Precision_X_XXX,    "X.XXX"},       //4
+    {4, ChannelOptions::Precision_X_XXXX,   "X.XXXX"},     //0
+    {5, ChannelOptions::Precision_X_XXXXX,  "X.XXXXX"},       //2
+    {6, ChannelOptions::Precision_X_XXXXXX, "X.XXXXXX"},     //3
+};
+
 
 #define TIME_UPDATE DateLabelUpdateTimer
 #define TIME_UPDATE_BAR DateLabelUpdateTimer
@@ -144,6 +159,16 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         StringListRTD.append(tableDiapasoneRTD[i].nameItem);
     }
 
+    StringListPrecisions.clear();
+    for(int i = 0; i < (sizeof(tablePrecisions)/sizeof(typeTablePrecisions)); i++)
+    {
+        StringListPrecisions.append(tablePrecisions[i].nameItem);
+    }
+    ui->comboPrecision->clear();
+    ui->comboPrecision->addItems(StringListPrecisions);
+    ui->comboPrecision->setCurrentIndex(ChannelOptions::Precision_X_X);
+
+
     ui->ustavkaVolDown->hide();
     ui->label_29->hide();
     ui->releyDown->hide();
@@ -154,8 +179,8 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     ui->label_31->hide();
     ui->unit->hide();
     ui->label_11->hide();
-    ui->comboCapacity->hide();
-    ui->labelCapacity->hide();
+//    ui->comboPrecision->hide();
+//    ui->labelPrecision->hide();
     // ----->
 
     ui->saveButton->setColorText(ColorBlue);
@@ -632,6 +657,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->enableColdJunction->setCurrentIndex(channel->getStateColdJunction());
         ui->shiftColdJunction->setValue(channel->getShiftColdJunction());
         ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
+        ui->comboPrecision->setCurrentIndex(getIndexTablePrecisions(channel->getPrecision()));
 //        ui->unit->setText(channel->GetUnitsName().toUtf8());
 //        ui->comboCapacity->setCurrentIndex(channel->getCapacity());
     }
@@ -761,7 +787,7 @@ void dSettings::saveParam()
             channel->SetDiapasonShema(diapasone, ui->sensorShema->currentIndex() /*sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex())*/);
             channel->SetUserDiapason(ui->sensorDiapazon->currentIndex());
             channel->setVolueVoltageType(ui->comboTypeValue->currentIndex());
-//            channel->setCapacity(ui->comboCapacity->currentIndex());
+            channel->setPrecision(tablePrecisions[ui->comboPrecision->currentIndex()].precision);
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
         mListChannel.unlock();
@@ -1130,6 +1156,19 @@ int dSettings::getIndexTableRTD(int d)
     for(int i = 0; i < sizeof(tableDiapasoneRTD)/sizeof(typeTableDiapasoneRTD); i++)
     {
         if(tableDiapasoneRTD[i].diapason == d)
+            return i;
+    }
+    return 0;
+}
+
+/*
+ * Получение индекса в таблице по точности
+ */
+int dSettings::getIndexTablePrecisions(int p)
+{
+    for(int i = 0; i < sizeof(tablePrecisions)/sizeof(typeTablePrecisions); i++)
+    {
+        if(tablePrecisions[i].precision == p)
             return i;
     }
     return 0;

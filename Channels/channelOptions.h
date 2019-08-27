@@ -116,8 +116,10 @@ public:
     double getShiftColdJunction(void);
     void setVolueVoltageType(int type) { valueVoltage = type; }
     int getVoltageType(void) { return valueVoltage; }
-    void setCapacity(int cap) { capacity = cap; }
-    int getCapacity(void) { return capacity; }
+//    void setCapacity(int cap) { capacity = cap; }
+//    int getCapacity(void) { return capacity; }
+    int getPrecision() { return precision; }
+    void setPrecision(int prec) { precision = prec; }
     bool isNewValue();
     int getChannelStatus() { return inputData.chanStatus; }
 
@@ -185,6 +187,7 @@ public:
     QStringList listCalibrationRegisters;
     int periodUpdateCalibrations;   //мс
 
+
 signals:
     void updateSignal(int index);
     void sendToWorker(Transaction tr);
@@ -243,8 +246,9 @@ private:
     int slot;
     int slotChannel;
     int valueVoltage;
-    int capacity;
+//    int capacity;
     bool newValue;      // признак наличия свежих данных
+    int precision;  //точность отображения данных в виджетах
 
     QString unitsname;
     QString state1highmessage;
@@ -369,6 +373,17 @@ public:
         Value_Procent = 1
     };
     Q_ENUM(ValueType)
+
+    enum typePrecision {
+        Precision_X = 0,
+        Precision_X_X = 1,
+        Precision_X_XX = 2,
+        Precision_X_XXX = 3,
+        Precision_X_XXXX = 4,
+        Precision_X_XXXXX = 5,
+        Precision_X_XXXXXX = 6,
+    };
+    Q_ENUM(typePrecision)
 
 
 //    QString getNameUnitByParam(void);

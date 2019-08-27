@@ -41,6 +41,7 @@ private:
     QTimer tUpdateTime;
     QTimer tUpdateBar;
     QStringList StringListCurrent, StringListNapryagenie, StringListRTD, StringListTC; // списки названий для каждого типа сигналов
+    QStringList StringListPrecisions;
     void updateGraf(int period);
 //    QList<ChannelOptions *> listChannels;
     void updateWidgets();
@@ -93,6 +94,7 @@ private:
     int getIndexTableTC(int d);
     int getIndexTableRTD(int d);
     void updateVer();
+    int getIndexTablePrecisions(int p);
 private slots:
     void initComboChannels(void);
     void on_exitButton_clicked();

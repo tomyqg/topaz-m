@@ -30,6 +30,7 @@ ChannelOptions::ChannelOptions()
     signaltype = 2;
     demphervalue = 0;
     outputData.chanSignalType = VoltageMeasure;
+//    precision = Precision_X_X;
     memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
     outputData.chanAdditionalParameter1[0] = diapason;
     unitsname = "mV";
@@ -49,6 +50,7 @@ ChannelOptions::ChannelOptions()
     updateParam();
     timerUpdateParam->start(30000);
     valueVoltage = Value_Real;
+    precision = (typePrecision)optimalPrecision();
 
 
 }
@@ -1236,11 +1238,11 @@ double ChannelOptions::ConvertVisualValue(double signal, int diapason, int value
 
 int ChannelOptions::optimalPrecision()
 {
-    int prec = 2;
+    typePrecision prec = Precision_X_XX;
 
     if (GetSignalType() == CurrentMeasure)
     {
-        prec = 3;
+        prec = Precision_X_XXX;
     }
     else if (GetSignalType() == VoltageMeasure)
     {
@@ -1248,17 +1250,17 @@ int ChannelOptions::optimalPrecision()
 
         case Voltage_1V:   // значение приходит в милливольтах
         {
-            prec = 1;
+            prec = Precision_X_X;
             break;
         }
         case Voltage_10V: // значение приходит в вольтах
         {
-            prec = 2;
+            prec = Precision_X_XX;
             break;
         }
         case Voltage_30V: // значение приходит в вольтах
         {
-            prec = 2;
+            prec = Precision_X_XX;
             break;
         }
         default:
@@ -1267,11 +1269,11 @@ int ChannelOptions::optimalPrecision()
     }
     else if (GetSignalType() == TermoCoupleMeasure)
     {
-        prec = 1;
+        prec = Precision_X_X;
     }
     else if (GetSignalType() == TermoResistanceMeasure)
     {
-        prec = 2;
+        prec = Precision_X_XX;
     }
 
     switch (getVoltageType()) {
@@ -1279,12 +1281,12 @@ int ChannelOptions::optimalPrecision()
         //prec = prec;
         break;
     case Value_Procent:
-        prec = 2;
+        prec = Precision_X_XX;
     default:
         break;
     }
 
-    return prec;
+    return (int)prec;
 }
 
 
