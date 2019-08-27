@@ -1617,6 +1617,7 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         ui->dempfer->setValue(srcChannel->GetDempherValue());
         ui->typeReg->setCurrentIndex(srcChannel->GetRegistrationType());
         ui->comboTypeValue->setCurrentIndex(srcChannel->getVoltageType());
+        ui->comboPrecision->setCurrentIndex(getIndexTablePrecisions(srcChannel->getPrecision()));
         ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
         if(srcChannel->GetSignalType() == VoltageMeasure)
         {
