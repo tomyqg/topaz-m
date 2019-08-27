@@ -68,6 +68,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["Dempher"] = Channel->GetDempherValue();
             channeljsonobj["RegistrationType"] = Channel->GetRegistrationType();
             channeljsonobj["ValueType"] = Channel->getVoltageType();
+            channeljsonobj["Precision"] = Channel->getPrecision();
             settings.append(channeljsonobj);
             countCh++;
         }
@@ -237,6 +238,7 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetDiapasonShema(ch.value("Diapason").toInt(), ch.value("Scheme").toInt());
             channel->SetRegistrationType(ch.value("RegistrationType").toInt());
             channel->setVolueVoltageType(ch.value("ValueType").toInt());
+            channel->setPrecision(ch.value("Precision").toInt());
         }
         else
         {
