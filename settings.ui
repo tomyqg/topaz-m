@@ -512,9 +512,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-299</y>
-                     <width>551</width>
-                     <height>913</height>
+                     <y>-279</y>
+                     <width>555</width>
+                     <height>974</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout">
@@ -530,205 +530,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <property name="verticalSpacing">
                      <number>20</number>
                     </property>
-                    <item row="10" column="0">
-                     <widget class="QLabel" name="labelValue">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ЕДИНИЦА ИЗМЕРЕНИЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="10" column="1">
-                     <widget class="QComboBox" name="comboTypeValue">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>169</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>16</pointsize>
-                       </font>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QComboBox::drop-down {
-	width:30px;
- }
-QComboBox{
-background-color: rgb(91, 119, 143);
-color: rgb(255, 255, 255);
-border-radius: 0px;
-}</string>
-                      </property>
-                      <property name="currentText">
-                       <string>РЕАЛЬНАЯ</string>
-                      </property>
-                      <property name="currentIndex">
-                       <number>0</number>
-                      </property>
-                      <property name="insertPolicy">
-                       <enum>QComboBox::NoInsert</enum>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="modelColumn">
-                       <number>0</number>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>РЕАЛЬНАЯ</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>% ДИАП.</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_5">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ТИП</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="7" column="1">
-                     <widget class="QComboBox" name="typeReg">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>169</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>16</pointsize>
-                       </font>
-                      </property>
-                      <property name="layoutDirection">
-                       <enum>Qt::LeftToRight</enum>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QComboBox{
-	background-color:rgb(44, 61, 77);
-	color: rgb(255 , 255, 255);
-	border-radius: 0px;
-}
-
-QComboBox::drop-down {
-	width:30px;
- }</string>
-                      </property>
-                      <property name="currentText">
-                       <string>МГНОВЕН.</string>
-                      </property>
-                      <property name="currentIndex">
-                       <number>0</number>
-                      </property>
-                      <property name="insertPolicy">
-                       <enum>QComboBox::NoInsert</enum>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="modelColumn">
-                       <number>0</number>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>МГНОВЕН.</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>СРЕДНЕЕ</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>МИНИМУМ</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>МАКСИМУМ</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>РАЗМАХ</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="8" column="1">
+                    <item row="9" column="1">
                      <widget class="QComboBox" name="sensorDiapazon">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -839,6 +641,50 @@ QComboBox{
                       </property>
                      </widget>
                     </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_7">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРХН. ПРЕДЕЛ ШКАЛЫ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_10">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НИЖН. ПРЕДЕЛ ШКАЛЫ</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="1" column="1">
                      <widget class="QLineEdit" name="nameChannel">
                       <property name="maximumSize">
@@ -875,8 +721,8 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="3" column="0">
-                     <widget class="QLabel" name="label_10">
+                    <item row="11" column="0">
+                     <widget class="QLabel" name="labelValue">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -893,12 +739,81 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>НИЖН. ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>ЕДИНИЦА ОТОБРАЖЕНИЯ</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="label_7">
+                    <item row="11" column="1">
+                     <widget class="QComboBox" name="comboTypeValue">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox::drop-down {
+	width:30px;
+ }
+QComboBox{
+background-color: rgb(91, 119, 143);
+color: rgb(255, 255, 255);
+border-radius: 0px;
+}</string>
+                      </property>
+                      <property name="currentText">
+                       <string>РЕАЛЬНАЯ</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>РЕАЛЬНАЯ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>% ДИАП.</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_5">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -915,8 +830,93 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ВЕРХН. ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>ТИП</string>
                       </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="1">
+                     <widget class="QComboBox" name="typeReg">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox{
+	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                      </property>
+                      <property name="currentText">
+                       <string>МГНОВЕН.</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>МГНОВЕН.</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>СРЕДНЕЕ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>МИНИМУМ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>МАКСИМУМ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>РАЗМАХ</string>
+                       </property>
+                      </item>
                      </widget>
                     </item>
                     <item row="0" column="1">
@@ -1038,6 +1038,50 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_11">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>НАЗВАНИЕ ЕД. ИЗМ.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="label_12">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ПЕРИОД ОБНОВЛ., СЕК</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="2" column="1">
                      <widget class="QDoubleSpinBox" name="scaleUp">
                       <property name="maximumSize">
@@ -1074,8 +1118,8 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="4" column="0">
-                     <widget class="QLabel" name="label_11">
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="label_16">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1092,29 +1136,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="5" column="0">
-                     <widget class="QLabel" name="label_12">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ПЕРИОД ОБНОВЛ., СЕК</string>
+                       <string>ДЕМПФИРОВАНИЕ</string>
                       </property>
                      </widget>
                     </item>
@@ -1154,29 +1176,7 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="6" column="0">
-                     <widget class="QLabel" name="label_16">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>ДЕМПФИРОВАНИЕ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="7" column="0">
+                    <item row="8" column="0">
                      <widget class="QLabel" name="label_17">
                       <property name="minimumSize">
                        <size>
@@ -1198,7 +1198,7 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="6" column="1">
+                    <item row="7" column="1">
                      <widget class="QSpinBox" name="dempfer">
                       <property name="maximumSize">
                        <size>
@@ -1222,7 +1222,29 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="5" column="1">
+                    <item row="18" column="0">
+                     <widget class="QLabel" name="labelCopy">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>КОПИРОВАТЬ ИЗ:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="1">
                      <widget class="QDoubleSpinBox" name="periodCh">
                       <property name="maximumSize">
                        <size>
@@ -1264,29 +1286,7 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="17" column="0">
-                     <widget class="QLabel" name="labelCopy">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>КОПИРОВАТЬ ИЗ:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="13" column="1">
+                    <item row="14" column="1">
                      <widget class="QComboBox" name="sensorShema">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1355,7 +1355,7 @@ border-radius: 0px;
                       </item>
                      </widget>
                     </item>
-                    <item row="17" column="1">
+                    <item row="18" column="1">
                      <widget class="QComboBox" name="srcChannel">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1429,7 +1429,7 @@ border-radius: 0px;
                       </item>
                      </widget>
                     </item>
-                    <item row="15" column="0">
+                    <item row="16" column="0">
                      <widget class="QLabel" name="labelShiftColdJunction">
                       <property name="minimumSize">
                        <size>
@@ -1451,7 +1451,29 @@ border-radius: 0px;
                       </property>
                      </widget>
                     </item>
-                    <item row="15" column="1">
+                    <item row="15" column="0">
+                     <widget class="QLabel" name="labelColdJunction">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>КОМПЕНСАЦИЯ Х. СПАЯ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="16" column="1">
                      <widget class="QDoubleSpinBox" name="shiftColdJunction">
                       <property name="maximumSize">
                        <size>
@@ -1490,29 +1512,7 @@ border-radius: 0px;</string>
                       </property>
                      </widget>
                     </item>
-                    <item row="14" column="0">
-                     <widget class="QLabel" name="labelColdJunction">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>КОМПЕНСАЦИЯ Х. СПАЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="14" column="1">
+                    <item row="15" column="1">
                      <widget class="QComboBox" name="enableColdJunction">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1582,29 +1582,7 @@ QComboBox::drop-down {
                       </item>
                      </widget>
                     </item>
-                    <item row="13" column="0">
-                     <widget class="QLabel" name="labelShema">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>41</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Open Sans</family>
-                        <pointsize>20</pointsize>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>СХЕМА ИЗМЕРЕНИЯ</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="8" column="0">
+                    <item row="9" column="0">
                      <widget class="QLabel" name="labelDiapazon">
                       <property name="minimumSize">
                        <size>
@@ -1626,7 +1604,51 @@ QComboBox::drop-down {
                       </property>
                      </widget>
                     </item>
-                    <item row="12" column="1">
+                    <item row="14" column="0">
+                     <widget class="QLabel" name="labelShema">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>СХЕМА ИЗМЕРЕНИЯ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="13" column="0">
+                     <widget class="QLabel" name="labelPrecision">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>20</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string>ДЕСЯТИЧНАЯ ТОЧКА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="13" column="1">
                      <widget class="QComboBox" name="comboPrecision">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1660,8 +1682,8 @@ QComboBox::drop-down {
 	width:30px;
  }
 QComboBox{
-background-color: rgb(91, 119, 143);
-color: rgb(255, 255, 255);
+background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
 border-radius: 0px;
 }</string>
                       </property>
@@ -1720,8 +1742,8 @@ border-radius: 0px;
                       </item>
                      </widget>
                     </item>
-                    <item row="12" column="0">
-                     <widget class="QLabel" name="labelPrecision">
+                    <item row="10" column="0">
+                     <widget class="QLabel" name="labelUnit">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1738,8 +1760,78 @@ border-radius: 0px;
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ДЕСЯТИЧНАЯ ТОЧКА</string>
+                       <string>ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
                       </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="1">
+                     <widget class="QComboBox" name="comboUnit">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>169</width>
+                        <height>41</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QComboBox{
+	background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
+}
+
+QComboBox::drop-down {
+	width:30px;
+ }</string>
+                      </property>
+                      <property name="currentText">
+                       <string>мВ</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="insertPolicy">
+                       <enum>QComboBox::NoInsert</enum>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="modelColumn">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>мВ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>В</string>
+                       </property>
+                      </item>
                      </widget>
                     </item>
                    </layout>

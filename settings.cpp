@@ -658,6 +658,7 @@ void dSettings::addChannel(QList<ChannelOptions *> channels, int num)
         ui->shiftColdJunction->setValue(channel->getShiftColdJunction());
         ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
         ui->comboPrecision->setCurrentIndex(getIndexTablePrecisions(channel->getPrecision()));
+        ui->comboUnit->setCurrentIndex(channel->getIndexMultiplier());
 //        ui->unit->setText(channel->GetUnitsName().toUtf8());
 //        ui->comboCapacity->setCurrentIndex(channel->getCapacity());
     }
@@ -698,11 +699,13 @@ void dSettings::setColorBar(QColor color, QColor colotLihgt)
 
 void dSettings::updateBar()
 {
-    double diapason = ui->sensorDiapazon->currentIndex();
-    double valueType= ui->comboTypeValue->currentIndex();
+    int diapason = ui->sensorDiapazon->currentIndex();
+    int valueType = ui->comboTypeValue->currentIndex();
+//    int signalType = tableSignalTypes[ui->typeSignal->currentIndex()].st;
+    int multIndex = ui->comboUnit->currentIndex();
     if(channel != NULL) {
-        ui->bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason, valueType),\
-                         channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason, valueType));
+        ui->bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue(), diapason, valueType, multIndex),\
+                         channel->ConvertVisualValue(channel->GetMaximumChannelValue(), diapason, valueType, multIndex));
         //        ui->bar->resetLim();
         ui->bar->cleanMarker();
         mListUstvok.lock();
@@ -718,9 +721,9 @@ void dSettings::updateBar()
         mListUstvok.unlock();
 //        ui->bar->setColor(ColorCh1, ColorCh1Light); //Vag: переделать на QColor
         ui->bar->setText(ui->nameChannel->text(), ui->unit->text());
-        ui->bar->setBarDiapazon(channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason, valueType),\
-                                channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason, valueType));
-        ui->bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason, valueType));
+        ui->bar->setBarDiapazon(channel->ConvertVisualValue(channel->getMaxInDiapason(diapason), diapason, valueType, multIndex),\
+                                channel->ConvertVisualValue(channel->getMinInDiapason(diapason), diapason, valueType, multIndex));
+        ui->bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), diapason, valueType, multIndex));
     }
 }
 
@@ -788,6 +791,7 @@ void dSettings::saveParam()
             channel->SetUserDiapason(ui->sensorDiapazon->currentIndex());
             channel->setVolueVoltageType(ui->comboTypeValue->currentIndex());
             channel->setPrecision(tablePrecisions[ui->comboPrecision->currentIndex()].precision);
+            channel->setIndexMultiplier(ui->comboUnit->currentIndex());
 //            channel->setShema(sensorShemaFromUiShemaIndex(ui->sensorShema->currentIndex()));
         }
         mListChannel.unlock();
@@ -1029,6 +1033,8 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelShiftColdJunction->hide();
         ui->labelValue->hide();
         ui->comboTypeValue->hide();
+        ui->comboUnit->hide();
+        ui->labelUnit->hide();
     }
     else if(index == CurrentMeasure)
     {
@@ -1045,6 +1051,8 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelShiftColdJunction->hide();
         ui->labelValue->show();
         ui->comboTypeValue->show();
+        ui->comboUnit->hide();
+        ui->labelUnit->hide();
     }
     else if(index == VoltageMeasure)
     {
@@ -1062,6 +1070,19 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelShiftColdJunction->hide();
         ui->labelValue->show();
         ui->comboTypeValue->show();
+        ui->comboUnit->show();
+        ui->labelUnit->show();
+//        if((channel->GetUserDiapason() == ChannelOptions::Voltage150mV) || \
+//                (channel->GetUserDiapason() == ChannelOptions::Voltage300mV) || \
+//                (channel->GetUserDiapason() == ChannelOptions::Voltage1V) || \
+//                (channel->GetUserDiapason() == ChannelOptions::Voltage0_1V))
+//        {
+//            ui->comboUnit->setCurrentIndex(0);
+//        }
+//        else
+//        {
+//            ui->comboUnit->setCurrentIndex(1);
+//        }
     }
     else if(index == TermoCoupleMeasure)
     {
@@ -1078,7 +1099,9 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelShiftColdJunction->show();
         ui->labelValue->hide();
         ui->comboTypeValue->hide();
-        channel->setVolueVoltageType(ChannelOptions::Value_Real);
+        ui->comboTypeValue->setCurrentIndex(ChannelOptions::Value_Real);
+        ui->comboUnit->hide();
+        ui->labelUnit->hide();
     }
     else if(index == TermoResistanceMeasure)
     {
@@ -1096,14 +1119,16 @@ void dSettings::updateUiSignalTypeParam(int index)
         ui->labelShiftColdJunction->hide();
         ui->labelValue->hide();
         ui->comboTypeValue->hide();
-        channel->setVolueVoltageType(ChannelOptions::Value_Real);
+        ui->comboTypeValue->setCurrentIndex(ChannelOptions::Value_Real);
+        ui->comboUnit->hide();
+        ui->labelUnit->hide();
     }
 
 
     ui->comboTypeValue->setCurrentIndex(channel->getVoltageType());
     if(ui->comboTypeValue->currentIndex() == ChannelOptions::Value_Real)
     {
-        ui->unit->setText(channel->getNameUnitByParam(index, channel->GetDiapason()));
+        ui->unit->setText(channel->getNameUnitByParam(index, ui->comboUnit->currentIndex()));
     }
 }
 
@@ -1623,6 +1648,7 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         {
 //            ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
             ui->sensorDiapazon->setCurrentIndex(srcChannel->GetUserDiapason());
+            ui->comboUnit->setCurrentIndex(srcChannel->getIndexMultiplier());
         }
         else if(srcChannel->GetSignalType() == TermoCoupleMeasure)
         {
@@ -1643,8 +1669,8 @@ void dSettings::on_comboTypeValue_currentIndexChanged(int index)
     switch(index)
     {
     case ChannelOptions::Value_Real:
-        ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st,\
-                          tableVoltageDiapasone[ui->sensorDiapazon->currentIndex()].diapason));
+        ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st, \
+                          ui->comboUnit->currentIndex()));
         break;
     case ChannelOptions::Value_Procent:
         ui->unit->setText("%");
@@ -1659,8 +1685,14 @@ void dSettings::on_sensorDiapazon_currentIndexChanged(int index)
     if(ui->comboTypeValue->currentIndex() != ChannelOptions::Value_Procent)
     {
         ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st,\
-                          tableVoltageDiapasone[index].diapason));
+                          ui->comboUnit->currentIndex()));
     }
 }
 
 
+
+void dSettings::on_comboUnit_currentIndexChanged(int index)
+{
+    ui->unit->setText(channel->getNameUnitByParam(tableSignalTypes[ui->typeSignal->currentIndex()].st,\
+                      ui->comboUnit->currentIndex()));
+}

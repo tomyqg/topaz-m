@@ -34,6 +34,7 @@ ChannelOptions::ChannelOptions()
     memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
     outputData.chanAdditionalParameter1[0] = diapason;
     unitsname = "mV";
+    indexMultiplier = 1;
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     timer->setInterval(measureperiod);
@@ -1200,31 +1201,27 @@ double ChannelOptions::getMinInDiapason(int diapason)
     return ret;
 }
 
-double ChannelOptions::ConvertVisualValue(double signal, int diapason, int valueType)
+double ChannelOptions::ConvertVisualValue(double signal, int diapason, int valueType, int multIndex)
 {
     double value = signal;
-    if(diapason == -1)
-    {
-        diapason = GetUserDiapason();
-    }
-    if(valueType == -1)
-    {
-        valueType = getVoltageType();
-    }
+    if(diapason == -1) diapason = GetUserDiapason();
+    if(valueType == -1) valueType = getVoltageType();
     double hisignal = getMaxInDiapason(diapason);
     double lowsignal = getMinInDiapason(diapason);
     double lowlimit = 0;
     double hilimit = 0;
 
+    if(multIndex == -1) multIndex = getIndexMultiplier();
+    double multiplier = getSelectMultiplier(multIndex, diapason, GetSignalType(), valueType);
+
 
     switch (valueType) {
     case Value_Real:
-        //            multiplier = 1000;
         lowlimit = lowsignal;
         hilimit = hisignal;
         break;
     case Value_Procent:
-        //            multiplier = 1;
+//        multiplier = 1;
         lowlimit = 0;
         hilimit = 100;
     default:
@@ -1233,7 +1230,7 @@ double ChannelOptions::ConvertVisualValue(double signal, int diapason, int value
 
     value = MetrologicalCalc::ConvertSignalToValue(signal,lowsignal,hisignal,lowlimit,hilimit); // берем начало и конец под-диапазона
 
-    return value;
+    return (value * multiplier);
 }
 
 int ChannelOptions::optimalPrecision()
@@ -1422,12 +1419,14 @@ void ChannelOptions::copyOptions(ChannelOptions * ch)
 //    return unit;
 //}
 
-QString ChannelOptions::getNameUnitByParam(uint16_t type, int diap)
+QString ChannelOptions::getNameUnitByParam(uint16_t type, int indexMult)
 {
     QString unit = "..";
+    if(indexMult == -1) indexMult = getIndexMultiplier();
+//    double mult = getSelectMultiplier(indexMult);
     if(type == VoltageMeasure)
     {
-        if(diap == Voltage_1V)
+        if(indexMult == voltUnit_mV)
         {
             unit = "мВ";
         }
@@ -1488,4 +1487,32 @@ void ChannelOptions::getAdditionalParametr1(uint8_t * param)
 void ChannelOptions::getAdditionalParametr2(uint8_t * param)
 {
     memcpy(param, outputData.chanAdditionalParameter2, sizeof(outputData.chanAdditionalParameter2));
+}
+
+/*
+ * index = 0 - мВ
+ * index = 1 - В
+ */
+double ChannelOptions::getSelectMultiplier(int index, int diap, int signal, int type)
+{
+    double mult = 1;
+
+    if(diap != -1) diap = GetUserDiapason();
+    if(signal != -1) signal = GetSignalType();
+    if(type != -1) getVoltageType();
+
+    if((type == Value_Real) && (signal == VoltageMeasure))
+    {
+        if((diap == Voltage150mV) || (diap == Voltage300mV) || \
+                (diap == Voltage0_1V) || (diap == Voltage1V))
+        {
+            if(index == 1) mult = 0.001;
+        }
+        else
+        {
+            if(index == 0) mult = 1000;
+        }
+    }
+
+    return mult;
 }
