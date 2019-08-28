@@ -242,9 +242,9 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     QScroller::grabGesture(ui->listWidget->viewport(), QScroller::LeftMouseButtonGesture);
     mouseScroll = false;
     //скролинг виджетов настроек каналов
-    QScroller *scroller = QScroller::scroller(ui->scrollAreaChannelOptions);
-    scroller->grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
-//    QScroller::grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
+    //QScroller *scroller = QScroller::scroller(ui->scrollAreaChannelOptions);
+//    scroller->grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
 
