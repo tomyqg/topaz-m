@@ -512,8 +512,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-279</y>
-                     <width>555</width>
+                     <y>-364</y>
+                     <width>551</width>
                      <height>974</height>
                     </rect>
                    </property>
@@ -739,7 +739,7 @@ border-radius: 0px;</string>
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ЕДИНИЦА ОТОБРАЖЕНИЯ</string>
+                       <string>ОТОБРАЖЕНИЕ</string>
                       </property>
                      </widget>
                     </item>
