@@ -58,7 +58,7 @@ public:
     double GetDempheredChannelValue();
     double GetValuePercent();
     double ConvertSignalToValue(double signal);
-    double ConvertVisualValue(double signal, int diapason = -1, int valueType = -1);
+    double ConvertVisualValue(double signal, int diapason = -1, int valueType = -1, int multIndex = -1);
 
     QString GetUnitsName();
     QString GetState1HighMessage();
@@ -122,6 +122,8 @@ public:
     void setPrecision(int prec) { precision = prec; }
     bool isNewValue();
     int getChannelStatus() { return inputData.chanStatus; }
+    void setIndexMultiplier(double mult) { indexMultiplier = mult; }
+    double getIndexMultiplier() { return indexMultiplier; }
 
     struct
     {
@@ -249,6 +251,7 @@ private:
 //    int capacity;
     bool newValue;      // признак наличия свежих данных
     int precision;  //точность отображения данных в виджетах
+    double indexMultiplier; //умножитель в случае пользовательского выбора мВ или В
 
     QString unitsname;
     QString state1highmessage;
@@ -385,9 +388,15 @@ public:
     };
     Q_ENUM(typePrecision)
 
+    enum typeVoltUnit {
+        voltUnit_mV = 0,
+        voltUnit_V = 1,
+    };
+    Q_ENUM(typeVoltUnit)
+
 
 //    QString getNameUnitByParam(void);
-    QString getNameUnitByParam(uint16_t type, int diap);
+    QString getNameUnitByParam(uint16_t type, int indexMult = -1);
     int optimalPrecision();
 
     void setAdditionalParametr1(uint8_t *param);
@@ -412,5 +421,6 @@ public:
     }
     double getMinInDiapason(int diapason = -1);
     double getMaxInDiapason(int diapason = -1);
+    double getSelectMultiplier(int index, int diap = -1, int signal = -1, int type = -1);
 };
 #endif // CHANNEL1_H

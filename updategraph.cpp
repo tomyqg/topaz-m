@@ -504,17 +504,6 @@ void MainWindow::updateBars(void)
                     double diapason = channel->GetUserDiapason();
                     double maximum = channel->ConvertVisualValue(channel->getMaxInDiapason());
                     double minimum = channel->ConvertVisualValue(channel->getMinInDiapason());
-//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
-//                    {
-////                        bar->setValueType(wVolueBar::BarValue_Real);
-
-//                    }
-//                    else
-//                    {
-////                        bar->setValueType(wVolueBar::BarValue_Procent);
-//                        max = 100;
-//                        min = 0;
-//                    }
                     bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue()),\
                                  channel->ConvertVisualValue(channel->GetMaximumChannelValue()));
                     bar->setBarDiapazon(maximum, minimum);
@@ -863,16 +852,16 @@ void MainWindow::updateVols()
 #endif
                 {
 //                    double value = channel->GetCurrentChannelValue();
-                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
-                    {
-                        vol->setVol(channel->GetCurrentChannelValue(), channel->getPrecision());
-                    }
-                    else
-                    {
-                        vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
-                                                                channel->GetUserDiapason()), \
-                                    channel->getPrecision());
-                    }
+//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
+//                    {
+//                        vol->setVol(channel->GetCurrentChannelValue(), channel->getPrecision());
+//                    }
+//                    else
+//                    {
+                    vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
+                                                            channel->GetUserDiapason()), \
+                                channel->getPrecision());
+//                    }
                     vol->show();
                     if(indexGroup >= 4)
                     {

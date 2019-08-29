@@ -49,6 +49,7 @@ int cFileManager::writeChannelsSettings(QString path/*, QList<ChannelOptions*> l
             channeljsonobj["Type"] = Channel->GetSignalType();
             channeljsonobj["Name"] = (Channel->GetChannelName());
             channeljsonobj["Units"] = Channel->GetUnitsName();
+            channeljsonobj["Multiplier"] = Channel->getIndexMultiplier();
             channeljsonobj["HigherLimit"] = Channel->GetHigherLimit();
             channeljsonobj["LowerLimit"] = Channel->GetLowerLimit();
             channeljsonobj["HigherMeasLimit"] = Channel->GetHigherMeasureLimit();
@@ -223,6 +224,7 @@ int cFileManager::readChannelsSettings(QString path)
             channel->SetSignalType(ch.value("Type").toInt());
             channel->SetCurSignalType(channel->GetSignalType());
             channel->SetUnitsName(ch.value("Units").toString().toUtf8());
+            channel->setIndexMultiplier(ch.value("Multiplier").toInt());
             channel->SetMeasurePeriod(ch.value("Period").toDouble());
             channel->SetState1HighMessage(ch.value("State1HighMessage").toString().toUtf8());
             channel->SetState1LowMessage(ch.value("State1LowMessage").toString().toUtf8());

@@ -131,6 +131,7 @@ private slots:
 
     void on_comboTypeValue_currentIndexChanged(int index);
     void on_sensorDiapazon_currentIndexChanged(int index);
+    void on_comboUnit_currentIndexChanged(int index);
 };
 
 #endif // SETTINGS_H
