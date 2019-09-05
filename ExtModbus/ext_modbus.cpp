@@ -6,6 +6,7 @@
 
 #include "ext_modbus.h"
 #include "defines.h"
+#include "expert_access.h"
 
 #include <QMessageBox>
 
@@ -32,7 +33,7 @@ uint8_t mbExtRegRwCheckFunc(void* param, void* buffer)
 }
 }
 
-
+QString accessPass = "";
 
 cExtModbus::cExtModbus(QObject *parent) : QObject(parent)
 {
@@ -178,6 +179,8 @@ void cExtModbus::run()
                                 }
                                 printf("New connection from %s:%d on socket %d\n",
                                        inet_ntoa(clientaddr.sin_addr), clientaddr.sin_port, newfd);
+                                //сброс уровней доступа при новом подключении
+                                cExpertAccess::resetExtAccess();
                             }
                         } else {
 
@@ -242,6 +245,11 @@ void cExtModbus::reply(){
         }
         if((offset + nb) < (i + (param->size >> 1)))
         {   // последний параметр на умещается в пакете данных
+            modbus_reply_exception(ctx, query, MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
+            return;
+        }
+        if(!isAccess(func, param->access))
+        {
             modbus_reply_exception(ctx, query, MODBUS_EXCEPTION_ILLEGAL_DATA_ADDRESS);
             return;
         }
@@ -340,11 +348,68 @@ void cExtModbus::reply(){
     }
 }
 
+bool cExtModbus::isAccess(uint8_t func, uint8_t access)
+{
+    bool res = false;
+
+    if(access == ACCESS_USER)
+    {
+        res = true;
+    }
+    else if(access == ACCESS_EXPERT)
+    {
+        res = true;
+        switch(func)
+        {
+        case _FC_WRITE_SINGLE_COIL:
+        case _FC_WRITE_MULTIPLE_COILS:
+        case _FC_WRITE_SINGLE_REGISTER:
+        case _FC_WRITE_MULTIPLE_REGISTERS:
+        {
+            if(cExpertAccess::accessExtRequest(accessPass) == Access_User)
+            {
+                res = false;
+            }
+        }
+        case _FC_READ_COILS:
+        case _FC_READ_DISCRETE_INPUTS:
+        case _FC_READ_HOLDING_REGISTERS:
+        case _FC_READ_INPUT_REGISTERS:
+            break;
+        default:
+            res = false;
+            break;
+        }
+    }
+    else if(access == ACCESS_SUPERADMIN)
+    {
+        if(cExpertAccess::accessExtRequest(accessPass) == Access_Admin)
+        {
+            res = true;
+        }
+    }
+    return res;
+}
+
+#define LENGHT_STR_PASS 32
 uint8_t cExtModbus::updateParam(const void * param)
 {
     const tExtLookupRegisters * parametr = (tExtLookupRegisters*) param;
-    if((parametr->typeMapping == LKUP_MAP_HILDING)
-            || (parametr->typeMapping == LKUP_MAP_COILS))
+
+    if((QString(parametr->nameParam) == "accessPass") && (parametr->typeMapping == LKUP_MAP_HILDING))
+    {
+        uint8_t size = parametr->size;
+        void * buffer = (void *)GET_PARAM_ADDRESS(parametr);
+        char str[LENGHT_STR_PASS];
+        memcpy(&str, buffer, LENGHT_STR_PASS);
+        accessPass = QString(QByteArray((char*)str, LENGHT_STR_PASS)); //.toStdString()
+        cExpertAccess::accessExtRequest(accessPass);
+        tModbusBuffer data;
+        memset(&data, '*', 32);
+        emit signalUpdateParam(parametr->nameParam, data);
+        return size;
+    }
+    else if((parametr->typeMapping == LKUP_MAP_HILDING) || (parametr->typeMapping == LKUP_MAP_COILS))
     {
         uint8_t size = parametr->size;
         void * buffer = (void *)GET_PARAM_ADDRESS(parametr);

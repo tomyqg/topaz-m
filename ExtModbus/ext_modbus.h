@@ -54,6 +54,7 @@ private:
     uint8_t updateParam(const void *param);
     void reply();
 
+    bool isAccess(uint8_t func, uint8_t access);
 };
 
 

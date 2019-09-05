@@ -5,12 +5,15 @@
 #include <QByteArray>
 #include "expert_access.h"
 
+QString cExpertAccess::configFileName = "";
 
 QString cExpertAccess::passExpert = "0000"; //Пароль экперта. "0000" - по-умолчанию
 QString cExpertAccess::passAdmin = "abrakadabra"; // Пароль доступа админа
-QString cExpertAccess::configFileName = "";
-accessModeType cExpertAccess::mode = ACCESS_USER;
-accessModeType cExpertAccess::modeModbusExt = ACCESS_USER;
+accessModeType cExpertAccess::mode = Access_User;
+
+QString cExpertAccess::passExtExpert = "0000"; //Пароль экперта. "0000" - по-умолчанию
+QString cExpertAccess::passExtAdmin = "abrakadabra"; // Пароль доступа админа
+accessModeType cExpertAccess::modeModbusExt = Access_User;
 
 cExpertAccess::cExpertAccess(QObject *parent) : QObject(parent)
 {
@@ -26,26 +29,47 @@ bool cExpertAccess::accessRequest(QString pass)
 {
     if(pass == passExpert)
     {
-        mode = ACCESS_EXPERT;
+        mode = Access_Expert;
         return true;
     }
     else if(pass == passAdmin)
     {
-        mode = ACCESS_ADMIN;
+        mode = Access_Admin;
         return true;
     }
     else
     {
-        mode = ACCESS_USER;
+        mode = Access_User;
         return false;
     }
 }
 
 void cExpertAccess::resetAccess()
 {
-    mode = ACCESS_USER;
+    mode = Access_User;
 }
 
+accessModeType cExpertAccess::accessExtRequest(QString pass)
+{
+    if(pass == passExtExpert)
+    {
+        modeModbusExt = Access_Expert;
+    }
+    else if(pass == passExtAdmin)
+    {
+        modeModbusExt = Access_Admin;
+    }
+    else
+    {
+        modeModbusExt = Access_User;
+    }
+    return modeModbusExt;
+}
+
+void cExpertAccess::resetExtAccess()
+{
+    modeModbusExt = Access_User;
+}
 
 
 /** Search the configuration file */

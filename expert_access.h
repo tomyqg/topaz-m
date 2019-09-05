@@ -5,9 +5,9 @@
 
 enum accessModeType
 {
-    ACCESS_USER = 0,
-    ACCESS_EXPERT = 1,
-    ACCESS_ADMIN = 2
+    Access_User = 0,
+    Access_Expert = 1,
+    Access_Admin = 2
 };
 
 class cExpertAccess : public QObject
@@ -18,6 +18,9 @@ public:
     static bool accessRequest(QString pass);
     static void resetAccess();
     static accessModeType getMode() { return mode; }
+    static void resetExtAccess();
+    static accessModeType accessExtRequest(QString pass);
+    static accessModeType getExtMode() { return modeModbusExt; }
 signals:
 
 public slots:
@@ -28,6 +31,8 @@ private:
     static QString passAdmin;
     static QString configFileName;
     static accessModeType mode;
+    static QString passExtExpert;
+    static QString passExtAdmin;
     static accessModeType modeModbusExt;
 
 };
