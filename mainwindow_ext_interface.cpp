@@ -502,7 +502,7 @@ void MainWindow::extGetAccessType(QString name)
     // Vag: реализовать отдельный признак доступа к прибору
 
     tModbusBuffer data;
-    data.data[0] = cExpertAccess::getMode();
+    data.data[0] = cExpertAccess::getExtMode();
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
 }

@@ -1155,11 +1155,11 @@ void dMenu::changeVisibleWidgets()
     foreach (QWidget * w, listWidgetsAdmin) { w->hide(); }
     foreach (QWidget * w, listWidgetsExpert) { w->hide(); }
 
-    if(access == ACCESS_EXPERT)
+    if(access == Access_Expert)
     {
         ui->modeAccess->setText("ЭКСПЕРТ");
     }
-    else if(access == ACCESS_ADMIN)
+    else if(access == Access_Admin)
     {
         ui->modeAccess->setText("АДМИН");
     }
@@ -1171,11 +1171,11 @@ void dMenu::changeVisibleWidgets()
     // включить отображение виджетов, соответствующих уровню доступа
     switch(access)
     {
-    case  ACCESS_ADMIN:
+    case  Access_Admin:
         foreach (QWidget * w, listWidgetsAdmin) { w->show(); }
-    case ACCESS_EXPERT:
+    case Access_Expert:
         foreach (QWidget * w, listWidgetsExpert) { w->show(); }
-    case ACCESS_USER:
+    case Access_User:
         // нечего больше показывать простому сметрному
     default:
         break;

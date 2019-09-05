@@ -60,7 +60,7 @@ typedef struct
  
     uint8_t             size;             // Number of bytes in parameter. U8 = 1, Float = 4, ASCII size
                                             //  depends on parameter.
-//    uint8_t             access;           // Access permissions based on mode
+    uint8_t             access;           // Access permissions based on mode
 } tExtLookupRegisters;
  
 // Type Mapping
@@ -83,6 +83,11 @@ typedef struct
 #define LKUP_SIZE_FLOAT                4
 #define LKUP_SIZE_ASCII                8
  
+// Access Level
+#define ACCESS_USER                    0
+#define ACCESS_EXPERT                  1
+#define ACCESS_SUPERADMIN              2
+  
 // Coil Mask
 #define LKUP_COIL_MASK_BIT0  (uint8_t)0x01
 #define LKUP_COIL_MASK_BIT1  (uint8_t)0x02
@@ -99,6 +104,5 @@ extern tExtDeviceBasicParams g_extModbusDataStorage;
 #endif
  
 #endif // MODBUS_LOOKUP_TABLE_H
- 
 
 

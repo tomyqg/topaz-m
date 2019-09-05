@@ -52,10 +52,10 @@ enum deviceStateEnum{
     Device_State_ErrChannel = 4,
     Device_State_ErrCallibr = 5
 };
-enum accessTypeEnum{
-    Access_User = 2,
-    Access_Root = 3
-};
+//enum accessTypeEnum{
+//    Access_User = 2,
+//    Access_Root = 3
+//};
 enum deviceStatusEnum{
     Device_Status_NOINIT = 0,   //запуск, самодиагностика
     Device_Status_CONFIG = 1,   //конфигурирование каналов
