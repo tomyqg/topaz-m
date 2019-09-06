@@ -655,7 +655,7 @@ void MainWindow::InitDevices()
     for(int i = 0; i < TOTAL_NUM_DEVICES; i++)
     {
         cDevice * device = new cDevice();
-        connect(device, SIGNAL(updateParam(Transaction)), this, SLOT(retransDeviceToWorker(Transaction)));
+        connect(device, SIGNAL(updateParam(Transaction)), this, SLOT(retransDeviceToWorker(Transaction)), Qt::DirectConnection);
         listDevice.append(device);
     }
 }

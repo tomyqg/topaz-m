@@ -1,5 +1,8 @@
 #include "device_slot.h"
 
+#include "mbcrc.h"
+
+
 #define TIME_RESET_ONLINE_SEC   10
 #define TIME_UPDATE_STATUS_SEC  3
 #define TIME_UPDATE_CONST_SEC   100
@@ -20,7 +23,7 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     pauseUpdateParam = false;
     countParams = 0;
     deviceMode = 0;
-    accessType = EAT_ROOT;
+    accessType = EAT_USER;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);
     timerUpdateConstParam = new QTimer(this);
@@ -80,14 +83,14 @@ int cDevice::parseDeviceParam(Transaction tr)
     else if(nameParam == "accessType")
     {
 
-        if(accessType != (uint16_t)tr.volInt)
-        {
-            Transaction trans(Transaction::W, slot);
-            trans.offset = cRegistersMap::getOffsetByName("accessType");
-            trans.volInt = accessType;
-            emit updateParam(trans);
-        }
-//        accessType = tr.volInt;
+//        if(accessType != (uint16_t)tr.volInt)
+//        {
+//            Transaction trans(Transaction::W, slot);
+//            trans.offset = cRegistersMap::getOffsetByName("accessType");
+//            trans.volInt = accessType;
+//            emit updateParam(trans);
+//        }
+        accessType = tr.volInt;
     }
     else if(nameParam == "mbCommCount")
     {
@@ -145,6 +148,21 @@ void cDevice::setMode(int m)
         tr.volInt = deviceMode;
         emit updateParam(tr);
     }
+}
+
+void cDevice::setHashRoot(bool root)
+{
+        Transaction tr(Transaction::W, slot);
+        tr.offset = cRegistersMap::getOffsetByName("hashRoot");
+        if(root)
+        {
+            tr.volInt = crc16(uniqueId, sizeof(uniqueId));
+        }
+        else
+        {
+            tr.volInt = 0;
+        }
+        emit updateParam(tr);
 }
 
 void cDevice::resetOnline()

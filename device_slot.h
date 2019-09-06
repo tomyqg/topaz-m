@@ -41,6 +41,7 @@ public:
     void setMode(int m);
     int getMode() { return deviceMode; }
 
+    void setHashRoot(bool root);
 signals:
     void updateParam(Transaction tr);
 

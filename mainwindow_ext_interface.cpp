@@ -1009,8 +1009,22 @@ void MainWindow::extGetCurrentTime(QString name)
 // установка текущего уровня доступа (пароль)
 void MainWindow::extSetAccessPass(QString name, uint8_t * data)
 {
-
-
+    if(cExpertAccess::getExtMode() == Access_Admin)
+    {
+        mListDev.lock();
+        foreach (cDevice * dev, listDevice) {
+            dev->setHashRoot(true);
+        }
+        mListDev.unlock();
+    }
+    else
+    {
+        mListDev.lock();
+        foreach (cDevice * dev, listDevice) {
+            dev->setHashRoot(false);
+        }
+        mListDev.unlock();
+    }
 
 }
 // Получение снежинок (пароль скрыт)
@@ -2357,7 +2371,7 @@ void MainWindow::extGetChanCalibr(QString name)
     QString paramName = name.right(name.size() - QString("chan").size() - QString::number(num).size());  //имя калибровочного параметра
     tModbusBuffer data;
     uint32_t value = 0;
-    qDebug() << "extGetChanCalibr:" << name.toStdString().c_str() << paramName.toStdString().c_str();
+//    qDebug() << "extGetChanCalibr:" << name.toStdString().c_str() << paramName.toStdString().c_str();
     mListChannel.lock();
     if((num > 0) && (num <= listChannels.size()))
     {
@@ -2548,6 +2562,7 @@ void MainWindow::extGetNeadCalibr(QString name)
     if((num > 0) && (num <= listChannels.size()))
     {
         data.data[0] = listChannels.at(num-1)->getNeadReadCalibtration();
+        data.data[1] = 0;
     }
     mListChannel.unlock();
     emit signalToExtModbus(name, data);

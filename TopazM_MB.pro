@@ -28,7 +28,7 @@ TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \
         Anybus Anybus/abcc_abp Anybus/abcc_adapt Anybus/abcc_drv Anybus/abcc_obj \
         Anybus/abcc_drv/inc Anybus/abcc_drv/src/spi Anybus/abcc_obj/nw_obj \
-        Drivers Communicator Grafika LookupTable Steel Relais Server Digital
+        Drivers Communicator Grafika LookupTable Steel Relais Server Digital CRC
 TEMPLATE = app
 
 RC_ICONS = icon.ico
@@ -96,7 +96,8 @@ SOURCES += main.cpp \
     ExtModbus/modbus_lookup_tables.c \
     3rdparty/libmodbus/src/modbus-tcp.c \
     mainwindow_ext_interface.cpp \
-    Channels/freq_channel.cpp
+    Channels/freq_channel.cpp \
+    CRC/mbcrc.c
 
 unix:SOURCES += 3rdparty/qextserialport/posix_qextserialport.cpp	\
                 3rdparty/qextserialport/qextserialenumerator_unix.cpp   \
@@ -208,7 +209,8 @@ HEADERS  += mainwindow.h \
     ExtModbus/ext_modbus.h \
     ExtModbus/device_params.h \
     ExtModbus/modbus_lookup_tables.h \
-    Channels/freq_channel.h
+    Channels/freq_channel.h \
+    CRC/mbcrc.h
  
 unix:HEADERS += Drivers/driveri2c.h \
             Drivers/driverspi.h \

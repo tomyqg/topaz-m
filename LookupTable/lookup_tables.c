@@ -92,6 +92,8 @@ const tLookupRegisters g_stLookupRegisters[] =
     {44, 34,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Up time  : uptime
     {45, 34,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    //
+    {500, 34,  OFFSET(hashRoot), "hashRoot", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W},
     // Parameter: Data (Measure/Generate)  : chan0Data
     {1000, 1000,  OFFSET(chan0Data), "chan0Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Raw Data : chan0RawData

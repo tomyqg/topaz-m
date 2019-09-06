@@ -1,30 +1,9 @@
-/*
- * FreeModbus Libary: ATMega168 Port
- * Copyright (C) 2006 Christian Walter <wolti@sil.at>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * File: $Id: mbcrc.c,v 1.2 2006/05/14 21:55:01 wolti Exp $
- */
+#include "mbcrc.h"
 
-/* ----------------------- System includes ----------------------------------*/
+typedef unsigned char UCHAR;
+typedef unsigned short  USHORT;
 
-/* ----------------------- Platform includes --------------------------------*/
-#include "port.h"
-
-static const UCHAR aucCRCHi[] = {
+const UCHAR aucCRCHi[] = {
     0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0, 0x80, 0x41,
     0x00, 0xC1, 0x81,
     0x40, 0x01, 0xC0, 0x80, 0x41, 0x00, 0xC1, 0x81, 0x40, 0x00, 0xC1, 0x81,
@@ -62,7 +41,7 @@ static const UCHAR aucCRCHi[] = {
     0x40
 };
 
-static const UCHAR aucCRCLo[] = {
+const UCHAR aucCRCLo[] = {
     0x00, 0xC0, 0xC1, 0x01, 0xC3, 0x03, 0x02, 0xC2, 0xC6, 0x06, 0x07, 0xC7,
     0x05, 0xC5, 0xC4,
     0x04, 0xCC, 0x0C, 0x0D, 0xCD, 0x0F, 0xCF, 0xCE, 0x0E, 0x0A, 0xCA, 0xCB,
@@ -100,7 +79,7 @@ static const UCHAR aucCRCLo[] = {
     0x40
 };
 
-USHORT usMBCRC16( UCHAR * pucFrame, USHORT usLen )
+USHORT crc16(UCHAR * pucFrame, USHORT usLen)
 {
     UCHAR ucCRCHi = 0xFF;
     UCHAR ucCRCLo = 0xFF;
@@ -114,3 +93,8 @@ USHORT usMBCRC16( UCHAR * pucFrame, USHORT usLen )
     }
     return ucCRCHi << 8 | ucCRCLo;
 }
+
+//unsigned short getCRC16(unsigned char * frame, unsigned short len)
+//{
+//    return crc16(frame, len);
+//}

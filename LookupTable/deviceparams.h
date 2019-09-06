@@ -159,6 +159,8 @@ typedef struct
     uint16_t devErrors;
     // Parameter: Up time  : uptime : NV Address: 34
     uint32_t uptime;
+    //
+    uint16_t hashRoot;
     // Parameter: Data (Measure/Generate)  : chan0Data : NV Address: 1000
     float chan0Data;
     // Parameter: Raw Data : chan0RawData : NV Address: 1000
