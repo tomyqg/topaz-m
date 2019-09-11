@@ -541,7 +541,7 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     opt->brightness = json["Brightness"].toInt();
     opt->typeMultigraph = (cSystemOptions::TypeMultigraphEnum)(json["TypeMultigraph"].toInt());
 
-    if(json["Modbus"].isNull())
+    if(json["Modbus"].isObject() == false)
     {
         opt->extModbus.type = cSystemOptions::ExtModbus_TCP;
         opt->extModbus.adress = 17;
