@@ -181,6 +181,7 @@ void MainWindow::updateSystemOptions()
 {
     cFileManager::readSystemOptionsFromFile(pathtosystemoptions, &systemOptions);
     updateVer();
+    emit signalReinitExtModbus();
     ClearPolarCoords();
 }
 

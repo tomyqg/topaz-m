@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>28</number>
+            <number>34</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -10216,12 +10216,12 @@ QComboBox::drop-down {
                   </item>
                   <item>
                    <property name="text">
-                    <string>RS-485</string>
+                    <string>Ethernet (TCP)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Ethernet</string>
+                    <string>RS-485 (RTU)</string>
                    </property>
                   </item>
                  </widget>
@@ -10238,7 +10238,7 @@ QComboBox::drop-down {
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_27">
-                <item row="4" column="0" colspan="2">
+                <item row="5" column="0" colspan="2">
                  <widget class="QLabel" name="labelModbusSlaveStopBit">
                   <property name="font">
                    <font>
@@ -10319,55 +10319,6 @@ QComboBox::drop-down {
                   </item>
                  </widget>
                 </item>
-                <item row="4" column="2">
-                 <widget class="QComboBox" name="comboModbusSlaveStopBit">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>41</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QComboBox {
-	background-color:rgb(44, 61, 77);
-	color: rgb(255 , 255, 255);
-	border-radius: 0px;
-}
-
-QComboBox::drop-down {
-	width:30px;
- }</string>
-                  </property>
-                  <property name="currentIndex">
-                   <number>0</number>
-                  </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::InsertAtBottom</enum>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string>1</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>2</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="labelModbusSlaveAdress">
                   <property name="font">
@@ -10407,7 +10358,7 @@ QComboBox::drop-down {
                  </widget>
                 </item>
                 <item row="3" column="2">
-                 <widget class="QComboBox" name="comboModbusSlaveEven">
+                 <widget class="QComboBox" name="comboModbusSlaveParity">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -10503,6 +10454,106 @@ QSpinBox::drop-down {
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QSpinBox" name="modbusSlaveDataBits">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QSpinBox {
+	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;
+}
+
+QSpinBox::drop-down {
+	width:30px;
+ }</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>5</number>
+                  </property>
+                  <property name="maximum">
+                   <number>8</number>
+                  </property>
+                  <property name="value">
+                   <number>8</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="labelModbusDataBits">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string>ЧИСЛО БИТ В СЛОВЕ</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="2">
+                 <widget class="QDoubleSpinBox" name="modbusSlaveStopBits">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QDoubleSpinBox {	
+background-color:rgb(44, 61, 77);
+	color: rgb(255 , 255, 255);
+	border-radius: 0px;
+}
+
+QDoubleSpinBox::drop-down {
+	width:30px;
+ }</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>2.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.500000000000000</double>
                   </property>
                  </widget>
                 </item>

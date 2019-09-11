@@ -395,12 +395,22 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     QJsonObject systemoptions;
     QJsonObject options, groupsjsonobj, mathjsonobj;
     QJsonArray settingsGroup, settingsMath;
+    QJsonObject extModbus;
 
     systemoptions["Arrows"] = opt->arrows;
     systemoptions["Display"] = opt->display;
     systemoptions["Autoscale"] = opt->autoscale;
     systemoptions["Brightness"] = opt->brightness;
     systemoptions["TypeMultigraph"] = opt->typeMultigraph;
+
+    extModbus["Type"] = opt->extModbus.type;
+    extModbus["Addr"] = opt->extModbus.adress;
+    extModbus["Baudrate"] = opt->extModbus.baud;
+    extModbus["Parity"] = opt->extModbus.parity;
+    extModbus["Databits"] = opt->extModbus.dataBits;
+    extModbus["Stopbits"] = opt->extModbus.stopBits;
+    extModbus["Port"] = opt->extModbus.port;
+    systemoptions["Modbus"] = extModbus;
 
     foreach (cGroupChannels * group, listGroup) {
         groupsjsonobj["Enabled"] = group->enabled;
@@ -482,7 +492,7 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     QJsonObject jsonobj;
     bool fileIsBad = false;
 
-    if(!infile.exists())
+    if(infile.exists())
     {
         if(infile.open(QIODevice::ReadOnly))
         {
@@ -521,13 +531,40 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
 
     QJsonDocument doc = QJsonDocument::fromJson(sss.toUtf8());
     QJsonObject json = doc.object();
+
     mSysOpt.lock();
+
     opt->arrows = json["Arrows"].toBool();
     opt->display = json["Display"].toInt();
     opt->autoscale = json["Autoscale"].toBool();
     opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
     opt->brightness = json["Brightness"].toInt();
     opt->typeMultigraph = (cSystemOptions::TypeMultigraphEnum)(json["TypeMultigraph"].toInt());
+
+    if(json["Modbus"].isNull())
+    {
+        opt->extModbus.type = cSystemOptions::ExtModbus_TCP;
+        opt->extModbus.adress = 17;
+        opt->extModbus.baud = 9600;
+        opt->extModbus.parity = cSystemOptions::ExtModbus_ParityNone;
+        opt->extModbus.dataBits = 8;
+        opt->extModbus.stopBits = 1;
+        opt->extModbus.port = 502;
+    }
+    else
+    {
+        QJsonObject modbus = json["Modbus"].toObject();
+        opt->extModbus.type = (cSystemOptions::TypeExtModbusInterface)(modbus["Type"].toInt());
+        opt->extModbus.adress = modbus["Addr"].toInt();
+        opt->extModbus.baud = modbus["Baudrate"].toInt();
+        opt->extModbus.parity = modbus["Parity"].toInt();
+        opt->extModbus.dataBits = modbus["Databits"].toInt();
+        opt->extModbus.stopBits = modbus["Stopbits"].toDouble();
+        if((opt->extModbus.stopBits < 1) || (opt->extModbus.stopBits > 2))
+            opt->extModbus.stopBits = 1;
+        opt->extModbus.port = modbus["Port"].toInt();
+    }
+
     mSysOpt.unlock();
 
     QJsonObject options = json["Options"].toObject();

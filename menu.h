@@ -81,6 +81,7 @@ private:
     QList<QComboBox*> listComboTypeTermo;
     QList<QLabel*> listLabelCj;
 
+
 //    QList<QPushButton*> listButtonModeling;
 //    QList<ChannelOptions *> listChannels;
     void initAnalizePage();
