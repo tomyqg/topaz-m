@@ -21,6 +21,7 @@ public:
     int init(int type);
 
     enum {
+        MB_OFF,
         TCP,
         RTU
     };
@@ -32,11 +33,14 @@ signals:
 public slots:
     void run();
     void updateData(QString name, tModbusBuffer buffer);
+    void slotReinit();
 private:
     int socket;
     modbus_t *ctx;
     modbus_mapping_t *mb_mapping;
     int use_backend;
+    int set_backend;
+    int tcp_port;
     uint8_t *query;
     int header_length;
     int maxNbInputRegisters;
@@ -49,12 +53,15 @@ private:
     fd_set rdset;
     /* Maximum file descriptor number */
     int fdmax;
+    bool needReinit;
+
 
     const tExtLookupRegisters *getLookupElementByOffsetAndFunc(uint16_t offset, uint8_t func);
     uint8_t updateParam(const void *param);
     void reply();
 
     bool isAccess(uint8_t func, uint8_t access);
+    void reinit(int type);
 };
 
 

@@ -14,6 +14,13 @@ public:
     bool autoscale;
     int brightness;
     int mode;   // режим прибора
+//    int modbusType;
+//    int modbusSlaveAddr;
+//    int modbusBaudrate;
+//    int modbusParity;
+//    int modbusDatabits;
+//    int modbusStopbits;
+//    int modbusPort;
     enum DisplayParametrEnum {
         Bars = 0x00,
         TrendsBars = 0x01,
@@ -35,25 +42,27 @@ public:
     TypeMultigraphEnum typeMultigraph;
     enum TypeExtModbusInterface {
         ExtModbus_None = 0,
-        ExtModbus_RTU = 1,
-        ExtModbus_TCP = 2,
+        ExtModbus_TCP = 1,
+        ExtModbus_RTU = 2,
     };
 //    TypeExtModbusInterface typeExtModbus;
-    enum TypeExtModbusEven {
-        ExtModbus_EvenOff = 0,
-        ExtModbus_EvenYes = 1,
-        ExtModbus_EvenNo = 2,
+    enum TypeExtModbusParity {
+        ExtModbus_ParityNone = 0,
+        ExtModbus_ParityOdd = 1,
+        ExtModbus_ParityEven = 2,
     };
 //    TypeExtModbusEven extModbasEven;
     typedef struct {
         TypeExtModbusInterface type;
         uint8_t adress;
         int baud;
-        uint8_t stopBits;
-        TypeExtModbusEven even;
+        uint8_t dataBits;
+        float stopBits;
+        int parity;
         uint16_t port;
     } typeExtModbus;
     typeExtModbus extModbus;
+    QList<int> listBauds;
 
 signals:
 

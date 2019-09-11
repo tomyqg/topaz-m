@@ -198,6 +198,7 @@ signals:
     void sendTransToWorker(Transaction tr);
     void setReleToOptionsForm(int code);
     void signalToExtModbus(QString name,tModbusBuffer buffer);
+    void signalReinitExtModbus();
 
 private:
     Ui::MainWindow *ui;

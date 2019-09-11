@@ -150,7 +150,8 @@ dMenu::dMenu(QWidget *parent) :
                          << ui->nameGroup \
                          << ui->nameMath \
                          << ui->formulaMath \
-                         << ui->unitMath;
+                         << ui->unitMath \
+                         << ui->modbusSlavePort;
 
     foreach (QWidget * w, listEditableLineText) {
         w->installEventFilter(this);
@@ -168,7 +169,6 @@ dMenu::dMenu(QWidget *parent) :
                       << ui->bSystem \
                       << ui->bTypeConnect \
                       << ui->bEditDataTime \
-                      << ui->bProtect \
                       << ui->bProtect \
                       << ui->bExtMemory \
                       << ui->bMessages \
@@ -194,6 +194,7 @@ dMenu::dMenu(QWidget *parent) :
 //    connect(ui->arrowscheckBox, SIGNAL(clicked(bool)), this, SLOT(clickCheckBox()));
 
 //    qDebug() << "Time start dMenu:" << time.elapsed();
+
 }
 
 void dMenu::updateVer()
@@ -322,6 +323,13 @@ void dMenu::on_saveButton_clicked()
     systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
     systemOptions.brightness = light;
     systemOptions.typeMultigraph = (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex();
+    systemOptions.extModbus.type = (cSystemOptions::TypeExtModbusInterface)ui->comboModbusSlaveInterface->currentIndex();
+    systemOptions.extModbus.adress = ui->modbusSlaveAdress->value();
+    systemOptions.extModbus.baud = systemOptions.listBauds.at(ui->comboModbusSlaveBaud->currentIndex());
+    systemOptions.extModbus.parity = ui->comboModbusSlaveParity->currentIndex();
+    systemOptions.extModbus.dataBits = ui->modbusSlaveDataBits->value();
+    systemOptions.extModbus.stopBits = ui->modbusSlaveStopBits->value();
+    systemOptions.extModbus.port = ui->modbusSlavePort->text().toInt();
     mSysOpt.unlock();
 
     updateVer();
@@ -2921,17 +2929,25 @@ void dMenu::updateInterfaceWidgets()
 {
     ui->comboModbusSlaveInterface->setCurrentIndex(systemOptions.extModbus.type);
     ui->modbusSlaveAdress->setValue(systemOptions.extModbus.adress);
-    QList<int> listBauds;
-    listBauds << 9600 << 19200 << 38400 << 57600 << 115200;
-    int i = listBauds.size();
-    foreach (int b, listBauds) {
-        i--;
-        if(b == systemOptions.extModbus.baud) break;
+    QStringList listStrBauds;
+    int size = systemOptions.listBauds.size();
+    int curIndexBaud = 0;
+    for(int i=0; i<size; i ++)
+    {
+        int baud = systemOptions.listBauds.at(i);
+        listStrBauds.append(QString::number(baud));
+        if(baud == systemOptions.extModbus.baud)
+        {
+            curIndexBaud = i;
+        }
     }
-    ui->comboModbusSlaveBaud->setCurrentIndex(i);
-    ui->comboModbusSlaveEven->setCurrentIndex(systemOptions.extModbus.even);
-    ui->comboModbusSlaveStopBit->setCurrentIndex(systemOptions.extModbus.stopBits-1);
+    ui->comboModbusSlaveBaud->clear();
+    ui->comboModbusSlaveBaud->addItems(listStrBauds);
+    ui->comboModbusSlaveBaud->setCurrentIndex(curIndexBaud);
+    ui->comboModbusSlaveParity->setCurrentIndex(systemOptions.extModbus.parity);
+    ui->modbusSlaveStopBits->setValue(systemOptions.extModbus.stopBits);
     ui->modbusSlavePort->setText(QString::number(systemOptions.extModbus.port));
+    ui->modbusSlaveDataBits->setValue(systemOptions.extModbus.dataBits);
     // принудительный вызов слота
     on_comboModbusSlaveInterface_currentIndexChanged(ui->comboModbusSlaveInterface->currentIndex());
 }

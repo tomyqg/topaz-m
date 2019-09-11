@@ -216,12 +216,14 @@ void MainWindow::MainWindowInitialization()
     // Vag: перенести позже в отдельную функцию и выполнять при включении опции
     cExtModbus * extModbus = new cExtModbus;
     extModbusThread = new QThread;
-    extModbus->init(cExtModbus::TCP);
+    int typeExtModbus[3] = {cExtModbus::MB_OFF, cExtModbus::TCP, cExtModbus::RTU};
+    extModbus->init(typeExtModbus[systemOptions.extModbus.type]/*cExtModbus::TCP*/);
+    //extModbus->init(cExtModbus::TCP);
     connect(extModbusThread, SIGNAL(started()), extModbus, SLOT(run()));
     connect(this, SIGNAL(signalToExtModbus(QString,tModbusBuffer)), extModbus, SLOT(updateData(QString,tModbusBuffer)), Qt::DirectConnection);
     connect(extModbus, SIGNAL(signalUpdateParam(QString,tModbusBuffer)), this, SLOT(slotFromExtModbus(QString,tModbusBuffer)), Qt::DirectConnection);
     connect(extModbus, SIGNAL(signalActualizeParam(QString)), this, SLOT(slotUpdateExtIntefaceData(QString)), Qt::DirectConnection);
-
+    connect(this, SIGNAL(signalReinitExtModbus()), extModbus, SLOT(slotReinit()), Qt::DirectConnection);
     extModbus->moveToThread(extModbusThread);
     extModbusThread->start();
     // /Инициализация потока внешнего Modbus ---------------------------

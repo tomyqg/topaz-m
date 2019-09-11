@@ -7,6 +7,7 @@
 #include "ext_modbus.h"
 #include "defines.h"
 #include "expert_access.h"
+#include "systemoptions.h"
 
 #include <QMessageBox>
 
@@ -33,15 +34,20 @@ uint8_t mbExtRegRwCheckFunc(void* param, void* buffer)
 }
 }
 
+extern cSystemOptions systemOptions;
 QString accessPass = "";
 
 cExtModbus::cExtModbus(QObject *parent) : QObject(parent)
 {
-
+    ctx = NULL;
+    fdmax = 0;
+    tcp_port = 502;
+    needReinit = false;
 }
 
 cExtModbus::~cExtModbus()
 {
+    modbus_close(ctx);
     if (use_backend == TCP) {
         close(socket);
     }
@@ -52,9 +58,13 @@ cExtModbus::~cExtModbus()
 
 int cExtModbus::init(int type)
 {
+    if((type != MB_OFF) && (type != TCP) && (type != RTU)) type = TCP;
 
 
     use_backend = type;
+    set_backend = use_backend;
+
+    if(use_backend == MB_OFF) return 1;
 
     maxNbInputRegisters = 0;
     maxNbHoldingRegisters = 0;
@@ -82,7 +92,7 @@ int cExtModbus::init(int type)
 
 
     if (use_backend == TCP) {
-        ctx = modbus_new_tcp("127.0.0.1", 502);
+        ctx = modbus_new_tcp("127.0.0.1", tcp_port);
         query = (uint8_t *) malloc(MODBUS_TCP_MAX_ADU_LENGTH);
     } else {
         QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
@@ -137,6 +147,31 @@ int cExtModbus::init(int type)
     return 0;
 }
 
+void cExtModbus::slotReinit()
+{
+    set_backend = systemOptions.extModbus.type;
+    tcp_port = systemOptions.extModbus.port;
+    needReinit = true;
+}
+
+void cExtModbus::reinit(int type)
+{
+    if(use_backend != MB_OFF)
+    {
+        //    modbus_mapping_free(mb_mapping);
+        if(query != NULL) free(query);
+        if(ctx != NULL)
+        {
+            modbus_close(ctx);
+            if (use_backend == TCP) {
+                close(socket);
+            }
+            modbus_free(ctx);
+        }
+    }
+    init(type);
+}
+
 void cExtModbus::run()
 {
     while(1)
@@ -144,12 +179,20 @@ void cExtModbus::run()
         //пауза для разгрузки процессора
         this->thread()->usleep(1);
 
+        if(needReinit)
+        {
+            reinit(set_backend);
+            needReinit = false;
+        }
+
         if( ctx == NULL ) continue;
 
         if (use_backend == TCP)
         {
             rdset = refset;
-            if (select(fdmax+1, &rdset, NULL, NULL, NULL) == -1) {
+
+            timeval timeout =  {0, 1000};
+            if (select(fdmax+1, &rdset, NULL, NULL, &timeout) == -1) {
                 perror("Server select() failure.");
                 close(socket);
             }
@@ -332,6 +375,7 @@ void cExtModbus::reply(){
     {
         return;
     }
+//    modbus_mapping_free(mb_mapping);
 
     // применение новых полученных данных
     size = 1;
