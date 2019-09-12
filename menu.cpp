@@ -105,6 +105,23 @@ dMenu::dMenu(QWidget *parent) :
     updateSystemOptions();
 
 
+    // стили для всех ComboBox
+    QList<QComboBox *> combos = ui->stackedWidget->findChildren<QComboBox *>();
+    foreach(QComboBox * combo, combos)
+    {
+        QListView *view = new QListView(combo);
+        view->setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
+        QFont font;
+        font.setFamily(QStringLiteral("Open Sans"));
+        font.setPointSize(14);
+        view->setFont(font);
+
+        QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
+        combo->setView(view);
+        QString comboStyle = combo->styleSheet();
+        QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
+        combo->setStyleSheet(comboStyle + styleAppend);
+    }
 
     QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();
     foreach(wButtonStyled * button, buttons)
@@ -114,8 +131,16 @@ dMenu::dMenu(QWidget *parent) :
         button->setAlignLeft();
     }
 
+    // стили для всех QScrollBar
+    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:40px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
+    QList<QScrollBar *> scrolls = ui->stackedWidget->findChildren<QScrollBar *>();
+    foreach(QScrollBar * scroll, scrolls)
+    {
+        scroll->setStyleSheet(styleScrollBars);
+    }
+
     QScroller::grabGesture(ui->scrollAreaUstavki, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaDI, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDI->viewport(), QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDigitalOutputs, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaChannels, QScroller::LeftMouseButtonGesture);
