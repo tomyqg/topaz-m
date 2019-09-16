@@ -115,7 +115,6 @@ dMenu::dMenu(QWidget *parent) :
         font.setFamily(QStringLiteral("Open Sans"));
         font.setPointSize(14);
         view->setFont(font);
-
         QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
         combo->setView(view);
         QString comboStyle = combo->styleSheet();
