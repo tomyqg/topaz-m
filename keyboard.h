@@ -49,6 +49,8 @@ private slots:
 
     void on_pushButton_27_toggled(bool checked);
 
+    void on_pushButton_59_clicked();
+
 public slots:
     QString getcustomstring();
     void setolderproperty(QString str);

@@ -99,6 +99,23 @@ keyboard::keyboard(QWidget *parent) :
         but->setStyleSheet(styleUnclicked);
     }
 
+    QList<QComboBox *> combos = findChildren<QComboBox *>();
+    foreach(QComboBox * combo, combos)
+    {
+        QListView *view = new QListView(combo);
+        view->setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
+        QFont font;
+        font.setFamily(QStringLiteral("Open Sans"));
+        font.setPointSize(14);
+        view->setFont(font);
+        QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
+        combo->setView(view);
+        QString comboStyle = combo->styleSheet();
+        QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
+        combo->setStyleSheet(comboStyle + styleAppend);
+        view->deleteLater();
+    }
+
 }
 
 keyboard::~keyboard()
@@ -151,6 +168,7 @@ void keyboard::textinput(int b)
     ui->textEdit->setCursorPosition(pos+1);
 }
 
+// Кнопка ОК, сохранение текущего текста
 void keyboard::on_pushButton_13_clicked()
 {
     newString = ui->textEdit->text();
@@ -346,4 +364,12 @@ bool keyboard::eventFilter(QObject *object, QEvent *event)
 void keyboard::setolderproperty(QString str)
 {
     this->olderproperty = str;
+}
+
+//  Кнопка ОТМЕНА, отменить изменения текста
+void keyboard::on_pushButton_59_clicked()
+{
+    newString = olderprop;
+    ui->labelWarning->hide();
+    this->close();
 }

@@ -244,9 +244,9 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     //скролинг виджетов настроек каналов
     //QScroller *scroller = QScroller::scroller(ui->scrollAreaChannelOptions);
 //    scroller->grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaChannelOptions, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollArea_2, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollArea_3, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaChannelOptions->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea_2->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollArea_3->viewport(), QScroller::LeftMouseButtonGesture);
 
     //настройки для архива
     if(arch != NULL)
@@ -275,6 +275,30 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     for (int i = 0; i < ComboBox.count(); ++i) {
         QComboBox *combox = ComboBox.at(i);
         combox->installEventFilter(this);
+    }
+    QList<QComboBox *> combos = ui->stackedWidget->findChildren<QComboBox *>();
+    foreach(QComboBox * combo, combos)
+    {
+        QListView *view = new QListView(combo);
+        view->setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
+        QFont font;
+        font.setFamily(QStringLiteral("Open Sans"));
+        font.setPointSize(14);
+        view->setFont(font);
+        QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
+        combo->setView(view);
+        QString comboStyle = combo->styleSheet();
+        QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
+        combo->setStyleSheet(comboStyle + styleAppend);
+        view->deleteLater();
+    }
+
+    // стили для всех QScrollBar
+    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:40px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
+    QList<QScrollBar *> scrolls = ui->stackedWidget->findChildren<QScrollBar *>();
+    foreach(QScrollBar * scroll, scrolls)
+    {
+        scroll->setStyleSheet(styleScrollBars);
     }
 
     if(page == 4)
@@ -903,7 +927,7 @@ void dSettings::resizeEvent(QResizeEvent * s)
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
 #ifndef Q_OS_WIN
-//#endif
+#endif
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
          (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
@@ -921,7 +945,7 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
-#endif
+//#endif
 
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (QString::fromLatin1(watched->metaObject()->className()) == "QComboBox"))
@@ -1040,7 +1064,14 @@ void dSettings::updateUiSignalTypeParam(int index)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListCurrent);
-        ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
+        if((channel->GetUserDiapason() < 0) || (channel->GetUserDiapason() > StringListCurrent.size()))
+        {
+            ui->sensorDiapazon->setCurrentIndex(0);
+        }
+        else
+        {
+            ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
+        }
         ui->sensorDiapazon->show();
         ui->sensorShema->hide();
         ui->labelDiapazon->show();
@@ -1058,7 +1089,14 @@ void dSettings::updateUiSignalTypeParam(int index)
     {
         ui->sensorDiapazon->clear();
         ui->sensorDiapazon->addItems(StringListNapryagenie);
-//        ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(channel->GetDiapason()));
+        if((channel->GetUserDiapason() < 0) || (channel->GetUserDiapason() > StringListNapryagenie.size()))
+        {
+            ui->sensorDiapazon->setCurrentIndex(0);
+        }
+        else
+        {
+            ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
+        }
         ui->sensorDiapazon->setCurrentIndex(channel->GetUserDiapason());
         ui->sensorDiapazon->show();
         ui->labelDiapazon->show();
@@ -1644,7 +1682,11 @@ void dSettings::on_srcChannel_currentIndexChanged(int index)
         ui->comboTypeValue->setCurrentIndex(srcChannel->getVoltageType());
         ui->comboPrecision->setCurrentIndex(getIndexTablePrecisions(srcChannel->getPrecision()));
         ui->unit->setText(srcChannel->GetUnitsName().toUtf8());
-        if(srcChannel->GetSignalType() == VoltageMeasure)
+        if(srcChannel->GetSignalType() == CurrentMeasure)
+        {
+            ui->sensorDiapazon->setCurrentIndex(srcChannel->GetUserDiapason());
+        }
+        else if(srcChannel->GetSignalType() == VoltageMeasure)
         {
 //            ui->sensorDiapazon->setCurrentIndex(getIndexVoltageTable(srcChannel->GetDiapason()));
             ui->sensorDiapazon->setCurrentIndex(srcChannel->GetUserDiapason());

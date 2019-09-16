@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>34</number>
+            <number>16</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -3743,8 +3743,14 @@ border-radius: 0px;
 selection-color: rgb(48, 48, 48);
 }
 QComboBox::drop-down {
-	width:30px;
- }</string>
+	width:0px;
+ }
+QComboBox QAbstractItemView {
+    /*border: 2px solid darkgray;*/
+    /*selection-background-color: rgb(44, 61, 77);*/
+	font-size:14pt;
+}
+</string>
                      </property>
                      <property name="currentIndex">
                       <number>0</number>
@@ -3810,7 +3816,9 @@ border-radius: 0px;
 }
 QComboBox::drop-down {
 	width:30px;
- }</string>
+ }
+
+</string>
                      </property>
                      <property name="currentIndex">
                       <number>0</number>
@@ -4635,41 +4643,46 @@ background-color: #2c3d4d;
                 <string notr="true">QScrollBar:vertical {              
         background:rgb(179, 179, 179);
         margin: 0px 0px 0px 0px;
-		border-radius: 5px;
-		width:10px; 
+		border-radius: 0px;
+		width:40px; 
     }
 QScrollBar::handle:vertical {
        background:rgb(77, 77, 77);
         min-height: 50px;
-		border-radius: 5px;
+		border-radius: 0px;
     }
 QScrollBar::add-line:vertical {
        background:rgb(179, 179, 179);
-        height: 10px;
+        height:0px;
         subcontrol-position: bottom;
         subcontrol-origin: margin;
-		border-radius: 5px;
+		border-radius: 0px;
     }
 
 QScrollBar::sub-line:vertical {
         background:rgb(77, 77, 77);
-        height: 10 px;
+        height: 0 px;
         subcontrol-position: top;
-        subcontrol-origin: margin;
-		border-radius: 5px;
+        subcontrol-origin: margin; 
+		border-radius: 0px;
     }
 QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
         background:rgb(77, 77, 77);
-        height: 10px;
-		border-radius: 5px;
+        height: 0px;
+		border-radius: 0px;
     }
 
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-    background: none;
-}</string>
+   background: none;
+}
+
+</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="horizontalScrollBarPolicy">
+                <enum>Qt::ScrollBarAlwaysOff</enum>
                </property>
                <property name="widgetResizable">
                 <bool>true</bool>
@@ -4678,8 +4691,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>0</y>
-                  <width>729</width>
+                  <y>-120</y>
+                  <width>703</width>
                   <height>778</height>
                  </rect>
                 </property>

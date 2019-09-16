@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -512,7 +512,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-364</y>
+                     <y>0</y>
                      <width>551</width>
                      <height>974</height>
                     </rect>
@@ -2292,10 +2292,13 @@ QListWidget::item {
                       <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(26, 188, 156);
+                      <string notr="true">QComboBox {
+background-color: rgb(26, 188, 156);
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}
+</string>
                      </property>
                      <property name="currentText">
                       <string>ОТКЛ.</string>
@@ -2366,10 +2369,12 @@ text-align: center;</string>
                       <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: #6666ff;
+                      <string notr="true">QComboBox {
+background-color: #6666ff;
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}</string>
                      </property>
                      <property name="currentText">
                       <string>ОТКЛ.</string>
@@ -2440,10 +2445,12 @@ text-align: center;</string>
                       <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(230, 77, 59);
+                      <string notr="true">QComboBox {
+background-color: rgb(230, 77, 59);
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}</string>
                      </property>
                      <property name="currentText">
                       <string>ОТКЛ.</string>
@@ -2514,10 +2521,12 @@ text-align: center;</string>
                       <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(44, 61, 77);
+                      <string notr="true">QComboBox {
+background-color: rgb(44, 61, 77);
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}</string>
                      </property>
                      <property name="currentText">
                       <string>ОТКЛ.</string>
@@ -2623,10 +2632,12 @@ text-align: center;</string>
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(91, 119, 143);
+                   <string notr="true">QComboBox {
+background-color: rgb(91, 119, 143);
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}</string>
                   </property>
                   <property name="currentText">
                    <string>МИНУТА</string>
@@ -2940,8 +2951,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
-                     <width>692</width>
+                     <y>-158</y>
+                     <width>757</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -4276,7 +4287,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>671</width>
+                     <width>757</width>
                      <height>1363</height>
                     </rect>
                    </property>
@@ -6336,10 +6347,12 @@ QComboBox::drop-down {
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(91, 119, 143);
+                   <string notr="true">QComboBox {
+background-color: rgb(91, 119, 143);
 color: rgb(255, 255, 255);
 border-radius: 0px;
-text-align: center;</string>
+text-align: center;
+}</string>
                   </property>
                   <property name="currentText">
                    <string>Выбрать</string>

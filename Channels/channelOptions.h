@@ -108,7 +108,9 @@ public:
     void parserChannel(Transaction tr);
     void copyOptions(ChannelOptions *ch);
     void SetDiapasonShema(int newdiapason, int sh);
-    void SetUserDiapason(int ud) { diapasonUser = ud; }
+    void SetUserDiapason(int ud) {
+        diapasonUser = ud;
+    }
     int GetUserDiapason() { return diapasonUser; }
     void enableColdJunction(int en);
     int getStateColdJunction(void);

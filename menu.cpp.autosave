@@ -109,18 +109,29 @@ dMenu::dMenu(QWidget *parent) :
     QList<QComboBox *> combos = ui->stackedWidget->findChildren<QComboBox *>();
     foreach(QComboBox * combo, combos)
     {
-        QListView *view = new QListView(combo);
-        view->setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
+//        QListView *view = new QListView(combo);
+//        view->setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
+//        QFont font;
+//        font.setFamily(QStringLiteral("Open Sans"));
+//        font.setPointSize(14);
+//        view->setFont(font);
+//        QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
+//        combo->setView(view);
+//        QString comboStyle = combo->styleSheet();
+//        QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
+//        combo->setStyleSheet(comboStyle + styleAppend);
+//        view->deleteLater();
+        QListView view = (QListView*)combo;
+        view.setStyleSheet("QListView::item{height: 50px;}\n QListView::item:selected{background-color:rgb(44, 61, 77);}");
         QFont font;
         font.setFamily(QStringLiteral("Open Sans"));
         font.setPointSize(14);
-        view->setFont(font);
-        QScroller::grabGesture(view->viewport(), QScroller::LeftMouseButtonGesture);
-        combo->setView(view);
+        view.setFont(font);
+        QScroller::grabGesture(&view.viewport(), QScroller::LeftMouseButtonGesture);
+        combo->setView(&view);
         QString comboStyle = combo->styleSheet();
         QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
         combo->setStyleSheet(comboStyle + styleAppend);
-        view->deleteLater();
     }
 
     QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();

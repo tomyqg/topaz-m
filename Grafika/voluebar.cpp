@@ -81,7 +81,15 @@ void wVolueBar::setValue(double vol)
     }
 
     QString valBar;
-    valBar = QString::number(vol, 'f', prec);
+    if(!std::isnan(vol))
+    {
+        valBar = QString::number(vol, 'f', prec);
+    }
+    else
+    {
+        valBar = NaNMessage;
+    }
+
     ui->volBar->setText(valBar);
 
     //геометрия поля значения
