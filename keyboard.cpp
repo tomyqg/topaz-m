@@ -113,7 +113,7 @@ keyboard::keyboard(QWidget *parent) :
         QString comboStyle = combo->styleSheet();
         QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
         combo->setStyleSheet(comboStyle + styleAppend);
-        view->deleteLater();
+//        view->deleteLater();
     }
 
 }

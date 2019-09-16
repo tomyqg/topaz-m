@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -513,19 +513,22 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>551</width>
+                     <width>548</width>
                      <height>974</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout">
+                    <property name="leftMargin">
+                     <number>5</number>
+                    </property>
                     <property name="rightMargin">
-                     <number>25</number>
+                     <number>10</number>
                     </property>
                     <property name="bottomMargin">
                      <number>9</number>
                     </property>
                     <property name="horizontalSpacing">
-                     <number>10</number>
+                     <number>5</number>
                     </property>
                     <property name="verticalSpacing">
                      <number>20</number>
@@ -540,13 +543,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -659,7 +662,7 @@ QComboBox{
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>ВЕРХН. ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>ВЕРХ. ПРЕДЕЛ ШКАЛЫ</string>
                       </property>
                      </widget>
                     </item>
@@ -681,15 +684,21 @@ QComboBox{
                        <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
-                       <string>НИЖН. ПРЕДЕЛ ШКАЛЫ</string>
+                       <string>НИЖ. ПРЕДЕЛ ШКАЛЫ</string>
                       </property>
                      </widget>
                     </item>
                     <item row="1" column="1">
                      <widget class="QLineEdit" name="nameChannel">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -753,13 +762,13 @@ border-radius: 0px;</string>
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -844,13 +853,13 @@ border-radius: 0px;
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -929,13 +938,13 @@ QComboBox::drop-down {
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1007,9 +1016,15 @@ QComboBox::drop-down {
                     </item>
                     <item row="3" column="1">
                      <widget class="QDoubleSpinBox" name="scaleDown">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1027,11 +1042,17 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="minimum">
                        <double>-1000000000000.000000000000000</double>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>-12.000000000000000</double>
@@ -1084,9 +1105,15 @@ border-radius: 0px;</string>
                     </item>
                     <item row="2" column="1">
                      <widget class="QDoubleSpinBox" name="scaleUp">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1104,6 +1131,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="decimals">
                        <number>2</number>
                       </property>
@@ -1112,6 +1142,9 @@ border-radius: 0px;</string>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>40.000000000000000</double>
@@ -1142,9 +1175,15 @@ border-radius: 0px;</string>
                     </item>
                     <item row="4" column="1">
                      <widget class="QLineEdit" name="unit">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1200,9 +1239,15 @@ border-radius: 0px;</string>
                     </item>
                     <item row="7" column="1">
                      <widget class="QSpinBox" name="dempfer">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1246,9 +1291,15 @@ border-radius: 0px;</string>
                     </item>
                     <item row="6" column="1">
                      <widget class="QDoubleSpinBox" name="periodCh">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1265,6 +1316,9 @@ border-radius: 0px;</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="accelerated">
+                       <bool>false</bool>
                       </property>
                       <property name="suffix">
                        <string/>
@@ -1296,13 +1350,13 @@ border-radius: 0px;</string>
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1365,13 +1419,13 @@ border-radius: 0px;
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1475,9 +1529,15 @@ border-radius: 0px;
                     </item>
                     <item row="16" column="1">
                      <widget class="QDoubleSpinBox" name="shiftColdJunction">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1522,13 +1582,13 @@ border-radius: 0px;</string>
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1658,13 +1718,13 @@ QComboBox::drop-down {
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1774,13 +1834,13 @@ border-radius: 0px;
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>41</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>169</width>
+                        <width>175</width>
                         <height>41</height>
                        </size>
                       </property>
@@ -1890,7 +1950,7 @@ QComboBox::drop-down {
               <widget class="QFrame" name="frameBar">
                <property name="minimumSize">
                 <size>
-                 <width>160</width>
+                 <width>140</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1911,13 +1971,13 @@ QComboBox::drop-down {
                  <number>0</number>
                 </property>
                 <property name="leftMargin">
-                 <number>20</number>
+                 <number>10</number>
                 </property>
                 <property name="topMargin">
                  <number>19</number>
                 </property>
                 <property name="rightMargin">
-                 <number>20</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>42</number>
@@ -2951,8 +3011,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-158</y>
-                     <width>757</width>
+                     <y>0</y>
+                     <width>754</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -3025,6 +3085,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="decimals">
                        <number>2</number>
                       </property>
@@ -3033,6 +3096,9 @@ border-radius: 0px;</string>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>20.000000000000000</double>
@@ -3538,6 +3604,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="decimals">
                        <number>2</number>
                       </property>
@@ -3546,6 +3615,9 @@ border-radius: 0px;</string>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>-20.000000000000000</double>
@@ -3927,6 +3999,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="decimals">
                        <number>2</number>
                       </property>
@@ -4287,7 +4362,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>757</width>
+                     <width>754</width>
                      <height>1363</height>
                     </rect>
                    </property>

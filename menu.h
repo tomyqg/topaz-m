@@ -272,6 +272,7 @@ private slots:
 
     void on_bCancelFreq_clicked();
 
+
 signals:
     void saveButtonSignal();
     void finishCopyArchive();
