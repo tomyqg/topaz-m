@@ -41,6 +41,7 @@ ChannelOptions::ChannelOptions()
     timer->stop();
     buffermutex = new QMutex();
     listStr << "SignalType" \
+            << "DataFlags" \
             << "Error" \
             << "AdditionalParameter1"\
             << "AdditionalParameter2"\

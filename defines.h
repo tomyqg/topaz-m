@@ -18,7 +18,7 @@
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.104"
+#define VER "1.105"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
@@ -137,7 +137,7 @@
 #define ObryvErrorMessage "обрыв"
 
 #define Font "Open Sans"
-#define NaNMessage "nan"
+#define NaNMessage "отказ"
 #define OKMessage "норма"
 #define AlertSign ""
 #define MathString "math "

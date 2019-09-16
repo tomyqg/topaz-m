@@ -1,5 +1,6 @@
 #include "vol.h"
 #include "ui_vol.h"
+#include "defines.h"
 
 #define PADDING_FRAME   10
 #define SHIFT_SHADOW    7
@@ -88,7 +89,14 @@ void wVol::setVol(double vol, int prec)
         else if(abs(vol) >= 10) prec = 2;
         else prec = 3;
     }
-    ui->labelVol->setText(QString::number(vol, 'f', prec));
+    if(!std::isnan(vol))
+    {
+        ui->labelVol->setText(QString::number(vol, 'f', prec));
+    }
+    else
+    {
+        ui->labelVol->setText(NaNMessage);
+    }
 }
 
 void wVol::setColor(QColor color)
