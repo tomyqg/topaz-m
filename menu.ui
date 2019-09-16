@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>16</number>
+            <number>34</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -4691,8 +4691,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>-120</y>
-                  <width>703</width>
+                  <y>0</y>
+                  <width>726</width>
                   <height>778</height>
                  </rect>
                 </property>
@@ -7148,7 +7148,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>729</width>
+                  <width>726</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -10190,6 +10190,9 @@ QComboBox::drop-down {
                 </item>
                 <item row="0" column="1">
                  <widget class="QComboBox" name="comboModbusSlaveInterface">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -10759,8 +10762,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>0</y>
-                  <width>729</width>
+                  <y>-183</y>
+                  <width>726</width>
                   <height>569</height>
                  </rect>
                 </property>
@@ -11004,6 +11007,9 @@ QDoubleSpinBox::drop-down {
                       <property name="maximum">
                        <double>2000.000000000000000</double>
                       </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
                       <property name="value">
                        <double>60.000000000000000</double>
                       </property>
@@ -11123,6 +11129,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="suffix">
                        <string/>
                       </property>
@@ -11165,6 +11174,9 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="decimals">
                        <number>2</number>
                       </property>
@@ -11173,6 +11185,9 @@ border-radius: 0px;</string>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>40.000000000000000</double>
@@ -11305,11 +11320,17 @@ border-radius: 0px;</string>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
                       </property>
+                      <property name="accelerated">
+                       <bool>true</bool>
+                      </property>
                       <property name="minimum">
                        <double>-1000000000000.000000000000000</double>
                       </property>
                       <property name="maximum">
                        <double>1000000000000000000000.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
                       </property>
                       <property name="value">
                        <double>-12.000000000000000</double>

@@ -256,21 +256,21 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
     }
 
     // устанавливаем евент фильтры чтобы при нажатии на поле появлялась клавиатура
-    QList<QSpinBox*> spinList = findChildren<QSpinBox*> ();
-    for (int i = 0; i < spinList.count(); ++i) {
-        QSpinBox *sb = spinList.at(i);
-        sb->installEventFilter(this);
-    }
+//    QList<QSpinBox*> spinList = findChildren<QSpinBox*> ();
+//    for (int i = 0; i < spinList.count(); ++i) {
+//        QSpinBox *sb = spinList.at(i);
+//        sb->installEventFilter(this);
+//    }
     QList<QLineEdit*> lineeditList = findChildren<QLineEdit*> (  );
     for (int i = 0; i < lineeditList.count(); ++i) {
         QLineEdit *le = lineeditList.at(i);
         le->installEventFilter(this);
     }
-    QList<QDoubleSpinBox*> SpinBox = findChildren<QDoubleSpinBox*> ();
-    for (int i = 0; i < SpinBox.count(); ++i) {
-        QDoubleSpinBox *spbox = SpinBox.at(i);
-        spbox->installEventFilter(this);
-    }
+//    QList<QDoubleSpinBox*> SpinBox = findChildren<QDoubleSpinBox*> ();
+//    for (int i = 0; i < SpinBox.count(); ++i) {
+//        QDoubleSpinBox *spbox = SpinBox.at(i);
+//        spbox->installEventFilter(this);
+//    }
     QList<QComboBox*> ComboBox = findChildren<QComboBox*> ();
     for (int i = 0; i < ComboBox.count(); ++i) {
         QComboBox *combox = ComboBox.at(i);
@@ -290,11 +290,11 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         QString comboStyle = combo->styleSheet();
         QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
         combo->setStyleSheet(comboStyle + styleAppend);
-        view->deleteLater();
+//        view->deleteLater();
     }
 
     // стили для всех QScrollBar
-    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:40px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
+    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:30px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
     QList<QScrollBar *> scrolls = ui->stackedWidget->findChildren<QScrollBar *>();
     foreach(QScrollBar * scroll, scrolls)
     {
@@ -930,9 +930,9 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
 #endif
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
-         (( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") || \
-          (QString::fromLatin1(watched->metaObject()->className()) == "QLineEdit") || \
-          (QString::fromLatin1(watched->metaObject()->className()) == "QDoubleSpinBox")))
+         (/*( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") ||*/ \
+          (QString::fromLatin1(watched->metaObject()->className()) == "QLineEdit")/* ||*/ \
+          /*(QString::fromLatin1(watched->metaObject()->className()) == "QDoubleSpinBox")*/))
     {
         //Vag: нужно переделать и передавать строку напрямую в конструктор клавиатуры
         keyboard::olderprop = watched->property("text").toString();

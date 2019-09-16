@@ -120,7 +120,7 @@ dMenu::dMenu(QWidget *parent) :
         QString comboStyle = combo->styleSheet();
         QString styleAppend = "\nQComboBox::drop-down {\n	width:0px;\n }";
         combo->setStyleSheet(comboStyle + styleAppend);
-        view->deleteLater();
+//        view->deleteLater();
     }
 
     QList<wButtonStyled *> buttons = ui->stackedWidget->findChildren<wButtonStyled *>();
@@ -174,6 +174,7 @@ dMenu::dMenu(QWidget *parent) :
                          << ui->gateWay \
                          << ui->nameGroup \
                          << ui->nameMath \
+                         << ui->nameFreqChannel \
                          << ui->formulaMath \
                          << ui->unitMath \
                          << ui->modbusSlavePort;
@@ -2967,7 +2968,7 @@ void dMenu::updateInterfaceWidgets()
     QStringList listStrBauds;
     int size = systemOptions.listBauds.size();
     int curIndexBaud = 0;
-    for(int i=0; i<size; i ++)
+    for(int i=0; i<size; i++)
     {
         int baud = systemOptions.listBauds.at(i);
         listStrBauds.append(QString::number(baud));
@@ -3001,8 +3002,6 @@ void dMenu::on_comboModbusSlaveInterface_currentIndexChanged(int index)
     }
 
 }
-
-
 
 void dMenu::on_comboTypeFreq_currentIndexChanged(int index)
 {
@@ -3062,3 +3061,4 @@ void dMenu::on_bCancelFreq_clicked()
     ui->dempferFreq->setValue(freq->getDempher());
     on_comboTypeFreq_currentIndexChanged(ui->comboTypeFreq->currentIndex());
 }
+
