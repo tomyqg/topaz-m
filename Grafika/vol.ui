@@ -150,6 +150,9 @@ background-clip:padding;</string>
         <pointsize>30</pointsize>
        </font>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(21, 159, 133);
 color: rgb(255, 255, 255);</string>
@@ -160,8 +163,14 @@ color: rgb(255, 255, 255);</string>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
       </property>
      </widget>
     </widget>

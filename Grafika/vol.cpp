@@ -25,7 +25,7 @@ wVol::~wVol()
 
 void wVol::resizeEvent(QResizeEvent * s)
 {
-    int sizeRect = ui->frameName->width();  //ну или  ui->frameMes->width()
+    int sizeRect = ui->frameName->height();  //ну или  ui->frameMes->width()
 
     ui->frameMes->setGeometry(ui->frameMes->x(), ui->frameMes->y(), sizeRect, sizeRect);
     ui->frameName->setGeometry(ui->frameName->x(), ui->frameName->y(), sizeRect, sizeRect);

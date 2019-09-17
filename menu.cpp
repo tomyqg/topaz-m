@@ -132,21 +132,21 @@ dMenu::dMenu(QWidget *parent) :
     }
 
     // стили для всех QScrollBar
-    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:40px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
+    QString styleScrollBars = "QScrollBar:vertical {              \n        background:rgb(179, 179, 179);\n        margin: 0px 0px 0px 0px;\n		border-radius: 0px;\n		width:30px; \n    }\nQScrollBar::handle:vertical {\n       background:rgb(77, 77, 77);\n        min-height: 50px;\n		border-radius: 0px;\n    }\nQScrollBar::add-line:vertical {\n       background:rgb(179, 179, 179);\n        height: 0px;\n        subcontrol-position: bottom;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\n\nQScrollBar::sub-line:vertical {\n        background:rgb(77, 77, 77);\n        height: 0 px;\n        subcontrol-position: top;\n        subcontrol-origin: margin;\n		border-radius: 0px;\n    }\nQScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {\n        background:rgb(77, 77, 77);\n        height: 0px;\n		border-radius: 0px;\n    }\n\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n    background: none;\n}\n";
     QList<QScrollBar *> scrolls = ui->stackedWidget->findChildren<QScrollBar *>();
     foreach(QScrollBar * scroll, scrolls)
     {
         scroll->setStyleSheet(styleScrollBars);
     }
 
-    QScroller::grabGesture(ui->scrollAreaUstavki, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaUstavki->viewport(), QScroller::LeftMouseButtonGesture);
     QScroller::grabGesture(ui->scrollAreaDI->viewport(), QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaDigitalOutputs, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaModeling, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaChannels, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaDevices, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaMeasures, QScroller::LeftMouseButtonGesture);
-    QScroller::grabGesture(ui->scrollAreaFreq, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDigitalOutputs->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaModeling->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaChannels->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaDevices->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaMeasures->viewport(), QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(ui->scrollAreaFreq->viewport(), QScroller::LeftMouseButtonGesture);
 
 
 

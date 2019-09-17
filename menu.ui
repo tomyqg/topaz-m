@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>34</number>
+            <number>36</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -811,6 +811,9 @@
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaChannels">
                <property name="styleSheet">
@@ -862,7 +865,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>480</height>
+                  <height>489</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -2614,6 +2617,9 @@ border-radius: 0px;</string>
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="wButtonStyled" name="bAnalogOutputs">
                <property name="sizePolicy">
@@ -2696,6 +2702,9 @@ border-radius: 0px;</string>
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QStackedWidget" name="stackedWidgetTypeAnaliz">
@@ -3589,6 +3598,9 @@ border-radius: 0px;</string>
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="wButtonStyled" name="bResetToDefault">
                <property name="sizePolicy">
@@ -3671,6 +3683,9 @@ border-radius: 0px;</string>
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QFrame" name="frameAnalogModes">
@@ -3971,6 +3986,9 @@ QComboBox::drop-down {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="wButtonStyled" name="bSteel1">
                <property name="sizePolicy">
@@ -4091,6 +4109,9 @@ QComboBox::drop-down {
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QFrame" name="frameExternalDrive">
@@ -4637,6 +4658,9 @@ background-color: #2c3d4d;
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaDI">
                <property name="styleSheet">
@@ -4691,9 +4715,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>0</y>
+                  <y>-81</y>
                   <width>726</width>
-                  <height>778</height>
+                  <height>702</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -4881,27 +4905,27 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    </property>
                   </spacer>
                  </item>
-                 <item>
-                  <widget class="wButtonStyled" name="bBackDigitInputs">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>70</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>НАЗАД</string>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
+              </widget>
+             </item>
+             <item>
+              <widget class="wButtonStyled" name="bBackDigitInputs">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -4916,6 +4940,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item row="1" column="0">
               <widget class="QLabel" name="label_17">
@@ -5693,6 +5720,9 @@ QComboBox::drop-down {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaDigitalOutputs">
                <property name="styleSheet">
@@ -5744,7 +5774,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>480</height>
+                  <height>489</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_42">
@@ -5877,6 +5907,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="4" column="0" colspan="2">
               <widget class="wButtonStyled" name="bDigitOutputSettingsApply">
                <property name="sizePolicy">
@@ -6003,6 +6036,9 @@ QComboBox::drop-down {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaMath">
                <property name="styleSheet">
@@ -6054,7 +6090,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>404</height>
+                  <height>413</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -6262,6 +6298,9 @@ QComboBox::drop-down {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaGroup">
                <property name="styleSheet">
@@ -6313,7 +6352,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>404</height>
+                  <height>413</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -6422,6 +6461,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item row="5" column="0">
               <widget class="QLabel" name="label_30">
@@ -7098,6 +7140,9 @@ border-radius: 0px;</string>
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaDevices">
                <property name="styleSheet">
@@ -7147,7 +7192,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>0</y>
+                  <y>-1</y>
                   <width>726</width>
                   <height>610</height>
                  </rect>
@@ -7372,6 +7417,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item row="0" column="0">
               <widget class="QFrame" name="frameDeviceInfo1">
@@ -7942,6 +7990,9 @@ border-radius: 0px;</string>
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <spacer name="verticalSpacer_34">
                <property name="orientation">
@@ -8181,6 +8232,9 @@ background-color: #2c3d4d;
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_16">
                <property name="minimumSize">
@@ -8392,6 +8446,9 @@ QListWidget::item {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaMeasures">
                <property name="styleSheet">
@@ -8443,7 +8500,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>480</height>
+                  <height>489</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -8695,6 +8752,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaModeling">
                <property name="styleSheet">
@@ -8746,7 +8806,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>0</x>
                   <y>0</y>
                   <width>743</width>
-                  <height>480</height>
+                  <height>489</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -8957,6 +9017,9 @@ border-radius: 0px;</string>
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="wButtonStyled" name="bEthernet">
                <property name="sizePolicy">
@@ -9115,6 +9178,9 @@ border-radius: 0px;</string>
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item row="6" column="0" colspan="3">
               <spacer name="verticalSpacer_39">
@@ -9333,6 +9399,9 @@ border-radius: 0px;</string>
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item row="4" column="0">
               <widget class="QLabel" name="label_35">
@@ -10053,6 +10122,9 @@ border-radius: 0px;
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="2" column="0" colspan="2">
               <spacer name="verticalSpacer_37">
                <property name="orientation">
@@ -10159,6 +10231,9 @@ QComboBox::drop-down {
              </property>
              <property name="rightMargin">
               <number>53</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QFrame" name="frameframeExtModbusType">
@@ -10692,6 +10767,9 @@ border-radius: 0px;
              <property name="rightMargin">
               <number>53</number>
              </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QScrollArea" name="scrollAreaFreqOptions">
                <property name="font">
@@ -10762,7 +10840,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>-183</y>
+                  <y>0</y>
                   <width>726</width>
                   <height>569</height>
                  </rect>

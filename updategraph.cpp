@@ -462,13 +462,33 @@ void MainWindow::updateBars(void)
     {
         if(listGroup.size() > 1)
         {
-            listBars.append(ui->wBar_5);
-            listBars.append(ui->wBar_6);
-            listBars.append(ui->wBar_7);
-            listBars.append(ui->wBar_8);
             int indexNextGroup = curGroupChannel + 1;
             if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
-            groupDop = listGroup.at(indexNextGroup);
+            if(listGroup.at(indexNextGroup)->enabled)
+            {
+                groupDop = listGroup.at(indexNextGroup);
+                ui->nameGroupChannels2->show();
+                listBars.append(ui->wBar_5);
+                listBars.append(ui->wBar_6);
+                listBars.append(ui->wBar_7);
+                listBars.append(ui->wBar_8);
+            }
+            else
+            {
+                ui->nameGroupChannels2->hide();
+                ui->wBar_5->hide();
+                ui->wBar_6->hide();
+                ui->wBar_7->hide();
+                ui->wBar_8->hide();
+            }
+        }
+        else
+        {
+           ui->nameGroupChannels2->hide();
+           ui->wBar_5->hide();
+           ui->wBar_6->hide();
+           ui->wBar_7->hide();
+           ui->wBar_8->hide();
         }
     }
     else
@@ -519,10 +539,10 @@ void MainWindow::updateBars(void)
                     }
                     mListUstvok.unlock();
                     bar->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
                 }
                 mListChannel.unlock();
             }
@@ -544,10 +564,10 @@ void MainWindow::updateBars(void)
                     mListMath.unlock();
                     bar->cleanMarker();
                     bar->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
                 }
             }
         }
@@ -583,10 +603,10 @@ void MainWindow::updateBars(void)
 //                        }
 //                    }
                     bar->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
                 }
                 mListFreq.unlock();
             }
@@ -816,13 +836,33 @@ void MainWindow::updateVols()
     {
         if(listGroup.size() > 1)
         {
-            listVols.append(ui->widgetVol5);
-            listVols.append(ui->widgetVol6);
-            listVols.append(ui->widgetVol7);
-            listVols.append(ui->widgetVol8);
             int indexNextGroup = curGroupChannel + 1;
             if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
-            groupDop = listGroup.at(indexNextGroup);
+            if(listGroup.at(indexNextGroup)->enabled)
+            {
+                groupDop = listGroup.at(indexNextGroup);
+                ui->nameGroupChannels2->show();
+                listVols.append(ui->widgetVol5);
+                listVols.append(ui->widgetVol6);
+                listVols.append(ui->widgetVol7);
+                listVols.append(ui->widgetVol8);
+            }
+            else
+            {
+                ui->nameGroupChannels2->hide();
+                ui->widgetVol5->hide();
+                ui->widgetVol6->hide();
+                ui->widgetVol7->hide();
+                ui->widgetVol8->hide();
+            }
+        }
+        else
+        {
+           ui->nameGroupChannels2->hide();
+           ui->widgetVol5->hide();
+           ui->widgetVol6->hide();
+           ui->widgetVol7->hide();
+           ui->widgetVol8->hide();
         }
     }
     else
@@ -831,6 +871,7 @@ void MainWindow::updateVols()
         ui->widgetVol6->hide();
         ui->widgetVol7->hide();
         ui->widgetVol8->hide();
+        ui->nameGroupChannels2->hide();
     }
 
     int i = 0;
@@ -863,10 +904,10 @@ void MainWindow::updateVols()
                                 channel->getPrecision());
 //                    }
                     vol->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
 
                 }
                 mListChannel.unlock();
@@ -882,10 +923,10 @@ void MainWindow::updateVols()
                     vol->setVol(listMath.at(group->mathChannel[i])->GetCurrentMathValue());
                     mListMath.unlock();
                     vol->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
                 }
             }
         }
@@ -907,10 +948,10 @@ void MainWindow::updateVols()
 //                        vol->setVol(channel->GetValuePercent(), channel->optimalPrecision());
 //                    }
                     vol->show();
-                    if(indexGroup >= 4)
-                    {
-                        ui->nameGroupChannels2->show();
-                    }
+//                    if(indexGroup >= 4)
+//                    {
+//                        ui->nameGroupChannels2->show();
+//                    }
 
                 }
                 mListFreq.unlock();
@@ -934,6 +975,7 @@ void MainWindow::selectWidgetDiagram(void)
         ui->right->show();
         ui->left->show();
         ui->frameSteel->hide();
+        ui->left->setMinimumWidth(ui->frameMain->width()/2);
     }
     else if((systemOptions.display == cSystemOptions::Cyfra) || \
             (systemOptions.display == cSystemOptions::Bars))
@@ -941,6 +983,7 @@ void MainWindow::selectWidgetDiagram(void)
         ui->left->hide();
         ui->right->show();
         ui->frameSteel->hide();
+        ui->left->setMinimumWidth(0);
     }
     else if(systemOptions.display == cSystemOptions::Polar ||\
             systemOptions.display == cSystemOptions::PolarBars ||\
@@ -950,12 +993,14 @@ void MainWindow::selectWidgetDiagram(void)
         ui->right->show();
         ui->left->show();
         ui->frameSteel->hide();
+        ui->left->setMinimumWidth(ui->frameMain->width()/2);
     }
     else if(systemOptions.display == cSystemOptions::Steel)
     {
         ui->right->hide();
         ui->left->hide();
         ui->frameSteel->show();
+        ui->left->setMinimumWidth(0);
     }
 }
 

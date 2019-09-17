@@ -100,17 +100,32 @@ void MainWindow::updateGroupWodgets()
     if(listGroup.size() > 1) {
         if(curGroupChannel >= listGroup.size()) curGroupChannel = 0;
         ui->nameGroupChannels1->setText(listGroup.at(curGroupChannel)->groupName);
-        if(listGroup.size() > 1)
-        {
+//        if(listGroup.size() > 1)
+//        {
             int indexNextGroup = curGroupChannel + 1;
             if(indexNextGroup >= listGroup.size()) indexNextGroup = 0;
             ui->nameGroupChannels2->setText(listGroup.at(indexNextGroup)->groupName);
-        }
+//        }
         ui->arrowGroupLeft->setPixmap(QPixmap(pathtoleftarrow));
         ui->arrowGroupRight->setPixmap(QPixmap(pathtorightarrow));
-        ui->frameGroup->show();
+        if(listGroup.at(indexNextGroup)->enabled)
+        {
+            ui->frameGroup->show();
+        }
+        else
+        {
+            ui->frameGroup->hide();
+        }
+        ui->horizontalSpacerBars->setGeometry(QRect(0, 0, 40, 20));
+        ui->horizontalSpacerVols->setGeometry(QRect(0, 0, 40, 20));
     }
-    else ui->frameGroup->hide();
+    else
+    {
+        ui->frameGroup->hide();
+        ui->horizontalSpacerBars->setGeometry(QRect(0, 0, 0, 0));
+        ui->horizontalSpacerVols->setGeometry(QRect(0, 0, 0, 0));
+
+    }
 }
 
 void MainWindow::on_ArchiveButton_clicked()
