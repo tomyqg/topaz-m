@@ -2,6 +2,7 @@
 #include "voluebar.h"
 #include "ui_voluebar.h"
 #include "defines.h"
+#include "math.h"
 
 #define VOL_TEXT_MIN_HEIGHT 20
 #define VOL_TEXT_PADDING_BOTTOM 5
@@ -258,15 +259,28 @@ void wVolueBar::setText(QString type, QString mes)
 //                             "<span style=\" vertical-align:sub;\">" + \
 //                             QString::number(numChan) + \
 //                             "</span></p></body></html>");
-        ui->typeBar->setText("<html><head/><body><p><strong>" + \
+        ui->typeBar->setText("<html><head/><body><p>" + \
                              type + \
-                             "</strong></p></body></html>");
+                             "</p></body></html>");
     }
     else
     {
         ui->typeBar->setText(type);
     }
     ui->mesBar->setText(mes);
+
+    // контроль шрифта
+    int size = type.size();
+    int fontSize = (int)(48.453*exp(-0.171*size));
+    QFont font = ui->typeBar->font();
+    font.setPointSize(fontSize);
+    ui->typeBar->setFont(font);
+    size = mes.size();
+    fontSize = (int)(48.453*exp(-0.171*size));
+    font = ui->mesBar->font();
+    font.setPointSize(fontSize);
+    ui->mesBar->setFont(font);
+
 }
 
 /*

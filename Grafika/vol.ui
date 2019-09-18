@@ -73,7 +73,11 @@
       <property name="font">
        <font>
         <family>Open Sans</family>
-        <pointsize>9</pointsize>
+        <pointsize>30</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferDefault</stylestrategy>
+        <kerning>true</kerning>
        </font>
       </property>
       <property name="styleSheet">
@@ -81,7 +85,7 @@
 color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;strong&gt;Каналище&lt;/strong&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Каналище&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

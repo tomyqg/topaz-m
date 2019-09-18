@@ -927,7 +927,7 @@ void dSettings::resizeEvent(QResizeEvent * s)
 bool dSettings::eventFilter(QObject *watched, QEvent *event)
 {
 #ifndef Q_OS_WIN
-#endif
+//#endif
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (watched->property("enabled").toString() == "true") && \
          (/*( QString::fromLatin1(watched->metaObject()->className()) == "QSpinBox") ||*/ \
@@ -945,7 +945,7 @@ bool dSettings::eventFilter(QObject *watched, QEvent *event)
         kb.close();
         kb.deleteLater();
     }
-//#endif
+#endif
 
     if ( (event->type() == QEvent::MouseButtonRelease) && \
          (QString::fromLatin1(watched->metaObject()->className()) == "QComboBox"))

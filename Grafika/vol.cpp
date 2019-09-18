@@ -59,15 +59,27 @@ void wVol::setText(QString name, QString mes)
 //                             "<span style=\" vertical-align:sub;\">" + \
 //                             QString::number(numChan) + \
 //                             "</span></p></body></html>");
-        ui->labelName->setText("<html><head/><body><p><strong>" + \
+        ui->labelName->setText("<html><head/><body><p>" + \
                                name + \
-                               "</strong></p></body></html>");
+                               "</p></body></html>");
     }
     else
     {
         ui->labelName->setText(name);
     }
     ui->labelMes->setText(mes);
+
+    // контроль шрифта
+    int size = name.size();
+    int fontSize = (int)(48.453*exp(-0.171*size));
+    QFont font = ui->labelName->font();
+    font.setPointSize(fontSize);
+    ui->labelName->setFont(font);
+    size = mes.size();
+    fontSize = (int)(48.453*exp(-0.171*size));
+    font = ui->labelMes->font();
+    font.setPointSize(fontSize);
+    ui->labelMes->setFont(font);
 }
 
 /*
