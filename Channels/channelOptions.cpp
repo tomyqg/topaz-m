@@ -1,8 +1,9 @@
+#include <QDebug>
+#include <stdlib.h>
 #include "channelOptions.h"
 #include "../uartdriver.h"
 #include "../metrologicalcalc.h"
-#include <QDebug>
-#include <stdlib.h>
+#include "deviceparams.h"
 
 extern QVector<double> X_Coordinates;
 extern QVector<double> X_Date_Coordinates;
@@ -29,6 +30,8 @@ ChannelOptions::ChannelOptions()
     lowerlimit = -100;
     signaltype = 2;
     demphervalue = 0;
+    memset(&outputData, 0, sizeof(outputData));
+    memset(&inputData, 0, sizeof(inputData));
     outputData.chanSignalType = VoltageMeasure;
 //    precision = Precision_X_X;
     memset(outputData.chanAdditionalParameter1, 0, sizeof(outputData.chanAdditionalParameter1));
@@ -43,6 +46,7 @@ ChannelOptions::ChannelOptions()
     listStr << "SignalType" \
             << "DataFlags" \
             << "Error" \
+            << "Status" \
             << "AdditionalParameter1"\
             << "AdditionalParameter2"\
             << "FSRinternal";
@@ -406,6 +410,15 @@ bool ChannelOptions::IsChannelMathematical()
     return this->MathematicalState;
 }
 
+void ChannelOptions::newTransaction(QString param, Transaction::dir_t dir, uint32_t value)
+{
+    QString name = "chan" + QString::number(slotChannel) + param;
+    uint16_t offset = cRegistersMap::getOffsetByName(name);
+    Transaction tr(dir, (uint8_t)slot, offset, 0);
+    tr.volInt = value;
+    emit sendToWorker(tr);
+}
+
 void ChannelOptions::parserChannel(Transaction tr)
 {
     Transaction trans = tr;
@@ -414,8 +427,16 @@ void ChannelOptions::parserChannel(Transaction tr)
     QString chanName = "chan" + QString::number(slotChannel);
     if(paramName == chanName + "Data")
     {
-        SetCurrentChannelValue((double)tr.volFlo);
-        inputData.chanData = tr.volFlo;
+        double data = tr.volFlo;
+        SetCurrentChannelValue(data);
+        if(std::isnan(data) != std::isnan(inputData.chanData))
+        {
+            // запросить статусы, флаги и ошибки
+            newTransaction("DataFlags", Transaction::R);
+            newTransaction("Status", Transaction::R);
+            newTransaction("Error", Transaction::R);
+        }
+        inputData.chanData = data;
     }
     else if(paramName == chanName + "DataFlags")
     {
@@ -634,10 +655,10 @@ void ChannelOptions::timerSlot()
 void ChannelOptions::updateParam()
 {
     if (!enable) return;
-    Transaction tr;
-    tr.dir = Transaction::R;
-    tr.slave = slot;
-    int devCh = slotChannel;
+//    Transaction tr;
+//    tr.dir = Transaction::R;
+//    tr.slave = slot;
+//    int devCh = slotChannel;
 
 //    listStr << "chan" + QString::number(devCh) + "SignalType" \
 //            << "chan" + QString::number(devCh) + "Error" \
@@ -651,9 +672,10 @@ void ChannelOptions::updateParam()
     QString str = listStr.at(iteratorParam % listStr.size());
     if((str != "FSRinternal") || (outputData.chanSignalType == TermoCoupleMeasure))
     {
-        QString s = "chan" + QString::number(devCh) + str;
-        tr.offset = cRegistersMap::getOffsetByName(s);
-        emit sendToWorker(tr);
+//        QString s = "chan" + QString::number(devCh) + str;
+//        tr.offset = cRegistersMap::getOffsetByName(s);
+//        emit sendToWorker(tr);
+        newTransaction(str, Transaction::R);
     }
     iteratorParam++;
     if(iteratorParam >= listStr.size())
@@ -661,6 +683,7 @@ void ChannelOptions::updateParam()
         iteratorParam = 0;
     }
 }
+
 
 void ChannelOptions::initCalibration()
 {
@@ -1517,3 +1540,15 @@ double ChannelOptions::getSelectMultiplier(int index, int diap, int signal, int 
 
     return mult;
 }
+
+bool ChannelOptions::isError()
+{
+    if((inputData.chanDataFlags == ECDF_BREAK) || (inputData.chanDataFlags == ECDF_ERROR))
+        return true;
+    if(inputData.chanError != EDE_NO_ERROR)
+        return true;
+    if((inputData.chanStatus == ECS_CONFIG) || (inputData.chanStatus == ECS_ERROR))
+        return true;
+    return false;
+}
+

@@ -27,13 +27,19 @@ wVolueBar::wVolueBar(/*int num, */QWidget *parent) :
                 );
     razmah = 50;
     numBar = 0;
+    errorStyle = false;
 
     //установка фильтра событий на лэйблы виджет-бара
     QList<QLabel*> labelList = findChildren<QLabel*>();
     foreach (QLabel * label, labelList) {
         label->installEventFilter(this);
     }
+
+    connect(&flashTimer, SIGNAL(timeout()), this, SLOT(slotErrorFlash()));
+    flashTimer.start(500);
 }
+
+
 
 wVolueBar::~wVolueBar()
 {
@@ -153,8 +159,9 @@ void wVolueBar::setValue(double vol)
         metka->show();
         metka->raise();
     }
-
 }
+
+
 
 /*
  * Перерисовка бара
@@ -340,4 +347,28 @@ bool wVolueBar::eventFilter(QObject* watched, QEvent* event)
         emit clickedLabel(numBar);
     }
     return QObject::eventFilter(watched, event);
+}
+
+void wVolueBar::slotErrorFlash()
+{
+    QString style = ui->typeBar->styleSheet();
+    if(style.contains("border:") || !errorStyle)
+    {
+        // красный бордер убирается
+        QStringList atributes = style.split(';');
+        style.clear();
+        foreach (QString atr, atributes)
+        {
+            if(!atr.contains("border:"))
+            {
+                style.append(atr + ";");
+            }
+        }
+    }
+    else
+    {
+        // красный бордер устанавливается
+        style.append("\n" + QString(StyleError));
+    }
+    ui->typeBar->setStyleSheet(style);
 }

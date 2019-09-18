@@ -135,6 +135,7 @@
 #define ConnectionErrorMessage "ош.соед"
 #define CRCErrorMessage "ош.crc"
 #define ObryvErrorMessage "обрыв"
+#define StyleError "border: 2px solid rgb(170, 0, 0);"
 
 #define Font "Open Sans"
 #define NaNMessage "отказ"
