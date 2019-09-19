@@ -2,6 +2,7 @@
 #define VOL_H
 
 #include <QWidget>
+#include <QTimer>
 
 namespace Ui {
 class wVol;
@@ -19,6 +20,7 @@ public:
     void changeNum(int num);
     void setColor(QColor color);
     void setChanNum(int num) { numChan = num; }
+    void setError(bool err) { errorStyle = err; }
 
 public slots:
     void resizeEvent(QResizeEvent * s);
@@ -27,10 +29,14 @@ public slots:
 signals:
     void clickedLabel(int);
 
+private slots:
+    void slotErrorFlash();
 private:
     Ui::wVol *ui;
     int numBar;
     int numChan;
+    bool errorStyle;    // включить стиль оформления "Ошибка"
+    QTimer flashTimer;  // таймер моргания ошибки
 };
 
 #endif // VOL_H

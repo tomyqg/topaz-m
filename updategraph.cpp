@@ -894,23 +894,11 @@ void MainWindow::updateVols()
                 if(listChannels.at(group->channel[i])->enable)
 #endif
                 {
-//                    double value = channel->GetCurrentChannelValue();
-//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
-//                    {
-//                        vol->setVol(channel->GetCurrentChannelValue(), channel->getPrecision());
-//                    }
-//                    else
-//                    {
                     vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
                                                             channel->GetUserDiapason()), \
                                 channel->getPrecision());
-//                    }
+                    vol->setError(channel->isError());
                     vol->show();
-//                    if(indexGroup >= 4)
-//                    {
-//                        ui->nameGroupChannels2->show();
-//                    }
-
                 }
                 mListChannel.unlock();
             }

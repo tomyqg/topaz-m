@@ -16,6 +16,8 @@ wVol::wVol(QWidget *parent) :
     foreach (QLabel * label, labelList) {
         label->installEventFilter(this);
     }
+    connect(&flashTimer, SIGNAL(timeout()), this, SLOT(slotErrorFlash()));
+    flashTimer.start(500);
 }
 
 wVol::~wVol()
@@ -25,23 +27,25 @@ wVol::~wVol()
 
 void wVol::resizeEvent(QResizeEvent * s)
 {
-    int sizeRect = ui->frameName->height();  //ну или  ui->frameMes->width()
+    int sizeRect = this->height();  //ну или  ui->frameMes->width()
+    if(sizeRect > ui->frameVol->x()) sizeRect = ui->frameVol->x();
 
-    ui->frameMes->setGeometry(ui->frameMes->x(), ui->frameMes->y(), sizeRect, sizeRect);
-    ui->frameName->setGeometry(ui->frameName->x(), ui->frameName->y(), sizeRect, sizeRect);
+    ui->frameVol->setGeometry(sizeRect, 0, this->width()-2*sizeRect, sizeRect);
+    ui->frameName->setGeometry(0, 0, sizeRect, sizeRect);
+    ui->frameMes->setGeometry(this->width()-sizeRect, 0, sizeRect, sizeRect);
 
     ui->labelVol->setGeometry(0, 0, ui->frameVol->width() - PADDING_FRAME, \
-                                    sizeRect - PADDING_FRAME);
+                              sizeRect - PADDING_FRAME);
     ui->shadowVol->setGeometry(SHIFT_SHADOW, SHIFT_SHADOW, ui->frameVol->width() - PADDING_FRAME, \
-                                                            sizeRect - PADDING_FRAME);
+                               sizeRect - PADDING_FRAME);
     ui->labelMes->setGeometry(0, 0, ui->frameMes->width() - PADDING_FRAME, \
-                                    ui->frameMes->height() - PADDING_FRAME);
+                              ui->frameMes->height() - PADDING_FRAME);
     ui->shadowMes->setGeometry(SHIFT_SHADOW, SHIFT_SHADOW, ui->frameMes->width() - PADDING_FRAME, \
-                                                            ui->frameMes->height() - PADDING_FRAME);
+                               ui->frameMes->height() - PADDING_FRAME);
     ui->labelName->setGeometry(0, 0, ui->frameName->width() - PADDING_FRAME, \
-                                    ui->frameName->height() - PADDING_FRAME);
+                               ui->frameName->height() - PADDING_FRAME);
     ui->shadowName->setGeometry(SHIFT_SHADOW, SHIFT_SHADOW, ui->frameName->width() - PADDING_FRAME, \
-                                                            ui->frameName->height() - PADDING_FRAME);
+                                ui->frameName->height() - PADDING_FRAME);
 }
 
 void wVol::setText(QString name, QString mes)
@@ -137,4 +141,28 @@ bool wVol::eventFilter(QObject* watched, QEvent* event)
         emit clickedLabel(numBar);
     }
     return QObject::eventFilter(watched, event);
+}
+
+void wVol::slotErrorFlash()
+{
+    QString style = ui->labelName->styleSheet();
+    if(style.contains("border:") || !errorStyle)
+    {
+        // красный бордер убирается
+        QStringList atributes = style.split(';');
+        style.clear();
+        foreach (QString atr, atributes)
+        {
+            if(!atr.contains("border:"))
+            {
+                style.append(atr + ";");
+            }
+        }
+    }
+    else
+    {
+        // красный бордер устанавливается
+        style.append("\n" + QString(StyleError));
+    }
+    ui->labelName->setStyleSheet(style);
 }
