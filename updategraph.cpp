@@ -329,6 +329,10 @@ void MainWindow::GrafsUpdateTrends()
     {
         ui->customPlot->yAxis->rescale();
         ui->customPlot->yAxis->setScaleRatio(ui->customPlot->yAxis, 1.1);
+        if(ui->customPlot->yAxis->range().size() > 199999)
+        {
+            ui->customPlot->yAxis->setRange(0, 199999, Qt::AlignCenter);
+        }
     }
 
     // add the helper arrow:
