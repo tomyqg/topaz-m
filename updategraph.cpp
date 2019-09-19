@@ -521,13 +521,13 @@ void MainWindow::updateBars(void)
                 if(channel->enable)
 #endif
                 {
-                    double diapason = channel->GetUserDiapason();
                     double maximum = channel->ConvertVisualValue(channel->getMaxInDiapason());
                     double minimum = channel->ConvertVisualValue(channel->getMinInDiapason());
                     bar->setExtr(channel->ConvertVisualValue(channel->GetMinimumChannelValue()),\
                                  channel->ConvertVisualValue(channel->GetMaximumChannelValue()));
                     bar->setBarDiapazon(maximum, minimum);
                     bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
+                    bar->setError(channel->isError());
                     bar->cleanMarker();
                     mListUstvok.lock();
                     foreach(Ustavka * ust, listUstavok)
@@ -561,6 +561,7 @@ void MainWindow::updateBars(void)
                     bar->setBarDiapazon(math->GetHigherMeasureLimit(), \
                                             math->GetLowerMeasureLimit());
                     bar->setValue(math->GetCurrentMathValue());
+                    bar->setError(false);
                     mListMath.unlock();
                     bar->cleanMarker();
                     bar->show();
@@ -594,6 +595,7 @@ void MainWindow::updateBars(void)
 ////                        val = channel->GetValuePercent();
 //                    }
                     bar->setValue(channel->GetCurrentChannelValue());
+                    bar->setError(false);
                     bar->cleanMarker();
 //                    foreach(Ustavka * ust, listUstavok)
 //                    {
@@ -892,23 +894,11 @@ void MainWindow::updateVols()
                 if(listChannels.at(group->channel[i])->enable)
 #endif
                 {
-//                    double value = channel->GetCurrentChannelValue();
-//                    if(channel->getVoltageType() == ChannelOptions::Value_Real)
-//                    {
-//                        vol->setVol(channel->GetCurrentChannelValue(), channel->getPrecision());
-//                    }
-//                    else
-//                    {
                     vol->setVol(channel->ConvertVisualValue(channel->GetCurrentChannelValue(), \
                                                             channel->GetUserDiapason()), \
                                 channel->getPrecision());
-//                    }
+                    vol->setError(channel->isError());
                     vol->show();
-//                    if(indexGroup >= 4)
-//                    {
-//                        ui->nameGroupChannels2->show();
-//                    }
-
                 }
                 mListChannel.unlock();
             }

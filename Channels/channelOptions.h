@@ -291,7 +291,7 @@ private:
     float processReadCalibrations; // % выполнения чтения
     bool neadRead;  //признак необходимости считать калибровки
 
-
+    void newTransaction(QString param, Transaction::dir_t dir, uint32_t value = 0);
 private slots:
     void updateCalibrations();
 
@@ -424,5 +424,6 @@ public:
     double getMinInDiapason(int diapason = -1);
     double getMaxInDiapason(int diapason = -1);
     double getSelectMultiplier(int index, int diap = -1, int signal = -1, int type = -1);
+    bool isError();
 };
 #endif // CHANNEL1_H

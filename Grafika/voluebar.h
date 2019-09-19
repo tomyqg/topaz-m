@@ -2,6 +2,7 @@
 #define VOLUEBAR_H
 
 #include <QFrame>
+#include <QTimer>
 
 namespace Ui {
 class wVolueBar;
@@ -35,13 +36,13 @@ public:
     void addMarker(double vol, bool dir);
     void setValueType(int type) { valueType = type; }
     int getValueType(void) { return valueType; }
+    void setError(bool err) { errorStyle = err; }
 
     enum BarValueType {
         BarValue_Real = 0,
         BarValue_Procent = 1
     };
     Q_ENUM(BarValueType)
-
 signals:
     void clickedLabel(int);
 
@@ -51,6 +52,8 @@ public slots:
     bool eventFilter(QObject* watched, QEvent* event);
 
 
+private slots:
+    void slotErrorFlash();
 private:
     Ui::wVolueBar *ui;
     double razmah;  //размах
@@ -66,6 +69,8 @@ private:
 //    } typeMarker;
     QList <cMarker*> listMarker;
     int valueType;  //тип отображения: 0 - абсолютная величина, 1 - %
+    bool errorStyle;    // включить стиль оформления "Ошибка"
+    QTimer flashTimer;  // таймер моргания ошибки
 };
 
 
