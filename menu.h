@@ -126,6 +126,7 @@ private slots:
     void updateDeviceInfo(uint8_t index);
     void updateLabelDiagnostic();
     void updateLabelModeling();
+    void updateMathResultFormula();
     void setBrightness(int l);
     void slotUpdateEthernetStatus(bool online, bool enable);
     void slotIpErr();

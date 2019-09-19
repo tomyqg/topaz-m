@@ -40,6 +40,28 @@ double cMathChannel::GetCurrentMathValue()
     return currentvalue;
 }
 
+double cMathChannel::testFormula(QString formula, int ch1, int ch2, int ch3, int ch4)
+{
+    double arg[NUM_MATH_ARG];
+    int ch[NUM_MATH_ARG] = { ch1, ch2, ch3, ch4 };
+
+    for(int i=0; i<NUM_MATH_ARG; i++)
+    {
+        if((ch[i] != -1) && (ch[i] < listChannels.size()))
+        {
+            mListChannel.lock();
+            arg[i] = listChannels.at(ch[i])->GetCurrentChannelValue();
+            mListChannel.unlock();
+        }
+        else
+        {
+            arg[i] = NAN;
+        }
+    }
+
+    return (mathresolver::SolveEquation(formula, arg[0], arg[1], arg[2], arg[3]));
+}
+
 void cMathChannel::slotUpdate()
 {
     double arg[NUM_MATH_ARG];

@@ -38,6 +38,7 @@ public:
     double GetMaximumMathValue();
     double GetMinimumMathValue();
     double GetAverageMathValue();
+    double testFormula(QString formula, int ch1, int ch2, int ch3, int ch4);
 signals:
 
 public slots:

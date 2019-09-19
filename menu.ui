@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>36</number>
+            <number>32</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -4715,7 +4715,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>-81</y>
+                  <y>0</y>
                   <width>726</width>
                   <height>702</height>
                  </rect>
@@ -7192,7 +7192,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>-1</y>
+                  <y>0</y>
                   <width>726</width>
                   <height>610</height>
                  </rect>
@@ -9639,6 +9639,22 @@ QComboBox::drop-down {
                </property>
               </widget>
              </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_32">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X3</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
              <item row="9" column="1">
               <widget class="QComboBox" name="comboMathArg3">
                <property name="minimumSize">
@@ -9741,7 +9757,7 @@ QComboBox::drop-down {
                </item>
               </widget>
              </item>
-             <item row="21" column="1">
+             <item row="23" column="1">
               <widget class="wButtonStyled" name="bDelMath">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -9757,22 +9773,6 @@ QComboBox::drop-down {
                </property>
                <property name="text">
                 <string>УДАЛИТЬ</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>АРГУМЕНТ X3</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -9878,41 +9878,6 @@ QComboBox::drop-down {
                </item>
               </widget>
              </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_33">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>АРГУМЕНТ X4</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="23" column="0" colspan="2">
-              <widget class="wButtonStyled" name="bBackMathSetting">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>НАЗАД</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="nameMath">
                <property name="sizePolicy">
@@ -9946,7 +9911,42 @@ border-radius: 0px;</string>
                </property>
               </widget>
              </item>
-             <item row="22" column="0" colspan="3">
+             <item row="25" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackMathSetting">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_33">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>АРГУМЕНТ X4</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="24" column="0" colspan="3">
               <spacer name="verticalSpacer_27">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -9958,6 +9958,43 @@ border-radius: 0px;</string>
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="17" column="1">
+              <widget class="QLineEdit" name="formulaMath">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+               </property>
+               <property name="text">
+                <string>X1*X2+X3*X4</string>
+               </property>
+               <property name="maxLength">
+                <number>32</number>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_36">
@@ -9991,43 +10028,6 @@ border-radius: 0px;</string>
                </property>
               </widget>
              </item>
-             <item row="17" column="1">
-              <widget class="QLineEdit" name="formulaMath">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(230, 230, 230);
-color: rgb(0, 0, 0);
-border-radius: 0px;
-</string>
-               </property>
-               <property name="text">
-                <string>X1*X2+X3-X4</string>
-               </property>
-               <property name="maxLength">
-                <number>32</number>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="20" column="0" colspan="3">
               <spacer name="verticalSpacer_25">
                <property name="orientation">
@@ -10041,7 +10041,23 @@ border-radius: 0px;
                </property>
               </spacer>
              </item>
-             <item row="21" column="0">
+             <item row="18" column="0">
+              <widget class="QLabel" name="labelUnitMath">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ЕДИНИЦА ИЗМЕРЕНИЯ</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="23" column="0">
               <widget class="wButtonStyled" name="bApplayMath">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -10057,22 +10073,6 @@ border-radius: 0px;
                </property>
                <property name="text">
                 <string>ПРИМЕНИТЬ</string>
-               </property>
-              </widget>
-             </item>
-             <item row="18" column="0">
-              <widget class="QLabel" name="labelUnitMath">
-               <property name="font">
-                <font>
-                 <family>Open Sans</family>
-                 <pointsize>14</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>ЕДИНИЦА ИЗМЕРЕНИЯ</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -10103,6 +10103,49 @@ border-radius: 0px;
                </property>
                <property name="text">
                 <string>Ед</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="0">
+              <widget class="QLabel" name="labelUnitMath_2">
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>ТЕКУЩИЙ РЕЗУЛЬТАТ</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="19" column="1">
+              <widget class="QLabel" name="labelResultFormula">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Open Sans</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+               </property>
+               <property name="text">
+                <string>1.23</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -10841,7 +10884,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>726</width>
+                  <width>431</width>
                   <height>569</height>
                  </rect>
                 </property>

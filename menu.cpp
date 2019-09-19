@@ -93,6 +93,7 @@ dMenu::dMenu(QWidget *parent) :
 
     connect(&tUpdateDiagnostic, SIGNAL(timeout()), this, SLOT(updateLabelDiagnostic()));
     connect(&tUpdateDiagnostic, SIGNAL(timeout()), this, SLOT(updateLabelModeling()));
+    connect(&tUpdateDiagnostic, SIGNAL(timeout()), this, SLOT(updateMathResultFormula()));
     tUpdateDiagnostic.start(TIME_UPD_DIAGNOSTIC);
 
     //периодические обновления виджетов информации о платах
@@ -360,6 +361,12 @@ void dMenu::on_saveButton_clicked()
 
     updateVer();
 
+    if(ui->stackedWidget->currentIndex() == 32)
+    {
+        on_bApplayMath_clicked();
+        ui->stackedWidget->setCurrentIndex(32);
+    }
+
     cFileManager::writeSystemOptionsToFile(pathtosystemoptions, &systemOptions);
     cFileManager::writeChannelsSettings(pathtooptions);
     log->addMess("Menu > Save", cLogger::SERVICE);
@@ -374,6 +381,9 @@ void dMenu::on_saveButton_clicked()
     foreach (cSteel * steel, listSteel) {
         steel->mode = Device_Mode_Regular;
     }
+
+
+
     emit saveButtonSignal();
 
 //    // ожидание таймера
@@ -2628,6 +2638,20 @@ void dMenu::updateLabelModeling()
             }
         }
         i++;
+    }
+}
+
+void dMenu::updateMathResultFormula()
+{
+    if(ui->stackedWidget->currentIndex() == 32)
+    {
+        cMathChannel math;
+        double result = math.testFormula(ui->formulaMath->text(),\
+                                         ui->comboMathArg1->currentIndex()-1,\
+                                         ui->comboMathArg2->currentIndex()-1,\
+                                         ui->comboMathArg3->currentIndex()-1,\
+                                         ui->comboMathArg4->currentIndex()-1);
+        ui->labelResultFormula->setText(QString::number(result, 'f'));
     }
 }
 
