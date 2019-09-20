@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>32</number>
+            <number>9</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -864,8 +864,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>489</height>
+                  <width>77</width>
+                  <height>306</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -1193,8 +1193,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>413</height>
+                  <width>16</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_27">

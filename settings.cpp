@@ -112,6 +112,9 @@ extern typeSteelTech steelTech[];
 extern cSystemOptions systemOptions;  //класс хранения состемных опций
 extern QMutex mListUstvok;
 extern QMutex mListChannel;
+//extern int dateindex;
+//extern int timeindex;
+extern QStringList datestrings, timestrings;
 
 dSettings::dSettings(QList<ChannelOptions*> channels,
                      int num,
@@ -348,10 +351,10 @@ void dSettings::DateUpdate() // каждую секунду обновляем �
 {
     QDateTime local(QDateTime::currentDateTime());
     QString str = "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; color:#ffffff;\">" \
-                  + local.time().toString("hh:mm:ss") + \
+                  + local.time().toString(timestrings.at(systemOptions.timeindex)) + \
                   "</span><span style=\" color:#ffffff;\"><br/></span>" \
                   "<span style=\" font-size:17pt; color:#ffffff;\">" \
-                  + local.date().toString("dd.MM.yyyy") + \
+                  + local.date().toString(datestrings.at(systemOptions.dateindex)) + \
                   "</span></p></body></html>";
     ui->date_time->setText(str);
 }

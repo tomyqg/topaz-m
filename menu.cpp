@@ -28,8 +28,8 @@
 
 //cExpertAccess access;
 
-extern int dateindex;
-extern int timeindex;
+//extern int dateindex;
+//extern int timeindex;
 extern QStringList datestrings, timestrings;
 //extern QVector<double> X_Coordinates_archive, Y_coordinates_Chanel_1_archive, Y_coordinates_Chanel_2_archive, Y_coordinates_Chanel_3_archive, Y_coordinates_Chanel_4_archive;
 extern QList<cDevice*> listDevice;
@@ -350,6 +350,11 @@ void dMenu::on_saveButton_clicked()
     systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
     systemOptions.brightness = light;
     systemOptions.typeMultigraph = (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex();
+    if(ui->stackedWidget->currentIndex() == 9)
+    {
+        systemOptions.timeindex = ui->timeformat->currentIndex();
+        systemOptions.dateindex = ui->DateFormat->currentIndex();
+    }
     systemOptions.extModbus.type = (cSystemOptions::TypeExtModbusInterface)ui->comboModbusSlaveInterface->currentIndex();
     systemOptions.extModbus.adress = ui->modbusSlaveAdress->value();
     systemOptions.extModbus.baud = systemOptions.listBauds.at(ui->comboModbusSlaveBaud->currentIndex());
@@ -885,10 +890,10 @@ void dMenu::DateUpdate() // каждую секунду обновляем зн�
 
     QDateTime local(QDateTime::currentDateTime());
     QString str = "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; color:#ffffff;\">" \
-                  + local.time().toString(timestrings.at(timeindex)) + \
+                  + local.time().toString(timestrings.at(systemOptions.timeindex)) + \
                   "</span><span style=\" color:#ffffff;\"><br/></span>" \
                   "<span style=\" font-size:17pt; color:#ffffff;\">" \
-                  + local.date().toString(datestrings.at(dateindex)) + \
+                  + local.date().toString(datestrings.at(systemOptions.dateindex)) + \
                   "</span></p></body></html>";
     ui->date_time->setText(str);
 
@@ -1707,10 +1712,10 @@ void dMenu::on_bEditDataTime_clicked()
     ui->dateEdit_y->setDisplayFormat("yyyy");
     ui->DateFormat->clear();
     ui->DateFormat->addItems(datestrings);
-    ui->DateFormat->setCurrentIndex(dateindex);
+    ui->DateFormat->setCurrentIndex(systemOptions.dateindex);
     ui->timeformat->clear();
     ui->timeformat->addItems(timestrings);
-    ui->timeformat->setCurrentIndex(timeindex);
+    ui->timeformat->setCurrentIndex(systemOptions.timeindex);
     ui->stackedWidget->setCurrentIndex(9);
     ui->nameSubMenu->setText("ДАТА/ВРЕМЯ");
 }
@@ -1731,10 +1736,10 @@ void dMenu::on_bDateTimeSet_clicked()
     process.startDetached("hwclock -w");
 
 #endif
-    dateindex = ui->DateFormat->currentIndex();
-    timeindex = ui->timeformat->currentIndex();
-//    ui->timeEdit->setDisplayFormat(timestrings.at(timeindex));
-//    ui->dateEdit->setDisplayFormat(datestrings.at(dateindex));
+    systemOptions.dateindex = ui->DateFormat->currentIndex();
+    systemOptions.timeindex = ui->timeformat->currentIndex();
+//    systemOptions.timeFormat = timestrings.at(timeindex);
+//    systemOptions.dateFormat = datestrings.at(dateindex);
 
 }
 
