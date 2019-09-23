@@ -593,6 +593,7 @@ private:
     void extSetNeadCalibr(QString name, uint8_t *data);
     void extGetNeadCalibr(QString name);
     void extGetProcessReadCalibr(QString name);
+    QString getNameDevice();
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

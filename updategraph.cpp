@@ -633,11 +633,6 @@ void MainWindow::setStyleBars()
     ui->wBar_6->setColor(ColorCh6, ColorCh6Light);
     ui->wBar_7->setColor(ColorCh7, ColorCh7Light);
     ui->wBar_8->setColor(ColorCh8, ColorCh8Light);
-
-//    ui->wBar_1->setText(channel1.GetChannelName(), channel1.GetUnitsName());
-//    ui->wBar_2->setText(channel2.GetChannelName(), channel2.GetUnitsName());
-//    ui->wBar_3->setText(channel3.GetChannelName(), channel3.GetUnitsName());
-    //    ui->wBar_4->setText(channel4.GetChannelName(), channel4.GetUnitsName());
 }
 
 void MainWindow::setTextBars()

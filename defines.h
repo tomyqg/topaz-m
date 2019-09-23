@@ -28,9 +28,14 @@
 #define CURRENT_VER VER
 #endif
 
-#define PROTOCOL_VER "12.3"  //версия протокола внутреннего Modbus
+#define PROTOCOL_VER "12.4"  //версия протокола внутреннего Modbus
 #define HARDWARE_VERSION "1.0" // версия железа
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
+#define TYPE_DEVICE "Multigraph"    //Тип/название прибора
+#define MANUFACTURER "Teplopribor"
+#define SITE "tpchel.ru"
+#define EXT_MODBUS_VER "1.2"
+#define BOARD_MODEL "MYD-AM335X"
 
 #define DEBUG_RELAY
 #define MYD

@@ -51,8 +51,8 @@
 
 //#include <QKeyEvent>
 
-int dateindex;
-int timeindex;
+//int dateindex;
+//int timeindex;
 QStringList datestrings, timestrings;
 QDateTime timeOutBuff;
 cUsbFlash * flash;
@@ -136,8 +136,6 @@ void MainWindow::MainWindowInitialization()
     timestrings.append("hh:mm:ss ");
     timestrings.append("hh.mm.ss ");
     timestrings.append("hh,mm,ss ");
-
-    dateindex = 0 ;
 
     setWindowFlags(Qt::CustomizeWindowHint);
     setWindowTitle(tr("VISION"));
@@ -720,8 +718,8 @@ void MainWindow::InitTouchScreen()
 void MainWindow::DateUpdate() // каждую секунду обновляем значок времени
 {
     QDateTime local(QDateTime::currentDateTime());
-    ui->date_label->setText(local.date().toString(datestrings.at(dateindex)));
-    ui->time_label->setText(local.time().toString(timestrings.at(0)));
+    ui->date_label->setText(local.date().toString(datestrings.at(systemOptions.dateindex)));
+    ui->time_label->setText(local.time().toString(timestrings.at(systemOptions.timeindex)));
     resizeSelf(1024,768);
 }
 

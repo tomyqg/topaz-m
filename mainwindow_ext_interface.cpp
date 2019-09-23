@@ -337,7 +337,7 @@ void MainWindow::extGetProtVer(QString name)
 {
     tModbusBuffer data;
     memset(&data, 0, 4);
-    QString verStr = PROTOCOL_VER;
+    QString verStr = EXT_MODBUS_VER;
     QStringList listStrVer = verStr.split('.');
     int i = 0;
     foreach (QString str, listStrVer) {
@@ -399,11 +399,7 @@ void MainWindow::extGetDevName(QString name)
 {
     tModbusBuffer data;
     memset(&data, 0, 32);
-    QString StrName = "Multigraph";
-    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
-    {
-        StrName = "Multigraph-Steel";
-    }
+    QString StrName = getNameDevice();
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
 }
@@ -412,7 +408,7 @@ void MainWindow::extGetManufact(QString name)
 {
     tModbusBuffer data;
     memset(&data, 0, 32);
-    QString StrName = "Teplopribor";
+    QString StrName = MANUFACTURER;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
 }
@@ -421,7 +417,7 @@ void MainWindow::extGetWebSite(QString name)
 {
     tModbusBuffer data;
     memset(&data, 0, 32);
-    QString StrName = "tpchel.ru";
+    QString StrName = SITE;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
 }
@@ -525,7 +521,7 @@ void MainWindow::extGetModelMatherboard(QString name)
 {
     tModbusBuffer data;
     memset(&data, 0, 32);
-    QString StrName = "MYD-AM335X";
+    QString StrName = BOARD_MODEL;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
 }

@@ -402,7 +402,8 @@ int cFileManager::writeSystemOptionsToFile(QString path, cSystemOptions * opt)
     systemoptions["Autoscale"] = opt->autoscale;
     systemoptions["Brightness"] = opt->brightness;
     systemoptions["TypeMultigraph"] = opt->typeMultigraph;
-
+    systemoptions["DateFormatIndex"] = opt->dateindex;
+    systemoptions["TimeFormatIndex"] = opt->timeindex;
     extModbus["Type"] = opt->extModbus.type;
     extModbus["Addr"] = opt->extModbus.adress;
     extModbus["Baudrate"] = opt->extModbus.baud;
@@ -540,6 +541,8 @@ int cFileManager::readSystemOptionsFromFile(QString path, cSystemOptions * opt)
     opt->brightness = 80;   // перестраховка на случай отсутствия найсройки в файле
     opt->brightness = json["Brightness"].toInt();
     opt->typeMultigraph = (cSystemOptions::TypeMultigraphEnum)(json["TypeMultigraph"].toInt());
+    opt->dateindex = json["DateFormatIndex"].toInt();
+    opt->timeindex = json["TimeFormatIndex"].toInt();
 
     if(json["Modbus"].isObject() == false)
     {

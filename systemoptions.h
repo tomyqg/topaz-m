@@ -14,13 +14,9 @@ public:
     bool autoscale;
     int brightness;
     int mode;   // режим прибора
-//    int modbusType;
-//    int modbusSlaveAddr;
-//    int modbusBaudrate;
-//    int modbusParity;
-//    int modbusDatabits;
-//    int modbusStopbits;
-//    int modbusPort;
+    int dateindex;
+    int timeindex;
+
     enum DisplayParametrEnum {
         Bars = 0x00,
         TrendsBars = 0x01,
