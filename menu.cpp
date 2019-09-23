@@ -98,6 +98,7 @@ dMenu::dMenu(QWidget *parent) :
 
     //периодические обновления виджетов информации о платах
     connect(&tUpdateDeviceUI, SIGNAL(timeout()), this, SLOT(updateDevicesUI()));
+    connect(&tUpdateDeviceUI, SIGNAL(timeout()), this, SLOT(updateDeviceMain()));
     tUpdateDeviceUI.start(TIME_UPDATE_DEVICE_UI);
     curDiagnostDevice = 0;
 
@@ -1440,6 +1441,18 @@ void dMenu::on_bDevices_clicked()
 }
 
 void dMenu::on_bBackDevice_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(24);
+    ui->nameSubMenu->setText("О ПРИБОРЕ");
+}
+
+void dMenu::on_bDevicesMain_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(37);
+    ui->nameSubMenu->setText("КОНТРОЛЛЕР");
+}
+
+void dMenu::on_bBackDevice_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(24);
     ui->nameSubMenu->setText("О ПРИБОРЕ");
@@ -3091,3 +3104,54 @@ void dMenu::on_bCancelFreq_clicked()
     on_comboTypeFreq_currentIndexChanged(ui->comboTypeFreq->currentIndex());
 }
 
+void dMenu::updateDeviceMain()
+{
+    if(ui->softVersion->text() != QString(CURRENT_VER))
+    {
+        ui->proborType->setText(getNameDevice().toUpper());
+        ui->manufacturer->setText(QString(MANUFACTURER).toUpper());
+        ui->site->setText(QString(SITE).toUpper());
+        int sn = 132;
+        QString serialNum = "%1";
+        serialNum = serialNum.arg(sn, 7, 10, QChar('0'));
+        ui->serialNumberDevice->setText(serialNum);
+        ui->serialDateManufacture->setText("23.09.2019");
+        ui->unicNumber->setText(QString::number(86237965));
+        ui->softVersion->setText(QString(CURRENT_VER));
+        ui->boardVersion->setText(QString(HARDWARE_VERSION));
+        ui->modbusVersion->setText(QString(PROTOCOL_VER));
+        ui->extModbusVersion->setText(QString(EXT_MODBUS_VER));
+    }
+    ui->deviceState->setText("OK");
+    int timeWork = 132.45;
+    ui->wirkingTime->setText(QString::number(timeWork, 'f', 2));
+    ui->netErrors->setText("2");
+    ui->netGoods->setText("24422");
+    accessModeType access = cExpertAccess::getMode();
+    QString strAccess = "ПОЛЬЗОВАТЕЛЬ";
+    if(access == Access_Expert)
+    {
+        strAccess = "ЭКСПЕРТ";
+    }
+    else if(access == Access_Admin)
+    {
+        strAccess = "АДМИН";
+    }
+    ui->accessLevel->setText(strAccess);
+    ui->boardModel->setText(QString(BOARD_MODEL));
+    int countDev = 0;
+    foreach (cDevice * dev, listDevice) {
+        if (dev->getOnline()) countDev++;
+    }
+    ui->countModules->setText(QString::number(countDev));
+}
+
+QString dMenu::getNameDevice()
+{
+    QString strName = QString(TYPE_DEVICE);
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
+    {
+        strName = strName + "-Steel";
+    }
+    return strName;
+}

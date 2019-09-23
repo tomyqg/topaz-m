@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>9</number>
+            <number>37</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -4716,7 +4716,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>726</width>
+                  <width>111</width>
                   <height>702</height>
                  </rect>
                 </property>
@@ -5773,8 +5773,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>489</height>
+                  <width>555</width>
+                  <height>324</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_42">
@@ -6089,8 +6089,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>413</height>
+                  <width>16</width>
+                  <height>16</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -6351,8 +6351,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>413</height>
+                  <width>108</width>
+                  <height>78</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -7193,7 +7193,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>726</width>
+                  <width>223</width>
                   <height>610</height>
                  </rect>
                 </property>
@@ -8499,8 +8499,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>489</height>
+                  <width>316</width>
+                  <height>124</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_37">
@@ -8805,8 +8805,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>743</width>
-                  <height>489</height>
+                  <width>494</width>
+                  <height>69</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_39">
@@ -11791,6 +11791,997 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              <property name="text">
               <string>НАЗАД</string>
              </property>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="pageMultigraphInfo">
+            <widget class="wButtonStyled" name="bBackDevice_2">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>525</y>
+               <width>743</width>
+               <height>70</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>НАЗАД</string>
+             </property>
+            </widget>
+            <widget class="QScrollArea" name="scrollAreaFreq_2">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>30</y>
+               <width>731</width>
+               <height>481</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QScrollBar:vertical {              
+        background:rgb(179, 179, 179);
+        margin: 0px 0px 0px 0px;
+		border-radius: 0px;
+		width:40px; 
+    }
+QScrollBar::handle:vertical {
+       background:rgb(77, 77, 77);
+        min-height: 50px;
+		border-radius: 0px;
+    }
+QScrollBar::add-line:vertical {
+       background:rgb(179, 179, 179);
+        height:0px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius: 0px;
+    }
+
+QScrollBar::sub-line:vertical {
+        background:rgb(77, 77, 77);
+        height: 0 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin; 
+		border-radius: 0px;
+    }
+QScrollBar::up-arrow:vertica, QScrollBar::down-arrow:verticall {
+        background:rgb(77, 77, 77);
+        height: 0px;
+		border-radius: 0px;
+    }
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+   background: none;
+}
+
+</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="widgetScrollAreaFreq_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>-417</y>
+                <width>714</width>
+                <height>898</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_44">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayoutFreq_2">
+                 <item>
+                  <widget class="QFrame" name="frameDeviceInfo1_2">
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_31">
+                    <property name="horizontalSpacing">
+                     <number>0</number>
+                    </property>
+                    <property name="verticalSpacing">
+                     <number>9</number>
+                    </property>
+                    <item row="6" column="1">
+                     <widget class="QLabel" name="serialDateManufacture">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>20.09.2019</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QLabel" name="site">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(232, 76, 61);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>TPCHEL.RU</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="devicelbl_3">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ТИП ПРИБОРА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="devicelbl_17">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>САЙТ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLabel" name="proborType">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>MULTIGRAPH</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="devicelbl_18">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ПРОИЗВОДИТЕЛЬ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QLabel" name="serialNumberDevice">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+                      </property>
+                      <property name="text">
+                       <string>0000010</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="devicelbl_26">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ДАТА ВЫПУСКА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="devicelbl_25">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СЕРИЙНЫЙ НОМЕР</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="QLabel" name="manufacturer">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>ТЕПЛОПРИБОР</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="1">
+                     <widget class="QLabel" name="unicNumber">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(102, 102, 255);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>2116885732</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="devicelbl_27">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>УНИКАЛЬНЫЙ НОМЕР</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frameDeviceInfo2_2">
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_30">
+                    <property name="horizontalSpacing">
+                     <number>0</number>
+                    </property>
+                    <property name="verticalSpacing">
+                     <number>9</number>
+                    </property>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="devicelbl_12">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРСИЯ ВНЕШНЕГО MODBUS</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QLabel" name="extModbusVersion">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>1.2.0.0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="devicelbl_11">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРСИЯ ПЛАТЫ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLabel" name="softVersion">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>1.42.0.0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLabel" name="boardVersion">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(232, 76, 61);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>1.0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QLabel" name="modbusVersion">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>12.4.0.0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="0" colspan="2">
+                     <spacer name="verticalSpacer_42">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="devicelbl_16">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРСИЯ ВНУТРЕННЕГО MODBUS</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="devicelbl_13">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ВЕРСИЯ ПО</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frameDeviceInfo2_3">
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_32">
+                    <property name="horizontalSpacing">
+                     <number>0</number>
+                    </property>
+                    <property name="verticalSpacing">
+                     <number>9</number>
+                    </property>
+                    <item row="2" column="1">
+                     <widget class="QLabel" name="wirkingTime">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+                      </property>
+                      <property name="text">
+                       <string>318.03</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QLabel" name="netGoods">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(91, 119, 143);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>65194</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="devicelbl_19">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ВРЕМЯ НЕПРЕРЫВНОЙ РАБОТЫ, Ч</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLabel" name="deviceState">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>ОК</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="devicelbl_20">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ЧИСЛО УСПЕШНЫХ ТРАНЗАКЦИЙ В СЕТИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QLabel" name="netErrors">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color:rgb(44, 61, 77);
+color: rgb(255 , 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>1</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="devicelbl_21">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ЧИСЛО ОШИБОЧНЫХ ТРАНЗАКЦИЙ В СЕТИ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="devicelbl_23">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>УРОВЕНЬ ДОСТУПА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="1">
+                     <widget class="QLabel" name="accessLevel">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(102, 102, 255);
+color: rgb(255, 255, 255);
+border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>ПОЛЬЗОВАТЕЛЬ</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="devicelbl_22">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СОСТОЯНИЕ ПРИБОРА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="devicelbl_24">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>МОДЕЛЬ ПЛАТЫ КОНТРОЛЛЕРА</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="1">
+                     <widget class="QLabel" name="boardModel">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">	background-color: rgb(232, 76, 61);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string> 0</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="9" column="0" colspan="2">
+                     <spacer name="verticalSpacer_43">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="devicelbl_28">
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>ЧИСЛО ПОДКЛЮЧЕНЫХ МОДУЛЕЙ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="1">
+                     <widget class="QLabel" name="countModules">
+                      <property name="minimumSize">
+                       <size>
+                        <width>131</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>185</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Open Sans</family>
+                        <pointsize>14</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(230, 230, 230);
+color: rgb(0, 0, 0);
+border-radius: 0px;
+</string>
+                      </property>
+                      <property name="text">
+                       <string>3</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacerFreq_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>165</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </widget>
           </widget>

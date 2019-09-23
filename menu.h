@@ -120,7 +120,9 @@ private:
     void updateInterfaceWidgets();
     void addWidgetFreqs();
     QLabel *addFramMeasureDiagnostic(QString lblParam, QString lblName, QString lblValue, QString lblUnit);
+    QString getNameDevice();
 private slots:
+    void updateDeviceMain();
     void updateDevicesUI();
     void UpdateAnalyze();
     void updateDeviceInfo(uint8_t index);
@@ -200,8 +202,9 @@ private slots:
     void on_bApplayGroup_clicked();
     void on_bBackDevices_clicked();
     void on_bDevices_clicked();
-    void on_bDevice1_clicked();
     void on_bBackDevice_clicked();
+    void on_bDevicesMain_clicked();
+    void on_bDevice1_clicked();
     void on_bDevice2_clicked();
     void on_bDevice3_clicked();
     void on_bDevice4_clicked();
@@ -273,6 +276,8 @@ private slots:
 
     void on_bCancelFreq_clicked();
 
+
+    void on_bBackDevice_2_clicked();
 
 signals:
     void saveButtonSignal();

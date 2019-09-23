@@ -822,3 +822,12 @@ void MainWindow::on_PlavkaButtonDown_4_clicked()
     if(listSteel.at(3)->numSmelt != 1)
         listSteel.at(3)->numSmelt--;
 }
+QString MainWindow::getNameDevice()
+{
+    QString strName = QString(TYPE_DEVICE);
+    if(systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel)
+    {
+        strName = strName + "-Steel";
+    }
+    return strName;
+}
