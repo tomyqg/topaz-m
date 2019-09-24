@@ -242,7 +242,7 @@ void cExtModbus::run()
                                 }
                                 continue;
                             }
-                            reply();
+                            reply(rc);
                         }
                     }
                 }
@@ -257,12 +257,12 @@ void cExtModbus::run()
                 /* Connection closed by the client or error */
                 continue;
             }
-            reply();
+            reply(rc);
         }
     }
 }
 
-void cExtModbus::reply(){
+void cExtModbus::reply(int req_length){
     //
     uint8_t func = query[header_length];
     // чтение адреса параметра в карте регистров
@@ -320,40 +320,41 @@ void cExtModbus::reply(){
         return;
     }
 
+    uint16_t * addrLookupElement = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
     /* Read/write holding registers */
     if((func == _FC_READ_HOLDING_REGISTERS)
             || (func == _FC_WRITE_SINGLE_REGISTER)
             || (func == _FC_WRITE_MULTIPLE_REGISTERS))
     {
         // обработка запроса регистров настроек
-        mb_mapping = modbus_mapping_new(0, 0, nb, 0);
-        mb_mapping->tab_registers = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
+        mb_mapping = modbus_mapping_new(0, 0, offset+nb, 0);
+        memcpy(mb_mapping->tab_registers+offset, addrLookupElement, nb);
     }
     else if(func == _FC_READ_INPUT_REGISTERS) /* Read input data */
     {
         // подготовка миникарты для ответа
-        mb_mapping = modbus_mapping_new(0, 0, 0, nb);
+        mb_mapping = modbus_mapping_new(0, 0, 0, offset+nb);
 
         // указатель на первый элемент в миникарту
-        mb_mapping->tab_input_registers = (uint16_t *)GET_PARAM_ADDRESS(lookupElement);
+        memcpy(mb_mapping->tab_input_registers+offset, addrLookupElement, nb);
     }
     else if(func == _FC_READ_DISCRETE_INPUTS) /* Read discrete inputs */
     {
         // подготовка миникарты для ответа
-        mb_mapping = modbus_mapping_new(0, nb, 0, 0);
+        mb_mapping = modbus_mapping_new(0, offset+nb, 0, 0);
 
         // указатель на первый элемент в миникарту
-        mb_mapping->tab_input_bits = (uint8_t *)GET_PARAM_ADDRESS(lookupElement);
+        memcpy(mb_mapping->tab_input_bits+offset, addrLookupElement, nb);
     }
     else if((func == _FC_READ_COILS)
             || (func == _FC_WRITE_SINGLE_COIL)
             || (func == _FC_WRITE_MULTIPLE_COILS)) /* Read/write coil */
     {
         // подготовка миникарты для ответа
-        mb_mapping = modbus_mapping_new(nb, 0, 0, 0);
+        mb_mapping = modbus_mapping_new(offset+nb, 0, 0, 0);
 
         // указатель на первый элемент в миникарту
-        mb_mapping->tab_bits = (uint8_t *)GET_PARAM_ADDRESS(lookupElement);
+        memcpy(mb_mapping->tab_bits+offset, addrLookupElement, nb);
     }
     else    // не корректная функция
     {
@@ -365,17 +366,31 @@ void cExtModbus::reply(){
 
     // обнуление адреса для корректного смещения по нашей миникарте
     // * больше адрес нигде не используется
-    query[header_length + 1] = 0;
-    query[header_length + 2] = 0;
+//    query[header_length + 1] = 0;
+//    query[header_length + 2] = 0;
 
     mutex.lock();
-    int rc = modbus_reply(ctx, query, rc, mb_mapping);
+    int rc = modbus_reply(ctx, query, req_length, mb_mapping);
     mutex.unlock();
     if (rc == -1)
     {
         return;
     }
-//    modbus_mapping_free(mb_mapping);
+
+    //Забираем данные из миникарты
+    if((func == _FC_READ_HOLDING_REGISTERS)
+            || (func == _FC_WRITE_SINGLE_REGISTER)
+            || (func == _FC_WRITE_MULTIPLE_REGISTERS))
+    {
+        memcpy(addrLookupElement, mb_mapping->tab_registers+offset, nb);
+    }
+    else if((func == _FC_READ_COILS)
+            || (func == _FC_WRITE_SINGLE_COIL)
+            || (func == _FC_WRITE_MULTIPLE_COILS))
+    {
+        memcpy(addrLookupElement, mb_mapping->tab_bits+offset, nb);
+    }
+    modbus_mapping_free(mb_mapping);
 
     // применение новых полученных данных
     size = 1;

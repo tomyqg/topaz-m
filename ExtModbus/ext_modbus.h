@@ -58,7 +58,7 @@ private:
 
     const tExtLookupRegisters *getLookupElementByOffsetAndFunc(uint16_t offset, uint8_t func);
     uint8_t updateParam(const void *param);
-    void reply();
+    void reply(int req_length);
 
     bool isAccess(uint8_t func, uint8_t access);
     void reinit(int type);
