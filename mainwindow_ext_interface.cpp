@@ -189,6 +189,8 @@ void MainWindow::initExtInterface()
          foreach (QString calib, listChannels.at(i)->listCalibrationRegisters) {
              tablSetParamExtInterface.append({chanNum + calib, &MainWindow::extGetChanCalibr, &MainWindow::extSetChanCalibr});
          }
+         tablSetParamExtInterface.append({chanNum + "SysOCR", &MainWindow::extGetChanCalibr, &MainWindow::extSetChanCalibr});
+         tablSetParamExtInterface.append({chanNum + "SysFSR", &MainWindow::extGetChanCalibr, &MainWindow::extSetChanCalibr});
          tablSetParamExtInterface.append({chanNum + "NeadReadCalibrations", &MainWindow::extGetNeadCalibr, &MainWindow::extSetNeadCalibr});
          tablExtInterfaceRegisters.append({chanNum + "ProcessReadCalibrations", &MainWindow::extGetProcessReadCalibr});
     }
@@ -2537,7 +2539,7 @@ void MainWindow::extSetChanCalibr(QString name, uint8_t * data)
     mListChannel.lock();
     if((num > 0) && (num <= listChannels.size()))
     {
-        uint32_t value;
+        uint32_t value = 0;
         memcpy(&value, data, sizeof(value));
         listChannels.at(num-1)->writeCalibration(paramName, value);
     }

@@ -328,7 +328,7 @@ void cExtModbus::reply(int req_length){
     {
         // обработка запроса регистров настроек
         mb_mapping = modbus_mapping_new(0, 0, offset+nb, 0);
-        memcpy(mb_mapping->tab_registers+offset, addrLookupElement, nb);
+        memcpy(mb_mapping->tab_registers+offset, addrLookupElement, nb*2);
     }
     else if(func == _FC_READ_INPUT_REGISTERS) /* Read input data */
     {
@@ -336,7 +336,7 @@ void cExtModbus::reply(int req_length){
         mb_mapping = modbus_mapping_new(0, 0, 0, offset+nb);
 
         // указатель на первый элемент в миникарту
-        memcpy(mb_mapping->tab_input_registers+offset, addrLookupElement, nb);
+        memcpy(mb_mapping->tab_input_registers+offset, addrLookupElement, nb*2);
     }
     else if(func == _FC_READ_DISCRETE_INPUTS) /* Read discrete inputs */
     {
@@ -344,7 +344,7 @@ void cExtModbus::reply(int req_length){
         mb_mapping = modbus_mapping_new(0, offset+nb, 0, 0);
 
         // указатель на первый элемент в миникарту
-        memcpy(mb_mapping->tab_input_bits+offset, addrLookupElement, nb);
+        memcpy(mb_mapping->tab_input_bits+offset, addrLookupElement, nb*2);
     }
     else if((func == _FC_READ_COILS)
             || (func == _FC_WRITE_SINGLE_COIL)
@@ -354,7 +354,7 @@ void cExtModbus::reply(int req_length){
         mb_mapping = modbus_mapping_new(offset+nb, 0, 0, 0);
 
         // указатель на первый элемент в миникарту
-        memcpy(mb_mapping->tab_bits+offset, addrLookupElement, nb);
+        memcpy(mb_mapping->tab_bits+offset, addrLookupElement, nb*2);
     }
     else    // не корректная функция
     {
@@ -378,14 +378,12 @@ void cExtModbus::reply(int req_length){
     }
 
     //Забираем данные из миникарты
-    if((func == _FC_READ_HOLDING_REGISTERS)
-            || (func == _FC_WRITE_SINGLE_REGISTER)
+    if((func == _FC_WRITE_SINGLE_REGISTER)
             || (func == _FC_WRITE_MULTIPLE_REGISTERS))
     {
         memcpy(addrLookupElement, mb_mapping->tab_registers+offset, nb);
     }
-    else if((func == _FC_READ_COILS)
-            || (func == _FC_WRITE_SINGLE_COIL)
+    else if((func == _FC_WRITE_SINGLE_COIL)
             || (func == _FC_WRITE_MULTIPLE_COILS))
     {
         memcpy(addrLookupElement, mb_mapping->tab_bits+offset, nb);
@@ -473,8 +471,13 @@ uint8_t cExtModbus::updateParam(const void * param)
         uint8_t size = parametr->size;
         void * buffer = (void *)GET_PARAM_ADDRESS(parametr);
         tModbusBuffer data;
+        memset(&data, 0, sizeof(data));
         memcpy(&data, buffer, size);
         emit signalUpdateParam(parametr->nameParam, data);
+        if(parametr->typeMapping == LKUP_MAP_HILDING)
+        {
+            size /= 2;
+        }
         return size;
     }
     return 0;

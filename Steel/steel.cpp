@@ -101,7 +101,10 @@ void cSteel::parserSteel(Transaction tr)
                         {
                             if(technology->COH != 0)
                             {
-                                vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
+                                if(tr.paramInt16[j] != 0x8000)
+                                {
+                                    vectorEds.replace(indexVec, (double)tr.paramInt16[j]);
+                                }
                             }
                         }
                     }
@@ -120,7 +123,10 @@ void cSteel::parserSteel(Transaction tr)
                     {
                         if(tr.paramInt16[j] != 0x7FFF)
                         {
-                            vectorTemp.replace(indexVec, (double)tr.paramInt16[j]);
+                            if(tr.paramInt16[j] != 0x8000)
+                            {
+                                vectorTemp.replace(indexVec, (double)tr.paramInt16[j]);
+                            }
                         }
                     }
                 }
@@ -302,6 +308,7 @@ void cSteel::update()
             if(status == ESCS_MEASURE)
             {
                 state = STEEL_MEASURE;
+                fReleyTimeout = false;
                 emit signalMeasure(num);
                 emit signalDevicesPause(true);
                 emit signalSteelFrame(false);
@@ -343,8 +350,8 @@ void cSteel::update()
                 vectorEdsReceived = false;
                 allVectorsReceived = false;
                 fConfirm = false;
-                alg = 0x7FFF;
-                ao = 0x7FFF;
+                alg = NAN;
+                ao = NAN;
                 temp = NAN;
                 eds = NAN;
                 cl = NAN;
