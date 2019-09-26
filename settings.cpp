@@ -304,6 +304,7 @@ dSettings::dSettings(QList<ChannelOptions*> channels,
         scroll->setStyleSheet(styleScrollBars);
     }
 
+
     if(page == 4)
     {
         ui->labelNumSteel->setText("СТАЛЬ #" + QString::number(num));
@@ -459,6 +460,13 @@ void dSettings::updateWidgets()
         ui->saveButton->hide();
         ui->nameSubMenu->setText("<html><head/><body><p>АРХИВ<br>ЗАМЕРОВ</p></body></html>");
         h = 72;
+        QString noData = "Нет данных";
+        ui->nameSteelTech->setText(noData);
+        ui->steelTemp->setText(noData);
+        ui->steelEmf->setText(noData);
+        ui->steelAO->setText(noData);
+        ui->steelAl->setText(noData);
+        ui->steelC->setText(noData);
 
     }
     else
@@ -1554,7 +1562,7 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
         ui->customPlotSteel->clearGraphs();
         ui->customPlotSteel->addGraph();
         ui->customPlotSteel->graph()->setData(X_Steel, Y_SteelTemp);
-        ui->customPlotSteel->xAxis->setLabel("t,sec");
+        ui->customPlotSteel->xAxis->setLabel("ВРЕМЯ, сек.");
         ui->customPlotSteel->xAxis->setAutoTickStep(false);
 //        if(X_Steel.size() > 20)
 //        {
@@ -1564,8 +1572,8 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
 //        {
 //            ui->customPlotSteel->xAxis->setTickStep(0.5);
 //        }
-        ui->customPlotSteel->yAxis2->setLabel("Emf, mV");
-        ui->customPlotSteel->yAxis->setLabel("Temp, °C");
+        ui->customPlotSteel->yAxis2->setLabel("ЭДС, мВ");
+        ui->customPlotSteel->yAxis->setLabel("ТЕМПЕРАТУРА, °C");
         ui->customPlotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
 
         ui->customPlotSteel->addGraph(ui->customPlotSteel->xAxis, ui->customPlotSteel->yAxis2);
@@ -1578,14 +1586,29 @@ void dSettings::on_timeSteel_currentIndexChanged(const QString &arg1)
         ui->customPlotSteel->replot();
         ui->customPlotSteel->clearItems();
 
-        QString string = json["Technology"].toString();
-        ui->nameSteelTech->setText(string);
-        ui->nameSteelSmelt->setText(json["Smelt"].toString());
-        ui->steelTemp->setText(json["Temp"].toString());
-        ui->steelEmf->setText(json["Eds"].toString());
-        ui->steelAO->setText(json["OxActivity"].toString());
-        ui->steelAl->setText(json["MassAl"].toString());
-        ui->steelC->setText(json["Carbon"].toString());
+        QString noData = "Нет данных";
+        ui->nameSteelTech->setText(noData);
+        ui->nameSteelSmelt->setText(noData);
+        ui->steelTemp->setText(noData);
+        ui->steelEmf->setText(noData);
+        ui->steelAO->setText(noData);
+        ui->steelAl->setText(noData);
+        ui->steelC->setText(noData);
+
+        if((json["Technology"].toString() != "nan") && (json["Technology"].toString() != "32767"))
+            ui->nameSteelTech->setText(json["Technology"].toString());
+        if((json["Smelt"].toString() != "nan") && (json["Smelt"].toString() != "32767"))
+            ui->nameSteelSmelt->setText(json["Smelt"].toString());
+        if((json["Temp"].toString() != "nan") && (json["Temp"].toString() != "32767"))
+            ui->steelTemp->setText(json["Temp"].toString());
+        if((json["Eds"].toString() != "nan") && (json["Eds"].toString() != "32767"))
+            ui->steelEmf->setText(json["Eds"].toString());
+        if((json["OxActivity"].toString() != "nan") && (json["OxActivity"].toString() != "32767"))
+            ui->steelAO->setText(json["OxActivity"].toString());
+        if((json["MassAl"].toString() != "nan") && (json["MassAl"].toString() != "32767"))
+            ui->steelAl->setText(json["MassAl"].toString());
+        if((json["Carbon"].toString() != "nan") && (json["Carbon"].toString() != "32767"))
+            ui->steelC->setText(json["Carbon"].toString());
 
         fileArchSteel.close();
     }

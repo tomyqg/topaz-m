@@ -626,7 +626,6 @@ void ChannelOptions::parserChannel(Transaction tr)
             }
         }
     }
-
 }
 
 void ChannelOptions::timerSlot()
@@ -689,7 +688,7 @@ void ChannelOptions::initCalibration()
 {
     listCalibrationRegisters.clear();
 
-    listCalibrationRegisters << "SysOCR" << "SysFSR" \
+    listCalibrationRegisters /*<< "SysOCR" << "SysFSR" */\
                              << "OCR20mV" << "FSR20mV" << "Date20mV" \
                              << "OCR100mV" << "FSR100mV" << "Date100mV" \
                              << "OCR1V" << "FSR1V" << "Date1V" \
@@ -712,29 +711,28 @@ void ChannelOptions::initCalibration()
 void ChannelOptions::updateCalibrations()
 {
     if (!enable) return;
+    Transaction tr;
+    tr.dir = Transaction::R;
+    tr.slave = slot;
+    QString name;
     if(neadRead)
     {
-        Transaction tr;
-        tr.dir = Transaction::R;
-        tr.slave = slot;
         for(int i=0; i<listCalibrationRegisters.size(); i++)
         {
-            QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(i);
+            name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(i);
             tr.offset = cRegistersMap::getOffsetByName(name);
             emit sendToWorker(tr);
         }
         neadRead = false;
-//        QString name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(iteratorCalibration);
-//        tr.offset = cRegistersMap::getOffsetByName(name);
-//        emit sendToWorker(tr);
-
-//        iteratorCalibration++;
-//        if(iteratorCalibration >= listCalibrationRegisters.size())
-//        {
-//            iteratorCalibration = 0;
-//            periodUpdateCalibrations = 10000;   //10сек
-//        }
-//        timerCalibrations->setInterval(periodUpdateCalibrations);
+    }
+    if((calibrations.chanSysFSR != 0) || (calibrations.chanSysOCR != 0))
+    {
+        name = "chan" + QString::number(slotChannel) + "SysFSR";
+        tr.offset = cRegistersMap::getOffsetByName(name);
+        emit sendToWorker(tr);
+        name = "chan" + QString::number(slotChannel) + "SysOCR";
+        tr.offset = cRegistersMap::getOffsetByName(name);
+        emit sendToWorker(tr);
     }
 }
 

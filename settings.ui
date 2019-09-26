@@ -19,7 +19,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Settings</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(14, 210, 226);</string>
@@ -347,7 +347,7 @@ border-top:10px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:1
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="channel">
             <property name="styleSheet">
@@ -3012,7 +3012,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>754</width>
+                     <width>692</width>
                      <height>918</height>
                     </rect>
                    </property>
@@ -4362,7 +4362,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>754</width>
+                     <width>671</width>
                      <height>1363</height>
                     </rect>
                    </property>
@@ -6381,13 +6381,13 @@ QComboBox::drop-down {
               <widget class="QFrame" name="frame_6">
                <property name="minimumSize">
                 <size>
-                 <width>252</width>
+                 <width>255</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>252</width>
+                 <width>255</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -6507,7 +6507,7 @@ border-radius: 0px;
 </string>
                   </property>
                   <property name="text">
-                   <string>Group 1</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -6523,7 +6523,7 @@ border-radius: 0px;
                    </font>
                   </property>
                   <property name="text">
-                   <string>Emf</string>
+                   <string>ЭДС</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -6623,7 +6623,7 @@ color: rgb(255 , 255, 255);
 border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>200,3</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -6669,7 +6669,7 @@ color: rgb(255, 255, 255);
 border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>1501,9</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -6715,7 +6715,7 @@ border-radius: 0px;</string>
 	border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>772,44</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -6790,7 +6790,7 @@ border-radius: 0px;</string>
 	border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>***</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -6824,7 +6824,7 @@ border-radius: 0px;
 </string>
                   </property>
                   <property name="text">
-                   <string>0,0362</string>
+                   <string>Нет данных</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>

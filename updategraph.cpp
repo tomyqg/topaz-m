@@ -1036,7 +1036,10 @@ void MainWindow::updateSteel()
             {
                 if(listRelais.at(relay)->getCurState() != relayStates[i])
                 {
-                    listRelais.at(relay)->setState(relayStates[i]);
+                    if(!((i == 3) && (steel->fReleyTimeout) && (relayStates[i] == 1)))
+                    {
+                        listRelais.at(relay)->setState(relayStates[i]);
+                    }
                     steel->countRelayTime = 4000 / UpdateSteelTime;
                 }
                 if((listRelais.at(relay)->getCurState() == true) && (i == 3))
@@ -1047,6 +1050,7 @@ void MainWindow::updateSteel()
                     }
                     else
                     {
+                        steel->fReleyTimeout = true;
                         listRelais.at(relay)->setState(false);
                     }
                 }
@@ -1064,9 +1068,9 @@ void MainWindow::updateSteelWidget(void)
 {
     QList<QString> strings;
     strings << "ОТКЛЮЧЕНО" << "ГОТОВ" << "ИЗМЕРЕНИЕ" \
-            << "ОШИБКА TC" << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ TC" \
+            << "ОШИБКА T/П" << "ОШИБКА ЭДС" << "НЕТ ПЛОЩАДКИ T/П" \
             << "НЕТ ПЛОЩАДКИ ЭДС" << "НЕТ ПЛОЩАДОК" << "КОНЕЦ ИЗМЕРЕНИЯ" \
-            << "ОБРЫВ TC" << "ОШИБКА КАНАЛА";
+            << "ОБРЫВ Т/П" << "ОШИБКА КАНАЛА";
     QList<QString> colorStyles;
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_GRAY.red()) + ", " + QString::number(COLOR_GRAY.green()) + ", " + QString::number(COLOR_GRAY.blue()) + ");color: rgb(0, 0, 0);");
     colorStyles.append("background-color: rgb(" + QString::number(COLOR_1.red()) + ", " + QString::number(COLOR_1.green()) + ", " + QString::number(COLOR_1.blue()) + ");color: rgb(255, 255, 255);");
@@ -1112,9 +1116,9 @@ void MainWindow::updateSteelWidget(void)
                 ui->steelTemp->setText(QString::number(steel->temp));
             if(!std::isnan(steel->eds))
                 ui->steelEmf->setText(QString::number(steel->eds));
-            if(steel->ao != 0x7FFF)
+            if(!std::isnan(steel->ao))
                 ui->steelAO->setText(QString::number(steel->ao));
-            if(steel->alg != 0x7FFF)
+            if(!std::isnan(steel->alg))
                 ui->steelAl->setText(QString::number(steel->alg));
             if(!std::isnan(steel->cl))
                 ui->steelC->setText(QString::number(steel->cl));
@@ -1143,9 +1147,9 @@ void MainWindow::updateSteelWidget(void)
         ui->plotSteel->clearGraphs();
         ui->plotSteel->addGraph();
         ui->plotSteel->graph()->setData(X_Coord_Steel, Y_Coord_SteelTemp);
-        ui->plotSteel->xAxis->setLabel("t,sec");
-        ui->plotSteel->yAxis2->setLabel("Emf, mV");
-        ui->plotSteel->yAxis->setLabel("Temp, °C");
+        ui->plotSteel->xAxis->setLabel("ВРЕМЯ, сек.");
+        ui->plotSteel->yAxis2->setLabel("ЭДС, мВ");
+        ui->plotSteel->yAxis->setLabel("ТЕМПЕРАТУРА, °C");
         ui->plotSteel->graph()->setPen(QPen(QBrush(ColorCh3), 2));
 
         ui->plotSteel->addGraph(ui->plotSteel->xAxis, ui->plotSteel->yAxis2);
@@ -1165,15 +1169,15 @@ void MainWindow::updateSteelWidget(void)
     }
     else
     {
-        QString str = "Нет данных";
-        ui->nameSteelTech->setText(str);
-        ui->labelTimeSteel->setText(" ");
-        ui->steelTemp->setText(str);
-        ui->steelEmf->setText(str);
-        ui->steelAO->setText(str);
-        ui->steelAl->setText(str);
-        ui->steelC->setText(str);
-        ui->plotSteel->clearGraphs();
+//        QString str = "Нет данных";
+//        ui->nameSteelTech->setText(str);
+//        ui->labelTimeSteel->setText(" ");
+//        ui->steelTemp->setText(str);
+//        ui->steelEmf->setText(str);
+//        ui->steelAO->setText(str);
+//        ui->steelAl->setText(str);
+//        ui->steelC->setText(str);
+//        ui->plotSteel->clearGraphs();
 
         ui->framePlotSteel->hide();
         ui->frameSteelStatus->show();
@@ -1197,6 +1201,15 @@ void MainWindow::slotMeasureSteel(int n)
 {
     steelReadyNum = n;
     stateWidgetSteel = STEEL_MEASURE;
+    QString str = "Нет данных";
+    ui->nameSteelTech->setText(str);
+    ui->labelTimeSteel->setText(" ");
+    ui->steelTemp->setText(str);
+    ui->steelEmf->setText(str);
+    ui->steelAO->setText(str);
+    ui->steelAl->setText(str);
+    ui->steelC->setText(str);
+    ui->plotSteel->clearGraphs();
 }
 
 void MainWindow::slotWaitSteel(int n)

@@ -489,9 +489,9 @@ void MainWindow::writeArchiveSteel(int steelNum)
     archive["Smelt"] = QString::number(steel->numSmelt);
     archive["Temp"] = QString::number(steel->temp, 'f', 2);
     archive["Eds"] = QString::number(steel->eds, 'f', 2);
-    archive["OxActivity"] = QString::number(steel->ao);
+    archive["OxActivity"] = QString::number(steel->ao, 'f', 2);
     archive["Carbon"] = QString::number(steel->cl, 'f', 2);
-    archive["MassAl"] = QString::number(steel->alg);
+    archive["MassAl"] = QString::number(steel->alg, 'f', 2);
 
 
     QString setstr = QJsonDocument(archive).toJson(QJsonDocument::Compact);
