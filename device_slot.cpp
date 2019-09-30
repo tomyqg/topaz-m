@@ -24,6 +24,8 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     countParams = 0;
     deviceMode = 0;
     accessType = EAT_USER;
+    memset(uniqueId, 0, sizeof(uniqueId));
+    root_Access = 0;
     timerResetOnline = new QTimer(this);
     timerUpdateStatus = new QTimer(this);
     timerUpdateConstParam = new QTimer(this);
@@ -35,9 +37,12 @@ cDevice::cDevice(QObject *parent) : QObject(parent)
     updateConstParam();
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);
     timerUpdateStatus->start(TIME_UPDATE_STATUS_SEC*1000);
-    timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
+    //timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
+    timerUpdateConstParam->start(1000);
 
 }
+
+
 
 int cDevice::parseDeviceParam(Transaction tr)
 {
@@ -49,7 +54,8 @@ int cDevice::parseDeviceParam(Transaction tr)
     if(counterStatus >= COUNT_STABLE_STATUS_ON) stableOnline = true;
     else stableOnline = false;
 
-    online  = true;     // устройство на связи
+    online = true;     // устройство на связи
+
     timerResetOnline->start(TIME_RESET_ONLINE_SEC*1000);  // перезапуск таймера сброса Онлайна
     QString nameParam = cRegistersMap::getNameByOffset(tr.offset);
     if(nameParam == "protocolVersion")
@@ -211,7 +217,11 @@ void cDevice::updateStatus()
 void cDevice::updateConstParam()
 {
     if(pauseUpdateParam) return;
-    if(!online) return;
+    if(!online)
+    {
+        timerUpdateConstParam->start(1000);
+        return;
+    }
     if((deviceType == Device_None) || ((int)deviceType >= Count_Device_Type)) return;
     Transaction tr(Transaction::R, slot);
     QList<QString> params;
@@ -223,4 +233,5 @@ void cDevice::updateConstParam()
         tr.offset = cRegistersMap::getOffsetByName(params.at(i));
         emit updateParam(tr);
     }
+    timerUpdateConstParam->start(TIME_UPDATE_CONST_SEC*1000);
 }

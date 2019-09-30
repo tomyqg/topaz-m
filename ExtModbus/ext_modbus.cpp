@@ -222,9 +222,9 @@ void cExtModbus::run()
                                 }
                                 printf("New connection from %s:%d on socket %d\n",
                                        inet_ntoa(clientaddr.sin_addr), clientaddr.sin_port, newfd);
-                                //сброс уровней доступа при новом подключении
-                                cExpertAccess::resetExtAccess();
                             }
+                            //сброс уровней доступа при новом подключении
+                            cExpertAccess::resetExtAccess();
                         } else {
 
                             int rc = modbus_receive(ctx, master_socket, query);
@@ -381,12 +381,12 @@ void cExtModbus::reply(int req_length){
     if((func == _FC_WRITE_SINGLE_REGISTER)
             || (func == _FC_WRITE_MULTIPLE_REGISTERS))
     {
-        memcpy(addrLookupElement, mb_mapping->tab_registers+offset, nb);
+        memcpy(addrLookupElement, mb_mapping->tab_registers+offset, nb*2);
     }
     else if((func == _FC_WRITE_SINGLE_COIL)
             || (func == _FC_WRITE_MULTIPLE_COILS))
     {
-        memcpy(addrLookupElement, mb_mapping->tab_bits+offset, nb);
+        memcpy(addrLookupElement, mb_mapping->tab_bits+offset, nb*2);
     }
     modbus_mapping_free(mb_mapping);
 

@@ -496,12 +496,24 @@ void MainWindow::extGetModbusGoods(QString name)
 
 void MainWindow::extGetAccessType(QString name)
 {
-
-    // Vag: реализовать отдельный признак доступа к прибору
-
     tModbusBuffer data;
-    data.data[0] = cExpertAccess::getExtMode();
+    int access = (int)Access_Admin;
     data.data[1] = 0;
+    for(int i=0; i<listDevice.size(); i++)
+    {
+        if(listDevice.at(i)->accessType < access)
+        {
+            if(listDevice.at(i)->getOnline() && (listDevice.at(i)->deviceType == Device_4AI))
+            {
+                access = (int)listDevice.at(i)->accessType;
+            }
+        }
+    }
+    if(cExpertAccess::getExtMode() < access)
+    {
+        access = (int)cExpertAccess::getExtMode();
+    }
+    data.data[0] = access ;
     emit signalToExtModbus(name, data);
 }
 

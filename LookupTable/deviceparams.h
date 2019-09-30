@@ -161,6 +161,8 @@ typedef struct
     uint32_t uptime;
     //
     uint16_t hashRoot;
+    // для прошивки нужно сюда записать значение из softwareVersion
+    uint32_t updateSoftware;
     // Parameter: Data (Measure/Generate)  : chan0Data : NV Address: 1000
     float chan0Data;
     // Parameter: Raw Data : chan0RawData : NV Address: 1000
