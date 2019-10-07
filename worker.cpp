@@ -26,6 +26,7 @@ worker::worker(QObject *parent) : QObject(parent)
         slaves[i].cntGood = 0;
         slaves[i].state = 0;
     }
+    pause = false;
 }
 
 
@@ -384,7 +385,7 @@ void worker::OpenSerialPort( int )
         }
         else
         {
-            qDebug() << "Port OK";
+            qDebug() << "Port Modbus OK";
         }
     }
     else
@@ -393,6 +394,19 @@ void worker::OpenSerialPort( int )
     }
 }
 
+void worker::slotRestartModbus()
+{
+    if( modbus_connect( m_modbus ) == -1 )
+    {
+        qDebug() << "Connection failed"  << "Could not connect serial port!" ;
+        emit ModbusConnectionError();
+    }
+    else
+    {
+        qDebug() << "Port Modbus OK";
+        pause = false;
+    }
+}
 
 void worker::run()
 {
@@ -413,42 +427,25 @@ void worker::run()
 
             time.restart();
             tLookupRegisters dp = cRegistersMap::getDpByOffset(tr.offset);
-            if(tr.dir == Transaction::R)
+            if(!pause)
             {
-                res = ReadModbusData(tr.slave, &dp, &tr.volInt);
-                if(res > 0)
+                if(tr.dir == Transaction::R)
                 {
+                    res = ReadModbusData(tr.slave, &dp, &tr.volInt);
+                    if(res > 0)
+                    {
 #ifdef DEBUG_WORKER
-//                    if((tr.offset >= 8) && (tr.offset <= 296))
-//                    {
-//                        qDebug() /*<< "Modbus Read  slave:" << tr.slave \
-//                                 << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
-//                                 << " offset:" << tr.offset \ */
-//                                 << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() << " vol: [" \
-//                                 << tr.paramInt16[0] << tr.paramInt16[1] << tr.paramInt16[2] << tr.paramInt16[3] \
-//                                 << tr.paramInt16[4] << tr.paramInt16[5] << tr.paramInt16[6] << tr.paramInt16[7] \
-//                                 << tr.paramInt16[8] << tr.paramInt16[9] << tr.paramInt16[10] << tr.paramInt16[11] \
-//                                 << tr.paramInt16[12] << tr.paramInt16[13] << tr.paramInt16[14] << tr.paramInt16[15] \
-//                                 << tr.paramInt16[16] << tr.paramInt16[17] << tr.paramInt16[18] << tr.paramInt16[19] \
-//                                 << tr.paramInt16[20] << tr.paramInt16[21] << tr.paramInt16[22] << tr.paramInt16[23] \
-//                                 << tr.paramInt16[24] << tr.paramInt16[25] << tr.paramInt16[26] << tr.paramInt16[27] \
-//                                 << tr.paramInt16[28] << tr.paramInt16[29] << tr.paramInt16[30] << tr.paramInt16[31] \
-//                                 << "] Time:" << time.elapsed();
-//                    }
-//                    else
-//                    {
                         qDebug() << "[" << trans.size() << "]" \
                                  << "Modbus Read  slave:" << tr.slave \
                                  << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
                                  << " offset:" << tr.offset \
                                  << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                                  << "Time: " << time.elapsed();
-//                    }
 #endif
-                    emit sendTrans(tr);
-                }
-            } else {    //(tr.dir == Transaction::W)
-                res = WriteModbusData(tr.slave, &dp, (uint32_t *)(&tr.volInt));
+                        emit sendTrans(tr);
+                    }
+                } else {    //(tr.dir == Transaction::W)
+                    res = WriteModbusData(tr.slave, &dp, (uint32_t *)(&tr.volInt));
 
 
 #ifdef DEBUG_WORKER
@@ -459,11 +456,33 @@ void worker::run()
                              << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
                              << "Time: " << time.elapsed();
 #endif
-//                tr.dir = Transaction::R;
-//                mQueue.lock();
-//                trans.enqueue(tr);
-//                mQueue.unlock();
+                }
             }
+            else
+            {
+                // отключение modbus сразу после записи updateSoftware
+                if(tr.offset == cRegistersMap::getOffsetByName("updateSoftware"))
+                {
+                    res = WriteModbusData(tr.slave, &dp, (uint32_t *)(&tr.volInt));
+                    qDebug() << "[" << trans.size() << "]" \
+                             << "Modbus Write  slave:" << tr.slave \
+                             << "name:" << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
+                             << " offset:" << tr.offset \
+                             << " vol:" << tr.volInt << "(" << tr.volFlo << ")" \
+                             << "Time: " << time.elapsed();
+                    if(res != -1)
+                    {
+                        modbus_close(m_modbus);
+                        qDebug() << "Modbus stop";
+                    }
+                    else
+                    {
+                        qDebug() << "Error Modbus stop";
+                        // Vag: сигнал в основной поток
+                    }
+                }
+            }
+
         }
         // время тишины линии Modbus
         //                  в мск     бит  норма    скорость порта
@@ -477,26 +496,40 @@ void worker::run()
 void worker::getTransSlot(Transaction tr)
 {
     mQueue.lock();
-//    qDebug() << "worker::getTransSlot" << tr.slave << tr.offset;
-    if(trans.size() >= 1000)
+    if((tr.offset != cRegistersMap::getOffsetByName("updateSoftware")) && !pause)
     {
-        if(!fQueueOver1000) qDebug() << "Warning: Queue is over 1000 elements!!!";
-        fQueueOver1000 = true;
-    } else {
-        fQueueOver1000 = false;
-    }
-//    qDebug() << "before DEBUG_WORKER";
+        //    qDebug() << "worker::getTransSlot" << tr.slave << tr.offset;
+        if(trans.size() >= 1000)
+        {
+            if(!fQueueOver1000) qDebug() << "Warning: Queue is over 1000 elements!!!";
+            fQueueOver1000 = true;
+        } else {
+            fQueueOver1000 = false;
+        }
+        //    qDebug() << "before DEBUG_WORKER";
 #ifdef DEBUG_WORKER
-//    std::string utf8_text = cRegistersMap::getNameByOffset(tr.offset).toUtf8().constData();
-    if(tr.dir == Transaction::R)
-    {
-        qDebug() << "[" << trans.size() << "]" \
-                 << "Modbus Ask  slave:" << tr.slave \
-                 << "name:"  << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
-                 << " offset:" << tr.offset;
-    }
+        //    std::string utf8_text = cRegistersMap::getNameByOffset(tr.offset).toUtf8().constData();
+        if(tr.dir == Transaction::R)
+        {
+            qDebug() << "[" << trans.size() << "]" \
+                     << "Modbus Ask  slave:" << tr.slave \
+                     << "name:"  << cRegistersMap::getNameByOffset(tr.offset).toStdString().c_str() \
+                     << " offset:" << tr.offset;
+        }
 #endif
-//    qDebug() << "after DEBUG_WORKER";
-    trans.enqueue(tr);
+        //    qDebug() << "after DEBUG_WORKER";
+        trans.enqueue(tr);
+    }
+    else
+    {
+        if(!pause)
+        {
+            // modbus нужно установить на паузу перед прошивкой
+            // очистка очереди и выполнение последней команды
+            pause = true;
+            trans.clear();
+            trans.enqueue(tr);
+        }
+    }
     mQueue.unlock();
 }

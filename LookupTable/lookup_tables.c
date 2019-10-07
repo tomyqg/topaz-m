@@ -75,25 +75,27 @@ const tLookupRegisters g_stLookupRegisters[] =
     // Parameter: Mode  : deviceMode
     {35, 532,  OFFSET(deviceMode), "deviceMode", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Modbus Baudrate : modbusBaud
-    {35, 26,  OFFSET(modbusBaud), "modbusBaud", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
+    {36, 26,  OFFSET(modbusBaud), "modbusBaud", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Modbus parity  : modbusParity
-    {35, 28,  OFFSET(modbusParity), "modbusParity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
+    {37, 28,  OFFSET(modbusParity), "modbusParity", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Modbus stopbit  : mbStopBits
-    {37, 30,  OFFSET(mbStopBits), "mbStopBits", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
+    {38, 30,  OFFSET(mbStopBits), "mbStopBits", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Data order : dataOrder
-    {38, 32,  OFFSET(dataOrder), "dataOrder", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
+    {39, 32,  OFFSET(dataOrder), "dataOrder", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_STATIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Modbus comm count  : mbCommCount
-    {39, 34,  OFFSET(mbCommCount), "mbCommCount", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {40, 34,  OFFSET(mbCommCount), "mbCommCount", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Modbus comm error  : mbCommError
-    {41, 34,  OFFSET(mbCommError), "mbCommError", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {42, 34,  OFFSET(mbCommError), "mbCommError", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Access type  : accessType
-    {43, 34,  OFFSET(accessType), "accessType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
+    {44, 34,  OFFSET(accessType), "accessType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     // Parameter: Errors : devErrors
-    {44, 34,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {45, 34,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Up time  : uptime
-    {45, 34,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    {46, 34,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     //
     {500, 34,  OFFSET(hashRoot), "hashRoot", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W},
+    // Parameter: Update Software : updateSoftware
+    {501, 34, OFFSET(updateSoftware), "updateSoftware", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W},
     // Parameter: Data (Measure/Generate)  : chan0Data
     {1000, 1000,  OFFSET(chan0Data), "chan0Data", LKUP_TYPE_FLOAT, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Raw Data : chan0RawData

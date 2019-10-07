@@ -76,17 +76,6 @@ void MainWindow::AddValuesToBuffer()
 //    X_Coordinates_archive.append(xoffset);
     X_Date_Coordinates.append(QDateTime::currentDateTime().toTime_t());
 
-//    vectorsChannels.resize(listChannels.size());
-//    QVector<double> * vectors[] = {&Y_coordinates_Chanel_1,\
-//                                &Y_coordinates_Chanel_2,\
-//                                &Y_coordinates_Chanel_3,\
-//                                &Y_coordinates_Chanel_4};
-//    vectorsChannelsArch.resize(listChannels.size());
-//    QVector<double> * vectorsArch[] = {&Y_coordinates_Chanel_1_archive,\
-//                                &Y_coordinates_Chanel_2_archive,\
-//                                &Y_coordinates_Chanel_3_archive,\
-//                                &Y_coordinates_Chanel_4_archive};
-
     int i = 0;
     mListChannel.lock();
     foreach (ChannelOptions * channel, listChannels) {
@@ -533,6 +522,7 @@ void MainWindow::updateBars(void)
                     bar->setValue(channel->ConvertVisualValue(channel->GetCurrentChannelValue()));
                     bar->setError(channel->isError());
                     bar->cleanMarker();
+                    mListChannel.unlock();
                     mListUstvok.lock();
                     foreach(Ustavka * ust, listUstavok)
                     {
@@ -548,7 +538,10 @@ void MainWindow::updateBars(void)
 //                        ui->nameGroupChannels2->show();
 //                    }
                 }
-                mListChannel.unlock();
+                else
+                {
+                    mListChannel.unlock();
+                }
             }
         }
         else if(group->typeInput[i] == cGroupChannels::Input_Math)
@@ -585,8 +578,6 @@ void MainWindow::updateBars(void)
 
                 if(channel->enable)
                 {
-                    //bar->setExtr(channel->GetMinimumChannelValue(),\
-                                 channel->GetMaximumChannelValue());
                     bar->setBarDiapazon(channel->GetHigherMeasureLimit(), \
                                             channel->GetLowerMeasureLimit());
 //                    if(channel->getVoltageType() == ChannelOptions::Value_Real)

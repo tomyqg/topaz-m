@@ -38,6 +38,7 @@ ChannelOptions::ChannelOptions()
     outputData.chanAdditionalParameter1[0] = diapason;
     unitsname = "mV";
     indexMultiplier = 1;
+    memset(&calibrations, 0, sizeof(calibrations));
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     timer->setInterval(measureperiod);
@@ -492,6 +493,7 @@ void ChannelOptions::parserChannel(Transaction tr)
     else if(paramName == chanName + "FSRinternal")
     {
         inputData.chanFSRinternal = tr.volFlo;
+		calibrations.chanFSRinternal = tr.volInt;
         if(inputData.chanFSRinternal != outputData.chanFSRinternal)
         {
             trans.volFlo = outputData.chanFSRinternal;

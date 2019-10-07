@@ -18,7 +18,7 @@
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.106"
+#define VER "1.107"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
@@ -100,6 +100,7 @@
 #define pathtorightarrow   "C:/Work/right.png"
 //#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #define pathtosteeloptions "C:/Work/steeloptions.txt"
+#define pathtoupdates  "C:/Work/updates/"
 #else
 #define pathtofiles  QCoreApplication::applicationDirPath()
 #define pathtodirarchive QCoreApplication::applicationDirPath() + "/archive/"

@@ -132,6 +132,10 @@ public slots:
     void slotUpdateExtIntefaceData(QString name);
     void slotFromExtModbus(QString name,tModbusBuffer data);
     void updateObjectsOfMainThread();
+    void slotRestartLocalModbus()
+    {
+        emit signalRestartModbus();
+    }
 
 private slots:
 
@@ -199,6 +203,7 @@ signals:
     void setReleToOptionsForm(int code);
     void signalToExtModbus(QString name,tModbusBuffer buffer);
     void signalReinitExtModbus();
+    void signalRestartModbus();
 
 private:
     Ui::MainWindow *ui;

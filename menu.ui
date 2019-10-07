@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>775</height>
+    <height>783</height>
    </rect>
   </property>
   <property name="font">
@@ -103,7 +103,7 @@
             <number>1</number>
            </property>
            <property name="currentIndex">
-            <number>37</number>
+            <number>25</number>
            </property>
            <widget class="QWidget" name="mainMenu">
             <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -7421,6 +7421,25 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="2" column="0" colspan="2">
+              <widget class="wButtonStyled" name="bBackDevice">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>НАЗАД</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QFrame" name="frameDeviceInfo1">
                <property name="frameShape">
@@ -7436,21 +7455,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="verticalSpacing">
                  <number>9</number>
                 </property>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="devicelbl">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>ТИП МОДУЛЯ</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <widget class="QLabel" name="devErrors">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="deviceType">
                   <property name="minimumSize">
                    <size>
                     <width>131</width>
@@ -7470,28 +7476,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">	background-color: rgb(232, 76, 61);
+                   <string notr="true">	background-color: rgb(21, 159, 133);
 	color: rgb(255, 255, 255);
 	border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string> 0</string>
+                   <string>4AI</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="devicelbl_2">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>ОШИБКИ, ШТ.</string>
                   </property>
                  </widget>
                 </item>
@@ -7522,39 +7515,6 @@ border-radius: 0px;</string>
                   </property>
                   <property name="text">
                    <string> 0</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="deviceType">
-                  <property name="minimumSize">
-                   <size>
-                    <width>131</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>185</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">	background-color: rgb(21, 159, 133);
-	color: rgb(255, 255, 255);
-	border-radius: 0px;</string>
-                  </property>
-                  <property name="text">
-                   <string>4AI</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -7621,19 +7581,6 @@ QListWidget::item {
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="devicelbl_4">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>СТАТУС</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="6" column="0" colspan="2">
                  <spacer name="verticalSpacer_32">
                   <property name="orientation">
@@ -7647,26 +7594,34 @@ QListWidget::item {
                   </property>
                  </spacer>
                 </item>
-               </layout>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QFrame" name="frameDeviceInfo2">
-               <property name="frameShape">
-                <enum>QFrame::NoFrame</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_21">
-                <property name="horizontalSpacing">
-                 <number>0</number>
-                </property>
-                <property name="verticalSpacing">
-                 <number>9</number>
-                </property>
-                <item row="5" column="1">
-                 <widget class="QLabel" name="serialNumber">
+                <item row="3" column="0">
+                 <widget class="QLabel" name="devicelbl_4">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>СТАТУС</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="devicelbl">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ТИП МОДУЛЯ</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QLabel" name="devErrors">
                   <property name="minimumSize">
                    <size>
                     <width>131</width>
@@ -7686,7 +7641,7 @@ QListWidget::item {
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">	background-color: rgb(91, 119, 143);
+                   <string notr="true">	background-color: rgb(232, 76, 61);
 	color: rgb(255, 255, 255);
 	border-radius: 0px;</string>
                   </property>
@@ -7697,6 +7652,76 @@ QListWidget::item {
                    <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="devicelbl_2">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ОШИБКИ, ШТ.</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QFrame" name="frameDeviceInfo2">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_21">
+                <property name="horizontalSpacing">
+                 <number>0</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>9</number>
+                </property>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="devicelbl_6">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ВЕРСИЯ ПЛАТЫ</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0">
+                 <widget class="QLabel" name="devicelbl_10">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ДАТА ВЫПУСКА</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="0" colspan="2">
+                 <spacer name="verticalSpacer_31">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item row="2" column="1">
                  <widget class="QLabel" name="hardwareVersion">
@@ -7732,21 +7757,8 @@ border-radius: 0px;
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="devicelbl_6">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>ВЕРСИЯ ПЛАТЫ</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="protocolVersion">
+                <item row="5" column="1">
+                 <widget class="QLabel" name="serialNumber">
                   <property name="minimumSize">
                    <size>
                     <width>131</width>
@@ -7766,28 +7778,15 @@ border-radius: 0px;
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">	background-color: rgb(21, 159, 133);
+                   <string notr="true">	background-color: rgb(91, 119, 143);
 	color: rgb(255, 255, 255);
 	border-radius: 0px;</string>
                   </property>
                   <property name="text">
-                   <string>10.4</string>
+                   <string> 0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="devicelbl_7">
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>СЕРИЙНЫЙ НОМЕР</string>
                   </property>
                  </widget>
                 </item>
@@ -7824,6 +7823,19 @@ border-radius: 0px;</string>
                   </property>
                  </widget>
                 </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="devicelbl_7">
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>СЕРИЙНЫЙ НОМЕР</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="4" column="0">
                  <widget class="QLabel" name="devicelbl_8">
                   <property name="font">
@@ -7837,16 +7849,69 @@ border-radius: 0px;</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="devicelbl_5">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="protocolVersion">
+                  <property name="minimumSize">
+                   <size>
+                    <width>131</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>185</width>
+                    <height>45</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Open Sans</family>
                     <pointsize>14</pointsize>
                    </font>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">	background-color: rgb(21, 159, 133);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                  </property>
                   <property name="text">
-                   <string>ПРОТОКОЛ</string>
+                   <string>10.4</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="1">
+                 <widget class="QLabel" name="dataOrder">
+                  <property name="minimumSize">
+                   <size>
+                    <width>131</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>185</width>
+                    <height>45</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Open Sans</family>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">	background-color: rgb(232, 76, 61);
+	color: rgb(255, 255, 255);
+	border-radius: 0px;</string>
+                  </property>
+                  <property name="text">
+                   <string> 0</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -7896,8 +7961,8 @@ border-radius: 0px;</string>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="0">
-                 <widget class="QLabel" name="devicelbl_10">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="devicelbl_5">
                   <property name="font">
                    <font>
                     <family>Open Sans</family>
@@ -7905,76 +7970,180 @@ border-radius: 0px;</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>ДАТА ВЫПУСКА</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="7" column="1">
-                 <widget class="QLabel" name="dataOrder">
-                  <property name="minimumSize">
-                   <size>
-                    <width>131</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>185</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Open Sans</family>
-                    <pointsize>14</pointsize>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">	background-color: rgb(232, 76, 61);
-	color: rgb(255, 255, 255);
-	border-radius: 0px;</string>
-                  </property>
-                  <property name="text">
-                   <string> 0</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <string>ПРОТОКОЛ</string>
                   </property>
                  </widget>
                 </item>
                 <item row="8" column="0" colspan="2">
-                 <spacer name="verticalSpacer_31">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                 <widget class="QFrame" name="frameSoftUpdate">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>40</height>
+                    <width>0</width>
+                    <height>0</height>
                    </size>
                   </property>
-                 </spacer>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_45">
+                   <item>
+                    <widget class="QComboBox" name="comboUpdateFiles">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>41</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>45</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>16</pointsize>
+                      </font>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QComboBox {
+background-color: rgb(91, 119, 143);
+color: rgb(255, 255, 255);
+border-radius: 0px;
+text-align: center;
+}</string>
+                     </property>
+                     <property name="currentText">
+                      <string>Выбрать ПО</string>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <property name="insertPolicy">
+                      <enum>QComboBox::NoInsert</enum>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Выбрать ПО</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Mutigraph4AI.hex</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Mutigraph4AI_2.hex</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Mutigraph4AI_test.hex</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="bUpdateStart">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>14</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);
+background-color: #2c3d4d;
+border: 0px solid rgba(255, 255, 255, 0);</string>
+                     </property>
+                     <property name="text">
+                      <string>ОБНОВИТЬ</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QProgressBar" name="progressBarUpdate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>34</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Open Sans</family>
+                       <pointsize>14</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QProgressBar {
+background-color: rgb(166, 166, 166);
+text-align: center;
+color:rgb(255, 255, 255);
+border-radius:0px;
+}
+
+QProgressBar::chunk {
+background-color: #2c3d4d;
+     width: 1px;
+ }</string>
+                     </property>
+                     <property name="value">
+                      <number>0</number>
+                     </property>
+                     <property name="format">
+                      <string>%v%</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </item>
                </layout>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="wButtonStyled" name="bBackDevice">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>НАЗАД</string>
-               </property>
               </widget>
              </item>
             </layout>
@@ -11877,7 +12046,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-417</y>
+                <y>0</y>
                 <width>714</width>
                 <height>898</height>
                </rect>
@@ -12809,7 +12978,7 @@ border-radius: 0px;
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1,1,1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1,1,0">
          <property name="spacing">
           <number>25</number>
          </property>

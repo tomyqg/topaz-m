@@ -46,7 +46,7 @@ signals:
 public slots:
     void run();
     void getTransSlot(Transaction tr);
-
+    void slotRestartModbus();
 private slots:
 //    void do_Work();
     int sendModbusRequest( int slave, int func, int addr, int num, int state, const uint16_t *data_src, uint32_t *data_dest);
@@ -59,6 +59,7 @@ private:
     bool isrunning,isstopped;
     bool m_running;
     bool fQueueOver1000;    //признак переполнения очереди
+    bool pause;             // пауза в работе воркера
     modbus_t * m_modbus;
     QList<ChannelOptions *> ChannelsObjectsList;
     QMutex mQueue;
@@ -67,6 +68,7 @@ private:
     QMutex TestMutex;
     QQueue<Transaction> trans;
     typeStateSlave slaves[6];
+
 
 };
 

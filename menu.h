@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QMovie>
 #include <QTimer>
+#include <QSerialPort>
 #include <settings.h>
 #include <systemoptions.h>
 #include <defines.h>
@@ -104,6 +105,13 @@ private:
     int curDiagnostDevice;
     int curRelay;
     int curFreq;
+    QDir dir;  //объект работы с папками
+    QFile updateFile;
+    QByteArray sendArray;
+    QSerialPort *m_serial = nullptr;
+    int countString;
+    int totalString;
+    QTimer * timerSoftUpdate;
 
 //    QList<cSteel*> listSteels;
 //    typeSteelTech steelTech[NUM_TECHNOLOGIES];
@@ -121,7 +129,13 @@ private:
     void addWidgetFreqs();
     QLabel *addFramMeasureDiagnostic(QString lblParam, QString lblName, QString lblValue, QString lblUnit);
     QString getNameDevice();
+    void asciiToHex(QByteArray inArray, uint8_t *outArray);
+
+    void sendFile();
+    void readData();
+    void findUpdateFales();
 private slots:
+    void closeSerialPort();
     void updateDeviceMain();
     void updateDevicesUI();
     void UpdateAnalyze();
@@ -279,11 +293,20 @@ private slots:
 
     void on_bBackDevice_2_clicked();
 
+    void on_bUpdateStart_clicked();
+
+    void on_bUpdateStart_pressed();
+
+    void on_bUpdateStart_released();
+
+    void handleError(QSerialPort::SerialPortError error);
+    void startSoftUpdate();
 signals:
     void saveButtonSignal();
     void finishCopyArchive();
     void newUstavka(int num);
     void signalToWorker(Transaction tr);
+    void signalRestartLocalModbus();
 };
 
 #endif // MENU_H
