@@ -3858,8 +3858,8 @@ typedef struct
     uint8_t analogUnitChan24[8];
 } tExtDeviceBasicParams;
 #pragma pack(pop)
-#define PAR_HELPER(fmt, ...) printf(fmt " \ n%; s; ", __VA_ARGS__)
-#define PAR(...) PAR_HELPER(__VA_ARGS__, ")
+//#define PAR_HELPER(fmt, ...) printf(fmt " \ n%; s; ", __VA_ARGS__)
+//#define PAR(...) PAR_HELPER(__VA_ARGS__, ")
 #define PAR_PREF(...) (*(&(g_extModbusDataStorage.##__VA_ARGS__##)))
 #define DEVICE_PAR(param) &(g_extModbusDataStorage.##param)
 #define DEVICE_PAR_VOID(param) ((void*)&(g_extModbusDataStorage.##param))

@@ -17,6 +17,7 @@
 #include "qtcsv-master/include/qtcsv/writer.h"
 #include "qtcsv-master/include/qtcsv/stringdata.h"
 
+#define DEBUG_UPDATE_SOFT
 
 #define HEIGHT 768
 #define WIDTH 1024
@@ -313,9 +314,6 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
 
 dMenu::~dMenu()
 {
-//    disconnect(ethernet, SIGNAL(signalErrIp()), this, SLOT(slotIpErr()));
-//    disconnect(ethernet, SIGNAL(signalStatus(bool,bool)), \
-            this, SLOT(slotUpdateEthernetStatus(bool,bool)));
     delete ui;
 }
 
@@ -1465,6 +1463,7 @@ void dMenu::on_bDevice1_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 1");
     curDiagnostDevice = 1;
+    findUpdateFales();
 }
 
 void dMenu::on_bDevice2_clicked()
@@ -1474,6 +1473,7 @@ void dMenu::on_bDevice2_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 2");
     curDiagnostDevice = 2;
+    findUpdateFales();
 }
 
 void dMenu::on_bDevice3_clicked()
@@ -1483,6 +1483,7 @@ void dMenu::on_bDevice3_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 3");
     curDiagnostDevice = 3;
+    findUpdateFales();
 }
 
 void dMenu::on_bDevice4_clicked()
@@ -1492,6 +1493,7 @@ void dMenu::on_bDevice4_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 4");
     curDiagnostDevice = 4;
+    findUpdateFales();
 }
 
 void dMenu::on_bDevice5_clicked()
@@ -1501,6 +1503,7 @@ void dMenu::on_bDevice5_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 5");
     curDiagnostDevice = 5;
+    findUpdateFales();
 }
 
 void dMenu::on_bDevice6_clicked()
@@ -1510,6 +1513,7 @@ void dMenu::on_bDevice6_clicked()
     ui->stackedWidget->setCurrentIndex(25);
     ui->nameSubMenu->setText("МОДУЛЬ 6");
     curDiagnostDevice = 6;
+    findUpdateFales();
 }
 
 void dMenu::on_bBackLight_clicked()
@@ -1676,6 +1680,8 @@ void dMenu::on_bBackListFreq_clicked()
     ui->stackedWidget->setCurrentIndex(4);
     ui->nameSubMenu->setText("ВХОДЫ");
 }
+
+
 
 void dMenu::updateDriversWidgets()
 {
@@ -2838,7 +2844,11 @@ void dMenu::updateDevicesUI()
         ui->listDeviceErrors->addItems(activeErrors);
         ui->protocolVersion->setText(QString::number(curDev->protocolVersion));
         ui->hardwareVersion->setText(QString::number(curDev->hardwareVersion));
-        ui->softwareVersion->setText(QString::number(curDev->softwareVersion));
+        QString strVersion = QString::number(curDev->softwareVersion >> 24);
+        strVersion += ("." + QString::number((curDev->softwareVersion >> 16) & 0xFF));
+        strVersion += ("." + QString::number((curDev->softwareVersion >> 8) & 0xFF));
+        strVersion += ("." + QString::number(curDev->softwareVersion & 0xFF));
+        ui->softwareVersion->setText(strVersion);
         ui->serialNumber->setText(QString::number(curDev->serialNumber));
         ui->uptime->setText(QString::number(curDev->uptime));
         int year = (curDev->factoryDate >> 24) & 0xFF;
@@ -3154,4 +3164,217 @@ QString dMenu::getNameDevice()
         strName = strName + "-Steel";
     }
     return strName;
+}
+
+
+
+
+void dMenu::on_bUpdateStart_pressed()
+{
+
+}
+
+void dMenu::on_bUpdateStart_released()
+{
+
+}
+
+void dMenu::findUpdateFales()
+{
+    ui->progressBarUpdate->hide();
+    dir.setPath(pathtoupdates);
+    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);   //устанавливаем фильтр выводимых файлов/папок
+    dir.setSorting(QDir::Time | QDir::Reversed);   //устанавливаем сортировку "от меньшего к большему"
+    QFileInfoList list = dir.entryInfoList();     //получаем список файлов директории
+    QStringList listNameFiles;
+    foreach (QFileInfo file, list) {
+        QStringList name = file.fileName().split('.');
+        if(name.at(name.size()-1) == "hex")
+        {
+            listNameFiles.append(file.fileName());
+        }
+    }
+    ui->comboUpdateFiles->clear();
+    ui->comboUpdateFiles->addItem("Выбрать ПО");
+    ui->comboUpdateFiles->addItems(listNameFiles);
+    ui->comboUpdateFiles->setCurrentIndex(0);
+}
+
+void dMenu::on_bUpdateStart_clicked()
+{
+    if(ui->comboUpdateFiles->currentIndex() != 0)
+    {
+        if(m_serial == NULL)
+        {
+            QString filePatch = QString(pathtoupdates) + ui->comboUpdateFiles->currentText();
+            updateFile.setFileName(filePatch);
+
+            // подсчёт количества строк в файле
+            if(updateFile.open(QIODevice::ReadOnly))
+            {
+                totalString = 0;
+                QString line;
+                do
+                {
+                    line = updateFile.readLine();
+                    totalString++;
+                }
+                while(!line.isEmpty());
+                updateFile.close();
+            }
+            else
+            {
+                qDebug() << "Error open file";
+            }
+
+            // инициализация прошивки
+            if(updateFile.open(QIODevice::ReadOnly))
+            {
+                qDebug() << "File is open";
+                Transaction tran(Transaction::W);
+                tran.slave = curDiagnostDevice;
+                tran.offset = cRegistersMap::getOffsetByName("updateSoftware");
+                tran.volInt = listDevice.at(curDiagnostDevice-1)->softwareVersion;
+                emit signalToWorker(tran);
+
+                timerSoftUpdate = new QTimer();
+                timerSoftUpdate->stop();
+                connect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(closeSerialPort()));
+                //            timerSoftUpdate->start(5000);
+                QTimer::singleShot(5000, this, SLOT(startSoftUpdate()));
+            }
+            else
+            {
+                qDebug() << "Error open file";
+            }
+        }
+    }
+}
+
+void dMenu::startSoftUpdate()
+{
+    timerSoftUpdate->start(10000);
+    m_serial = new QSerialPort(this);
+    m_serial->setPortName(comportname);
+    m_serial->setBaudRate(115200);//(comportbaud);
+    m_serial->setDataBits(QSerialPort::Data8);
+    m_serial->setParity(QSerialPort::NoParity);
+    m_serial->setStopBits(QSerialPort::OneStop);
+//            m_serial->setFlowControl(p.flowControl);
+    connect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
+    connect(m_serial, &QSerialPort::readyRead, this, &dMenu::readData);
+    if(!m_serial->open(QIODevice::ReadWrite))
+    {
+        qDebug() << "Error open Port";
+    }
+    else
+    {
+        countString = 0;
+        if(totalString != 0)
+        {
+            float progress = (float)countString / totalString * 100;
+            ui->progressBarUpdate->setValue(progress);
+            ui->progressBarUpdate->show();
+        }
+        sendFile();
+    }
+}
+
+void dMenu::asciiToHex(QByteArray inArray, uint8_t* outArray)
+{
+    uint8_t tmp[43];
+    for(uint8_t i = 1; i < 43; i++)
+    {
+        if(inArray[i] <= '9' && inArray[i] >= '0' )
+        {
+            tmp[i] = inArray[i];
+            tmp[i] = inArray[i] - 0x30;
+        }
+        else
+        {
+            tmp[i] = inArray[i];
+            tmp[i] = inArray[i] - 0x41 + 10;
+        }
+    }
+    outArray[0] = ':';
+    for(uint8_t i = 1; i < 22 ; i++)
+    {
+        outArray[i] = tmp[2*i - 1]*16 + tmp[2*i];
+    }
+}
+
+void dMenu::handleError(QSerialPort::SerialPortError error)
+{
+    if(error == QSerialPort::ResourceError) {
+        QMessageBox::critical(this, tr("Critical Error"), m_serial->errorString());
+        closeSerialPort();
+    }
+}
+
+void dMenu::closeSerialPort()
+{
+    timerSoftUpdate->stop();
+    if (m_serial->isOpen())
+    {
+        m_serial->close();  //закрыть и удалить порт по завершении
+    }
+    qDebug() << "Disconnected";
+    updateFile.close(); //закрыть файл по завершении прошивки
+    qDebug() << "File is closed";
+    disconnect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
+    disconnect(m_serial, &QSerialPort::readyRead, this, &dMenu::readData);
+    m_serial->deleteLater();
+    disconnect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(startSoftUpdate()));
+    timerSoftUpdate->deleteLater();
+
+    emit signalRestartLocalModbus();
+    qDebug() << "Signal Restart Modbus";
+    ui->progressBarUpdate->hide();
+    ui->comboUpdateFiles->setCurrentIndex(0);
+}
+
+void dMenu::readData()
+{
+    timerSoftUpdate->setInterval(10000);
+    const QByteArray data = m_serial->readAll();
+#ifdef DEBUG_UPDATE_SOFT
+    qDebug() << "data" << data;
+#endif
+    if (data[0] == 'O')
+    {
+        this->thread()->msleep(1);  // ждём между строчками 1 мсек
+        sendFile();
+    }
+    else
+    {
+        m_serial->write(sendArray,22);
+    }
+}
+
+void dMenu::sendFile()
+{
+    uint8_t outArray[22];
+    QByteArray readArray = updateFile.readLine();
+#ifdef DEBUG_UPDATE_SOFT
+    qDebug() << "readArray" << readArray;
+#endif
+    if(!readArray.isEmpty())
+    {
+        asciiToHex(readArray, outArray);
+        sendArray = QByteArray::fromRawData((char*)(outArray), 22);
+        int res = m_serial->write(sendArray,22);
+#ifdef DEBUG_UPDATE_SOFT
+        qDebug() << "sendArray" << sendArray.toHex();
+        qDebug() << countString;
+#endif
+        countString++;
+        float progress = (float)countString / totalString * 100;
+        ui->progressBarUpdate->setValue(progress);
+    }
+    else
+    {
+        timerSoftUpdate->stop();
+//        QTimer::singleShot(15000, this, SLOT(closeSerialPort()));
+        closeSerialPort();
+    }
 }

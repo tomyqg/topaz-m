@@ -62,11 +62,6 @@ void wVolueBar::setValue(double vol)
     //геометрия виждета текущей величины
     if(vol >= 0)
     {
-//        ui->curHBar->setGeometry(0, \
-                                 (ui->placeBar->height() / 2) * (1 - (vol / razmah)), \
-                                 ui->placeBar->width(), \
-                                 (vol / razmah) * (ui->placeBar->height() / 2) \
-                                 );
         ui->curHBar->setGeometry(0, \
                                  lineZeroY - ui->placeBar->height() * (vol / razmah), \
                                  ui->placeBar->width(), \
@@ -75,11 +70,6 @@ void wVolueBar::setValue(double vol)
     }
     else if(vol < 0)
     {
-//        ui->curHBar->setGeometry(0, \
-                                 ui->placeBar->height() / 2, \
-                                 ui->placeBar->width(), \
-                                 vol * ui->placeBar->height() / 2 * (-1) / razmah \
-                                 );
         ui->curHBar->setGeometry(0, \
                                  lineZeroY, \
                                  ui->placeBar->width(), \
@@ -180,11 +170,6 @@ void wVolueBar::resizeEvent(QResizeEvent * s)
                 ui->shadowBar->width(),      \
                 ui->frameBar->height() - BAR_PADDING_BOTTOM \
                 );
-//    ui->lineZero->setGeometry(  \
-                0,  \
-                ui->placeBar->height()/2 - 1,  \
-                ui->placeBar->width(),      \
-                2 );
     ui->lineZero->setGeometry(  \
                 0,  \
                 (higherMeasure / razmah) * ui->placeBar->height() - 1,  \
@@ -211,12 +196,7 @@ void wVolueBar::setExtr(double minimum, double maximum)
  */
 void wVolueBar::setLim(double low, double hi)
 {
-//    ui->metkaLow->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (low / razmah)) - METKA_HEIGHT / 2, \
-//                              ui->placeBar->width(), METKA_HEIGHT);
-//    ui->metkaHi->setGeometry(0, (ui->placeBar->height() / 2) * (1 - (hi / razmah)) - METKA_HEIGHT / 2, \
-//                             ui->placeBar->width(), METKA_HEIGHT);
-//    ui->metkaLow->show();
-//    ui->metkaHi->show();
+
 }
 
 void wVolueBar::resetLim()
@@ -261,11 +241,6 @@ void wVolueBar::setText(QString type, QString mes)
 
     if(numChan != 0)
     {
-//        ui->typeBar->setText("<html><head/><body><p>" + \
-//                             type + \
-//                             "<span style=\" vertical-align:sub;\">" + \
-//                             QString::number(numChan) + \
-//                             "</span></p></body></html>");
         ui->typeBar->setText("<html><head/><body><p>" + \
                              type + \
                              "</p></body></html>");

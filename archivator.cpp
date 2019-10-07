@@ -316,8 +316,8 @@ QVector<double> cArchivator::getVector(int ch)
             //если индекс следующий, то снова усреднять точки в одном индексе
             if(vectorIndexBigPeriod > lastIndexBig)
             {
-                //получается, что обновляет выходной массив \
-                сразу при переходе на новый индекс
+                //получается, что обновляет выходной массив 
+                //сразу при переходе на новый индекс
                 if(countAvg != 0) ret.replace(lastIndexBig, avg / countAvg);
                 lastIndexBig = vectorIndexBigPeriod;
                 countAvg = 0;

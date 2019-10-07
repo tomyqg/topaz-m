@@ -100,6 +100,7 @@
 #define pathtorightarrow   "C:/Work/right.png"
 //#define pathtosteeloptions QCoreApplication::applicationDirPath() + "/steeloptions.txt"
 #define pathtosteeloptions "C:/Work/steeloptions.txt"
+#define pathtoupdates  "C:/Work/updates/"
 #else
 #define pathtofiles  QCoreApplication::applicationDirPath()
 #define pathtodirarchive QCoreApplication::applicationDirPath() + "/archive/"

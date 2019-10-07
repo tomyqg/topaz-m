@@ -111,6 +111,7 @@ void MainWindow::MainWindowInitialization()
     connect(this, SIGNAL(sendTransToWorker(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendTrans(Transaction)), this, SLOT(getTransFromWorkerSlot(Transaction)), Qt::DirectConnection);
     connect(myWorker, SIGNAL(sendMessToLog(QString)), this, SLOT(WorkerMessSlot(QString)), Qt::DirectConnection);
+    connect(this, SIGNAL(signalRestartModbus()), myWorker, SLOT(slotRestartModbus()), Qt::DirectConnection);
 //    connect(sc, SIGNAL(sendRequest(Transaction)), myWorker, SLOT(getTransSlot(Transaction)), Qt::DirectConnection);
     WorkerThread->start(QThread::LowPriority); // запускаем сам поток
     // /Инициализация потока Worker ---------------------
@@ -414,6 +415,9 @@ void MainWindow::MainWindowInitialization()
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     //сигнал из меню о создании новой уставки
     connect(menu, SIGNAL(newUstavka(int)), this, SLOT(newUstavkaConnect(int)));
+    // сигналы для инициализации прошивки платы
+    connect(menu, SIGNAL(signalToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
+    connect(menu, SIGNAL(signalRestartLocalModbus()), this, SLOT(slotRestartLocalModbus()));
 
     qDebug() << "MainWindow is init";
 }
@@ -505,13 +509,11 @@ void MainWindow::UpdUst()
         int i = 0;
         if(ch)
         {
-            mListChannel.lock();
+            mListChannel.lock(); // Vag: Устранить мютекс в мютексе
             ChannelOptions * channel = listChannels.at(ch-1);
-            ust->update(channel->GetCurrentChannelValue());
+            double value = channel->GetCurrentChannelValue();
             mListChannel.unlock();
-//            ust->setNameCh(channel->GetChannelName());
-//            ust->setNum(i+1);
-//            ust->setIdentifikator("Limit" + QString::number(i+1));
+            ust->update(value);
         }
         i++;
     }
