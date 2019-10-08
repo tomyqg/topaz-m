@@ -1,7 +1,5 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2012-03-04T23:24:55
-# By Andrey Shmelev e-mail: andrshmel@gmail.com +79227112858
 #-------------------------------------------------
 
 QT += core gui qml #script
@@ -23,6 +21,7 @@ CONFIG += mockup
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
+unix:CONFIG += serialport
 
 TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \

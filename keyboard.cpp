@@ -173,7 +173,7 @@ void keyboard::on_pushButton_13_clicked()
 {
     newString = ui->textEdit->text();
     cLogger mk(pathtomessages, cLogger::UI);
-    mk.addMess("Keyboard " + olderprop + " > " + ui->textEdit->text()/*->toPlainText()*/,\
+    mk.addMess("Keyboard \"" + olderprop + "\" > \"" + ui->textEdit->displayText() + "\"",\
                cLogger::SERVICE);
     ui->labelWarning->hide();
     this->close();

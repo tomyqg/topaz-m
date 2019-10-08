@@ -441,14 +441,72 @@ void ChannelOptions::parserChannel(Transaction tr)
     }
     else if(paramName == chanName + "DataFlags")
     {
+        if(inputData.chanDataFlags != (uint16_t)tr.volInt)
+        {
+            log = new cLogger(pathtomessages, cLogger::CHANNEL);
+            if((uint16_t)tr.volInt == ECDF_BREAK)
+            {
+
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Line break";
+                log->addMess(mess, cLogger::ERR);
+            }
+            else if((uint16_t)tr.volInt == ECDF_ERROR)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Measure impossible";
+                log->addMess(mess, cLogger::ERR);
+            }
+            log->deleteLater();
+        }
         inputData.chanDataFlags = (uint16_t)tr.volInt;
     }
     else if(paramName == chanName + "Status")
     {
+        if(inputData.chanStatus != (uint16_t)tr.volInt)
+        {
+            log = new cLogger(pathtomessages, cLogger::CHANNEL);
+            if((uint16_t)tr.volInt == ECS_CONFIG)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Error configiration";
+                log->addMess(mess, cLogger::ERR);
+            }
+            else if((uint16_t)tr.volInt == ECS_ERROR)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Error in channel";
+                log->addMess(mess, cLogger::ERR);
+            }
+            log->deleteLater();
+        }
         inputData.chanStatus = (uint16_t)tr.volInt;
     }
     else if(paramName == chanName + "Error")
     {
+        if(inputData.chanError != (uint16_t)tr.volInt)
+        {
+            log = new cLogger(pathtomessages, cLogger::CHANNEL);
+            if((uint16_t)tr.volInt & ECE_COMM)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Error ADC";
+                log->addMess(mess, cLogger::ERR);
+            }
+            if((uint16_t)tr.volInt & ECE_CJ)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Error cold junction";
+                log->addMess(mess, cLogger::ERR);
+            }
+            if((uint16_t)tr.volInt & ECE_CALIB)
+            {
+                QString mess = "Channel " + QString::number(numChannel)\
+                        + " | Error calibrations";
+                log->addMess(mess, cLogger::ERR);
+            }
+            log->deleteLater();
+        }
         inputData.chanError = (uint16_t)tr.volInt;
     }
     else if(paramName == chanName + "Quantity")
@@ -1545,7 +1603,7 @@ bool ChannelOptions::isError()
 {
     if((inputData.chanDataFlags == ECDF_BREAK) || (inputData.chanDataFlags == ECDF_ERROR))
         return true;
-    if(inputData.chanError != EDE_NO_ERROR)
+    if(inputData.chanError != ECE_NO_ERROR)
         return true;
     if((inputData.chanStatus == ECS_CONFIG) || (inputData.chanStatus == ECS_ERROR))
         return true;

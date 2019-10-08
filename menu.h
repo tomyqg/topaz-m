@@ -108,7 +108,7 @@ private:
     QDir dir;  //объект работы с папками
     QFile updateFile;
     QByteArray sendArray;
-    QSerialPort *m_serial = nullptr;
+    QSerialPort * m_serial;
     int countString;
     int totalString;
     QTimer * timerSoftUpdate;

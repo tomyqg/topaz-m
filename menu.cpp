@@ -1864,8 +1864,9 @@ void dMenu::updateDiagnosticMess()
 
     for (int var = 0; var < messagesarray.count() ; ++var) {
         QJsonObject mes = messagesarray.at(var).toObject();
-        if((mes.value("C") != cLogger::SERVICE) && \
-                (mes.value("C") == cLogger::ERR))
+        if(((mes.value("C") == cLogger::SERVICE) \
+            && (cExpertAccess::getMode() != Access_User))\
+                || (mes.value("C") == cLogger::ERR))
         {
 //            if((mes.value("S") == cLogger::CHANNEL) || \
 //                    (mes.value("S") == cLogger::DEVICE) || \
@@ -2433,6 +2434,7 @@ void dMenu::on_bAddUstavka_clicked()
     listUstavok.append(ust);
     mListUstvok.unlock();
     emit newUstavka(i);
+    log->addMess("New setpoint", cLogger::SERVICE, cLogger::USTAVKA);
 
     //регенерация кнопок уставок
     addWidgetUstavki();
@@ -2448,6 +2450,7 @@ void dMenu::on_bAddGroup_clicked()
     group->enabled = true;
     group->groupName = "Group " + QString::number(size+1);
     listGroup.append(group);
+    log->addMess("New group", cLogger::USER, cLogger::UI);
 
     //регенерация кнопок групп
     addWidgetGroup();
@@ -2457,6 +2460,8 @@ void dMenu::on_bDelGroup_clicked()
 {
     if(listGroup.size() > 1)
     {
+        QString mess = "Del group " + listGroup.at(curGroupEdit)->groupName + "(" + QString::number(curGroupEdit) + ")";
+        log->addMess(mess, cLogger::USER, cLogger::UI);
         listGroup.removeAt(curGroupEdit);
     }
     ui->stackedWidget->setCurrentIndex(22);
@@ -2900,6 +2905,8 @@ void dMenu::updateDeviceInfo(uint8_t index)
 
 void dMenu::on_bToConnect_clicked()
 {
+    QString mess = "Set Ethernet: ip " + ui->ipAddr->text();
+    log->addMess(mess, cLogger::SERVICE, cLogger::EXT_NET);
     ethernet->setConfig(ui->ipAddr->text(), \
                             ui->netMask->text(), ui->gateWay->text());
 }
@@ -3198,14 +3205,19 @@ void dMenu::findUpdateFales()
     ui->comboUpdateFiles->addItem("Выбрать ПО");
     ui->comboUpdateFiles->addItems(listNameFiles);
     ui->comboUpdateFiles->setCurrentIndex(0);
+    if(ui->comboUpdateFiles->count() > 1)
+    {
+        ui->bUpdateStart->setEnabled(true);
+    }
 }
 
 void dMenu::on_bUpdateStart_clicked()
 {
     if(ui->comboUpdateFiles->currentIndex() != 0)
     {
-        if(m_serial == NULL)
-        {
+//        if(m_serial == NULL)
+//        {
+        ui->bUpdateStart->setEnabled(false);
             QString filePatch = QString(pathtoupdates) + ui->comboUpdateFiles->currentText();
             updateFile.setFileName(filePatch);
 
@@ -3227,6 +3239,18 @@ void dMenu::on_bUpdateStart_clicked()
                 qDebug() << "Error open file";
             }
 
+            // Запись в журнал о начале прошивке, если файл не пустой
+            if(totalString > 0)
+            {
+                QStringList strType;
+                strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+                int size = strType.size();
+                int type = (int)listDevice.at(curDiagnostDevice-1)->deviceType;
+                QString mess = "Start update module " + QString::number(curDiagnostDevice)\
+                        + " | Type: " + strType.at(type % size);
+                log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+            }
+
             // инициализация прошивки
             if(updateFile.open(QIODevice::ReadOnly))
             {
@@ -3242,12 +3266,13 @@ void dMenu::on_bUpdateStart_clicked()
                 connect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(closeSerialPort()));
                 //            timerSoftUpdate->start(5000);
                 QTimer::singleShot(5000, this, SLOT(startSoftUpdate()));
+
             }
             else
             {
                 qDebug() << "Error open file";
             }
-        }
+//        }
     }
 }
 
@@ -3261,7 +3286,7 @@ void dMenu::startSoftUpdate()
     m_serial->setParity(QSerialPort::NoParity);
     m_serial->setStopBits(QSerialPort::OneStop);
 //            m_serial->setFlowControl(p.flowControl);
-    connect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
+//    connect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
     connect(m_serial, &QSerialPort::readyRead, this, &dMenu::readData);
     if(!m_serial->open(QIODevice::ReadWrite))
     {
@@ -3319,9 +3344,9 @@ void dMenu::closeSerialPort()
         m_serial->close();  //закрыть и удалить порт по завершении
     }
     qDebug() << "Disconnected";
-    updateFile.close(); //закрыть файл по завершении прошивки
+
     qDebug() << "File is closed";
-    disconnect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
+//    disconnect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
     disconnect(m_serial, &QSerialPort::readyRead, this, &dMenu::readData);
     m_serial->deleteLater();
     disconnect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(startSoftUpdate()));
@@ -3338,7 +3363,7 @@ void dMenu::readData()
     timerSoftUpdate->setInterval(10000);
     const QByteArray data = m_serial->readAll();
 #ifdef DEBUG_UPDATE_SOFT
-    qDebug() << "data" << data;
+    qDebug() << "data" << data.toStdString().c_str();
 #endif
     if (data[0] == 'O')
     {
@@ -3356,7 +3381,7 @@ void dMenu::sendFile()
     uint8_t outArray[22];
     QByteArray readArray = updateFile.readLine();
 #ifdef DEBUG_UPDATE_SOFT
-    qDebug() << "readArray" << readArray;
+    qDebug() << "readArray" << readArray.toStdString().c_str();
 #endif
     if(!readArray.isEmpty())
     {
@@ -3364,7 +3389,7 @@ void dMenu::sendFile()
         sendArray = QByteArray::fromRawData((char*)(outArray), 22);
         int res = m_serial->write(sendArray,22);
 #ifdef DEBUG_UPDATE_SOFT
-        qDebug() << "sendArray" << sendArray.toHex();
+        qDebug() << "sendArray" << sendArray.toHex().toStdString().c_str();
         qDebug() << countString;
 #endif
         countString++;
@@ -3373,8 +3398,14 @@ void dMenu::sendFile()
     }
     else
     {
+        updateFile.close(); //закрыть файл по завершении прошивки
         timerSoftUpdate->stop();
-//        QTimer::singleShot(15000, this, SLOT(closeSerialPort()));
+//        QTimer::singleShot(5000, this, SLOT(closeSerialPort()));
+        QStringList strType;
+        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+        QString mess = "Finish update module " + QString::number(curDiagnostDevice)\
+                + " | Type: " + strType.at((listDevice.at(curDiagnostDevice-1)->deviceType)%strType.size());
+        log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
         closeSerialPort();
     }
 }

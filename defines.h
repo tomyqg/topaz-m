@@ -63,6 +63,7 @@
 #define pathtorightarrow   "/opt/right.png"
 #define pathtomodbusconfigfile  "/opt/MODBusConfigFile.txt"
 #define pathtosteeloptions "/opt/steeloptions.txt"
+#define pathtoupdates  "/opt/updates/"
 #define uartsleep DelayMsec(80);
 #define threadsleep DelayMsec(100);
 #define longsleep DelayMsec(1000);
