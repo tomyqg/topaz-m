@@ -3239,6 +3239,18 @@ void dMenu::on_bUpdateStart_clicked()
                 qDebug() << "Error open file";
             }
 
+            // Запись в журнал о начале прошивке, если файл не пустой
+            if(totalString > 0)
+            {
+                QStringList strType;
+                strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+                int size = strType.size();
+                int type = (int)listDevice.at(curDiagnostDevice-1)->deviceType;
+                QString mess = "Start update module " + QString::number(curDiagnostDevice)\
+                        + " | Type: " + strType.at(type % size);
+                log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+            }
+
             // инициализация прошивки
             if(updateFile.open(QIODevice::ReadOnly))
             {
@@ -3254,13 +3266,7 @@ void dMenu::on_bUpdateStart_clicked()
                 connect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(closeSerialPort()));
                 //            timerSoftUpdate->start(5000);
                 QTimer::singleShot(5000, this, SLOT(startSoftUpdate()));
-//                QStringList strType;
-//                strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
-//                int size = strType.size();
-//                int type = (int)listDevice.at(curDiagnostDevice)->deviceType;
-//                QString mess = "Start update module " + QString::number(curDiagnostDevice)\
-//                        + " | Type: " + strType.at(type % size);
-//                log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+
             }
             else
             {
@@ -3338,7 +3344,7 @@ void dMenu::closeSerialPort()
         m_serial->close();  //закрыть и удалить порт по завершении
     }
     qDebug() << "Disconnected";
-    updateFile.close(); //закрыть файл по завершении прошивки
+
     qDebug() << "File is closed";
 //    disconnect(m_serial, &QSerialPort::errorOccurred, this, &dMenu::handleError);
     disconnect(m_serial, &QSerialPort::readyRead, this, &dMenu::readData);
@@ -3357,7 +3363,7 @@ void dMenu::readData()
     timerSoftUpdate->setInterval(10000);
     const QByteArray data = m_serial->readAll();
 #ifdef DEBUG_UPDATE_SOFT
-    qDebug() << "data" << data;
+    qDebug() << "data" << data.toStdString().c_str();
 #endif
     if (data[0] == 'O')
     {
@@ -3375,7 +3381,7 @@ void dMenu::sendFile()
     uint8_t outArray[22];
     QByteArray readArray = updateFile.readLine();
 #ifdef DEBUG_UPDATE_SOFT
-    qDebug() << "readArray" << readArray;
+    qDebug() << "readArray" << readArray.toStdString().c_str();
 #endif
     if(!readArray.isEmpty())
     {
@@ -3383,7 +3389,7 @@ void dMenu::sendFile()
         sendArray = QByteArray::fromRawData((char*)(outArray), 22);
         int res = m_serial->write(sendArray,22);
 #ifdef DEBUG_UPDATE_SOFT
-        qDebug() << "sendArray" << sendArray.toHex();
+        qDebug() << "sendArray" << sendArray.toHex().toStdString().c_str();
         qDebug() << countString;
 #endif
         countString++;
@@ -3392,13 +3398,14 @@ void dMenu::sendFile()
     }
     else
     {
+        updateFile.close(); //закрыть файл по завершении прошивки
         timerSoftUpdate->stop();
-//        QTimer::singleShot(15000, this, SLOT(closeSerialPort()));
-//        QStringList strType;
-//        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
-//        QString mess = "Finish update module " + QString::number(curDiagnostDevice)\
-//                + " | Type: " + strType.at((listDevice.at(curDiagnostDevice)->deviceType)%strType.size());
-//        log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+//        QTimer::singleShot(5000, this, SLOT(closeSerialPort()));
+        QStringList strType;
+        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+        QString mess = "Finish update module " + QString::number(curDiagnostDevice)\
+                + " | Type: " + strType.at((listDevice.at(curDiagnostDevice-1)->deviceType)%strType.size());
+        log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
         closeSerialPort();
     }
 }
