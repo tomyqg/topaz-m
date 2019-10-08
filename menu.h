@@ -5,7 +5,7 @@
 #include <QWidget>
 #include <QMovie>
 #include <QTimer>
-#include "qextserialport.h"
+//#include "qextserialport.h"
 //#include <QtSerialPort/QtSerialPort>
 #include <QSerialPort>
 #include <settings.h>

@@ -18,10 +18,10 @@ Q_OS_LINUX = 1
 
 QT_IM_MODULE=mockup
 CONFIG += mockup
-CONFIG += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
+unix:CONFIG += serialport
 
 TARGET = TopazM_MB
 INCLUDEPATH += 3rdparty/libmodbus 3rdparty/qextserialport   \

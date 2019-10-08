@@ -3205,14 +3205,19 @@ void dMenu::findUpdateFales()
     ui->comboUpdateFiles->addItem("Выбрать ПО");
     ui->comboUpdateFiles->addItems(listNameFiles);
     ui->comboUpdateFiles->setCurrentIndex(0);
+    if(ui->comboUpdateFiles->count() > 1)
+    {
+        ui->bUpdateStart->setEnabled(true);
+    }
 }
 
 void dMenu::on_bUpdateStart_clicked()
 {
     if(ui->comboUpdateFiles->currentIndex() != 0)
     {
-        if(m_serial == NULL)
-        {
+//        if(m_serial == nullptr)
+//        {
+        ui->bUpdateStart->setEnabled(false);
             QString filePatch = QString(pathtoupdates) + ui->comboUpdateFiles->currentText();
             updateFile.setFileName(filePatch);
 
@@ -3249,17 +3254,19 @@ void dMenu::on_bUpdateStart_clicked()
                 connect(timerSoftUpdate, SIGNAL(timeout()), this, SLOT(closeSerialPort()));
                 //            timerSoftUpdate->start(5000);
                 QTimer::singleShot(5000, this, SLOT(startSoftUpdate()));
-                QStringList strType;
-                strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
-                QString mess = "Start update module " + QString::number(curDiagnostDevice)\
-                        + " | Type: " + strType.at((listDevice.at(curDiagnostDevice)->deviceType)%strType.size());
-                log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+//                QStringList strType;
+//                strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+//                int size = strType.size();
+//                int type = (int)listDevice.at(curDiagnostDevice)->deviceType;
+//                QString mess = "Start update module " + QString::number(curDiagnostDevice)\
+//                        + " | Type: " + strType.at(type % size);
+//                log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
             }
             else
             {
                 qDebug() << "Error open file";
             }
-        }
+//        }
     }
 }
 
@@ -3387,11 +3394,11 @@ void dMenu::sendFile()
     {
         timerSoftUpdate->stop();
 //        QTimer::singleShot(15000, this, SLOT(closeSerialPort()));
-        QStringList strType;
-        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
-        QString mess = "Finish update module " + QString::number(curDiagnostDevice)\
-                + " | Type: " + strType.at((listDevice.at(curDiagnostDevice)->deviceType)%strType.size());
-        log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
+//        QStringList strType;
+//        strType << "" << "4AI" << "8RP" << "STEEL" << "6DI6RO";
+//        QString mess = "Finish update module " + QString::number(curDiagnostDevice)\
+//                + " | Type: " + strType.at((listDevice.at(curDiagnostDevice)->deviceType)%strType.size());
+//        log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
         closeSerialPort();
     }
 }
