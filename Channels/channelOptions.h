@@ -8,6 +8,7 @@
 #include "../mathresolver.h"
 #include "../ustavka.h"
 #include "transaction.h"
+#include "log.h"
 
 #define BASE_CHANNELS_OFFSET 32768
 
@@ -290,6 +291,8 @@ private:
     int iteratorCalibration;
     float processReadCalibrations; // % выполнения чтения
     bool neadRead;  //признак необходимости считать калибровки
+
+    cLogger * log;
 
     void newTransaction(QString param, Transaction::dir_t dir, uint32_t value = 0);
 private slots:

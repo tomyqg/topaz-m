@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QMovie>
 #include <QTimer>
+#include "qextserialport.h"
+//#include <QtSerialPort/QtSerialPort>
 #include <QSerialPort>
 #include <settings.h>
 #include <systemoptions.h>
@@ -108,7 +110,7 @@ private:
     QDir dir;  //объект работы с папками
     QFile updateFile;
     QByteArray sendArray;
-    QSerialPort *m_serial = nullptr;
+    QSerialPort * m_serial;
     int countString;
     int totalString;
     QTimer * timerSoftUpdate;

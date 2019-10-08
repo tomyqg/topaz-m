@@ -4,6 +4,8 @@
 #include <QSettings>
 #include <QByteArray>
 #include "expert_access.h"
+#include "log.h"
+#include "defines.h"
 
 QString cExpertAccess::configFileName = "";
 
@@ -29,16 +31,22 @@ bool cExpertAccess::accessRequest(QString pass)
 {
     if(pass == passExpert)
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("Login Expert", cLogger::SERVICE);
         mode = Access_Expert;
         return true;
     }
     else if(pass == passAdmin)
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("Login Admin", cLogger::SERVICE);
         mode = Access_Admin;
         return true;
     }
     else
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("Login error pass", cLogger::SERVICE);
         mode = Access_User;
         return false;
     }
@@ -53,14 +61,20 @@ accessModeType cExpertAccess::accessExtRequest(QString pass)
 {
     if(pass == passExtExpert)
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("Login external Expert", cLogger::SERVICE);
         modeModbusExt = Access_Expert;
     }
     else if(pass == passExtAdmin)
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("Login external Admin", cLogger::SERVICE);
         modeModbusExt = Access_Admin;
     }
     else
     {
+        cLogger log(pathtomessages, cLogger::UI);
+        log.addMess("External Login Error", cLogger::SERVICE);
         modeModbusExt = Access_User;
     }
     return modeModbusExt;

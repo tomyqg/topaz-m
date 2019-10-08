@@ -1,4 +1,6 @@
 #include "device_slot.h"
+#include "log.h"
+#include "defines.h"
 
 #include "mbcrc.h"
 
@@ -51,7 +53,15 @@ int cDevice::parseDeviceParam(Transaction tr)
     // определение стабильности платы
     if(online) counterStatus ++;
     else counterStatus = 0;
-    if(counterStatus >= COUNT_STABLE_STATUS_ON) stableOnline = true;
+    if(counterStatus >= COUNT_STABLE_STATUS_ON)
+    {
+        if(!stableOnline)
+        {
+            cLogger log(pathtomessages, cLogger::DEVICE);
+            log.addMess("Module " + QString::number(slot) + " is online", cLogger::STATISTIC);
+        }
+        stableOnline = true;
+    }
     else stableOnline = false;
 
     online = true;     // устройство на связи
@@ -178,7 +188,16 @@ void cDevice::resetOnline()
     // определение стабильности платы
     if(!online) counterStatus ++;
     else counterStatus = 0;
-    if(counterStatus >= COUNT_STABLE_STATUS_OFF) stableOnline = true;
+    if(counterStatus >= COUNT_STABLE_STATUS_OFF)
+    {
+        if(!stableOnline)
+        {
+            cLogger log(pathtomessages, cLogger::DEVICE);
+            log.addMess("Module " + QString::number(slot) + " is offline", cLogger::STATISTIC);
+        }
+        stableOnline = true;
+
+    }
     else stableOnline = false;
 
     //если таймер сработал, значит плата давно не отвечала - оффлайн

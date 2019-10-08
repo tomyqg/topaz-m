@@ -827,11 +827,12 @@ void MainWindow::updateDevicesComplect()
                 list6DI6RO.append(device->getSlot());
                 break;
             default:
-                cLogger mk(pathtomessages, cLogger::DEVICE);
-                QString strSlot = QString::number(device->getSlot());
-                QString strtype = QString::number(device->deviceType);
-                mk.addMess("Slot " + strSlot + " | Device unidentified | type "\
-                           + strtype, cLogger::WARNING);
+                // Перенести запись в журнал в другое место кода
+//                cLogger mk(pathtomessages, cLogger::DEVICE);
+//                QString strSlot = QString::number(device->getSlot());
+//                QString strtype = QString::number(device->deviceType);
+//                mk.addMess("Slot " + strSlot + " | Device unidentified | type "\
+//                           + strtype, cLogger::WARNING);
                 break;
             }
         }
