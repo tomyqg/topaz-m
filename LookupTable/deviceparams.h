@@ -160,6 +160,8 @@ typedef struct
     // Parameter: Up time  : uptime : NV Address: 34
     uint32_t uptime;
     //
+    uint16_t configDeviceType;
+    //
     uint16_t hashRoot;
     // для прошивки нужно сюда записать значение из softwareVersion
     uint32_t updateSoftware;

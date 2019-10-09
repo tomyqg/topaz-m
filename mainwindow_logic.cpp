@@ -1230,15 +1230,24 @@ void MainWindow::retransToWorker(Transaction tr)
         mListDev.lock();
         deviceTypeEnum deviceType = listDevice.at(tr.slave - 1)->deviceType;
         mListDev.unlock();
-        if(systemOptions.typeMultigraph == cSystemOptions::Multigraph)
+        if(tr.offset >= 1000)
         {
-            if((deviceType == Device_4AI) || (deviceType == Device_8RP)  || (deviceType == Divece_6DI6RO))
-                emit sendTransToWorker(tr);
+            //параметры каналов фильтруются в зависимости от типа модуля и типа прибора
+            if(systemOptions.typeMultigraph == cSystemOptions::Multigraph)
+            {
+                if((deviceType == Device_4AI) || (deviceType == Device_8RP)  || (deviceType == Divece_6DI6RO))
+                    emit sendTransToWorker(tr);
+            }
+            else if((systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel))
+            {
+                if((deviceType == Device_STEEL) || (deviceType == Device_8RP))
+                    emit sendTransToWorker(tr);
+            }
         }
-        else if((systemOptions.typeMultigraph == cSystemOptions::Multigraph_Steel))
+        else
         {
-            if((deviceType == Device_STEEL) || (deviceType == Device_8RP))
-                emit sendTransToWorker(tr);
+            // параметры модулей не фильруются
+            emit sendTransToWorker(tr);
         }
     }
 }

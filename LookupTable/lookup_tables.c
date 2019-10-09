@@ -92,6 +92,8 @@ const tLookupRegisters g_stLookupRegisters[] =
     {45, 34,  OFFSET(devErrors), "devErrors", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
     // Parameter: Up time  : uptime
     {46, 34,  OFFSET(uptime), "uptime", LKUP_TYPE_U32, 4, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_R},
+    // Parameter: configDeviceType : configDeviceType
+    {48, 34, OFFSET(configDeviceType), "configDeviceType", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_RW},
     //
     {500, 34,  OFFSET(hashRoot), "hashRoot", LKUP_TYPE_U16, 2, LKUP_ACCESS_TYPE_DYNAMIC | LKUP_ACCESS_WORK_W},
     // Parameter: Update Software : updateSoftware

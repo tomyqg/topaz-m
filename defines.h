@@ -18,7 +18,7 @@
 #endif
 //#define RANDOM_CHAN
 
-#define VER "1.107"
+#define VER "1.108"
 
 //#define CURRENT_VER "1.84" //версия ПО
 
