@@ -210,9 +210,9 @@ dMenu::dMenu(QWidget *parent) :
                       << ui->bModbusSlave \
                       << ui->bEthernetIP \
                       << ui->bProfibus \
-                      << ui->bProfinet \
-                      << ui->bTypeMultigraph;
-//    listWidgetsAdmin << ui->bTypeMultigraph;
+                      << ui->bProfinet;
+                      //<< ui->bTypeMultigraph;
+    listWidgetsAdmin << ui->bTypeMultigraph;
 
     // скрыть эти выджеты(кнопки) изначально
     changeVisibleWidgets();
@@ -335,6 +335,7 @@ void dMenu::on_exitButton_clicked()
     this->close();
 }
 
+
 void dMenu::on_saveButton_clicked()
 {
     mo.start();
@@ -348,7 +349,36 @@ void dMenu::on_saveButton_clicked()
     systemOptions.display += (ui->modeBar->currentIndex() << 2);
     systemOptions.autoscale = ui->autoscalecheckbox->isChecked();
     systemOptions.brightness = light;
+
+    // Изменить тип плат 4AI/STEEL если тип прибора поменялся
+    if(systemOptions.typeMultigraph != (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex())
+    {
+        foreach (cDevice * dev, listDevice) {
+            if(dev->getOnline() \
+                    && ((dev->deviceType == deviceTypeEnum::Device_4AI) \
+                    || (dev->deviceType == deviceTypeEnum::Device_STEEL)))
+            {
+                Transaction t(Transaction::W, dev->getSlot());
+                t.offset = cRegistersMap::getOffsetByName("configDeviceType");
+                if((cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex() == cSystemOptions::Multigraph_Steel)
+                {
+                    t.volInt = deviceTypeEnum::Device_STEEL;
+                }
+                else if((cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex() == cSystemOptions::Multigraph)
+                {
+                    t.volInt = deviceTypeEnum::Device_4AI;
+                }
+                emit signalToWorker(t);
+//                t.dir = Transaction::R;
+//                t.offset = cRegistersMap::getOffsetByName("deviceType");
+//                emit signalToWorker(t);
+                dev->deviceType = Device_None;
+
+            }
+        }
+    }
     systemOptions.typeMultigraph = (cSystemOptions::TypeMultigraphEnum)ui->comboTypeMultigraph->currentIndex();
+
     if(ui->stackedWidget->currentIndex() == 9)
     {
         systemOptions.timeindex = ui->timeformat->currentIndex();
@@ -1190,6 +1220,24 @@ void dMenu::on_bExpert_clicked()
     kb.setWarning("Введите пароль режима ЭКСПЕРТ", true);
     kb.exec();
     cExpertAccess::accessRequest(keyboard::newString);
+
+    if(cExpertAccess::getMode() == Access_Admin)
+    {
+        mListDev.lock();
+        foreach (cDevice * dev, listDevice) {
+            dev->setHashRoot(true);
+        }
+        mListDev.unlock();
+    }
+    else
+    {
+        mListDev.lock();
+        foreach (cDevice * dev, listDevice) {
+            dev->setHashRoot(false);
+        }
+        mListDev.unlock();
+    }
+
     // Изменить видимость виджетов в соответствии с режимом доступа
     changeVisibleWidgets();
 }
@@ -3385,6 +3433,14 @@ void dMenu::sendFile()
 #endif
     if(!readArray.isEmpty())
     {
+        while(readArray.length() < 43)
+        {
+            readArray.append('0');
+        }
+        for(int i=0; i<readArray.length(); i++)
+        {
+            if(readArray.at(i) <= 0x20) readArray.replace(i, 1, "0");
+        }
         asciiToHex(readArray, outArray);
         sendArray = QByteArray::fromRawData((char*)(outArray), 22);
         int res = m_serial->write(sendArray,22);

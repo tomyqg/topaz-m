@@ -179,6 +179,9 @@ void cDevice::setHashRoot(bool root)
             tr.volInt = 0;
         }
         emit updateParam(tr);
+        tr.dir = Transaction::R;
+        tr.offset = cRegistersMap::getOffsetByName("accessType");
+        emit updateParam(tr);
 }
 
 void cDevice::resetOnline()
