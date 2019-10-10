@@ -201,7 +201,9 @@ public slots:
 
 private slots:
     void timerSlot();
-    void updateParam();
+
+public slots:
+    void updateParam(bool all = false);
 
 
     // приватные переменные настроек канала

@@ -858,9 +858,17 @@ void MainWindow::updateDevicesComplect()
         {
             //обновление параметров каналов
             ChannelOptions * ch = listChannels.at(i);
-            ch->setSlot(slot);     //
-            ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
-            ch->enable = true;
+
+            // оперативное обновление всех параметров,
+            //если было отключение или переключение платы
+            if((ch->getSlot() != slot) || (!ch->enable))
+            {
+                ch->setSlotChannel(i%NUM_CHAN_IN_4AI);
+                ch->setSlot(slot);     //
+                ch->enable = true;
+                ch->updateParam(true);
+            }
+
         }
         i++;
     }

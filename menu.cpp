@@ -430,7 +430,7 @@ void dMenu::on_saveButton_clicked()
 
 void dMenu::updateSystemOptions(QString path)
 {
-//    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
+    cFileManager::readSystemOptionsFromFile(path, &systemOptions);
 
     ui->arrowscheckBox->setChecked(systemOptions.arrows);
     ui->modeBar->setCurrentIndex((systemOptions.display >> 2) % ui->modeBar->count());
@@ -2202,7 +2202,8 @@ void dMenu::on_bReadChanFromDrive_clicked()
     src2 = QString(path + "steeloptions.txt");
     if(QFile::exists(src) && QFile::exists(src2))
     {
-        updateSystemOptions(src);
+        cFileManager::readChannelsSettings(src);
+        cFileManager::readSteelsSettings(src2);
         log->addMess("Read settings from media", cLogger::STATISTIC);
         qDebug() << "I / O settings were successfully read from the specified media";
         QString mess = QString("Настройки входов и выходов успешно прочитаны с указаного носителя\r\n");

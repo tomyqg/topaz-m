@@ -711,35 +711,27 @@ void ChannelOptions::timerSlot()
     timer->setInterval((int)(measureperiod*1000));
 }
 
-void ChannelOptions::updateParam()
+void ChannelOptions::updateParam(bool all)
 {
-    if (!enable) return;
-//    Transaction tr;
-//    tr.dir = Transaction::R;
-//    tr.slave = slot;
-//    int devCh = slotChannel;
-
-//    listStr << "chan" + QString::number(devCh) + "SignalType" \
-//            << "chan" + QString::number(devCh) + "Error" \
-//            << "chan" + QString::number(devCh) + "AdditionalParameter1"\
-//            << "chan" + QString::number(devCh) + "AdditionalParameter2";
-//    if(outputData.chanSignalType == TermoCoupleMeasure)
-//    {
-//        listStr << "chan" + QString::number(devCh) + "FSRinternal";
-//    }
-
-    QString str = listStr.at(iteratorParam % listStr.size());
-    if((str != "FSRinternal") || (outputData.chanSignalType == TermoCoupleMeasure))
+    if(!enable) return;
+    if(!all)
     {
-//        QString s = "chan" + QString::number(devCh) + str;
-//        tr.offset = cRegistersMap::getOffsetByName(s);
-//        emit sendToWorker(tr);
-        newTransaction(str, Transaction::R);
+        QString str = listStr.at(iteratorParam % listStr.size());
+        if((str != "FSRinternal") || (outputData.chanSignalType == TermoCoupleMeasure))
+        {
+            newTransaction(str, Transaction::R);
+        }
+        iteratorParam++;
+        if(iteratorParam >= listStr.size())
+        {
+            iteratorParam = 0;
+        }
     }
-    iteratorParam++;
-    if(iteratorParam >= listStr.size())
+    else    // all=true - обновить все параметры для вновь обнаруженного канала
     {
-        iteratorParam = 0;
+        foreach (QString str, listStr) {
+            newTransaction(str, Transaction::R);
+        }
     }
 }
 
