@@ -8,8 +8,10 @@
 #include "src/modbus.h"
 #include "modbus_lookup_tables.h"
 
+#define SIZE_EXT_MODBUS_BUFFER 256
+
 typedef struct {
-    uint8_t data[256];
+    uint8_t data[SIZE_EXT_MODBUS_BUFFER];
 } tModbusBuffer;
 
 class cExtModbus : public QObject

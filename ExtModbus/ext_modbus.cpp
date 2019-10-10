@@ -39,6 +39,17 @@ QString accessPass = "";
 
 cExtModbus::cExtModbus(QObject *parent) : QObject(parent)
 {
+    socket = 0;
+    mb_mapping = NULL;
+    use_backend = MB_OFF;
+    set_backend = MB_OFF;
+    query = NULL;
+    header_length = 0;
+    maxNbInputRegisters = 0;
+    maxNbHoldingRegisters = 0;
+    maxNbCoil = 0;
+    maxNbDiscrete = 0;
+    master_socket = 0;
     ctx = NULL;
     fdmax = 0;
     tcp_port = 502;
