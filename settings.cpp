@@ -345,6 +345,16 @@ void dSettings::updateVer()
 
 dSettings::~dSettings()
 {
+    disconnect(&timerUpdateGraf, SIGNAL(timeout()), this, SLOT(replotGraf()));
+    disconnect(&timerLoad, SIGNAL(timeout()), this, SLOT(timeoutLoad()));
+    disconnect(&tUpdateTime, SIGNAL(timeout()), this, SLOT(DateUpdate()));
+    if(arch != NULL)
+    {
+        disconnect(arch, SIGNAL(loadFinished()), this, SLOT(drowGraf()));
+        disconnect(arch, SIGNAL(loadFinished()), this, SLOT(initComboChannels()));
+        delete arch;
+    }
+    disconnect(&tUpdateBar, SIGNAL(timeout()), this, SLOT(updateBar()));
     delete ui;
 }
 

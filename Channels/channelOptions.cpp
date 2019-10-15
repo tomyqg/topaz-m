@@ -763,12 +763,13 @@ void ChannelOptions::initCalibration()
 void ChannelOptions::updateCalibrations()
 {
     if (!enable) return;
-    Transaction tr;
-    tr.dir = Transaction::R;
-    tr.slave = slot;
-    QString name;
+
     if(neadRead)
     {
+        Transaction tr;
+        tr.dir = Transaction::R;
+        tr.slave = slot;
+        QString name;
         for(int i=0; i<listCalibrationRegisters.size(); i++)
         {
             name = "chan" + QString::number(slotChannel) + listCalibrationRegisters.at(i);
@@ -779,6 +780,10 @@ void ChannelOptions::updateCalibrations()
     }
     if((calibrations.chanSysFSR != 0) || (calibrations.chanSysOCR != 0))
     {
+        Transaction tr;
+        tr.dir = Transaction::R;
+        tr.slave = slot;
+        QString name;
         name = "chan" + QString::number(slotChannel) + "SysFSR";
         tr.offset = cRegistersMap::getOffsetByName(name);
         emit sendToWorker(tr);
@@ -1364,6 +1369,7 @@ int ChannelOptions::optimalPrecision()
 void ChannelOptions::SetCurrentChannelValue(double value)
 {
 //    currentvalue = ConvertSignalToValue(value);
+
     currentvalue = value;
     newValue = true;
 
@@ -1375,13 +1381,13 @@ void ChannelOptions::SetCurrentChannelValue(double value)
 
 
     buffermutex->lock();
-    while (channelxbuffer.length()>300)
+    while (channelxbuffer.length()>=300)
         channelxbuffer.removeFirst();
-    while (channelvaluesbuffer.length()>300)
+    while (channelvaluesbuffer.length()>=300)
         channelvaluesbuffer.removeFirst();
-    while (dempheredvaluesbuffer.length()>300)
+    while (dempheredvaluesbuffer.length()>=300)
         dempheredvaluesbuffer.removeFirst();
-    while (channeltimebuffer.length() > 300)
+    while (channeltimebuffer.length()>=300)
         channeltimebuffer.removeFirst();
 
     if(!X_Coordinates.isEmpty())
@@ -1394,6 +1400,7 @@ void ChannelOptions::SetCurrentChannelValue(double value)
     }
 
     buffermutex->unlock();
+
 }
 
 void ChannelOptions::SetDempher(int newdempher)

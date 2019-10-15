@@ -1365,7 +1365,7 @@ void dMenu::on_bAddDigitInput_clicked()
 void dMenu::on_bDigitals_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
-    ui->nameSubMenu->setText("ЦИФР. ВХОДЫ");
+    ui->nameSubMenu->setText("ДИСКРЕТ. ВХ.");
 }
 
 void dMenu::on_bDigitInput1_clicked()
@@ -2523,6 +2523,7 @@ void dMenu::on_bDelMath_clicked()
     mListMath.lock();
     if(listMath.size() > 1)
     {
+        listMath.at(curMathEdit)->deleteLater();
         listMath.removeAt(curMathEdit);
     }
     mListMath.unlock();
@@ -3237,36 +3238,47 @@ void dMenu::on_bUpdateStart_released()
 
 void dMenu::findUpdateFales()
 {
-    ui->progressBarUpdate->hide();
-    dir.setPath(pathtoupdates);
-    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);   //устанавливаем фильтр выводимых файлов/папок
-    dir.setSorting(QDir::Time | QDir::Reversed);   //устанавливаем сортировку "от меньшего к большему"
-    QFileInfoList list = dir.entryInfoList();     //получаем список файлов директории
-    QStringList listNameFiles;
-    foreach (QFileInfo file, list) {
-        QStringList name = file.fileName().split('.');
-        if(name.at(name.size()-1) == "hex")
-        {
-            listNameFiles.append(file.fileName());
-        }
-    }
-    ui->comboUpdateFiles->clear();
-    ui->comboUpdateFiles->addItem("Выбрать ПО");
-    ui->comboUpdateFiles->addItems(listNameFiles);
-    ui->comboUpdateFiles->setCurrentIndex(0);
-    if(ui->comboUpdateFiles->count() > 1)
+    if(cExpertAccess::getMode() != Access_User)
     {
-        ui->bUpdateStart->setEnabled(true);
+        ui->progressBarUpdate->hide();
+        dir.setPath(pathtoupdates);
+        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);   //устанавливаем фильтр выводимых файлов/папок
+        dir.setSorting(QDir::Time | QDir::Reversed);   //устанавливаем сортировку "от меньшего к большему"
+        QFileInfoList list = dir.entryInfoList();     //получаем список файлов директории
+        QStringList listNameFiles;
+        foreach (QFileInfo file, list) {
+            QStringList name = file.fileName().split('.');
+            if(name.at(name.size()-1) == "hex")
+            {
+                listNameFiles.append(file.fileName());
+            }
+        }
+        ui->comboUpdateFiles->clear();
+        ui->comboUpdateFiles->addItem("Выбрать ПО");
+        ui->comboUpdateFiles->addItems(listNameFiles);
+        ui->comboUpdateFiles->setCurrentIndex(0);
+        if(ui->comboUpdateFiles->count() > 1)
+        {
+            ui->bUpdateStart->setEnabled(true);
+        }
+        ui->frameSoftUpdate->show();
     }
+    else
+    {
+        ui->frameSoftUpdate->hide();
+    }
+
 }
 
 void dMenu::on_bUpdateStart_clicked()
 {
-    if(ui->comboUpdateFiles->currentIndex() != 0)
+    if(cExpertAccess::getMode() != Access_User)
     {
-//        if(m_serial == nullptr)
-//        {
-        ui->bUpdateStart->setEnabled(false);
+        if(ui->comboUpdateFiles->currentIndex() != 0)
+        {
+            //        if(m_serial == nullptr)
+            //        {
+            ui->bUpdateStart->setEnabled(false);
             QString filePatch = QString(pathtoupdates) + ui->comboUpdateFiles->currentText();
             updateFile.setFileName(filePatch);
 
@@ -3321,7 +3333,8 @@ void dMenu::on_bUpdateStart_clicked()
             {
                 qDebug() << "Error open file";
             }
-//        }
+            //        }
+        }
     }
 }
 

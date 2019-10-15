@@ -79,6 +79,7 @@ void MainWindow::updateDateLabel()
 
 void MainWindow::on_WorkButton_clicked()
 {
+
     dMenu * menu = (dMenu*)dialogMenu;
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     //сигнал из меню о создании новой уставки
@@ -86,6 +87,7 @@ void MainWindow::on_WorkButton_clicked()
     menu->selectPageWork();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+
     logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();
@@ -179,11 +181,13 @@ void MainWindow::on_ArchiveButton_clicked()
 
 void MainWindow::on_MenuButton_clicked()
 {
+
     dMenu * menu = (dMenu*)dialogMenu;
     connect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
     menu->selectPageMain();
     menu->exec();
     disconnect(menu, SIGNAL(saveButtonSignal()), this, SLOT(updateSystemOptions()));
+
     logger->addMess("Menu > Open ", cLogger::SERVICE, cLogger::UI);
     sendConfigChannelsToSlave();
     setTextBars();

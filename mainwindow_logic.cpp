@@ -419,6 +419,7 @@ void MainWindow::MainWindowInitialization()
     connect(menu, SIGNAL(signalToWorker(Transaction)), this, SLOT(retransToWorker(Transaction)));
     connect(menu, SIGNAL(signalRestartLocalModbus()), this, SLOT(slotRestartLocalModbus()));
 
+
     qDebug() << "MainWindow is init";
 }
 
@@ -874,7 +875,7 @@ void MainWindow::updateDevicesComplect()
     }
     if(listChannels.size() > list4AI.size())
     {
-        // плат стало меньше, тогда временно отключем каналы, но не удаляем
+        // плат меньше, тогда временно отключем каналы, но не удаляем
         for(int i = list4AI.size(); i < listChannels.size(); i++)
         {
             listChannels.at(i)->enable = false;

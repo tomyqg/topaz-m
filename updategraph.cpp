@@ -16,6 +16,7 @@
 #include "Channels/freq_channel.h"
 #include "qrect.h"
 
+//#define DEBUG_TIME_UPDATEGRAF
 
 #define PERIOD_MEASURE_STEEL 100    //msec период точек на графике анализа стали
 
@@ -156,6 +157,11 @@ void MainWindow::UpdateGraphics()
         systemOptions.display = cSystemOptions::Steel;
     }
     needUpdatePainter = true;
+
+    // тест времени прорисовки
+//    QTime time;
+//    time.restart();
+
     switch(systemOptions.display)
     {
     case cSystemOptions::TrendsCyfra:
@@ -197,6 +203,9 @@ void MainWindow::UpdateGraphics()
     default:
         break;
     }
+//#ifdef DEBUG_TIME_UPDATEGRAF
+//    qDebug() << "UpdateGraphics" << time.elapsed();
+//#endif
     selectWidgetDiagram();
 }
 
@@ -205,6 +214,9 @@ void MainWindow::UpdateGraphics()
  * */
 void MainWindow::GrafsUpdateTrends()
 {
+
+//    QTime time;
+//    time.restart();
 
     if(dialogMenu->isVisible()) return;     //Не рисовать графики пока в меню
     if(pauseUpdateGraph)
@@ -238,7 +250,6 @@ void MainWindow::GrafsUpdateTrends()
     ui->customPlot->xAxis->setTickLabelFont(QFont("Open Sans", 10));
 
     graphPen.setWidth(GraphWidthinPixels);
-
 
     for(int i = 0; i < MAX_NUM_CHAN_GROUP; i++)
     {
@@ -278,6 +289,7 @@ void MainWindow::GrafsUpdateTrends()
             ui->customPlot->clearGraphs();
             updateGraph = false;
         }
+
         //Добавление в конец недостающих точек или добавление линии тренда целиком
         if(ui->customPlot->graphCount() > i)
         {
@@ -309,8 +321,8 @@ void MainWindow::GrafsUpdateTrends()
             }
         }
     }
-    ui->customPlot->xAxis->setAutoTickStep(true);
 
+    ui->customPlot->xAxis->setAutoTickStep(true);
     ui->customPlot->xAxis->setAutoTickLabels(true);
 
     // авто масштабирование
@@ -318,9 +330,14 @@ void MainWindow::GrafsUpdateTrends()
     {
         ui->customPlot->yAxis->rescale();
         ui->customPlot->yAxis->setScaleRatio(ui->customPlot->yAxis, 1.1);
+        double center = ui->customPlot->yAxis->range().center();
         if(ui->customPlot->yAxis->range().size() > 199999)
         {
-            ui->customPlot->yAxis->setRange(0, 199999, Qt::AlignCenter);
+            ui->customPlot->yAxis->setRange(center, 199999, Qt::AlignCenter);
+        }
+        else if(ui->customPlot->yAxis->range().size() < 0.019)
+        {
+            ui->customPlot->yAxis->setRange(center, 0.019, Qt::AlignCenter);
         }
     }
 
@@ -351,7 +368,6 @@ void MainWindow::GrafsUpdateTrends()
                 name = listMath.at(group->mathChannel[index])->getName();
                 mListMath.unlock();
             }
-
 
             int ystart = ui->customPlot->height() / 5;
             int xstart = ui->customPlot->width() - ui->customPlot->width() / 10;
@@ -385,8 +401,13 @@ void MainWindow::GrafsUpdateTrends()
 
 //    ui->customPlot->setAntialiasedElements(QCP::aeAll);
 
-    ui->customPlot->replot();
 
+        ui->customPlot->replot();
+
+#ifdef DEBUG_TIME_UPDATEGRAF
+        qDebug() << time.elapsed();
+        time.restart();
+#endif
 }
 
 void MainWindow::GrafsUpdateNone()

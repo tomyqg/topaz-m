@@ -389,6 +389,8 @@ private:
     //таймер для слежения IRQ от модуля Anybus
     QTimer * timerAnybusEv;
 
+    QTime time;
+
 #ifndef Q_OS_WIN
     cCommunicator * comm;
     QTimer * commRun;

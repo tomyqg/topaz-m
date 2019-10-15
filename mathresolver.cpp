@@ -42,13 +42,16 @@ double mathresolver::SolveEquation(QString eqstring, double x1, double x2, doubl
     replaced.replace(QString("x2"), QString::number(x2));
     replaced.replace(QString("x3"), QString::number(x3));
     replaced.replace(QString("x4"), QString::number(x4));
+
 #ifndef Q_OS_WIN32
     QScriptEngine myEngine;
 #else
     QJSEngine myEngine;
 #endif
+
     double Result = myEngine.evaluate(replaced).toNumber();
     return Result;
+
 }
 
 double mathresolver::SolveEquation(QString eqstring)

@@ -231,6 +231,7 @@ void MainWindow::updateObjectsOfMainThread()
         mListMath.lock();
         for(int i = totalMath; i < size; i++)
         {
+            listMath.at(listMath.size()-1)->deleteLater();
             listMath.removeLast();
         }
         for(int i = size; i < totalMath; i++)
