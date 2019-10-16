@@ -47,6 +47,7 @@ extern QMutex mListUstvok;
 extern QMutex mListMath;
 extern QMutex mListChannel;
 extern QMutex mListFreq;
+extern QMutex mListRelay;
 
 
 int MainWindow::GetXOffset(int smallrectinglewidth, QGraphicsTextItem *ChannelValueText)
@@ -1044,6 +1045,7 @@ void MainWindow::updateSteel()
         for(int i = 0; i < SUM_RELAYS; i++)
         {
             int8_t relay = steel->relais[i];
+            mListRelay.lock();
             if((relay != -1) && (listRelais.size() > relay))
             {
                 if(listRelais.at(relay)->getCurState() != relayStates[i])
@@ -1067,6 +1069,7 @@ void MainWindow::updateSteel()
                     }
                 }
             }
+            mListRelay.unlock();
         }
     }
 }

@@ -35,6 +35,7 @@ extern QMutex mListMath;
 extern QMutex mListChannel;
 extern QMutex mListDev;
 extern QMutex mListFreq;
+extern QMutex mListRelay;
 
 QMutex mExtModbus;
 int currentSetpointNum = 1;
@@ -135,6 +136,12 @@ void MainWindow::initExtInterface()
 
     }
 
+    // Реле
+    for(int i = 0; i < TOTAL_NUM_RELAY; i++)
+    {
+        QString num = QString::number(i+1);
+        tablSetParamExtInterface.append({"relay" + num, &MainWindow::extGetRelay, &MainWindow::extSetRelay});
+    }
 
 
     // Таблица (список) функций применения новых параметров
@@ -2690,4 +2697,33 @@ void MainWindow::extGetProcessReadCalibr(QString name)
     }
     mListChannel.unlock();
     emit signalToExtModbus(name, data);
+}
+
+void MainWindow::extGetRelay(QString name)
+{
+    tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+    int num = name.right(name.size() - QString("relay").size()).toInt();
+
+    mListRelay.lock();
+    if((num > 0) && (num <= listRelais.size()))
+    {
+        data.data[0] = (uint8_t)listRelais.at(num-1)->getState();
+    }
+    mListRelay.unlock();
+
+    emit signalToExtModbus(name, data);
+
+}
+
+void MainWindow::extSetRelay(QString name, uint8_t * data)
+{
+    int num = name.right(name.size() - QString("relay").size()).toInt();
+
+    mListRelay.lock();
+    if((num > 0) && (num <= listRelais.size()))
+    {
+        listRelais.at(num-1)->setState(data[0] & 0x1);
+    }
+    mListRelay.unlock();
 }

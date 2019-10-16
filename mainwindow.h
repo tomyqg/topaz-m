@@ -601,6 +601,8 @@ private:
     void extGetNeadCalibr(QString name);
     void extGetProcessReadCalibr(QString name);
     QString getNameDevice();
+    void extGetRelay(QString name);
+    void extSetRelay(QString name, uint8_t *data);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };

@@ -62,6 +62,7 @@ QMutex mListMath;
 QMutex mListChannel;
 QMutex mListDev;
 QMutex mListFreq;
+QMutex mListRelay;
 
 extern MainWindow * globalMainWin;
 extern QList<cDevice*> listDevice;
@@ -524,6 +525,7 @@ void MainWindow::UpdUst()
 
 void MainWindow::InitRelaySlotTable()
 {
+    mListRelay.lock();
     for(int i = 0; i < TOTAL_NUM_RELAY; i++)
     {
         cRelay * relay = new cRelay(i);
@@ -531,6 +533,7 @@ void MainWindow::InitRelaySlotTable()
         connect(relay, SIGNAL(signalGetState(uint8_t, uint8_t)), this, SLOT(slotGetRelay(uint8_t, uint8_t)));
         listRelais.append(relay);
     }
+    mListRelay.unlock();
 }
 
 
@@ -540,11 +543,12 @@ void MainWindow::InitRelaySlotTable()
 */
 void MainWindow::sendRelayStateToWorker(int relay, bool state)
 {
+    mListRelay.lock();
     if(relay < listRelais.size())
     {
         listRelais.at(relay)->setState(state);
     }
-
+    mListRelay.unlock();
 }
 
 void MainWindow::InitPins()
@@ -887,6 +891,7 @@ void MainWindow::updateDevicesComplect()
 
     // обновление списка реле
     i = 0;
+    mListRelay.lock();
     foreach (uint8_t slot, list8RP) {
         if(i < listRelais.size())
         {
@@ -906,6 +911,7 @@ void MainWindow::updateDevicesComplect()
             listRelais.at(i)->enable = false;
         }
     }
+    mListRelay.unlock();
 
 
     // обновление списка частотных каналов и твердотельных реле
@@ -922,6 +928,7 @@ void MainWindow::updateDevicesComplect()
             ch->enable = true;
         }
         mListFreq.unlock();
+        mListRelay.lock();
         if((i + sizeList8RP) < listRelais.size())
         {
             //обновление параметров реле (твердортельных реле)
@@ -930,6 +937,7 @@ void MainWindow::updateDevicesComplect()
             r->mySlot = slot;     //
             r->myPhysicalNum = i%NUM_RELAY_IN_6DI6RO;
         }
+        mListRelay.unlock();
         i++;
     }
     mListFreq.lock();
@@ -944,7 +952,7 @@ void MainWindow::updateDevicesComplect()
     mListFreq.unlock();
 
 
-
+    mListRelay.lock();
     if(listRelais.size() > (list8RP.size() + list6DI6RO.size()))
     {
         // плат стало меньше, тогда отключаем объекты
@@ -953,7 +961,7 @@ void MainWindow::updateDevicesComplect()
             listRelais.at(i)->enable = false;
         }
     }
-
+    mListRelay.unlock();
 
     // обновление списка входных групп анализа стали
     i = 0;
@@ -1060,18 +1068,18 @@ void MainWindow::slotRelay(uint8_t sl, uint8_t num, bool state)
 {
 
     Transaction tr(Transaction::W);
-    int relayControlRregister = 0;
+    int relayControlRegister = 0;
     for(int i = 0; i < NUM_RELAY_IN_8RP; i ++)
     {
         int index = getIndexRelayBySlotAndCh(sl, i);
         if(index != -1)
         {
-            relayControlRregister += (listRelais.at(index)->getState() << i);
+            relayControlRegister += (listRelais.at(index)->getState() << i);
         }
     }
     tr.offset = cRegistersMap::getOffsetByName("RelayControl");
     tr.slave = sl;
-    tr.volInt = relayControlRregister;
+    tr.volInt = relayControlRegister;
 #ifdef DEBUG_RELAY
     qDebug() << "Relay:" << num << "=" << state;
 #endif
@@ -1466,7 +1474,9 @@ void MainWindow::parseWorkerReceive()
                         if(index != -1)
                         {
                             bool state = (bool)((tr.volInt >> i) & 1);
+                            mListRelay.lock();
                             listRelais.at(index)->setCurState(state);
+                            mListRelay.unlock();
                         }
                     }
 
@@ -1551,6 +1561,7 @@ int MainWindow::getIndexFreqBySlotAndCh(int slot, int ch)
 int MainWindow::getIndexRelayBySlotAndCh(int slot, int ch)
 {
     int ret = -1;
+//    mListRelay.lock();
     for(int i = 0; i < listRelais.size(); i++)
     {
         cRelay * r = listRelais.at(i);
@@ -1560,6 +1571,7 @@ int MainWindow::getIndexRelayBySlotAndCh(int slot, int ch)
             break;
         }
     }
+//    mListRelay.unlock();
     return ret;
 }
 

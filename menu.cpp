@@ -51,6 +51,7 @@ extern QMutex mListMath;
 extern QMutex mListChannel;
 extern QMutex mListDev;
 extern QMutex mListFreq;
+extern QMutex mListRelay;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -268,8 +269,10 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         }
         QStringList listParam = object->objectName().split('_');
         int num = listParam.at(2).toInt();
+        mListRelay.lock();
         if(listParam.at(1) == "On") listRelais.at(num)->setState(true);
         else if(listParam.at(1) == "Off") listRelais.at(num)->setState(false);
+        mListRelay.unlock();
         //возвращать цвет кнопки
 
     }
@@ -571,6 +574,7 @@ void dMenu::addWidgetDigitOutputs()
     clearLayout(ui->verticalLayoutDigitalOutputs);
 
     int i = 0;
+    mListRelay.lock();
     foreach (cRelay * relay, listRelais) {
         if(relay->enable)
         {
@@ -586,6 +590,7 @@ void dMenu::addWidgetDigitOutputs()
             i++;
         }
     }
+    mListRelay.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutDigitalOutputs->addItem(verticalSpacer);
 }
@@ -1147,7 +1152,9 @@ void dMenu::slotOpenChannel(int num)
 void dMenu::slotOpenDigitOutput(int num)
 {
     curRelay = num - 1;
+    mListRelay.lock();
     ui->comboDigitOutputType->setCurrentIndex(listRelais.at(curRelay)->type & 1);
+    mListRelay.unlock();
     ui->stackedWidget->setCurrentIndex(19);
     ui->nameSubMenu->setText("ВЫХОД " + QString::number(num));
 }
@@ -2703,6 +2710,7 @@ void dMenu::updateLabelModeling()
                     "color: rgb(255, 255, 255);"
                     "border-radius: 0px;";
 
+//        mListRelay.lock();
         if(i < listRelais.size())
         {
             cRelay * r = listRelais.at(i);
@@ -2716,6 +2724,7 @@ void dMenu::updateLabelModeling()
                 volLabel->setStyleSheet(strStyle.at(2));
             }
         }
+//        mListRelay.unlock();
         i++;
     }
 }
@@ -2738,12 +2747,16 @@ void dMenu::updateMathResultFormula()
 
 void dMenu::on_modelingOn_clicked()
 {
+    mListRelay.lock();
     listRelais.at(0)->setState(true);
+    mListRelay.unlock();
 }
 
 void dMenu::on_modelingOff_clicked()
 {
+    mListRelay.lock();
     listRelais.at(0)->setState(false);
+    mListRelay.unlock();
 }
 
 void dMenu::addWidgetModeling()
@@ -2757,6 +2770,7 @@ void dMenu::addWidgetModeling()
     font6.setPointSize(20);
 
     int i = 0;
+    mListRelay.lock();
     foreach(cRelay * relay, listRelais)
     {
         if(!relay->enable) continue;
@@ -2818,6 +2832,7 @@ void dMenu::addWidgetModeling()
 
         i++;
     }
+    mListRelay.unlock();
 
     QSpacerItem * verticalSpacer_36 = new QSpacerItem(20, 165, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayouModeling->addItem(verticalSpacer_36);
@@ -2965,7 +2980,9 @@ void dMenu::on_bToConnect_clicked()
 
 void dMenu::on_bDigitOutputSettingsApply_clicked()
 {
+    mListRelay.lock();
     listRelais.at(curRelay)->type = ui->comboDigitOutputType->currentIndex();
+    mListRelay.unlock();
 }
 
 void dMenu::addWidgetMath()
