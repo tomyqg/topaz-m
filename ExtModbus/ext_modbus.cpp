@@ -39,6 +39,17 @@ QString accessPass = "";
 
 cExtModbus::cExtModbus(QObject *parent) : QObject(parent)
 {
+    socket = 0;
+    mb_mapping = NULL;
+    use_backend = MB_OFF;
+    set_backend = MB_OFF;
+    query = NULL;
+    header_length = 0;
+    maxNbInputRegisters = 0;
+    maxNbHoldingRegisters = 0;
+    maxNbCoil = 0;
+    maxNbDiscrete = 0;
+    master_socket = 0;
     ctx = NULL;
     fdmax = 0;
     tcp_port = 502;
@@ -344,7 +355,7 @@ void cExtModbus::reply(int req_length){
         mb_mapping = modbus_mapping_new(0, offset+nb, 0, 0);
 
         // указатель на первый элемент в миникарту
-        memcpy(mb_mapping->tab_input_bits+offset, addrLookupElement, nb*2);
+        memcpy(mb_mapping->tab_input_bits+offset, (uint8_t *)addrLookupElement, nb);
     }
     else if((func == _FC_READ_COILS)
             || (func == _FC_WRITE_SINGLE_COIL)
@@ -354,7 +365,7 @@ void cExtModbus::reply(int req_length){
         mb_mapping = modbus_mapping_new(offset+nb, 0, 0, 0);
 
         // указатель на первый элемент в миникарту
-        memcpy(mb_mapping->tab_bits+offset, addrLookupElement, nb*2);
+        memcpy(mb_mapping->tab_bits+offset, (uint8_t *)addrLookupElement, nb);
     }
     else    // не корректная функция
     {
@@ -386,7 +397,7 @@ void cExtModbus::reply(int req_length){
     else if((func == _FC_WRITE_SINGLE_COIL)
             || (func == _FC_WRITE_MULTIPLE_COILS))
     {
-        memcpy(addrLookupElement, mb_mapping->tab_bits+offset, nb*2);
+        memcpy((uint8_t *)addrLookupElement, mb_mapping->tab_bits+offset, nb);
     }
     modbus_mapping_free(mb_mapping);
 

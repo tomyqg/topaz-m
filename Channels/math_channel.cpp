@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "math_channel.h"
 #include "channelOptions.h"
 
@@ -15,13 +16,14 @@ cMathChannel::cMathChannel(QObject *parent) : QObject(parent)
     higherLimit = 100;
     lowerLimit = 0;
     currentvalue = 0;
+    buffermutex = new QMutex();
     connect(&timerUpdate, SIGNAL(timeout()), this, SLOT(slotUpdate()));
     timerUpdate.start(MATH_UPDATE_PERIOD_MS);
-    buffermutex = new QMutex();
 }
 
 cMathChannel::~cMathChannel()
 {
+    disconnect(&timerUpdate, SIGNAL(timeout()), this, SLOT(slotUpdate()));
     delete buffermutex;
 }
 
@@ -91,6 +93,7 @@ void cMathChannel::slotUpdate()
         dempheredvaluesbuffer.removeFirst();
     while (mathtimebuffer.length() > 300)
         mathtimebuffer.removeFirst();
+
     if(!X_Coordinates.isEmpty())
     {
         mathvaluesbuffer.append(currentvalue);

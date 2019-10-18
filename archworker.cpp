@@ -14,6 +14,7 @@ cArchWorker::cArchWorker(QString file, QObject *parent) : QObject(parent)
 {
     fileArch = file;
     shift = 0;
+    period = 60;
 }
 
 /*

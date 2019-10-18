@@ -51,6 +51,7 @@ extern QMutex mListMath;
 extern QMutex mListChannel;
 extern QMutex mListDev;
 extern QMutex mListFreq;
+extern QMutex mListRelay;
 
 
 dMenu::dMenu(QWidget *parent) :
@@ -268,8 +269,10 @@ bool dMenu::eventFilter(QObject *object, QEvent *event)
         }
         QStringList listParam = object->objectName().split('_');
         int num = listParam.at(2).toInt();
+        mListRelay.lock();
         if(listParam.at(1) == "On") listRelais.at(num)->setState(true);
         else if(listParam.at(1) == "Off") listRelais.at(num)->setState(false);
+        mListRelay.unlock();
         //возвращать цвет кнопки
 
     }
@@ -430,7 +433,7 @@ void dMenu::on_saveButton_clicked()
 
 void dMenu::updateSystemOptions(QString path)
 {
-//    cFileManager::readSystemOptionsFromFile(path, &sysOptions);
+    cFileManager::readSystemOptionsFromFile(path, &systemOptions);
 
     ui->arrowscheckBox->setChecked(systemOptions.arrows);
     ui->modeBar->setCurrentIndex((systemOptions.display >> 2) % ui->modeBar->count());
@@ -571,6 +574,7 @@ void dMenu::addWidgetDigitOutputs()
     clearLayout(ui->verticalLayoutDigitalOutputs);
 
     int i = 0;
+    mListRelay.lock();
     foreach (cRelay * relay, listRelais) {
         if(relay->enable)
         {
@@ -586,6 +590,7 @@ void dMenu::addWidgetDigitOutputs()
             i++;
         }
     }
+    mListRelay.unlock();
     QSpacerItem * verticalSpacer = new QSpacerItem(20, 169, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayoutDigitalOutputs->addItem(verticalSpacer);
 }
@@ -1147,7 +1152,9 @@ void dMenu::slotOpenChannel(int num)
 void dMenu::slotOpenDigitOutput(int num)
 {
     curRelay = num - 1;
+    mListRelay.lock();
     ui->comboDigitOutputType->setCurrentIndex(listRelais.at(curRelay)->type & 1);
+    mListRelay.unlock();
     ui->stackedWidget->setCurrentIndex(19);
     ui->nameSubMenu->setText("ВЫХОД " + QString::number(num));
 }
@@ -1365,7 +1372,7 @@ void dMenu::on_bAddDigitInput_clicked()
 void dMenu::on_bDigitals_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
-    ui->nameSubMenu->setText("ЦИФР. ВХОДЫ");
+    ui->nameSubMenu->setText("ДИСКРЕТ. ВХ.");
 }
 
 void dMenu::on_bDigitInput1_clicked()
@@ -2202,7 +2209,8 @@ void dMenu::on_bReadChanFromDrive_clicked()
     src2 = QString(path + "steeloptions.txt");
     if(QFile::exists(src) && QFile::exists(src2))
     {
-        updateSystemOptions(src);
+        cFileManager::readChannelsSettings(src);
+        cFileManager::readSteelsSettings(src2);
         log->addMess("Read settings from media", cLogger::STATISTIC);
         qDebug() << "I / O settings were successfully read from the specified media";
         QString mess = QString("Настройки входов и выходов успешно прочитаны с указаного носителя\r\n");
@@ -2522,6 +2530,7 @@ void dMenu::on_bDelMath_clicked()
     mListMath.lock();
     if(listMath.size() > 1)
     {
+        listMath.at(curMathEdit)->deleteLater();
         listMath.removeAt(curMathEdit);
     }
     mListMath.unlock();
@@ -2701,6 +2710,7 @@ void dMenu::updateLabelModeling()
                     "color: rgb(255, 255, 255);"
                     "border-radius: 0px;";
 
+//        mListRelay.lock();
         if(i < listRelais.size())
         {
             cRelay * r = listRelais.at(i);
@@ -2714,6 +2724,7 @@ void dMenu::updateLabelModeling()
                 volLabel->setStyleSheet(strStyle.at(2));
             }
         }
+//        mListRelay.unlock();
         i++;
     }
 }
@@ -2736,12 +2747,16 @@ void dMenu::updateMathResultFormula()
 
 void dMenu::on_modelingOn_clicked()
 {
+    mListRelay.lock();
     listRelais.at(0)->setState(true);
+    mListRelay.unlock();
 }
 
 void dMenu::on_modelingOff_clicked()
 {
+    mListRelay.lock();
     listRelais.at(0)->setState(false);
+    mListRelay.unlock();
 }
 
 void dMenu::addWidgetModeling()
@@ -2755,6 +2770,7 @@ void dMenu::addWidgetModeling()
     font6.setPointSize(20);
 
     int i = 0;
+    mListRelay.lock();
     foreach(cRelay * relay, listRelais)
     {
         if(!relay->enable) continue;
@@ -2816,6 +2832,7 @@ void dMenu::addWidgetModeling()
 
         i++;
     }
+    mListRelay.unlock();
 
     QSpacerItem * verticalSpacer_36 = new QSpacerItem(20, 165, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->verticalLayouModeling->addItem(verticalSpacer_36);
@@ -2963,7 +2980,9 @@ void dMenu::on_bToConnect_clicked()
 
 void dMenu::on_bDigitOutputSettingsApply_clicked()
 {
+    mListRelay.lock();
     listRelais.at(curRelay)->type = ui->comboDigitOutputType->currentIndex();
+    mListRelay.unlock();
 }
 
 void dMenu::addWidgetMath()
@@ -3236,36 +3255,47 @@ void dMenu::on_bUpdateStart_released()
 
 void dMenu::findUpdateFales()
 {
-    ui->progressBarUpdate->hide();
-    dir.setPath(pathtoupdates);
-    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);   //устанавливаем фильтр выводимых файлов/папок
-    dir.setSorting(QDir::Time | QDir::Reversed);   //устанавливаем сортировку "от меньшего к большему"
-    QFileInfoList list = dir.entryInfoList();     //получаем список файлов директории
-    QStringList listNameFiles;
-    foreach (QFileInfo file, list) {
-        QStringList name = file.fileName().split('.');
-        if(name.at(name.size()-1) == "hex")
-        {
-            listNameFiles.append(file.fileName());
-        }
-    }
-    ui->comboUpdateFiles->clear();
-    ui->comboUpdateFiles->addItem("Выбрать ПО");
-    ui->comboUpdateFiles->addItems(listNameFiles);
-    ui->comboUpdateFiles->setCurrentIndex(0);
-    if(ui->comboUpdateFiles->count() > 1)
+    if(cExpertAccess::getMode() != Access_User)
     {
-        ui->bUpdateStart->setEnabled(true);
+        ui->progressBarUpdate->hide();
+        dir.setPath(pathtoupdates);
+        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);   //устанавливаем фильтр выводимых файлов/папок
+        dir.setSorting(QDir::Time | QDir::Reversed);   //устанавливаем сортировку "от меньшего к большему"
+        QFileInfoList list = dir.entryInfoList();     //получаем список файлов директории
+        QStringList listNameFiles;
+        foreach (QFileInfo file, list) {
+            QStringList name = file.fileName().split('.');
+            if(name.at(name.size()-1) == "hex")
+            {
+                listNameFiles.append(file.fileName());
+            }
+        }
+        ui->comboUpdateFiles->clear();
+        ui->comboUpdateFiles->addItem("Выбрать ПО");
+        ui->comboUpdateFiles->addItems(listNameFiles);
+        ui->comboUpdateFiles->setCurrentIndex(0);
+        if(ui->comboUpdateFiles->count() > 1)
+        {
+            ui->bUpdateStart->setEnabled(true);
+        }
+        ui->frameSoftUpdate->show();
     }
+    else
+    {
+        ui->frameSoftUpdate->hide();
+    }
+
 }
 
 void dMenu::on_bUpdateStart_clicked()
 {
-    if(ui->comboUpdateFiles->currentIndex() != 0)
+    if(cExpertAccess::getMode() != Access_User)
     {
-//        if(m_serial == nullptr)
-//        {
-        ui->bUpdateStart->setEnabled(false);
+        if(ui->comboUpdateFiles->currentIndex() != 0)
+        {
+            //        if(m_serial == nullptr)
+            //        {
+            ui->bUpdateStart->setEnabled(false);
             QString filePatch = QString(pathtoupdates) + ui->comboUpdateFiles->currentText();
             updateFile.setFileName(filePatch);
 
@@ -3320,7 +3350,8 @@ void dMenu::on_bUpdateStart_clicked()
             {
                 qDebug() << "Error open file";
             }
-//        }
+            //        }
+        }
     }
 }
 
@@ -3464,4 +3495,14 @@ void dMenu::sendFile()
         log->addMess(mess, cLogger::SERVICE, cLogger::DEVICE);
         closeSerialPort();
     }
+}
+
+void dMenu::on_selectDigitInputAction_currentIndexChanged(int index)
+{
+
+}
+
+void dMenu::on_selectDigitInputMode_currentIndexChanged(int index)
+{
+    ui->stackedWidgetTiming->setCurrentIndex(index);
 }

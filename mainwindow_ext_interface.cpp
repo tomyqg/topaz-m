@@ -35,6 +35,7 @@ extern QMutex mListMath;
 extern QMutex mListChannel;
 extern QMutex mListDev;
 extern QMutex mListFreq;
+extern QMutex mListRelay;
 
 QMutex mExtModbus;
 int currentSetpointNum = 1;
@@ -135,6 +136,12 @@ void MainWindow::initExtInterface()
 
     }
 
+    // Реле
+    for(int i = 0; i < TOTAL_NUM_RELAY; i++)
+    {
+        QString num = QString::number(i+1);
+        tablSetParamExtInterface.append({"relay" + num, &MainWindow::extGetRelay, &MainWindow::extSetRelay});
+    }
 
 
     // Таблица (список) функций применения новых параметров
@@ -231,6 +238,7 @@ void MainWindow::updateObjectsOfMainThread()
         mListMath.lock();
         for(int i = totalMath; i < size; i++)
         {
+            listMath.at(listMath.size()-1)->deleteLater();
             listMath.removeLast();
         }
         for(int i = size; i < totalMath; i++)
@@ -295,6 +303,7 @@ void MainWindow::applyParam(QString name, uint8_t * data)
 void MainWindow::extGetChannel(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     if(name.contains("analogChan"))
     {
         int chan = name.right(name.size() - QString("analogChan").size()).toInt();
@@ -338,7 +347,7 @@ void MainWindow::extGetChannel(QString name)
 void MainWindow::extGetProtVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString verStr = EXT_MODBUS_VER;
     QStringList listStrVer = verStr.split('.');
     int i = 0;
@@ -351,7 +360,7 @@ void MainWindow::extGetProtVer(QString name)
 void MainWindow::extGetChannelStatus(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int chan = name.right(name.size() - QString("analogStatusChan").size()).toInt();
     if((chan>0) && (chan<=listChannels.size()))
     {
@@ -366,7 +375,7 @@ void MainWindow::extGetChannelStatus(QString name)
 void MainWindow::extGetHardVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString verStr = HARDWARE_VERSION;
     QStringList listStrVer = verStr.split('.');
     int i = 0;
@@ -379,7 +388,7 @@ void MainWindow::extGetHardVer(QString name)
 void MainWindow::extGetSoftVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString verStr = VER;
     QStringList listStrVer = verStr.split('.');
     int i = 0;
@@ -392,6 +401,7 @@ void MainWindow::extGetSoftVer(QString name)
 void MainWindow::extGetDevType(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = systemOptions.typeMultigraph;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -400,7 +410,7 @@ void MainWindow::extGetDevType(QString name)
 void MainWindow::extGetDevName(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString StrName = getNameDevice();
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
@@ -409,7 +419,7 @@ void MainWindow::extGetDevName(QString name)
 void MainWindow::extGetManufact(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString StrName = MANUFACTURER;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
@@ -418,7 +428,7 @@ void MainWindow::extGetManufact(QString name)
 void MainWindow::extGetWebSite(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString StrName = SITE;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
@@ -427,7 +437,7 @@ void MainWindow::extGetWebSite(QString name)
 void MainWindow::extGetSerialNum(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString StrName = "000123";
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
@@ -438,7 +448,7 @@ void MainWindow::extGetManufDate(QString name)
     //Vag: переделать после реализации хранения даты производства
 
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString manufDate = "9.07.2019";
     QStringList listStr = manufDate.split('.');
     QString str;
@@ -455,6 +465,7 @@ void MainWindow::extGetManufDate(QString name)
 void MainWindow::extGetDevID(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = 0;
     data.data[1] = 0;
     data.data[2] = 0;
@@ -465,6 +476,7 @@ void MainWindow::extGetDevID(QString name)
 void MainWindow::extGetDevState(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = 2;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -473,6 +485,7 @@ void MainWindow::extGetDevState(QString name)
 void MainWindow::extGetWorkingTime(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = 0;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -481,6 +494,7 @@ void MainWindow::extGetWorkingTime(QString name)
 void MainWindow::extGetModbusErrs(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = 0;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -489,6 +503,7 @@ void MainWindow::extGetModbusErrs(QString name)
 void MainWindow::extGetModbusGoods(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = 0;
     data.data[1] = 0;
     emit signalToExtModbus(name, data);
@@ -497,6 +512,7 @@ void MainWindow::extGetModbusGoods(QString name)
 void MainWindow::extGetAccessType(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int access = (int)Access_Admin;
     data.data[1] = 0;
     for(int i=0; i<listDevice.size(); i++)
@@ -520,6 +536,7 @@ void MainWindow::extGetAccessType(QString name)
 void MainWindow::extGetCountModules(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint8_t count = 0;
     mListDev.lock();
     foreach (cDevice * dev, listDevice) {
@@ -534,7 +551,7 @@ void MainWindow::extGetCountModules(QString name)
 void MainWindow::extGetModelMatherboard(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString StrName = BOARD_MODEL;
     memcpy(&data, StrName.toLocal8Bit(), StrName.toLocal8Bit().size());
     emit signalToExtModbus(name, data);
@@ -543,7 +560,7 @@ void MainWindow::extGetModelMatherboard(QString name)
 void MainWindow::extGetModulIsErrors(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -561,7 +578,7 @@ void MainWindow::extGetModulIsErrors(QString name)
 void MainWindow::extGetModulIsOnline(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -579,7 +596,7 @@ void MainWindow::extGetModulIsOnline(QString name)
 void MainWindow::extGetModulAccessType(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -605,7 +622,7 @@ void MainWindow::extGetModulAccessType(QString name)
 void MainWindow::extGetModuleProtocolVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -623,7 +640,7 @@ void MainWindow::extGetModuleProtocolVer(QString name)
 void MainWindow::extGetModuleHardVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -641,7 +658,7 @@ void MainWindow::extGetModuleHardVer(QString name)
 void MainWindow::extGetModuleSoftVer(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -659,7 +676,7 @@ void MainWindow::extGetModuleSoftVer(QString name)
 void MainWindow::extGetModuleSerialNumber(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -677,7 +694,7 @@ void MainWindow::extGetModuleSerialNumber(QString name)
 void MainWindow::extGetModuleFactoryDate(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -695,7 +712,7 @@ void MainWindow::extGetModuleFactoryDate(QString name)
 void MainWindow::extGetModuleType(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -729,6 +746,7 @@ void MainWindow::extSetDisplayMode(QString name, uint8_t * data)
 void MainWindow::extGetDisplayMode(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t dataUint16 = systemOptions.display;
     memcpy(&data, &dataUint16, sizeof(dataUint16));
     emit signalToExtModbus(name, data);
@@ -747,6 +765,7 @@ void MainWindow::extSetIpAddress(QString name, uint8_t * data)
 void MainWindow::extGetIpAddress(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t address = (192 << 24) + (168 << 16) + (0 << 8) + 2;
     memcpy(&data, &address, sizeof(address));
     emit signalToExtModbus(name, data);
@@ -765,6 +784,7 @@ void MainWindow::extSetIpMask(QString name, uint8_t * data)
 void MainWindow::extGetIpMask(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t mask = (255 << 24) + (255 << 16) + (0 << 8) + 0;
     memcpy(&data, &mask, sizeof(mask));
     emit signalToExtModbus(name, data);
@@ -783,6 +803,7 @@ void MainWindow::extSetBroadcast(QString name, uint8_t * data)
 void MainWindow::extGetBroadcast(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t broadcast = (192 << 24) + (168 << 16) + (0 << 8) + 1;
     memcpy(&data, &broadcast, sizeof(broadcast));
     emit signalToExtModbus(name, data);
@@ -801,6 +822,7 @@ void MainWindow::extSetPortWebServer(QString name, uint8_t * data)
 void MainWindow::extGetPortWebServer(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t port = 80;
     memcpy(&data, &port, sizeof(port));
     emit signalToExtModbus(name, data);
@@ -819,6 +841,7 @@ void MainWindow::extSetPortModbus(QString name, uint8_t * data)
 void MainWindow::extGetPortModbus(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t port = 502;
     memcpy(&data, &port, sizeof(port));
     emit signalToExtModbus(name, data);
@@ -837,6 +860,7 @@ void MainWindow::extSetPortModbusType(QString name, uint8_t * data)
 void MainWindow::extGetPortModbusType(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t type = 0;
     memcpy(&data, &type, sizeof(type));
     emit signalToExtModbus(name, data);
@@ -855,6 +879,7 @@ void MainWindow::extSetModbusSlave(QString name, uint8_t * data)
 void MainWindow::extGetModbusSlave(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t slave = systemOptions.extModbus.adress;
     memcpy(&data, &slave, sizeof(slave));
     emit signalToExtModbus(name, data);
@@ -873,6 +898,7 @@ void MainWindow::extSetModbusRtuBaudrate(QString name, uint8_t * data)
 void MainWindow::extGetModbusRtuBaudrate(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t baud = systemOptions.extModbus.baud;
     memcpy(&data, &baud, sizeof(baud));
     emit signalToExtModbus(name, data);
@@ -891,6 +917,7 @@ void MainWindow::extSetDisplayAutoscale(QString name, uint8_t * data)
 void MainWindow::extGetDisplayAutoscale(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t autoscale = systemOptions.autoscale ? 1 : 0;
     memcpy(&data, &autoscale, sizeof(autoscale));
     emit signalToExtModbus(name, data);
@@ -909,6 +936,7 @@ void MainWindow::extSetDisplayArrows(QString name, uint8_t * data)
 void MainWindow::extGetDisplayArrows(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t arrows = systemOptions.arrows ? 1 : 0;
     memcpy(&data, &arrows, sizeof(arrows));
     emit signalToExtModbus(name, data);
@@ -935,6 +963,7 @@ void MainWindow::extSetDisplayBrightness(QString name, uint8_t * data)
 void MainWindow::extGetDisplayBrightness(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t brightness = systemOptions.brightness;
     memcpy(&data, &brightness, sizeof(brightness));
     emit signalToExtModbus(name, data);
@@ -953,6 +982,7 @@ void MainWindow::extSetDevMode(QString name, uint8_t * data)
 void MainWindow::extGetDevMode(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint16_t mode = systemOptions.mode;
     memcpy(&data, &mode, sizeof(mode));
     emit signalToExtModbus(name, data);
@@ -979,6 +1009,7 @@ void MainWindow::extSetCurrentDate(QString name, uint8_t * data)
 void MainWindow::extGetCurrentDate(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t date;
     date = QDateTime::currentDateTime().date().year() << 16;
     date += QDateTime::currentDateTime().date().month() << 8;
@@ -1008,6 +1039,7 @@ void MainWindow::extSetCurrentTime(QString name, uint8_t * data)
 void MainWindow::extGetCurrentTime(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t date;
     date = QDateTime::currentDateTime().time().hour() << 24;
     date += QDateTime::currentDateTime().time().minute() << 16;
@@ -1041,6 +1073,7 @@ void MainWindow::extSetAccessPass(QString name, uint8_t * data)
 void MainWindow::extGetAccessPass(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
 //    data.data[0] = 0;
     memset(&data, '*', 32);
     emit signalToExtModbus(name, data);
@@ -1061,6 +1094,7 @@ void MainWindow::extSetSetPoint(QString name, uint8_t * data)
 void MainWindow::extGetSetPoint(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int num = currentSetpointNum + 1;
     data.data[0] = num & 0xFF;
     data.data[1] = (num << 8) &0xFF;
@@ -1080,7 +1114,8 @@ void MainWindow::extSetTotalSetpoint(QString name, uint8_t * data)
 void MainWindow::extGetTotalSetpoint(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+//    memset(&data, 0, 4);
     int total = listUstavok.size();
     data.data[0] = total & 0xFF;
     data.data[1] = (total >> 8) & 0xFF;
@@ -1106,7 +1141,8 @@ void MainWindow::extSetSetpointIdentifikator(QString name, uint8_t * data)
 void MainWindow::extGetSetpointIdentifikator(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, LENGHT_STR_IDENTOFIKATOR);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+//    memset(&data, 0, LENGHT_STR_IDENTOFIKATOR);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1138,7 +1174,8 @@ void MainWindow::extSetSetpointChannel(QString name, uint8_t * data)
 void MainWindow::extGetSetpointChannel(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+//    memset(&data, 0, 32);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1170,7 +1207,8 @@ void MainWindow::extSetSetpointType(QString name, uint8_t * data)
 void MainWindow::extGetSetpointType(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 32);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+//    memset(&data, 0, 32);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1203,8 +1241,9 @@ void MainWindow::extSetSetpointValue(QString name, uint8_t * data)
 void MainWindow::extGetSetpointValue(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     float value;
-    memset(&data, 0, sizeof(value));
+//    memset(&data, 0, sizeof(value));
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1238,7 +1277,8 @@ void MainWindow::extGetSetpointHister(QString name)
 {
     tModbusBuffer data;
     float value;
-    memset(&data, 0, sizeof(value));
+//    memset(&data, 0, sizeof(value));
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1270,8 +1310,9 @@ void MainWindow::extSetSetpointRelay(QString name, uint8_t * data)
 void MainWindow::extGetSetpointRelay(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int relay;
-    memset(&data, 0, sizeof(relay));
+//    memset(&data, 0, sizeof(relay));
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1302,7 +1343,8 @@ void MainWindow::extGetSetpointOverMess(QString name)
 {
     tModbusBuffer data;
     QString str;
-    memset(&data, 0, LENGHT_STR_OVERMESS);
+//    memset(&data, 0, LENGHT_STR_OVERMESS);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1318,7 +1360,8 @@ void MainWindow::extGetSetpointOverMess(QString name)
 void MainWindow::extSetSetpointNormMess(QString name, uint8_t * data)
 {
     char str[LENGHT_STR_NORMMESS];
-    memcpy(&str, data, LENGHT_STR_NORMMESS);
+//    memcpy(&str, data, LENGHT_STR_NORMMESS);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString mess = QString(QByteArray(str, LENGHT_STR_NORMMESS));
 
     mListUstvok.lock();
@@ -1332,8 +1375,9 @@ void MainWindow::extSetSetpointNormMess(QString name, uint8_t * data)
 void MainWindow::extGetSetpointNormMess(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString str;
-    memset(&data, 0, LENGHT_STR_NORMMESS);
+//    memset(&data, 0, LENGHT_STR_NORMMESS);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1359,6 +1403,7 @@ void MainWindow::extSetSetpointConfirm(QString name, uint8_t * data)
 void MainWindow::extGetSetpointConfirm(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListUstvok.lock();
     if(currentSetpointNum < listUstavok.size())
     {
@@ -1380,6 +1425,7 @@ void MainWindow::extSetSetpointTimeFilter(QString name, uint8_t * data)
 void MainWindow::extGetSetpointTimeFilter(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     data.data[0] = DELAY_RELAY && 0xFF;
     data.data[1] = (DELAY_RELAY >> 8) && 0xFF;
     emit signalToExtModbus(name, data);
@@ -1400,6 +1446,7 @@ void MainWindow::extSetCurrentMath(QString name, uint8_t * data)
 void MainWindow::extGetCurrentMath(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int num = currentMathNum + 1;
     data.data[0] = num & 0xFF;
     data.data[1] = (num << 8) &0xFF;
@@ -1419,7 +1466,8 @@ void MainWindow::extSetTotalMath(QString name, uint8_t * data)
 void MainWindow::extGetTotalMath(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 4);
+//    memset(&data, 0, 4);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     int total = listMath.size();
     data.data[0] = total & 0xFF;
     data.data[1] = (total >> 8) & 0xFF;
@@ -1445,7 +1493,8 @@ void MainWindow::extSetMathName(QString name, uint8_t * data)
 void MainWindow::extGetMathName(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, LENGHT_MATH_NAME);
+//    memset(&data, 0, LENGHT_MATH_NAME);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListMath.lock();
     if(currentMathNum < listMath.size())
     {
@@ -1475,7 +1524,8 @@ void MainWindow::extSetMathFormula(QString name, uint8_t * data)
 void MainWindow::extGetMathFormula(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, LENGHT_MATH_FORMULA);
+//    memset(&data, 0, LENGHT_MATH_FORMULA);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListMath.lock();
     if(currentMathNum < listMath.size())
     {
@@ -1504,6 +1554,7 @@ void MainWindow::extSetMathArgument(QString name, uint8_t * data)
 void MainWindow::extGetMathArgument(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     if(name.contains("mathX"))
     {
         int chan = name.right(name.size() - QString("mathX").size()).toInt();
@@ -1536,7 +1587,8 @@ void MainWindow::extSetMathUnit(QString name, uint8_t * data)
 void MainWindow::extGetMathUnit(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, LENGHT_MATH_UNIT);
+//    memset(&data, 0, LENGHT_MATH_UNIT);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListMath.lock();
     if(currentMathNum < listMath.size())
     {
@@ -1563,8 +1615,9 @@ void MainWindow::extSetMathHiLimit(QString name, uint8_t * data)
 void MainWindow::extGetMathHiLimit(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     float value;
-    memset(&data, 0, sizeof(value));
+//    memset(&data, 0, sizeof(value));
     mListMath.lock();
     if(currentMathNum < listMath.size())
     {
@@ -1592,7 +1645,8 @@ void MainWindow::extGetMathLowLimit(QString name)
 {
     tModbusBuffer data;
     float value;
-    memset(&data, 0, sizeof(value));
+//    memset(&data, 0, sizeof(value));
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListMath.lock();
     if(currentMathNum < listMath.size())
     {
@@ -1612,6 +1666,7 @@ void MainWindow::extSetMathPeriod(QString name, uint8_t * data)
 void MainWindow::extGetMathPeriod(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     float period = MATH_UPDATE_PERIOD_MS / 1000;
     emit signalToExtModbus(name, data);
 }
@@ -1633,6 +1688,7 @@ void MainWindow::extSetChannelSignalType(QString name, uint8_t * data)
 void MainWindow::extGetChannelSignalType(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("SignalType").size()).toInt();
 
@@ -1663,6 +1719,7 @@ void MainWindow::extSetChannelAdditionalPar1(QString name, uint8_t * data)
 void MainWindow::extGetChannelAdditionalPar1(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("AdditionalParameter1").size()).toInt();
     mListChannel.lock();
@@ -1690,6 +1747,7 @@ void MainWindow::extSetChannelAdditionalPar2(QString name, uint8_t * data)
 void MainWindow::extGetChannelAdditionalPar2(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("AdditionalParameter2").size()).toInt();
     mListChannel.lock();
@@ -1720,6 +1778,7 @@ void MainWindow::extSetChannelCorrectionCj(QString name, uint8_t * data)
 void MainWindow::extGetChannelCorrectionCj(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("CorrectionCjValue").size()).toInt();
 
@@ -1753,6 +1812,7 @@ void MainWindow::extSetChannelLowLim(QString name, uint8_t * data)
 void MainWindow::extGetChannelLowLim(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("LowMeasureLim").size()).toInt();
 
@@ -1785,6 +1845,7 @@ void MainWindow::extSetChannelHiLim(QString name, uint8_t * data)
 void MainWindow::extGetChannelHiLim(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("HighMeasureLim").size()).toInt();
 
@@ -1803,9 +1864,10 @@ void MainWindow::extGetChannelHiLim(QString name)
 void MainWindow::extGetChannelName(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("Name").size()).toInt();
-    memset(&data, 0, LENGHT_CHAN_NAME);
+//    memset(&data, 0, LENGHT_CHAN_NAME);
     mListChannel.lock();
     if((num > 0) && (num <= listChannels.size()))
     {
@@ -1848,6 +1910,7 @@ void MainWindow::extSetChannelPeriod(QString name, uint8_t * data)
 void MainWindow::extGetChannelPeriod(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("Period").size()).toInt();
 
@@ -1881,6 +1944,7 @@ void MainWindow::extSetChannelDempher(QString name, uint8_t * data)
 void MainWindow::extGetChannelDempher(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("Dempher").size()).toInt();
 
@@ -1914,6 +1978,7 @@ void MainWindow::extSetChannelTypeRegistration(QString name, uint8_t * data)
 void MainWindow::extGetChannelTypeRegistration(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("TypeRegistration").size()).toInt();
 
@@ -1947,6 +2012,7 @@ void MainWindow::extSetChannelTypeValue(QString name, uint8_t * data)
 void MainWindow::extGetChannelTypeValue(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("TypeValue").size()).toInt();
 
@@ -1966,7 +2032,8 @@ void MainWindow::extGetChannelTypeValue(QString name)
 void MainWindow::extGetModuleMode(QString name)
 {
     tModbusBuffer data;
-    memset(&data, 0, 8);
+//    memset(&data, 0, 8);
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString module = name.right(name.size() - QString("module").size());//.toInt();
     int num = module.left(1).toInt();
 
@@ -2056,6 +2123,7 @@ void MainWindow::extSetFreqSignalType(QString name, uint8_t * data)
 void MainWindow::extGetFreqSignalType(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("chan").size());
     int num = chan.left(chan.size() - QString("FreqSignalType").size()).toInt();
     mListFreq.lock();
@@ -2085,6 +2153,7 @@ void MainWindow::extSetFreqAdditionalParameter(QString name, uint8_t * data)
 void MainWindow::extGetFreqAdditionalParameter(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("AdditionalParameter").size()).toInt();
     mListFreq.lock();
@@ -2114,6 +2183,7 @@ void MainWindow::extSetFreqImpulseDuration(QString name, uint8_t * data)
 void MainWindow::extGetFreqImpulseDuration(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("ImpulseDuration").size()).toInt();
     mListFreq.lock();
@@ -2144,6 +2214,7 @@ void MainWindow::extSetFreqImpWeight(QString name, uint8_t * data)
 void MainWindow::extGetFreqImpWeight(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("ImpWeight").size()).toInt();
     mListFreq.lock();
@@ -2174,6 +2245,7 @@ void MainWindow::extSetFreqLowMeasureLim(QString name, uint8_t * data)
 void MainWindow::extGetFreqLowMeasureLim(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("LowMeasureLim").size()).toInt();
     mListFreq.lock();
@@ -2204,6 +2276,7 @@ void MainWindow::extSetFreqHighMeasureLim(QString name, uint8_t * data)
 void MainWindow::extGetFreqHighMeasureLim(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("HighMeasureLim").size()).toInt();
     mListFreq.lock();
@@ -2234,6 +2307,7 @@ void MainWindow::extSetFreqPeriod(QString name, uint8_t * data)
 void MainWindow::extGetFreqPeriod(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("Period").size()).toInt();
     mListFreq.lock();
@@ -2264,6 +2338,7 @@ void MainWindow::extSetFreqDempher(QString name, uint8_t * data)
 void MainWindow::extGetFreqDempher(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("Dempher").size()).toInt();
     mListFreq.lock();
@@ -2294,6 +2369,7 @@ void MainWindow::extSetFreqTypeValue(QString name, uint8_t * data)
 void MainWindow::extGetFreqTypeValue(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("TypeValue").size()).toInt();
     mListFreq.lock();
@@ -2312,9 +2388,10 @@ void MainWindow::extGetFreqTypeValue(QString name)
 void MainWindow::extGetFreqName(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("Name").size()).toInt();
-    memset(&data, 0, LENGHT_FREQ_NAME);
+//    memset(&data, 0, LENGHT_FREQ_NAME);
     mListFreq.lock();
     if((num > 0) && (num <= listFreq.size()))
     {
@@ -2343,9 +2420,10 @@ void MainWindow::extSetFreqName(QString name, uint8_t * data)
 void MainWindow::extGetFreqUnit(QString name)
 {
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     QString chan = name.right(name.size() - QString("freq").size());
     int num = chan.left(chan.size() - QString("Unit").size()).toInt();
-    memset(&data, 0, LENGHT_FREQ_UNIT);
+//    memset(&data, 0, LENGHT_FREQ_UNIT);
     mListFreq.lock();
     if((num > 0) && (num <= listFreq.size()))
     {
@@ -2380,6 +2458,7 @@ void MainWindow::extGetChanCalibr(QString name)
 //    chan = "chan" + QString::number((num-1)%NUM_CHAN_IN_4AI); //приставка и номер канала во внутреннем модбасе в плате
     QString paramName = name.right(name.size() - QString("chan").size() - QString::number(num).size());  //имя калибровочного параметра
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     uint32_t value = 0;
 //    qDebug() << "extGetChanCalibr:" << name.toStdString().c_str() << paramName.toStdString().c_str();
     mListChannel.lock();
@@ -2568,6 +2647,7 @@ void MainWindow::extGetNeadCalibr(QString name)
     }
 
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListChannel.lock();
     if((num > 0) && (num <= listChannels.size()))
     {
@@ -2608,6 +2688,7 @@ void MainWindow::extGetProcessReadCalibr(QString name)
     }
 
     tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
     mListChannel.lock();
     if((num > 0) && (num <= listChannels.size()))
     {
@@ -2616,4 +2697,33 @@ void MainWindow::extGetProcessReadCalibr(QString name)
     }
     mListChannel.unlock();
     emit signalToExtModbus(name, data);
+}
+
+void MainWindow::extGetRelay(QString name)
+{
+    tModbusBuffer data;
+    memset(&data, 0, SIZE_EXT_MODBUS_BUFFER);
+    int num = name.right(name.size() - QString("relay").size()).toInt();
+
+    mListRelay.lock();
+    if((num > 0) && (num <= listRelais.size()))
+    {
+        data.data[0] = (uint8_t)listRelais.at(num-1)->getState();
+    }
+    mListRelay.unlock();
+
+    emit signalToExtModbus(name, data);
+
+}
+
+void MainWindow::extSetRelay(QString name, uint8_t * data)
+{
+    int num = name.right(name.size() - QString("relay").size()).toInt();
+
+    mListRelay.lock();
+    if((num > 0) && (num <= listRelais.size()))
+    {
+        listRelais.at(num-1)->setState(data[0] & 0x1);
+    }
+    mListRelay.unlock();
 }

@@ -303,6 +303,10 @@ private slots:
 
     void handleError(QSerialPort::SerialPortError error);
     void startSoftUpdate();
+    void on_selectDigitInputAction_currentIndexChanged(int index);
+
+    void on_selectDigitInputMode_currentIndexChanged(int index);
+
 signals:
     void saveButtonSignal();
     void finishCopyArchive();

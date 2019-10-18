@@ -389,6 +389,8 @@ private:
     //таймер для слежения IRQ от модуля Anybus
     QTimer * timerAnybusEv;
 
+    QTime time;
+
 #ifndef Q_OS_WIN
     cCommunicator * comm;
     QTimer * commRun;
@@ -599,6 +601,8 @@ private:
     void extGetNeadCalibr(QString name);
     void extGetProcessReadCalibr(QString name);
     QString getNameDevice();
+    void extGetRelay(QString name);
+    void extSetRelay(QString name, uint8_t *data);
 protected:
     void paintEvent(QPaintEvent *event) ;
 };
