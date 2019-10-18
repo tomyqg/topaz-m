@@ -913,7 +913,6 @@ void MainWindow::updateDevicesComplect()
     }
     mListRelay.unlock();
 
-
     // обновление списка частотных каналов и твердотельных реле
     i = 0;
     int sizeList8RP = list8RP.size();

@@ -3496,3 +3496,13 @@ void dMenu::sendFile()
         closeSerialPort();
     }
 }
+
+void dMenu::on_selectDigitInputAction_currentIndexChanged(int index)
+{
+
+}
+
+void dMenu::on_selectDigitInputMode_currentIndexChanged(int index)
+{
+    ui->stackedWidgetTiming->setCurrentIndex(index);
+}
