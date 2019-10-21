@@ -3133,6 +3133,7 @@ void dMenu::on_comboTypeFreq_currentIndexChanged(int index)
 {
     ui->frameFreqCountImp->hide();
     ui->frameFreqOptions->hide();
+    ui->frameMesAboutDiscrete->hide();
     if(index == ImpulseCounterMeasure)
     {
         ui->frameFreqCountImp->show();
@@ -3141,6 +3142,10 @@ void dMenu::on_comboTypeFreq_currentIndexChanged(int index)
     else if(index == FrequencyMeasure)
     {
         ui->frameFreqOptions->show();
+    }
+    else if(index == FreqNoMeasure)
+    {
+        ui->frameMesAboutDiscrete->show();
     }
 }
 
