@@ -28,7 +28,7 @@
 #define CURRENT_VER VER
 #endif
 
-#define PROTOCOL_VER "12.4"  //версия протокола внутреннего Modbus
+#define PROTOCOL_VER "13.0"  //версия протокола внутреннего Modbus
 #define HARDWARE_VERSION "1.0" // версия железа
 #define SOFTWARE_REVISION "0001"  //ревизия ПО
 #define TYPE_DEVICE "Multigraph"    //Тип/название прибора

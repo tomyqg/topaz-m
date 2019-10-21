@@ -2,5 +2,11 @@
 
 cDigitalInput::cDigitalInput(QObject *parent) : QObject(parent)
 {
-    function = 0;
+    function = NoneFunction;
+    controlObject = ControlGroup;
+    numDiscretOutpit = 0;
+    action = 1;
+    mode = ModeSignal;
+    timeoutOn = 100;
+    timeoutOff = 100;
 }
